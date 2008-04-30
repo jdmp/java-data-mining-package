@@ -1,0 +1,94 @@
+package org.jdmp.matrix.implementations.basic;
+
+import org.jdmp.matrix.DefaultMatrixList;
+import org.jdmp.matrix.GenericMatrix;
+import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.MatrixList;
+import org.jdmp.matrix.interfaces.HasSourceMatrix;
+
+public class SynchronizedMatrix extends GenericMatrix implements HasSourceMatrix {
+	private static final long serialVersionUID = -4456493053286654056L;
+
+	private Matrix matrix = null;
+
+	public SynchronizedMatrix(Matrix source) {
+		this.matrix = source;
+	}
+
+	public synchronized Iterable<long[]> allCoordinates() {
+		return matrix.allCoordinates();
+	}
+
+	public synchronized long[] getSize() {
+		return matrix.getSize();
+	}
+
+	public synchronized double getDouble(long... coordinates) throws MatrixException {
+		return matrix.getDouble(coordinates);
+	}
+
+	@Override
+	public synchronized long getValueCount() {
+		return matrix.getValueCount();
+	}
+
+	public synchronized boolean isSparse() {
+		return matrix.isSparse();
+	}
+
+	public synchronized void setDouble(double value, long... coordinates) throws MatrixException {
+		matrix.setDouble(value, coordinates);
+	}
+
+	public synchronized Object getMatrixAnnotation() {
+		return matrix.getMatrixAnnotation();
+	}
+
+	public synchronized void setMatrixAnnotation(Object value) {
+		matrix.setMatrixAnnotation(value);
+	}
+
+	public synchronized Object getObject(long... c) throws MatrixException {
+		return matrix.getObject(c);
+	}
+
+	public synchronized void setObject(Object value, long... c) throws MatrixException {
+		matrix.setObject(value, c);
+	}
+
+	public synchronized Object getAxisAnnotation(int axis, int positionOnAxis) {
+		return matrix.getAxisAnnotation(axis, positionOnAxis);
+	}
+
+	public synchronized void setAxisAnnotation(int axis, int positionOnAxis, Object value) {
+		matrix.setAxisAnnotation(axis, positionOnAxis, value);
+	}
+
+	public synchronized boolean contains(long... coordinates) {
+		return matrix.contains(coordinates);
+	}
+
+	@Override
+	public synchronized boolean isReadOnly() {
+		return matrix.isReadOnly();
+	}
+
+	public Matrix getSourceMatrix() {
+		return matrix;
+	}
+
+	public MatrixList getSourceMatrices() {
+		MatrixList matrices = new DefaultMatrixList();
+		if (getSourceMatrix() instanceof HasSourceMatrix) {
+			matrices.addAll(((HasSourceMatrix) getSourceMatrix()).getSourceMatrices());
+		}
+		matrices.add(getSourceMatrix());
+		return matrices;
+	}
+
+	public EntryType getEntryType() {
+		return matrix.getEntryType();
+	}
+
+}
