@@ -10,7 +10,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.apache.commons.math.random.RandomDataImpl;
-import org.jdmp.matrix.Matrix;
 
 
 public abstract class MathUtil {
