@@ -24,11 +24,11 @@ public class Deletion extends ObjectCalculation {
 		List<Long> columns = MathUtil.sequenceListLong(0, getSource().getColumnCount() - 1);
 
 		for (int r = 0; r < deletion[ROW].size(); r++) {
-			rows.remove(deletion[ROW].get(r));
+			rows.remove((Long) deletion[ROW].get(r).longValue());
 		}
 
 		for (int c = 0; c < deletion[COLUMN].size(); c++) {
-			columns.remove(deletion[COLUMN].get(c));
+			columns.remove((Long) deletion[COLUMN].get(c).longValue());
 		}
 
 		selection = new long[2][];
