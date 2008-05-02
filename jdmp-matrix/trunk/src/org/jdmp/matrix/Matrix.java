@@ -1,38 +1,22 @@
 package org.jdmp.matrix;
 
 import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.jdmp.matrix.calculation.Calculation.Ret;
-import org.jdmp.matrix.calculation.basic.Convert;
 import org.jdmp.matrix.calculation.basic.DiscretizeToColumns;
-import org.jdmp.matrix.calculation.entrywise.creators.Eye;
-import org.jdmp.matrix.calculation.entrywise.creators.Fill;
-import org.jdmp.matrix.calculation.entrywise.creators.Ones;
-import org.jdmp.matrix.calculation.entrywise.creators.Rand;
-import org.jdmp.matrix.calculation.entrywise.creators.Randn;
 import org.jdmp.matrix.implementations.basic.DefaultDenseDoubleMatrix2D;
 import org.jdmp.matrix.implementations.basic.DefaultDenseObjectMatrix2D;
 import org.jdmp.matrix.implementations.basic.DefaultDenseStringMatrix2D;
 import org.jdmp.matrix.implementations.basic.DefaultSparseObjectMatrix;
-import org.jdmp.matrix.implementations.basic.SynchronizedMatrix;
-import org.jdmp.matrix.implementations.collections.DefaultListMatrix;
-import org.jdmp.matrix.implementations.collections.DefaultMapMatrix;
-import org.jdmp.matrix.implementations.io.DenseFileMatrix2D;
-import org.jdmp.matrix.implementations.io.FileListMatrix;
-import org.jdmp.matrix.implementations.misc.BufferedObjectMatrix;
 import org.jdmp.matrix.implementations.misc.ReshapedMatrix;
 import org.jdmp.matrix.implementations.misc.SubMatrix;
 import org.jdmp.matrix.interfaces.MatrixInterfaces;
 import org.jdmp.matrix.io.Export;
-import org.jdmp.matrix.io.Import;
 import org.jdmp.matrix.util.JDMPSettings;
 import org.jdmp.matrix.util.MathUtil;
 import org.jdmp.matrix.util.StringUtil;
@@ -119,38 +103,6 @@ public abstract class Matrix implements MatrixInterfaces {
 		}
 	}
 
-	/**
-	 * Wraps another Matrix so that all methods are executed synchronized.
-	 * 
-	 * @param matrix
-	 *            the source Matrix
-	 * @return a synchronized Matrix
-	 */
-	public static final SynchronizedMatrix synchronizedMatrix(Matrix matrix) {
-		return new SynchronizedMatrix(matrix);
-	}
-
-	public static final Matrix linkToFile(Format format, File file, Object... parameters) throws MatrixException,
-			IOException {
-		return Import.linkToFile(format, file, parameters);
-	}
-
-	public static final Matrix importFromFile(String filename, Object... parameters) throws MatrixException {
-		return Import.importFromFile(new File(filename), parameters);
-	}
-
-	public static final Matrix importFromFile(File file, Object... parameters) throws MatrixException {
-		return Import.importFromFile(file, parameters);
-	}
-
-	public static final Matrix importFromFile(Format format, String file, Object... parameters) throws MatrixException {
-		return Import.importFromFile(format, new File(file), parameters);
-	}
-
-	public static final Matrix importFromFile(Format format, File file, Object... parameters) throws MatrixException {
-		return Import.importFromFile(format, file, parameters);
-	}
-
 	public abstract void exportToFile(Format format, File file, Object... parameters) throws MatrixException;
 
 	public abstract void exportToFile(Format format, String file, Object... parameters) throws MatrixException;
@@ -158,62 +110,6 @@ public abstract class Matrix implements MatrixInterfaces {
 	public abstract void exportToFile(File file, Object... parameters) throws MatrixException;
 
 	public abstract void exportToFile(String file, Object... parameters) throws MatrixException;
-
-	public static final DefaultDenseObjectMatrix2D fromArray(Object[]... valueList) {
-		return new DefaultDenseObjectMatrix2D(valueList);
-	}
-
-	public static final FileListMatrix linkToDir(String dir) {
-		return new FileListMatrix(dir);
-	}
-
-	@SuppressWarnings("unchecked")
-	public static final DefaultMapMatrix fromMap(Map map) {
-		return new DefaultMapMatrix<Object, Object>(map);
-	}
-
-	public static final DefaultListMatrix fromArray(Object... objects) {
-		return new DefaultListMatrix<Object>(objects);
-	}
-
-	@SuppressWarnings("unchecked")
-	public static final DefaultListMatrix fromCollection(Collection list) {
-		return new DefaultListMatrix<Object>(list);
-	}
-
-	public static final Matrix correlatedColumns(int rows, int columns, double correlationFactor)
-			throws MatrixException {
-		Matrix ret = Matrix.zeros(rows, columns);
-
-		Matrix orig = Matrix.randn(rows, 1);
-
-		for (int c = 0; c < columns; c++) {
-			Matrix rand = Matrix.randn(rows, 1);
-
-			for (int r = 0; r < rows; r++) {
-				ret.setDouble((orig.getDouble(r, 0) * correlationFactor)
-						+ ((1.0 - correlationFactor) * rand.getDouble(r, 0)), r, c);
-			}
-		}
-
-		return ret;
-	}
-
-	public static final Matrix sharedInstance(Matrix m) {
-		try {
-			Class<?> c = Class.forName("org.jdmp.jgroups.ReplicatedSparseMatrix");
-			Constructor<?> constr = c.getConstructor(new Class[] { Matrix.class });
-			Matrix matrix = (Matrix) constr.newInstance(new Object[] { m });
-			return matrix;
-		} catch (Exception e) {
-			logger.log(Level.WARNING, "cannot connect", e);
-			return null;
-		}
-	}
-
-	public static final DefaultDenseDoubleMatrix2D fromValue(double value) {
-		return new DefaultDenseDoubleMatrix2D(new double[][] { { value } });
-	}
 
 	public final boolean containsMissingValues() throws MatrixException {
 		for (long[] c : allCoordinates()) {
@@ -223,68 +119,6 @@ public abstract class Matrix implements MatrixInterfaces {
 			}
 		}
 		return false;
-	}
-
-	public static final Matrix copyFromArray(double[]... values) {
-		int rows = values.length;
-		int columns = 0;
-		for (int i = values.length - 1; i >= 0; i--) {
-			columns = Math.max(columns, values[i].length);
-		}
-		Matrix m = Matrix.zeros(rows, columns);
-		for (int i = rows - 1; i >= 0; i--) {
-			for (int j = values[i].length - 1; j >= 0; j--) {
-				m.setDouble(values[i][j], i, j);
-			}
-		}
-		return m;
-	}
-
-	public static final DefaultDenseDoubleMatrix2D fromArray(double[]... values) {
-		return new DefaultDenseDoubleMatrix2D(values);
-	}
-
-	public static final DefaultDenseDoubleMatrix2D fromArray(double... values) {
-		return new DefaultDenseDoubleMatrix2D(values);
-	}
-
-	public static final DefaultDenseDoubleMatrix2D fromArray(int[]... values) {
-		double[][] doubleValues = MathUtil.toDoubleArray(values);
-		return new DefaultDenseDoubleMatrix2D(doubleValues);
-	}
-
-	public static final DefaultDenseDoubleMatrix2D fromArray(int... values) {
-		double[] doubleValues = MathUtil.toDoubleArray(values);
-		return new DefaultDenseDoubleMatrix2D(doubleValues);
-	}
-
-	public static final Matrix copyOf(AnnotationTransfer annotationTransfer, Matrix matrix) throws MatrixException {
-		return Convert.calcNew(annotationTransfer, matrix);
-	}
-
-	public static final Matrix copyOf(Matrix matrix) throws MatrixException {
-		return Convert.calcNew(AnnotationTransfer.LINK, matrix);
-	}
-
-	public static final Matrix randn(long... size) throws MatrixException {
-		return Randn.calc(size);
-	}
-
-	public static final Matrix randn(EntryType entryType, long... size) throws MatrixException {
-		return Randn.calc(entryType, size);
-	}
-
-	public static final Matrix rand(long... size) throws MatrixException {
-		return Rand.calc(size);
-	}
-
-	public static final Matrix rand(EntryType entryType, long... size) throws MatrixException {
-		return Rand.calc(entryType, size);
-	}
-
-	public static final Matrix copyOf(EntryType newEntryType, AnnotationTransfer annotationTransfer, Matrix matrix)
-			throws MatrixException {
-		return Convert.calcNew(newEntryType, annotationTransfer, matrix);
 	}
 
 	public static void setFullDoubleMatrix2DClassName(String fullDoubleMatrix2DClassName) {
@@ -297,19 +131,7 @@ public abstract class Matrix implements MatrixInterfaces {
 		Matrix.sparseDoubleMatrix2DConstructor = null;
 	}
 
-	public static Matrix zeros(long... size) throws MatrixException {
-		try {
-			return getFullDoubleMatrix2DConstructor().newInstance(size);
-		} catch (Exception e) {
-			if (e.getCause() instanceof OutOfMemoryError) {
-				logger.log(Level.WARNING, "matrix does not fit into memory, creating sparse Matrix instead");
-				return sparse(size);
-			}
-			throw new MatrixException("could not create Matrix", e);
-		}
-	}
-
-	private static Constructor<? extends Matrix> getFullDoubleMatrix2DConstructor() throws Exception {
+	static Constructor<? extends Matrix> getFullDoubleMatrix2DConstructor() throws Exception {
 		if (fullDoubleMatrix2DConstructor == null) {
 			Class<?> fullDoubleMatrix2DClass = null;
 			try {
@@ -333,7 +155,7 @@ public abstract class Matrix implements MatrixInterfaces {
 		return fullDoubleMatrix2DConstructor;
 	}
 
-	private static Constructor<? extends Matrix> getSparseDoubleMatrix2DConstructor() throws Exception {
+	static Constructor<? extends Matrix> getSparseDoubleMatrix2DConstructor() throws Exception {
 		if (sparseDoubleMatrix2DConstructor == null) {
 			Class<? extends Matrix> sparseDoubleMatrix2DClass = null;
 			try {
@@ -357,89 +179,13 @@ public abstract class Matrix implements MatrixInterfaces {
 		return sparseDoubleMatrix2DConstructor;
 	}
 
-	public static Matrix zeros(EntryType entryType, long... size) throws MatrixException {
-		try {
-			switch (entryType) {
-			case DOUBLE:
-				return zeros(size);
-			case OBJECT:
-				return new DefaultDenseObjectMatrix2D(size);
-			case STRING:
-				return new DefaultDenseStringMatrix2D(size);
-			default:
-				logger.log(Level.WARNING, "entry type not yet supported: " + entryType);
-				return null;
-			}
-		} catch (Exception e) {
-			throw new MatrixException("could not create Matrix", e);
-		}
-	}
-
-	public static Matrix ones(long... size) throws MatrixException {
-		return Ones.calc(size);
-	}
-
-	public static Matrix fill(Object value, long... size) throws MatrixException {
-		return Fill.calc(value, size);
-	}
-
-	public static Matrix ones(EntryType entryType, long... size) throws MatrixException {
-		return Ones.calc(entryType, size);
-	}
-
-	public static Matrix eye(long... size) throws MatrixException {
-		return Eye.calc(size);
-	}
-
-	public static Matrix eye(EntryType entryType, long... size) throws MatrixException {
-		return Eye.calc(entryType, size);
-	}
-
-	public static final Matrix createVectorForClass(int classID, int classCount) throws MatrixException {
-		Matrix matrix = Matrix.zeros(classCount, 1);
-		matrix.setDouble(1.0, classID, 0);
-		return matrix;
-	}
-
 	public final Matrix convertIntToVector(int numberOfClasses) throws MatrixException {
-		Matrix m = Matrix.zeros(numberOfClasses, 1);
+		Matrix m = MatrixFactory.zeros(numberOfClasses, 1);
 		for (int i = numberOfClasses - 1; i != -1; i--) {
 			m.setDouble(-1.0, i, 0);
 		}
 		m.setDouble(1.0, (int) getDouble(0, 0), 0);
 		return m;
-	}
-
-	public static final Matrix linkToBinaryFile(String filename, int rowCount, int columnCount) {
-		return new DenseFileMatrix2D(new File(filename), rowCount, columnCount);
-	}
-
-	public static final Matrix linkToJDBC(String url, String username, String password, String tablename) {
-		try {
-			Class<?> c = Class.forName("org.jdmp.odbc.FullODBCMatrix2D");
-			Constructor<?> constr = c.getConstructor(new Class[] { String.class, String.class, String.class,
-					String.class });
-			Matrix odbcMatrix = (Matrix) constr.newInstance(new Object[] { url, username, password, tablename });
-			return new BufferedObjectMatrix(odbcMatrix);
-		} catch (Exception e) {
-			logger.log(Level.WARNING, "cannot connect", e);
-			return null;
-		}
-	}
-
-	public static final Matrix linkToJDBC(String url, String username, String password, String tablename,
-			String idColumn) {
-		try {
-			Class<?> c = Class.forName("org.jdmp.odbc.FullODBCMatrix2D");
-			Constructor<?> constr = c.getConstructor(new Class[] { String.class, String.class, String.class,
-					String.class, String.class });
-			Matrix odbcMatrix = (Matrix) constr
-					.newInstance(new Object[] { url, username, password, tablename, idColumn });
-			return new BufferedObjectMatrix(odbcMatrix);
-		} catch (Exception e) {
-			logger.log(Level.WARNING, "cannot connect", e);
-			return null;
-		}
 	}
 
 	public final double getEuklideanValue() throws MatrixException {
@@ -465,7 +211,7 @@ public abstract class Matrix implements MatrixInterfaces {
 	}
 
 	public Matrix replaceMissingBy(Matrix matrix) throws MatrixException {
-		Matrix ret = Matrix.zeros(getSize());
+		Matrix ret = MatrixFactory.zeros(getSize());
 		for (long[] c : allCoordinates()) {
 			double v = getDouble(c);
 			if (MathUtil.isNaNOrInfinite(v)) {
@@ -578,7 +324,7 @@ public abstract class Matrix implements MatrixInterfaces {
 	public final Matrix subMatrixCopy(long startRow, long startColumn, long endRow, long endColumn)
 			throws MatrixException {
 		long[] newSize = new long[] { endRow - startRow + 1, endColumn - startColumn + 1 };
-		Matrix result = Matrix.zeros(newSize);
+		Matrix result = MatrixFactory.zeros(newSize);
 		for (long[] c : allCoordinates()) {
 			if (c[ROW] >= startRow && c[ROW] < endRow + 1 && c[COLUMN] >= startColumn && c[COLUMN] < endColumn + 1) {
 				long[] target = Coordinates.copyOf(c);
@@ -607,39 +353,6 @@ public abstract class Matrix implements MatrixInterfaces {
 		return getEuklideanValue();
 	}
 
-	public static final Matrix horCat(Matrix... matrices) throws MatrixException {
-		return concat(COLUMN, matrices);
-	}
-
-	public static final Matrix vertCat(Matrix... matrices) throws MatrixException {
-		return concat(ROW, matrices);
-	}
-
-	public static final Matrix vertCat(Collection<Matrix> matrices) throws MatrixException {
-		return concat(ROW, matrices);
-	}
-
-	public static final Matrix horCat(Collection<Matrix> matrices) throws MatrixException {
-		return concat(COLUMN, matrices);
-	}
-
-	public static final Matrix concat(int dimension, Matrix... matrices) throws MatrixException {
-		Matrix result = Matrix.copyOf(AnnotationTransfer.COPY, matrices[0]);
-		for (int i = 1; i < matrices.length; i++) {
-			result = result.append(dimension, matrices[i]);
-		}
-		return result;
-	}
-
-	public static final Matrix concat(int dimension, Collection<Matrix> matrices) throws MatrixException {
-		List<Matrix> list = new ArrayList<Matrix>(matrices);
-		Matrix result = Matrix.copyOf(AnnotationTransfer.COPY, list.get(0));
-		for (int i = 1; i < matrices.size(); i++) {
-			result = result.append(dimension, list.get(i));
-		}
-		return result;
-	}
-
 	public final Matrix appendHorizontally(Matrix m) throws MatrixException {
 		return append(COLUMN, m);
 	}
@@ -651,7 +364,7 @@ public abstract class Matrix implements MatrixInterfaces {
 	public final Matrix append(int dimension, Matrix m) throws MatrixException {
 		long[] newSize = Coordinates.copyOf(getSize());
 		newSize[dimension] += m.getSize()[dimension];
-		Matrix result = Matrix.zeros(newSize);
+		Matrix result = MatrixFactory.zeros(newSize);
 		for (long[] c : allCoordinates()) {
 			result.setDouble(getDouble(c), c);
 		}
@@ -749,7 +462,7 @@ public abstract class Matrix implements MatrixInterfaces {
 	}
 
 	public final Matrix rescaleEntries(int axis, double targetMin, double targetMax) throws MatrixException {
-		Matrix ret = Matrix.zeros(getSize());
+		Matrix ret = MatrixFactory.zeros(getSize());
 		ret.rescaleEntries_(axis, targetMin, targetMax);
 		return ret;
 	}
@@ -812,26 +525,8 @@ public abstract class Matrix implements MatrixInterfaces {
 		fadeOut_(ROW, 0, getRowCount());
 	}
 
-	public final static Matrix sparse(long... size) throws MatrixException {
-		try {
-			return getSparseDoubleMatrix2DConstructor().newInstance(size);
-		} catch (Exception e) {
-			throw new MatrixException("could not create Matrix", e);
-		}
-	}
-
-	public final static Matrix sparse(EntryType entryType, long... size) throws MatrixException {
-		switch (entryType) {
-		case DOUBLE:
-			return sparse(size);
-		default:
-			logger.log(Level.WARNING, "entry type not yet supported: " + entryType);
-			return null;
-		}
-	}
-
 	public Matrix addColumnWithOnes() throws MatrixException {
-		Matrix ret = Matrix.zeros(getRowCount(), getColumnCount() + 1);
+		Matrix ret = MatrixFactory.zeros(getRowCount(), getColumnCount() + 1);
 		for (long[] c : allCoordinates()) {
 			ret.setDouble(getDouble(c), c);
 		}
@@ -842,7 +537,7 @@ public abstract class Matrix implements MatrixInterfaces {
 	}
 
 	public Matrix addRowWithOnes() throws MatrixException {
-		Matrix ret = Matrix.zeros(getRowCount() + 1, getColumnCount());
+		Matrix ret = MatrixFactory.zeros(getRowCount() + 1, getColumnCount());
 		for (long[] c : allCoordinates()) {
 			ret.setDouble(getDouble(c), c);
 		}
@@ -850,14 +545,6 @@ public abstract class Matrix implements MatrixInterfaces {
 			ret.setDouble(1.0, getRowCount(), c);
 		}
 		return ret;
-	}
-
-	public static Matrix fromString(String string, Object... parameters) {
-		return Import.fromString(string, parameters);
-	}
-
-	public static Matrix fromString(Format format, String string, Object... parameters) throws MatrixException {
-		return Import.fromString(format, string, parameters);
 	}
 
 	public abstract Matrix clone();

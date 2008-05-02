@@ -5,6 +5,7 @@ import java.util.Arrays;
 import org.jdmp.matrix.Coordinates;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.calculation.DoubleCalculation;
 import org.jdmp.matrix.util.MathUtil;
 
@@ -28,7 +29,7 @@ public class AddMissing extends DoubleCalculation {
 	public double getDouble(long... coordinates) throws MatrixException {
 		if (missingValues == null) {
 
-			missingValues = Matrix.sparse(getSource().getSize());
+			missingValues = MatrixFactory.sparse(getSource().getSize());
 
 			switch (getDimension()) {
 			case ALL:

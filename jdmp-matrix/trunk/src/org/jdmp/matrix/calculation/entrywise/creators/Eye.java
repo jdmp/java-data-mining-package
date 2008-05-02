@@ -5,6 +5,7 @@ import java.util.Arrays;
 import org.jdmp.matrix.Coordinates;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.Matrix.EntryType;
 import org.jdmp.matrix.calculation.DoubleCalculation;
 
@@ -21,7 +22,7 @@ public class Eye extends DoubleCalculation {
 	}
 
 	public static Matrix calc(Matrix source) throws MatrixException {
-		Matrix ret = Matrix.zeros(source.getSize());
+		Matrix ret = MatrixFactory.zeros(source.getSize());
 		long[] c = Coordinates.copyOf(source.getSize());
 		for (int i = 0; Coordinates.isSmallerThan(c, source.getSize()); i++) {
 			Arrays.fill(c, i);
@@ -35,7 +36,7 @@ public class Eye extends DoubleCalculation {
 	}
 
 	public static Matrix calc(EntryType entryType, long... size) throws MatrixException {
-		Matrix ret = Matrix.zeros(entryType, size);
+		Matrix ret = MatrixFactory.zeros(entryType, size);
 		long[] c = Coordinates.copyOf(size);
 		for (int i = 0; Coordinates.isSmallerThan(c, size); i++) {
 			Arrays.fill(c, i);

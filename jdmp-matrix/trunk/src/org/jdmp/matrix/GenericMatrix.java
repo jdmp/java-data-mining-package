@@ -148,11 +148,13 @@ public abstract class GenericMatrix<A> extends Matrix {
 		return new ImputeMean(dimension, this).calc(returnType);
 	}
 
-//	public Matrix imputeNeuralNetwork(Ret returnType, int k, double tolerance, double learningRate,
-//			int maxIterations) throws MatrixException {
-//		return new ImputeNeuralNetwork(this, k, tolerance, learningRate, maxIterations)
-//				.calc(returnType);
-//	}
+// public Matrix imputeNeuralNetwork(Ret returnType, int k, double tolerance,
+// double learningRate,
+// int maxIterations) throws MatrixException {
+// return new ImputeNeuralNetwork(this, k, tolerance, learningRate,
+// maxIterations)
+// .calc(returnType);
+// }
 
 	public Matrix imputeRegression(Ret returnType) throws MatrixException {
 		return new ImputeRegression(this).calc(returnType);
@@ -166,9 +168,10 @@ public abstract class GenericMatrix<A> extends Matrix {
 		return new ImputeEM(dimension, this).calc(returnType);
 	}
 
-//	public Matrix imputeRescale(Ret returnType, int dimension) throws MatrixException {
-//		return new ImputeRescale(dimension, this).calc(returnType);
-//	}
+// public Matrix imputeRescale(Ret returnType, int dimension) throws
+// MatrixException {
+// return new ImputeRescale(dimension, this).calc(returnType);
+// }
 
 	public Matrix imputeZero(Ret returnType) throws MatrixException {
 		return new ImputeZero(this).calc(returnType);
@@ -690,7 +693,7 @@ public abstract class GenericMatrix<A> extends Matrix {
 		long columnCount = getColumnCount();
 		long mColumnCount = matrix.getColumnCount();
 
-		Matrix ret = Matrix.zeros(rowCount, mColumnCount);
+		Matrix ret = MatrixFactory.zeros(rowCount, mColumnCount);
 
 		if (ignoreNaN) {
 

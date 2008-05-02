@@ -3,6 +3,7 @@ package org.jdmp.matrix.calculation;
 import org.jdmp.matrix.Coordinates;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.Matrix.EntryType;
 import org.jdmp.matrix.util.MathUtil;
 import org.jdmp.matrix.util.StringUtil;
@@ -37,7 +38,7 @@ public abstract class ObjectCalculation extends AbstractCalculation {
 	}
 
 	public final Matrix calcNew() throws MatrixException {
-		Matrix result = Matrix.zeros(getEntryType(), getSize());
+		Matrix result = MatrixFactory.zeros(getEntryType(), getSize());
 		// TODO: copy annotation
 
 		switch (getEntryType()) {

@@ -4,6 +4,7 @@ import java.util.regex.Pattern;
 
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.Matrix.EntryType;
 import org.jdmp.matrix.calculation.StringCalculation;
 
@@ -32,7 +33,7 @@ public class ReplaceRegex extends StringCalculation {
 	}
 
 	public static Matrix calc(Matrix source, Pattern search, String replacement) throws MatrixException {
-		Matrix ret = Matrix.zeros(EntryType.STRING, source.getSize());
+		Matrix ret = MatrixFactory.zeros(EntryType.STRING, source.getSize());
 		for (long[] c : source.availableCoordinates()) {
 			String src = source.getString(c);
 			ret.setString((src == null) ? null : search.matcher(src).replaceAll(replacement), c);

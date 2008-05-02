@@ -23,6 +23,7 @@ import junit.framework.TestCase;
 
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.Matrix.EntryType;
 import org.jdmp.matrix.calculation.Calculation.Ret;
 import org.jdmp.matrix.calculation.entrywise.replace.ReplaceRegex;
@@ -30,7 +31,7 @@ import org.jdmp.matrix.calculation.entrywise.replace.ReplaceRegex;
 public class TestReplaceRegex extends TestCase {
 
 	private static Matrix getTestMatrix() throws MatrixException {
-		Matrix m = Matrix.zeros(EntryType.STRING, 2, 2);
+		Matrix m = MatrixFactory.zeros(EntryType.STRING, 2, 2);
 		m.setString("aabbcabd", 0, 0);
 		m.setString(null, 0, 1);
 		m.setString("ad", 1, 0);
@@ -39,7 +40,7 @@ public class TestReplaceRegex extends TestCase {
 	}
 
 	private static Matrix getResultMatrix() throws MatrixException {
-		Matrix m = Matrix.zeros(EntryType.STRING, 2, 2);
+		Matrix m = MatrixFactory.zeros(EntryType.STRING, 2, 2);
 		m.setString("afgrbcfgrd", 0, 0);
 		m.setString(null, 0, 1);
 		m.setString("ad", 1, 0);

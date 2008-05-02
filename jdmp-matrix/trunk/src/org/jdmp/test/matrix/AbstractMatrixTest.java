@@ -8,6 +8,7 @@ import junit.framework.TestCase;
 import org.jdmp.matrix.Coordinates;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.calculation.Calculation.Ret;
 import org.jdmp.matrix.stubs.AbstractDoubleMatrix;
 import org.jdmp.matrix.util.SerializationUtil;
@@ -345,7 +346,7 @@ public abstract class AbstractMatrixTest extends TestCase {
     byte[] data = SerializationUtil.serialize(m);
     Matrix m2 = (Matrix) SerializationUtil.deserialize(data);
     if (m2.isTransient()) {
-      Matrix m0 = Matrix.zeros(2, 2);
+      Matrix m0 = MatrixFactory.zeros(2, 2);
       assertEquals(getLabel(), m0, m2);
     } else {
       assertEquals(getLabel(), m, m2);
@@ -505,7 +506,7 @@ public abstract class AbstractMatrixTest extends TestCase {
 
 
   public static void main(String[] args) throws MatrixException {
-    Matrix m = Matrix.randn(5, 5);
+    Matrix m = MatrixFactory.randn(5, 5);
     m.inv();
   }
 

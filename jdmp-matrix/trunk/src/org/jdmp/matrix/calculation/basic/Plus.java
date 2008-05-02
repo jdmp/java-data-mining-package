@@ -2,6 +2,7 @@ package org.jdmp.matrix.calculation.basic;
 
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.calculation.DoubleCalculation;
 import org.jdmp.matrix.util.MathUtil;
 
@@ -16,7 +17,7 @@ public class Plus extends DoubleCalculation {
 	}
 
 	public Plus(boolean ignoreNaN, Matrix m1, double v2) throws MatrixException {
-		super(m1, Matrix.fill(v2, m1.getSize()));
+		super(m1, MatrixFactory.fill(v2, m1.getSize()));
 		this.ignoreNaN = ignoreNaN;
 	}
 
@@ -28,7 +29,7 @@ public class Plus extends DoubleCalculation {
 	}
 
 	public static Matrix calc(boolean ignoreNaN, Matrix m1, Matrix m2) throws MatrixException {
-		Matrix ret = Matrix.zeros(m1.getSize());
+		Matrix ret = MatrixFactory.zeros(m1.getSize());
 		if (ignoreNaN) {
 			for (long[] c : m2.availableCoordinates()) {
 				ret.setDouble(MathUtil.ignoreNaN(m1.getDouble(c)) + MathUtil.ignoreNaN(m2.getDouble(c)), c);
@@ -42,7 +43,7 @@ public class Plus extends DoubleCalculation {
 	}
 
 	public static Matrix calc(boolean ignoreNaN, Matrix m1, double v2) throws MatrixException {
-		Matrix ret = Matrix.zeros(m1.getSize());
+		Matrix ret = MatrixFactory.zeros(m1.getSize());
 		v2 = ignoreNaN ? MathUtil.ignoreNaN(v2) : v2;
 		if (ignoreNaN) {
 			for (long[] c : m1.allCoordinates()) {

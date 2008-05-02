@@ -5,6 +5,7 @@ import java.util.Iterator;
 import org.jdmp.matrix.Coordinates;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.calculation.DoubleCalculation;
 
 public class Transpose extends DoubleCalculation {
@@ -76,9 +77,9 @@ public class Transpose extends DoubleCalculation {
 	public static Matrix calc(Matrix m) throws MatrixException {
 		Matrix ret = null;
 		if (m.isSparse()) {
-			ret = Matrix.sparse(Coordinates.transpose(m.getSize()));
+			ret = MatrixFactory.sparse(Coordinates.transpose(m.getSize()));
 		} else {
-			ret = Matrix.zeros(Coordinates.transpose(m.getSize()));
+			ret = MatrixFactory.zeros(Coordinates.transpose(m.getSize()));
 		}
 		for (long[] c : m.availableCoordinates()) {
 			ret.setDouble(m.getDouble(c), Coordinates.transpose(c));

@@ -2,6 +2,7 @@ package org.jdmp.matrix.calculation.entrywise.creators;
 
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.Matrix.EntryType;
 import org.jdmp.matrix.calculation.DoubleCalculation;
 import org.jdmp.matrix.util.MathUtil;
@@ -37,7 +38,7 @@ public class Rand extends DoubleCalculation {
 	}
 
 	public static Matrix calc(Matrix source, double min, double max) throws MatrixException {
-		Matrix ret = Matrix.zeros(source.getSize());
+		Matrix ret = MatrixFactory.zeros(source.getSize());
 		for (long[] c : source.allCoordinates()) {
 			ret.setDouble(MathUtil.nextUniform(min, max), c);
 		}
@@ -45,7 +46,7 @@ public class Rand extends DoubleCalculation {
 	}
 
 	public static Matrix calc(EntryType entryType, long... size) throws MatrixException {
-		Matrix ret = Matrix.zeros(entryType, size);
+		Matrix ret = MatrixFactory.zeros(entryType, size);
 		for (long[] c : ret.allCoordinates()) {
 			ret.setDouble(MathUtil.nextUniform(0.0, 1.0), c);
 		}

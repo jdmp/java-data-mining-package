@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.Matrix.EntryType;
 import org.jdmp.matrix.util.IntelligentFileReader;
 import org.jdmp.matrix.util.StringUtil;
@@ -34,7 +35,7 @@ public abstract class ImportCSV {
 				}
 			}
 			lr.close();
-			Matrix m = Matrix.zeros(EntryType.OBJECT, rows, cols);
+			Matrix m = MatrixFactory.zeros(EntryType.OBJECT, rows, cols);
 			m.setLabel(file.getAbsolutePath());
 			lr = new IntelligentFileReader(file);
 			for (int r = 0; r < rows; r++) {

@@ -10,6 +10,7 @@ import java.util.logging.Level;
 
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.calculation.DoubleCalculation;
 import org.jdmp.matrix.util.MathUtil;
 
@@ -48,7 +49,7 @@ public class ImputeRegression extends DoubleCalculation {
 		try {
 			Matrix x = getSource();
 
-			imputedFinal = Matrix.zeros(x.getSize());
+			imputedFinal = MatrixFactory.zeros(x.getSize());
 			imputedFinal.showGUI();
 
 			ExecutorService executor = Executors.newFixedThreadPool(1);

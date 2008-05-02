@@ -2,6 +2,7 @@ package org.jdmp.matrix.calculation.entrywise.creators;
 
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.Matrix.EntryType;
 import org.jdmp.matrix.calculation.ObjectCalculation;
 
@@ -21,7 +22,7 @@ public class Fill extends ObjectCalculation {
 	}
 
 	public static Matrix calc(Matrix source, Object fill) throws MatrixException {
-		Matrix ret = Matrix.zeros(source.getEntryType(), source.getSize());
+		Matrix ret = MatrixFactory.zeros(source.getEntryType(), source.getSize());
 		for (long[] c : source.allCoordinates()) {
 			ret.setObject(fill, c);
 		}
@@ -31,11 +32,11 @@ public class Fill extends ObjectCalculation {
 	public static Matrix calc(Object fill, long... size) throws MatrixException {
 		Matrix ret = null;
 		if (fill instanceof Number) {
-			ret = Matrix.zeros(EntryType.DOUBLE, size);
+			ret = MatrixFactory.zeros(EntryType.DOUBLE, size);
 		} else if (fill instanceof String) {
-			ret = Matrix.zeros(EntryType.STRING, size);
+			ret = MatrixFactory.zeros(EntryType.STRING, size);
 		} else {
-			ret = Matrix.zeros(EntryType.OBJECT, size);
+			ret = MatrixFactory.zeros(EntryType.OBJECT, size);
 		}
 		for (long[] c : ret.allCoordinates()) {
 			ret.setObject(fill, c);

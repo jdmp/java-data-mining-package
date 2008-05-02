@@ -2,6 +2,7 @@ package org.jdmp.matrix.calculation.basic;
 
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.Matrix.AnnotationTransfer;
 import org.jdmp.matrix.Matrix.EntryType;
 import org.jdmp.matrix.calculation.AbstractCalculation;
@@ -21,7 +22,7 @@ public class Convert extends AbstractCalculation {
 
 	public static Matrix calcNew(EntryType entryType, AnnotationTransfer annotationTransfer, Matrix source)
 			throws MatrixException {
-		Matrix ret = Matrix.zeros(entryType, source.getSize());
+		Matrix ret = MatrixFactory.zeros(entryType, source.getSize());
 		for (long[] c : source.availableCoordinates()) {
 			ret.setDouble(source.getDouble(c), c);
 		}

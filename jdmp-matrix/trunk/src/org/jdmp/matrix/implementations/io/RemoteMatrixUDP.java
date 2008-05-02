@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import org.jdmp.matrix.GenericMatrix;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.MatrixFactory;
 
 public class RemoteMatrixUDP extends GenericMatrix {
 	private static final long serialVersionUID = 3889079475875267966L;
@@ -118,7 +119,7 @@ public class RemoteMatrixUDP extends GenericMatrix {
 
 	public static void main(String[] args) throws MatrixException {
 
-		Matrix m = Matrix.zeros(10, 10);
+		Matrix m = MatrixFactory.zeros(10, 10);
 		ServerMatrixUDP sm = new ServerMatrixUDP(m, 19000);
 
 		RemoteMatrixUDP rm = new RemoteMatrixUDP("localhost", 19000);

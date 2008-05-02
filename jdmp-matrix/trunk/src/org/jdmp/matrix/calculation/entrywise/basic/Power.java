@@ -2,6 +2,7 @@ package org.jdmp.matrix.calculation.entrywise.basic;
 
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.calculation.DoubleCalculation;
 
 public class Power extends DoubleCalculation {
@@ -12,7 +13,7 @@ public class Power extends DoubleCalculation {
 	}
 
 	public Power(Matrix m1, double v2) throws MatrixException {
-		super(m1, Matrix.fill(v2, m1.getSize()));
+		super(m1, MatrixFactory.fill(v2, m1.getSize()));
 	}
 
 	@Override
@@ -21,7 +22,7 @@ public class Power extends DoubleCalculation {
 	}
 
 	public static Matrix calc(Matrix source, Matrix power) throws MatrixException {
-		Matrix ret = Matrix.zeros(source.getSize());
+		Matrix ret = MatrixFactory.zeros(source.getSize());
 		for (long[] c : source.availableCoordinates()) {
 			ret.setDouble(Math.pow(source.getDouble(c), power.getDouble(c)), c);
 		}
@@ -29,7 +30,7 @@ public class Power extends DoubleCalculation {
 	}
 
 	public static Matrix calc(Matrix source, double power) throws MatrixException {
-		Matrix ret = Matrix.zeros(source.getSize());
+		Matrix ret = MatrixFactory.zeros(source.getSize());
 		for (long[] c : source.availableCoordinates()) {
 			ret.setDouble(Math.pow(source.getDouble(c), power), c);
 		}
