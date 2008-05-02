@@ -40,8 +40,7 @@ public class CoordinateSetToLongWrapper implements Set<long[]>, Wrapper<Set<Coor
 	}
 
 	public boolean containsAll(Collection<?> c) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new RuntimeException("not implemented");
 	}
 
 	public boolean isEmpty() {
@@ -69,6 +68,7 @@ public class CoordinateSetToLongWrapper implements Set<long[]>, Wrapper<Set<Coor
 		}
 
 		public void remove() {
+			throw new RuntimeException("not implemented");
 		}
 
 	}
@@ -78,13 +78,11 @@ public class CoordinateSetToLongWrapper implements Set<long[]>, Wrapper<Set<Coor
 	}
 
 	public boolean removeAll(Collection<?> c) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new RuntimeException("not implemented");
 	}
 
 	public boolean retainAll(Collection<?> c) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new RuntimeException("not implemented");
 	}
 
 	public int size() {
@@ -92,13 +90,11 @@ public class CoordinateSetToLongWrapper implements Set<long[]>, Wrapper<Set<Coor
 	}
 
 	public Object[] toArray() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("not implemented");
 	}
 
 	public <T> T[] toArray(T[] a) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("not implemented");
 	}
 
 }
