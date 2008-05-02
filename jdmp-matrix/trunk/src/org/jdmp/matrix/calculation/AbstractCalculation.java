@@ -57,7 +57,7 @@ public abstract class AbstractCalculation implements Calculation {
 	}
 
 	public boolean isSparse() {
-		return true;
+		return false;
 	}
 
 	public long getValueCount() {

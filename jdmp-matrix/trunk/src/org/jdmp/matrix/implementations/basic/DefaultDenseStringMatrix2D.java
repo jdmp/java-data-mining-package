@@ -29,7 +29,7 @@ public class DefaultDenseStringMatrix2D extends AbstractDenseStringMatrix2D {
 	public DefaultDenseStringMatrix2D(Matrix source) throws MatrixException {
 		this(source.getSize());
 		for (long[] c : source.availableCoordinates()) {
-			setDouble(source.getDouble(c), c);
+			setString(source.getString(c), c);
 		}
 	}
 
@@ -83,6 +83,17 @@ public class DefaultDenseStringMatrix2D extends AbstractDenseStringMatrix2D {
 			annotation = new DefaultAnnotation();
 		}
 		annotation.setAxisAnnotation(axis, positionOnAxis, value);
+	}
+
+	public Object getAxisAnnotation(int axis) {
+		return annotation == null ? null : annotation.getAxisAnnotation(axis);
+	}
+
+	public void setAxisAnnotation(int axis, Object value) {
+		if (annotation == null) {
+			annotation = new DefaultAnnotation();
+		}
+		annotation.setAxisAnnotation(axis, value);
 	}
 
 }

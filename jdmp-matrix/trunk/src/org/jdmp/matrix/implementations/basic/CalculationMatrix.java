@@ -50,6 +50,15 @@ public class CalculationMatrix extends GenericMatrix {
 		calculation.setObject(o, coordinates);
 	}
 
+	@Override
+	public String getString(long... coordinates) throws MatrixException {
+		return calculation.getString(coordinates);
+	}
+
+	public void setString(String s, long... coordinates) throws MatrixException {
+		calculation.setString(s, coordinates);
+	}
+
 	public boolean isSparse() {
 		return calculation.isSparse();
 	}
