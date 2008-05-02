@@ -5,6 +5,14 @@ import java.io.Serializable;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
 
+/**
+ * Interface for all matrix-calculations. 
+ *
+ * 
+ * 
+ * @author Andreas Naegele
+ * @version $Revision$
+ */
 public interface Calculation extends Serializable {
 
 	public static final int ALL = Matrix.ALL;
