@@ -56,6 +56,13 @@ import org.jdmp.matrix.implementations.misc.BufferedObjectMatrix;
 import org.jdmp.matrix.io.Import;
 import org.jdmp.matrix.util.MathUtil;
 
+/**
+ * This class provides a factory for matrix generation.
+ *
+ * 
+ * 
+ * @author Andreas Naegele
+ */
 public abstract class MatrixFactory {
 
 	protected transient static final Logger logger = Logger.getLogger(MatrixFactory.class.getName());
