@@ -44,7 +44,7 @@ public interface CoordinateFunctions {
 	/**
 	 * Returns an Iterator that goes only over the Coordinates defined by the
 	 * selection. The selections consists of a list of long arrays, one for each
-	 * dimension. The first array constains the row numbers that should be
+	 * dimension. The first array contains the row numbers that should be
 	 * selected, the second the column numbers, and so on.
 	 * 
 	 * @param selection
