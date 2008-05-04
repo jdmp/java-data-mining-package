@@ -1,11 +1,11 @@
 package org.jdmp.matrix.implementations.basic;
 
 import org.jdmp.matrix.DefaultMatrixList;
-import org.jdmp.matrix.AbstractGenericMatrix;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.MatrixList;
 import org.jdmp.matrix.interfaces.HasSourceMatrix;
+import org.jdmp.matrix.stubs.AbstractGenericMatrix;
 
 public class SynchronizedMatrix<A> extends AbstractGenericMatrix<A> implements HasSourceMatrix {
 	private static final long serialVersionUID = -4456493053286654056L;

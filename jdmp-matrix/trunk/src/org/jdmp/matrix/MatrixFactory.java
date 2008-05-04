@@ -58,6 +58,7 @@ import org.jdmp.matrix.implementations.io.DenseFileMatrix2D;
 import org.jdmp.matrix.implementations.io.FileListMatrix;
 import org.jdmp.matrix.implementations.misc.BufferedObjectMatrix;
 import org.jdmp.matrix.io.Import;
+import org.jdmp.matrix.stubs.AbstractGenericMatrix;
 import org.jdmp.matrix.util.MathUtil;
 
 /**

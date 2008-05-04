@@ -1,6 +1,5 @@
 package org.jdmp.matrix.stubs;
 
-import org.jdmp.matrix.AbstractGenericMatrix;
 import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.StringMatrix;
 import org.jdmp.matrix.util.StringUtil;

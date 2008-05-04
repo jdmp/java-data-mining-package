@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-import org.jdmp.matrix.AbstractGenericMatrix;
 import org.jdmp.matrix.interfaces.ListMatrix;
 
 public abstract class AbstractListMatrix<A> extends AbstractGenericMatrix<A> implements ListMatrix<A> {

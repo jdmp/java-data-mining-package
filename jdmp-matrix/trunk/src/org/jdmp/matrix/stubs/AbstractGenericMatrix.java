@@ -1,4 +1,4 @@
-package org.jdmp.matrix;
+package org.jdmp.matrix.stubs;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
@@ -13,6 +13,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
+import org.jdmp.matrix.Coordinates;
+import org.jdmp.matrix.GenericMatrix;
+import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.calculation.AbstractCalculation;
 import org.jdmp.matrix.calculation.Calculation;
 import org.jdmp.matrix.calculation.Calculation.Calc;
@@ -136,7 +141,7 @@ public abstract class AbstractGenericMatrix<A> implements GenericMatrix<A> {
 		AbstractGenericMatrix.sparseDoubleMatrix2DConstructor = null;
 	}
 
-	static Constructor<? extends Matrix> getFullDoubleMatrix2DConstructor() throws Exception {
+	public static Constructor<? extends Matrix> getFullDoubleMatrix2DConstructor() throws Exception {
 		if (fullDoubleMatrix2DConstructor == null) {
 			Class<?> fullDoubleMatrix2DClass = null;
 			try {
@@ -160,7 +165,7 @@ public abstract class AbstractGenericMatrix<A> implements GenericMatrix<A> {
 		return fullDoubleMatrix2DConstructor;
 	}
 
-	static Constructor<? extends Matrix> getSparseDoubleMatrix2DConstructor() throws Exception {
+	public static Constructor<? extends Matrix> getSparseDoubleMatrix2DConstructor() throws Exception {
 		if (sparseDoubleMatrix2DConstructor == null) {
 			Class<? extends Matrix> sparseDoubleMatrix2DClass = null;
 			try {

@@ -3,11 +3,11 @@ package org.jdmp.matrix.implementations.misc;
 import org.jdmp.matrix.CoordinateIterator2D;
 import org.jdmp.matrix.Coordinates;
 import org.jdmp.matrix.DefaultMatrixList;
-import org.jdmp.matrix.AbstractGenericMatrix;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.MatrixList;
 import org.jdmp.matrix.interfaces.HasSourceMatrix;
+import org.jdmp.matrix.stubs.AbstractGenericMatrix;
 
 public class SubMatrix<A> extends AbstractGenericMatrix<A> implements HasSourceMatrix {
 	private static final long serialVersionUID = 8230514498244193787L;

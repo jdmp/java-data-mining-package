@@ -10,10 +10,10 @@ import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.util.logging.Level;
 
-import org.jdmp.matrix.AbstractGenericMatrix;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.MatrixFactory;
+import org.jdmp.matrix.stubs.AbstractGenericMatrix;
 
 public class RemoteMatrixUDP<A> extends AbstractGenericMatrix<A> {
 	private static final long serialVersionUID = 3889079475875267966L;

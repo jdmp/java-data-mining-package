@@ -1,8 +1,8 @@
 package org.jdmp.matrix.implementations.basic;
 
-import org.jdmp.matrix.AbstractGenericMatrix;
 import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.calculation.AbstractCalculation;
+import org.jdmp.matrix.stubs.AbstractGenericMatrix;
 
 public class CalculationMatrix<A> extends AbstractGenericMatrix<A> {
 	private static final long serialVersionUID = -8345796002435936888L;

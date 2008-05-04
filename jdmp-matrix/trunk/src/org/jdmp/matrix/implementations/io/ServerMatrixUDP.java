@@ -9,9 +9,9 @@ import java.net.DatagramSocket;
 import java.util.logging.Level;
 
 import org.jdmp.matrix.Coordinates;
-import org.jdmp.matrix.AbstractGenericMatrix;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.stubs.AbstractGenericMatrix;
 
 public class ServerMatrixUDP<A> extends AbstractGenericMatrix<A> {
 	private static final long serialVersionUID = 3907994158174208114L;
