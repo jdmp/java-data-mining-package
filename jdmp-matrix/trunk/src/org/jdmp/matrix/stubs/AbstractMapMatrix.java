@@ -8,9 +8,9 @@ import java.util.Set;
 
 import org.jdmp.matrix.interfaces.MapMatrix;
 
-public abstract class AbstractMapMatrix<K, V> extends AbstractDenseObjectMatrix2D<Object> implements MapMatrix<K, V> {
+public abstract class AbstractMapMatrix extends AbstractDenseObjectMatrix2D implements MapMatrix<Object, Object> {
 
-	public abstract Map<K, V> getMap();
+	public abstract Map<Object, Object> getMap();
 
 	public final long[] getSize() {
 		return new long[] { size(), 2 };
@@ -65,11 +65,11 @@ public abstract class AbstractMapMatrix<K, V> extends AbstractDenseObjectMatrix2
 		return getMap().containsValue(value);
 	}
 
-	public final Set<java.util.Map.Entry<K, V>> entrySet() {
+	public final Set<java.util.Map.Entry<Object, Object>> entrySet() {
 		return getMap().entrySet();
 	}
 
-	public final V get(Object key) {
+	public final Object get(Object key) {
 		return getMap().get(key);
 	}
 
@@ -77,23 +77,23 @@ public abstract class AbstractMapMatrix<K, V> extends AbstractDenseObjectMatrix2
 		return getMap().isEmpty();
 	}
 
-	public final Set<K> keySet() {
+	public final Set<Object> keySet() {
 		return getMap().keySet();
 	}
 
-	public final V put(K key, V value) {
-		V v = getMap().put(key, value);
+	public final Object put(Object key, Object value) {
+		Object v = getMap().put(key, value);
 		notifyGUIObject();
 		return v;
 	}
 
-	public final void putAll(Map<? extends K, ? extends V> m) {
+	public final void putAll(Map<? extends Object, ? extends Object> m) {
 		getMap().putAll(m);
 		notifyGUIObject();
 	}
 
-	public final V remove(Object key) {
-		V v = getMap().remove(key);
+	public final Object remove(Object key) {
+		Object v = getMap().remove(key);
 		notifyGUIObject();
 		return v;
 	}
@@ -102,7 +102,7 @@ public abstract class AbstractMapMatrix<K, V> extends AbstractDenseObjectMatrix2
 		return getMap().size();
 	}
 
-	public final Collection<V> values() {
+	public final Collection<Object> values() {
 		return getMap().values();
 	}
 

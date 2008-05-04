@@ -95,8 +95,6 @@ public interface MissingValueCalculations {
 	 */
 	public Matrix imputeRegression(Ret returnType, Matrix firstGuess) throws MatrixException;
 
-
-
 	/**
 	 * Replaces missing values by regression on other variables. Missing values
 	 * are initially replaced by mean. After that they are re-estimated several
@@ -112,6 +110,8 @@ public interface MissingValueCalculations {
 	 */
 	public Matrix imputeEM(Ret returnType, int dimension) throws MatrixException;
 
+	public Matrix deleteColumnsWithMissingValues(Ret returnType) throws MatrixException;
 
+	public Matrix deleteRowsWithMissingValues(Ret returnType) throws MatrixException;
 
 }

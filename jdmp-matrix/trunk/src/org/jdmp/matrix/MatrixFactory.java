@@ -25,6 +25,10 @@
 
 package org.jdmp.matrix;
 
+import static org.jdmp.matrix.Matrix.EntryType.DOUBLE;
+import static org.jdmp.matrix.Matrix.EntryType.OBJECT;
+import static org.jdmp.matrix.Matrix.EntryType.STRING;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
@@ -58,7 +62,7 @@ import org.jdmp.matrix.util.MathUtil;
 
 /**
  * This class provides a factory for matrix generation.
- *
+ * 
  * 
  * 
  * @author Andreas Naegele
@@ -262,7 +266,7 @@ public abstract class MatrixFactory {
 
 	@SuppressWarnings("unchecked")
 	public static final DefaultMapMatrix fromMap(Map map) {
-		return new DefaultMapMatrix<Object, Object>(map);
+		return new DefaultMapMatrix(map);
 	}
 
 	public static final DefaultListMatrix fromArray(Object... objects) {
@@ -325,7 +329,7 @@ public abstract class MatrixFactory {
 
 	public final static Matrix sparse(long... size) throws MatrixException {
 		try {
-			return Matrix.getSparseDoubleMatrix2DConstructor().newInstance(size);
+			return AbstractGenericMatrix.getSparseDoubleMatrix2DConstructor().newInstance(size);
 		} catch (Exception e) {
 			throw new MatrixException("could not create Matrix", e);
 		}
@@ -342,7 +346,7 @@ public abstract class MatrixFactory {
 
 	public static Matrix zeros(long... size) throws MatrixException {
 		try {
-			return Matrix.getFullDoubleMatrix2DConstructor().newInstance(size);
+			return AbstractGenericMatrix.getFullDoubleMatrix2DConstructor().newInstance(size);
 		} catch (Exception e) {
 			if (e.getCause() instanceof OutOfMemoryError) {
 				logger.log(Level.WARNING, "matrix does not fit into memory, creating sparse Matrix instead");

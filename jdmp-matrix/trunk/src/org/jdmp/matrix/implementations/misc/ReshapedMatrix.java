@@ -4,13 +4,13 @@ import java.util.Iterator;
 
 import org.jdmp.matrix.Coordinates;
 import org.jdmp.matrix.DefaultMatrixList;
-import org.jdmp.matrix.GenericMatrix;
+import org.jdmp.matrix.AbstractGenericMatrix;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.MatrixList;
 import org.jdmp.matrix.interfaces.HasSourceMatrix;
 
-public class ReshapedMatrix extends GenericMatrix implements HasSourceMatrix {
+public class ReshapedMatrix<A> extends AbstractGenericMatrix<A> implements HasSourceMatrix {
 	private static final long serialVersionUID = -4298270756453090584L;
 
 	private Matrix source = null;
@@ -82,8 +82,8 @@ public class ReshapedMatrix extends GenericMatrix implements HasSourceMatrix {
 		return source.getDouble(getOldCoordinates(coordinates));
 	}
 
-	public Object getObject(long... coordinates) throws MatrixException {
-		return source.getObject(getOldCoordinates(coordinates));
+	public A getObject(long... coordinates) throws MatrixException {
+		return (A) source.getObject(getOldCoordinates(coordinates));
 	}
 
 	@Override

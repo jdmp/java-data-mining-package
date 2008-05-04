@@ -34,4 +34,40 @@ public interface MiscGeneralCalculations {
 	 */
 	public Matrix standardize(Ret returnType, int dimension, boolean ignoreNaN) throws MatrixException;
 
+	public Matrix addColumnWithOnes() throws MatrixException;
+
+	public Matrix addRowWithOnes() throws MatrixException;
+
+	public Matrix rescaleEntries() throws MatrixException;
+
+	public void rescaleEntries_() throws MatrixException;
+
+	public Matrix rescaleEntries(int axis, double targetMin, double targetMax) throws MatrixException;
+
+	public void rescaleEntries_(int axis, double targetMin, double targetMax) throws MatrixException;
+
+	public void addNoise_(double noiselevel) throws MatrixException;
+
+	public Matrix replaceMissingBy(Matrix matrix) throws MatrixException;
+
+	public void fadeIn_(int axis, long start, long end) throws MatrixException;
+
+	public void fadeOut_(int axis, long start, long end) throws MatrixException;
+
+	public void fadeIn_() throws MatrixException;
+
+	public void fadeOut_() throws MatrixException;
+	
+	public  Matrix convertIntToVector(int numberOfClasses) throws MatrixException;
+	
+	public  void greaterOrZero_() throws MatrixException ;
+	
+	public  void scaleRowsToOne_() throws MatrixException;
+	
+	public  Matrix appendHorizontally(Matrix m) throws MatrixException ;
+	
+	public  Matrix appendVertically(Matrix m) throws MatrixException ;
+	
+	public  Matrix append(int dimension, Matrix m) throws MatrixException ;
+
 }

@@ -43,6 +43,10 @@ public interface BasicMatrixProperties {
 
 	public boolean isTransient();
 
+	public boolean containsMissingValues() throws MatrixException;
+
+	public double getDoubleValue() throws MatrixException;
+
 	public double getMinValue() throws MatrixException;
 
 	public double getMeanValue() throws MatrixException;
@@ -50,6 +54,16 @@ public interface BasicMatrixProperties {
 	public double getStdValue() throws MatrixException;
 
 	public double getMaxValue() throws MatrixException;
+
+	public double getEuklideanValue() throws MatrixException;
+
+	public double getValueSum() throws MatrixException;
+
+	public double getAbsoluteValueSum() throws MatrixException;
+
+	public double getAbsoluteValueMean() throws MatrixException;
+
+	public double getRMS() throws MatrixException;
 
 	public long getRowCount();
 

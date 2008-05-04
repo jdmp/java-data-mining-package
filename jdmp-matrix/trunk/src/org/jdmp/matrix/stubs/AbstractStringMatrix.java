@@ -1,10 +1,11 @@
 package org.jdmp.matrix.stubs;
 
-import org.jdmp.matrix.GenericMatrix;
+import org.jdmp.matrix.AbstractGenericMatrix;
 import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.StringMatrix;
 import org.jdmp.matrix.util.StringUtil;
 
-public abstract class AbstractStringMatrix extends GenericMatrix<String> {
+public abstract class AbstractStringMatrix extends AbstractGenericMatrix<String> implements StringMatrix {
 
 	public final String getObject(long... coordinates) throws MatrixException {
 		return getString(coordinates);

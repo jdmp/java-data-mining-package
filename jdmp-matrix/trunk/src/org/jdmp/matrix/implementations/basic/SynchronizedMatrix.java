@@ -1,13 +1,13 @@
 package org.jdmp.matrix.implementations.basic;
 
 import org.jdmp.matrix.DefaultMatrixList;
-import org.jdmp.matrix.GenericMatrix;
+import org.jdmp.matrix.AbstractGenericMatrix;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.MatrixList;
 import org.jdmp.matrix.interfaces.HasSourceMatrix;
 
-public class SynchronizedMatrix extends GenericMatrix implements HasSourceMatrix {
+public class SynchronizedMatrix<A> extends AbstractGenericMatrix<A> implements HasSourceMatrix {
 	private static final long serialVersionUID = -4456493053286654056L;
 
 	private Matrix matrix = null;
@@ -49,8 +49,8 @@ public class SynchronizedMatrix extends GenericMatrix implements HasSourceMatrix
 		matrix.setMatrixAnnotation(value);
 	}
 
-	public synchronized Object getObject(long... c) throws MatrixException {
-		return matrix.getObject(c);
+	public synchronized A getObject(long... c) throws MatrixException {
+		return (A) matrix.getObject(c);
 	}
 
 	public synchronized void setObject(Object value, long... c) throws MatrixException {

@@ -7,6 +7,7 @@ import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.Matrix.AnnotationTransfer;
 import org.jdmp.matrix.Matrix.EntryType;
 import org.jdmp.matrix.calculation.Calculation.Ret;
+import org.jdmp.matrix.implementations.misc.SubMatrix;
 
 public interface BasicCalculations {
 
@@ -54,8 +55,7 @@ public interface BasicCalculations {
 	 *            defines how annotation should be treated
 	 * @return Matrix with the same entries in the new format
 	 */
-	public Matrix convert(EntryType newEntryType, AnnotationTransfer annotationTransfer)
-			throws MatrixException;
+	public Matrix convert(EntryType newEntryType, AnnotationTransfer annotationTransfer) throws MatrixException;
 
 	/**
 	 * Adds a specified value to all entries in the matrix.
@@ -301,8 +301,7 @@ public interface BasicCalculations {
 	 * @return Link to original Matrix with desired rows and columns
 	 * @throws MatrixException
 	 */
-	public Matrix select(Ret returnType, List<? extends Number>... selection)
-			throws MatrixException;
+	public Matrix select(Ret returnType, List<? extends Number>... selection) throws MatrixException;
 
 	/**
 	 * Delete rows and columns in the Matrix and returns a link to it.
@@ -314,8 +313,7 @@ public interface BasicCalculations {
 	 * @return Link to original Matrix with desired rows and columns
 	 * @throws MatrixException
 	 */
-	public Matrix delete(Ret returnType, List<? extends Number>... selection)
-			throws MatrixException;
+	public Matrix delete(Ret returnType, List<? extends Number>... selection) throws MatrixException;
 
 	/**
 	 * Selects rows in the Matrix and returns a link to it.
@@ -399,8 +397,7 @@ public interface BasicCalculations {
 	 * @return Link to original Matrix with desired columns
 	 * @throws MatrixException
 	 */
-	public Matrix selectColumns(Ret returnType, List<? extends Number> columns)
-			throws MatrixException;
+	public Matrix selectColumns(Ret returnType, List<? extends Number> columns) throws MatrixException;
 
 	/**
 	 * Deletes columns in the Matrix and returns a link to it.
@@ -412,8 +409,7 @@ public interface BasicCalculations {
 	 * @return Link to original Matrix with desired columns
 	 * @throws MatrixException
 	 */
-	public Matrix deleteColumns(Ret returnType, List<? extends Number> columns)
-			throws MatrixException;
+	public Matrix deleteColumns(Ret returnType, List<? extends Number> columns) throws MatrixException;
 
 	/**
 	 * Selects rows and columns in the Matrix and returns a link to it.
@@ -447,5 +443,13 @@ public interface BasicCalculations {
 	 * @throws MatrixException
 	 */
 	public Matrix delete(Ret returnType, String selection) throws MatrixException;
+
+	public Matrix subMatrixCopy(long[] start, long[] end) throws MatrixException;
+
+	public Matrix subMatrixCopy(long startRow, long startColumn, long endRow, long endColumn) throws MatrixException;
+
+	public Matrix subMatrixLink(long[] start, long[] size);
+
+	public Matrix subMatrixLink(long startRow, long startColumn, long rowCount, long columnCount);
 
 }

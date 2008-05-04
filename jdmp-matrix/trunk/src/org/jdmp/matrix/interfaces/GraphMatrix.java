@@ -1,5 +1,7 @@
 package org.jdmp.matrix.interfaces;
 
-public interface GraphMatrix<N,E> extends MatrixInterfaces, GraphInterface<N,E> {
+import org.jdmp.matrix.Matrix;
+
+public interface GraphMatrix<N, E> extends Matrix<E>, GraphInterface<N, E> {
 
 }

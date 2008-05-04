@@ -28,4 +28,11 @@ public interface SolvingCalculations {
 	 */
 	public Matrix princomp() throws MatrixException;
 
+	/**
+	 * Calculates the singular value decomposition of the matrix.
+	 * 
+	 * @return Singular value decomposition of the matrix.
+	 */
+	public Matrix[] svd() throws MatrixException;
+
 }

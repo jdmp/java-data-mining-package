@@ -10,12 +10,12 @@ import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.util.logging.Level;
 
-import org.jdmp.matrix.GenericMatrix;
+import org.jdmp.matrix.AbstractGenericMatrix;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.MatrixFactory;
 
-public class RemoteMatrixUDP extends GenericMatrix {
+public class RemoteMatrixUDP<A> extends AbstractGenericMatrix<A> {
 	private static final long serialVersionUID = 3889079475875267966L;
 
 	private static final int BUFFERSIZE = 512;
@@ -139,7 +139,7 @@ public class RemoteMatrixUDP extends GenericMatrix {
 	}
 
 	@Override
-	public Object getObject(long... coordinates) {
+	public A getObject(long... coordinates) {
 		// TODO Auto-generated method stub
 		return null;
 	}

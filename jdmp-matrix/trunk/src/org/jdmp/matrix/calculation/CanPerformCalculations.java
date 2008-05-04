@@ -8,7 +8,6 @@ import org.jdmp.matrix.calculation.basic.BasicCalculations;
 import org.jdmp.matrix.calculation.entrywise.EntrywiseCalculations;
 import org.jdmp.matrix.calculation.general.GeneralCalculations;
 
-
 /**
  * <p>
  * This interface declares many methods for performing calculations on a matrix.
@@ -38,56 +37,28 @@ import org.jdmp.matrix.calculation.general.GeneralCalculations;
  * 
  * @see Calculation.Calc for available calculations
  * @author Holger Arndt
- * 
+ *
  */
-public interface CanPerformCalculations extends BasicCalculations,
-    EntrywiseCalculations, GeneralCalculations {
+public interface CanPerformCalculations extends BasicCalculations, EntrywiseCalculations, GeneralCalculations {
 
-  public Matrix calcNew(Calculation calculation) throws MatrixException;
+	public Matrix calcNew(Calculation calculation) throws MatrixException;
 
+	public Matrix calc(Calculation calculation, Ret returnType) throws MatrixException;
 
+	public Matrix calcNew(String calculation, Matrix... matrices) throws MatrixException;
 
-  public Matrix calc(Calculation calculation, Ret returnType)
-      throws MatrixException;
+	public Matrix calcNew(String calculation, int dimension, Matrix... matrices) throws MatrixException;
 
+	public Matrix calc(String calculation, Ret returnType, Matrix... matrices) throws MatrixException;
 
+	public Matrix calc(String calculation, Ret returnType, int dimension, Matrix... matrices) throws MatrixException;
 
-  public Matrix calcNew(String calculation, Matrix... matrices)
-      throws MatrixException;
+	public Matrix calcNew(Calc calculation, Matrix... matrices) throws MatrixException;
 
+	public Matrix calcNew(Calc calculation, int dimension, Matrix... matrices) throws MatrixException;
 
+	public Matrix calc(Calc calculation, Ret returnType, Matrix... matrices) throws MatrixException;
 
-  public Matrix calcNew(String calculation, int dimension, Matrix... matrices)
-      throws MatrixException;
-
-
-
-  public Matrix calc(String calculation, Ret returnType, Matrix... matrices)
-      throws MatrixException;
-
-
-
-  public Matrix calc(String calculation, Ret returnType, int dimension,
-      Matrix... matrices) throws MatrixException;
-
-
-
-  public Matrix calcNew(Calc calculation, Matrix... matrices)
-      throws MatrixException;
-
-
-
-  public Matrix calcNew(Calc calculation, int dimension, Matrix... matrices)
-      throws MatrixException;
-
-
-
-  public Matrix calc(Calc calculation, Ret returnType, Matrix... matrices)
-      throws MatrixException;
-
-
-
-  public Matrix calc(Calc calculation, Ret returnType, int dimension,
-      Matrix... matrices) throws MatrixException;
+	public Matrix calc(Calc calculation, Ret returnType, int dimension, Matrix... matrices) throws MatrixException;
 
 }

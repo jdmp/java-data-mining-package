@@ -9,11 +9,11 @@ import java.net.DatagramSocket;
 import java.util.logging.Level;
 
 import org.jdmp.matrix.Coordinates;
-import org.jdmp.matrix.GenericMatrix;
+import org.jdmp.matrix.AbstractGenericMatrix;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
 
-public class ServerMatrixUDP extends GenericMatrix {
+public class ServerMatrixUDP<A> extends AbstractGenericMatrix<A> {
 	private static final long serialVersionUID = 3907994158174208114L;
 
 	private static final int BUFFERSIZE = 512;
@@ -57,8 +57,8 @@ public class ServerMatrixUDP extends GenericMatrix {
 		return matrix.getDouble(coordinates);
 	}
 
-	public Object getObject(long... coordinates) throws MatrixException {
-		return matrix.getObject(coordinates);
+	public A getObject(long... coordinates) throws MatrixException {
+		return (A) matrix.getObject(coordinates);
 	}
 
 	@Override

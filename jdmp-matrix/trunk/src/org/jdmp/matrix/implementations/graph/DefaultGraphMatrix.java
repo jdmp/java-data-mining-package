@@ -198,4 +198,24 @@ public class DefaultGraphMatrix<N, E> extends AbstractGraphMatrix<N, E> {
 		throw new MatrixException("not implemented!");
 	}
 
+	public double getDouble(long... coordinates) throws MatrixException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public void setDouble(double value, long... coordinates) throws MatrixException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public org.jdmp.matrix.Matrix.EntryType getEntryType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean isSparse() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

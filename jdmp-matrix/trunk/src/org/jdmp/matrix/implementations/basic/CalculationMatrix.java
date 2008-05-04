@@ -1,10 +1,10 @@
 package org.jdmp.matrix.implementations.basic;
 
-import org.jdmp.matrix.GenericMatrix;
+import org.jdmp.matrix.AbstractGenericMatrix;
 import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.calculation.AbstractCalculation;
 
-public class CalculationMatrix extends GenericMatrix {
+public class CalculationMatrix<A> extends AbstractGenericMatrix<A> {
 	private static final long serialVersionUID = -8345796002435936888L;
 
 	private AbstractCalculation calculation = null;
@@ -42,8 +42,8 @@ public class CalculationMatrix extends GenericMatrix {
 	}
 
 	@Override
-	public Object getObject(long... coordinates) throws MatrixException {
-		return calculation.getObject(coordinates);
+	public A getObject(long... coordinates) throws MatrixException {
+		return (A) calculation.getObject(coordinates);
 	}
 
 	public void setObject(Object o, long... coordinates) throws MatrixException {

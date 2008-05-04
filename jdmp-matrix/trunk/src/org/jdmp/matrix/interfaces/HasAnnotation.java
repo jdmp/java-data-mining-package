@@ -18,4 +18,20 @@ public interface HasAnnotation {
 
 	public void setMatrixAnnotation(Object annotation);
 
+	public String getColumnLabel(int col);
+
+	public String getRowLabel(int row);
+
+	public Object getRowObject(int row);
+
+	public Object getColumnObject(int col);
+
+	public void setColumnLabel(int col, String label);
+
+	public void setRowLabel(int row, String label);
+
+	public void setRowObject(int row, Object o);
+
+	public void setColumnObject(int col, Object o);
+
 }
