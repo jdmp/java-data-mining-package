@@ -82,31 +82,31 @@ public abstract class MatrixFactory {
 
 	public static final int NONE = Matrix.NONE;
 
-	public static final Matrix horCat(Matrix... matrices) throws MatrixException {
+	public static final <A>Matrix<A> horCat(Matrix<A>... matrices) throws MatrixException {
 		return concat(COLUMN, matrices);
 	}
 
-	public static final Matrix vertCat(Matrix... matrices) throws MatrixException {
+	public static final <A>Matrix<A> vertCat(Matrix<A>... matrices) throws MatrixException {
 		return concat(ROW, matrices);
 	}
 
-	public static final Matrix vertCat(Collection<Matrix> matrices) throws MatrixException {
+	public static final <A>Matrix<A> vertCat(Collection<Matrix> matrices) throws MatrixException {
 		return concat(ROW, matrices);
 	}
 
-	public static final Matrix horCat(Collection<Matrix> matrices) throws MatrixException {
+	public static final <A>Matrix<A> horCat(Collection<Matrix> matrices) throws MatrixException {
 		return concat(COLUMN, matrices);
 	}
 
-	public static final Matrix concat(int dimension, Matrix... matrices) throws MatrixException {
-		Matrix result = MatrixFactory.copyOf(AnnotationTransfer.COPY, matrices[0]);
+	public static final <A>Matrix<A> concat(int dimension, Matrix<A>... matrices) throws MatrixException {
+		Matrix<A> result = MatrixFactory.copyOf(AnnotationTransfer.COPY, matrices[0]);
 		for (int i = 1; i < matrices.length; i++) {
 			result = result.append(dimension, matrices[i]);
 		}
 		return result;
 	}
 
-	public static final Matrix concat(int dimension, Collection<Matrix> matrices) throws MatrixException {
+	public static final <A>Matrix<A> concat(int dimension, Collection<Matrix> matrices) throws MatrixException {
 		List<Matrix> list = new ArrayList<Matrix>(matrices);
 		Matrix result = MatrixFactory.copyOf(AnnotationTransfer.COPY, list.get(0));
 		for (int i = 1; i < matrices.size(); i++) {
@@ -115,7 +115,7 @@ public abstract class MatrixFactory {
 		return result;
 	}
 
-	public static final Matrix copyFromArray(double[]... values) {
+	public static final <A>Matrix<A> copyFromArray(double[]... values) {
 		int rows = values.length;
 		int columns = 0;
 		for (int i = values.length - 1; i >= 0; i--) {
@@ -148,36 +148,36 @@ public abstract class MatrixFactory {
 		return new DefaultDenseDoubleMatrix2D(doubleValues);
 	}
 
-	public static final Matrix copyOf(AnnotationTransfer annotationTransfer, Matrix matrix) throws MatrixException {
+	public static final <A>Matrix<A> copyOf(AnnotationTransfer annotationTransfer, Matrix<A> matrix) throws MatrixException {
 		return Convert.calcNew(annotationTransfer, matrix);
 	}
 
-	public static final Matrix copyOf(Matrix matrix) throws MatrixException {
+	public static final <A>Matrix<A> copyOf(Matrix<A> matrix) throws MatrixException {
 		return Convert.calcNew(AnnotationTransfer.LINK, matrix);
 	}
 
-	public static final Matrix randn(long... size) throws MatrixException {
+	public static final <A>Matrix<A> randn(long... size) throws MatrixException {
 		return Randn.calc(size);
 	}
 
-	public static final Matrix randn(EntryType entryType, long... size) throws MatrixException {
+	public static final <A>Matrix<A> randn(EntryType entryType, long... size) throws MatrixException {
 		return Randn.calc(entryType, size);
 	}
 
-	public static final Matrix rand(long... size) throws MatrixException {
+	public static final <A>Matrix<A> rand(long... size) throws MatrixException {
 		return Rand.calc(size);
 	}
 
-	public static final Matrix rand(EntryType entryType, long... size) throws MatrixException {
+	public static final <A>Matrix<A> rand(EntryType entryType, long... size) throws MatrixException {
 		return Rand.calc(entryType, size);
 	}
 
-	public static final Matrix copyOf(EntryType newEntryType, AnnotationTransfer annotationTransfer, Matrix matrix)
+	public static final <A>Matrix<A> copyOf(EntryType newEntryType, AnnotationTransfer annotationTransfer, Matrix<?> matrix)
 			throws MatrixException {
 		return Convert.calcNew(newEntryType, annotationTransfer, matrix);
 	}
 
-	public static final Matrix correlatedColumns(int rows, int columns, double correlationFactor)
+	public static final <A>Matrix<A> correlatedColumns(int rows, int columns, double correlationFactor)
 			throws MatrixException {
 		Matrix ret = MatrixFactory.zeros(rows, columns);
 
@@ -195,7 +195,7 @@ public abstract class MatrixFactory {
 		return ret;
 	}
 
-	public static final Matrix sharedInstance(Matrix m) throws MatrixException {
+	public static final <A>Matrix<A> sharedInstance(Matrix<A> m) throws MatrixException {
 		try {
 			Class<?> c = Class.forName("org.jdmp.jgroups.ReplicatedSparseMatrix");
 			Constructor<?> constr = c.getConstructor(new Class[] { Matrix.class });
@@ -227,27 +227,27 @@ public abstract class MatrixFactory {
 		}
 	}
 
-	public static Matrix ones(long... size) throws MatrixException {
+	public static <A>Matrix<A> ones(long... size) throws MatrixException {
 		return Ones.calc(size);
 	}
 
-	public static Matrix fill(Object value, long... size) throws MatrixException {
+	public static <A>Matrix<A> fill(Object value, long... size) throws MatrixException {
 		return Fill.calc(value, size);
 	}
 
-	public static Matrix ones(EntryType entryType, long... size) throws MatrixException {
+	public static <A>Matrix<A> ones(EntryType entryType, long... size) throws MatrixException {
 		return Ones.calc(entryType, size);
 	}
 
-	public static Matrix eye(long... size) throws MatrixException {
+	public static <A>Matrix<A> eye(long... size) throws MatrixException {
 		return Eye.calc(size);
 	}
 
-	public static Matrix eye(EntryType entryType, long... size) throws MatrixException {
+	public static <A>Matrix<A> eye(EntryType entryType, long... size) throws MatrixException {
 		return Eye.calc(entryType, size);
 	}
 
-	public static final Matrix createVectorForClass(int classID, int classCount) throws MatrixException {
+	public static final <A>Matrix<A> createVectorForClass(int classID, int classCount) throws MatrixException {
 		Matrix matrix = MatrixFactory.zeros(classCount, 1);
 		matrix.setDouble(1.0, classID, 0);
 		return matrix;
@@ -275,11 +275,11 @@ public abstract class MatrixFactory {
 		return new DefaultListMatrix<Object>(list);
 	}
 
-	public static Matrix fromString(String string, Object... parameters) {
+	public static <A>Matrix<A> fromString(String string, Object... parameters) {
 		return Import.fromString(string, parameters);
 	}
 
-	public static Matrix fromString(Format format, String string, Object... parameters) throws MatrixException {
+	public static <A>Matrix<A> fromString(Format format, String string, Object... parameters) throws MatrixException {
 		return Import.fromString(format, string, parameters);
 	}
 
@@ -290,11 +290,11 @@ public abstract class MatrixFactory {
 	 *            the source Matrix
 	 * @return a synchronized Matrix
 	 */
-	public static final SynchronizedMatrix synchronizedMatrix(Matrix matrix) {
-		return new SynchronizedMatrix(matrix);
+	public static final <A>SynchronizedMatrix<A> synchronizedMatrix(Matrix<A> matrix) {
+		return new SynchronizedMatrix<A>(matrix);
 	}
 
-	public static final Matrix linkToBinaryFile(String filename, int rowCount, int columnCount) {
+	public static final DoubleMatrix linkToBinaryFile(String filename, int rowCount, int columnCount) {
 		return new DenseFileMatrix2D(new File(filename), rowCount, columnCount);
 	}
 
