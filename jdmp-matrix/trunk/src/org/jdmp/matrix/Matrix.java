@@ -30,7 +30,7 @@ import org.jdmp.matrix.io.ExportInterface;
  */
 public abstract interface Matrix<A> extends Serializable, ExportInterface, CoordinateFunctions,
 		MatrixEntryGettersAndSetters<A>, BasicMatrixProperties, CanPerformCalculations, CanBeReshaped,
-		DistanceMeasures, Comparable<Matrix>, Cloneable, Clearable, HasAnnotation, HasLabel, HasGUIObject {
+		DistanceMeasures, Comparable<Matrix<?>>, Cloneable, Clearable, HasAnnotation, HasLabel, HasGUIObject {
 
 	/**
 	 * Defines the object types that can be stored in a Matrix. Different matrix
@@ -66,6 +66,6 @@ public abstract interface Matrix<A> extends Serializable, ExportInterface, Coord
 		CSV, TXT, M, MAT, HTML, MTX, XLS, OBJ, SER, GraphML, TEX, WAV, BMP, TIFF, PLT, JPEG, PDF, PNG, XML, AML, ARFF, ATT, LOG, NET, XRFF
 	};
 
-	public Matrix clone();
+	public Matrix<?> clone();
 
 }

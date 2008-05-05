@@ -26,17 +26,15 @@ public abstract class MatrixList implements Iterable<Matrix> {
 	public synchronized final Matrix getFirst() {
 		if (isEmpty()) {
 			return null;
-		} else {
-			return get(0);
 		}
+    	return get(0);
 	}
 
 	public final synchronized Matrix getLast() {
 		if (isEmpty()) {
 			return null;
-		} else {
-			return get(size() - 1);
 		}
+		return get(size() - 1);
 	}
 
 	public abstract Matrix get(int i);

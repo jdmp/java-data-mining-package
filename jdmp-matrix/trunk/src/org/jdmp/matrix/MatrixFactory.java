@@ -25,10 +25,6 @@
 
 package org.jdmp.matrix;
 
-import static org.jdmp.matrix.Matrix.EntryType.DOUBLE;
-import static org.jdmp.matrix.Matrix.EntryType.OBJECT;
-import static org.jdmp.matrix.Matrix.EntryType.STRING;
-
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
