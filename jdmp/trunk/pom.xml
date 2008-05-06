@@ -1,14 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
 	 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<groupId>org.jdmp</groupId>
 	<artifactId>jdmp</artifactId>
 	<version>0.0.1</version>
 	<packaging>pom</packaging>
-	
+
 	<build>
 		<plugins>
 			<plugin>
@@ -23,22 +23,76 @@
 	</build>
 
 	<dependencyManagement>
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.4</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>commons-math</groupId>
-			<artifactId>commons-math</artifactId>
-			<version>1.2</version>
+		<dependencies>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.4</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>commons-math</groupId>
+				<artifactId>commons-math</artifactId>
+				<version>1.2</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+			<groupId>mtj</groupId>
+			<artifactId>mtj</artifactId>
+			<version>0.9.9</version>
 			<scope>compile</scope>
 		</dependency>
-	</dependencies>
-        </dependencyManagement>
-	
+		<dependency>
+			<groupId>arpack_util</groupId>
+			<artifactId>arpack_util</artifactId>
+			<version>070508</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>arpack</groupId>
+			<artifactId>arpack</artifactId>
+			<version>070508</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>blas</groupId>
+			<artifactId>blas</artifactId>
+			<version>0.8</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>f2jutil</groupId>
+			<artifactId>f2jutil</artifactId>
+			<version>071114</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>jlapack_jni</groupId>
+			<artifactId>jlapack_jni</artifactId>
+			<version>071118</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>lapack</groupId>
+			<artifactId>lapack</artifactId>
+			<version>0.8</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>xerbla</groupId>
+			<artifactId>xerbla</artifactId>
+			<version>0.8</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-matrix</artifactId>
+			<version>0.0.1</version>
+			<scope>compile</scope>
+		</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<reporting>
 		<plugins>
 			<plugin>
@@ -46,8 +100,15 @@
 				<artifactId>maven-javadoc-plugin</artifactId>
 			</plugin>
 		</plugins>
-		
 	</reporting>
+	
+	<distributionManagement>
+		<repository>
+			<id>jdmp-repository</id>
+			<name>JDMP Repository</name>
+			<url>file:/~/.m2/repository</url>
+		</repository>
+	</distributionManagement>
 
 
 </project>
