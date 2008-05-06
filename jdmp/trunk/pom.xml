@@ -24,6 +24,32 @@
 
 	<dependencyManagement>
 		<dependencies>
+
+			<dependency>
+				<groupId>org.jdmp</groupId>
+				<artifactId>jdmp-matrix</artifactId>
+				<version>0.0.1</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.jdmp</groupId>
+				<artifactId>jdmp-core</artifactId>
+				<version>0.0.1</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.jdmp</groupId>
+				<artifactId>jdmp-libsvm</artifactId>
+				<version>0.0.1</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.jdmp</groupId>
+				<artifactId>jdmp-weka</artifactId>
+				<version>0.0.1</version>
+				<scope>compile</scope>
+			</dependency>
+
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
@@ -37,77 +63,72 @@
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
-			<groupId>mtj</groupId>
-			<artifactId>mtj</artifactId>
-			<version>0.9.9</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>arpack_util</groupId>
-			<artifactId>arpack_util</artifactId>
-			<version>070508</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>arpack</groupId>
-			<artifactId>arpack</artifactId>
-			<version>070508</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>blas</groupId>
-			<artifactId>blas</artifactId>
-			<version>0.8</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>f2jutil</groupId>
-			<artifactId>f2jutil</artifactId>
-			<version>071114</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>jlapack_jni</groupId>
-			<artifactId>jlapack_jni</artifactId>
-			<version>071118</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>lapack</groupId>
-			<artifactId>lapack</artifactId>
-			<version>0.8</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>xerbla</groupId>
-			<artifactId>xerbla</artifactId>
-			<version>0.8</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-matrix</artifactId>
-			<version>0.0.1</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>dom4j</groupId>
-			<artifactId>dom4j</artifactId>
-			<version>1.6.1</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>jaxen</groupId>
-			<artifactId>jaxen</artifactId>
-			<version>1.1.1</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>xstream</groupId>
-			<artifactId>xstream</artifactId>
-			<version>1.2.2</version>
-			<scope>compile</scope>
-		</dependency>
+				<groupId>mtj</groupId>
+				<artifactId>mtj</artifactId>
+				<version>0.9.9</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>arpack_util</groupId>
+				<artifactId>arpack_util</artifactId>
+				<version>070508</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>arpack</groupId>
+				<artifactId>arpack</artifactId>
+				<version>070508</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>blas</groupId>
+				<artifactId>blas</artifactId>
+				<version>0.8</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>f2jutil</groupId>
+				<artifactId>f2jutil</artifactId>
+				<version>071114</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>jlapack_jni</groupId>
+				<artifactId>jlapack_jni</artifactId>
+				<version>071118</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>lapack</groupId>
+				<artifactId>lapack</artifactId>
+				<version>0.8</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>xerbla</groupId>
+				<artifactId>xerbla</artifactId>
+				<version>0.8</version>
+				<scope>compile</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>dom4j</groupId>
+				<artifactId>dom4j</artifactId>
+				<version>1.6.1</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>jaxen</groupId>
+				<artifactId>jaxen</artifactId>
+				<version>1.1.1</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>xstream</groupId>
+				<artifactId>xstream</artifactId>
+				<version>1.2.2</version>
+				<scope>compile</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -119,7 +140,7 @@
 			</plugin>
 		</plugins>
 	</reporting>
-	
+
 	<distributionManagement>
 		<repository>
 			<id>jdmp-repository</id>
