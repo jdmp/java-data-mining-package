@@ -1,5 +1,5 @@
 package org.jdmp.matrix;
 
-public interface ObjectMatrix extends Matrix<Object> {
+public interface ObjectMatrix extends GenericMatrix<Object> {
 
 }

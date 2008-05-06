@@ -15,7 +15,7 @@ import org.jdmp.matrix.MatrixException;
  * no exception if the entry cannot be converted. Instead, the result will be
  * either null, 0, false or Double.NaN depending on the method.
  */
-public interface MatrixEntryGettersAndSetters<A> {
+public interface MatrixEntryGettersAndSetters {
 
 	/**
 	 * Returns a boolean representation of an entry in the matrix. The stored
@@ -210,7 +210,7 @@ public interface MatrixEntryGettersAndSetters<A> {
 	 * @return entry object
 	 * @throws MatrixException
 	 */
-	public A getObject(long... coordinates) throws MatrixException;
+	public Object getObject(long... coordinates) throws MatrixException;
 
 	/**
 	 * Sets an entry in the matrix to an object. If the matrix cannot store this
