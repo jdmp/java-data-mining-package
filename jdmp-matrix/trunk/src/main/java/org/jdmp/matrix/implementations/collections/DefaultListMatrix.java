@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.interfaces.Annotation;
 import org.jdmp.matrix.stubs.AbstractListMatrix;
 
 public class DefaultListMatrix<A> extends AbstractListMatrix<A> {
@@ -44,34 +44,6 @@ public class DefaultListMatrix<A> extends AbstractListMatrix<A> {
 		matrixAnnotation = value;
 	}
 
-	public Iterable<long[]> allCoordinates() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public boolean contains(long... coordinates) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public double getDouble(long... coordinates) throws MatrixException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public void setDouble(double value, long... coordinates) throws MatrixException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public org.jdmp.matrix.Matrix.EntryType getEntryType() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public boolean isSparse() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 
 }

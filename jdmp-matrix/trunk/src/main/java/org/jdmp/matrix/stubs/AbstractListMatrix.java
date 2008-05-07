@@ -5,7 +5,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import org.jdmp.matrix.CoordinateIterator2D;
+import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.interfaces.ListMatrix;
+import org.jdmp.matrix.util.MathUtil;
 
 public abstract class AbstractListMatrix<A> extends AbstractGenericMatrix<A> implements ListMatrix<A> {
 
@@ -130,5 +133,29 @@ public abstract class AbstractListMatrix<A> extends AbstractGenericMatrix<A> imp
 	public <T> T[] toArray(T[] a) {
 		return null;
 	}
+	
+	public Iterable<long[]> allCoordinates() {
+        return new CoordinateIterator2D(getSize());
+    }
+
+    public boolean contains(long... coordinates) {        
+        return coordinates[ROW]<getList().size()&&coordinates[COLUMN]<1;
+    }
+
+    public double getDouble(long... coordinates) throws MatrixException {
+        return MathUtil.getDouble(getObject(coordinates));
+    }
+
+    public void setDouble(double value, long... coordinates) throws MatrixException {
+        setObject(value, coordinates);
+    }
+
+    public org.jdmp.matrix.Matrix.EntryType getEntryType() {
+       throw new MatrixException("not supported");
+    }
+
+    public boolean isSparse() {
+        return false;
+    }
 
 }

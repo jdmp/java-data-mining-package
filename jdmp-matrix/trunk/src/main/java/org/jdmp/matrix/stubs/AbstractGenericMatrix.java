@@ -602,7 +602,7 @@ public abstract class AbstractGenericMatrix<A> implements GenericMatrix<A> {
 	}
 
 	public final int getInt(long... coordinates) throws MatrixException {
-		return (int) getDouble(coordinates);
+		return (int) Math.round(getDouble(coordinates));
 	}
 
 	public final void setInt(int value, long... coordinates) throws MatrixException {
