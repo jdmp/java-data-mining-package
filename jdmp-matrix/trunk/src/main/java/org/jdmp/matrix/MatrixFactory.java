@@ -47,6 +47,7 @@ import org.jdmp.matrix.calculation.entrywise.creators.Randn;
 import org.jdmp.matrix.implementations.basic.DefaultDenseDoubleMatrix2D;
 import org.jdmp.matrix.implementations.basic.DefaultDenseObjectMatrix2D;
 import org.jdmp.matrix.implementations.basic.DefaultDenseStringMatrix2D;
+import org.jdmp.matrix.implementations.basic.DefaultSparseObjectMatrix;
 import org.jdmp.matrix.implementations.basic.SynchronizedMatrix;
 import org.jdmp.matrix.implementations.collections.DefaultListMatrix;
 import org.jdmp.matrix.implementations.collections.DefaultMapMatrix;
@@ -80,7 +81,87 @@ public abstract class MatrixFactory {
 
 	public static final int ALL = Matrix.ALL;
 
-	public static final int NONE = Matrix.NONE;
+	public static final int NONE = Matrix.NONE;	
+	
+	private static String fullDoubleMatrix2DClassName = "org.jdmp.mtj.MTJFullDoubleMatrix2D";
+
+    private static String fullObjectMatrix2DClassName = DefaultDenseObjectMatrix2D.class.getName();
+
+    private static String fullStringMatrix2DClassName = DefaultDenseStringMatrix2D.class.getName();
+
+    private static String sparseDoubleMatrix2DClassName = DefaultSparseObjectMatrix.class.getName();
+
+    private static String sparseObjectMatrix2DClassName = DefaultSparseObjectMatrix.class.getName();
+
+    private static Constructor<? extends Matrix> fullDoubleMatrix2DConstructor = null;
+
+    private static Constructor<? extends Matrix> fullObjectMatrix2DConstructor = null;
+
+    private static Constructor<? extends Matrix> sparseDoubleMatrix2DConstructor = null;
+
+    private static Constructor<? extends Matrix> sparseObjectMatrix2DConstructor = null;
+    
+    
+    public static void setFullDoubleMatrix2DClassName(String fullDoubleMatrix2DClassName) {
+        MatrixFactory.fullDoubleMatrix2DClassName = fullDoubleMatrix2DClassName;
+        MatrixFactory.fullDoubleMatrix2DConstructor = null;
+    }
+
+    public static void setSparseDoubleMatrix2DClassName(String sparseDoubleMatrix2DClassName) {
+        MatrixFactory.sparseDoubleMatrix2DClassName = sparseDoubleMatrix2DClassName;
+        MatrixFactory.sparseDoubleMatrix2DConstructor = null;
+    }
+
+    public static Constructor<? extends Matrix> getFullDoubleMatrix2DConstructor() throws Exception {
+        if (fullDoubleMatrix2DConstructor == null) {
+            Class<?> fullDoubleMatrix2DClass = null;
+            try {
+                fullDoubleMatrix2DClass = Class.forName(fullDoubleMatrix2DClassName);
+            } catch (ClassNotFoundException e) {
+                logger.log(Level.WARNING, "Could not find desired Matrix implementation: "
+                        + fullDoubleMatrix2DClassName);
+                logger.log(Level.INFO, "Falling back to DefaultFullDoubleMatrix2D.");
+                logger.log(Level.INFO, "To speed up Matrix calculations, you should add jdmp-mtj to the classpath.");
+                fullDoubleMatrix2DClass = DefaultDenseDoubleMatrix2D.class;
+            }
+            Class<?> p = null;
+            // TODO: this should be solved in a more efficient way
+            for (Constructor<?> co : fullDoubleMatrix2DClass.getConstructors()) {
+                if ("long[]".equals(co.getParameterTypes()[0].getCanonicalName())) {
+                    p = co.getParameterTypes()[0];
+                }
+            }
+            fullDoubleMatrix2DConstructor = (Constructor<Matrix>) fullDoubleMatrix2DClass.getConstructor(p);
+        }
+        return fullDoubleMatrix2DConstructor;
+    }
+
+    @SuppressWarnings("unchecked")
+    public static Constructor<? extends Matrix> getSparseDoubleMatrix2DConstructor() throws Exception {
+        if (sparseDoubleMatrix2DConstructor == null) {
+            Class<? extends Matrix> sparseDoubleMatrix2DClass = null;
+            try {
+                sparseDoubleMatrix2DClass = (Class<? extends Matrix>) Class.forName(sparseDoubleMatrix2DClassName);
+            } catch (ClassNotFoundException e) {
+                logger.log(Level.WARNING, "Could not find desired Matrix implementation: "
+                        + sparseDoubleMatrix2DClassName);
+                logger.log(Level.INFO, "Falling back to DefaultSparseObjectMatrix.");
+                logger.log(Level.INFO, "To speed up Matrix calculations, you should add jdmp-mtj to the classpath.");
+                sparseDoubleMatrix2DClass = DefaultSparseObjectMatrix.class;
+            }
+            Class<?> p = null;
+            // TODO: this should be solved in a more efficient way
+            for (Constructor<?> co : sparseDoubleMatrix2DClass.getConstructors()) {
+                if ("long[]".equals(co.getParameterTypes()[0].getCanonicalName())) {
+                    p = co.getParameterTypes()[0];
+                }
+            }
+            sparseDoubleMatrix2DConstructor = sparseDoubleMatrix2DClass.getConstructor(p);
+        }
+        return sparseDoubleMatrix2DConstructor;
+    }
+
+	
 
 	public static final Matrix horCat(Matrix... matrices) throws MatrixException {
 		return concat(COLUMN, matrices);
@@ -266,7 +347,7 @@ public abstract class MatrixFactory {
 		return new DefaultMapMatrix(map);
 	}
 
-	public static final DefaultListMatrix fromArray(Object... objects) {
+	public static final DefaultListMatrix<Object> fromArray(Object... objects) {
 		return new DefaultListMatrix<Object>(objects);
 	}
 
@@ -290,8 +371,8 @@ public abstract class MatrixFactory {
 	 *            the source Matrix
 	 * @return a synchronized Matrix
 	 */
-	public static final <A>SynchronizedMatrix synchronizedMatrix(Matrix matrix) {
-		return new SynchronizedMatrix(matrix);
+	public static final SynchronizedMatrix<?> synchronizedMatrix(Matrix matrix) {
+		return new SynchronizedMatrix<Object>(matrix);
 	}
 
 	public static final DoubleMatrix linkToBinaryFile(String filename, int rowCount, int columnCount) {
@@ -326,7 +407,7 @@ public abstract class MatrixFactory {
 
 	public final static Matrix sparse(long... size) throws MatrixException {
 		try {
-			return AbstractGenericMatrix.getSparseDoubleMatrix2DConstructor().newInstance(size);
+			return MatrixFactory.getSparseDoubleMatrix2DConstructor().newInstance(size);
 		} catch (Exception e) {
 			throw new MatrixException("could not create Matrix", e);
 		}
@@ -343,7 +424,7 @@ public abstract class MatrixFactory {
 
 	public static Matrix zeros(long... size) throws MatrixException {
 		try {
-			return AbstractGenericMatrix.getFullDoubleMatrix2DConstructor().newInstance(size);
+			return MatrixFactory.getFullDoubleMatrix2DConstructor().newInstance(size);
 		} catch (Exception e) {
 			if (e.getCause() instanceof OutOfMemoryError) {
 				logger.log(Level.WARNING, "matrix does not fit into memory, creating sparse Matrix instead");

@@ -77,10 +77,6 @@ import org.jdmp.matrix.calculation.general.statistical.Min;
 import org.jdmp.matrix.calculation.general.statistical.Std;
 import org.jdmp.matrix.calculation.general.statistical.Sum;
 import org.jdmp.matrix.calculation.general.statistical.Var;
-import org.jdmp.matrix.implementations.basic.DefaultDenseDoubleMatrix2D;
-import org.jdmp.matrix.implementations.basic.DefaultDenseObjectMatrix2D;
-import org.jdmp.matrix.implementations.basic.DefaultDenseStringMatrix2D;
-import org.jdmp.matrix.implementations.basic.DefaultSparseObjectMatrix;
 import org.jdmp.matrix.implementations.misc.ReshapedMatrix;
 import org.jdmp.matrix.implementations.misc.SubMatrix;
 import org.jdmp.matrix.interfaces.Annotation;
@@ -99,23 +95,6 @@ public abstract class AbstractGenericMatrix<A> implements GenericMatrix<A> {
 	 */
 	protected transient static final Logger logger = Logger.getLogger(Matrix.class.getName());
 	
-	private static String fullDoubleMatrix2DClassName = "org.jdmp.mtj.MTJFullDoubleMatrix2D";
-
-	private static String fullObjectMatrix2DClassName = DefaultDenseObjectMatrix2D.class.getName();
-
-	private static String fullStringMatrix2DClassName = DefaultDenseStringMatrix2D.class.getName();
-
-	private static String sparseDoubleMatrix2DClassName = DefaultSparseObjectMatrix.class.getName();
-
-	private static String sparseObjectMatrix2DClassName = DefaultSparseObjectMatrix.class.getName();
-
-	private static Constructor<? extends Matrix> fullDoubleMatrix2DConstructor = null;
-
-	private static Constructor<? extends Matrix> fullObjectMatrix2DConstructor = null;
-
-	private static Constructor<? extends Matrix> sparseDoubleMatrix2DConstructor = null;
-
-	private static Constructor<? extends Matrix> sparseObjectMatrix2DConstructor = null;
 	
 	static {
 		JDMPSettings.initialize();
@@ -131,64 +110,7 @@ public abstract class AbstractGenericMatrix<A> implements GenericMatrix<A> {
 	public abstract A getObject(long... coordinates) throws MatrixException;
 
 	
-	public static void setFullDoubleMatrix2DClassName(String fullDoubleMatrix2DClassName) {
-		AbstractGenericMatrix.fullDoubleMatrix2DClassName = fullDoubleMatrix2DClassName;
-		AbstractGenericMatrix.fullDoubleMatrix2DConstructor = null;
-	}
-
-	public static void setSparseDoubleMatrix2DClassName(String sparseDoubleMatrix2DClassName) {
-		AbstractGenericMatrix.sparseDoubleMatrix2DClassName = sparseDoubleMatrix2DClassName;
-		AbstractGenericMatrix.sparseDoubleMatrix2DConstructor = null;
-	}
-
-	public static Constructor<? extends Matrix> getFullDoubleMatrix2DConstructor() throws Exception {
-		if (fullDoubleMatrix2DConstructor == null) {
-			Class<?> fullDoubleMatrix2DClass = null;
-			try {
-				fullDoubleMatrix2DClass = Class.forName(fullDoubleMatrix2DClassName);
-			} catch (ClassNotFoundException e) {
-				logger.log(Level.WARNING, "Could not find desired Matrix implementation: "
-						+ fullDoubleMatrix2DClassName);
-				logger.log(Level.INFO, "Falling back to DefaultFullDoubleMatrix2D.");
-				logger.log(Level.INFO, "To speed up Matrix calculations, you should add jdmp-mtj to the classpath.");
-				fullDoubleMatrix2DClass = DefaultDenseDoubleMatrix2D.class;
-			}
-			Class<?> p = null;
-			// TODO: this should be solved in a more efficient way
-			for (Constructor<?> co : fullDoubleMatrix2DClass.getConstructors()) {
-				if ("long[]".equals(co.getParameterTypes()[0].getCanonicalName())) {
-					p = co.getParameterTypes()[0];
-				}
-			}
-			fullDoubleMatrix2DConstructor = (Constructor<Matrix>) fullDoubleMatrix2DClass.getConstructor(p);
-		}
-		return fullDoubleMatrix2DConstructor;
-	}
-
-	public static Constructor<? extends Matrix> getSparseDoubleMatrix2DConstructor() throws Exception {
-		if (sparseDoubleMatrix2DConstructor == null) {
-			Class<? extends Matrix> sparseDoubleMatrix2DClass = null;
-			try {
-				sparseDoubleMatrix2DClass = (Class<? extends Matrix>) Class.forName(sparseDoubleMatrix2DClassName);
-			} catch (ClassNotFoundException e) {
-				logger.log(Level.WARNING, "Could not find desired Matrix implementation: "
-						+ sparseDoubleMatrix2DClassName);
-				logger.log(Level.INFO, "Falling back to DefaultSparseObjectMatrix.");
-				logger.log(Level.INFO, "To speed up Matrix calculations, you should add jdmp-mtj to the classpath.");
-				sparseDoubleMatrix2DClass = DefaultSparseObjectMatrix.class;
-			}
-			Class<?> p = null;
-			// TODO: this should be solved in a more efficient way
-			for (Constructor<?> co : sparseDoubleMatrix2DClass.getConstructors()) {
-				if ("long[]".equals(co.getParameterTypes()[0].getCanonicalName())) {
-					p = co.getParameterTypes()[0];
-				}
-			}
-			sparseDoubleMatrix2DConstructor = sparseDoubleMatrix2DClass.getConstructor(p);
-		}
-		return sparseDoubleMatrix2DConstructor;
-	}
-
+	
 	
 	
 	public final GUIObject getGUIObject() {
