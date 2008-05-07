@@ -49,6 +49,12 @@
 				<version>0.0.1</version>
 				<scope>compile</scope>
 			</dependency>
+			<dependency>
+				<groupId>org.jdmp</groupId>
+				<artifactId>jdmp-mail</artifactId>
+				<version>0.0.1</version>
+				<scope>compile</scope>
+			</dependency>
 
 			<dependency>
 				<groupId>junit</groupId>
@@ -127,6 +133,12 @@
 				<groupId>xstream</groupId>
 				<artifactId>xstream</artifactId>
 				<version>1.2.2</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>mail</groupId>
+				<artifactId>mail</artifactId>
+				<version>1.4.1</version>
 				<scope>compile</scope>
 			</dependency>
 		</dependencies>
