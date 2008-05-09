@@ -74,6 +74,7 @@ import org.jdmp.matrix.calculation.general.statistical.IndexOfMin;
 import org.jdmp.matrix.calculation.general.statistical.Max;
 import org.jdmp.matrix.calculation.general.statistical.Mean;
 import org.jdmp.matrix.calculation.general.statistical.Min;
+import org.jdmp.matrix.calculation.general.statistical.MutualInformation;
 import org.jdmp.matrix.calculation.general.statistical.Std;
 import org.jdmp.matrix.calculation.general.statistical.Sum;
 import org.jdmp.matrix.calculation.general.statistical.Var;
@@ -1084,6 +1085,10 @@ public abstract class AbstractGenericMatrix<A> implements GenericMatrix<A> {
 	public Matrix corrcoef(Ret returnType, boolean ignoreNaN) throws MatrixException {
 		return new Corrcoef(ignoreNaN, this).calc(returnType);
 	}
+	
+	public Matrix mutualInf(Ret returnType) throws MatrixException {
+		return new MutualInformation(this).calc(returnType);
+	}
 
 	public double trace() throws MatrixException {
 		double sum = 0.0;
@@ -1096,6 +1101,11 @@ public abstract class AbstractGenericMatrix<A> implements GenericMatrix<A> {
 	public final void exportToFile(File file, Object... parameters) throws MatrixException {
 		Export.save(file, this, parameters);
 	}
+	
+	public final void exportToClipboard(Format format,Object... parameters) throws MatrixException {
+		Export.toClipboard(format, this,parameters);
+	}
+	
 
 	public final void exportToFile(String file, Object... parameters) throws MatrixException {
 		Export.save(file, this, parameters);
@@ -1484,8 +1494,8 @@ public abstract class AbstractGenericMatrix<A> implements GenericMatrix<A> {
 		}
 	}
 	
-	public String toString(Format format) throws MatrixException {
-		return Export.toString(format, this);
+	public String toString(Format format,Object... parameters) throws MatrixException {
+		return Export.toString(format, this,parameters);
 	}
 	
 	public void setSize(long... size) {

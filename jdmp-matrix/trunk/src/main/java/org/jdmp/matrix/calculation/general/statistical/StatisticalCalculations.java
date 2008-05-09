@@ -121,6 +121,17 @@ public interface StatisticalCalculations {
 	public Matrix corrcoef(Ret returnType, boolean ignoreNaN) throws MatrixException;
 
 	/**
+	 * Calculates the mutual information. Each row is an observation and each
+	 * column is a variable.
+	 * 
+	 * @param returnType
+	 *            Select whether a new or a linked Matrix is returned, or if the
+	 *            operation is performed on the original Matrix
+	 * @return Matrix with mutual information
+	 */
+	public Matrix mutualInf(Ret returnType) throws MatrixException;
+
+	/**
 	 * Finds the index of the maximum value in the matrix
 	 * 
 	 * @param returnType

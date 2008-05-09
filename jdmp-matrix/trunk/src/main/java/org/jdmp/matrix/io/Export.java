@@ -51,4 +51,12 @@ public abstract class Export {
 		}
 		return "format " + format + " not yet supported";
 	}
+	
+	public static final String toClipboard(Format format, Matrix m, Object... paramters) throws MatrixException {
+		switch (format) {
+		case CSV:
+			return ExportCSV.toCSV(m);
+		}
+		return "format " + format + " not yet supported";
+	}
 }

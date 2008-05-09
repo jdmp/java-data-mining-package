@@ -15,6 +15,8 @@ public interface ExportInterface {
 
 	public void exportToFile(String file, Object... parameters) throws MatrixException;
 
-	public String toString(Format format) throws MatrixException;
+	public void exportToClipboard(Format format, Object... parameters) throws MatrixException;
+
+	public String toString(Format forma, Object... parameters) throws MatrixException;
 
 }
