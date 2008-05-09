@@ -9,6 +9,7 @@ public class AllTests extends TestSuite {
 		suite.addTestSuite(TestDefaultFullDoubleMatrix2D.class);
 		suite.addTestSuite(TestDefaultFullObjectMatrix2D.class);
 		suite.addTestSuite(TestDefaultFullStringMatrix2D.class);
+		suite.addTestSuite(TestCommonsMathRealMatrix.class);
 		return suite;
 	}
 
