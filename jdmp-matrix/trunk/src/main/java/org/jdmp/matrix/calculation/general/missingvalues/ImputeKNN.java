@@ -20,10 +20,10 @@ public class ImputeKNN extends DoubleCalculation {
 		Matrix toReplace = null;
 		switch (getDimension()) {
 		case ROW:
-			toReplace = getSource().subMatrixLink(coordinates[ROW], 0, 1, getSource().getColumnCount());
+			toReplace = getSource().selectRows(Ret.LINK, coordinates[ROW]);
 			for (long r = getSource().getRowCount() - 1; r != -1; r--) {
 				if (r != coordinates[ROW]) {
-					Matrix candidate = getSource().subMatrixLink(r, 0, 1, getSource().getColumnCount());
+					Matrix candidate = getSource().selectRows(Ret.LINK, r);
 					if (!MathUtil.isNaNOrInfinite(candidate.getDouble(0, coordinates[COLUMN]))) {
 						double distance = toReplace.euklideanDistanceTo(candidate, true);
 						if (distance < bestDistance) {
@@ -35,10 +35,10 @@ public class ImputeKNN extends DoubleCalculation {
 			}
 			break;
 		case COLUMN:
-			toReplace = getSource().subMatrixLink(0, coordinates[COLUMN], getSource().getRowCount(), 1);
+			toReplace = getSource().selectColumns(Ret.LINK, coordinates[COLUMN]);
 			for (long c = getSource().getColumnCount() - 1; c != -1; c--) {
 				if (c != coordinates[COLUMN]) {
-					Matrix candidate = getSource().subMatrixLink(0, c, getSource().getRowCount(), 1);
+					Matrix candidate = getSource().selectColumns(Ret.LINK, c);
 					double distance = toReplace.euklideanDistanceTo(candidate, true);
 					if (distance < bestDistance) {
 						bestDistance = distance;

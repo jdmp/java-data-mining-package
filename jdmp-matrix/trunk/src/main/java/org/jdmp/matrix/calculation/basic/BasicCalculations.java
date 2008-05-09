@@ -7,7 +7,6 @@ import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.Matrix.AnnotationTransfer;
 import org.jdmp.matrix.Matrix.EntryType;
 import org.jdmp.matrix.calculation.Calculation.Ret;
-import org.jdmp.matrix.implementations.misc.SubMatrix;
 
 public interface BasicCalculations {
 
@@ -444,12 +443,7 @@ public interface BasicCalculations {
 	 */
 	public Matrix delete(Ret returnType, String selection) throws MatrixException;
 
-	public Matrix subMatrixCopy(long[] start, long[] end) throws MatrixException;
-
-	public Matrix subMatrixCopy(long startRow, long startColumn, long endRow, long endColumn) throws MatrixException;
-
-	public Matrix subMatrixLink(long[] start, long[] size);
-
-	public Matrix subMatrixLink(long startRow, long startColumn, long rowCount, long columnCount);
+	public Matrix subMatrix(Ret returnType, long startRow, long startColumn, long endRow, long endColumn)
+			throws MatrixException;
 
 }

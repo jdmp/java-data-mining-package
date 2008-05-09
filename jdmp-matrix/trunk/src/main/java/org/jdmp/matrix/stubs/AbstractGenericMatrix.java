@@ -78,7 +78,6 @@ import org.jdmp.matrix.calculation.general.statistical.Std;
 import org.jdmp.matrix.calculation.general.statistical.Sum;
 import org.jdmp.matrix.calculation.general.statistical.Var;
 import org.jdmp.matrix.implementations.misc.ReshapedMatrix;
-import org.jdmp.matrix.implementations.misc.SubMatrix;
 import org.jdmp.matrix.interfaces.Annotation;
 import org.jdmp.matrix.interfaces.GUIObject;
 import org.jdmp.matrix.interfaces.HasLabel;
@@ -1294,13 +1293,7 @@ public abstract class AbstractGenericMatrix<A> implements GenericMatrix<A> {
 		return ret;
 	}
 	
-	public final Matrix subMatrixLink(long[] start, long[] size) {
-		return new SubMatrix(this, start, size);
-	}
 
-	public final Matrix subMatrixLink(long startRow, long startColumn, long rowCount, long columnCount) {
-		return new SubMatrix(this, new long[] { startRow, startColumn }, new long[] { rowCount, columnCount });
-	}
 
 	
 	public Matrix deleteColumnsWithMissingValues(Ret returnType) throws MatrixException {
@@ -1442,24 +1435,16 @@ public abstract class AbstractGenericMatrix<A> implements GenericMatrix<A> {
 		return new DiscretizeToColumns(this, false, column).calc(Ret.NEW);
 	}
 	
-	public final Matrix subMatrixCopy(long[] start, long[] end) throws MatrixException {
-		return subMatrixCopy(start[ROW], start[COLUMN], end[ROW], end[COLUMN]);
-	}
+	
 
-	public final Matrix subMatrixCopy(long startRow, long startColumn, long endRow, long endColumn)
-			throws MatrixException {
-		long[] newSize = new long[] { endRow - startRow + 1, endColumn - startColumn + 1 };
-		Matrix result = MatrixFactory.zeros(newSize);
-		for (long[] c : allCoordinates()) {
-			if (c[ROW] >= startRow && c[ROW] < endRow + 1 && c[COLUMN] >= startColumn && c[COLUMN] < endColumn + 1) {
-				long[] target = Coordinates.copyOf(c);
-				target[ROW] -= startRow;
-				target[COLUMN] -= startColumn;
-				result.setDouble(getDouble(c), target);
-			}
-		}
-		return result;
-	}
+	
+	
+	public final Matrix subMatrix(Ret returnType,long startRow, long startColumn, long endRow, long endColumn)
+	throws MatrixException {
+		long[] rows=MathUtil.sequenceLong(startRow, endRow);
+		long[] columns=MathUtil.sequenceLong(startColumn, endColumn);
+		return select(returnType, rows,columns);
+    }
 	
 	public Matrix addColumnWithOnes() throws MatrixException {
 		Matrix ret = MatrixFactory.zeros(getRowCount(), getColumnCount() + 1);
