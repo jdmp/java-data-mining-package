@@ -132,6 +132,17 @@ public interface StatisticalCalculations {
 	public Matrix mutualInf(Ret returnType) throws MatrixException;
 
 	/**
+	 * Calculates a paired T-Test on the matrix. Each row is an observation and
+	 * each column is a variable.
+	 * 
+	 * @param returnType
+	 *            Select whether a new or a linked Matrix is returned, or if the
+	 *            operation is performed on the original Matrix
+	 * @return Matrix with p-values of the T-Test
+	 */
+	public Matrix pairedTTest(Ret returnType) throws MatrixException;
+
+	/**
 	 * Finds the index of the maximum value in the matrix
 	 * 
 	 * @param returnType

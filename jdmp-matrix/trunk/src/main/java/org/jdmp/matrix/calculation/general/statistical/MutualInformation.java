@@ -8,7 +8,7 @@ import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.calculation.DoubleCalculation;
 
 public class MutualInformation extends DoubleCalculation {
-	private static final long serialVersionUID = 879653499852789474L;
+	private static final long serialVersionUID = -4891250637894943873L;
 
 	public MutualInformation(Matrix matrix) {
 		super(matrix);

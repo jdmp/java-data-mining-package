@@ -75,6 +75,7 @@ import org.jdmp.matrix.calculation.general.statistical.Max;
 import org.jdmp.matrix.calculation.general.statistical.Mean;
 import org.jdmp.matrix.calculation.general.statistical.Min;
 import org.jdmp.matrix.calculation.general.statistical.MutualInformation;
+import org.jdmp.matrix.calculation.general.statistical.PairedTTest;
 import org.jdmp.matrix.calculation.general.statistical.Std;
 import org.jdmp.matrix.calculation.general.statistical.Sum;
 import org.jdmp.matrix.calculation.general.statistical.Var;
@@ -1088,6 +1089,10 @@ public abstract class AbstractGenericMatrix<A> implements GenericMatrix<A> {
 	
 	public Matrix mutualInf(Ret returnType) throws MatrixException {
 		return new MutualInformation(this).calc(returnType);
+	}
+	
+	public Matrix pairedTTest(Ret returnType) throws MatrixException {
+		return new PairedTTest(this).calc(returnType);
 	}
 
 	public double trace() throws MatrixException {
