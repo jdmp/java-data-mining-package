@@ -122,7 +122,7 @@ public class ReshapedMatrix<A> extends AbstractGenericMatrix<A> implements HasSo
 	}
 
 	public EntryType getEntryType() {
-		return null;
+		return getSourceMatrix().getEntryType();
 	}
 
 }
