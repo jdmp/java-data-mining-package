@@ -6,6 +6,7 @@ import java.util.Map;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.calculation.DoubleCalculation;
+import org.jdmp.matrix.util.MathUtil;
 
 public class MutualInformation extends DoubleCalculation {
 	private static final long serialVersionUID = -4891250637894943873L;
@@ -73,7 +74,7 @@ public class MutualInformation extends DoubleCalculation {
 				double p2 = count2.get(value2);
 				Double p12 = count12.get(value1 + "," + value2);
 				if (p12 != null) {
-					mutualInformation += p12 * Math.log(p12 / (p1 * p2));
+					mutualInformation += p12 * MathUtil.log2(p12 / (p1 * p2));
 				}
 			}
 		}
