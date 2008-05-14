@@ -47,7 +47,9 @@ public abstract class Export {
 	public static final String toString(Format format, Matrix m, Object... paramters) throws MatrixException {
 		switch (format) {
 		case CSV:
-			return ExportCSV.toCSV(m);
+			return ExportCSV.toCSV(m,paramters);
+		case TEX:
+            return ExportTEX.toTEX(m,paramters);
 		}
 		return "format " + format + " not yet supported";
 	}

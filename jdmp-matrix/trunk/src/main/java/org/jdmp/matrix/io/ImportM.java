@@ -17,7 +17,7 @@ public abstract class ImportM {
 	 *            the string to parse
 	 * @return a StringMatrix with the desired values
 	 */
-	public static Matrix fromString(String string) {
+	public static Matrix fromString(String string,Object ... parameters) {
 		return new DefaultDenseStringMatrix2D(string);
 	}
 

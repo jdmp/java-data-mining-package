@@ -35,6 +35,14 @@ public class IntelligentFileReader extends Reader {
 			logger.log(Level.WARNING, "could not open stream", e);
 		}
 	}
+	
+	public IntelligentFileReader(Reader reader) {
+        try {
+            lr = new LineNumberReader(reader);
+        } catch (Exception e) {
+            logger.log(Level.WARNING, "could not open stream", e);
+        }
+    }
 
 	public IntelligentFileReader(File file) {
 		if (file != null && file.exists()) {

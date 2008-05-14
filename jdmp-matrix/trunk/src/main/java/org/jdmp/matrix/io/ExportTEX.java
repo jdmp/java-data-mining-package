@@ -23,11 +23,11 @@ public class ExportTEX {
 		return FileSelector.selectFile(c, "TEX Files", ".tex");
 	}
 
-	public static final void save(String texFile, Matrix m) {
+	public static final void save(String texFile, Matrix m,Object...parameters) {
 		save(new File(texFile), m);
 	}
 
-	public static final void save(File texFile, Matrix m) {
+	public static final void save(File texFile, Matrix m,Object...parameters) {
 		String EOL = System.getProperty("line.separator");
 
 		try {
@@ -59,7 +59,7 @@ public class ExportTEX {
 		}
 	}
 
-	public static String toTEX(Matrix m) throws MatrixException {
+	public static String toTEX(Matrix m,Object...parameters) throws MatrixException {
 		StringBuffer s = new StringBuffer();
 		try {
 			appendTo(m, s);
@@ -69,7 +69,7 @@ public class ExportTEX {
 		return s.toString();
 	}
 
-	private static void appendTo(Matrix m, Appendable out) throws IOException, MatrixException {
+	private static void appendTo(Matrix m, Appendable out,Object...parameters) throws IOException, MatrixException {
 
 		String EOL = System.getProperty("line.separator");
 
@@ -89,6 +89,7 @@ public class ExportTEX {
 		}
 
 		out.append("\\begin{tabular}{" + alignment + "}" + EOL);
+		out.append("\\toprule" + EOL);
 
 		for (int row = 0; row < rowCount; row++) {
 			for (int col = 0; col < colCount; col++) {

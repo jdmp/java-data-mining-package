@@ -25,6 +25,10 @@
 
 package org.jdmp.matrix;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
@@ -55,7 +59,6 @@ import org.jdmp.matrix.implementations.io.DenseFileMatrix2D;
 import org.jdmp.matrix.implementations.io.FileListMatrix;
 import org.jdmp.matrix.implementations.misc.BufferedObjectMatrix;
 import org.jdmp.matrix.io.Import;
-import org.jdmp.matrix.stubs.AbstractGenericMatrix;
 import org.jdmp.matrix.util.MathUtil;
 
 /**
@@ -439,20 +442,36 @@ public abstract class MatrixFactory {
 		return Import.linkToFile(format, file, parameters);
 	}
 
-	public static final Matrix importFromFile(String filename, Object... parameters) throws MatrixException {
+	public static final Matrix importFromFile(String filename, Object... parameters) throws MatrixException, IOException {
 		return Import.importFromFile(new File(filename), parameters);
 	}
 
-	public static final Matrix importFromFile(File file, Object... parameters) throws MatrixException {
+	public static final Matrix importFromFile(File file, Object... parameters) throws MatrixException, IOException {
 		return Import.importFromFile(file, parameters);
 	}
 
-	public static final Matrix importFromFile(Format format, String file, Object... parameters) throws MatrixException {
+	public static final Matrix importFromFile(Format format, String file, Object... parameters) throws MatrixException, IOException {
 		return Import.importFromFile(format, new File(file), parameters);
 	}
 
-	public static final Matrix importFromFile(Format format, File file, Object... parameters) throws MatrixException {
+	public static final Matrix importFromFile(Format format, File file, Object... parameters) throws MatrixException, IOException {
 		return Import.importFromFile(format, file, parameters);
 	}
+
+	public static Matrix importFromClipboard(Object...parameters)throws MatrixException {
+	  return importFromClipboard(Format.CSV, parameters);
+	}
+	
+  public static Matrix importFromClipboard(Format format, Object...parameters)throws MatrixException {
+    Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        Transferable clipData = clipboard.getContents(null);
+        String s;
+        try {
+            s = (String) (clipData.getTransferData(DataFlavor.stringFlavor));
+        } catch (Exception ex) {
+            s = ex.toString();
+        }
+    return fromString(format, s, parameters);
+  }
 
 }

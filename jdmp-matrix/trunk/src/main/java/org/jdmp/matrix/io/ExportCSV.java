@@ -23,17 +23,17 @@ public class ExportCSV {
 		return FileSelector.selectFile("CSV Files", ".csv");
 	}
 
-	public static String toCSV(Matrix m) throws MatrixException {
+	public static String toCSV(Matrix m,Object...parameters) throws MatrixException {
 		StringBuffer s = new StringBuffer();
 		try {
-			appendTo(m, s);
+			appendTo(m, s,parameters);
 		} catch (IOException e) {
 			logger.log(Level.WARNING, "could not convert to CSV", e);
 		}
 		return s.toString();
 	}
 
-	private static void appendTo(Matrix m, Appendable out) throws IOException, MatrixException {
+	private static void appendTo(Matrix m, Appendable out,Object...parameters) throws IOException, MatrixException {
 		String lineend = System.getProperty("line.separator");
 		long rowCount = m.getRowCount();
 		long colCount = m.getColumnCount();
@@ -50,11 +50,11 @@ public class ExportCSV {
 		}
 	}
 
-	public static final void save(File file, Matrix m) {
+	public static final void save(File file, Matrix m,Object...parameters) {
 		IntelligentFileWriter out = null;
 		try {
 			out = new IntelligentFileWriter(file);
-			appendTo(m, out);
+			appendTo(m, out,parameters);
 		} catch (Exception e) {
 			logger.log(Level.WARNING, "could not write to file " + file, e);
 		} finally {
