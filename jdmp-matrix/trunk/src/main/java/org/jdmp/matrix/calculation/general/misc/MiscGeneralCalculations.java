@@ -34,6 +34,12 @@ public interface MiscGeneralCalculations {
 	 */
 	public Matrix standardize(Ret returnType, int dimension, boolean ignoreNaN) throws MatrixException;
 
+	public Matrix shuffle(Ret returnType) throws MatrixException;
+	
+	public Matrix bootstrap(Ret returnType) throws MatrixException;
+	
+	public Matrix bootstrap(Ret returnType, int count) throws MatrixException;
+	
 	public Matrix addColumnWithOnes() throws MatrixException;
 
 	public Matrix addRowWithOnes() throws MatrixException;

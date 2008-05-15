@@ -55,7 +55,9 @@ import org.jdmp.matrix.calculation.entrywise.rounding.Round;
 import org.jdmp.matrix.calculation.entrywise.trigonometric.Cos;
 import org.jdmp.matrix.calculation.entrywise.trigonometric.Sin;
 import org.jdmp.matrix.calculation.entrywise.trigonometric.Tan;
+import org.jdmp.matrix.calculation.general.misc.Bootstrap;
 import org.jdmp.matrix.calculation.general.misc.Center;
+import org.jdmp.matrix.calculation.general.misc.Shuffle;
 import org.jdmp.matrix.calculation.general.misc.Standardize;
 import org.jdmp.matrix.calculation.general.missingvalues.AddMissing;
 import org.jdmp.matrix.calculation.general.missingvalues.CountMissing;
@@ -1094,6 +1096,18 @@ public abstract class AbstractGenericMatrix<A> implements GenericMatrix<A> {
 	public Matrix pairedTTest(Ret returnType) throws MatrixException {
 		return new PairedTTest(this).calc(returnType);
 	}
+	
+	public Matrix bootstrap(Ret returnType) throws MatrixException {
+        return new Bootstrap(this).calc(returnType);
+    }
+	
+	public Matrix bootstrap(Ret returnType,int count) throws MatrixException {
+        return new Bootstrap(this,count).calc(returnType);
+    }
+	
+	public Matrix shuffle(Ret returnType) throws MatrixException {
+        return new Shuffle(this).calc(returnType);
+    }
 
 	public double trace() throws MatrixException {
 		double sum = 0.0;
