@@ -219,6 +219,18 @@
 				<version>1.5.1</version>
 				<scope>compile</scope>
 			</dependency>
+			<dependency>
+				<groupId>jxl</groupId>
+				<artifactId>jxl</artifactId>
+				<version>2.6.6</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>libsvm</groupId>
+				<artifactId>libsvm</artifactId>
+				<version>2.85</version>
+				<scope>compile</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
