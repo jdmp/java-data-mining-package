@@ -13,7 +13,7 @@ public abstract class ImportXLS {
 		Matrix xls = null;
 		try {
 			int sheet = 0;
-			Class<?> c = Class.forName("org.jdmp.jxl.DenseExcelMatrix2D");
+			Class<?> c = Class.forName("org.jdmp.jexcelapi.DenseExcelMatrix2D");
 			Constructor<?> constr = c.getConstructor(new Class[] { File.class, Integer.TYPE });
 			xls = (Matrix) constr.newInstance(new Object[] { file, sheet });
 		} catch (Exception e) {
