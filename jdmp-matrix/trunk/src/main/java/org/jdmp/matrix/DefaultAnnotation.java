@@ -19,12 +19,12 @@ public class DefaultAnnotation implements Annotation {
 		axisLabelAnnotation = new HashMap<Integer, Object>(2);
 	}
 
-	public DefaultAnnotation(DefaultAnnotation annotation) {
+	public DefaultAnnotation(Annotation annotation) {
 		this.matrixAnnotation = annotation.getMatrixAnnotation();
 		axisAnnotation = new HashMap<Integer, Map<Integer, Object>>();
 		axisLabelAnnotation = new HashMap<Integer, Object>(2);
-		axisLabelAnnotation.putAll(annotation.axisLabelAnnotation);
-		for (int i : annotation.axisAnnotation.keySet()) {
+		axisLabelAnnotation.putAll(annotation.getAxisLabelAnnotation());
+		for (int i : annotation.getAxisAnnotation().keySet()) {
 			Map<Integer, Object> m = axisAnnotation.get(i);
 			Map<Integer, Object> mnew = new HashMap<Integer, Object>();
 			mnew.putAll(m);
@@ -68,6 +68,14 @@ public class DefaultAnnotation implements Annotation {
 	public Annotation clone() {
 		DefaultAnnotation a = new DefaultAnnotation(this);
 		return a;
+	}
+
+	public Map<Integer, Object> getAxisLabelAnnotation() {
+		return axisLabelAnnotation;
+	}
+
+	public Map<Integer, Map<Integer, Object>> getAxisAnnotation() {
+		return axisAnnotation;
 	}
 
 }

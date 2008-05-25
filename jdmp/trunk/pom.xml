@@ -67,6 +67,25 @@
 				<version>0.0.1</version>
 				<scope>compile</scope>
 			</dependency>
+			<dependency>
+				<groupId>org.jdmp</groupId>
+				<artifactId>jdmp-jama</artifactId>
+				<version>0.0.1</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.jdmp</groupId>
+				<artifactId>jdmp-gui</artifactId>
+				<version>0.0.1</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.jdmp</groupId>
+				<artifactId>jdmp-jexcelapi</artifactId>
+				<version>0.0.1</version>
+				<scope>compile</scope>
+			</dependency>
+
 
 			<dependency>
 				<groupId>junit</groupId>
@@ -243,6 +262,7 @@
 				<version>1.0.2</version>
 				<scope>compile</scope>
 			</dependency>
+			
 		</dependencies>		
 	</dependencyManagement>
 

@@ -1,8 +1,13 @@
 package org.jdmp.matrix.interfaces;
 
 import java.io.Serializable;
+import java.util.Map;
 
 public interface Annotation extends Serializable {
+
+	public Map<Integer, Object> getAxisLabelAnnotation();
+
+	public Map<Integer, Map<Integer, Object>> getAxisAnnotation();
 
 	public void setAxisAnnotation(int axis, int positionOnAxis, Object value);
 

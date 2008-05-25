@@ -13,15 +13,15 @@ import org.jdmp.matrix.util.SerializationUtil;
 
 public abstract class AbstractMatrixTest extends TestCase {
 
-	public abstract Matrix createMatrix(long... size) throws MatrixException;
+	public abstract Matrix createMatrix(long... size) throws Exception;
 
-	public abstract Matrix createMatrix(Matrix source) throws MatrixException;
+	public abstract Matrix createMatrix(Matrix source) throws Exception;
 
 	public String getLabel() {
 		return this.getClass().getSimpleName();
 	}
 
-	public Matrix getTestMatrix() {
+	public Matrix getTestMatrix() throws Exception {
 		Matrix m = createMatrix(3, 3);
 		m.setDouble(1.0, 0, 0);
 		m.setDouble(3.0, 1, 0);
@@ -33,7 +33,7 @@ public abstract class AbstractMatrixTest extends TestCase {
 
 	// Test interface CoordinateFunctions
 
-	public void testCoordinateIterator2D() throws MatrixException {
+	public void testCoordinateIterator2D() throws Exception {
 		Matrix m = createMatrix(3, 3);
 		Iterator<long[]> ci = m.allCoordinates().iterator();
 		long[] c1 = ci.next();
@@ -57,7 +57,7 @@ public abstract class AbstractMatrixTest extends TestCase {
 		assertFalse(getLabel(), ci.hasNext());
 	}
 
-	public void testAvailableCoordinateIterator2D() throws MatrixException {
+	public void testAvailableCoordinateIterator2D() throws Exception {
 		Matrix m = getTestMatrix();
 
 		List<Coordinates> clist = new ArrayList<Coordinates>();
@@ -88,7 +88,7 @@ public abstract class AbstractMatrixTest extends TestCase {
 
 	}
 
-	public void testSelectedCoordinatesString() {
+	public void testSelectedCoordinatesString() throws Exception {
 		Matrix m = getTestMatrix();
 
 		Matrix mTest = createMatrix(2, 3);
@@ -115,7 +115,7 @@ public abstract class AbstractMatrixTest extends TestCase {
 
 	}
 
-	public void testSelectedCoordinates() {
+	public void testSelectedCoordinates() throws Exception {
 		Matrix m = getTestMatrix();
 
 		Matrix mTest = createMatrix(2, 3);
@@ -142,7 +142,7 @@ public abstract class AbstractMatrixTest extends TestCase {
 		assertFalse(getLabel(), ci.hasNext());
 	}
 
-	public void testGetCoordinatesOfMaximum() {
+	public void testGetCoordinatesOfMaximum() throws Exception {
 		Matrix m = getTestMatrix();
 		long[] c = m.getCoordinatesOfMaximum();
 		assertTrue(getLabel(), Coordinates.equals(c, new long[] { 1, 1 }));
@@ -156,7 +156,7 @@ public abstract class AbstractMatrixTest extends TestCase {
 		assertTrue(getLabel(), Coordinates.equals(c, new long[] { -1, -1 }));
 	}
 
-	public void testGetCoordinatesOfMininim() {
+	public void testGetCoordinatesOfMininim() throws Exception {
 		Matrix m = getTestMatrix();
 		long[] c = m.getCoordinatesOfMinimum();
 		assertTrue(getLabel(), Coordinates.equals(c, new long[] { 1, 2 }));
@@ -170,7 +170,7 @@ public abstract class AbstractMatrixTest extends TestCase {
 		assertTrue(getLabel(), Coordinates.equals(c, new long[] { -1, -1 }));
 	}
 
-	public void testContains() {
+	public void testContains() throws Exception {
 		Matrix m = getTestMatrix();
 		assertTrue(m.contains(0, 0));
 		if (m.isSparse())
@@ -199,13 +199,13 @@ public abstract class AbstractMatrixTest extends TestCase {
 		assertFalse(m.contains(7, 7));
 	}
 
-	public void testSize() throws MatrixException {
+	public void testSize() throws Exception {
 		Matrix m = createMatrix(20, 10);
 		assertEquals(getLabel(), 20, m.getRowCount());
 		assertEquals(getLabel(), 10, m.getColumnCount());
 	}
 
-	public void testClone() throws MatrixException {
+	public void testClone() throws Exception {
 		Matrix m = createMatrix(2, 2);
 		m.setDouble(1.0, 0, 0);
 		m.setDouble(2.0, 0, 1);
@@ -223,7 +223,7 @@ public abstract class AbstractMatrixTest extends TestCase {
 		assertTrue(getLabel(), m.equalsAnnotation(m2));
 	}
 
-	public void testAnnotation() {
+	public void testAnnotation() throws Exception {
 		Matrix m = createMatrix(2, 2);
 		m.setDouble(1.0, 0, 0);
 		m.setDouble(2.0, 0, 1);
@@ -245,7 +245,7 @@ public abstract class AbstractMatrixTest extends TestCase {
 		assertEquals(getLabel(), "column1", m.getAxisAnnotation(Matrix.COLUMN, 1));
 	}
 
-	public void testCountMissingValues() throws MatrixException {
+	public void testCountMissingValues() throws Exception {
 		Matrix m = createMatrix(4, 4);
 		m = m.zeros();
 		m.setDouble(Double.NaN, 1, 0);
@@ -272,7 +272,7 @@ public abstract class AbstractMatrixTest extends TestCase {
 		assertEquals(getLabel(), 6.0, m3.getDouble(0, 0));
 	}
 
-	public void testLink() throws MatrixException {
+	public void testLink() throws Exception {
 		Matrix m = createMatrix(2, 2);
 		m.setDouble(1.0, 0, 0);
 		m.setDouble(2.0, 0, 1);
@@ -296,7 +296,7 @@ public abstract class AbstractMatrixTest extends TestCase {
 		assertEquals(getLabel(), m, m2);
 	}
 
-	public void testSerialize() throws MatrixException, ClassNotFoundException, IOException {
+	public void testSerialize() throws Exception {
 		Matrix m = createMatrix(2, 2);
 		m.setDouble(1.0, 0, 0);
 		m.setDouble(2.0, 0, 1);
@@ -312,7 +312,7 @@ public abstract class AbstractMatrixTest extends TestCase {
 		}
 	}
 
-	public void testToDoubleArray() throws MatrixException {
+	public void testToDoubleArray() throws Exception {
 		Matrix m = createMatrix(2, 2);
 		m.setDouble(1.0, 0, 0);
 		m.setDouble(2.0, 0, 1);
@@ -325,7 +325,7 @@ public abstract class AbstractMatrixTest extends TestCase {
 		assertEquals(getLabel(), 4.0, values[1][1]);
 	}
 
-	public void testSetAndGet() throws MatrixException {
+	public void testSetAndGet() throws Exception {
 		Matrix m = createMatrix(2, 2);
 		m.setDouble(1.0, 0, 0);
 		m.setDouble(2.0, 0, 1);
@@ -337,7 +337,7 @@ public abstract class AbstractMatrixTest extends TestCase {
 		assertEquals(getLabel(), 4.0, m.getDouble(1, 1));
 	}
 
-	public void testPlus() throws MatrixException {
+	public void testPlus() throws Exception {
 		Matrix m = createMatrix(2, 2);
 		m.setDouble(1.0, 0, 0);
 		m.setDouble(2.0, 0, 1);
@@ -350,7 +350,7 @@ public abstract class AbstractMatrixTest extends TestCase {
 		assertEquals(getLabel(), 5.0, m.getDouble(1, 1));
 	}
 
-	public void testTranspose() throws MatrixException {
+	public void testTranspose() throws Exception {
 		Matrix m = createMatrix(2, 2);
 		m.setDouble(1.0, 0, 0);
 		m.setDouble(2.0, 0, 1);
@@ -363,7 +363,7 @@ public abstract class AbstractMatrixTest extends TestCase {
 		assertEquals(getLabel(), 4.0, m.getDouble(1, 1));
 	}
 
-	public void testEmpty() throws MatrixException {
+	public void testEmpty() throws Exception {
 		Matrix m = createMatrix(2, 2);
 		if (m instanceof AbstractDoubleMatrix) {
 			assertEquals(getLabel(), 0.0, m.getDouble(0, 0));
@@ -378,7 +378,7 @@ public abstract class AbstractMatrixTest extends TestCase {
 		}
 	}
 
-	public void testMinus() throws MatrixException {
+	public void testMinus() throws Exception {
 		Matrix m = createMatrix(2, 2);
 		m.setDouble(1.0, 0, 0);
 		m.setDouble(2.0, 0, 1);
@@ -391,7 +391,7 @@ public abstract class AbstractMatrixTest extends TestCase {
 		assertEquals(getLabel(), 3.0, m.getDouble(1, 1));
 	}
 
-	public void testMultiply() throws MatrixException {
+	public void testMultiply() throws Exception {
 		Matrix m1 = createMatrix(2, 2);
 		m1.setDouble(1.0, 0, 0);
 		m1.setDouble(2.0, 0, 1);
@@ -409,7 +409,7 @@ public abstract class AbstractMatrixTest extends TestCase {
 		assertEquals(getLabel(), 22.0, m3.getDouble(1, 1));
 	}
 
-	public void testInverse() throws MatrixException {
+	public void testInverse() throws Exception {
 		Matrix m1 = createMatrix(3, 3);
 		m1.setDouble(1.0, 0, 0);
 		m1.setDouble(2.0, 1, 0);
