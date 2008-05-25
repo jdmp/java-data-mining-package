@@ -1,11 +1,16 @@
 package org.jdmp.colt;
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import org.jdmp.matrix.Coordinates;
 import org.jdmp.matrix.DefaultAnnotation;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.interfaces.Wrapper;
 import org.jdmp.matrix.stubs.AbstractSparseDoubleMatrix2D;
+import org.jdmp.matrix.util.CoordinateSetToLongWrapper;
 
 import cern.colt.matrix.impl.SparseDoubleMatrix2D;
 
@@ -66,6 +71,26 @@ public class ColtSparseDoubleMatrix2D extends AbstractSparseDoubleMatrix2D imple
 		return annotation == null ? null : annotation.getAxisAnnotation(axis, positionOnAxis);
 	}
 
+	@Override
+	public Iterable<long[]> availableCoordinates() {
+		return new AvailableCoordinateIterable();
+	}
+
+	class AvailableCoordinateIterable implements Iterable<long[]> {
+
+		public Iterator<long[]> iterator() {
+			Set<Coordinates> cset = new HashSet<Coordinates>();
+			for (long r = getRowCount() - 1; r >= 0; r--) {
+				for (long c = getColumnCount() - 1; c >= 0; c--) {
+					if (getDouble(r, c) != 0.0) {
+						cset.add(new Coordinates(r, c));
+					}
+				}
+			}
+			return new CoordinateSetToLongWrapper(cset).iterator();
+		}
+	}
+
 	public Object getAxisAnnotation(int axis) {
 		return annotation == null ? null : annotation.getAxisAnnotation(axis);
 	}
@@ -84,8 +109,7 @@ public class ColtSparseDoubleMatrix2D extends AbstractSparseDoubleMatrix2D imple
 		annotation.setAxisAnnotation(axis, value);
 	}
 
-	// TODO: improve
 	public final boolean contains(long... coordinates) {
-		return Coordinates.isSmallerThan(coordinates, getSize());
+		return getDouble(coordinates) != 0.0;
 	}
 }

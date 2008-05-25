@@ -3,15 +3,16 @@ package org.jdmp.matrix.implementations.misc;
 import org.apache.commons.math.linear.RealMatrix;
 import org.apache.commons.math.linear.RealMatrixImpl;
 import org.jdmp.matrix.DefaultAnnotation;
+import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.interfaces.Annotation;
 import org.jdmp.matrix.interfaces.Wrapper;
 import org.jdmp.matrix.stubs.AbstractDenseDoubleMatrix2D;
 
-public class CommonsMathRealMatrix extends AbstractDenseDoubleMatrix2D implements Wrapper<RealMatrix> {
+public class CommonsMathRealMatrix extends AbstractDenseDoubleMatrix2D implements Wrapper<RealMatrixImpl> {
 	private static final long serialVersionUID = -1161807620507675926L;
 
-	private RealMatrix matrix = null;
+	private RealMatrixImpl matrix = null;
 
 	private Annotation annotation = null;
 
@@ -26,20 +27,28 @@ public class CommonsMathRealMatrix extends AbstractDenseDoubleMatrix2D implement
 		}
 	}
 
-	public RealMatrix getWrappedObject() {
+	public CommonsMathRealMatrix(RealMatrix matrix) {
+		if (matrix instanceof RealMatrixImpl) {
+			this.matrix = (RealMatrixImpl) matrix;
+		} else {
+			throw new MatrixException("Can oly use RealMatrixImpl");
+		}
+	}
+
+	public RealMatrixImpl getWrappedObject() {
 		return matrix;
 	}
 
-	public void setWrappedObject(RealMatrix object) {
+	public void setWrappedObject(RealMatrixImpl object) {
 		this.matrix = object;
 	}
 
 	public double getDouble(long... coordinates) throws MatrixException {
-		return matrix.getData()[(int) coordinates[ROW]][(int) coordinates[COLUMN]];
+		return matrix.getEntry((int) coordinates[ROW], (int) coordinates[COLUMN]);
 	}
 
 	public void setDouble(double value, long... coordinates) throws MatrixException {
-		matrix.getData()[(int) coordinates[ROW]][(int) coordinates[COLUMN]] = value;
+		matrix.getDataRef()[(int) coordinates[ROW]][(int) coordinates[COLUMN]] = value;
 	}
 
 	public long[] getSize() {
@@ -77,6 +86,10 @@ public class CommonsMathRealMatrix extends AbstractDenseDoubleMatrix2D implement
 			annotation = new DefaultAnnotation();
 		}
 		annotation.setAxisAnnotation(axis, value);
+	}
+
+	public Matrix inv() {
+		return new CommonsMathRealMatrix(matrix.inverse());
 	}
 
 }

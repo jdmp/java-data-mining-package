@@ -38,6 +38,7 @@ public class CoordinateIterator2D implements Iterable<long[]> {
 			}
 
 			public void remove() {
+				throw new MatrixException("not implemented");
 			}
 		};
 	}

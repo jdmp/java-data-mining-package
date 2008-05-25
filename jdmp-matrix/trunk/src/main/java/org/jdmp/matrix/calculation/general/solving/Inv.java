@@ -6,6 +6,7 @@ import org.jdmp.matrix.Coordinates;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.calculation.DoubleCalculation;
+import org.jdmp.matrix.implementations.misc.CommonsMathRealMatrix;
 
 public class Inv extends DoubleCalculation {
 	private static final long serialVersionUID = 7886298456216056038L;
@@ -23,10 +24,12 @@ public class Inv extends DoubleCalculation {
 
 				Matrix m = getSource();
 
-				if (!"".equals(m.getClass().getName())) {
-					Class<?> c = Class.forName("org.jdmp.mtj.MTJFullDoubleMatrix2D");
+				try {
+					Class<?> c = Class.forName("org.jdmp.mtj.MTJDenseDoubleMatrix2D");
 					Constructor<?> con = c.getConstructor(Matrix.class);
 					m = (Matrix) con.newInstance(m);
+				} catch (ClassNotFoundException e) {
+					m = new CommonsMathRealMatrix(m);
 				}
 
 				inv = m.inv();
