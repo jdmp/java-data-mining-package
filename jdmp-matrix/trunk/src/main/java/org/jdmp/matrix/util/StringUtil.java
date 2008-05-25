@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import org.jdmp.matrix.MatrixException;
+
 public abstract class StringUtil {
 
 	private static final NumberFormat DefaultNF = NumberFormat.getNumberInstance(Locale.US);
@@ -19,7 +21,7 @@ public abstract class StringUtil {
 		DefaultNF.setMinimumFractionDigits(4);
 		DefaultNF.setMaximumFractionDigits(4);
 	}
-	
+
 	public static final String format(Object o) {
 		if (o == null) {
 			return "";
@@ -71,9 +73,19 @@ public abstract class StringUtil {
 	}
 
 	public static long[][] parseSelection(String selectionString, long[] size) {
+		if (selectionString.contains(";")) {
+			return parseSelectionSemicolon(selectionString, size);
+		} else {
+			return parseSelectionComma(selectionString, size);
+		}
+	}
 
-		// TODO: check that no selection is bigger than size
+	private static long[][] parseSelectionComma(String selectionString, long[] size) {
+		throw new MatrixException(
+				"Matlab style is not supported yet. Please use a semicolon (;) to separate rows and columns");
+	}
 
+	private static long[][] parseSelectionSemicolon(String selectionString, long[] size) {
 		String[] fields = selectionString.replaceAll(BRACKETS, "").split(";");
 		long[][] selection = new long[fields.length][];
 
@@ -90,11 +102,25 @@ public abstract class StringUtil {
 					String dimsel = dimselections[j];
 					if (dimsel.contains(":") || dimsel.contains("-")) {
 						String[] range = dimsel.split("[:-]");
-						String startS = range[0];
-						String endS = range[1];
-						long start = Long.parseLong(startS.replaceAll("\\D", ""));
-						long end = Long.parseLong(endS.replaceAll("\\D", ""));
-						list.addAll(MathUtil.sequenceListLong(start, end));
+						if (range.length == 0) {
+							// all coordinates in this dimension
+							list.addAll(MathUtil.sequenceListLong(0, size[i] - 1));
+						} else if (range.length == 2) {
+							// from lower bound to upper bound
+							String startS = range[0];
+							String endS = range[1];
+							long start = Long.parseLong(startS.replaceAll("\\D", ""));
+							long end = Long.parseLong(endS.replaceAll("\\D", ""));
+
+							if (end > size[j]) {
+								throw new MatrixException("Selection is bigger than size");
+							}
+
+							list.addAll(MathUtil.sequenceListLong(start, end));
+						} else {
+							throw new MatrixException("Selection not supported: " + dimsel);
+						}
+
 					} else {
 						list.add(Long.parseLong(dimsel.replaceAll("\\D", "")));
 					}

@@ -25,6 +25,8 @@ public abstract class AbstractMapTest extends TestCase {
 
 	public void testSerialize() throws Exception {
 		Map m = createMap();
+		m.put("a", "test1");
+		m.put("b", "test2");
 		if (m instanceof Serializable) {
 			byte[] data = SerializationUtil.serialize((Serializable) m);
 			Map m2 = (Map) SerializationUtil.deserialize(data);

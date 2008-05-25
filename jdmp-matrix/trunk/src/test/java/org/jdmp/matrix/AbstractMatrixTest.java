@@ -118,7 +118,7 @@ public abstract class AbstractMatrixTest extends TestCase {
     mTest.setObject(mTest.getObject(1, 1), 1, 1);
     mTest.setObject(mTest.getObject(1, 2), 1, 2);
 
-    Iterator<long[]> ci = m.selectedCoordinates("1:2,:").iterator();
+    Iterator<long[]> ci = m.selectedCoordinates("1:2;:").iterator();
     long[] c = ci.next();
     assertTrue(getLabel(), Coordinates.equals(c, new long[] { 0, 0 }));
     c = ci.next();
@@ -481,7 +481,7 @@ public abstract class AbstractMatrixTest extends TestCase {
     // inverse only works when MTJ is in classpath
 
     try {
-      Class<?> c = Class.forName("org.jdmp.mtj.MTJFullDoubleMatrix2D");
+      Class<?> c = Class.forName("org.jdmp.mtj.MTJDenseDoubleMatrix2D");
     } catch (ClassNotFoundException e) {
       return;
     }

@@ -1,8 +1,5 @@
 package org.jdmp.matrix.util.collections;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.Serializable;
 import java.lang.ref.SoftReference;
 import java.util.Collection;
 import java.util.HashMap;
@@ -11,8 +8,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class SoftHashMap<K, V> implements Serializable, Map<K, V> {
-	private static final long serialVersionUID = 6660643969172743401L;
+public class SoftHashMap<K, V> implements Map<K, V> {
 
 	private static final Logger logger = Logger.getLogger(SoftHashMap.class.getName());
 
@@ -81,11 +77,6 @@ public class SoftHashMap<K, V> implements Serializable, Map<K, V> {
 	public Collection<V> values() {
 		logger.log(Level.WARNING, "cannot get values");
 		return null;
-	}
-
-	private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
-		s.defaultReadObject();
-		map = new HashMap<K, SoftReference<V>>();
 	}
 
 }
