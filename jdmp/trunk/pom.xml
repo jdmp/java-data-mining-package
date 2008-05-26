@@ -91,6 +91,12 @@
 				<version>0.0.1</version>
 				<scope>compile</scope>
 			</dependency>
+			<dependency>
+				<groupId>org.jdmp</groupId>
+				<artifactId>jdmp-vecmath</artifactId>
+				<version>0.0.1</version>
+				<scope>compile</scope>
+			</dependency>
 
 
 			<dependency>
@@ -268,14 +274,14 @@
 				<version>1.0.2</version>
 				<scope>compile</scope>
 			</dependency>
-			 <dependency>
-		      <groupId>ehcache</groupId>
-		      <artifactId>ehcache</artifactId>
-		      <version>1.4.1</version>
+			<dependency>
+				<groupId>ehcache</groupId>
+				<artifactId>ehcache</artifactId>
+				<version>1.4.1</version>
 				<scope>compile</scope>
-    </dependency>
-			
-		</dependencies>		
+			</dependency>
+
+		</dependencies>
 	</dependencyManagement>
 
 	<reporting>

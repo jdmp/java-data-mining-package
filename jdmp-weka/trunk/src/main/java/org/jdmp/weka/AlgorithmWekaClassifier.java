@@ -102,7 +102,7 @@ public class AlgorithmWekaClassifier extends AlgorithmClassifier {
 		if (c == null) {
 			throw new ClassNotFoundException("class not found: " + classifierName);
 		} else {
-			Constructor constr = c.getConstructor(new Class[] {});
+			Constructor<?> constr = c.getConstructor(new Class[] {});
 			wekaClassifier = (Classifier) constr.newInstance(new Object[] {});
 			if (options != null || options.length != 0) {
 				wekaClassifier.setOptions(options);
