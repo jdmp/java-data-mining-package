@@ -4,9 +4,6 @@ import java.io.Closeable;
 import java.io.File;
 import java.io.Flushable;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
@@ -15,13 +12,16 @@ import java.util.Set;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
+import net.sf.ehcache.bootstrap.BootstrapCacheLoader;
 import net.sf.ehcache.config.CacheConfiguration;
 import net.sf.ehcache.config.Configuration;
 import net.sf.ehcache.config.DiskStoreConfiguration;
 import net.sf.ehcache.event.RegisteredEventListeners;
 import net.sf.ehcache.store.MemoryStoreEvictionPolicy;
 
-public class EhcacheMap<K, V> implements Map<K, V>, Serializable, Flushable, Closeable {
+import org.jdmp.matrix.MatrixException;
+
+public class EhcacheMap<K, V> implements Map<K, V>, Flushable, Closeable {
 	private static final long serialVersionUID = -2405059234958626645L;
 
 	private int maxElementsInMemory = 100;
@@ -33,25 +33,31 @@ public class EhcacheMap<K, V> implements Map<K, V>, Serializable, Flushable, Clo
 	private boolean eternal = true;
 
 	private boolean diskPersistent = true;
+	
+	private transient File diskStorePath=null;
+	
+	private transient String name=null;
 
-	private RegisteredEventListeners registeredEventListeners = null;
+	private transient RegisteredEventListeners registeredEventListeners = null;
 
 	private int timeToLiveSeconds = 100000;
 
 	private int timeToIdleSeconds = 120;
+	
+	private int diskSpoolBufferSizeMB=1;
 
 	private int diskExpiryThreadIntervalSeconds = 300;
 
 	private MemoryStoreEvictionPolicy memoryStoreEvictionPolicy = MemoryStoreEvictionPolicy.LFU;
 
-	private String diskStorePath = null;
-
 	private transient CacheManager manager = null;
 
 	private transient Cache cache = null;
+	
+	private BootstrapCacheLoader bootstrapCacheLoader=null;
 
 	public EhcacheMap() throws IOException {
-		this("cache" + System.nanoTime());
+		this(null);
 	}
 
 	public EhcacheMap(String name) throws IOException {
@@ -60,31 +66,37 @@ public class EhcacheMap<K, V> implements Map<K, V>, Serializable, Flushable, Clo
 
 	public EhcacheMap(String name, File path) throws IOException {
 		System.setProperty("net.sf.ehcache.enableShutdownHook", "true");
-
-		if (path == null) {
-			path = File.createTempFile("ehcache" + System.nanoTime(), "tmp");
-			path.delete();
-			path.mkdir();
-		}
-
-		diskStorePath = path.getAbsolutePath();
-
-		Cache c = new Cache(name, maxElementsInMemory, memoryStoreEvictionPolicy, overflowToDisk, diskStorePath,
-				eternal, timeToLiveSeconds, timeToIdleSeconds, diskPersistent, diskExpiryThreadIntervalSeconds,
-				registeredEventListeners);
-		getCacheManager().addCache(c);
-		cache = getCacheManager().getCache(name);
+		this.diskStorePath = path;
+		this.name=name;		
 	}
 
-	public String getPath() {
+	public String getName(){
+	  if(name==null){
+	    name="ehcache"+System.nanoTime();
+	  }
+	  return name;
+	}
+	
+	public File getPath()  {
 		if (diskStorePath == null) {
-			diskStorePath = System.getProperty("java.io.tmpdir");
+		  try{
+			diskStorePath = File.createTempFile(getName(), ".tmp");
+            diskStorePath.delete();
+            diskStorePath.mkdir();
+            diskStorePath.deleteOnExit();
+            }catch(Exception e){
+              e.printStackTrace();
+              throw new RuntimeException(e);
+            }
 		}
 		return diskStorePath;
 	}
 
-	private CacheManager getCacheManager() {
+	
+	
+	private CacheManager getCacheManager()  {	  
 		if (manager == null) {
+		  		  
 			Configuration config = new Configuration();
 			CacheConfiguration cacheconfig = new CacheConfiguration();
 			cacheconfig.setDiskExpiryThreadIntervalSeconds(diskExpiryThreadIntervalSeconds);
@@ -98,32 +110,54 @@ public class EhcacheMap<K, V> implements Map<K, V>, Serializable, Flushable, Clo
 			cacheconfig.setTimeToLiveSeconds(timeToLiveSeconds);
 
 			DiskStoreConfiguration diskStoreConfigurationParameter = new DiskStoreConfiguration();
-			diskStoreConfigurationParameter.setPath(getPath());
+			diskStoreConfigurationParameter.setPath(getPath().getAbsolutePath());
 			config.addDiskStore(diskStoreConfigurationParameter);
 			config.setDefaultCacheConfiguration(cacheconfig);
 			manager = new CacheManager(config);
 		}
 		return manager;
 	}
+	
+	private Cache getCache(){
+	  if(cache==null){
+	    Cache c = new Cache( getName(),
+                  maxElementsInMemory,
+                  memoryStoreEvictionPolicy,
+                  overflowToDisk,
+                  getPath().getAbsolutePath(),
+                  eternal,
+                  timeToLiveSeconds,
+                  timeToIdleSeconds,
+                  diskPersistent,
+                  diskExpiryThreadIntervalSeconds,
+                  registeredEventListeners,
+                  bootstrapCacheLoader,
+                  maxElementsOnDisk,
+                  diskSpoolBufferSizeMB);
+        getCacheManager().addCache(c);
+        cache = getCacheManager().getCache(getName());
+	  }
+	  return cache;
+	}
 
 	public void clear() {
-		cache.flush();
+		getCache().flush();
 	}
 
 	public boolean containsKey(Object key) {
-		return cache.isKeyInCache(key);
+		return getCache().isKeyInCache(key);
 	}
 
 	public boolean containsValue(Object value) {
-		return cache.isValueInCache(value);
+		return getCache().isValueInCache(value);
 	}
 
 	public Set<java.util.Map.Entry<K, V>> entrySet() {
-		return null;
+		throw new MatrixException("not implemented");
 	}
 
 	public V get(Object key) {
-		Element e = cache.get(key);
+		Element e = getCache().get(key);
 		if (e != null) {
 			return (V) e.getValue();
 		} else {
@@ -132,16 +166,16 @@ public class EhcacheMap<K, V> implements Map<K, V>, Serializable, Flushable, Clo
 	}
 
 	public boolean isEmpty() {
-		return cache.getSize() == 0;
+		return getCache().getSize() == 0;
 	}
 
 	public Set<K> keySet() {
-		return new HashSet<K>(cache.getKeys());
+		return new HashSet<K>(getCache().getKeys());
 	}
 
-	public V put(K key, V value) {
+	public synchronized V put(K key, V value) {
 		Element e = new Element(key, value);
-		cache.put(e);
+		getCache().put(e);
 		return null;
 	}
 
@@ -152,44 +186,29 @@ public class EhcacheMap<K, V> implements Map<K, V>, Serializable, Flushable, Clo
 		}
 	}
 
-	public V remove(Object key) {
-		cache.remove(key);
+	public synchronized V remove(Object key) {
+		getCache().remove(key);
 		return null;
 	}
 
 	public int size() {
-		return cache.getSize();
+		return getCache().getSize();
 	}
 
 	public Collection<V> values() {
-		return null;
+		throw new MatrixException("not implemented");
 	}
 
 	public void finalize() {
-		CacheManager.getInstance().removeCache(cache.getName());
+		getCacheManager().removeCache(getCache().getName());
 	}
 
-	public void flush() throws IOException {
-		cache.flush();
+	public synchronized void flush() throws IOException {
+		getCache().flush();
 	}
 
-	public void close() throws IOException {
-		cache.dispose();
-		manager.removeCache(cache.getName());
+	public synchronized void close() throws IOException {
+		getCache().dispose();
+		getCacheManager().removeCache(getCache().getName());
 	}
-
-	private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
-		s.defaultReadObject();
-		String cacheName = (String) s.readObject();
-		diskStorePath = (String) s.readObject();
-		System.out.println(cacheName);
-		cache = getCacheManager().getCache(cacheName);
-	}
-
-	private void writeObject(ObjectOutputStream s) throws IOException {
-		s.defaultWriteObject();
-		s.writeObject(cache.getName());
-		s.writeObject(diskStorePath);
-	}
-
 }
