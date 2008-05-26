@@ -84,97 +84,94 @@ public abstract class MatrixFactory {
 
 	public static final int ALL = Matrix.ALL;
 
-	public static final int NONE = Matrix.NONE;	
-	
+	public static final int NONE = Matrix.NONE;
+
 	private static String fullDoubleMatrix2DClassName = "org.jdmp.mtj.MTJFullDoubleMatrix2D";
 
-    private static String fullObjectMatrix2DClassName = DefaultDenseObjectMatrix2D.class.getName();
+	private static String fullObjectMatrix2DClassName = DefaultDenseObjectMatrix2D.class.getName();
 
-    private static String fullStringMatrix2DClassName = DefaultDenseStringMatrix2D.class.getName();
+	private static String fullStringMatrix2DClassName = DefaultDenseStringMatrix2D.class.getName();
 
-    private static String sparseDoubleMatrix2DClassName = DefaultSparseObjectMatrix.class.getName();
+	private static String sparseDoubleMatrix2DClassName = DefaultSparseObjectMatrix.class.getName();
 
-    private static String sparseObjectMatrix2DClassName = DefaultSparseObjectMatrix.class.getName();
+	private static String sparseObjectMatrix2DClassName = DefaultSparseObjectMatrix.class.getName();
 
-    private static Constructor<? extends Matrix> fullDoubleMatrix2DConstructor = null;
+	private static Constructor<? extends Matrix> fullDoubleMatrix2DConstructor = null;
 
-    private static Constructor<? extends Matrix> fullObjectMatrix2DConstructor = null;
+	private static Constructor<? extends Matrix> fullObjectMatrix2DConstructor = null;
 
-    private static Constructor<? extends Matrix> sparseDoubleMatrix2DConstructor = null;
+	private static Constructor<? extends Matrix> sparseDoubleMatrix2DConstructor = null;
 
-    private static Constructor<? extends Matrix> sparseObjectMatrix2DConstructor = null;
-    
-    
-    public static void setFullDoubleMatrix2DClassName(String fullDoubleMatrix2DClassName) {
-        MatrixFactory.fullDoubleMatrix2DClassName = fullDoubleMatrix2DClassName;
-        MatrixFactory.fullDoubleMatrix2DConstructor = null;
-    }
+	private static Constructor<? extends Matrix> sparseObjectMatrix2DConstructor = null;
 
-    public static void setSparseDoubleMatrix2DClassName(String sparseDoubleMatrix2DClassName) {
-        MatrixFactory.sparseDoubleMatrix2DClassName = sparseDoubleMatrix2DClassName;
-        MatrixFactory.sparseDoubleMatrix2DConstructor = null;
-    }
+	public static void setFullDoubleMatrix2DClassName(String fullDoubleMatrix2DClassName) {
+		MatrixFactory.fullDoubleMatrix2DClassName = fullDoubleMatrix2DClassName;
+		MatrixFactory.fullDoubleMatrix2DConstructor = null;
+	}
 
-    public static Constructor<? extends Matrix> getFullDoubleMatrix2DConstructor() throws Exception {
-        if (fullDoubleMatrix2DConstructor == null) {
-            Class<?> fullDoubleMatrix2DClass = null;
-            try {
-                fullDoubleMatrix2DClass = Class.forName(fullDoubleMatrix2DClassName);
-            } catch (ClassNotFoundException e) {
-                logger.log(Level.WARNING, "Could not find desired Matrix implementation: "
-                        + fullDoubleMatrix2DClassName);
-                logger.log(Level.INFO, "Falling back to DefaultFullDoubleMatrix2D.");
-                logger.log(Level.INFO, "To speed up Matrix calculations, you should add jdmp-mtj to the classpath.");
-                fullDoubleMatrix2DClass = DefaultDenseDoubleMatrix2D.class;
-            }
-            Class<?> p = null;
-            // TODO: this should be solved in a more efficient way
-            for (Constructor<?> co : fullDoubleMatrix2DClass.getConstructors()) {
-                if ("long[]".equals(co.getParameterTypes()[0].getCanonicalName())) {
-                    p = co.getParameterTypes()[0];
-                }
-            }
-            fullDoubleMatrix2DConstructor = (Constructor<Matrix>) fullDoubleMatrix2DClass.getConstructor(p);
-        }
-        return fullDoubleMatrix2DConstructor;
-    }
+	public static void setSparseDoubleMatrix2DClassName(String sparseDoubleMatrix2DClassName) {
+		MatrixFactory.sparseDoubleMatrix2DClassName = sparseDoubleMatrix2DClassName;
+		MatrixFactory.sparseDoubleMatrix2DConstructor = null;
+	}
 
-    @SuppressWarnings("unchecked")
-    public static Constructor<? extends Matrix> getSparseDoubleMatrix2DConstructor() throws Exception {
-        if (sparseDoubleMatrix2DConstructor == null) {
-            Class<? extends Matrix> sparseDoubleMatrix2DClass = null;
-            try {
-                sparseDoubleMatrix2DClass = (Class<? extends Matrix>) Class.forName(sparseDoubleMatrix2DClassName);
-            } catch (ClassNotFoundException e) {
-                logger.log(Level.WARNING, "Could not find desired Matrix implementation: "
-                        + sparseDoubleMatrix2DClassName);
-                logger.log(Level.INFO, "Falling back to DefaultSparseObjectMatrix.");
-                logger.log(Level.INFO, "To speed up Matrix calculations, you should add jdmp-mtj to the classpath.");
-                sparseDoubleMatrix2DClass = DefaultSparseObjectMatrix.class;
-            }
-            Class<?> p = null;
-            // TODO: this should be solved in a more efficient way
-            for (Constructor<?> co : sparseDoubleMatrix2DClass.getConstructors()) {
-                if ("long[]".equals(co.getParameterTypes()[0].getCanonicalName())) {
-                    p = co.getParameterTypes()[0];
-                }
-            }
-            sparseDoubleMatrix2DConstructor = sparseDoubleMatrix2DClass.getConstructor(p);
-        }
-        return sparseDoubleMatrix2DConstructor;
-    }
+	public static Constructor<? extends Matrix> getFullDoubleMatrix2DConstructor() throws Exception {
+		if (fullDoubleMatrix2DConstructor == null) {
+			Class<?> fullDoubleMatrix2DClass = null;
+			try {
+				fullDoubleMatrix2DClass = Class.forName(fullDoubleMatrix2DClassName);
+			} catch (ClassNotFoundException e) {
+				logger.log(Level.WARNING, "Could not find desired Matrix implementation: "
+						+ fullDoubleMatrix2DClassName);
+				logger.log(Level.INFO, "Falling back to DefaultFullDoubleMatrix2D.");
+				logger.log(Level.INFO, "To speed up Matrix calculations, you should add jdmp-mtj to the classpath.");
+				fullDoubleMatrix2DClass = DefaultDenseDoubleMatrix2D.class;
+			}
+			Class<?> p = null;
+			// TODO: this should be solved in a more efficient way
+			for (Constructor<?> co : fullDoubleMatrix2DClass.getConstructors()) {
+				if ("long[]".equals(co.getParameterTypes()[0].getCanonicalName())) {
+					p = co.getParameterTypes()[0];
+				}
+			}
+			fullDoubleMatrix2DConstructor = (Constructor<Matrix>) fullDoubleMatrix2DClass.getConstructor(p);
+		}
+		return fullDoubleMatrix2DConstructor;
+	}
 
-	
+	@SuppressWarnings("unchecked")
+	public static Constructor<? extends Matrix> getSparseDoubleMatrix2DConstructor() throws Exception {
+		if (sparseDoubleMatrix2DConstructor == null) {
+			Class<? extends Matrix> sparseDoubleMatrix2DClass = null;
+			try {
+				sparseDoubleMatrix2DClass = (Class<? extends Matrix>) Class.forName(sparseDoubleMatrix2DClassName);
+			} catch (ClassNotFoundException e) {
+				logger.log(Level.WARNING, "Could not find desired Matrix implementation: "
+						+ sparseDoubleMatrix2DClassName);
+				logger.log(Level.INFO, "Falling back to DefaultSparseObjectMatrix.");
+				logger.log(Level.INFO, "To speed up Matrix calculations, you should add jdmp-mtj to the classpath.");
+				sparseDoubleMatrix2DClass = DefaultSparseObjectMatrix.class;
+			}
+			Class<?> p = null;
+			// TODO: this should be solved in a more efficient way
+			for (Constructor<?> co : sparseDoubleMatrix2DClass.getConstructors()) {
+				if ("long[]".equals(co.getParameterTypes()[0].getCanonicalName())) {
+					p = co.getParameterTypes()[0];
+				}
+			}
+			sparseDoubleMatrix2DConstructor = sparseDoubleMatrix2DClass.getConstructor(p);
+		}
+		return sparseDoubleMatrix2DConstructor;
+	}
 
 	public static final Matrix horCat(Matrix... matrices) throws MatrixException {
 		return concat(COLUMN, matrices);
 	}
 
-	public static final <A>Matrix vertCat(Matrix... matrices) throws MatrixException {
+	public static final <A> Matrix vertCat(Matrix... matrices) throws MatrixException {
 		return concat(ROW, matrices);
 	}
 
-	public static final <A>Matrix vertCat(Collection<Matrix> matrices) throws MatrixException {
+	public static final <A> Matrix vertCat(Collection<Matrix> matrices) throws MatrixException {
 		return concat(ROW, matrices);
 	}
 
@@ -300,6 +297,8 @@ public abstract class MatrixFactory {
 			case DOUBLE:
 				return zeros(size);
 			case OBJECT:
+				return new DefaultDenseObjectMatrix2D(size);
+			case GENERIC:
 				return new DefaultDenseObjectMatrix2D(size);
 			case STRING:
 				return new DefaultDenseStringMatrix2D(size);
@@ -442,7 +441,8 @@ public abstract class MatrixFactory {
 		return Import.linkToFile(format, file, parameters);
 	}
 
-	public static final Matrix importFromFile(String filename, Object... parameters) throws MatrixException, IOException {
+	public static final Matrix importFromFile(String filename, Object... parameters) throws MatrixException,
+			IOException {
 		return Import.importFromFile(new File(filename), parameters);
 	}
 
@@ -450,28 +450,30 @@ public abstract class MatrixFactory {
 		return Import.importFromFile(file, parameters);
 	}
 
-	public static final Matrix importFromFile(Format format, String file, Object... parameters) throws MatrixException, IOException {
+	public static final Matrix importFromFile(Format format, String file, Object... parameters) throws MatrixException,
+			IOException {
 		return Import.importFromFile(format, new File(file), parameters);
 	}
 
-	public static final Matrix importFromFile(Format format, File file, Object... parameters) throws MatrixException, IOException {
+	public static final Matrix importFromFile(Format format, File file, Object... parameters) throws MatrixException,
+			IOException {
 		return Import.importFromFile(format, file, parameters);
 	}
 
-	public static Matrix importFromClipboard(Object...parameters)throws MatrixException {
-	  return importFromClipboard(Format.CSV, parameters);
+	public static Matrix importFromClipboard(Object... parameters) throws MatrixException {
+		return importFromClipboard(Format.CSV, parameters);
 	}
-	
-  public static Matrix importFromClipboard(Format format, Object...parameters)throws MatrixException {
-    Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-        Transferable clipData = clipboard.getContents(null);
-        String s;
-        try {
-            s = (String) (clipData.getTransferData(DataFlavor.stringFlavor));
-        } catch (Exception ex) {
-            s = ex.toString();
-        }
-    return fromString(format, s, parameters);
-  }
+
+	public static Matrix importFromClipboard(Format format, Object... parameters) throws MatrixException {
+		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+		Transferable clipData = clipboard.getContents(null);
+		String s;
+		try {
+			s = (String) (clipData.getTransferData(DataFlavor.stringFlavor));
+		} catch (Exception ex) {
+			s = ex.toString();
+		}
+		return fromString(format, s, parameters);
+	}
 
 }
