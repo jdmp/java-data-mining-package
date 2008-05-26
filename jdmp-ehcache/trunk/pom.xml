@@ -26,6 +26,14 @@
 			<artifactId>ehcache</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>backport-util-concurrent</groupId>
+			<artifactId>backport-util-concurrent</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-matrix</artifactId>
 		</dependency>

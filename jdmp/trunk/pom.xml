@@ -280,6 +280,12 @@
 				<version>1.4.1</version>
 				<scope>compile</scope>
 			</dependency>
+			<dependency>
+				<groupId>backport-util-concurrent</groupId>
+				<artifactId>backport-util-concurrent</artifactId>
+				<version>3.0</version>
+				<scope>compile</scope>
+			</dependency>
 
 		</dependencies>
 	</dependencyManagement>
