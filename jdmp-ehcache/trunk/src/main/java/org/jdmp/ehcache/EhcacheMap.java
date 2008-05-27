@@ -84,6 +84,8 @@ public class EhcacheMap<K, V> implements Map<K, V>, Flushable, Closeable {
             diskStorePath.delete();
             diskStorePath.mkdir();
             diskStorePath.deleteOnExit();
+            new File(diskStorePath+System.getProperty("file.separator")+getName()+".data").deleteOnExit();
+            new File(diskStorePath+System.getProperty("file.separator")+getName()+".index").deleteOnExit();
             }catch(Exception e){
               e.printStackTrace();
               throw new RuntimeException(e);
