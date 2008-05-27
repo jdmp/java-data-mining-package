@@ -27,6 +27,8 @@ public class UIDefaults {
 			logger.log(Level.WARNING, "look and feel not found");
 		}
 
+		ToolTipManager.sharedInstance().setDismissDelay(Integer.MAX_VALUE);
+		
 		Locale.setDefault(Locale.US);
 
 		ClassLoader cl = UIDefaults.class.getClassLoader();
@@ -39,6 +41,9 @@ public class UIDefaults {
 
 		UIManager.put("JDMP.defaultInsets", new Insets(5, 5, 5, 5));
 
+		//TODO no icons available		
+		if(false){ 
+		
 		UIManager.put("JDMP.icon.Image", new ImageIcon(cl.getResource("icons/image.png")));
 
 		UIManager.put("JDMP.icon.Variable", new ImageIcon("resources/icons/variable.png"));
@@ -67,8 +72,8 @@ public class UIDefaults {
 		UIManager.put("JDMP.icon.StartAction", new ImageIcon(cl.getResource("icons/start.png")));
 		UIManager.put("JDMP.icon.StopAction", new ImageIcon(cl.getResource("icons/stop.png")));
 		UIManager.put("JDMP.icon.PasteAction", new ImageIcon(cl.getResource("icons/paste.png")));
-
-		ToolTipManager.sharedInstance().setDismissDelay(Integer.MAX_VALUE);
+		}
+		
 	}
 }
 

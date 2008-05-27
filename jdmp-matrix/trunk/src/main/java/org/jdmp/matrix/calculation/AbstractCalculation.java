@@ -38,6 +38,7 @@ import org.jdmp.matrix.calculation.general.statistical.Max;
 import org.jdmp.matrix.calculation.general.statistical.Min;
 import org.jdmp.matrix.calculation.general.statistical.Sum;
 import org.jdmp.matrix.implementations.basic.CalculationMatrix;
+import org.jdmp.matrix.interfaces.Annotation;
 
 public abstract class AbstractCalculation implements Calculation {
 
@@ -88,12 +89,16 @@ public abstract class AbstractCalculation implements Calculation {
 
 	public abstract void setString(String value, long... coordinates) throws MatrixException;
 
+	public Annotation getAnnotation() {
+		return sources == null ? null : sources[0].getAnnotation();
+	}
+
 	public final Matrix calcLink() {
 		return new CalculationMatrix(this);
 	}
 
-	public static Matrix calc(Calc calculation, Ret returnType, int dimension, Matrix source0, Matrix... sources)
-			throws MatrixException {
+	public static Matrix calc(Calc calculation, Ret returnType, int dimension, Matrix source0,
+			Matrix... sources) throws MatrixException {
 		switch (calculation) {
 		case CLONE:
 			return new Convert(source0).calc(returnType);

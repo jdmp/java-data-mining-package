@@ -4,14 +4,15 @@ import java.util.Map;
 
 import org.jdmp.matrix.CoordinateIterator2D;
 import org.jdmp.matrix.Coordinates;
+import org.jdmp.matrix.GenericMatrix;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
-import org.jdmp.matrix.MatrixFactory;
+import org.jdmp.matrix.implementations.basic.DefaultDenseObjectMatrix2D;
 import org.jdmp.matrix.interfaces.Wrapper;
 import org.jdmp.matrix.util.MathUtil;
 
-public abstract class AbstractMapToTiledMatrix2DWrapper<A> extends AbstractSparseMatrix<A> implements
-		Wrapper<Map<Coordinates, Matrix>> {
+public abstract class AbstractMapToTiledMatrix2DWrapper<A> extends AbstractDenseMatrix<A> implements
+		Wrapper<Map<Coordinates, GenericMatrix<A>>> {
 
 	private long tileSize = 100;
 
@@ -46,25 +47,31 @@ public abstract class AbstractMapToTiledMatrix2DWrapper<A> extends AbstractSpars
 		}
 	}
 
-	public Map<Coordinates, Matrix> getWrappedObject() {
+	public Map<Coordinates, GenericMatrix<A>> getWrappedObject() {
 		return getMap();
 	}
 
-	public abstract Map<Coordinates, Matrix> getMap();
+	public abstract Map<Coordinates, GenericMatrix<A>> getMap();
 
-	public void setWrappedObject(Map<Coordinates, Matrix> object) {
+	public void setWrappedObject(Map<Coordinates, GenericMatrix<A>> object) {
 		setMap(object);
 	}
 
-	public abstract void setMap(Map<Coordinates, Matrix> map);
+	public abstract void setMap(Map<Coordinates, GenericMatrix<A>> map);
 
 	public Iterable<long[]> allCoordinates() {
 		return new CoordinateIterator2D(getSize());
 	}
 
 	public boolean contains(long... coordinates) {
-		// TODO Auto-generated method stub
-		return false;
+		if (Coordinates.isSmallerThan(coordinates, size)) {
+			Coordinates c = new Coordinates(coordinates[ROW] / tileSize, coordinates[COLUMN]
+					/ tileSize);
+			Matrix m = getMap().get(c);
+			return m != null;
+		} else {
+			return false;
+		}
 	}
 
 	public final double getDouble(long... coordinates) throws MatrixException {
@@ -77,9 +84,9 @@ public abstract class AbstractMapToTiledMatrix2DWrapper<A> extends AbstractSpars
 
 	public void setObject(Object o, long... coordinates) throws MatrixException {
 		Coordinates c = new Coordinates(coordinates[ROW] / tileSize, coordinates[COLUMN] / tileSize);
-		Matrix m = getMap().get(c);
+		GenericMatrix<A> m = getMap().get(c);
 		if (m == null) {
-			m = MatrixFactory.zeros(getEntryType(), tileSize, tileSize);
+			m = (GenericMatrix<A>) new DefaultDenseObjectMatrix2D(tileSize, tileSize);
 		}
 		m.setObject(o, coordinates[ROW] % tileSize, coordinates[COLUMN] % tileSize);
 		getMap().put(c, m);

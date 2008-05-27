@@ -4,13 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jdmp.matrix.Coordinates;
+import org.jdmp.matrix.GenericMatrix;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.stubs.AbstractMapToTiledMatrix2DWrapper;
 
 public class DefaultTiledObjectMatrix2D<A> extends AbstractMapToTiledMatrix2DWrapper<A> {
 	private static final long serialVersionUID = 6745798685307431625L;
 
-	private Map<Coordinates, Matrix> values = null;
+	private Map<Coordinates, GenericMatrix<A>> values = null;
 
 	public DefaultTiledObjectMatrix2D(long... size) {
 		super(size);
@@ -21,23 +22,16 @@ public class DefaultTiledObjectMatrix2D<A> extends AbstractMapToTiledMatrix2DWra
 	}
 
 	@Override
-	public Map<Coordinates, Matrix> getMap() {
+	public Map<Coordinates, GenericMatrix<A>> getMap() {
 		if (values == null) {
-			values = new HashMap<Coordinates, Matrix>();
+			values = new HashMap<Coordinates, GenericMatrix<A>>();
 		}
 		return values;
 	}
 
 	@Override
-	public void setMap(Map<Coordinates, Matrix> map) {
+	public void setMap(Map<Coordinates, GenericMatrix<A>> map) {
 		this.values = map;
-	}
-
-	public static void main(String[] args) throws Exception {
-		Matrix m = new DefaultTiledObjectMatrix2D<Object>(10, 10);
-		m.setObject("test", 0, 0);
-		System.out.println(m.toString());
-
 	}
 
 }

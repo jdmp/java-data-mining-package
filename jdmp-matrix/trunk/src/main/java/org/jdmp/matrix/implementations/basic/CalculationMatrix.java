@@ -11,6 +11,7 @@ public class CalculationMatrix<A> extends AbstractGenericMatrix<A> {
 
 	public CalculationMatrix(AbstractCalculation calculation) {
 		this.calculation = calculation;
+		setAnnotation(calculation.getAnnotation());
 	}
 
 	public EntryType getEntryType() {

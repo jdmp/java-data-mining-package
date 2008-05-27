@@ -249,6 +249,35 @@ public class DenseExcelMatrix2D extends AbstractDenseStringMatrix2D implements C
 			return axisLabelAnnotation;
 		}
 
+		public boolean equals(Annotation a) {
+			if (a == null) {
+				return false;
+			}
+			if (matrixAnnotation != null && !matrixAnnotation.equals(a.getMatrixAnnotation())) {
+				return false;
+			} else if (a.getMatrixAnnotation() != null
+					&& !a.getMatrixAnnotation().equals(matrixAnnotation)) {
+				return false;
+			}
+			if (axisLabelAnnotation != null
+					&& !axisLabelAnnotation.equals(a.getAxisLabelAnnotation())) {
+				return false;
+			} else {
+				if (a.getAxisLabelAnnotation() != null
+						&& !a.getAxisLabelAnnotation().equals(axisLabelAnnotation)) {
+					return false;
+				}
+			}
+			if (axisAnnotation != null && !axisAnnotation.equals(a.getAxisAnnotation())) {
+				return false;
+			} else {
+				if (a.getAxisAnnotation() != null && !a.getAxisAnnotation().equals(axisAnnotation)) {
+					return false;
+				}
+			}
+			return true;
+		}
+
 	}
 
 }

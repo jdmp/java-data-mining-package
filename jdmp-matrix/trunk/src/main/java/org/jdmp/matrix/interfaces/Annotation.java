@@ -23,4 +23,6 @@ public interface Annotation extends Serializable {
 
 	public Annotation clone();
 
+	public boolean equals(Annotation a);
+
 }

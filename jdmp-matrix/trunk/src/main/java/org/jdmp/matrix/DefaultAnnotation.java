@@ -25,7 +25,7 @@ public class DefaultAnnotation implements Annotation {
 		axisLabelAnnotation = new HashMap<Integer, Object>(2);
 		axisLabelAnnotation.putAll(annotation.getAxisLabelAnnotation());
 		for (int i : annotation.getAxisAnnotation().keySet()) {
-			Map<Integer, Object> m = axisAnnotation.get(i);
+			Map<Integer, Object> m = annotation.getAxisAnnotation().get(i);
 			Map<Integer, Object> mnew = new HashMap<Integer, Object>();
 			mnew.putAll(m);
 			axisAnnotation.put(i, mnew);
@@ -78,4 +78,31 @@ public class DefaultAnnotation implements Annotation {
 		return axisAnnotation;
 	}
 
+	public boolean equals(Annotation a) {
+		if (a == null) {
+			return false;
+		}
+		if (matrixAnnotation != null && !matrixAnnotation.equals(a.getMatrixAnnotation())) {
+			return false;
+		} else if (a.getMatrixAnnotation() != null
+				&& !a.getMatrixAnnotation().equals(matrixAnnotation)) {
+			return false;
+		}
+		if (axisLabelAnnotation != null && !axisLabelAnnotation.equals(a.getAxisLabelAnnotation())) {
+			return false;
+		} else {
+			if (a.getAxisLabelAnnotation() != null
+					&& !a.getAxisLabelAnnotation().equals(axisLabelAnnotation)) {
+				return false;
+			}
+		}
+		if (axisAnnotation != null && !axisAnnotation.equals(a.getAxisAnnotation())) {
+			return false;
+		} else {
+			if (a.getAxisAnnotation() != null && !a.getAxisAnnotation().equals(axisAnnotation)) {
+				return false;
+			}
+		}
+		return true;
+	}
 }
