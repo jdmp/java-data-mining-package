@@ -3,15 +3,12 @@ package org.jdmp.matrix.implementations.basic;
 import java.util.logging.Level;
 
 import org.jdmp.matrix.Coordinates;
-import org.jdmp.matrix.DefaultAnnotation;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.stubs.AbstractDenseDoubleMatrix2D;
 
 public class DefaultDenseDoubleMatrix2D extends AbstractDenseDoubleMatrix2D {
 	private static final long serialVersionUID = 3132491298449205914L;
-
-	private DefaultAnnotation annotation = null;
 
 	private double[][] values = null;
 
@@ -67,39 +64,6 @@ public class DefaultDenseDoubleMatrix2D extends AbstractDenseDoubleMatrix2D {
 
 	public void setDouble(double value, long... coordinates) {
 		values[(int) coordinates[ROW]][(int) coordinates[COLUMN]] = value;
-	}
-
-	public Object getMatrixAnnotation() {
-		return annotation == null ? null : annotation.getMatrixAnnotation();
-	}
-
-	public void setMatrixAnnotation(Object value) {
-		if (annotation == null) {
-			annotation = new DefaultAnnotation();
-		}
-		annotation.setMatrixAnnotation(value);
-	}
-
-	public Object getAxisAnnotation(int axis, int positionOnAxis) {
-		return annotation == null ? null : annotation.getAxisAnnotation(axis, positionOnAxis);
-	}
-
-	public Object getAxisAnnotation(int axis) {
-		return annotation == null ? null : annotation.getAxisAnnotation(axis);
-	}
-
-	public void setAxisAnnotation(int axis, int positionOnAxis, Object value) {
-		if (annotation == null) {
-			annotation = new DefaultAnnotation();
-		}
-		annotation.setAxisAnnotation(axis, positionOnAxis, value);
-	}
-
-	public void setAxisAnnotation(int axis, Object value) {
-		if (annotation == null) {
-			annotation = new DefaultAnnotation();
-		}
-		annotation.setAxisAnnotation(axis, value);
 	}
 
 	public final Matrix transpose() {

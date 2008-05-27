@@ -122,13 +122,6 @@ public abstract class AbstractTreeMatrix<A> extends AbstractSparseDoubleMatrix i
 		return getObjectList().size();
 	}
 
-	public Object getAxisAnnotation(int axis, int positionOnAxis) {
-		return getObject(positionOnAxis);
-	}
-
-	public void setAxisAnnotation(int axis, int positionOnAxis, Object value) {
-	}
-
 	public void addObject(Object o) {
 		getObjectList().add(o);
 	}

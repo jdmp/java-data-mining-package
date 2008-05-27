@@ -33,8 +33,4 @@ public class MatrixAvailableProcessors extends AbstractDenseDoubleMatrix2D {
 		return true;
 	}
 
-	public Object getMatrixAnnotation() {
-		return "Available Processors";
-	}
-
 }

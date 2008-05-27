@@ -2,7 +2,6 @@ package org.jdmp.vecmath;
 
 import javax.vecmath.GMatrix;
 
-import org.jdmp.matrix.DefaultAnnotation;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.interfaces.Wrapper;
@@ -10,8 +9,6 @@ import org.jdmp.matrix.stubs.AbstractDenseDoubleMatrix2D;
 
 public class VecMathMatrix extends AbstractDenseDoubleMatrix2D implements Wrapper<GMatrix> {
 	private static final long serialVersionUID = 3792684800581150214L;
-
-	private DefaultAnnotation annotation = null;
 
 	private GMatrix matrix = null;
 
@@ -54,39 +51,6 @@ public class VecMathMatrix extends AbstractDenseDoubleMatrix2D implements Wrappe
 
 	public void setWrappedObject(GMatrix object) {
 		this.matrix = object;
-	}
-
-	public Object getMatrixAnnotation() {
-		return annotation == null ? null : annotation.getMatrixAnnotation();
-	}
-
-	public void setMatrixAnnotation(Object value) {
-		if (annotation == null) {
-			annotation = new DefaultAnnotation();
-		}
-		annotation.setMatrixAnnotation(value);
-	}
-
-	public Object getAxisAnnotation(int axis, int positionOnAxis) {
-		return annotation == null ? null : annotation.getAxisAnnotation(axis, positionOnAxis);
-	}
-
-	public Object getAxisAnnotation(int axis) {
-		return annotation == null ? null : annotation.getAxisAnnotation(axis);
-	}
-
-	public void setAxisAnnotation(int axis, int positionOnAxis, Object value) {
-		if (annotation == null) {
-			annotation = new DefaultAnnotation();
-		}
-		annotation.setAxisAnnotation(axis, positionOnAxis, value);
-	}
-
-	public void setAxisAnnotation(int axis, Object value) {
-		if (annotation == null) {
-			annotation = new DefaultAnnotation();
-		}
-		annotation.setAxisAnnotation(axis, value);
 	}
 
 }

@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.jdmp.matrix.CoordinateIterator2D;
 import org.jdmp.matrix.Coordinates;
-import org.jdmp.matrix.DefaultAnnotation;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.stubs.AbstractSparseObjectMatrix;
@@ -15,8 +14,6 @@ public class DefaultSparseObjectMatrix extends AbstractSparseObjectMatrix {
 	private static final long serialVersionUID = -7139128532871448340L;
 
 	private Map<Coordinates, Object> values = new HashMap<Coordinates, Object>();
-
-	private DefaultAnnotation annotation = null;
 
 	private long[] size = null;
 
@@ -79,28 +76,6 @@ public class DefaultSparseObjectMatrix extends AbstractSparseObjectMatrix {
 
 	public Iterable<long[]> availableCoordinates() {
 		return new CoordinateSetToLongWrapper(values.keySet());
-	}
-
-	public Object getMatrixAnnotation() {
-		return annotation == null ? null : annotation.getMatrixAnnotation();
-	}
-
-	public void setMatrixAnnotation(Object value) {
-		if (annotation == null) {
-			annotation = new DefaultAnnotation();
-		}
-		annotation.setMatrixAnnotation(value);
-	}
-
-	public Object getAxisAnnotation(int axis, int positionOnAxis) {
-		return annotation == null ? null : annotation.getAxisAnnotation(axis, positionOnAxis);
-	}
-
-	public void setAxisAnnotation(int axis, int positionOnAxis, Object value) {
-		if (annotation == null) {
-			annotation = new DefaultAnnotation();
-		}
-		annotation.setAxisAnnotation(axis, positionOnAxis, value);
 	}
 
 	public boolean contains(long... coordinates) {

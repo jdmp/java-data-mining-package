@@ -160,13 +160,6 @@ public abstract class AbstractGraphMatrix<N, E> extends AbstractGenericMatrix<E>
 		return ((List<N>) getNodeList()).indexOf(o);
 	}
 
-	public final Object getAxisAnnotation(int axis, int positionOnAxis) {
-		return ((List<N>) getNodeList()).get(positionOnAxis);
-	}
-
-	public final void setAxisAnnotation(int axis, int positionOnAxis, Object value) {
-	}
-
 	public void setUndirectedEdge(E value, long node1, long node2) {
 		setDirectedEdge(value, node1, node2);
 		setDirectedEdge(value, node2, node1);

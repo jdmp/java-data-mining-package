@@ -49,8 +49,4 @@ public class ImageMatrix extends AbstractDenseDoubleMatrix2D {
 		return new long[] { bufferedImage.getHeight(), bufferedImage.getWidth() };
 	}
 
-	public Object getMatrixAnnotation() {
-		return file;
-	}
-
 }

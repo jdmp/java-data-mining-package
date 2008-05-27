@@ -14,6 +14,7 @@ public class SynchronizedMatrix<A> extends AbstractGenericMatrix<A> implements H
 
 	public SynchronizedMatrix(Matrix source) {
 		this.matrix = source;
+		setAnnotation(source.getAnnotation());
 	}
 
 	public synchronized Iterable<long[]> allCoordinates() {
@@ -41,13 +42,6 @@ public class SynchronizedMatrix<A> extends AbstractGenericMatrix<A> implements H
 		matrix.setDouble(value, coordinates);
 	}
 
-	public synchronized Object getMatrixAnnotation() {
-		return matrix.getMatrixAnnotation();
-	}
-
-	public synchronized void setMatrixAnnotation(Object value) {
-		matrix.setMatrixAnnotation(value);
-	}
 
 	public synchronized A getObject(long... c) throws MatrixException {
 		return (A) matrix.getObject(c);
@@ -55,14 +49,6 @@ public class SynchronizedMatrix<A> extends AbstractGenericMatrix<A> implements H
 
 	public synchronized void setObject(Object value, long... c) throws MatrixException {
 		matrix.setObject(value, c);
-	}
-
-	public synchronized Object getAxisAnnotation(int axis, int positionOnAxis) {
-		return matrix.getAxisAnnotation(axis, positionOnAxis);
-	}
-
-	public synchronized void setAxisAnnotation(int axis, int positionOnAxis, Object value) {
-		matrix.setAxisAnnotation(axis, positionOnAxis, value);
 	}
 
 	public synchronized boolean contains(long... coordinates) {

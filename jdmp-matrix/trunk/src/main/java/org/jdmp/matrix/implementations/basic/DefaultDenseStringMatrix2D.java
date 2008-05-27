@@ -1,6 +1,5 @@
 package org.jdmp.matrix.implementations.basic;
 
-import org.jdmp.matrix.DefaultAnnotation;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.stubs.AbstractDenseStringMatrix2D;
@@ -8,8 +7,6 @@ import org.jdmp.matrix.util.StringUtil;
 
 public class DefaultDenseStringMatrix2D extends AbstractDenseStringMatrix2D {
 	private static final long serialVersionUID = -4292004796378125964L;
-
-	private DefaultAnnotation annotation = null;
 
 	private String[][] values = null;
 
@@ -61,39 +58,6 @@ public class DefaultDenseStringMatrix2D extends AbstractDenseStringMatrix2D {
 
 	public void setString(String value, long... coordinates) {
 		values[(int) coordinates[ROW]][(int) coordinates[COLUMN]] = value;
-	}
-
-	public Object getMatrixAnnotation() {
-		return annotation == null ? null : annotation.getMatrixAnnotation();
-	}
-
-	public void setMatrixAnnotation(Object value) {
-		if (annotation == null) {
-			annotation = new DefaultAnnotation();
-		}
-		annotation.setMatrixAnnotation(value);
-	}
-
-	public Object getAxisAnnotation(int axis, int positionOnAxis) {
-		return annotation == null ? null : annotation.getAxisAnnotation(axis, positionOnAxis);
-	}
-
-	public void setAxisAnnotation(int axis, int positionOnAxis, Object value) {
-		if (annotation == null) {
-			annotation = new DefaultAnnotation();
-		}
-		annotation.setAxisAnnotation(axis, positionOnAxis, value);
-	}
-
-	public Object getAxisAnnotation(int axis) {
-		return annotation == null ? null : annotation.getAxisAnnotation(axis);
-	}
-
-	public void setAxisAnnotation(int axis, Object value) {
-		if (annotation == null) {
-			annotation = new DefaultAnnotation();
-		}
-		annotation.setAxisAnnotation(axis, value);
-	}
+	}	
 
 }

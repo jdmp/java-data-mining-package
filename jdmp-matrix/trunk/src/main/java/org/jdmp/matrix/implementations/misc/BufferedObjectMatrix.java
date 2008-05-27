@@ -153,12 +153,4 @@ public class BufferedObjectMatrix extends AbstractObjectMatrix implements Flusha
 		return matrices;
 	}
 
-	public Object getMatrixAnnotation() {
-		return original.getMatrixAnnotation();
-	}
-
-	public void setMatrixAnnotation(Object value) {
-		original.setMatrixAnnotation(value);
-	}
-
 }

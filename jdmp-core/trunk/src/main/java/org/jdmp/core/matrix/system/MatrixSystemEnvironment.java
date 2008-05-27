@@ -17,10 +17,6 @@ public class MatrixSystemEnvironment extends AbstractMapMatrix {
 		return matrix;
 	}
 
-	public Object getMatrixAnnotation() {
-		return "System Environment";
-	}
-
 	@Override
 	public Map getMap() {
 		return System.getenv();

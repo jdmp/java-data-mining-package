@@ -42,21 +42,6 @@ public abstract class AbstractMapMatrix extends AbstractDenseObjectMatrix2D impl
 		return it.hasNext() ? it.next() : null;
 	}
 
-	public final Object getAxisAnnotation(int axis, int positionOnAxis) {
-		if (axis == COLUMN) {
-			switch (positionOnAxis) {
-			case 0:
-				return "Key";
-			case 1:
-				return "Value";
-			}
-		}
-		return null;
-	}
-
-	public final void setAxisAnnotation(int axis, int positionOnAxis, Object value) {
-	}
-
 	public final boolean containsKey(Object key) {
 		return getMap().containsKey(key);
 	}

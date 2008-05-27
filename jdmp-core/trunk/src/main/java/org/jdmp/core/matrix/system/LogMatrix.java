@@ -55,7 +55,8 @@ public class LogMatrix extends AbstractDenseObjectMatrix2D {
 
 		@Override
 		public void publish(LogRecord record) {
-			record.setParameters(new Object[] { Runtime.getRuntime().freeMemory(), Runtime.getRuntime() });
+			record.setParameters(new Object[] { Runtime.getRuntime().freeMemory(),
+					Runtime.getRuntime() });
 			list.add(record);
 			if (matrix != null) {
 				matrix.notifyGUIObject();
@@ -99,35 +100,6 @@ public class LogMatrix extends AbstractDenseObjectMatrix2D {
 	}
 
 	public void setObject(Object o, long... coordinates) {
-	}
-
-	public Object getMatrixAnnotation() {
-		return "Error Log";
-	}
-
-	public Object getAxisAnnotation(int axis, int positionOnAxis) {
-		if (axis == COLUMN) {
-			switch (positionOnAxis) {
-			case 0:
-				return "Time";
-			case 1:
-				return "Level";
-			case 2:
-				return "Message";
-			case 3:
-				return "Class Name";
-			case 4:
-				return "Method Name";
-			case 5:
-				return "Free Memory";
-			case 6:
-				return "Throwable";
-			}
-		}
-		return null;
-	}
-
-	public void setAxisAnnotation(int axis, int positionOnAxis, Object value) {
 	}
 
 }

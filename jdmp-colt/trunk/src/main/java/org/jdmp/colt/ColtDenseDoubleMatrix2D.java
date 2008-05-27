@@ -1,6 +1,5 @@
 package org.jdmp.colt;
 
-import org.jdmp.matrix.DefaultAnnotation;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.interfaces.Wrapper;
@@ -8,10 +7,9 @@ import org.jdmp.matrix.stubs.AbstractDenseDoubleMatrix2D;
 
 import cern.colt.matrix.impl.DenseDoubleMatrix2D;
 
-public class ColtDenseDoubleMatrix2D extends AbstractDenseDoubleMatrix2D implements Wrapper<DenseDoubleMatrix2D> {
+public class ColtDenseDoubleMatrix2D extends AbstractDenseDoubleMatrix2D implements
+		Wrapper<DenseDoubleMatrix2D> {
 	private static final long serialVersionUID = -3223474248020842822L;
-
-	private DefaultAnnotation annotation = null;
 
 	private DenseDoubleMatrix2D matrix = null;
 
@@ -50,36 +48,4 @@ public class ColtDenseDoubleMatrix2D extends AbstractDenseDoubleMatrix2D impleme
 		this.matrix = object;
 	}
 
-	public Object getMatrixAnnotation() {
-		return annotation == null ? null : annotation.getMatrixAnnotation();
-	}
-
-	public void setMatrixAnnotation(Object value) {
-		if (annotation == null) {
-			annotation = new DefaultAnnotation();
-		}
-		annotation.setMatrixAnnotation(value);
-	}
-
-	public Object getAxisAnnotation(int axis, int positionOnAxis) {
-		return annotation == null ? null : annotation.getAxisAnnotation(axis, positionOnAxis);
-	}
-
-	public Object getAxisAnnotation(int axis) {
-		return annotation == null ? null : annotation.getAxisAnnotation(axis);
-	}
-
-	public void setAxisAnnotation(int axis, int positionOnAxis, Object value) {
-		if (annotation == null) {
-			annotation = new DefaultAnnotation();
-		}
-		annotation.setAxisAnnotation(axis, positionOnAxis, value);
-	}
-
-	public void setAxisAnnotation(int axis, Object value) {
-		if (annotation == null) {
-			annotation = new DefaultAnnotation();
-		}
-		annotation.setAxisAnnotation(axis, value);
-	}
 }

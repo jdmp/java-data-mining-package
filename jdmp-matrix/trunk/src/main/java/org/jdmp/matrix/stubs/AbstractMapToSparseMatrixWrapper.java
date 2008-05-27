@@ -4,18 +4,14 @@ import java.util.Map;
 
 import org.jdmp.matrix.CoordinateIterator2D;
 import org.jdmp.matrix.Coordinates;
-import org.jdmp.matrix.DefaultAnnotation;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
-import org.jdmp.matrix.interfaces.Annotation;
 import org.jdmp.matrix.interfaces.Wrapper;
 import org.jdmp.matrix.util.CoordinateSetToLongWrapper;
 import org.jdmp.matrix.util.MathUtil;
 
 public abstract class AbstractMapToSparseMatrixWrapper<A> extends AbstractSparseMatrix<A> implements
 		Wrapper<Map<Coordinates, Object>> {
-
-	private Annotation annotation = null;
 
 	private A defaultValue = null;
 
@@ -109,36 +105,4 @@ public abstract class AbstractMapToSparseMatrixWrapper<A> extends AbstractSparse
 		this.maximumNumberOfEntries = maximumNumberOfEntries;
 	}
 
-	public Object getMatrixAnnotation() {
-		return annotation == null ? null : annotation.getMatrixAnnotation();
-	}
-
-	public void setMatrixAnnotation(Object value) {
-		if (annotation == null) {
-			annotation = new DefaultAnnotation();
-		}
-		annotation.setMatrixAnnotation(value);
-	}
-
-	public Object getAxisAnnotation(int axis, int positionOnAxis) {
-		return annotation == null ? null : annotation.getAxisAnnotation(axis, positionOnAxis);
-	}
-
-	public void setAxisAnnotation(int axis, int positionOnAxis, Object value) {
-		if (annotation == null) {
-			annotation = new DefaultAnnotation();
-		}
-		annotation.setAxisAnnotation(axis, positionOnAxis, value);
-	}
-
-	public Object getAxisAnnotation(int axis) {
-		return annotation == null ? null : annotation.getAxisAnnotation(axis);
-	}
-
-	public void setAxisAnnotation(int axis, Object value) {
-		if (annotation == null) {
-			annotation = new DefaultAnnotation();
-		}
-		annotation.setAxisAnnotation(axis, value);
-	}
 }

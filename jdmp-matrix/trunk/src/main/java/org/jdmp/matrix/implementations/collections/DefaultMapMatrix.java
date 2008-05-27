@@ -10,8 +10,6 @@ public class DefaultMapMatrix extends AbstractMapMatrix {
 
 	private Map<Object, Object> map = null;
 
-	private Object matrixAnnotation = null;
-
 	public DefaultMapMatrix() {
 		this.map = new HashMap<Object, Object>();
 	}
@@ -22,14 +20,6 @@ public class DefaultMapMatrix extends AbstractMapMatrix {
 
 	public Map<Object, Object> getMap() {
 		return map;
-	}
-
-	public Object getMatrixAnnotation() {
-		return matrixAnnotation;
-	}
-
-	public void setMatrixAnnotation(Object value) {
-		matrixAnnotation = value;
 	}
 
 }

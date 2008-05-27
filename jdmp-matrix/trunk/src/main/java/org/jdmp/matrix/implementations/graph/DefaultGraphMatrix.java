@@ -23,8 +23,6 @@ public class DefaultGraphMatrix<N, E> extends AbstractGraphMatrix<N, E> {
 
 	private Map<Long, List<Long>> children = new HashMap<Long, List<Long>>();
 
-	private Object matrixAnnotation = null;
-
 	public DefaultGraphMatrix() {
 	}
 
@@ -76,14 +74,6 @@ public class DefaultGraphMatrix<N, E> extends AbstractGraphMatrix<N, E> {
 
 	public int getNodeCount() {
 		return nodes.size();
-	}
-
-	public Object getMatrixAnnotation() {
-		return matrixAnnotation;
-	}
-
-	public void setMatrixAnnotation(Object value) {
-		matrixAnnotation = value;
 	}
 
 	public void addDirectedEdge(long node1, long node2) {

@@ -17,10 +17,6 @@ public class MatrixSystemProperties extends AbstractMapMatrix {
 		return matrix;
 	}
 
-	public Object getMatrixAnnotation() {
-		return "System Properties";
-	}
-
 	@Override
 	public Map getMap() {
 		return System.getProperties();

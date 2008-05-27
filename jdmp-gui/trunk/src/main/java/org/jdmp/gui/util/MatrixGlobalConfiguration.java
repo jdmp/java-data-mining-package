@@ -17,10 +17,6 @@ public class MatrixGlobalConfiguration extends AbstractMapMatrix {
 		return matrix;
 	}
 
-	public Object getMatrixAnnotation() {
-		return "Global Configuration";
-	}
-
 	@Override
 	public Map getMap() {
 		return GlobalConfiguration.getInstance();

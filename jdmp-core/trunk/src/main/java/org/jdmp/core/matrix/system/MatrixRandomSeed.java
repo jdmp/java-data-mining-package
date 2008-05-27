@@ -31,8 +31,4 @@ public class MatrixRandomSeed extends AbstractDenseDoubleMatrix2D {
 		MathUtil.setSeed((long) value);
 	}
 
-	public Object getMatrixAnnotation() {
-		return "Random Seed";
-	}
-
 }

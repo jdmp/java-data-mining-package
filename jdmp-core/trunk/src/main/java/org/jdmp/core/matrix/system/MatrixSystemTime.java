@@ -44,8 +44,4 @@ public class MatrixSystemTime extends AbstractDenseDoubleMatrix2D {
 		return true;
 	}
 
-	public Object getMatrixAnnotation() {
-		return "System Time";
-	}
-
 }

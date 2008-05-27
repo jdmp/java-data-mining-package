@@ -13,8 +13,6 @@ public class DefaultListMatrix<A> extends AbstractListMatrix<A> {
 
 	private List<A> list = null;
 
-	private Object matrixAnnotation = null;
-
 	public DefaultListMatrix(Collection<A> list) {
 		if (list instanceof List) {
 			this.list = (List<A>) list;
@@ -35,15 +33,5 @@ public class DefaultListMatrix<A> extends AbstractListMatrix<A> {
 	public List<A> getList() {
 		return list;
 	}
-
-	public Object getMatrixAnnotation() {
-		return matrixAnnotation;
-	}
-
-	public void setMatrixAnnotation(Object value) {
-		matrixAnnotation = value;
-	}
-
-	
 
 }

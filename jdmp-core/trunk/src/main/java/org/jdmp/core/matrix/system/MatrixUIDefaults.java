@@ -19,10 +19,6 @@ public class MatrixUIDefaults extends AbstractMapMatrix {
 		return matrix;
 	}
 
-	public Object getMatrixAnnotation() {
-		return "UI Defaults";
-	}
-
 	@Override
 	public Map getMap() {
 		return UIManager.getDefaults();

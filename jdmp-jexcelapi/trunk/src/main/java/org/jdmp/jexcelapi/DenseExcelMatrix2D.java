@@ -40,8 +40,6 @@ public class DenseExcelMatrix2D extends AbstractDenseStringMatrix2D implements C
 
 	private int sheetNumber = 0;
 
-	private Annotation annotation = null;
-
 	private long[] size = null;
 
 	public DenseExcelMatrix2D(long... size) throws MatrixException, IOException {
@@ -65,7 +63,8 @@ public class DenseExcelMatrix2D extends AbstractDenseStringMatrix2D implements C
 		this(file, 0);
 	}
 
-	public DenseExcelMatrix2D(String filename, boolean labelInFirstRow) throws MatrixException, IOException {
+	public DenseExcelMatrix2D(String filename, boolean labelInFirstRow) throws MatrixException,
+			IOException {
 		this(new File(filename), 0, labelInFirstRow);
 	}
 
@@ -77,7 +76,8 @@ public class DenseExcelMatrix2D extends AbstractDenseStringMatrix2D implements C
 		this(file, sheetNumber, false);
 	}
 
-	public DenseExcelMatrix2D(File file, int sheetNumber, boolean labelsInFistLine) throws MatrixException, IOException {
+	public DenseExcelMatrix2D(File file, int sheetNumber, boolean labelsInFistLine)
+			throws MatrixException, IOException {
 		openFile(file, sheetNumber, labelsInFistLine ? 1 : 0);
 	}
 
@@ -88,14 +88,16 @@ public class DenseExcelMatrix2D extends AbstractDenseStringMatrix2D implements C
 		}
 	}
 
-	public DenseExcelMatrix2D(File file, Matrix matrix, boolean labelsInFirstLine) throws MatrixException, IOException {
+	public DenseExcelMatrix2D(File file, Matrix matrix, boolean labelsInFirstLine)
+			throws MatrixException, IOException {
 		this(file, 0, labelsInFirstLine);
 		for (long[] c : matrix.allCoordinates()) {
 			setObject(matrix.getObject(c), c);
 		}
 	}
 
-	private void openFile(File file, int sheetNumber, int offset) throws MatrixException, IOException {
+	private void openFile(File file, int sheetNumber, int offset) throws MatrixException,
+			IOException {
 		if (file == null) {
 			file = File.createTempFile("jdmpMatrix", ".xls");
 			file.delete();
@@ -118,8 +120,8 @@ public class DenseExcelMatrix2D extends AbstractDenseStringMatrix2D implements C
 			sheet = writableWorkbook.createSheet("First Sheet", 0);
 		}
 
-		annotation = new ExcelAnnotation();
-		annotation.setMatrixAnnotation(file + " (" + sheet.getName() + ")");
+		setAnnotation(new ExcelAnnotation());
+		setMatrixAnnotation(file + " (" + sheet.getName() + ")");
 
 	}
 
@@ -185,30 +187,6 @@ public class DenseExcelMatrix2D extends AbstractDenseStringMatrix2D implements C
 		s.writeObject(offset);
 		s.writeObject(size);
 		s.writeObject(MatrixFactory.copyOf(this));
-	}
-
-	public Object getMatrixAnnotation() {
-		return annotation.getMatrixAnnotation();
-	}
-
-	public void setMatrixAnnotation(Object value) {
-		annotation.setMatrixAnnotation(value);
-	}
-
-	public Object getAxisAnnotation(int axis, int positionOnAxis) {
-		return annotation.getAxisAnnotation(axis, positionOnAxis);
-	}
-
-	public void setAxisAnnotation(int axis, int positionOnAxis, Object value) {
-		annotation.setAxisAnnotation(axis, positionOnAxis, value);
-	}
-
-	public Object getAxisAnnotation(int axis) {
-		return annotation.getAxisAnnotation(axis);
-	}
-
-	public void setAxisAnnotation(int axis, Object value) {
-		annotation.setAxisAnnotation(axis, value);
 	}
 
 	class ExcelAnnotation implements Annotation {

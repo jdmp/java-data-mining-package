@@ -15,8 +15,6 @@ public class VolatileSparseObjectMatrix extends AbstractSparseObjectMatrix {
 
 	private Map<Coordinates, Object> values = new SoftHashMap<Coordinates, Object>();
 
-	private Object matrixAnnotation = null;
-
 	private long[] size = null;
 
 	public VolatileSparseObjectMatrix(Matrix m) throws MatrixException {
@@ -60,14 +58,6 @@ public class VolatileSparseObjectMatrix extends AbstractSparseObjectMatrix {
 
 	public boolean contains(long... coordinates) {
 		return values.containsKey(new Coordinates(coordinates));
-	}
-
-	public Object getMatrixAnnotation() {
-		return matrixAnnotation;
-	}
-
-	public void setMatrixAnnotation(Object value) {
-		matrixAnnotation = value;
 	}
 
 }

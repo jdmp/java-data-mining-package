@@ -7,7 +7,8 @@ import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.interfaces.Wrapper;
 import org.jdmp.matrix.stubs.AbstractDenseDoubleMatrix2D;
 
-public class DataSetInputMatrixWrapper extends AbstractDenseDoubleMatrix2D implements Wrapper<BasicDataSet> {
+public class DataSetInputMatrixWrapper extends AbstractDenseDoubleMatrix2D implements
+		Wrapper<BasicDataSet> {
 	private static final long serialVersionUID = -817570097594349208L;
 
 	private BasicDataSet dataSet = null;
@@ -35,11 +36,12 @@ public class DataSetInputMatrixWrapper extends AbstractDenseDoubleMatrix2D imple
 		int col = (int) coordinates[COLUMN];
 		Sample p = dataSet.getSample(row);
 		if (p != null) {
-		  if(p.getInputMatrix()!=null){
-			long r = col / p.getInputMatrix().getColumnCount();
-			long c = col % p.getInputMatrix().getColumnCount();
-			return p.getInputMatrix().getDouble(r, c);
-		}}
+			if (p.getInputMatrix() != null) {
+				long r = col / p.getInputMatrix().getColumnCount();
+				long c = col % p.getInputMatrix().getColumnCount();
+				return p.getInputMatrix().getDouble(r, c);
+			}
+		}
 		return 0.0;
 	}
 
@@ -48,15 +50,12 @@ public class DataSetInputMatrixWrapper extends AbstractDenseDoubleMatrix2D imple
 		int col = (int) coordinates[COLUMN];
 		Sample p = dataSet.getSample(row);
 		if (p != null) {
-		  if(p.getInputMatrix()!=null){
-			long r = col / p.getInputMatrix().getColumnCount();
-			long c = col % p.getInputMatrix().getColumnCount();
-			p.getInputMatrix().setDouble(value, r, c);
-		}}
-	}
-
-	public Object getMatrixAnnotation() {
-		return "Input";
+			if (p.getInputMatrix() != null) {
+				long r = col / p.getInputMatrix().getColumnCount();
+				long c = col % p.getInputMatrix().getColumnCount();
+				p.getInputMatrix().setDouble(value, r, c);
+			}
+		}
 	}
 
 	public BasicDataSet getWrappedObject() {

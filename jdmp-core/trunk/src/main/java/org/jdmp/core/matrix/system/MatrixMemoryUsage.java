@@ -51,25 +51,4 @@ public class MatrixMemoryUsage extends AbstractDenseDoubleMatrix2D {
 		return true;
 	}
 
-	public Object getMatrixAnnotation() {
-		return "Memory Usage";
-	}
-
-	public Object getAxisAnnotation(int axis, int positionOnAxis) {
-		if (axis == ROW) {
-			switch (positionOnAxis) {
-			case 0:
-				return "Free Memory";
-			case 1:
-				return "Max Memory";
-			case 2:
-				return "Total Memory";
-			}
-		}
-		return null;
-	}
-
-	public void setAxisAnnotation(int axis, int positionOnAxis, Object value) {
-	}
-
 }

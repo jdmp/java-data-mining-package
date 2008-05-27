@@ -36,10 +36,6 @@ public class MatrixRunningThreads extends AbstractMapMatrix {
 		return matrix;
 	}
 
-	public Object getMatrixAnnotation() {
-		return "Running Threads";
-	}
-
 	@Override
 	public Map getMap() {
 		return ThreadMap.getInstance();

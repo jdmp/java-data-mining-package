@@ -22,6 +22,7 @@ public class FileListMatrix extends AbstractDenseStringMatrix2D {
 		this.path = path;
 		this.files = Arrays.asList(path.listFiles());
 		Collections.sort(files);
+		setMatrixAnnotation(path);
 	}
 
 	public long[] getSize() {
@@ -46,13 +47,6 @@ public class FileListMatrix extends AbstractDenseStringMatrix2D {
 			source.renameTo(target);
 			files.set((int) coordinates[ROW], target);
 		}
-	}
-
-	public Object getMatrixAnnotation() {
-		return path;
-	}
-
-	public void setMatrixAnnotation(Object value) {
 	}
 
 }

@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import org.jdmp.matrix.Coordinates;
+import org.jdmp.matrix.DefaultAnnotation;
 import org.jdmp.matrix.GenericMatrix;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
@@ -109,12 +110,45 @@ public abstract class AbstractGenericMatrix<A> implements GenericMatrix<A> {
 	}
 	
 	private transient GUIObject guiObject = null;
+	
+	private Annotation annotation=null;
 
 	public abstract A getObject(long... coordinates) throws MatrixException;
 
 	
 	
-	
+	public final Object getMatrixAnnotation() {
+        return annotation == null ? null : annotation.getMatrixAnnotation();
+    }
+
+    public final void setMatrixAnnotation(Object value) {
+        if (annotation == null) {
+            annotation = new DefaultAnnotation();
+        }
+        annotation.setMatrixAnnotation(value);
+    }
+
+    public final Object getAxisAnnotation(int axis, int positionOnAxis) {
+        return annotation == null ? null : annotation.getAxisAnnotation(axis, positionOnAxis);
+    }
+
+    public final Object getAxisAnnotation(int axis) {
+        return annotation == null ? null : annotation.getAxisAnnotation(axis);
+    }
+
+    public final void setAxisAnnotation(int axis, int positionOnAxis, Object value) {
+        if (annotation == null) {
+            annotation = new DefaultAnnotation();
+        }
+        annotation.setAxisAnnotation(axis, positionOnAxis, value);
+    }
+
+    public final void setAxisAnnotation(int axis, Object value) {
+        if (annotation == null) {
+            annotation = new DefaultAnnotation();
+        }
+        annotation.setAxisAnnotation(axis, value);
+    }
 	
 	public final GUIObject getGUIObject() {
 		if (guiObject == null) {
@@ -1540,36 +1574,15 @@ public abstract class AbstractGenericMatrix<A> implements GenericMatrix<A> {
 		return Math.sqrt(sum);
 	}
 
-	public void setMatrixAnnotation(Object o) {
+
+
+
+	public final Annotation getAnnotation() {
+		return annotation;
 	}
 
-	public Object getMatrixAnnotation() {
-		return null;
-	}
-
-	public Object getAxisAnnotation(int axis, int positionOnAxis) {
-		return null;
-	}
-
-	public final Object getAxisAnnotation(int axis, int positionOnAxis, Object key) {
-		return null;
-	}
-
-	public void setAxisAnnotation(int axis, int positionOnAxis, Object value) {
-	}
-
-	public Object getAxisAnnotation(int axis) {
-		return null;
-	}
-
-	public void setAxisAnnotation(int axis, Object value) {
-	}
-
-	public Annotation getAnnotation() {
-		return null;
-	}
-
-	public void setAnnotation(Annotation axisAnnotation) {
+	public final void setAnnotation(Annotation annotation) {
+	  this.annotation=annotation;
 	}
 
 	public final boolean equalsAnnotation(Object o) {

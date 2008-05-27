@@ -8,7 +8,6 @@ import no.uib.cipr.matrix.DenseMatrix;
 import no.uib.cipr.matrix.Matrices;
 import no.uib.cipr.matrix.SVD;
 
-import org.jdmp.matrix.DefaultAnnotation;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.MatrixFactory;
@@ -20,8 +19,6 @@ public class MTJFullDoubleMatrix2D extends AbstractDenseDoubleMatrix2D implement
 	private static final long serialVersionUID = -2386081646062313108L;
 
 	private transient DenseMatrix matrix = null;
-
-	private DefaultAnnotation annotation = null;
 
 	public MTJFullDoubleMatrix2D(DenseMatrix m) {
 		this.matrix = m;
@@ -291,28 +288,6 @@ public class MTJFullDoubleMatrix2D extends AbstractDenseDoubleMatrix2D implement
 		return new MTJFullDoubleMatrix2D(matrix.copy());
 	}
 
-	public Object getMatrixAnnotation() {
-		return annotation == null ? null : annotation.getMatrixAnnotation();
-	}
-
-	public void setMatrixAnnotation(Object value) {
-		if (annotation == null) {
-			annotation = new DefaultAnnotation();
-		}
-		annotation.setMatrixAnnotation(value);
-	}
-
-	public Object getAxisAnnotation(int axis, int positionOnAxis) {
-		return annotation == null ? null : annotation.getAxisAnnotation(axis, positionOnAxis);
-	}
-
-	public void setAxisAnnotation(int axis, int positionOnAxis, Object value) {
-		if (annotation == null) {
-			annotation = new DefaultAnnotation();
-		}
-		annotation.setAxisAnnotation(axis, positionOnAxis, value);
-	}
-
 	public boolean containsNaN() {
 		double[] data = matrix.getData();
 		for (int i = matrix.getData().length; --i >= 0;) {
@@ -323,14 +298,4 @@ public class MTJFullDoubleMatrix2D extends AbstractDenseDoubleMatrix2D implement
 		return false;
 	}
 
-	public Object getAxisAnnotation(int axis) {
-		return annotation == null ? null : annotation.getAxisAnnotation(axis);
-	}
-
-	public void setAxisAnnotation(int axis, Object value) {
-		if (annotation == null) {
-			annotation = new DefaultAnnotation();
-		}
-		annotation.setAxisAnnotation(axis, value);
-	}
 }
