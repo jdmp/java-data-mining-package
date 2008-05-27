@@ -28,6 +28,8 @@ public class SerializedObjectMap<K, V> implements Map<K, V> {
 	private FileNameConverter fileNameConverter = null;
 
 	private File path = null;
+	
+	private boolean temporary=false;
 
 	private int method = SERIALIZE;
 
@@ -44,6 +46,8 @@ public class SerializedObjectMap<K, V> implements Map<K, V> {
 			if (path == null) {
 				path = File.createTempFile("serializedmap" + System.nanoTime(), "");
 				path.delete();
+				path.deleteOnExit();
+				temporary=true;
 			}
 			this.path = path;
 			if (!path.exists()) {
@@ -143,6 +147,9 @@ public class SerializedObjectMap<K, V> implements Map<K, V> {
 
 			if (!file.getParentFile().exists()) {
 				file.getParentFile().mkdirs();
+				if(temporary){
+				  file.getParentFile().deleteOnExit();
+				}
 			}
 
 			FileOutputStream fo = new FileOutputStream(file);
@@ -161,6 +168,10 @@ public class SerializedObjectMap<K, V> implements Map<K, V> {
 
 			bo.close();
 			fo.close();
+			
+			if(temporary){
+			  file.deleteOnExit();
+			}
 
 			return null;
 		} catch (Exception e) {
