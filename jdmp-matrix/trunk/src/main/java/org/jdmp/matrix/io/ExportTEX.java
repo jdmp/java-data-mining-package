@@ -1,6 +1,5 @@
 package org.jdmp.matrix.io;
 
-import java.awt.Component;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -8,6 +7,7 @@ import java.util.logging.Logger;
 
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.Matrix.Format;
 import org.jdmp.matrix.util.IntelligentFileWriter;
 import org.jdmp.matrix.util.StringUtil;
 
@@ -15,19 +15,11 @@ public class ExportTEX {
 
 	private static final Logger logger = Logger.getLogger(ExportTEX.class.getName());
 
-	public static final File selectFile() {
-		return selectFile(null);
-	}
-
-	public static final File selectFile(Component c) {
-		return FileSelector.selectFile(c, "TEX Files", ".tex");
-	}
-
-	public static final void save(String texFile, Matrix m,Object...parameters) {
+	public static final void save(String texFile, Matrix m, Object... parameters) {
 		save(new File(texFile), m);
 	}
 
-	public static final void save(File texFile, Matrix m,Object...parameters) {
+	public static final void save(File texFile, Matrix m, Object... parameters) {
 		String EOL = System.getProperty("line.separator");
 
 		try {
@@ -53,13 +45,13 @@ public class ExportTEX {
 			// }
 			out.close();
 
-			ExportCSV.save(datFile, m);
+			Export.toFile(Format.CSV, datFile, m);
 		} catch (Exception e) {
 			logger.log(Level.WARNING, "could not save TEX file", e);
 		}
 	}
 
-	public static String toTEX(Matrix m,Object...parameters) throws MatrixException {
+	public static String toTEX(Matrix m, Object... parameters) throws MatrixException {
 		StringBuffer s = new StringBuffer();
 		try {
 			appendTo(m, s);
@@ -69,7 +61,8 @@ public class ExportTEX {
 		return s.toString();
 	}
 
-	private static void appendTo(Matrix m, Appendable out,Object...parameters) throws IOException, MatrixException {
+	private static void appendTo(Matrix m, Appendable out, Object... parameters)
+			throws IOException, MatrixException {
 
 		String EOL = System.getProperty("line.separator");
 

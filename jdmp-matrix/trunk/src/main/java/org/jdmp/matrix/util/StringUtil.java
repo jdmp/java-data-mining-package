@@ -35,6 +35,19 @@ public abstract class StringUtil {
 		return o.toString();
 	}
 
+	public static final String convert(Object o) {
+		if (o == null) {
+			return "";
+		}
+		if (o instanceof String) {
+			return (String) o;
+		}
+		if (o instanceof Number) {
+			return "" + (((Number) o).doubleValue());
+		}
+		return o.toString();
+	}
+
 	public static final String format(Double value) {
 		if (value == null)
 			return "";

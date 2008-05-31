@@ -18,26 +18,29 @@ import org.jdmp.matrix.util.StringUtil;
 
 public abstract class ImportCSV {
 
-  public static final Matrix fromString(String string, Object... parameters) throws MatrixException {
-    StringReader sr=new StringReader(string);
-    IntelligentFileReader r=new IntelligentFileReader(sr);
-    Matrix m= importFromReader(r);
-    r.close();
-    return m;
-  }
-  
-  public static final Matrix importFromFile(File file, Object... parameters) throws MatrixException, IOException {
-    FileReader lr = new FileReader(file);
-    Matrix m=importFromReader(lr, parameters);
-    m.setLabel(file.getAbsolutePath());
-    lr.close();
-    return m;
-  }
-  
-	public static final Matrix importFromReader(Reader reader, Object... parameters) throws MatrixException {
-	  
-	  List<String> rowData=new ArrayList<String>();
-	  
+	public static final Matrix fromString(String string, Object... parameters)
+			throws MatrixException {
+		StringReader sr = new StringReader(string);
+		IntelligentFileReader r = new IntelligentFileReader(sr);
+		Matrix m = importFromReader(r);
+		r.close();
+		return m;
+	}
+
+	public static final Matrix importFromFile(File file, Object... parameters)
+			throws MatrixException, IOException {
+		FileReader lr = new FileReader(file);
+		Matrix m = importFromReader(lr, parameters);
+		m.setLabel(file.getAbsolutePath());
+		lr.close();
+		return m;
+	}
+
+	public static final Matrix importFromReader(Reader reader, Object... parameters)
+			throws MatrixException {
+
+		List<String> rowData = new ArrayList<String>();
+
 		String separator = "[,;\t]";
 		if (parameters.length == 1 && parameters[0] instanceof String) {
 			separator = (String) parameters[0];
@@ -50,7 +53,7 @@ public abstract class ImportCSV {
 			String line = null;
 			while ((line = lr.readLine()) != null) {
 				if (line.length() > 0) {
-				  rowData.add(line);
+					rowData.add(line);
 					int lcols = p.split(line).length;
 					if (lcols > cols) {
 						cols = lcols;
@@ -62,9 +65,9 @@ public abstract class ImportCSV {
 			}
 			lr.close();
 			Matrix m = MatrixFactory.zeros(EntryType.STRING, rows, cols);
-			
-			int r=0;
-			for (String l:rowData) {			  
+
+			int r = 0;
+			for (String l : rowData) {
 				String[] fields = p.split(l);
 				for (int c = fields.length - 1; c != -1; c--) {
 					String s = StringUtil.deleteChar(fields[c], ',', 0);
@@ -72,7 +75,7 @@ public abstract class ImportCSV {
 				}
 				r++;
 			}
-			
+
 			return m;
 		} catch (Exception e) {
 			throw new MatrixException(e);

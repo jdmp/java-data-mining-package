@@ -1,28 +1,24 @@
 package org.jdmp.matrix.io;
 
+import java.io.Closeable;
 import java.io.File;
-import java.util.logging.Logger;
+import java.lang.reflect.Constructor;
 
 import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.MatrixException;
 
 public class ExportXLS {
 
-	private static final Logger logger = Logger.getLogger(ExportXLS.class.getName());
-
-	public static final File selectFile() {
-		return selectFile(null);
-	}
-
-	public static final File selectFile(Matrix m) {
-		return FileSelector.selectFile("Excel Files", ".xls");
-	}
-
-	public static final void save(String filename, Matrix m) {
-		save(new File(filename), m);
-	}
-
-	public static final void save(File file, Matrix m) {
-
+	public static void toFile(File file, Matrix matrix, Object... parameters) {
+		Matrix xls = null;
+		try {
+			Class<?> c = Class.forName("org.jdmp.jexcelapi.DenseExcelMatrix2D");
+			Constructor<?> constr = c.getConstructor(new Class[] { File.class, Matrix.class });
+			xls = (Matrix) constr.newInstance(new Object[] { file, matrix });
+			((Closeable) xls).close();
+		} catch (Exception e) {
+			throw new MatrixException(e);
+		}
 	}
 
 }

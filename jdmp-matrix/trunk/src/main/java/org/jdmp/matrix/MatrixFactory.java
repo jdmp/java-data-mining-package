@@ -59,6 +59,7 @@ import org.jdmp.matrix.implementations.io.DenseFileMatrix2D;
 import org.jdmp.matrix.implementations.io.FileListMatrix;
 import org.jdmp.matrix.implementations.misc.BufferedObjectMatrix;
 import org.jdmp.matrix.io.Import;
+import org.jdmp.matrix.io.Link;
 import org.jdmp.matrix.util.MathUtil;
 
 /**
@@ -453,7 +454,7 @@ public abstract class MatrixFactory {
 
 	public static final Matrix linkToFile(Format format, File file, Object... parameters)
 			throws MatrixException, IOException {
-		return Import.linkToFile(format, file, parameters);
+		return Link.linkToFile(format, file, parameters);
 	}
 
 	public static final Matrix importFromFile(String filename, Object... parameters)

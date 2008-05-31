@@ -29,7 +29,7 @@ public class MatrixSelection implements Transferable, ClipboardOwner, Serializab
 
 	private String stringData = null;
 
-	public MatrixSelection(Matrix matrix) throws MatrixException {
+	public MatrixSelection(Matrix matrix) throws MatrixException, IOException {
 		stringData = matrix.toString(Format.CSV);
 	}
 

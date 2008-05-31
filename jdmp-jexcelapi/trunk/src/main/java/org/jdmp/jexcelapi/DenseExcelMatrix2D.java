@@ -10,22 +10,26 @@ import java.util.Map;
 import java.util.logging.Level;
 
 import jxl.Cell;
+import jxl.NumberCell;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.biff.EmptyCell;
 import jxl.read.biff.BiffException;
 import jxl.write.Label;
+import jxl.write.WritableCell;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
+import jxl.write.biff.NumberRecord;
 
 import org.jdmp.matrix.DefaultAnnotation;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.interfaces.Annotation;
-import org.jdmp.matrix.stubs.AbstractDenseStringMatrix2D;
+import org.jdmp.matrix.stubs.AbstractDenseObjectMatrix2D;
+import org.jdmp.matrix.util.StringUtil;
 
-public class DenseExcelMatrix2D extends AbstractDenseStringMatrix2D implements Closeable {
+public class DenseExcelMatrix2D extends AbstractDenseObjectMatrix2D implements Closeable {
 	private static final long serialVersionUID = -5250390126697486050L;
 
 	private WritableWorkbook writableWorkbook = null;
@@ -82,10 +86,7 @@ public class DenseExcelMatrix2D extends AbstractDenseStringMatrix2D implements C
 	}
 
 	public DenseExcelMatrix2D(File file, Matrix matrix) throws MatrixException, IOException {
-		this(file, 0, false);
-		for (long[] c : matrix.allCoordinates()) {
-			setObject(matrix.getObject(c), c);
-		}
+		this(file, matrix, false);
 	}
 
 	public DenseExcelMatrix2D(File file, Matrix matrix, boolean labelsInFirstLine)
@@ -144,31 +145,6 @@ public class DenseExcelMatrix2D extends AbstractDenseStringMatrix2D implements C
 			size = new long[] { sheet.getRows() - offset, sheet.getColumns() };
 		}
 		return size;
-	}
-
-	public String getString(long... coordinates) {
-		try {
-			Cell c = sheet.getCell((int) coordinates[COLUMN], (int) coordinates[ROW] + offset);
-			if (c instanceof EmptyCell) {
-				return null;
-			} else {
-				return c.getContents();
-			}
-		} catch (Exception e) {
-			logger.log(Level.WARNING, "could not read value", e);
-		}
-		return null;
-	}
-
-	public void setString(String string, long... coordinates) {
-		try {
-			if (sheet instanceof WritableSheet) {
-				Label l = new Label((int) coordinates[COLUMN], (int) coordinates[ROW], string);
-				((WritableSheet) sheet).addCell(l);
-			}
-		} catch (Exception e) {
-			logger.log(Level.WARNING, "could not write to cell", e);
-		}
 	}
 
 	private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
@@ -280,4 +256,41 @@ public class DenseExcelMatrix2D extends AbstractDenseStringMatrix2D implements C
 
 	}
 
+	@Override
+	public Object getObject(long... coordinates) throws MatrixException {
+		try {
+			Cell c = sheet.getCell((int) coordinates[COLUMN], (int) coordinates[ROW] + offset);
+			if (c instanceof EmptyCell) {
+				return null;
+			} else if (c instanceof NumberCell) {
+				return ((NumberCell) c).getValue();
+			} else {
+				return c.getContents();
+			}
+		} catch (Exception e) {
+			logger.log(Level.WARNING, "could not read value", e);
+		}
+		return null;
+	}
+
+	public void setObject(Object o, long... coordinates) throws MatrixException {
+		try {
+			if ((sheet instanceof WritableSheet)) {
+				WritableCell cell = null;
+				if (o == null) {
+					cell = (new EmptyCell((int) coordinates[COLUMN], (int) coordinates[ROW]));
+				} else if (o instanceof Number) {
+					cell = new jxl.write.Number((int) coordinates[COLUMN], (int) coordinates[ROW],
+							((Number) o).doubleValue());
+				} else {
+					cell = new Label((int) coordinates[COLUMN], (int) coordinates[ROW], StringUtil
+							.convert(o));
+				}
+				((WritableSheet) sheet).addCell(cell);
+			}
+
+		} catch (Exception e) {
+			logger.log(Level.WARNING, "could not write to cell", e);
+		}
+	}
 }

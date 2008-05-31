@@ -1,6 +1,7 @@
 package org.jdmp.core.dataset;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -16,8 +17,9 @@ import org.jdmp.matrix.DefaultMatrixList;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.MatrixList;
+import org.jdmp.matrix.Matrix.Format;
 import org.jdmp.matrix.calculation.Calculation.Ret;
-import org.jdmp.matrix.io.ExportCSV;
+import org.jdmp.matrix.io.Export;
 
 public class BasicDataSet extends DataSet {
 	private static final long serialVersionUID = -2887879051530049677L;
@@ -85,15 +87,12 @@ public class BasicDataSet extends DataSet {
 		return Arrays.asList(getSampleList().toArray(new BasicSample[0]));
 	}
 
-	public final String toCSV() throws MatrixException {
-		return ExportCSV.toCSV(this.getInputMatrix());
+	public final String toCSV() throws MatrixException, IOException {
+		return Export.toString(Format.CSV, this.getInputMatrix());
 	}
 
-	public final void exportToCSV(File file) {
-		ExportCSV.save(file, this.getInputMatrix());
+	public final void exportToCSV(File file) throws MatrixException, IOException {
+		Export.toFile(Format.CSV, file, this.getInputMatrix());
 	}
-	
-	
-
 
 }
