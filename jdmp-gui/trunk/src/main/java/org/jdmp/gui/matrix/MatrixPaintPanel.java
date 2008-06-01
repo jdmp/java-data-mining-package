@@ -30,16 +30,16 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
 import org.jdmp.core.matrix.MatrixGUIObject;
+import org.jdmp.gui.io.ExportJPEG;
+import org.jdmp.gui.io.ExportPDF;
+import org.jdmp.gui.io.ExportPNG;
 import org.jdmp.gui.matrix.actions.MatrixActions;
 import org.jdmp.gui.util.CanBeRepainted;
 import org.jdmp.gui.util.GraphicsExecutor;
 import org.jdmp.matrix.interfaces.HasToolTip;
-import org.jdmp.matrix.io.ExportJPEG;
-import org.jdmp.matrix.io.ExportPDF;
-import org.jdmp.matrix.io.ExportPNG;
 
-public class MatrixPaintPanel extends JPanel implements ComponentListener, TableModelListener, MouseListener,
-		MouseMotionListener, CanBeRepainted, HasToolTip, ListSelectionListener {
+public class MatrixPaintPanel extends JPanel implements ComponentListener, TableModelListener,
+		MouseListener, MouseMotionListener, CanBeRepainted, HasToolTip, ListSelectionListener {
 	private static final long serialVersionUID = 843653796010276950L;
 
 	private static final Logger logger = Logger.getLogger(MatrixPaintPanel.class.getName());
@@ -143,7 +143,8 @@ public class MatrixPaintPanel extends JPanel implements ComponentListener, Table
 				startRow = startRow < 0 ? 0 : startRow;
 				startCol = startCol < 0 ? 0 : startCol;
 				startRow = startRow >= matrix.getRowCount() ? matrix.getRowCount() - 1 : startRow;
-				startCol = startCol >= matrix.getColumnCount() ? matrix.getColumnCount() - 1 : startCol;
+				startCol = startCol >= matrix.getColumnCount() ? matrix.getColumnCount() - 1
+						: startCol;
 				matrix.getRowSelectionModel().setValueIsAdjusting(true);
 				matrix.getColumnSelectionModel().setValueIsAdjusting(true);
 				matrix.getRowSelectionModel().setSelectionInterval(startRow, startRow);
@@ -158,7 +159,8 @@ public class MatrixPaintPanel extends JPanel implements ComponentListener, Table
 	}
 
 	private int getColPos(int x) {
-		return (int) Math.floor((double) matrix.getColumnCount() * (double) x / (double) getWidth());
+		return (int) Math
+				.floor((double) matrix.getColumnCount() * (double) x / (double) getWidth());
 	}
 
 	public void mouseReleased(MouseEvent e) {
@@ -254,14 +256,18 @@ public class MatrixPaintPanel extends JPanel implements ComponentListener, Table
 				int x2 = matrix.getColumnSelectionModel().getMaxSelectionIndex();
 				int y1 = matrix.getRowSelectionModel().getMinSelectionIndex();
 				int y2 = matrix.getRowSelectionModel().getMaxSelectionIndex();
-				double sx = (double) (getWidth() - PADDINGX - PADDINGX) / (double) matrix.getColumnCount();
-				double sy = (double) (getHeight() - PADDINGY - PADDINGY) / (double) matrix.getRowCount();
+				double sx = (double) (getWidth() - PADDINGX - PADDINGX)
+						/ (double) matrix.getColumnCount();
+				double sy = (double) (getHeight() - PADDINGY - PADDINGY)
+						/ (double) matrix.getRowCount();
 				g2d.setStroke(new BasicStroke(2.0f));
-				g2d.drawRect((int) Math.floor(PADDINGX + x1 * sx), (int) Math.floor(PADDINGY + y1 * sy), (int) Math
-						.ceil(sx + (x2 - x1) * sx), (int) Math.ceil(sy + (y2 - y1) * sy));
+				g2d.drawRect((int) Math.floor(PADDINGX + x1 * sx), (int) Math.floor(PADDINGY + y1
+						* sy), (int) Math.ceil(sx + (x2 - x1) * sx), (int) Math.ceil(sy + (y2 - y1)
+						* sy));
 				g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, 0.3f));
-				g2d.fillRect((int) Math.floor(PADDINGX + x1 * sx), (int) Math.floor(PADDINGY + y1 * sy), (int) Math
-						.ceil(sx + (x2 - x1) * sx), (int) Math.ceil(sy + (y2 - y1) * sy));
+				g2d.fillRect((int) Math.floor(PADDINGX + x1 * sx), (int) Math.floor(PADDINGY + y1
+						* sy), (int) Math.ceil(sx + (x2 - x1) * sx), (int) Math.ceil(sy + (y2 - y1)
+						* sy));
 			}
 		} else {
 			g2d.setColor(Color.GRAY);
@@ -272,7 +278,8 @@ public class MatrixPaintPanel extends JPanel implements ComponentListener, Table
 
 	public void repaintUI() {
 		if (matrix != null && getWidth() > 0 && getHeight() > 0) {
-			BufferedImage tempBufferedImage = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+			BufferedImage tempBufferedImage = new BufferedImage(getWidth(), getHeight(),
+					BufferedImage.TYPE_INT_RGB);
 			renderer.setSize(getWidth(), getHeight());
 			Graphics2D g2d = (Graphics2D) tempBufferedImage.getGraphics();
 			renderer.paintComponent(g2d);

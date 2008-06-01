@@ -1,4 +1,4 @@
-package org.jdmp.matrix.io;
+package org.jdmp.gui.io;
 
 import java.awt.Component;
 import java.awt.Graphics2D;
@@ -8,6 +8,8 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.jdmp.matrix.io.FileSelector;
 
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGEncodeParam;
@@ -47,8 +49,8 @@ public abstract class ExportJPEG {
 			return;
 		}
 		double factor = width / c.getWidth();
-		BufferedImage myImage = new BufferedImage((int) (c.getWidth() * factor), (int) (c.getHeight() * factor),
-				BufferedImage.TYPE_INT_RGB);
+		BufferedImage myImage = new BufferedImage((int) (c.getWidth() * factor), (int) (c
+				.getHeight() * factor), BufferedImage.TYPE_INT_RGB);
 		Graphics2D g2 = myImage.createGraphics();
 		g2.scale(factor, factor);
 		c.paint(g2);

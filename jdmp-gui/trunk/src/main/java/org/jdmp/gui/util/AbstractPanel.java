@@ -8,10 +8,10 @@ import javax.swing.JPanel;
 import javax.swing.ToolTipManager;
 
 import org.jdmp.core.util.AbstractGUIObject;
+import org.jdmp.gui.io.ExportJPEG;
+import org.jdmp.gui.io.ExportPDF;
+import org.jdmp.gui.io.ExportPNG;
 import org.jdmp.matrix.interfaces.HasToolTip;
-import org.jdmp.matrix.io.ExportJPEG;
-import org.jdmp.matrix.io.ExportPDF;
-import org.jdmp.matrix.io.ExportPNG;
 
 public abstract class AbstractPanel extends JPanel implements HasToolTip {
 	private static final long serialVersionUID = 4748216534779867441L;

@@ -11,9 +11,9 @@ import javax.swing.JSeparator;
 import javax.swing.UIManager;
 
 import org.jdmp.gui.actions.PanelActions;
+import org.jdmp.gui.io.ExportJPEG;
+import org.jdmp.gui.io.ExportPDF;
 import org.jdmp.gui.util.JungGraphPanel.GraphLayout;
-import org.jdmp.matrix.io.ExportJPEG;
-import org.jdmp.matrix.io.ExportPDF;
 
 public class JungGraphActions extends JPopupMenu {
 

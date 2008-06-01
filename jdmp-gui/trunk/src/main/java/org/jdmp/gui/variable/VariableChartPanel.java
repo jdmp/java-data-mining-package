@@ -31,15 +31,15 @@ import javax.swing.event.ListSelectionListener;
 
 import org.jdmp.core.variable.Variable;
 import org.jdmp.gui.actions.ExportAction;
+import org.jdmp.gui.io.ExportJPEG;
+import org.jdmp.gui.io.ExportPDF;
+import org.jdmp.gui.io.ExportPNG;
 import org.jdmp.gui.util.CanBeRepainted;
 import org.jdmp.gui.util.CanRenderGraph;
 import org.jdmp.gui.util.ColorUtil;
 import org.jdmp.gui.util.GraphicsExecutor;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
-import org.jdmp.matrix.io.ExportJPEG;
-import org.jdmp.matrix.io.ExportPDF;
-import org.jdmp.matrix.io.ExportPNG;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.ChartUtilities;
@@ -66,8 +66,8 @@ import org.jfree.ui.Layer;
 import org.jfree.ui.RectangleAnchor;
 import org.jfree.ui.TextAnchor;
 
-public class VariableChartPanel extends ChartPanel implements CanBeRepainted, CanRenderGraph, DatasetChangeListener,
-		ComponentListener, PlotChangeListener, ListSelectionListener {
+public class VariableChartPanel extends ChartPanel implements CanBeRepainted, CanRenderGraph,
+		DatasetChangeListener, ComponentListener, PlotChangeListener, ListSelectionListener {
 	private static final long serialVersionUID = -6852675670416844022L;
 
 	protected static final Logger logger = Logger.getLogger(VariableChartPanel.class.getName());
@@ -123,8 +123,8 @@ public class VariableChartPanel extends ChartPanel implements CanBeRepainted, Ca
 		setMaximumDrawWidth(2000);
 		setMaximumDrawHeight(2000);
 
-		final JFreeChart chart = ChartFactory.createXYLineChart(null, null, null, dataset, PlotOrientation.VERTICAL,
-				true, true, false);
+		final JFreeChart chart = ChartFactory.createXYLineChart(null, null, null, dataset,
+				PlotOrientation.VERTICAL, true, true, false);
 
 		chart.setBackgroundPaint(UIManager.getColor("Panel.background"));
 		plot = chart.getXYPlot();
@@ -206,7 +206,8 @@ public class VariableChartPanel extends ChartPanel implements CanBeRepainted, Ca
 		//
 		// }
 
-		BufferedImage tempBufferedImage = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+		BufferedImage tempBufferedImage = new BufferedImage(getWidth(), getHeight(),
+				BufferedImage.TYPE_INT_RGB);
 		Graphics g = tempBufferedImage.getGraphics();
 		super.paintComponent(g);
 		bufferedImage = tempBufferedImage;
@@ -214,7 +215,8 @@ public class VariableChartPanel extends ChartPanel implements CanBeRepainted, Ca
 
 	public void doSaveAs() throws IOException {
 		JFileChooser fileChooser = new JFileChooser();
-		ExtensionFileFilter filter = new ExtensionFileFilter(localizationResources.getString("PNG_Image_Files"), ".png");
+		ExtensionFileFilter filter = new ExtensionFileFilter(localizationResources
+				.getString("PNG_Image_Files"), ".png");
 		fileChooser.addChoosableFileFilter(filter);
 
 		int option = fileChooser.showSaveDialog(this);
@@ -256,7 +258,8 @@ public class VariableChartPanel extends ChartPanel implements CanBeRepainted, Ca
 		JCheckBoxMenuItem showLegendItem = new JCheckBoxMenuItem(new ShowLegendAction(this));
 		showLegendItem.setState(this.isShowLegend());
 		menu.add(showLegendItem);
-		JCheckBoxMenuItem showOnlyEuklideanValuesItem = new JCheckBoxMenuItem(new ShowOnlyEuklideanValuesAction(this));
+		JCheckBoxMenuItem showOnlyEuklideanValuesItem = new JCheckBoxMenuItem(
+				new ShowOnlyEuklideanValuesAction(this));
 		showOnlyEuklideanValuesItem.setState(this.isShowOnlyEuklideanValues());
 		menu.add(showOnlyEuklideanValuesItem);
 
@@ -314,7 +317,8 @@ public class VariableChartPanel extends ChartPanel implements CanBeRepainted, Ca
 
 		XYSeries ts = new XYSeries("TimeSeries", false);
 
-		int stepSize = (int) Math.ceil((double) variable.getMatrixList().size() / (double) MAXPOINTCOUNT);
+		int stepSize = (int) Math.ceil((double) variable.getMatrixList().size()
+				/ (double) MAXPOINTCOUNT);
 
 		for (int j = 0; j < variable.getMatrixList().size(); j += stepSize) {
 			text = null;
@@ -347,10 +351,12 @@ public class VariableChartPanel extends ChartPanel implements CanBeRepainted, Ca
 	private void doNormalPlot() throws MatrixException {
 		String text = null;
 
-		for (int i = 0; i < ColorUtil.TRACECOLORS.length && i < variable.getMatrixList().getTraceCount(); i++) {
+		for (int i = 0; i < ColorUtil.TRACECOLORS.length
+				&& i < variable.getMatrixList().getTraceCount(); i++) {
 			XYSeries ts = new XYSeriesWrapper(variable, i);
 
-			int stepSize = (int) Math.ceil((double) variable.getMatrixList().size() / (double) MAXPOINTCOUNT);
+			int stepSize = (int) Math.ceil((double) variable.getMatrixList().size()
+					/ (double) MAXPOINTCOUNT);
 
 			for (int j = 0; j < variable.getMatrixList().size(); j += stepSize) {
 				text = null;
@@ -386,7 +392,8 @@ public class VariableChartPanel extends ChartPanel implements CanBeRepainted, Ca
 
 		XYSeries ts = new XYSeries("Euklidean Values");
 
-		int stepSize = (int) Math.ceil((double) variable.getMatrixList().size() / (double) MAXPOINTCOUNT);
+		int stepSize = (int) Math.ceil((double) variable.getMatrixList().size()
+				/ (double) MAXPOINTCOUNT);
 
 		for (int j = 0; j < variable.getMatrixList().size(); j += stepSize) {
 			text = null;
@@ -626,7 +633,8 @@ class CircleDrawer implements Drawable {
 	}
 
 	public void draw(Graphics2D g2, Rectangle2D area) {
-		Ellipse2D.Double circle = new Ellipse2D.Double(area.getX(), area.getY(), area.getWidth(), area.getHeight());
+		Ellipse2D.Double circle = new Ellipse2D.Double(area.getX(), area.getY(), area.getWidth(),
+				area.getHeight());
 		g2.setStroke(stroke);
 		g2.setColor(color);
 		g2.draw(circle);

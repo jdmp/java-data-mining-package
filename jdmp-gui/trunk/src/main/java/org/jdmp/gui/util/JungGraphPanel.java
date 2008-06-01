@@ -16,9 +16,9 @@ import java.util.logging.Logger;
 
 import javax.swing.JPopupMenu;
 
-import org.jdmp.matrix.io.ExportJPEG;
-import org.jdmp.matrix.io.ExportPDF;
-import org.jdmp.matrix.io.ExportPNG;
+import org.jdmp.gui.io.ExportJPEG;
+import org.jdmp.gui.io.ExportPDF;
+import org.jdmp.gui.io.ExportPNG;
 
 import edu.uci.ics.jung.graph.ArchetypeEdge;
 import edu.uci.ics.jung.graph.ArchetypeVertex;

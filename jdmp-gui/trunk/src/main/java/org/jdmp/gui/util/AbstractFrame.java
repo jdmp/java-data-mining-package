@@ -25,6 +25,9 @@ import org.jdmp.core.util.AbstractGUIObject;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.gui.algorithm.AlgorithmPanel;
 import org.jdmp.gui.dataset.DataSetPanel;
+import org.jdmp.gui.io.ExportJPEG;
+import org.jdmp.gui.io.ExportPDF;
+import org.jdmp.gui.io.ExportPNG;
 import org.jdmp.gui.matrix.MatrixPanel;
 import org.jdmp.gui.module.ModulePanel;
 import org.jdmp.gui.sample.SamplePanel;
@@ -32,9 +35,6 @@ import org.jdmp.gui.variable.VariablePanel;
 import org.jdmp.matrix.Coordinates;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixException;
-import org.jdmp.matrix.io.ExportJPEG;
-import org.jdmp.matrix.io.ExportPDF;
-import org.jdmp.matrix.io.ExportPNG;
 
 public abstract class AbstractFrame extends JFrame implements PropertyChangeListener {
 	private static final long serialVersionUID = -4656308453503586700L;

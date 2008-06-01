@@ -1,10 +1,12 @@
-package org.jdmp.matrix.io;
+package org.jdmp.gui.io;
 
 import java.awt.Component;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.jdmp.matrix.io.FileSelector;
 
 public class ExportPDF {
 
