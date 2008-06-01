@@ -40,7 +40,7 @@ import org.jdmp.matrix.io.ExportInterface;
 /**
  * <code>Matrix</code> is the main class for storing any type of data. You
  * have to choose the suitable implementation for your needs, e.g.
- * <code>DefaultFullDoubleMatrix2D</code> to store double values or
+ * <code>DefaultDenseDoubleMatrix2D</code> to store double values or
  * DefaultGenericMatrix if you want to specify the object type.
  * 
  * 
@@ -53,7 +53,8 @@ import org.jdmp.matrix.io.ExportInterface;
  */
 public interface Matrix extends Serializable, ExportInterface, CoordinateFunctions,
 		MatrixEntryGettersAndSetters, BasicMatrixProperties, CanPerformCalculations, CanBeReshaped,
-		DistanceMeasures, Comparable<Matrix>, Cloneable, Clearable, HasAnnotation, HasLabel, HasGUIObject {
+		DistanceMeasures, Comparable<Matrix>, Cloneable, Clearable, HasAnnotation, HasLabel,
+		HasGUIObject {
 
 	/**
 	 * Defines the object types that can be stored in a Matrix. Different matrix

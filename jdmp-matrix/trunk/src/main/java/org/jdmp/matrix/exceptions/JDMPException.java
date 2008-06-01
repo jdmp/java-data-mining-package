@@ -23,18 +23,17 @@
 
 package org.jdmp.matrix.exceptions;
 
-public class MatrixException extends JDMPException {
-	private static final long serialVersionUID = -2291815899552676592L;
+public abstract class JDMPException extends RuntimeException {
 
-	public MatrixException(String message) {
+	public JDMPException(String message) {
 		super(message);
 	}
 
-	public MatrixException(String message, Throwable cause) {
+	public JDMPException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
-	public MatrixException(Throwable cause) {
+	public JDMPException(Throwable cause) {
 		super(cause);
 	}
 
