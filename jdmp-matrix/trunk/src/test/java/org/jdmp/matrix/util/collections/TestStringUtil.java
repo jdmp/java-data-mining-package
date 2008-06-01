@@ -23,10 +23,10 @@
 
 package org.jdmp.matrix.util.collections;
 
+import junit.framework.TestCase;
+
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.StringUtil;
-
-import junit.framework.TestCase;
 
 public class TestStringUtil extends TestCase {
 

@@ -25,8 +25,6 @@ package org.jdmp.matrix.util.collections;
 
 import junit.framework.TestCase;
 
-import org.jdmp.matrix.util.collections.RingBufferList;
-
 public class TestRingBufferList extends TestCase {
 
 	public void testAdd() {
