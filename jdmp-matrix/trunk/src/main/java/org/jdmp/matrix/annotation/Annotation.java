@@ -21,7 +21,7 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.matrix.interfaces;
+package org.jdmp.matrix.annotation;
 
 import java.io.Serializable;
 import java.util.Map;

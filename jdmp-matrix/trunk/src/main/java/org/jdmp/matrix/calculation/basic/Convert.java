@@ -27,9 +27,9 @@ import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.Matrix.AnnotationTransfer;
 import org.jdmp.matrix.Matrix.EntryType;
+import org.jdmp.matrix.annotation.Annotation;
 import org.jdmp.matrix.calculation.AbstractCalculation;
 import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.interfaces.Annotation;
 
 public class Convert extends AbstractCalculation {
 	private static final long serialVersionUID = 6393277198816850597L;

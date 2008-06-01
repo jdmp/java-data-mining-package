@@ -25,13 +25,13 @@ package org.jdmp.matrix;
 
 import java.io.Serializable;
 
+import org.jdmp.matrix.annotation.HasAnnotation;
 import org.jdmp.matrix.calculation.CanPerformCalculations;
 import org.jdmp.matrix.interfaces.BasicMatrixProperties;
 import org.jdmp.matrix.interfaces.CanBeReshaped;
 import org.jdmp.matrix.interfaces.Clearable;
 import org.jdmp.matrix.interfaces.CoordinateFunctions;
 import org.jdmp.matrix.interfaces.DistanceMeasures;
-import org.jdmp.matrix.interfaces.HasAnnotation;
 import org.jdmp.matrix.interfaces.HasGUIObject;
 import org.jdmp.matrix.interfaces.HasLabel;
 import org.jdmp.matrix.interfaces.MatrixEntryGettersAndSetters;

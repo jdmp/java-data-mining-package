@@ -28,6 +28,7 @@ import java.util.logging.Logger;
 
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.Matrix.EntryType;
+import org.jdmp.matrix.annotation.Annotation;
 import org.jdmp.matrix.calculation.basic.Convert;
 import org.jdmp.matrix.calculation.basic.Divide;
 import org.jdmp.matrix.calculation.basic.Minus;
@@ -61,7 +62,6 @@ import org.jdmp.matrix.coordinates.CoordinateIterator2D;
 import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.implementations.basic.CalculationMatrix;
-import org.jdmp.matrix.interfaces.Annotation;
 
 public abstract class AbstractCalculation implements Calculation {
 

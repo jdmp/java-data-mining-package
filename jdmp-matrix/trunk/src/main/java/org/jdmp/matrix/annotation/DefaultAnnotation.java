@@ -26,7 +26,6 @@ package org.jdmp.matrix.annotation;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jdmp.matrix.interfaces.Annotation;
 
 public class DefaultAnnotation implements Annotation {
 	private static final long serialVersionUID = 4497806180298615612L;
