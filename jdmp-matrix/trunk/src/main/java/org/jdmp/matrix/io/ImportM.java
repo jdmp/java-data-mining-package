@@ -29,7 +29,7 @@ import org.jdmp.matrix.implementations.basic.DefaultDenseStringMatrix2D;
 public abstract class ImportM {
 
 	/**
-	 * Creates a DefaultFullStringMatrix2D from a given String. The string
+	 * Creates a DefaultDenseStringMatrix2D from a given String. The string
 	 * contains the rows of the matrix separated by semicolons or new lines. The
 	 * columns of the matrix are separated by spaces or commas. All types of
 	 * brackets are ignored.

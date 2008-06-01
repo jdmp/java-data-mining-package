@@ -1571,7 +1571,7 @@ public abstract class AbstractGenericMatrix<A> implements GenericMatrix<A> {
 	public Matrix[] svd() throws MatrixException {
 		try {
 			Class<? extends Matrix> mtjc = (Class<? extends Matrix>) Class
-					.forName("org.jdmp.mtj.MTJFullDoubleMatrix2D");
+					.forName("org.jdmp.mtj.MTJDenseDoubleMatrix2D");
 			Constructor<? extends Matrix> con = mtjc.getConstructor(Matrix.class);
 			Matrix mtjm = con.newInstance(this);
 

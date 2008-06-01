@@ -26,18 +26,18 @@ package org.jdmp.matrix.implementations;
 import org.jdmp.matrix.AbstractMatrixTest;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.implementations.basic.DefaultDenseStringMatrix2D;
+import org.jdmp.matrix.implementations.basic.DefaultDenseDoubleMatrix2D;
 
-public class TestDefaultFullStringMatrix2D extends AbstractMatrixTest {
+public class TestDefaultDenseDoubleMatrix2D extends AbstractMatrixTest {
 
 	@Override
 	public Matrix createMatrix(long... size) throws MatrixException {
-		return new DefaultDenseStringMatrix2D(size);
+		return new DefaultDenseDoubleMatrix2D(size);
 	}
 
 	@Override
 	public Matrix createMatrix(Matrix source) throws MatrixException {
-		return new DefaultDenseStringMatrix2D(source);
+		return new DefaultDenseDoubleMatrix2D(source);
 	}
 
 }
