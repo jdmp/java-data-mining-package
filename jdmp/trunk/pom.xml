@@ -109,6 +109,12 @@
 				<version>0.0.1</version>
 				<scope>compile</scope>
 			</dependency>
+			<dependency>
+				<groupId>org.jdmp</groupId>
+				<artifactId>jdmp-jmatio</artifactId>
+				<version>0.0.1</version>
+				<scope>compile</scope>
+			</dependency>
 
 
 			<dependency>
@@ -310,6 +316,12 @@
 				<version>2.1.2u</version>
 				<scope>compile</scope>
 			</dependency>
+			<dependency>
+     			  <groupId>jmatio</groupId>
+			      <artifactId>jmatio</artifactId>
+			      <version>0.2.2</version>
+				  <scope>compile</scope>
+		    </dependency>
 
 		</dependencies>
 	</dependencyManagement>

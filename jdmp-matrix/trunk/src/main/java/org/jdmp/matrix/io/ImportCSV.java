@@ -22,21 +22,21 @@ public abstract class ImportCSV {
 			throws MatrixException {
 		StringReader sr = new StringReader(string);
 		IntelligentFileReader r = new IntelligentFileReader(sr);
-		Matrix m = importFromReader(r);
+		Matrix m = fromReader(r);
 		r.close();
 		return m;
 	}
 
-	public static final Matrix importFromFile(File file, Object... parameters)
-			throws MatrixException, IOException {
+	public static final Matrix fromFile(File file, Object... parameters) throws MatrixException,
+			IOException {
 		FileReader lr = new FileReader(file);
-		Matrix m = importFromReader(lr, parameters);
+		Matrix m = fromReader(lr, parameters);
 		m.setLabel(file.getAbsolutePath());
 		lr.close();
 		return m;
 	}
 
-	public static final Matrix importFromReader(Reader reader, Object... parameters)
+	public static final Matrix fromReader(Reader reader, Object... parameters)
 			throws MatrixException {
 
 		List<String> rowData = new ArrayList<String>();

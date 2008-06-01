@@ -8,8 +8,7 @@ import org.jdmp.matrix.MatrixException;
 
 public abstract class ImportXLS {
 
-	public static final Matrix importFromExcel(File file, Object... parameters)
-			throws MatrixException {
+	public static final Matrix fromFile(File file, Object... parameters) throws MatrixException {
 		Matrix xls = null;
 		try {
 			int sheet = 0;

@@ -8,11 +8,11 @@ import org.jdmp.matrix.interfaces.Annotation;
 public class DefaultAnnotation implements Annotation {
 	private static final long serialVersionUID = 4497806180298615612L;
 
-	private Object matrixAnnotation = null;
+	protected Object matrixAnnotation = null;
 
-	private Map<Integer, Map<Integer, Object>> axisAnnotation = null;
+	protected Map<Integer, Map<Integer, Object>> axisAnnotation = null;
 
-	private Map<Integer, Object> axisLabelAnnotation = null;
+	protected Map<Integer, Object> axisLabelAnnotation = null;
 
 	public DefaultAnnotation() {
 		axisAnnotation = new HashMap<Integer, Map<Integer, Object>>();

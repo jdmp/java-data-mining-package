@@ -88,27 +88,27 @@ public abstract class MatrixFactory {
 
 	public static final int NONE = Matrix.NONE;
 
-	private static String fullDoubleMatrix2DClassName = "org.jdmp.mtj.MTJFullDoubleMatrix2D";
+	private static String denseDoubleMatrix2DClassName = "org.jdmp.mtj.MTJDenseDoubleMatrix2D";
 
-	private static String fullObjectMatrix2DClassName = DefaultDenseObjectMatrix2D.class.getName();
+	private static String denseObjectMatrix2DClassName = DefaultDenseObjectMatrix2D.class.getName();
 
-	private static String fullStringMatrix2DClassName = DefaultDenseStringMatrix2D.class.getName();
+	private static String denseStringMatrix2DClassName = DefaultDenseStringMatrix2D.class.getName();
 
 	private static String sparseDoubleMatrix2DClassName = DefaultSparseObjectMatrix.class.getName();
 
 	private static String sparseObjectMatrix2DClassName = DefaultSparseObjectMatrix.class.getName();
 
-	private static Constructor<? extends Matrix> fullDoubleMatrix2DConstructor = null;
+	private static Constructor<? extends Matrix> denseDoubleMatrix2DConstructor = null;
 
-	private static Constructor<? extends Matrix> fullObjectMatrix2DConstructor = null;
+	private static Constructor<? extends Matrix> denseObjectMatrix2DConstructor = null;
 
 	private static Constructor<? extends Matrix> sparseDoubleMatrix2DConstructor = null;
 
 	private static Constructor<? extends Matrix> sparseObjectMatrix2DConstructor = null;
 
-	public static void setFullDoubleMatrix2DClassName(String fullDoubleMatrix2DClassName) {
-		MatrixFactory.fullDoubleMatrix2DClassName = fullDoubleMatrix2DClassName;
-		MatrixFactory.fullDoubleMatrix2DConstructor = null;
+	public static void setDenseDoubleMatrix2DClassName(String denseDoubleMatrix2DClassName) {
+		MatrixFactory.denseDoubleMatrix2DClassName = denseDoubleMatrix2DClassName;
+		MatrixFactory.denseDoubleMatrix2DConstructor = null;
 	}
 
 	public static void setSparseDoubleMatrix2DClassName(String sparseDoubleMatrix2DClassName) {
@@ -116,31 +116,32 @@ public abstract class MatrixFactory {
 		MatrixFactory.sparseDoubleMatrix2DConstructor = null;
 	}
 
-	public static Constructor<? extends Matrix> getFullDoubleMatrix2DConstructor() throws Exception {
-		if (fullDoubleMatrix2DConstructor == null) {
-			Class<?> fullDoubleMatrix2DClass = null;
+	public static Constructor<? extends Matrix> getDenseDoubleMatrix2DConstructor()
+			throws Exception {
+		if (denseDoubleMatrix2DConstructor == null) {
+			Class<?> denseDoubleMatrix2DClass = null;
 			try {
-				fullDoubleMatrix2DClass = Class.forName(fullDoubleMatrix2DClassName);
+				denseDoubleMatrix2DClass = Class.forName(denseDoubleMatrix2DClassName);
 			} catch (ClassNotFoundException e) {
 				logger.log(Level.WARNING, "Could not find desired Matrix implementation: "
-						+ fullDoubleMatrix2DClassName);
-				logger.log(Level.INFO, "Falling back to DefaultFullDoubleMatrix2D.");
+						+ denseDoubleMatrix2DClassName);
+				logger.log(Level.INFO, "Falling back to DefaultDenseDoubleMatrix2D.");
 				logger
 						.log(Level.INFO,
 								"To speed up Matrix calculations, you should add jdmp-mtj to the classpath.");
-				fullDoubleMatrix2DClass = DefaultDenseDoubleMatrix2D.class;
+				denseDoubleMatrix2DClass = DefaultDenseDoubleMatrix2D.class;
 			}
 			Class<?> p = null;
 			// TODO: this should be solved in a more efficient way
-			for (Constructor<?> co : fullDoubleMatrix2DClass.getConstructors()) {
+			for (Constructor<?> co : denseDoubleMatrix2DClass.getConstructors()) {
 				if ("long[]".equals(co.getParameterTypes()[0].getCanonicalName())) {
 					p = co.getParameterTypes()[0];
 				}
 			}
-			fullDoubleMatrix2DConstructor = (Constructor<Matrix>) fullDoubleMatrix2DClass
+			denseDoubleMatrix2DConstructor = (Constructor<Matrix>) denseDoubleMatrix2DClass
 					.getConstructor(p);
 		}
-		return fullDoubleMatrix2DConstructor;
+		return denseDoubleMatrix2DConstructor;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -397,7 +398,7 @@ public abstract class MatrixFactory {
 	public static final Matrix linkToJDBC(String url, String username, String password,
 			String tablename) {
 		try {
-			Class<?> c = Class.forName("org.jdmp.odbc.FullODBCMatrix2D");
+			Class<?> c = Class.forName("org.jdmp.odbc.DenseODBCMatrix2D");
 			Constructor<?> constr = c.getConstructor(new Class[] { String.class, String.class,
 					String.class, String.class });
 			Matrix odbcMatrix = (Matrix) constr.newInstance(new Object[] { url, username, password,
@@ -411,7 +412,7 @@ public abstract class MatrixFactory {
 	public static final Matrix linkToJDBC(String url, String username, String password,
 			String tablename, String idColumn) {
 		try {
-			Class<?> c = Class.forName("org.jdmp.odbc.FullODBCMatrix2D");
+			Class<?> c = Class.forName("org.jdmp.odbc.DenseODBCMatrix2D");
 			Constructor<?> constr = c.getConstructor(new Class[] { String.class, String.class,
 					String.class, String.class, String.class });
 			Matrix odbcMatrix = (Matrix) constr.newInstance(new Object[] { url, username, password,
@@ -441,7 +442,7 @@ public abstract class MatrixFactory {
 
 	public static Matrix zeros(long... size) throws MatrixException {
 		try {
-			return MatrixFactory.getFullDoubleMatrix2DConstructor().newInstance(size);
+			return MatrixFactory.getDenseDoubleMatrix2DConstructor().newInstance(size);
 		} catch (Exception e) {
 			if (e.getCause() instanceof OutOfMemoryError) {
 				logger.log(Level.WARNING,
@@ -459,22 +460,22 @@ public abstract class MatrixFactory {
 
 	public static final Matrix importFromFile(String filename, Object... parameters)
 			throws MatrixException, IOException {
-		return Import.importFromFile(new File(filename), parameters);
+		return Import.fromFile(new File(filename), parameters);
 	}
 
 	public static final Matrix importFromFile(File file, Object... parameters)
 			throws MatrixException, IOException {
-		return Import.importFromFile(file, parameters);
+		return Import.fromFile(file, parameters);
 	}
 
 	public static final Matrix importFromFile(Format format, String file, Object... parameters)
 			throws MatrixException, IOException {
-		return Import.importFromFile(format, new File(file), parameters);
+		return Import.fromFile(format, new File(file), parameters);
 	}
 
 	public static final Matrix importFromFile(Format format, File file, Object... parameters)
 			throws MatrixException, IOException {
-		return Import.importFromFile(format, file, parameters);
+		return Import.fromFile(format, file, parameters);
 	}
 
 	public static Matrix importFromClipboard(Object... parameters) throws MatrixException {
