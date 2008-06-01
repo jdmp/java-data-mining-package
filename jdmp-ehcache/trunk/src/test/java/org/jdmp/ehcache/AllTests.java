@@ -8,6 +8,7 @@ public class AllTests extends TestSuite {
 		TestSuite suite = new TestSuite(AllTests.class.getName());
 		suite.addTestSuite(TestEhcacheMap.class);
 		suite.addTestSuite(TestSparseEhcacheMatrix.class);
+		suite.addTestSuite(TestTiledEhcacheMatrix2D.class);
 		return suite;
 	}
 

@@ -24,27 +24,27 @@ import org.jdmp.matrix.MatrixException;
 public class EhcacheMap<K, V> implements Map<K, V>, Flushable, Closeable {
 	private static final long serialVersionUID = -2405059234958626645L;
 
-	private int maxElementsInMemory = 100;
+	private int maxElementsInMemory = 1000;
 
-	private int maxElementsOnDisk = 100000;
+	private int maxElementsOnDisk = Integer.MAX_VALUE - 1;
 
 	private boolean overflowToDisk = true;
 
 	private boolean eternal = true;
 
 	private boolean diskPersistent = true;
-	
-	private transient File diskStorePath=null;
-	
-	private transient String name=null;
+
+	private transient File diskStorePath = null;
+
+	private transient String name = null;
 
 	private transient RegisteredEventListeners registeredEventListeners = null;
 
-	private int timeToLiveSeconds = 100000;
+	private int timeToLiveSeconds = Integer.MAX_VALUE - 1;
 
 	private int timeToIdleSeconds = 120;
-	
-	private int diskSpoolBufferSizeMB=1;
+
+	private int diskSpoolBufferSizeMB = 16;
 
 	private int diskExpiryThreadIntervalSeconds = 300;
 
@@ -53,8 +53,8 @@ public class EhcacheMap<K, V> implements Map<K, V>, Flushable, Closeable {
 	private transient CacheManager manager = null;
 
 	private transient Cache cache = null;
-	
-	private BootstrapCacheLoader bootstrapCacheLoader=null;
+
+	private BootstrapCacheLoader bootstrapCacheLoader = null;
 
 	public EhcacheMap() throws IOException {
 		this(null);
@@ -67,38 +67,38 @@ public class EhcacheMap<K, V> implements Map<K, V>, Flushable, Closeable {
 	public EhcacheMap(String name, File path) throws IOException {
 		System.setProperty("net.sf.ehcache.enableShutdownHook", "true");
 		this.diskStorePath = path;
-		this.name=name;		
+		this.name = name;
 	}
 
-	public String getName(){
-	  if(name==null){
-	    name="ehcache"+System.nanoTime();
-	  }
-	  return name;
+	public String getName() {
+		if (name == null) {
+			name = "ehcache" + System.nanoTime();
+		}
+		return name;
 	}
-	
-	public File getPath()  {
+
+	public File getPath() {
 		if (diskStorePath == null) {
-		  try{
-			diskStorePath = File.createTempFile(getName(), ".tmp");
-            diskStorePath.delete();
-            diskStorePath.mkdir();
-            diskStorePath.deleteOnExit();
-            new File(diskStorePath+System.getProperty("file.separator")+getName()+".data").deleteOnExit();
-            new File(diskStorePath+System.getProperty("file.separator")+getName()+".index").deleteOnExit();
-            }catch(Exception e){
-              e.printStackTrace();
-              throw new RuntimeException(e);
-            }
+			try {
+				diskStorePath = File.createTempFile(getName(), ".tmp");
+				diskStorePath.delete();
+				diskStorePath.mkdir();
+				diskStorePath.deleteOnExit();
+				new File(diskStorePath + System.getProperty("file.separator") + getName() + ".data")
+						.deleteOnExit();
+				new File(diskStorePath + System.getProperty("file.separator") + getName()
+						+ ".index").deleteOnExit();
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
 		}
 		return diskStorePath;
 	}
 
-	
-	
-	private CacheManager getCacheManager()  {	  
+	private CacheManager getCacheManager() {
 		if (manager == null) {
-		  		  
+
 			Configuration config = new Configuration();
 			CacheConfiguration cacheconfig = new CacheConfiguration();
 			cacheconfig.setDiskExpiryThreadIntervalSeconds(diskExpiryThreadIntervalSeconds);
@@ -119,27 +119,18 @@ public class EhcacheMap<K, V> implements Map<K, V>, Flushable, Closeable {
 		}
 		return manager;
 	}
-	
-	private Cache getCache(){
-	  if(cache==null){
-	    Cache c = new Cache( getName(),
-                  maxElementsInMemory,
-                  memoryStoreEvictionPolicy,
-                  overflowToDisk,
-                  getPath().getAbsolutePath(),
-                  eternal,
-                  timeToLiveSeconds,
-                  timeToIdleSeconds,
-                  diskPersistent,
-                  diskExpiryThreadIntervalSeconds,
-                  registeredEventListeners,
-                  bootstrapCacheLoader,
-                  maxElementsOnDisk,
-                  diskSpoolBufferSizeMB);
-        getCacheManager().addCache(c);
-        cache = getCacheManager().getCache(getName());
-	  }
-	  return cache;
+
+	private Cache getCache() {
+		if (cache == null) {
+			Cache c = new Cache(getName(), maxElementsInMemory, memoryStoreEvictionPolicy,
+					overflowToDisk, getPath().getAbsolutePath(), eternal, timeToLiveSeconds,
+					timeToIdleSeconds, diskPersistent, diskExpiryThreadIntervalSeconds,
+					registeredEventListeners, bootstrapCacheLoader, maxElementsOnDisk,
+					diskSpoolBufferSizeMB);
+			getCacheManager().addCache(c);
+			cache = getCacheManager().getCache(getName());
+		}
+		return cache;
 	}
 
 	public void clear() {
@@ -175,7 +166,7 @@ public class EhcacheMap<K, V> implements Map<K, V>, Flushable, Closeable {
 		return new HashSet<K>(getCache().getKeys());
 	}
 
-	public synchronized V put(K key, V value) {
+	public V put(K key, V value) {
 		Element e = new Element(key, value);
 		getCache().put(e);
 		return null;
@@ -188,7 +179,7 @@ public class EhcacheMap<K, V> implements Map<K, V>, Flushable, Closeable {
 		}
 	}
 
-	public synchronized V remove(Object key) {
+	public V remove(Object key) {
 		getCache().remove(key);
 		return null;
 	}
@@ -205,11 +196,11 @@ public class EhcacheMap<K, V> implements Map<K, V>, Flushable, Closeable {
 		getCacheManager().removeCache(getCache().getName());
 	}
 
-	public synchronized void flush() throws IOException {
+	public void flush() throws IOException {
 		getCache().flush();
 	}
 
-	public synchronized void close() throws IOException {
+	public void close() throws IOException {
 		getCache().dispose();
 		getCacheManager().removeCache(getCache().getName());
 	}

@@ -7,42 +7,37 @@ import java.io.OptionalDataException;
 import java.util.Map;
 
 import org.jdmp.matrix.Coordinates;
+import org.jdmp.matrix.GenericMatrix;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
-import org.jdmp.matrix.stubs.AbstractMapToSparseMatrixWrapper;
+import org.jdmp.matrix.stubs.AbstractMapToTiledMatrix2DWrapper;
 
-public class SparseEhcacheMatrix<A> extends AbstractMapToSparseMatrixWrapper<A> {
-	private static final long serialVersionUID = -7743149828558906127L;
+public class TiledEhcacheMatrix2D<A> extends AbstractMapToTiledMatrix2DWrapper<A> {
+	private static final long serialVersionUID = 4324063544046176423L;
 
-	private transient Map<Coordinates, Object> values = null;
+	private transient Map<Coordinates, GenericMatrix<A>> values = null;
 
-	public SparseEhcacheMatrix(Matrix m) throws MatrixException, IOException {
-		super(m);
-	}
-
-	public SparseEhcacheMatrix(Matrix m, int maximumNumberOfEntries) throws MatrixException,
-			IOException {
-		super(m, maximumNumberOfEntries);
-	}
-
-	public SparseEhcacheMatrix(long... size) throws MatrixException, IOException {
+	public TiledEhcacheMatrix2D(long... size) {
 		super(size);
 	}
 
+	public TiledEhcacheMatrix2D(Matrix source) {
+		super(source);
+	}
+
 	@Override
-	public Map<Coordinates, Object> getMap() {
+	public Map<Coordinates, GenericMatrix<A>> getMap() {
 		if (values == null) {
 			try {
-				values = new EhcacheMap<Coordinates, Object>("matrix" + System.nanoTime());
+				values = new EhcacheMap<Coordinates, GenericMatrix<A>>();
 			} catch (IOException e) {
-				throw new MatrixException(e);
+				e.printStackTrace();
 			}
 		}
 		return values;
 	}
 
 	@Override
-	public void setMap(Map<Coordinates, Object> map) {
+	public void setMap(Map<Coordinates, GenericMatrix<A>> map) {
 		this.values = map;
 	}
 
