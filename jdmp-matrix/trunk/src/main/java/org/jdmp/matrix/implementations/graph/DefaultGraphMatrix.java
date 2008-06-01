@@ -1,3 +1,26 @@
+/*
+ * Copyright (C) 2008 Holger Arndt, Andreas Naegele and Markus Bundschus
+ *
+ * This file is part of the Java Data Mining Package (JDMP).
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership and licensing.
+ *
+ * JDMP is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * JDMP is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with JDMP; if not, write to the
+ * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+ * Boston, MA  02110-1301  USA
+ */
+
 package org.jdmp.matrix.implementations.graph;
 
 import java.util.ArrayList;
@@ -164,9 +187,11 @@ public class DefaultGraphMatrix<N, E> extends AbstractGraphMatrix<N, E> {
 	public void setEdge(E edgeObject, long nodeIndex1, long nodeIndex2) {
 		int nmbOfNodes = nodes.size();
 		if (nodeIndex1 >= nmbOfNodes)
-			throw new MatrixException("accessed node " + nodeIndex1 + ", but only " + nmbOfNodes + " available");
+			throw new MatrixException("accessed node " + nodeIndex1 + ", but only " + nmbOfNodes
+					+ " available");
 		if (nodeIndex2 >= nmbOfNodes)
-			throw new MatrixException("accessed node " + nodeIndex2 + ", but only " + nmbOfNodes + " available");
+			throw new MatrixException("accessed node " + nodeIndex2 + ", but only " + nmbOfNodes
+					+ " available");
 		edges.put(new Coordinates(nodeIndex1, nodeIndex2), edgeObject);
 		List<Long> list = children.get(nodeIndex1);
 		if (list == null) {
@@ -195,7 +220,7 @@ public class DefaultGraphMatrix<N, E> extends AbstractGraphMatrix<N, E> {
 
 	public void setDouble(double value, long... coordinates) throws MatrixException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public org.jdmp.matrix.Matrix.EntryType getEntryType() {
