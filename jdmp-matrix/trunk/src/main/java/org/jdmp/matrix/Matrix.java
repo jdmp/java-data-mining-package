@@ -61,7 +61,7 @@ public interface Matrix extends Serializable, ExportInterface, CoordinateFunctio
 	 * object types.
 	 */
 	public enum EntryType {
-		GENERIC, BOOLEAN, BYTE, CHAR, SHORT, INT, LONG, FLOAT, DOUBLE, STRING, DATE, OBJECT
+		GENERIC, BOOLEAN, BYTE, CHARACTER, SHORT, INTEGER, LONG, FLOAT, DOUBLE, STRING, DATE, OBJECT
 	};
 
 	public enum AnnotationTransfer {
