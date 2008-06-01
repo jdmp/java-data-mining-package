@@ -19,7 +19,7 @@ import net.sf.ehcache.config.DiskStoreConfiguration;
 import net.sf.ehcache.event.RegisteredEventListeners;
 import net.sf.ehcache.store.MemoryStoreEvictionPolicy;
 
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public class EhcacheMap<K, V> implements Map<K, V>, Flushable, Closeable {
 	private static final long serialVersionUID = -2405059234958626645L;

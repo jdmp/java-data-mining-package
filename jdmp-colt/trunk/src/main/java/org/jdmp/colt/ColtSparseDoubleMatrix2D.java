@@ -4,9 +4,9 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.jdmp.matrix.Coordinates;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.coordinates.Coordinates;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.Wrapper;
 import org.jdmp.matrix.stubs.AbstractSparseDoubleMatrix2D;
 import org.jdmp.matrix.util.CoordinateSetToLongWrapper;

@@ -24,9 +24,9 @@
 package org.jdmp.matrix.calculation.entrywise.rounding;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.calculation.DoubleCalculation;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public class Ceil extends DoubleCalculation {
 	private static final long serialVersionUID = 3050677685836703426L;

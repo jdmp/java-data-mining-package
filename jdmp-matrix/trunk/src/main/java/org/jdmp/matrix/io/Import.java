@@ -28,8 +28,8 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.Matrix.Format;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public abstract class Import {
 

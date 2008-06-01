@@ -32,9 +32,9 @@ import org.jdmp.gui.matrix.MatrixPanel;
 import org.jdmp.gui.module.ModulePanel;
 import org.jdmp.gui.sample.SamplePanel;
 import org.jdmp.gui.variable.VariablePanel;
-import org.jdmp.matrix.Coordinates;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.coordinates.Coordinates;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public abstract class AbstractFrame extends JFrame implements PropertyChangeListener {
 	private static final long serialVersionUID = -4656308453503586700L;

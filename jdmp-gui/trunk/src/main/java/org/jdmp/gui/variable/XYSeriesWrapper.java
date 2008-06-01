@@ -8,7 +8,7 @@ import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableEvent;
 import org.jdmp.core.variable.VariableListener;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.StringUtil;
 import org.jfree.chart.plot.IntervalMarker;
 import org.jfree.chart.plot.ValueMarker;

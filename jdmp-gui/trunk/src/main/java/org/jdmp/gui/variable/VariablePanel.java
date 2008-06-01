@@ -13,7 +13,7 @@ import org.jdmp.gui.matrix.MatrixGraphPanel;
 import org.jdmp.gui.matrix.MatrixListPanel;
 import org.jdmp.gui.matrix.MatrixPaintPanel;
 import org.jdmp.gui.util.AbstractPanel;
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.HasMatrixList;
 
 public class VariablePanel extends AbstractPanel {

@@ -26,7 +26,7 @@ package org.jdmp.matrix.calculation;
 import java.io.Serializable;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 /**
  * Interface for all matrix-calculations. 

@@ -24,7 +24,7 @@
 package org.jdmp.matrix.interfaces;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public interface DistanceMeasures {
 

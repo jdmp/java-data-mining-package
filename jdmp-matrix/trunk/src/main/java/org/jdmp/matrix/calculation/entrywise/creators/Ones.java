@@ -24,10 +24,10 @@
 package org.jdmp.matrix.calculation.entrywise.creators;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.Matrix.EntryType;
 import org.jdmp.matrix.calculation.DoubleCalculation;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public class Ones extends DoubleCalculation {
 	private static final long serialVersionUID = 2547827499345834225L;

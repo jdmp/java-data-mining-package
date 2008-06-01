@@ -6,9 +6,9 @@ import java.io.ObjectOutputStream;
 import java.io.OptionalDataException;
 import java.util.Map;
 
-import org.jdmp.matrix.Coordinates;
 import org.jdmp.matrix.GenericMatrix;
 import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.stubs.AbstractMapToTiledMatrix2DWrapper;
 
 public class TiledEhcacheMatrix2D<A> extends AbstractMapToTiledMatrix2DWrapper<A> {

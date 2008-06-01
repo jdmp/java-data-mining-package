@@ -28,7 +28,7 @@ import java.io.File;
 import java.lang.reflect.Constructor;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public class ExportXLS {
 

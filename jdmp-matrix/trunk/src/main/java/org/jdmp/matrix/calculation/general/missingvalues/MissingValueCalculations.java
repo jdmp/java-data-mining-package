@@ -24,8 +24,8 @@
 package org.jdmp.matrix.calculation.general.missingvalues;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.calculation.Calculation.Ret;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public interface MissingValueCalculations {
 

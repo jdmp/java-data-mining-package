@@ -29,8 +29,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.Matrix.Format;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.IntelligentFileWriter;
 import org.jdmp.matrix.util.StringUtil;
 

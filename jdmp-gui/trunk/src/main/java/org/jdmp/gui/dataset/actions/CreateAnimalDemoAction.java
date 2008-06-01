@@ -8,7 +8,7 @@ import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
 import org.jdmp.core.dataset.DataSet;
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public class CreateAnimalDemoAction extends DataSetAction {
 	private static final long serialVersionUID = 6821548758392591613L;

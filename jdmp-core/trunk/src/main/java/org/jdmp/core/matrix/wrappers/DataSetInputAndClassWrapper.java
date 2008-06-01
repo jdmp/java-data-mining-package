@@ -3,7 +3,7 @@ package org.jdmp.core.matrix.wrappers;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.sample.RegressionSample;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.Wrapper;
 import org.jdmp.matrix.stubs.AbstractDenseDoubleMatrix2D;
 

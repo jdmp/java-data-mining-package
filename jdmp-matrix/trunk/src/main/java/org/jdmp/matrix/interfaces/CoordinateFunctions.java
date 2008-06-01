@@ -23,7 +23,7 @@
 
 package org.jdmp.matrix.interfaces;
 
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 /**
  * This interface defines functions on a Matrix that have to do with the

@@ -27,7 +27,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.jdmp.matrix.Coordinates;
+import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.interfaces.Wrapper;
 
 public class CoordinateSetToLongWrapper implements Set<long[]>, Wrapper<Set<Coordinates>> {

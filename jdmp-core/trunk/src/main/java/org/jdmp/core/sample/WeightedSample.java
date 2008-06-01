@@ -3,8 +3,8 @@ package org.jdmp.core.sample;
 import org.jdmp.core.variable.DefaultVariable;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.MatrixFactory;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public class WeightedSample extends BasicSample {
 	private static final long serialVersionUID = 8787906424200203777L;

@@ -25,7 +25,7 @@ package org.jdmp.matrix.interfaces;
 
 import java.util.Date;
 
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 /**
  * This interface declares the getters and setters for the entries in the Matrix

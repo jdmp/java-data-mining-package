@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.jdmp.core.algorithm.AlgorithmOneSource;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.calculation.Calculation.Ret;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public class AlgorithmSum extends AlgorithmOneSource {
 	private static final long serialVersionUID = -6902623124007218820L;

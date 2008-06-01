@@ -25,11 +25,11 @@ package org.jdmp.matrix.calculation.general.statistical;
 
 import java.util.logging.Level;
 
-import org.jdmp.matrix.Coordinates;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.calculation.DoubleCalculation;
 import org.jdmp.matrix.calculation.general.missingvalues.CountMissing;
+import org.jdmp.matrix.coordinates.Coordinates;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public class Mean extends DoubleCalculation {
 	private static final long serialVersionUID = 4116408128004680574L;

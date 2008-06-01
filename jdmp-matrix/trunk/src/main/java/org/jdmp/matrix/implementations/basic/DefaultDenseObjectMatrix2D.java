@@ -24,7 +24,7 @@
 package org.jdmp.matrix.implementations.basic;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.stubs.AbstractDenseObjectMatrix2D;
 
 public class DefaultDenseObjectMatrix2D extends AbstractDenseObjectMatrix2D {

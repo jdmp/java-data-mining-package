@@ -1,9 +1,9 @@
 package org.jdmp.core.sample;
 
-import org.jdmp.matrix.Coordinates;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.MatrixFactory;
+import org.jdmp.matrix.coordinates.Coordinates;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public class ClassificationSample extends RegressionSample {
 	private static final long serialVersionUID = 7327527059314579381L;

@@ -1,11 +1,11 @@
 package org.jdmp.core.matrix.wrappers;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
-import org.jdmp.matrix.MatrixList;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.HasMatrixList;
 import org.jdmp.matrix.interfaces.Wrapper;
 import org.jdmp.matrix.stubs.AbstractDenseDoubleMatrix2D;
+import org.jdmp.matrix.util.collections.MatrixList;
 
 public class MatrixListToMatrixWrapper extends AbstractDenseDoubleMatrix2D implements
 		Wrapper<MatrixList> {

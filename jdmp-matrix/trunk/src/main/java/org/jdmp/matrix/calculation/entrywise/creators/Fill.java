@@ -24,10 +24,10 @@
 package org.jdmp.matrix.calculation.entrywise.creators;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.Matrix.EntryType;
 import org.jdmp.matrix.calculation.ObjectCalculation;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public class Fill extends ObjectCalculation {
 	private static final long serialVersionUID = -3477957135967841340L;

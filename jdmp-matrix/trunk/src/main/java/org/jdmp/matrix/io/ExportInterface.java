@@ -28,8 +28,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Writer;
 
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.Matrix.Format;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public interface ExportInterface {
 

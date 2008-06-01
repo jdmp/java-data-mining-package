@@ -31,10 +31,10 @@ import org.jdmp.core.matrix.MatrixListTableModel;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.gui.matrix.actions.FillWithValueAction;
 import org.jdmp.gui.matrix.actions.MatrixActions;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.calculation.Calculation.Ret;
 import org.jdmp.matrix.calculation.entrywise.creators.Rand;
 import org.jdmp.matrix.calculation.entrywise.creators.Randn;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.HasMatrixList;
 import org.jdmp.matrix.interfaces.HasToolTip;
 

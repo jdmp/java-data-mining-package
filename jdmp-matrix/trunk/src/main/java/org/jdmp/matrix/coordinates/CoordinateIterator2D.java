@@ -21,9 +21,12 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.matrix;
+package org.jdmp.matrix.coordinates;
 
 import java.util.Iterator;
+
+import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public class CoordinateIterator2D implements Iterable<long[]> {
 

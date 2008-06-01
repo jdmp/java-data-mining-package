@@ -26,8 +26,8 @@ package org.jdmp.matrix.io;
 import java.io.IOException;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.Matrix.Format;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public class ExportMatlab {
 

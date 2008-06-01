@@ -2,7 +2,7 @@ package org.jdmp.vecmath;
 
 import org.jdmp.matrix.AbstractMatrixTest;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.vecmath.VecMathMatrix;
 
 public class TestVecMathMatrix extends AbstractMatrixTest {

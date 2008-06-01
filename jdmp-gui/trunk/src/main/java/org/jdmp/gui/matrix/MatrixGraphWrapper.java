@@ -8,9 +8,9 @@ import javax.swing.event.TableModelListener;
 
 import org.jdmp.core.matrix.MatrixGUIObject;
 import org.jdmp.gui.util.JungGraphPanel.Data;
-import org.jdmp.matrix.Coordinates;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.coordinates.Coordinates;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 import edu.uci.ics.jung.graph.Edge;
 import edu.uci.ics.jung.graph.Vertex;

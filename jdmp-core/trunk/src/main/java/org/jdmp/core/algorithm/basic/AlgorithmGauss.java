@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.jdmp.core.algorithm.AlgorithmOneSource;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.MatrixFactory;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public class AlgorithmGauss extends AlgorithmOneSource {
 	private static final long serialVersionUID = 3127916742763698423L;

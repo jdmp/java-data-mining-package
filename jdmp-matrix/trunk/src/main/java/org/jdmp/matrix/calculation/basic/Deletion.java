@@ -26,8 +26,8 @@ package org.jdmp.matrix.calculation.basic;
 import java.util.List;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.calculation.ObjectCalculation;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.MathUtil;
 import org.jdmp.matrix.util.StringUtil;
 

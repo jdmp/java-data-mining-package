@@ -9,7 +9,7 @@ import javax.swing.KeyStroke;
 import org.jdmp.core.matrix.MatrixGUIObject;
 import org.jdmp.core.variable.WorkspaceVariable;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.HasMatrixList;
 
 public class TransposeMatrixAction extends MatrixAction {

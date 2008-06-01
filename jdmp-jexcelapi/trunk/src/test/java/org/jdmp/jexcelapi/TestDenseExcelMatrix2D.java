@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import org.jdmp.matrix.AbstractMatrixTest;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public class TestDenseExcelMatrix2D extends AbstractMatrixTest {
 

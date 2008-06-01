@@ -21,7 +21,7 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.matrix;
+package org.jdmp.matrix.exceptions;
 
 public class MatrixException extends RuntimeException {
 	private static final long serialVersionUID = -2291815899552676592L;

@@ -21,14 +21,15 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.matrix;
+package org.jdmp.matrix.util.collections;
 
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-import org.jdmp.matrix.util.collections.RingBufferList;
+import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public class DefaultMatrixList extends MatrixList {
 	private static final long serialVersionUID = -908619462706136008L;

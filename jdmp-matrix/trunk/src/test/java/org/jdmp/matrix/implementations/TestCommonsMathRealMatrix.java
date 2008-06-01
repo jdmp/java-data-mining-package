@@ -25,7 +25,7 @@ package org.jdmp.matrix.implementations;
 
 import org.jdmp.matrix.AbstractMatrixTest;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.implementations.misc.CommonsMathRealMatrix;
 
 public class TestCommonsMathRealMatrix extends AbstractMatrixTest {

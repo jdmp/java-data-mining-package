@@ -26,10 +26,7 @@ package org.jdmp.matrix.calculation;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.jdmp.matrix.CoordinateIterator2D;
-import org.jdmp.matrix.Coordinates;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.Matrix.EntryType;
 import org.jdmp.matrix.calculation.basic.Convert;
 import org.jdmp.matrix.calculation.basic.Divide;
@@ -60,6 +57,9 @@ import org.jdmp.matrix.calculation.entrywise.trigonometric.Tan;
 import org.jdmp.matrix.calculation.general.statistical.Max;
 import org.jdmp.matrix.calculation.general.statistical.Min;
 import org.jdmp.matrix.calculation.general.statistical.Sum;
+import org.jdmp.matrix.coordinates.CoordinateIterator2D;
+import org.jdmp.matrix.coordinates.Coordinates;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.implementations.basic.CalculationMatrix;
 import org.jdmp.matrix.interfaces.Annotation;
 

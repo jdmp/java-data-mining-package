@@ -10,8 +10,8 @@ import org.jdmp.core.algorithm.classification.AlgorithmClassifier;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.sample.ClassificationSample;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.MatrixFactory;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public class AlgorithmSVM extends AlgorithmClassifier {
 	private static final long serialVersionUID = -3809157647628200950L;

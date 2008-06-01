@@ -9,9 +9,9 @@ import no.uib.cipr.matrix.Matrices;
 import no.uib.cipr.matrix.SVD;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.calculation.Calculation.Ret;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.Wrapper;
 import org.jdmp.matrix.stubs.AbstractDenseDoubleMatrix2D;
 

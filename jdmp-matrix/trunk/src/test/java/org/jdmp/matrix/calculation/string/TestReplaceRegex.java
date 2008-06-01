@@ -29,11 +29,11 @@ import junit.framework.Assert;
 import junit.framework.TestCase;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.Matrix.EntryType;
 import org.jdmp.matrix.calculation.Calculation.Ret;
 import org.jdmp.matrix.calculation.entrywise.replace.ReplaceRegex;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public class TestReplaceRegex extends TestCase {
 

@@ -1,10 +1,10 @@
 package org.jdmp.core.variable;
 
-import org.jdmp.matrix.DefaultMatrixList;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.MatrixFactory;
-import org.jdmp.matrix.MatrixList;
+import org.jdmp.matrix.exceptions.MatrixException;
+import org.jdmp.matrix.util.collections.DefaultMatrixList;
+import org.jdmp.matrix.util.collections.MatrixList;
 
 public class DefaultVariable extends Variable {
 	private static final long serialVersionUID = -7192491915167470355L;

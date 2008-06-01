@@ -2,7 +2,7 @@ package org.jdmp.gui.module;
 
 import org.jdmp.core.module.Module;
 import org.jdmp.gui.util.AbstractFrame;
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public class ModuleFrame extends AbstractFrame {
 	private static final long serialVersionUID = 3669267793401815259L;

@@ -24,7 +24,7 @@
 package org.jdmp.matrix.calculation.general.solving;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public interface SolvingCalculations {
 

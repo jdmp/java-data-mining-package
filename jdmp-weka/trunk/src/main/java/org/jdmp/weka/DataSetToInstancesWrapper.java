@@ -3,7 +3,7 @@ package org.jdmp.weka;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.sample.ClassificationSample;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 import weka.core.Instances;
 

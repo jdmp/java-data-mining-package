@@ -23,7 +23,7 @@
 
 package org.jdmp.matrix.stubs;
 
-import org.jdmp.matrix.Coordinates;
+import org.jdmp.matrix.coordinates.Coordinates;
 
 public abstract class AbstractDenseStringMatrix extends AbstractStringMatrix {
 

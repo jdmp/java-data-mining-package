@@ -24,8 +24,8 @@
 package org.jdmp.matrix.calculation.general.statistical;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.calculation.DoubleCalculation;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public class IndexOfMin extends DoubleCalculation {
 	private static final long serialVersionUID = -8301078828905448159L;

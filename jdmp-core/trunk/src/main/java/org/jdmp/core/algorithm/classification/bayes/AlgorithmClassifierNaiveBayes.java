@@ -23,9 +23,9 @@ import org.jdmp.core.dataset.ClassificationDataSet;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.sample.ClassificationSample;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.calculation.Calculation.Ret;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 
 public class AlgorithmClassifierNaiveBayes extends AlgorithmClassifier {

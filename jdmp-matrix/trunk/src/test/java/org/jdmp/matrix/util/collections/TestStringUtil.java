@@ -23,7 +23,7 @@
 
 package org.jdmp.matrix.util.collections;
 
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.StringUtil;
 
 import junit.framework.TestCase;

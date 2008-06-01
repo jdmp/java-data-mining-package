@@ -10,7 +10,7 @@ import java.awt.geom.Ellipse2D;
 import org.jdmp.core.matrix.MatrixGUIObject;
 import org.jdmp.gui.util.GraphicsExecutor;
 import org.jdmp.gui.util.JungGraphPanel;
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 import edu.uci.ics.jung.graph.ArchetypeVertex;
 import edu.uci.ics.jung.graph.Edge;

@@ -3,7 +3,7 @@ package org.jdmp.colt;
 import org.jdmp.colt.ColtDenseDoubleMatrix2D;
 import org.jdmp.matrix.AbstractMatrixTest;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public class TestColtDenseDoubleMatrix2D extends AbstractMatrixTest {
 

@@ -27,8 +27,8 @@ import java.io.File;
 import java.io.IOException;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.Matrix.Format;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.implementations.io.CSVMatrix;
 import org.jdmp.matrix.implementations.io.WaveMatrix;
 

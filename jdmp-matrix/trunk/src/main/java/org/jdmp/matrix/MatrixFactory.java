@@ -46,6 +46,7 @@ import org.jdmp.matrix.calculation.entrywise.creators.Fill;
 import org.jdmp.matrix.calculation.entrywise.creators.Ones;
 import org.jdmp.matrix.calculation.entrywise.creators.Rand;
 import org.jdmp.matrix.calculation.entrywise.creators.Randn;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.implementations.basic.DefaultDenseDoubleMatrix2D;
 import org.jdmp.matrix.implementations.basic.DefaultDenseObjectMatrix2D;
 import org.jdmp.matrix.implementations.basic.DefaultDenseStringMatrix2D;

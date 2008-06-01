@@ -6,9 +6,9 @@ import java.io.ObjectOutputStream;
 import java.io.OptionalDataException;
 import java.util.Map;
 
-import org.jdmp.matrix.Coordinates;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.coordinates.Coordinates;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.stubs.AbstractMapToSparseMatrixWrapper;
 
 public class SparseEhcacheMatrix<A> extends AbstractMapToSparseMatrixWrapper<A> {

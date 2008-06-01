@@ -26,10 +26,10 @@ package org.jdmp.matrix.implementations.basic;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jdmp.matrix.CoordinateIterator2D;
-import org.jdmp.matrix.Coordinates;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.coordinates.CoordinateIterator2D;
+import org.jdmp.matrix.coordinates.Coordinates;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.stubs.AbstractSparseObjectMatrix;
 import org.jdmp.matrix.util.CoordinateSetToLongWrapper;
 

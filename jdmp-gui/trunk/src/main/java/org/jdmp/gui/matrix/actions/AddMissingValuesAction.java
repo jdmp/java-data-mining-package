@@ -5,8 +5,8 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
 import org.jdmp.core.matrix.MatrixGUIObject;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.calculation.Calculation.Ret;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.HasMatrixList;
 
 public class AddMissingValuesAction extends MatrixAction {

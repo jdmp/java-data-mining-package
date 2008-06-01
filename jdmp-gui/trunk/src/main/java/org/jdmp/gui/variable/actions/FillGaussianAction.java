@@ -8,7 +8,7 @@ import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
 import org.jdmp.core.variable.Variable;
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public class FillGaussianAction extends VariableAction {
 	private static final long serialVersionUID = 2702306358440290066L;

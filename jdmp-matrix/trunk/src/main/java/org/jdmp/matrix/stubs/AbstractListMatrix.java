@@ -28,8 +28,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-import org.jdmp.matrix.CoordinateIterator2D;
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.coordinates.CoordinateIterator2D;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.ListMatrix;
 import org.jdmp.matrix.util.MathUtil;
 

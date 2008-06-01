@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.jdmp.core.algorithm.AlgorithmOneSource;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.calculation.entrywise.misc.LogisticFunction;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public class AlgorithmLogistic extends AlgorithmOneSource {
 	private static final long serialVersionUID = -6185025728766094423L;

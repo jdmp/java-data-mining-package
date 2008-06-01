@@ -23,11 +23,11 @@
 
 package org.jdmp.matrix.calculation.general.statistical;
 
-import org.jdmp.matrix.Coordinates;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.calculation.DoubleCalculation;
 import org.jdmp.matrix.calculation.general.missingvalues.CountMissing;
+import org.jdmp.matrix.coordinates.Coordinates;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.MathUtil;
 
 public class Var extends DoubleCalculation {

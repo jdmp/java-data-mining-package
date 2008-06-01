@@ -26,8 +26,8 @@ package org.jdmp.matrix.calculation.general.statistical;
 import java.util.logging.Level;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.calculation.DoubleCalculation;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.MathUtil;
 
 public class Corrcoef extends DoubleCalculation {

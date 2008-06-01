@@ -3,7 +3,7 @@ package org.jdmp.jama;
 import org.jdmp.jama.JamaMatrix;
 import org.jdmp.matrix.AbstractMatrixTest;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public class TestJamaMatrix extends AbstractMatrixTest {
 

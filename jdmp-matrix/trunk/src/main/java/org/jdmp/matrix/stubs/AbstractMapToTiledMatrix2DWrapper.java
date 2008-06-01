@@ -25,11 +25,11 @@ package org.jdmp.matrix.stubs;
 
 import java.util.Map;
 
-import org.jdmp.matrix.CoordinateIterator2D;
-import org.jdmp.matrix.Coordinates;
 import org.jdmp.matrix.GenericMatrix;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.coordinates.CoordinateIterator2D;
+import org.jdmp.matrix.coordinates.Coordinates;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.implementations.basic.DefaultDenseObjectMatrix2D;
 import org.jdmp.matrix.interfaces.Wrapper;
 import org.jdmp.matrix.util.MathUtil;

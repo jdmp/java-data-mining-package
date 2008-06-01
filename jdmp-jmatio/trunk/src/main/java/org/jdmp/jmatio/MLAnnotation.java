@@ -3,7 +3,7 @@ package org.jdmp.jmatio;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jdmp.matrix.DefaultAnnotation;
+import org.jdmp.matrix.annotation.DefaultAnnotation;
 import org.jdmp.matrix.interfaces.Annotation;
 import org.jdmp.matrix.util.StringUtil;
 

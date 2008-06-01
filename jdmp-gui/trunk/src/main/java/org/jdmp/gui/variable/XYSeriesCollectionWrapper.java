@@ -1,7 +1,7 @@
 package org.jdmp.gui.variable;
 
 import org.jdmp.core.variable.Variable;
-import org.jdmp.matrix.Coordinates;
+import org.jdmp.matrix.coordinates.Coordinates;
 import org.jfree.chart.plot.IntervalMarker;
 import org.jfree.chart.plot.ValueMarker;
 import org.jfree.data.Range;

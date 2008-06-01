@@ -39,7 +39,7 @@ import org.jdmp.gui.util.CanRenderGraph;
 import org.jdmp.gui.util.ColorUtil;
 import org.jdmp.gui.util.GraphicsExecutor;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.ChartUtilities;

@@ -21,7 +21,7 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.matrix;
+package org.jdmp.matrix.util.collections;
 
 import java.util.Collection;
 import java.util.logging.Level;
@@ -29,6 +29,8 @@ import java.util.logging.Logger;
 
 import javax.swing.DefaultListSelectionModel;
 import javax.swing.ListSelectionModel;
+
+import org.jdmp.matrix.Matrix;
 
 public abstract class MatrixList implements Iterable<Matrix> {
 

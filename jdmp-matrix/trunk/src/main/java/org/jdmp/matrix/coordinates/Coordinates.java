@@ -21,9 +21,11 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.matrix;
+package org.jdmp.matrix.coordinates;
 
 import java.io.Serializable;
+
+import org.jdmp.matrix.Matrix;
 
 public class Coordinates implements Serializable {
 	private static final long serialVersionUID = 8361257560328772093L;

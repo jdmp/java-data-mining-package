@@ -24,9 +24,9 @@
 package org.jdmp.matrix.calculation.entrywise.basic;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.calculation.DoubleCalculation;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public class Sign extends DoubleCalculation {
 	private static final long serialVersionUID = 8479106978433813886L;

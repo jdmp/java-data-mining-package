@@ -26,7 +26,7 @@ package org.jdmp.matrix.interfaces;
 import javax.swing.ListSelectionModel;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixList;
+import org.jdmp.matrix.util.collections.MatrixList;
 
 public interface HasMatrixList {
 

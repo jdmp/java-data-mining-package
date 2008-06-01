@@ -21,10 +21,10 @@ import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.biff.NumberRecord;
 
-import org.jdmp.matrix.DefaultAnnotation;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.MatrixFactory;
+import org.jdmp.matrix.annotation.DefaultAnnotation;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.Annotation;
 import org.jdmp.matrix.stubs.AbstractDenseObjectMatrix2D;
 import org.jdmp.matrix.util.StringUtil;

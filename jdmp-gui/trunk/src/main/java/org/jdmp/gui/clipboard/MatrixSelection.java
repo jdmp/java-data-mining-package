@@ -9,8 +9,8 @@ import java.io.IOException;
 import java.io.Serializable;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.Matrix.Format;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public class MatrixSelection implements Transferable, ClipboardOwner, Serializable {
 	private static final long serialVersionUID = -8462961141636462510L;

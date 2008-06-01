@@ -26,7 +26,7 @@ package org.jdmp.matrix.stubs;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jdmp.matrix.Coordinates;
+import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.interfaces.GraphMatrix;
 
 public abstract class AbstractGraphMatrix<N, E> extends AbstractGenericMatrix<E> implements GraphMatrix<N, E> {

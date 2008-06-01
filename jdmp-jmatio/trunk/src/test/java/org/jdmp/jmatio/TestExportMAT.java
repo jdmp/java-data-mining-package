@@ -1,7 +1,7 @@
 package org.jdmp.jmatio;
 
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.Matrix.Format;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.io.TestIO;
 
 public class TestExportMAT extends TestIO {

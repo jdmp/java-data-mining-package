@@ -2,7 +2,7 @@ package org.jdmp.mtj;
 
 import org.jdmp.matrix.AbstractMatrixTest;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public class TestMTJFullDoubleMatrix2D extends AbstractMatrixTest {
 

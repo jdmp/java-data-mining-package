@@ -23,8 +23,8 @@
 
 package org.jdmp.matrix.stubs;
 
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.ObjectMatrix;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.MathUtil;
 
 public abstract class AbstractObjectMatrix extends AbstractGenericMatrix<Object> implements ObjectMatrix {

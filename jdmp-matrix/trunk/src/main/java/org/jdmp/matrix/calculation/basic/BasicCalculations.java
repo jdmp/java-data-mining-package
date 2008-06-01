@@ -26,10 +26,10 @@ package org.jdmp.matrix.calculation.basic;
 import java.util.List;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.Matrix.AnnotationTransfer;
 import org.jdmp.matrix.Matrix.EntryType;
 import org.jdmp.matrix.calculation.Calculation.Ret;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public interface BasicCalculations {
 

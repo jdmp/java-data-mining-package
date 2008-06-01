@@ -26,8 +26,8 @@ package org.jdmp.matrix.calculation.entrywise.replace;
 import java.util.regex.Pattern;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.calculation.Calculation.Ret;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public interface ReplaceCalculations {
 

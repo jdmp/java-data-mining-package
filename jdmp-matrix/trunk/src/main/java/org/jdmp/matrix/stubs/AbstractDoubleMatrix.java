@@ -24,7 +24,7 @@
 package org.jdmp.matrix.stubs;
 
 import org.jdmp.matrix.DoubleMatrix;
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.MathUtil;
 
 public abstract class AbstractDoubleMatrix extends AbstractGenericMatrix<Double> implements DoubleMatrix {

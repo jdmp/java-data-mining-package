@@ -4,8 +4,8 @@ import org.jdmp.core.matrix.wrappers.SampleInputOutputMatrix;
 import org.jdmp.core.variable.DefaultVariable;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.MatrixFactory;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public class RegressionSample extends WeightedSample {
 	private static final long serialVersionUID = -7326840837391243268L;

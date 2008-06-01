@@ -3,7 +3,7 @@ package org.jdmp.jgroups;
 import org.jdmp.jgroups.ReplicatedSparseMatrix;
 import org.jdmp.matrix.AbstractMatrixTest;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public class TestReplicatedSparseMatrix extends AbstractMatrixTest {
 

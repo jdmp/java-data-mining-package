@@ -30,7 +30,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.logging.Level;
 
-import org.jdmp.matrix.Coordinates;
+import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.stubs.AbstractDenseDoubleMatrix2D;
 import org.jdmp.matrix.util.BufferedRandomAccessFile;
 

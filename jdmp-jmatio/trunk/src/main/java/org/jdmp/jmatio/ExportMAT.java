@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.MatrixFactory;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 import com.jmatio.io.MatFileWriter;
 import com.jmatio.types.MLArray;

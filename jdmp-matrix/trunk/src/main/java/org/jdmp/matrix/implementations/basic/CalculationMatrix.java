@@ -23,8 +23,8 @@
 
 package org.jdmp.matrix.implementations.basic;
 
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.calculation.AbstractCalculation;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.stubs.AbstractGenericMatrix;
 
 public class CalculationMatrix<A> extends AbstractGenericMatrix<A> {

@@ -21,7 +21,7 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.matrix;
+package org.jdmp.matrix.annotation;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -24,9 +24,9 @@
 package org.jdmp.matrix.calculation.general.misc;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.calculation.DoubleCalculation;
 import org.jdmp.matrix.calculation.general.statistical.Std;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public class Standardize extends DoubleCalculation {
 	private static final long serialVersionUID = 6454174968175712888L;

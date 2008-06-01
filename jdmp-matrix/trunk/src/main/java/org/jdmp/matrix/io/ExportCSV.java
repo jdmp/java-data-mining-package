@@ -30,7 +30,7 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.IntelligentFileWriter;
 
 public abstract class ExportCSV {

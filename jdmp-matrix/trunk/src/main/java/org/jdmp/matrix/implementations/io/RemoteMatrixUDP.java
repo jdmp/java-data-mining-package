@@ -34,8 +34,8 @@ import java.net.SocketAddress;
 import java.util.logging.Level;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.MatrixFactory;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.stubs.AbstractGenericMatrix;
 
 public class RemoteMatrixUDP<A> extends AbstractGenericMatrix<A> {

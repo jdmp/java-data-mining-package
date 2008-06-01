@@ -22,18 +22,18 @@ import org.jdmp.core.matrix.wrappers.MatrixListToMatrixWrapper;
 import org.jdmp.core.matrix.wrappers.MatrixToMatrixListWrapper;
 import org.jdmp.core.util.AbstractGUIObject;
 import org.jdmp.core.util.AbstractEvent.EventType;
-import org.jdmp.matrix.Coordinates;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
 import org.jdmp.matrix.MatrixFactory;
-import org.jdmp.matrix.MatrixList;
 import org.jdmp.matrix.calculation.Calculation.Ret;
 import org.jdmp.matrix.calculation.basic.Divide;
 import org.jdmp.matrix.calculation.basic.Plus;
+import org.jdmp.matrix.coordinates.Coordinates;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.HasMatrix;
 import org.jdmp.matrix.interfaces.HasMatrixList;
 import org.jdmp.matrix.util.IntelligentFileReader;
 import org.jdmp.matrix.util.IntelligentFileWriter;
+import org.jdmp.matrix.util.collections.MatrixList;
 
 public abstract class Variable extends AbstractGUIObject implements HasMatrix, HasMatrixList {
 

@@ -4,10 +4,10 @@ import javax.swing.DefaultListSelectionModel;
 import javax.swing.ListSelectionModel;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixList;
 import org.jdmp.matrix.interfaces.HasMatrixList;
 import org.jdmp.matrix.interfaces.HasSourceMatrix;
 import org.jdmp.matrix.interfaces.Wrapper;
+import org.jdmp.matrix.util.collections.MatrixList;
 
 public class EditHistoryToMatrixWrapper implements Wrapper<HasSourceMatrix>, HasMatrixList {
 

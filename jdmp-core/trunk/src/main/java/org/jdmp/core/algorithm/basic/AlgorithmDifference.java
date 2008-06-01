@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.jdmp.core.algorithm.AlgorithmTwoSources;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.exceptions.MatrixException;
 
 public class AlgorithmDifference extends AlgorithmTwoSources {
 	private static final long serialVersionUID = 2476001103906791183L;

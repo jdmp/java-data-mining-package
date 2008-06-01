@@ -26,7 +26,7 @@ package org.jdmp.matrix.implementations.io;
 import java.io.File;
 import java.io.IOException;
 
-import org.jdmp.matrix.MatrixException;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.stubs.AbstractDenseStringMatrix2D;
 import org.jdmp.matrix.util.MathUtil;
 import org.jdmp.matrix.util.SeekableLineInputStream;

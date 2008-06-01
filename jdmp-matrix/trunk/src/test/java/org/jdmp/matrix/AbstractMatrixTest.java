@@ -30,6 +30,8 @@ import java.util.List;
 import junit.framework.TestCase;
 
 import org.jdmp.matrix.calculation.Calculation.Ret;
+import org.jdmp.matrix.coordinates.Coordinates;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.stubs.AbstractDoubleMatrix;
 import org.jdmp.matrix.util.SerializationUtil;
 
