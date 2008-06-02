@@ -21,21 +21,40 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.matrix.util.collections;
+package org.jdmp.matrix.collections;
 
-import junit.framework.TestSuite;
+import java.io.Serializable;
+import java.util.Map;
 
-public class AllTests extends TestSuite {
+import junit.framework.TestCase;
 
-	public static TestSuite suite() {
-		TestSuite suite = new TestSuite(AllTests.class.getName());
-		suite.addTestSuite(TestRingBufferList.class);
-		suite.addTestSuite(TestSerializedObjectMap.class);
-		suite.addTestSuite(TestHashMapList.class);
-		suite.addTestSuite(TestSoftHashMap.class);
-		suite.addTestSuite(TestSoftHashMapList.class);
-		suite.addTestSuite(TestStringUtil.class);
-		return suite;
+import org.jdmp.matrix.util.SerializationUtil;
+
+public abstract class AbstractMapTest extends TestCase {
+
+	public abstract Map createMap() throws Exception;
+
+	public String getLabel() {
+		return this.getClass().getSimpleName();
+	}
+
+	public void testPutAndGet() throws Exception {
+		Map m = createMap();
+		m.put("a", "test1");
+		m.put("b", "test2");
+		assertEquals(getLabel(), "test1", m.get("a"));
+		assertEquals(getLabel(), "test2", m.get("b"));
+	}
+
+	public void testSerialize() throws Exception {
+		Map m = createMap();
+		m.put("a", "test1");
+		m.put("b", "test2");
+		if (m instanceof Serializable) {
+			byte[] data = SerializationUtil.serialize((Serializable) m);
+			Map m2 = (Map) SerializationUtil.deserialize(data);
+			assertEquals(getLabel(), m, m2);
+		}
 	}
 
 }

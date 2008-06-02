@@ -21,17 +21,23 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.matrix.util.collections;
+package org.jdmp.matrix.collections;
 
-import java.util.Map;
+import org.jdmp.matrix.util.TestStringUtil;
 
-import org.jdmp.matrix.collections.SoftHashMap;
+import junit.framework.TestSuite;
 
-public class TestSoftHashMap extends AbstractMapTest {
+public class AllTests extends TestSuite {
 
-	@Override
-	public Map createMap() throws Exception {
-		return new SoftHashMap<String, String>();
+	public static TestSuite suite() {
+		TestSuite suite = new TestSuite(AllTests.class.getName());
+		suite.addTestSuite(TestRingBufferList.class);
+		suite.addTestSuite(TestSerializedObjectMap.class);
+		suite.addTestSuite(TestHashMapList.class);
+		suite.addTestSuite(TestSoftHashMap.class);
+		suite.addTestSuite(TestSoftHashMapList.class);
+		suite.addTestSuite(TestStringUtil.class);
+		return suite;
 	}
 
 }

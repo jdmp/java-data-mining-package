@@ -21,17 +21,17 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.matrix.util.collections;
+package org.jdmp.matrix.collections;
 
 import java.util.Map;
 
-import org.jdmp.matrix.collections.SoftHashMapList;
+import org.jdmp.matrix.collections.serializedmap.SerializedObjectMap;
 
-public class TestSoftHashMapList extends AbstractMapTest {
+public class TestSerializedObjectMap extends AbstractMapTest {
 
 	@Override
 	public Map createMap() throws Exception {
-		return new SoftHashMapList<String, String>();
+		return new SerializedObjectMap<String, String>();
 	}
 
 }

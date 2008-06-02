@@ -2,7 +2,7 @@ package org.jdmp.ehcache;
 
 import java.util.Map;
 
-import org.jdmp.matrix.util.collections.AbstractMapTest;
+import org.jdmp.matrix.collections.AbstractMapTest;
 
 public class TestEhcacheMap extends AbstractMapTest {
 

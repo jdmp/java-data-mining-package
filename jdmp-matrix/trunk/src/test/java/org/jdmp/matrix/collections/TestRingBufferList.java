@@ -21,17 +21,47 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.matrix.util.collections;
+package org.jdmp.matrix.collections;
 
-import java.util.Map;
+import org.jdmp.matrix.collections.RingBufferList;
 
-import org.jdmp.matrix.collections.serializedmap.SerializedObjectMap;
+import junit.framework.TestCase;
 
-public class TestSerializedObjectMap extends AbstractMapTest {
+public class TestRingBufferList extends TestCase {
 
-	@Override
-	public Map createMap() throws Exception {
-		return new SerializedObjectMap<String, String>();
+	public void testAdd() {
+		RingBufferList<Integer> rl = new RingBufferList<Integer>(4);
+
+		assertEquals(0, rl.size());
+
+		rl.add(0);
+		assertEquals(1, rl.size());
+		assertEquals(0, (int) rl.get(0));
+
+		rl.add(1);
+		assertEquals(2, rl.size());
+		assertEquals(1, (int) rl.get(1));
+
+		rl.add(2);
+		assertEquals(3, rl.size());
+		assertEquals(2, (int) rl.get(2));
+
+		rl.set(1, 5);
+		assertEquals(3, rl.size());
+		assertEquals(5, (int) rl.get(1));
+
+		rl.add(3);
+		assertEquals(4, rl.size());
+		assertEquals(3, (int) rl.get(3));
+
+		rl.add(4);
+		assertEquals(4, rl.size());
+		assertEquals(4, (int) rl.get(3));
+
+		rl.add(5);
+		assertEquals(4, rl.size());
+		assertEquals(5, (int) rl.get(3));
+
 	}
 
 }

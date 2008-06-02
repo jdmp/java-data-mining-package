@@ -21,26 +21,17 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.matrix.util.collections;
+package org.jdmp.matrix.collections;
 
-import junit.framework.TestCase;
+import java.util.Map;
 
-import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.util.StringUtil;
+import org.jdmp.matrix.collections.SoftHashMap;
 
-public class TestStringUtil extends TestCase {
+public class TestSoftHashMap extends AbstractMapTest {
 
-	public void testParseSelectionMatlab() {
-
-		try {
-			long[][] sel = StringUtil.parseSelection(":,2", new long[] { 3, 4 });
-		} catch (MatrixException e) {
-			// should not work yet
-			return;
-		}
-
-		throw new RuntimeException("Matlab selection is available. Add tests");
-
+	@Override
+	public Map createMap() throws Exception {
+		return new SoftHashMap<String, String>();
 	}
 
 }

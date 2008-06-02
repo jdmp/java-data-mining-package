@@ -21,40 +21,26 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.matrix.util.collections;
-
-import java.io.Serializable;
-import java.util.Map;
+package org.jdmp.matrix.util;
 
 import junit.framework.TestCase;
 
-import org.jdmp.matrix.util.SerializationUtil;
+import org.jdmp.matrix.exceptions.MatrixException;
+import org.jdmp.matrix.util.StringUtil;
 
-public abstract class AbstractMapTest extends TestCase {
+public class TestStringUtil extends TestCase {
 
-	public abstract Map createMap() throws Exception;
+	public void testParseSelectionMatlab() {
 
-	public String getLabel() {
-		return this.getClass().getSimpleName();
-	}
-
-	public void testPutAndGet() throws Exception {
-		Map m = createMap();
-		m.put("a", "test1");
-		m.put("b", "test2");
-		assertEquals(getLabel(), "test1", m.get("a"));
-		assertEquals(getLabel(), "test2", m.get("b"));
-	}
-
-	public void testSerialize() throws Exception {
-		Map m = createMap();
-		m.put("a", "test1");
-		m.put("b", "test2");
-		if (m instanceof Serializable) {
-			byte[] data = SerializationUtil.serialize((Serializable) m);
-			Map m2 = (Map) SerializationUtil.deserialize(data);
-			assertEquals(getLabel(), m, m2);
+		try {
+			long[][] sel = StringUtil.parseSelection(":,2", new long[] { 3, 4 });
+		} catch (MatrixException e) {
+			// should not work yet
+			return;
 		}
+
+		throw new RuntimeException("Matlab selection is available. Add tests");
+
 	}
 
 }
