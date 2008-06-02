@@ -23,18 +23,49 @@
 
 package org.jdmp.matrix.io;
 
-import junit.framework.TestSuite;
+import org.jdmp.matrix.Matrix.Format;
+import org.jdmp.matrix.exceptions.MatrixException;
 
-public class AllTests extends TestSuite {
+public class TestExportMAT extends TestIO {
 
-	public static TestSuite suite() {
-		TestSuite suite = new TestSuite(AllTests.class.getName());
-		suite.addTestSuite(org.jdmp.matrix.io.TestExportCSV.class);
-		suite.addTestSuite(org.jdmp.matrix.io.TestExportXLS.class);
-		suite.addTestSuite(org.jdmp.matrix.io.TestExportHTML.class);
-		suite.addTestSuite(org.jdmp.matrix.io.TestExportM.class);
-		suite.addTestSuite(org.jdmp.matrix.io.TestExportMAT.class);
-		return suite;
+	public Format getFormat() {
+		return Format.MAT;
+	}
+
+	public void testExportToStream() throws Exception {
+		try {
+			super.testExportToStream();
+		} catch (MatrixException e) {
+			return;
+		}
+		throw new Exception("this method should not be supported");
+	}
+
+	public void testExportToWriter() throws Exception {
+		try {
+			super.testExportToWriter();
+		} catch (MatrixException e) {
+			return;
+		}
+		throw new Exception("this method should not be supported");
+	}
+
+	public void testExportToClipboard() throws Exception {
+		try {
+			super.testExportToClipboard();
+		} catch (MatrixException e) {
+			return;
+		}
+		throw new Exception("this method should not be supported");
+	}
+
+	public void testExportToString() throws Exception {
+		try {
+			super.testExportToString();
+		} catch (MatrixException e) {
+			return;
+		}
+		throw new Exception("this method should not be supported");
 	}
 
 }

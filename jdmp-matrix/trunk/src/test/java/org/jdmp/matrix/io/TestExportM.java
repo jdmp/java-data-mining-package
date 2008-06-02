@@ -23,18 +23,31 @@
 
 package org.jdmp.matrix.io;
 
-import junit.framework.TestSuite;
+import java.io.File;
 
-public class AllTests extends TestSuite {
+import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.Matrix.Format;
 
-	public static TestSuite suite() {
-		TestSuite suite = new TestSuite(AllTests.class.getName());
-		suite.addTestSuite(org.jdmp.matrix.io.TestExportCSV.class);
-		suite.addTestSuite(org.jdmp.matrix.io.TestExportXLS.class);
-		suite.addTestSuite(org.jdmp.matrix.io.TestExportHTML.class);
-		suite.addTestSuite(org.jdmp.matrix.io.TestExportM.class);
-		suite.addTestSuite(org.jdmp.matrix.io.TestExportMAT.class);
-		return suite;
+public class TestExportM extends TestIO {
+
+	public Format getFormat() {
+		return Format.M;
+	}
+
+	public void testExportToFile() throws Exception {
+
+		File file = File.createTempFile("testExportToFile", "." + getFormat().name().toLowerCase());
+		file.deleteOnExit();
+
+		Matrix m = getMatrix();
+		m.exportToFile(getFormat(), file);
+
+		assertTrue(getLabel(), file.exists());
+		assertTrue(getLabel(), file.length() > 0);
+
+		file.delete();
+		assertFalse(getLabel(), file.exists());
+
 	}
 
 }

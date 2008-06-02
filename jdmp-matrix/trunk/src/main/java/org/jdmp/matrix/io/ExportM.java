@@ -32,9 +32,8 @@ import java.io.Writer;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.IntelligentFileWriter;
-import org.jdmp.matrix.util.StringUtil;
 
-public class ExportHTML {
+public class ExportM {
 
 	public static void toFile(File file, Matrix matrix, Object... parameters) throws IOException,
 			MatrixException {
@@ -50,30 +49,12 @@ public class ExportHTML {
 		writer.close();
 	}
 
-	public static void toWriter(Writer out, Matrix m, Object... parameters) throws IOException,
-			MatrixException {
+	public static void toWriter(Writer writer, Matrix matrix, Object... parameters)
+			throws IOException, MatrixException {
 		String EOL = System.getProperty("line.separator");
-
-		long rowCount = m.getRowCount();
-		long colCount = m.getColumnCount();
-
-		out.append("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" ");
-		out.append("\"http://www.w3.org/TR/html4/strict.dtd\">" + EOL);
-		out.append("<body>" + EOL);
-		out.append("<html>" + EOL + EOL);
-		out.append("<table>" + EOL);
-		for (int row = 0; row < rowCount; row++) {
-			out.append("<tr>" + EOL);
-			for (int col = 0; col < colCount; col++) {
-				out.append("<td>");
-				out.append(StringUtil.convert(m.getObject(row, col)));
-				out.append("</td>" + EOL);
-			}
-			out.append("</tr>" + EOL);
-		}
-		out.append("</table>" + EOL);
-		out.append("</body>" + EOL);
-		out.append("</html>" + EOL);
+		writer.append("A = [ ");
+		ExportCSV.toWriter(writer, matrix);
+		writer.append("];" + EOL);
 	}
 
 }

@@ -23,21 +23,30 @@
 
 package org.jdmp.matrix.io;
 
-import java.io.IOException;
+import java.io.File;
 
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.Matrix.Format;
-import org.jdmp.matrix.exceptions.MatrixException;
 
-public class ExportMatlab {
+public class TestExportHTML extends TestIO {
 
-	public static String toString(Matrix m, Object... parameters) throws MatrixException,
-			IOException {
-		String EOL = System.getProperty("line.separator");
-		StringBuffer s = new StringBuffer();
-		s.append("A = [ ");
-		s.append(m.toString(Format.CSV));
-		s.append("];" + EOL);
-		return s.toString();
+	public Format getFormat() {
+		return Format.HTML;
+	}
+
+	public void testExportToFile() throws Exception {
+
+		File file = File.createTempFile("testExportToFile", "." + getFormat().name().toLowerCase());
+		file.deleteOnExit();
+
+		Matrix m = getMatrix();
+		m.exportToFile(getFormat(), file);
+
+		assertTrue(getLabel(), file.exists());
+		assertTrue(getLabel(), file.length() > 0);
+
+		file.delete();
+		assertFalse(getLabel(), file.exists());
+
 	}
 }
