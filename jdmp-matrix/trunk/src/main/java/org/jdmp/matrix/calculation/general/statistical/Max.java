@@ -24,10 +24,10 @@
 package org.jdmp.matrix.calculation.general.statistical;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.calculation.DoubleCalculation;
+import org.jdmp.matrix.calculation.AbstractDoubleCalculation;
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public class Max extends DoubleCalculation {
+public class Max extends AbstractDoubleCalculation {
 	private static final long serialVersionUID = -132801357103800951L;
 
 	public Max(int dimension, Matrix matrix) {

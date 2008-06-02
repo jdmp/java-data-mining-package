@@ -25,10 +25,10 @@ package org.jdmp.matrix.calculation.entrywise.creators;
 
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
-import org.jdmp.matrix.calculation.DoubleCalculation;
+import org.jdmp.matrix.calculation.AbstractDoubleCalculation;
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public class Zeros extends DoubleCalculation {
+public class Zeros extends AbstractDoubleCalculation {
 	private static final long serialVersionUID = 6651797875513211513L;
 
 	public Zeros(Matrix matrix) {

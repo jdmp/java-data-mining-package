@@ -26,12 +26,12 @@ package org.jdmp.matrix.calculation.basic;
 import java.util.List;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.calculation.ObjectCalculation;
+import org.jdmp.matrix.calculation.AbstractObjectCalculation;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.MathUtil;
 import org.jdmp.matrix.util.StringUtil;
 
-public class Deletion extends ObjectCalculation {
+public class Deletion extends AbstractObjectCalculation {
 	private static final long serialVersionUID = 3714270132906708701L;
 
 	private long[][] selection = null;

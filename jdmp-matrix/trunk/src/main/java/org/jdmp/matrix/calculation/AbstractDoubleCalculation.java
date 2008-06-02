@@ -29,13 +29,13 @@ import org.jdmp.matrix.Matrix.EntryType;
 import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public abstract class DoubleCalculation extends AbstractCalculation {
+public abstract class AbstractDoubleCalculation extends AbstractCalculation {
 
-	public DoubleCalculation(Matrix... sources) {
+	public AbstractDoubleCalculation(Matrix... sources) {
 		super(sources);
 	}
 
-	public DoubleCalculation(int dimension, Matrix... sources) {
+	public AbstractDoubleCalculation(int dimension, Matrix... sources) {
 		super(dimension, sources);
 	}
 

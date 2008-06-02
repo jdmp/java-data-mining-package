@@ -25,10 +25,10 @@ package org.jdmp.matrix.calculation.entrywise.rounding;
 
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
-import org.jdmp.matrix.calculation.DoubleCalculation;
+import org.jdmp.matrix.calculation.AbstractDoubleCalculation;
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public class Floor extends DoubleCalculation {
+public class Floor extends AbstractDoubleCalculation {
 	private static final long serialVersionUID = -695413938968267729L;
 
 	public Floor(Matrix matrix) {

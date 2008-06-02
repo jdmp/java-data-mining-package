@@ -51,7 +51,7 @@ import org.jdmp.matrix.implementations.basic.DefaultDenseDoubleMatrix2D;
 import org.jdmp.matrix.implementations.basic.DefaultDenseObjectMatrix2D;
 import org.jdmp.matrix.implementations.basic.DefaultDenseStringMatrix2D;
 import org.jdmp.matrix.implementations.basic.DefaultSparseObjectMatrix;
-import org.jdmp.matrix.implementations.basic.SynchronizedMatrix;
+import org.jdmp.matrix.implementations.basic.SynchronizedGenericMatrix;
 import org.jdmp.matrix.implementations.collections.DefaultListMatrix;
 import org.jdmp.matrix.implementations.collections.DefaultMapMatrix;
 import org.jdmp.matrix.implementations.io.DenseFileMatrix2D;
@@ -386,8 +386,8 @@ public abstract class MatrixFactory {
 	 *            the source Matrix
 	 * @return a synchronized Matrix
 	 */
-	public static final SynchronizedMatrix<?> synchronizedMatrix(Matrix matrix) {
-		return new SynchronizedMatrix<Object>(matrix);
+	public static final SynchronizedGenericMatrix<?> synchronizedMatrix(Matrix matrix) {
+		return new SynchronizedGenericMatrix<Object>(matrix);
 	}
 
 	public static final DoubleMatrix linkToBinaryFile(String filename, int rowCount, int columnCount) {

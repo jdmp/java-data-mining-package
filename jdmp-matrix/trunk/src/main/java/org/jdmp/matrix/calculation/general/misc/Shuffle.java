@@ -28,11 +28,11 @@ import java.util.Collections;
 import java.util.List;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.calculation.ObjectCalculation;
+import org.jdmp.matrix.calculation.AbstractObjectCalculation;
 import org.jdmp.matrix.exceptions.MatrixException;
 
 
-public class Shuffle extends ObjectCalculation {
+public class Shuffle extends AbstractObjectCalculation {
   private static final long serialVersionUID = -6935375114060680121L;
 
   private Matrix selection = null;

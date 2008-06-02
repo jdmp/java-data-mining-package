@@ -26,11 +26,11 @@ package org.jdmp.matrix.calculation.general.statistical;
 import java.util.logging.Level;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.calculation.DoubleCalculation;
+import org.jdmp.matrix.calculation.AbstractDoubleCalculation;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.MathUtil;
 
-public class Cov extends DoubleCalculation {
+public class Cov extends AbstractDoubleCalculation {
 	private static final long serialVersionUID = -2100820298353936855L;
 
 	private Matrix mean = null;

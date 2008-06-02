@@ -29,11 +29,11 @@ import java.util.List;
 import java.util.Set;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.calculation.ObjectCalculation;
+import org.jdmp.matrix.calculation.AbstractObjectCalculation;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.MathUtil;
 
-public class DiscretizeToColumns extends ObjectCalculation {
+public class DiscretizeToColumns extends AbstractObjectCalculation {
 	private static final long serialVersionUID = -3606534079672701424L;
 
 	private long column = 0;

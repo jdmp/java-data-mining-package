@@ -28,10 +28,10 @@ import java.util.regex.Pattern;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.Matrix.EntryType;
-import org.jdmp.matrix.calculation.StringCalculation;
+import org.jdmp.matrix.calculation.AbstractStringCalculation;
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public class ReplaceRegex extends StringCalculation {
+public class ReplaceRegex extends AbstractStringCalculation {
 	private static final long serialVersionUID = 8158807887609103123L;
 
 	private Pattern searchPattern = null;

@@ -25,7 +25,7 @@ import org.jdmp.matrix.calculation.general.statistical.IndexOfMax;
 import org.jdmp.matrix.collections.DefaultMatrixList;
 import org.jdmp.matrix.collections.MatrixList;
 import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.implementations.basic.CalculationMatrix;
+import org.jdmp.matrix.implementations.basic.GenericCalculationMatrix;
 import org.jdmp.matrix.util.MathUtil;
 
 public class ClassificationDataSet extends RegressionDataSet {
@@ -125,7 +125,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 
 	public Matrix getDesiredClassMatrix() {
 		if (desiredClassMatrix == null) {
-			desiredClassMatrix = new CalculationMatrix(new IndexOfMax(COLUMN, getDesiredOutputMatrix()));
+			desiredClassMatrix = new GenericCalculationMatrix(new IndexOfMax(COLUMN, getDesiredOutputMatrix()));
 			desiredClassMatrix.setLabel("Desired Class");
 		}
 		return desiredClassMatrix;

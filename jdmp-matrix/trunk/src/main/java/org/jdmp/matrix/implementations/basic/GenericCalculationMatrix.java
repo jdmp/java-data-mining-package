@@ -27,12 +27,12 @@ import org.jdmp.matrix.calculation.AbstractCalculation;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.stubs.AbstractGenericMatrix;
 
-public class CalculationMatrix<A> extends AbstractGenericMatrix<A> {
+public class GenericCalculationMatrix<A> extends AbstractGenericMatrix<A> {
 	private static final long serialVersionUID = -8345796002435936888L;
 
 	private AbstractCalculation calculation = null;
 
-	public CalculationMatrix(AbstractCalculation calculation) {
+	public GenericCalculationMatrix(AbstractCalculation calculation) {
 		this.calculation = calculation;
 		setAnnotation(calculation.getAnnotation());
 	}

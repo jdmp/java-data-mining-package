@@ -26,13 +26,13 @@ package org.jdmp.matrix.calculation.basic;
 import java.util.logging.Level;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.calculation.DoubleCalculation;
+import org.jdmp.matrix.calculation.AbstractDoubleCalculation;
 import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.implementations.basic.DefaultDenseDoubleMatrix2D;
 import org.jdmp.matrix.util.MathUtil;
 
-public class Mtimes extends DoubleCalculation {
+public class Mtimes extends AbstractDoubleCalculation {
 	private static final long serialVersionUID = 4170937261358240120L;
 
 	private boolean ignoreNaN = false;

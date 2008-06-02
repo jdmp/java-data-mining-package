@@ -30,12 +30,12 @@ import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.HasSourceMatrix;
 import org.jdmp.matrix.stubs.AbstractGenericMatrix;
 
-public class SynchronizedMatrix<A> extends AbstractGenericMatrix<A> implements HasSourceMatrix {
+public class SynchronizedGenericMatrix<A> extends AbstractGenericMatrix<A> implements HasSourceMatrix {
 	private static final long serialVersionUID = -4456493053286654056L;
 
 	private Matrix matrix = null;
 
-	public SynchronizedMatrix(Matrix source) {
+	public SynchronizedGenericMatrix(Matrix source) {
 		this.matrix = source;
 		setAnnotation(source.getAnnotation());
 	}

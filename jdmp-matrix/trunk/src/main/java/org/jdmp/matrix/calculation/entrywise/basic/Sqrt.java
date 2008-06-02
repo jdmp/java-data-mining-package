@@ -25,10 +25,10 @@ package org.jdmp.matrix.calculation.entrywise.basic;
 
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
-import org.jdmp.matrix.calculation.DoubleCalculation;
+import org.jdmp.matrix.calculation.AbstractDoubleCalculation;
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public class Sqrt extends DoubleCalculation {
+public class Sqrt extends AbstractDoubleCalculation {
 	private static final long serialVersionUID = -8139556053923421840L;
 
 	public Sqrt(Matrix matrix) {

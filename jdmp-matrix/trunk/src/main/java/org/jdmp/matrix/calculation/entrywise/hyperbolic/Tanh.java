@@ -25,10 +25,10 @@ package org.jdmp.matrix.calculation.entrywise.hyperbolic;
 
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
-import org.jdmp.matrix.calculation.DoubleCalculation;
+import org.jdmp.matrix.calculation.AbstractDoubleCalculation;
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public class Tanh extends DoubleCalculation {
+public class Tanh extends AbstractDoubleCalculation {
 	private static final long serialVersionUID = -3681404429953396643L;
 
 	public Tanh(Matrix matrix) {

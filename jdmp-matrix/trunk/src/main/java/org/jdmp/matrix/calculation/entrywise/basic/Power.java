@@ -25,10 +25,10 @@ package org.jdmp.matrix.calculation.entrywise.basic;
 
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
-import org.jdmp.matrix.calculation.DoubleCalculation;
+import org.jdmp.matrix.calculation.AbstractDoubleCalculation;
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public class Power extends DoubleCalculation {
+public class Power extends AbstractDoubleCalculation {
 	private static final long serialVersionUID = -6766560469728046231L;
 
 	public Power(Matrix matrix, Matrix power) {

@@ -24,11 +24,11 @@
 package org.jdmp.matrix.calculation.general.missingvalues;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.calculation.DoubleCalculation;
+import org.jdmp.matrix.calculation.AbstractDoubleCalculation;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.MathUtil;
 
-public class ImputeZero extends DoubleCalculation {
+public class ImputeZero extends AbstractDoubleCalculation {
 	private static final long serialVersionUID = 7347927669886417833L;
 
 	public ImputeZero(Matrix matrix) {

@@ -30,13 +30,13 @@ import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.MathUtil;
 
-public abstract class StringCalculation extends AbstractCalculation {
+public abstract class AbstractStringCalculation extends AbstractCalculation {
 
-	public StringCalculation(Matrix... sources) {
+	public AbstractStringCalculation(Matrix... sources) {
 		super(sources);
 	}
 
-	public StringCalculation(int dimension, Matrix... sources) {
+	public AbstractStringCalculation(int dimension, Matrix... sources) {
 		super(dimension, sources);
 	}
 

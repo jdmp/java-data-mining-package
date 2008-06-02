@@ -24,12 +24,12 @@
 package org.jdmp.matrix.calculation.general.solving;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.calculation.DoubleCalculation;
+import org.jdmp.matrix.calculation.AbstractDoubleCalculation;
 import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.JDMPSettings;
 
-public class Pinv extends DoubleCalculation {
+public class Pinv extends AbstractDoubleCalculation {
 	private static final long serialVersionUID = 7886298456216056038L;
 
 	private Matrix pinv = null;

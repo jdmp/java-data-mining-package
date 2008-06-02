@@ -25,10 +25,10 @@ package org.jdmp.matrix.calculation.entrywise.trigonometric;
 
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
-import org.jdmp.matrix.calculation.DoubleCalculation;
+import org.jdmp.matrix.calculation.AbstractDoubleCalculation;
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public class Sin extends DoubleCalculation {
+public class Sin extends AbstractDoubleCalculation {
 	private static final long serialVersionUID = -8127064720590287207L;
 
 	public Sin(Matrix matrix) {

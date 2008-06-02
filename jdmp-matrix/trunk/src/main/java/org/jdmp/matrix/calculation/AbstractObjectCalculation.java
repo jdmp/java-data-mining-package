@@ -31,13 +31,13 @@ import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.MathUtil;
 import org.jdmp.matrix.util.StringUtil;
 
-public abstract class ObjectCalculation extends AbstractCalculation {
+public abstract class AbstractObjectCalculation extends AbstractCalculation {
 
-	public ObjectCalculation(Matrix... sources) {
+	public AbstractObjectCalculation(Matrix... sources) {
 		super(sources);
 	}
 
-	public ObjectCalculation(int dimension, Matrix... sources) {
+	public AbstractObjectCalculation(int dimension, Matrix... sources) {
 		super(dimension, sources);
 	}
 

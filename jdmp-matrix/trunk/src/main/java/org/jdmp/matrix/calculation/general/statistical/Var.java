@@ -24,13 +24,13 @@
 package org.jdmp.matrix.calculation.general.statistical;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.calculation.DoubleCalculation;
+import org.jdmp.matrix.calculation.AbstractDoubleCalculation;
 import org.jdmp.matrix.calculation.general.missingvalues.CountMissing;
 import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.MathUtil;
 
-public class Var extends DoubleCalculation {
+public class Var extends AbstractDoubleCalculation {
 	private static final long serialVersionUID = -6376910948253374396L;
 
 	private Matrix mean = null;

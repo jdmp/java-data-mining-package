@@ -31,16 +31,16 @@ import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.stubs.AbstractMapToTiledMatrix2DWrapper;
 
-public class DefaultTiledObjectMatrix2D<A> extends AbstractMapToTiledMatrix2DWrapper<A> {
+public class DefaultTiledGenericMatrix2D<A> extends AbstractMapToTiledMatrix2DWrapper<A> {
 	private static final long serialVersionUID = 6745798685307431625L;
 
 	private Map<Coordinates, GenericMatrix<A>> values = null;
 
-	public DefaultTiledObjectMatrix2D(long... size) {
+	public DefaultTiledGenericMatrix2D(long... size) {
 		super(size);
 	}
 
-	public DefaultTiledObjectMatrix2D(Matrix source) {
+	public DefaultTiledGenericMatrix2D(Matrix source) {
 		super(source);
 	}
 

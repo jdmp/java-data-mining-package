@@ -25,11 +25,11 @@ package org.jdmp.matrix.calculation.basic;
 
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
-import org.jdmp.matrix.calculation.DoubleCalculation;
+import org.jdmp.matrix.calculation.AbstractDoubleCalculation;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.MathUtil;
 
-public class Plus extends DoubleCalculation {
+public class Plus extends AbstractDoubleCalculation {
 	private static final long serialVersionUID = -2670849261944345597L;
 
 	private boolean ignoreNaN = false;

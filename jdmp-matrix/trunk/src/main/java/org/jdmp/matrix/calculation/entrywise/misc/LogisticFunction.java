@@ -24,10 +24,10 @@
 package org.jdmp.matrix.calculation.entrywise.misc;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.calculation.DoubleCalculation;
+import org.jdmp.matrix.calculation.AbstractDoubleCalculation;
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public class LogisticFunction extends DoubleCalculation {
+public class LogisticFunction extends AbstractDoubleCalculation {
 	private static final long serialVersionUID = -82780095324379021L;
 
 	public LogisticFunction(Matrix matrix) {

@@ -26,12 +26,12 @@ package org.jdmp.matrix.calculation.general.solving;
 import java.lang.reflect.Constructor;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.calculation.DoubleCalculation;
+import org.jdmp.matrix.calculation.AbstractDoubleCalculation;
 import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.implementations.misc.CommonsMathRealMatrix;
 
-public class Inv extends DoubleCalculation {
+public class Inv extends AbstractDoubleCalculation {
 	private static final long serialVersionUID = 7886298456216056038L;
 
 	private Matrix inv = null;

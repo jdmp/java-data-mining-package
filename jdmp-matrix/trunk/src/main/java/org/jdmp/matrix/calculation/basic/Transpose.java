@@ -27,11 +27,11 @@ import java.util.Iterator;
 
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
-import org.jdmp.matrix.calculation.DoubleCalculation;
+import org.jdmp.matrix.calculation.AbstractDoubleCalculation;
 import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public class Transpose extends DoubleCalculation {
+public class Transpose extends AbstractDoubleCalculation {
 	private static final long serialVersionUID = -2749226948849267413L;
 
 	private int swap1 = ROW;

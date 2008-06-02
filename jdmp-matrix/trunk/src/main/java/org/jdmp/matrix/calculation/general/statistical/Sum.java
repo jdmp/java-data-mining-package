@@ -24,11 +24,11 @@
 package org.jdmp.matrix.calculation.general.statistical;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.calculation.DoubleCalculation;
+import org.jdmp.matrix.calculation.AbstractDoubleCalculation;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.MathUtil;
 
-public class Sum extends DoubleCalculation {
+public class Sum extends AbstractDoubleCalculation {
 	private static final long serialVersionUID = 1070433312716157660L;
 
 	boolean ignoreNaN = false;

@@ -26,10 +26,10 @@ package org.jdmp.matrix.calculation.entrywise.creators;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.Matrix.EntryType;
-import org.jdmp.matrix.calculation.ObjectCalculation;
+import org.jdmp.matrix.calculation.AbstractObjectCalculation;
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public class Fill extends ObjectCalculation {
+public class Fill extends AbstractObjectCalculation {
 	private static final long serialVersionUID = -3477957135967841340L;
 
 	private Object fill = null;

@@ -61,7 +61,7 @@ import org.jdmp.matrix.calculation.general.statistical.Sum;
 import org.jdmp.matrix.coordinates.CoordinateIterator2D;
 import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.implementations.basic.CalculationMatrix;
+import org.jdmp.matrix.implementations.basic.GenericCalculationMatrix;
 
 public abstract class AbstractCalculation implements Calculation {
 
@@ -117,7 +117,7 @@ public abstract class AbstractCalculation implements Calculation {
 	}
 
 	public final Matrix calcLink() {
-		return new CalculationMatrix(this);
+		return new GenericCalculationMatrix(this);
 	}
 
 	public static Matrix calc(Calc calculation, Ret returnType, int dimension, Matrix source0,

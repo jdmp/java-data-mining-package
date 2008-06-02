@@ -25,10 +25,10 @@ package org.jdmp.matrix.calculation.entrywise.rounding;
 
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
-import org.jdmp.matrix.calculation.DoubleCalculation;
+import org.jdmp.matrix.calculation.AbstractDoubleCalculation;
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public class Round extends DoubleCalculation {
+public class Round extends AbstractDoubleCalculation {
 	private static final long serialVersionUID = -5038322249059783563L;
 
 	public Round(Matrix matrix) {

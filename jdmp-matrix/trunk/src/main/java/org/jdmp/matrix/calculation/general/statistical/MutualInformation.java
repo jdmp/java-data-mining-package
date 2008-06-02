@@ -27,11 +27,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.calculation.DoubleCalculation;
+import org.jdmp.matrix.calculation.AbstractDoubleCalculation;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.MathUtil;
 
-public class MutualInformation extends DoubleCalculation {
+public class MutualInformation extends AbstractDoubleCalculation {
 	private static final long serialVersionUID = -4891250637894943873L;
 
 	public MutualInformation(Matrix matrix) {

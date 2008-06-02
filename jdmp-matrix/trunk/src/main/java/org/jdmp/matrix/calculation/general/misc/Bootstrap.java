@@ -27,11 +27,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.calculation.ObjectCalculation;
+import org.jdmp.matrix.calculation.AbstractObjectCalculation;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.MathUtil;
 
-public class Bootstrap extends ObjectCalculation {
+public class Bootstrap extends AbstractObjectCalculation {
 	private static final long serialVersionUID = -5084329826465538416L;
 
 	private int count = 0;

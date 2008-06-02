@@ -24,12 +24,12 @@
 package org.jdmp.matrix.calculation.general.missingvalues;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.calculation.DoubleCalculation;
+import org.jdmp.matrix.calculation.AbstractDoubleCalculation;
 import org.jdmp.matrix.calculation.general.statistical.Mean;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.MathUtil;
 
-public class ImputeMean extends DoubleCalculation {
+public class ImputeMean extends AbstractDoubleCalculation {
 	private static final long serialVersionUID = -3749987323095497386L;
 
 	private Matrix mean = null;

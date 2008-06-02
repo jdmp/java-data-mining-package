@@ -25,10 +25,10 @@ package org.jdmp.matrix.calculation.entrywise.hyperbolic;
 
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
-import org.jdmp.matrix.calculation.DoubleCalculation;
+import org.jdmp.matrix.calculation.AbstractDoubleCalculation;
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public class Sinh extends DoubleCalculation {
+public class Sinh extends AbstractDoubleCalculation {
 	private static final long serialVersionUID = 2083545526665186477L;
 
 	public Sinh(Matrix matrix) {
