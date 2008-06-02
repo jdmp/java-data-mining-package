@@ -118,7 +118,7 @@ public class AlgorithmWekaClassifier extends AlgorithmClassifier {
 		probabilities = wekaClassifier.distributionForInstance(instance);
 		double[][] v = new double[1][];
 		v[0] = probabilities;
-		Matrix output = MatrixFactory.fromArray(v);
+		Matrix output = MatrixFactory.linkToArray(v);
 		return output;
 	}
 

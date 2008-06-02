@@ -48,15 +48,15 @@ public class AlgorithmAllWekaClassifiers extends AlgorithmClassifier {
 						errorCount++;
 					}
 				}
-				Matrix outputError = MatrixFactory.fromValue(error / dataSet.getSampleCount());
+				Matrix outputError = MatrixFactory.linkToValue(error / dataSet.getSampleCount());
 				outputError.setLabel("Output Error with " + a.getLabel());
 				dataSet.appendRMSEMatrix(outputError);
 				confusion.setLabel("Confusion with " + a.getLabel());
 				dataSet.appendConfusionMatrix(confusion);
-				Matrix accuracy = MatrixFactory.fromValue((double) correctCount / (double) dataSet.getSampleCount());
+				Matrix accuracy = MatrixFactory.linkToValue((double) correctCount / (double) dataSet.getSampleCount());
 				accuracy.setLabel("Accuracy with " + a.getLabel());
 				dataSet.appendAccuracyMatrix(accuracy);
-				Matrix errorMatrix = MatrixFactory.fromValue((double) errorCount);
+				Matrix errorMatrix = MatrixFactory.linkToValue((double) errorCount);
 				errorMatrix.setLabel("Errors with " + a.getLabel());
 				dataSet.appendErrorCountMatrix(errorMatrix);
 			}

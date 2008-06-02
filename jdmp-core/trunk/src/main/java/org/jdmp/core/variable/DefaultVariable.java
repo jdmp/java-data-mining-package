@@ -46,7 +46,7 @@ public class DefaultVariable extends Variable {
 	public DefaultVariable(String label, double value) {
 		this();
 		setLabel(label);
-		addMatrix(MatrixFactory.fromValue(value));
+		addMatrix(MatrixFactory.linkToValue(value));
 	}
 
 	public DefaultVariable(String label, int memorySize) {

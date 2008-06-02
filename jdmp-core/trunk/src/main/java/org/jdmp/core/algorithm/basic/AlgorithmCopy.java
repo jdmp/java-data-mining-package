@@ -24,7 +24,7 @@ public class AlgorithmCopy extends AlgorithmOneSource {
 		}
 
 		Matrix source = input.get(SOURCE);
-		Matrix target = MatrixFactory.copyOf(source);
+		Matrix target = MatrixFactory.copyFromMatrix(source);
 
 		result.add(target);
 

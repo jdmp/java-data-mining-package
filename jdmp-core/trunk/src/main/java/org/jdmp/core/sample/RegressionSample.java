@@ -44,7 +44,7 @@ public class RegressionSample extends WeightedSample {
 
 		getDesiredOutputVariable().setMemorySize(1);
 		getDesiredOutputVariable().setSize(1, 1);
-		getDesiredOutputVariable().addMatrix(MatrixFactory.fromValue(Double.parseDouble(fields[classPos])));
+		getDesiredOutputVariable().addMatrix(MatrixFactory.linkToValue(Double.parseDouble(fields[classPos])));
 
 		Matrix m = MatrixFactory.zeros(getInputVariable().getRowCount(), 1);
 		for (int i = 0; i < getInputVariable().getRowCount(); i++) {

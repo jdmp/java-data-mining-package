@@ -42,7 +42,7 @@ public class ReplicatedVariable extends Variable {
 
 	public ReplicatedVariable(String label, double value) {
 		this(label, 1, 1, 1);
-		addMatrix(MatrixFactory.fromValue(value));
+		addMatrix(MatrixFactory.linkToValue(value));
 	}
 
 	public ReplicatedVariable(String label, long rows, long columns) {

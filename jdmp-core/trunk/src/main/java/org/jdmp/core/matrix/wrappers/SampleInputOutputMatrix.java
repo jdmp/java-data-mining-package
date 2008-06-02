@@ -18,12 +18,12 @@ public class SampleInputOutputMatrix extends AbstractDenseDoubleMatrix2D impleme
 
 	public Matrix getInputMatrix() {
 		Matrix m = sample.getInputVariable().getMatrix();
-		return (m == null) ? MatrixFactory.fromValue(0) : m;
+		return (m == null) ? MatrixFactory.linkToValue(0) : m;
 	}
 
 	public Matrix getDesiredOutputMatrix() {
 		Matrix m = sample.getDesiredOutputVariable().getMatrix();
-		return (m == null) ? MatrixFactory.fromValue(0) : m;
+		return (m == null) ? MatrixFactory.linkToValue(0) : m;
 	}
 
 	public long[] getSize() {

@@ -37,7 +37,7 @@ public class AlgorithmAddMissingValues extends AlgorithmTwoSources {
 		Matrix source = matrices.get(SOURCE);
 		Matrix probability = matrices.get(PROBABILITY);
 
-		Matrix target = MatrixFactory.copyOf(source);
+		Matrix target = MatrixFactory.copyFromMatrix(source);
 		AlgorithmAddMissingValues.replace(target, probability.getEuklideanValue());
 
 		result.add(target);

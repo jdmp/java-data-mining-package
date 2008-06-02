@@ -232,7 +232,7 @@ public abstract class Variable extends AbstractGUIObject implements HasMatrix, H
 	}
 
 	public final void setValue(double value) {
-		Matrix m = MatrixFactory.fromValue(value);
+		Matrix m = MatrixFactory.linkToValue(value);
 		addMatrix(m);
 	}
 

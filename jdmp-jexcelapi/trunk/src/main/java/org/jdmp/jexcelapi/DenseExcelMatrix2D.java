@@ -162,7 +162,7 @@ public class DenseExcelMatrix2D extends AbstractDenseObjectMatrix2D implements C
 		s.writeObject(file);
 		s.writeObject(offset);
 		s.writeObject(size);
-		s.writeObject(MatrixFactory.copyOf(this));
+		s.writeObject(MatrixFactory.copyFromMatrix(this));
 	}
 
 	class ExcelAnnotation implements Annotation {

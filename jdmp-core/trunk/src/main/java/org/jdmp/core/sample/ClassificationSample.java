@@ -46,12 +46,12 @@ public class ClassificationSample extends RegressionSample {
 	}
 
 	public void setClassID(int classID) {
-		Matrix m = MatrixFactory.fromValue(classID);
+		Matrix m = MatrixFactory.linkToValue(classID);
 		// setMatrixForType(VariableType.OUTPUTCLASS, m);
 	}
 
 	public void setClassID(int classID, String label) {
-		Matrix m = MatrixFactory.fromValue(classID);
+		Matrix m = MatrixFactory.linkToValue(classID);
 		m.setLabel(label);
 		// setMatrixForType(VariableType.OUTPUTCLASS, m);
 	}

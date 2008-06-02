@@ -33,7 +33,7 @@ public class WeightedSample extends BasicSample {
 	}
 
 	public void setWeight(double weight) {
-		Matrix m = MatrixFactory.fromValue(weight);
+		Matrix m = MatrixFactory.linkToValue(weight);
 		getWeightVariable().addMatrix(m);
 	}
 

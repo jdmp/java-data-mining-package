@@ -35,7 +35,7 @@ import org.jdmp.matrix.collections.DefaultMatrixList;
 import org.jdmp.matrix.collections.MatrixList;
 import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.implementations.basic.DefaultSparseObjectMatrix;
+import org.jdmp.matrix.implementations.basic.DefaultSparseGenericMatrix;
 import org.jdmp.matrix.interfaces.HasSourceMatrix;
 import org.jdmp.matrix.stubs.AbstractObjectMatrix;
 
@@ -108,7 +108,7 @@ public class BufferedObjectMatrix extends AbstractObjectMatrix implements Flusha
 		if (numElements < 1) {
 			inputBuffer = new VolatileSparseObjectMatrix(original.getSize());
 		} else {
-			inputBuffer = new DefaultSparseObjectMatrix(numElements, original.getSize());
+			inputBuffer = new DefaultSparseGenericMatrix(numElements, original.getSize());
 		}
 	}
 

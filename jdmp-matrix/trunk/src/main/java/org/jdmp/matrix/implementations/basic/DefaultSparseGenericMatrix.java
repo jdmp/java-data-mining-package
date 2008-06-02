@@ -31,39 +31,35 @@ import org.jdmp.matrix.coordinates.CoordinateIterator2D;
 import org.jdmp.matrix.coordinates.CoordinateSetToLongWrapper;
 import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.stubs.AbstractSparseObjectMatrix;
+import org.jdmp.matrix.stubs.AbstractSparseGenericMatrix;
+import org.jdmp.matrix.util.MathUtil;
 
-public class DefaultSparseObjectMatrix extends AbstractSparseObjectMatrix {
+public class DefaultSparseGenericMatrix<A> extends AbstractSparseGenericMatrix<A> {
 	private static final long serialVersionUID = -7139128532871448340L;
 
-	private Map<Coordinates, Object> values = new HashMap<Coordinates, Object>();
+	private Map<Coordinates, A> values = new HashMap<Coordinates, A>();
 
 	private long[] size = null;
 
 	private int maximumNumberOfEntries = -1;
 
-	private double defaultValue = 0.0;
-
-	public DefaultSparseObjectMatrix(Matrix m) throws MatrixException {
-		this.size = Coordinates.copyOf(m.getSize());
-		for (long[] c : m.allCoordinates()) {
-			setDouble(m.getDouble(c), c);
-		}
+	public DefaultSparseGenericMatrix(Matrix m) throws MatrixException {
+		this(m, -1);
 	}
 
-	public DefaultSparseObjectMatrix(Matrix m, int maximumNumberOfEntries) throws MatrixException {
+	public DefaultSparseGenericMatrix(Matrix m, int maximumNumberOfEntries) throws MatrixException {
 		this.size = Coordinates.copyOf(m.getSize());
 		this.maximumNumberOfEntries = maximumNumberOfEntries;
 		for (long[] c : m.allCoordinates()) {
-			setDouble(m.getDouble(c), c);
+			setObject(m.getObject(c), c);
 		}
 	}
 
-	public DefaultSparseObjectMatrix(long... size) {
+	public DefaultSparseGenericMatrix(long... size) {
 		this.size = Coordinates.copyOf(size);
 	}
 
-	public DefaultSparseObjectMatrix(int maximumNumberOfEntries, long... size) {
+	public DefaultSparseGenericMatrix(int maximumNumberOfEntries, long... size) {
 		this.size = Coordinates.copyOf(size);
 		this.maximumNumberOfEntries = maximumNumberOfEntries;
 	}
@@ -71,12 +67,12 @@ public class DefaultSparseObjectMatrix extends AbstractSparseObjectMatrix {
 	public long[] getSize() {
 		return size;
 	}
-	
-	public void setSize(long...size) {
-      this.size = size;
-    }
 
-	public Object getObject(long... coordinates) {
+	public void setSize(long... size) {
+		this.size = size;
+	}
+
+	public A getObject(long... coordinates) {
 		return values.get(new Coordinates(coordinates));
 	}
 
@@ -89,7 +85,7 @@ public class DefaultSparseObjectMatrix extends AbstractSparseObjectMatrix {
 			values.remove(values.keySet().iterator().next());
 		}
 		if (Coordinates.isSmallerThan(coordinates, size)) {
-			values.put(new Coordinates(coordinates), value);
+			values.put(new Coordinates(coordinates), (A) value);
 		}
 	}
 
@@ -103,6 +99,18 @@ public class DefaultSparseObjectMatrix extends AbstractSparseObjectMatrix {
 
 	public boolean contains(long... coordinates) {
 		return values.containsKey(new Coordinates(coordinates));
+	}
+
+	public double getDouble(long... coordinates) throws MatrixException {
+		return MathUtil.getDouble(getObject(coordinates));
+	}
+
+	public void setDouble(double value, long... coordinates) throws MatrixException {
+		setObject(value, coordinates);
+	}
+
+	public EntryType getEntryType() {
+		return EntryType.GENERIC;
 	}
 
 }

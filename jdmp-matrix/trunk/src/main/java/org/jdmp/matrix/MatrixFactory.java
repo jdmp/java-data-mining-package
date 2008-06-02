@@ -50,7 +50,7 @@ import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.implementations.basic.DefaultDenseDoubleMatrix2D;
 import org.jdmp.matrix.implementations.basic.DefaultDenseObjectMatrix2D;
 import org.jdmp.matrix.implementations.basic.DefaultDenseStringMatrix2D;
-import org.jdmp.matrix.implementations.basic.DefaultSparseObjectMatrix;
+import org.jdmp.matrix.implementations.basic.DefaultSparseGenericMatrix;
 import org.jdmp.matrix.implementations.basic.SynchronizedGenericMatrix;
 import org.jdmp.matrix.implementations.collections.DefaultListMatrix;
 import org.jdmp.matrix.implementations.collections.DefaultMapMatrix;
@@ -93,9 +93,9 @@ public abstract class MatrixFactory {
 
 	private static String denseStringMatrix2DClassName = DefaultDenseStringMatrix2D.class.getName();
 
-	private static String sparseDoubleMatrix2DClassName = DefaultSparseObjectMatrix.class.getName();
+	private static String sparseDoubleMatrix2DClassName = DefaultSparseGenericMatrix.class.getName();
 
-	private static String sparseObjectMatrix2DClassName = DefaultSparseObjectMatrix.class.getName();
+	private static String sparseObjectMatrix2DClassName = DefaultSparseGenericMatrix.class.getName();
 
 	private static Constructor<? extends Matrix> denseDoubleMatrix2DConstructor = null;
 
@@ -158,7 +158,7 @@ public abstract class MatrixFactory {
 				logger
 						.log(Level.INFO,
 								"To speed up Matrix calculations, you should add jdmp-mtj to the classpath.");
-				sparseDoubleMatrix2DClass = DefaultSparseObjectMatrix.class;
+				sparseDoubleMatrix2DClass = DefaultSparseGenericMatrix.class;
 			}
 			Class<?> p = null;
 			// TODO: this should be solved in a more efficient way
@@ -189,7 +189,7 @@ public abstract class MatrixFactory {
 	}
 
 	public static final Matrix concat(int dimension, Matrix... matrices) throws MatrixException {
-		Matrix result = MatrixFactory.copyOf(AnnotationTransfer.COPY, matrices[0]);
+		Matrix result = MatrixFactory.copyFromMatrix(AnnotationTransfer.COPY, matrices[0]);
 		for (int i = 1; i < matrices.length; i++) {
 			result = result.append(dimension, matrices[i]);
 		}
@@ -199,14 +199,14 @@ public abstract class MatrixFactory {
 	public static final Matrix concat(int dimension, Collection<Matrix> matrices)
 			throws MatrixException {
 		List<Matrix> list = new ArrayList<Matrix>(matrices);
-		Matrix result = MatrixFactory.copyOf(AnnotationTransfer.COPY, list.get(0));
+		Matrix result = MatrixFactory.copyFromMatrix(AnnotationTransfer.COPY, list.get(0));
 		for (int i = 1; i < matrices.size(); i++) {
 			result = result.append(dimension, list.get(i));
 		}
 		return result;
 	}
 
-	public static final Matrix copyFromArray(double[]... values) {
+	public static final Matrix importFromArray(double[]... values) {
 		int rows = values.length;
 		int columns = 0;
 		for (int i = values.length - 1; i >= 0; i--) {
@@ -221,30 +221,30 @@ public abstract class MatrixFactory {
 		return m;
 	}
 
-	public static final DefaultDenseDoubleMatrix2D fromArray(double[]... values) {
+	public static final DefaultDenseDoubleMatrix2D linkToArray(double[]... values) {
 		return new DefaultDenseDoubleMatrix2D(values);
 	}
 
-	public static final DefaultDenseDoubleMatrix2D fromArray(double... values) {
+	public static final DefaultDenseDoubleMatrix2D linkToArray(double... values) {
 		return new DefaultDenseDoubleMatrix2D(values);
 	}
 
-	public static final DefaultDenseDoubleMatrix2D fromArray(int[]... values) {
+	public static final DefaultDenseDoubleMatrix2D linkToArray(int[]... values) {
 		double[][] doubleValues = MathUtil.toDoubleArray(values);
 		return new DefaultDenseDoubleMatrix2D(doubleValues);
 	}
 
-	public static final DefaultDenseDoubleMatrix2D fromArray(int... values) {
+	public static final DefaultDenseDoubleMatrix2D linkToArray(int... values) {
 		double[] doubleValues = MathUtil.toDoubleArray(values);
 		return new DefaultDenseDoubleMatrix2D(doubleValues);
 	}
 
-	public static final Matrix copyOf(AnnotationTransfer annotationTransfer, Matrix matrix)
+	public static final Matrix copyFromMatrix(AnnotationTransfer annotationTransfer, Matrix matrix)
 			throws MatrixException {
 		return Convert.calcNew(annotationTransfer, matrix);
 	}
 
-	public static final Matrix copyOf(Matrix matrix) throws MatrixException {
+	public static final Matrix copyFromMatrix(Matrix matrix) throws MatrixException {
 		return Convert.calcNew(AnnotationTransfer.LINK, matrix);
 	}
 
@@ -264,7 +264,7 @@ public abstract class MatrixFactory {
 		return Rand.calc(entryType, size);
 	}
 
-	public static final Matrix copyOf(EntryType newEntryType,
+	public static final Matrix copyFromMatrix(EntryType newEntryType,
 			AnnotationTransfer annotationTransfer, Matrix matrix) throws MatrixException {
 		return Convert.calcNew(newEntryType, annotationTransfer, matrix);
 	}
@@ -298,7 +298,7 @@ public abstract class MatrixFactory {
 		}
 	}
 
-	public static final DefaultDenseDoubleMatrix2D fromValue(double value) {
+	public static final DefaultDenseDoubleMatrix2D linkToValue(double value) {
 		return new DefaultDenseDoubleMatrix2D(new double[][] { { value } });
 	}
 
@@ -348,7 +348,7 @@ public abstract class MatrixFactory {
 		return matrix;
 	}
 
-	public static final DefaultDenseObjectMatrix2D fromArray(Object[]... valueList) {
+	public static final DefaultDenseObjectMatrix2D linkToArray(Object[]... valueList) {
 		return new DefaultDenseObjectMatrix2D(valueList);
 	}
 
@@ -357,24 +357,24 @@ public abstract class MatrixFactory {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static final DefaultMapMatrix fromMap(Map map) {
+	public static final DefaultMapMatrix linkToMap(Map map) {
 		return new DefaultMapMatrix(map);
 	}
 
-	public static final DefaultListMatrix<Object> fromArray(Object... objects) {
+	public static final DefaultListMatrix<Object> linkToArray(Object... objects) {
 		return new DefaultListMatrix<Object>(objects);
 	}
 
 	@SuppressWarnings("unchecked")
-	public static final DefaultListMatrix fromCollection(Collection list) {
+	public static final DefaultListMatrix linkToCollection(Collection list) {
 		return new DefaultListMatrix<Object>(list);
 	}
 
-	public static Matrix fromString(String string, Object... parameters) {
+	public static Matrix importFromString(String string, Object... parameters) {
 		return ImportMatrix.fromString(string, parameters);
 	}
 
-	public static Matrix fromString(Format format, String string, Object... parameters)
+	public static Matrix importFromString(Format format, String string, Object... parameters)
 			throws MatrixException {
 		return ImportMatrix.fromString(format, string, parameters);
 	}
@@ -491,7 +491,7 @@ public abstract class MatrixFactory {
 		} catch (Exception ex) {
 			s = ex.toString();
 		}
-		return fromString(format, s, parameters);
+		return importFromString(format, s, parameters);
 	}
 
 }

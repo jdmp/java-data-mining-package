@@ -27,7 +27,7 @@ public class AlgorithmGauss extends AlgorithmOneSource {
 			return result;
 		}
 
-		Matrix in = MatrixFactory.copyOf(input.get(SOURCE));
+		Matrix in = MatrixFactory.copyFromMatrix(input.get(SOURCE));
 		for (long[] c : in.allCoordinates()) {
 			in.setDouble(getProbability(in.getDouble(c)), c);
 		}

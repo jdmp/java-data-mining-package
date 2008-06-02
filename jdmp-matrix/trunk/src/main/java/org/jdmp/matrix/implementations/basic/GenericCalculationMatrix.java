@@ -30,9 +30,9 @@ import org.jdmp.matrix.stubs.AbstractGenericMatrix;
 public class GenericCalculationMatrix<A> extends AbstractGenericMatrix<A> {
 	private static final long serialVersionUID = -8345796002435936888L;
 
-	private AbstractGenericCalculation calculation = null;
+	private AbstractGenericCalculation<A> calculation = null;
 
-	public GenericCalculationMatrix(AbstractGenericCalculation calculation) {
+	public GenericCalculationMatrix(AbstractGenericCalculation<A> calculation) {
 		this.calculation = calculation;
 		setAnnotation(calculation.getAnnotation());
 	}

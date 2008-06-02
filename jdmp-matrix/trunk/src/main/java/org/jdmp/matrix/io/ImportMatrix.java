@@ -41,7 +41,7 @@ public abstract class ImportMatrix {
 	public static Matrix fromFile(Format format, File file, Object... parameters)
 			throws MatrixException, IOException {
 		try {
-			Class<?> c = Class.forName("org.jdmp.matrix.io.Import" + format.name());
+			Class<?> c = Class.forName("org.jdmp.matrix.io.ImportMatrix" + format.name());
 			Method m = c.getMethod("fromFile", new Class<?>[] { File.class, Object[].class });
 			Matrix matrix=(Matrix)m.invoke(null, file,parameters);
 			return matrix;

@@ -38,7 +38,7 @@ public abstract class AlgorithmRegression extends Algorithm {
 		sample.setOutputMatrix(output);
 		List<Matrix> error = getOutputErrorAlgorithm().calculate(output, sample.getDesiredOutputMatrix());
 		sample.setOutputErrorMatrix(error.get(0));
-		sample.setRMSEMatrix(MatrixFactory.fromValue(error.get(0).getRMS()));
+		sample.setRMSEMatrix(MatrixFactory.linkToValue(error.get(0).getRMS()));
 	}
 
 	public final Matrix predict(Matrix input) throws Exception {
@@ -46,7 +46,7 @@ public abstract class AlgorithmRegression extends Algorithm {
 	}
 
 	public final void train(Matrix input, Matrix desiredOutput) throws Exception {
-		train(input, MatrixFactory.fromValue(1.0), desiredOutput);
+		train(input, MatrixFactory.linkToValue(1.0), desiredOutput);
 	}
 
 	public abstract Matrix predict(Matrix input, Matrix sampleWeight) throws Exception;
@@ -115,7 +115,7 @@ public abstract class AlgorithmRegression extends Algorithm {
 
 		}
 
-		Matrix outputError = MatrixFactory.fromValue(Math.sqrt(error / dataSet.getSampleCount()));
+		Matrix outputError = MatrixFactory.linkToValue(Math.sqrt(error / dataSet.getSampleCount()));
 		outputError.setLabel("Output Error with " + getLabel());
 		dataSet.appendRMSEMatrix(outputError);
 
@@ -123,11 +123,11 @@ public abstract class AlgorithmRegression extends Algorithm {
 			confusion.setLabel("Confusion with " + getLabel());
 			((ClassificationDataSet) dataSet).appendConfusionMatrix(confusion);
 
-			Matrix accuracy = MatrixFactory.fromValue((double) correctCount / (double) dataSet.getSampleCount());
+			Matrix accuracy = MatrixFactory.linkToValue((double) correctCount / (double) dataSet.getSampleCount());
 			accuracy.setLabel("Accuracy with " + getLabel());
 			((ClassificationDataSet) dataSet).appendAccuracyMatrix(accuracy);
 
-			Matrix errorMatrix = MatrixFactory.fromValue((double) errorCount);
+			Matrix errorMatrix = MatrixFactory.linkToValue((double) errorCount);
 			errorMatrix.setLabel("Errors with " + getLabel());
 			((ClassificationDataSet) dataSet).appendErrorCountMatrix(errorMatrix);
 		}

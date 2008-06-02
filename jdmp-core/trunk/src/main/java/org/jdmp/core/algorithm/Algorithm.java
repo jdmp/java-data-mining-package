@@ -253,7 +253,7 @@ public abstract class Algorithm extends AbstractGUIObject implements HasAlgorith
 	public final List<Matrix> calculate(double... input) throws Exception {
 		List<Matrix> inputA = new LinkedList<Matrix>();
 		for (int i = 0; i < input.length; i++) {
-			inputA.add(MatrixFactory.fromValue(input[i]));
+			inputA.add(MatrixFactory.linkToValue(input[i]));
 		}
 		return calculate(inputA);
 	}
