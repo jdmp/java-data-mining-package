@@ -29,11 +29,11 @@ public class AllTests extends TestSuite {
 
 	public static TestSuite suite() {
 		TestSuite suite = new TestSuite(AllTests.class.getName());
-		suite.addTestSuite(org.jdmp.matrix.io.TestExportCSV.class);
-		suite.addTestSuite(org.jdmp.matrix.io.TestExportXLS.class);
-		suite.addTestSuite(org.jdmp.matrix.io.TestExportHTML.class);
-		suite.addTestSuite(org.jdmp.matrix.io.TestExportM.class);
-		suite.addTestSuite(org.jdmp.matrix.io.TestExportMAT.class);
+		suite.addTestSuite(org.jdmp.matrix.io.TestExportMatrixCSV.class);
+		suite.addTestSuite(org.jdmp.matrix.io.TestExportMatrixXLS.class);
+		suite.addTestSuite(org.jdmp.matrix.io.TestExportMatrixHTML.class);
+		suite.addTestSuite(org.jdmp.matrix.io.TestExportMatrixM.class);
+		suite.addTestSuite(org.jdmp.matrix.io.TestExportMatrixMAT.class);
 		return suite;
 	}
 

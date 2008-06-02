@@ -23,8 +23,6 @@
 
 package org.jdmp.matrix.collections;
 
-import org.jdmp.matrix.util.TestStringUtil;
-
 import junit.framework.TestSuite;
 
 public class AllTests extends TestSuite {
@@ -36,7 +34,6 @@ public class AllTests extends TestSuite {
 		suite.addTestSuite(TestHashMapList.class);
 		suite.addTestSuite(TestSoftHashMap.class);
 		suite.addTestSuite(TestSoftHashMapList.class);
-		suite.addTestSuite(TestStringUtil.class);
 		return suite;
 	}
 

@@ -23,30 +23,11 @@
 
 package org.jdmp.matrix.io;
 
-import java.io.File;
-
-import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.Matrix.Format;
 
-public class TestExportHTML extends TestIO {
+public class TestExportMatrixCSV extends AbstractExportMatrixTest {
 
 	public Format getFormat() {
-		return Format.HTML;
-	}
-
-	public void testExportToFile() throws Exception {
-
-		File file = File.createTempFile("testExportToFile", "." + getFormat().name().toLowerCase());
-		file.deleteOnExit();
-
-		Matrix m = getMatrix();
-		m.exportToFile(getFormat(), file);
-
-		assertTrue(getLabel(), file.exists());
-		assertTrue(getLabel(), file.length() > 0);
-
-		file.delete();
-		assertFalse(getLabel(), file.exists());
-
+		return Format.CSV;
 	}
 }

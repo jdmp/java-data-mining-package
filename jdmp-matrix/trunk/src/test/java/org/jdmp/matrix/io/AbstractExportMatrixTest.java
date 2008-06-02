@@ -34,7 +34,7 @@ import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.Matrix.Format;
 
-public abstract class TestIO extends TestCase {
+public abstract class AbstractExportMatrixTest extends TestCase {
 
 	public abstract Format getFormat();
 

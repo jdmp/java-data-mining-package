@@ -28,7 +28,7 @@ import java.io.File;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.Matrix.Format;
 
-public class TestExportM extends TestIO {
+public class TestExportMatrixM extends AbstractExportMatrixTest {
 
 	public Format getFormat() {
 		return Format.M;

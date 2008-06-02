@@ -26,10 +26,10 @@ package org.jdmp.matrix.io;
 import org.jdmp.matrix.Matrix.Format;
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public class TestExportXLS extends TestIO {
+public class TestExportMatrixMAT extends AbstractExportMatrixTest {
 
 	public Format getFormat() {
-		return Format.XLS;
+		return Format.MAT;
 	}
 
 	public void testExportToStream() throws Exception {

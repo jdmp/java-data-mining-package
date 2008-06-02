@@ -23,49 +23,30 @@
 
 package org.jdmp.matrix.io;
 
-import org.jdmp.matrix.Matrix.Format;
-import org.jdmp.matrix.exceptions.MatrixException;
+import java.io.File;
 
-public class TestExportMAT extends TestIO {
+import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.Matrix.Format;
+
+public class TestExportMatrixHTML extends AbstractExportMatrixTest {
 
 	public Format getFormat() {
-		return Format.MAT;
+		return Format.HTML;
 	}
 
-	public void testExportToStream() throws Exception {
-		try {
-			super.testExportToStream();
-		} catch (MatrixException e) {
-			return;
-		}
-		throw new Exception("this method should not be supported");
-	}
+	public void testExportToFile() throws Exception {
 
-	public void testExportToWriter() throws Exception {
-		try {
-			super.testExportToWriter();
-		} catch (MatrixException e) {
-			return;
-		}
-		throw new Exception("this method should not be supported");
-	}
+		File file = File.createTempFile("testExportToFile", "." + getFormat().name().toLowerCase());
+		file.deleteOnExit();
 
-	public void testExportToClipboard() throws Exception {
-		try {
-			super.testExportToClipboard();
-		} catch (MatrixException e) {
-			return;
-		}
-		throw new Exception("this method should not be supported");
-	}
+		Matrix m = getMatrix();
+		m.exportToFile(getFormat(), file);
 
-	public void testExportToString() throws Exception {
-		try {
-			super.testExportToString();
-		} catch (MatrixException e) {
-			return;
-		}
-		throw new Exception("this method should not be supported");
-	}
+		assertTrue(getLabel(), file.exists());
+		assertTrue(getLabel(), file.length() > 0);
 
+		file.delete();
+		assertFalse(getLabel(), file.exists());
+
+	}
 }

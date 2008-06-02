@@ -2,9 +2,9 @@ package org.jdmp.jmatio;
 
 import org.jdmp.matrix.Matrix.Format;
 import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.io.TestIO;
+import org.jdmp.matrix.io.AbstractExportMatrixTest;
 
-public class TestExportMAT extends TestIO {
+public class TestExportMAT extends AbstractExportMatrixTest {
 
 	public Format getFormat() {
 		return Format.MAT;
