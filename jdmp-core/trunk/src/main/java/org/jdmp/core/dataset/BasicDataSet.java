@@ -17,7 +17,7 @@ import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.Matrix.Format;
 import org.jdmp.matrix.calculation.Calculation.Ret;
 import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.io.Export;
+import org.jdmp.matrix.io.ExportMatrix;
 import org.jdmp.matrix.util.collections.DefaultMatrixList;
 import org.jdmp.matrix.util.collections.MatrixList;
 
@@ -88,11 +88,11 @@ public class BasicDataSet extends DataSet {
 	}
 
 	public final String toCSV() throws MatrixException, IOException {
-		return Export.toString(Format.CSV, this.getInputMatrix());
+		return ExportMatrix.toString(Format.CSV, this.getInputMatrix());
 	}
 
 	public final void exportToCSV(File file) throws MatrixException, IOException {
-		Export.toFile(Format.CSV, file, this.getInputMatrix());
+		ExportMatrix.toFile(Format.CSV, file, this.getInputMatrix());
 	}
 
 }

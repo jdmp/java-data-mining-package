@@ -21,7 +21,7 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.matrix.util;
+package org.jdmp.matrix.io.util;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,6 +29,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 
 public class SeekableLineInputStream extends InputStream {
 

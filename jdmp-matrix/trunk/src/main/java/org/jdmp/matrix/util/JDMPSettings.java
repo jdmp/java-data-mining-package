@@ -23,6 +23,9 @@
 
 package org.jdmp.matrix.util;
 
+import org.jdmp.matrix.io.util.RingBufferWriter;
+import org.jdmp.matrix.io.util.TeeStream;
+
 public abstract class JDMPSettings {
 
 	private static double tolerance = Math.pow(10.0, -6.0);

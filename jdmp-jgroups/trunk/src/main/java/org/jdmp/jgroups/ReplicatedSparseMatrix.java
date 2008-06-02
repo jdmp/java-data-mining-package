@@ -7,10 +7,10 @@ import java.util.Vector;
 import java.util.logging.Level;
 
 import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.coordinates.CoordinateSetToLongWrapper;
 import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.stubs.AbstractSparseDoubleMatrix;
-import org.jdmp.matrix.util.CoordinateSetToLongWrapper;
 import org.jgroups.ChannelFactory;
 import org.jgroups.JChannelFactory;
 import org.jgroups.View;

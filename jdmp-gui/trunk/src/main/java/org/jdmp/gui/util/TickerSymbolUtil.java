@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 
-import org.jdmp.matrix.util.IntelligentFileReader;
+import org.jdmp.matrix.io.util.IntelligentFileReader;
 
 public class TickerSymbolUtil {
 

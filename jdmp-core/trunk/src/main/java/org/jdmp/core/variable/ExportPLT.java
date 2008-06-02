@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.io.FileSelector;
-import org.jdmp.matrix.util.IntelligentFileWriter;
+import org.jdmp.matrix.io.util.IntelligentFileWriter;
 
 public abstract class ExportPLT {
 

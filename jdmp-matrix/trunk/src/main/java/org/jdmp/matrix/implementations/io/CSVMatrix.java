@@ -27,9 +27,9 @@ import java.io.File;
 import java.io.IOException;
 
 import org.jdmp.matrix.exceptions.MatrixException;
+import org.jdmp.matrix.io.util.SeekableLineInputStream;
 import org.jdmp.matrix.stubs.AbstractDenseStringMatrix2D;
 import org.jdmp.matrix.util.MathUtil;
-import org.jdmp.matrix.util.SeekableLineInputStream;
 
 
 public class CSVMatrix extends AbstractDenseStringMatrix2D {

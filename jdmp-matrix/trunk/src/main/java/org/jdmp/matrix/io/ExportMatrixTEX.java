@@ -31,7 +31,7 @@ import java.util.logging.Logger;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.Matrix.Format;
 import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.util.IntelligentFileWriter;
+import org.jdmp.matrix.io.util.IntelligentFileWriter;
 import org.jdmp.matrix.util.StringUtil;
 
 public class ExportMatrixTEX {

@@ -31,8 +31,8 @@ import java.nio.ByteOrder;
 import java.util.logging.Level;
 
 import org.jdmp.matrix.coordinates.Coordinates;
+import org.jdmp.matrix.io.util.BufferedRandomAccessFile;
 import org.jdmp.matrix.stubs.AbstractDenseDoubleMatrix2D;
-import org.jdmp.matrix.util.BufferedRandomAccessFile;
 
 public class DenseFileMatrix2D extends AbstractDenseDoubleMatrix2D {
 	private static final long serialVersionUID = 1754729146021609978L;

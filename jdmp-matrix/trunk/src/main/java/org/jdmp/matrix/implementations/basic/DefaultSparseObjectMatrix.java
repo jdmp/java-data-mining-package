@@ -28,10 +28,10 @@ import java.util.Map;
 
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.coordinates.CoordinateIterator2D;
+import org.jdmp.matrix.coordinates.CoordinateSetToLongWrapper;
 import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.stubs.AbstractSparseObjectMatrix;
-import org.jdmp.matrix.util.CoordinateSetToLongWrapper;
 
 public class DefaultSparseObjectMatrix extends AbstractSparseObjectMatrix {
 	private static final long serialVersionUID = -7139128532871448340L;

@@ -29,10 +29,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.jdmp.matrix.coordinates.CoordinateSetToLongWrapper;
 import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.stubs.AbstractGraphMatrix;
-import org.jdmp.matrix.util.CoordinateSetToLongWrapper;
 import org.jdmp.matrix.util.collections.ArrayIndexList;
 
 public class DefaultGraphMatrix<N, E> extends AbstractGraphMatrix<N, E> {

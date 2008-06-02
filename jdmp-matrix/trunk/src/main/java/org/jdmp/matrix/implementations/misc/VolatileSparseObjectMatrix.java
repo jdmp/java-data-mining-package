@@ -27,10 +27,10 @@ import java.util.Map;
 
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.coordinates.CoordinateIterator2D;
+import org.jdmp.matrix.coordinates.CoordinateSetToLongWrapper;
 import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.stubs.AbstractSparseObjectMatrix;
-import org.jdmp.matrix.util.CoordinateSetToLongWrapper;
 import org.jdmp.matrix.util.collections.SoftHashMap;
 
 public class VolatileSparseObjectMatrix extends AbstractSparseObjectMatrix {

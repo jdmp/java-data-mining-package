@@ -5,11 +5,11 @@ import java.util.Iterator;
 import java.util.Set;
 
 import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.coordinates.CoordinateSetToLongWrapper;
 import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.Wrapper;
 import org.jdmp.matrix.stubs.AbstractSparseDoubleMatrix2D;
-import org.jdmp.matrix.util.CoordinateSetToLongWrapper;
 
 import cern.colt.matrix.impl.SparseDoubleMatrix2D;
 

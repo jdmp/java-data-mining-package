@@ -8,7 +8,7 @@ import javax.swing.JComponent;
 import org.jdmp.core.dataset.ClassificationDataSet;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.ClassificationSample;
-import org.jdmp.matrix.util.IntelligentFileReader;
+import org.jdmp.matrix.io.util.IntelligentFileReader;
 
 public class ImportCSVInOneLineAction extends DataSetAction {
 	private static final long serialVersionUID = 2560365188173770556L;

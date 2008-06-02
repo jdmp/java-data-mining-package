@@ -21,13 +21,12 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.matrix.util;
+package org.jdmp.matrix.coordinates;
 
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.interfaces.Wrapper;
 
 public class CoordinateSetToLongWrapper implements Set<long[]>, Wrapper<Set<Coordinates>> {

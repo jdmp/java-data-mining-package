@@ -36,7 +36,7 @@ import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.Matrix.EntryType;
 import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.util.IntelligentFileReader;
+import org.jdmp.matrix.io.util.IntelligentFileReader;
 import org.jdmp.matrix.util.StringUtil;
 
 public abstract class ImportMatrixCSV {

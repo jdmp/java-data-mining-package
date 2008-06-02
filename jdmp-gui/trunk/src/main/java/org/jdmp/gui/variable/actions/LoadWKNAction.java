@@ -34,7 +34,7 @@ import org.jdmp.core.variable.Variable;
 import org.jdmp.gui.util.TickerSymbolUtil;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
-import org.jdmp.matrix.util.IntelligentFileReader;
+import org.jdmp.matrix.io.util.IntelligentFileReader;
 
 public class LoadWKNAction extends VariableAction {
 	private static final long serialVersionUID = -5617733019886606869L;
