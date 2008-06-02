@@ -30,6 +30,8 @@ import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.util.logging.Logger;
 
+import org.jdmp.matrix.io.util.FileSelector;
+
 public class ImportMatrixOBJ {
 	private static final Logger logger = Logger.getLogger(ImportMatrixOBJ.class.getName());
 

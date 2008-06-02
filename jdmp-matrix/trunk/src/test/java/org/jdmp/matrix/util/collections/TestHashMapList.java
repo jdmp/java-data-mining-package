@@ -25,6 +25,8 @@ package org.jdmp.matrix.util.collections;
 
 import java.util.Map;
 
+import org.jdmp.matrix.collections.HashMapList;
+
 public class TestHashMapList extends AbstractMapTest {
 
 	@Override

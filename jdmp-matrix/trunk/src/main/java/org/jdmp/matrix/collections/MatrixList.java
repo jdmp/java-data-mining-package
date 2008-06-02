@@ -21,7 +21,7 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.matrix.util.collections;
+package org.jdmp.matrix.collections;
 
 import java.util.Collection;
 import java.util.logging.Level;

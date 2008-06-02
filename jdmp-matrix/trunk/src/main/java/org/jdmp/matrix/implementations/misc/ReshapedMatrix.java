@@ -26,12 +26,12 @@ package org.jdmp.matrix.implementations.misc;
 import java.util.Iterator;
 
 import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.collections.DefaultMatrixList;
+import org.jdmp.matrix.collections.MatrixList;
 import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.HasSourceMatrix;
 import org.jdmp.matrix.stubs.AbstractGenericMatrix;
-import org.jdmp.matrix.util.collections.DefaultMatrixList;
-import org.jdmp.matrix.util.collections.MatrixList;
 
 public class ReshapedMatrix<A> extends AbstractGenericMatrix<A> implements HasSourceMatrix {
 	private static final long serialVersionUID = -4298270756453090584L;

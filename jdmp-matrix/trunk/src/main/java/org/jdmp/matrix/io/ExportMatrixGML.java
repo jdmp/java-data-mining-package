@@ -28,6 +28,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.io.util.FileSelector;
 import org.jdmp.matrix.io.util.IntelligentFileWriter;
 
 public class ExportMatrixGML {

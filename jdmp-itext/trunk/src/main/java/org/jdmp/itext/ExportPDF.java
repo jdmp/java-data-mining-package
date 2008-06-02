@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 
 import org.jdmp.gui.util.CanRenderGraph;
-import org.jdmp.matrix.io.JDMPFileFilter;
+import org.jdmp.matrix.io.util.JDMPFileFilter;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.pdf.DefaultFontMapper;

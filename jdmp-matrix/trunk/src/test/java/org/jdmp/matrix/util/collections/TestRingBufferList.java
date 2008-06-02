@@ -23,6 +23,8 @@
 
 package org.jdmp.matrix.util.collections;
 
+import org.jdmp.matrix.collections.RingBufferList;
+
 import junit.framework.TestCase;
 
 public class TestRingBufferList extends TestCase {

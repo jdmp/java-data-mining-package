@@ -17,7 +17,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import org.jdmp.gui.util.ColorUtil;
-import org.jdmp.matrix.util.collections.DefaultMatrixList;
+import org.jdmp.matrix.collections.DefaultMatrixList;
 
 public class Matrix3DTableCellRenderer extends DefaultTableCellRenderer {
 	private static final long serialVersionUID = 4107015466785369684L;

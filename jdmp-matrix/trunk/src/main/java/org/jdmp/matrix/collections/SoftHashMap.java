@@ -21,122 +21,85 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.matrix.util.collections;
+package org.jdmp.matrix.collections;
 
+import java.lang.ref.SoftReference;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.jdmp.matrix.interfaces.HasCache;
-import org.jdmp.matrix.interfaces.Wrapper;
+public class SoftHashMap<K, V> implements Map<K, V> {
 
-public class CachedMap<K, V> implements HasCache<Map<K, V>>, Wrapper<Map<K, V>>, Map<K, V> {
+	private static final Logger logger = Logger.getLogger(SoftHashMap.class.getName());
 
-	private static final Logger logger = Logger.getLogger(CachedMap.class.getName());
+	private transient Map<K, SoftReference<V>> map = null;
 
-	private Map<K, V> source = null;
-
-	private Map<K, V> cache = null;
-
-	public CachedMap(Map<K, V> source) {
-		setWrappedObject(source);
-		setCache(new SoftHashMap<K, V>());
+	public SoftHashMap() {
+		map = new HashMap<K, SoftReference<V>>();
 	}
 
-	public CachedMap(Map<K, V> source, Map<K, V> cache) {
-		setWrappedObject(source);
-		setCache(cache);
+	public SoftHashMap(Map<? extends K, ? extends V> map) {
+		this();
+		putAll(map);
 	}
 
 	public void clear() {
-		cache.clear();
-		source.clear();
+		map.clear();
 	}
 
 	public boolean containsKey(Object key) {
-		if (cache.containsKey(key)) {
-			return true;
-		}
-		return source.containsKey(key);
-	}
-
-	public boolean containsValue(Object value) {
-		if (cache.containsValue(value)) {
-			return true;
-		}
-		return source.containsValue(value);
-	}
-
-	public Set<java.util.Map.Entry<K, V>> entrySet() {
-		logger.log(Level.WARNING, "cannot get entries");
-		return null;
+		return map.containsKey(key);
 	}
 
 	@SuppressWarnings("unchecked")
+	public boolean containsValue(Object value) {
+		return map.containsValue(new SoftReference((V) value));
+	}
+
+	public Set<java.util.Map.Entry<K, V>> entrySet() {
+		logger.log(Level.WARNING, "cannot get entryset");
+		return null;
+	}
+
 	public V get(Object key) {
-		V value = cache.get(key);
-		if (value == null) {
-			value = source.get(key);
-			cache.put((K) key, value);
-		}
-		return value;
+		SoftReference<V> v = map.get(key);
+		return v == null ? null : v.get();
 	}
 
 	public boolean isEmpty() {
-		if (!cache.isEmpty()) {
-			return false;
-		}
-		return source.isEmpty();
+		return map.isEmpty();
 	}
 
 	public Set<K> keySet() {
-		return source.keySet();
+		return map.keySet();
 	}
 
 	public V put(K key, V value) {
-		cache.put(key, value);
-		return source.put(key, value);
+		SoftReference<V> v = map.put(key, new SoftReference<V>(value));
+		return v == null ? null : v.get();
 	}
 
 	public void putAll(Map<? extends K, ? extends V> m) {
-		for (K k : m.keySet()) {
-			put(k, m.get(k));
+		for (K key : m.keySet()) {
+			put(key, m.get(key));
 		}
 	}
 
 	public V remove(Object key) {
-		cache.remove(key);
-		return source.remove(key);
+		SoftReference<V> v = map.remove(key);
+		return v == null ? null : v.get();
 	}
 
 	public int size() {
-		return source.size();
+		return map.size();
 	}
 
 	public Collection<V> values() {
-		logger.log(Level.WARNING, "cannot get entries");
+		logger.log(Level.WARNING, "cannot get values");
 		return null;
-	}
-
-	public Map<K, V> getWrappedObject() {
-		return source;
-	}
-
-	public void setWrappedObject(Map<K, V> object) {
-		if (cache != null) {
-			cache.clear();
-		}
-		this.source = object;
-	}
-
-	public Map<K, V> getCache() {
-		return cache;
-	}
-
-	public void setCache(Map<K, V> cache) {
-		this.cache = cache;
 	}
 
 }

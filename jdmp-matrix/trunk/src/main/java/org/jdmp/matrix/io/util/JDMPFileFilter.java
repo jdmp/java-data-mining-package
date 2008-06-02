@@ -21,7 +21,7 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.matrix.io;
+package org.jdmp.matrix.io.util;
 
 import java.io.File;
 import java.util.Collection;

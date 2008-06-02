@@ -4,11 +4,11 @@ import javax.swing.DefaultListSelectionModel;
 import javax.swing.ListSelectionModel;
 
 import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.collections.DefaultMatrixList;
+import org.jdmp.matrix.collections.MatrixList;
 import org.jdmp.matrix.interfaces.HasMatrix;
 import org.jdmp.matrix.interfaces.HasMatrixList;
 import org.jdmp.matrix.interfaces.Wrapper;
-import org.jdmp.matrix.util.collections.DefaultMatrixList;
-import org.jdmp.matrix.util.collections.MatrixList;
 
 public class SingleMatrixWrapper implements Wrapper<Matrix>, HasMatrixList {
 

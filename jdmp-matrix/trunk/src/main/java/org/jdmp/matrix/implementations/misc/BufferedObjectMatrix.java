@@ -31,13 +31,13 @@ import java.util.Set;
 import java.util.logging.Level;
 
 import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.collections.DefaultMatrixList;
+import org.jdmp.matrix.collections.MatrixList;
 import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.implementations.basic.DefaultSparseObjectMatrix;
 import org.jdmp.matrix.interfaces.HasSourceMatrix;
 import org.jdmp.matrix.stubs.AbstractObjectMatrix;
-import org.jdmp.matrix.util.collections.DefaultMatrixList;
-import org.jdmp.matrix.util.collections.MatrixList;
 
 public class BufferedObjectMatrix extends AbstractObjectMatrix implements Flushable, HasSourceMatrix {
 	private static final long serialVersionUID = 7750549087897737457L;

@@ -7,8 +7,8 @@ import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableEvent;
 import org.jdmp.core.variable.VariableListener;
 import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.collections.MatrixList;
 import org.jdmp.matrix.interfaces.HasMatrixList;
-import org.jdmp.matrix.util.collections.MatrixList;
 
 public class MatrixListTableModel extends AbstractTableModel implements VariableListener, HasMatrixList {
 	private static final long serialVersionUID = 1820859033991171760L;

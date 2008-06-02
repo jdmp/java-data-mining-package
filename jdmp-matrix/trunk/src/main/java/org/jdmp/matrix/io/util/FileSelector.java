@@ -21,45 +21,36 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.matrix.util.collections;
+package org.jdmp.matrix.io.util;
 
-import java.util.Iterator;
-import java.util.Map;
+import java.awt.Component;
+import java.io.File;
 
-public class SoftHashMapList<K, V> extends SoftHashMap<K, V> {
+import javax.swing.JFileChooser;
 
-	public SoftHashMapList() {
-		super();
+
+public abstract class FileSelector {
+
+	public static final File selectFile(String label, String suffix) {
+		return selectFile(null, label, suffix);
 	}
 
-	public SoftHashMapList(Map<? extends K, ? extends V> m) {
-		super(m);
+	public static final File selectFile(String suffix) {
+		return selectFile(null, "*." + suffix, suffix);
 	}
 
-	public synchronized V put(K key, V value) {
-		return super.put(key, value);
-	}
-
-	public synchronized int indexOf(V value) {
-		Iterator<V> it = values().iterator();
-		for (int i = 0; it.hasNext(); i++) {
-			if (it.next().equals(value)) {
-				return i;
-			}
+	public static final File selectFile(Component c, String label, String suffix) {
+		JFileChooser chooser = new JFileChooser();
+		JDMPFileFilter filter = new JDMPFileFilter(label, suffix);
+		chooser.setFileFilter(filter);
+		int returnVal = chooser.showOpenDialog(c);
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			File file = chooser.getSelectedFile();
+			if (!file.getAbsolutePath().toLowerCase().endsWith(suffix))
+				file = new File(file.getAbsolutePath() + suffix);
+			return file;
 		}
-		return -1;
-	}
-
-	public synchronized V get(int index) {
-		Iterator<V> it = values().iterator();
-		for (int i = 0; it.hasNext() && i < index; i++) {
-			it.next();
-		}
-		return it.hasNext() ? it.next() : null;
-	}
-
-	public synchronized V remove(Object key) {
-		return super.remove(key);
+		return null;
 	}
 
 }

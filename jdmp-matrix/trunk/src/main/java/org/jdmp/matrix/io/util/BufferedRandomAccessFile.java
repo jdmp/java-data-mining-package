@@ -29,7 +29,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Map;
 
-import org.jdmp.matrix.util.collections.SoftHashMap;
+import org.jdmp.matrix.collections.SoftHashMap;
 
 public class BufferedRandomAccessFile extends RandomAccessFile {
 

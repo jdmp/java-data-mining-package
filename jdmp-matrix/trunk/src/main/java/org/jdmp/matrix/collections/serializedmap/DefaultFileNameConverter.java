@@ -21,12 +21,13 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.matrix.util.collections;
+package org.jdmp.matrix.collections.serializedmap;
 
 import java.io.File;
 import java.io.FileFilter;
 import java.util.Arrays;
 import java.util.List;
+
 
 public class DefaultFileNameConverter implements FileNameConverter {
 

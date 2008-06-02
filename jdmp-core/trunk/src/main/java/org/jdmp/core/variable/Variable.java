@@ -27,13 +27,13 @@ import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.calculation.Calculation.Ret;
 import org.jdmp.matrix.calculation.basic.Divide;
 import org.jdmp.matrix.calculation.basic.Plus;
+import org.jdmp.matrix.collections.MatrixList;
 import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.HasMatrix;
 import org.jdmp.matrix.interfaces.HasMatrixList;
 import org.jdmp.matrix.io.util.IntelligentFileReader;
 import org.jdmp.matrix.io.util.IntelligentFileWriter;
-import org.jdmp.matrix.util.collections.MatrixList;
 
 public abstract class Variable extends AbstractGUIObject implements HasMatrix, HasMatrixList {
 

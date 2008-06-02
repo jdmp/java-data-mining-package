@@ -24,7 +24,7 @@
 package org.jdmp.matrix.interfaces;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.util.collections.MatrixList;
+import org.jdmp.matrix.collections.MatrixList;
 
 public interface HasSourceMatrix {
 

@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 
 import org.jdmp.core.util.AbstractGUIObject;
-import org.jdmp.matrix.io.JDMPFileFilter;
+import org.jdmp.matrix.io.util.JDMPFileFilter;
 
 public class ExportAction extends ObjectAction {
 	private static final long serialVersionUID = -3132833245167910507L;

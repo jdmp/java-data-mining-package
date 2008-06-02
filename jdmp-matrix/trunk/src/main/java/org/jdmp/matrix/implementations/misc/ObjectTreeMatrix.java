@@ -30,8 +30,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.jdmp.matrix.collections.ArrayIndexList;
 import org.jdmp.matrix.stubs.AbstractTreeMatrix;
-import org.jdmp.matrix.util.collections.ArrayIndexList;
 
 public class ObjectTreeMatrix extends AbstractTreeMatrix {
 	private static final long serialVersionUID = -7343649063964349539L;

@@ -26,12 +26,12 @@ package org.jdmp.matrix.implementations.misc;
 import java.util.Map;
 
 import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.collections.SoftHashMap;
 import org.jdmp.matrix.coordinates.CoordinateIterator2D;
 import org.jdmp.matrix.coordinates.CoordinateSetToLongWrapper;
 import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.stubs.AbstractSparseObjectMatrix;
-import org.jdmp.matrix.util.collections.SoftHashMap;
 
 public class VolatileSparseObjectMatrix extends AbstractSparseObjectMatrix {
 	private static final long serialVersionUID = 392817709394048419L;

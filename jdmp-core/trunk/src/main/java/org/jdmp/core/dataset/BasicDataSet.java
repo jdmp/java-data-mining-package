@@ -16,10 +16,10 @@ import org.jdmp.core.variable.Variable;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.Matrix.Format;
 import org.jdmp.matrix.calculation.Calculation.Ret;
+import org.jdmp.matrix.collections.DefaultMatrixList;
+import org.jdmp.matrix.collections.MatrixList;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.io.ExportMatrix;
-import org.jdmp.matrix.util.collections.DefaultMatrixList;
-import org.jdmp.matrix.util.collections.MatrixList;
 
 public class BasicDataSet extends DataSet {
 	private static final long serialVersionUID = -2887879051530049677L;
