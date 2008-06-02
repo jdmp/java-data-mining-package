@@ -23,17 +23,38 @@
 
 package org.jdmp.matrix.io;
 
+import java.awt.Component;
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.util.logging.Logger;
 
-import org.jdmp.matrix.implementations.graph.DefaultGraphMatrix;
-import org.jdmp.matrix.stubs.AbstractGraphMatrix;
+public class ImportMatrixOBJ {
+	private static final Logger logger = Logger.getLogger(ImportMatrixOBJ.class.getName());
 
-public abstract class ImportGML {
-
-	public static final AbstractGraphMatrix importFromGraphML(File file) {
-		DefaultGraphMatrix m = new DefaultGraphMatrix();
-		//m.importFromGML(file);
-		return m;
+	public static final File selectFile() {
+		return selectFile(null);
 	}
 
+	public static final File selectFile(Component c) {
+		return FileSelector.selectFile(c, "OBJ Files", ".obj");
+	}
+
+	@SuppressWarnings("unchecked")
+	public static Object load(File file) {
+		ObjectInputStream ois = null;
+		try {
+			ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)));
+			Object o = ois.readObject();
+			return o;
+		} catch (Exception e) {
+		} finally {
+			try {
+				ois.close();
+			} catch (Exception e2) {
+			}
+		}
+		return null;
+	}
 }

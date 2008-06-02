@@ -24,34 +24,22 @@
 package org.jdmp.matrix.io;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.Writer;
+import java.lang.reflect.Method;
 
-import org.jdmp.matrix.Matrix.Format;
+import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public interface ExportInterface {
+public abstract class ImportMatrixMAT {
 
-	public void exportToFile(Format format, File file, Object... parameters)
-			throws MatrixException, IOException;
-
-	public void exportToFile(Format format, String file, Object... parameters)
-			throws MatrixException, IOException;
-
-	public void exportToFile(File file, Object... parameters) throws MatrixException, IOException;
-
-	public void exportToFile(String file, Object... parameters) throws MatrixException, IOException;
-
-	public void exportToStream(Format format, OutputStream stream, Object... parameters)
-			throws MatrixException, IOException;
-
-	public void exportToWriter(Format format, Writer writer, Object... parameters)
-			throws MatrixException, IOException;
-
-	public void exportToClipboard(Format format, Object... parameters) throws MatrixException,
-			IOException;
-
-	public String toString(Format format, Object... parameters) throws MatrixException, IOException;
+	public static Matrix fromFile(File file, Object... parameters) {
+		try {
+			Class<?> c = Class.forName("org.jdmp.jmatio.ImportMAT");
+			Method method = c.getMethod("fromFile", new Class[] { File.class, Object[].class });
+			Matrix matrix = (Matrix) method.invoke(null, file, parameters);
+			return matrix;
+		} catch (Exception e) {
+			throw new MatrixException(e);
+		}
+	}
 
 }

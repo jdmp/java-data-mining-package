@@ -34,9 +34,9 @@ import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.IntelligentFileWriter;
 import org.jdmp.matrix.util.StringUtil;
 
-public class ExportTEX {
+public class ExportMatrixTEX {
 
-	private static final Logger logger = Logger.getLogger(ExportTEX.class.getName());
+	private static final Logger logger = Logger.getLogger(ExportMatrixTEX.class.getName());
 
 	public static final void save(String texFile, Matrix m, Object... parameters) {
 		save(new File(texFile), m);
@@ -68,7 +68,7 @@ public class ExportTEX {
 			// }
 			out.close();
 
-			Export.toFile(Format.CSV, datFile, m);
+			ExportMatrix.toFile(Format.CSV, datFile, m);
 		} catch (Exception e) {
 			logger.log(Level.WARNING, "could not save TEX file", e);
 		}

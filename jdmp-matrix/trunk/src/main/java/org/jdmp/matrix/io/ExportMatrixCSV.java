@@ -33,7 +33,9 @@ import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.IntelligentFileWriter;
 
-public class ExportM {
+public abstract class ExportMatrixCSV {
+
+	private static String separator = "\t";
 
 	public static void toFile(File file, Matrix matrix, Object... parameters) throws IOException,
 			MatrixException {
@@ -51,10 +53,19 @@ public class ExportM {
 
 	public static void toWriter(Writer writer, Matrix matrix, Object... parameters)
 			throws IOException, MatrixException {
-		String EOL = System.getProperty("line.separator");
-		writer.append("A = [ ");
-		ExportCSV.toWriter(writer, matrix);
-		writer.append("];" + EOL);
+		String lineend = System.getProperty("line.separator");
+		long rowCount = matrix.getRowCount();
+		long colCount = matrix.getColumnCount();
+		for (int row = 0; row < rowCount; row++) {
+			for (int col = 0; col < colCount; col++) {
+				writer.append("" + matrix.getObject(row, col));
+				if (col < colCount - 1) {
+					writer.append(separator);
+				}
+			}
+			if (row < rowCount - 1) {
+				writer.append(lineend);
+			}
+		}
 	}
-
 }

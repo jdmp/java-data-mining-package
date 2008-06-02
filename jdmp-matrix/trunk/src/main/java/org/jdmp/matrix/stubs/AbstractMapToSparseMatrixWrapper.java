@@ -33,7 +33,7 @@ import org.jdmp.matrix.interfaces.Wrapper;
 import org.jdmp.matrix.util.CoordinateSetToLongWrapper;
 import org.jdmp.matrix.util.MathUtil;
 
-public abstract class AbstractMapToSparseMatrixWrapper<A> extends AbstractSparseMatrix<A> implements
+public abstract class AbstractMapToSparseMatrixWrapper<A> extends AbstractSparseGenericMatrix<A> implements
 		Wrapper<Map<Coordinates, Object>> {
 
 	private A defaultValue = null;

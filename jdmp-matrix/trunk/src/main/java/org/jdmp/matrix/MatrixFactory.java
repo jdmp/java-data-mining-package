@@ -57,8 +57,8 @@ import org.jdmp.matrix.implementations.collections.DefaultMapMatrix;
 import org.jdmp.matrix.implementations.io.DenseFileMatrix2D;
 import org.jdmp.matrix.implementations.io.FileListMatrix;
 import org.jdmp.matrix.implementations.misc.BufferedObjectMatrix;
-import org.jdmp.matrix.io.Import;
-import org.jdmp.matrix.io.Link;
+import org.jdmp.matrix.io.ImportMatrix;
+import org.jdmp.matrix.io.LinkMatrix;
 import org.jdmp.matrix.util.MathUtil;
 
 /**
@@ -371,12 +371,12 @@ public abstract class MatrixFactory {
 	}
 
 	public static Matrix fromString(String string, Object... parameters) {
-		return Import.fromString(string, parameters);
+		return ImportMatrix.fromString(string, parameters);
 	}
 
 	public static Matrix fromString(Format format, String string, Object... parameters)
 			throws MatrixException {
-		return Import.fromString(format, string, parameters);
+		return ImportMatrix.fromString(format, string, parameters);
 	}
 
 	/**
@@ -454,27 +454,27 @@ public abstract class MatrixFactory {
 
 	public static final Matrix linkToFile(Format format, File file, Object... parameters)
 			throws MatrixException, IOException {
-		return Link.linkToFile(format, file, parameters);
+		return LinkMatrix.toFile(format, file, parameters);
 	}
 
 	public static final Matrix importFromFile(String filename, Object... parameters)
 			throws MatrixException, IOException {
-		return Import.fromFile(new File(filename), parameters);
+		return ImportMatrix.fromFile(new File(filename), parameters);
 	}
 
 	public static final Matrix importFromFile(File file, Object... parameters)
 			throws MatrixException, IOException {
-		return Import.fromFile(file, parameters);
+		return ImportMatrix.fromFile(file, parameters);
 	}
 
 	public static final Matrix importFromFile(Format format, String file, Object... parameters)
 			throws MatrixException, IOException {
-		return Import.fromFile(format, new File(file), parameters);
+		return ImportMatrix.fromFile(format, new File(file), parameters);
 	}
 
 	public static final Matrix importFromFile(Format format, File file, Object... parameters)
 			throws MatrixException, IOException {
-		return Import.fromFile(format, file, parameters);
+		return ImportMatrix.fromFile(format, file, parameters);
 	}
 
 	public static Matrix importFromClipboard(Object... parameters) throws MatrixException {

@@ -26,7 +26,7 @@ package org.jdmp.matrix.io;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.implementations.basic.DefaultDenseStringMatrix2D;
 
-public abstract class ImportM {
+public abstract class ImportMatrixM {
 
 	/**
 	 * Creates a DefaultDenseStringMatrix2D from a given String. The string

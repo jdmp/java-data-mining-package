@@ -23,25 +23,38 @@
 
 package org.jdmp.matrix.io;
 
-import java.io.Closeable;
 import java.io.File;
-import java.lang.reflect.Constructor;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.exceptions.MatrixException;
+import org.jdmp.matrix.util.IntelligentFileWriter;
 
-public class ExportXLS {
+public class ExportMatrixM {
 
-	public static void toFile(File file, Matrix matrix, Object... parameters) {
-		Matrix xls = null;
-		try {
-			Class<?> c = Class.forName("org.jdmp.jexcelapi.DenseExcelMatrix2D");
-			Constructor<?> constr = c.getConstructor(new Class[] { File.class, Matrix.class });
-			xls = (Matrix) constr.newInstance(new Object[] { file, matrix });
-			((Closeable) xls).close();
-		} catch (Exception e) {
-			throw new MatrixException(e);
-		}
+	public static void toFile(File file, Matrix matrix, Object... parameters) throws IOException,
+			MatrixException {
+		IntelligentFileWriter writer = new IntelligentFileWriter(file);
+		toWriter(writer, matrix, parameters);
+		writer.close();
+	}
+
+	public static void toStream(OutputStream outputStream, Matrix matrix, Object... parameters)
+			throws IOException, MatrixException {
+		OutputStreamWriter writer = new OutputStreamWriter(outputStream);
+		toWriter(writer, matrix, parameters);
+		writer.close();
+	}
+
+	public static void toWriter(Writer writer, Matrix matrix, Object... parameters)
+			throws IOException, MatrixException {
+		String EOL = System.getProperty("line.separator");
+		writer.append("A = [ ");
+		ExportMatrixCSV.toWriter(writer, matrix);
+		writer.append("];" + EOL);
 	}
 
 }

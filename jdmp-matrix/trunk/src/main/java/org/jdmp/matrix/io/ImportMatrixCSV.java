@@ -39,7 +39,7 @@ import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.IntelligentFileReader;
 import org.jdmp.matrix.util.StringUtil;
 
-public abstract class ImportCSV {
+public abstract class ImportMatrixCSV {
 
 	public static final Matrix fromString(String string, Object... parameters)
 			throws MatrixException {

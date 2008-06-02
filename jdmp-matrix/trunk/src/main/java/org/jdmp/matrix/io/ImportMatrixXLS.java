@@ -29,7 +29,7 @@ import java.lang.reflect.Constructor;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public abstract class ImportXLS {
+public abstract class ImportMatrixXLS {
 
 	public static final Matrix fromFile(File file, Object... parameters) throws MatrixException {
 		Matrix xls = null;

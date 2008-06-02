@@ -113,7 +113,7 @@ import org.jdmp.matrix.implementations.misc.ReshapedMatrix;
 import org.jdmp.matrix.interfaces.GUIObject;
 import org.jdmp.matrix.interfaces.HasLabel;
 import org.jdmp.matrix.interfaces.HasSourceMatrix;
-import org.jdmp.matrix.io.Export;
+import org.jdmp.matrix.io.ExportMatrix;
 import org.jdmp.matrix.util.JDMPSettings;
 import org.jdmp.matrix.util.MathUtil;
 import org.jdmp.matrix.util.StringUtil;
@@ -1178,36 +1178,36 @@ public abstract class AbstractGenericMatrix<A> implements GenericMatrix<A> {
 	}
 
 	public final void exportToFile(File file, Object... parameters) throws MatrixException, IOException {
-		Export.toFile(file, this, parameters);
+		ExportMatrix.toFile(file, this, parameters);
 	}
 	
 	public final void exportToClipboard(Format format,Object... parameters) throws MatrixException, IOException {
-		Export.toClipboard(format, this,parameters);
+		ExportMatrix.toClipboard(format, this,parameters);
 	}
 	
 
 	public final void exportToFile(String file, Object... parameters) throws MatrixException, IOException {
-		Export.toFile(file, this, parameters);
+		ExportMatrix.toFile(file, this, parameters);
 	}
 
 	public final void exportToFile(Format format, String filename, Object... parameters)
 			throws MatrixException, IOException {
-		Export.toFile(format, filename, this, parameters);
+		ExportMatrix.toFile(format, filename, this, parameters);
 	}
 
 	public final void exportToFile(Format format, File file, Object... parameters)
 			throws MatrixException, IOException {
-		Export.toFile(format, file, this, parameters);
+		ExportMatrix.toFile(format, file, this, parameters);
 	}
 	
 	public final void exportToStream(Format format, OutputStream outputStream, Object... parameters)
 	throws MatrixException, IOException {
-		Export.toStream(format, outputStream, this, parameters);
+		ExportMatrix.toStream(format, outputStream, this, parameters);
 	}
 	
 	public final void exportToWriter(Format format, Writer writer, Object... parameters)
 	throws MatrixException, IOException {
-		Export.toWriter(format, writer, this, parameters);
+		ExportMatrix.toWriter(format, writer, this, parameters);
 	}
 
 	public final void setLabel(String label) {
@@ -1584,7 +1584,7 @@ public abstract class AbstractGenericMatrix<A> implements GenericMatrix<A> {
 	}
 	
 	public String toString(Format format,Object... parameters) throws MatrixException, IOException {
-		return Export.toString(format, this,parameters);
+		return ExportMatrix.toString(format, this,parameters);
 	}
 	
 	public void setSize(long... size) {

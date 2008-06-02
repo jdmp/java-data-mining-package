@@ -30,9 +30,9 @@ import java.util.logging.Logger;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.util.IntelligentFileWriter;
 
-public class ExportGML {
+public class ExportMatrixGML {
 
-	private static final Logger logger = Logger.getLogger(ExportGML.class.getName());
+	private static final Logger logger = Logger.getLogger(ExportMatrixGML.class.getName());
 
 	public static final File selectFile() {
 		return selectFile(null);

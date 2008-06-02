@@ -37,7 +37,7 @@ import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.Matrix.Format;
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public abstract class Export {
+public abstract class ExportMatrix {
 
 	public static final void toFile(File file, Matrix m, Object... parameters)
 			throws MatrixException, IOException {
@@ -57,7 +57,7 @@ public abstract class Export {
 	public static final void toFile(Format format, File file, Matrix matrix, Object... parameters)
 			throws MatrixException, IOException {
 		try {
-			Class<?> c = Class.forName("org.jdmp.matrix.io.Export" + format.name());
+			Class<?> c = Class.forName("org.jdmp.matrix.io.ExportMatrix" + format.name());
 			Method m = c.getMethod("toFile", new Class<?>[] { File.class, Matrix.class, Object[].class });
 			m.invoke(null, file,matrix,parameters);
 		} catch (Exception e) {
@@ -103,7 +103,7 @@ public abstract class Export {
 	public static final void toStream(Format format, OutputStream outputStream, Matrix matrix,
 			Object... parameters) throws IOException {
 		try {
-			Class<?> c = Class.forName("org.jdmp.matrix.io.Export" + format.name());
+			Class<?> c = Class.forName("org.jdmp.matrix.io.ExportMatrix" + format.name());
 			Method m = c.getMethod("toStream", new Class<?>[] { OutputStream.class, Matrix.class, Object[].class });
 			m.invoke(null, outputStream,matrix,parameters);
 		} catch (Exception e) {
@@ -114,7 +114,7 @@ public abstract class Export {
 	public static final void toWriter(Format format, Writer writer, Matrix matrix,
 			Object... parameters) {
 		try {
-			Class<?> c = Class.forName("org.jdmp.matrix.io.Export" + format.name());
+			Class<?> c = Class.forName("org.jdmp.matrix.io.ExportMatrix" + format.name());
 			Method m = c.getMethod("toWriter", new Class<?>[] {Writer.class, Matrix.class, Object[].class });
 			m.invoke(null, writer,matrix,parameters);
 		} catch (Exception e) {

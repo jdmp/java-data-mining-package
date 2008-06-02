@@ -35,7 +35,7 @@ import org.jdmp.matrix.interfaces.DistanceMeasures;
 import org.jdmp.matrix.interfaces.HasGUIObject;
 import org.jdmp.matrix.interfaces.HasLabel;
 import org.jdmp.matrix.interfaces.MatrixEntryGettersAndSetters;
-import org.jdmp.matrix.io.ExportInterface;
+import org.jdmp.matrix.io.ExportMatrixInterface;
 
 /**
  * <code>Matrix</code> is the main class for storing any type of data. You
@@ -51,7 +51,7 @@ import org.jdmp.matrix.io.ExportInterface;
  * @log $Log$
  * 
  */
-public interface Matrix extends Serializable, ExportInterface, CoordinateFunctions,
+public interface Matrix extends Serializable, ExportMatrixInterface, CoordinateFunctions,
 		MatrixEntryGettersAndSetters, BasicMatrixProperties, CanPerformCalculations, CanBeReshaped,
 		DistanceMeasures, Comparable<Matrix>, Cloneable, Clearable, HasAnnotation, HasLabel,
 		HasGUIObject {
