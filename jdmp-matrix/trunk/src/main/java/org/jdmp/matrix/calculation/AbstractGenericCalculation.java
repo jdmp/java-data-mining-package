@@ -63,19 +63,20 @@ import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.implementations.basic.GenericCalculationMatrix;
 
-public abstract class AbstractCalculation implements Calculation {
+public abstract class AbstractGenericCalculation<A> implements GenericCalculation<A> {
 
-	protected static final Logger logger = Logger.getLogger(AbstractCalculation.class.getName());
+	protected static final Logger logger = Logger.getLogger(AbstractGenericCalculation.class
+			.getName());
 
 	private Matrix[] sources = null;
 
 	private int dimension = NONE;
 
-	public AbstractCalculation(Matrix... sources) {
+	public AbstractGenericCalculation(Matrix... sources) {
 		this.sources = sources;
 	}
 
-	public AbstractCalculation(int dimension, Matrix... sources) {
+	public AbstractGenericCalculation(int dimension, Matrix... sources) {
 		this.sources = sources;
 		this.dimension = dimension;
 	}
@@ -104,7 +105,7 @@ public abstract class AbstractCalculation implements Calculation {
 
 	public abstract void setDouble(double value, long... coordinates) throws MatrixException;
 
-	public abstract Object getObject(long... coordinates) throws MatrixException;
+	public abstract A getObject(long... coordinates) throws MatrixException;
 
 	public abstract void setObject(Object value, long... coordinates) throws MatrixException;
 

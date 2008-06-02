@@ -28,10 +28,10 @@ import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.Matrix.AnnotationTransfer;
 import org.jdmp.matrix.Matrix.EntryType;
 import org.jdmp.matrix.annotation.Annotation;
-import org.jdmp.matrix.calculation.AbstractCalculation;
+import org.jdmp.matrix.calculation.AbstractGenericCalculation;
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public class Convert extends AbstractCalculation {
+public class Convert extends AbstractGenericCalculation {
 	private static final long serialVersionUID = 6393277198816850597L;
 
 	public Convert(Matrix matrix) {

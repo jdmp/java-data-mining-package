@@ -84,16 +84,8 @@ public class Deletion extends AbstractObjectCalculation {
 	}
 
 	public void setObject(Object o, long... coordinates) throws MatrixException {
-		getSource().setObject(o, selection[ROW][(int) coordinates[ROW]], selection[COLUMN][(int) coordinates[COLUMN]]);
-	}
-
-	public double getDouble(long... coordinates) throws MatrixException {
-		return getSource().getDouble(selection[ROW][(int) coordinates[ROW]],
+		getSource().setObject(o, selection[ROW][(int) coordinates[ROW]],
 				selection[COLUMN][(int) coordinates[COLUMN]]);
-	}
-
-	public void setDouble(double v, long... coordinates) throws MatrixException {
-		getSource().setDouble(v, selection[ROW][(int) coordinates[ROW]], selection[COLUMN][(int) coordinates[COLUMN]]);
 	}
 
 	public long[] getSize() {

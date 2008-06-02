@@ -31,7 +31,7 @@ import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.MathUtil;
 import org.jdmp.matrix.util.StringUtil;
 
-public abstract class AbstractObjectCalculation extends AbstractCalculation {
+public abstract class AbstractObjectCalculation extends AbstractGenericCalculation<Object> {
 
 	public AbstractObjectCalculation(Matrix... sources) {
 		super(sources);
@@ -41,23 +41,23 @@ public abstract class AbstractObjectCalculation extends AbstractCalculation {
 		super(dimension, sources);
 	}
 
-	public double getDouble(long... coordinates) throws MatrixException {
+	public final double getDouble(long... coordinates) throws MatrixException {
 		return MathUtil.getDouble(getObject(coordinates));
 	}
 
-	public void setDouble(double value, long... coordinates) throws MatrixException {
+	public final void setDouble(double value, long... coordinates) throws MatrixException {
 		setObject(value, coordinates);
 	}
 
 	public void setObject(Object value, long... coordinates) throws MatrixException {
 	}
 
-	public void setString(String value, long... coordinates) throws MatrixException {
+	public final void setString(String value, long... coordinates) throws MatrixException {
 		setObject(value, coordinates);
 	}
 
-	public String getString(long... coordinates) throws MatrixException {
-		return StringUtil.format(getObject(coordinates));
+	public final String getString(long... coordinates) throws MatrixException {
+		return StringUtil.convert(getObject(coordinates));
 	}
 
 	public final Matrix calcNew() throws MatrixException {
@@ -81,7 +81,8 @@ public abstract class AbstractObjectCalculation extends AbstractCalculation {
 
 	public final Matrix calcOrig() throws MatrixException {
 		if (!Coordinates.equals(getSource().getSize(), getSize())) {
-			throw new MatrixException("Cannot change Matrix size. Use calc(Ret.NEW) or calc(Ret.LINK) instead.");
+			throw new MatrixException(
+					"Cannot change Matrix size. Use calc(Ret.NEW) or calc(Ret.LINK) instead.");
 		}
 		for (long[] c : getSource().allCoordinates()) {
 			getSource().setObject(getObject(c), c);

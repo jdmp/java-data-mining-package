@@ -26,11 +26,13 @@ package org.jdmp.matrix.calculation;
 import java.io.Serializable;
 
 import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.Matrix.EntryType;
+import org.jdmp.matrix.annotation.Annotation;
 import org.jdmp.matrix.exceptions.MatrixException;
 
 /**
- * Interface for all matrix-calculations. 
- *
+ * Interface for all matrix-calculations.
+ * 
  * 
  * 
  * @author Andreas Naegele
@@ -61,5 +63,43 @@ public interface Calculation extends Serializable {
 	public Matrix calcLink() throws MatrixException;
 
 	public Matrix calcOrig() throws MatrixException;
+
+	public boolean isSparse();
+
+	public double getDouble(long... coordinates) throws MatrixException;
+
+	public void setDouble(double value, long... coordinates) throws MatrixException;
+
+	public Object getObject(long... coordinates) throws MatrixException;
+
+	public void setObject(Object value, long... coordinates) throws MatrixException;
+
+	public String getString(long... coordinates) throws MatrixException;
+
+	public void setString(String value, long... coordinates) throws MatrixException;
+
+	public Annotation getAnnotation();
+
+	public long getValueCount();
+
+	public Iterable<long[]> availableCoordinates();
+
+	public Iterable<long[]> allCoordinates();
+
+	public boolean contains(long... coordinates);
+
+	public Matrix getSource();
+
+	public Matrix[] getSources();
+
+	public void setSources(Matrix... sources);
+
+	public int getDimension();
+
+	public void setDimension(int dimension);
+
+	public long[] getSize();
+
+	public abstract EntryType getEntryType();
 
 }

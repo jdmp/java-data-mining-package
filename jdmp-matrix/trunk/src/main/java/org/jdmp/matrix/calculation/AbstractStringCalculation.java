@@ -30,7 +30,7 @@ import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.MathUtil;
 
-public abstract class AbstractStringCalculation extends AbstractCalculation {
+public abstract class AbstractStringCalculation extends AbstractGenericCalculation<String> {
 
 	public AbstractStringCalculation(Matrix... sources) {
 		super(sources);
@@ -44,7 +44,7 @@ public abstract class AbstractStringCalculation extends AbstractCalculation {
 		return MathUtil.getDouble(getString(coordinates));
 	}
 
-	public Object getObject(long... coordinates) throws MatrixException {
+	public String getObject(long... coordinates) throws MatrixException {
 		return getString(coordinates);
 	}
 
@@ -59,7 +59,8 @@ public abstract class AbstractStringCalculation extends AbstractCalculation {
 
 	public final Matrix calcOrig() throws MatrixException {
 		if (!Coordinates.equals(getSource().getSize(), getSize())) {
-			throw new MatrixException("Cannot change Matrix size. Use calc(Ret.NEW) or calc(Ret.LINK) instead.");
+			throw new MatrixException(
+					"Cannot change Matrix size. Use calc(Ret.NEW) or calc(Ret.LINK) instead.");
 		}
 		for (long[] c : getSource().allCoordinates()) {
 			getSource().setString(getString(c), c);

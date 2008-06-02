@@ -44,7 +44,7 @@ import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.annotation.Annotation;
 import org.jdmp.matrix.annotation.DefaultAnnotation;
-import org.jdmp.matrix.calculation.AbstractCalculation;
+import org.jdmp.matrix.calculation.AbstractGenericCalculation;
 import org.jdmp.matrix.calculation.Calculation;
 import org.jdmp.matrix.calculation.Calculation.Calc;
 import org.jdmp.matrix.calculation.Calculation.Ret;
@@ -632,7 +632,7 @@ public abstract class AbstractGenericMatrix<A> implements GenericMatrix<A> {
 
 	public Matrix calc(Calc calculation, Ret returnType, int dimension, Matrix... matrices)
 			throws MatrixException {
-		return AbstractCalculation.calc(calculation, returnType, dimension, this, matrices);
+		return AbstractGenericCalculation.calc(calculation, returnType, dimension, this, matrices);
 	}
 
 	public Matrix calcNew(Calculation calculation) throws MatrixException {
