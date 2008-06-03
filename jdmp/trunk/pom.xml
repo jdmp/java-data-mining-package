@@ -8,6 +8,7 @@
 	<artifactId>jdmp</artifactId>
 	<version>0.0.1</version>
 	<packaging>pom</packaging>
+  <url>www.jdmp.org</url>
 
 	<build>
     <resources>
@@ -341,6 +342,16 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
+        <inherited>true</inherited>
+        <configuration>
+        <outputDirectory>../jdmp/target/${project.version}/docs/${project.name}</outputDirectory>
+        <reportOutputDirectory>../jdmp/target/${project.version}/docs/${project.name}</reportOutputDirectory>
+        <linksource>true</linksource>
+        <links>
+          <link>http://java.sun.com/javase/6/docs/api/</link>
+          <link>http://www.jdmp.org/${project.version}/docs/jdmp-matrix/apidocs</link>
+        </links>
+        </configuration>
 			</plugin>
 		</plugins>
 	</reporting>
