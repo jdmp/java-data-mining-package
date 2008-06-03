@@ -297,4 +297,36 @@ public abstract class MathUtil {
 			return false;
 		}
 	}
+
+	public static double sensitivity(double tp, double fn) {
+		return tp / (tp + fn);
+	}
+
+	public static double specificity(double tn, double fp) {
+		return tn / (tn + fp);
+	}
+
+	public static double positivePredictiveValue(double tp, double fp) {
+		return tp / (tp + fp);
+	}
+
+	public static double negativePredictiveValue(double tn, double fn) {
+		return tn / (tn + fn);
+	}
+
+	public static double falsePositiveRate(double fp, double tn) {
+		return fp / (fp + tn);
+	}
+
+	public static double falseNegativeRate(double fn, double tp) {
+		return fn / (fn + tp);
+	}
+
+	public static double f1Measure(double precision, double recall) {
+		return (2.0 * precision * recall) / (precision + recall);
+	}
+
+	public static double fBetaMeasure(double beta, double precision, double recall) {
+		return ((1 + beta * beta) * precision * recall) / (beta * beta * precision + recall);
+	}
 }
