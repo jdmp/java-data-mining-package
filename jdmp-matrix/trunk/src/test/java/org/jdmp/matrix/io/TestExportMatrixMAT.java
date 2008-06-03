@@ -32,6 +32,18 @@ public class TestExportMatrixMAT extends AbstractExportMatrixTest {
 		return Format.MAT;
 	}
 
+	public void testExportToFile() throws Exception {
+
+		try {
+			Class.forName("org.jdmp.jmatio.ExportMatrixMAT");
+		} catch (ClassNotFoundException e) {
+			return;
+		}
+
+		super.testExportToFile();
+
+	}
+
 	public void testExportToStream() throws Exception {
 		try {
 			super.testExportToStream();

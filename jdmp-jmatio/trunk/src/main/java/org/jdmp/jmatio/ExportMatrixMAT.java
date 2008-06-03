@@ -12,7 +12,7 @@ import org.jdmp.matrix.exceptions.MatrixException;
 import com.jmatio.io.MatFileWriter;
 import com.jmatio.types.MLArray;
 
-public abstract class ExportMAT {
+public abstract class ExportMatrixMAT {
 
 	public static void toFile(File file, Matrix matrix, Object... parameters) throws IOException, MatrixException {
 		MatFileWriter writer = new MatFileWriter();
@@ -24,8 +24,8 @@ public abstract class ExportMAT {
 	public static void main(String[] args) throws Exception {
 		Matrix m = MatrixFactory.rand(10, 10);
 		m.setLabel("A");
-		ExportMAT.toFile(new File("/home/arndt/matlab.mat"), m);
-		Matrix m2 = ImportMAT.fromFile(new File("/home/arndt/matlab.mat"));
+		ExportMatrixMAT.toFile(new File("/home/arndt/matlab.mat"), m);
+		Matrix m2 = ImportMatrixMAT.fromFile(new File("/home/arndt/matlab.mat"));
 		System.out.println(m2);
 	}
 

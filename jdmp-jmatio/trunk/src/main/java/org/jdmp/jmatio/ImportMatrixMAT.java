@@ -10,7 +10,7 @@ import com.jmatio.io.MatFileReader;
 import com.jmatio.types.MLArray;
 import com.jmatio.types.MLDouble;
 
-public class ImportMAT {
+public class ImportMatrixMAT {
 
 	public static Matrix fromFile(File file, Object... parameters) throws IOException {
 		MatFileReader reader = new MatFileReader();
