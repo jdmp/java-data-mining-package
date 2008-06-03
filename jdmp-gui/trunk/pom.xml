@@ -5,9 +5,9 @@
 	<groupId>org.jdmp</groupId>
 	<artifactId>jdmp-gui</artifactId>
 	<packaging>jar</packaging>
-	<version>0.0.1</version>
+	<!-- <version>0.0.1</version>-->
 	<name>jdmp-gui</name>
-	<url>http://maven.apache.org</url>
+	<!-- <url>http://maven.apache.org</url>-->
 
 	<parent>
 		<groupId>org.jdmp</groupId>
