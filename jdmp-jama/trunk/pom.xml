@@ -5,14 +5,12 @@
 	<groupId>org.jdmp</groupId>
 	<artifactId>jdmp-jama</artifactId>
 	<packaging>jar</packaging>
-	<version>0.0.1</version>
 	<name>jdmp-jama</name>
-	<url>http://maven.apache.org</url>
 
 	<parent>
 		<groupId>org.jdmp</groupId>
 		<artifactId>jdmp</artifactId>
-		<version>0.0.1</version>
+		<version>${jdmp.version}</version>
 		<relativePath>../jdmp</relativePath>
 	</parent>
 

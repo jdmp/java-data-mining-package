@@ -4,11 +4,15 @@
 	 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+    <properties>
+      <jdmp.version>0.0.2</jdmp.version>
+    </properties>
+
 	<groupId>org.jdmp</groupId>
 	<artifactId>jdmp</artifactId>
-	<version>0.0.1</version>
+	<version>${jdmp.version}</version>
 	<packaging>pom</packaging>
-  <url>www.jdmp.org</url>
+    <url>http://www.jdmp.org</url>
 
 	<build>
     <resources>
@@ -39,91 +43,91 @@
 			<dependency>
 				<groupId>org.jdmp</groupId>
 				<artifactId>jdmp-matrix</artifactId>
-				<version>0.0.1</version>
+				<version>${jdmp.version}</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.jdmp</groupId>
 				<artifactId>jdmp-core</artifactId>
-				<version>0.0.1</version>
+				<version>${jdmp.version}</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.jdmp</groupId>
 				<artifactId>jdmp-libsvm</artifactId>
-				<version>0.0.1</version>
+				<version>${jdmp.version}</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.jdmp</groupId>
 				<artifactId>jdmp-weka</artifactId>
-				<version>0.0.1</version>
+				<version>${jdmp.version}</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.jdmp</groupId>
 				<artifactId>jdmp-mail</artifactId>
-				<version>0.0.1</version>
+				<version>${jdmp.version}</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.jdmp</groupId>
 				<artifactId>jdmp-mtj</artifactId>
-				<version>0.0.1</version>
+				<version>${jdmp.version}</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.jdmp</groupId>
 				<artifactId>jdmp-colt</artifactId>
-				<version>0.0.1</version>
+				<version>${jdmp.version}</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.jdmp</groupId>
 				<artifactId>jdmp-jama</artifactId>
-				<version>0.0.1</version>
+				<version>${jdmp.version}</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.jdmp</groupId>
 				<artifactId>jdmp-gui</artifactId>
-				<version>0.0.1</version>
+				<version>${jdmp.version}</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.jdmp</groupId>
 				<artifactId>jdmp-jexcelapi</artifactId>
-				<version>0.0.1</version>
+				<version>${jdmp.version}</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.jdmp</groupId>
 				<artifactId>jdmp-ehcache</artifactId>
-				<version>0.0.1</version>
+				<version>${jdmp.version}</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.jdmp</groupId>
 				<artifactId>jdmp-vecmath</artifactId>
-				<version>0.0.1</version>
+				<version>${jdmp.version}</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.jdmp</groupId>
 				<artifactId>jdmp-jgroups</artifactId>
-				<version>0.0.1</version>
+				<version>${jdmp.version}</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.jdmp</groupId>
 				<artifactId>jdmp-itext</artifactId>
-				<version>0.0.1</version>
+				<version>${jdmp.version}</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.jdmp</groupId>
 				<artifactId>jdmp-jmatio</artifactId>
-				<version>0.0.1</version>
+				<version>${jdmp.version}</version>
 				<scope>compile</scope>
 			</dependency>
 
@@ -342,17 +346,17 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-        <inherited>true</inherited>
-        <configuration>
-        <outputDirectory>../jdmp/target/${project.version}/docs/${project.name}</outputDirectory>
-        <reportOutputDirectory>../jdmp/target/${project.version}/docs/${project.name}</reportOutputDirectory>
-        <linksource>true</linksource>
-        <links>
-          <link>http://java.sun.com/javase/6/docs/api/</link>
-          <link>http://www.jdmp.org/jdmp/${project.version}/docs/jdmp-matrix/apidocs</link>
-          <link>http://www.jdmp.org/jdmp/${project.version}/docs/jdmp-core/apidocs</link>
-        </links>
-        </configuration>
+        		<inherited>true</inherited>
+		        <configuration>
+		        <outputDirectory>../jdmp/target/${project.version}/docs/${project.name}</outputDirectory>
+		        <reportOutputDirectory>../jdmp/target/${project.version}/docs/${project.name}</reportOutputDirectory>
+		        <linksource>true</linksource>
+		        <links>
+		          <link>http://java.sun.com/javase/6/docs/api/</link>
+		          <link>http://www.jdmp.org/jdmp/${project.version}/docs/jdmp-matrix/apidocs</link>
+		          <link>http://www.jdmp.org/jdmp/${project.version}/docs/jdmp-core/apidocs</link>
+		        </links>
+		        </configuration>
 			</plugin>
 		</plugins>
 	</reporting>

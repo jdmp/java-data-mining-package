@@ -2,19 +2,19 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.jdmp</groupId>
-		<artifactId>jdmp</artifactId>
-		<version>0.0.1</version>
-		<relativePath>../jdmp</relativePath>
-	</parent>
 	<groupId>org.jdmp</groupId>
 	<artifactId>jdmp-matrix</artifactId>
 	<packaging>jar</packaging>
-	<!-- <version>0.0.1</version>-->
 	<name>jdmp-matrix</name>
-	<!-- <url>http://maven.apache.org</url>-->
-
+		
+	<parent>
+		<groupId>org.jdmp</groupId>
+		<artifactId>jdmp</artifactId>
+		<version>${jdmp.version}</version>
+		<relativePath>../jdmp</relativePath>
+	</parent>
+	
+	
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
