@@ -1,0 +1,41 @@
+package org.jdmp.core.algorithm.basic;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.jdmp.core.algorithm.Algorithm;
+import org.jdmp.matrix.Matrix;
+
+public class AlgorithmSerialExecution extends Algorithm {
+	private static final long serialVersionUID = -3635082316760868682L;
+
+	public AlgorithmSerialExecution() {
+		super("Serial Execution");
+		setDescription("calls other Algorithms in defined order");
+	}
+
+	@Override
+	public List<Matrix> calculate(List<Matrix> matrices) throws Exception {
+		List<Matrix> result = new ArrayList<Matrix>();
+
+		for (Algorithm a : getAlgorithmList()) {
+			List<Matrix> r = a.calculate();
+			result.addAll(r);
+		}
+
+		return result;
+	}
+
+	public String getEdgeLabelForAlgorithm(int i) {
+		return "Task " + (i + 1);
+	}
+
+	public int getEdgeDirectionForReference(int i) {
+		return OUTGOING;
+	}
+
+	public void addAlgorithm(Algorithm a) {
+		setAlgorithm(getAlgorithmCount(), a);
+	}
+
+}
