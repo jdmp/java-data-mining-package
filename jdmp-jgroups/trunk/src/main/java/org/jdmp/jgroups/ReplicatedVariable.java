@@ -1,13 +1,13 @@
 package org.jdmp.jgroups;
 
-import org.jdmp.core.variable.Variable;
+import org.jdmp.core.variable.AbstractVariable;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.collections.DefaultMatrixList;
 import org.jdmp.matrix.collections.MatrixList;
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public class ReplicatedVariable extends Variable {
+public class ReplicatedVariable extends AbstractVariable {
 	private static final long serialVersionUID = -2486416251545919644L;
 
 	private static int runningId = 0;

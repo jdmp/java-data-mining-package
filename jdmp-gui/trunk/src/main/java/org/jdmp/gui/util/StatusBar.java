@@ -11,8 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
-import org.jdmp.core.util.AbstractGUIObject;
 import org.jdmp.gui.actions.TaskQueue;
+import org.jdmp.matrix.interfaces.GUIObject;
 
 public class StatusBar extends JPanel {
 	private static final long serialVersionUID = -92341245296146976L;
@@ -21,7 +21,7 @@ public class StatusBar extends JPanel {
 
 	private JLabel objectStatus = new JLabel();
 
-	private AbstractGUIObject object = null;
+	private GUIObject object = null;
 
 	private JProgressBar jProgressBar = new JProgressBar();
 
@@ -29,7 +29,7 @@ public class StatusBar extends JPanel {
 
 	// private Timer timer = null;
 
-	public StatusBar(AbstractGUIObject o) {
+	public StatusBar(GUIObject o) {
 		this.object = o;
 		this.setPreferredSize(new Dimension(1000, 30));
 		this.setBorder(BorderFactory.createEtchedBorder());
@@ -41,11 +41,11 @@ public class StatusBar extends JPanel {
 		add(objectStatus, new GridBagConstraints(0, 0, 1, 1, 0.2, 1.0, GridBagConstraints.EAST,
 				GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
 
-		add(taskStatus, new GridBagConstraints(2, 0, 1, 1, 0.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.BOTH,
-				new Insets(2, 2, 2, 2), 0, 0));
+		add(taskStatus, new GridBagConstraints(2, 0, 1, 1, 0.0, 1.0, GridBagConstraints.EAST,
+				GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
 
-		add(memoryUsage, new GridBagConstraints(3, 0, 1, 1, 0.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.BOTH,
-				new Insets(2, 2, 2, 2), 0, 0));
+		add(memoryUsage, new GridBagConstraints(3, 0, 1, 1, 0.0, 1.0, GridBagConstraints.EAST,
+				GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
 
 		jProgressBar.setStringPainted(false);
 		jProgressBar.setMinimum(0);
@@ -114,7 +114,7 @@ public class StatusBar extends JPanel {
 		memoryUsage.setToolTipText("" + used + "MB of " + max + "MB used");
 	}
 
-	public AbstractGUIObject getObject() {
+	public GUIObject getObject() {
 		return object;
 	}
 

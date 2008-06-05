@@ -23,6 +23,7 @@
 
 package org.jdmp.matrix.interfaces;
 
+import java.beans.PropertyChangeListener;
 import java.io.Serializable;
 
 /**
@@ -35,12 +36,27 @@ import java.io.Serializable;
  * @author Holger Arndt
  * 
  */
-public interface GUIObject extends Serializable, Disposable, Cloneable, HasLabel, HasDescription, HasToolTip {
+public interface GUIObject extends Serializable, Disposable, Cloneable, HasLabel, HasDescription,
+		HasToolTip {
 
 	/**
 	 * Indicates that changed in the object have been made, that should be
 	 * updated on the screen.
 	 */
 	public void fireValueChanged();
+
+	public String getLongStatus();
+
+	public String getShortStatus();
+
+	public void addPropertyChangeListener(PropertyChangeListener l);
+
+	public void removePropertyChangeListener(PropertyChangeListener l);
+
+	public void showGUI();
+
+	public void clear();
+
+	public boolean isInListenerList(Object listener);
 
 }

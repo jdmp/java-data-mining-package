@@ -22,7 +22,6 @@ import org.jdmp.core.matrix.system.MatrixSystemTime;
 import org.jdmp.core.matrix.system.MatrixUIDefaults;
 import org.jdmp.core.module.Module;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.util.AbstractGUIObject;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.WorkspaceVariable;
 import org.jdmp.gui.actions.AboutAction;
@@ -34,11 +33,12 @@ import org.jdmp.gui.matrix.actions.ShowInFrameAction;
 import org.jdmp.gui.module.actions.ModuleActions;
 import org.jdmp.gui.sample.actions.SampleActions;
 import org.jdmp.gui.variable.actions.VariableActions;
+import org.jdmp.matrix.interfaces.GUIObject;
 
 public class DefaultMenuBar extends JMenuBar {
 	private static final long serialVersionUID = -6115122804967308915L;
 
-	public DefaultMenuBar(JComponent component, AbstractGUIObject o) {
+	public DefaultMenuBar(JComponent component, GUIObject o) {
 
 		JMenu menu = new JMenu("" + o.getClass().getSimpleName());
 
@@ -65,19 +65,29 @@ public class DefaultMenuBar extends JMenuBar {
 
 		JMenu optionsMenu = new JMenu("Tools");
 		optionsMenu.setMnemonic(KeyEvent.VK_T);
-		optionsMenu.add(new JMenuItem(new ShowInFrameAction(component, WorkspaceVariable.getInstance())));
+		optionsMenu.add(new JMenuItem(new ShowInFrameAction(component, WorkspaceVariable
+				.getInstance())));
 		optionsMenu.add(new JMenuItem(new ShowInFrameAction(component, Module.getInstance())));
 		optionsMenu.add(new JSeparator());
-		optionsMenu.add(new JMenuItem(new ShowInFrameAction(component, MatrixGlobalConfiguration.getInstance())));
-		optionsMenu.add(new JMenuItem(new ShowInFrameAction(component, MatrixSystemProperties.getInstance())));
-		optionsMenu.add(new JMenuItem(new ShowInFrameAction(component, MatrixSystemEnvironment.getInstance())));
-		optionsMenu.add(new JMenuItem(new ShowInFrameAction(component, MatrixUIDefaults.getInstance())));
+		optionsMenu.add(new JMenuItem(new ShowInFrameAction(component, MatrixGlobalConfiguration
+				.getInstance())));
+		optionsMenu.add(new JMenuItem(new ShowInFrameAction(component, MatrixSystemProperties
+				.getInstance())));
+		optionsMenu.add(new JMenuItem(new ShowInFrameAction(component, MatrixSystemEnvironment
+				.getInstance())));
+		optionsMenu.add(new JMenuItem(new ShowInFrameAction(component, MatrixUIDefaults
+				.getInstance())));
 		optionsMenu.add(new JSeparator());
-		optionsMenu.add(new JMenuItem(new ShowInFrameAction(component, MatrixMemoryUsage.getInstance())));
-		optionsMenu.add(new JMenuItem(new ShowInFrameAction(component, MatrixRunningThreads.getInstance())));
-		optionsMenu.add(new JMenuItem(new ShowInFrameAction(component, MatrixSystemTime.getInstance())));
-		optionsMenu.add(new JMenuItem(new ShowInFrameAction(component, MatrixRandomSeed.getInstance())));
-		optionsMenu.add(new JMenuItem(new ShowInFrameAction(component, MatrixAvailableProcessors.getInstance())));
+		optionsMenu.add(new JMenuItem(new ShowInFrameAction(component, MatrixMemoryUsage
+				.getInstance())));
+		optionsMenu.add(new JMenuItem(new ShowInFrameAction(component, MatrixRunningThreads
+				.getInstance())));
+		optionsMenu.add(new JMenuItem(new ShowInFrameAction(component, MatrixSystemTime
+				.getInstance())));
+		optionsMenu.add(new JMenuItem(new ShowInFrameAction(component, MatrixRandomSeed
+				.getInstance())));
+		optionsMenu.add(new JMenuItem(new ShowInFrameAction(component, MatrixAvailableProcessors
+				.getInstance())));
 		optionsMenu.add(new JSeparator());
 		optionsMenu.add(new JMenuItem(new ShowInFrameAction(component, LogMatrix.getInstance())));
 		add(optionsMenu);

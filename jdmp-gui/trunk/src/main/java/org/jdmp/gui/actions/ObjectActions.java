@@ -11,7 +11,6 @@ import org.jdmp.core.algorithm.HasAlgorithms;
 import org.jdmp.core.dataset.HasDataSets;
 import org.jdmp.core.matrix.MatrixGUIObject;
 import org.jdmp.core.module.HasModules;
-import org.jdmp.core.util.AbstractGUIObject;
 import org.jdmp.core.variable.HasVariables;
 import org.jdmp.gui.algorithm.actions.AlgorithmListActions;
 import org.jdmp.gui.dataset.actions.DataSetListActions;
@@ -19,6 +18,7 @@ import org.jdmp.gui.matrix.actions.ClearMatrixAction;
 import org.jdmp.gui.matrix.actions.DeleteMatrixAction;
 import org.jdmp.gui.module.actions.ModuleListActions;
 import org.jdmp.gui.variable.actions.VariableListActions;
+import org.jdmp.matrix.interfaces.GUIObject;
 
 public class ObjectActions extends ArrayList<JComponent> {
 	private static final long serialVersionUID = 5237673098669230511L;
@@ -27,7 +27,7 @@ public class ObjectActions extends ArrayList<JComponent> {
 
 	private ExportAction exportAction = null;
 
-	public ObjectActions(JComponent component, AbstractGUIObject o) {
+	public ObjectActions(JComponent component, GUIObject o) {
 
 		if (o instanceof MatrixGUIObject) {
 			add(new JMenuItem(new ClearMatrixAction(component, (MatrixGUIObject) o, null)));

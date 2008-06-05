@@ -16,8 +16,8 @@ import javax.swing.JComponent;
 import javax.swing.UIManager;
 import javax.swing.event.SwingPropertyChangeSupport;
 
-import org.jdmp.core.util.AbstractGUIObject;
 import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.interfaces.GUIObject;
 
 public abstract class ObjectAction implements Action, Callable<Object>, Serializable {
 
@@ -29,7 +29,7 @@ public abstract class ObjectAction implements Action, Callable<Object>, Serializ
 
 	public static final int ALL = Matrix.ALL;
 
-	private transient AbstractGUIObject object = null;
+	private transient GUIObject object = null;
 
 	private transient JComponent component = null;
 
@@ -41,7 +41,7 @@ public abstract class ObjectAction implements Action, Callable<Object>, Serializ
 
 	private transient HashMap<String, Object> arrayTable = new HashMap<String, Object>();
 
-	public ObjectAction(JComponent c, AbstractGUIObject o) {
+	public ObjectAction(JComponent c, GUIObject o) {
 		setObject(o);
 		this.component = c;
 		icon = UIManager.getIcon("JDMP.icon." + getClass().getSimpleName());
@@ -67,14 +67,14 @@ public abstract class ObjectAction implements Action, Callable<Object>, Serializ
 		return (String) getValue(Action.NAME) + " (" + getValue(Action.SHORT_DESCRIPTION) + ")";
 	}
 
-	public final AbstractGUIObject getObject() {
+	public final GUIObject getObject() {
 		// if (object == null)
 		// object =
 		// Workspace.getInstance().getObjectForReference(objectReference);
 		return object;
 	}
 
-	public final void setObject(AbstractGUIObject o) {
+	public final void setObject(GUIObject o) {
 		if (o != null) {
 			this.object = o;
 			// this.objectReference = o.getReference();
@@ -124,7 +124,8 @@ public abstract class ObjectAction implements Action, Callable<Object>, Serializ
 	}
 
 	protected void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
-		if (changeSupport == null || (oldValue != null && newValue != null && oldValue.equals(newValue))) {
+		if (changeSupport == null
+				|| (oldValue != null && newValue != null && oldValue.equals(newValue))) {
 			return;
 		}
 		changeSupport.firePropertyChange(propertyName, oldValue, newValue);

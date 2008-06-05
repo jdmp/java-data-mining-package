@@ -5,12 +5,12 @@ import java.util.logging.Level;
 import javax.swing.Action;
 import javax.swing.JComponent;
 
-import org.jdmp.core.util.AbstractGUIObject;
+import org.jdmp.matrix.interfaces.GUIObject;
 
 public class PrintAction extends ObjectAction {
 	private static final long serialVersionUID = 5977367168891486978L;
 
-	public PrintAction(JComponent c, AbstractGUIObject o) {
+	public PrintAction(JComponent c, GUIObject o) {
 		super(c, o);
 		putValue(Action.NAME, "Print...");
 		putValue(Action.SHORT_DESCRIPTION, "Print a screenshot of this object");

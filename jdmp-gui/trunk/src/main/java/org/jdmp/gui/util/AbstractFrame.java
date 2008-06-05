@@ -21,7 +21,6 @@ import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.matrix.MatrixGUIObject;
 import org.jdmp.core.module.Module;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.util.AbstractGUIObject;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.gui.algorithm.AlgorithmPanel;
 import org.jdmp.gui.dataset.DataSetPanel;
@@ -35,6 +34,7 @@ import org.jdmp.gui.variable.VariablePanel;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.exceptions.MatrixException;
+import org.jdmp.matrix.interfaces.GUIObject;
 
 public abstract class AbstractFrame extends JFrame implements PropertyChangeListener {
 	private static final long serialVersionUID = -4656308453503586700L;
@@ -43,13 +43,13 @@ public abstract class AbstractFrame extends JFrame implements PropertyChangeList
 
 	private static Image image = Toolkit.getDefaultToolkit().getImage("jdmp16.png");
 
-	AbstractGUIObject object = null;
+	GUIObject object = null;
 
 	StatusBar statusBar = null;
 
 	private static int frameCount = 0;
 
-	public AbstractFrame(AbstractGUIObject o) throws MatrixException {
+	public AbstractFrame(GUIObject o) throws MatrixException {
 		UIDefaults.setDefaults();
 		FrameManager.registerFrame(this);
 		this.object = o;
@@ -134,8 +134,8 @@ public abstract class AbstractFrame extends JFrame implements PropertyChangeList
 			Icon icon = null;
 			int initialValue = 0;
 			String[] options = new String[] { "Exit", "Close", "Restore" };
-			int ret = JOptionPane.showOptionDialog(parentComponent, message, title, 0, messageType, icon, options,
-					initialValue);
+			int ret = JOptionPane.showOptionDialog(parentComponent, message, title, 0, messageType,
+					icon, options, initialValue);
 
 			if (ret == 0) {
 				System.exit(0);
@@ -145,7 +145,7 @@ public abstract class AbstractFrame extends JFrame implements PropertyChangeList
 		}
 	}
 
-	public final AbstractGUIObject getObject() {
+	public final GUIObject getObject() {
 		return object;
 	}
 

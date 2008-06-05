@@ -6,12 +6,12 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
-import org.jdmp.core.util.AbstractGUIObject;
+import org.jdmp.matrix.interfaces.GUIObject;
 
 public class ClearAction extends ObjectAction {
 	private static final long serialVersionUID = 8394347761552694383L;
 
-	public ClearAction(JComponent c, AbstractGUIObject o) {
+	public ClearAction(JComponent c, GUIObject o) {
 		super(c, o);
 		putValue(Action.NAME, "Clear");
 		putValue(Action.SHORT_DESCRIPTION, "Delete the contents of this object");

@@ -8,19 +8,20 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 
 import org.jdmp.core.matrix.MatrixGUIObject;
-import org.jdmp.core.util.AbstractGUIObject;
 import org.jdmp.gui.clipboard.MatrixSelection;
+import org.jdmp.matrix.interfaces.GUIObject;
 
 public class CopyAction extends ObjectAction {
 	private static final long serialVersionUID = -2679630812122400202L;
 
-	public CopyAction(JComponent c, AbstractGUIObject o) {
+	public CopyAction(JComponent c, GUIObject o) {
 		super(c, o);
 		putValue(Action.NAME, "Copy");
 		if (o == null) {
 			putValue(Action.SHORT_DESCRIPTION, "Copy Object to clipboard");
 		} else {
-			putValue(Action.SHORT_DESCRIPTION, "Copy " + o.getClass().getSimpleName() + " to clipboard");
+			putValue(Action.SHORT_DESCRIPTION, "Copy " + o.getClass().getSimpleName()
+					+ " to clipboard");
 		}
 	}
 
@@ -29,7 +30,8 @@ public class CopyAction extends ObjectAction {
 			Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 
 			if (getObject() instanceof MatrixGUIObject) {
-				MatrixSelection ms = new MatrixSelection(((MatrixGUIObject) getObject()).getMatrix());
+				MatrixSelection ms = new MatrixSelection(((MatrixGUIObject) getObject())
+						.getMatrix());
 				clipboard.setContents(ms, ms);
 			} else {
 			}

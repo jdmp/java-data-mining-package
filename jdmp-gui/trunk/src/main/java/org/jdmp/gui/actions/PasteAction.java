@@ -8,12 +8,12 @@ import java.awt.datatransfer.Transferable;
 import javax.swing.Action;
 import javax.swing.JComponent;
 
-import org.jdmp.core.util.AbstractGUIObject;
+import org.jdmp.matrix.interfaces.GUIObject;
 
 public class PasteAction extends ObjectAction {
 	private static final long serialVersionUID = -4029079211237756552L;
 
-	public PasteAction(JComponent c, AbstractGUIObject o) {
+	public PasteAction(JComponent c, GUIObject o) {
 		super(c, o);
 		putValue(Action.NAME, "Paste");
 		putValue(Action.SHORT_DESCRIPTION, "Paste from clipboard");

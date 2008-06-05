@@ -6,12 +6,12 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
-import org.jdmp.core.util.AbstractGUIObject;
+import org.jdmp.matrix.interfaces.GUIObject;
 
 public class DeleteAction extends ObjectAction {
 	private static final long serialVersionUID = -5156314488187149520L;
 
-	public DeleteAction(JComponent c, AbstractGUIObject o) {
+	public DeleteAction(JComponent c, GUIObject o) {
 		super(c, o);
 		putValue(Action.NAME, "Delete");
 		putValue(Action.SHORT_DESCRIPTION, "Delete this object");

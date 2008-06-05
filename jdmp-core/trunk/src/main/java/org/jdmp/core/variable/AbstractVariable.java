@@ -35,9 +35,10 @@ import org.jdmp.matrix.interfaces.HasMatrixList;
 import org.jdmp.matrix.io.util.IntelligentFileReader;
 import org.jdmp.matrix.io.util.IntelligentFileWriter;
 
-public abstract class AbstractVariable extends AbstractGUIObject implements HasMatrix, HasMatrixList {
+public abstract class AbstractVariable extends AbstractGUIObject implements Variable, HasMatrix,
+		HasMatrixList {
 
-	protected static transient Logger logger = Logger.getLogger(AbstractVariable.class.getName());
+	protected static transient Logger logger = Logger.getLogger(Variable.class.getName());
 
 	private transient Matrix matrixListMatrix = null;
 
@@ -47,7 +48,7 @@ public abstract class AbstractVariable extends AbstractGUIObject implements HasM
 		super();
 	}
 
-	public static final AbstractVariable fromMatrix(Matrix m) {
+	public static final Variable fromMatrix(Matrix m) {
 		return new DefaultVariable(new MatrixToMatrixListWrapper(m));
 	}
 
@@ -211,8 +212,8 @@ public abstract class AbstractVariable extends AbstractGUIObject implements HasM
 	}
 
 	public final String getLongStatus() {
-		return getLabel() + " [" + getRowCount() + "x" + getColumnCount() + "]" + " length:" + getLength()
-				+ " entries:" + getMatrixCount() + "/" + getMemorySize();
+		return getLabel() + " [" + getRowCount() + "x" + getColumnCount() + "]" + " length:"
+				+ getLength() + " entries:" + getMatrixCount() + "/" + getMemorySize();
 	}
 
 	public final String getShortStatus() {
@@ -259,7 +260,8 @@ public abstract class AbstractVariable extends AbstractGUIObject implements HasM
 				setSize(m.getRowCount(), m.getColumnCount());
 			}
 			getMatrixList().add(m);
-			fireVariableEvent(new VariableEvent(this, EventType.ADDED, getMatrixList().size() - 1, m));
+			fireVariableEvent(new VariableEvent(this, EventType.ADDED, getMatrixList().size() - 1,
+					m));
 		}
 	}
 

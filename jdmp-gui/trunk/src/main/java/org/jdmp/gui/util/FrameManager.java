@@ -28,7 +28,7 @@ import org.jdmp.matrix.interfaces.GUIObject;
 
 public abstract class FrameManager {
 
-	private static final Map<AbstractGUIObject, AbstractFrame> frames = new HashMap<AbstractGUIObject, AbstractFrame>();
+	private static final Map<GUIObject, AbstractFrame> frames = new HashMap<GUIObject, AbstractFrame>();
 
 	private static List<JComponent> actions = null;
 
@@ -178,7 +178,7 @@ class FrameAction extends ObjectAction {
 
 	public FrameAction(AbstractFrame frame) {
 		super(null, frame.getObject());
-		AbstractGUIObject o = frame.getObject();
+		GUIObject o = frame.getObject();
 		putValue(Action.NAME, o.getClass().getSimpleName() + " " + o.getLabel());
 		if (frame.isVisible()) {
 			putValue(Action.SHORT_DESCRIPTION, "Show " + frame.getObject().getLabel());

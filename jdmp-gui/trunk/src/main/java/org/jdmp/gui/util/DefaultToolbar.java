@@ -5,7 +5,6 @@ import javax.swing.JToolBar;
 
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.dataset.DataSet;
-import org.jdmp.core.util.AbstractGUIObject;
 import org.jdmp.gui.actions.ClearAction;
 import org.jdmp.gui.actions.CopyAction;
 import org.jdmp.gui.actions.DeleteAction;
@@ -15,11 +14,12 @@ import org.jdmp.gui.actions.PrintAction;
 import org.jdmp.gui.algorithm.actions.CalculateOnceAction;
 import org.jdmp.gui.algorithm.actions.StartAction;
 import org.jdmp.gui.algorithm.actions.StopAction;
+import org.jdmp.matrix.interfaces.GUIObject;
 
 public class DefaultToolbar extends JToolBar {
 	private static final long serialVersionUID = 3044233848101292254L;
 
-	public DefaultToolbar(JComponent c, AbstractGUIObject o) {
+	public DefaultToolbar(JComponent c, GUIObject o) {
 
 		setFloatable(false);
 
