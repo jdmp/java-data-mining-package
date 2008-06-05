@@ -21,9 +21,8 @@ import org.jdmp.matrix.collections.MatrixList;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.io.ExportMatrix;
 
-public class BasicDataSet extends DataSet {
+public class BasicDataSet extends AbstractDataSet {
 	private static final long serialVersionUID = -2887879051530049677L;
-
 
 	private Matrix inputMatrix = null;
 

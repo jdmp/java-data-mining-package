@@ -7,6 +7,7 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
+import org.jdmp.core.dataset.AbstractDataSet;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.matrix.exceptions.MatrixException;
 
@@ -18,11 +19,12 @@ public class CreateAnimalDemoAction extends DataSetAction {
 		putValue(Action.NAME, "Create Animal DataSet");
 		putValue(Action.SHORT_DESCRIPTION, "Creates a demo DataSet with animals");
 		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_A);
-		putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.ALT_DOWN_MASK));
+		putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_A,
+				InputEvent.ALT_DOWN_MASK));
 	}
 
 	public Object call() throws MatrixException {
-		DataSet animals = DataSet.ANIMALS();
+		DataSet animals = AbstractDataSet.ANIMALS();
 		animals.showGUI();
 		return animals;
 	}
