@@ -10,7 +10,7 @@ import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.StringUtil;
 
-public class BasicSample extends Sample {
+public class BasicSample extends AbstractSample {
 	private static final long serialVersionUID = -3649758882404748630L;
 
 	public static final int INPUT = 0;
@@ -19,7 +19,6 @@ public class BasicSample extends Sample {
 		this(m.getLabel());
 		setInputMatrix(m);
 	}
-
 
 	public BasicSample(String label) {
 		super(label);
