@@ -13,6 +13,7 @@ import javax.swing.JMenuItem;
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.matrix.MatrixGUIObject;
+import org.jdmp.core.module.AbstractModule;
 import org.jdmp.core.module.Module;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.AbstractGUIObject;
@@ -80,10 +81,10 @@ public abstract class FrameManager {
 
 	public static void showFrame() {
 		try {
-			AbstractFrame frame = frames.get(Module.getInstance());
+			AbstractFrame frame = frames.get(AbstractModule.getInstance());
 			if (frame == null) {
-				frame = new ModuleFrame(Module.getInstance());
-				frames.put(Module.getInstance(), frame);
+				frame = new ModuleFrame(AbstractModule.getInstance());
+				frames.put(AbstractModule.getInstance(), frame);
 			}
 			frame.setVisible(true);
 		} catch (Exception e) {

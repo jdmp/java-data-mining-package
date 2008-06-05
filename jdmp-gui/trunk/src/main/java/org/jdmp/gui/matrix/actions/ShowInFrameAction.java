@@ -4,9 +4,9 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 
 import org.jdmp.core.matrix.MatrixGUIObject;
-import org.jdmp.core.util.AbstractGUIObject;
 import org.jdmp.gui.actions.ObjectAction;
 import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.interfaces.GUIObject;
 
 public class ShowInFrameAction extends ObjectAction {
 	private static final long serialVersionUID = -5025569936825456099L;
@@ -15,7 +15,7 @@ public class ShowInFrameAction extends ObjectAction {
 		this(c, (MatrixGUIObject) matrix.getGUIObject());
 	}
 
-	public ShowInFrameAction(JComponent c, AbstractGUIObject object) {
+	public ShowInFrameAction(JComponent c, GUIObject object) {
 		super(c, object);
 		putValue(Action.NAME, object.getLabel());
 		putValue(Action.SHORT_DESCRIPTION, "Show " + object.getLabel() + " in a new Window");
