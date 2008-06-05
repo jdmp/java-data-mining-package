@@ -12,11 +12,12 @@ import org.jdmp.core.util.AbstractGUIObject;
 import org.jdmp.core.util.AbstractEvent.EventType;
 import org.jdmp.core.util.interfaces.HasAlgorithmsAndVariables;
 import org.jdmp.core.variable.HasVariables;
-import org.jdmp.core.variable.AbstractVariable;
+import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableListEvent;
 import org.jdmp.core.variable.VariableListListener;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
+
 
 public abstract class Algorithm extends AbstractGUIObject implements HasAlgorithmsAndVariables, HasVariables,
 		HasAlgorithms, Callable<List<Matrix>> {
@@ -32,7 +33,7 @@ public abstract class Algorithm extends AbstractGUIObject implements HasAlgorith
 
 	public static final int BIDIRECTIONAL = 3;
 
-	private final List<AbstractVariable> variableList = new CopyOnWriteArrayList<AbstractVariable>();
+	private final List<Variable> variableList = new CopyOnWriteArrayList<Variable>();
 
 	private final List<Algorithm> algorithmList = new CopyOnWriteArrayList<Algorithm>();
 
@@ -59,7 +60,7 @@ public abstract class Algorithm extends AbstractGUIObject implements HasAlgorith
 		setLabel(label);
 	}
 
-	public void setVariable(int index, AbstractVariable variable) {
+	public void setVariable(int index, Variable variable) {
 		while (variableList.size() <= index) {
 			variableList.add(null);
 		}
@@ -296,14 +297,14 @@ public abstract class Algorithm extends AbstractGUIObject implements HasAlgorith
 		return "count: " + getCount();
 	}
 
-	public void addVariable(AbstractVariable v) {
+	public void addVariable(Variable v) {
 	}
 
 	public void addVariableListListener(VariableListListener l) {
 		getListenerList().add(VariableListListener.class, l);
 	}
 
-	public final int getIndexOfVariable(AbstractVariable v) {
+	public final int getIndexOfVariable(Variable v) {
 		return variableList.indexOf(v);
 	}
 
@@ -316,7 +317,7 @@ public abstract class Algorithm extends AbstractGUIObject implements HasAlgorith
 	}
 
 	public final Matrix getMatrixFromVariable(int variableIndex) {
-		AbstractVariable v = getVariable(variableIndex);
+		Variable v = getVariable(variableIndex);
 		if (v == null)
 			return null;
 		else
@@ -328,7 +329,7 @@ public abstract class Algorithm extends AbstractGUIObject implements HasAlgorith
 	}
 
 	public final Matrix getMatrixFromVariable(int variableIndex, int matrixIndex) {
-		AbstractVariable v = getVariable(variableIndex);
+		Variable v = getVariable(variableIndex);
 		if (v == null)
 			return null;
 		else
@@ -336,18 +337,18 @@ public abstract class Algorithm extends AbstractGUIObject implements HasAlgorith
 	}
 
 	public final void addMatrixForVariable(int variableIndex, Matrix matrix) {
-		AbstractVariable v = getVariable(variableIndex);
+		Variable v = getVariable(variableIndex);
 		if (v != null)
 			v.addMatrix(matrix);
 	}
 
 	public final void setMatrixForVariable(int variableIndex, int matrixIndex, Matrix matrix) {
-		AbstractVariable v = getVariable(variableIndex);
+		Variable v = getVariable(variableIndex);
 		if (v != null)
 			v.setMatrix(matrixIndex, matrix);
 	}
 
-	public final AbstractVariable getVariable(int index) {
+	public final Variable getVariable(int index) {
 		return variableList.get(index);
 	}
 
@@ -355,11 +356,11 @@ public abstract class Algorithm extends AbstractGUIObject implements HasAlgorith
 		return variableList.size();
 	}
 
-	public final List<AbstractVariable> getVariableList() {
+	public final List<Variable> getVariableList() {
 		return variableList;
 	}
 
-	public void removeVariable(AbstractVariable variable) {
+	public void removeVariable(Variable variable) {
 	}
 
 	public void removeVariableListListener(VariableListListener l) {

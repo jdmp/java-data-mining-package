@@ -5,7 +5,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import org.jdmp.core.variable.DefaultVariable;
-import org.jdmp.core.variable.AbstractVariable;
+import org.jdmp.core.variable.Variable;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.StringUtil;
@@ -19,6 +19,7 @@ public class BasicSample extends Sample {
 		this(m.getLabel());
 		setInputMatrix(m);
 	}
+
 
 	public BasicSample(String label) {
 		super(label);
@@ -34,8 +35,8 @@ public class BasicSample extends Sample {
 		return s;
 	}
 
-	public AbstractVariable getInputVariable() {
-		AbstractVariable v = getVariable(INPUT);
+	public Variable getInputVariable() {
+		Variable v = getVariable(INPUT);
 		if (v == null) {
 			v = new DefaultVariable("Input", 1);
 			setVariable(INPUT, v);

@@ -18,8 +18,8 @@ import org.jdmp.matrix.interfaces.HasRowSelectionModel;
 import org.jdmp.matrix.util.JDMPSettings;
 import org.jdmp.matrix.util.StringUtil;
 
-public class MatrixGUIObject extends AbstractGUIObject implements TableModel, HasColumnSelectionModel,
-		HasRowSelectionModel {
+public class MatrixGUIObject extends AbstractGUIObject implements TableModel,
+		HasColumnSelectionModel, HasRowSelectionModel {
 	private static final long serialVersionUID = -5777110889052748093L;
 
 	private Matrix matrix = null;
@@ -49,7 +49,6 @@ public class MatrixGUIObject extends AbstractGUIObject implements TableModel, Ha
 		fireValueChanged();
 	}
 
-	@Override
 	public String getLongStatus() {
 		return getShortStatus();
 	}
@@ -84,12 +83,12 @@ public class MatrixGUIObject extends AbstractGUIObject implements TableModel, Ha
 		return min;
 	}
 
-	@Override
 	public String getShortStatus() {
 		StringBuffer s = new StringBuffer();
 		if (getLabel() != null)
 			s.append(getLabel() + " ");
-		s.append("[" + getClass().getSimpleName() + ":" + getRowCount() + "x" + getColumnCount() + "]");
+		s.append("[" + getClass().getSimpleName() + ":" + getRowCount() + "x" + getColumnCount()
+				+ "]");
 		return s.toString();
 	}
 
@@ -155,7 +154,8 @@ public class MatrixGUIObject extends AbstractGUIObject implements TableModel, Ha
 					s.append("<tr>");
 					s.append("<th>" + matrix.getRowLabel(row) + "</th>");
 					for (int col = 0; col < columnCount && col < JDMPSettings.getMaxToolTipCols(); col++) {
-						s.append("<td align=right>" + StringUtil.format(matrix.getDouble(row, col)) + "</td>");
+						s.append("<td align=right>" + StringUtil.format(matrix.getDouble(row, col))
+								+ "</td>");
 					}
 					if (getColumnCount() > JDMPSettings.getMaxToolTipCols()) {
 						s.append("<td align=right>...</td>");
@@ -165,7 +165,8 @@ public class MatrixGUIObject extends AbstractGUIObject implements TableModel, Ha
 				if (getRowCount() > JDMPSettings.getMaxToolTipRows()) {
 					s.append("<tr>");
 					s.append("<td></td>");
-					for (int col = 0; col < getColumnCount() && col < JDMPSettings.getMaxToolTipCols(); col++) {
+					for (int col = 0; col < getColumnCount()
+							&& col < JDMPSettings.getMaxToolTipCols(); col++) {
 						s.append("<td align=right>...</td>");
 					}
 					if (getColumnCount() > JDMPSettings.getMaxToolTipCols()) {

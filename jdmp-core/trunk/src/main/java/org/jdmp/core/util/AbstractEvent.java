@@ -2,6 +2,8 @@ package org.jdmp.core.util;
 
 import java.util.EventObject;
 
+import org.jdmp.matrix.interfaces.GUIObject;
+
 public abstract class AbstractEvent extends EventObject {
 	private static final long serialVersionUID = 6308911806902569388L;
 
@@ -13,7 +15,7 @@ public abstract class AbstractEvent extends EventObject {
 
 	protected Object[] data = null;
 
-	public AbstractEvent(AbstractGUIObject source, EventType type, Object... data) {
+	public AbstractEvent(GUIObject source, EventType type, Object... data) {
 		super(source);
 		this.type = type;
 		this.data = data;

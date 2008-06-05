@@ -3,7 +3,7 @@ package org.jdmp.core.matrix;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.AbstractTableModel;
 
-import org.jdmp.core.variable.AbstractVariable;
+import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableEvent;
 import org.jdmp.core.variable.VariableListener;
 import org.jdmp.matrix.Matrix;
@@ -21,14 +21,15 @@ public class MatrixListTableModel extends AbstractTableModel implements Variable
 
 	public static final int MATRIXPLOTCOLUMN = 2;
 
+
 	public static final int SIZECOLUMN = 3;
 
 	public static final int LABELCOLUMN = 4;
 
 	public MatrixListTableModel(HasMatrixList v) {
 		this.variable = v;
-		if (v instanceof AbstractVariable) {
-			((AbstractVariable) variable).addVariableListener(this);
+		if (v instanceof Variable) {
+			((Variable) variable).addVariableListener(this);
 		}
 	}
 

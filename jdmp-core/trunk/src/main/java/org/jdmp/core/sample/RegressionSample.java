@@ -2,7 +2,7 @@ package org.jdmp.core.sample;
 
 import org.jdmp.core.matrix.wrappers.SampleInputOutputMatrix;
 import org.jdmp.core.variable.DefaultVariable;
-import org.jdmp.core.variable.AbstractVariable;
+import org.jdmp.core.variable.Variable;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.exceptions.MatrixException;
@@ -17,6 +17,7 @@ public class RegressionSample extends WeightedSample {
 	public static final int OUTPUTERROR = 4;
 
 	public static final int RMSE = 5;
+
 
 	private transient SampleInputOutputMatrix sampleInputOutputMatrix = null;
 
@@ -55,8 +56,8 @@ public class RegressionSample extends WeightedSample {
 		setLabel(fields[classLabelPos]);
 	}
 
-	public AbstractVariable getOutputVariable() {
-		AbstractVariable v = getVariable(OUTPUT);
+	public Variable getOutputVariable() {
+		Variable v = getVariable(OUTPUT);
 		if (v == null) {
 			v = new DefaultVariable("Output");
 			setVariable(OUTPUT, v);
@@ -64,8 +65,8 @@ public class RegressionSample extends WeightedSample {
 		return v;
 	}
 
-	public AbstractVariable getDesiredOutputVariable() {
-		AbstractVariable v = getVariable(DESIREDOUTPUT);
+	public Variable getDesiredOutputVariable() {
+		Variable v = getVariable(DESIREDOUTPUT);
 		if (v == null) {
 			v = new DefaultVariable("Desired Output");
 			setVariable(DESIREDOUTPUT, v);
@@ -73,8 +74,8 @@ public class RegressionSample extends WeightedSample {
 		return v;
 	}
 
-	public AbstractVariable getOutputErrorVariable() {
-		AbstractVariable v = getVariable(OUTPUTERROR);
+	public Variable getOutputErrorVariable() {
+		Variable v = getVariable(OUTPUTERROR);
 		if (v == null) {
 			v = new DefaultVariable("Output Error");
 			setVariable(OUTPUTERROR, v);
@@ -82,8 +83,8 @@ public class RegressionSample extends WeightedSample {
 		return v;
 	}
 
-	public AbstractVariable getRMSEVariable() {
-		AbstractVariable v = getVariable(RMSE);
+	public Variable getRMSEVariable() {
+		Variable v = getVariable(RMSE);
 		if (v == null) {
 			v = new DefaultVariable("RMSE");
 			setVariable(RMSE, v);

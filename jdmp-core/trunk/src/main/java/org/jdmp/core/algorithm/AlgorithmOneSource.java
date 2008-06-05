@@ -1,13 +1,14 @@
 package org.jdmp.core.algorithm;
 
 import org.jdmp.core.variable.DefaultVariable;
-import org.jdmp.core.variable.AbstractVariable;
+import org.jdmp.core.variable.Variable;
 
 public abstract class AlgorithmOneSource extends Algorithm {
 
 	public AlgorithmOneSource(String label) {
 		super(label);
 	}
+
 
 	public static final int SOURCE = 0;
 
@@ -46,11 +47,11 @@ public abstract class AlgorithmOneSource extends Algorithm {
 		}
 	}
 
-	public final void setSourceVariable(AbstractVariable v) {
+	public final void setSourceVariable(Variable v) {
 		setVariable(SOURCE, v);
 	}
 
-	public final void setTargetVariable(AbstractVariable v) {
+	public final void setTargetVariable(Variable v) {
 		setVariable(TARGET, v);
 	}
 

@@ -2,13 +2,6 @@ package org.jdmp.core.util;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.beans.XMLEncoder;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.lang.reflect.Method;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -121,46 +114,6 @@ public abstract class AbstractGUIObject implements GUIObject {
 			return getClass().getSimpleName() + " [" + label + "] " + getShortStatus();
 	}
 
-	public abstract String getShortStatus();
-
-	public final void exportToXML(File file) {
-		if (file == null) {
-			logger.log(Level.WARNING, "no filename provided");
-			return;
-		}
-
-		try {
-			FileOutputStream fos = new FileOutputStream(file);
-			BufferedOutputStream bos = new BufferedOutputStream(fos);
-			XMLEncoder enc = new XMLEncoder(bos);
-			enc.writeObject(this);
-			enc.close();
-			bos.close();
-			fos.close();
-		} catch (Exception e) {
-			logger.log(Level.WARNING, "could not write xml to file", e);
-		}
-	}
-
-	public final void exportToOBJ(File file) {
-		if (file == null) {
-			logger.log(Level.WARNING, "no filename provided");
-			return;
-		}
-
-		try {
-			FileOutputStream fos = new FileOutputStream(file);
-			BufferedOutputStream bos = new BufferedOutputStream(fos);
-			ObjectOutputStream oos = new ObjectOutputStream(bos);
-			oos.writeObject(this);
-			oos.close();
-			bos.close();
-			fos.close();
-		} catch (Exception e) {
-			logger.log(Level.WARNING, "could not write to file", e);
-		}
-	}
-
 	public String getToolTipText() {
 		StringBuffer s = new StringBuffer();
 		s.append("<html>");
@@ -188,18 +141,12 @@ public abstract class AbstractGUIObject implements GUIObject {
 		return s.toString();
 	}
 
-	public abstract String getLongStatus();
-
 	public final void addPropertyChangeListener(PropertyChangeListener l) {
 		getProptertyChangeSupport().addPropertyChangeListener(l);
 	}
 
 	public final void removePropertyChangeListener(PropertyChangeListener l) {
 		getProptertyChangeSupport().removePropertyChangeListener(l);
-	}
-
-	private final void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
-		s.defaultReadObject();
 	}
 
 }

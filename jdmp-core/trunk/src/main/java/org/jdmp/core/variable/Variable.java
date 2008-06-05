@@ -1,5 +1,129 @@
 package org.jdmp.core.variable;
 
-public interface Variable {
+import java.io.File;
+import java.io.InputStream;
 
+import javax.swing.Icon;
+import javax.swing.ListSelectionModel;
+
+import org.jdmp.core.util.CoreObject;
+import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.collections.MatrixList;
+import org.jdmp.matrix.exceptions.MatrixException;
+import org.jdmp.matrix.interfaces.GUIObject;
+import org.jdmp.matrix.interfaces.HasDescription;
+import org.jdmp.matrix.interfaces.HasLabel;
+import org.jdmp.matrix.interfaces.HasMatrix;
+import org.jdmp.matrix.interfaces.HasMatrixList;
+
+public interface Variable extends CoreObject, GUIObject, HasLabel, HasDescription, HasMatrix,
+		HasMatrixList {
+
+	public void exportToM(File filename);
+
+	public long[] getSize();
+
+	public void setSize(long... size);
+
+	public void exportToPLT(File pltFile);
+
+	public void loadTSP(InputStream is);
+
+	public void loadTSP(String file);
+
+	public double getLength();
+
+	public double getMinTime();
+
+	public double getMaxTime();
+
+	public double getTime();
+
+	public int getMemorySize();
+
+	public int getMatrixCount();
+
+	public Matrix getMatrix();
+
+	public Matrix getMatrixCopy();
+
+	public Matrix getMatrix(int index);
+
+	public Matrix getMatrixCopy(int index);
+
+	public String getLongStatus();
+
+	public String getShortStatus();
+
+	public void clearHistory();
+
+	public double getValue() throws MatrixException;
+
+	public void setValue(double value);
+
+	public void dispose();
+
+	public MatrixList getMatrixList();
+
+	public Matrix getAsMatrix();
+
+	public void fireValueChanged(Matrix m);
+
+	public void addMatrix(Matrix m);
+
+	public void removeVariableListener(VariableListener l);
+
+	public void fireVariableEvent(VariableEvent e);
+
+	public void setMatrix(int index, Matrix m);
+
+	public void addVariableListener(VariableListener l);
+
+	public int getIndexOfMatrix(Matrix m);
+
+	public void clear();
+
+	public void fillGaussian() throws MatrixException;
+
+	public void fillUniform() throws MatrixException;
+
+	public void divideBy(double v) throws MatrixException;
+
+	public void plus(double v) throws MatrixException;
+
+	public void fillWithValue(double v) throws MatrixException;
+
+	public Icon getIcon();
+
+	public void setMemorySize(int size);
+
+	public void convertIntToVector(int numberOfClasses) throws MatrixException;
+
+	public long getRowCount();
+
+	public long getColumnCount();
+
+	public ListSelectionModel getRowSelectionModel();
+
+	public ListSelectionModel getColumnSelectionModel();
+
+	public double getEuklideanValue() throws MatrixException;
+
+	public double getMinValue() throws MatrixException;
+
+	public double getMaxValue() throws MatrixException;
+
+	public long getIndexOfMaximum() throws MatrixException;
+
+	public long getIndexOfMinimum() throws MatrixException;
+
+	public Matrix getMeanMatrix() throws MatrixException;
+
+	public Matrix getMaxMatrix() throws MatrixException;
+
+	public Matrix getMinMatrix() throws MatrixException;
+
+	public Matrix getVarianceMatrix() throws MatrixException;
+
+	public Matrix getStandardDeviationMatrix() throws MatrixException;
 }

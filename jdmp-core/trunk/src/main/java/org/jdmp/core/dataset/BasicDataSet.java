@@ -12,7 +12,7 @@ import org.jdmp.core.matrix.wrappers.DataSetInputMatrixWrapper;
 import org.jdmp.core.sample.Attribute;
 import org.jdmp.core.sample.BasicSample;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.variable.AbstractVariable;
+import org.jdmp.core.variable.Variable;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.Matrix.Format;
 import org.jdmp.matrix.calculation.Calculation.Ret;
@@ -24,11 +24,12 @@ import org.jdmp.matrix.io.ExportMatrix;
 public class BasicDataSet extends DataSet {
 	private static final long serialVersionUID = -2887879051530049677L;
 
+
 	private Matrix inputMatrix = null;
 
 	protected MatrixList matrixList = null;
 
-	public BasicDataSet(AbstractVariable v) {
+	public BasicDataSet(Variable v) {
 		this(v.getLabel());
 		for (Matrix m : v.getMatrixList()) {
 			BasicSample s = new BasicSample(m);

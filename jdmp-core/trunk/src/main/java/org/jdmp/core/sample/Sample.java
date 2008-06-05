@@ -6,7 +6,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.jdmp.core.util.AbstractGUIObject;
 import org.jdmp.core.variable.HasVariables;
-import org.jdmp.core.variable.AbstractVariable;
+import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableListEvent;
 import org.jdmp.core.variable.VariableListListener;
 import org.jdmp.matrix.Matrix;
@@ -14,7 +14,7 @@ import org.jdmp.matrix.interfaces.HasMatrix;
 
 public abstract class Sample extends AbstractGUIObject implements HasVariables, HasMatrix {
 
-	private final List<AbstractVariable> variableMap = new CopyOnWriteArrayList<AbstractVariable>();
+	private final List<Variable> variableMap = new CopyOnWriteArrayList<Variable>();
 
 	public Sample() {
 		super();
@@ -26,12 +26,12 @@ public abstract class Sample extends AbstractGUIObject implements HasVariables, 
 	}
 
 	public abstract Sample clone();
-	
+
 	public void dispose() {
 		clear();
 	}
 
-	public final void setVariable(int index, AbstractVariable v) {
+	public final void setVariable(int index, Variable v) {
 		while (variableMap.size() <= index) {
 			variableMap.add(null);
 		}
@@ -70,7 +70,7 @@ public abstract class Sample extends AbstractGUIObject implements HasVariables, 
 		return 0.0;
 	}
 
-	public List<AbstractVariable> getVariableList() {
+	public List<Variable> getVariableList() {
 		return Collections.unmodifiableList(variableMap);
 	}
 
@@ -80,7 +80,7 @@ public abstract class Sample extends AbstractGUIObject implements HasVariables, 
 
 	public abstract Matrix getInputMatrix();
 
-	public AbstractVariable getVariable(int pos) {
+	public Variable getVariable(int pos) {
 		if (pos < variableMap.size()) {
 			return variableMap.get(pos);
 		} else {
@@ -88,7 +88,7 @@ public abstract class Sample extends AbstractGUIObject implements HasVariables, 
 		}
 	}
 
-	public int getIndexOfVariable(AbstractVariable variable) {
+	public int getIndexOfVariable(Variable variable) {
 		return getVariableList().indexOf(variable);
 	}
 
@@ -108,18 +108,16 @@ public abstract class Sample extends AbstractGUIObject implements HasVariables, 
 		getListenerList().add(VariableListListener.class, l);
 	}
 
-	public void addVariable(AbstractVariable v) {
+	public void addVariable(Variable v) {
 	}
 
-	public void removeVariable(AbstractVariable v) {
+	public void removeVariable(Variable v) {
 	}
 
-	@Override
 	public String getLongStatus() {
 		return null;
 	}
 
-	@Override
 	public void clear() {
 	}
 

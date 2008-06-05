@@ -1,7 +1,7 @@
 package org.jdmp.core.sample;
 
 import org.jdmp.core.variable.DefaultVariable;
-import org.jdmp.core.variable.AbstractVariable;
+import org.jdmp.core.variable.Variable;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.exceptions.MatrixException;
@@ -19,8 +19,9 @@ public class WeightedSample extends BasicSample {
 		super();
 	}
 
-	public AbstractVariable getWeightVariable() {
-		AbstractVariable v = getVariable(WEIGHT);
+
+	public Variable getWeightVariable() {
+		Variable v = getVariable(WEIGHT);
 		if (v == null) {
 			v = new DefaultVariable("Weight", 1.0);
 			setVariable(WEIGHT, v);

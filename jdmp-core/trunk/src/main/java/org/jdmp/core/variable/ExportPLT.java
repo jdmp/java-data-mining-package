@@ -25,8 +25,9 @@ public abstract class ExportPLT {
 
 	}
 
-	public static final void save(File pltFile, AbstractVariable v) {
+	public static final void save(File pltFile, Variable v) {
 		String EOL = System.getProperty("line.separator");
+
 
 		try {
 			if (!pltFile.getAbsolutePath().toLowerCase().endsWith(".plt"))

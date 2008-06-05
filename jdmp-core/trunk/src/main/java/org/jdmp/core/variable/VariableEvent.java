@@ -6,11 +6,12 @@ import org.jdmp.matrix.Matrix;
 public class VariableEvent extends AbstractEvent {
 	private static final long serialVersionUID = -8349940514872800903L;
 
-	public VariableEvent(AbstractVariable source, EventType type) {
+	public VariableEvent(Variable source, EventType type) {
 		super(source, type);
 	}
 
-	public VariableEvent(AbstractVariable source, EventType type, int index, Matrix m) {
+
+	public VariableEvent(Variable source, EventType type, int index, Matrix m) {
 		super(source, type, index, m);
 	}
 
