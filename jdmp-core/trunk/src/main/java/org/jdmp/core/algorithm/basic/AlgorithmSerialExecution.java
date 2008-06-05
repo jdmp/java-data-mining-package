@@ -3,10 +3,11 @@ package org.jdmp.core.algorithm.basic;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.matrix.Matrix;
 
-public class AlgorithmSerialExecution extends Algorithm {
+public class AlgorithmSerialExecution extends AbstractAlgorithm {
 	private static final long serialVersionUID = -3635082316760868682L;
 
 	public AlgorithmSerialExecution() {

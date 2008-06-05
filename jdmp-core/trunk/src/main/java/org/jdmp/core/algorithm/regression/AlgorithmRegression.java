@@ -2,6 +2,7 @@ package org.jdmp.core.algorithm.regression;
 
 import java.util.List;
 
+import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.algorithm.basic.AlgorithmDifference;
 import org.jdmp.core.dataset.ClassificationDataSet;
@@ -12,7 +13,7 @@ import org.jdmp.core.sample.Sample;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
 
-public abstract class AlgorithmRegression extends Algorithm {
+public abstract class AlgorithmRegression extends AbstractAlgorithm {
 
 	public static final int OUTPUTERRORALGORITHM = 0;
 
@@ -31,12 +32,14 @@ public abstract class AlgorithmRegression extends Algorithm {
 
 	public abstract void reset() throws Exception;
 
-	public abstract void train(Matrix input, Matrix sampleWeight, Matrix desiredOutput) throws Exception;
+	public abstract void train(Matrix input, Matrix sampleWeight, Matrix desiredOutput)
+			throws Exception;
 
 	public final void predict(RegressionSample sample) throws Exception {
 		Matrix output = predict(sample.getInputMatrix(), sample.getWeightMatrix());
 		sample.setOutputMatrix(output);
-		List<Matrix> error = getOutputErrorAlgorithm().calculate(output, sample.getDesiredOutputMatrix());
+		List<Matrix> error = getOutputErrorAlgorithm().calculate(output,
+				sample.getDesiredOutputMatrix());
 		sample.setOutputErrorMatrix(error.get(0));
 		sample.setRMSEMatrix(MatrixFactory.linkToValue(error.get(0).getRMS()));
 	}
@@ -99,7 +102,8 @@ public abstract class AlgorithmRegression extends Algorithm {
 				if (classCount == 1 || recognized == -1) {
 					confusion.setDouble(confusion.getDouble(0, 0) + 1, 0, 0);
 				} else {
-					confusion.setDouble(confusion.getDouble(recognized, desired) + 1, recognized, desired);
+					confusion.setDouble(confusion.getDouble(recognized, desired) + 1, recognized,
+							desired);
 				}
 
 				if (((ClassificationSample) sample).isCorrect()) {
@@ -123,7 +127,8 @@ public abstract class AlgorithmRegression extends Algorithm {
 			confusion.setLabel("Confusion with " + getLabel());
 			((ClassificationDataSet) dataSet).appendConfusionMatrix(confusion);
 
-			Matrix accuracy = MatrixFactory.linkToValue((double) correctCount / (double) dataSet.getSampleCount());
+			Matrix accuracy = MatrixFactory.linkToValue((double) correctCount
+					/ (double) dataSet.getSampleCount());
 			accuracy.setLabel("Accuracy with " + getLabel());
 			((ClassificationDataSet) dataSet).appendAccuracyMatrix(accuracy);
 

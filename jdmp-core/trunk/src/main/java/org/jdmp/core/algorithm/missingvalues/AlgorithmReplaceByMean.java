@@ -2,10 +2,10 @@ package org.jdmp.core.algorithm.missingvalues;
 
 import java.util.List;
 
-import org.jdmp.core.algorithm.Algorithm;
+import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.matrix.Matrix;
 
-public class AlgorithmReplaceByMean extends Algorithm {
+public class AlgorithmReplaceByMean extends AbstractAlgorithm {
 
 	private static final long serialVersionUID = -6789652101266789295L;
 

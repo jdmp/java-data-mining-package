@@ -3,12 +3,11 @@ package org.jdmp.core.algorithm;
 import org.jdmp.core.variable.DefaultVariable;
 import org.jdmp.core.variable.Variable;
 
-public abstract class AlgorithmOneSource extends Algorithm {
+public abstract class AlgorithmOneSource extends AbstractAlgorithm {
 
 	public AlgorithmOneSource(String label) {
 		super(label);
 	}
-
 
 	public static final int SOURCE = 0;
 

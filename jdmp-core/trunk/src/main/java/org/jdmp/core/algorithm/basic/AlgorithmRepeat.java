@@ -2,10 +2,11 @@ package org.jdmp.core.algorithm.basic;
 
 import java.util.List;
 
+import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.matrix.Matrix;
 
-public class AlgorithmRepeat extends Algorithm {
+public class AlgorithmRepeat extends AbstractAlgorithm {
 	private static final long serialVersionUID = 1469854394519674382L;
 
 	private int REPEATEDALGORITHM = 0;

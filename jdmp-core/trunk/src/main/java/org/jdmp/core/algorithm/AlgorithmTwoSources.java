@@ -2,7 +2,7 @@ package org.jdmp.core.algorithm;
 
 import org.jdmp.core.variable.DefaultVariable;
 
-public abstract class AlgorithmTwoSources extends Algorithm {
+public abstract class AlgorithmTwoSources extends AbstractAlgorithm {
 
 	public static final int SOURCE1 = 0;
 
