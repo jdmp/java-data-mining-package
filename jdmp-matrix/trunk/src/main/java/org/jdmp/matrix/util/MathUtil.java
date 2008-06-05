@@ -322,6 +322,18 @@ public abstract class MathUtil {
 		return fn / (fn + tp);
 	}
 
+	public static double recall(double tp, double fn) {
+		return tp / (tp + fn);
+	}
+
+	public static double precision(double tp, double fp) {
+		return tp / (tp + fp);
+	}
+
+	public static double fallout(double tn, double fp) {
+		return tn / (fp + tn);
+	}
+
 	public static double f1Measure(double precision, double recall) {
 		return (2.0 * precision * recall) / (precision + recall);
 	}
