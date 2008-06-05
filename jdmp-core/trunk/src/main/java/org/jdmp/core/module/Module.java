@@ -15,7 +15,7 @@ import org.jdmp.core.util.AbstractGUIObject;
 import org.jdmp.core.util.AbstractEvent.EventType;
 import org.jdmp.core.util.interfaces.HasAlgorithmsAndVariables;
 import org.jdmp.core.variable.HasVariables;
-import org.jdmp.core.variable.Variable;
+import org.jdmp.core.variable.AbstractVariable;
 import org.jdmp.core.variable.VariableListEvent;
 import org.jdmp.core.variable.VariableListListener;
 import org.jdmp.core.variable.WorkspaceVariable;
@@ -29,7 +29,7 @@ public abstract class Module extends AbstractGUIObject implements HasAlgorithmsA
 
 	protected final List<DataSet> dataSetList = new CopyOnWriteArrayList<DataSet>();
 
-	protected final List<Variable> variableList = new CopyOnWriteArrayList<Variable>();
+	protected final List<AbstractVariable> variableList = new CopyOnWriteArrayList<AbstractVariable>();
 
 	protected final List<Module> moduleList = new CopyOnWriteArrayList<Module>();
 
@@ -142,7 +142,7 @@ public abstract class Module extends AbstractGUIObject implements HasAlgorithmsA
 		fireAlgorithmAdded(new AlgorithmListEvent(this, EventType.ADDED, a));
 	}
 
-	public void addVariable(Variable v) {
+	public void addVariable(AbstractVariable v) {
 		variableList.add(v);
 		fireVariableAdded(new VariableListEvent(this, EventType.ADDED, v));
 	}
@@ -195,7 +195,7 @@ public abstract class Module extends AbstractGUIObject implements HasAlgorithmsA
 		fireAlgorithmRemoved(new AlgorithmListEvent(this, EventType.REMOVED, algorithm));
 	}
 
-	public void removeVariable(Variable variable) {
+	public void removeVariable(AbstractVariable variable) {
 		variable.dispose();
 		variableList.remove(variable);
 		fireVariableRemoved(new VariableListEvent(this, EventType.REMOVED, variable));
@@ -265,15 +265,15 @@ public abstract class Module extends AbstractGUIObject implements HasAlgorithmsA
 		return variableList.size();
 	}
 
-	public final Variable getVariable(int pos) {
+	public final AbstractVariable getVariable(int pos) {
 		return variableList.get(pos);
 	}
 
-	public final List<Variable> getVariableList() {
+	public final List<AbstractVariable> getVariableList() {
 		return variableList;
 	}
 
-	public final int getIndexOfVariable(Variable variable) {
+	public final int getIndexOfVariable(AbstractVariable variable) {
 		return variableList.indexOf(variable);
 	}
 
@@ -299,7 +299,7 @@ public abstract class Module extends AbstractGUIObject implements HasAlgorithmsA
 			removeDataSet(ds);
 		}
 		while (!variableList.isEmpty()) {
-			Variable v = variableList.get(0);
+			AbstractVariable v = variableList.get(0);
 			removeVariable(v);
 		}
 		while (!algorithmList.isEmpty()) {

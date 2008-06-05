@@ -4,21 +4,21 @@ import java.util.List;
 
 public interface HasVariables {
 
-	public void addVariable(Variable v);
+	public void addVariable(AbstractVariable v);
 
 	public int getVariableCount();
 
-	public Variable getVariable(int pos);
+	public AbstractVariable getVariable(int pos);
 
-	public int getIndexOfVariable(Variable v);
+	public int getIndexOfVariable(AbstractVariable v);
 
 	public void addVariableListListener(VariableListListener l);
 
 	public void removeVariableListListener(VariableListListener l);
 
-	public List<Variable> getVariableList();
+	public List<AbstractVariable> getVariableList();
 
-	public void removeVariable(Variable variable);
+	public void removeVariable(AbstractVariable variable);
 
 	public void fireVariableAdded(VariableListEvent e);
 

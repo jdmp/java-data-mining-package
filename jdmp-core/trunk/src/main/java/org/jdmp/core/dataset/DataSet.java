@@ -18,7 +18,7 @@ import org.jdmp.core.sample.WeightedSample;
 import org.jdmp.core.util.AbstractGUIObject;
 import org.jdmp.core.util.AbstractEvent.EventType;
 import org.jdmp.core.variable.HasVariables;
-import org.jdmp.core.variable.Variable;
+import org.jdmp.core.variable.AbstractVariable;
 import org.jdmp.core.variable.VariableListEvent;
 import org.jdmp.core.variable.VariableListListener;
 import org.jdmp.core.variable.VariableListener;
@@ -35,7 +35,7 @@ public abstract class DataSet extends AbstractGUIObject implements HasVariables,
 	// CopyOnWriteArrayList so no nullpointerexceptions are thrown
 	private final List<Sample> sampleList = new CopyOnWriteArrayList<Sample>();
 
-	private final List<Variable> variableList = new CopyOnWriteArrayList<Variable>();
+	private final List<AbstractVariable> variableList = new CopyOnWriteArrayList<AbstractVariable>();
 
 	public DataSet() {
 		super();
@@ -46,17 +46,17 @@ public abstract class DataSet extends AbstractGUIObject implements HasVariables,
 		setLabel(label);
 	}
 
-	public void addVariable(Variable v) {
+	public void addVariable(AbstractVariable v) {
 	}
 
-	public void removeVariable(Variable v) {
+	public void removeVariable(AbstractVariable v) {
 	}
 
 	public List<Sample> getSampleList() {
 		return sampleList;
 	}
 
-	public final List<Variable> getVariableList() {
+	public final List<AbstractVariable> getVariableList() {
 		return Collections.unmodifiableList(variableList);
 	}
 
@@ -99,7 +99,7 @@ public abstract class DataSet extends AbstractGUIObject implements HasVariables,
 			return null;
 	}
 
-	public void setVariable(int index, Variable v) {
+	public void setVariable(int index, AbstractVariable v) {
 		while (variableList.size() <= index) {
 			variableList.add(null);
 		}
@@ -134,11 +134,11 @@ public abstract class DataSet extends AbstractGUIObject implements HasVariables,
 		return variableList.size();
 	}
 
-	public final Variable getVariable(int index) {
+	public final AbstractVariable getVariable(int index) {
 		return variableList.get(index);
 	}
 
-	public final int getIndexOfVariable(Variable v) {
+	public final int getIndexOfVariable(AbstractVariable v) {
 		return variableList.indexOf(v);
 	}
 
@@ -159,7 +159,7 @@ public abstract class DataSet extends AbstractGUIObject implements HasVariables,
 	}
 
 	public final Matrix getMatrixFromVariable(int variableIndex) {
-		Variable v = getVariable(variableIndex);
+		AbstractVariable v = getVariable(variableIndex);
 		if (v == null)
 			return null;
 		else
@@ -167,7 +167,7 @@ public abstract class DataSet extends AbstractGUIObject implements HasVariables,
 	}
 
 	public final Matrix getMatrixFromVariable(int variableIndex, int matrixIndex) {
-		Variable v = getVariable(variableIndex);
+		AbstractVariable v = getVariable(variableIndex);
 		if (v == null)
 			return null;
 		else
@@ -175,13 +175,13 @@ public abstract class DataSet extends AbstractGUIObject implements HasVariables,
 	}
 
 	public final void addMatrixForVariable(int variableIndex, Matrix matrix) {
-		Variable v = getVariable(variableIndex);
+		AbstractVariable v = getVariable(variableIndex);
 		if (v != null)
 			v.addMatrix(matrix);
 	}
 
 	public final void setMatrixForVariable(int variableIndex, int matrixIndex, Matrix matrix) {
-		Variable v = getVariable(variableIndex);
+		AbstractVariable v = getVariable(variableIndex);
 		if (v != null)
 			v.setMatrix(matrixIndex, matrix);
 	}
@@ -239,7 +239,7 @@ public abstract class DataSet extends AbstractGUIObject implements HasVariables,
 		for (Sample p : getSampleList()) {
 			p.dispose();
 		}
-		for (Variable v : getVariableList()) {
+		for (AbstractVariable v : getVariableList()) {
 			v.dispose();
 		}
 		sampleList.clear();

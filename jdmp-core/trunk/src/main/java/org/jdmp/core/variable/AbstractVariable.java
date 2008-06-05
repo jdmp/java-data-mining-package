@@ -35,19 +35,19 @@ import org.jdmp.matrix.interfaces.HasMatrixList;
 import org.jdmp.matrix.io.util.IntelligentFileReader;
 import org.jdmp.matrix.io.util.IntelligentFileWriter;
 
-public abstract class Variable extends AbstractGUIObject implements HasMatrix, HasMatrixList {
+public abstract class AbstractVariable extends AbstractGUIObject implements HasMatrix, HasMatrixList {
 
-	protected static transient Logger logger = Logger.getLogger(Variable.class.getName());
+	protected static transient Logger logger = Logger.getLogger(AbstractVariable.class.getName());
 
 	private transient Matrix matrixListMatrix = null;
 
 	private long[] size = new long[] { 0, 0 };
 
-	protected Variable() {
+	protected AbstractVariable() {
 		super();
 	}
 
-	public static final Variable fromMatrix(Matrix m) {
+	public static final AbstractVariable fromMatrix(Matrix m) {
 		return new DefaultVariable(new MatrixToMatrixListWrapper(m));
 	}
 

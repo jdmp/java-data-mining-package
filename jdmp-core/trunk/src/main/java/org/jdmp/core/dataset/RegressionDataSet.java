@@ -5,7 +5,7 @@ import org.jdmp.core.matrix.wrappers.DataSetInputOutputMatrixWrapper;
 import org.jdmp.core.matrix.wrappers.DataSetOutputMatrixWrapper;
 import org.jdmp.core.sample.RegressionSample;
 import org.jdmp.core.variable.DefaultVariable;
-import org.jdmp.core.variable.Variable;
+import org.jdmp.core.variable.AbstractVariable;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.calculation.Calculation.Ret;
 import org.jdmp.matrix.collections.DefaultMatrixList;
@@ -73,7 +73,7 @@ public class RegressionDataSet extends BasicDataSet {
 		return new RegressionDataSet(null, input, desiredOutput);
 	}
 
-	public Variable getRMSEVariable() {
+	public AbstractVariable getRMSEVariable() {
 		return getVariable(RMSE);
 	}
 
@@ -108,7 +108,7 @@ public class RegressionDataSet extends BasicDataSet {
 	}
 
 	public int getEarlyStoppingIndex(int numberOfSteps) {
-		Variable v = getRMSEVariable();
+		AbstractVariable v = getRMSEVariable();
 		if (v.getMatrixCount() <= numberOfSteps) {
 			return -1;
 		}

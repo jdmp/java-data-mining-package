@@ -16,7 +16,7 @@ import org.jdmp.core.matrix.wrappers.DataSetInputAndClassWrapper;
 import org.jdmp.core.sample.ClassificationSample;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.DefaultVariable;
-import org.jdmp.core.variable.Variable;
+import org.jdmp.core.variable.AbstractVariable;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.Matrix.Format;
@@ -206,11 +206,11 @@ public class ClassificationDataSet extends RegressionDataSet {
 		return matrixList;
 	}
 
-	public Variable getConfusionVariable() {
+	public AbstractVariable getConfusionVariable() {
 		return getVariable(CONFUSION);
 	}
 
-	public Variable getErrorCountVariable() {
+	public AbstractVariable getErrorCountVariable() {
 		return getVariable(ERRORCOUNT);
 	}
 
@@ -218,7 +218,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 		return (int) getErrorCountVariable().getEuklideanValue();
 	}
 
-	public Variable getAccuracyVariable() {
+	public AbstractVariable getAccuracyVariable() {
 		return getVariable(ACCURACY);
 	}
 

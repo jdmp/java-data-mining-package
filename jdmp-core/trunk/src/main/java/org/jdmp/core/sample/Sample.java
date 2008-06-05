@@ -6,7 +6,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.jdmp.core.util.AbstractGUIObject;
 import org.jdmp.core.variable.HasVariables;
-import org.jdmp.core.variable.Variable;
+import org.jdmp.core.variable.AbstractVariable;
 import org.jdmp.core.variable.VariableListEvent;
 import org.jdmp.core.variable.VariableListListener;
 import org.jdmp.matrix.Matrix;
@@ -14,7 +14,7 @@ import org.jdmp.matrix.interfaces.HasMatrix;
 
 public abstract class Sample extends AbstractGUIObject implements HasVariables, HasMatrix {
 
-	private final List<Variable> variableMap = new CopyOnWriteArrayList<Variable>();
+	private final List<AbstractVariable> variableMap = new CopyOnWriteArrayList<AbstractVariable>();
 
 	public Sample() {
 		super();
@@ -31,7 +31,7 @@ public abstract class Sample extends AbstractGUIObject implements HasVariables, 
 		clear();
 	}
 
-	public final void setVariable(int index, Variable v) {
+	public final void setVariable(int index, AbstractVariable v) {
 		while (variableMap.size() <= index) {
 			variableMap.add(null);
 		}
@@ -70,7 +70,7 @@ public abstract class Sample extends AbstractGUIObject implements HasVariables, 
 		return 0.0;
 	}
 
-	public List<Variable> getVariableList() {
+	public List<AbstractVariable> getVariableList() {
 		return Collections.unmodifiableList(variableMap);
 	}
 
@@ -80,7 +80,7 @@ public abstract class Sample extends AbstractGUIObject implements HasVariables, 
 
 	public abstract Matrix getInputMatrix();
 
-	public Variable getVariable(int pos) {
+	public AbstractVariable getVariable(int pos) {
 		if (pos < variableMap.size()) {
 			return variableMap.get(pos);
 		} else {
@@ -88,7 +88,7 @@ public abstract class Sample extends AbstractGUIObject implements HasVariables, 
 		}
 	}
 
-	public int getIndexOfVariable(Variable variable) {
+	public int getIndexOfVariable(AbstractVariable variable) {
 		return getVariableList().indexOf(variable);
 	}
 
@@ -108,10 +108,10 @@ public abstract class Sample extends AbstractGUIObject implements HasVariables, 
 		getListenerList().add(VariableListListener.class, l);
 	}
 
-	public void addVariable(Variable v) {
+	public void addVariable(AbstractVariable v) {
 	}
 
-	public void removeVariable(Variable v) {
+	public void removeVariable(AbstractVariable v) {
 	}
 
 	@Override

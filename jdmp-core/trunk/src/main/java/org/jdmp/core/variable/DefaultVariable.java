@@ -6,7 +6,7 @@ import org.jdmp.matrix.collections.DefaultMatrixList;
 import org.jdmp.matrix.collections.MatrixList;
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public class DefaultVariable extends Variable {
+public class DefaultVariable extends AbstractVariable {
 	private static final long serialVersionUID = -7192491915167470355L;
 
 	private MatrixList matrixList = null;

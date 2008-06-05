@@ -12,7 +12,7 @@ import org.jdmp.core.matrix.wrappers.DataSetInputMatrixWrapper;
 import org.jdmp.core.sample.Attribute;
 import org.jdmp.core.sample.BasicSample;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.variable.Variable;
+import org.jdmp.core.variable.AbstractVariable;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.Matrix.Format;
 import org.jdmp.matrix.calculation.Calculation.Ret;
@@ -28,7 +28,7 @@ public class BasicDataSet extends DataSet {
 
 	protected MatrixList matrixList = null;
 
-	public BasicDataSet(Variable v) {
+	public BasicDataSet(AbstractVariable v) {
 		this(v.getLabel());
 		for (Matrix m : v.getMatrixList()) {
 			BasicSample s = new BasicSample(m);

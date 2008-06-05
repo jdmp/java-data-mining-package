@@ -2,7 +2,7 @@ package org.jdmp.core.sample;
 
 import org.jdmp.core.matrix.wrappers.SampleInputOutputMatrix;
 import org.jdmp.core.variable.DefaultVariable;
-import org.jdmp.core.variable.Variable;
+import org.jdmp.core.variable.AbstractVariable;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.exceptions.MatrixException;
@@ -55,8 +55,8 @@ public class RegressionSample extends WeightedSample {
 		setLabel(fields[classLabelPos]);
 	}
 
-	public Variable getOutputVariable() {
-		Variable v = getVariable(OUTPUT);
+	public AbstractVariable getOutputVariable() {
+		AbstractVariable v = getVariable(OUTPUT);
 		if (v == null) {
 			v = new DefaultVariable("Output");
 			setVariable(OUTPUT, v);
@@ -64,8 +64,8 @@ public class RegressionSample extends WeightedSample {
 		return v;
 	}
 
-	public Variable getDesiredOutputVariable() {
-		Variable v = getVariable(DESIREDOUTPUT);
+	public AbstractVariable getDesiredOutputVariable() {
+		AbstractVariable v = getVariable(DESIREDOUTPUT);
 		if (v == null) {
 			v = new DefaultVariable("Desired Output");
 			setVariable(DESIREDOUTPUT, v);
@@ -73,8 +73,8 @@ public class RegressionSample extends WeightedSample {
 		return v;
 	}
 
-	public Variable getOutputErrorVariable() {
-		Variable v = getVariable(OUTPUTERROR);
+	public AbstractVariable getOutputErrorVariable() {
+		AbstractVariable v = getVariable(OUTPUTERROR);
 		if (v == null) {
 			v = new DefaultVariable("Output Error");
 			setVariable(OUTPUTERROR, v);
@@ -82,8 +82,8 @@ public class RegressionSample extends WeightedSample {
 		return v;
 	}
 
-	public Variable getRMSEVariable() {
-		Variable v = getVariable(RMSE);
+	public AbstractVariable getRMSEVariable() {
+		AbstractVariable v = getVariable(RMSE);
 		if (v == null) {
 			v = new DefaultVariable("RMSE");
 			setVariable(RMSE, v);
