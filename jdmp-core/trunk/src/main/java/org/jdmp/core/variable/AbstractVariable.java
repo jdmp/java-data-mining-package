@@ -19,7 +19,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 
 import org.jdmp.core.matrix.wrappers.MatrixListToMatrixWrapper;
-import org.jdmp.core.matrix.wrappers.MatrixToMatrixListWrapper;
 import org.jdmp.core.util.AbstractGUIObject;
 import org.jdmp.core.util.AbstractEvent.EventType;
 import org.jdmp.matrix.Matrix;
@@ -46,10 +45,6 @@ public abstract class AbstractVariable extends AbstractGUIObject implements Vari
 
 	protected AbstractVariable() {
 		super();
-	}
-
-	public static final Variable fromMatrix(Matrix m) {
-		return new DefaultVariable(new MatrixToMatrixListWrapper(m));
 	}
 
 	public final void exportToM(File filename) {

@@ -7,8 +7,8 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
-import org.jdmp.core.dataset.AbstractDataSet;
 import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.matrix.exceptions.MatrixException;
 
 public class CreateAnimalDemoAction extends DataSetAction {
@@ -24,7 +24,7 @@ public class CreateAnimalDemoAction extends DataSetAction {
 	}
 
 	public Object call() throws MatrixException {
-		DataSet animals = AbstractDataSet.ANIMALS();
+		DataSet animals = DataSetFactory.ANIMALS();
 		animals.showGUI();
 		return animals;
 	}
