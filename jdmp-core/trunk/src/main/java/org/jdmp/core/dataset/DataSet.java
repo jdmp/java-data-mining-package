@@ -16,10 +16,9 @@ import org.jdmp.core.variable.VariableListEvent;
 import org.jdmp.core.variable.VariableListListener;
 import org.jdmp.core.variable.VariableListener;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.interfaces.GUIObject;
 import org.jdmp.matrix.interfaces.HasMatrixList;
 
-public interface DataSet extends CoreObject, GUIObject, HasVariables, HasSamples, HasMatrixList {
+public interface DataSet extends CoreObject, HasVariables, HasSamples, HasMatrixList {
 
 	public void addVariable(Variable v);
 

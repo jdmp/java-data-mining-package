@@ -8,13 +8,14 @@ import javax.swing.JComponent;
 import org.jdmp.core.dataset.ClassificationDataSet;
 import org.jdmp.core.sample.ClassificationSample;
 import org.jdmp.core.sample.Sample;
+import org.jdmp.gui.dataset.DataSetGUIObject;
 
 public class ConvertDesiredOutputToVectorAction extends DataSetAction {
 	private static final long serialVersionUID = -5096995308098618259L;
 
 	private int numberOfClasses = 0;
 
-	public ConvertDesiredOutputToVectorAction(JComponent c, ClassificationDataSet ds, int numberOfClasses) {
+	public ConvertDesiredOutputToVectorAction(JComponent c, DataSetGUIObject ds, int numberOfClasses) {
 		super(c, ds);
 		this.numberOfClasses = numberOfClasses;
 		putValue(Action.NAME, "Convert DesiredOutput to Vector");
@@ -25,11 +26,13 @@ public class ConvertDesiredOutputToVectorAction extends DataSetAction {
 		try {
 			setStatus("Converting desired output to Matrix...");
 			setProgress(0);
-			getDataSet().getVariable(ClassificationDataSet.RMSE).setSize(numberOfClasses, 1);
+			getDataSet().getDataSet().getVariable(ClassificationDataSet.RMSE).setSize(
+					numberOfClasses, 1);
 			double i = 0;
-			double total = getDataSet().getSampleCount();
-			for (Sample p : getDataSet().getSampleList()) {
-				((ClassificationSample) p).getDesiredOutputVariable().convertIntToVector(numberOfClasses);
+			double total = getDataSet().getDataSet().getSampleCount();
+			for (Sample p : getDataSet().getDataSet().getSampleList()) {
+				((ClassificationSample) p).getDesiredOutputVariable().convertIntToVector(
+						numberOfClasses);
 				setProgress(i++ / total);
 			}
 			return null;

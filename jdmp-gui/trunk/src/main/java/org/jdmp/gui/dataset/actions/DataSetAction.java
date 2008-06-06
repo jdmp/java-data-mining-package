@@ -2,17 +2,17 @@ package org.jdmp.gui.dataset.actions;
 
 import javax.swing.JComponent;
 
-import org.jdmp.core.dataset.DataSet;
 import org.jdmp.gui.actions.ObjectAction;
+import org.jdmp.gui.dataset.DataSetGUIObject;
 
 public abstract class DataSetAction extends ObjectAction {
 
-	public DataSetAction(JComponent c, DataSet ds) {
+	public DataSetAction(JComponent c, DataSetGUIObject ds) {
 		super(c, ds);
 	}
 
-	public DataSet getDataSet() {
-		return (DataSet) getObject();
+	public DataSetGUIObject getDataSet() {
+		return (DataSetGUIObject) getObject();
 	}
 
 }

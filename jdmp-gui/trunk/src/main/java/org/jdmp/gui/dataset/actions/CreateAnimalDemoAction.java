@@ -9,12 +9,13 @@ import javax.swing.KeyStroke;
 
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DataSetFactory;
+import org.jdmp.gui.dataset.DataSetGUIObject;
 import org.jdmp.matrix.exceptions.MatrixException;
 
 public class CreateAnimalDemoAction extends DataSetAction {
 	private static final long serialVersionUID = 6821548758392591613L;
 
-	public CreateAnimalDemoAction(JComponent c, DataSet ds) {
+	public CreateAnimalDemoAction(JComponent c, DataSetGUIObject ds) {
 		super(c, ds);
 		putValue(Action.NAME, "Create Animal DataSet");
 		putValue(Action.SHORT_DESCRIPTION, "Creates a demo DataSet with animals");

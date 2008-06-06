@@ -17,10 +17,10 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import org.jdmp.core.algorithm.Algorithm;
-import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.matrix.MatrixGUIObject;
 import org.jdmp.core.module.Module;
 import org.jdmp.gui.algorithm.AlgorithmPanel;
+import org.jdmp.gui.dataset.DataSetGUIObject;
 import org.jdmp.gui.dataset.DataSetPanel;
 import org.jdmp.gui.io.ExportJPEG;
 import org.jdmp.gui.io.ExportPDF;
@@ -80,8 +80,8 @@ public abstract class AbstractFrame extends JFrame implements PropertyChangeList
 		JComponent component = null;
 		if (o instanceof Algorithm) {
 			component = new AlgorithmPanel((Algorithm) o);
-		} else if (o instanceof DataSet) {
-			component = new DataSetPanel((DataSet) o);
+		} else if (o instanceof DataSetGUIObject) {
+			component = new DataSetPanel((DataSetGUIObject) o);
 		} else if (o instanceof MatrixGUIObject) {
 			component = new MatrixPanel((MatrixGUIObject) o);
 		} else if (o instanceof Module) {

@@ -5,14 +5,14 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 
-import org.jdmp.core.dataset.DataSet;
 import org.jdmp.gui.actions.ExitAction;
 import org.jdmp.gui.actions.ObjectActions;
+import org.jdmp.gui.dataset.DataSetGUIObject;
 
 public class DataSetActions extends ObjectActions {
 	private static final long serialVersionUID = 989312444370800368L;
 
-	public DataSetActions(JComponent c, DataSet ds) {
+	public DataSetActions(JComponent c, DataSetGUIObject ds) {
 		super(c, ds);
 
 		add(2, new JSeparator());

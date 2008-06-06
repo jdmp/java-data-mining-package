@@ -6,8 +6,8 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 
 import org.jdmp.core.dataset.ClassificationDataSet;
-import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.ClassificationSample;
+import org.jdmp.gui.dataset.DataSetGUIObject;
 import org.jdmp.matrix.io.util.IntelligentFileReader;
 
 public class ImportCSVInOneLineAction extends DataSetAction {
@@ -25,8 +25,8 @@ public class ImportCSVInOneLineAction extends DataSetAction {
 
 	private int classLabelPos;
 
-	public ImportCSVInOneLineAction(JComponent c, ClassificationDataSet ds, String filename, int startPos, int count,
-			int classPos, int classLabelPos, int maxSampleCount) {
+	public ImportCSVInOneLineAction(JComponent c, DataSetGUIObject ds, String filename,
+			int startPos, int count, int classPos, int classLabelPos, int maxSampleCount) {
 		this(c, ds);
 		this.filename = filename;
 		this.startPos = startPos;
@@ -36,7 +36,7 @@ public class ImportCSVInOneLineAction extends DataSetAction {
 		this.maxSampleCount = maxSampleCount;
 	}
 
-	public ImportCSVInOneLineAction(JComponent c, DataSet ds) {
+	public ImportCSVInOneLineAction(JComponent c, DataSetGUIObject ds) {
 		super(c, ds);
 		putValue(Action.NAME, "Import from CSV...");
 		putValue(Action.SHORT_DESCRIPTION, "Import from CSV file");
@@ -59,7 +59,7 @@ public class ImportCSVInOneLineAction extends DataSetAction {
 			for (int i = 0; i < maxSampleCount && (line = lr.readLine()) != null; i++) {
 				ClassificationSample p = new ClassificationSample();
 				p.createFromLine(line, startPos, featureCount, classPos, classLabelPos);
-				((ClassificationDataSet) getDataSet()).addSample(p);
+				((ClassificationDataSet) getDataSet().getDataSet()).addSample(p);
 				if (i % 100 == 0) {
 					setProgress((double) lr.getLineNumber() / (double) totalLineCount);
 					setStatus(lr.getLineNumber() + " of " + totalLineCount + " Samples loaded");

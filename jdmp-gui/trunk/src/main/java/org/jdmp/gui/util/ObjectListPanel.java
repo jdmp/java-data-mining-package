@@ -198,7 +198,11 @@ public class ObjectListPanel extends JPanel implements MouseListener, KeyListene
 
 	public ObjectListPanel(HasSamples iSamples) {
 		this();
-		this.object = (GUIObject) iSamples;
+		if (iSamples instanceof CoreObject) {
+			this.object = ((CoreObject) iSamples).getGUIObject();
+		} else {
+			this.object = (GUIObject) iSamples;
+		}
 		this.type = ISAMPLES;
 
 		dataModel = new SampleListTableModel(iSamples);

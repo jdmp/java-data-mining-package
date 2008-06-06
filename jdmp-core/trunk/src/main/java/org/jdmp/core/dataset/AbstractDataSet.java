@@ -1,11 +1,13 @@
 package org.jdmp.core.dataset;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.logging.Level;
 
 import javax.swing.ListSelectionModel;
 
@@ -13,7 +15,7 @@ import org.jdmp.core.sample.HasSamples;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.sample.SampleListEvent;
 import org.jdmp.core.sample.SampleListListener;
-import org.jdmp.core.util.AbstractGUIObject;
+import org.jdmp.core.util.AbstractCoreObject;
 import org.jdmp.core.util.AbstractEvent.EventType;
 import org.jdmp.core.variable.HasVariables;
 import org.jdmp.core.variable.Variable;
@@ -21,11 +23,14 @@ import org.jdmp.core.variable.VariableListEvent;
 import org.jdmp.core.variable.VariableListListener;
 import org.jdmp.core.variable.VariableListener;
 import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.interfaces.GUIObject;
 import org.jdmp.matrix.interfaces.HasMatrixList;
 
-public abstract class AbstractDataSet extends AbstractGUIObject implements DataSet, HasVariables,
+public abstract class AbstractDataSet extends AbstractCoreObject implements DataSet, HasVariables,
 		HasSamples, HasMatrixList {
 
+	private transient GUIObject guiObject=null;
+	
 	private DataSetType dataSetType = DataSetType.TRAININGSET;
 
 	// CopyOnWriteArrayList so no nullpointerexceptions are thrown
@@ -231,7 +236,6 @@ public abstract class AbstractDataSet extends AbstractGUIObject implements DataS
 		getListenerList().remove(DataSetListener.class, l);
 	}
 
-	@Override
 	public void clear() {
 		for (Sample p : getSampleList()) {
 			p.dispose();
@@ -342,5 +346,18 @@ public abstract class AbstractDataSet extends AbstractGUIObject implements DataS
 	public void removeAllSamples() {
 		sampleList.clear();
 		fireSampleUpdated(new SampleListEvent(this, EventType.ALLUPDATED));
+	}
+	
+	public final GUIObject getGUIObject() {
+		if (guiObject == null) {
+			try {
+				Class<?> c = Class.forName("org.jdmp.gui.dataset.DataSetGUIObject");
+				Constructor<?> con = c.getConstructor(new Class<?>[] { DataSet.class });
+				guiObject = (GUIObject) con.newInstance(new Object[] { this });
+			} catch (Exception e) {
+				logger.log(Level.WARNING, "cannot create dataset gui object", e);
+			}
+		}
+		return guiObject;
 	}
 }

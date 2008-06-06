@@ -1,8 +1,10 @@
 package org.jdmp.core.sample;
 
+import java.lang.reflect.Constructor;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.logging.Level;
 
 import org.jdmp.core.util.AbstractCoreObject;
 import org.jdmp.core.variable.HasVariables;
@@ -10,11 +12,14 @@ import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableListEvent;
 import org.jdmp.core.variable.VariableListListener;
 import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.interfaces.GUIObject;
 import org.jdmp.matrix.interfaces.HasMatrix;
 
 public abstract class AbstractSample extends AbstractCoreObject implements Sample, HasVariables,
 		HasMatrix {
 
+	private transient GUIObject guiObject=null;
+	
 	private final List<Variable> variableMap = new CopyOnWriteArrayList<Variable>();
 
 	public AbstractSample() {
@@ -120,6 +125,19 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 	}
 
 	public void clear() {
+	}
+	
+	public final GUIObject getGUIObject() {
+		if (guiObject == null) {
+			try {
+				Class<?> c = Class.forName("org.jdmp.gui.sample.SampleGUIObject");
+				Constructor<?> con = c.getConstructor(new Class<?>[] { Sample.class });
+				guiObject = (GUIObject) con.newInstance(new Object[] { this });
+			} catch (Exception e) {
+				logger.log(Level.WARNING, "cannot create sample gui object", e);
+			}
+		}
+		return guiObject;
 	}
 
 }

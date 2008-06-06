@@ -11,13 +11,14 @@ import javax.swing.JComponent;
 import javax.swing.JMenuItem;
 
 import org.jdmp.core.algorithm.Algorithm;
-import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.matrix.MatrixGUIObject;
 import org.jdmp.core.module.AbstractModule;
 import org.jdmp.core.module.Module;
+import org.jdmp.core.util.CoreObject;
 import org.jdmp.gui.actions.ObjectAction;
 import org.jdmp.gui.algorithm.AlgorithmFrame;
 import org.jdmp.gui.dataset.DataSetFrame;
+import org.jdmp.gui.dataset.DataSetGUIObject;
 import org.jdmp.gui.matrix.MatrixFrame;
 import org.jdmp.gui.module.ModuleFrame;
 import org.jdmp.gui.sample.SampleFrame;
@@ -33,21 +34,31 @@ public abstract class FrameManager {
 
 	private static List<JComponent> actions = null;
 
-	public static void showFrame(Object o) {
+	public static void showFrame(GUIObject o) {
 		if (o instanceof MatrixGUIObject) {
 			showFrame((MatrixGUIObject) o);
 		} else if (o instanceof Algorithm) {
 			showFrame((Algorithm) o);
 		} else if (o instanceof VariableGUIObject) {
 			showFrame((VariableGUIObject) o);
-		} else if (o instanceof DataSet) {
-			showFrame((DataSet) o);
+		} else if (o instanceof DataSetGUIObject) {
+			showFrame((DataSetGUIObject) o);
 		} else if (o instanceof SampleGUIObject) {
 			showFrame((SampleGUIObject) o);
 		} else if (o instanceof Module) {
 			showFrame((Module) o);
 		} else {
 			throw new MatrixException("cannot show frame for object: " + o);
+		}
+	}
+
+	public static void showFrame(Object o) {
+		if (o instanceof GUIObject) {
+			showFrame((GUIObject) o);
+		} else if (o instanceof CoreObject) {
+			showFrame(((CoreObject) o).getGUIObject());
+		} else {
+			throw new MatrixException("wrong object type: " + o);
 		}
 	}
 
@@ -120,7 +131,7 @@ public abstract class FrameManager {
 		}
 	}
 
-	public static void showFrame(DataSet d) {
+	public static void showFrame(DataSetGUIObject d) {
 		try {
 			AbstractFrame frame = frames.get(d);
 			if (frame == null) {
