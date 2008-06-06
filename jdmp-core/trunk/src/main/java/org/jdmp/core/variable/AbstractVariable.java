@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 
 import org.jdmp.core.matrix.wrappers.MatrixListToMatrixWrapper;
-import org.jdmp.core.util.AbstractGUIObject;
+import org.jdmp.core.util.AbstractCoreObject;
 import org.jdmp.core.util.AbstractEvent.EventType;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
@@ -29,13 +29,10 @@ import org.jdmp.matrix.calculation.basic.Plus;
 import org.jdmp.matrix.collections.MatrixList;
 import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.interfaces.HasMatrix;
-import org.jdmp.matrix.interfaces.HasMatrixList;
 import org.jdmp.matrix.io.util.IntelligentFileReader;
 import org.jdmp.matrix.io.util.IntelligentFileWriter;
 
-public abstract class AbstractVariable extends AbstractGUIObject implements Variable, HasMatrix,
-		HasMatrixList {
+public abstract class AbstractVariable extends AbstractCoreObject implements Variable {
 
 	protected static transient Logger logger = Logger.getLogger(Variable.class.getName());
 
