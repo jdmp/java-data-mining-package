@@ -9,11 +9,10 @@ import java.util.logging.Logger;
 import javax.swing.event.EventListenerList;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.interfaces.GUIObject;
 
 public abstract class AbstractCoreObject implements CoreObject {
 
-	protected static final Logger logger = Logger.getLogger(AbstractGUIObject.class.getName());
+	protected static final Logger logger = Logger.getLogger(AbstractCoreObject.class.getName());
 
 	public static final int X = Matrix.X;
 
@@ -110,7 +109,7 @@ public abstract class AbstractCoreObject implements CoreObject {
 	public final void showGUI() {
 		try {
 			Class<?> c = Class.forName("org.jdmp.gui.util.FrameManager");
-			Method method = c.getMethod("showFrame", new Class[] { GUIObject.class });
+			Method method = c.getMethod("showFrame", new Class[] { Object.class });
 			method.invoke(null, new Object[] { this });
 		} catch (Exception e) {
 			logger.log(Level.WARNING, "cannot show frame", e);

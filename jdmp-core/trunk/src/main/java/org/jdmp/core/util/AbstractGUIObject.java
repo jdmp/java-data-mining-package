@@ -69,7 +69,7 @@ public abstract class AbstractGUIObject implements GUIObject {
 	public final void showGUI() {
 		try {
 			Class<?> c = Class.forName("org.jdmp.gui.util.FrameManager");
-			Method method = c.getMethod("showFrame", new Class[] { GUIObject.class });
+			Method method = c.getMethod("showFrame", new Class[] { Object.class });
 			method.invoke(null, new Object[] { this });
 		} catch (Exception e) {
 			logger.log(Level.WARNING, "cannot show frame", e);

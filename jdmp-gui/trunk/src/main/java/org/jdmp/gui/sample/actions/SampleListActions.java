@@ -7,8 +7,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 
 import org.jdmp.core.sample.HasSamples;
-import org.jdmp.core.util.AbstractGUIObject;
 import org.jdmp.gui.actions.ExitAction;
+import org.jdmp.matrix.interfaces.GUIObject;
 
 public class SampleListActions extends ArrayList<JComponent> {
 	private static final long serialVersionUID = 864758348092666603L;
@@ -17,7 +17,7 @@ public class SampleListActions extends ArrayList<JComponent> {
 		this.add(new JMenuItem(new AddSampleAction(c, v)));
 
 		this.add(new JSeparator());
-		this.add(new JMenuItem(new ExitAction(c, (AbstractGUIObject) v)));
+		this.add(new JMenuItem(new ExitAction(c, (GUIObject) v)));
 	}
 
 }

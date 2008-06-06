@@ -15,10 +15,10 @@ import javax.swing.Icon;
 import javax.swing.UIManager;
 
 import org.jdmp.core.algorithm.Algorithm;
-import org.jdmp.core.util.AbstractGUIObject;
 import org.jdmp.core.util.interfaces.HasAlgorithmsAndVariables;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.gui.variable.VariableIcon;
+import org.jdmp.matrix.interfaces.GUIObject;
 
 import edu.uci.ics.jung.graph.ArchetypeVertex;
 import edu.uci.ics.jung.graph.Edge;
@@ -50,14 +50,14 @@ public class TopologyPanel extends JungGraphPanel {
 		((PluggableRenderer) getRenderer()).setVertexIconFunction(new VertexIconFunction() {
 
 			public Icon getIcon(ArchetypeVertex v) {
-				AbstractGUIObject object = (AbstractGUIObject) v.getUserDatum(Data.JDMPObject);
+				GUIObject object = (GUIObject) v.getUserDatum(Data.JDMPObject);
 				return TopologyPanel.getIcon(object);
 			}
 		});
 
 		setToolTipFunction(new ToolTipFunction() {
 			public String getToolTipText(Vertex v) {
-				return ((AbstractGUIObject) v.getUserDatum(Data.JDMPObject)).getToolTipText();
+				return ((GUIObject) v.getUserDatum(Data.JDMPObject)).getToolTipText();
 			}
 
 			public String getToolTipText(Edge e) {
@@ -104,7 +104,7 @@ public class TopologyPanel extends JungGraphPanel {
 
 	}
 
-	public static final Icon getIcon(AbstractGUIObject o) {
+	public static final Icon getIcon(GUIObject o) {
 		if (o instanceof Algorithm) {
 			return UIManager.getIcon("Algorithm.icon");
 		} else if (o instanceof Variable) {
@@ -120,7 +120,7 @@ public class TopologyPanel extends JungGraphPanel {
 		}
 	}
 
-	public static final Shape getShape(AbstractGUIObject o) {
+	public static final Shape getShape(GUIObject o) {
 		Icon icon = getIcon(o);
 		Shape shape = getShape(icon, 30);
 		int width = icon.getIconWidth();
@@ -131,7 +131,8 @@ public class TopologyPanel extends JungGraphPanel {
 	}
 
 	public static Shape getShape(Icon icon, int max) {
-		BufferedImage bi = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
+		BufferedImage bi = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(),
+				BufferedImage.TYPE_INT_ARGB);
 		Graphics g = bi.createGraphics();
 		icon.paintIcon(null, g, 0, 0);
 		g.dispose();
@@ -139,7 +140,8 @@ public class TopologyPanel extends JungGraphPanel {
 	}
 
 	public static Shape getShape(Image image, int max) {
-		BufferedImage bi = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+		BufferedImage bi = new BufferedImage(image.getWidth(null), image.getHeight(null),
+				BufferedImage.TYPE_INT_ARGB);
 		Graphics g = bi.createGraphics();
 		g.drawImage(image, 0, 0, null);
 		g.dispose();

@@ -3,13 +3,13 @@ package org.jdmp.gui.algorithm.actions;
 import javax.swing.JComponent;
 
 import org.jdmp.core.algorithm.HasAlgorithms;
-import org.jdmp.core.util.AbstractGUIObject;
 import org.jdmp.gui.actions.ObjectAction;
+import org.jdmp.matrix.interfaces.GUIObject;
 
 public abstract class AlgorithmListAction extends ObjectAction {
 
 	public AlgorithmListAction(JComponent c, HasAlgorithms iAlgorithms) {
-		super(c, (AbstractGUIObject) iAlgorithms);
+		super(c, (GUIObject) iAlgorithms);
 	}
 
 	public HasAlgorithms getIAlgorithms() {

@@ -36,7 +36,6 @@ import org.jdmp.core.module.Module;
 import org.jdmp.core.sample.ClassificationSample;
 import org.jdmp.core.sample.HasSamples;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.util.AbstractGUIObject;
 import org.jdmp.core.variable.HasVariables;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.gui.actions.ObjectActions;
@@ -56,10 +55,11 @@ import org.jdmp.gui.variable.VariableListTableModel;
 import org.jdmp.gui.variable.VariableTableCellRenderer;
 import org.jdmp.gui.variable.actions.VariableListActions;
 import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.interfaces.GUIObject;
 import org.jdmp.matrix.interfaces.HasToolTip;
 
-public class ObjectListPanel extends JPanel implements MouseListener, KeyListener, ListSelectionListener,
-		TableModelListener {
+public class ObjectListPanel extends JPanel implements MouseListener, KeyListener,
+		ListSelectionListener, TableModelListener {
 	private static final long serialVersionUID = -8449938064172061258L;
 
 	protected static final Logger logger = Logger.getLogger(ObjectListPanel.class.getName());
@@ -78,7 +78,7 @@ public class ObjectListPanel extends JPanel implements MouseListener, KeyListene
 
 	private int type = 0;
 
-	private AbstractGUIObject object = null;
+	private GUIObject object = null;
 
 	private int ICONWIDTH = UIManager.getInt("Table.iconWidth");
 
@@ -125,8 +125,8 @@ public class ObjectListPanel extends JPanel implements MouseListener, KeyListene
 		scrollPane = new JScrollPane(jTable);
 		this.addMouseListener(this);
 
-		this.add(jTable.getTableHeader(), new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.EAST,
-				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		this.add(jTable.getTableHeader(), new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
+				GridBagConstraints.EAST, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 		this.add(scrollPane, new GridBagConstraints(0, 1, 1, 1, 1.0, 1.0, GridBagConstraints.EAST,
 				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 
@@ -138,7 +138,7 @@ public class ObjectListPanel extends JPanel implements MouseListener, KeyListene
 
 	public ObjectListPanel(HasAlgorithms iAlgorithms) {
 		this();
-		this.object = (AbstractGUIObject) iAlgorithms;
+		this.object = (GUIObject) iAlgorithms;
 		this.type = IALGORITHMS;
 
 		dataModel = new AlgorithmListTableModel(iAlgorithms);
@@ -146,16 +146,19 @@ public class ObjectListPanel extends JPanel implements MouseListener, KeyListene
 		jTable.setDefaultRenderer(Algorithm.class, new AlgorithmTableCellRenderer());
 		jTable.setModel(dataModel);
 
-		jTable.getColumnModel().getColumn(AlgorithmListTableModel.ICONCOLUMN).setMinWidth(ICONWIDTH);
-		jTable.getColumnModel().getColumn(AlgorithmListTableModel.ICONCOLUMN).setMaxWidth(ICONWIDTH);
-		jTable.getColumnModel().getColumn(AlgorithmListTableModel.ICONCOLUMN).setPreferredWidth(ICONWIDTH);
+		jTable.getColumnModel().getColumn(AlgorithmListTableModel.ICONCOLUMN)
+				.setMinWidth(ICONWIDTH);
+		jTable.getColumnModel().getColumn(AlgorithmListTableModel.ICONCOLUMN)
+				.setMaxWidth(ICONWIDTH);
+		jTable.getColumnModel().getColumn(AlgorithmListTableModel.ICONCOLUMN).setPreferredWidth(
+				ICONWIDTH);
 
 		updateTitle();
 	}
 
 	public ObjectListPanel(HasDataSets iDataSets) {
 		this();
-		this.object = (AbstractGUIObject) iDataSets;
+		this.object = (GUIObject) iDataSets;
 		this.type = IDATASETS;
 
 		dataModel = new DataSetListTableModel(iDataSets);
@@ -166,14 +169,15 @@ public class ObjectListPanel extends JPanel implements MouseListener, KeyListene
 
 		jTable.getColumnModel().getColumn(DataSetListTableModel.ICONCOLUMN).setMinWidth(ICONWIDTH);
 		jTable.getColumnModel().getColumn(DataSetListTableModel.ICONCOLUMN).setMaxWidth(ICONWIDTH);
-		jTable.getColumnModel().getColumn(DataSetListTableModel.ICONCOLUMN).setPreferredWidth(ICONWIDTH);
+		jTable.getColumnModel().getColumn(DataSetListTableModel.ICONCOLUMN).setPreferredWidth(
+				ICONWIDTH);
 
 		updateTitle();
 	}
 
 	public ObjectListPanel(HasModules iModules) {
 		this();
-		this.object = (AbstractGUIObject) iModules;
+		this.object = (GUIObject) iModules;
 		this.type = IMODULES;
 
 		dataModel = new ModuleListTableModel(iModules);
@@ -184,14 +188,15 @@ public class ObjectListPanel extends JPanel implements MouseListener, KeyListene
 
 		jTable.getColumnModel().getColumn(ModuleListTableModel.ICONCOLUMN).setMinWidth(ICONWIDTH);
 		jTable.getColumnModel().getColumn(ModuleListTableModel.ICONCOLUMN).setMaxWidth(ICONWIDTH);
-		jTable.getColumnModel().getColumn(ModuleListTableModel.ICONCOLUMN).setPreferredWidth(ICONWIDTH);
+		jTable.getColumnModel().getColumn(ModuleListTableModel.ICONCOLUMN).setPreferredWidth(
+				ICONWIDTH);
 
 		updateTitle();
 	}
 
 	public ObjectListPanel(HasSamples iSamples) {
 		this();
-		this.object = (AbstractGUIObject) iSamples;
+		this.object = (GUIObject) iSamples;
 		this.type = ISAMPLES;
 
 		dataModel = new SampleListTableModel(iSamples);
@@ -228,14 +233,15 @@ public class ObjectListPanel extends JPanel implements MouseListener, KeyListene
 
 		jTable.getColumnModel().getColumn(SampleListTableModel.ICONCOLUMN).setMinWidth(ICONWIDTH);
 		jTable.getColumnModel().getColumn(SampleListTableModel.ICONCOLUMN).setMaxWidth(ICONWIDTH);
-		jTable.getColumnModel().getColumn(SampleListTableModel.ICONCOLUMN).setPreferredWidth(ICONWIDTH);
+		jTable.getColumnModel().getColumn(SampleListTableModel.ICONCOLUMN).setPreferredWidth(
+				ICONWIDTH);
 
 		updateTitle();
 	}
 
 	public ObjectListPanel(HasVariables iVariables) {
 		this();
-		this.object = (AbstractGUIObject) iVariables;
+		this.object = (GUIObject) iVariables;
 		this.type = IVARIABLES;
 
 		dataModel = new VariableListTableModel(iVariables);
@@ -246,7 +252,8 @@ public class ObjectListPanel extends JPanel implements MouseListener, KeyListene
 
 		jTable.getColumnModel().getColumn(VariableListTableModel.ICONCOLUMN).setMinWidth(ICONWIDTH);
 		jTable.getColumnModel().getColumn(VariableListTableModel.ICONCOLUMN).setMaxWidth(ICONWIDTH);
-		jTable.getColumnModel().getColumn(VariableListTableModel.ICONCOLUMN).setPreferredWidth(ICONWIDTH);
+		jTable.getColumnModel().getColumn(VariableListTableModel.ICONCOLUMN).setPreferredWidth(
+				ICONWIDTH);
 
 		updateTitle();
 	}
@@ -296,11 +303,11 @@ public class ObjectListPanel extends JPanel implements MouseListener, KeyListene
 
 	public void mouseClickedOnObject(MouseEvent e) {
 
-		AbstractGUIObject otemp = null;
+		GUIObject otemp = null;
 
 		int selectedRow = jTable.getSelectedRow();
 		if (selectedRow >= 0) {
-			otemp = (AbstractGUIObject) dataModel.getValueAt(selectedRow, 0);
+			otemp = (GUIObject) dataModel.getValueAt(selectedRow, 0);
 		}
 
 		switch (e.getButton()) {
@@ -317,10 +324,10 @@ public class ObjectListPanel extends JPanel implements MouseListener, KeyListene
 			int row = jTable.rowAtPoint(e.getPoint());
 			jTable.setRowSelectionInterval(row, row);
 			selectedRow = jTable.getSelectedRow();
-			otemp = (AbstractGUIObject) dataModel.getValueAt(selectedRow, 0);
+			otemp = (GUIObject) dataModel.getValueAt(selectedRow, 0);
 			if (otemp != null) {
 				// Reference ref = otemp.getReference();
-				AbstractGUIObject o = otemp;
+				GUIObject o = otemp;
 
 				// switch (type) {
 				// case IVARIABLES:
@@ -365,10 +372,10 @@ public class ObjectListPanel extends JPanel implements MouseListener, KeyListene
 
 	public void keyTyped(KeyEvent e) {
 		try {
-			AbstractGUIObject o = null;
+			GUIObject o = null;
 			int row = jTable.getSelectedRow();
 			if (row >= 0 && row < dataModel.getRowCount()) {
-				o = (AbstractGUIObject) dataModel.getValueAt(row, 0);
+				o = (GUIObject) dataModel.getValueAt(row, 0);
 				if (o != null) {
 					// ref = o.getReference();
 				}

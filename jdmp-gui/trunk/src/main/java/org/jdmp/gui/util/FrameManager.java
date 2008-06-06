@@ -16,7 +16,6 @@ import org.jdmp.core.matrix.MatrixGUIObject;
 import org.jdmp.core.module.AbstractModule;
 import org.jdmp.core.module.Module;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.util.AbstractGUIObject;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.gui.actions.ObjectAction;
 import org.jdmp.gui.algorithm.AlgorithmFrame;
@@ -25,6 +24,7 @@ import org.jdmp.gui.matrix.MatrixFrame;
 import org.jdmp.gui.module.ModuleFrame;
 import org.jdmp.gui.sample.SampleFrame;
 import org.jdmp.gui.variable.VariableFrame;
+import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.GUIObject;
 
 public abstract class FrameManager {
@@ -33,7 +33,7 @@ public abstract class FrameManager {
 
 	private static List<JComponent> actions = null;
 
-	public static void showFrame(GUIObject o) {
+	public static void showFrame(Object o) {
 		if (o instanceof MatrixGUIObject) {
 			showFrame((MatrixGUIObject) o);
 		} else if (o instanceof Algorithm) {
@@ -46,6 +46,8 @@ public abstract class FrameManager {
 			showFrame((Sample) o);
 		} else if (o instanceof Module) {
 			showFrame((Module) o);
+		} else {
+			throw new MatrixException("cannot show frame for object: " + o);
 		}
 	}
 
@@ -144,14 +146,14 @@ public abstract class FrameManager {
 		}
 	}
 
-	public static void hideFrame(AbstractGUIObject m) {
+	public static void hideFrame(GUIObject m) {
 		AbstractFrame frame = frames.get(m);
 		if (frame != null) {
 			frame.setVisible(false);
 		}
 	}
 
-	public static void closeFrame(AbstractGUIObject m) {
+	public static void closeFrame(GUIObject m) {
 		AbstractFrame frame = frames.get(m);
 		if (frame != null) {
 			frame.setVisible(false);

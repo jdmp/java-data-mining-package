@@ -3,12 +3,12 @@ package org.jdmp.gui.util;
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.algorithm.AlgorithmListEvent;
 import org.jdmp.core.algorithm.AlgorithmListListener;
-import org.jdmp.core.util.AbstractGUIObject;
 import org.jdmp.core.util.interfaces.HasAlgorithmsAndVariables;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableListEvent;
 import org.jdmp.core.variable.VariableListListener;
 import org.jdmp.gui.util.JungGraphPanel.Data;
+import org.jdmp.matrix.interfaces.GUIObject;
 
 import edu.uci.ics.jung.graph.Edge;
 import edu.uci.ics.jung.graph.Vertex;
@@ -17,7 +17,8 @@ import edu.uci.ics.jung.graph.impl.DirectedSparseGraph;
 import edu.uci.ics.jung.graph.impl.DirectedSparseVertex;
 import edu.uci.ics.jung.utils.UserData;
 
-public class TopologyGraphWrapper extends DirectedSparseGraph implements VariableListListener, AlgorithmListListener {
+public class TopologyGraphWrapper extends DirectedSparseGraph implements VariableListListener,
+		AlgorithmListListener {
 
 	public TopologyGraphWrapper(HasAlgorithmsAndVariables iTopology) {
 
@@ -52,8 +53,8 @@ public class TopologyGraphWrapper extends DirectedSparseGraph implements Variabl
 			for (Object o2 : getVertices()) {
 				Vertex v1 = (Vertex) o1;
 				Vertex v2 = (Vertex) o2;
-				AbstractGUIObject u1 = (AbstractGUIObject) v1.getUserDatum(Data.JDMPObject);
-				AbstractGUIObject u2 = (AbstractGUIObject) v2.getUserDatum(Data.JDMPObject);
+				GUIObject u1 = (GUIObject) v1.getUserDatum(Data.JDMPObject);
+				GUIObject u2 = (GUIObject) v2.getUserDatum(Data.JDMPObject);
 				if (u1 instanceof Algorithm && u2 instanceof Variable) {
 					Algorithm a = (Algorithm) u1;
 					Variable va = (Variable) u2;
@@ -74,7 +75,8 @@ public class TopologyGraphWrapper extends DirectedSparseGraph implements Variabl
 							break;
 						}
 						if (e != null) {
-							e.setUserDatum(Data.Label, a.getEdgeLabelForVariable(index), UserData.SHARED);
+							e.setUserDatum(Data.Label, a.getEdgeLabelForVariable(index),
+									UserData.SHARED);
 							addEdge(e);
 						}
 					}
@@ -85,7 +87,8 @@ public class TopologyGraphWrapper extends DirectedSparseGraph implements Variabl
 					int index = a.getIndexOfAlgorithm(a2);
 					if (index >= 0) {
 						Edge e = new DirectedSparseEdge(v1, v2);
-						e.setUserDatum(Data.Label, a.getEdgeLabelForAlgorithm(index), UserData.SHARED);
+						e.setUserDatum(Data.Label, a.getEdgeLabelForAlgorithm(index),
+								UserData.SHARED);
 						addEdge(e);
 					}
 				}
