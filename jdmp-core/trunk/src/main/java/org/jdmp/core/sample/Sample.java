@@ -8,10 +8,9 @@ import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableListEvent;
 import org.jdmp.core.variable.VariableListListener;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.interfaces.GUIObject;
 import org.jdmp.matrix.interfaces.HasMatrix;
 
-public interface Sample extends CoreObject, GUIObject, HasVariables, HasMatrix {
+public interface Sample extends CoreObject, HasVariables, HasMatrix {
 
 	public abstract Sample clone();
 

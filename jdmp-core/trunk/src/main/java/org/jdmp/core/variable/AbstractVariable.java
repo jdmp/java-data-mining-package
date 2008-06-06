@@ -440,7 +440,7 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 				Constructor<?> con = c.getConstructor(new Class<?>[] { Variable.class });
 				guiObject = (GUIObject) con.newInstance(new Object[] { this });
 			} catch (Exception e) {
-				logger.log(Level.WARNING, "cannot create matrix gui object", e);
+				logger.log(Level.WARNING, "cannot create variable gui object", e);
 			}
 		}
 		return guiObject;

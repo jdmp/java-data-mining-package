@@ -122,7 +122,7 @@ public class LoadWKNAction extends VariableAction {
 
 			List<Matrix> mList = new ArrayList<Matrix>();
 
-			getVariable().setSize(1, 1);
+			getVariable().getVariable().setSize(1, 1);
 
 			int index = 1;
 			int progress = 0;
@@ -260,7 +260,7 @@ public class LoadWKNAction extends VariableAction {
 				logger.log(Level.WARNING, "no data loaded for WKN " + wkn);
 			} else {
 				if (convertToPercent) {
-					getVariable().setMemorySize(mList.size() - 1);
+					getVariable().getVariable().setMemorySize(mList.size() - 1);
 					Matrix ref = mList.get(mList.size() - 1);
 					for (int i = mList.size() - 2; i >= 0; i--) {
 						Matrix comp = mList.get(i);
@@ -270,15 +270,15 @@ public class LoadWKNAction extends VariableAction {
 						m.setDouble((c - r) / r * 50, 0, 0);
 						// m.setTime(index++);
 						m.setLabel(ref.getLabel() + " -> " + comp.getLabel());
-						getVariable().addMatrix(m);
+						getVariable().getVariable().addMatrix(m);
 						ref = comp;
 					}
 				} else {
-					getVariable().setMemorySize(mList.size());
+					getVariable().getVariable().setMemorySize(mList.size());
 					for (int i = mList.size() - 1; i >= 0; i--) {
 						Matrix m = mList.get(i);
 						// m.setTime(index++);
-						getVariable().addMatrix(m);
+						getVariable().getVariable().addMatrix(m);
 					}
 				}
 			}

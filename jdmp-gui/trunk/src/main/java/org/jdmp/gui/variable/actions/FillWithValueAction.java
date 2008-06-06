@@ -27,7 +27,7 @@ public class FillWithValueAction extends VariableAction {
 		String s = JOptionPane.showInputDialog("Enter value:");
 		try {
 			value = Double.parseDouble(s);
-			getVariable().fillWithValue(value);
+			getVariable().getVariable().fillWithValue(value);
 		} catch (Exception ex) {
 		}
 		return null;

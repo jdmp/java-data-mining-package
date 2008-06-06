@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import org.jdmp.core.util.AbstractGUIObject;
+import org.jdmp.core.util.AbstractCoreObject;
 import org.jdmp.core.variable.HasVariables;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableListEvent;
@@ -12,7 +12,7 @@ import org.jdmp.core.variable.VariableListListener;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.interfaces.HasMatrix;
 
-public abstract class AbstractSample extends AbstractGUIObject implements Sample, HasVariables,
+public abstract class AbstractSample extends AbstractCoreObject implements Sample, HasVariables,
 		HasMatrix {
 
 	private final List<Variable> variableMap = new CopyOnWriteArrayList<Variable>();

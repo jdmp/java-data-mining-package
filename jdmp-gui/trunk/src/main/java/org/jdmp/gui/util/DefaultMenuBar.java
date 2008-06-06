@@ -22,8 +22,6 @@ import org.jdmp.core.matrix.system.MatrixSystemTime;
 import org.jdmp.core.matrix.system.MatrixUIDefaults;
 import org.jdmp.core.module.AbstractModule;
 import org.jdmp.core.module.Module;
-import org.jdmp.core.sample.Sample;
-import org.jdmp.core.variable.Variable;
 import org.jdmp.gui.actions.AboutAction;
 import org.jdmp.gui.actions.ObjectActions;
 import org.jdmp.gui.algorithm.actions.AlgorithmActions;
@@ -31,6 +29,7 @@ import org.jdmp.gui.dataset.actions.DataSetActions;
 import org.jdmp.gui.matrix.actions.MatrixActions;
 import org.jdmp.gui.matrix.actions.ShowInFrameAction;
 import org.jdmp.gui.module.actions.ModuleActions;
+import org.jdmp.gui.sample.SampleGUIObject;
 import org.jdmp.gui.sample.actions.SampleActions;
 import org.jdmp.gui.variable.VariableGUIObject;
 import org.jdmp.gui.variable.actions.VariableActions;
@@ -51,8 +50,8 @@ public class DefaultMenuBar extends JMenuBar {
 			actions = new DataSetActions(component, (DataSet) o);
 		} else if (o instanceof Module) {
 			actions = new ModuleActions(component, (Module) o);
-		} else if (o instanceof Sample) {
-			actions = new SampleActions(component, (Sample) o);
+		} else if (o instanceof SampleGUIObject) {
+			actions = new SampleActions(component, (SampleGUIObject) o);
 		} else if (o instanceof VariableGUIObject) {
 			actions = new VariableActions(component, (VariableGUIObject) o);
 		} else if (o instanceof MatrixGUIObject) {

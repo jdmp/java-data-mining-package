@@ -20,7 +20,6 @@ import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.matrix.MatrixGUIObject;
 import org.jdmp.core.module.Module;
-import org.jdmp.core.sample.Sample;
 import org.jdmp.gui.algorithm.AlgorithmPanel;
 import org.jdmp.gui.dataset.DataSetPanel;
 import org.jdmp.gui.io.ExportJPEG;
@@ -28,6 +27,7 @@ import org.jdmp.gui.io.ExportPDF;
 import org.jdmp.gui.io.ExportPNG;
 import org.jdmp.gui.matrix.MatrixPanel;
 import org.jdmp.gui.module.ModulePanel;
+import org.jdmp.gui.sample.SampleGUIObject;
 import org.jdmp.gui.sample.SamplePanel;
 import org.jdmp.gui.variable.VariableGUIObject;
 import org.jdmp.gui.variable.VariablePanel;
@@ -86,12 +86,12 @@ public abstract class AbstractFrame extends JFrame implements PropertyChangeList
 			component = new MatrixPanel((MatrixGUIObject) o);
 		} else if (o instanceof Module) {
 			component = new ModulePanel((Module) o);
-		} else if (o instanceof Sample) {
-			component = new SamplePanel((Sample) o);
+		} else if (o instanceof SampleGUIObject) {
+			component = new SamplePanel((SampleGUIObject) o);
 		} else if (o instanceof VariableGUIObject) {
 			component = new VariablePanel((VariableGUIObject) o);
 		} else {
-			logger.log(Level.WARNING, "unknown object type:" + o);
+			logger.log(Level.WARNING, "unknown object type: " + o);
 		}
 
 		getContentPane().add(component, BorderLayout.CENTER);

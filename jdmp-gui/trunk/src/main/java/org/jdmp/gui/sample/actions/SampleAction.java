@@ -2,16 +2,16 @@ package org.jdmp.gui.sample.actions;
 
 import javax.swing.JComponent;
 
-import org.jdmp.core.sample.Sample;
 import org.jdmp.gui.actions.ObjectAction;
+import org.jdmp.gui.sample.SampleGUIObject;
 
 public abstract class SampleAction extends ObjectAction {
 
-	public SampleAction(JComponent c, Sample p) {
+	public SampleAction(JComponent c, SampleGUIObject p) {
 		super(c, p);
 	}
 
-	public Sample getSample() {
-		return (Sample) getObject();
+	public SampleGUIObject getSample() {
+		return (SampleGUIObject) getObject();
 	}
 }

@@ -23,7 +23,7 @@ public class FillUniformAction extends VariableAction {
 	}
 
 	public Object call() throws MatrixException {
-		getVariable().fillUniform();
+		getVariable().getVariable().fillUniform();
 		return null;
 	}
 

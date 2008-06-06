@@ -6,7 +6,6 @@ import java.awt.GridLayout;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
-import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.HasVariables;
 import org.jdmp.gui.util.AbstractPanel;
 import org.jdmp.gui.util.ObjectListPanel;
@@ -20,11 +19,11 @@ public class SamplePanel extends AbstractPanel {
 
 	private JPanel rightPanel = new JPanel();
 
-	public SamplePanel(Sample s) {
+	public SamplePanel(SampleGUIObject s) {
 		super(s);
 
 		rightPanel.setLayout(new GridLayout(1, 1));
-		rightPanel.add(new ObjectListPanel((HasVariables) s));
+		rightPanel.add(new ObjectListPanel((HasVariables) s.getSample()));
 
 		splitPane.setLeftComponent(leftPanel);
 		splitPane.setRightComponent(rightPanel);

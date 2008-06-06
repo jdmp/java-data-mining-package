@@ -23,7 +23,7 @@ public class DivideAction extends VariableAction {
 	}
 
 	public Object call() throws MatrixException {
-		getVariable().divideBy(2.0);
+		getVariable().getVariable().divideBy(2.0);
 		return null;
 	}
 

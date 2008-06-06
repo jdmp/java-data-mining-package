@@ -15,14 +15,13 @@ import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.matrix.MatrixGUIObject;
 import org.jdmp.core.module.AbstractModule;
 import org.jdmp.core.module.Module;
-import org.jdmp.core.sample.Sample;
-import org.jdmp.core.variable.Variable;
 import org.jdmp.gui.actions.ObjectAction;
 import org.jdmp.gui.algorithm.AlgorithmFrame;
 import org.jdmp.gui.dataset.DataSetFrame;
 import org.jdmp.gui.matrix.MatrixFrame;
 import org.jdmp.gui.module.ModuleFrame;
 import org.jdmp.gui.sample.SampleFrame;
+import org.jdmp.gui.sample.SampleGUIObject;
 import org.jdmp.gui.variable.VariableFrame;
 import org.jdmp.gui.variable.VariableGUIObject;
 import org.jdmp.matrix.exceptions.MatrixException;
@@ -43,8 +42,8 @@ public abstract class FrameManager {
 			showFrame((VariableGUIObject) o);
 		} else if (o instanceof DataSet) {
 			showFrame((DataSet) o);
-		} else if (o instanceof Sample) {
-			showFrame((Sample) o);
+		} else if (o instanceof SampleGUIObject) {
+			showFrame((SampleGUIObject) o);
 		} else if (o instanceof Module) {
 			showFrame((Module) o);
 		} else {
@@ -134,7 +133,7 @@ public abstract class FrameManager {
 		}
 	}
 
-	public static void showFrame(Sample s) {
+	public static void showFrame(SampleGUIObject s) {
 		try {
 			AbstractFrame frame = frames.get(s);
 			if (frame == null) {

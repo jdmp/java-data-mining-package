@@ -1,8 +1,10 @@
 package org.jdmp.core.sample;
 
+import java.lang.reflect.Constructor;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.logging.Level;
 
 import org.jdmp.core.variable.DefaultVariable;
 import org.jdmp.core.variable.Variable;
@@ -14,6 +16,8 @@ import org.jdmp.matrix.util.StringUtil;
 public class BasicSample extends AbstractSample {
 	private static final long serialVersionUID = -3649758882404748630L;
 
+	private transient GUIObject guiObject=null;
+	
 	public static final int INPUT = 0;
 
 	public BasicSample(Matrix m) {
@@ -87,5 +91,18 @@ public class BasicSample extends AbstractSample {
 		return getInputMatrix();
 	}
 
+	
+	public final GUIObject getGUIObject() {
+		if (guiObject == null) {
+			try {
+				Class<?> c = Class.forName("org.jdmp.gui.sample.SampleGUIObject");
+				Constructor<?> con = c.getConstructor(new Class<?>[] { Sample.class });
+				guiObject = (GUIObject) con.newInstance(new Object[] { this });
+			} catch (Exception e) {
+				logger.log(Level.WARNING, "cannot create sample gui object", e);
+			}
+		}
+		return guiObject;
+	}
 
 }
