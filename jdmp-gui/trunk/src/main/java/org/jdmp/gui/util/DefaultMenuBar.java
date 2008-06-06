@@ -8,7 +8,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 
-import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.matrix.MatrixGUIObject;
 import org.jdmp.core.matrix.system.LogMatrix;
 import org.jdmp.core.matrix.system.MatrixAvailableProcessors;
@@ -23,6 +22,7 @@ import org.jdmp.core.module.AbstractModule;
 import org.jdmp.core.module.Module;
 import org.jdmp.gui.actions.AboutAction;
 import org.jdmp.gui.actions.ObjectActions;
+import org.jdmp.gui.algorithm.AlgorithmGUIObject;
 import org.jdmp.gui.algorithm.actions.AlgorithmActions;
 import org.jdmp.gui.dataset.DataSetGUIObject;
 import org.jdmp.gui.dataset.actions.DataSetActions;
@@ -44,8 +44,8 @@ public class DefaultMenuBar extends JMenuBar {
 
 		ObjectActions actions = null;
 
-		if (o instanceof Algorithm) {
-			actions = new AlgorithmActions(component, (Algorithm) o);
+		if (o instanceof AlgorithmGUIObject) {
+			actions = new AlgorithmActions(component, (AlgorithmGUIObject) o);
 		} else if (o instanceof DataSetGUIObject) {
 			actions = new DataSetActions(component, (DataSetGUIObject) o);
 		} else if (o instanceof Module) {

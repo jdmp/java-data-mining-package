@@ -140,7 +140,7 @@ public class ObjectListPanel extends JPanel implements MouseListener, KeyListene
 
 	public ObjectListPanel(HasAlgorithms iAlgorithms) {
 		this();
-		this.object = (GUIObject) iAlgorithms;
+		this.object = ((CoreObject) iAlgorithms).getGUIObject();
 		this.type = IALGORITHMS;
 
 		dataModel = new AlgorithmListTableModel(iAlgorithms);

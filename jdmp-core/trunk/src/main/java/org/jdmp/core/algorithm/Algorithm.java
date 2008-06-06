@@ -11,9 +11,8 @@ import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableListEvent;
 import org.jdmp.core.variable.VariableListListener;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.interfaces.GUIObject;
 
-public interface Algorithm extends CoreObject, GUIObject, HasAlgorithmsAndVariables, HasVariables,
+public interface Algorithm extends CoreObject, HasAlgorithmsAndVariables, HasVariables,
 		HasAlgorithms, Callable<List<Matrix>> {
 
 	public static final int NOTCONNECTED = 0;

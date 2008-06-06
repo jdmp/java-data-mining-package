@@ -11,6 +11,7 @@ import org.jdmp.gui.actions.DeleteAction;
 import org.jdmp.gui.actions.ExportAction;
 import org.jdmp.gui.actions.PasteAction;
 import org.jdmp.gui.actions.PrintAction;
+import org.jdmp.gui.algorithm.AlgorithmGUIObject;
 import org.jdmp.gui.algorithm.actions.CalculateOnceAction;
 import org.jdmp.gui.algorithm.actions.StartAction;
 import org.jdmp.gui.algorithm.actions.StopAction;
@@ -40,9 +41,9 @@ public class DefaultToolbar extends JToolBar {
 
 		if (o instanceof Algorithm) {
 			addSeparator();
-			add(new CalculateOnceAction(c, (Algorithm) o));
-			add(new StartAction(c, (Algorithm) o));
-			add(new StopAction(c, (Algorithm) o));
+			add(new CalculateOnceAction(c, (AlgorithmGUIObject) o));
+			add(new StartAction(c, (AlgorithmGUIObject) o));
+			add(new StopAction(c, (AlgorithmGUIObject) o));
 		}
 
 		if (o instanceof DataSet) {

@@ -7,11 +7,12 @@ import javax.swing.JSeparator;
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.gui.actions.ExitAction;
 import org.jdmp.gui.actions.ObjectActions;
+import org.jdmp.gui.algorithm.AlgorithmGUIObject;
 
 public class AlgorithmActions extends ObjectActions {
 	private static final long serialVersionUID = -4508932056911168672L;
 
-	public AlgorithmActions(JComponent c, Algorithm algorithm) {
+	public AlgorithmActions(JComponent c, AlgorithmGUIObject algorithm) {
 		super(c, algorithm);
 		add(new JMenuItem(new SetIntervalAction(c, algorithm)));
 		add(new JMenuItem(new CalculateOnceAction(c, algorithm)));

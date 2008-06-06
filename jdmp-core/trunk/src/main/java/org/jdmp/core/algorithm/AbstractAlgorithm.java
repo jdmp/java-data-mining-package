@@ -1,6 +1,7 @@
 package org.jdmp.core.algorithm;
 
 import java.io.File;
+import java.lang.reflect.Constructor;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -8,7 +9,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.jdmp.core.util.AbstractGUIObject;
+import org.jdmp.core.util.AbstractCoreObject;
 import org.jdmp.core.util.AbstractEvent.EventType;
 import org.jdmp.core.util.interfaces.HasAlgorithmsAndVariables;
 import org.jdmp.core.variable.HasVariables;
@@ -17,12 +18,15 @@ import org.jdmp.core.variable.VariableListEvent;
 import org.jdmp.core.variable.VariableListListener;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
+import org.jdmp.matrix.interfaces.GUIObject;
 
-public abstract class AbstractAlgorithm extends AbstractGUIObject implements Algorithm,
+public abstract class AbstractAlgorithm extends AbstractCoreObject implements Algorithm,
 		HasAlgorithmsAndVariables, HasVariables, HasAlgorithms, Callable<List<Matrix>> {
 
 	protected static transient Logger logger = Logger.getLogger(Algorithm.class.getName());
 
+	private transient GUIObject guiObject =null;
+	
 	public static final int NOTCONNECTED = 0;
 
 	public static final int INCOMING = 1;
@@ -431,6 +435,19 @@ public abstract class AbstractAlgorithm extends AbstractGUIObject implements Alg
 
 		if (file.getAbsolutePath().toLowerCase().endsWith(".alg")) {
 		}
+	}
+	
+	public final GUIObject getGUIObject() {
+		if (guiObject == null) {
+			try {
+				Class<?> c = Class.forName("org.jdmp.gui.algorithm.AlgorithmGUIObject");
+				Constructor<?> con = c.getConstructor(new Class<?>[] { Algorithm.class });
+				guiObject = (GUIObject) con.newInstance(new Object[] { this });
+			} catch (Exception e) {
+				logger.log(Level.WARNING, "cannot create sample gui object", e);
+			}
+		}
+		return guiObject;
 	}
 
 }

@@ -16,9 +16,9 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.matrix.MatrixGUIObject;
 import org.jdmp.core.module.Module;
+import org.jdmp.gui.algorithm.AlgorithmGUIObject;
 import org.jdmp.gui.algorithm.AlgorithmPanel;
 import org.jdmp.gui.dataset.DataSetGUIObject;
 import org.jdmp.gui.dataset.DataSetPanel;
@@ -78,8 +78,8 @@ public abstract class AbstractFrame extends JFrame implements PropertyChangeList
 		getContentPane().add(statusBar, BorderLayout.SOUTH);
 
 		JComponent component = null;
-		if (o instanceof Algorithm) {
-			component = new AlgorithmPanel((Algorithm) o);
+		if (o instanceof AlgorithmGUIObject) {
+			component = new AlgorithmPanel((AlgorithmGUIObject) o);
 		} else if (o instanceof DataSetGUIObject) {
 			component = new DataSetPanel((DataSetGUIObject) o);
 		} else if (o instanceof MatrixGUIObject) {

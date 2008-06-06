@@ -15,6 +15,7 @@ import javax.swing.Icon;
 import javax.swing.UIManager;
 
 import org.jdmp.core.algorithm.Algorithm;
+import org.jdmp.core.util.CoreObject;
 import org.jdmp.core.util.interfaces.HasAlgorithmsAndVariables;
 import org.jdmp.gui.variable.VariableGUIObject;
 import org.jdmp.gui.variable.VariableIcon;
@@ -50,8 +51,8 @@ public class TopologyPanel extends JungGraphPanel {
 		((PluggableRenderer) getRenderer()).setVertexIconFunction(new VertexIconFunction() {
 
 			public Icon getIcon(ArchetypeVertex v) {
-				GUIObject object = (GUIObject) v.getUserDatum(Data.JDMPObject);
-				return TopologyPanel.getIcon(object);
+				CoreObject object = (CoreObject) v.getUserDatum(Data.JDMPObject);
+				return TopologyPanel.getIcon(object.getGUIObject());
 			}
 		});
 

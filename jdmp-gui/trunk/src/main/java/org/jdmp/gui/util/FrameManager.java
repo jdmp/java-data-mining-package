@@ -10,13 +10,13 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.JMenuItem;
 
-import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.matrix.MatrixGUIObject;
 import org.jdmp.core.module.AbstractModule;
 import org.jdmp.core.module.Module;
 import org.jdmp.core.util.CoreObject;
 import org.jdmp.gui.actions.ObjectAction;
 import org.jdmp.gui.algorithm.AlgorithmFrame;
+import org.jdmp.gui.algorithm.AlgorithmGUIObject;
 import org.jdmp.gui.dataset.DataSetFrame;
 import org.jdmp.gui.dataset.DataSetGUIObject;
 import org.jdmp.gui.matrix.MatrixFrame;
@@ -37,8 +37,8 @@ public abstract class FrameManager {
 	public static void showFrame(GUIObject o) {
 		if (o instanceof MatrixGUIObject) {
 			showFrame((MatrixGUIObject) o);
-		} else if (o instanceof Algorithm) {
-			showFrame((Algorithm) o);
+		} else if (o instanceof AlgorithmGUIObject) {
+			showFrame((AlgorithmGUIObject) o);
 		} else if (o instanceof VariableGUIObject) {
 			showFrame((VariableGUIObject) o);
 		} else if (o instanceof DataSetGUIObject) {
@@ -79,7 +79,7 @@ public abstract class FrameManager {
 		}
 	}
 
-	public static void showFrame(Algorithm a) {
+	public static void showFrame(AlgorithmGUIObject a) {
 		try {
 			AbstractFrame frame = frames.get(a);
 			if (frame == null) {

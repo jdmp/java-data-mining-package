@@ -3,12 +3,12 @@ package org.jdmp.gui.util;
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.algorithm.AlgorithmListEvent;
 import org.jdmp.core.algorithm.AlgorithmListListener;
+import org.jdmp.core.util.CoreObject;
 import org.jdmp.core.util.interfaces.HasAlgorithmsAndVariables;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableListEvent;
 import org.jdmp.core.variable.VariableListListener;
 import org.jdmp.gui.util.JungGraphPanel.Data;
-import org.jdmp.matrix.interfaces.GUIObject;
 
 import edu.uci.ics.jung.graph.Edge;
 import edu.uci.ics.jung.graph.Vertex;
@@ -53,8 +53,8 @@ public class TopologyGraphWrapper extends DirectedSparseGraph implements Variabl
 			for (Object o2 : getVertices()) {
 				Vertex v1 = (Vertex) o1;
 				Vertex v2 = (Vertex) o2;
-				GUIObject u1 = (GUIObject) v1.getUserDatum(Data.JDMPObject);
-				GUIObject u2 = (GUIObject) v2.getUserDatum(Data.JDMPObject);
+				CoreObject u1 = (CoreObject) v1.getUserDatum(Data.JDMPObject);
+				CoreObject u2 = (CoreObject) v2.getUserDatum(Data.JDMPObject);
 				if (u1 instanceof Algorithm && u2 instanceof Variable) {
 					Algorithm a = (Algorithm) u1;
 					Variable va = (Variable) u2;

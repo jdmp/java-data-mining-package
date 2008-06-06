@@ -2,16 +2,16 @@ package org.jdmp.gui.algorithm.actions;
 
 import javax.swing.JComponent;
 
-import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.gui.actions.ObjectAction;
+import org.jdmp.gui.algorithm.AlgorithmGUIObject;
 
 public abstract class AlgorithmAction extends ObjectAction {
 
-	public AlgorithmAction(JComponent c, Algorithm a) {
+	public AlgorithmAction(JComponent c, AlgorithmGUIObject a) {
 		super(c, a);
 	}
 
-	public Algorithm getAlgorithm() {
-		return (Algorithm) getObject();
+	public AlgorithmGUIObject getAlgorithm() {
+		return (AlgorithmGUIObject) getObject();
 	}
 }
