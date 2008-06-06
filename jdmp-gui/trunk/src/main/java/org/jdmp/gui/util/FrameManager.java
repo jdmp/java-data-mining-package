@@ -24,6 +24,7 @@ import org.jdmp.gui.matrix.MatrixFrame;
 import org.jdmp.gui.module.ModuleFrame;
 import org.jdmp.gui.sample.SampleFrame;
 import org.jdmp.gui.variable.VariableFrame;
+import org.jdmp.gui.variable.VariableGUIObject;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.GUIObject;
 
@@ -38,8 +39,8 @@ public abstract class FrameManager {
 			showFrame((MatrixGUIObject) o);
 		} else if (o instanceof Algorithm) {
 			showFrame((Algorithm) o);
-		} else if (o instanceof Variable) {
-			showFrame((Variable) o);
+		} else if (o instanceof VariableGUIObject) {
+			showFrame((VariableGUIObject) o);
 		} else if (o instanceof DataSet) {
 			showFrame((DataSet) o);
 		} else if (o instanceof Sample) {
@@ -94,7 +95,7 @@ public abstract class FrameManager {
 		}
 	}
 
-	public static void showFrame(Variable v) {
+	public static void showFrame(VariableGUIObject v) {
 		try {
 			AbstractFrame frame = frames.get(v);
 			if (frame == null) {

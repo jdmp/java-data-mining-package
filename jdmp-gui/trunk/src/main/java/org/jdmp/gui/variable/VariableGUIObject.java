@@ -14,22 +14,19 @@ public class VariableGUIObject extends AbstractGUIObject {
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-
+		variable.clear();
 	}
 
 	public String getLongStatus() {
-		// TODO Auto-generated method stub
-		return null;
+		return variable.getLongStatus();
 	}
 
 	public String getShortStatus() {
-		// TODO Auto-generated method stub
-		return null;
+		return variable.getShortStatus();
 	}
 
 	public void dispose() {
-		// TODO Auto-generated method stub
+		variable.dispose();
 	}
 
 	public Variable getVariable() {

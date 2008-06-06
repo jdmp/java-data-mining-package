@@ -16,7 +16,7 @@ import javax.swing.UIManager;
 
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.util.interfaces.HasAlgorithmsAndVariables;
-import org.jdmp.core.variable.Variable;
+import org.jdmp.gui.variable.VariableGUIObject;
 import org.jdmp.gui.variable.VariableIcon;
 import org.jdmp.matrix.interfaces.GUIObject;
 
@@ -32,7 +32,7 @@ import edu.uci.ics.jung.visualization.PluggableRenderer;
 public class TopologyPanel extends JungGraphPanel {
 	private static final long serialVersionUID = -6852675670416844022L;
 
-	private static Map<Variable, Icon> variableIcons = new HashMap<Variable, Icon>();
+	private static Map<VariableGUIObject, Icon> variableIcons = new HashMap<VariableGUIObject, Icon>();
 
 	public TopologyPanel(HasAlgorithmsAndVariables iTopology) {
 		TopologyGraphWrapper graph = new TopologyGraphWrapper(iTopology);
@@ -107,10 +107,10 @@ public class TopologyPanel extends JungGraphPanel {
 	public static final Icon getIcon(GUIObject o) {
 		if (o instanceof Algorithm) {
 			return UIManager.getIcon("Algorithm.icon");
-		} else if (o instanceof Variable) {
+		} else if (o instanceof VariableGUIObject) {
 			Icon i = variableIcons.get(o);
 			if (i == null) {
-				Variable v = (Variable) o;
+				VariableGUIObject v = (VariableGUIObject) o;
 				i = new VariableIcon(v);
 				variableIcons.put(v, i);
 			}

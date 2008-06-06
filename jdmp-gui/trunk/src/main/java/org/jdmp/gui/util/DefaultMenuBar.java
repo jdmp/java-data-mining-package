@@ -24,7 +24,6 @@ import org.jdmp.core.module.AbstractModule;
 import org.jdmp.core.module.Module;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
-import org.jdmp.core.variable.WorkspaceVariable;
 import org.jdmp.gui.actions.AboutAction;
 import org.jdmp.gui.actions.ObjectActions;
 import org.jdmp.gui.algorithm.actions.AlgorithmActions;
@@ -33,6 +32,7 @@ import org.jdmp.gui.matrix.actions.MatrixActions;
 import org.jdmp.gui.matrix.actions.ShowInFrameAction;
 import org.jdmp.gui.module.actions.ModuleActions;
 import org.jdmp.gui.sample.actions.SampleActions;
+import org.jdmp.gui.variable.VariableGUIObject;
 import org.jdmp.gui.variable.actions.VariableActions;
 import org.jdmp.matrix.interfaces.GUIObject;
 
@@ -53,8 +53,8 @@ public class DefaultMenuBar extends JMenuBar {
 			actions = new ModuleActions(component, (Module) o);
 		} else if (o instanceof Sample) {
 			actions = new SampleActions(component, (Sample) o);
-		} else if (o instanceof Variable) {
-			actions = new VariableActions(component, (Variable) o);
+		} else if (o instanceof VariableGUIObject) {
+			actions = new VariableActions(component, (VariableGUIObject) o);
 		} else if (o instanceof MatrixGUIObject) {
 			actions = new MatrixActions(component, (MatrixGUIObject) o, null);
 		}
@@ -66,8 +66,6 @@ public class DefaultMenuBar extends JMenuBar {
 
 		JMenu optionsMenu = new JMenu("Tools");
 		optionsMenu.setMnemonic(KeyEvent.VK_T);
-		optionsMenu.add(new JMenuItem(new ShowInFrameAction(component, WorkspaceVariable
-				.getInstance())));
 		optionsMenu.add(new JMenuItem(
 				new ShowInFrameAction(component, AbstractModule.getInstance())));
 		optionsMenu.add(new JSeparator());

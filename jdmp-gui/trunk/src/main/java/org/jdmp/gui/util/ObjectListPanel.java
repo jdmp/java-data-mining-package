@@ -36,6 +36,7 @@ import org.jdmp.core.module.Module;
 import org.jdmp.core.sample.ClassificationSample;
 import org.jdmp.core.sample.HasSamples;
 import org.jdmp.core.sample.Sample;
+import org.jdmp.core.util.CoreObject;
 import org.jdmp.core.variable.HasVariables;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.gui.actions.ObjectActions;
@@ -51,6 +52,7 @@ import org.jdmp.gui.module.actions.ModuleListActions;
 import org.jdmp.gui.sample.SampleListTableModel;
 import org.jdmp.gui.sample.SampleTableCellRenderer;
 import org.jdmp.gui.sample.actions.SampleListActions;
+import org.jdmp.gui.variable.VariableGUIObject;
 import org.jdmp.gui.variable.VariableListTableModel;
 import org.jdmp.gui.variable.VariableTableCellRenderer;
 import org.jdmp.gui.variable.actions.VariableListActions;
@@ -241,7 +243,11 @@ public class ObjectListPanel extends JPanel implements MouseListener, KeyListene
 
 	public ObjectListPanel(HasVariables iVariables) {
 		this();
-		this.object = (GUIObject) iVariables;
+		if (iVariables instanceof CoreObject) {
+			this.object = ((CoreObject) iVariables).getGUIObject();
+		} else {
+			this.object = (GUIObject) iVariables;
+		}
 		this.type = IVARIABLES;
 
 		dataModel = new VariableListTableModel(iVariables);
@@ -307,7 +313,11 @@ public class ObjectListPanel extends JPanel implements MouseListener, KeyListene
 
 		int selectedRow = jTable.getSelectedRow();
 		if (selectedRow >= 0) {
-			otemp = (GUIObject) dataModel.getValueAt(selectedRow, 0);
+			Object o = dataModel.getValueAt(selectedRow, 0);
+			if (o instanceof CoreObject) {
+				otemp = ((CoreObject) o).getGUIObject();
+			} else
+				otemp = (GUIObject) o;
 		}
 
 		switch (e.getButton()) {
@@ -401,8 +411,8 @@ public class ObjectListPanel extends JPanel implements MouseListener, KeyListene
 			} else
 				System.out.println("char entered in ObjectListPanel: " + e.getKeyChar());
 
-			if (o instanceof Variable) {
-				Variable v = (Variable) o;
+			if (o instanceof VariableGUIObject) {
+				Variable v = ((VariableGUIObject) o).getVariable();
 				switch (e.getKeyChar()) {
 				case 'g':
 					v.fillGaussian();

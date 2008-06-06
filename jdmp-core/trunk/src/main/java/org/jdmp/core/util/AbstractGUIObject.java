@@ -149,4 +149,11 @@ public abstract class AbstractGUIObject implements GUIObject {
 		getProptertyChangeSupport().removePropertyChangeListener(l);
 	}
 
+	public GUIObject getGUIObject() {
+		return this;
+	}
+
+	public void notifyGUIObject() {
+	}
+
 }

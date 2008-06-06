@@ -7,7 +7,6 @@ import javax.swing.JTabbedPane;
 
 import org.jdmp.core.matrix.MatrixGUIObject;
 import org.jdmp.core.matrix.wrappers.MatrixListToMatrixWrapper;
-import org.jdmp.core.variable.Variable;
 import org.jdmp.gui.matrix.MatrixEditorPanel;
 import org.jdmp.gui.matrix.MatrixGraphPanel;
 import org.jdmp.gui.matrix.MatrixListPanel;
@@ -37,12 +36,13 @@ public class VariablePanel extends AbstractPanel {
 
 	private JSplitPane split2 = new JSplitPane();
 
-	public VariablePanel(Variable v) throws MatrixException {
+	public VariablePanel(VariableGUIObject v) throws MatrixException {
 		super(v);
 
-		matrixObject = (MatrixGUIObject) new MatrixListToMatrixWrapper(v).getGUIObject();
+		matrixObject = (MatrixGUIObject) new MatrixListToMatrixWrapper(v.getVariable())
+				.getGUIObject();
 
-		matrixListPanel = new MatrixListPanel((HasMatrixList) v);
+		matrixListPanel = new MatrixListPanel((HasMatrixList) v.getVariable());
 
 		variableChartPanel = new VariableChartPanel(v, true);
 

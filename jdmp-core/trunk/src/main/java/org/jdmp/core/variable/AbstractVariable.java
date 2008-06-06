@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -29,6 +30,7 @@ import org.jdmp.matrix.calculation.basic.Plus;
 import org.jdmp.matrix.collections.MatrixList;
 import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.exceptions.MatrixException;
+import org.jdmp.matrix.interfaces.GUIObject;
 import org.jdmp.matrix.io.util.IntelligentFileReader;
 import org.jdmp.matrix.io.util.IntelligentFileWriter;
 
@@ -39,6 +41,8 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 	private transient Matrix matrixListMatrix = null;
 
 	private long[] size = new long[] { 0, 0 };
+	
+	private transient GUIObject guiObject=null;
 
 	protected AbstractVariable() {
 		super();
@@ -429,5 +433,18 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 	public Matrix getStandardDeviationMatrix() throws MatrixException {
 		return getAsMatrix().std(Ret.NEW, ROW, true);
 	}
-
+	public final GUIObject getGUIObject() {
+		if (guiObject == null) {
+			try {
+				Class<?> c = Class.forName("org.jdmp.gui.variable.VariableGUIObject");
+				Constructor<?> con = c.getConstructor(new Class<?>[] { Variable.class });
+				guiObject = (GUIObject) con.newInstance(new Object[] { this });
+			} catch (Exception e) {
+				logger.log(Level.WARNING, "cannot create matrix gui object", e);
+			}
+		}
+		return guiObject;
+	}
+	
+	
 }

@@ -8,17 +8,18 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
-import org.jdmp.core.variable.Variable;
+import org.jdmp.gui.variable.VariableGUIObject;
 
 public class FillWithValueAction extends VariableAction {
 	private static final long serialVersionUID = -3609906043755395315L;
 
-	public FillWithValueAction(JComponent c, Variable v) {
+	public FillWithValueAction(JComponent c, VariableGUIObject v) {
 		super(c, v);
 		putValue(Action.NAME, "Fill With Value...");
 		putValue(Action.SHORT_DESCRIPTION, "Fills all values with specified value");
 		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_V);
-		putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.ALT_DOWN_MASK));
+		putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_V,
+				InputEvent.ALT_DOWN_MASK));
 	}
 
 	public Object call() {

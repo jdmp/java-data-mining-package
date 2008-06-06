@@ -1,6 +1,5 @@
 package org.jdmp.gui.variable;
 
-import org.jdmp.core.variable.Variable;
 import org.jdmp.matrix.coordinates.Coordinates;
 import org.jfree.chart.plot.IntervalMarker;
 import org.jfree.chart.plot.ValueMarker;
@@ -12,15 +11,15 @@ public class XYSeriesCollectionWrapper extends XYSeriesCollection {
 
 	private static final int MAXTRACES = 10;
 
-	private Variable variable = null;
+	private VariableGUIObject variable = null;
 
-	public XYSeriesCollectionWrapper(Variable v) {
+	public XYSeriesCollectionWrapper(VariableGUIObject v) {
 		this.variable = v;
-		if (Coordinates.product(v.getSize()) == 0) {
+		if (Coordinates.product(v.getVariable().getSize()) == 0) {
 			System.out.println("size not definied");
 		}
 
-		int size = (int) Math.min(Coordinates.product(v.getSize()), MAXTRACES);
+		int size = (int) Math.min(Coordinates.product(v.getVariable().getSize()), MAXTRACES);
 		for (int i = 0; i < size; i++) {
 			addSeries(new XYSeriesWrapper(variable, i));
 		}

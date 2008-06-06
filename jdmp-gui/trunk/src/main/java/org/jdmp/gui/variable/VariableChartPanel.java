@@ -29,7 +29,6 @@ import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import org.jdmp.core.variable.Variable;
 import org.jdmp.gui.actions.ExportAction;
 import org.jdmp.gui.io.ExportJPEG;
 import org.jdmp.gui.io.ExportPDF;
@@ -88,7 +87,7 @@ public class VariableChartPanel extends ChartPanel implements CanBeRepainted, Ca
 
 	private boolean showOnlyEuklideanValues = false;
 
-	private Variable variable = null;
+	private VariableGUIObject variable = null;
 
 	private XYAnnotation circle = null;
 
@@ -102,10 +101,10 @@ public class VariableChartPanel extends ChartPanel implements CanBeRepainted, Ca
 
 	public LegendTitle legend = null;
 
-	public VariableChartPanel(Variable v, boolean showBorder) {
+	public VariableChartPanel(VariableGUIObject v, boolean showBorder) {
 		super(null, false);
 		this.variable = v;
-		v.getRowSelectionModel().addListSelectionListener(this);
+		v.getVariable().getRowSelectionModel().addListSelectionListener(this);
 
 		addComponentListener(this);
 
@@ -317,12 +316,12 @@ public class VariableChartPanel extends ChartPanel implements CanBeRepainted, Ca
 
 		XYSeries ts = new XYSeries("TimeSeries", false);
 
-		int stepSize = (int) Math.ceil((double) variable.getMatrixList().size()
+		int stepSize = (int) Math.ceil((double) variable.getVariable().getMatrixList().size()
 				/ (double) MAXPOINTCOUNT);
 
-		for (int j = 0; j < variable.getMatrixList().size(); j += stepSize) {
+		for (int j = 0; j < variable.getVariable().getMatrixList().size(); j += stepSize) {
 			text = null;
-			Matrix m = variable.getMatrixList().get(j);
+			Matrix m = variable.getVariable().getMatrixList().get(j);
 			double x = m.getDouble(0, 0);
 			double y = m.getDouble(0, 1);
 			ts.add(x, y);
@@ -352,15 +351,15 @@ public class VariableChartPanel extends ChartPanel implements CanBeRepainted, Ca
 		String text = null;
 
 		for (int i = 0; i < ColorUtil.TRACECOLORS.length
-				&& i < variable.getMatrixList().getTraceCount(); i++) {
+				&& i < variable.getVariable().getMatrixList().getTraceCount(); i++) {
 			XYSeries ts = new XYSeriesWrapper(variable, i);
 
-			int stepSize = (int) Math.ceil((double) variable.getMatrixList().size()
+			int stepSize = (int) Math.ceil((double) variable.getVariable().getMatrixList().size()
 					/ (double) MAXPOINTCOUNT);
 
-			for (int j = 0; j < variable.getMatrixList().size(); j += stepSize) {
+			for (int j = 0; j < variable.getVariable().getMatrixList().size(); j += stepSize) {
 				text = null;
-				Matrix m = variable.getMatrixList().get(j);
+				Matrix m = variable.getVariable().getMatrixList().get(j);
 				double x = j;
 				double y = m.getDouble(i % m.getRowCount(), i / m.getRowCount());
 				// ts.addOrUpdate(x, y);
@@ -392,12 +391,12 @@ public class VariableChartPanel extends ChartPanel implements CanBeRepainted, Ca
 
 		XYSeries ts = new XYSeries("Euklidean Values");
 
-		int stepSize = (int) Math.ceil((double) variable.getMatrixList().size()
+		int stepSize = (int) Math.ceil((double) variable.getVariable().getMatrixList().size()
 				/ (double) MAXPOINTCOUNT);
 
-		for (int j = 0; j < variable.getMatrixList().size(); j += stepSize) {
+		for (int j = 0; j < variable.getVariable().getMatrixList().size(); j += stepSize) {
 			text = null;
-			Matrix m = variable.getMatrixList().get(j);
+			Matrix m = variable.getVariable().getMatrixList().get(j);
 			ts.addOrUpdate(0.0, m.getEuklideanValue());
 
 			if (isShowLabels() && isShowValues()) {
@@ -435,7 +434,7 @@ public class VariableChartPanel extends ChartPanel implements CanBeRepainted, Ca
 		getChart().setBackgroundPaint(UIManager.getColor("Panel.background"));
 	}
 
-	public Variable getVariable() {
+	public VariableGUIObject getVariable() {
 		return variable;
 	}
 
@@ -491,7 +490,7 @@ public class VariableChartPanel extends ChartPanel implements CanBeRepainted, Ca
 			return;
 		}
 
-		Matrix m = variable.getMatrix(index);
+		Matrix m = variable.getVariable().getMatrix(index);
 
 		plot.clearRangeMarkers();
 		plot.clearDomainMarkers();
@@ -505,7 +504,8 @@ public class VariableChartPanel extends ChartPanel implements CanBeRepainted, Ca
 			plot.addAnnotation(circle);
 		} else {
 			ValueMarker vm = null;
-			if (variable.getMinTime() == 0.0 && variable.getMaxTime() == 0.0) {
+			if (variable.getVariable().getMinTime() == 0.0
+					&& variable.getVariable().getMaxTime() == 0.0) {
 				vm = new ValueMarker(index);
 			} else {
 				vm = new ValueMarker(0.0);
@@ -584,8 +584,8 @@ public class VariableChartPanel extends ChartPanel implements CanBeRepainted, Ca
 
 	public void valueChanged(ListSelectionEvent e) {
 		if (e.getValueIsAdjusting() == false) {
-			int min = variable.getRowSelectionModel().getMinSelectionIndex();
-			int max = variable.getRowSelectionModel().getMaxSelectionIndex();
+			int min = variable.getVariable().getRowSelectionModel().getMinSelectionIndex();
+			int max = variable.getVariable().getRowSelectionModel().getMaxSelectionIndex();
 			rangeSelection.setStartValue(min);
 			rangeSelection.setEndValue(max);
 			if (min == max) {

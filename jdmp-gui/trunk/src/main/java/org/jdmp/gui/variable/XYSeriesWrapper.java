@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableEvent;
 import org.jdmp.core.variable.VariableListener;
 import org.jdmp.matrix.Matrix;
@@ -25,7 +24,7 @@ public class XYSeriesWrapper extends XYSeries implements VariableListener {
 
 	private Map<Integer, XYDataItem> values = new WeakHashMap<Integer, XYDataItem>();
 
-	private Variable variable = null;
+	private VariableGUIObject variable = null;
 
 	private ValueMarker meanMarker = null;
 
@@ -39,15 +38,16 @@ public class XYSeriesWrapper extends XYSeries implements VariableListener {
 
 	private int start = 0;
 
-	public XYSeriesWrapper(Variable v, int number) {
+	public XYSeriesWrapper(VariableGUIObject v, int number) {
 		super("TimeSeries " + number);
 		this.number = number;
 		this.variable = v;
 		meanMarker = new MeanMarkerForVariable(variable, number);
 		standardDeviationMarker = new StandardDeviationMarkerForVariable(variable, number);
 		minMaxMarker = new MinMaxMarkerForVariable(variable, number);
-		variable.addVariableListener(this);
-		stepsize = (int) Math.ceil((double) variable.getMatrixCount() / (double) MAXITEMS);
+		variable.getVariable().addVariableListener(this);
+		stepsize = (int) Math.ceil((double) variable.getVariable().getMatrixCount()
+				/ (double) MAXITEMS);
 	}
 
 	public void setRange(Range range) {
@@ -59,11 +59,11 @@ public class XYSeriesWrapper extends XYSeries implements VariableListener {
 	@Override
 	public XYDataItem getDataItem(int index) {
 		int id = start + index * stepsize;
-		if (id >= variable.getMatrixCount()) {
+		if (id >= variable.getVariable().getMatrixCount()) {
 			return new XYDataItem(id, 0.0);
 		}
 
-		Matrix matrix = variable.getMatrix(id);
+		Matrix matrix = variable.getVariable().getMatrix(id);
 		double value = 0.0;
 		try {
 			value = matrix.getDouble(number % matrix.getRowCount(), number / matrix.getRowCount());
@@ -85,10 +85,10 @@ public class XYSeriesWrapper extends XYSeries implements VariableListener {
 
 	@Override
 	public int getItemCount() {
-		if (variable.getMatrixCount() > MAXITEMS) {
+		if (variable.getVariable().getMatrixCount() > MAXITEMS) {
 			return MAXITEMS;
 		}
-		return variable.getMatrixCount();
+		return variable.getVariable().getMatrixCount();
 	}
 
 	@Override
@@ -120,9 +120,9 @@ class StandardDeviationMarkerForVariable extends IntervalMarker {
 
 	private int number = 0;
 
-	private Variable variable = null;
+	private VariableGUIObject variable = null;
 
-	public StandardDeviationMarkerForVariable(Variable v, int number) {
+	public StandardDeviationMarkerForVariable(VariableGUIObject v, int number) {
 		super(0, 0);
 		this.variable = v;
 		this.number = number;
@@ -132,8 +132,8 @@ class StandardDeviationMarkerForVariable extends IntervalMarker {
 	@Override
 	public double getEndValue() {
 		try {
-			return variable.getMeanMatrix().getDouble(0, number)
-					+ variable.getStandardDeviationMatrix().getDouble(0, number);
+			return variable.getVariable().getMeanMatrix().getDouble(0, number)
+					+ variable.getVariable().getStandardDeviationMatrix().getDouble(0, number);
 		} catch (MatrixException e) {
 			return 0.0;
 		}
@@ -142,8 +142,8 @@ class StandardDeviationMarkerForVariable extends IntervalMarker {
 	@Override
 	public double getStartValue() {
 		try {
-			return variable.getMeanMatrix().getDouble(0, number)
-					- variable.getStandardDeviationMatrix().getDouble(0, number);
+			return variable.getVariable().getMeanMatrix().getDouble(0, number)
+					- variable.getVariable().getStandardDeviationMatrix().getDouble(0, number);
 		} catch (MatrixException e) {
 			return 0.0;
 		}
@@ -155,9 +155,9 @@ class MinMaxMarkerForVariable extends IntervalMarker {
 
 	private int number = 0;
 
-	private Variable variable = null;
+	private VariableGUIObject variable = null;
 
-	public MinMaxMarkerForVariable(Variable v, int number) {
+	public MinMaxMarkerForVariable(VariableGUIObject v, int number) {
 		super(0, 0);
 		this.variable = v;
 		this.number = number;
@@ -167,7 +167,7 @@ class MinMaxMarkerForVariable extends IntervalMarker {
 	@Override
 	public double getEndValue() {
 		try {
-			return variable.getMaxMatrix().getDouble(0, number);
+			return variable.getVariable().getMaxMatrix().getDouble(0, number);
 		} catch (MatrixException e) {
 			return 0.0;
 		}
@@ -176,7 +176,7 @@ class MinMaxMarkerForVariable extends IntervalMarker {
 	@Override
 	public double getStartValue() {
 		try {
-			return variable.getMinMatrix().getDouble(0, number);
+			return variable.getVariable().getMinMatrix().getDouble(0, number);
 		} catch (MatrixException e) {
 			return 0.0;
 		}
@@ -189,9 +189,9 @@ class MeanMarkerForVariable extends ValueMarker {
 
 	private int number = 0;
 
-	private Variable variable = null;
+	private VariableGUIObject variable = null;
 
-	public MeanMarkerForVariable(Variable v, int number) {
+	public MeanMarkerForVariable(VariableGUIObject v, int number) {
 		super(0);
 		this.variable = v;
 		this.number = number;
@@ -203,7 +203,7 @@ class MeanMarkerForVariable extends ValueMarker {
 	@Override
 	public String getLabel() {
 		try {
-			return StringUtil.format(variable.getMeanMatrix().getDouble(0, number));
+			return StringUtil.format(variable.getVariable().getMeanMatrix().getDouble(0, number));
 		} catch (MatrixException e) {
 			return "";
 		}
@@ -212,7 +212,7 @@ class MeanMarkerForVariable extends ValueMarker {
 	@Override
 	public double getValue() {
 		try {
-			return variable.getMeanMatrix().getDouble(0, number);
+			return variable.getVariable().getMeanMatrix().getDouble(0, number);
 		} catch (MatrixException e) {
 			return 0.0;
 		}

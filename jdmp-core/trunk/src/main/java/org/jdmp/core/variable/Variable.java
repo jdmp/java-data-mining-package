@@ -10,14 +10,12 @@ import org.jdmp.core.util.CoreObject;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.collections.MatrixList;
 import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.interfaces.GUIObject;
 import org.jdmp.matrix.interfaces.HasDescription;
 import org.jdmp.matrix.interfaces.HasLabel;
 import org.jdmp.matrix.interfaces.HasMatrix;
 import org.jdmp.matrix.interfaces.HasMatrixList;
 
-public interface Variable extends CoreObject, GUIObject, HasLabel, HasDescription, HasMatrix,
-		HasMatrixList {
+public interface Variable extends CoreObject, HasLabel, HasDescription, HasMatrix, HasMatrixList {
 
 	public void exportToM(File filename);
 

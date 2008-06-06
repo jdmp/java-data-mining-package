@@ -30,8 +30,8 @@ import javax.swing.UIManager;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import org.jdmp.core.variable.Variable;
 import org.jdmp.gui.util.TickerSymbolUtil;
+import org.jdmp.gui.variable.VariableGUIObject;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.io.util.IntelligentFileReader;
@@ -41,15 +41,16 @@ public class LoadWKNAction extends VariableAction {
 
 	private String wkn = null;
 
-	public LoadWKNAction(JComponent c, Variable v) {
+	public LoadWKNAction(JComponent c, VariableGUIObject v) {
 		super(c, v);
 		putValue(Action.NAME, "Load WKN...");
 		putValue(Action.SHORT_DESCRIPTION, "Load WKN from yahoo finance");
 		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_W);
-		putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_W, InputEvent.ALT_DOWN_MASK));
+		putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_W,
+				InputEvent.ALT_DOWN_MASK));
 	}
 
-	public LoadWKNAction(JComponent c, Variable v, String wkn) {
+	public LoadWKNAction(JComponent c, VariableGUIObject v, String wkn) {
 		this(c, v);
 		this.wkn = wkn;
 	}
@@ -76,7 +77,8 @@ public class LoadWKNAction extends VariableAction {
 			dialog.setSize(new Dimension(600, 400));
 			dialog.setResizable(false);
 			if (JDialog.isDefaultLookAndFeelDecorated()) {
-				boolean supportsWindowDecorations = UIManager.getLookAndFeel().getSupportsWindowDecorations();
+				boolean supportsWindowDecorations = UIManager.getLookAndFeel()
+						.getSupportsWindowDecorations();
 				if (supportsWindowDecorations) {
 					dialog.setUndecorated(true);
 					// getRootPane().setWindowDecorationStyle(style);
@@ -159,7 +161,8 @@ public class LoadWKNAction extends VariableAction {
 				if (!dir.exists())
 					dir.mkdirs();
 
-				File file = new File(dir.getAbsolutePath() + File.separator + wkn + "-" + year + ".csv");
+				File file = new File(dir.getAbsolutePath() + File.separator + wkn + "-" + year
+						+ ".csv");
 
 				String[] fields = null;
 

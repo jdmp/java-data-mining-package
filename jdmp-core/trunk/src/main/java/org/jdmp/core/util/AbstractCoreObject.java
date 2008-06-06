@@ -125,4 +125,7 @@ public abstract class AbstractCoreObject implements CoreObject {
 		return false;
 	}
 
+	public void notifyGUIObject() {
+	}
+
 }

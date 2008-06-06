@@ -5,7 +5,9 @@ import java.beans.PropertyChangeSupport;
 
 import javax.swing.event.EventListenerList;
 
-public interface CoreObject {
+import org.jdmp.matrix.interfaces.HasGUIObject;
+
+public interface CoreObject extends HasGUIObject {
 
 	public EventListenerList getListenerList();
 
