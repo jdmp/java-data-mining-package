@@ -17,7 +17,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import org.jdmp.core.matrix.MatrixGUIObject;
-import org.jdmp.core.module.Module;
 import org.jdmp.gui.algorithm.AlgorithmGUIObject;
 import org.jdmp.gui.algorithm.AlgorithmPanel;
 import org.jdmp.gui.dataset.DataSetGUIObject;
@@ -26,6 +25,7 @@ import org.jdmp.gui.io.ExportJPEG;
 import org.jdmp.gui.io.ExportPDF;
 import org.jdmp.gui.io.ExportPNG;
 import org.jdmp.gui.matrix.MatrixPanel;
+import org.jdmp.gui.module.ModuleGUIObject;
 import org.jdmp.gui.module.ModulePanel;
 import org.jdmp.gui.sample.SampleGUIObject;
 import org.jdmp.gui.sample.SamplePanel;
@@ -84,8 +84,8 @@ public abstract class AbstractFrame extends JFrame implements PropertyChangeList
 			component = new DataSetPanel((DataSetGUIObject) o);
 		} else if (o instanceof MatrixGUIObject) {
 			component = new MatrixPanel((MatrixGUIObject) o);
-		} else if (o instanceof Module) {
-			component = new ModulePanel((Module) o);
+		} else if (o instanceof ModuleGUIObject) {
+			component = new ModulePanel((ModuleGUIObject) o);
 		} else if (o instanceof SampleGUIObject) {
 			component = new SamplePanel((SampleGUIObject) o);
 		} else if (o instanceof VariableGUIObject) {

@@ -1,7 +1,9 @@
 package org.jdmp.core.module;
 
+import java.lang.reflect.Constructor;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.logging.Level;
 
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.algorithm.AlgorithmListEvent;
@@ -11,7 +13,7 @@ import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DataSetListEvent;
 import org.jdmp.core.dataset.DataSetListListener;
 import org.jdmp.core.dataset.HasDataSets;
-import org.jdmp.core.util.AbstractGUIObject;
+import org.jdmp.core.util.AbstractCoreObject;
 import org.jdmp.core.util.AbstractEvent.EventType;
 import org.jdmp.core.util.interfaces.HasAlgorithmsAndVariables;
 import org.jdmp.core.variable.HasVariables;
@@ -19,11 +21,14 @@ import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableListEvent;
 import org.jdmp.core.variable.VariableListListener;
 import org.jdmp.core.variable.WorkspaceVariable;
+import org.jdmp.matrix.interfaces.GUIObject;
 
-public abstract class AbstractModule extends AbstractGUIObject implements Module,
+public abstract class AbstractModule extends AbstractCoreObject implements Module,
 		HasAlgorithmsAndVariables, HasModules, HasAlgorithms, HasVariables, HasDataSets {
 
 	private static Module module = null;
+	
+	private transient GUIObject guiObject =null;
 
 	protected final List<Algorithm> algorithmList = new CopyOnWriteArrayList<Algorithm>();
 
@@ -306,6 +311,19 @@ public abstract class AbstractModule extends AbstractGUIObject implements Module
 			Algorithm a = algorithmList.get(0);
 			removeAlgorithm(a);
 		}
+	}
+	
+	public final GUIObject getGUIObject() {
+		if (guiObject == null) {
+			try {
+				Class<?> c = Class.forName("org.jdmp.gui.module.ModuleGUIObject");
+				Constructor<?> con = c.getConstructor(new Class<?>[] { Module.class });
+				guiObject = (GUIObject) con.newInstance(new Object[] { this });
+			} catch (Exception e) {
+				logger.log(Level.WARNING, "cannot create module gui object", e);
+			}
+		}
+		return guiObject;
 	}
 
 }

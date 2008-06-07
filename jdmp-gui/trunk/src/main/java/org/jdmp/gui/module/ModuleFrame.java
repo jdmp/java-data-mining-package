@@ -1,7 +1,6 @@
 package org.jdmp.gui.module;
 
 import org.jdmp.core.module.AbstractModule;
-import org.jdmp.core.module.Module;
 import org.jdmp.gui.util.AbstractFrame;
 import org.jdmp.matrix.exceptions.MatrixException;
 
@@ -12,12 +11,13 @@ public class ModuleFrame extends AbstractFrame {
 
 	public static ModuleFrame getInstance() throws MatrixException {
 		if (moduleFrame == null) {
-			moduleFrame = new ModuleFrame(AbstractModule.getInstance());
+			moduleFrame = new ModuleFrame((ModuleGUIObject) AbstractModule.getInstance()
+					.getGUIObject());
 		}
 		return moduleFrame;
 	}
 
-	public ModuleFrame(Module m) throws MatrixException {
+	public ModuleFrame(ModuleGUIObject m) throws MatrixException {
 		super(m);
 	}
 

@@ -21,6 +21,7 @@ import org.jdmp.gui.dataset.DataSetFrame;
 import org.jdmp.gui.dataset.DataSetGUIObject;
 import org.jdmp.gui.matrix.MatrixFrame;
 import org.jdmp.gui.module.ModuleFrame;
+import org.jdmp.gui.module.ModuleGUIObject;
 import org.jdmp.gui.sample.SampleFrame;
 import org.jdmp.gui.sample.SampleGUIObject;
 import org.jdmp.gui.variable.VariableFrame;
@@ -96,8 +97,9 @@ public abstract class FrameManager {
 		try {
 			AbstractFrame frame = frames.get(AbstractModule.getInstance());
 			if (frame == null) {
-				frame = new ModuleFrame(AbstractModule.getInstance());
-				frames.put(AbstractModule.getInstance(), frame);
+				frame = new ModuleFrame((ModuleGUIObject) AbstractModule.getInstance()
+						.getGUIObject());
+				frames.put(AbstractModule.getInstance().getGUIObject(), frame);
 			}
 			frame.setVisible(true);
 		} catch (Exception e) {
@@ -118,7 +120,7 @@ public abstract class FrameManager {
 		}
 	}
 
-	public static void showFrame(Module m) {
+	public static void showFrame(ModuleGUIObject m) {
 		try {
 			AbstractFrame frame = frames.get(m);
 			if (frame == null) {

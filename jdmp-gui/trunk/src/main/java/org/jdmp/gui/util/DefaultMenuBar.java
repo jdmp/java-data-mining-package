@@ -28,6 +28,7 @@ import org.jdmp.gui.dataset.DataSetGUIObject;
 import org.jdmp.gui.dataset.actions.DataSetActions;
 import org.jdmp.gui.matrix.actions.MatrixActions;
 import org.jdmp.gui.matrix.actions.ShowInFrameAction;
+import org.jdmp.gui.module.ModuleGUIObject;
 import org.jdmp.gui.module.actions.ModuleActions;
 import org.jdmp.gui.sample.SampleGUIObject;
 import org.jdmp.gui.sample.actions.SampleActions;
@@ -49,7 +50,7 @@ public class DefaultMenuBar extends JMenuBar {
 		} else if (o instanceof DataSetGUIObject) {
 			actions = new DataSetActions(component, (DataSetGUIObject) o);
 		} else if (o instanceof Module) {
-			actions = new ModuleActions(component, (Module) o);
+			actions = new ModuleActions(component, (ModuleGUIObject) o);
 		} else if (o instanceof SampleGUIObject) {
 			actions = new SampleActions(component, (SampleGUIObject) o);
 		} else if (o instanceof VariableGUIObject) {
@@ -65,8 +66,8 @@ public class DefaultMenuBar extends JMenuBar {
 
 		JMenu optionsMenu = new JMenu("Tools");
 		optionsMenu.setMnemonic(KeyEvent.VK_T);
-		optionsMenu.add(new JMenuItem(
-				new ShowInFrameAction(component, AbstractModule.getInstance())));
+		optionsMenu.add(new JMenuItem(new ShowInFrameAction(component, AbstractModule.getInstance()
+				.getGUIObject())));
 		optionsMenu.add(new JSeparator());
 		optionsMenu.add(new JMenuItem(new ShowInFrameAction(component, MatrixGlobalConfiguration
 				.getInstance())));

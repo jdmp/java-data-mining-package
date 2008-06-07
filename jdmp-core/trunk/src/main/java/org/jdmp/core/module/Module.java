@@ -16,10 +16,9 @@ import org.jdmp.core.variable.HasVariables;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableListEvent;
 import org.jdmp.core.variable.VariableListListener;
-import org.jdmp.matrix.interfaces.GUIObject;
 
-public interface Module extends CoreObject, GUIObject, HasAlgorithmsAndVariables, HasModules,
-		HasAlgorithms, HasVariables, HasDataSets {
+public interface Module extends CoreObject, HasAlgorithmsAndVariables, HasModules, HasAlgorithms,
+		HasVariables, HasDataSets {
 
 	public void fireVariableAdded(VariableListEvent e);
 

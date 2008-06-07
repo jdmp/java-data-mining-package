@@ -3,7 +3,7 @@ package org.jdmp.gui.module.actions;
 import javax.swing.Action;
 import javax.swing.JComponent;
 
-import org.jdmp.core.module.Module;
+import org.jdmp.gui.module.ModuleGUIObject;
 import org.jdmp.matrix.Matrix;
 
 public class AppendMatrixAction extends ModuleAction {
@@ -11,8 +11,7 @@ public class AppendMatrixAction extends ModuleAction {
 
 	private Matrix matrix = null;
 
-
-	public AppendMatrixAction(JComponent c, Module module,  Matrix m) {
+	public AppendMatrixAction(JComponent c, ModuleGUIObject module, Matrix m) {
 		super(c, module);
 		this.matrix = m;
 

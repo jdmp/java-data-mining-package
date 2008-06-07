@@ -10,7 +10,6 @@ import javax.swing.JSplitPane;
 import org.jdmp.core.algorithm.HasAlgorithms;
 import org.jdmp.core.dataset.HasDataSets;
 import org.jdmp.core.module.HasModules;
-import org.jdmp.core.module.Module;
 import org.jdmp.core.variable.HasVariables;
 import org.jdmp.gui.util.AbstractPanel;
 import org.jdmp.gui.util.ObjectListPanel;
@@ -26,11 +25,12 @@ public class ModulePanel extends AbstractPanel {
 
 	private JPanel rightPanel = new JPanel();
 
-	public ModulePanel(Module m) {
+	public ModulePanel(ModuleGUIObject m) {
 		super(m);
 
 		leftPanel.setLayout(new BorderLayout());
-		leftPanel.add(new GraphZoomScrollPane(new ModuleListGraphPanel((HasModules) m)), BorderLayout.CENTER);
+		leftPanel.add(new GraphZoomScrollPane(new ModuleListGraphPanel((HasModules) m)),
+				BorderLayout.CENTER);
 		leftPanel.setBorder(BorderFactory.createTitledBorder("Modules in Module"));
 
 		rightPanel.setLayout(new GridLayout(4, 1));
