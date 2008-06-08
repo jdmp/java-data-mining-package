@@ -39,20 +39,6 @@ public abstract class AbstractGUIObject implements GUIObject {
 	public AbstractGUIObject() {
 	}
 
-	public PropertyChangeSupport getProptertyChangeSupport() {
-		if (changeSupport == null) {
-			changeSupport = new PropertyChangeSupport(this);
-		}
-		return changeSupport;
-	}
-
-	public EventListenerList getListenerList() {
-		if (listenerList == null) {
-			listenerList = new EventListenerList();
-		}
-		return listenerList;
-	}
-
 	public AbstractGUIObject(String label) {
 		this();
 		setLabel(label);
@@ -61,6 +47,20 @@ public abstract class AbstractGUIObject implements GUIObject {
 	public AbstractGUIObject(String label, String description) {
 		this(label);
 		setDescription(description);
+	}
+
+	public final PropertyChangeSupport getProptertyChangeSupport() {
+		if (changeSupport == null) {
+			changeSupport = new PropertyChangeSupport(this);
+		}
+		return changeSupport;
+	}
+
+	public final EventListenerList getListenerList() {
+		if (listenerList == null) {
+			listenerList = new EventListenerList();
+		}
+		return listenerList;
 	}
 
 	public void fireValueChanged() {
@@ -74,17 +74,6 @@ public abstract class AbstractGUIObject implements GUIObject {
 		} catch (Exception e) {
 			logger.log(Level.WARNING, "cannot show frame", e);
 		}
-	}
-
-	public abstract void clear();
-
-	public final boolean isInListenerList(Object listener) {
-		for (Object o : getListenerList().getListenerList()) {
-			if (o.equals(listener)) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	public String getLabel() {
@@ -147,13 +136,6 @@ public abstract class AbstractGUIObject implements GUIObject {
 
 	public final void removePropertyChangeListener(PropertyChangeListener l) {
 		getProptertyChangeSupport().removePropertyChangeListener(l);
-	}
-
-	public GUIObject getGUIObject() {
-		return this;
-	}
-
-	public void notifyGUIObject() {
 	}
 
 }

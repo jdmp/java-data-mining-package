@@ -12,7 +12,6 @@ public class SampleGUIObject extends AbstractGUIObject {
 		this.sample = s;
 	}
 
-	@Override
 	public void clear() {
 		sample.clear();
 	}

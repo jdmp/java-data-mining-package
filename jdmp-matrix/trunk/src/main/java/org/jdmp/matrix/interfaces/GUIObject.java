@@ -57,6 +57,4 @@ public interface GUIObject extends Serializable, Disposable, Cloneable, HasLabel
 
 	public void clear();
 
-	public boolean isInListenerList(Object listener);
-
 }

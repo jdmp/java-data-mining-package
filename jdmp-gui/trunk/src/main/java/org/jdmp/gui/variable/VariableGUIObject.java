@@ -12,7 +12,6 @@ public class VariableGUIObject extends AbstractGUIObject {
 		this.variable = v;
 	}
 
-	@Override
 	public void clear() {
 		variable.clear();
 	}

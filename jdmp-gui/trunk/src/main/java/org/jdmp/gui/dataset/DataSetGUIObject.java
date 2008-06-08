@@ -16,7 +16,6 @@ public class DataSetGUIObject extends AbstractGUIObject {
 		this.dataSet = d;
 	}
 
-	@Override
 	public void clear() {
 		dataSet.clear();
 	}

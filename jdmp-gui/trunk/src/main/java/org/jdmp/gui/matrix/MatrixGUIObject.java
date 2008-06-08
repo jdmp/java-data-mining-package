@@ -38,7 +38,6 @@ public class MatrixGUIObject extends AbstractGUIObject implements TableModel,
 		return matrix;
 	}
 
-	@Override
 	public void clear() {
 		matrix.clear();
 		fireValueChanged();

@@ -12,7 +12,6 @@ public class AlgorithmGUIObject extends AbstractGUIObject {
 		this.algorithm = a;
 	}
 
-	@Override
 	public void clear() {
 		algorithm.clear();
 	}

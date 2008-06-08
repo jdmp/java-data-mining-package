@@ -12,7 +12,6 @@ public class ModuleGUIObject extends AbstractGUIObject {
 		this.module = module;
 	}
 
-	@Override
 	public void clear() {
 		module.clear();
 	}
