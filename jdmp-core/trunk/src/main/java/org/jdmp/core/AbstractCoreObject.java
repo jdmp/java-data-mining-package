@@ -103,7 +103,7 @@ public abstract class AbstractCoreObject implements CoreObject {
 		return s.toString();
 	}
 
-	public void fireValueChanged() {
+	public final void fireValueChanged() {
 	}
 
 	public final void showGUI() {
@@ -116,16 +116,7 @@ public abstract class AbstractCoreObject implements CoreObject {
 		}
 	}
 
-	public final boolean isInListenerList(Object listener) {
-		for (Object o : getListenerList().getListenerList()) {
-			if (o.equals(listener)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public void notifyGUIObject() {
+	public final void notifyGUIObject() {
 	}
 
 }

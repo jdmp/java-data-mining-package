@@ -2,26 +2,23 @@ package org.jdmp.core;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.Serializable;
 
 import javax.swing.event.EventListenerList;
 
+import org.jdmp.matrix.interfaces.Disposable;
+import org.jdmp.matrix.interfaces.HasDescription;
 import org.jdmp.matrix.interfaces.HasGUIObject;
+import org.jdmp.matrix.interfaces.HasLabel;
 
-public interface CoreObject extends HasGUIObject {
+public interface CoreObject extends Serializable, Disposable, Cloneable, HasGUIObject, HasLabel,
+		HasDescription {
 
 	public EventListenerList getListenerList();
 
 	public String getLongStatus();
 
 	public String getShortStatus();
-
-	public String getLabel();
-
-	public void setLabel(String label);
-
-	public String getDescription();
-
-	public void setDescription(String description);
 
 	public void addPropertyChangeListener(PropertyChangeListener l);
 
@@ -31,7 +28,4 @@ public interface CoreObject extends HasGUIObject {
 
 	public void fireValueChanged();
 
-	public boolean isInListenerList(Object listener);
-
-	public void showGUI();
 }
