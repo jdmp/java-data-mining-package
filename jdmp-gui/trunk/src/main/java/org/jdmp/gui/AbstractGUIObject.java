@@ -1,4 +1,4 @@
-package org.jdmp.core.util;
+package org.jdmp.gui;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;

@@ -1,7 +1,7 @@
 package org.jdmp.gui.module;
 
 import org.jdmp.core.module.Module;
-import org.jdmp.core.util.AbstractGUIObject;
+import org.jdmp.gui.AbstractGUIObject;
 
 public class ModuleGUIObject extends AbstractGUIObject {
 	private static final long serialVersionUID = -317629566695423286L;

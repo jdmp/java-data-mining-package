@@ -5,8 +5,8 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
-import org.jdmp.core.util.AbstractGUIObject;
 import org.jdmp.core.util.FastListSelectionModel;
+import org.jdmp.gui.AbstractGUIObject;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.calculation.Calculation.Ret;
 import org.jdmp.matrix.calculation.entrywise.creators.Fill;
