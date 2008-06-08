@@ -37,7 +37,7 @@ public interface HasGUIObject {
 	 * Returns an object suitable for displaying on the screen. Ensures that,
 	 * for each basic object, only one GUIObject can be returned.
 	 * 
-	 * @return object suitable for displaying on the screenf
+	 * @return object suitable for displaying on the screen
 	 */
 	public GUIObject getGUIObject();
 
