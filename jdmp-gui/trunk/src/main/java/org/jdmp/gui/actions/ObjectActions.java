@@ -9,11 +9,11 @@ import javax.swing.JSeparator;
 
 import org.jdmp.core.algorithm.HasAlgorithms;
 import org.jdmp.core.dataset.HasDataSets;
-import org.jdmp.core.matrix.MatrixGUIObject;
 import org.jdmp.core.module.HasModules;
 import org.jdmp.core.variable.HasVariables;
 import org.jdmp.gui.algorithm.actions.AlgorithmListActions;
 import org.jdmp.gui.dataset.actions.DataSetListActions;
+import org.jdmp.gui.matrix.MatrixGUIObject;
 import org.jdmp.gui.matrix.actions.ClearMatrixAction;
 import org.jdmp.gui.matrix.actions.DeleteMatrixAction;
 import org.jdmp.gui.module.actions.ModuleListActions;

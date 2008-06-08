@@ -8,7 +8,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 
-import org.jdmp.core.matrix.MatrixGUIObject;
 import org.jdmp.core.matrix.system.LogMatrix;
 import org.jdmp.core.matrix.system.MatrixAvailableProcessors;
 import org.jdmp.core.matrix.system.MatrixMemoryUsage;
@@ -26,6 +25,7 @@ import org.jdmp.gui.algorithm.AlgorithmGUIObject;
 import org.jdmp.gui.algorithm.actions.AlgorithmActions;
 import org.jdmp.gui.dataset.DataSetGUIObject;
 import org.jdmp.gui.dataset.actions.DataSetActions;
+import org.jdmp.gui.matrix.MatrixGUIObject;
 import org.jdmp.gui.matrix.actions.MatrixActions;
 import org.jdmp.gui.matrix.actions.ShowInFrameAction;
 import org.jdmp.gui.module.ModuleGUIObject;

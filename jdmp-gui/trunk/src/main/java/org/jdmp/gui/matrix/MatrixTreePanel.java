@@ -7,8 +7,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.tree.TreeModel;
 
-import org.jdmp.core.matrix.MatrixGUIObject;
-
 public class MatrixTreePanel extends JPanel {
 	private static final long serialVersionUID = 6571680515596275337L;
 

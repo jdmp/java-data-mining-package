@@ -7,7 +7,6 @@ import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.tree.TreeModel;
 
-import org.jdmp.core.matrix.MatrixGUIObject;
 import org.jdmp.gui.matrix.plot.MatrixPlot;
 import org.jdmp.gui.util.AbstractPanel;
 import org.jdmp.gui.util.BufferedPanel;
@@ -36,7 +35,8 @@ public class MatrixPanel extends AbstractPanel {
 
 		if (false) {
 			try {
-		//		tabbedPane.add("3D Visualization", new Matrix3DPanel(m, false));
+				// tabbedPane.add("3D Visualization", new Matrix3DPanel(m,
+				// false));
 			} catch (Throwable t) {
 			}
 		}

@@ -6,7 +6,6 @@ import java.util.Map;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
-import org.jdmp.core.matrix.MatrixGUIObject;
 import org.jdmp.gui.util.JungGraphPanel.Data;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.coordinates.Coordinates;
@@ -50,8 +49,8 @@ public class MatrixGraphWrapper extends DirectedSparseGraph implements TableMode
 				if (matrix.getColumnName(i) != null) {
 					v.setUserDatum(Data.Label, matrix.getColumnName(i), UserData.SHARED);
 				} else
-                  v.setUserDatum(Data.Label, ""+i, UserData.SHARED);
-				  
+					v.setUserDatum(Data.Label, "" + i, UserData.SHARED);
+
 				addVertex(v);
 				vertices.put(i, v);
 
@@ -74,9 +73,13 @@ public class MatrixGraphWrapper extends DirectedSparseGraph implements TableMode
 					if (v1 != null && v2 != null) {
 						if (numEdges() < MAXEDGES) {
 							Edge e = new DirectedSparseEdge(v1, v2);
-							e.addUserDatum(Data.Label, matrix.getDoubleValueAt(rc), UserData.SHARED);
+							e
+									.addUserDatum(Data.Label, matrix.getDoubleValueAt(rc),
+											UserData.SHARED);
 							e.addUserDatum(Data.RowColumn, rc, UserData.SHARED);
-							e.addUserDatum(Data.Value, matrix.getDoubleValueAt(rc), UserData.SHARED);
+							e
+									.addUserDatum(Data.Value, matrix.getDoubleValueAt(rc),
+											UserData.SHARED);
 							addEdge(e);
 						}
 					}

@@ -4,9 +4,9 @@ import javax.swing.JComponent;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 
-import org.jdmp.core.matrix.MatrixGUIObject;
 import org.jdmp.gui.actions.ExitAction;
 import org.jdmp.gui.actions.ObjectActions;
+import org.jdmp.gui.matrix.MatrixGUIObject;
 import org.jdmp.matrix.interfaces.HasMatrixList;
 
 public class MatrixActions extends ObjectActions {

@@ -7,7 +7,7 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
-import org.jdmp.core.matrix.MatrixGUIObject;
+import org.jdmp.gui.matrix.MatrixGUIObject;
 import org.jdmp.matrix.interfaces.HasMatrixList;
 
 public class FillWithValueAction extends MatrixAction {

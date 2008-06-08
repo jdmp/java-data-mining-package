@@ -8,9 +8,9 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 
-import org.jdmp.core.matrix.MatrixGUIObject;
 import org.jdmp.core.variable.HasVariables;
 import org.jdmp.core.variable.Variable;
+import org.jdmp.gui.matrix.MatrixGUIObject;
 import org.jdmp.gui.util.JungGraphPanel.Data;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.exceptions.MatrixException;
@@ -141,7 +141,8 @@ public class ProjectionPanel extends JPanel implements MouseListener {
 				g.addVertex(v);
 				double x = m.getDouble(this.xAxis % m.getRowCount(), this.xAxis / m.getRowCount());
 				double y = m.getDouble(this.yAxis % m.getRowCount(), this.yAxis / m.getRowCount());
-				v.setUserDatum(layout.getBaseKey(), new Coordinates(x * 50, y * 50), UserData.SHARED);
+				v.setUserDatum(layout.getBaseKey(), new Coordinates(x * 50, y * 50),
+						UserData.SHARED);
 				// layout.lockVertex(v);
 			}
 		}

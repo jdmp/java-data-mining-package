@@ -9,8 +9,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
-import org.jdmp.core.matrix.MatrixGUIObject;
-import org.jdmp.core.matrix.MatrixListTableModel;
 import org.jdmp.gui.matrix.plot.MatrixPlot;
 import org.jdmp.matrix.util.StringUtil;
 
@@ -39,8 +37,8 @@ public class MatrixTableCellRenderer implements TableCellRenderer {
 		matrixPlot.getPlotSettings().setTimeLimit(10);
 	}
 
-	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-			int row, int column) {
+	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+			boolean hasFocus, int row, int column) {
 
 		l = null;
 
@@ -55,9 +53,11 @@ public class MatrixTableCellRenderer implements TableCellRenderer {
 				o = row;
 				break;
 			case MatrixListTableModel.MATRIXCOLUMN:
-				return matrixRenderer.getTableCellRendererComponent(table, matrix, isSelected, hasFocus, row, column);
+				return matrixRenderer.getTableCellRendererComponent(table, matrix, isSelected,
+						hasFocus, row, column);
 			case MatrixListTableModel.MATRIXPLOTCOLUMN:
-				return matrixPlot.getTableCellRendererComponent(table, matrix, isSelected, hasFocus, row, column);
+				return matrixPlot.getTableCellRendererComponent(table, matrix, isSelected,
+						hasFocus, row, column);
 			case MatrixListTableModel.SIZECOLUMN:
 				o = "" + matrix.getColumnCount() + "x" + matrix.getRowCount();
 				break;
@@ -69,7 +69,8 @@ public class MatrixTableCellRenderer implements TableCellRenderer {
 				break;
 			}
 
-			l = (JLabel) renderer.getTableCellRendererComponent(table, o, isSelected, hasFocus, row, column);
+			l = (JLabel) renderer.getTableCellRendererComponent(table, o, isSelected, hasFocus,
+					row, column);
 			l.setIcon(null);
 			l.setHorizontalAlignment(JLabel.CENTER);
 		}

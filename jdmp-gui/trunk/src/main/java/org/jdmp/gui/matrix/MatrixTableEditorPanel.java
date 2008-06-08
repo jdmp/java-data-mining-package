@@ -32,10 +32,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 
-import org.jdmp.core.matrix.MatrixGUIObject;
-
-public class MatrixTableEditorPanel extends JPanel implements TableModelListener, MouseListener, KeyListener,
-		ListSelectionListener {
+public class MatrixTableEditorPanel extends JPanel implements TableModelListener, MouseListener,
+		KeyListener, ListSelectionListener {
 	private static final long serialVersionUID = -1794955656888362574L;
 
 	private MatrixGUIObject dataModel = null;
@@ -79,8 +77,8 @@ public class MatrixTableEditorPanel extends JPanel implements TableModelListener
 
 		this.addMouseListener(this);
 
-		this.add(jTable.getTableHeader(), new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.EAST,
-				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		this.add(jTable.getTableHeader(), new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
+				GridBagConstraints.EAST, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 		this.add(scrollPane, new GridBagConstraints(0, 1, 1, 1, 1.0, 1.0, GridBagConstraints.EAST,
 				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 	}
@@ -231,8 +229,8 @@ class RowHeaderRenderer extends JLabel implements ListCellRenderer {
 		setHorizontalAlignment(RIGHT);
 	}
 
-	public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
-			boolean cellHasFocus) {
+	public Component getListCellRendererComponent(JList list, Object value, int index,
+			boolean isSelected, boolean cellHasFocus) {
 		if (table.getSelectionModel().isSelectedIndex(index)) {
 			setFont(selectedFont);
 			// setBackground(Color.blue);

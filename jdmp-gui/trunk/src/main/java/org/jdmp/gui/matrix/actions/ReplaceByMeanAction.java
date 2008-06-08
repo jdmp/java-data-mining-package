@@ -3,7 +3,7 @@ package org.jdmp.gui.matrix.actions;
 import javax.swing.Action;
 import javax.swing.JComponent;
 
-import org.jdmp.core.matrix.MatrixGUIObject;
+import org.jdmp.gui.matrix.MatrixGUIObject;
 import org.jdmp.matrix.calculation.Calculation.Ret;
 import org.jdmp.matrix.calculation.general.missingvalues.ImputeMean;
 import org.jdmp.matrix.exceptions.MatrixException;
@@ -20,8 +20,8 @@ public class ReplaceByMeanAction extends MatrixAction {
 
 	@Override
 	public Object call() throws MatrixException {
-		return getMatrixObject().getMatrix().calc(new ImputeMean(getDimension(), getMatrixObject().getMatrix()),
-				Ret.ORIG);
+		return getMatrixObject().getMatrix().calc(
+				new ImputeMean(getDimension(), getMatrixObject().getMatrix()), Ret.ORIG);
 	}
 
 }

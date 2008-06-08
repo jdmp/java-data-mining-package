@@ -3,7 +3,7 @@ package org.jdmp.gui.matrix.actions;
 import javax.swing.Action;
 import javax.swing.JComponent;
 
-import org.jdmp.core.matrix.MatrixGUIObject;
+import org.jdmp.gui.matrix.MatrixGUIObject;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.calculation.Calculation.Ret;
 import org.jdmp.matrix.exceptions.MatrixException;
@@ -15,7 +15,8 @@ public class StandardDeviationAction extends MatrixAction {
 	public StandardDeviationAction(JComponent c, MatrixGUIObject m, HasMatrixList v) {
 		super(c, m, v);
 		putValue(Action.NAME, "Standard Deviation");
-		putValue(Action.SHORT_DESCRIPTION, "Calculates the standard deviation of the entries in this matrix");
+		putValue(Action.SHORT_DESCRIPTION,
+				"Calculates the standard deviation of the entries in this matrix");
 	}
 
 	@Override

@@ -7,8 +7,8 @@ import java.util.logging.Level;
 import javax.swing.Action;
 import javax.swing.JComponent;
 
-import org.jdmp.core.matrix.MatrixGUIObject;
 import org.jdmp.gui.clipboard.MatrixSelection;
+import org.jdmp.gui.matrix.MatrixGUIObject;
 import org.jdmp.matrix.interfaces.GUIObject;
 
 public class CopyAction extends ObjectAction {

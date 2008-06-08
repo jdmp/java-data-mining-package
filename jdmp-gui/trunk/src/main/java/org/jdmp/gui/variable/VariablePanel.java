@@ -5,9 +5,9 @@ import java.awt.BorderLayout;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 
-import org.jdmp.core.matrix.MatrixGUIObject;
 import org.jdmp.core.matrix.wrappers.MatrixListToMatrixWrapper;
 import org.jdmp.gui.matrix.MatrixEditorPanel;
+import org.jdmp.gui.matrix.MatrixGUIObject;
 import org.jdmp.gui.matrix.MatrixGraphPanel;
 import org.jdmp.gui.matrix.MatrixListPanel;
 import org.jdmp.gui.matrix.MatrixPaintPanel;

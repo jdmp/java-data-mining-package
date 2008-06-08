@@ -10,7 +10,6 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.JMenuItem;
 
-import org.jdmp.core.matrix.MatrixGUIObject;
 import org.jdmp.core.module.AbstractModule;
 import org.jdmp.core.module.Module;
 import org.jdmp.core.util.CoreObject;
@@ -20,6 +19,7 @@ import org.jdmp.gui.algorithm.AlgorithmGUIObject;
 import org.jdmp.gui.dataset.DataSetFrame;
 import org.jdmp.gui.dataset.DataSetGUIObject;
 import org.jdmp.gui.matrix.MatrixFrame;
+import org.jdmp.gui.matrix.MatrixGUIObject;
 import org.jdmp.gui.module.ModuleFrame;
 import org.jdmp.gui.module.ModuleGUIObject;
 import org.jdmp.gui.sample.SampleFrame;

@@ -6,7 +6,7 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
-import org.jdmp.core.matrix.MatrixGUIObject;
+import org.jdmp.gui.matrix.MatrixGUIObject;
 import org.jdmp.matrix.calculation.Calculation.Ret;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.HasMatrixList;

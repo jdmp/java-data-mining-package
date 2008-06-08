@@ -9,7 +9,6 @@ import javax.swing.JTable;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import org.jdmp.core.matrix.MatrixGUIObject;
 import org.jdmp.gui.util.ColorUtil;
 import org.jdmp.matrix.util.StringUtil;
 
@@ -20,9 +19,10 @@ public class MatrixValueTableCellRenderer extends DefaultTableCellRenderer {
 
 	private Border border = BorderFactory.createLineBorder(Color.blue, 2);
 
-	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-			int row, int column) {
-		JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+			boolean hasFocus, int row, int column) {
+		JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected,
+				hasFocus, row, column);
 		label.setHorizontalAlignment(JLabel.CENTER);
 
 		MatrixGUIObject m = (MatrixGUIObject) table.getModel();

@@ -6,7 +6,7 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
-import org.jdmp.core.matrix.MatrixGUIObject;
+import org.jdmp.gui.matrix.MatrixGUIObject;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.HasMatrixList;
 
@@ -16,7 +16,8 @@ public class FillGaussianAction extends MatrixAction {
 	public FillGaussianAction(JComponent c, MatrixGUIObject m, HasMatrixList v) {
 		super(c, m, v);
 		putValue(Action.NAME, "Fill Gaussian");
-		putValue(Action.SHORT_DESCRIPTION, "set entries to gaussian values with mean 0.0 and variance 1.0");
+		putValue(Action.SHORT_DESCRIPTION,
+				"set entries to gaussian values with mean 0.0 and variance 1.0");
 		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_G);
 		putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_G, 0));
 	}

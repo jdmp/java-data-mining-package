@@ -3,9 +3,9 @@ package org.jdmp.gui.matrix.actions;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
-import org.jdmp.core.matrix.MatrixGUIObject;
 import org.jdmp.core.matrix.wrappers.MatrixListToMatrixWrapper;
 import org.jdmp.gui.actions.ObjectAction;
+import org.jdmp.gui.matrix.MatrixGUIObject;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.calculation.Calculation.Ret;
 import org.jdmp.matrix.interfaces.HasMatrixList;

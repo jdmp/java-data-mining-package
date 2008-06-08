@@ -1,4 +1,4 @@
-package org.jdmp.core.matrix;
+package org.jdmp.gui.matrix;
 
 import javax.swing.ListSelectionModel;
 import javax.swing.table.AbstractTableModel;

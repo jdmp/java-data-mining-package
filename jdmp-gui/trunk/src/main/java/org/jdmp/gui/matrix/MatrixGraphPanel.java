@@ -7,7 +7,6 @@ import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Ellipse2D;
 
-import org.jdmp.core.matrix.MatrixGUIObject;
 import org.jdmp.gui.util.GraphicsExecutor;
 import org.jdmp.gui.util.JungGraphPanel;
 import org.jdmp.matrix.exceptions.MatrixException;
@@ -56,11 +55,11 @@ public class MatrixGraphPanel extends JungGraphPanel {
 
 		((PluggableRenderer) getRenderer()).setVertexStringer(new VertexStringer() {
 			public String getLabel(ArchetypeVertex v) {
-				//if (v.degree() > 29 && v.getUserDatum(Data.Label) != null) {
-				//	System.out.println(v.getUserDatum(Data.Label));
-					return "" + v.getUserDatum(Data.Label);
-				//}
-				//return null;
+				// if (v.degree() > 29 && v.getUserDatum(Data.Label) != null) {
+				// System.out.println(v.getUserDatum(Data.Label));
+				return "" + v.getUserDatum(Data.Label);
+				// }
+				// return null;
 			}
 		});
 

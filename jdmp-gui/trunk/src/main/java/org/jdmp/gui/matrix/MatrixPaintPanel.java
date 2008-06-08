@@ -29,7 +29,6 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
-import org.jdmp.core.matrix.MatrixGUIObject;
 import org.jdmp.gui.io.ExportJPEG;
 import org.jdmp.gui.io.ExportPDF;
 import org.jdmp.gui.io.ExportPNG;

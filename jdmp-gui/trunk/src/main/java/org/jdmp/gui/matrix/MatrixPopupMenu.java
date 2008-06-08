@@ -7,7 +7,6 @@ import javax.swing.JLabel;
 import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
 
-import org.jdmp.core.matrix.MatrixGUIObject;
 import org.jdmp.gui.actions.ObjectActions;
 import org.jdmp.gui.matrix.actions.MatrixActions;
 import org.jdmp.matrix.Matrix;

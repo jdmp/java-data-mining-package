@@ -13,13 +13,14 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableCellRenderer;
 
-import org.jdmp.core.matrix.MatrixGUIObject;
+import org.jdmp.gui.matrix.MatrixGUIObject;
 import org.jdmp.gui.util.CanBeUpdated;
 import org.jdmp.gui.util.UIDefaults;
 import org.jdmp.gui.util.UpdateListener;
 import org.jdmp.matrix.Matrix;
 
-public class MatrixPlot extends JPanel implements TableCellRenderer, CanBeUpdated, ListSelectionListener {
+public class MatrixPlot extends JPanel implements TableCellRenderer, CanBeUpdated,
+		ListSelectionListener {
 	private static final long serialVersionUID = -3845070497558608841L;
 
 	private EventListenerList listenerList = null;
@@ -140,8 +141,8 @@ public class MatrixPlot extends JPanel implements TableCellRenderer, CanBeUpdate
 		}
 	}
 
-	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-			int row, int column) {
+	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+			boolean hasFocus, int row, int column) {
 		plotSettings.setMatrixGUIObject((MatrixGUIObject) value);
 
 		if (isSelected) {

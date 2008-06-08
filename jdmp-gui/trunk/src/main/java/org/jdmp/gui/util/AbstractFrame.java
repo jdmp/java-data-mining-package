@@ -16,7 +16,6 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import org.jdmp.core.matrix.MatrixGUIObject;
 import org.jdmp.gui.algorithm.AlgorithmGUIObject;
 import org.jdmp.gui.algorithm.AlgorithmPanel;
 import org.jdmp.gui.dataset.DataSetGUIObject;
@@ -24,6 +23,7 @@ import org.jdmp.gui.dataset.DataSetPanel;
 import org.jdmp.gui.io.ExportJPEG;
 import org.jdmp.gui.io.ExportPDF;
 import org.jdmp.gui.io.ExportPNG;
+import org.jdmp.gui.matrix.MatrixGUIObject;
 import org.jdmp.gui.matrix.MatrixPanel;
 import org.jdmp.gui.module.ModuleGUIObject;
 import org.jdmp.gui.module.ModulePanel;

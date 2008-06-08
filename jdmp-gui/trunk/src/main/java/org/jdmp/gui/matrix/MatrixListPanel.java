@@ -26,8 +26,6 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
-import org.jdmp.core.matrix.MatrixGUIObject;
-import org.jdmp.core.matrix.MatrixListTableModel;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.gui.matrix.actions.FillWithValueAction;
 import org.jdmp.gui.matrix.actions.MatrixActions;
@@ -38,7 +36,8 @@ import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.HasMatrixList;
 import org.jdmp.matrix.interfaces.HasToolTip;
 
-public class MatrixListPanel extends JPanel implements MouseListener, ListSelectionListener, TableModelListener {
+public class MatrixListPanel extends JPanel implements MouseListener, ListSelectionListener,
+		TableModelListener {
 	private static final long serialVersionUID = -6599031713168986357L;
 
 	private JTable jTable = null;
@@ -92,10 +91,10 @@ public class MatrixListPanel extends JPanel implements MouseListener, ListSelect
 		jTable.getColumnModel().getColumn(0).setPreferredWidth(45);
 		jTable.setDefaultRenderer(MatrixGUIObject.class, new MatrixTableCellRenderer());
 
-		this.add(jTable.getTableHeader(), new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.EAST,
-				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-		this.add(new JScrollPane(jTable), new GridBagConstraints(0, 1, 1, 1, 1.0, 1.0, GridBagConstraints.EAST,
-				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		this.add(jTable.getTableHeader(), new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
+				GridBagConstraints.EAST, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		this.add(new JScrollPane(jTable), new GridBagConstraints(0, 1, 1, 1, 1.0, 1.0,
+				GridBagConstraints.EAST, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 
 		registerKeyboardActions();
 
@@ -147,7 +146,8 @@ public class MatrixListPanel extends JPanel implements MouseListener, ListSelect
 			if (e.getClickCount() == 2) {
 				int row = jTable.rowAtPoint(e.getPoint());
 				jTable.setRowSelectionInterval(row, row);
-				MatrixGUIObject m = (MatrixGUIObject) dataModel.getValueAt(jTable.getSelectedRow(), 0);
+				MatrixGUIObject m = (MatrixGUIObject) dataModel.getValueAt(jTable.getSelectedRow(),
+						0);
 				MatrixFrame mf = new MatrixFrame(m);
 				mf.setVisible(true);
 			}
@@ -223,40 +223,52 @@ public class MatrixListPanel extends JPanel implements MouseListener, ListSelect
 				if (m != null) {
 					switch (e.getKeyChar()) {
 					case '.':
-						new FillWithValueAction(null, m, variable, "" + e.getKeyChar()).actionPerformed(null);
+						new FillWithValueAction(null, m, variable, "" + e.getKeyChar())
+								.actionPerformed(null);
 						break;
 					case '-':
-						new FillWithValueAction(null, m, variable, "" + e.getKeyChar()).actionPerformed(null);
+						new FillWithValueAction(null, m, variable, "" + e.getKeyChar())
+								.actionPerformed(null);
 						break;
 					case '0':
-						new FillWithValueAction(null, m, variable, "" + e.getKeyChar()).actionPerformed(null);
+						new FillWithValueAction(null, m, variable, "" + e.getKeyChar())
+								.actionPerformed(null);
 						break;
 					case '1':
-						new FillWithValueAction(null, m, variable, "" + e.getKeyChar()).actionPerformed(null);
+						new FillWithValueAction(null, m, variable, "" + e.getKeyChar())
+								.actionPerformed(null);
 						break;
 					case '2':
-						new FillWithValueAction(null, m, variable, "" + e.getKeyChar()).actionPerformed(null);
+						new FillWithValueAction(null, m, variable, "" + e.getKeyChar())
+								.actionPerformed(null);
 						break;
 					case '3':
-						new FillWithValueAction(null, m, variable, "" + e.getKeyChar()).actionPerformed(null);
+						new FillWithValueAction(null, m, variable, "" + e.getKeyChar())
+								.actionPerformed(null);
 						break;
 					case '4':
-						new FillWithValueAction(null, m, variable, "" + e.getKeyChar()).actionPerformed(null);
+						new FillWithValueAction(null, m, variable, "" + e.getKeyChar())
+								.actionPerformed(null);
 						break;
 					case '5':
-						new FillWithValueAction(null, m, variable, "" + e.getKeyChar()).actionPerformed(null);
+						new FillWithValueAction(null, m, variable, "" + e.getKeyChar())
+								.actionPerformed(null);
 						break;
 					case '6':
-						new FillWithValueAction(null, m, variable, "" + e.getKeyChar()).actionPerformed(null);
+						new FillWithValueAction(null, m, variable, "" + e.getKeyChar())
+								.actionPerformed(null);
 						break;
 					case '7':
-						new FillWithValueAction(null, m, variable, "" + e.getKeyChar()).actionPerformed(null);
+						new FillWithValueAction(null, m, variable, "" + e.getKeyChar())
+								.actionPerformed(null);
 						break;
 					case '8':
-						new FillWithValueAction(null, m, variable, "" + e.getKeyChar()).actionPerformed(null);
+						new FillWithValueAction(null, m, variable, "" + e.getKeyChar())
+								.actionPerformed(null);
 						break;
 					case '9':
-						new FillWithValueAction(null, m, variable, "" + e.getKeyChar()).actionPerformed(null);
+						new FillWithValueAction(null, m, variable, "" + e.getKeyChar())
+								.actionPerformed(null);
 						break;
 					case 'g':
 						new Randn(m.getMatrix()).calc(Ret.ORIG);
@@ -322,7 +334,8 @@ public class MatrixListPanel extends JPanel implements MouseListener, ListSelect
 		if (lsm.isSelectionEmpty() || lsm.getValueIsAdjusting())
 			return null;
 		int selectedRow = lsm.getMinSelectionIndex();
-		return (MatrixGUIObject) jTable.getModel().getValueAt(selectedRow, MatrixListTableModel.MATRIXCOLUMN);
+		return (MatrixGUIObject) jTable.getModel().getValueAt(selectedRow,
+				MatrixListTableModel.MATRIXCOLUMN);
 	}
 
 	public void updateTitle() {

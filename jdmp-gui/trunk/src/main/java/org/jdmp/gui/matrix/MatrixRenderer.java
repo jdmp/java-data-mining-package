@@ -14,7 +14,6 @@ import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import org.jdmp.core.matrix.MatrixGUIObject;
 import org.jdmp.gui.util.ColorUtil;
 import org.jdmp.gui.util.GraphicsUtil;
 import org.jdmp.gui.util.UIDefaults;
@@ -48,8 +47,8 @@ public class MatrixRenderer extends DefaultTableCellRenderer {
 		this.matrix = m;
 	}
 
-	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-			int row, int column) {
+	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+			boolean hasFocus, int row, int column) {
 
 		if (value instanceof MatrixGUIObject) {
 			matrix = (MatrixGUIObject) value;
@@ -129,9 +128,11 @@ public class MatrixRenderer extends DefaultTableCellRenderer {
 					stepsizeY = 1.0;
 				}
 
-				BufferedImage bufferedImage = new BufferedImage(xsize, ysize, BufferedImage.TYPE_INT_RGB);
+				BufferedImage bufferedImage = new BufferedImage(xsize, ysize,
+						BufferedImage.TYPE_INT_RGB);
 
-				int[] pixels = ((DataBufferInt) bufferedImage.getRaster().getDataBuffer()).getData();
+				int[] pixels = ((DataBufferInt) bufferedImage.getRaster().getDataBuffer())
+						.getData();
 
 				if (stepsizeX != 1.0 || stepsizeY != 1.0) {
 					int pos = 0;
@@ -140,7 +141,8 @@ public class MatrixRenderer extends DefaultTableCellRenderer {
 							int mx = (int) Math.floor(x * stepsizeX);
 							int my = (int) Math.floor(y * stepsizeY);
 							Color col = ColorUtil.fromObject(matrix.getValueAt(my, mx));
-							pixels[pos++] = (col.getRed() << 16) + (col.getGreen() << 8) + col.getBlue();
+							pixels[pos++] = (col.getRed() << 16) + (col.getGreen() << 8)
+									+ col.getBlue();
 						}
 					}
 				} else {
@@ -149,21 +151,24 @@ public class MatrixRenderer extends DefaultTableCellRenderer {
 						for (long[] c : cos) {
 							if (c != null) {
 								Color col = ColorUtil.fromObject(matrix.getValueAt(c));
-								int pos = getPosition(totalColumn, c[Coordinates.ROW], c[Coordinates.COLUMN]);
-								pixels[pos] = (col.getRed() << 16) + (col.getGreen() << 8) + col.getBlue();
+								int pos = getPosition(totalColumn, c[Coordinates.ROW],
+										c[Coordinates.COLUMN]);
+								pixels[pos] = (col.getRed() << 16) + (col.getGreen() << 8)
+										+ col.getBlue();
 							}
 						}
 					}
 				}
 
-				g2d.drawImage(bufferedImage, PADDINGX, PADDINGY, width - PADDINGX - PADDINGX, height - PADDINGY
-						- PADDINGY, null);
+				g2d.drawImage(bufferedImage, PADDINGX, PADDINGY, width - PADDINGX - PADDINGX,
+						height - PADDINGY - PADDINGY, null);
 
 				if (width > 20 && matrix.isScalar()) {
 					Color col = ColorUtil.fromObject(matrix.getValueAt(0, 0));
 					g2d.setColor(ColorUtil.contrastBW(col));
-					GraphicsUtil.drawString(g2d, width / 2.0, height / 2.0 - 1.0, GraphicsUtil.ALIGNCENTER,
-							GraphicsUtil.ALIGNCENTER, StringUtil.format(matrix.getDoubleValueAt(0, 0)));
+					GraphicsUtil.drawString(g2d, width / 2.0, height / 2.0 - 1.0,
+							GraphicsUtil.ALIGNCENTER, GraphicsUtil.ALIGNCENTER, StringUtil
+									.format(matrix.getDoubleValueAt(0, 0)));
 				}
 
 			} else {
@@ -194,9 +199,11 @@ public class MatrixRenderer extends DefaultTableCellRenderer {
 		} else {
 			g2d.translate(PADDINGX, PADDINGX);
 			if (matrix.getColumnCount() > matrix.getRowCount()) {
-				paintMatrixOriginal(g2d, matrix, width - PADDINGX - PADDINGX, height - PADDINGY - PADDINGY);
+				paintMatrixOriginal(g2d, matrix, width - PADDINGX - PADDINGX, height - PADDINGY
+						- PADDINGY);
 			} else {
-				paintMatrixTransposed(g2d, matrix, width - PADDINGX - PADDINGX, height - PADDINGY - PADDINGY);
+				paintMatrixTransposed(g2d, matrix, width - PADDINGX - PADDINGX, height - PADDINGY
+						- PADDINGY);
 			}
 			g2d.translate(-PADDINGX, -PADDINGX);
 		}
@@ -238,8 +245,9 @@ public class MatrixRenderer extends DefaultTableCellRenderer {
 					bufferedImage.getHeight(), null);
 			if (width > 20 && matrix.isScalar()) {
 				g2d.setColor(ColorUtil.contrastBW(bg.getColor()));
-				GraphicsUtil.drawString(g2d, width / 2.0, height / 2.0 - 1.0, GraphicsUtil.ALIGNCENTER,
-						GraphicsUtil.ALIGNCENTER, StringUtil.format(matrix.getDouble(0, 0)));
+				GraphicsUtil.drawString(g2d, width / 2.0, height / 2.0 - 1.0,
+						GraphicsUtil.ALIGNCENTER, GraphicsUtil.ALIGNCENTER, StringUtil
+								.format(matrix.getDouble(0, 0)));
 			}
 		} catch (Exception e) {
 			logger.log(Level.WARNING, "error painting matrix", e);
@@ -274,7 +282,8 @@ public class MatrixRenderer extends DefaultTableCellRenderer {
 			int y = 0;
 
 			for (int i = 0; i < valueCount; i++) {
-				bg.setColor(ColorUtil.fromDouble(matrix.getDouble(i % matrix.getRowCount(), i / matrix.getRowCount())));
+				bg.setColor(ColorUtil.fromDouble(matrix.getDouble(i % matrix.getRowCount(), i
+						/ matrix.getRowCount())));
 				bg.fillRect(x / xStepSize, y / yStepSize, 1, 1);
 				x++;
 				if (x >= xSize) {
@@ -287,8 +296,9 @@ public class MatrixRenderer extends DefaultTableCellRenderer {
 					bufferedImage.getHeight(), null);
 			if (width > 20 && matrix.isScalar()) {
 				g2d.setColor(ColorUtil.contrastBW(bg.getColor()));
-				GraphicsUtil.drawString(g2d, width / 2.0, height / 2.0 - 1.0, GraphicsUtil.ALIGNCENTER,
-						GraphicsUtil.ALIGNCENTER, StringUtil.format(matrix.getDouble(0, 0)));
+				GraphicsUtil.drawString(g2d, width / 2.0, height / 2.0 - 1.0,
+						GraphicsUtil.ALIGNCENTER, GraphicsUtil.ALIGNCENTER, StringUtil
+								.format(matrix.getDouble(0, 0)));
 			}
 		} catch (Exception e) {
 			logger.log(Level.WARNING, "error painting matrix", e);
@@ -332,8 +342,9 @@ public class MatrixRenderer extends DefaultTableCellRenderer {
 					bufferedImage.getHeight(), null);
 			if (width > 20 && matrix.isScalar()) {
 				g2d.setColor(ColorUtil.contrastBW(bg.getColor()));
-				GraphicsUtil.drawString(g2d, width / 2.0, height / 2.0 - 1.0, GraphicsUtil.ALIGNCENTER,
-						GraphicsUtil.ALIGNCENTER, StringUtil.format(matrix.getDouble(0, 0)));
+				GraphicsUtil.drawString(g2d, width / 2.0, height / 2.0 - 1.0,
+						GraphicsUtil.ALIGNCENTER, GraphicsUtil.ALIGNCENTER, StringUtil
+								.format(matrix.getDouble(0, 0)));
 			}
 		} catch (Exception e) {
 			logger.log(Level.WARNING, "error painting matrix", e);
