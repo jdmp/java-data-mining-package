@@ -6,7 +6,7 @@ import java.io.InputStream;
 import javax.swing.Icon;
 import javax.swing.ListSelectionModel;
 
-import org.jdmp.core.util.CoreObject;
+import org.jdmp.core.CoreObject;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.collections.MatrixList;
 import org.jdmp.matrix.exceptions.MatrixException;

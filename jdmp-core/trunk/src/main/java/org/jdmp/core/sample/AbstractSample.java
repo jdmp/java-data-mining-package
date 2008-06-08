@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Level;
 
-import org.jdmp.core.util.AbstractCoreObject;
+import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.variable.HasVariables;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableListEvent;

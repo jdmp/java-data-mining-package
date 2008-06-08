@@ -9,7 +9,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.jdmp.core.util.AbstractCoreObject;
+import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.util.AbstractEvent.EventType;
 import org.jdmp.core.util.interfaces.HasAlgorithmsAndVariables;
 import org.jdmp.core.variable.HasVariables;

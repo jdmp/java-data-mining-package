@@ -14,8 +14,8 @@ import java.util.Map;
 import javax.swing.Icon;
 import javax.swing.UIManager;
 
+import org.jdmp.core.CoreObject;
 import org.jdmp.core.algorithm.Algorithm;
-import org.jdmp.core.util.CoreObject;
 import org.jdmp.core.util.interfaces.HasAlgorithmsAndVariables;
 import org.jdmp.gui.variable.VariableGUIObject;
 import org.jdmp.gui.variable.VariableIcon;

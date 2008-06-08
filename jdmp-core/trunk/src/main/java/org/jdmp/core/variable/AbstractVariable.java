@@ -19,8 +19,8 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 
+import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.matrix.wrappers.MatrixListToMatrixWrapper;
-import org.jdmp.core.util.AbstractCoreObject;
 import org.jdmp.core.util.AbstractEvent.EventType;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;

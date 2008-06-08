@@ -11,11 +11,11 @@ import java.util.logging.Level;
 
 import javax.swing.ListSelectionModel;
 
+import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.sample.HasSamples;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.sample.SampleListEvent;
 import org.jdmp.core.sample.SampleListListener;
-import org.jdmp.core.util.AbstractCoreObject;
 import org.jdmp.core.util.AbstractEvent.EventType;
 import org.jdmp.core.variable.HasVariables;
 import org.jdmp.core.variable.Variable;

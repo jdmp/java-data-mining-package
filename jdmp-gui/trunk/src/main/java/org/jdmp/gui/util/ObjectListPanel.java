@@ -27,6 +27,7 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+import org.jdmp.core.CoreObject;
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.algorithm.HasAlgorithms;
 import org.jdmp.core.dataset.DataSet;
@@ -36,7 +37,6 @@ import org.jdmp.core.module.Module;
 import org.jdmp.core.sample.ClassificationSample;
 import org.jdmp.core.sample.HasSamples;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.util.CoreObject;
 import org.jdmp.core.variable.HasVariables;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.gui.actions.ObjectActions;

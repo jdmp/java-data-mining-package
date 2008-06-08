@@ -10,9 +10,9 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.JMenuItem;
 
+import org.jdmp.core.CoreObject;
 import org.jdmp.core.module.AbstractModule;
 import org.jdmp.core.module.Module;
-import org.jdmp.core.util.CoreObject;
 import org.jdmp.gui.actions.ObjectAction;
 import org.jdmp.gui.algorithm.AlgorithmFrame;
 import org.jdmp.gui.algorithm.AlgorithmGUIObject;

@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-import org.jdmp.core.util.CoreObject;
+import org.jdmp.core.CoreObject;
 import org.jdmp.core.util.interfaces.HasAlgorithmsAndVariables;
 import org.jdmp.core.variable.HasVariables;
 import org.jdmp.core.variable.Variable;

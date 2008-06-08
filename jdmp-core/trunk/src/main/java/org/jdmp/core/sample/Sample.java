@@ -2,7 +2,7 @@ package org.jdmp.core.sample;
 
 import java.util.List;
 
-import org.jdmp.core.util.CoreObject;
+import org.jdmp.core.CoreObject;
 import org.jdmp.core.variable.HasVariables;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableListEvent;

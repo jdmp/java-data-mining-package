@@ -5,11 +5,11 @@ import java.util.List;
 
 import javax.swing.ListSelectionModel;
 
+import org.jdmp.core.CoreObject;
 import org.jdmp.core.sample.HasSamples;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.sample.SampleListEvent;
 import org.jdmp.core.sample.SampleListListener;
-import org.jdmp.core.util.CoreObject;
 import org.jdmp.core.variable.HasVariables;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableListEvent;
