@@ -8,7 +8,6 @@ public interface HasVariables {
 
 	public int getVariableCount();
 
-
 	public Variable getVariable(int pos);
 
 	public int getIndexOfVariable(Variable v);

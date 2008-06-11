@@ -8,8 +8,6 @@ import org.jdmp.core.CoreObject;
 import org.jdmp.core.util.interfaces.HasAlgorithmsAndVariables;
 import org.jdmp.core.variable.HasVariables;
 import org.jdmp.core.variable.Variable;
-import org.jdmp.core.variable.VariableListEvent;
-import org.jdmp.core.variable.VariableListListener;
 import org.jdmp.matrix.Matrix;
 
 public interface Algorithm extends CoreObject, HasAlgorithmsAndVariables, HasVariables,
@@ -28,20 +26,6 @@ public interface Algorithm extends CoreObject, HasAlgorithmsAndVariables, HasVar
 	public void setAlgorithm(int index, Algorithm a);
 
 	public void createVariablesAndAlgorithms();
-
-	public void fireVariableAdded(VariableListEvent e);
-
-	public void fireVariableRemoved(VariableListEvent e);
-
-	public void fireVariableUpdated(VariableListEvent e);
-
-	public void fireAlgorithmAdded(AlgorithmListEvent e);
-
-	public void fireAlgorithmRemoved(AlgorithmListEvent e);
-
-	public void fireAlgorithmUpdated(AlgorithmListEvent e);
-
-	public String getLongStatus();
 
 	public void clear();
 
@@ -99,14 +83,6 @@ public interface Algorithm extends CoreObject, HasAlgorithmsAndVariables, HasVar
 
 	public void setCallsPerSecond(int i);
 
-	public String getShortStatus();
-
-	public void addVariable(Variable v);
-
-	public void addVariableListListener(VariableListListener l);
-
-	public int getIndexOfVariable(Variable v);
-
 	public int getEdgeDirectionForVariable(int index);
 
 	public int getEdgeDirectionForAlgorithm(int index);
@@ -120,32 +96,6 @@ public interface Algorithm extends CoreObject, HasAlgorithmsAndVariables, HasVar
 	public void addMatrixForVariable(int variableIndex, Matrix matrix);
 
 	public void setMatrixForVariable(int variableIndex, int matrixIndex, Matrix matrix);
-
-	public Variable getVariable(int index);
-
-	public int getVariableCount();
-
-	public List<Variable> getVariableList();
-
-	public void removeVariable(Variable variable);
-
-	public void removeVariableListListener(VariableListListener l);
-
-	public void addAlgorithm(Algorithm a);
-
-	public void addAlgorithmListListener(AlgorithmListListener l);
-
-	public int getAlgorithmCount();
-
-	public List<Algorithm> getAlgorithmList();
-
-	public int getIndexOfAlgorithm(Algorithm a);
-
-	public Algorithm getAlgorithm(int pos);
-
-	public void removeAlgorithm(Algorithm algorithm);
-
-	public void removeAlgorithmListListener(AlgorithmListListener l);
 
 	public void setInterval(int intervall);
 

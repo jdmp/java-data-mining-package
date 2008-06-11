@@ -4,11 +4,9 @@ import java.io.File;
 import java.io.InputStream;
 
 import javax.swing.Icon;
-import javax.swing.ListSelectionModel;
 
 import org.jdmp.core.CoreObject;
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.collections.MatrixList;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.HasDescription;
 import org.jdmp.matrix.interfaces.HasLabel;
@@ -39,19 +37,9 @@ public interface Variable extends CoreObject, HasLabel, HasDescription, HasMatri
 
 	public int getMemorySize();
 
-	public int getMatrixCount();
-
-	public Matrix getMatrix();
-
 	public Matrix getMatrixCopy();
 
-	public Matrix getMatrix(int index);
-
 	public Matrix getMatrixCopy(int index);
-
-	public String getLongStatus();
-
-	public String getShortStatus();
 
 	public void clearHistory();
 
@@ -59,13 +47,7 @@ public interface Variable extends CoreObject, HasLabel, HasDescription, HasMatri
 
 	public void setValue(double value);
 
-	public void dispose();
-
-	public MatrixList getMatrixList();
-
 	public Matrix getAsMatrix();
-
-	public void fireValueChanged(Matrix m);
 
 	public void addMatrix(Matrix m);
 
@@ -100,10 +82,6 @@ public interface Variable extends CoreObject, HasLabel, HasDescription, HasMatri
 	public long getRowCount();
 
 	public long getColumnCount();
-
-	public ListSelectionModel getRowSelectionModel();
-
-	public ListSelectionModel getColumnSelectionModel();
 
 	public double getEuklideanValue() throws MatrixException;
 
