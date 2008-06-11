@@ -9,7 +9,8 @@ import org.jdmp.core.variable.VariableListEvent;
 import org.jdmp.core.variable.VariableListListener;
 import org.jdmp.core.variable.VariableListener;
 
-public class VariableListTableModel extends AbstractTableModel implements VariableListener, VariableListListener {
+public class VariableListTableModel extends AbstractTableModel implements VariableListener,
+		VariableListListener {
 	private static final long serialVersionUID = -1032855724069297926L;
 
 	public static final int ICONCOLUMN = 0;
