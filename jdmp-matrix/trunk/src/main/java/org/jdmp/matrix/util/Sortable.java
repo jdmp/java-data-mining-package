@@ -28,10 +28,17 @@ public class Sortable<C extends Comparable<C>, O> implements Comparable<Sortable
 	private C comparable = null;
 
 	private O object = null;
+	
+	private boolean compareObject = false;
 
 	public Sortable(C comparable, O object) {
 		this.comparable = comparable;
 		this.object = object;
+	}
+	public Sortable(C comparable, O object, boolean compareObject) {
+		this.comparable = comparable;
+		this.object = object;
+		this.compareObject = compareObject;
 	}
 
 	public C getComparable() {
@@ -54,7 +61,12 @@ public class Sortable<C extends Comparable<C>, O> implements Comparable<Sortable
 		return "" + comparable + ": " + object;
 	}
 
-	public int compareTo(Sortable<C, O> s) {
-		return comparable.compareTo(s.comparable);
+	  @SuppressWarnings("unchecked")
+	  public int compareTo(Sortable<C, O> s) {
+		int compObjectEqual = comparable.compareTo(s
+	            .comparable);
+	        if (!compareObject || !(compObjectEqual == 0))
+	          return compObjectEqual;
+	        return ((Comparable<O>) object).compareTo(s.object);
 	}
 }
