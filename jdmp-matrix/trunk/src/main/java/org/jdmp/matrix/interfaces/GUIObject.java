@@ -45,10 +45,6 @@ public interface GUIObject extends Serializable, Disposable, Cloneable, HasLabel
 	 */
 	public void fireValueChanged();
 
-	public String getLongStatus();
-
-	public String getShortStatus();
-
 	public void addPropertyChangeListener(PropertyChangeListener l);
 
 	public void removePropertyChangeListener(PropertyChangeListener l);

@@ -90,14 +90,6 @@ public abstract class AbstractCoreObject implements CoreObject {
 		s.append("<td><b>Description:</b></td>");
 		s.append("<td>" + getDescription() + "</td>");
 		s.append("</tr>");
-		s.append("<tr>");
-		s.append("<td><b>Short Status:</b></td>");
-		s.append("<td>" + getShortStatus() + "</td>");
-		s.append("</tr>");
-		s.append("<tr>");
-		s.append("<td><b>Long Status:</b></td>");
-		s.append("<td>" + getLongStatus() + "</td>");
-		s.append("</tr>");
 		s.append("</table>");
 		s.append("</html>");
 		return s.toString();

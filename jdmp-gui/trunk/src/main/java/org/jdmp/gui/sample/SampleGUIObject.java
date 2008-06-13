@@ -15,14 +15,6 @@ public class SampleGUIObject extends AbstractGUIObject {
 	public void clear() {
 	}
 
-	public String getLongStatus() {
-		return sample.getLongStatus();
-	}
-
-	public String getShortStatus() {
-		return sample.getShortStatus();
-	}
-
 	public void dispose() {
 		sample.dispose();
 	}

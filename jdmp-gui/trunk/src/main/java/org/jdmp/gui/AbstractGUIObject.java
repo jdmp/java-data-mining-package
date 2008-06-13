@@ -98,9 +98,9 @@ public abstract class AbstractGUIObject implements GUIObject {
 
 	public String toString() {
 		if ("".equals(label))
-			return getClass().getSimpleName() + " " + getShortStatus();
+			return getClass().getSimpleName();
 		else
-			return getClass().getSimpleName() + " [" + label + "] " + getShortStatus();
+			return getClass().getSimpleName() + " [" + label + "]";
 	}
 
 	public String getToolTipText() {
@@ -116,14 +116,6 @@ public abstract class AbstractGUIObject implements GUIObject {
 		s.append("</tr>");
 		s.append("<td><b>Description:</b></td>");
 		s.append("<td>" + getDescription() + "</td>");
-		s.append("</tr>");
-		s.append("<tr>");
-		s.append("<td><b>Short Status:</b></td>");
-		s.append("<td>" + getShortStatus() + "</td>");
-		s.append("</tr>");
-		s.append("<tr>");
-		s.append("<td><b>Long Status:</b></td>");
-		s.append("<td>" + getLongStatus() + "</td>");
 		s.append("</tr>");
 		s.append("</table>");
 		s.append("</html>");

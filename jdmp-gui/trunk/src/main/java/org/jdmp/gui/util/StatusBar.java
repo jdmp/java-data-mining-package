@@ -129,7 +129,7 @@ public class StatusBar extends JPanel {
 		public void run() {
 			statusBar.setTaskString(TaskQueue.getStatus());
 			// statusBar.setToolTipText(getObject().getToolTipText());
-			statusBar.setObjectString(getObject().getShortStatus());
+			statusBar.setObjectString("" + getObject());
 			statusBar.setProgress(TaskQueue.getProgress());
 			statusBar.updateMemoryUsage();
 		}

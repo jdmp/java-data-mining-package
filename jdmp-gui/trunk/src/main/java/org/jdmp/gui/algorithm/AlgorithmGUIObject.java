@@ -16,13 +16,7 @@ public class AlgorithmGUIObject extends AbstractGUIObject {
 		algorithm.clear();
 	}
 
-	public String getLongStatus() {
-		return algorithm.getLongStatus();
-	}
-
-	public String getShortStatus() {
-		return algorithm.getShortStatus();
-	}
+	
 
 	public void dispose() {
 		algorithm.dispose();

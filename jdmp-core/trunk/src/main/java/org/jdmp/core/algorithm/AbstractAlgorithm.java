@@ -127,9 +127,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		}
 	}
 
-	public final String getLongStatus() {
-		return "long status";
-	}
+
 
 	public void clear() {
 
@@ -295,9 +293,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		this.callsPerSecond = i;
 	}
 
-	public String getShortStatus() {
-		return "count: " + getCount();
-	}
+
 
 	public void addVariable(Variable v) {
 	}

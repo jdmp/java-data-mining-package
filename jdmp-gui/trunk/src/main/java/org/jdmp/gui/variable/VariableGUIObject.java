@@ -16,14 +16,6 @@ public class VariableGUIObject extends AbstractGUIObject {
 		variable.clear();
 	}
 
-	public String getLongStatus() {
-		return variable.getLongStatus();
-	}
-
-	public String getShortStatus() {
-		return variable.getShortStatus();
-	}
-
 	public void dispose() {
 		variable.dispose();
 	}

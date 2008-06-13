@@ -16,14 +16,6 @@ public class ModuleGUIObject extends AbstractGUIObject {
 		module.clear();
 	}
 
-	public String getLongStatus() {
-		return module.getLongStatus();
-	}
-
-	public String getShortStatus() {
-		return module.getShortStatus();
-	}
-
 	public void dispose() {
 		module.dispose();
 	}

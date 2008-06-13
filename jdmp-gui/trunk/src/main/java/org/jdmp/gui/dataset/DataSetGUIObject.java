@@ -20,14 +20,6 @@ public class DataSetGUIObject extends AbstractGUIObject {
 		dataSet.clear();
 	}
 
-	public String getLongStatus() {
-		return dataSet.getLongStatus();
-	}
-
-	public String getShortStatus() {
-		return dataSet.getShortStatus();
-	}
-
 	public void dispose() {
 		dataSet.dispose();
 	}

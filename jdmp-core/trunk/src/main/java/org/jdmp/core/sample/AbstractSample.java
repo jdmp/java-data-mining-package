@@ -43,9 +43,6 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 
 
 
-	public final String getShortStatus() {
-		return getLabel();
-	}
 
 
 
@@ -79,9 +76,6 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 
 
 
-	public String getLongStatus() {
-		return null;
-	}
 
 
 	

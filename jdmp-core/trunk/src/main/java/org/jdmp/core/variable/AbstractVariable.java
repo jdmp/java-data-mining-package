@@ -207,14 +207,7 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 		}
 	}
 
-	public final String getLongStatus() {
-		return getLabel() + " [" + getRowCount() + "x" + getColumnCount() + "]" + " length:"
-				+ getLength() + " entries:" + getMatrixCount() + "/" + getMemorySize();
-	}
 
-	public final String getShortStatus() {
-		return getLabel() + " [" + getRowCount() + "x" + getColumnCount() + "]";
-	}
 
 	public final void clearHistory() {
 		if (getMatrixList() != null)

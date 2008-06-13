@@ -16,10 +16,6 @@ public interface CoreObject extends Serializable, Disposable, Cloneable, HasGUIO
 
 	public EventListenerList getListenerList();
 
-	public String getLongStatus();
-
-	public String getShortStatus();
-
 	public void addPropertyChangeListener(PropertyChangeListener l);
 
 	public void removePropertyChangeListener(PropertyChangeListener l);

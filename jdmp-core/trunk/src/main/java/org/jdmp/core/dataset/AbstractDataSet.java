@@ -86,10 +86,7 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		}
 	}
 
-	public String getShortStatus() {
-		return "" + " " + getLabel() + " " + getSampleCount() + " Samples [" + getDataSetType()
-				+ "]";
-	}
+
 
 	public int getSampleCount() {
 		return sampleList.size();
@@ -118,9 +115,7 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		fireSampleRemoved(new SampleListEvent(this, EventType.REMOVED, p));
 	}
 
-	public String getLongStatus() {
-		return "" + getSampleCount() + " Samples";
-	}
+
 
 	public DataSetType getDataSetType() {
 		return dataSetType;

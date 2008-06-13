@@ -48,10 +48,6 @@ public class MatrixGUIObject extends AbstractGUIObject implements TableModel,
 		fireValueChanged();
 	}
 
-	public String getLongStatus() {
-		return getShortStatus();
-	}
-
 	public double getEstimatedMaxValue(long timeOut) throws MatrixException {
 		double max = -Double.MAX_VALUE;
 		long t0 = System.currentTimeMillis();
@@ -80,15 +76,6 @@ public class MatrixGUIObject extends AbstractGUIObject implements TableModel,
 			}
 		}
 		return min;
-	}
-
-	public String getShortStatus() {
-		StringBuffer s = new StringBuffer();
-		if (getLabel() != null)
-			s.append(getLabel() + " ");
-		s.append("[" + getClass().getSimpleName() + ":" + getRowCount() + "x" + getColumnCount()
-				+ "]");
-		return s.toString();
 	}
 
 	public long getValueCount() {
