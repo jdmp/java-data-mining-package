@@ -6,14 +6,14 @@ import libsvm.svm_node;
 import libsvm.svm_parameter;
 import libsvm.svm_problem;
 
-import org.jdmp.core.algorithm.classification.AlgorithmClassifier;
+import org.jdmp.core.algorithm.classification.AbstractClassifier;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.sample.ClassificationSample;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public class AlgorithmSVM extends AlgorithmClassifier {
+public class AlgorithmSVM extends AbstractClassifier {
 	private static final long serialVersionUID = -3809157647628200950L;
 
 	private svm_parameter param = null;

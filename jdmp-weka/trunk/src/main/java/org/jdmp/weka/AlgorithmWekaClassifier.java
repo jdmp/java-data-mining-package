@@ -3,7 +3,7 @@ package org.jdmp.weka;
 import java.lang.reflect.Constructor;
 import java.util.logging.Level;
 
-import org.jdmp.core.algorithm.classification.AlgorithmClassifier;
+import org.jdmp.core.algorithm.classification.AbstractClassifier;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
@@ -12,7 +12,7 @@ import weka.classifiers.Classifier;
 import weka.core.Instance;
 import weka.core.Instances;
 
-public class AlgorithmWekaClassifier extends AlgorithmClassifier {
+public class AlgorithmWekaClassifier extends AbstractClassifier {
 	private static final long serialVersionUID = 29290678735702499L;
 
 	public enum WekaClassifier {

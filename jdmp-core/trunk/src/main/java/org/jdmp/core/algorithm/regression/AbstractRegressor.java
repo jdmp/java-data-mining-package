@@ -13,7 +13,7 @@ import org.jdmp.core.sample.Sample;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
 
-public abstract class AlgorithmRegression extends AbstractAlgorithm implements Regressor {
+public abstract class AbstractRegressor extends AbstractAlgorithm implements Regressor {
 
 	public static final int OUTPUTERRORALGORITHM = 0;
 
@@ -23,7 +23,7 @@ public abstract class AlgorithmRegression extends AbstractAlgorithm implements R
 
 	public int mode = TRAIN;
 
-	public AlgorithmRegression(String label) {
+	public AbstractRegressor(String label) {
 		super(label);
 		setAlgorithm(OUTPUTERRORALGORITHM, new AlgorithmDifference());
 	}

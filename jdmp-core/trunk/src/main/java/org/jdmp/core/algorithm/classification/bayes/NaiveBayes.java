@@ -16,7 +16,7 @@
 
 package org.jdmp.core.algorithm.classification.bayes;
 
-import org.jdmp.core.algorithm.classification.AlgorithmClassifier;
+import org.jdmp.core.algorithm.classification.AbstractClassifier;
 import org.jdmp.core.algorithm.estimator.DensityEstimator;
 import org.jdmp.core.algorithm.estimator.DiscreteDensityEstimator;
 import org.jdmp.core.dataset.ClassificationDataSet;
@@ -28,7 +28,7 @@ import org.jdmp.matrix.calculation.Calculation.Ret;
 import org.jdmp.matrix.exceptions.MatrixException;
 
 
-public class AlgorithmClassifierNaiveBayes extends AlgorithmClassifier {
+public class NaiveBayes extends AbstractClassifier {
 
   private static final long serialVersionUID = -6511197233753905836L;
 
@@ -44,7 +44,7 @@ public class AlgorithmClassifierNaiveBayes extends AlgorithmClassifier {
 
 
 
-  public AlgorithmClassifierNaiveBayes() {
+  public NaiveBayes() {
     super("Naive Bayes");
   }
 

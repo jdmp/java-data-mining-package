@@ -1,7 +1,7 @@
 package org.jdmp.weka;
 
 import org.jdmp.core.algorithm.Algorithm;
-import org.jdmp.core.algorithm.classification.AlgorithmClassifier;
+import org.jdmp.core.algorithm.classification.AbstractClassifier;
 import org.jdmp.core.dataset.ClassificationDataSet;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.sample.ClassificationSample;
@@ -10,7 +10,7 @@ import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.weka.AlgorithmWekaClassifier.WekaClassifier;
 
-public class AlgorithmAllWekaClassifiers extends AlgorithmClassifier {
+public class AlgorithmAllWekaClassifiers extends AbstractClassifier {
 	private static final long serialVersionUID = 7734147962054470988L;
 
 	public AlgorithmAllWekaClassifiers() throws Exception {
@@ -28,7 +28,7 @@ public class AlgorithmAllWekaClassifiers extends AlgorithmClassifier {
 	public void predict(ClassificationDataSet dataSet) throws Exception {
 		for (Algorithm a : getAlgorithmList()) {
 
-			if (a instanceof AlgorithmClassifier) {
+			if (a instanceof AbstractClassifier) {
 
 				int classCount = dataSet.getClassCount();
 				Matrix confusion = MatrixFactory.zeros(classCount, classCount);
@@ -36,7 +36,7 @@ public class AlgorithmAllWekaClassifiers extends AlgorithmClassifier {
 				int correctCount = 0;
 				int errorCount = 0;
 				for (Sample sample : dataSet.getSampleList()) {
-					((AlgorithmClassifier) a).predict((ClassificationSample) sample);
+					((AbstractClassifier) a).predict((ClassificationSample) sample);
 					int desired = (int) ((ClassificationSample) sample).getDesiredOutputMatrix()
 							.getCoordinatesOfMaximum()[COLUMN];
 					int recognized = (int) ((ClassificationSample) sample).getOutputMatrix().getCoordinatesOfMaximum()[COLUMN];
@@ -65,9 +65,9 @@ public class AlgorithmAllWekaClassifiers extends AlgorithmClassifier {
 
 	public void train(RegressionDataSet dataSet) {
 		for (Algorithm a : getAlgorithmList()) {
-			if (a instanceof AlgorithmClassifier) {
+			if (a instanceof AbstractClassifier) {
 				try {
-					((AlgorithmClassifier) a).train(dataSet);
+					((AbstractClassifier) a).train(dataSet);
 				} catch (Exception e) {
 				}
 			}
@@ -77,9 +77,9 @@ public class AlgorithmAllWekaClassifiers extends AlgorithmClassifier {
 	@Override
 	public Matrix predict(Matrix input, Matrix weight) {
 		for (Algorithm a : getAlgorithmList()) {
-			if (a instanceof AlgorithmClassifier) {
+			if (a instanceof AbstractClassifier) {
 				try {
-					((AlgorithmClassifier) a).predict(input, weight);
+					((AbstractClassifier) a).predict(input, weight);
 				} catch (Exception e) {
 				}
 			}
