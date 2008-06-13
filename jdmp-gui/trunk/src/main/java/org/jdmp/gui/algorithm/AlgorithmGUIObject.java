@@ -16,12 +16,6 @@ public class AlgorithmGUIObject extends AbstractGUIObject {
 		algorithm.clear();
 	}
 
-	
-
-	public void dispose() {
-		algorithm.dispose();
-	}
-
 	public Algorithm getAlgorithm() {
 		return algorithm;
 	}

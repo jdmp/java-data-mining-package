@@ -20,8 +20,4 @@ public class DataSetGUIObject extends AbstractGUIObject {
 		dataSet.clear();
 	}
 
-	public void dispose() {
-		dataSet.dispose();
-	}
-
 }

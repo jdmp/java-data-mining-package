@@ -196,25 +196,21 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 	}
 
 	public void removeAlgorithm(Algorithm algorithm) {
-		algorithm.dispose();
 		algorithmList.remove(algorithm);
 		fireAlgorithmRemoved(new AlgorithmListEvent(this, EventType.REMOVED, algorithm));
 	}
 
 	public void removeVariable(Variable variable) {
-		variable.dispose();
 		variableList.remove(variable);
 		fireVariableRemoved(new VariableListEvent(this, EventType.REMOVED, variable));
 	}
 
 	public void removeDataSet(DataSet ds) {
-		ds.dispose();
 		dataSetList.remove(ds);
 		fireDataSetRemoved(new DataSetListEvent(this, EventType.REMOVED, ds));
 	}
 
 	public void removeModule(Module m) {
-		m.dispose();
 		moduleList.remove(m);
 		fireModuleRemoved(new ModuleListEvent(this, EventType.REMOVED, m));
 	}
@@ -291,9 +287,7 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		getListenerList().add(VariableListListener.class, l);
 	}
 
-	public void dispose() {
-		clear();
-	}
+
 
 	public void clear() {
 		while (!moduleList.isEmpty()) {

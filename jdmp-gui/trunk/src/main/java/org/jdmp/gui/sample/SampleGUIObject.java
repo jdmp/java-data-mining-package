@@ -15,10 +15,6 @@ public class SampleGUIObject extends AbstractGUIObject {
 	public void clear() {
 	}
 
-	public void dispose() {
-		sample.dispose();
-	}
-
 	public Sample getSample() {
 		return sample;
 	}

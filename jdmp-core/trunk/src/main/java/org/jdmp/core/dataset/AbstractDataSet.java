@@ -110,7 +110,6 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 	}
 
 	public void removeSample(Sample p) {
-		p.dispose();
 		sampleList.remove(p);
 		fireSampleRemoved(new SampleListEvent(this, EventType.REMOVED, p));
 	}
@@ -217,9 +216,7 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		return sampleList.indexOf(p);
 	}
 
-	public void dispose() {
-		clear();
-	}
+
 
 	public void addDataSetListener(DataSetListener l) {
 		getListenerList().add(DataSetListener.class, l);
@@ -230,12 +227,6 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 	}
 
 	public void clear() {
-		for (Sample p : getSampleList()) {
-			p.dispose();
-		}
-		for (Variable v : getVariableList()) {
-			v.dispose();
-		}
 		sampleList.clear();
 	}
 

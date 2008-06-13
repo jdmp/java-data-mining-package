@@ -226,9 +226,7 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 		addMatrix(m);
 	}
 
-	public final void dispose() {
-		clear();
-	}
+
 
 	public abstract MatrixList getMatrixList();
 

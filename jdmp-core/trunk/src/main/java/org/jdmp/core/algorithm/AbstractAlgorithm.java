@@ -147,10 +147,6 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		return getStepsToDo() > 0;
 	}
 
-	public void dispose() {
-		clear();
-	}
-
 	public void start() {
 		setStepsToDo(1000000);
 	}

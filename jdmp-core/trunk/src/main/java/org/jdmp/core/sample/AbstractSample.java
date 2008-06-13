@@ -30,8 +30,7 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 
 	public abstract Sample clone();
 
-	public void dispose() {
-	}
+	
 
 	public final void setVariable(int index, Variable v) {
 		variableMap.put(index, v);

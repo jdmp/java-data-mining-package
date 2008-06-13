@@ -20,7 +20,6 @@ public class DeleteAction extends ObjectAction {
 	}
 
 	public Object call() {
-		getObject().dispose();
 		return null;
 	}
 

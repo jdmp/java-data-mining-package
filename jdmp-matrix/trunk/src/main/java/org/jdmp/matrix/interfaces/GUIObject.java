@@ -36,8 +36,7 @@ import java.io.Serializable;
  * @author Holger Arndt
  * 
  */
-public interface GUIObject extends Serializable, Disposable, Cloneable, HasLabel, HasDescription,
-		HasToolTip {
+public interface GUIObject extends Serializable, Cloneable, HasLabel, HasDescription, HasToolTip {
 
 	/**
 	 * Indicates that changed in the object have been made, that should be

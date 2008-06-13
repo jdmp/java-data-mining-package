@@ -43,11 +43,6 @@ public class MatrixGUIObject extends AbstractGUIObject implements TableModel,
 		fireValueChanged();
 	}
 
-	public void dispose() {
-		matrix.clear();
-		fireValueChanged();
-	}
-
 	public double getEstimatedMaxValue(long timeOut) throws MatrixException {
 		double max = -Double.MAX_VALUE;
 		long t0 = System.currentTimeMillis();

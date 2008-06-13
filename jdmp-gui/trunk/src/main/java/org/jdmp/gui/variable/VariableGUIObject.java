@@ -16,10 +16,6 @@ public class VariableGUIObject extends AbstractGUIObject {
 		variable.clear();
 	}
 
-	public void dispose() {
-		variable.dispose();
-	}
-
 	public Variable getVariable() {
 		return variable;
 	}

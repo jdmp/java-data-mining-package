@@ -16,8 +16,4 @@ public class ModuleGUIObject extends AbstractGUIObject {
 		module.clear();
 	}
 
-	public void dispose() {
-		module.dispose();
-	}
-
 }
