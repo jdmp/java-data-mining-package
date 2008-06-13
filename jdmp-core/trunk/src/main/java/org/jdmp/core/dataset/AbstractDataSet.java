@@ -16,6 +16,7 @@ import org.jdmp.core.sample.HasSamples;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.sample.SampleListEvent;
 import org.jdmp.core.sample.SampleListListener;
+import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.util.AbstractEvent.EventType;
 import org.jdmp.core.variable.HasVariables;
 import org.jdmp.core.variable.Variable;
@@ -36,7 +37,7 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 	// CopyOnWriteArrayList so no nullpointerexceptions are thrown
 	private final List<Sample> sampleList = new CopyOnWriteArrayList<Sample>();
 
-	private final List<Variable> variableList = new CopyOnWriteArrayList<Variable>();
+	private final ObservableMap<Variable> variableList = new ObservableMap<Variable>();
 
 	public AbstractDataSet() {
 		super();
@@ -57,8 +58,8 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		return sampleList;
 	}
 
-	public final List<Variable> getVariableList() {
-		return Collections.unmodifiableList(variableList);
+	public final ObservableMap<Variable> getVariableList() {
+		return variableList;
 	}
 
 	public void fireVariableAdded(VariableListEvent e) {
@@ -102,10 +103,7 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 	}
 
 	public void setVariable(int index, Variable v) {
-		while (variableList.size() <= index) {
-			variableList.add(null);
-		}
-		variableList.set(index, v);
+		variableList.put(index, v);
 		fireVariableAdded(new VariableListEvent(this, EventType.ADDED, v));
 	}
 
@@ -133,7 +131,7 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 	}
 
 	public int getVariableCount() {
-		return variableList.size();
+		return variableList.getSize();
 	}
 
 	public final Variable getVariable(int index) {
@@ -244,7 +242,6 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 			v.dispose();
 		}
 		sampleList.clear();
-		variableList.clear();
 	}
 
 	public void fireValueChanged(Matrix m) {

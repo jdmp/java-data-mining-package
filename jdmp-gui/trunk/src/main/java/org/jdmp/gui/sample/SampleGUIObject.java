@@ -13,7 +13,6 @@ public class SampleGUIObject extends AbstractGUIObject {
 	}
 
 	public void clear() {
-		sample.clear();
 	}
 
 	public String getLongStatus() {

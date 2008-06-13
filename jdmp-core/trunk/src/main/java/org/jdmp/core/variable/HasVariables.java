@@ -1,28 +1,9 @@
 package org.jdmp.core.variable;
 
-import java.util.List;
+import org.jdmp.core.util.CoreObjectList;
 
 public interface HasVariables {
 
-	public void addVariable(Variable v);
+	public CoreObjectList<Variable> getVariableList();
 
-	public int getVariableCount();
-
-	public Variable getVariable(int pos);
-
-	public int getIndexOfVariable(Variable v);
-
-	public void addVariableListListener(VariableListListener l);
-
-	public void removeVariableListListener(VariableListListener l);
-
-	public List<Variable> getVariableList();
-
-	public void removeVariable(Variable variable);
-
-	public void fireVariableAdded(VariableListEvent e);
-
-	public void fireVariableRemoved(VariableListEvent e);
-
-	public void fireVariableUpdated(VariableListEvent e);
 }

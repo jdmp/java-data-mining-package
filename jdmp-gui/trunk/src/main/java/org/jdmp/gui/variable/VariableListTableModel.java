@@ -1,5 +1,7 @@
 package org.jdmp.gui.variable;
 
+import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
 import javax.swing.table.AbstractTableModel;
 
 import org.jdmp.core.variable.HasVariables;
@@ -10,7 +12,7 @@ import org.jdmp.core.variable.VariableListListener;
 import org.jdmp.core.variable.VariableListener;
 
 public class VariableListTableModel extends AbstractTableModel implements VariableListener,
-		VariableListListener {
+		VariableListListener, ListDataListener {
 	private static final long serialVersionUID = -1032855724069297926L;
 
 	public static final int ICONCOLUMN = 0;
@@ -37,7 +39,7 @@ public class VariableListTableModel extends AbstractTableModel implements Variab
 
 	public VariableListTableModel(HasVariables iVariables) {
 		this.iVariables = iVariables;
-		iVariables.addVariableListListener(this);
+		iVariables.getVariableList().addListDataListener(this);
 		for (Variable v : iVariables.getVariableList()) {
 			if (v != null) {
 				v.addVariableListener(this);
@@ -46,7 +48,7 @@ public class VariableListTableModel extends AbstractTableModel implements Variab
 	}
 
 	public int getRowCount() {
-		return iVariables.getVariableCount();
+		return iVariables.getVariableList().getSize();
 	}
 
 	public int getColumnCount() {
@@ -88,7 +90,7 @@ public class VariableListTableModel extends AbstractTableModel implements Variab
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		Variable v = iVariables.getVariable(rowIndex);
+		Variable v = iVariables.getVariableList().getElementAt(rowIndex);
 		switch (columnIndex) {
 		default:
 			return v;
@@ -96,7 +98,7 @@ public class VariableListTableModel extends AbstractTableModel implements Variab
 	}
 
 	public void valueChanged(VariableEvent e) {
-		int row = iVariables.getIndexOfVariable((Variable) e.getSource());
+		int row = iVariables.getVariableList().indexOf((Variable) e.getSource());
 		if (row >= 0) {
 			fireTableRowsUpdated(row, row);
 		}
@@ -116,5 +118,20 @@ public class VariableListTableModel extends AbstractTableModel implements Variab
 
 	public void variableUpdated(VariableListEvent e) {
 		fireTableDataChanged();
+	}
+
+	public void contentsChanged(ListDataEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void intervalAdded(ListDataEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void intervalRemoved(ListDataEvent e) {
+		// TODO Auto-generated method stub
+
 	}
 }

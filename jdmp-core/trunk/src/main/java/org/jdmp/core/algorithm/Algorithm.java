@@ -6,11 +6,11 @@ import java.util.concurrent.Callable;
 
 import org.jdmp.core.CoreObject;
 import org.jdmp.core.util.interfaces.HasAlgorithmsAndVariables;
-import org.jdmp.core.variable.HasVariables;
+import org.jdmp.core.variable.HasVariableMap;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.matrix.Matrix;
 
-public interface Algorithm extends CoreObject, HasAlgorithmsAndVariables, HasVariables,
+public interface Algorithm extends CoreObject, HasAlgorithmsAndVariables, HasVariableMap,
 		HasAlgorithms, Callable<List<Matrix>> {
 
 	public static final int NOTCONNECTED = 0;
@@ -35,8 +35,6 @@ public interface Algorithm extends CoreObject, HasAlgorithmsAndVariables, HasVar
 
 	public boolean isRunning();
 
-	public void dispose();
-
 	public void start();
 
 	public void stop();
@@ -60,8 +58,6 @@ public interface Algorithm extends CoreObject, HasAlgorithmsAndVariables, HasVar
 	public int getCallsPerSecond();
 
 	public List<Matrix> calculate() throws Exception;
-
-	public List<Matrix> call() throws Exception;
 
 	public List<Matrix> calculate(Matrix... input) throws Exception;
 

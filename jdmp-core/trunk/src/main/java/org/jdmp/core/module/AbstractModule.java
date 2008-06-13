@@ -14,6 +14,7 @@ import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DataSetListEvent;
 import org.jdmp.core.dataset.DataSetListListener;
 import org.jdmp.core.dataset.HasDataSets;
+import org.jdmp.core.util.ObservableList;
 import org.jdmp.core.util.AbstractEvent.EventType;
 import org.jdmp.core.util.interfaces.HasAlgorithmsAndVariables;
 import org.jdmp.core.variable.HasVariables;
@@ -34,14 +35,14 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 
 	protected final List<DataSet> dataSetList = new CopyOnWriteArrayList<DataSet>();
 
-	protected final List<Variable> variableList = new CopyOnWriteArrayList<Variable>();
+	protected final ObservableList<Variable> variableList = new ObservableList<Variable>();
 
 	protected final List<Module> moduleList = new CopyOnWriteArrayList<Module>();
 
 	public static final Module getInstance() {
 		if (module == null) {
 			module = new DefaultModule();
-			module.addVariable(WorkspaceVariable.getInstance());
+			module.getVariableList().add(WorkspaceVariable.getInstance());
 		}
 		return module;
 	}
@@ -267,14 +268,14 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 	}
 
 	public final int getVariableCount() {
-		return variableList.size();
+		return variableList.getSize();
 	}
 
 	public final Variable getVariable(int pos) {
-		return variableList.get(pos);
+		return variableList.getElementAt(pos);
 	}
 
-	public final List<Variable> getVariableList() {
+	public final ObservableList<Variable> getVariableList() {
 		return variableList;
 	}
 
@@ -304,7 +305,7 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 			removeDataSet(ds);
 		}
 		while (!variableList.isEmpty()) {
-			Variable v = variableList.get(0);
+			Variable v = variableList.getElementAt(0);
 			removeVariable(v);
 		}
 		while (!algorithmList.isEmpty()) {

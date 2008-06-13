@@ -21,8 +21,8 @@ public class ModuleTableCellRenderer implements TableCellRenderer {
 
 	private JLabel c = null;
 
-	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-			int row, int column) {
+	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+			boolean hasFocus, int row, int column) {
 
 		c = null;
 
@@ -41,7 +41,7 @@ public class ModuleTableCellRenderer implements TableCellRenderer {
 				o = module.getDataSetCount();
 				break;
 			case ModuleListTableModel.VARIABLECOUNTCOLUMN:
-				o = module.getVariableCount();
+				o = module.getVariableList().getSize();
 				break;
 			case ModuleListTableModel.MODULECOUNTCOLUMN:
 				o = null;
@@ -54,7 +54,8 @@ public class ModuleTableCellRenderer implements TableCellRenderer {
 				break;
 			}
 
-			c = (JLabel) renderer.getTableCellRendererComponent(table, o, isSelected, hasFocus, row, column);
+			c = (JLabel) renderer.getTableCellRendererComponent(table, o, isSelected, hasFocus,
+					row, column);
 
 			switch (column) {
 			case ModuleListTableModel.ICONCOLUMN:

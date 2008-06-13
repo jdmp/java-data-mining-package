@@ -1,5 +1,8 @@
 package org.jdmp.gui.util;
 
+import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
+
 import org.jdmp.core.CoreObject;
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.algorithm.AlgorithmListEvent;
@@ -7,7 +10,6 @@ import org.jdmp.core.algorithm.AlgorithmListListener;
 import org.jdmp.core.util.interfaces.HasAlgorithmsAndVariables;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableListEvent;
-import org.jdmp.core.variable.VariableListListener;
 import org.jdmp.gui.util.JungGraphPanel.Data;
 
 import edu.uci.ics.jung.graph.Edge;
@@ -17,7 +19,7 @@ import edu.uci.ics.jung.graph.impl.DirectedSparseGraph;
 import edu.uci.ics.jung.graph.impl.DirectedSparseVertex;
 import edu.uci.ics.jung.utils.UserData;
 
-public class TopologyGraphWrapper extends DirectedSparseGraph implements VariableListListener,
+public class TopologyGraphWrapper extends DirectedSparseGraph implements ListDataListener,
 		AlgorithmListListener {
 
 	public TopologyGraphWrapper(HasAlgorithmsAndVariables iTopology) {
@@ -58,7 +60,7 @@ public class TopologyGraphWrapper extends DirectedSparseGraph implements Variabl
 				if (u1 instanceof Algorithm && u2 instanceof Variable) {
 					Algorithm a = (Algorithm) u1;
 					Variable va = (Variable) u2;
-					int index = a.getIndexOfVariable(va);
+					int index = a.getVariableList().indexOf(va);
 					if (index >= 0) {
 						Edge e = null;
 						switch (a.getEdgeDirectionForVariable(index)) {
@@ -95,7 +97,7 @@ public class TopologyGraphWrapper extends DirectedSparseGraph implements Variabl
 			}
 		}
 
-		iTopology.addVariableListListener(this);
+		iTopology.getVariableList().addListDataListener(this);
 		iTopology.addAlgorithmListListener(this);
 	}
 
@@ -131,6 +133,21 @@ public class TopologyGraphWrapper extends DirectedSparseGraph implements Variabl
 
 	public void algorithmUpdated(AlgorithmListEvent e) {
 		mGraphListenerHandler.handleAdd((Edge) null);
+	}
+
+	public void contentsChanged(ListDataEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void intervalAdded(ListDataEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void intervalRemoved(ListDataEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

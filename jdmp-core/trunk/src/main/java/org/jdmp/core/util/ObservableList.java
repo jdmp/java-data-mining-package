@@ -1,6 +1,7 @@
 package org.jdmp.core.util;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.AbstractListModel;
@@ -38,5 +39,13 @@ public class ObservableList<V> extends AbstractListModel implements CoreObjectLi
 			fireIntervalRemoved(this, index, index);
 		}
 		return b;
+	}
+
+	public synchronized Iterator<V> iterator() {
+		return values.iterator();
+	}
+
+	public boolean isEmpty() {
+		return values.isEmpty();
 	}
 }

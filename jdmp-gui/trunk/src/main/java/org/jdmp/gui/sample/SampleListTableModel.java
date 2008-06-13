@@ -6,9 +6,8 @@ import org.jdmp.core.sample.HasSamples;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.sample.SampleListEvent;
 import org.jdmp.core.sample.SampleListListener;
-import org.jdmp.core.sample.SampleListener;
 
-public class SampleListTableModel extends AbstractTableModel implements SampleListener, SampleListListener {
+public class SampleListTableModel extends AbstractTableModel implements SampleListListener {
 	private static final long serialVersionUID = -5468178300746964431L;
 
 	public static final int ICONCOLUMN = 0;
@@ -32,9 +31,6 @@ public class SampleListTableModel extends AbstractTableModel implements SampleLi
 	public SampleListTableModel(HasSamples iSamples) {
 		this.iSamples = iSamples;
 		iSamples.addSampleListListener(this);
-		for (Sample p : iSamples.getSampleList()) {
-			p.addSampleListener(this);
-		}
 	}
 
 	public int getRowCount() {
@@ -87,19 +83,13 @@ public class SampleListTableModel extends AbstractTableModel implements SampleLi
 		fireTableDataChanged();
 	}
 
-	public void sampleChanged(SampleListEvent e) {
-		fireTableDataChanged();
-	}
-
 	public void sampleAdded(SampleListEvent e) {
 		Sample p = (Sample) e.getData();
-		p.addSampleListener(this);
 		fireTableDataChanged();
 	}
 
 	public void sampleRemoved(SampleListEvent e) {
 		Sample p = (Sample) e.getData();
-		p.removeSampleListener(this);
 		fireTableDataChanged();
 	}
 

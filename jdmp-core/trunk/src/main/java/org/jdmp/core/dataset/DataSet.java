@@ -6,13 +6,13 @@ import java.util.List;
 import org.jdmp.core.CoreObject;
 import org.jdmp.core.sample.HasSamples;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.variable.HasVariables;
+import org.jdmp.core.variable.HasVariableMap;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableListener;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.interfaces.HasMatrixList;
 
-public interface DataSet extends CoreObject, HasVariables, HasSamples, HasMatrixList {
+public interface DataSet extends CoreObject, HasVariableMap, HasSamples, HasMatrixList {
 
 	public void setVariable(int index, Variable v);
 

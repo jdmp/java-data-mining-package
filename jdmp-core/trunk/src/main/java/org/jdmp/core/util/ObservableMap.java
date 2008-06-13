@@ -23,6 +23,10 @@ public class ObservableMap<V> extends AbstractListModel implements CoreObjectLis
 		return it.hasNext() ? it.next() : null;
 	}
 
+	public synchronized V get(Object key) {
+		return map.get(key);
+	}
+
 	public synchronized int indexOf(V value) {
 		Iterator<V> it = map.values().iterator();
 		for (int i = 0; it.hasNext(); i++) {
@@ -55,6 +59,14 @@ public class ObservableMap<V> extends AbstractListModel implements CoreObjectLis
 			fireIntervalRemoved(this, index, index);
 		}
 		return v;
+	}
+
+	public synchronized Iterator<V> iterator() {
+		return map.values().iterator();
+	}
+
+	public boolean isEmpty() {
+		return map.isEmpty();
 	}
 
 }

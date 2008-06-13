@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.jdmp.core.AbstractCoreObject;
+import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.util.AbstractEvent.EventType;
 import org.jdmp.core.util.interfaces.HasAlgorithmsAndVariables;
 import org.jdmp.core.variable.HasVariables;
@@ -35,7 +36,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 
 	public static final int BIDIRECTIONAL = 3;
 
-	private final List<Variable> variableList = new CopyOnWriteArrayList<Variable>();
+	private final ObservableMap<Variable> variableList = new ObservableMap<Variable>();
 
 	private final List<Algorithm> algorithmList = new CopyOnWriteArrayList<Algorithm>();
 
@@ -63,10 +64,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 	}
 
 	public void setVariable(int index, Variable variable) {
-		while (variableList.size() <= index) {
-			variableList.add(null);
-		}
-		variableList.set(index, variable);
+		variableList.put(index, variable);
 		fireVariableAdded(new VariableListEvent(this, EventType.ADDED, variable));
 	}
 
@@ -230,7 +228,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 
 	public final List<Matrix> call() throws Exception {
 		List<Matrix> input = new LinkedList<Matrix>();
-		int size = variableList.size();
+		int size = variableList.getSize();
 		for (int v = 0; v < size; v++) {
 			if (getEdgeDirectionForVariable(v) == INCOMING
 					|| getEdgeDirectionForVariable(v) == BIDIRECTIONAL) {
@@ -357,10 +355,10 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 	}
 
 	public int getVariableCount() {
-		return variableList.size();
+		return variableList.getSize();
 	}
 
-	public final List<Variable> getVariableList() {
+	public final ObservableMap<Variable> getVariableList() {
 		return variableList;
 	}
 
