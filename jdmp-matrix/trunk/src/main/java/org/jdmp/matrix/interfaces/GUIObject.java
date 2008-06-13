@@ -23,7 +23,6 @@
 
 package org.jdmp.matrix.interfaces;
 
-import java.beans.PropertyChangeListener;
 import java.io.Serializable;
 
 /**

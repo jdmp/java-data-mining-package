@@ -2,8 +2,10 @@ package org.jdmp.core.dataset;
 
 import java.io.IOException;
 
+import org.jdmp.core.algorithm.regression.Regressor;
 import org.jdmp.core.sample.ClassificationSample;
-import org.jdmp.core.sample.WeightedSample;
+import org.jdmp.core.sample.Sample;
+import org.jdmp.core.sample.SampleFactory;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.Matrix.Format;
@@ -15,68 +17,70 @@ public abstract class DataSetFactory {
 	public static BasicDataSet ANIMALS() throws MatrixException {
 		BasicDataSet animals = new BasicDataSet("Animals");
 
-		WeightedSample pigeon = new WeightedSample("Pigeon");
-		pigeon.setInputMatrix(MatrixFactory.importFromString("1 0 0 1 0 0 0 0 1 0 0 1 0"));
+		Object INPUT = Regressor.INPUT;
+
+		Sample pigeon = SampleFactory.labeledSample("Pigeon");
+		pigeon.setMatrix(INPUT, MatrixFactory.importFromString("1 0 0 1 0 0 0 0 1 0 0 1 0"));
 		animals.addSample(pigeon);
 
-		WeightedSample chicken = new WeightedSample("Chicken");
-		chicken.setInputMatrix(MatrixFactory.importFromString("1 0 0 1 0 0 0 0 1 0 0 0 0"));
+		Sample chicken = SampleFactory.labeledSample("Chicken");
+		chicken.setMatrix(INPUT, MatrixFactory.importFromString("1 0 0 1 0 0 0 0 1 0 0 0 0"));
 		animals.addSample(chicken);
 
-		WeightedSample duck = new WeightedSample("Duck");
-		duck.setInputMatrix(MatrixFactory.importFromString("1 0 0 1 0 0 0 0 1 0 0 0 1"));
+		Sample duck = SampleFactory.labeledSample("Duck");
+		duck.setMatrix(INPUT, MatrixFactory.importFromString("1 0 0 1 0 0 0 0 1 0 0 0 1"));
 		animals.addSample(duck);
 
-		WeightedSample goose = new WeightedSample("Goose");
-		goose.setInputMatrix(MatrixFactory.importFromString("1 0 0 1 0 0 0 0 1 0 0 1 1"));
+		Sample goose = SampleFactory.labeledSample("Goose");
+		goose.setMatrix(INPUT, MatrixFactory.importFromString("1 0 0 1 0 0 0 0 1 0 0 1 1"));
 		animals.addSample(goose);
 
-		WeightedSample owl = new WeightedSample("Owl");
-		owl.setInputMatrix(MatrixFactory.importFromString("1 0 0 1 0 0 0 0 1 1 0 1 0"));
+		Sample owl = SampleFactory.labeledSample("Owl");
+		owl.setMatrix(INPUT, MatrixFactory.importFromString("1 0 0 1 0 0 0 0 1 1 0 1 0"));
 		animals.addSample(owl);
 
-		WeightedSample falcon = new WeightedSample("Falcon");
-		falcon.setInputMatrix(MatrixFactory.importFromString("1 0 0 1 0 0 0 0 1 1 0 1 0"));
+		Sample falcon = SampleFactory.labeledSample("Falcon");
+		falcon.setMatrix(INPUT, MatrixFactory.importFromString("1 0 0 1 0 0 0 0 1 1 0 1 0"));
 		animals.addSample(falcon);
 
-		WeightedSample eagle = new WeightedSample("Eagle");
-		eagle.setInputMatrix(MatrixFactory.importFromString("0 1 0 1 0 0 0 0 1 1 0 1 0"));
+		Sample eagle = SampleFactory.labeledSample("Eagle");
+		eagle.setMatrix(INPUT, MatrixFactory.importFromString("0 1 0 1 0 0 0 0 1 1 0 1 0"));
 		animals.addSample(eagle);
 
-		WeightedSample fox = new WeightedSample("Fox");
-		fox.setInputMatrix(MatrixFactory.importFromString("0 1 0 0 1 1 0 0 0 1 0 0 0"));
+		Sample fox = SampleFactory.labeledSample("Fox");
+		fox.setMatrix(INPUT, MatrixFactory.importFromString("0 1 0 0 1 1 0 0 0 1 0 0 0"));
 		animals.addSample(fox);
 
-		WeightedSample dog = new WeightedSample("Dog");
-		dog.setInputMatrix(MatrixFactory.importFromString("0 1 0 0 1 1 0 0 0 0 1 0 0"));
+		Sample dog = SampleFactory.labeledSample("Dog");
+		dog.setMatrix(INPUT, MatrixFactory.importFromString("0 1 0 0 1 1 0 0 0 0 1 0 0"));
 		animals.addSample(dog);
 
-		WeightedSample wolf = new WeightedSample("Wolf");
-		wolf.setInputMatrix(MatrixFactory.importFromString("0 1 0 0 1 1 0 1 0 1 1 0 0"));
+		Sample wolf = SampleFactory.labeledSample("Wolf");
+		wolf.setMatrix(INPUT, MatrixFactory.importFromString("0 1 0 0 1 1 0 1 0 1 1 0 0"));
 		animals.addSample(wolf);
 
-		WeightedSample cat = new WeightedSample("Cat");
-		cat.setInputMatrix(MatrixFactory.importFromString("1 0 0 0 1 1 0 0 0 1 0 0 0"));
+		Sample cat = SampleFactory.labeledSample("Cat");
+		cat.setMatrix(INPUT, MatrixFactory.importFromString("1 0 0 0 1 1 0 0 0 1 0 0 0"));
 		animals.addSample(cat);
 
-		WeightedSample tiger = new WeightedSample("Tiger");
-		tiger.setInputMatrix(MatrixFactory.importFromString("0 0 1 0 1 1 0 0 0 1 1 0 0"));
+		Sample tiger = SampleFactory.labeledSample("Tiger");
+		tiger.setMatrix(INPUT, MatrixFactory.importFromString("0 0 1 0 1 1 0 0 0 1 1 0 0"));
 		animals.addSample(tiger);
 
-		WeightedSample lion = new WeightedSample("Lion");
-		lion.setInputMatrix(MatrixFactory.importFromString("0 0 1 0 1 1 0 1 0 1 1 0 0"));
+		Sample lion = SampleFactory.labeledSample("Lion");
+		lion.setMatrix(INPUT, MatrixFactory.importFromString("0 0 1 0 1 1 0 1 0 1 1 0 0"));
 		animals.addSample(lion);
 
-		WeightedSample horse = new WeightedSample("Horse");
-		horse.setInputMatrix(MatrixFactory.importFromString("0 0 1 0 1 1 1 1 0 0 1 0 0"));
+		Sample horse = SampleFactory.labeledSample("Horse");
+		horse.setMatrix(INPUT, MatrixFactory.importFromString("0 0 1 0 1 1 1 1 0 0 1 0 0"));
 		animals.addSample(horse);
 
-		WeightedSample zebra = new WeightedSample("Zebra");
-		zebra.setInputMatrix(MatrixFactory.importFromString("0 0 1 0 1 1 1 1 0 0 1 0 0"));
+		Sample zebra = SampleFactory.labeledSample("Zebra");
+		zebra.setMatrix(INPUT, MatrixFactory.importFromString("0 0 1 0 1 1 1 1 0 0 1 0 0"));
 		animals.addSample(zebra);
 
-		WeightedSample cow = new WeightedSample("Cow");
-		cow.setInputMatrix(MatrixFactory.importFromString("0 0 1 0 1 1 1 0 0 0 0 0 0"));
+		Sample cow = SampleFactory.labeledSample("Cow");
+		cow.setMatrix(INPUT, MatrixFactory.importFromString("0 0 1 0 1 1 1 0 0 0 0 0 0"));
 		animals.addSample(cow);
 
 		return animals;

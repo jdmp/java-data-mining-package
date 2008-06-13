@@ -1,5 +1,6 @@
 package org.jdmp.core.matrix.wrappers;
 
+import org.jdmp.core.algorithm.regression.Regressor;
 import org.jdmp.core.dataset.BasicDataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.matrix.Matrix;
@@ -10,6 +11,8 @@ import org.jdmp.matrix.stubs.AbstractDenseDoubleMatrix2D;
 public class DataSetInputMatrixWrapper extends AbstractDenseDoubleMatrix2D implements
 		Wrapper<BasicDataSet> {
 	private static final long serialVersionUID = -817570097594349208L;
+
+	public static final Object INPUT = Regressor.INPUT;
 
 	private BasicDataSet dataSet = null;
 
@@ -22,11 +25,11 @@ public class DataSetInputMatrixWrapper extends AbstractDenseDoubleMatrix2D imple
 		if (p == null) {
 			return new long[] { 0, 0 };
 		}
-		Matrix input = p.getInputMatrix();
+		Matrix input = p.getMatrix(INPUT);
 		if (input != null) {
 			return new long[] { dataSet.getSampleCount(), input.getValueCount() };
 		} else {
-			return null;
+			return new long[] { 0, 0 };
 		}
 
 	}
@@ -36,10 +39,10 @@ public class DataSetInputMatrixWrapper extends AbstractDenseDoubleMatrix2D imple
 		int col = (int) coordinates[COLUMN];
 		Sample p = dataSet.getSample(row);
 		if (p != null) {
-			if (p.getInputMatrix() != null) {
-				long r = col / p.getInputMatrix().getColumnCount();
-				long c = col % p.getInputMatrix().getColumnCount();
-				return p.getInputMatrix().getDouble(r, c);
+			if (p.getMatrix(INPUT) != null) {
+				long r = col / p.getMatrix(INPUT).getColumnCount();
+				long c = col % p.getMatrix(INPUT).getColumnCount();
+				return p.getMatrix(INPUT).getDouble(r, c);
 			}
 		}
 		return 0.0;
@@ -50,10 +53,10 @@ public class DataSetInputMatrixWrapper extends AbstractDenseDoubleMatrix2D imple
 		int col = (int) coordinates[COLUMN];
 		Sample p = dataSet.getSample(row);
 		if (p != null) {
-			if (p.getInputMatrix() != null) {
-				long r = col / p.getInputMatrix().getColumnCount();
-				long c = col % p.getInputMatrix().getColumnCount();
-				p.getInputMatrix().setDouble(value, r, c);
+			if (p.getMatrix(INPUT) != null) {
+				long r = col / p.getMatrix(INPUT).getColumnCount();
+				long c = col % p.getMatrix(INPUT).getColumnCount();
+				p.getMatrix(INPUT).setDouble(value, r, c);
 			}
 		}
 	}

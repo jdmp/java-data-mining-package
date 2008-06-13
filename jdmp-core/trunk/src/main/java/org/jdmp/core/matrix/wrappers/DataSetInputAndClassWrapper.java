@@ -1,5 +1,6 @@
 package org.jdmp.core.matrix.wrappers;
 
+import org.jdmp.core.algorithm.regression.Regressor;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.sample.RegressionSample;
 import org.jdmp.core.sample.Sample;
@@ -10,6 +11,8 @@ import org.jdmp.matrix.stubs.AbstractDenseDoubleMatrix2D;
 public class DataSetInputAndClassWrapper extends AbstractDenseDoubleMatrix2D implements
 		Wrapper<RegressionDataSet> {
 	private static final long serialVersionUID = 7464288604917584889L;
+
+	public static final Object INPUT = Regressor.INPUT;
 
 	private RegressionDataSet dataSet = null;
 
@@ -34,7 +37,7 @@ public class DataSetInputAndClassWrapper extends AbstractDenseDoubleMatrix2D imp
 		if (p == null) {
 			return new long[] { 0, 0 };
 		} else {
-			return new long[] { dataSet.getSampleCount(), p.getInputMatrix().getColumnCount() + 1 };
+			return new long[] { dataSet.getSampleCount(), p.getMatrix(INPUT).getColumnCount() + 1 };
 		}
 	}
 

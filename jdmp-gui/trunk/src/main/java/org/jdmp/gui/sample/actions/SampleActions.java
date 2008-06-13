@@ -1,9 +1,7 @@
 package org.jdmp.gui.sample.actions;
 
 import javax.swing.JComponent;
-import javax.swing.JMenuItem;
 
-import org.jdmp.core.sample.WeightedSample;
 import org.jdmp.gui.actions.ObjectActions;
 import org.jdmp.gui.sample.SampleGUIObject;
 
@@ -12,10 +10,6 @@ public class SampleActions extends ObjectActions {
 
 	public SampleActions(JComponent c, SampleGUIObject p) {
 		super(c, p);
-
-		if (p.getSample() instanceof WeightedSample) {
-			add(new JMenuItem(new DivideInputAction(c, p)));
-		}
 
 	}
 

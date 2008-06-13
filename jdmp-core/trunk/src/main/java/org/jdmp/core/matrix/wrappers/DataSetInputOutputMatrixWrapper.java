@@ -1,5 +1,6 @@
 package org.jdmp.core.matrix.wrappers;
 
+import org.jdmp.core.algorithm.regression.Regressor;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.matrix.exceptions.MatrixException;
@@ -9,6 +10,8 @@ import org.jdmp.matrix.stubs.AbstractDenseDoubleMatrix2D;
 public class DataSetInputOutputMatrixWrapper extends AbstractDenseDoubleMatrix2D implements
 		Wrapper<RegressionDataSet> {
 	private static final long serialVersionUID = 677010635477854113L;
+
+	public static final Object INPUT = Regressor.INPUT;
 
 	private RegressionDataSet dataSet = null;
 
@@ -21,7 +24,7 @@ public class DataSetInputOutputMatrixWrapper extends AbstractDenseDoubleMatrix2D
 		if (p == null) {
 			return new long[] { 0, 0 };
 		} else {
-			return new long[] { dataSet.getSampleCount(), p.getMatrix().getColumnCount() };
+			return new long[] { dataSet.getSampleCount(), p.getMatrix(INPUT).getColumnCount() };
 		}
 	}
 
@@ -30,7 +33,7 @@ public class DataSetInputOutputMatrixWrapper extends AbstractDenseDoubleMatrix2D
 		int col = (int) coordinates[COLUMN];
 		Sample p = dataSet.getSample(row);
 		if (p != null) {
-			return p.getMatrix().getDouble(0, col);
+			return p.getMatrix(INPUT).getDouble(0, col);
 		} else {
 			return 0.0;
 		}
@@ -41,7 +44,7 @@ public class DataSetInputOutputMatrixWrapper extends AbstractDenseDoubleMatrix2D
 		int col = (int) coordinates[COLUMN];
 		Sample p = dataSet.getSample(row);
 		if (p != null) {
-			p.getMatrix().setDouble(value, 0, col);
+			p.getMatrix(INPUT).setDouble(value, 0, col);
 		}
 	}
 

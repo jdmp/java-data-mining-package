@@ -4,14 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 import org.jdmp.core.matrix.wrappers.DataSetInputMatrixWrapper;
-import org.jdmp.core.sample.Attribute;
 import org.jdmp.core.sample.BasicSample;
-import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.Matrix.Format;
@@ -42,18 +37,6 @@ public class BasicDataSet extends AbstractDataSet {
 
 	public BasicDataSet() {
 		super();
-	}
-
-	public final Set<Attribute> getAttributes() {
-		SortedSet<Attribute> features = new TreeSet<Attribute>();
-		for (Sample s : getSampleList()) {
-			features.addAll(((BasicSample) s).getAttributes());
-		}
-		return features;
-	}
-
-	public final int getFeatureCount() {
-		return getAttributes().size();
 	}
 
 	public BasicSample getSample(int pos) {

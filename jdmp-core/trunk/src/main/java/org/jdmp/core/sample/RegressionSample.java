@@ -1,5 +1,6 @@
 package org.jdmp.core.sample;
 
+import org.jdmp.core.algorithm.regression.Regressor;
 import org.jdmp.core.matrix.wrappers.SampleInputOutputMatrix;
 import org.jdmp.core.variable.DefaultVariable;
 import org.jdmp.core.variable.Variable;
@@ -7,17 +8,8 @@ import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public class RegressionSample extends WeightedSample {
+public class RegressionSample extends BasicSample {
 	private static final long serialVersionUID = -7326840837391243268L;
-
-	public static final int OUTPUT = 2;
-
-	public static final int DESIREDOUTPUT = 3;
-
-	public static final int OUTPUTERROR = 4;
-
-	public static final int RMSE = 5;
-
 
 	private transient SampleInputOutputMatrix sampleInputOutputMatrix = null;
 
@@ -45,7 +37,8 @@ public class RegressionSample extends WeightedSample {
 
 		getDesiredOutputVariable().setMemorySize(1);
 		getDesiredOutputVariable().setSize(1, 1);
-		getDesiredOutputVariable().addMatrix(MatrixFactory.linkToValue(Double.parseDouble(fields[classPos])));
+		getDesiredOutputVariable().addMatrix(
+				MatrixFactory.linkToValue(Double.parseDouble(fields[classPos])));
 
 		Matrix m = MatrixFactory.zeros(getInputVariable().getRowCount(), 1);
 		for (int i = 0; i < getInputVariable().getRowCount(); i++) {
@@ -57,37 +50,37 @@ public class RegressionSample extends WeightedSample {
 	}
 
 	public Variable getOutputVariable() {
-		Variable v = getVariable(OUTPUT);
+		Variable v = getVariableList().get(Regressor.PREDICTED);
 		if (v == null) {
 			v = new DefaultVariable("Output");
-			setVariable(OUTPUT, v);
+			getVariableList().put(Regressor.PREDICTED, v);
 		}
 		return v;
 	}
 
 	public Variable getDesiredOutputVariable() {
-		Variable v = getVariable(DESIREDOUTPUT);
+		Variable v = getVariableList().get(Regressor.TARGET);
 		if (v == null) {
 			v = new DefaultVariable("Desired Output");
-			setVariable(DESIREDOUTPUT, v);
+			getVariableList().put(Regressor.TARGET, v);
 		}
 		return v;
 	}
 
 	public Variable getOutputErrorVariable() {
-		Variable v = getVariable(OUTPUTERROR);
+		Variable v = getVariableList().get(Regressor.DIFFERENCE);
 		if (v == null) {
 			v = new DefaultVariable("Output Error");
-			setVariable(OUTPUTERROR, v);
+			getVariableList().put(Regressor.DIFFERENCE, v);
 		}
 		return v;
 	}
 
 	public Variable getRMSEVariable() {
-		Variable v = getVariable(RMSE);
+		Variable v = getVariableList().get(Regressor.RMSE);
 		if (v == null) {
 			v = new DefaultVariable("RMSE");
-			setVariable(RMSE, v);
+			getVariableList().put(Regressor.RMSE, v);
 		}
 		return v;
 	}

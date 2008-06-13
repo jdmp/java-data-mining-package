@@ -5,15 +5,11 @@ import java.util.logging.Level;
 
 import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.util.ObservableMap;
-import org.jdmp.core.variable.HasVariables;
 import org.jdmp.core.variable.Variable;
-import org.jdmp.core.variable.VariableListListener;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.interfaces.GUIObject;
-import org.jdmp.matrix.interfaces.HasMatrix;
 
-public abstract class AbstractSample extends AbstractCoreObject implements Sample, HasVariables,
-		HasMatrix {
+public abstract class AbstractSample extends AbstractCoreObject implements Sample {
 
 	private transient GUIObject guiObject=null;
 	
@@ -30,53 +26,11 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 
 	public abstract Sample clone();
 
-	
-
-	public final void setVariable(int index, Variable v) {
-		variableMap.put(index, v);
-	}
-
-
-
-
-
-
-
-
-
 
 	public ObservableMap<Variable> getVariableList() {
 		return variableMap;
 	}
-
-	public int getVariableCount() {
-		return getVariableList().getSize();
-	}
-
-	public abstract Matrix getInputMatrix();
-
-	public Variable getVariable(Object pos) {
-			return variableMap.get(pos);
-	}
-
-	public int getIndexOfVariable(Variable variable) {
-		return getVariableList().indexOf(variable);
-	}
-
-
-
-	public void addVariableListListener(VariableListListener l) {
-		getListenerList().add(VariableListListener.class, l);
-	}
-
-	public void removeVariableListListener(VariableListListener l) {
-		getListenerList().add(VariableListListener.class, l);
-	}
-
-
-
-
-
+	
 	
 	public final GUIObject getGUIObject() {
 		if (guiObject == null) {
@@ -91,4 +45,21 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 		return guiObject;
 	}
 
+	
+	public Matrix getMatrix(Object variableKey){
+		Variable v=getVariableList().get(variableKey);
+		if(v!=null){
+			return v.getMatrix();
+		}else{
+			return null;
+		}
+	}
+
+	public void setMatrix(Object variableKey, Matrix matrix){
+		Variable v=getVariableList().get(variableKey);
+		if(v!=null){
+			 v.addMatrix(matrix);
+		}
+	}
+	
 }

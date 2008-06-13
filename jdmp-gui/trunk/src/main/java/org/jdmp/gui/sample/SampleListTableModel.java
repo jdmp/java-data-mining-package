@@ -18,11 +18,11 @@ public class SampleListTableModel extends AbstractTableModel implements SampleLi
 
 	public static final int INPUTCOLUMN = 3;
 
-	public static final int DESIREDOUTPUTCOLUMN = 4;
+	public static final int TARGETCOLUMN = 4;
 
-	public static final int ACTUALOUTPUTCOLUMN = 5;
+	public static final int PREDICTEDCOLUMN = 5;
 
-	public static final int OUTPUTERRORCOLUMN = 6;
+	public static final int DIFFERENCECOLUMN = 6;
 
 	public static final int RMSECOLUMN = 7;
 
@@ -51,12 +51,12 @@ public class SampleListTableModel extends AbstractTableModel implements SampleLi
 			return "Weight";
 		case INPUTCOLUMN:
 			return "Input";
-		case DESIREDOUTPUTCOLUMN:
-			return "DesiredOutput";
-		case ACTUALOUTPUTCOLUMN:
-			return "ActualOutput";
-		case OUTPUTERRORCOLUMN:
-			return "OutputError";
+		case TARGETCOLUMN:
+			return "Target";
+		case PREDICTEDCOLUMN:
+			return "Predicted";
+		case DIFFERENCECOLUMN:
+			return "Difference";
 		case RMSECOLUMN:
 			return "RMSE";
 		default:

@@ -23,7 +23,6 @@ public class RegressionDataSet extends BasicDataSet {
 
 	private Matrix desiredOutputMatrix = null;
 
-
 	public RegressionDataSet(String label) {
 		super(label);
 		setVariable(RMSE, new DefaultVariable("RMSE", 10000));
@@ -33,12 +32,14 @@ public class RegressionDataSet extends BasicDataSet {
 		this(null);
 	}
 
-	public static RegressionDataSet copyFromMatrix(Matrix input, Matrix desiredOutput) throws MatrixException {
+	public static RegressionDataSet copyFromMatrix(Matrix input, Matrix desiredOutput)
+			throws MatrixException {
 		RegressionDataSet ds = new RegressionDataSet();
 		for (int i = 0; i < input.getRowCount(); i++) {
 			RegressionSample s = new RegressionSample();
 			Matrix in = input.subMatrix(Ret.NEW, i, 0, i, input.getColumnCount() - 1);
-			Matrix out = desiredOutput.subMatrix(Ret.NEW, i, 0, i, desiredOutput.getColumnCount() - 1);
+			Matrix out = desiredOutput.subMatrix(Ret.NEW, i, 0, i,
+					desiredOutput.getColumnCount() - 1);
 			s.setInputMatrix(in);
 			s.setDesiredOutputMatrix(out);
 			ds.addSample(s);
@@ -53,7 +54,8 @@ public class RegressionDataSet extends BasicDataSet {
 			RegressionSample s = new RegressionSample();
 
 			Matrix si = input.subMatrix(Ret.LINK, i, 0, i, input.getColumnCount() - 1);
-			Matrix so = desiredOutput.subMatrix(Ret.LINK, i, 0, i, desiredOutput.getColumnCount() - 1);
+			Matrix so = desiredOutput.subMatrix(Ret.LINK, i, 0, i,
+					desiredOutput.getColumnCount() - 1);
 
 			s.setInputMatrix(si);
 			s.setDesiredOutputMatrix(so);
@@ -162,5 +164,14 @@ public class RegressionDataSet extends BasicDataSet {
 
 	public Matrix getRMSEMatrix() {
 		return getMatrixFromVariable(RMSE);
+	}
+
+	public int getFeatureCount() {
+		Matrix m = getInputMatrix();
+		if (m == null) {
+			return 0;
+		} else {
+			return (int) m.getColumnCount();
+		}
 	}
 }
