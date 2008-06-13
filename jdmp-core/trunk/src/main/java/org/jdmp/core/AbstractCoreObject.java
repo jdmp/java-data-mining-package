@@ -76,25 +76,6 @@ public abstract class AbstractCoreObject implements CoreObject {
 		getProptertyChangeSupport().firePropertyChange("Label", oldLabel, label);
 	}
 
-	public final String getToolTipText() {
-		StringBuffer s = new StringBuffer();
-		s.append("<html>");
-		s.append("<table>");
-		s.append("<tr>");
-		s.append("<td colspan=2><h3>" + getClass().getSimpleName() + "</h3></td>");
-		s.append("</tr>");
-		s.append("<tr>");
-		s.append("<td><b>Label:</b></td>");
-		s.append("<td>" + getLabel() + "</td>");
-		s.append("</tr>");
-		s.append("<td><b>Description:</b></td>");
-		s.append("<td>" + getDescription() + "</td>");
-		s.append("</tr>");
-		s.append("</table>");
-		s.append("</html>");
-		return s.toString();
-	}
-
 	public final void fireValueChanged() {
 	}
 
