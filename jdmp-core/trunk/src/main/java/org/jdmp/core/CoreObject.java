@@ -1,7 +1,5 @@
 package org.jdmp.core;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 
 import javax.swing.event.EventListenerList;
@@ -15,12 +13,6 @@ public interface CoreObject extends Serializable, Disposable, Cloneable, HasGUIO
 		HasDescription {
 
 	public EventListenerList getListenerList();
-
-	public void addPropertyChangeListener(PropertyChangeListener l);
-
-	public void removePropertyChangeListener(PropertyChangeListener l);
-
-	public PropertyChangeSupport getProptertyChangeSupport();
 
 	public void fireValueChanged();
 
