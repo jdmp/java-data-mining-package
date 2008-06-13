@@ -1,7 +1,5 @@
 package org.jdmp.gui;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.lang.reflect.Method;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,8 +26,6 @@ public abstract class AbstractGUIObject implements GUIObject {
 
 	public static final int ALL = Matrix.ALL;
 
-	private transient PropertyChangeSupport changeSupport = null;
-
 	private transient EventListenerList listenerList = null;
 
 	private String label = "";
@@ -47,13 +43,6 @@ public abstract class AbstractGUIObject implements GUIObject {
 	public AbstractGUIObject(String label, String description) {
 		this(label);
 		setDescription(description);
-	}
-
-	public final PropertyChangeSupport getProptertyChangeSupport() {
-		if (changeSupport == null) {
-			changeSupport = new PropertyChangeSupport(this);
-		}
-		return changeSupport;
 	}
 
 	public final EventListenerList getListenerList() {
@@ -81,9 +70,7 @@ public abstract class AbstractGUIObject implements GUIObject {
 	}
 
 	public void setLabel(String label) {
-		String oldLabel = this.label;
 		this.label = label;
-		getProptertyChangeSupport().firePropertyChange("Label", oldLabel, label);
 	}
 
 	public final String getDescription() {
@@ -91,9 +78,7 @@ public abstract class AbstractGUIObject implements GUIObject {
 	}
 
 	public final void setDescription(String description) {
-		String oldDescription = this.description;
 		this.description = description;
-		getProptertyChangeSupport().firePropertyChange("Description", oldDescription, description);
 	}
 
 	public String toString() {
@@ -120,14 +105,6 @@ public abstract class AbstractGUIObject implements GUIObject {
 		s.append("</table>");
 		s.append("</html>");
 		return s.toString();
-	}
-
-	public final void addPropertyChangeListener(PropertyChangeListener l) {
-		getProptertyChangeSupport().addPropertyChangeListener(l);
-	}
-
-	public final void removePropertyChangeListener(PropertyChangeListener l) {
-		getProptertyChangeSupport().removePropertyChangeListener(l);
 	}
 
 }

@@ -83,9 +83,7 @@ public class MatrixGUIObject extends AbstractGUIObject implements TableModel,
 	}
 
 	public void setLabel(String label) {
-		String oldLabel = matrix.getLabel();
-		setLabel(label);
-		getProptertyChangeSupport().firePropertyChange("Label", oldLabel, label);
+		matrix.setLabel(label);
 	}
 
 	public final void addTableModelListener(TableModelListener l) {

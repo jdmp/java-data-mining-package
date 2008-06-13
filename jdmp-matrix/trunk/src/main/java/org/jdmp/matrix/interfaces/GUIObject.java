@@ -44,10 +44,6 @@ public interface GUIObject extends Serializable, Cloneable, HasLabel, HasDescrip
 	 */
 	public void fireValueChanged();
 
-	public void addPropertyChangeListener(PropertyChangeListener l);
-
-	public void removePropertyChangeListener(PropertyChangeListener l);
-
 	public void showGUI();
 
 	public void clear();

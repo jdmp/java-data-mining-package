@@ -5,8 +5,6 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,7 +34,7 @@ import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.GUIObject;
 
-public abstract class AbstractFrame extends JFrame implements PropertyChangeListener {
+public abstract class AbstractFrame extends JFrame {
 	private static final long serialVersionUID = -4656308453503586700L;
 
 	private static final Logger logger = Logger.getLogger(AbstractFrame.class.getName());
@@ -64,7 +62,6 @@ public abstract class AbstractFrame extends JFrame implements PropertyChangeList
 		}
 
 		setIconImage(image);
-		o.addPropertyChangeListener(this);
 
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		if (d.getHeight() < 1024) {
@@ -101,12 +98,6 @@ public abstract class AbstractFrame extends JFrame implements PropertyChangeList
 
 		setJMenuBar(new DefaultMenuBar(component, o));
 
-	}
-
-	public void propertyChange(PropertyChangeEvent evt) {
-		if ("Label".equals(evt.getPropertyName())) {
-			setTitle(object.getClass().getSimpleName() + " [" + object.getLabel() + "]");
-		}
 	}
 
 	public void setVisible(boolean state) {
