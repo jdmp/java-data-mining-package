@@ -26,10 +26,11 @@ public class WekaClassifier extends AbstractClassifier {
 	private WekaClassifierType classifierName = null;
 
 	private String[] options = null;
-	
+
 	private boolean discrete = false;
 
-	public WekaClassifier(WekaClassifierType classifierName, boolean discrete, String... options) throws Exception {
+	public WekaClassifier(WekaClassifierType classifierName, boolean discrete, String... options)
+			throws Exception {
 		super("Weka-" + classifierName);
 		this.classifierName = classifierName;
 		this.options = options;
@@ -113,7 +114,7 @@ public class WekaClassifier extends AbstractClassifier {
 	@Override
 	public Matrix predict(Matrix input, Matrix weight) throws Exception {
 		double[] probabilities = null;
-		Instance instance = new SampleToInstanceWrapper(input, weight, null,discrete);
+		Instance instance = new SampleToInstanceWrapper(input, weight, null, discrete, true);
 		instance.setDataset(instances);
 		probabilities = wekaClassifier.distributionForInstance(instance);
 		double[][] v = new double[1][];
@@ -123,7 +124,7 @@ public class WekaClassifier extends AbstractClassifier {
 	}
 
 	public void train(RegressionDataSet dataSet) throws Exception {
-		instances = new DataSetToInstancesWrapper(dataSet, discrete);
+		instances = new DataSetToInstancesWrapper(dataSet, discrete, true);
 		wekaClassifier.buildClassifier(instances);
 	}
 

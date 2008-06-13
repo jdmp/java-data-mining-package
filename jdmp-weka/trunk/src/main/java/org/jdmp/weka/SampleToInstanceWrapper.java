@@ -9,7 +9,7 @@ public class SampleToInstanceWrapper extends Instance {
 	private static final long serialVersionUID = 6525723600252564795L;
 
 	public SampleToInstanceWrapper(Matrix input, Matrix weight, Matrix desiredOutput,
-			boolean discrete) throws MatrixException {
+			boolean discrete, boolean includeTarget) throws MatrixException {
 		super((int) input.getColumnCount() + 1);
 		if (weight != null) {
 			setWeight(weight.getDoubleValue());
@@ -25,7 +25,7 @@ public class SampleToInstanceWrapper extends Instance {
 				}
 			}
 		}
-		if (desiredOutput != null) {
+		if (includeTarget && desiredOutput != null) {
 			long[] c = desiredOutput.getCoordinatesOfMaximum();
 			setValue((int) input.getColumnCount(), c[Matrix.COLUMN]);
 		}

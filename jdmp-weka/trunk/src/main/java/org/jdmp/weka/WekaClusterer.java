@@ -3,15 +3,20 @@ package org.jdmp.weka;
 import java.lang.reflect.Constructor;
 
 import org.jdmp.core.algorithm.clustering.AbstractClusterer;
+import org.jdmp.core.dataset.RegressionDataSet;
+import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.MatrixFactory;
 
 import weka.clusterers.Clusterer;
+import weka.clusterers.NumberOfClustersRequestable;
+import weka.core.Instance;
 import weka.core.Instances;
 
 public class WekaClusterer extends AbstractClusterer {
 	private static final long serialVersionUID = 1308337964347655655L;
 
 	public enum WekaClustererType {
-		SimpleKMeans
+		Cobweb, DBScan, EM, FarthestFirst, FilteredClusterer, MakeDensityBasedClusterer, SimpleKMeans, XMeans
 	};
 
 	private Clusterer wekaClusterer = null;
@@ -61,6 +66,30 @@ public class WekaClusterer extends AbstractClusterer {
 
 	public void reset() throws Exception {
 		createAlgorithm();
+	}
+
+	public void train(RegressionDataSet dataSet) throws Exception {
+		instances = new DataSetToInstancesWrapper(dataSet, discrete, false);
+		wekaClusterer.buildClusterer(instances);
+	}
+
+	public Matrix predict(Matrix input, Matrix weight) throws Exception {
+		double[] probabilities = null;
+		Instance instance = new SampleToInstanceWrapper(input, weight, null, discrete, false);
+		instance.setDataset(instances);
+		probabilities = wekaClusterer.distributionForInstance(instance);
+		double[][] v = new double[1][];
+		v[0] = probabilities;
+		Matrix output = MatrixFactory.linkToArray(v);
+		return output;
+	}
+
+	public void setNumberOfClusters(int numberOfClusters) throws Exception {
+		if (wekaClusterer instanceof NumberOfClustersRequestable) {
+			((NumberOfClustersRequestable) wekaClusterer).setNumClusters(numberOfClusters);
+		} else {
+			throw new RuntimeException("Cannot set number of Clusters for this Clusterer");
+		}
 	}
 
 }

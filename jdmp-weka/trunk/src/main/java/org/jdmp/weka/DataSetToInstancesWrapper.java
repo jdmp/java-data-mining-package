@@ -16,17 +16,20 @@ public class DataSetToInstancesWrapper extends Instances {
 	public static final Object WEIGHT = Classifier.WEIGHT;
 	public static final Object TARGET = Classifier.TARGET;
 
-	public DataSetToInstancesWrapper(RegressionDataSet dataSet, boolean discrete)
-			throws MatrixException {
+	public DataSetToInstancesWrapper(RegressionDataSet dataSet, boolean discrete,
+			boolean includeTarget) throws MatrixException {
 		super(dataSet.getLabel(), new DataSetToAttributeInfoWrapper(dataSet, discrete), dataSet
 				.getSampleCount());
-		setClassIndex(dataSet.getFeatureCount());
+
+		if (includeTarget) {
+			setClassIndex(dataSet.getFeatureCount());
+		}
 
 		for (Sample s : dataSet.getSampleList()) {
 			Matrix input = ((ClassificationSample) s).getMatrix(INPUT);
 			Matrix weight = ((ClassificationSample) s).getMatrix(WEIGHT);
 			Matrix target = ((ClassificationSample) s).getMatrix(TARGET);
-			add(new SampleToInstanceWrapper(input, weight, target, discrete));
+			add(new SampleToInstanceWrapper(input, weight, target, discrete, includeTarget));
 		}
 
 	}
