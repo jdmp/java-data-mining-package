@@ -13,7 +13,7 @@ import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public class AlgorithmSVM extends AbstractClassifier {
+public class SVMClassifier extends AbstractClassifier {
 	private static final long serialVersionUID = -3809157647628200950L;
 
 	private svm_parameter param = null;
@@ -28,11 +28,11 @@ public class AlgorithmSVM extends AbstractClassifier {
 		LINEAR, RBF, SIGMOID, POLYNOM
 	};
 
-	public AlgorithmSVM() {
+	public SVMClassifier() {
 		this(Kernel.RBF);
 	}
 
-	public AlgorithmSVM(Kernel kernel) {
+	public SVMClassifier(Kernel kernel) {
 		super("SVM " + kernel.name());
 		this.kernel = kernel;
 		createAlgorithm();

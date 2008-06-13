@@ -12,10 +12,10 @@ import weka.classifiers.Classifier;
 import weka.core.Instance;
 import weka.core.Instances;
 
-public class AlgorithmWekaClassifier extends AbstractClassifier {
+public class WekaClassifier extends AbstractClassifier {
 	private static final long serialVersionUID = 29290678735702499L;
 
-	public enum WekaClassifier {
+	public enum WekaClassifierType {
 		AODE, BayesNet, ComplementNaiveBayes, HNB, NaiveBayes, NaiveBayesMultinomial, NaiveBayesMultinomialUpdateable, NaiveBayesSimple, NaiveBayesUpdateable, WAODE, GaussianProcesses, IsotonicRegression, LeastMedSq, LinearRegression, Logistic, MultilayerPerceptron, PaceRegression, PLSClassifier, RBFNetwork, SimpleLinearRegression, SimpleLogistic, SMO, SMOreg, SVMreg, VotedPerceptron, Winnow, IB1, IBk, KStar, LBR, LWL, AdaBoostM1, AdditiveRegression, AttributeSelectedClassifier, Bagging, ClassificationViaRegression, CostSensitiveClassifier, CVParameterSelection, Dagging, Decorate, END, EnsembleSelection, FilteredClassifier, Grading, GridSearch, LogitBoost, MetaCost, MultiBoostAB, MultiClassClassifier, MultiScheme, OrdinalClassClassifier, RacedIncrementalLogitBoost, RandomCommittee, RandomSubSpace, RegressionByDiscretization, Stacking, StackingC, ThresholdSelector, Vote, CitationKNN, MDD, MIBoost, MIDD, MIEMDD, MILR, MINND, MIOptimalBall, MISMO, MISVM, MIWrapper, SimpleMI, TLD, TLDSimple, FLR, HyperPipes, MinMaxExtension, OLM, OSDL, SerializedClassifier, VFI, ConjunctiveRule, DecisionTable, JRip, M5Rules, NNge, OneR, PART, Prism, Ridor, ZeroR, ADTree, BFTree, DecisionStump, Id3, J48, LMT, M5P, NBTree, RandomForest, RandomTree, REPTree, SimpleCart
 	};
 
@@ -23,13 +23,13 @@ public class AlgorithmWekaClassifier extends AbstractClassifier {
 
 	private Instances instances = null;
 
-	private WekaClassifier classifierName = null;
+	private WekaClassifierType classifierName = null;
 
 	private String[] options = null;
 	
 	private boolean discrete = false;
 
-	public AlgorithmWekaClassifier(WekaClassifier classifierName, boolean discrete, String... options) throws Exception {
+	public WekaClassifier(WekaClassifierType classifierName, boolean discrete, String... options) throws Exception {
 		super("Weka-" + classifierName);
 		this.classifierName = classifierName;
 		this.options = options;

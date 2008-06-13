@@ -2,14 +2,15 @@ package org.jdmp.weka;
 
 import java.lang.reflect.Constructor;
 
-import org.jdmp.core.algorithm.clustering.AbstractClusteringAlgorithm;
+import org.jdmp.core.algorithm.clustering.AbstractClusterer;
 
 import weka.clusterers.Clusterer;
 import weka.core.Instances;
 
-public class WekaClusterer extends AbstractClusteringAlgorithm {
+public class WekaClusterer extends AbstractClusterer {
+	private static final long serialVersionUID = 1308337964347655655L;
 
-	public enum WekaClusterers {
+	public enum WekaClustererType {
 		SimpleKMeans
 	};
 
@@ -17,13 +18,13 @@ public class WekaClusterer extends AbstractClusteringAlgorithm {
 
 	private Instances instances = null;
 
-	private WekaClusterers clustererName = null;
+	private WekaClustererType clustererName = null;
 
 	private String[] options = null;
 
 	private boolean discrete = false;
 
-	public WekaClusterer(WekaClusterers classifierName, boolean discrete, String... options)
+	public WekaClusterer(WekaClustererType classifierName, boolean discrete, String... options)
 			throws Exception {
 		super("Weka-" + classifierName.name());
 		this.clustererName = classifierName;
@@ -53,11 +54,11 @@ public class WekaClusterer extends AbstractClusteringAlgorithm {
 			Constructor<?> constr = c.getConstructor(new Class[] {});
 			wekaClusterer = (Clusterer) constr.newInstance(new Object[] {});
 			if (options != null || options.length != 0) {
-				//wekaClusterer.setOptions(options);
+				// wekaClusterer.setOptions(options);
 			}
 		}
 	}
-	
+
 	public void reset() throws Exception {
 		createAlgorithm();
 	}

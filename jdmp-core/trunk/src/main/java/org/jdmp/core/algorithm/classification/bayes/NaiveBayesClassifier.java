@@ -28,7 +28,7 @@ import org.jdmp.matrix.calculation.Calculation.Ret;
 import org.jdmp.matrix.exceptions.MatrixException;
 
 
-public class NaiveBayes extends AbstractClassifier {
+public class NaiveBayesClassifier extends AbstractClassifier {
 
   private static final long serialVersionUID = -6511197233753905836L;
 
@@ -44,7 +44,7 @@ public class NaiveBayes extends AbstractClassifier {
 
 
 
-  public NaiveBayes() {
+  public NaiveBayesClassifier() {
     super("Naive Bayes");
   }
 

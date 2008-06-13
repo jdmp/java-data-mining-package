@@ -5,9 +5,9 @@ import java.util.List;
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.matrix.Matrix;
 
-public abstract class AbstractClusteringAlgorithm extends AbstractAlgorithm implements Clusterer {
+public abstract class AbstractClusterer extends AbstractAlgorithm implements Clusterer {
 
-	public AbstractClusteringAlgorithm(String label) {
+	public AbstractClusterer(String label) {
 		super(label);
 	}
 
