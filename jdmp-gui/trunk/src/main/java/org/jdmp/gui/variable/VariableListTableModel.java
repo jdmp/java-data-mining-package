@@ -1,7 +1,5 @@
 package org.jdmp.gui.variable;
 
-import javax.swing.event.ListDataEvent;
-import javax.swing.event.ListDataListener;
 import javax.swing.table.AbstractTableModel;
 
 import org.jdmp.core.variable.HasVariables;
@@ -12,7 +10,7 @@ import org.jdmp.core.variable.VariableListListener;
 import org.jdmp.core.variable.VariableListener;
 
 public class VariableListTableModel extends AbstractTableModel implements VariableListener,
-		VariableListListener, ListDataListener {
+		VariableListListener {
 	private static final long serialVersionUID = -1032855724069297926L;
 
 	public static final int ICONCOLUMN = 0;
@@ -25,21 +23,14 @@ public class VariableListTableModel extends AbstractTableModel implements Variab
 
 	public static final int HISTORYCOLUMN = 4;
 
-	public static final int MINTIMECOLUMN = 5;
+	public static final int MATRIXCOUNTCOLUMN = 5;
 
-	public static final int MAXTIMECOLUMN = 6;
-
-	public static final int LENGTHCOLUMN = 7;
-
-	public static final int MATRIXCOUNTCOLUMN = 8;
-
-	public static final int MEMORYSIZECOLUMN = 9;
+	public static final int MEMORYSIZECOLUMN = 6;
 
 	private HasVariables iVariables = null;
 
 	public VariableListTableModel(HasVariables iVariables) {
 		this.iVariables = iVariables;
-		iVariables.getVariableList().addListDataListener(this);
 		for (Variable v : iVariables.getVariableList()) {
 			if (v != null) {
 				v.addVariableListener(this);
@@ -52,7 +43,7 @@ public class VariableListTableModel extends AbstractTableModel implements Variab
 	}
 
 	public int getColumnCount() {
-		return 10;
+		return 7;
 	}
 
 	public String getColumnName(int columnIndex) {
@@ -67,12 +58,6 @@ public class VariableListTableModel extends AbstractTableModel implements Variab
 			return "Matrix";
 		case HISTORYCOLUMN:
 			return "History";
-		case MINTIMECOLUMN:
-			return "MinTime";
-		case MAXTIMECOLUMN:
-			return "MaxTime";
-		case LENGTHCOLUMN:
-			return "Length";
 		case MATRIXCOUNTCOLUMN:
 			return "MatrixCount";
 		case MEMORYSIZECOLUMN:
@@ -120,18 +105,4 @@ public class VariableListTableModel extends AbstractTableModel implements Variab
 		fireTableDataChanged();
 	}
 
-	public void contentsChanged(ListDataEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void intervalAdded(ListDataEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void intervalRemoved(ListDataEvent e) {
-		// TODO Auto-generated method stub
-
-	}
 }

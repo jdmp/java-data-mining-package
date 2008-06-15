@@ -133,32 +133,6 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 		}
 	}
 
-	public final double getLength() {
-		if (getMatrixList() == null)
-			return 0;
-		return getMatrixList().getLength();
-	}
-
-	public final double getMinTime() {
-		if (getMatrixList() == null) {
-			return 0;
-		} else {
-			return getMatrixList().getMinTime();
-		}
-	}
-
-	public final double getMaxTime() {
-		if (getMatrixList() == null) {
-			return 0;
-		} else {
-			return getMatrixList().getMaxTime();
-		}
-	}
-
-	public final double getTime() {
-		return getMaxTime();
-	}
-
 	public final int getMemorySize() {
 		if (getMatrixList() == null) {
 			return 0;

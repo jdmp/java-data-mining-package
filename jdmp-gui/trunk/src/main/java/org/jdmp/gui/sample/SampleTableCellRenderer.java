@@ -12,7 +12,6 @@ import org.jdmp.core.algorithm.regression.Regressor;
 import org.jdmp.core.sample.BasicSample;
 import org.jdmp.core.sample.RegressionSample;
 import org.jdmp.core.variable.Variable;
-import org.jdmp.gui.matrix.Matrix3DTableCellRenderer;
 import org.jdmp.gui.matrix.MatrixRenderer;
 
 public class SampleTableCellRenderer implements TableCellRenderer {
@@ -22,8 +21,6 @@ public class SampleTableCellRenderer implements TableCellRenderer {
 	private DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
 
 	private MatrixRenderer matrixRenderer = new MatrixRenderer();
-
-	private Matrix3DTableCellRenderer timeSeriesRenderer = new Matrix3DTableCellRenderer();
 
 	private BasicSample sample = null;
 
@@ -52,10 +49,7 @@ public class SampleTableCellRenderer implements TableCellRenderer {
 
 			case SampleListTableModel.INPUTCOLUMN:
 				v = sample.getInputVariable();
-				if (v != null && v.getLength() > 0) {
-					return timeSeriesRenderer.getTableCellRendererComponent(table, v
-							.getMatrixList(), isSelected, hasFocus, row, column);
-				} else if (v != null && v.getLength() == 0) {
+				if (v != null) {
 					return matrixRenderer.getTableCellRendererComponent(table, v.getMatrix(),
 							isSelected, hasFocus, row, column);
 				} else {
@@ -66,10 +60,7 @@ public class SampleTableCellRenderer implements TableCellRenderer {
 			case SampleListTableModel.PREDICTEDCOLUMN:
 				if (sample instanceof RegressionSample) {
 					v = ((RegressionSample) sample).getOutputVariable();
-					if (v != null && v.getLength() > 0) {
-						return timeSeriesRenderer.getTableCellRendererComponent(table, v
-								.getMatrixList(), isSelected, hasFocus, row, column);
-					} else if (v != null && v.getLength() == 0) {
+					if (v != null) {
 						return matrixRenderer.getTableCellRendererComponent(table, v.getMatrix(),
 								isSelected, hasFocus, row, column);
 					}
@@ -84,10 +75,7 @@ public class SampleTableCellRenderer implements TableCellRenderer {
 					return matrixRenderer.getTableCellRendererComponent(table, null, isSelected,
 							hasFocus, row, column);
 				}
-				if (v != null && v.getLength() > 0) {
-					return timeSeriesRenderer.getTableCellRendererComponent(table, v
-							.getMatrixList(), isSelected, hasFocus, row, column);
-				} else if (v != null && v.getLength() == 0) {
+				if (v != null) {
 					return matrixRenderer.getTableCellRendererComponent(table, v.getMatrix(),
 							isSelected, hasFocus, row, column);
 				}
@@ -95,10 +83,7 @@ public class SampleTableCellRenderer implements TableCellRenderer {
 			case SampleListTableModel.TARGETCOLUMN:
 				if (sample instanceof RegressionSample) {
 					v = ((RegressionSample) sample).getDesiredOutputVariable();
-					if (v != null && v.getLength() > 0) {
-						return timeSeriesRenderer.getTableCellRendererComponent(table, v
-								.getMatrixList(), isSelected, hasFocus, row, column);
-					} else if (v != null && v.getLength() == 0) {
+					if (v != null) {
 						return matrixRenderer.getTableCellRendererComponent(table, v.getMatrix(),
 								isSelected, hasFocus, row, column);
 					}
@@ -109,10 +94,7 @@ public class SampleTableCellRenderer implements TableCellRenderer {
 			case SampleListTableModel.RMSECOLUMN:
 				if (sample instanceof RegressionSample) {
 					v = ((RegressionSample) sample).getRMSEVariable();
-					if (v != null && v.getLength() > 0) {
-						return timeSeriesRenderer.getTableCellRendererComponent(table, v
-								.getMatrixList(), isSelected, hasFocus, row, column);
-					} else if (v != null && v.getLength() == 0) {
+					if (v != null) {
 						return matrixRenderer.getTableCellRendererComponent(table, v.getMatrix(),
 								isSelected, hasFocus, row, column);
 					}
@@ -123,10 +105,7 @@ public class SampleTableCellRenderer implements TableCellRenderer {
 			case SampleListTableModel.DIFFERENCECOLUMN:
 				if (sample instanceof RegressionSample) {
 					v = ((RegressionSample) sample).getOutputErrorVariable();
-					if (v != null && v.getLength() > 0) {
-						return timeSeriesRenderer.getTableCellRendererComponent(table, v
-								.getMatrixList(), isSelected, hasFocus, row, column);
-					} else if (v != null && v.getLength() == 0) {
+					if (v != null) {
 						return matrixRenderer.getTableCellRendererComponent(table, v.getMatrix(),
 								isSelected, hasFocus, row, column);
 					}

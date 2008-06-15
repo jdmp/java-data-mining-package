@@ -503,13 +503,7 @@ public class VariableChartPanel extends ChartPanel implements CanBeRepainted, Ca
 			circle = new XYDrawableAnnotation(m.getDouble(0, 0), m.getDouble(1, 0), 11, 11, cd);
 			plot.addAnnotation(circle);
 		} else {
-			ValueMarker vm = null;
-			if (variable.getVariable().getMinTime() == 0.0
-					&& variable.getVariable().getMaxTime() == 0.0) {
-				vm = new ValueMarker(index);
-			} else {
-				vm = new ValueMarker(0.0);
-			}
+			ValueMarker vm = new ValueMarker(index);
 			vm.setPaint(Color.red);
 			plot.addDomainMarker(vm);
 		}

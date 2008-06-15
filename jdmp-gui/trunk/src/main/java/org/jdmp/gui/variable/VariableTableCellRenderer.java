@@ -25,8 +25,8 @@ public class VariableTableCellRenderer implements TableCellRenderer {
 
 	private Object o = null;
 
-	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-			int row, int column) {
+	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+			boolean hasFocus, int row, int column) {
 
 		JLabel l = null;
 
@@ -40,17 +40,8 @@ public class VariableTableCellRenderer implements TableCellRenderer {
 			case VariableListTableModel.LABELCOLUMN:
 				o = variable.getLabel();
 				break;
-			case VariableListTableModel.LENGTHCOLUMN:
-				o = variable.getLength();
-				break;
 			case VariableListTableModel.MATRIXCOUNTCOLUMN:
 				o = variable.getMatrixCount();
-				break;
-			case VariableListTableModel.MAXTIMECOLUMN:
-				o = variable.getMaxTime();
-				break;
-			case VariableListTableModel.MINTIMECOLUMN:
-				o = variable.getMinTime();
 				break;
 			case VariableListTableModel.SIZECOLUMN:
 				o = "" + variable.getRowCount() + "x" + variable.getColumnCount();
@@ -59,17 +50,18 @@ public class VariableTableCellRenderer implements TableCellRenderer {
 				o = variable.getMemorySize();
 				break;
 			case VariableListTableModel.HISTORYCOLUMN:
-				return timeSeriesRenderer.getTableCellRendererComponent(table, variable.getMatrixList(), isSelected,
-						hasFocus, row, column);
+				return timeSeriesRenderer.getTableCellRendererComponent(table, variable
+						.getMatrixList(), isSelected, hasFocus, row, column);
 			case VariableListTableModel.MATRIXCOLUMN:
-				return matrixRenderer.getTableCellRendererComponent(table, variable.getMatrix(), isSelected, hasFocus,
-						row, column);
+				return matrixRenderer.getTableCellRendererComponent(table, variable.getMatrix(),
+						isSelected, hasFocus, row, column);
 			default:
 				o = null;
 				break;
 			}
 
-			l = (JLabel) renderer.getTableCellRendererComponent(table, o, isSelected, hasFocus, row, column);
+			l = (JLabel) renderer.getTableCellRendererComponent(table, o, isSelected, hasFocus,
+					row, column);
 
 			switch (column) {
 			case VariableListTableModel.ICONCOLUMN:

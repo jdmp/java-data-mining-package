@@ -27,14 +27,6 @@ public interface Variable extends CoreObject, HasLabel, HasDescription, HasMatri
 
 	public void loadTSP(String file);
 
-	public double getLength();
-
-	public double getMinTime();
-
-	public double getMaxTime();
-
-	public double getTime();
-
 	public int getMemorySize();
 
 	public Matrix getMatrixCopy();
