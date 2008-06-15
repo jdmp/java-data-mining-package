@@ -31,7 +31,6 @@ import org.jdmp.matrix.util.MathUtil;
 public class ClassificationDataSet extends RegressionDataSet {
 	private static final long serialVersionUID = 3969274321783319184L;
 
-
 	public static final int ACCURACY = 1;
 
 	public static final int CONFUSION = 2;
@@ -47,13 +46,15 @@ public class ClassificationDataSet extends RegressionDataSet {
 		importFromFile(file, separator);
 	}
 
-	public static ClassificationDataSet copyFromMatrix(Matrix input, Matrix desiredOutput) throws MatrixException {
+	public static ClassificationDataSet copyFromMatrix(Matrix input, Matrix desiredOutput)
+			throws MatrixException {
 		ClassificationDataSet ds = new ClassificationDataSet();
 		for (int i = 0; i < input.getRowCount(); i++) {
 			ClassificationSample s = new ClassificationSample();
 			Matrix in = input.subMatrix(Ret.NEW, i, 0, i, input.getColumnCount() - 1);
-			Matrix out = desiredOutput.subMatrix(Ret.NEW, i, 0, i, desiredOutput.getColumnCount() - 1);
-			s.setInputMatrix(in);
+			Matrix out = desiredOutput.subMatrix(Ret.NEW, i, 0, i,
+					desiredOutput.getColumnCount() - 1);
+			s.setMatrix(INPUT, in);
 			s.setDesiredOutputMatrix(out);
 			ds.addSample(s);
 		}
@@ -126,7 +127,8 @@ public class ClassificationDataSet extends RegressionDataSet {
 
 	public Matrix getDesiredClassMatrix() {
 		if (desiredClassMatrix == null) {
-			desiredClassMatrix = new GenericCalculationMatrix(new IndexOfMax(COLUMN, getDesiredOutputMatrix()));
+			desiredClassMatrix = new GenericCalculationMatrix(new IndexOfMax(COLUMN,
+					getDesiredOutputMatrix()));
 			desiredClassMatrix.setLabel("Desired Class");
 		}
 		return desiredClassMatrix;
@@ -149,7 +151,8 @@ public class ClassificationDataSet extends RegressionDataSet {
 		List<Object> classList = new ArrayList<Object>(classes);
 
 		for (int i = 0; i < rows; i++) {
-			ClassificationSample s = new ClassificationSample("Sample" + i + " (" + m.getObject(i, cols - 1) + ")");
+			ClassificationSample s = new ClassificationSample("Sample" + i + " ("
+					+ m.getObject(i, cols - 1) + ")");
 			Matrix input = MatrixFactory.zeros(1, cols - 1);
 			Matrix output = MatrixFactory.zeros(1, classes.size());
 
@@ -166,22 +169,25 @@ public class ClassificationDataSet extends RegressionDataSet {
 				}
 			}
 
-			s.setInputMatrix(input);
+			s.setMatrix(INPUT, input);
 			s.setDesiredOutputMatrix(output);
 			addSample(s);
 		}
 	}
 
 	public int getClassCount() {
-		return (int) ((ClassificationSample) getSample(0)).getDesiredOutputMatrix().getColumnCount();
+		return (int) ((ClassificationSample) getSample(0)).getDesiredOutputMatrix()
+				.getColumnCount();
 	}
 
-	public final void importFromCSV(File file, String separator) throws MatrixException, IOException {
+	public final void importFromCSV(File file, String separator) throws MatrixException,
+			IOException {
 		Matrix m = MatrixFactory.importFromFile(Format.CSV, file, separator);
 		createFromMatrix(m);
 	}
 
-	public final void importFromFile(File file, String separator) throws MatrixException, IOException {
+	public final void importFromFile(File file, String separator) throws MatrixException,
+			IOException {
 		if (file == null) {
 			logger.log(Level.WARNING, "no filename provided");
 			return;
@@ -248,23 +254,23 @@ public class ClassificationDataSet extends RegressionDataSet {
 	}
 
 	public List<ClassificationDataSet> splitByClass() {
-	  List<ClassificationDataSet> returnDataSets = new ArrayList<ClassificationDataSet>();
-	  
-	  
-	  for(int i=0;i<getClassCount();i++){
-	    ClassificationDataSet ds=new ClassificationDataSet("Class "+i);
-	    for(Sample s:getSampleList()){
-	      if(((ClassificationSample)s).getDesiredClass()==i){
-	        ds.addSample(s.clone());
-	      }
-	    }
-	    returnDataSets.add(ds);
-	  }
-	  
-	  return returnDataSets;
+		List<ClassificationDataSet> returnDataSets = new ArrayList<ClassificationDataSet>();
+
+		for (int i = 0; i < getClassCount(); i++) {
+			ClassificationDataSet ds = new ClassificationDataSet("Class " + i);
+			for (Sample s : getSampleList()) {
+				if (((ClassificationSample) s).getDesiredClass() == i) {
+					ds.addSample(s.clone());
+				}
+			}
+			returnDataSets.add(ds);
+		}
+
+		return returnDataSets;
 	}
-	
-	public List<ClassificationDataSet> splitForStratifiedCV(int numberOfCVSets, int idOfCVSet, long randomSeed) {
+
+	public List<ClassificationDataSet> splitForStratifiedCV(int numberOfCVSets, int idOfCVSet,
+			long randomSeed) {
 		List<ClassificationDataSet> returnDataSets = new ArrayList<ClassificationDataSet>();
 		Random rand = new Random(randomSeed);
 		int classCount = getClassCount();
@@ -303,7 +309,8 @@ public class ClassificationDataSet extends RegressionDataSet {
 
 				List<Sample> to = cvSets.get(toPointer);
 
-				while (to.size() < (double) getSampleCount() / numberOfCVSets && fromPointer < sortedSamples.size()) {
+				while (to.size() < (double) getSampleCount() / numberOfCVSets
+						&& fromPointer < sortedSamples.size()) {
 					List<Sample> from = sortedSamples.get(fromPointer);
 
 					if (!from.isEmpty()) {
@@ -321,10 +328,10 @@ public class ClassificationDataSet extends RegressionDataSet {
 		}
 
 		// create the data sets
-		ClassificationDataSet train = new ClassificationDataSet("TrainingSet " + idOfCVSet + "/" + numberOfCVSets + "("
-				+ randomSeed + ")");
-		ClassificationDataSet test = new ClassificationDataSet("TestSet " + idOfCVSet + "/" + numberOfCVSets + "("
-				+ randomSeed + ")");
+		ClassificationDataSet train = new ClassificationDataSet("TrainingSet " + idOfCVSet + "/"
+				+ numberOfCVSets + "(" + randomSeed + ")");
+		ClassificationDataSet test = new ClassificationDataSet("TestSet " + idOfCVSet + "/"
+				+ numberOfCVSets + "(" + randomSeed + ")");
 
 		test.addAllSamples(cvSets.remove(idOfCVSet));
 
@@ -352,18 +359,17 @@ public class ClassificationDataSet extends RegressionDataSet {
 		if (index >= 0) {
 			return getAccuracyVariable().getMatrix(index).getEuklideanValue();
 		}
-		return -1;		
+		return -1;
 	}
-	
-	
-	public ClassificationDataSet bootstrap(int numberOfSamples){
-          ClassificationDataSet ds=new ClassificationDataSet("Bootstrap of "+getLabel());
-          List<Sample> sampleList=getSampleList();
-          for(int i=0;i<numberOfSamples;i++){
-            int rand=MathUtil.nextInteger(0, sampleList.size()-1);
-            ds.addSample(sampleList.get(rand).clone());
-          }
-     return ds;
-    }
+
+	public ClassificationDataSet bootstrap(int numberOfSamples) {
+		ClassificationDataSet ds = new ClassificationDataSet("Bootstrap of " + getLabel());
+		List<Sample> sampleList = getSampleList();
+		for (int i = 0; i < numberOfSamples; i++) {
+			int rand = MathUtil.nextInteger(0, sampleList.size() - 1);
+			ds.addSample(sampleList.get(rand).clone());
+		}
+		return ds;
+	}
 
 }

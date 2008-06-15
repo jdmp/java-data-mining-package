@@ -74,7 +74,7 @@ public class SVMClassifier extends AbstractClassifier {
 	}
 
 	public void train(RegressionDataSet dataSet) throws MatrixException {
-		int columnCount = (int) dataSet.getSample(0).getInputMatrix().getColumnCount();
+		int columnCount = (int) dataSet.getSample(0).getMatrix(INPUT).getColumnCount();
 
 		prob = new svm_problem();
 		prob.l = dataSet.getSampleCount();
@@ -84,7 +84,7 @@ public class SVMClassifier extends AbstractClassifier {
 
 		for (int i = 0; i < prob.l; i++) {
 			ClassificationSample p = (ClassificationSample) dataSet.getSample(i);
-			Matrix input = p.getInputMatrix();
+			Matrix input = p.getMatrix(INPUT);
 			prob.y[i] = p.getDesiredClass();
 			for (int j = 0; j < columnCount; j++) {
 				prob.x[i][j] = new svm_node();
@@ -99,7 +99,8 @@ public class SVMClassifier extends AbstractClassifier {
 		if (param.kernel_type == svm_parameter.PRECOMPUTED)
 			for (int i = 0; i < prob.l; i++) {
 				if (prob.x[i][0].index != 0) {
-					System.err.print("Wrong kernel matrix: first column must be 0:sample_serial_number\n");
+					System.err
+							.print("Wrong kernel matrix: first column must be 0:sample_serial_number\n");
 					System.exit(1);
 				}
 				if ((int) prob.x[i][0].value <= 0 || (int) prob.x[i][0].value > columnCount) {

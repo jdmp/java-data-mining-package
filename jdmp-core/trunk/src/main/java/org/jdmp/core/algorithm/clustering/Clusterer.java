@@ -6,6 +6,10 @@ import org.jdmp.matrix.Matrix;
 
 public interface Clusterer {
 
+	public static final Object INPUT = "Input";
+
+	public static final Object WEIGHT = "Weight";
+
 	public void reset() throws Exception;
 
 	public void train(RegressionDataSet dataSet) throws Exception;

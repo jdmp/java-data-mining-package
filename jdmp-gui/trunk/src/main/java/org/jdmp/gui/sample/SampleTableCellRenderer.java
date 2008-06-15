@@ -9,8 +9,9 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
 import org.jdmp.core.algorithm.regression.Regressor;
-import org.jdmp.core.sample.BasicSample;
+import org.jdmp.core.sample.DefaultSample;
 import org.jdmp.core.sample.RegressionSample;
+import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.gui.matrix.MatrixRenderer;
 
@@ -22,7 +23,7 @@ public class SampleTableCellRenderer implements TableCellRenderer {
 
 	private MatrixRenderer matrixRenderer = new MatrixRenderer();
 
-	private BasicSample sample = null;
+	private DefaultSample sample = null;
 
 	private Object o = null;
 
@@ -35,8 +36,8 @@ public class SampleTableCellRenderer implements TableCellRenderer {
 
 		c = null;
 
-		if (value instanceof BasicSample)
-			sample = (BasicSample) value;
+		if (value instanceof DefaultSample)
+			sample = (DefaultSample) value;
 		else
 			sample = null;
 
@@ -48,7 +49,7 @@ public class SampleTableCellRenderer implements TableCellRenderer {
 				break;
 
 			case SampleListTableModel.INPUTCOLUMN:
-				v = sample.getInputVariable();
+				v = sample.getVariableList().get(Sample.INPUT);
 				if (v != null) {
 					return matrixRenderer.getTableCellRendererComponent(table, v.getMatrix(),
 							isSelected, hasFocus, row, column);

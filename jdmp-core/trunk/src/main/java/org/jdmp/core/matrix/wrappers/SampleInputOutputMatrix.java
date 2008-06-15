@@ -1,13 +1,15 @@
 package org.jdmp.core.matrix.wrappers;
 
 import org.jdmp.core.sample.RegressionSample;
+import org.jdmp.core.sample.Sample;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.Wrapper;
 import org.jdmp.matrix.stubs.AbstractDenseDoubleMatrix2D;
 
-public class SampleInputOutputMatrix extends AbstractDenseDoubleMatrix2D implements Wrapper<RegressionSample> {
+public class SampleInputOutputMatrix extends AbstractDenseDoubleMatrix2D implements
+		Wrapper<RegressionSample> {
 	private static final long serialVersionUID = -8005076916609420357L;
 
 	private RegressionSample sample = null;
@@ -17,7 +19,7 @@ public class SampleInputOutputMatrix extends AbstractDenseDoubleMatrix2D impleme
 	}
 
 	public Matrix getInputMatrix() {
-		Matrix m = sample.getInputVariable().getMatrix();
+		Matrix m = sample.getMatrix(Sample.INPUT);
 		return (m == null) ? MatrixFactory.linkToValue(0) : m;
 	}
 
@@ -27,7 +29,8 @@ public class SampleInputOutputMatrix extends AbstractDenseDoubleMatrix2D impleme
 	}
 
 	public long[] getSize() {
-		return new long[] { Math.max(getInputMatrix().getRowCount(), getDesiredOutputMatrix().getRowCount()),
+		return new long[] {
+				Math.max(getInputMatrix().getRowCount(), getDesiredOutputMatrix().getRowCount()),
 				getInputMatrix().getColumnCount() + getDesiredOutputMatrix().getColumnCount() };
 	}
 

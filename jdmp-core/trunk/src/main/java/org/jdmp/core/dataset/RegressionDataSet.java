@@ -40,7 +40,7 @@ public class RegressionDataSet extends BasicDataSet {
 			Matrix in = input.subMatrix(Ret.NEW, i, 0, i, input.getColumnCount() - 1);
 			Matrix out = desiredOutput.subMatrix(Ret.NEW, i, 0, i,
 					desiredOutput.getColumnCount() - 1);
-			s.setInputMatrix(in);
+			s.setMatrix(INPUT, in);
 			s.setDesiredOutputMatrix(out);
 			ds.addSample(s);
 		}
@@ -57,7 +57,7 @@ public class RegressionDataSet extends BasicDataSet {
 			Matrix so = desiredOutput.subMatrix(Ret.LINK, i, 0, i,
 					desiredOutput.getColumnCount() - 1);
 
-			s.setInputMatrix(si);
+			s.setMatrix(INPUT, si);
 			s.setDesiredOutputMatrix(so);
 
 			addSample(s);

@@ -3,7 +3,6 @@ package org.jdmp.core.algorithm.clustering;
 import java.util.List;
 
 import org.jdmp.core.algorithm.AbstractAlgorithm;
-import org.jdmp.core.algorithm.regression.Regressor;
 import org.jdmp.core.dataset.ClassificationDataSet;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.sample.ClassificationSample;
@@ -88,7 +87,7 @@ public abstract class AbstractClusterer extends AbstractAlgorithm implements Clu
 	}
 
 	public final void predict(RegressionSample sample) throws Exception {
-		Matrix output = predict(sample.getInputMatrix(), sample.getMatrix(Regressor.WEIGHT));
+		Matrix output = predict(sample.getMatrix(INPUT), sample.getMatrix(WEIGHT));
 		sample.setOutputMatrix(output);
 		// List<Matrix> error = getOutputErrorAlgorithm().calculate(output,
 		// sample.getDesiredOutputMatrix());

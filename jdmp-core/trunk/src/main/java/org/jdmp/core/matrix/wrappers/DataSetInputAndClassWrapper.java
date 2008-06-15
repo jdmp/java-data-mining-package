@@ -26,7 +26,7 @@ public class DataSetInputAndClassWrapper extends AbstractDenseDoubleMatrix2D imp
 		RegressionSample p = (RegressionSample) dataSet.getSample(row);
 		if (p != null) {
 			if (col < getSize()[COLUMN] - 1) {
-				return p.getInputMatrix().getDouble(0, col);
+				return p.getMatrix(INPUT).getDouble(0, col);
 			}
 		}
 		return 0.0;

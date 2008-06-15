@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.jdmp.core.matrix.wrappers.DataSetInputMatrixWrapper;
-import org.jdmp.core.sample.BasicSample;
+import org.jdmp.core.sample.DefaultSample;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.Matrix.Format;
@@ -26,7 +26,7 @@ public class BasicDataSet extends AbstractDataSet {
 	public BasicDataSet(Variable v) {
 		this(v.getLabel());
 		for (Matrix m : v.getMatrixList()) {
-			BasicSample s = new BasicSample(m);
+			DefaultSample s = new DefaultSample(m);
 			addSample(s);
 		}
 	}
@@ -39,8 +39,8 @@ public class BasicDataSet extends AbstractDataSet {
 		super();
 	}
 
-	public BasicSample getSample(int pos) {
-		return (BasicSample) super.getSample(pos);
+	public DefaultSample getSample(int pos) {
+		return (DefaultSample) super.getSample(pos);
 	}
 
 	public final void standardize(int dimension) throws MatrixException {
@@ -66,8 +66,8 @@ public class BasicDataSet extends AbstractDataSet {
 		return matrixList;
 	}
 
-	public final List<BasicSample> getBasicSampleList() {
-		return Arrays.asList(getSampleList().toArray(new BasicSample[0]));
+	public final List<DefaultSample> getBasicSampleList() {
+		return Arrays.asList(getSampleList().toArray(new DefaultSample[0]));
 	}
 
 	public final String toCSV() throws MatrixException, IOException {

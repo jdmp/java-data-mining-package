@@ -14,6 +14,8 @@ import org.jdmp.matrix.interfaces.HasMatrixList;
 
 public interface DataSet extends CoreObject, HasVariableMap, HasSamples, HasMatrixList {
 
+	public static final Object INPUT = "Input";
+
 	public void setVariable(int index, Variable v);
 
 	public DataSetType getDataSetType();

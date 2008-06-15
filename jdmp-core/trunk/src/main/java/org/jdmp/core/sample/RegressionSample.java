@@ -8,7 +8,7 @@ import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public class RegressionSample extends BasicSample {
+public class RegressionSample extends DefaultSample {
 	private static final long serialVersionUID = -7326840837391243268L;
 
 	private transient SampleInputOutputMatrix sampleInputOutputMatrix = null;
@@ -23,7 +23,7 @@ public class RegressionSample extends BasicSample {
 
 	public RegressionSample clone() {
 		RegressionSample s = new RegressionSample();
-		s.setInputMatrix(getInputMatrix().clone());
+		s.setMatrix(INPUT, getMatrix(INPUT).clone());
 		s.setDesiredOutputMatrix(getDesiredOutputMatrix().clone());
 		return s;
 	}
@@ -32,19 +32,19 @@ public class RegressionSample extends BasicSample {
 			throws MatrixException {
 		String[] fields = line.split(" ");
 
-		getInputVariable().setMemorySize(1);
-		getInputVariable().setSize(count, 1);
+		getVariableList().get(INPUT).setMemorySize(1);
+		getVariableList().get(INPUT).setSize(count, 1);
 
 		getDesiredOutputVariable().setMemorySize(1);
 		getDesiredOutputVariable().setSize(1, 1);
 		getDesiredOutputVariable().addMatrix(
 				MatrixFactory.linkToValue(Double.parseDouble(fields[classPos])));
 
-		Matrix m = MatrixFactory.zeros(getInputVariable().getRowCount(), 1);
-		for (int i = 0; i < getInputVariable().getRowCount(); i++) {
+		Matrix m = MatrixFactory.zeros(getVariableList().get(INPUT).getRowCount(), 1);
+		for (int i = 0; i < getVariableList().get(INPUT).getRowCount(); i++) {
 			m.setDouble(Double.parseDouble(fields[i + startPos]), i, 0);
 		}
-		getInputVariable().addMatrix(m);
+		getVariableList().get(INPUT).addMatrix(m);
 
 		setLabel(fields[classLabelPos]);
 	}

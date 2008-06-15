@@ -18,7 +18,7 @@ public class ClassificationSample extends RegressionSample {
 
 	public ClassificationSample(Matrix input, Matrix output) {
 		super();
-		setInputMatrix(input);
+		setMatrix(INPUT, input);
 		setDesiredOutputMatrix(output);
 	}
 
@@ -28,13 +28,14 @@ public class ClassificationSample extends RegressionSample {
 
 	public ClassificationSample clone() {
 		ClassificationSample s = new ClassificationSample();
-		s.setInputMatrix(getInputMatrix().clone());
+		s.setMatrix(INPUT, getMatrix(INPUT).clone());
 		s.setDesiredOutputMatrix(getDesiredOutputMatrix().clone());
 		return s;
 	}
 
 	public String toString() {
-		return "ClassificationSample [" + Coordinates.toString(getInputMatrix().getSize()) + "]->" + getDesiredClass();
+		return "ClassificationSample [" + Coordinates.toString(getMatrix(INPUT).getSize()) + "]->"
+				+ getDesiredClass();
 	}
 
 	public int getDesiredClass() throws MatrixException {

@@ -2,7 +2,6 @@ package org.jdmp.core.dataset;
 
 import java.io.IOException;
 
-import org.jdmp.core.algorithm.regression.Regressor;
 import org.jdmp.core.sample.ClassificationSample;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.sample.SampleFactory;
@@ -17,70 +16,73 @@ public abstract class DataSetFactory {
 	public static BasicDataSet ANIMALS() throws MatrixException {
 		BasicDataSet animals = new BasicDataSet("Animals");
 
-		Object INPUT = Regressor.INPUT;
-
 		Sample pigeon = SampleFactory.labeledSample("Pigeon");
-		pigeon.setMatrix(INPUT, MatrixFactory.importFromString("1 0 0 1 0 0 0 0 1 0 0 1 0"));
+		pigeon
+				.setMatrix(DataSet.INPUT, MatrixFactory
+						.importFromString("1 0 0 1 0 0 0 0 1 0 0 1 0"));
 		animals.addSample(pigeon);
 
 		Sample chicken = SampleFactory.labeledSample("Chicken");
-		chicken.setMatrix(INPUT, MatrixFactory.importFromString("1 0 0 1 0 0 0 0 1 0 0 0 0"));
+		chicken.setMatrix(DataSet.INPUT, MatrixFactory
+				.importFromString("1 0 0 1 0 0 0 0 1 0 0 0 0"));
 		animals.addSample(chicken);
 
 		Sample duck = SampleFactory.labeledSample("Duck");
-		duck.setMatrix(INPUT, MatrixFactory.importFromString("1 0 0 1 0 0 0 0 1 0 0 0 1"));
+		duck.setMatrix(DataSet.INPUT, MatrixFactory.importFromString("1 0 0 1 0 0 0 0 1 0 0 0 1"));
 		animals.addSample(duck);
 
 		Sample goose = SampleFactory.labeledSample("Goose");
-		goose.setMatrix(INPUT, MatrixFactory.importFromString("1 0 0 1 0 0 0 0 1 0 0 1 1"));
+		goose.setMatrix(DataSet.INPUT, MatrixFactory.importFromString("1 0 0 1 0 0 0 0 1 0 0 1 1"));
 		animals.addSample(goose);
 
 		Sample owl = SampleFactory.labeledSample("Owl");
-		owl.setMatrix(INPUT, MatrixFactory.importFromString("1 0 0 1 0 0 0 0 1 1 0 1 0"));
+		owl.setMatrix(DataSet.INPUT, MatrixFactory.importFromString("1 0 0 1 0 0 0 0 1 1 0 1 0"));
 		animals.addSample(owl);
 
 		Sample falcon = SampleFactory.labeledSample("Falcon");
-		falcon.setMatrix(INPUT, MatrixFactory.importFromString("1 0 0 1 0 0 0 0 1 1 0 1 0"));
+		falcon
+				.setMatrix(DataSet.INPUT, MatrixFactory
+						.importFromString("1 0 0 1 0 0 0 0 1 1 0 1 0"));
 		animals.addSample(falcon);
 
 		Sample eagle = SampleFactory.labeledSample("Eagle");
-		eagle.setMatrix(INPUT, MatrixFactory.importFromString("0 1 0 1 0 0 0 0 1 1 0 1 0"));
+		eagle.setMatrix(DataSet.INPUT, MatrixFactory.importFromString("0 1 0 1 0 0 0 0 1 1 0 1 0"));
 		animals.addSample(eagle);
 
 		Sample fox = SampleFactory.labeledSample("Fox");
-		fox.setMatrix(INPUT, MatrixFactory.importFromString("0 1 0 0 1 1 0 0 0 1 0 0 0"));
+		fox.setMatrix(DataSet.INPUT, MatrixFactory.importFromString("0 1 0 0 1 1 0 0 0 1 0 0 0"));
 		animals.addSample(fox);
 
 		Sample dog = SampleFactory.labeledSample("Dog");
-		dog.setMatrix(INPUT, MatrixFactory.importFromString("0 1 0 0 1 1 0 0 0 0 1 0 0"));
+		dog.setMatrix(DataSet.INPUT, MatrixFactory.importFromString("0 1 0 0 1 1 0 0 0 0 1 0 0"));
 		animals.addSample(dog);
 
 		Sample wolf = SampleFactory.labeledSample("Wolf");
-		wolf.setMatrix(INPUT, MatrixFactory.importFromString("0 1 0 0 1 1 0 1 0 1 1 0 0"));
+		wolf.setMatrix(DataSet.INPUT, MatrixFactory.importFromString("0 1 0 0 1 1 0 1 0 1 1 0 0"));
 		animals.addSample(wolf);
 
 		Sample cat = SampleFactory.labeledSample("Cat");
-		cat.setMatrix(INPUT, MatrixFactory.importFromString("1 0 0 0 1 1 0 0 0 1 0 0 0"));
+		cat.setMatrix(DataSet.INPUT, MatrixFactory.importFromString("1 0 0 0 1 1 0 0 0 1 0 0 0"));
 		animals.addSample(cat);
 
 		Sample tiger = SampleFactory.labeledSample("Tiger");
-		tiger.setMatrix(INPUT, MatrixFactory.importFromString("0 0 1 0 1 1 0 0 0 1 1 0 0"));
+		tiger.setMatrix(DataSet.INPUT, MatrixFactory.importFromString("0 0 1 0 1 1 0 0 0 1 1 0 0"));
 		animals.addSample(tiger);
 
 		Sample lion = SampleFactory.labeledSample("Lion");
-		lion.setMatrix(INPUT, MatrixFactory.importFromString("0 0 1 0 1 1 0 1 0 1 1 0 0"));
+		lion.setMatrix(DataSet.INPUT, MatrixFactory.importFromString("0 0 1 0 1 1 0 1 0 1 1 0 0"));
 		animals.addSample(lion);
 
 		Sample horse = SampleFactory.labeledSample("Horse");
-		horse.setMatrix(INPUT, MatrixFactory.importFromString("0 0 1 0 1 1 1 1 0 0 1 0 0"));
+		horse.setMatrix(DataSet.INPUT, MatrixFactory.importFromString("0 0 1 0 1 1 1 1 0 0 1 0 0"));
 		animals.addSample(horse);
 
 		Sample zebra = SampleFactory.labeledSample("Zebra");
-		zebra.setMatrix(INPUT, MatrixFactory.importFromString("0 0 1 0 1 1 1 1 0 0 1 0 0"));
+		zebra.setMatrix(DataSet.INPUT, MatrixFactory.importFromString("0 0 1 0 1 1 1 1 0 0 1 0 0"));
 		animals.addSample(zebra);
 
 		Sample cow = SampleFactory.labeledSample("Cow");
-		cow.setMatrix(INPUT, MatrixFactory.importFromString("0 0 1 0 1 1 1 0 0 0 0 0 0"));
+		cow.setMatrix(DataSet.INPUT, MatrixFactory.importFromString("0 0 1 0 1 1 1 0 0 0 0 0 0"));
 		animals.addSample(cow);
 
 		return animals;
@@ -90,32 +92,32 @@ public abstract class DataSetFactory {
 		ClassificationDataSet or = new ClassificationDataSet("Linear1");
 
 		ClassificationSample x0 = new ClassificationSample("0.0=0.0");
-		x0.setInputMatrix(MatrixFactory.linkToArray(new double[] { 0.0 }).transpose());
+		x0.setMatrix(DataSet.INPUT, MatrixFactory.linkToArray(new double[] { 0.0 }).transpose());
 		x0.setDesiredOutputMatrix(MatrixFactory.linkToArray(new double[] { 0.0 }).transpose());
 		or.addSample(x0);
 
 		ClassificationSample x1 = new ClassificationSample("0.1=0.1");
-		x1.setInputMatrix(MatrixFactory.linkToArray(new double[] { 0.1 }).transpose());
+		x1.setMatrix(DataSet.INPUT, MatrixFactory.linkToArray(new double[] { 0.1 }).transpose());
 		x1.setDesiredOutputMatrix(MatrixFactory.linkToArray(new double[] { 0.1 }).transpose());
 		or.addSample(x1);
 
 		ClassificationSample x2 = new ClassificationSample("0.2=0.2");
-		x2.setInputMatrix(MatrixFactory.linkToArray(new double[] { 0.2 }).transpose());
+		x2.setMatrix(DataSet.INPUT, MatrixFactory.linkToArray(new double[] { 0.2 }).transpose());
 		x2.setDesiredOutputMatrix(MatrixFactory.linkToArray(new double[] { 0.2 }).transpose());
 		or.addSample(x2);
 
 		ClassificationSample x3 = new ClassificationSample("0.3=0.3");
-		x3.setInputMatrix(MatrixFactory.linkToArray(new double[] { 0.3 }).transpose());
+		x3.setMatrix(DataSet.INPUT, MatrixFactory.linkToArray(new double[] { 0.3 }).transpose());
 		x3.setDesiredOutputMatrix(MatrixFactory.linkToArray(new double[] { 0.3 }).transpose());
 		or.addSample(x3);
 
 		ClassificationSample x4 = new ClassificationSample("0.4=0.4");
-		x4.setInputMatrix(MatrixFactory.linkToArray(new double[] { 0.4 }).transpose());
+		x4.setMatrix(DataSet.INPUT, MatrixFactory.linkToArray(new double[] { 0.4 }).transpose());
 		x4.setDesiredOutputMatrix(MatrixFactory.linkToArray(new double[] { 0.4 }).transpose());
 		or.addSample(x4);
 
 		ClassificationSample x5 = new ClassificationSample("0.5=0.5");
-		x5.setInputMatrix(MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
+		x5.setMatrix(DataSet.INPUT, MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
 		x5.setDesiredOutputMatrix(MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
 		or.addSample(x5);
 
@@ -126,32 +128,32 @@ public abstract class DataSetFactory {
 		ClassificationDataSet or = new ClassificationDataSet("Linear3");
 
 		ClassificationSample x0 = new ClassificationSample("0.0=0.5");
-		x0.setInputMatrix(MatrixFactory.linkToArray(new double[] { 0.0 }).transpose());
+		x0.setMatrix(DataSet.INPUT, MatrixFactory.linkToArray(new double[] { 0.0 }).transpose());
 		x0.setDesiredOutputMatrix(MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
 		or.addSample(x0);
 
 		ClassificationSample x1 = new ClassificationSample("0.1=0.5");
-		x1.setInputMatrix(MatrixFactory.linkToArray(new double[] { 0.1 }).transpose());
+		x1.setMatrix(DataSet.INPUT, MatrixFactory.linkToArray(new double[] { 0.1 }).transpose());
 		x1.setDesiredOutputMatrix(MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
 		or.addSample(x1);
 
 		ClassificationSample x2 = new ClassificationSample("0.2=0.5");
-		x2.setInputMatrix(MatrixFactory.linkToArray(new double[] { 0.2 }).transpose());
+		x2.setMatrix(DataSet.INPUT, MatrixFactory.linkToArray(new double[] { 0.2 }).transpose());
 		x2.setDesiredOutputMatrix(MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
 		or.addSample(x2);
 
 		ClassificationSample x3 = new ClassificationSample("0.3=0.5");
-		x3.setInputMatrix(MatrixFactory.linkToArray(new double[] { 0.3 }).transpose());
+		x3.setMatrix(DataSet.INPUT, MatrixFactory.linkToArray(new double[] { 0.3 }).transpose());
 		x3.setDesiredOutputMatrix(MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
 		or.addSample(x3);
 
 		ClassificationSample x4 = new ClassificationSample("0.4=0.5");
-		x4.setInputMatrix(MatrixFactory.linkToArray(new double[] { 0.4 }).transpose());
+		x4.setMatrix(DataSet.INPUT, MatrixFactory.linkToArray(new double[] { 0.4 }).transpose());
 		x4.setDesiredOutputMatrix(MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
 		or.addSample(x4);
 
 		ClassificationSample x5 = new ClassificationSample("0.5=0.5");
-		x5.setInputMatrix(MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
+		x5.setMatrix(DataSet.INPUT, MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
 		x5.setDesiredOutputMatrix(MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
 		or.addSample(x5);
 
@@ -162,32 +164,32 @@ public abstract class DataSetFactory {
 		ClassificationDataSet or = new ClassificationDataSet("Linear2");
 
 		ClassificationSample x0 = new ClassificationSample("0.0=0.1");
-		x0.setInputMatrix(MatrixFactory.linkToArray(new double[] { 0.0 }).transpose());
+		x0.setMatrix(DataSet.INPUT, MatrixFactory.linkToArray(new double[] { 0.0 }).transpose());
 		x0.setDesiredOutputMatrix(MatrixFactory.linkToArray(new double[] { 0.1 }).transpose());
 		or.addSample(x0);
 
 		ClassificationSample x1 = new ClassificationSample("0.1=0.2");
-		x1.setInputMatrix(MatrixFactory.linkToArray(new double[] { 0.1 }).transpose());
+		x1.setMatrix(DataSet.INPUT, MatrixFactory.linkToArray(new double[] { 0.1 }).transpose());
 		x1.setDesiredOutputMatrix(MatrixFactory.linkToArray(new double[] { 0.2 }).transpose());
 		or.addSample(x1);
 
 		ClassificationSample x2 = new ClassificationSample("0.2=0.3");
-		x2.setInputMatrix(MatrixFactory.linkToArray(new double[] { 0.2 }).transpose());
+		x2.setMatrix(DataSet.INPUT, MatrixFactory.linkToArray(new double[] { 0.2 }).transpose());
 		x2.setDesiredOutputMatrix(MatrixFactory.linkToArray(new double[] { 0.3 }).transpose());
 		or.addSample(x2);
 
 		ClassificationSample x3 = new ClassificationSample("0.3=0.4");
-		x3.setInputMatrix(MatrixFactory.linkToArray(new double[] { 0.3 }).transpose());
+		x3.setMatrix(DataSet.INPUT, MatrixFactory.linkToArray(new double[] { 0.3 }).transpose());
 		x3.setDesiredOutputMatrix(MatrixFactory.linkToArray(new double[] { 0.4 }).transpose());
 		or.addSample(x3);
 
 		ClassificationSample x4 = new ClassificationSample("0.4=0.5");
-		x4.setInputMatrix(MatrixFactory.linkToArray(new double[] { 0.4 }).transpose());
+		x4.setMatrix(DataSet.INPUT, MatrixFactory.linkToArray(new double[] { 0.4 }).transpose());
 		x4.setDesiredOutputMatrix(MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
 		or.addSample(x4);
 
 		ClassificationSample x5 = new ClassificationSample("0.5=0.6");
-		x5.setInputMatrix(MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
+		x5.setMatrix(DataSet.INPUT, MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
 		x5.setDesiredOutputMatrix(MatrixFactory.linkToArray(new double[] { 0.6 }).transpose());
 		or.addSample(x5);
 
@@ -198,22 +200,22 @@ public abstract class DataSetFactory {
 		ClassificationDataSet or = new ClassificationDataSet("OR-Problem");
 
 		ClassificationSample x000 = new ClassificationSample("00=01");
-		x000.setInputMatrix(MatrixFactory.linkToArray(new double[] { 0, 0 }).transpose());
+		x000.setMatrix(DataSet.INPUT, MatrixFactory.linkToArray(new double[] { 0, 0 }).transpose());
 		x000.setDesiredOutputMatrix(MatrixFactory.linkToArray(new double[] { 0, 1 }).transpose());
 		or.addSample(x000);
 
 		ClassificationSample x011 = new ClassificationSample("01=10");
-		x011.setInputMatrix(MatrixFactory.linkToArray(new double[] { 0, 1 }).transpose());
+		x011.setMatrix(DataSet.INPUT, MatrixFactory.linkToArray(new double[] { 0, 1 }).transpose());
 		x011.setDesiredOutputMatrix(MatrixFactory.linkToArray(new double[] { 1, 0 }).transpose());
 		or.addSample(x011);
 
 		ClassificationSample x101 = new ClassificationSample("10=10");
-		x101.setInputMatrix(MatrixFactory.linkToArray(new double[] { 1, 0 }).transpose());
+		x101.setMatrix(DataSet.INPUT, MatrixFactory.linkToArray(new double[] { 1, 0 }).transpose());
 		x101.setDesiredOutputMatrix(MatrixFactory.linkToArray(new double[] { 1, 0 }).transpose());
 		or.addSample(x101);
 
 		ClassificationSample x110 = new ClassificationSample("11=10");
-		x110.setInputMatrix(MatrixFactory.linkToArray(new double[] { 1, 1 }).transpose());
+		x110.setMatrix(DataSet.INPUT, MatrixFactory.linkToArray(new double[] { 1, 1 }).transpose());
 		x110.setDesiredOutputMatrix(MatrixFactory.linkToArray(new double[] { 1, 0 }).transpose());
 		or.addSample(x110);
 
@@ -224,22 +226,22 @@ public abstract class DataSetFactory {
 		ClassificationDataSet xor = new ClassificationDataSet("XOR-Problem");
 
 		ClassificationSample x000 = new ClassificationSample("00=01");
-		x000.setInputMatrix(MatrixFactory.linkToArray(new double[] { 0, 0 }).transpose());
+		x000.setMatrix(DataSet.INPUT, MatrixFactory.linkToArray(new double[] { 0, 0 }).transpose());
 		x000.setDesiredOutputMatrix(MatrixFactory.linkToArray(new double[] { 0, 1 }).transpose());
 		xor.addSample(x000);
 
 		ClassificationSample x011 = new ClassificationSample("01=10");
-		x011.setInputMatrix(MatrixFactory.linkToArray(new double[] { 0, 1 }).transpose());
+		x011.setMatrix(DataSet.INPUT, MatrixFactory.linkToArray(new double[] { 0, 1 }).transpose());
 		x011.setDesiredOutputMatrix(MatrixFactory.linkToArray(new double[] { 1, 0 }).transpose());
 		xor.addSample(x011);
 
 		ClassificationSample x101 = new ClassificationSample("10=10");
-		x101.setInputMatrix(MatrixFactory.linkToArray(new double[] { 1, 0 }).transpose());
+		x101.setMatrix(DataSet.INPUT, MatrixFactory.linkToArray(new double[] { 1, 0 }).transpose());
 		x101.setDesiredOutputMatrix(MatrixFactory.linkToArray(new double[] { 1, 0 }).transpose());
 		xor.addSample(x101);
 
 		ClassificationSample x110 = new ClassificationSample("11=01");
-		x110.setInputMatrix(MatrixFactory.linkToArray(new double[] { 1, 1 }).transpose());
+		x110.setMatrix(DataSet.INPUT, MatrixFactory.linkToArray(new double[] { 1, 1 }).transpose());
 		x110.setDesiredOutputMatrix(MatrixFactory.linkToArray(new double[] { 0, 1 }).transpose());
 		xor.addSample(x110);
 
