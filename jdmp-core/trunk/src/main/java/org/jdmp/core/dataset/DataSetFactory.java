@@ -71,6 +71,39 @@ public abstract class DataSetFactory {
 		return q;
 	}
 
+	public static RegressionDataSet LogisticMap(int sampleCount, int inputLength,
+			int predictionLength) {
+		RegressionDataSet logistic = new RegressionDataSet("Logistic Map");
+
+		double r = 3.82;
+		Random random = new Random();
+
+		for (int si = 0; si < sampleCount; si++) {
+
+			double x = random.nextDouble();
+
+			Matrix input = MatrixFactory.zeros(1, inputLength);
+			for (int i = 0; i < inputLength; i++) {
+				x = r * x * (1 - x);
+				input.setDouble(x, 0, i);
+			}
+
+			Matrix target = MatrixFactory.zeros(1, predictionLength);
+			for (int i = 0; i < predictionLength; i++) {
+				x = r * x * (1 - x);
+				target.setDouble(x, 0, i);
+			}
+
+			Sample s = new RegressionSample("Sample " + si);
+			s.setMatrix(Sample.INPUT, input);
+			s.setMatrix(Sample.TARGET, target);
+
+			logistic.addSample(s);
+		}
+
+		return logistic;
+	}
+
 	public static BasicDataSet ANIMALS() throws MatrixException {
 		BasicDataSet animals = new BasicDataSet("Animals");
 
