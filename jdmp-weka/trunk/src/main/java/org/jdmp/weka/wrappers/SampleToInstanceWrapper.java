@@ -1,4 +1,4 @@
-package org.jdmp.weka;
+package org.jdmp.weka.wrappers;
 
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.exceptions.MatrixException;

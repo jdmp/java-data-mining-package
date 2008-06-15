@@ -33,7 +33,7 @@ public abstract class ImportMatrixMAT {
 
 	public static Matrix fromFile(File file, Object... parameters) {
 		try {
-			Class<?> c = Class.forName("org.jdmp.jmatio.ImportMAT");
+			Class<?> c = Class.forName("org.jdmp.jmatio.ImportMatrixMAT");
 			Method method = c.getMethod("fromFile", new Class[] { File.class, Object[].class });
 			Matrix matrix = (Matrix) method.invoke(null, file, parameters);
 			return matrix;

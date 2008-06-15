@@ -1,4 +1,4 @@
-package org.jdmp.weka;
+package org.jdmp.weka.classifier;
 
 import java.lang.reflect.Constructor;
 import java.util.logging.Level;
@@ -7,6 +7,8 @@ import org.jdmp.core.algorithm.classification.AbstractClassifier;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
+import org.jdmp.weka.wrappers.DataSetToInstancesWrapper;
+import org.jdmp.weka.wrappers.SampleToInstanceWrapper;
 
 import weka.classifiers.Classifier;
 import weka.core.Instance;

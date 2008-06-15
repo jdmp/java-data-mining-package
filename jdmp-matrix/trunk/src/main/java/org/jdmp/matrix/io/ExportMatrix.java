@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import org.jdmp.matrix.Matrix;
@@ -60,7 +61,13 @@ public abstract class ExportMatrix {
 			Class<?> c = Class.forName("org.jdmp.matrix.io.ExportMatrix" + format.name());
 			Method m = c.getMethod("toFile", new Class<?>[] { File.class, Matrix.class, Object[].class });
 			m.invoke(null, file,matrix,parameters);
-		} catch (Exception e) {
+		} catch (ClassNotFoundException e) {
+			throw new MatrixException("file format not supported: " + format, e);
+		} catch (NoSuchMethodException e) {
+			throw new MatrixException("file format not supported: " + format, e);
+		}catch (IllegalAccessException e) {
+			throw new MatrixException("file format not supported: " + format, e);
+		}catch (InvocationTargetException e) {
 			throw new MatrixException("file format not supported: " + format, e);
 		}
 	}

@@ -2,7 +2,7 @@ package org.jdmp.core.dataset;
 
 import java.util.List;
 
-import org.jdmp.core.algorithm.classification.AbstractClassifier;
+import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.calculation.Calculation.Ret;
 import org.jdmp.matrix.implementations.collections.DefaultListMatrix;
@@ -10,8 +10,8 @@ import org.jdmp.matrix.interfaces.ListMatrix;
 
 public class CrossValidation {
 
-	public static ListMatrix<Double> run(AbstractClassifier algorithm,
-			ClassificationDataSet dataSet, int folds, int runs, long randomSeed) throws Exception {
+	public static ListMatrix<Double> run(Classifier algorithm, ClassificationDataSet dataSet,
+			int folds, int runs, long randomSeed) throws Exception {
 
 		ListMatrix<Double> all = new DefaultListMatrix<Double>();
 

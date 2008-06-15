@@ -35,7 +35,7 @@ public abstract class ExportMatrixMAT {
 	public static void toFile(File file, Matrix matrix, Object... parameters) throws IOException,
 			MatrixException {
 		try {
-			Class<?> c = Class.forName("org.jdmp.jmatio.ExportMAT");
+			Class<?> c = Class.forName("org.jdmp.jmatio.ExportMatrixMAT");
 			Method method = c.getMethod("toFile", new Class[] { File.class, Matrix.class,
 					Object[].class });
 			method.invoke(null, file, matrix, parameters);

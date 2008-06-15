@@ -1,4 +1,4 @@
-package org.jdmp.weka;
+package org.jdmp.weka.wrappers;
 
 import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.dataset.RegressionDataSet;
