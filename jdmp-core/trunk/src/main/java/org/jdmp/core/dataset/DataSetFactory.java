@@ -1,8 +1,10 @@
 package org.jdmp.core.dataset;
 
 import java.io.IOException;
+import java.util.Random;
 
 import org.jdmp.core.sample.ClassificationSample;
+import org.jdmp.core.sample.RegressionSample;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.sample.SampleFactory;
 import org.jdmp.matrix.Matrix;
@@ -12,6 +14,62 @@ import org.jdmp.matrix.calculation.Calculation.Ret;
 import org.jdmp.matrix.exceptions.MatrixException;
 
 public abstract class DataSetFactory {
+
+	public static RegressionDataSet HenonMap(int sampleCount, int inputLength, int predictionLength) {
+		RegressionDataSet henon = new RegressionDataSet("Henon Map");
+
+		Random random = new Random();
+
+		for (int si = 0; si < sampleCount; si++) {
+
+			double q1 = random.nextDouble() * 1.26 * 2 - 1.26;
+			q1 = q1 >= 1.26 ? q1 - 1.26 : q1;
+			q1 = q1 < -1.26 ? q1 + 1.26 : q1;
+
+			double q2 = random.nextDouble() * 1.26 * 2 - 1.26;
+			q2 = q2 >= 1.26 ? q2 - 1.26 : q2;
+			q2 = q2 < -1.26 ? q2 + 1.26 : q2;
+
+			double q = 0;
+
+			Matrix input = MatrixFactory.zeros(1, inputLength);
+			for (int i = 0; i < inputLength; i++) {
+				q = henon(q1, q2);
+				input.setDouble(q / 2, 0, i);
+				q2 = q1;
+				q1 = q;
+			}
+
+			Matrix target = MatrixFactory.zeros(1, predictionLength);
+			for (int i = 0; i < predictionLength; i++) {
+				q = henon(q1, q2);
+				target.setDouble(q / 2, 0, i);
+				q2 = q1;
+				q1 = q;
+			}
+
+			Sample s = new RegressionSample("Sample " + si);
+			s.setMatrix(Sample.INPUT, input);
+			s.setMatrix(Sample.TARGET, target);
+
+			henon.addSample(s);
+		}
+
+		return henon;
+	}
+
+	private static double henon(double q1, double q2) {
+		double a = 1.4;
+		double b = 0.3;
+
+		double y = 1 - a * q1 * q1 + b * q2;
+
+		double q = y;
+		q = q >= 1.26 ? q - 1.26 : q;
+		q = q < -1.26 ? q + 1.26 : q;
+
+		return q;
+	}
 
 	public static BasicDataSet ANIMALS() throws MatrixException {
 		BasicDataSet animals = new BasicDataSet("Animals");
