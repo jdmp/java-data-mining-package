@@ -136,6 +136,12 @@
 		        <version>${jdmp.version}</version>
 				<scope>compile</scope>
 		    </dependency>
+		    <dependency>
+      			<groupId>org.jdmp</groupId>
+		        <artifactId>jdmp-jmathlib</artifactId>
+		        <version>${jdmp.version}</version>
+				<scope>compile</scope>
+		    </dependency>
 
 
 			<dependency>
@@ -347,6 +353,12 @@
       			<groupId>jmatrices</groupId>
 		        <artifactId>jmatrices</artifactId>
 		        <version>0.6</version>
+				<scope>compile</scope>
+		    </dependency>
+		    <dependency>
+      			<groupId>jmathlib</groupId>
+		        <artifactId>jmathlib</artifactId>
+		        <version>0.9.0</version>
 				<scope>compile</scope>
 		    </dependency>
 
