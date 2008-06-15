@@ -130,6 +130,12 @@
 				<version>${jdmp.version}</version>
 				<scope>compile</scope>
 			</dependency>
+			<dependency>
+      			<groupId>org.jdmp</groupId>
+		        <artifactId>jdmp-jmatrices</artifactId>
+		        <version>${jdmp.version}</version>
+				<scope>compile</scope>
+		    </dependency>
 
 
 			<dependency>
@@ -336,6 +342,12 @@
 			      <artifactId>jmatio</artifactId>
 			      <version>0.2.2</version>
 				  <scope>compile</scope>
+		    </dependency>
+		    <dependency>
+      			<groupId>jmatrices</groupId>
+		        <artifactId>jmatrices</artifactId>
+		        <version>0.6</version>
+				<scope>compile</scope>
 		    </dependency>
 
 		</dependencies>
