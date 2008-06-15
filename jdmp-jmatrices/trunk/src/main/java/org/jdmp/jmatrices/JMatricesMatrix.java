@@ -5,8 +5,7 @@ import org.jdmp.matrix.interfaces.Wrapper;
 import org.jdmp.matrix.stubs.AbstractDenseDoubleMatrix2D;
 import org.jmatrices.dbl.MatrixFactory;
 
-public class JMatricesMatrix extends AbstractDenseDoubleMatrix2D implements
-		Wrapper<org.jmatrices.dbl.Matrix> {
+public class JMatricesMatrix extends AbstractDenseDoubleMatrix2D implements Wrapper<org.jmatrices.dbl.Matrix> {
 	private static final long serialVersionUID = 513251881654621L;
 
 	private org.jmatrices.dbl.Matrix matrix = null;
@@ -27,7 +26,7 @@ public class JMatricesMatrix extends AbstractDenseDoubleMatrix2D implements
 	}
 
 	public double getDouble(long... coordinates) {
-		return matrix.get((int) coordinates[ROW], (int) coordinates[COLUMN]);
+		return matrix.get((int) coordinates[ROW] + 1, (int) coordinates[COLUMN] + 1);
 	}
 
 	public long[] getSize() {
@@ -35,7 +34,7 @@ public class JMatricesMatrix extends AbstractDenseDoubleMatrix2D implements
 	}
 
 	public void setDouble(double value, long... coordinates) {
-		matrix.set((int) coordinates[ROW], (int) coordinates[COLUMN], value);
+		matrix.set((int) coordinates[ROW] + 1, (int) coordinates[COLUMN] + 1, value);
 	}
 
 	public org.jmatrices.dbl.Matrix getWrappedObject() {
