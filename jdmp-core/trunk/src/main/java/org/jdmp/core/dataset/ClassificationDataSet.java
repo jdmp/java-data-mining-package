@@ -54,7 +54,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 			Matrix in = input.subMatrix(Ret.NEW, i, 0, i, input.getColumnCount() - 1);
 			Matrix out = desiredOutput.subMatrix(Ret.NEW, i, 0, i,
 					desiredOutput.getColumnCount() - 1);
-			s.setMatrix(INPUT, in);
+			s.setMatrix(Sample.INPUT, in);
 			s.setDesiredOutputMatrix(out);
 			ds.addSample(s);
 		}
@@ -169,7 +169,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 				}
 			}
 
-			s.setMatrix(INPUT, input);
+			s.setMatrix(Sample.INPUT, input);
 			s.setDesiredOutputMatrix(output);
 			addSample(s);
 		}

@@ -41,7 +41,7 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 		List<Matrix> error = getOutputErrorAlgorithm().calculate(output,
 				sample.getDesiredOutputMatrix());
 		sample.setOutputErrorMatrix(error.get(0));
-		sample.setRMSEMatrix(MatrixFactory.linkToValue(error.get(0).getRMS()));
+		sample.setMatrix(RMSE, MatrixFactory.linkToValue(error.get(0).getRMS()));
 	}
 
 	public final Matrix predict(Matrix input) throws Exception {
@@ -90,7 +90,7 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 
 			predict((RegressionSample) sample);
 
-			double rmse = ((RegressionSample) sample).getRMSEVariable().getEuklideanValue();
+			double rmse = ((RegressionSample) sample).getMatrix(RMSE).getEuklideanValue();
 			error += Math.pow(rmse, 2.0);
 
 			if (sample instanceof ClassificationSample) {

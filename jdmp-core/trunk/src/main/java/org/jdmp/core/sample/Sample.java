@@ -11,6 +11,12 @@ public interface Sample extends CoreObject, HasVariableMap {
 
 	public static final Object WEIGHT = Regressor.WEIGHT;
 
+	public static final Object TARGET = Regressor.TARGET;
+
+	public static final Object PREDICTED = Regressor.PREDICTED;
+
+	public static final Object RMSE = Regressor.RMSE;
+
 	public Sample clone();
 
 	public Matrix getMatrix(Object variableKey);

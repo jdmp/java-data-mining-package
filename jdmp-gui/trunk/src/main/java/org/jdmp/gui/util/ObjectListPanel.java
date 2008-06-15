@@ -220,8 +220,8 @@ public class ObjectListPanel extends JPanel implements MouseListener, KeyListene
 					return new Comparator<ClassificationSample>() {
 
 						public int compare(ClassificationSample s1, ClassificationSample s2) {
-							Matrix m1 = s1.getRMSEMatrix();
-							Matrix m2 = s2.getRMSEMatrix();
+							Matrix m1 = s1.getMatrix(Sample.RMSE);
+							Matrix m2 = s2.getMatrix(Sample.RMSE);
 							if (m1 != null && m2 != null) {
 								return m1.compareTo(m2);
 							} else {

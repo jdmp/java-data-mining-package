@@ -93,16 +93,8 @@ public class SampleTableCellRenderer implements TableCellRenderer {
 				}
 				break;
 			case SampleListTableModel.RMSECOLUMN:
-				if (sample instanceof RegressionSample) {
-					v = ((RegressionSample) sample).getRMSEVariable();
-					if (v != null) {
-						return matrixRenderer.getTableCellRendererComponent(table, v.getMatrix(),
-								isSelected, hasFocus, row, column);
-					}
-				} else {
-					o = "n/a";
-				}
-				break;
+				return matrixRenderer.getTableCellRendererComponent(table, sample
+						.getMatrix(Sample.RMSE), isSelected, hasFocus, row, column);
 			case SampleListTableModel.DIFFERENCECOLUMN:
 				if (sample instanceof RegressionSample) {
 					v = ((RegressionSample) sample).getOutputErrorVariable();

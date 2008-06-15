@@ -6,6 +6,7 @@ import java.util.logging.Level;
 import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.Variable;
+import org.jdmp.core.variable.VariableFactory;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.interfaces.GUIObject;
 
@@ -57,9 +58,11 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 
 	public void setMatrix(Object variableKey, Matrix matrix){
 		Variable v=getVariableList().get(variableKey);
-		if(v!=null){
-			 v.addMatrix(matrix);
+		if(v==null){
+			v=VariableFactory.labeledVariable(variableKey.toString());
+			getVariableList().put(variableKey, v);
 		}
+		v.addMatrix(matrix);
 	}
 	
 }

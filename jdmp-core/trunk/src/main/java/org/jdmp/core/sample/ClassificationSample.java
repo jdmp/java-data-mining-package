@@ -1,7 +1,6 @@
 package org.jdmp.core.sample;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.exceptions.MatrixException;
 
@@ -44,17 +43,6 @@ public class ClassificationSample extends RegressionSample {
 
 	public int getRecognizedClass() throws MatrixException {
 		return (int) getOutputMatrix().getCoordinatesOfMaximum()[COLUMN];
-	}
-
-	public void setClassID(int classID) {
-		Matrix m = MatrixFactory.linkToValue(classID);
-		// setMatrixForType(VariableType.OUTPUTCLASS, m);
-	}
-
-	public void setClassID(int classID, String label) {
-		Matrix m = MatrixFactory.linkToValue(classID);
-		m.setLabel(label);
-		// setMatrixForType(VariableType.OUTPUTCLASS, m);
 	}
 
 }

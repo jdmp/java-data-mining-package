@@ -6,17 +6,17 @@ import org.jdmp.matrix.Matrix;
 
 public interface Regressor {
 
-	public static final String INPUT = "Input";
+	public static final Object INPUT = "Input";
 
-	public static final String WEIGHT = "Weight";
+	public static final Object WEIGHT = "Weight";
 
-	public static final String PREDICTED = "Predicted";
+	public static final Object PREDICTED = "Predicted";
 
-	public static final String TARGET = "Target";
+	public static final Object TARGET = "Target";
 
-	public static final String DIFFERENCE = "Difference";
+	public static final Object DIFFERENCE = "Difference";
 
-	public static final String RMSE = "RMSE";
+	public static final Object RMSE = "RMSE";
 
 	public void train(RegressionDataSet dataSet) throws Exception;
 

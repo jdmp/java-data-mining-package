@@ -4,6 +4,7 @@ import org.jdmp.core.matrix.wrappers.DataSetDesiredOutputMatrixWrapper;
 import org.jdmp.core.matrix.wrappers.DataSetInputOutputMatrixWrapper;
 import org.jdmp.core.matrix.wrappers.DataSetOutputMatrixWrapper;
 import org.jdmp.core.sample.RegressionSample;
+import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.DefaultVariable;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.matrix.Matrix;
@@ -40,7 +41,7 @@ public class RegressionDataSet extends BasicDataSet {
 			Matrix in = input.subMatrix(Ret.NEW, i, 0, i, input.getColumnCount() - 1);
 			Matrix out = desiredOutput.subMatrix(Ret.NEW, i, 0, i,
 					desiredOutput.getColumnCount() - 1);
-			s.setMatrix(INPUT, in);
+			s.setMatrix(Sample.INPUT, in);
 			s.setDesiredOutputMatrix(out);
 			ds.addSample(s);
 		}
@@ -57,7 +58,7 @@ public class RegressionDataSet extends BasicDataSet {
 			Matrix so = desiredOutput.subMatrix(Ret.LINK, i, 0, i,
 					desiredOutput.getColumnCount() - 1);
 
-			s.setMatrix(INPUT, si);
+			s.setMatrix(Sample.INPUT, si);
 			s.setDesiredOutputMatrix(so);
 
 			addSample(s);

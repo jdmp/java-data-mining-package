@@ -16,7 +16,6 @@ public class DataSetActions extends ObjectActions {
 		super(c, ds);
 
 		add(2, new JSeparator());
-		add(3, new JMenuItem(new ImportCSVInOneLineAction(c, ds)));
 
 		add(new JMenuItem(new CreateAnimalDemoAction(c, ds)));
 
