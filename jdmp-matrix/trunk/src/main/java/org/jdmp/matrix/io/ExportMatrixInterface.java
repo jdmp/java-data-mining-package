@@ -52,6 +52,6 @@ public interface ExportMatrixInterface {
 	public void exportToClipboard(Format format, Object... parameters) throws MatrixException,
 			IOException;
 
-	public String toString(Format format, Object... parameters) throws MatrixException, IOException;
+	public String exportToString(Format format, Object... parameters) throws MatrixException, IOException;
 
 }

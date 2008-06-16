@@ -1583,7 +1583,7 @@ public abstract class AbstractGenericMatrix<A> implements GenericMatrix<A> {
 		}
 	}
 	
-	public String toString(Format format,Object... parameters) throws MatrixException, IOException {
+	public String exportToString(Format format,Object... parameters) throws MatrixException, IOException {
 		return ExportMatrix.toString(format, this,parameters);
 	}
 	

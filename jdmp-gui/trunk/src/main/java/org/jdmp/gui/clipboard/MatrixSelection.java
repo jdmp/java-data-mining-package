@@ -30,7 +30,7 @@ public class MatrixSelection implements Transferable, ClipboardOwner, Serializab
 	private String stringData = null;
 
 	public MatrixSelection(Matrix matrix) throws MatrixException, IOException {
-		stringData = matrix.toString(Format.CSV);
+		stringData = matrix.exportToString(Format.CSV);
 	}
 
 	public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {

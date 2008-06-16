@@ -111,7 +111,7 @@ public abstract class AbstractExportMatrixTest extends TestCase {
 	public void testExportToString() throws Exception {
 
 		Matrix m = getMatrix();
-		String s = m.toString(getFormat());
+		String s = m.exportToString(getFormat());
 
 		assertTrue(getLabel(), s != null);
 		assertTrue(getLabel(), s.length() > 0);
