@@ -23,35 +23,22 @@
 
 package org.jdmp.matrix.stubs;
 
-import org.jdmp.matrix.StringMatrix;
+import org.jdmp.matrix.IntMatrix;
 import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.util.StringUtil;
+import org.jdmp.matrix.util.MathUtil;
 
-public abstract class AbstractStringMatrix extends AbstractGenericMatrix<String> implements
-		StringMatrix {
+public abstract class AbstractIntMatrix extends AbstractGenericMatrix<Integer> implements IntMatrix {
 
-	public final String getObject(long... coordinates) throws MatrixException {
-		return getString(coordinates);
+	public final Integer getObject(long... coordinates) throws MatrixException {
+		return getInt(coordinates);
 	}
 
 	public final void setObject(Object o, long... coordinates) throws MatrixException {
-		setString(StringUtil.convert(o), coordinates);
-	}
-
-	public final double getDouble(long... coordinates) {
-		try {
-			return Double.parseDouble(getString(coordinates));
-		} catch (NumberFormatException e) {
-			return Double.NaN;
-		}
-	}
-
-	public final void setDouble(double value, long... coordinates) throws MatrixException {
-		setString("" + value, coordinates);
+		setDouble(MathUtil.getDouble(o), coordinates);
 	}
 
 	public final EntryType getEntryType() {
-		return EntryType.STRING;
+		return EntryType.INTEGER;
 	}
 
 }

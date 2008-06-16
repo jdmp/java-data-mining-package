@@ -664,11 +664,11 @@ public abstract class AbstractGenericMatrix<A> implements GenericMatrix<A> {
 		setDouble(value ? 1.0 : 0.0, coordinates);
 	}
 
-	public final int getInt(long... coordinates) throws MatrixException {
+	public int getInt(long... coordinates) throws MatrixException {
 		return (int) Math.round(getDouble(coordinates));
 	}
 
-	public final void setInt(int value, long... coordinates) throws MatrixException {
+	public void setInt(int value, long... coordinates) throws MatrixException {
 		setDouble(value, coordinates);
 	}
 

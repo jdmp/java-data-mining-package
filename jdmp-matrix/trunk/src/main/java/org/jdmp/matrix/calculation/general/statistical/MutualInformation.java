@@ -23,10 +23,15 @@
 
 package org.jdmp.matrix.calculation.general.statistical;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.jdmp.matrix.DoubleMatrix;
+import org.jdmp.matrix.IntMatrix;
 import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.MatrixFactory;
+import org.jdmp.matrix.Matrix.EntryType;
 import org.jdmp.matrix.calculation.AbstractDoubleCalculation;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.MathUtil;
@@ -109,5 +114,61 @@ public class MutualInformation extends AbstractDoubleCalculation {
 
 		return mutualInformation;
 	}
+	
+	public static DoubleMatrix calcNew(Matrix matrix) {
+		return calcNew((IntMatrix)matrix.convert(EntryType.INTEGER));
+	}
 
+	public static DoubleMatrix calcNew(IntMatrix matrix) {
+		long count = matrix.getColumnCount();
+		int samples = (int) matrix.getRowCount();
+		DoubleMatrix result = (DoubleMatrix) MatrixFactory.zeros(Matrix.EntryType.DOUBLE, count,
+				count);
+		int[] d_dc = new int[(int) count];
+		Arrays.fill(d_dc, (int)matrix.getMaxValue()+1);
+		int aVal, bVal;
+		for (int a = 0; a < count; a++) {
+			for (int b = 0; b <= a; b++) {
+				double mutual = 0;
+
+				double[][] Nab = new double[d_dc[a]][d_dc[b]];
+				double[] Na = new double[d_dc[a]];
+				double[] Nb = new double[d_dc[b]];
+				for (int k = (int) matrix.getRowCount() - 1; k >= 0; k--) {
+					aVal = matrix.getInt(k,a);// dataset[aIndex][k];
+					bVal = matrix.getInt(k,b);// dataset[bIndex][k];
+					Na[aVal]++;
+					Nb[bVal]++;
+					Nab[aVal][bVal]++;
+				}
+				double[] NaLog = new double[d_dc[a]];
+				double[] NbLog = new double[d_dc[b]];
+				double log2 = Math.log(2);
+				for (int j = d_dc[b] - 1; j >= 0; j--) {
+					Nb[j] /= (double) samples;
+					if (Nb[j] != 0)
+						NbLog[j] = Math.log(Nb[j]);
+				}
+				for (int i = d_dc[a] - 1; i >= 0; i--) {
+					Na[i] /= (double) samples;
+					if (Na[i] != 0)
+						NaLog[i] = Math.log(Na[i]);
+					for (int j = d_dc[b] - 1; j >= 0; j--) {
+						Nab[i][j] /= (double) samples;
+
+						if (Na[i] != 0 && Nb[j] != 0 && Nab[i][j] != 0) {
+							mutual += Nab[i][j] * (Math.log(Nab[i][j]) - NaLog[i] - NbLog[j])
+									/ log2;
+						}
+					}
+				}
+				mutual = (mutual < 0) ? 0 : mutual;
+				result.setDouble(mutual, a, b);
+				result.setDouble(mutual, b, a);
+			}
+
+		}
+
+		return result;
+	}
 }

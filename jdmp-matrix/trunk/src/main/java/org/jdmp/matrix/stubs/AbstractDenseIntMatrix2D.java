@@ -21,8 +21,14 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.matrix;
+package org.jdmp.matrix.stubs;
 
-public interface IntegerMatrix extends GenericMatrix<Integer> {
+import org.jdmp.matrix.coordinates.CoordinateIterator2D;
+
+public abstract class AbstractDenseIntMatrix2D extends AbstractDenseIntMatrix {
+
+	public final Iterable<long[]> allCoordinates() {
+		return new CoordinateIterator2D(getSize());
+	}
 
 }

@@ -28,16 +28,28 @@ import javax.swing.ListSelectionModel;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.collections.MatrixList;
 
+/**
+ * DELETE?
+ */
 public interface HasMatrixList {
 
 	public MatrixList getMatrixList();
 
 	public int getMatrixCount();
 
+	/**
+	 * @todo move to Variable
+	 */
 	public void fireValueChanged(Matrix m);
 
+	/**
+	 * @todo move to GuiObject
+	 */
 	public ListSelectionModel getRowSelectionModel();
 
+	/**
+	 * @todo move to GuiObject
+	 */
 	public ListSelectionModel getColumnSelectionModel();
 
 	public Matrix getMatrix(int index);

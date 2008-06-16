@@ -27,6 +27,7 @@ import java.util.Iterator;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import org.jdmp.matrix.DoubleMatrix;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.calculation.AbstractObjectCalculation;
@@ -34,10 +35,16 @@ import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.Sortable;
 
 
+/**
+ * Sorts the rows of a matrix 
+ *
+ * 
+ * 
+ */
 public class Sort extends AbstractObjectCalculation {
   private static final long serialVersionUID = -6935375114060680121L;
 
-  private Matrix index = null;
+  private DoubleMatrix index = null;
 
 
 
@@ -57,7 +64,7 @@ public class Sort extends AbstractObjectCalculation {
   
   private void createSortIndex() {
 	  Matrix m = getSource();
-	  Matrix indexMatrix = MatrixFactory.zeros(m.getSize());
+	  DoubleMatrix indexMatrix = (DoubleMatrix)MatrixFactory.zeros(m.getSize());
 	for (long i = 0; i < m.getRowCount(); i++) {
 		SortedSet<Sortable<?,Long>> sortedSet = new TreeSet<Sortable<?,Long>>();
 		for (long j = 0; j < m.getColumnCount(); j++) {
@@ -79,7 +86,7 @@ public class Sort extends AbstractObjectCalculation {
 
 
 
-public Matrix getIndex() {
+public DoubleMatrix getIndex() {
 	return index;
 }
   

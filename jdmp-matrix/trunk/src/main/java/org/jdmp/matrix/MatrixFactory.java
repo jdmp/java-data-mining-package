@@ -48,6 +48,7 @@ import org.jdmp.matrix.calculation.entrywise.creators.Rand;
 import org.jdmp.matrix.calculation.entrywise.creators.Randn;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.implementations.basic.DefaultDenseDoubleMatrix2D;
+import org.jdmp.matrix.implementations.basic.DefaultDenseIntMatrix2D;
 import org.jdmp.matrix.implementations.basic.DefaultDenseObjectMatrix2D;
 import org.jdmp.matrix.implementations.basic.DefaultDenseStringMatrix2D;
 import org.jdmp.matrix.implementations.basic.DefaultSparseGenericMatrix;
@@ -229,9 +230,8 @@ public abstract class MatrixFactory {
 		return new DefaultDenseDoubleMatrix2D(values);
 	}
 
-	public static final DefaultDenseDoubleMatrix2D linkToArray(int[]... values) {
-		double[][] doubleValues = MathUtil.toDoubleArray(values);
-		return new DefaultDenseDoubleMatrix2D(doubleValues);
+	public static final DefaultDenseIntMatrix2D linkToArray(int[]... values) {
+		return new DefaultDenseIntMatrix2D(values);
 	}
 
 	public static final DefaultDenseDoubleMatrix2D linkToArray(int... values) {
@@ -313,6 +313,8 @@ public abstract class MatrixFactory {
 				return new DefaultDenseObjectMatrix2D(size);
 			case STRING:
 				return new DefaultDenseStringMatrix2D(size);
+			case INTEGER:
+				return new DefaultDenseIntMatrix2D(size);
 			default:
 				throw new MatrixException("entry type not yet supported: " + entryType);
 			}
