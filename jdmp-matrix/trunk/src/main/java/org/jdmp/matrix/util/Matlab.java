@@ -1,0 +1,157 @@
+package org.jdmp.matrix.util;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+
+import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.MatrixFactory;
+import org.jdmp.matrix.Matrix.Format;
+
+public class Matlab {
+
+	public static final String[] SEARCH = new String[] { "/usr/bin/matlab",
+			"/opt/matlab/bin/matlab" };
+
+	public static final String MATLABPARAMETERS = "-nosplash -nojvm";
+
+	private static String pathToMatlab = null;
+
+	private BufferedReader input = null;
+
+	private BufferedWriter output = null;
+
+	private BufferedReader error = null;
+
+	private Process matlabProcess = null;
+
+	private boolean running = false;
+
+	private static Matlab matlab = null;
+
+	public static synchronized Matlab getInstance() throws Exception {
+		if (matlab == null) {
+			matlab = getInstance(findMatlab());
+		}
+		return matlab;
+	}
+
+	private static String findMatlab() {
+		if (pathToMatlab == null) {
+			File file = new File(System.getProperty("user.home") + "/matlab/bin/matlab");
+			if (file.exists()) {
+				pathToMatlab = file.getAbsolutePath();
+				return pathToMatlab;
+			}
+			for (String s : SEARCH) {
+				file = new File(s);
+				if (file.exists()) {
+					pathToMatlab = file.getAbsolutePath();
+					return pathToMatlab;
+				}
+			}
+		}
+		return pathToMatlab;
+	}
+
+	public static synchronized Matlab getInstance(String pathToMatlab) throws Exception {
+		if (matlab == null) {
+			matlab = new Matlab(pathToMatlab);
+		}
+		return matlab;
+	}
+
+	private Matlab(String pathToMatlab) throws Exception {
+		matlabProcess = Runtime.getRuntime().exec(pathToMatlab + " " + MATLABPARAMETERS);
+		output = new BufferedWriter(new OutputStreamWriter(matlabProcess.getOutputStream()));
+		input = new BufferedReader(new InputStreamReader(matlabProcess.getInputStream()));
+		error = new BufferedReader(new InputStreamReader(matlabProcess.getErrorStream()));
+		String startMessage = getFromMatlab();
+		if (startMessage != null && startMessage.length() > 0) {
+			running = true;
+			return;
+		}
+		throw new Exception("could not start Matlab");
+	}
+
+	private synchronized String getFromMatlab() throws Exception {
+		boolean endSeen = false;
+		StringBuffer sb = new StringBuffer();
+
+		while (true) {
+			while (!input.ready()) {
+				Thread.yield();
+			}
+			while (input.ready()) {
+
+				char c = (char) input.read();
+				sb.append((char) c);
+
+				if (c == '>') {
+					if (endSeen) {
+						return sb.substring(0, sb.length() - 2);
+					}
+					endSeen = true;
+				} else {
+					endSeen = false;
+				}
+			}
+		}
+	}
+
+	public String execute(String command) throws Exception {
+		sendToMatlab(command);
+		return getFromMatlab();
+	}
+
+	public synchronized void shutdown() throws Exception {
+		sendToMatlab("exit");
+		matlabProcess.waitFor();
+		output.close();
+		input.close();
+	}
+
+	private synchronized void sendToMatlab(String command) throws Exception {
+		if (!command.endsWith("\n")) {
+			command = command + "\n";
+		}
+		output.write(command, 0, command.length());
+		output.flush();
+	}
+
+	public void setMatrix(String label, Matrix matrix) throws Exception {
+		execute(label + "=" + matrix.exportToString(Format.M));
+	}
+
+	public Matrix getMatrix(String label) throws Exception {
+		try {
+			String rawRows = execute("fprintf(1,'%d\\n',size(" + label + ",1));");
+			int rows = Integer.parseInt(rawRows.trim());
+			String rawCols = execute("fprintf(1,'%d\\n',size(" + label + ",2));");
+			int cols = Integer.parseInt(rawCols.trim());
+
+			String rawText = execute("fprintf(1,'%55.55f\\n'," + label + ")");
+			String[] rawValues = rawText.split("\n");
+
+			Matrix matrix = MatrixFactory.zeros(rows, cols);
+
+			int i = 0;
+			for (int c = 0; c < cols; c++) {
+				for (int r = 0; r < rows; r++) {
+					matrix.setDouble(Double.parseDouble(rawValues[i++]), r, c);
+				}
+			}
+
+			return matrix;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public static boolean isAvailable() {
+		return findMatlab() != null;
+	}
+}

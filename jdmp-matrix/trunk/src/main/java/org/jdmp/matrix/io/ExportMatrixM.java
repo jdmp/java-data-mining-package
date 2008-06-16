@@ -52,7 +52,7 @@ public class ExportMatrixM {
 	public static void toWriter(Writer writer, Matrix matrix, Object... parameters)
 			throws IOException, MatrixException {
 		String EOL = System.getProperty("line.separator");
-		writer.append("A = [ ");
+		writer.append("[");
 		ExportMatrixCSV.toWriter(writer, matrix);
 		writer.append("];" + EOL);
 	}

@@ -209,7 +209,7 @@ public class Coordinates implements Serializable {
 
 	public static boolean isSmallerThan(long[] coordinates, long[] size) {
 		for (int i = coordinates.length - 1; i != -1; i--) {
-			if (coordinates[i] > size[i])
+			if (coordinates[i] >= size[i])
 				return false;
 		}
 		return true;
