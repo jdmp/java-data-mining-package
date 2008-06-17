@@ -1,3 +1,26 @@
+/*
+ * Copyright (C) 2008 Holger Arndt, Andreas Naegele and Markus Bundschus
+ *
+ * This file is part of the Java Data Mining Package (JDMP).
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership and licensing.
+ *
+ * JDMP is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * JDMP is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with JDMP; if not, write to the
+ * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+ * Boston, MA  02110-1301  USA
+ */
+
 package org.jdmp.matrix.util;
 
 import java.io.BufferedReader;
@@ -173,4 +196,129 @@ public class Octave {
 	public static boolean isAvailable() {
 		return findOctave() != null;
 	}
+
+	public void plot(Matrix matrix, String... format) throws Exception {
+		setMatrix("jdmpmatrix", matrix);
+		execute("figure;");
+		execute("plot(jdmpmatrix" + toString(format) + ");");
+	}
+
+	public void loglog(Matrix matrix, String... format) throws Exception {
+		setMatrix("jdmpmatrix", matrix);
+		execute("figure;");
+		execute("loglog(jdmpmatrix" + toString(format) + ");");
+	}
+
+	public void semilogx(Matrix matrix, String... format) throws Exception {
+		setMatrix("jdmpmatrix", matrix);
+		execute("figure;");
+		execute("semilogx(jdmpmatrix" + toString(format) + ");");
+	}
+
+	public void semilogy(Matrix matrix, String... format) throws Exception {
+		setMatrix("jdmpmatrix", matrix);
+		execute("figure;");
+		execute("semilogy(jdmpmatrix" + toString(format) + ");");
+	}
+
+	public void bar(Matrix matrix, String... format) throws Exception {
+		setMatrix("jdmpmatrix", matrix);
+		execute("figure;");
+		execute("bar(jdmpmatrix" + toString(format) + ");");
+	}
+
+	public void stairs(Matrix matrix, String... format) throws Exception {
+		setMatrix("jdmpmatrix", matrix);
+		execute("figure;");
+		execute("stairs(jdmpmatrix" + toString(format) + ");");
+	}
+
+	public void hist(Matrix matrix, String... format) throws Exception {
+		setMatrix("jdmpmatrix", matrix);
+		execute("figure;");
+		execute("hist(jdmpmatrix" + toString(format) + ");");
+	}
+
+	public void plot(Matrix x, Matrix y, String... format) throws Exception {
+		setMatrix("jdmpmatrix_x", x);
+		setMatrix("jdmpmatrix_y", y);
+		execute("figure;");
+		execute("plot(jdmpmatrix_x,jdmpmatrix_y" + toString(format) + ");");
+	}
+
+	public void loglog(Matrix x, Matrix y, String... format) throws Exception {
+		setMatrix("jdmpmatrix_x", x);
+		setMatrix("jdmpmatrix_y", y);
+		execute("figure;");
+		execute("loglog(jdmpmatrix_x,jdmpmatrix_y" + toString(format) + ");");
+	}
+
+	public void semilogx(Matrix x, Matrix y, String... format) throws Exception {
+		setMatrix("jdmpmatrix_x", x);
+		setMatrix("jdmpmatrix_y", y);
+		execute("figure;");
+		execute("semilogx(jdmpmatrix_x,jdmpmatrix_y" + toString(format) + ");");
+	}
+
+	public void semilogy(Matrix x, Matrix y, String... format) throws Exception {
+		setMatrix("jdmpmatrix_x", x);
+		setMatrix("jdmpmatrix_y", y);
+		execute("figure;");
+		execute("semilogy(jdmpmatrix_x,jdmpmatrix_y" + toString(format) + ");");
+	}
+
+	public void bar(Matrix x, Matrix y, String... format) throws Exception {
+		setMatrix("jdmpmatrix_x", x);
+		setMatrix("jdmpmatrix_y", y);
+		execute("figure;");
+		execute("bar(jdmpmatrix_x,jdmpmatrix_y" + toString(format) + ");");
+	}
+
+	public void stairs(Matrix x, Matrix y, String... format) throws Exception {
+		setMatrix("jdmpmatrix_x", x);
+		setMatrix("jdmpmatrix_y", y);
+		execute("figure;");
+		execute("stairs(jdmpmatrix_x,jdmpmatrix_y" + toString(format) + ");");
+	}
+
+	public void hist(Matrix x, Matrix y, String... format) throws Exception {
+		setMatrix("jdmpmatrix_x", x);
+		setMatrix("jdmpmatrix_y", y);
+		execute("figure;");
+		execute("hist(jdmpmatrix_x,jdmpmatrix_y" + toString(format) + ");");
+	}
+
+	public void polar(Matrix theta, Matrix rho, String... format) throws Exception {
+		setMatrix("jdmpmatrix_theta", theta);
+		setMatrix("jdmpmatrix_rho", rho);
+		execute("figure;");
+		execute("hist(jdmpmatrix_theta,jdmpmatrix_rho" + toString(format) + ");");
+	}
+
+	public void contour(Matrix z, Matrix n, Matrix x, Matrix y, String... format) throws Exception {
+		setMatrix("jdmpmatrix_z", z);
+		setMatrix("jdmpmatrix_n", n);
+		setMatrix("jdmpmatrix_x", x);
+		setMatrix("jdmpmatrix_y", y);
+		execute("figure;");
+		execute("contour(jdmpmatrix_z,jdmpmatrix_n,jdmpmatrix_x,jdmpmatrix_y" + toString(format)
+				+ ");");
+	}
+
+	public void mesh(Matrix x, Matrix y, Matrix z, String... format) throws Exception {
+		setMatrix("jdmpmatrix_x", x);
+		setMatrix("jdmpmatrix_y", y);
+		setMatrix("jdmpmatrix_z", z);
+		execute("figure;");
+		execute("mesh(jdmpmatrix_x,jdmpmatrix_y,jdmpmatrix_z" + toString(format) + ");");
+	}
+
+	public static String toString(String[] strings) {
+		if (strings.length != 0) {
+			return ",'" + strings[0] + "'";
+		} else {
+			return "";
+		}
+	}
+
 }
