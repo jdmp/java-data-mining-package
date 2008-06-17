@@ -184,6 +184,42 @@ public class Matlab {
 		execute("plot(jdmpmatrix" + toString(format) + ");");
 	}
 
+	public void hist(Matrix matrix, String... format) throws Exception {
+		setMatrix("jdmpmatrix", matrix);
+		execute("figure;");
+		execute("hist(jdmpmatrix" + toString(format) + ");");
+	}
+
+	public void surf(Matrix matrix, String... format) throws Exception {
+		setMatrix("jdmpmatrix", matrix);
+		execute("figure;");
+		execute("surf(jdmpmatrix" + toString(format) + ");");
+	}
+
+	public void imagesc(Matrix matrix, String... format) throws Exception {
+		setMatrix("jdmpmatrix", matrix);
+		execute("figure;");
+		execute("imagesc(jdmpmatrix" + toString(format) + ");");
+	}
+
+	public void bar(Matrix matrix, String... format) throws Exception {
+		setMatrix("jdmpmatrix", matrix);
+		execute("figure;");
+		execute("bar(jdmpmatrix" + toString(format) + ");");
+	}
+
+	public void barh(Matrix matrix, String... format) throws Exception {
+		setMatrix("jdmpmatrix", matrix);
+		execute("figure;");
+		execute("barh(jdmpmatrix" + toString(format) + ");");
+	}
+
+	public void stem(Matrix matrix, String... format) throws Exception {
+		setMatrix("jdmpmatrix", matrix);
+		execute("figure;");
+		execute("stem(jdmpmatrix" + toString(format) + ");");
+	}
+
 	public void plot(Matrix x, Matrix y, String... format) throws Exception {
 		setMatrix("jdmpmatrix_x", x);
 		setMatrix("jdmpmatrix_y", y);
