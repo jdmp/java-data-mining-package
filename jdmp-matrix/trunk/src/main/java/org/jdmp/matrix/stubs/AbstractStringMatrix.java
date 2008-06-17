@@ -25,6 +25,7 @@ package org.jdmp.matrix.stubs;
 
 import org.jdmp.matrix.StringMatrix;
 import org.jdmp.matrix.exceptions.MatrixException;
+import org.jdmp.matrix.util.MathUtil;
 import org.jdmp.matrix.util.StringUtil;
 
 public abstract class AbstractStringMatrix extends AbstractGenericMatrix<String> implements
@@ -39,11 +40,7 @@ public abstract class AbstractStringMatrix extends AbstractGenericMatrix<String>
 	}
 
 	public final double getDouble(long... coordinates) {
-		try {
-			return Double.parseDouble(getString(coordinates));
-		} catch (NumberFormatException e) {
-			return Double.NaN;
-		}
+		return MathUtil.getDouble(getString(coordinates));
 	}
 
 	public final void setDouble(double value, long... coordinates) throws MatrixException {
