@@ -24,7 +24,7 @@ public class SampleInputOutputMatrix extends AbstractDenseDoubleMatrix2D impleme
 	}
 
 	public Matrix getDesiredOutputMatrix() {
-		Matrix m = sample.getDesiredOutputVariable().getMatrix();
+		Matrix m = sample.getMatrix(Sample.TARGET);
 		return (m == null) ? MatrixFactory.linkToValue(0) : m;
 	}
 

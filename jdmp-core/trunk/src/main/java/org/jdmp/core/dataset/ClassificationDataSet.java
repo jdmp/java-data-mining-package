@@ -46,16 +46,15 @@ public class ClassificationDataSet extends RegressionDataSet {
 		importFromFile(file, separator);
 	}
 
-	public static ClassificationDataSet copyFromMatrix(Matrix input, Matrix desiredOutput)
+	public static ClassificationDataSet copyFromMatrix(Matrix input, Matrix target)
 			throws MatrixException {
 		ClassificationDataSet ds = new ClassificationDataSet();
 		for (int i = 0; i < input.getRowCount(); i++) {
 			ClassificationSample s = new ClassificationSample();
 			Matrix in = input.subMatrix(Ret.NEW, i, 0, i, input.getColumnCount() - 1);
-			Matrix out = desiredOutput.subMatrix(Ret.NEW, i, 0, i,
-					desiredOutput.getColumnCount() - 1);
+			Matrix out = target.subMatrix(Ret.NEW, i, 0, i, target.getColumnCount() - 1);
 			s.setMatrix(Sample.INPUT, in);
-			s.setDesiredOutputMatrix(out);
+			s.setMatrix(Sample.TARGET, out);
 			ds.addSample(s);
 		}
 		return ds;
@@ -154,7 +153,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 			ClassificationSample s = new ClassificationSample("Sample" + i + " ("
 					+ m.getObject(i, cols - 1) + ")");
 			Matrix input = MatrixFactory.zeros(1, cols - 1);
-			Matrix output = MatrixFactory.zeros(1, classes.size());
+			Matrix target = MatrixFactory.zeros(1, classes.size());
 
 			for (int c = 0; c < cols - 1; c++) {
 				input.setDouble(m.getDouble(i, c), 0, c);
@@ -163,21 +162,20 @@ public class ClassificationDataSet extends RegressionDataSet {
 			int classId = classList.indexOf(m.getObject(i, cols - 1));
 			for (int c = 0; c < classList.size(); c++) {
 				if (classId == c) {
-					output.setDouble(1.0, 0, c);
+					target.setDouble(1.0, 0, c);
 				} else {
 					// output.setDoubleValueAt(-1.0, 0, c);
 				}
 			}
 
 			s.setMatrix(Sample.INPUT, input);
-			s.setDesiredOutputMatrix(output);
+			s.setMatrix(Sample.TARGET, target);
 			addSample(s);
 		}
 	}
 
 	public int getClassCount() {
-		return (int) ((ClassificationSample) getSample(0)).getDesiredOutputMatrix()
-				.getColumnCount();
+		return (int) getSample(0).getMatrix(Sample.TARGET).getColumnCount();
 	}
 
 	public final void importFromCSV(File file, String separator) throws MatrixException,

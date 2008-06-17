@@ -33,33 +33,31 @@ public class RegressionDataSet extends BasicDataSet {
 		this(null);
 	}
 
-	public static RegressionDataSet copyFromMatrix(Matrix input, Matrix desiredOutput)
+	public static RegressionDataSet copyFromMatrix(Matrix input, Matrix target)
 			throws MatrixException {
 		RegressionDataSet ds = new RegressionDataSet();
 		for (int i = 0; i < input.getRowCount(); i++) {
 			RegressionSample s = new RegressionSample();
 			Matrix in = input.subMatrix(Ret.NEW, i, 0, i, input.getColumnCount() - 1);
-			Matrix out = desiredOutput.subMatrix(Ret.NEW, i, 0, i,
-					desiredOutput.getColumnCount() - 1);
+			Matrix out = target.subMatrix(Ret.NEW, i, 0, i, target.getColumnCount() - 1);
 			s.setMatrix(Sample.INPUT, in);
-			s.setDesiredOutputMatrix(out);
+			s.setMatrix(Sample.TARGET, out);
 			ds.addSample(s);
 		}
 		return ds;
 	}
 
-	public RegressionDataSet(String label, Matrix input, Matrix desiredOutput) {
+	public RegressionDataSet(String label, Matrix input, Matrix target) {
 		this(label);
 		long count = input.getRowCount();
 		for (int i = 0; i < count; i++) {
 			RegressionSample s = new RegressionSample();
 
 			Matrix si = input.subMatrix(Ret.LINK, i, 0, i, input.getColumnCount() - 1);
-			Matrix so = desiredOutput.subMatrix(Ret.LINK, i, 0, i,
-					desiredOutput.getColumnCount() - 1);
+			Matrix so = target.subMatrix(Ret.LINK, i, 0, i, target.getColumnCount() - 1);
 
 			s.setMatrix(Sample.INPUT, si);
-			s.setDesiredOutputMatrix(so);
+			s.setMatrix(Sample.TARGET, so);
 
 			addSample(s);
 		}

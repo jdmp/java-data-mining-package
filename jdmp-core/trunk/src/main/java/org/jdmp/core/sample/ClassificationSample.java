@@ -28,7 +28,7 @@ public class ClassificationSample extends RegressionSample {
 	public ClassificationSample clone() {
 		ClassificationSample s = new ClassificationSample();
 		s.setMatrix(INPUT, getMatrix(INPUT).clone());
-		s.setDesiredOutputMatrix(getDesiredOutputMatrix().clone());
+		s.setMatrix(TARGET, getMatrix(TARGET).clone());
 		return s;
 	}
 
@@ -38,7 +38,7 @@ public class ClassificationSample extends RegressionSample {
 	}
 
 	public int getDesiredClass() throws MatrixException {
-		return (int) getDesiredOutputMatrix().getCoordinatesOfMaximum()[COLUMN];
+		return (int) getMatrix(TARGET).getCoordinatesOfMaximum()[COLUMN];
 	}
 
 	public int getRecognizedClass() throws MatrixException {
