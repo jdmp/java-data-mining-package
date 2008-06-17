@@ -26,10 +26,12 @@ package org.jdmp.matrix.util;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.Matrix.Format;
 
 public class R {
@@ -129,6 +131,7 @@ public class R {
 	}
 
 	public synchronized void shutdown() throws Exception {
+		r = null;
 		sendToR("q()");
 		rProcess.waitFor();
 		output.close();
@@ -136,11 +139,17 @@ public class R {
 	}
 
 	private synchronized void sendToR(String command) throws Exception {
-		if (!command.endsWith("\n")) {
-			command += "\n";
+		if (r != null) {
+			try {
+				if (!command.endsWith("\n")) {
+					command += "\n";
+				}
+				output.write(command, 0, command.length());
+				output.flush();
+			} catch (IOException e) {
+				shutdown();
+			}
 		}
-		output.write(command, 0, command.length());
-		output.flush();
 	}
 
 	public void setMatrix(String label, Matrix matrix) throws Exception {
@@ -161,19 +170,24 @@ public class R {
 		return pathToR;
 	}
 
-	// TODO: change this method, because it does not work for matrices with many
-	// columns
 	public Matrix getMatrix(String label) throws Exception {
 		try {
-			Matrix matrix = null;
-			String rawText = execute(label);
 
-			String[] rawValues = rawText.split("\n");
+			String rawRows = execute("cat(nrow(" + label + "))");
+			int rows = Integer.parseInt(rawRows.split("\n")[1]);
+			String rawCols = execute("cat(ncol(" + label + "))");
+			int cols = Integer.parseInt(rawCols.split("\n")[1]);
 
-			int rows = rawValues.length - 2;
-			for (int r = 2; r < rawValues.length; r++) {
-				String[] cols = rawValues[r].split("[\\s]+");
-				int c = cols.length;
+			String rawText = execute("cat(" + label + ")");
+			String[] rawValues = rawText.split("\n")[1].split("[\\s]+");
+
+			Matrix matrix = MatrixFactory.zeros(rows, cols);
+
+			int i = 0;
+			for (int r = 0; r < rows; r++) {
+				for (int c = 0; c < cols; c++) {
+					matrix.setDouble(Double.parseDouble(rawValues[i++]), r, c);
+				}
 			}
 
 			return matrix;
@@ -187,10 +201,52 @@ public class R {
 		return findR() != null;
 	}
 
-	public void plot(Matrix matrix) throws Exception {
+	public static String toString(String[] strings) {
+		if (strings.length != 0) {
+			return "," + strings[0];
+		} else {
+			return "";
+		}
+	}
+
+	public void plot(Matrix matrix, String... format) throws Exception {
+		execute("X11()");
 		setMatrix("jdmpmatrix", matrix);
-		execute("plot(jdmpmatrix);");
-		execute("plot(jdmpmatrix);");
+		execute("plot(jdmpmatrix" + toString(format) + ")");
+	}
+
+	public void pairs(Matrix matrix, String... format) throws Exception {
+		execute("X11()");
+		setMatrix("jdmpmatrix", matrix);
+		execute("pairs(jdmpmatrix" + toString(format) + ")");
+	}
+
+	public void qqnorm(Matrix matrix, String... format) throws Exception {
+		execute("X11()");
+		setMatrix("jdmpmatrix", matrix);
+		execute("qqnorm(jdmpmatrix" + toString(format) + ")");
+	}
+
+	public void hist(Matrix matrix, String... format) throws Exception {
+		execute("X11()");
+		setMatrix("jdmpmatrix", matrix);
+		execute("hist(jdmpmatrix" + toString(format) + ")");
+	}
+
+	public void image(Matrix matrix, String... format) throws Exception {
+		execute("X11()");
+		setMatrix("jdmpmatrix", matrix);
+		execute("image(jdmpmatrix" + toString(format) + ")");
+	}
+
+	public void boxplot(Matrix matrix, String... format) throws Exception {
+		execute("X11()");
+		setMatrix("jdmpmatrix", matrix);
+		execute("boxplot(jdmpmatrix" + toString(format) + ")");
+	}
+
+	public void closeLastFigure() throws Exception {
+		execute("dev.off()");
 	}
 
 }

@@ -29,6 +29,9 @@ public class MatlabPanel extends JPanel {
 		add(new JButton(new BarAction()));
 		add(new JButton(new BarhAction()));
 		add(new JButton(new StemAction()));
+		add(new JButton(new PieAction()));
+		add(new JButton(new Pie3Action()));
+		add(new JButton(new PairsAction()));
 	}
 
 	class ScatterPlotAction extends AbstractAction {
@@ -166,6 +169,51 @@ public class MatlabPanel extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			try {
 				Matlab.getInstance().stem(matrix.getMatrix());
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
+
+	class PairsAction extends AbstractAction {
+
+		public PairsAction() {
+			super("Pairs");
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			try {
+				Matlab.getInstance().pairs(matrix.getMatrix(), "x");
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
+
+	class PieAction extends AbstractAction {
+
+		public PieAction() {
+			super("Pie Chart");
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			try {
+				Matlab.getInstance().pie(matrix.getMatrix());
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
+
+	class Pie3Action extends AbstractAction {
+
+		public Pie3Action() {
+			super("3D Pie Chart");
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			try {
+				Matlab.getInstance().pie3(matrix.getMatrix());
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
