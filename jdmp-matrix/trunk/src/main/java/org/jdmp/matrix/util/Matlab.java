@@ -233,20 +233,10 @@ public class Matlab {
 		execute("pie3(jdmpmatrix" + toString(format) + ");");
 	}
 
-	public void pairs(Matrix matrix, String... format) throws Exception {
+	public void plotmatrix(Matrix matrix, String... format) throws Exception {
+		setMatrix("jdmpmatrix", matrix);
 		execute("figure;");
-		long cols = matrix.getColumnCount();
-		for (int r = 0; r < cols; r++) {
-			for (int c = 0; c < cols; c++) {
-				long i = r * cols + c;
-				Matrix x = matrix.selectColumns(Ret.NEW, r);
-				Matrix y = matrix.selectColumns(Ret.NEW, c);
-				execute("subplot(" + cols + "," + cols + "," + (i + 1) + ");");
-				setMatrix("jdmpmatrix_x", x);
-				setMatrix("jdmpmatrix_y", y);
-				execute("plot(jdmpmatrix_x,jdmpmatrix_y" + toString(format) + ");");
-			}
-		}
+		execute("plotmatrix(jdmpmatrix" + toString(format) + ");");
 	}
 
 	public void plot(Matrix x, Matrix y, String... format) throws Exception {

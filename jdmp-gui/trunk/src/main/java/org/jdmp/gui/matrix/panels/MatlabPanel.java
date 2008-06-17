@@ -183,7 +183,7 @@ public class MatlabPanel extends JPanel {
 
 		public void actionPerformed(ActionEvent e) {
 			try {
-				Matlab.getInstance().pairs(matrix.getMatrix(), "x");
+				Matlab.getInstance().plotmatrix(matrix.getMatrix());
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
