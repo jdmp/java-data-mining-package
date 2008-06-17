@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Random;
 
 import org.jdmp.core.sample.ClassificationSample;
-import org.jdmp.core.sample.RegressionSample;
+import org.jdmp.core.sample.DefaultSample;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.sample.SampleFactory;
 import org.jdmp.matrix.Matrix;
@@ -48,7 +48,7 @@ public abstract class DataSetFactory {
 				q1 = q;
 			}
 
-			Sample s = new RegressionSample("Sample " + si);
+			Sample s = new DefaultSample("Sample " + si);
 			s.setMatrix(Sample.INPUT, input);
 			s.setMatrix(Sample.TARGET, target);
 
@@ -94,7 +94,7 @@ public abstract class DataSetFactory {
 				target.setDouble(x, 0, i);
 			}
 
-			Sample s = new RegressionSample("Sample " + si);
+			Sample s = new DefaultSample("Sample " + si);
 			s.setMatrix(Sample.INPUT, input);
 			s.setMatrix(Sample.TARGET, target);
 

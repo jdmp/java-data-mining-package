@@ -3,7 +3,7 @@ package org.jdmp.core.dataset;
 import org.jdmp.core.matrix.wrappers.DataSetDesiredOutputMatrixWrapper;
 import org.jdmp.core.matrix.wrappers.DataSetInputOutputMatrixWrapper;
 import org.jdmp.core.matrix.wrappers.DataSetOutputMatrixWrapper;
-import org.jdmp.core.sample.RegressionSample;
+import org.jdmp.core.sample.DefaultSample;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.DefaultVariable;
 import org.jdmp.core.variable.Variable;
@@ -37,7 +37,7 @@ public class RegressionDataSet extends BasicDataSet {
 			throws MatrixException {
 		RegressionDataSet ds = new RegressionDataSet();
 		for (int i = 0; i < input.getRowCount(); i++) {
-			RegressionSample s = new RegressionSample();
+			Sample s = new DefaultSample();
 			Matrix in = input.subMatrix(Ret.NEW, i, 0, i, input.getColumnCount() - 1);
 			Matrix out = target.subMatrix(Ret.NEW, i, 0, i, target.getColumnCount() - 1);
 			s.setMatrix(Sample.INPUT, in);
@@ -51,7 +51,7 @@ public class RegressionDataSet extends BasicDataSet {
 		this(label);
 		long count = input.getRowCount();
 		for (int i = 0; i < count; i++) {
-			RegressionSample s = new RegressionSample();
+			Sample s = new DefaultSample();
 
 			Matrix si = input.subMatrix(Ret.LINK, i, 0, i, input.getColumnCount() - 1);
 			Matrix so = target.subMatrix(Ret.LINK, i, 0, i, target.getColumnCount() - 1);
@@ -146,10 +146,6 @@ public class RegressionDataSet extends BasicDataSet {
 			outputMatrix = new DataSetOutputMatrixWrapper(this);
 		}
 		return outputMatrix;
-	}
-
-	public RegressionSample getSample(int pos) {
-		return (RegressionSample) super.getSample(pos);
 	}
 
 	public double getRMSE() throws MatrixException {

@@ -20,7 +20,14 @@ public class DefaultSample extends AbstractSample {
 
 	public DefaultSample clone() {
 		DefaultSample s = new DefaultSample();
-		s.setMatrix(INPUT, getMatrix(INPUT).clone());
+		Matrix input = getMatrix(INPUT);
+		if (input != null) {
+			s.setMatrix(INPUT, input.clone());
+		}
+		Matrix target = getMatrix(TARGET);
+		if (target != null) {
+			s.setMatrix(TARGET, target.clone());
+		}
 		return s;
 	}
 

@@ -1,7 +1,6 @@
 package org.jdmp.core.algorithm.clustering;
 
 import org.jdmp.core.dataset.RegressionDataSet;
-import org.jdmp.core.sample.RegressionSample;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.matrix.Matrix;
 
@@ -17,7 +16,7 @@ public interface Clusterer {
 
 	public void train(RegressionDataSet dataSet) throws Exception;
 
-	public void predict(RegressionSample sample) throws Exception;
+	public void predict(Sample sample) throws Exception;
 
 	public void predict(RegressionDataSet dataSet) throws Exception;
 

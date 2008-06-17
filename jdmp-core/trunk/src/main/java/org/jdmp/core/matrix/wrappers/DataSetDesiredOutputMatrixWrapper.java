@@ -1,7 +1,6 @@
 package org.jdmp.core.matrix.wrappers;
 
 import org.jdmp.core.dataset.RegressionDataSet;
-import org.jdmp.core.sample.RegressionSample;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.Wrapper;
@@ -18,7 +17,7 @@ public class DataSetDesiredOutputMatrixWrapper extends AbstractDenseDoubleMatrix
 	}
 
 	public long[] getSize() {
-		RegressionSample p = dataSet.getSample(0);
+		Sample p = dataSet.getSample(0);
 		if (p == null) {
 			return new long[] { 0, 0 };
 		}
@@ -28,7 +27,7 @@ public class DataSetDesiredOutputMatrixWrapper extends AbstractDenseDoubleMatrix
 	public double getDouble(long... coordinates) throws MatrixException {
 		int row = (int) coordinates[ROW];
 		int col = (int) coordinates[COLUMN];
-		RegressionSample p = dataSet.getSample(row);
+		Sample p = dataSet.getSample(row);
 		if (p != null) {
 			return p.getMatrix(Sample.TARGET).getDouble(0, col);
 		} else {
@@ -39,7 +38,7 @@ public class DataSetDesiredOutputMatrixWrapper extends AbstractDenseDoubleMatrix
 	public void setDouble(double value, long... coordinates) throws MatrixException {
 		int row = (int) coordinates[ROW];
 		int col = (int) coordinates[COLUMN];
-		RegressionSample p = dataSet.getSample(row);
+		Sample p = dataSet.getSample(row);
 		if (p != null) {
 			p.getMatrix(Sample.TARGET).setDouble(value, 0, col);
 		}

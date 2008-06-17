@@ -8,7 +8,6 @@ import org.jdmp.core.algorithm.basic.AlgorithmDifference;
 import org.jdmp.core.dataset.ClassificationDataSet;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.sample.ClassificationSample;
-import org.jdmp.core.sample.RegressionSample;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
@@ -35,7 +34,7 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 	public abstract void train(Matrix input, Matrix sampleWeight, Matrix desiredOutput)
 			throws Exception;
 
-	public final void predict(RegressionSample sample) throws Exception {
+	public final void predict(Sample sample) throws Exception {
 		Matrix predicted = predict(sample.getMatrix(INPUT), sample.getMatrix(WEIGHT));
 		sample.setMatrix(PREDICTED, predicted);
 		List<Matrix> error = getOutputErrorAlgorithm().calculate(predicted,
@@ -66,7 +65,7 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 		return null;
 	}
 
-	public final void train(RegressionSample sample) throws Exception {
+	public final void train(Sample sample) throws Exception {
 		Matrix input = sample.getMatrix(INPUT);
 		Matrix weight = sample.getMatrix(WEIGHT);
 		Matrix target = sample.getMatrix(TARGET);
@@ -88,9 +87,9 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 
 		for (Sample sample : dataSet.getSampleList()) {
 
-			predict((RegressionSample) sample);
+			predict(sample);
 
-			double rmse = ((RegressionSample) sample).getMatrix(RMSE).getEuklideanValue();
+			double rmse = sample.getMatrix(RMSE).getEuklideanValue();
 			error += Math.pow(rmse, 2.0);
 
 			if (sample instanceof ClassificationSample) {

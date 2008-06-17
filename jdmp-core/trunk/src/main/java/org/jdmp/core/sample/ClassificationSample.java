@@ -4,7 +4,7 @@ import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public class ClassificationSample extends RegressionSample {
+public class ClassificationSample extends DefaultSample {
 	private static final long serialVersionUID = 7327527059314579381L;
 
 	public ClassificationSample(String label) {

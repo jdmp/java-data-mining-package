@@ -1,7 +1,7 @@
 package org.jdmp.core.algorithm.regression;
 
 import org.jdmp.core.dataset.RegressionDataSet;
-import org.jdmp.core.sample.RegressionSample;
+import org.jdmp.core.sample.Sample;
 import org.jdmp.matrix.Matrix;
 
 public interface Regressor {
@@ -24,7 +24,7 @@ public interface Regressor {
 
 	public void train(Matrix input, Matrix sampleWeight, Matrix target) throws Exception;
 
-	public void predict(RegressionSample sample) throws Exception;
+	public void predict(Sample sample) throws Exception;
 
 	public Matrix predict(Matrix input) throws Exception;
 
@@ -32,7 +32,7 @@ public interface Regressor {
 
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception;
 
-	public void train(RegressionSample sample) throws Exception;
+	public void train(Sample sample) throws Exception;
 
 	public void predict(RegressionDataSet dataSet) throws Exception;
 

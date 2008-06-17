@@ -1,7 +1,6 @@
 package org.jdmp.core.matrix.wrappers;
 
 import org.jdmp.core.dataset.RegressionDataSet;
-import org.jdmp.core.sample.RegressionSample;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.exceptions.MatrixException;
@@ -19,7 +18,7 @@ public class DataSetOutputMatrixWrapper extends AbstractDenseDoubleMatrix2D impl
 	}
 
 	public long[] getSize() {
-		RegressionSample p = dataSet.getSample(0);
+		Sample p = dataSet.getSample(0);
 		if (p == null) {
 			return new long[] { 0, 0 };
 		}
@@ -35,7 +34,7 @@ public class DataSetOutputMatrixWrapper extends AbstractDenseDoubleMatrix2D impl
 	public double getDouble(long... coordinates) throws MatrixException {
 		int row = (int) coordinates[ROW];
 		int col = (int) coordinates[COLUMN];
-		RegressionSample p = dataSet.getSample(row);
+		Sample p = dataSet.getSample(row);
 		if (p != null) {
 			if (p.getMatrix(Sample.PREDICTED) != null) {
 				long r = col / p.getMatrix(Sample.PREDICTED).getColumnCount();
@@ -49,7 +48,7 @@ public class DataSetOutputMatrixWrapper extends AbstractDenseDoubleMatrix2D impl
 	public void setDouble(double value, long... coordinates) throws MatrixException {
 		int row = (int) coordinates[ROW];
 		int col = (int) coordinates[COLUMN];
-		RegressionSample p = dataSet.getSample(row);
+		Sample p = dataSet.getSample(row);
 		if (p != null) {
 			if (p.getMatrix(Sample.PREDICTED) != null) {
 				long r = col / p.getMatrix(Sample.PREDICTED).getColumnCount();
