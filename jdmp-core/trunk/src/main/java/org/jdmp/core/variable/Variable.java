@@ -1,6 +1,5 @@
 package org.jdmp.core.variable;
 
-import java.io.File;
 import java.io.InputStream;
 
 import javax.swing.Icon;
@@ -15,13 +14,9 @@ import org.jdmp.matrix.interfaces.HasMatrixList;
 
 public interface Variable extends CoreObject, HasLabel, HasDescription, HasMatrix, HasMatrixList {
 
-	public void exportToM(File filename);
-
 	public long[] getSize();
 
 	public void setSize(long... size);
-
-	public void exportToPLT(File pltFile);
 
 	public void loadTSP(InputStream is);
 
@@ -64,8 +59,6 @@ public interface Variable extends CoreObject, HasLabel, HasDescription, HasMatri
 	public void plus(double v) throws MatrixException;
 
 	public void fillWithValue(double v) throws MatrixException;
-
-	public Icon getIcon();
 
 	public void setMemorySize(int size);
 

@@ -1,8 +1,16 @@
 package org.jdmp.gui.matrix;
 
+import java.awt.Component;
+import java.awt.image.BufferedImage;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 
 import org.jdmp.core.util.FastListSelectionModel;
@@ -297,6 +305,42 @@ public class MatrixGUIObject extends AbstractGUIObject implements TableModel,
 	public void setEntriesUniform_(double min, double max) throws MatrixException {
 		new Rand(matrix).calc(Ret.ORIG);
 		fireValueChanged();
+	}
+
+	public final Icon getIcon() {
+		try {
+			TableModel dataModel = new AbstractTableModel() {
+				private static final long serialVersionUID = 5562866897873790623L;
+
+				public int getColumnCount() {
+					return 1;
+				}
+
+				public int getRowCount() {
+					return 1;
+				}
+
+				public Object getValueAt(int row, int col) {
+					return this;
+				}
+			};
+			JTable table = new JTable(dataModel);
+			table.getColumnModel().getColumn(0).setWidth(32);
+			table.setRowHeight(32);
+
+			int WIDTH = table.getColumnModel().getColumn(0).getWidth() - 1;
+			int HEIGHT = table.getRowHeight(0) - 1;
+
+			Class<?> cl = Class.forName("org.jdmp.gui.matrix.MatrixRenderer");
+			DefaultTableCellRenderer mr = (DefaultTableCellRenderer) cl.newInstance();
+			Component c = mr.getTableCellRendererComponent(table, this, false, false, 0, 0);
+			BufferedImage bi = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+			c.paint(bi.getGraphics());
+			return new ImageIcon(bi);
+
+		} catch (Exception e) {
+			return new ImageIcon("resources/icons/rebuild.png");
+		}
 	}
 
 }

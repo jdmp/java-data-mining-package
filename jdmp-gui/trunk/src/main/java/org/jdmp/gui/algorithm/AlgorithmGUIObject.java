@@ -1,5 +1,7 @@
 package org.jdmp.gui.algorithm;
 
+import javax.swing.Icon;
+
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.gui.AbstractGUIObject;
 
@@ -18,6 +20,10 @@ public class AlgorithmGUIObject extends AbstractGUIObject {
 
 	public Algorithm getAlgorithm() {
 		return algorithm;
+	}
+
+	public Icon getIcon() {
+		return null;
 	}
 
 }

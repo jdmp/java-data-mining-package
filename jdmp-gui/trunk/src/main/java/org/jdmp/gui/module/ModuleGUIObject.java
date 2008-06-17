@@ -1,5 +1,7 @@
 package org.jdmp.gui.module;
 
+import javax.swing.Icon;
+
 import org.jdmp.core.module.Module;
 import org.jdmp.gui.AbstractGUIObject;
 
@@ -14,6 +16,10 @@ public class ModuleGUIObject extends AbstractGUIObject {
 
 	public void clear() {
 		module.clear();
+	}
+
+	public Icon getIcon() {
+		return null;
 	}
 
 }

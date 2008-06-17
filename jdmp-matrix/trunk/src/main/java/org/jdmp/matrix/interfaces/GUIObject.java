@@ -25,6 +25,8 @@ package org.jdmp.matrix.interfaces;
 
 import java.io.Serializable;
 
+import javax.swing.Icon;
+
 /**
  * A GUIObject is an object that can be displayed in a Frame. This interface is
  * needed to indicate that an object can be displayed when the package
@@ -46,5 +48,7 @@ public interface GUIObject extends Serializable, Cloneable, HasLabel, HasDescrip
 	public void showGUI();
 
 	public void clear();
+
+	public Icon getIcon();
 
 }

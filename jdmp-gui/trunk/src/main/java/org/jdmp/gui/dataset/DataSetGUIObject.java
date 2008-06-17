@@ -1,5 +1,7 @@
 package org.jdmp.gui.dataset;
 
+import javax.swing.Icon;
+
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.gui.AbstractGUIObject;
 
@@ -18,6 +20,10 @@ public class DataSetGUIObject extends AbstractGUIObject {
 
 	public void clear() {
 		dataSet.clear();
+	}
+	
+	public Icon getIcon() {
+		return null;
 	}
 
 }

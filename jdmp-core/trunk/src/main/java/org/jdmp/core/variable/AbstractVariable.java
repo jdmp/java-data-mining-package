@@ -48,17 +48,7 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 		super();
 	}
 
-	public final void exportToM(File filename) {
-		try {
-			if (!filename.getAbsolutePath().toLowerCase().endsWith(".m"))
-				filename = new File(filename.getAbsolutePath() + ".m");
-			IntelligentFileWriter out = new IntelligentFileWriter(filename);
-			out.write("plot(1,1);");
-			out.close();
-		} catch (Exception e) {
-			logger.log(Level.WARNING, "could not save Matlab file", e);
-		}
-	}
+	
 
 	public final long[] getSize() {
 		return size;
@@ -68,9 +58,7 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 		this.size = Coordinates.copyOf(size);
 	}
 
-	public final void exportToPLT(File pltFile) {
-		ExportPLT.save(pltFile, this);
-	}
+	
 
 	public final void loadTSP(InputStream is) {
 		String line = null;
@@ -291,45 +279,8 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 		addMatrix(m);
 	}
 
-	public final Icon getIcon() {
-		try {
-			TableModel dataModel = new AbstractTableModel() {
-				private static final long serialVersionUID = 5562866897873790623L;
+	
 
-				public int getColumnCount() {
-					return 1;
-				}
-
-				public int getRowCount() {
-					return 1;
-				}
-
-				public Object getValueAt(int row, int col) {
-					return getMatrix();
-				}
-			};
-			JTable table = new JTable(dataModel);
-			table.getColumnModel().getColumn(0).setWidth(32);
-			table.setRowHeight(32);
-
-			int WIDTH = table.getColumnModel().getColumn(0).getWidth() - 1;
-			int HEIGHT = table.getRowHeight(0) - 1;
-
-			Class<?> cl = Class.forName("org.jdmp.gui.matrix.MatrixRenderer");
-			DefaultTableCellRenderer mr = (DefaultTableCellRenderer) cl.newInstance();
-			Component c = mr.getTableCellRendererComponent(table, getMatrix(), false, false, 0, 0);
-			BufferedImage bi = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
-			c.paint(bi.getGraphics());
-			return new ImageIcon(bi);
-
-		} catch (Exception e) {
-			return new ImageIcon("resources/icons/rebuild.png");
-		}
-	}
-
-	public abstract void setMemorySize(int size);
-
-	public abstract void convertIntToVector(int numberOfClasses) throws MatrixException;
 
 	public final long getRowCount() {
 		return getSize()[ROW];

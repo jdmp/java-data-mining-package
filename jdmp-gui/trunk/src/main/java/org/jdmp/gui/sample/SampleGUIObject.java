@@ -1,5 +1,7 @@
 package org.jdmp.gui.sample;
 
+import javax.swing.Icon;
+
 import org.jdmp.core.sample.Sample;
 import org.jdmp.gui.AbstractGUIObject;
 
@@ -17,6 +19,10 @@ public class SampleGUIObject extends AbstractGUIObject {
 
 	public Sample getSample() {
 		return sample;
+	}
+
+	public Icon getIcon() {
+		return null;
 	}
 
 }
