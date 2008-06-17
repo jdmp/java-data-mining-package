@@ -129,7 +129,7 @@ public class R {
 	}
 
 	public synchronized void shutdown() throws Exception {
-		sendToR("exit");
+		sendToR("q()");
 		rProcess.waitFor();
 		output.close();
 		input.close();
