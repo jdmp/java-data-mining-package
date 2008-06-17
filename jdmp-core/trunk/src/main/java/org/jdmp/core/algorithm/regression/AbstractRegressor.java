@@ -40,7 +40,7 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 		sample.setOutputMatrix(output);
 		List<Matrix> error = getOutputErrorAlgorithm().calculate(output,
 				sample.getDesiredOutputMatrix());
-		sample.setOutputErrorMatrix(error.get(0));
+		sample.setMatrix(DIFFERENCE, error.get(0));
 		sample.setMatrix(RMSE, MatrixFactory.linkToValue(error.get(0).getRMS()));
 	}
 

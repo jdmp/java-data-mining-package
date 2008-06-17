@@ -2,6 +2,7 @@ package org.jdmp.core.matrix.wrappers;
 
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.sample.RegressionSample;
+import org.jdmp.core.sample.Sample;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.Wrapper;
@@ -50,7 +51,7 @@ public class DataSetOutputMatrixWrapper extends AbstractDenseDoubleMatrix2D impl
 		int col = (int) coordinates[COLUMN];
 		RegressionSample p = dataSet.getSample(row);
 		if (p != null) {
-			if (p.getOutputErrorMatrix() != null) {
+			if (p.getOutputMatrix() != null) {
 				long r = col / p.getOutputMatrix().getColumnCount();
 				long c = col % p.getOutputMatrix().getColumnCount();
 				p.getOutputMatrix().setDouble(value, r, c);

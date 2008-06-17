@@ -10,7 +10,6 @@ import javax.swing.table.TableCellRenderer;
 
 import org.jdmp.core.algorithm.regression.Regressor;
 import org.jdmp.core.sample.DefaultSample;
-import org.jdmp.core.sample.RegressionSample;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.gui.matrix.MatrixRenderer;
@@ -47,65 +46,24 @@ public class SampleTableCellRenderer implements TableCellRenderer {
 			case SampleListTableModel.LABELCOLUMN:
 				o = sample.getLabel();
 				break;
-
 			case SampleListTableModel.INPUTCOLUMN:
-				v = sample.getVariableList().get(Sample.INPUT);
-				if (v != null) {
-					return matrixRenderer.getTableCellRendererComponent(table, v.getMatrix(),
-							isSelected, hasFocus, row, column);
-				} else {
-					o = "n/a";
-				}
-				break;
-
+				return matrixRenderer.getTableCellRendererComponent(table, sample
+						.getMatrix(Sample.INPUT), isSelected, hasFocus, row, column);
 			case SampleListTableModel.PREDICTEDCOLUMN:
-				if (sample instanceof RegressionSample) {
-					v = ((RegressionSample) sample).getOutputVariable();
-					if (v != null) {
-						return matrixRenderer.getTableCellRendererComponent(table, v.getMatrix(),
-								isSelected, hasFocus, row, column);
-					}
-				} else {
-					o = "n/a";
-				}
-				break;
-
+				return matrixRenderer.getTableCellRendererComponent(table, sample
+						.getMatrix(Sample.PREDICTED), isSelected, hasFocus, row, column);
 			case SampleListTableModel.WEIGHTCOLUMN:
-				v = sample.getVariableList().get(WEIGHT);
-				if (v == null) {
-					return matrixRenderer.getTableCellRendererComponent(table, null, isSelected,
-							hasFocus, row, column);
-				}
-				if (v != null) {
-					return matrixRenderer.getTableCellRendererComponent(table, v.getMatrix(),
-							isSelected, hasFocus, row, column);
-				}
-				break;
+				return matrixRenderer.getTableCellRendererComponent(table, sample
+						.getMatrix(Sample.WEIGHT), isSelected, hasFocus, row, column);
 			case SampleListTableModel.TARGETCOLUMN:
-				if (sample instanceof RegressionSample) {
-					v = ((RegressionSample) sample).getDesiredOutputVariable();
-					if (v != null) {
-						return matrixRenderer.getTableCellRendererComponent(table, v.getMatrix(),
-								isSelected, hasFocus, row, column);
-					}
-				} else {
-					o = "n/a";
-				}
-				break;
+				return matrixRenderer.getTableCellRendererComponent(table, sample
+						.getMatrix(Sample.TARGET), isSelected, hasFocus, row, column);
 			case SampleListTableModel.RMSECOLUMN:
 				return matrixRenderer.getTableCellRendererComponent(table, sample
 						.getMatrix(Sample.RMSE), isSelected, hasFocus, row, column);
 			case SampleListTableModel.DIFFERENCECOLUMN:
-				if (sample instanceof RegressionSample) {
-					v = ((RegressionSample) sample).getOutputErrorVariable();
-					if (v != null) {
-						return matrixRenderer.getTableCellRendererComponent(table, v.getMatrix(),
-								isSelected, hasFocus, row, column);
-					}
-				} else {
-					o = "n/a";
-				}
-				break;
+				return matrixRenderer.getTableCellRendererComponent(table, sample
+						.getMatrix(Sample.DIFFERENCE), isSelected, hasFocus, row, column);
 			default:
 				o = "";
 				break;

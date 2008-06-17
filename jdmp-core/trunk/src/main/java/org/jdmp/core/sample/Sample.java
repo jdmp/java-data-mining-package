@@ -17,6 +17,8 @@ public interface Sample extends CoreObject, HasVariableMap {
 
 	public static final Object RMSE = Regressor.RMSE;
 
+	public static final Object DIFFERENCE = Regressor.DIFFERENCE;
+
 	public Sample clone();
 
 	public Matrix getMatrix(Object variableKey);

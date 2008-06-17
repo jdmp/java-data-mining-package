@@ -1,6 +1,5 @@
 package org.jdmp.core.sample;
 
-import org.jdmp.core.algorithm.regression.Regressor;
 import org.jdmp.core.variable.DefaultVariable;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.matrix.Matrix;
@@ -24,28 +23,19 @@ public class RegressionSample extends DefaultSample {
 	}
 
 	public Variable getOutputVariable() {
-		Variable v = getVariableList().get(Regressor.PREDICTED);
+		Variable v = getVariableList().get(PREDICTED);
 		if (v == null) {
 			v = new DefaultVariable("Output");
-			getVariableList().put(Regressor.PREDICTED, v);
+			getVariableList().put(PREDICTED, v);
 		}
 		return v;
 	}
 
 	public Variable getDesiredOutputVariable() {
-		Variable v = getVariableList().get(Regressor.TARGET);
+		Variable v = getVariableList().get(TARGET);
 		if (v == null) {
 			v = new DefaultVariable("Desired Output");
-			getVariableList().put(Regressor.TARGET, v);
-		}
-		return v;
-	}
-
-	public Variable getOutputErrorVariable() {
-		Variable v = getVariableList().get(Regressor.DIFFERENCE);
-		if (v == null) {
-			v = new DefaultVariable("Output Error");
-			getVariableList().put(Regressor.DIFFERENCE, v);
+			getVariableList().put(TARGET, v);
 		}
 		return v;
 	}
@@ -62,16 +52,8 @@ public class RegressionSample extends DefaultSample {
 		return getDesiredOutputVariable().getMatrix();
 	}
 
-	public Matrix getOutputErrorMatrix() {
-		return getOutputErrorVariable().getMatrix();
-	}
-
 	public Matrix getOutputMatrix() {
 		return getOutputVariable().getMatrix();
-	}
-
-	public void setOutputErrorMatrix(Matrix outputError) {
-		getOutputErrorVariable().addMatrix(outputError);
 	}
 
 }
