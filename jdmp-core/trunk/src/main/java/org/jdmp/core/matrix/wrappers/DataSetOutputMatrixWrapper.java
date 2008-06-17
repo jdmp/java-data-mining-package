@@ -23,7 +23,7 @@ public class DataSetOutputMatrixWrapper extends AbstractDenseDoubleMatrix2D impl
 		if (p == null) {
 			return new long[] { 0, 0 };
 		}
-		Matrix output = p.getOutputMatrix();
+		Matrix output = p.getMatrix(Sample.PREDICTED);
 		if (output != null) {
 			return new long[] { dataSet.getSampleCount(), output.getValueCount() };
 		} else {
@@ -37,10 +37,10 @@ public class DataSetOutputMatrixWrapper extends AbstractDenseDoubleMatrix2D impl
 		int col = (int) coordinates[COLUMN];
 		RegressionSample p = dataSet.getSample(row);
 		if (p != null) {
-			if (p.getOutputMatrix() != null) {
-				long r = col / p.getOutputMatrix().getColumnCount();
-				long c = col % p.getOutputMatrix().getColumnCount();
-				return p.getOutputMatrix().getDouble(r, c);
+			if (p.getMatrix(Sample.PREDICTED) != null) {
+				long r = col / p.getMatrix(Sample.PREDICTED).getColumnCount();
+				long c = col % p.getMatrix(Sample.PREDICTED).getColumnCount();
+				return p.getMatrix(Sample.PREDICTED).getDouble(r, c);
 			}
 		}
 		return 0.0;
@@ -51,10 +51,10 @@ public class DataSetOutputMatrixWrapper extends AbstractDenseDoubleMatrix2D impl
 		int col = (int) coordinates[COLUMN];
 		RegressionSample p = dataSet.getSample(row);
 		if (p != null) {
-			if (p.getOutputMatrix() != null) {
-				long r = col / p.getOutputMatrix().getColumnCount();
-				long c = col % p.getOutputMatrix().getColumnCount();
-				p.getOutputMatrix().setDouble(value, r, c);
+			if (p.getMatrix(Sample.PREDICTED) != null) {
+				long r = col / p.getMatrix(Sample.PREDICTED).getColumnCount();
+				long c = col % p.getMatrix(Sample.PREDICTED).getColumnCount();
+				p.getMatrix(Sample.PREDICTED).setDouble(value, r, c);
 			}
 		}
 	}

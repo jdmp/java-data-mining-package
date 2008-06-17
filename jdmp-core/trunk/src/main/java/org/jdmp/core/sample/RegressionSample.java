@@ -22,15 +22,6 @@ public class RegressionSample extends DefaultSample {
 		return s;
 	}
 
-	public Variable getOutputVariable() {
-		Variable v = getVariableList().get(PREDICTED);
-		if (v == null) {
-			v = new DefaultVariable("Output");
-			getVariableList().put(PREDICTED, v);
-		}
-		return v;
-	}
-
 	public Variable getDesiredOutputVariable() {
 		Variable v = getVariableList().get(TARGET);
 		if (v == null) {
@@ -40,20 +31,12 @@ public class RegressionSample extends DefaultSample {
 		return v;
 	}
 
-	public void setOutputMatrix(Matrix output) {
-		getOutputVariable().addMatrix(output);
-	}
-
 	public void setDesiredOutputMatrix(Matrix output) {
 		getDesiredOutputVariable().addMatrix(output);
 	}
 
 	public Matrix getDesiredOutputMatrix() {
 		return getDesiredOutputVariable().getMatrix();
-	}
-
-	public Matrix getOutputMatrix() {
-		return getOutputVariable().getMatrix();
 	}
 
 }

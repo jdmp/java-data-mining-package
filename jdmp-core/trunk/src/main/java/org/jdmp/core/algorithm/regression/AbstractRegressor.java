@@ -36,9 +36,9 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 			throws Exception;
 
 	public final void predict(RegressionSample sample) throws Exception {
-		Matrix output = predict(sample.getMatrix(INPUT), sample.getMatrix(WEIGHT));
-		sample.setOutputMatrix(output);
-		List<Matrix> error = getOutputErrorAlgorithm().calculate(output,
+		Matrix predicted = predict(sample.getMatrix(INPUT), sample.getMatrix(WEIGHT));
+		sample.setMatrix(PREDICTED, predicted);
+		List<Matrix> error = getOutputErrorAlgorithm().calculate(predicted,
 				sample.getDesiredOutputMatrix());
 		sample.setMatrix(DIFFERENCE, error.get(0));
 		sample.setMatrix(RMSE, MatrixFactory.linkToValue(error.get(0).getRMS()));

@@ -15,10 +15,10 @@ public class ClassificationSample extends RegressionSample {
 		super();
 	}
 
-	public ClassificationSample(Matrix input, Matrix output) {
+	public ClassificationSample(Matrix input, Matrix target) {
 		super();
 		setMatrix(INPUT, input);
-		setDesiredOutputMatrix(output);
+		setMatrix(TARGET, target);
 	}
 
 	public boolean isCorrect() throws MatrixException {
@@ -42,7 +42,7 @@ public class ClassificationSample extends RegressionSample {
 	}
 
 	public int getRecognizedClass() throws MatrixException {
-		return (int) getOutputMatrix().getCoordinatesOfMaximum()[COLUMN];
+		return (int) getMatrix(PREDICTED).getCoordinatesOfMaximum()[COLUMN];
 	}
 
 }
