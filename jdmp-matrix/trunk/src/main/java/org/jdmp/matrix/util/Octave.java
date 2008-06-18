@@ -35,8 +35,8 @@ import org.jdmp.matrix.Matrix.Format;
 
 public class Octave {
 
-	public static final String[] SEARCH = new String[] { "/usr/bin/octave",
-			"/opt/octave/bin/octave" };
+	public static final String[] SEARCH = new String[] { System.getProperty("Octave"),
+			"/usr/bin/octave", "/opt/octave/bin/octave" };
 
 	public static final int POLLINTERVAL = 100;
 
@@ -151,16 +151,14 @@ public class Octave {
 
 	private static String findOctave() {
 		if (pathToOctave == null) {
-			File file = new File(System.getProperty("user.home") + "/octave/bin/octave");
-			if (file.exists()) {
-				pathToOctave = file.getAbsolutePath();
-				return pathToOctave;
-			}
+			File file = null;
 			for (String s : SEARCH) {
-				file = new File(s);
-				if (file.exists()) {
-					pathToOctave = file.getAbsolutePath();
-					return pathToOctave;
+				if (s != null) {
+					file = new File(s);
+					if (file.exists()) {
+						pathToOctave = file.getAbsolutePath();
+						return pathToOctave;
+					}
 				}
 			}
 		}

@@ -32,11 +32,11 @@ import java.io.OutputStreamWriter;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.Matrix.Format;
-import org.jdmp.matrix.calculation.Calculation.Ret;
 
 public class Matlab {
 
-	public static final String[] SEARCH = new String[] { "/usr/bin/matlab",
+	public static final String[] SEARCH = new String[] { System.getProperty("Matlab"),
+			System.getProperty("user.home") + "/matlab/bin/matlab", "/usr/bin/matlab",
 			"/opt/matlab/bin/matlab" };
 
 	public static final String MATLABPARAMETERS = "-nosplash -nojvm";
@@ -64,16 +64,14 @@ public class Matlab {
 
 	private static String findMatlab() {
 		if (pathToMatlab == null) {
-			File file = new File(System.getProperty("user.home") + "/matlab/bin/matlab");
-			if (file.exists()) {
-				pathToMatlab = file.getAbsolutePath();
-				return pathToMatlab;
-			}
+			File file = null;
 			for (String s : SEARCH) {
-				file = new File(s);
-				if (file.exists()) {
-					pathToMatlab = file.getAbsolutePath();
-					return pathToMatlab;
+				if (s != null) {
+					file = new File(s);
+					if (file.exists()) {
+						pathToMatlab = file.getAbsolutePath();
+						return pathToMatlab;
+					}
 				}
 			}
 		}

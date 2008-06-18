@@ -36,7 +36,8 @@ import org.jdmp.matrix.Matrix.Format;
 
 public class R {
 
-	public static final String[] SEARCH = new String[] { "/usr/bin/R", "/opt/R/bin/R" };
+	public static final String[] SEARCH = new String[] { System.getProperty("R"), "/usr/bin/R",
+			"/opt/R/bin/R" };
 
 	public static final int POLLINTERVAL = 100;
 
@@ -157,13 +158,15 @@ public class R {
 	}
 
 	private static String findR() {
-		File file = null;
 		if (pathToR == null) {
+			File file = null;
 			for (String s : SEARCH) {
-				file = new File(s);
-				if (file.exists()) {
-					pathToR = file.getAbsolutePath();
-					return pathToR;
+				if (s != null) {
+					file = new File(s);
+					if (file.exists()) {
+						pathToR = file.getAbsolutePath();
+						return pathToR;
+					}
 				}
 			}
 		}
