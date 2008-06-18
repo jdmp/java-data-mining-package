@@ -25,7 +25,7 @@ package org.jdmp.matrix;
 
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public interface BooleanMatrix extends GenericMatrix<Boolean> {
+public interface BooleanMatrix extends Matrix {
 
 	/**
 	 * Returns a byte representation of an entry in the matrix. The stored value

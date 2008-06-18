@@ -25,7 +25,7 @@ package org.jdmp.matrix;
 
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public interface FloatMatrix extends GenericMatrix<Float> {
+public interface FloatMatrix extends Matrix {
 
 	/**
 	 * Returns a float representation of an entry in the matrix. The stored

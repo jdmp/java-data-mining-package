@@ -39,7 +39,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
-import org.jdmp.matrix.GenericMatrix;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.annotation.Annotation;
@@ -118,7 +117,7 @@ import org.jdmp.matrix.util.JDMPSettings;
 import org.jdmp.matrix.util.MathUtil;
 import org.jdmp.matrix.util.StringUtil;
 
-public abstract class AbstractGenericMatrix<A> implements GenericMatrix<A> {
+public abstract class AbstractGenericMatrix<A> implements Matrix {
 
 	/**
 	 * A logger used for <code>Matrix</code> and all subclasses

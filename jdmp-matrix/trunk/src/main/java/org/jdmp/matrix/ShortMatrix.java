@@ -27,7 +27,7 @@ import java.util.Date;
 
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public interface ShortMatrix extends GenericMatrix<Short> {
+public interface ShortMatrix extends Matrix {
 
 	/**
 	 * Returns a short representation of an entry in the matrix. The stored

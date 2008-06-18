@@ -27,7 +27,7 @@ import java.util.Date;
 
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public interface DateMatrix extends GenericMatrix<Date> {
+public interface DateMatrix extends Matrix {
 
 	/**
 	 * Returns a Date representation of an entry in the matrix. The stored value

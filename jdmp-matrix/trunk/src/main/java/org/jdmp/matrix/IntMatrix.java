@@ -25,7 +25,7 @@ package org.jdmp.matrix;
 
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public interface IntMatrix extends GenericMatrix<Integer> {
+public interface IntMatrix extends Matrix {
 
 	/**
 	 * Returns an int representation of an entry in the matrix. The stored value

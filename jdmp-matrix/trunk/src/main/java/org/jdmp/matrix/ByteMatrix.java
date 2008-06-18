@@ -25,7 +25,7 @@ package org.jdmp.matrix;
 
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public interface ByteMatrix extends GenericMatrix<Byte> {
+public interface ByteMatrix extends Matrix {
 
 	/**
 	 * Returns a byte representation of an entry in the matrix. The stored value

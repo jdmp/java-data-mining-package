@@ -25,7 +25,7 @@ package org.jdmp.matrix;
 
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public interface CharMatrix extends GenericMatrix<Character> {
+public interface CharMatrix extends Matrix {
 
 	/**
 	 * Returns a char representation of an entry in the matrix. The stored value

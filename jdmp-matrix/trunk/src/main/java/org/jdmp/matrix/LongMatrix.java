@@ -25,7 +25,7 @@ package org.jdmp.matrix;
 
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public interface LongMatrix extends GenericMatrix<Long> {
+public interface LongMatrix extends Matrix {
 
 	/**
 	 * Returns a long representation of an entry in the matrix. The stored value
