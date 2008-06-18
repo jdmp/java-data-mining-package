@@ -15,24 +15,24 @@ import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.Wrapper;
 import org.jdmp.matrix.stubs.AbstractDenseDoubleMatrix2D;
 
-public class MTJFullDoubleMatrix2D extends AbstractDenseDoubleMatrix2D implements Wrapper<DenseMatrix> {
+public class MTJDenseDoubleMatrix2D extends AbstractDenseDoubleMatrix2D implements Wrapper<DenseMatrix> {
 	private static final long serialVersionUID = -2386081646062313108L;
 
 	private transient DenseMatrix matrix = null;
 
-	public MTJFullDoubleMatrix2D(DenseMatrix m) {
+	public MTJDenseDoubleMatrix2D(DenseMatrix m) {
 		this.matrix = m;
 	}
 
-	public MTJFullDoubleMatrix2D(Matrix m) throws MatrixException {
-		if (m instanceof MTJFullDoubleMatrix2D) {
-			this.matrix = ((MTJFullDoubleMatrix2D) m).matrix.copy();
+	public MTJDenseDoubleMatrix2D(Matrix m) throws MatrixException {
+		if (m instanceof MTJDenseDoubleMatrix2D) {
+			this.matrix = ((MTJDenseDoubleMatrix2D) m).matrix.copy();
 		} else {
 			this.matrix = new DenseMatrix(m.toDoubleArray());
 		}
 	}
 
-	public MTJFullDoubleMatrix2D(long... size) {
+	public MTJDenseDoubleMatrix2D(long... size) {
 		this.matrix = new DenseMatrix((int) size[ROW], (int) size[COLUMN]);
 	}
 
@@ -40,14 +40,14 @@ public class MTJFullDoubleMatrix2D extends AbstractDenseDoubleMatrix2D implement
 		DenseMatrix A = (DenseMatrix) this.getWrappedObject();
 		DenseMatrix I = Matrices.identity((int) getColumnCount());
 		DenseMatrix AI = I.copy();
-		return new MTJFullDoubleMatrix2D((DenseMatrix) A.solve(I, AI));
+		return new MTJDenseDoubleMatrix2D((DenseMatrix) A.solve(I, AI));
 	}
 
 	public Matrix[] svd() throws MatrixException {
 		try {
 			SVD svd = SVD.factorize(getWrappedObject());
-			Matrix u = new MTJFullDoubleMatrix2D(svd.getU());
-			Matrix v = new MTJFullDoubleMatrix2D(svd.getVt()).transpose();
+			Matrix u = new MTJDenseDoubleMatrix2D(svd.getU());
+			Matrix v = new MTJDenseDoubleMatrix2D(svd.getVt()).transpose();
 			double[] svs = svd.getS();
 			Matrix s = MatrixFactory.zeros(getSize());
 			for (int i = (int) Math.min(s.getRowCount(), s.getColumnCount()); --i >= 0;) {
@@ -76,7 +76,7 @@ public class MTJFullDoubleMatrix2D extends AbstractDenseDoubleMatrix2D implement
 	public Matrix transpose() {
 		// TODO: maybe this can be made faster using System.arraycopy()
 		DenseMatrix ret = new DenseMatrix((int) getColumnCount(), (int) getRowCount());
-		return new MTJFullDoubleMatrix2D((DenseMatrix) matrix.transpose(ret));
+		return new MTJDenseDoubleMatrix2D((DenseMatrix) matrix.transpose(ret));
 	}
 
 	public DenseMatrix getWrappedObject() {
@@ -99,54 +99,54 @@ public class MTJFullDoubleMatrix2D extends AbstractDenseDoubleMatrix2D implement
 	}
 
 	public Matrix mtimes(Matrix m2) throws MatrixException {
-		if (m2 instanceof MTJFullDoubleMatrix2D) {
+		if (m2 instanceof MTJDenseDoubleMatrix2D) {
 			DenseMatrix a = matrix;
-			DenseMatrix b = ((MTJFullDoubleMatrix2D) m2).getWrappedObject();
+			DenseMatrix b = ((MTJDenseDoubleMatrix2D) m2).getWrappedObject();
 			DenseMatrix c = new DenseMatrix(a.numRows(), b.numColumns());
 			a.mult(b, c);
-			return new MTJFullDoubleMatrix2D(c);
+			return new MTJDenseDoubleMatrix2D(c);
 		} else {
 			return super.mtimes(m2);
 		}
 	}
 
 	public Matrix plus(Matrix m2) throws MatrixException {
-		if (m2 instanceof MTJFullDoubleMatrix2D) {
+		if (m2 instanceof MTJDenseDoubleMatrix2D) {
 			DenseMatrix a = new DenseMatrix(matrix.numRows(), matrix.numColumns());
 			System.arraycopy(matrix.getData(), 0, a.getData(), 0, matrix.getData().length);
-			DenseMatrix b = ((MTJFullDoubleMatrix2D) m2).getWrappedObject();
+			DenseMatrix b = ((MTJDenseDoubleMatrix2D) m2).getWrappedObject();
 			for (int i = a.getData().length; --i >= 0;) {
 				a.getData()[i] += b.getData()[i];
 			}
-			return new MTJFullDoubleMatrix2D(a);
+			return new MTJDenseDoubleMatrix2D(a);
 		} else {
 			return super.plus(m2);
 		}
 	}
 
 	public Matrix times(Matrix m2) throws MatrixException {
-		if (m2 instanceof MTJFullDoubleMatrix2D) {
+		if (m2 instanceof MTJDenseDoubleMatrix2D) {
 			DenseMatrix a = new DenseMatrix(matrix.numRows(), matrix.numColumns());
 			System.arraycopy(matrix.getData(), 0, a.getData(), 0, matrix.getData().length);
-			DenseMatrix b = ((MTJFullDoubleMatrix2D) m2).getWrappedObject();
+			DenseMatrix b = ((MTJDenseDoubleMatrix2D) m2).getWrappedObject();
 			for (int i = a.getData().length; --i >= 0;) {
 				a.getData()[i] *= b.getData()[i];
 			}
-			return new MTJFullDoubleMatrix2D(a);
+			return new MTJDenseDoubleMatrix2D(a);
 		} else {
 			return super.plus(m2);
 		}
 	}
 
 	public Matrix minus(Matrix m2) throws MatrixException {
-		if (m2 instanceof MTJFullDoubleMatrix2D) {
+		if (m2 instanceof MTJDenseDoubleMatrix2D) {
 			DenseMatrix a = new DenseMatrix(matrix.numRows(), matrix.numColumns());
 			System.arraycopy(matrix.getData(), 0, a.getData(), 0, matrix.getData().length);
-			DenseMatrix b = ((MTJFullDoubleMatrix2D) m2).getWrappedObject();
+			DenseMatrix b = ((MTJDenseDoubleMatrix2D) m2).getWrappedObject();
 			for (int i = a.getData().length; --i >= 0;) {
 				a.getData()[i] -= b.getData()[i];
 			}
-			return new MTJFullDoubleMatrix2D(a);
+			return new MTJDenseDoubleMatrix2D(a);
 		} else {
 			return super.minus(m2);
 		}
@@ -197,8 +197,8 @@ public class MTJFullDoubleMatrix2D extends AbstractDenseDoubleMatrix2D implement
 	}
 
 	public Matrix minus(Ret returnType, boolean ignoreNaN, Matrix m2) throws MatrixException {
-		if (m2 instanceof MTJFullDoubleMatrix2D) {
-			DenseMatrix b = ((MTJFullDoubleMatrix2D) m2).getWrappedObject();
+		if (m2 instanceof MTJDenseDoubleMatrix2D) {
+			DenseMatrix b = ((MTJDenseDoubleMatrix2D) m2).getWrappedObject();
 
 			if (ignoreNaN) {
 				switch (returnType) {
@@ -254,7 +254,7 @@ public class MTJFullDoubleMatrix2D extends AbstractDenseDoubleMatrix2D implement
 		for (int i = a.getData().length; --i >= 0;) {
 			a.getData()[i] -= f;
 		}
-		return new MTJFullDoubleMatrix2D(a);
+		return new MTJDenseDoubleMatrix2D(a);
 	}
 
 	public Matrix plus(double f) throws MatrixException {
@@ -263,7 +263,7 @@ public class MTJFullDoubleMatrix2D extends AbstractDenseDoubleMatrix2D implement
 		for (int i = a.getData().length; --i >= 0;) {
 			a.getData()[i] += f;
 		}
-		return new MTJFullDoubleMatrix2D(a);
+		return new MTJDenseDoubleMatrix2D(a);
 	}
 
 	public Matrix times(double f) throws MatrixException {
@@ -272,7 +272,7 @@ public class MTJFullDoubleMatrix2D extends AbstractDenseDoubleMatrix2D implement
 		for (int i = a.getData().length; --i >= 0;) {
 			a.getData()[i] *= f;
 		}
-		return new MTJFullDoubleMatrix2D(a);
+		return new MTJDenseDoubleMatrix2D(a);
 	}
 
 	public Matrix divide(double f) throws MatrixException {
@@ -281,11 +281,11 @@ public class MTJFullDoubleMatrix2D extends AbstractDenseDoubleMatrix2D implement
 		for (int i = a.getData().length; --i >= 0;) {
 			a.getData()[i] /= f;
 		}
-		return new MTJFullDoubleMatrix2D(a);
+		return new MTJDenseDoubleMatrix2D(a);
 	}
 
 	public Matrix copy() {
-		return new MTJFullDoubleMatrix2D(matrix.copy());
+		return new MTJDenseDoubleMatrix2D(matrix.copy());
 	}
 
 	public boolean containsNaN() {
