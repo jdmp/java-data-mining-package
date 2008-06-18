@@ -23,6 +23,40 @@
 
 package org.jdmp.matrix;
 
+import org.jdmp.matrix.exceptions.MatrixException;
+
 public interface IntMatrix extends GenericMatrix<Integer> {
+
+	/**
+	 * Returns an int representation of an entry in the matrix. The stored value
+	 * will be converted to an int as good as possible.
+	 * 
+	 * @param coordinates
+	 *            location of the entry
+	 * @return an int representation of the entry
+	 * @throws MatrixException
+	 */
+	public int getInt(long... coordinates) throws MatrixException;
+
+	/**
+	 * Sets an entry in the matrix to an int value. If the matrix cannot store
+	 * int values, the value will be represented as good as possible.
+	 * 
+	 * @param value
+	 *            int value
+	 * @param coordinates
+	 *            location of the entry
+	 * @throws MatrixException
+	 */
+	public void setInt(int value, long... coordinates) throws MatrixException;
+
+	/**
+	 * Converts the content of a matrix into a 2-dimensional array of int
+	 * values.
+	 * 
+	 * @return int array with matrix entries
+	 * @throws MatrixException
+	 */
+	public int[][] toIntArray() throws MatrixException;
 
 }

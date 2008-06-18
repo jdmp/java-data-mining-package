@@ -53,7 +53,7 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 			// for all features
 			logs[i] = Math.log(classDists.getProbability(i));
 			for (int j = 0; j < input.getColumnCount(); j++) {
-				int val = input.getInt(0, j);
+				int val = (int) input.getDouble(0, j);
 				logs[i] += Math.log(dists[j][i].getProbability((double) val));
 			}
 		}
@@ -104,7 +104,7 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 
 		for (int i = 0; i < featureCount; i++) {
 			for (int j = 0; j < classCount; j++) {
-				dists[i][j] = new DiscreteDensityEstimator(max.getInt(0, i) + 1, true);
+				dists[i][j] = new DiscreteDensityEstimator((int) max.getDouble(0, i) + 1, true);
 			}
 		}
 
@@ -118,9 +118,9 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 			if (w != null) {
 				weight = w.getEuklideanValue();
 			}
-			int outputVal = sampleTarget.getInt(0, 0);
+			int outputVal = (int) sampleTarget.getDouble(0, 0);
 			for (int j = 0; j < sampleInput.getColumnCount(); j++) {
-				int inputVal = sampleInput.getInt(0, j);
+				int inputVal = (int) sampleInput.getDouble(0, j);
 				dists[j][outputVal].addValue((double) inputVal, weight);
 			}
 			classDists.addValue(outputVal, weight);

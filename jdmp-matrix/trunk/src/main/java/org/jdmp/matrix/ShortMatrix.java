@@ -23,6 +23,42 @@
 
 package org.jdmp.matrix;
 
+import java.util.Date;
+
+import org.jdmp.matrix.exceptions.MatrixException;
+
 public interface ShortMatrix extends GenericMatrix<Short> {
+
+	/**
+	 * Returns a short representation of an entry in the matrix. The stored
+	 * value will be converted to a short as good as possible.
+	 * 
+	 * @param coordinates
+	 *            location of the entry
+	 * @return a short representation of the entry
+	 * @throws MatrixException
+	 */
+	public short getShort(long... coordinates) throws MatrixException;
+
+	/**
+	 * Sets an entry in the matrix to a short value. If the matrix cannot store
+	 * short values, the value will be represented as good as possible.
+	 * 
+	 * @param value
+	 *            short value
+	 * @param coordinates
+	 *            location of the entry
+	 * @throws MatrixException
+	 */
+	public void setShort(short value, long... coordinates) throws MatrixException;
+
+	/**
+	 * Converts the content of a matrix into a 2-dimensional array of Date
+	 * values.
+	 * 
+	 * @return Date array with matrix entries
+	 * @throws MatrixException
+	 */
+	public Date[][] toDateArray() throws MatrixException;
 
 }

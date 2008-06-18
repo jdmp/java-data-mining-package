@@ -25,6 +25,40 @@ package org.jdmp.matrix;
 
 import java.util.Date;
 
+import org.jdmp.matrix.exceptions.MatrixException;
+
 public interface DateMatrix extends GenericMatrix<Date> {
+
+	/**
+	 * Returns a Date representation of an entry in the matrix. The stored value
+	 * will be converted to a Date object as good as possible.
+	 * 
+	 * @param coordinates
+	 *            location of the entry
+	 * @return a String representation of the entry
+	 * @throws MatrixException
+	 */
+	public Date getDate(long... coordinates) throws MatrixException;
+
+	/**
+	 * Sets an entry in the matrix to a Date value. If the matrix cannot store
+	 * Date objects, the value will be represented as good as possible.
+	 * 
+	 * @param value
+	 *            Date object to store
+	 * @param coordinates
+	 *            location of the entry
+	 * @throws MatrixException
+	 */
+	public void setDate(Date date, long... coordinates) throws MatrixException;
+
+	/**
+	 * Converts the content of a matrix into a 2-dimensional array of Date
+	 * values.
+	 * 
+	 * @return Date array with matrix entries
+	 * @throws MatrixException
+	 */
+	public Date[][] toDateArray() throws MatrixException;
 
 }

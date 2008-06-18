@@ -25,6 +25,7 @@ package org.jdmp.matrix.implementations.basic;
 
 import java.util.logging.Level;
 
+import org.jdmp.matrix.IntMatrix;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.exceptions.MatrixException;
@@ -86,7 +87,7 @@ public class DefaultDenseIntMatrix2D extends AbstractDenseIntMatrix2D {
 	}
 
 	public void setDouble(double value, long... coordinates) {
-		values[(int) coordinates[ROW]][(int) coordinates[COLUMN]] = (int)value;
+		values[(int) coordinates[ROW]][(int) coordinates[COLUMN]] = (int) value;
 	}
 
 	public int getInt(long... coordinates) {
@@ -97,8 +98,7 @@ public class DefaultDenseIntMatrix2D extends AbstractDenseIntMatrix2D {
 		values[(int) coordinates[ROW]][(int) coordinates[COLUMN]] = value;
 	}
 
-	
-	public final Matrix transpose() {
+	public final IntMatrix transpose() {
 		int[][] result = new int[values[0].length][values.length];
 		for (int r = result.length; --r >= 0;) {
 			for (int c = result[0].length; --c >= 0;) {
@@ -108,8 +108,8 @@ public class DefaultDenseIntMatrix2D extends AbstractDenseIntMatrix2D {
 		return new DefaultDenseIntMatrix2D(result);
 	}
 
-	public final Matrix plus(double v) {
-		int vInt = (int)v;
+	public final IntMatrix plus(double v) {
+		int vInt = (int) v;
 		int[][] result = new int[values.length][values[0].length];
 		for (int r = result.length; --r >= 0;) {
 			for (int c = result[0].length; --c >= 0;) {
@@ -119,8 +119,8 @@ public class DefaultDenseIntMatrix2D extends AbstractDenseIntMatrix2D {
 		return new DefaultDenseIntMatrix2D(result);
 	}
 
-	public final Matrix minus(double v) {
-		int vInt = (int)v;
+	public final IntMatrix minus(double v) {
+		int vInt = (int) v;
 		int[][] result = new int[values.length][values[0].length];
 		for (int r = result.length; --r >= 0;) {
 			for (int c = result[0].length; --c >= 0;) {
@@ -130,8 +130,8 @@ public class DefaultDenseIntMatrix2D extends AbstractDenseIntMatrix2D {
 		return new DefaultDenseIntMatrix2D(result);
 	}
 
-	public final Matrix times(double v) {
-		int vInt = (int)v;
+	public final IntMatrix times(double v) {
+		int vInt = (int) v;
 		int[][] result = new int[values.length][values[0].length];
 		for (int r = result.length; --r >= 0;) {
 			for (int c = result[0].length; --c >= 0;) {
@@ -141,8 +141,8 @@ public class DefaultDenseIntMatrix2D extends AbstractDenseIntMatrix2D {
 		return new DefaultDenseIntMatrix2D(result);
 	}
 
-	public final Matrix divide(double v) {
-		int vInt = (int)v;
+	public final IntMatrix divide(double v) {
+		int vInt = (int) v;
 		int[][] result = new int[values.length][values[0].length];
 		for (int r = result.length; --r >= 0;) {
 			for (int c = result[0].length; --c >= 0;) {
@@ -152,7 +152,7 @@ public class DefaultDenseIntMatrix2D extends AbstractDenseIntMatrix2D {
 		return new DefaultDenseIntMatrix2D(result);
 	}
 
-	public final Matrix plus(Matrix m2) throws MatrixException {
+	public final IntMatrix plus(IntMatrix m2) throws MatrixException {
 		int[][] result = new int[values.length][values[0].length];
 		for (int r = result.length; --r >= 0;) {
 			for (int c = result[0].length; --c >= 0;) {
@@ -162,7 +162,7 @@ public class DefaultDenseIntMatrix2D extends AbstractDenseIntMatrix2D {
 		return new DefaultDenseIntMatrix2D(result);
 	}
 
-	public final Matrix minus(Matrix m2) throws MatrixException {
+	public final IntMatrix minus(IntMatrix m2) throws MatrixException {
 		int[][] result = new int[values.length][values[0].length];
 		for (int r = result.length; --r >= 0;) {
 			for (int c = result[0].length; --c >= 0;) {
@@ -172,7 +172,7 @@ public class DefaultDenseIntMatrix2D extends AbstractDenseIntMatrix2D {
 		return new DefaultDenseIntMatrix2D(result);
 	}
 
-	public final Matrix times(Matrix m2) throws MatrixException {
+	public final IntMatrix times(IntMatrix m2) throws MatrixException {
 		int[][] result = new int[values.length][values[0].length];
 		for (int r = result.length; --r >= 0;) {
 			for (int c = result[0].length; --c >= 0;) {
@@ -182,7 +182,7 @@ public class DefaultDenseIntMatrix2D extends AbstractDenseIntMatrix2D {
 		return new DefaultDenseIntMatrix2D(result);
 	}
 
-	public final Matrix divide(Matrix m2) throws MatrixException {
+	public final IntMatrix divide(IntMatrix m2) throws MatrixException {
 		int[][] result = new int[values.length][values[0].length];
 		for (int r = result.length; --r >= 0;) {
 			for (int c = result[0].length; --c >= 0;) {
@@ -192,7 +192,7 @@ public class DefaultDenseIntMatrix2D extends AbstractDenseIntMatrix2D {
 		return new DefaultDenseIntMatrix2D(result);
 	}
 
-	public Matrix mtimes(Matrix matrix) throws MatrixException {
+	public IntMatrix mtimes(IntMatrix matrix) throws MatrixException {
 		if (values[0].length != matrix.getRowCount()) {
 			logger.log(Level.WARNING, "matrices have wrong size: "
 					+ Coordinates.toString(getSize()) + " and "

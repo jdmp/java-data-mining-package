@@ -27,69 +27,61 @@ import java.util.Iterator;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import org.jdmp.matrix.DoubleMatrix;
+import org.jdmp.matrix.LongMatrix;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
+import org.jdmp.matrix.Matrix.EntryType;
 import org.jdmp.matrix.calculation.AbstractObjectCalculation;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.Sortable;
 
-
 /**
- * Sorts the rows of a matrix 
- *
+ * Sorts the rows of a matrix
+ * 
  * 
  * 
  */
 public class Sort extends AbstractObjectCalculation {
-  private static final long serialVersionUID = -6935375114060680121L;
+	private static final long serialVersionUID = -6935375114060680121L;
 
-  private DoubleMatrix index = null;
+	private LongMatrix index = null;
 
-
-
-  public Sort(Matrix m) {
-    super(m);
-  }
-
-
-
-  @Override
-  public Object getObject(long... coordinates) throws MatrixException {
-    if (index == null) {
-    	createSortIndex();
-    }
-    return getSource().getObject(coordinates[0],index.getLong(coordinates));
-  }
-  
-  private void createSortIndex() {
-	  Matrix m = getSource();
-	  DoubleMatrix indexMatrix = (DoubleMatrix)MatrixFactory.zeros(m.getSize());
-	for (long i = 0; i < m.getRowCount(); i++) {
-		SortedSet<Sortable<?,Long>> sortedSet = new TreeSet<Sortable<?,Long>>();
-		for (long j = 0; j < m.getColumnCount(); j++) {
-			Comparable c = (Comparable)m.getObject(i,j);
-			Sortable<?,Long> s = new Sortable(c,j,true);
-			sortedSet.add(s);
-		}
-		Iterator<Sortable<?,Long>> it = sortedSet.iterator();
-		long j = 0;
-		while(it.hasNext()) {
-			Sortable<?,Long> s = it.next();
-			long index = s.getObject();
-			indexMatrix.setLong(index, i,j);
-			j++;
-		}
+	public Sort(Matrix m) {
+		super(m);
 	}
-	this.index = indexMatrix;
-  }
 
+	@Override
+	public Object getObject(long... coordinates) throws MatrixException {
+		if (index == null) {
+			createSortIndex();
+		}
+		return getSource().getObject(coordinates[0], index.getLong(coordinates));
+	}
 
+	private void createSortIndex() {
+		Matrix m = getSource();
+		LongMatrix indexMatrix = (LongMatrix) MatrixFactory.zeros(EntryType.LONG, m.getSize());
+		for (long i = 0; i < m.getRowCount(); i++) {
+			SortedSet<Sortable<?, Long>> sortedSet = new TreeSet<Sortable<?, Long>>();
+			for (long j = 0; j < m.getColumnCount(); j++) {
+				Comparable c = (Comparable) m.getObject(i, j);
+				Sortable<?, Long> s = new Sortable(c, j, true);
+				sortedSet.add(s);
+			}
+			Iterator<Sortable<?, Long>> it = sortedSet.iterator();
+			long j = 0;
+			while (it.hasNext()) {
+				Sortable<?, Long> s = it.next();
+				long index = s.getObject();
+				indexMatrix.setLong(index, i, j);
+				j++;
+			}
+		}
+		this.index = indexMatrix;
+	}
 
-public DoubleMatrix getIndex() {
-	return index;
-}
-  
-  
+	public LongMatrix getIndex() {
+		return index;
+	}
 
 }

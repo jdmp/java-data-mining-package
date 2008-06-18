@@ -23,6 +23,40 @@
 
 package org.jdmp.matrix;
 
+import org.jdmp.matrix.exceptions.MatrixException;
+
 public interface ByteMatrix extends GenericMatrix<Byte> {
+
+	/**
+	 * Returns a byte representation of an entry in the matrix. The stored value
+	 * will be converted to a byte as good as possible.
+	 * 
+	 * @param coordinates
+	 *            location of the entry
+	 * @return a byte representation of the entry
+	 * @throws MatrixException
+	 */
+	public byte getByte(long... coordinates) throws MatrixException;
+
+	/**
+	 * Sets an entry in the matrix to a byte value. If the matrix cannot store
+	 * byte values, the value will be represented as good as possible.
+	 * 
+	 * @param value
+	 *            byte value
+	 * @param coordinates
+	 *            location of the entry
+	 * @throws MatrixException
+	 */
+	public void setByte(byte value, long... coordinates) throws MatrixException;
+
+	/**
+	 * Converts the content of a matrix into a 2-dimensional array of char
+	 * values.
+	 * 
+	 * @return char array with matrix entries
+	 * @throws MatrixException
+	 */
+	public char[][] toCharArray() throws MatrixException;
 
 }

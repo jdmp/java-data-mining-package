@@ -23,6 +23,40 @@
 
 package org.jdmp.matrix;
 
+import org.jdmp.matrix.exceptions.MatrixException;
+
 public interface LongMatrix extends GenericMatrix<Long> {
+
+	/**
+	 * Returns a long representation of an entry in the matrix. The stored value
+	 * will be converted to a long as good as possible.
+	 * 
+	 * @param coordinates
+	 *            location of the entry
+	 * @return a long representation of the entry
+	 * @throws MatrixException
+	 */
+	public long getLong(long... coordinates) throws MatrixException;
+
+	/**
+	 * Sets an entry in the matrix to a long value. If the matrix cannot store
+	 * long values, the value will be represented as good as possible.
+	 * 
+	 * @param value
+	 *            long value
+	 * @param coordinates
+	 *            location of the entry
+	 * @throws MatrixException
+	 */
+	public void setLong(long value, long... coordinates) throws MatrixException;
+
+	/**
+	 * Converts the content of a matrix into a 2-dimensional array of long
+	 * values.
+	 * 
+	 * @return long array with matrix entries
+	 * @throws MatrixException
+	 */
+	public long[][] toLongArray() throws MatrixException;
 
 }

@@ -23,6 +23,40 @@
 
 package org.jdmp.matrix;
 
+import org.jdmp.matrix.exceptions.MatrixException;
+
 public interface FloatMatrix extends GenericMatrix<Float> {
+
+	/**
+	 * Returns a float representation of an entry in the matrix. The stored
+	 * value will be converted to a float as good as possible.
+	 * 
+	 * @param coordinates
+	 *            location of the entry
+	 * @return a float representation of the entry
+	 * @throws MatrixException
+	 */
+	public float getFloat(long... coordinates) throws MatrixException;
+
+	/**
+	 * Sets an entry in the matrix to a float value. If the matrix cannot store
+	 * float values, the value will be represented as good as possible.
+	 * 
+	 * @param value
+	 *            float value
+	 * @param coordinates
+	 *            location of the entry
+	 * @throws MatrixException
+	 */
+	public void setFloat(float value, long... coordinates) throws MatrixException;
+
+	/**
+	 * Converts the content of a matrix into a 2-dimensional array of float
+	 * values.
+	 * 
+	 * @return float array with matrix entries
+	 * @throws MatrixException
+	 */
+	public float[][] toFloatArray() throws MatrixException;
 
 }

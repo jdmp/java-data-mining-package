@@ -13,33 +13,33 @@ public class DataSetToAttributeInfoWrapper extends FastVector {
 	public DataSetToAttributeInfoWrapper(RegressionDataSet dataSet, boolean discrete) {
 		super();
 
-//		for (Attribute f : dataSet.getAttributes()) {
-//			weka.core.Attribute a = null;
-//			if (f.isDiscrete()) {
-//				FastVector values = new FastVector();
-//				for (int i = 0; i < f.getValueCount(); i++) {
-//					values.addElement("Attribute " + i);
-//				}
-//				a = new weka.core.Attribute(f.getLabel(), values);
-//			} else {
-//				a = new weka.core.Attribute(f.getLabel());
-//			}
-//			addElement(a);
-//		}
-        Matrix valueCounts = dataSet.getInputMatrix().max(Ret.NEW, Matrix.ROW).plus(1);
-        for (int j = 0; j < dataSet.getInputMatrix().getColumnCount(); j++) {
-          weka.core.Attribute a = null;
-          if (discrete) {
-              FastVector values = new FastVector();
-              for (int i = 0; i < valueCounts.getInt(0,j); i++) {
-                  values.addElement("Attribute " + i);
-              }
-              a = new weka.core.Attribute(j+"", values);
-          } else {
-              a = new weka.core.Attribute(j+"");
-          }
-          addElement(a);
-      }
+		// for (Attribute f : dataSet.getAttributes()) {
+		// weka.core.Attribute a = null;
+		// if (f.isDiscrete()) {
+		// FastVector values = new FastVector();
+		// for (int i = 0; i < f.getValueCount(); i++) {
+		// values.addElement("Attribute " + i);
+		// }
+		// a = new weka.core.Attribute(f.getLabel(), values);
+		// } else {
+		// a = new weka.core.Attribute(f.getLabel());
+		// }
+		// addElement(a);
+		// }
+		Matrix valueCounts = dataSet.getInputMatrix().max(Ret.NEW, Matrix.ROW).plus(1);
+		for (int j = 0; j < dataSet.getInputMatrix().getColumnCount(); j++) {
+			weka.core.Attribute a = null;
+			if (discrete) {
+				FastVector values = new FastVector();
+				for (int i = 0; i < valueCounts.getDouble(0, j); i++) {
+					values.addElement("Attribute " + i);
+				}
+				a = new weka.core.Attribute(j + "", values);
+			} else {
+				a = new weka.core.Attribute(j + "");
+			}
+			addElement(a);
+		}
 
 		FastVector classes = new FastVector();
 		for (int i = 0; i < ((ClassificationDataSet) dataSet).getClassCount(); i++) {

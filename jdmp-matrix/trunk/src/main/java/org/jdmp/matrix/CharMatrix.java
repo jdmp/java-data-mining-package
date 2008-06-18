@@ -25,14 +25,38 @@ package org.jdmp.matrix;
 
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public interface ObjectMatrix extends GenericMatrix<Object> {
+public interface CharMatrix extends GenericMatrix<Character> {
 
 	/**
-	 * Converts the content of a matrix into a 2-dimensional array of Objects.
+	 * Returns a char representation of an entry in the matrix. The stored value
+	 * will be converted to a char as good as possible.
 	 * 
-	 * @return Object array with matrix entries
+	 * @param coordinates
+	 *            location of the entry
+	 * @return a char representation of the entry
 	 * @throws MatrixException
 	 */
-	public Object[][] toObjectArray() throws MatrixException;
+	public char getChar(long... coordinates) throws MatrixException;
+
+	/**
+	 * Sets an entry in the matrix to a char value. If the matrix cannot store
+	 * char values, the value will be represented as good as possible.
+	 * 
+	 * @param value
+	 *            char value
+	 * @param coordinates
+	 *            location of the entry
+	 * @throws MatrixException
+	 */
+	public void setChar(char value, long... coordinates) throws MatrixException;
+
+	/**
+	 * Converts the content of a matrix into a 2-dimensional array of char
+	 * values.
+	 * 
+	 * @return char array with matrix entries
+	 * @throws MatrixException
+	 */
+	public char[][] toCharArray() throws MatrixException;
 
 }

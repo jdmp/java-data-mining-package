@@ -23,6 +23,16 @@
 
 package org.jdmp.matrix;
 
+import org.jdmp.matrix.exceptions.MatrixException;
+
 public interface StringMatrix extends GenericMatrix<String> {
+
+	/**
+	 * Converts the content of a matrix into a 2-dimensional array of Strings.
+	 * 
+	 * @return String array with matrix entries
+	 * @throws MatrixException
+	 */
+	public String[][] toStringArray() throws MatrixException;
 
 }
