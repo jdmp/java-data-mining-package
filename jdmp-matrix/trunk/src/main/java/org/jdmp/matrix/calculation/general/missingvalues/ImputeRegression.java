@@ -42,7 +42,7 @@ public class ImputeRegression extends AbstractDoubleCalculation {
 
 	Matrix firstGuess = null;
 
-	Matrix imputedFinal = null;
+	Matrix imputed = null;
 
 	public ImputeRegression(Matrix matrix) {
 		super(matrix);
@@ -54,15 +54,12 @@ public class ImputeRegression extends AbstractDoubleCalculation {
 	}
 
 	public double getDouble(long... coordinates) throws MatrixException {
-		if (firstGuess == null) {
-			firstGuess = getSource().imputeMean(Ret.NEW, Matrix.ROW);
-		}
-		if (imputedFinal == null) {
+		if (imputed == null) {
 			createMatrix();
 		}
 		double v = getSource().getDouble(coordinates);
 		if (MathUtil.isNaNOrInfinite(v)) {
-			return imputedFinal.getDouble(coordinates);
+			return imputed.getDouble(coordinates);
 		} else {
 			return v;
 		}
@@ -72,16 +69,18 @@ public class ImputeRegression extends AbstractDoubleCalculation {
 		try {
 			Matrix x = getSource();
 
-			imputedFinal = MatrixFactory.zeros(x.getSize());
-			imputedFinal.showGUI();
+			if (firstGuess == null) {
+				firstGuess = getSource().imputeMean(Ret.NEW, Matrix.ROW);
+			}
+
+			imputed = MatrixFactory.zeros(x.getSize());
 
 			ExecutorService executor = Executors.newFixedThreadPool(1);
 			List<Future<Long>> futures = new ArrayList<Future<Long>>();
 
 			long t0 = System.currentTimeMillis();
 
-			// for (long c = 0; c < x.getColumnCount(); c++) {
-			for (long c = 0; c < 9; c++) {
+			for (long c = 0; c < x.getColumnCount(); c++) {
 				futures.add(executor.submit(new PredictColumn(c)));
 			}
 
@@ -89,10 +88,10 @@ public class ImputeRegression extends AbstractDoubleCalculation {
 				Long completedCols = f.get();
 				long elapsedTime = System.currentTimeMillis() - t0;
 				long remainingCols = x.getColumnCount() - completedCols;
-				double colsPerMillisecond = (double) completedCols / (double) elapsedTime;
+				double colsPerMillisecond = (double) (completedCols + 1) / (double) elapsedTime;
 				long remainingTime = (long) (remainingCols / colsPerMillisecond / 1000.0);
-				System.out.println((completedCols * 1000 / x.getColumnCount() / 10.0) + "% completed (" + remainingTime
-						+ " seconds remaining)");
+				System.out.println((completedCols * 1000 / x.getColumnCount() / 10.0)
+						+ "% completed (" + remainingTime + " seconds remaining)");
 			}
 
 			executor.shutdown();
@@ -113,14 +112,15 @@ public class ImputeRegression extends AbstractDoubleCalculation {
 		public Long call() throws Exception {
 			Matrix newColumn = replaceInColumn(getSource(), firstGuess, column);
 			for (int r = 0; r < newColumn.getRowCount(); r++) {
-				imputedFinal.setDouble(newColumn.getDouble(r, 0), r, column);
+				imputed.setDouble(newColumn.getDouble(r, 0), r, column);
 			}
 			return column;
 		}
 
 	}
 
-	private static Matrix replaceInColumn(Matrix original, Matrix firstGuess, long column) throws MatrixException {
+	private static Matrix replaceInColumn(Matrix original, Matrix firstGuess, long column)
+			throws MatrixException {
 
 		Matrix x = firstGuess.deleteColumns(Ret.NEW, column);
 		Matrix y = original.selectColumns(Ret.NEW, column);
@@ -133,14 +133,26 @@ public class ImputeRegression extends AbstractDoubleCalculation {
 			}
 		}
 
-		Matrix xtrain = x.deleteRows(Ret.NEW, missingRows);
+		if (missingRows.isEmpty()) {
+			return y;
+		}
+
+		Matrix xtrain = x.deleteRows(Ret.NEW, missingRows).addColumnWithOnes();
 		Matrix ytrain = y.deleteRows(Ret.NEW, missingRows);
 
 		Matrix xinv = xtrain.pinv();
 		Matrix b = xinv.mtimes(ytrain);
-		Matrix ypredicted = x.mtimes(b);
+		Matrix yPredicted = x.addColumnWithOnes().mtimes(b);
 
-		return ypredicted;
+		// set non-missing values back to original values
+		for (int row = 0; row < y.getRowCount(); row++) {
+			double v = y.getDouble(row, 0);
+			if (!Double.isNaN(v)) {
+				yPredicted.setDouble(v, row, 0);
+			}
+		}
+
+		return yPredicted;
 	}
 
 }

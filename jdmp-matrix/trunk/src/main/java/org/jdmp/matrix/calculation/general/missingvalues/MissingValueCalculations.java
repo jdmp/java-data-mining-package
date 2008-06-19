@@ -42,7 +42,8 @@ public interface MissingValueCalculations {
 	 * @return Matrix with missing values
 	 * @throws MatrixException
 	 */
-	public Matrix addMissing(Ret returnType, int dimension, double... percentMissing) throws MatrixException;
+	public Matrix addMissing(Ret returnType, int dimension, double... percentMissing)
+			throws MatrixException;
 
 	/**
 	 * Counts the missing values within the matrix, i.e. Infinity or NaN
@@ -126,12 +127,10 @@ public interface MissingValueCalculations {
 	 * @param returnType
 	 *            Select whether a new or a linked Matrix is returned, or if the
 	 *            operation is performed on the original Matrix
-	 * @param dimension
-	 *            The axis along which to calculate
 	 * @return Matrix with missing values replaced
 	 * @throws MatrixException
 	 */
-	public Matrix imputeEM(Ret returnType, int dimension) throws MatrixException;
+	public Matrix imputeEM(Ret returnType) throws MatrixException;
 
 	public Matrix deleteColumnsWithMissingValues(Ret returnType) throws MatrixException;
 

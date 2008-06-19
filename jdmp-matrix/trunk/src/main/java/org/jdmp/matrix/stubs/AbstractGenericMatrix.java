@@ -273,8 +273,8 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		return new ImputeRegression(this, firstGuess).calc(returnType);
 	}
 
-	public Matrix imputeEM(Ret returnType, int dimension) throws MatrixException {
-		return new ImputeEM(dimension, this).calc(returnType);
+	public Matrix imputeEM(Ret returnType) throws MatrixException {
+		return new ImputeEM( this).calc(returnType);
 	}
 
 // public Matrix imputeRescale(Ret returnType, int dimension) throws

@@ -20,6 +20,7 @@ import org.jdmp.gui.io.ExportJPEG;
 import org.jdmp.gui.io.ExportPDF;
 import org.jdmp.gui.io.ExportPNG;
 
+import edu.uci.ics.jung.exceptions.FatalException;
 import edu.uci.ics.jung.graph.ArchetypeEdge;
 import edu.uci.ics.jung.graph.ArchetypeVertex;
 import edu.uci.ics.jung.graph.Graph;
@@ -43,8 +44,8 @@ import edu.uci.ics.jung.visualization.contrib.KKLayout;
 import edu.uci.ics.jung.visualization.control.DefaultModalGraphMouse;
 import edu.uci.ics.jung.visualization.control.ModalGraphMouse;
 
-public abstract class JungGraphPanel extends VisualizationViewer implements MouseListener, ComponentListener,
-		GraphEventListener, CanBeRepainted, CanRenderGraph {
+public abstract class JungGraphPanel extends VisualizationViewer implements MouseListener,
+		ComponentListener, GraphEventListener, CanBeRepainted, CanRenderGraph {
 	private static final long serialVersionUID = 5056858150031378990L;
 
 	protected static final Logger logger = Logger.getLogger(JungGraphPanel.class.getName());
@@ -68,8 +69,8 @@ public abstract class JungGraphPanel extends VisualizationViewer implements Mous
 	private BufferedImage bufferedImage = null;
 
 	public JungGraphPanel() {
-		super(new DefaultVisualizationModel(new FRLayout(new DirectedSparseGraph())), new PluggableRenderer(),
-				new Dimension(800, 600));
+		super(new DefaultVisualizationModel(new FRLayout(new DirectedSparseGraph())),
+				new PluggableRenderer(), new Dimension(800, 600));
 
 		addComponentListener(this);
 
@@ -100,7 +101,8 @@ public abstract class JungGraphPanel extends VisualizationViewer implements Mous
 				if (font == null) {
 					font = new Font(g.getFont().getName(), Font.ITALIC, 10);
 					metrics = g.getFontMetrics(font);
-					swidth = metrics.stringWidth(GlobalConfiguration.getInstance().getVersionLabel());
+					swidth = metrics.stringWidth(GlobalConfiguration.getInstance()
+							.getVersionLabel());
 					sheight = metrics.getMaxAscent() + metrics.getMaxDescent();
 					x = (d.width - swidth - 10);
 					y = (int) (d.height - sheight * 1.5);
@@ -175,9 +177,14 @@ public abstract class JungGraphPanel extends VisualizationViewer implements Mous
 			((LayoutMutable) getModel().getGraphLayout()).update();
 		}
 		if (!isVisRunnerRunning()) {
-			init();
+			try {
+				init();
+			} catch (FatalException e) {
+				System.out.println("Fatal Error in JungGraphPanel");
+			}
 		}
-		BufferedImage tempBufferedImage = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+		BufferedImage tempBufferedImage = new BufferedImage(getWidth(), getHeight(),
+				BufferedImage.TYPE_INT_RGB);
 		Graphics g = tempBufferedImage.getGraphics();
 		super.paintComponent(g);
 		g.dispose();
