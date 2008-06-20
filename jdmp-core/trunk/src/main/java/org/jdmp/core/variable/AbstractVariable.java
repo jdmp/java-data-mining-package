@@ -46,14 +46,7 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 		}
 	}
 
-	public final Matrix getMatrixCopy() {
-		Matrix m = getMatrix();
-		if (m != null) {
-			return m.clone();
-		} else {
-			return null;
-		}
-	}
+
 
 	public final Matrix getMatrix(int index) {
 		if (getMatrixList() == null)
@@ -61,14 +54,7 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 		return getMatrixList().get(index);
 	}
 
-	public final Matrix getMatrixCopy(int index) {
-		Matrix m = getMatrix(index);
-		if (m == null) {
-			return null;
-		} else {
-			return m.clone();
-		}
-	}
+	
 
 
 	public final double getValue() throws MatrixException {

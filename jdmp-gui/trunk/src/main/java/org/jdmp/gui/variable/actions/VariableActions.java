@@ -13,7 +13,6 @@ public class VariableActions extends ObjectActions {
 
 	public VariableActions(JComponent c, VariableGUIObject v) {
 		super(c, v);
-		this.add(new JMenuItem(new LoadWKNAction(c, v)));
 		this.add(new JMenuItem(new FillUniformAction(c, v)));
 		this.add(new JMenuItem(new FillGaussianAction(c, v)));
 		this.add(new JMenuItem(new FillWithValueAction(c, v)));

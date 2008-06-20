@@ -46,9 +46,6 @@ public class SingleMatrixVariable extends AbstractVariable {
 		return m == null ? new long[] { 0, 0 } : m.getSize();
 	}
 
-	public void setMemorySize(int size) {
-	}
-
 	public void setSize(long... size) {
 	}
 

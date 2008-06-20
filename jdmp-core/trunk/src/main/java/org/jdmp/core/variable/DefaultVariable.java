@@ -128,8 +128,4 @@ public class DefaultVariable extends AbstractVariable {
 		this.matrixList = history;
 	}
 
-	public void setMemorySize(int size) {
-		matrixList.setMaxCount(size);
-	}
-
 }

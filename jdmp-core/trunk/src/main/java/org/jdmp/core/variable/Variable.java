@@ -16,10 +16,6 @@ public interface Variable extends CoreObject, HasLabel, HasDescription, HasMatri
 
 	public int getMemorySize();
 
-	public Matrix getMatrixCopy();
-
-	public Matrix getMatrixCopy(int index);
-
 	public double getValue() throws MatrixException;
 
 	public void setValue(double value);
@@ -39,8 +35,6 @@ public interface Variable extends CoreObject, HasLabel, HasDescription, HasMatri
 	public int getIndexOfMatrix(Matrix m);
 
 	public void clear();
-
-	public void setMemorySize(int size);
 
 	public long getRowCount();
 
