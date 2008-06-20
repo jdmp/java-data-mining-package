@@ -28,11 +28,18 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import javax.swing.DefaultListSelectionModel;
+import javax.swing.ListSelectionModel;
+
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.exceptions.MatrixException;
 
 public class DefaultMatrixList extends AbstractMatrixList {
 	private static final long serialVersionUID = -908619462706136008L;
+
+	private ListSelectionModel rowSelectionModel = null;
+
+	private ListSelectionModel columnSelectionModel = null;
 
 	private RingBufferList<Matrix> matrixList = new RingBufferList<Matrix>();
 
@@ -185,6 +192,20 @@ public class DefaultMatrixList extends AbstractMatrixList {
 
 	public void setMaxCount(int maxCount) {
 		matrixList = new RingBufferList<Matrix>(maxCount);
+	}
+
+	public ListSelectionModel getRowSelectionModel() {
+		if (rowSelectionModel == null) {
+			rowSelectionModel = new DefaultListSelectionModel();
+		}
+		return rowSelectionModel;
+	}
+
+	public ListSelectionModel getColumnSelectionModel() {
+		if (columnSelectionModel == null) {
+			columnSelectionModel = new DefaultListSelectionModel();
+		}
+		return columnSelectionModel;
 	}
 
 }

@@ -23,21 +23,9 @@
 
 package org.jdmp.matrix.collections;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.swing.DefaultListSelectionModel;
-import javax.swing.ListSelectionModel;
-
 import org.jdmp.matrix.Matrix;
 
 public abstract class AbstractMatrixList implements MatrixList {
-
-	protected static final Logger logger = Logger.getLogger(MatrixList.class.getName());
-
-	private ListSelectionModel rowSelectionModel = null;
-
-	private ListSelectionModel columnSelectionModel = null;
 
 	public final synchronized Matrix getFirst() {
 		if (isEmpty()) {
@@ -64,7 +52,7 @@ public abstract class AbstractMatrixList implements MatrixList {
 			}
 			return ret;
 		} catch (Exception e) {
-			logger.log(Level.WARNING, "could not return trace " + i);
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -86,20 +74,6 @@ public abstract class AbstractMatrixList implements MatrixList {
 	public final long getTraceCount() {
 		Matrix m = getFirst();
 		return (m == null) ? 0 : m.getColumnCount() * m.getRowCount();
-	}
-
-	public ListSelectionModel getRowSelectionModel() {
-		if (rowSelectionModel == null) {
-			rowSelectionModel = new DefaultListSelectionModel();
-		}
-		return rowSelectionModel;
-	}
-
-	public ListSelectionModel getColumnSelectionModel() {
-		if (columnSelectionModel == null) {
-			columnSelectionModel = new DefaultListSelectionModel();
-		}
-		return columnSelectionModel;
 	}
 
 	public final void addAll(MatrixList matrices) {

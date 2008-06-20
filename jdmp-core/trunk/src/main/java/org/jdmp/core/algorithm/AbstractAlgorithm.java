@@ -9,6 +9,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.event.EventListenerList;
+
 import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.util.AbstractEvent.EventType;
@@ -58,6 +60,35 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 
 	private transient Thread algorithmSpeedThread = null;
 
+	private transient EventListenerList listenerList = null;
+	
+	private String label = "";
+
+	private String description = "";
+
+	public final String getDescription() {
+		return description;
+	}
+
+	public final void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	public final void setLabel(String label) {
+		this.label = label;
+	}
+
+	public final EventListenerList getListenerList() {
+		if (listenerList == null) {
+			listenerList = new EventListenerList();
+		}
+		return listenerList;
+	}
+	
 	public AbstractAlgorithm(String label) {
 		super();
 		setLabel(label);

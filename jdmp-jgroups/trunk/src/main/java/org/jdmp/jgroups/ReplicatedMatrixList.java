@@ -11,6 +11,9 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.DefaultListSelectionModel;
+import javax.swing.ListSelectionModel;
+
 import org.jdmp.core.util.AbstractEvent.EventType;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableEvent;
@@ -40,6 +43,10 @@ public class ReplicatedMatrixList extends AbstractMatrixList {
 	private boolean persist = false;
 
 	private Variable variable = null;
+
+	private ListSelectionModel rowSelectionModel = null;
+
+	private ListSelectionModel columnSelectionModel = null;
 
 	private int maxCount = 100;
 
@@ -211,6 +218,20 @@ public class ReplicatedMatrixList extends AbstractMatrixList {
 
 	public void setMaxCount(int maxCount) {
 		this.maxCount = maxCount;
+	}
+
+	public ListSelectionModel getRowSelectionModel() {
+		if (rowSelectionModel == null) {
+			rowSelectionModel = new DefaultListSelectionModel();
+		}
+		return rowSelectionModel;
+	}
+
+	public ListSelectionModel getColumnSelectionModel() {
+		if (columnSelectionModel == null) {
+			columnSelectionModel = new DefaultListSelectionModel();
+		}
+		return columnSelectionModel;
 	}
 
 }

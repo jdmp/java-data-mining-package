@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.swing.event.EventListenerList;
+
 import org.jdmp.core.matrix.wrappers.DataSetInputMatrixWrapper;
 import org.jdmp.core.sample.DefaultSample;
 import org.jdmp.core.variable.Variable;
@@ -18,6 +20,35 @@ import org.jdmp.matrix.io.ExportMatrix;
 
 public class BasicDataSet extends AbstractDataSet {
 	private static final long serialVersionUID = -2887879051530049677L;
+
+	private transient EventListenerList listenerList = null;
+
+	public final EventListenerList getListenerList() {
+		if (listenerList == null) {
+			listenerList = new EventListenerList();
+		}
+		return listenerList;
+	}
+
+	private String label = "";
+
+	private String description = "";
+
+	public final String getDescription() {
+		return description;
+	}
+
+	public final void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	public final void setLabel(String label) {
+		this.label = label;
+	}
 
 	private Matrix inputMatrix = null;
 

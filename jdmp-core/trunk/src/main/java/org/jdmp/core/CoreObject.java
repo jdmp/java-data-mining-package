@@ -12,6 +12,4 @@ public interface CoreObject extends Serializable, Cloneable, HasGUIObject, HasLa
 
 	public EventListenerList getListenerList();
 
-	public void fireValueChanged();
-
 }
