@@ -67,4 +67,20 @@ public class VariableGUIObject extends AbstractGUIObject {
 		}
 	}
 
+	public String getLabel() {
+		return variable.getLabel();
+	}
+
+	public void setLabel(String label) {
+		variable.setLabel(label);
+	}
+
+	public String getDescription() {
+		return variable.getDescription();
+	}
+
+	public void setDescription(String description) {
+		variable.setDescription(description);
+	}
+
 }

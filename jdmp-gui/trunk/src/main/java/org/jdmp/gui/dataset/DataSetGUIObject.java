@@ -21,9 +21,25 @@ public class DataSetGUIObject extends AbstractGUIObject {
 	public void clear() {
 		dataSet.clear();
 	}
-	
+
 	public Icon getIcon() {
 		return null;
+	}
+
+	public String getLabel() {
+		return dataSet.getLabel();
+	}
+
+	public void setLabel(String label) {
+		dataSet.setLabel(label);
+	}
+
+	public String getDescription() {
+		return dataSet.getDescription();
+	}
+
+	public void setDescription(String description) {
+		dataSet.setDescription(description);
 	}
 
 }

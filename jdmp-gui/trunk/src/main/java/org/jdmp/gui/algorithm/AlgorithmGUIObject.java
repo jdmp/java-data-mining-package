@@ -26,4 +26,20 @@ public class AlgorithmGUIObject extends AbstractGUIObject {
 		return null;
 	}
 
+	public String getLabel() {
+		return algorithm.getLabel();
+	}
+
+	public void setLabel(String label) {
+		algorithm.setLabel(label);
+	}
+
+	public String getDescription() {
+		return algorithm.getDescription();
+	}
+
+	public void setDescription(String description) {
+		algorithm.setDescription(description);
+	}
+
 }

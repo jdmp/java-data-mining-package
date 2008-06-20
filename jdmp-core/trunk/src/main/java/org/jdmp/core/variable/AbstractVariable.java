@@ -10,7 +10,7 @@ import org.jdmp.core.util.AbstractEvent.EventType;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.calculation.Calculation.Ret;
-import org.jdmp.matrix.collections.MatrixList;
+import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.GUIObject;
 
@@ -47,7 +47,6 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 	}
 
 
-
 	public final Matrix getMatrix(int index) {
 		if (getMatrixList() == null)
 			return null;
@@ -68,11 +67,6 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 		Matrix m = MatrixFactory.linkToValue(value);
 		addMatrix(m);
 	}
-
-
-
-	public abstract MatrixList getMatrixList();
-
 	
 
 	public final void fireValueChanged(Matrix m) {
@@ -80,14 +74,18 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 	}
 
 	public final void addMatrix(Matrix m) {
-		if (m != null) {
-			if (getColumnCount() != m.getColumnCount() || getRowCount() != m.getRowCount()) {
-				setSize(m.getRowCount(), m.getColumnCount());
-			}
-			getMatrixList().add(m);
-			fireVariableEvent(new VariableEvent(this, EventType.ADDED, getMatrixList().size() - 1,
-					m));
+		if(m==null){
+			throw new RuntimeException("tried to add null Matrix");
 		}
+		
+		if (getSize()==null) {
+			setSize(Coordinates.copyOf(m.getSize()));
+		}
+		
+		getMatrixList().add(m);
+		fireVariableEvent(new VariableEvent(this, EventType.ADDED, getMatrixList().size() - 1,
+				m));
+		
 	}
 
 	public final void removeVariableListener(VariableListener l) {

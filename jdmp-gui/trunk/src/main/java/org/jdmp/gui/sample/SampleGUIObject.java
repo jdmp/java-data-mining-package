@@ -25,4 +25,20 @@ public class SampleGUIObject extends AbstractGUIObject {
 		return null;
 	}
 
+	public String getLabel() {
+		return sample.getLabel();
+	}
+
+	public void setLabel(String label) {
+		sample.setLabel(label);
+	}
+
+	public String getDescription() {
+		return sample.getDescription();
+	}
+
+	public void setDescription(String description) {
+		sample.setDescription(description);
+	}
+
 }

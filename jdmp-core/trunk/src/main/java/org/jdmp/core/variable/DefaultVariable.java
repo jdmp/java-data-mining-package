@@ -124,8 +124,4 @@ public class DefaultVariable extends AbstractVariable {
 		return matrixList;
 	}
 
-	public void setMatrixList(DefaultMatrixList history) {
-		this.matrixList = history;
-	}
-
 }

@@ -28,10 +28,6 @@ public abstract class AbstractGUIObject implements GUIObject {
 
 	private transient EventListenerList listenerList = null;
 
-	private String label = "";
-
-	private String description = "";
-
 	public AbstractGUIObject() {
 	}
 
@@ -45,12 +41,7 @@ public abstract class AbstractGUIObject implements GUIObject {
 		setDescription(description);
 	}
 
-	public final EventListenerList getListenerList() {
-		if (listenerList == null) {
-			listenerList = new EventListenerList();
-		}
-		return listenerList;
-	}
+
 
 	public void fireValueChanged() {
 	}
@@ -65,27 +56,11 @@ public abstract class AbstractGUIObject implements GUIObject {
 		}
 	}
 
-	public String getLabel() {
-		return label;
-	}
-
-	public void setLabel(String label) {
-		this.label = label;
-	}
-
-	public final String getDescription() {
-		return description;
-	}
-
-	public final void setDescription(String description) {
-		this.description = description;
-	}
-
 	public String toString() {
-		if ("".equals(label))
+		if ("".equals(getLabel()))
 			return getClass().getSimpleName();
 		else
-			return getClass().getSimpleName() + " [" + label + "]";
+			return getClass().getSimpleName() + " [" + getLabel() + "]";
 	}
 
 	public String getToolTipText() {

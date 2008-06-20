@@ -7,6 +7,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.EventListenerList;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
@@ -37,6 +38,8 @@ public class MatrixGUIObject extends AbstractGUIObject implements TableModel,
 	private transient ListSelectionModel rowSelectionModel = null;
 
 	private transient ListSelectionModel columnSelectionModel = null;
+
+	private transient EventListenerList listenerList = null;
 
 	public MatrixGUIObject(Matrix m) {
 		this.matrix = m;
@@ -85,7 +88,13 @@ public class MatrixGUIObject extends AbstractGUIObject implements TableModel,
 		return matrix.getValueCount();
 	}
 
-	@Override
+	public final EventListenerList getListenerList() {
+		if (listenerList == null) {
+			listenerList = new EventListenerList();
+		}
+		return listenerList;
+	}
+
 	public String getLabel() {
 		return matrix.getLabel();
 	}
@@ -341,6 +350,15 @@ public class MatrixGUIObject extends AbstractGUIObject implements TableModel,
 		} catch (Exception e) {
 			return new ImageIcon("resources/icons/rebuild.png");
 		}
+	}
+
+	// Description not supported for Matrix
+	public String getDescription() {
+		return null;
+	}
+
+	// Description not supported for Matrix
+	public void setDescription(String description) {
 	}
 
 }

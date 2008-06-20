@@ -22,4 +22,20 @@ public class ModuleGUIObject extends AbstractGUIObject {
 		return null;
 	}
 
+	public String getLabel() {
+		return module.getLabel();
+	}
+
+	public void setLabel(String label) {
+		module.setLabel(label);
+	}
+
+	public String getDescription() {
+		return module.getDescription();
+	}
+
+	public void setDescription(String description) {
+		module.setDescription(description);
+	}
+
 }
