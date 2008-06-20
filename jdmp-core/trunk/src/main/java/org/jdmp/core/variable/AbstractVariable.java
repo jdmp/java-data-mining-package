@@ -1,126 +1,27 @@
 package org.jdmp.core.variable;
 
-import java.awt.Component;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableModel;
 
 import org.jdmp.core.AbstractCoreObject;
-import org.jdmp.core.matrix.wrappers.MatrixListToMatrixWrapper;
 import org.jdmp.core.util.AbstractEvent.EventType;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.calculation.Calculation.Ret;
-import org.jdmp.matrix.calculation.basic.Divide;
-import org.jdmp.matrix.calculation.basic.Plus;
 import org.jdmp.matrix.collections.MatrixList;
-import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.GUIObject;
-import org.jdmp.matrix.io.util.IntelligentFileReader;
-import org.jdmp.matrix.io.util.IntelligentFileWriter;
 
 public abstract class AbstractVariable extends AbstractCoreObject implements Variable {
-
-	protected static transient Logger logger = Logger.getLogger(Variable.class.getName());
-
-	private transient Matrix matrixListMatrix = null;
-
-	private long[] size = new long[] { 0, 0 };
 	
 	private transient GUIObject guiObject=null;
 
 	protected AbstractVariable() {
 		super();
 	}
-
 	
-
-	public final long[] getSize() {
-		return size;
-	}
-
-	public final void setSize(long... size) {
-		this.size = Coordinates.copyOf(size);
-	}
-
-	
-
-	public final void loadTSP(InputStream is) {
-		String line = null;
-		setSize(2, 1);
-		int count = 0;
-		String[] fields = null;
-		List<Matrix> mList = new ArrayList<Matrix>();
-
-		try {
-			IntelligentFileReader lr = new IntelligentFileReader(is);
-			while ((line = lr.readLine()) != null) {
-				if (line.toLowerCase().startsWith("name")) {
-					fields = line.split(":");
-					setLabel(fields[1].trim());
-				} else if (line.toLowerCase().startsWith("comment")) {
-					fields = line.split(":");
-					setDescription(getDescription() + " " + fields[1].trim());
-				} else if (line.toLowerCase().startsWith("type")) {
-					;
-				} else if (line.toLowerCase().startsWith("dimension")) {
-					;
-				} else if (line.toLowerCase().startsWith("edge")) {
-					;
-				} else if (line.toLowerCase().startsWith("node")) {
-					;
-				} else if (line.toLowerCase().startsWith("eof")) {
-					;
-				} else {
-					fields = line.split(" ");
-					if (fields != null && fields.length == 3) {
-						double x = Double.parseDouble(fields[1]);
-						double y = Double.parseDouble(fields[2]);
-						count++;
-						Matrix m = MatrixFactory.zeros(2, 1);
-						m.setDouble(x, 0, 0);
-						m.setDouble(y, 1, 0);
-						mList.add(m);
-					}
-				}
-			}
-
-			lr.close();
-
-			// setMatrixList(new DefaultMatrixList(mList.size()));
-			for (Matrix m : mList) {
-				addMatrix(m);
-			}
-
-		} catch (Exception e) {
-			logger.log(Level.WARNING, "could not read from stream", e);
-		}
-	}
-
-	public final void loadTSP(String file) {
-		try {
-			InputStream is = new FileInputStream(file);
-			loadTSP(is);
-		} catch (Exception e) {
-			logger.log(Level.WARNING, "could not read from file: " + file, e);
-		}
-	}
-
 	public final int getMemorySize() {
 		if (getMatrixList() == null) {
 			return 0;
@@ -170,12 +71,6 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 	}
 
 
-
-	public final void clearHistory() {
-		if (getMatrixList() != null)
-			getMatrixList().clear();
-	}
-
 	public final double getValue() throws MatrixException {
 		if (getMatrix() != null)
 			return getMatrix().getEuklideanValue();
@@ -192,12 +87,7 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 
 	public abstract MatrixList getMatrixList();
 
-	public Matrix getAsMatrix() {
-		if (matrixListMatrix == null) {
-			matrixListMatrix = new MatrixListToMatrixWrapper(this);
-		}
-		return matrixListMatrix;
-	}
+	
 
 	public final void fireValueChanged(Matrix m) {
 		fireVariableEvent(new VariableEvent(this, EventType.UPDATED, getIndexOfMatrix(m), m));
@@ -254,34 +144,6 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 		}
 	}
 
-	public final void fillGaussian() throws MatrixException {
-		Matrix m = MatrixFactory.randn(getRowCount(), getColumnCount());
-		addMatrix(m);
-	}
-
-	public final void fillUniform() throws MatrixException {
-		Matrix m = MatrixFactory.rand(getRowCount(), getColumnCount());
-		addMatrix(m);
-	}
-
-	public final void divideBy(double v) throws MatrixException {
-		new Divide(this.getAsMatrix(), v).calc(Ret.ORIG);
-	}
-
-	public final void plus(double v) throws MatrixException {
-		for (Matrix m : getMatrixList()) {
-			m.calc(new Plus(true, m, v), Ret.ORIG);
-		}
-	}
-
-	public final void fillWithValue(double v) throws MatrixException {
-		Matrix m = MatrixFactory.fill(v, getRowCount(), getColumnCount());
-		addMatrix(m);
-	}
-
-	
-
-
 	public final long getRowCount() {
 		return getSize()[ROW];
 	}
@@ -306,47 +168,40 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 		}
 	}
 
-	public final double getEuklideanValue() throws MatrixException {
-		Matrix m = getMatrix();
-		if (m != null)
-			return m.getEuklideanValue();
-		else
-			return 0;
-	}
 
-	public double getMinValue() throws MatrixException {
+	public final double getMinValue() throws MatrixException {
 		return getAsMatrix().getMinValue();
 	}
 
-	public double getMaxValue() throws MatrixException {
+	public final double getMaxValue() throws MatrixException {
 		return getAsMatrix().getMaxValue();
 	}
 
-	public long getIndexOfMaximum() throws MatrixException {
+	public final long getIndexOfMaximum() throws MatrixException {
 		return getAsMatrix().getCoordinatesOfMaximum()[ROW];
 	}
 
-	public long getIndexOfMinimum() throws MatrixException {
+	public final long getIndexOfMinimum() throws MatrixException {
 		return getAsMatrix().getCoordinatesOfMinimum()[ROW];
 	}
 
-	public Matrix getMeanMatrix() throws MatrixException {
+	public final Matrix getMeanMatrix() throws MatrixException {
 		return getAsMatrix().mean(Ret.NEW, ROW, true);
 	}
 
-	public Matrix getMaxMatrix() throws MatrixException {
+	public final Matrix getMaxMatrix() throws MatrixException {
 		return getAsMatrix().max(Ret.NEW, ROW);
 	}
 
-	public Matrix getMinMatrix() throws MatrixException {
+	public final Matrix getMinMatrix() throws MatrixException {
 		return getAsMatrix().min(Ret.NEW, ROW);
 	}
 
-	public Matrix getVarianceMatrix() throws MatrixException {
+	public final Matrix getVarianceMatrix() throws MatrixException {
 		return getAsMatrix().var(Ret.NEW, ROW, true);
 	}
 
-	public Matrix getStandardDeviationMatrix() throws MatrixException {
+	public final Matrix getStandardDeviationMatrix() throws MatrixException {
 		return getAsMatrix().std(Ret.NEW, ROW, true);
 	}
 	public final GUIObject getGUIObject() {

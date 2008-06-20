@@ -24,111 +24,53 @@
 package org.jdmp.matrix.collections;
 
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import javax.swing.DefaultListSelectionModel;
 import javax.swing.ListSelectionModel;
 
 import org.jdmp.matrix.Matrix;
 
-public abstract class MatrixList implements Iterable<Matrix> {
+public interface MatrixList extends Iterable<Matrix> {
 
-	protected static final Logger logger = Logger.getLogger(MatrixList.class.getName());
+	public int getMaxCount();
 
-	private ListSelectionModel rowSelectionModel = null;
+	public void setMaxCount(int maxCount);
 
-	private ListSelectionModel columnSelectionModel = null;
+	public boolean addAll(Collection<? extends Matrix> c);
 
-	public abstract int getMaxCount();
+	public boolean addAll(int index, Collection<? extends Matrix> c);
 
-	public abstract void setMaxCount(int maxCount);
+	public Matrix getFirst();
 
-	public abstract boolean addAll(Collection<? extends Matrix> c);
+	public Matrix getLast();
 
-	public abstract boolean addAll(int index, Collection<? extends Matrix> c);
+	public Matrix get(int i);
 
-	public synchronized final Matrix getFirst() {
-		if (isEmpty()) {
-			return null;
-		}
-    	return get(0);
-	}
+	public boolean isEmpty();
 
-	public final synchronized Matrix getLast() {
-		if (isEmpty()) {
-			return null;
-		}
-		return get(size() - 1);
-	}
+	public int size();
 
-	public abstract Matrix get(int i);
+	public double[][] getTrace(int i);
 
-	public abstract boolean isEmpty();
+	public double getMaxTime();
 
-	public abstract int size();
+	public double getMinTime();
 
-	public final double[][] getTrace(int i) {
-		try {
-			int hsize = size();
-			double[][] ret = new double[hsize][2];
-			for (int a = 0; a < hsize; a++) {
-				Matrix m = get(a);
-				ret[a][0] = 0.0;
-				ret[a][1] = m.getDouble(i % m.getRowCount(), i / m.getRowCount());
-			}
-			return ret;
-		} catch (Exception e) {
-			logger.log(Level.WARNING, "could not return trace " + i);
-			return null;
-		}
-	}
+	public double getLength();
 
-	public final double getMaxTime() {
-		Matrix m = getLast();
-		return (m == null) ? 0.0 : 0.0;
-	}
+	public long getTraceCount();
 
-	public final double getMinTime() {
-		Matrix m = getFirst();
-		return (m == null) ? 0.0 : 0.0;
-	}
+	public ListSelectionModel getRowSelectionModel();
 
-	public final double getLength() {
-		return getMaxTime() - getMinTime();
-	}
+	public ListSelectionModel getColumnSelectionModel();
 
-	public final long getTraceCount() {
-		Matrix m = getFirst();
-		return (m == null) ? 0 : m.getColumnCount() * m.getRowCount();
-	}
+	public boolean add(Matrix matrix);
 
-	public ListSelectionModel getRowSelectionModel() {
-		if (rowSelectionModel == null) {
-			rowSelectionModel = new DefaultListSelectionModel();
-		}
-		return rowSelectionModel;
-	}
+	public void addAll(MatrixList matrices);
 
-	public ListSelectionModel getColumnSelectionModel() {
-		if (columnSelectionModel == null) {
-			columnSelectionModel = new DefaultListSelectionModel();
-		}
-		return columnSelectionModel;
-	}
+	public void clear();
 
-	public abstract boolean add(Matrix matrix);
+	public Matrix set(int index, Matrix m);
 
-	public final void addAll(MatrixList matrices) {
-		for (Matrix m : matrices) {
-			add(m);
-		}
-	}
-
-	public abstract void clear();
-
-	public abstract Matrix set(int index, Matrix m);
-
-	public abstract int indexOf(Object o);
+	public int indexOf(Object o);
 
 }

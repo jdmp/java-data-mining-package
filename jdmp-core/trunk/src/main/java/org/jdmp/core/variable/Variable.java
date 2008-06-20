@@ -1,9 +1,5 @@
 package org.jdmp.core.variable;
 
-import java.io.InputStream;
-
-import javax.swing.Icon;
-
 import org.jdmp.core.CoreObject;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.exceptions.MatrixException;
@@ -18,17 +14,11 @@ public interface Variable extends CoreObject, HasLabel, HasDescription, HasMatri
 
 	public void setSize(long... size);
 
-	public void loadTSP(InputStream is);
-
-	public void loadTSP(String file);
-
 	public int getMemorySize();
 
 	public Matrix getMatrixCopy();
 
 	public Matrix getMatrixCopy(int index);
-
-	public void clearHistory();
 
 	public double getValue() throws MatrixException;
 
@@ -50,25 +40,11 @@ public interface Variable extends CoreObject, HasLabel, HasDescription, HasMatri
 
 	public void clear();
 
-	public void fillGaussian() throws MatrixException;
-
-	public void fillUniform() throws MatrixException;
-
-	public void divideBy(double v) throws MatrixException;
-
-	public void plus(double v) throws MatrixException;
-
-	public void fillWithValue(double v) throws MatrixException;
-
 	public void setMemorySize(int size);
-
-	public void convertIntToVector(int numberOfClasses) throws MatrixException;
 
 	public long getRowCount();
 
 	public long getColumnCount();
-
-	public double getEuklideanValue() throws MatrixException;
 
 	public double getMinValue() throws MatrixException;
 

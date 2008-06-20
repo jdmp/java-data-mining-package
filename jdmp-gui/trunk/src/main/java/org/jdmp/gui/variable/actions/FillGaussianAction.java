@@ -23,7 +23,7 @@ public class FillGaussianAction extends VariableAction {
 	}
 
 	public Object call() throws MatrixException {
-		getVariable().getVariable().fillGaussian();
+		getVariable().getVariable().addMatrix(getVariable().getVariable().getMatrix().randn());
 		return null;
 	}
 

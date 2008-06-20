@@ -31,7 +31,7 @@ import java.util.ListIterator;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.exceptions.MatrixException;
 
-public class DefaultMatrixList extends MatrixList {
+public class DefaultMatrixList extends AbstractMatrixList {
 	private static final long serialVersionUID = -908619462706136008L;
 
 	private RingBufferList<Matrix> matrixList = new RingBufferList<Matrix>();
@@ -179,12 +179,10 @@ public class DefaultMatrixList extends MatrixList {
 		return values;
 	}
 
-	@Override
 	public int getMaxCount() {
 		return matrixList.maxSize();
 	}
 
-	@Override
 	public void setMaxCount(int maxCount) {
 		matrixList = new RingBufferList<Matrix>(maxCount);
 	}

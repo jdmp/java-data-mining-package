@@ -23,7 +23,7 @@ public class FillUniformAction extends VariableAction {
 	}
 
 	public Object call() throws MatrixException {
-		getVariable().getVariable().fillUniform();
+		getVariable().getVariable().addMatrix(getVariable().getVariable().getMatrix().rand());
 		return null;
 	}
 

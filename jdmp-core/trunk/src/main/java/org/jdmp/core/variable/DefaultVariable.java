@@ -1,13 +1,18 @@
 package org.jdmp.core.variable;
 
+import org.jdmp.core.matrix.wrappers.MatrixListToMatrixWrapper;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.collections.DefaultMatrixList;
 import org.jdmp.matrix.collections.MatrixList;
-import org.jdmp.matrix.exceptions.MatrixException;
+import org.jdmp.matrix.coordinates.Coordinates;
 
 public class DefaultVariable extends AbstractVariable {
 	private static final long serialVersionUID = -7192491915167470355L;
+
+	private transient Matrix matrixListMatrix = null;
+
+	private long[] size = new long[] { 0, 0 };
 
 	private MatrixList matrixList = null;
 
@@ -69,6 +74,21 @@ public class DefaultVariable extends AbstractVariable {
 		setLabel(label);
 	}
 
+	public final long[] getSize() {
+		return size;
+	}
+
+	public final void setSize(long... size) {
+		this.size = Coordinates.copyOf(size);
+	}
+
+	public Matrix getAsMatrix() {
+		if (matrixListMatrix == null) {
+			matrixListMatrix = new MatrixListToMatrixWrapper(this);
+		}
+		return matrixListMatrix;
+	}
+
 	public MatrixList getMatrixList() {
 		return matrixList;
 	}
@@ -79,14 +99,6 @@ public class DefaultVariable extends AbstractVariable {
 
 	public void setMemorySize(int size) {
 		matrixList.setMaxCount(size);
-	}
-
-	public final void convertIntToVector(int numberOfClasses) throws MatrixException {
-		MatrixList ts = new DefaultMatrixList(matrixList);
-		setSize(numberOfClasses, 1);
-		for (int i = 0; i < ts.size(); i++) {
-			matrixList.add(ts.get(i).convertIntToVector(numberOfClasses));
-		}
 	}
 
 }

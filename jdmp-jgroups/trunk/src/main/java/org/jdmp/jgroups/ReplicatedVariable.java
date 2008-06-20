@@ -1,18 +1,22 @@
 package org.jdmp.jgroups;
 
+import org.jdmp.core.matrix.wrappers.MatrixListToMatrixWrapper;
 import org.jdmp.core.variable.AbstractVariable;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
-import org.jdmp.matrix.collections.DefaultMatrixList;
 import org.jdmp.matrix.collections.MatrixList;
-import org.jdmp.matrix.exceptions.MatrixException;
+import org.jdmp.matrix.coordinates.Coordinates;
 
 public class ReplicatedVariable extends AbstractVariable {
 	private static final long serialVersionUID = -2486416251545919644L;
 
 	private static int runningId = 0;
 
+	private transient Matrix matrixListMatrix = null;
+
 	private MatrixList matrixList = null;
+
+	private long[] size = new long[] { 0, 0 };
 
 	public ReplicatedVariable() {
 		this("Variable" + runningId++, 100, 0, 0);
@@ -64,12 +68,19 @@ public class ReplicatedVariable extends AbstractVariable {
 		matrixList.setMaxCount(size);
 	}
 
-	public final void convertIntToVector(int numberOfClasses) throws MatrixException {
-		MatrixList ts = new DefaultMatrixList(matrixList);
-		setSize(numberOfClasses, 1);
-		for (int i = 0; i < ts.size(); i++) {
-			matrixList.add(ts.get(i).convertIntToVector(numberOfClasses));
+	public final long[] getSize() {
+		return size;
+	}
+
+	public final void setSize(long... size) {
+		this.size = Coordinates.copyOf(size);
+	}
+
+	public Matrix getAsMatrix() {
+		if (matrixListMatrix == null) {
+			matrixListMatrix = new MatrixListToMatrixWrapper(this);
 		}
+		return matrixListMatrix;
 	}
 
 }

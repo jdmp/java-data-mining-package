@@ -11,12 +11,12 @@ import javax.swing.ListSelectionModel;
 
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.calculation.Calculation.Ret;
-import org.jdmp.matrix.collections.MatrixList;
+import org.jdmp.matrix.collections.AbstractMatrixList;
 import org.jdmp.matrix.interfaces.HasColumnSelectionModel;
 import org.jdmp.matrix.interfaces.HasRowSelectionModel;
 import org.jdmp.matrix.interfaces.Wrapper;
 
-public class MatrixToMatrixListWrapper extends MatrixList implements Wrapper<Matrix> {
+public class MatrixToMatrixListWrapper extends AbstractMatrixList implements Wrapper<Matrix> {
 	private static final long serialVersionUID = 7207765740833228177L;
 
 	private Matrix matrix = null;

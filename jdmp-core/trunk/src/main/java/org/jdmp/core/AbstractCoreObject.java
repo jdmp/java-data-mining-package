@@ -45,7 +45,7 @@ public abstract class AbstractCoreObject implements CoreObject {
 		return listenerList;
 	}
 
-	public final String getLabel() {
+	public String getLabel() {
 		return label;
 	}
 

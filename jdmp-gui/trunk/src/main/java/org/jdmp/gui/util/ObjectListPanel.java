@@ -419,10 +419,10 @@ public class ObjectListPanel extends JPanel implements MouseListener, KeyListene
 				Variable v = ((VariableGUIObject) o).getVariable();
 				switch (e.getKeyChar()) {
 				case 'g':
-					v.fillGaussian();
+					// v.fillGaussian();
 					break;
 				case 'u':
-					v.fillUniform();
+					// v.fillUniform();
 					break;
 				default:
 					break;

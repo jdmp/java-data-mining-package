@@ -220,7 +220,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 	}
 
 	public int getErrorCount() throws MatrixException {
-		return (int) getErrorCountVariable().getEuklideanValue();
+		return (int) getErrorCountVariable().getMatrix().getEuklideanValue();
 	}
 
 	public Variable getAccuracyVariable() {
@@ -244,7 +244,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 	}
 
 	public double getAccuracy() throws MatrixException {
-		return getAccuracyVariable().getEuklideanValue();
+		return getAccuracyVariable().getMatrix().getEuklideanValue();
 	}
 
 	public double getMaxAccuracy() throws MatrixException {

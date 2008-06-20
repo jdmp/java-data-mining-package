@@ -15,6 +15,7 @@ import org.jdmp.core.util.AbstractEvent.EventType;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableEvent;
 import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.collections.AbstractMatrixList;
 import org.jdmp.matrix.collections.DefaultMatrixList;
 import org.jdmp.matrix.collections.MapToListWrapper;
 import org.jdmp.matrix.collections.MatrixList;
@@ -25,7 +26,7 @@ import org.jgroups.View;
 import org.jgroups.blocks.ReplicatedHashMap;
 import org.jgroups.blocks.ReplicatedHashMap.Notification;
 
-public class ReplicatedMatrixList extends MatrixList {
+public class ReplicatedMatrixList extends AbstractMatrixList {
 	private static final Logger logger = Logger.getLogger(DefaultMatrixList.class.getName());
 
 	private List<Matrix> matrixList = null;
@@ -47,7 +48,8 @@ public class ReplicatedMatrixList extends MatrixList {
 			this.variable = v;
 			factory = new JChannelFactory();
 			props.setBindAddress(InetAddress.getLocalHost().getHostAddress());
-			map = new ReplicatedHashMap<Integer, Matrix>(name, factory, props.toString(), persist, 10000);
+			map = new ReplicatedHashMap<Integer, Matrix>(name, factory, props.toString(), persist,
+					10000);
 			matrixList = new MapToListWrapper<Matrix>(map);
 			map.addNotifier(new MatrixNotificationListener(this));
 		} catch (Exception e) {
@@ -203,12 +205,10 @@ public class ReplicatedMatrixList extends MatrixList {
 		variable.fireVariableEvent(new VariableEvent(variable, EventType.ALLUPDATED));
 	}
 
-	@Override
 	public int getMaxCount() {
 		return maxCount;
 	}
 
-	@Override
 	public void setMaxCount(int maxCount) {
 		this.maxCount = maxCount;
 	}
