@@ -31,7 +31,8 @@ import java.util.Set;
 
 import org.jdmp.matrix.interfaces.MapMatrix;
 
-public abstract class AbstractMapMatrix extends AbstractDenseObjectMatrix2D implements MapMatrix<Object, Object> {
+public abstract class AbstractMapMatrix extends AbstractDenseObjectMatrix2D implements
+		MapMatrix<Object, Object> {
 
 	public abstract Map<Object, Object> getMap();
 
@@ -39,11 +40,11 @@ public abstract class AbstractMapMatrix extends AbstractDenseObjectMatrix2D impl
 		return new long[] { size(), 2 };
 	}
 
-	public final Object getObject(long... coordinates) {
-		Object mapKey = getKey((int) coordinates[ROW]);
-		if (coordinates[COLUMN] == 0) {
+	public final Object getObject(long row, long column) {
+		Object mapKey = getKey((int) row);
+		if (column == 0) {
 			return mapKey;
-		} else if (coordinates[COLUMN] == 1) {
+		} else if (column == 1) {
 			return (mapKey == null ? null : getMap().get(mapKey));
 		} else {
 			return null;
@@ -51,7 +52,7 @@ public abstract class AbstractMapMatrix extends AbstractDenseObjectMatrix2D impl
 
 	}
 
-	public final void setObject(Object key, long... coordinates) {
+	public final void setObject(Object key, long row, long column) {
 	}
 
 	private final Object getKey(int index) {

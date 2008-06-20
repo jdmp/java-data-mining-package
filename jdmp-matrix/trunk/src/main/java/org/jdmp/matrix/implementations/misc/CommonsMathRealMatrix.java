@@ -30,7 +30,8 @@ import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.Wrapper;
 import org.jdmp.matrix.stubs.AbstractDenseDoubleMatrix2D;
 
-public class CommonsMathRealMatrix extends AbstractDenseDoubleMatrix2D implements Wrapper<RealMatrixImpl> {
+public class CommonsMathRealMatrix extends AbstractDenseDoubleMatrix2D implements
+		Wrapper<RealMatrixImpl> {
 	private static final long serialVersionUID = -1161807620507675926L;
 
 	private RealMatrixImpl matrix = null;
@@ -62,12 +63,12 @@ public class CommonsMathRealMatrix extends AbstractDenseDoubleMatrix2D implement
 		this.matrix = object;
 	}
 
-	public double getDouble(long... coordinates) throws MatrixException {
-		return matrix.getEntry((int) coordinates[ROW], (int) coordinates[COLUMN]);
+	public double getDouble(long row, long column) throws MatrixException {
+		return matrix.getEntry((int) row, (int) column);
 	}
 
-	public void setDouble(double value, long... coordinates) throws MatrixException {
-		matrix.getDataRef()[(int) coordinates[ROW]][(int) coordinates[COLUMN]] = value;
+	public void setDouble(double value, long row, long column) throws MatrixException {
+		matrix.getDataRef()[(int) row][(int) column] = value;
 	}
 
 	public long[] getSize() {

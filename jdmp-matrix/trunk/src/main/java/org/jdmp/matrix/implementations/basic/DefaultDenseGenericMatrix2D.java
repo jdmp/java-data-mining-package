@@ -57,12 +57,12 @@ public class DefaultDenseGenericMatrix2D<A> extends AbstractDenseGenericMatrix2D
 		return values[0].length;
 	}
 
-	public A getObject(long... coordinates) {
-		return (A) values[(int) coordinates[ROW]][(int) coordinates[COLUMN]];
+	public A getObject(long row, long column) {
+		return (A) values[(int) row][(int) column];
 	}
 
-	public void setObject(Object value, long... coordinates) {
-		values[(int) coordinates[ROW]][(int) coordinates[COLUMN]] = (A) value;
+	public void setObject(Object value, long row, long column) {
+		values[(int) row][(int) column] = (A) value;
 	}
 
 	public double getDouble(long... coordinates) throws MatrixException {

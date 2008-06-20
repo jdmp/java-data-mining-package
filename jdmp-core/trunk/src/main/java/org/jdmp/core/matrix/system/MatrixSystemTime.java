@@ -33,11 +33,11 @@ public class MatrixSystemTime extends AbstractDenseDoubleMatrix2D {
 		return new long[] { 1, 1 };
 	}
 
-	public double getDouble(long... coordinates) {
+	public double getDouble(long row, long column) {
 		return System.currentTimeMillis();
 	}
 
-	public void setDouble(double value, long... coordinates) {
+	public void setDouble(double value, long row, long column) {
 	}
 
 	public boolean isReadOnly() {

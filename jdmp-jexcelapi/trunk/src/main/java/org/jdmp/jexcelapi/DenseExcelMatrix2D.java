@@ -256,10 +256,9 @@ public class DenseExcelMatrix2D extends AbstractDenseObjectMatrix2D implements C
 
 	}
 
-	@Override
-	public Object getObject(long... coordinates) throws MatrixException {
+	public Object getObject(long row, long column) throws MatrixException {
 		try {
-			Cell c = sheet.getCell((int) coordinates[COLUMN], (int) coordinates[ROW] + offset);
+			Cell c = sheet.getCell((int) column, (int) row + offset);
 			if (c instanceof EmptyCell) {
 				return null;
 			} else if (c instanceof NumberCell) {
@@ -273,18 +272,16 @@ public class DenseExcelMatrix2D extends AbstractDenseObjectMatrix2D implements C
 		return null;
 	}
 
-	public void setObject(Object o, long... coordinates) throws MatrixException {
+	public void setObject(Object o, long row, long column) throws MatrixException {
 		try {
 			if ((sheet instanceof WritableSheet)) {
 				WritableCell cell = null;
 				if (o == null) {
-					cell = (new EmptyCell((int) coordinates[COLUMN], (int) coordinates[ROW]));
+					cell = (new EmptyCell((int) column, (int) row));
 				} else if (o instanceof Number) {
-					cell = new jxl.write.Number((int) coordinates[COLUMN], (int) coordinates[ROW],
-							((Number) o).doubleValue());
+					cell = new jxl.write.Number((int) column, (int) row, ((Number) o).doubleValue());
 				} else {
-					cell = new Label((int) coordinates[COLUMN], (int) coordinates[ROW], StringUtil
-							.convert(o));
+					cell = new Label((int) column, (int) row, StringUtil.convert(o));
 				}
 				((WritableSheet) sheet).addCell(cell);
 			}

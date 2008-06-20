@@ -21,22 +21,13 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.matrix.stubs;
+package org.jdmp.matrix;
 
-import org.jdmp.matrix.coordinates.CoordinateIterator2D;
+import java.util.Date;
 
-public abstract class AbstractDenseGenericMatrix2D<A> extends AbstractDenseGenericMatrix<A> {
+public interface DateMatrix2D extends DateMatrix {
 
-	public final Iterable<long[]> allCoordinates() {
-		return new CoordinateIterator2D(getSize());
-	}
+	public Date getDate(long row, long column);
 
-	public final A getObject(long... coordinates) {
-		return getObject(coordinates[ROW], coordinates[COLUMN]);
-	}
-
-	public final void setObject(Object value, long... coordinates) {
-		setObject(value, coordinates[ROW], coordinates[COLUMN]);
-	}
-
+	public void setDate(Date value, long row, long column);
 }

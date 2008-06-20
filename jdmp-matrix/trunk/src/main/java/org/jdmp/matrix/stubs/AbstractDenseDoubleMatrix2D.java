@@ -23,12 +23,22 @@
 
 package org.jdmp.matrix.stubs;
 
+import org.jdmp.matrix.DoubleMatrix2D;
 import org.jdmp.matrix.coordinates.CoordinateIterator2D;
 
-public abstract class AbstractDenseDoubleMatrix2D extends AbstractDenseDoubleMatrix {
+public abstract class AbstractDenseDoubleMatrix2D extends AbstractDenseDoubleMatrix implements
+		DoubleMatrix2D {
 
 	public final Iterable<long[]> allCoordinates() {
 		return new CoordinateIterator2D(getSize());
+	}
+
+	public final double getDouble(long... coordinates) {
+		return getDouble(coordinates[ROW], coordinates[COLUMN]);
+	}
+
+	public final void setDouble(double value, long... coordinates) {
+		setDouble(value, coordinates[ROW], coordinates[COLUMN]);
 	}
 
 }

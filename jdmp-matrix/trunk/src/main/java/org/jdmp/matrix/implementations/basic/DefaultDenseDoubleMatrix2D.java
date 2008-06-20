@@ -81,12 +81,12 @@ public class DefaultDenseDoubleMatrix2D extends AbstractDenseDoubleMatrix2D {
 		return values[0].length;
 	}
 
-	public double getDouble(long... coordinates) {
-		return values[(int) coordinates[ROW]][(int) coordinates[COLUMN]];
+	public double getDouble(long row, long column) {
+		return values[(int) row][(int) column];
 	}
 
-	public void setDouble(double value, long... coordinates) {
-		values[(int) coordinates[ROW]][(int) coordinates[COLUMN]] = value;
+	public void setDouble(double value, long row, long column) {
+		values[(int) row][(int) column] = value;
 	}
 
 	public final Matrix transpose() {
@@ -215,4 +215,5 @@ public class DefaultDenseDoubleMatrix2D extends AbstractDenseDoubleMatrix2D {
 		}
 		return false;
 	}
+
 }

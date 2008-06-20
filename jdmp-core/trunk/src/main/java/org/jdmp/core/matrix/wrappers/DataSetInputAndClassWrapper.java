@@ -19,13 +19,11 @@ public class DataSetInputAndClassWrapper extends AbstractDenseDoubleMatrix2D imp
 		this.dataSet = ds;
 	}
 
-	public double getDouble(long... coordinates) throws MatrixException {
-		int row = (int) coordinates[ROW];
-		int col = (int) coordinates[COLUMN];
-		Sample p = dataSet.getSample(row);
+	public double getDouble(long row, long column) throws MatrixException {
+		Sample p = dataSet.getSample((int) row);
 		if (p != null) {
-			if (col < getSize()[COLUMN] - 1) {
-				return p.getMatrix(INPUT).getDouble(0, col);
+			if (column < getSize()[COLUMN] - 1) {
+				return p.getMatrix(INPUT).getDouble(0, column);
 			}
 		}
 		return 0.0;
@@ -40,7 +38,7 @@ public class DataSetInputAndClassWrapper extends AbstractDenseDoubleMatrix2D imp
 		}
 	}
 
-	public void setDouble(double value, long... coordinates) {
+	public void setDouble(double value, long row, long column) {
 	}
 
 	public RegressionDataSet getWrappedObject() {

@@ -31,4 +31,12 @@ public abstract class AbstractDenseStringMatrix2D extends AbstractDenseStringMat
 		return new CoordinateIterator2D(getSize());
 	}
 
+	public final String getString(long... coordinates) {
+		return getString(coordinates[ROW], coordinates[COLUMN]);
+	}
+
+	public final void setString(String value, long... coordinates) {
+		setString(value, coordinates[ROW], coordinates[COLUMN]);
+	}
+
 }

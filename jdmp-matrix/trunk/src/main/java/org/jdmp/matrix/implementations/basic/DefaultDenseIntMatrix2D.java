@@ -90,12 +90,12 @@ public class DefaultDenseIntMatrix2D extends AbstractDenseIntMatrix2D {
 		values[(int) coordinates[ROW]][(int) coordinates[COLUMN]] = (int) value;
 	}
 
-	public int getInt(long... coordinates) {
-		return values[(int) coordinates[ROW]][(int) coordinates[COLUMN]];
+	public int getInt(long row, long column) {
+		return values[(int) row][(int) column];
 	}
 
-	public void setInt(int value, long... coordinates) {
-		values[(int) coordinates[ROW]][(int) coordinates[COLUMN]] = value;
+	public void setInt(int value, long row, long column) {
+		values[(int) row][(int) column] = value;
 	}
 
 	public final IntMatrix transpose() {

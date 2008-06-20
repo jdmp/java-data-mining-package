@@ -28,23 +28,19 @@ public class DataSetInputOutputMatrixWrapper extends AbstractDenseDoubleMatrix2D
 		}
 	}
 
-	public double getDouble(long... coordinates) throws MatrixException {
-		int row = (int) coordinates[ROW];
-		int col = (int) coordinates[COLUMN];
-		Sample p = dataSet.getSample(row);
+	public double getDouble(long row, long column) throws MatrixException {
+		Sample p = dataSet.getSample((int) row);
 		if (p != null) {
-			return p.getMatrix(INPUT).getDouble(0, col);
+			return p.getMatrix(INPUT).getDouble(0, column);
 		} else {
 			return 0.0;
 		}
 	}
 
-	public void setDouble(double value, long... coordinates) throws MatrixException {
-		int row = (int) coordinates[ROW];
-		int col = (int) coordinates[COLUMN];
-		Sample p = dataSet.getSample(row);
+	public void setDouble(double value, long row, long column) throws MatrixException {
+		Sample p = dataSet.getSample((int) row);
 		if (p != null) {
-			p.getMatrix(INPUT).setDouble(value, 0, col);
+			p.getMatrix(INPUT).setDouble(value, 0, column);
 		}
 	}
 

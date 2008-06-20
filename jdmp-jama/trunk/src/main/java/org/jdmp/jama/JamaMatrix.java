@@ -22,16 +22,16 @@ public class JamaMatrix extends AbstractDenseDoubleMatrix2D implements Wrapper<J
 		}
 	}
 
-	public double getDouble(long... coordinates) {
-		return matrix.get((int) coordinates[ROW], (int) coordinates[COLUMN]);
+	public double getDouble(long row, long column) {
+		return matrix.get((int) row, (int) column);
 	}
 
 	public long[] getSize() {
 		return new long[] { matrix.getRowDimension(), matrix.getColumnDimension() };
 	}
 
-	public void setDouble(double value, long... coordinates) {
-		matrix.set((int) coordinates[ROW], (int) coordinates[COLUMN], value);
+	public void setDouble(double value, long row, long column) {
+		matrix.set((int) row, (int) column, value);
 	}
 
 	public Matrix getWrappedObject() {

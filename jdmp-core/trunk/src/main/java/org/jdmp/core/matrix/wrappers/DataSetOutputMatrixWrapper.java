@@ -31,28 +31,24 @@ public class DataSetOutputMatrixWrapper extends AbstractDenseDoubleMatrix2D impl
 
 	}
 
-	public double getDouble(long... coordinates) throws MatrixException {
-		int row = (int) coordinates[ROW];
-		int col = (int) coordinates[COLUMN];
-		Sample p = dataSet.getSample(row);
+	public double getDouble(long row, long column) throws MatrixException {
+		Sample p = dataSet.getSample((int) row);
 		if (p != null) {
 			if (p.getMatrix(Sample.PREDICTED) != null) {
-				long r = col / p.getMatrix(Sample.PREDICTED).getColumnCount();
-				long c = col % p.getMatrix(Sample.PREDICTED).getColumnCount();
+				long r = column / p.getMatrix(Sample.PREDICTED).getColumnCount();
+				long c = column % p.getMatrix(Sample.PREDICTED).getColumnCount();
 				return p.getMatrix(Sample.PREDICTED).getDouble(r, c);
 			}
 		}
 		return 0.0;
 	}
 
-	public void setDouble(double value, long... coordinates) throws MatrixException {
-		int row = (int) coordinates[ROW];
-		int col = (int) coordinates[COLUMN];
-		Sample p = dataSet.getSample(row);
+	public void setDouble(double value, long row, long column) throws MatrixException {
+		Sample p = dataSet.getSample((int) row);
 		if (p != null) {
 			if (p.getMatrix(Sample.PREDICTED) != null) {
-				long r = col / p.getMatrix(Sample.PREDICTED).getColumnCount();
-				long c = col % p.getMatrix(Sample.PREDICTED).getColumnCount();
+				long r = column / p.getMatrix(Sample.PREDICTED).getColumnCount();
+				long c = column % p.getMatrix(Sample.PREDICTED).getColumnCount();
 				p.getMatrix(Sample.PREDICTED).setDouble(value, r, c);
 			}
 		}

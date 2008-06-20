@@ -15,7 +15,8 @@ import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.Wrapper;
 import org.jdmp.matrix.stubs.AbstractDenseDoubleMatrix2D;
 
-public class MTJDenseDoubleMatrix2D extends AbstractDenseDoubleMatrix2D implements Wrapper<DenseMatrix> {
+public class MTJDenseDoubleMatrix2D extends AbstractDenseDoubleMatrix2D implements
+		Wrapper<DenseMatrix> {
 	private static final long serialVersionUID = -2386081646062313108L;
 
 	private transient DenseMatrix matrix = null;
@@ -60,16 +61,16 @@ public class MTJDenseDoubleMatrix2D extends AbstractDenseDoubleMatrix2D implemen
 		}
 	}
 
-	public double getDouble(long... coordinates) {
-		return matrix.getData()[(int) (coordinates[ROW] + coordinates[COLUMN] * matrix.numRows())];
+	public double getDouble(long row, long column) {
+		return matrix.getData()[(int) (row + column * matrix.numRows())];
 	}
 
 	public long[] getSize() {
 		return new long[] { matrix.numRows(), matrix.numColumns() };
 	}
 
-	public void setDouble(double value, long... coordinates) {
-		matrix.getData()[(int) (coordinates[ROW] + coordinates[COLUMN] * matrix.numRows())] = value;
+	public void setDouble(double value, long row, long column) {
+		matrix.getData()[(int) (row + column * matrix.numRows())] = value;
 	}
 
 	@Override

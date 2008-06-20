@@ -22,11 +22,11 @@ public class MatrixAvailableProcessors extends AbstractDenseDoubleMatrix2D {
 		return new long[] { 1, 1 };
 	}
 
-	public double getDouble(long... coordinates) {
+	public double getDouble(long row, long column) {
 		return Runtime.getRuntime().availableProcessors();
 	}
 
-	public void setDouble(double value, long... coordinates) {
+	public void setDouble(double value, long row, long column) {
 	}
 
 	public boolean isReadOnly() {

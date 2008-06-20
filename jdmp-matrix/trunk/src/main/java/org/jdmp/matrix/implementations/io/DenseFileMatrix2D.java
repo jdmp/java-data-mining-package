@@ -30,7 +30,6 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.logging.Level;
 
-import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.io.util.BufferedRandomAccessFile;
 import org.jdmp.matrix.stubs.AbstractDenseDoubleMatrix2D;
 
@@ -89,7 +88,8 @@ public class DenseFileMatrix2D extends AbstractDenseDoubleMatrix2D {
 		this(file, rowCount, columnCount, 0, dataType, false);
 	}
 
-	public DenseFileMatrix2D(File file, int rowCount, int columnCount, long offset, int dataType, boolean readOnly) {
+	public DenseFileMatrix2D(File file, int rowCount, int columnCount, long offset, int dataType,
+			boolean readOnly) {
 		this.file = file;
 		this.rowCount = rowCount;
 		this.columnCount = columnCount;
@@ -109,7 +109,8 @@ public class DenseFileMatrix2D extends AbstractDenseDoubleMatrix2D {
 				}
 				long difference = getFileLength() + offset - randomAccessFile.length();
 				if (difference > 0) {
-					randomAccessFile.seek((long) (Math.ceil(getPos(getRowCount(), getColumnCount()))));
+					randomAccessFile.seek((long) (Math
+							.ceil(getPos(getRowCount(), getColumnCount()))));
 					switch (dataType) {
 					case BYTE:
 						randomAccessFile.writeByte((byte) 0.0);
@@ -225,11 +226,11 @@ public class DenseFileMatrix2D extends AbstractDenseDoubleMatrix2D {
 
 	private double getPos(long row, long column) {
 		if (getBytesPerValue() < 1) {
-			return ((double) row * (double) columnCount * getBytesPerValue()) + ((double) column * getBytesPerValue())
-					+ (double) offset;
+			return ((double) row * (double) columnCount * getBytesPerValue())
+					+ ((double) column * getBytesPerValue()) + (double) offset;
 		}
-		return ((long) row * (long) columnCount * getBytesPerValue()) + ((long) column * getBytesPerValue())
-				+ (long) offset;
+		return ((long) row * (long) columnCount * getBytesPerValue())
+				+ ((long) column * getBytesPerValue()) + (long) offset;
 	}
 
 	public long getFileLength() {
@@ -241,10 +242,10 @@ public class DenseFileMatrix2D extends AbstractDenseDoubleMatrix2D {
 		return dataType;
 	}
 
-	public synchronized double getDouble(long... coordinates) {
+	public synchronized double getDouble(long row, long column) {
 		if (randomAccessFile != null) {
 			try {
-				double pos = getPos(coordinates[ROW], coordinates[COLUMN]);
+				double pos = getPos(row, column);
 
 				if (pos < getFileLength() + offset) {
 
@@ -302,7 +303,7 @@ public class DenseFileMatrix2D extends AbstractDenseDoubleMatrix2D {
 					}
 
 				} else {
-					logger.log(Level.WARNING, "no such coordinates: " + Coordinates.toString(coordinates));
+					logger.log(Level.WARNING, "no such coordinates: " + row + "," + column);
 				}
 			} catch (Exception e) {
 				logger.log(Level.WARNING, "could not read value", e);
@@ -353,13 +354,13 @@ public class DenseFileMatrix2D extends AbstractDenseDoubleMatrix2D {
 		return b;
 	}
 
-	public synchronized void setDouble(double value, long... c) {
+	public synchronized void setDouble(double value, long row, long column) {
 		if (isReadOnly())
 			return;
 
 		if (randomAccessFile != null) {
 			try {
-				double pos = getPos(c[ROW], c[COLUMN]);
+				double pos = getPos(row, column);
 
 				randomAccessFile.seek((long) Math.floor(pos));
 
@@ -416,7 +417,8 @@ public class DenseFileMatrix2D extends AbstractDenseDoubleMatrix2D {
 					break;
 				}
 			} catch (Exception e) {
-				logger.log(Level.WARNING, "could not write value at coordinates " + c, e);
+				logger.log(Level.WARNING, "could not write value at coordinates " + row + ","
+						+ column, e);
 			}
 		}
 	}

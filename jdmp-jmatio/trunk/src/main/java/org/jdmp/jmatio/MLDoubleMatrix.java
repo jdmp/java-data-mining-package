@@ -40,12 +40,12 @@ public class MLDoubleMatrix extends AbstractDenseDoubleMatrix2D implements Wrapp
 		return new long[] { matrix.getM(), matrix.getN() };
 	}
 
-	public double getDouble(long... coordinates) {
-		return matrix.get((int) coordinates[ROW], (int) coordinates[COLUMN]);
+	public double getDouble(long row, long column) {
+		return matrix.get((int) row, (int) column);
 	}
 
-	public void setDouble(double value, long... coordinates) {
-		matrix.set(value, (int) coordinates[ROW], (int) coordinates[COLUMN]);
+	public void setDouble(double value, long row, long column) {
+		matrix.set(value, (int) row, (int) column);
 	}
 
 	public MLDouble getWrappedObject() {

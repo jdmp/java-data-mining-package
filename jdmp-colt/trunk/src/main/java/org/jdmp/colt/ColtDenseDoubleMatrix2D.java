@@ -28,16 +28,16 @@ public class ColtDenseDoubleMatrix2D extends AbstractDenseDoubleMatrix2D impleme
 		}
 	}
 
-	public double getDouble(long... coordinates) {
-		return matrix.getQuick((int) coordinates[ROW], (int) coordinates[COLUMN]);
+	public double getDouble(long row, long column) {
+		return matrix.getQuick((int) row, (int) column);
 	}
 
 	public long[] getSize() {
 		return new long[] { matrix.rows(), matrix.columns() };
 	}
 
-	public void setDouble(double value, long... coordinates) {
-		matrix.setQuick((int) coordinates[ROW], (int) coordinates[COLUMN], value);
+	public void setDouble(double value, long row, long column) {
+		matrix.setQuick((int) row, (int) column, value);
 	}
 
 	public DenseDoubleMatrix2D getWrappedObject() {

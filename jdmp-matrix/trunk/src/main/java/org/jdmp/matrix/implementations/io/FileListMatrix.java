@@ -52,23 +52,23 @@ public class FileListMatrix extends AbstractDenseStringMatrix2D {
 		return new long[] { files.size(), 2 };
 	}
 
-	public String getString(long... coordinates) {
-		switch ((int) coordinates[COLUMN]) {
+	public String getString(long row, long column) {
+		switch ((int) column) {
 		case 0:
-			File f = files.get((int) coordinates[ROW]);
+			File f = files.get((int) row);
 			return f.getName();
 		case 1:
-			return "" + files.get((int) coordinates[ROW]).length();
+			return "" + files.get((int) row).length();
 		}
 		return null;
 	}
 
-	public void setString(String value, long... coordinates) {
-		if (coordinates[COLUMN] == 0 && coordinates[ROW] < files.size()) {
-			File source = files.get((int) coordinates[ROW]);
+	public void setString(String value, long row, long column) {
+		if (column == 0 && row < files.size()) {
+			File source = files.get((int) row);
 			File target = new File(source.getParent() + File.separator + value);
 			source.renameTo(target);
-			files.set((int) coordinates[ROW], target);
+			files.set((int) row, target);
 		}
 	}
 

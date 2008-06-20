@@ -31,4 +31,12 @@ public abstract class AbstractDenseObjectMatrix2D extends AbstractDenseObjectMat
 		return new CoordinateIterator2D(getSize());
 	}
 
+	public final Object getObject(long... coordinates) {
+		return getObject(coordinates[ROW], coordinates[COLUMN]);
+	}
+
+	public final void setObject(Object value, long... coordinates) {
+		setObject(value, coordinates[ROW], coordinates[COLUMN]);
+	}
+
 }

@@ -34,28 +34,24 @@ public class DataSetInputMatrixWrapper extends AbstractDenseDoubleMatrix2D imple
 
 	}
 
-	public double getDouble(long... coordinates) throws MatrixException {
-		int row = (int) coordinates[ROW];
-		int col = (int) coordinates[COLUMN];
-		Sample p = dataSet.getSample(row);
+	public double getDouble(long row, long column) throws MatrixException {
+		Sample p = dataSet.getSample((int) row);
 		if (p != null) {
 			if (p.getMatrix(INPUT) != null) {
-				long r = col / p.getMatrix(INPUT).getColumnCount();
-				long c = col % p.getMatrix(INPUT).getColumnCount();
+				long r = column / p.getMatrix(INPUT).getColumnCount();
+				long c = column % p.getMatrix(INPUT).getColumnCount();
 				return p.getMatrix(INPUT).getDouble(r, c);
 			}
 		}
 		return 0.0;
 	}
 
-	public void setDouble(double value, long... coordinates) throws MatrixException {
-		int row = (int) coordinates[ROW];
-		int col = (int) coordinates[COLUMN];
-		Sample p = dataSet.getSample(row);
+	public void setDouble(double value, long row, long column) throws MatrixException {
+		Sample p = dataSet.getSample((int) row);
 		if (p != null) {
 			if (p.getMatrix(INPUT) != null) {
-				long r = col / p.getMatrix(INPUT).getColumnCount();
-				long c = col % p.getMatrix(INPUT).getColumnCount();
+				long r = column / p.getMatrix(INPUT).getColumnCount();
+				long c = column % p.getMatrix(INPUT).getColumnCount();
 				p.getMatrix(INPUT).setDouble(value, r, c);
 			}
 		}

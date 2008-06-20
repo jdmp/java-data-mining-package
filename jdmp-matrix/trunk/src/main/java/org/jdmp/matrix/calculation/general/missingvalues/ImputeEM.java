@@ -46,7 +46,7 @@ public class ImputeEM extends AbstractDoubleCalculation {
 
 	private double delta = 1e-6;
 
-	private double decay = 0.9;
+	private double decay = 0.5;
 
 	public ImputeEM(Matrix matrix) {
 		super(matrix);
@@ -81,6 +81,12 @@ public class ImputeEM extends AbstractDoubleCalculation {
 
 			Matrix x = getSource();
 
+			double valueCount = x.getValueCount();
+			long missingCount = (long) x.countMissing(Ret.NEW, Matrix.ALL).getEuklideanValue();
+			double percent = ((int) Math.round((missingCount * 1000.0 / valueCount))) / 10.0;
+			System.out.println("missing values: " + missingCount + " (" + percent + "%)");
+			System.out.println("============================================");
+
 			if (bestGuess == null) {
 				bestGuess = getSource().imputeMean(Ret.NEW, Matrix.ROW);
 			}
@@ -111,7 +117,7 @@ public class ImputeEM extends AbstractDoubleCalculation {
 							+ "% completed (" + remainingTime + " seconds remaining)");
 				}
 
-				double d = imputed.euklideanDistanceTo(bestGuess, true);
+				double d = imputed.euklideanDistanceTo(bestGuess, true) / missingCount;
 				System.out.println("delta: " + d);
 				System.out.println("============================================");
 

@@ -29,18 +29,18 @@ public class MatrixListToMatrixWrapper extends AbstractDenseDoubleMatrix2D imple
 		}
 	}
 
-	public double getDouble(long... coordinates) throws MatrixException {
-		Matrix m = matrixList.get((int) coordinates[ROW]);
+	public double getDouble(long row, long column) throws MatrixException {
+		Matrix m = matrixList.get((int) row);
 		if (m != null) {
-			return m.getDouble(0, coordinates[COLUMN]);
+			return m.getDouble(0, column);
 		}
 		return 0.0;
 	}
 
-	public void setDouble(double value, long... coordinates) throws MatrixException {
-		Matrix m = matrixList.get((int) coordinates[ROW]);
+	public void setDouble(double value, long row, long column) throws MatrixException {
+		Matrix m = matrixList.get((int) row);
 		if (m != null) {
-			m.setDouble(value, 0, coordinates[COLUMN]);
+			m.setDouble(value, 0, column);
 		}
 	}
 

@@ -32,21 +32,21 @@ public class SampleInputOutputMatrix extends AbstractDenseDoubleMatrix2D impleme
 				getInputMatrix().getColumnCount() + getDesiredOutputMatrix().getColumnCount() };
 	}
 
-	public double getDouble(long... coordinates) throws MatrixException {
-		if (coordinates[COLUMN] < getInputMatrix().getColumnCount()) {
-			return getInputMatrix().getDouble(coordinates);
+	public double getDouble(long row, long column) throws MatrixException {
+		if (column < getInputMatrix().getColumnCount()) {
+			return getInputMatrix().getDouble(row, column);
 		} else {
-			coordinates[COLUMN] -= getInputMatrix().getColumnCount();
-			return getDesiredOutputMatrix().getDouble(coordinates);
+			column -= getInputMatrix().getColumnCount();
+			return getDesiredOutputMatrix().getDouble(row, column);
 		}
 	}
 
-	public void setDouble(double value, long... coordinates) throws MatrixException {
-		if (coordinates[COLUMN] < getInputMatrix().getColumnCount()) {
-			getInputMatrix().setDouble(value, coordinates);
+	public void setDouble(double value, long row, long column) throws MatrixException {
+		if (column < getInputMatrix().getColumnCount()) {
+			getInputMatrix().setDouble(value, row, column);
 		} else {
-			coordinates[COLUMN] -= getInputMatrix().getColumnCount();
-			getDesiredOutputMatrix().setDouble(value, coordinates);
+			column -= getInputMatrix().getColumnCount();
+			getDesiredOutputMatrix().setDouble(value, row, column);
 		}
 	}
 

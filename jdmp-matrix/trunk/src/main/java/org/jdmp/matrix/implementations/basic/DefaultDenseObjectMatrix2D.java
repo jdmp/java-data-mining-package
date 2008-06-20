@@ -71,12 +71,12 @@ public class DefaultDenseObjectMatrix2D extends AbstractDenseObjectMatrix2D {
 		return values[0].length;
 	}
 
-	public Object getObject(long... coordinates) {
-		return values[(int) coordinates[ROW]][(int) coordinates[COLUMN]];
+	public Object getObject(long row, long column) {
+		return values[(int) row][(int) column];
 	}
 
-	public void setObject(Object value, long... coordinates) {
-		values[(int) coordinates[ROW]][(int) coordinates[COLUMN]] = value;
+	public void setObject(Object value, long row, long column) {
+		values[(int) row][(int) column] = value;
 	}
-	
+
 }

@@ -58,13 +58,13 @@ public class ImageMatrix extends AbstractDenseDoubleMatrix2D {
 		fis.close();
 	}
 
-	public double getDouble(long... coordinates) throws MatrixException {
-		int pos = (int) (coordinates[ROW] * bufferedImage.getWidth() + coordinates[COLUMN]);
+	public double getDouble(long row, long column) throws MatrixException {
+		int pos = (int) (row * bufferedImage.getWidth() + column);
 		return pixels[pos];
 	}
 
-	public void setDouble(double value, long... coordinates) throws MatrixException {
-		int pos = (int) (coordinates[ROW] * bufferedImage.getWidth() + coordinates[COLUMN]);
+	public void setDouble(double value, long row, long column) throws MatrixException {
+		int pos = (int) (row * bufferedImage.getWidth() + column);
 		pixels[pos] = (int) value;
 	}
 

@@ -29,8 +29,8 @@ public class MatrixMemoryUsage extends AbstractDenseDoubleMatrix2D {
 		return matrix;
 	}
 
-	public double getDouble(long... coordinates) {
-		switch ((int) coordinates[ROW]) {
+	public double getDouble(long row, long column) {
+		switch ((int) row) {
 		case 0:
 			return Runtime.getRuntime().freeMemory();
 		case 1:
@@ -44,7 +44,7 @@ public class MatrixMemoryUsage extends AbstractDenseDoubleMatrix2D {
 		return new long[] { 3, 1 };
 	}
 
-	public void setDouble(double value, long... coordinates) {
+	public void setDouble(double value, long row, long column) {
 	}
 
 	public boolean isReadOnly() {

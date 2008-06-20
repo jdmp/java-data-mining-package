@@ -33,16 +33,16 @@ public class VecMathMatrix extends AbstractDenseDoubleMatrix2D implements Wrappe
 		}
 	}
 
-	public double getDouble(long... coordinates) {
-		return matrix.getElement((int) coordinates[ROW], (int) coordinates[COLUMN]);
+	public double getDouble(long row, long column) {
+		return matrix.getElement((int) row, (int) column);
 	}
 
 	public long[] getSize() {
 		return new long[] { matrix.getNumRow(), matrix.getNumCol() };
 	}
 
-	public void setDouble(double value, long... coordinates) {
-		matrix.setElement((int) coordinates[ROW], (int) coordinates[COLUMN], value);
+	public void setDouble(double value, long row, long column) {
+		matrix.setElement((int) row, (int) column, value);
 	}
 
 	public GMatrix getWrappedObject() {

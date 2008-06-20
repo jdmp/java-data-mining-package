@@ -75,12 +75,12 @@ public class DefaultDenseStringMatrix2D extends AbstractDenseStringMatrix2D {
 		return values[0].length;
 	}
 
-	public String getString(long... coordinates) {
-		return values[(int) coordinates[ROW]][(int) coordinates[COLUMN]];
+	public String getString(long row, long column) {
+		return values[(int) row][(int) column];
 	}
 
-	public void setString(String value, long... coordinates) {
-		values[(int) coordinates[ROW]][(int) coordinates[COLUMN]] = value;
-	}	
+	public void setString(String value, long row, long column) {
+		values[(int) row][(int) column] = value;
+	}
 
 }

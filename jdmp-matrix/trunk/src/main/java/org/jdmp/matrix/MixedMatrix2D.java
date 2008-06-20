@@ -21,22 +21,10 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.matrix.stubs;
+package org.jdmp.matrix;
 
-import org.jdmp.matrix.coordinates.CoordinateIterator2D;
-
-public abstract class AbstractDenseGenericMatrix2D<A> extends AbstractDenseGenericMatrix<A> {
-
-	public final Iterable<long[]> allCoordinates() {
-		return new CoordinateIterator2D(getSize());
-	}
-
-	public final A getObject(long... coordinates) {
-		return getObject(coordinates[ROW], coordinates[COLUMN]);
-	}
-
-	public final void setObject(Object value, long... coordinates) {
-		setObject(value, coordinates[ROW], coordinates[COLUMN]);
-	}
+public interface MixedMatrix2D extends BooleanMatrix2D, ByteMatrix2D, CharMatrix2D, DateMatrix2D,
+		DoubleMatrix2D, FloatMatrix2D, IntMatrix2D, LongMatrix2D, ObjectMatrix2D, ShortMatrix2D,
+		StringMatrix2D {
 
 }

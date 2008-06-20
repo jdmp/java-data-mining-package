@@ -25,16 +25,16 @@ public class JMatricesMatrix extends AbstractDenseDoubleMatrix2D implements Wrap
 		}
 	}
 
-	public double getDouble(long... coordinates) {
-		return matrix.get((int) coordinates[ROW] + 1, (int) coordinates[COLUMN] + 1);
+	public double getDouble(long row, long column) {
+		return matrix.get((int) row + 1, (int) column + 1);
 	}
 
 	public long[] getSize() {
 		return new long[] { matrix.rows(), matrix.cols() };
 	}
 
-	public void setDouble(double value, long... coordinates) {
-		matrix.set((int) coordinates[ROW] + 1, (int) coordinates[COLUMN] + 1, value);
+	public void setDouble(double value, long row, long column) {
+		matrix.set((int) row + 1, (int) column + 1, value);
 	}
 
 	public org.jmatrices.dbl.Matrix getWrappedObject() {
