@@ -23,9 +23,11 @@
 
 package org.jdmp.matrix.stubs;
 
+import org.jdmp.matrix.DoubleMatrix2D;
 import org.jdmp.matrix.coordinates.CoordinateIterator2D;
 
-public abstract class AbstractSparseDoubleMatrix2D extends AbstractSparseDoubleMatrix {
+public abstract class AbstractSparseDoubleMatrix2D extends AbstractSparseDoubleMatrix implements
+		DoubleMatrix2D {
 
 	public final Iterable<long[]> allCoordinates() {
 		return new CoordinateIterator2D(getSize());

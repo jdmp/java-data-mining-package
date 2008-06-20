@@ -4,10 +4,8 @@ import javax.swing.table.AbstractTableModel;
 
 import org.jdmp.core.sample.HasSamples;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.sample.SampleListEvent;
-import org.jdmp.core.sample.SampleListListener;
 
-public class SampleListTableModel extends AbstractTableModel implements SampleListListener {
+public class SampleListTableModel extends AbstractTableModel {
 	private static final long serialVersionUID = -5468178300746964431L;
 
 	public static final int ICONCOLUMN = 0;
@@ -30,11 +28,10 @@ public class SampleListTableModel extends AbstractTableModel implements SampleLi
 
 	public SampleListTableModel(HasSamples iSamples) {
 		this.iSamples = iSamples;
-		iSamples.addSampleListListener(this);
 	}
 
 	public int getRowCount() {
-		return iSamples.getSampleCount();
+		return iSamples.getSampleList().getSize();
 	}
 
 	public int getColumnCount() {
@@ -72,29 +69,11 @@ public class SampleListTableModel extends AbstractTableModel implements SampleLi
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		Sample p = iSamples.getSample(rowIndex);
+		Sample p = iSamples.getSampleList().getElementAt(rowIndex);
 		switch (columnIndex) {
 		default:
 			return p;
 		}
-	}
-
-	public void samplesShuffled(SampleListEvent e) {
-		fireTableDataChanged();
-	}
-
-	public void sampleAdded(SampleListEvent e) {
-		Sample p = (Sample) e.getData();
-		fireTableDataChanged();
-	}
-
-	public void sampleRemoved(SampleListEvent e) {
-		Sample p = (Sample) e.getData();
-		fireTableDataChanged();
-	}
-
-	public void sampleUpdated(SampleListEvent e) {
-		fireTableDataChanged();
 	}
 
 }

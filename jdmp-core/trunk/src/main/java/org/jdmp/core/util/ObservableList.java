@@ -1,6 +1,7 @@
 package org.jdmp.core.util;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -19,6 +20,10 @@ public class ObservableList<V> extends AbstractListModel implements CoreObjectLi
 		return values.get(index);
 	}
 
+	public synchronized void clear() {
+		values.clear();
+	}
+
 	public synchronized int getSize() {
 		return values.size();
 	}
@@ -30,6 +35,12 @@ public class ObservableList<V> extends AbstractListModel implements CoreObjectLi
 	public synchronized void add(V value) {
 		values.add(value);
 		fireIntervalAdded(this, values.size() - 1, values.size() - 1);
+	}
+
+	public void addAll(Collection<V> values) {
+		for (V v : values) {
+			add(v);
+		}
 	}
 
 	public synchronized boolean remove(V value) {
@@ -48,4 +59,9 @@ public class ObservableList<V> extends AbstractListModel implements CoreObjectLi
 	public boolean isEmpty() {
 		return values.isEmpty();
 	}
+
+	public Collection<V> toCollection() {
+		return values;
+	}
+
 }

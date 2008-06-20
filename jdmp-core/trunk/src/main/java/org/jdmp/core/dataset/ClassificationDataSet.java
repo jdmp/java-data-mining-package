@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import org.jdmp.core.matrix.wrappers.DataSetInputAndClassWrapper;
 import org.jdmp.core.sample.ClassificationSample;
 import org.jdmp.core.sample.Sample;
+import org.jdmp.core.util.ObservableList;
 import org.jdmp.core.variable.DefaultVariable;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.matrix.Matrix;
@@ -362,10 +363,10 @@ public class ClassificationDataSet extends RegressionDataSet {
 
 	public ClassificationDataSet bootstrap(int numberOfSamples) {
 		ClassificationDataSet ds = new ClassificationDataSet("Bootstrap of " + getLabel());
-		List<Sample> sampleList = getSampleList();
+		ObservableList<Sample> sampleList = getSampleList();
 		for (int i = 0; i < numberOfSamples; i++) {
-			int rand = MathUtil.nextInteger(0, sampleList.size() - 1);
-			ds.addSample(sampleList.get(rand).clone());
+			int rand = MathUtil.nextInteger(0, sampleList.getSize() - 1);
+			ds.addSample(sampleList.getElementAt(rand).clone());
 		}
 		return ds;
 	}

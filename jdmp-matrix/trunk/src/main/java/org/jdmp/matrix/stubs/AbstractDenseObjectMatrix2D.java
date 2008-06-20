@@ -23,9 +23,11 @@
 
 package org.jdmp.matrix.stubs;
 
+import org.jdmp.matrix.ObjectMatrix2D;
 import org.jdmp.matrix.coordinates.CoordinateIterator2D;
 
-public abstract class AbstractDenseObjectMatrix2D extends AbstractDenseObjectMatrix {
+public abstract class AbstractDenseObjectMatrix2D extends AbstractDenseObjectMatrix implements
+		ObjectMatrix2D {
 
 	public Iterable<long[]> allCoordinates() {
 		return new CoordinateIterator2D(getSize());

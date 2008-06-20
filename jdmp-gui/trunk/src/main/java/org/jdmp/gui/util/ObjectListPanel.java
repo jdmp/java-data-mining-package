@@ -35,6 +35,7 @@ import org.jdmp.core.dataset.HasDataSets;
 import org.jdmp.core.module.HasModules;
 import org.jdmp.core.module.Module;
 import org.jdmp.core.sample.ClassificationSample;
+import org.jdmp.core.sample.HasSampleList;
 import org.jdmp.core.sample.HasSamples;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.HasVariables;
@@ -297,7 +298,7 @@ public class ObjectListPanel extends JPanel implements MouseListener, KeyListene
 				actions = new ModuleListActions(this, (HasModules) object);
 				break;
 			case ISAMPLES:
-				actions = new SampleListActions(this, (HasSamples) object);
+				actions = new SampleListActions(this, (HasSampleList) object);
 				break;
 			}
 			if (actions != null) {

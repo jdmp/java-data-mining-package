@@ -74,4 +74,7 @@ public class CSVMatrix extends AbstractDenseStringMatrix2D {
 		}
 		return null;
 	}
+
+	public void setString(String value, long row, long column) {
+	}
 }

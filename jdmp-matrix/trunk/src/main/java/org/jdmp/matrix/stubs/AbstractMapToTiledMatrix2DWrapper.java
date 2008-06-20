@@ -27,6 +27,7 @@ import java.util.Map;
 
 import org.jdmp.matrix.GenericMatrix;
 import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.ObjectMatrix2D;
 import org.jdmp.matrix.coordinates.CoordinateIterator2D;
 import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.exceptions.MatrixException;
@@ -35,7 +36,7 @@ import org.jdmp.matrix.interfaces.Wrapper;
 import org.jdmp.matrix.util.MathUtil;
 
 public abstract class AbstractMapToTiledMatrix2DWrapper<A> extends AbstractDenseMatrix<A> implements
-		Wrapper<Map<Coordinates, GenericMatrix<A>>> {
+		Wrapper<Map<Coordinates, ObjectMatrix2D>> {
 
 	private long tileSize = 100;
 
@@ -70,17 +71,17 @@ public abstract class AbstractMapToTiledMatrix2DWrapper<A> extends AbstractDense
 		}
 	}
 
-	public Map<Coordinates, GenericMatrix<A>> getWrappedObject() {
+	public Map<Coordinates, ObjectMatrix2D> getWrappedObject() {
 		return getMap();
 	}
 
-	public abstract Map<Coordinates, GenericMatrix<A>> getMap();
+	public abstract Map<Coordinates, ObjectMatrix2D> getMap();
 
-	public void setWrappedObject(Map<Coordinates, GenericMatrix<A>> object) {
+	public void setWrappedObject(Map<Coordinates, ObjectMatrix2D> object) {
 		setMap(object);
 	}
 
-	public abstract void setMap(Map<Coordinates, GenericMatrix<A>> map);
+	public abstract void setMap(Map<Coordinates, ObjectMatrix2D> map);
 
 	public Iterable<long[]> allCoordinates() {
 		return new CoordinateIterator2D(getSize());
@@ -107,9 +108,9 @@ public abstract class AbstractMapToTiledMatrix2DWrapper<A> extends AbstractDense
 
 	public void setObject(Object o, long... coordinates) throws MatrixException {
 		Coordinates c = new Coordinates(coordinates[ROW] / tileSize, coordinates[COLUMN] / tileSize);
-		GenericMatrix<A> m = getMap().get(c);
+		ObjectMatrix2D m = getMap().get(c);
 		if (m == null) {
-			m = (GenericMatrix<A>) new DefaultDenseObjectMatrix2D(tileSize, tileSize);
+			m = (ObjectMatrix2D) new DefaultDenseObjectMatrix2D(tileSize, tileSize);
 		}
 		m.setObject(o, coordinates[ROW] % tileSize, coordinates[COLUMN] % tileSize);
 		getMap().put(c, m);

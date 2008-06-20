@@ -1,5 +1,6 @@
 package org.jdmp.core.util;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -67,6 +68,14 @@ public class ObservableMap<V> extends AbstractListModel implements CoreObjectLis
 
 	public boolean isEmpty() {
 		return map.isEmpty();
+	}
+
+	public void clear() {
+		map.clear();
+	}
+
+	public Collection<V> toCollection() {
+		return map.values();
 	}
 
 }

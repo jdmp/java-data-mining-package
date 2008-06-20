@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Level;
 
 import javax.swing.ListSelectionModel;
@@ -14,8 +13,7 @@ import javax.swing.ListSelectionModel;
 import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.sample.HasSamples;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.sample.SampleListEvent;
-import org.jdmp.core.sample.SampleListListener;
+import org.jdmp.core.util.ObservableList;
 import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.util.AbstractEvent.EventType;
 import org.jdmp.core.variable.HasVariables;
@@ -34,8 +32,7 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 	
 	private DataSetType dataSetType = DataSetType.TRAININGSET;
 
-	// CopyOnWriteArrayList so no nullpointerexceptions are thrown
-	private final List<Sample> sampleList = new CopyOnWriteArrayList<Sample>();
+	private final ObservableList<Sample> sampleList = new ObservableList<Sample>();
 
 	private final ObservableMap<Variable> variableList = new ObservableMap<Variable>();
 
@@ -54,7 +51,7 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 	public void removeVariable(Variable v) {
 	}
 
-	public List<Sample> getSampleList() {
+	public ObservableList<Sample> getSampleList() {
 		return sampleList;
 	}
 
@@ -89,12 +86,12 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 
 
 	public int getSampleCount() {
-		return sampleList.size();
+		return sampleList.getSize();
 	}
 
 	public Sample getSample(int pos) {
-		if (pos >= 0 && pos < sampleList.size())
-			return sampleList.get(pos);
+		if (pos >= 0 && pos < sampleList.getSize())
+			return sampleList.getElementAt(pos);
 		else
 			return null;
 	}
@@ -106,15 +103,11 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 
 	public void addSample(Sample sample) {
 		sampleList.add(sample);
-		fireSampleAdded(new SampleListEvent(this, EventType.ADDED, sample));
 	}
 
 	public void removeSample(Sample p) {
 		sampleList.remove(p);
-		fireSampleRemoved(new SampleListEvent(this, EventType.REMOVED, p));
 	}
-
-
 
 	public DataSetType getDataSetType() {
 		return dataSetType;
@@ -142,14 +135,6 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 
 	public void removeVariableListener(VariableListener l) {
 		getListenerList().add(VariableListener.class, l);
-	}
-
-	public void addVariableListListener(VariableListListener l) {
-		getListenerList().add(VariableListListener.class, l);
-	}
-
-	public void removeVariableListListener(VariableListListener l) {
-		getListenerList().add(VariableListListener.class, l);
 	}
 
 	public final Matrix getMatrixFromVariable(int variableIndex) {
@@ -180,37 +165,9 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 			v.setMatrix(matrixIndex, matrix);
 	}
 
-	public void fireSampleAdded(SampleListEvent e) {
-		for (Object o : getListenerList().getListenerList()) {
-			if (o instanceof SampleListListener) {
-				((SampleListListener) o).sampleAdded(e);
-			}
-		}
-	}
+	
 
-	public void fireSampleRemoved(SampleListEvent e) {
-		for (Object o : getListenerList().getListenerList()) {
-			if (o instanceof SampleListListener) {
-				((SampleListListener) o).sampleRemoved(e);
-			}
-		}
-	}
 
-	public void fireSampleUpdated(SampleListEvent e) {
-		for (Object o : getListenerList().getListenerList()) {
-			if (o instanceof SampleListListener) {
-				((SampleListListener) o).sampleUpdated(e);
-			}
-		}
-	}
-
-	public void addSampleListListener(SampleListListener l) {
-		getListenerList().add(SampleListListener.class, l);
-	}
-
-	public void removeSampleListListener(SampleListListener l) {
-		getListenerList().remove(SampleListListener.class, l);
-	}
 
 	public int getIndexOfSample(Sample p) {
 		return sampleList.indexOf(p);
@@ -264,13 +221,13 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		for (int i = 0; i < count.length; i++) {
 			DataSet ds = new ClassificationDataSet("DataSet" + i);
 			for (int c = 0; c < count[i]; c++) {
-				ds.addSample(getSample(ids.remove(0)).clone());
+				ds.getSampleList().add(getSample(ids.remove(0)).clone());
 			}
 			dataSets.add(ds);
 		}
 		DataSet ds = new ClassificationDataSet("DataSet" + count.length);
 		while (ids.size() != 0) {
-			ds.addSample(getSample(ids.remove(0)).clone());
+			ds.getSampleList().add(getSample(ids.remove(0)).clone());
 		}
 		dataSets.add(ds);
 
@@ -280,7 +237,7 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 	public List<DataSet> splitForCV(int numberOfCVSets, int idOfCVSet, long randomSeed) {
 		List<DataSet> returnDataSets = new ArrayList<DataSet>();
 		List<List<Sample>> tempSampleLists = new ArrayList<List<Sample>>();
-		List<Sample> allSamples = new ArrayList<Sample>(getSampleList());
+		List<Sample> allSamples = new ArrayList<Sample>(getSampleList().toCollection());		
 		Collections.shuffle(allSamples, new Random(randomSeed));
 
 		for (int set = 0; set < numberOfCVSets; set++) {
@@ -314,7 +271,6 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 
 	public void addAllSamples(Collection<Sample> samples) {
 		sampleList.addAll(samples);
-		fireSampleUpdated(new SampleListEvent(this, EventType.ALLUPDATED));
 	}
 
 	public List<DataSet> splitByPercent(boolean shuffle, double... percent) {
@@ -328,7 +284,6 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 
 	public void removeAllSamples() {
 		sampleList.clear();
-		fireSampleUpdated(new SampleListEvent(this, EventType.ALLUPDATED));
 	}
 	
 	public final GUIObject getGUIObject() {

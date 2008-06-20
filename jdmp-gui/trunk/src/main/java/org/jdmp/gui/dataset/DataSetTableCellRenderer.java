@@ -23,8 +23,8 @@ public class DataSetTableCellRenderer implements TableCellRenderer {
 
 	private JLabel c = null;
 
-	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-			int row, int column) {
+	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+			boolean hasFocus, int row, int column) {
 
 		c = null;
 
@@ -42,17 +42,18 @@ public class DataSetTableCellRenderer implements TableCellRenderer {
 				o = dataSet.getDataSetType();
 				break;
 			case DataSetListTableModel.VARIABLECOLUMN:
-				return variableListTableCellRenderer.getTableCellRendererComponent(table, dataSet.getVariableList(),
-						isSelected, hasFocus, row, column);
+				return variableListTableCellRenderer.getTableCellRendererComponent(table, dataSet
+						.getVariableList(), isSelected, hasFocus, row, column);
 			case DataSetListTableModel.SAMPLECOUNTCOLUMN:
-				o = "" + dataSet.getSampleCount();
+				o = "" + dataSet.getSampleList().getSize();
 				break;
 			default:
 				o = null;
 				break;
 			}
 
-			c = (JLabel) renderer.getTableCellRendererComponent(table, o, isSelected, hasFocus, row, column);
+			c = (JLabel) renderer.getTableCellRendererComponent(table, o, isSelected, hasFocus,
+					row, column);
 
 			switch (column) {
 			case DataSetListTableModel.ICONCOLUMN:

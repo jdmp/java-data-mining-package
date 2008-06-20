@@ -26,15 +26,15 @@ package org.jdmp.matrix.implementations.basic;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jdmp.matrix.GenericMatrix;
 import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.ObjectMatrix2D;
 import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.stubs.AbstractMapToTiledMatrix2DWrapper;
 
 public class DefaultTiledGenericMatrix2D<A> extends AbstractMapToTiledMatrix2DWrapper<A> {
 	private static final long serialVersionUID = 6745798685307431625L;
 
-	private Map<Coordinates, GenericMatrix<A>> values = null;
+	private Map<Coordinates, ObjectMatrix2D> values = null;
 
 	public DefaultTiledGenericMatrix2D(long... size) {
 		super(size);
@@ -45,15 +45,15 @@ public class DefaultTiledGenericMatrix2D<A> extends AbstractMapToTiledMatrix2DWr
 	}
 
 	@Override
-	public Map<Coordinates, GenericMatrix<A>> getMap() {
+	public Map<Coordinates, ObjectMatrix2D> getMap() {
 		if (values == null) {
-			values = new HashMap<Coordinates, GenericMatrix<A>>();
+			values = new HashMap<Coordinates, ObjectMatrix2D>();
 		}
 		return values;
 	}
 
 	@Override
-	public void setMap(Map<Coordinates, GenericMatrix<A>> map) {
+	public void setMap(Map<Coordinates, ObjectMatrix2D> map) {
 		this.values = map;
 	}
 

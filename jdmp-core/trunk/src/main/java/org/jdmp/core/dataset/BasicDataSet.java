@@ -97,10 +97,6 @@ public class BasicDataSet extends AbstractDataSet {
 		return matrixList;
 	}
 
-	public final List<DefaultSample> getBasicSampleList() {
-		return Arrays.asList(getSampleList().toArray(new DefaultSample[0]));
-	}
-
 	public final String toCSV() throws MatrixException, IOException {
 		return ExportMatrix.toString(Format.CSV, this.getInputMatrix());
 	}

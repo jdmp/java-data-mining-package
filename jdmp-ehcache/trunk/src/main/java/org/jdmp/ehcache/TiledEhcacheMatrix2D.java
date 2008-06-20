@@ -6,15 +6,15 @@ import java.io.ObjectOutputStream;
 import java.io.OptionalDataException;
 import java.util.Map;
 
-import org.jdmp.matrix.GenericMatrix;
 import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.ObjectMatrix2D;
 import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.stubs.AbstractMapToTiledMatrix2DWrapper;
 
 public class TiledEhcacheMatrix2D<A> extends AbstractMapToTiledMatrix2DWrapper<A> {
 	private static final long serialVersionUID = 4324063544046176423L;
 
-	private transient Map<Coordinates, GenericMatrix<A>> values = null;
+	private transient Map<Coordinates, ObjectMatrix2D> values = null;
 
 	public TiledEhcacheMatrix2D(long... size) {
 		super(size);
@@ -25,10 +25,10 @@ public class TiledEhcacheMatrix2D<A> extends AbstractMapToTiledMatrix2DWrapper<A
 	}
 
 	@Override
-	public Map<Coordinates, GenericMatrix<A>> getMap() {
+	public Map<Coordinates, ObjectMatrix2D> getMap() {
 		if (values == null) {
 			try {
-				values = new EhcacheMap<Coordinates, GenericMatrix<A>>();
+				values = new EhcacheMap<Coordinates, ObjectMatrix2D>();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -37,7 +37,7 @@ public class TiledEhcacheMatrix2D<A> extends AbstractMapToTiledMatrix2DWrapper<A
 	}
 
 	@Override
-	public void setMap(Map<Coordinates, GenericMatrix<A>> map) {
+	public void setMap(Map<Coordinates, ObjectMatrix2D> map) {
 		this.values = map;
 	}
 
