@@ -46,7 +46,7 @@ public class ImputeEM extends AbstractDoubleCalculation {
 
 	private double delta = 1e-6;
 
-	private double decay = 0.5;
+	private double decay = 0.66;
 
 	public ImputeEM(Matrix matrix) {
 		super(matrix);

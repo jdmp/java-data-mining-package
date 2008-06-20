@@ -31,7 +31,7 @@ import org.jdmp.matrix.Matrix;
 
 public interface MatrixList extends Iterable<Matrix> {
 
-	public int getMaxCount();
+	public int getMaxSize();
 
 	public void setMaxCount(int maxCount);
 

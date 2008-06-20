@@ -182,7 +182,7 @@ public class ReplicatedMatrixList extends AbstractMatrixList {
 
 	public boolean add(Matrix matrix) {
 		// delete if already full
-		while (size() >= getMaxCount()) {
+		while (size() >= getMaxSize()) {
 			matrixList.remove(0);
 		}
 
@@ -212,7 +212,7 @@ public class ReplicatedMatrixList extends AbstractMatrixList {
 		variable.fireVariableEvent(new VariableEvent(variable, EventType.ALLUPDATED));
 	}
 
-	public int getMaxCount() {
+	public int getMaxSize() {
 		return maxCount;
 	}
 

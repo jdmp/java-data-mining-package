@@ -26,7 +26,7 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 		if (getMatrixList() == null) {
 			return 0;
 		} else {
-			return getMatrixList().getMaxCount();
+			return getMatrixList().getMaxSize();
 		}
 	}
 

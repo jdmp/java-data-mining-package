@@ -186,7 +186,7 @@ public class DefaultMatrixList extends AbstractMatrixList {
 		return values;
 	}
 
-	public int getMaxCount() {
+	public int getMaxSize() {
 		return matrixList.maxSize();
 	}
 

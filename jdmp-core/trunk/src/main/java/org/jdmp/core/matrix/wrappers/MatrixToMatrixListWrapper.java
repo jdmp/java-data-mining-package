@@ -159,7 +159,7 @@ public class MatrixToMatrixListWrapper extends AbstractMatrixList implements Wra
 		this.matrix = object;
 	}
 
-	public int getMaxCount() {
+	public int getMaxSize() {
 		return (int) matrix.getRowCount();
 	}
 
