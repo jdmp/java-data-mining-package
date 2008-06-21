@@ -23,12 +23,9 @@
 
 package org.jdmp.matrix;
 
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.Transferable;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -374,8 +371,9 @@ public abstract class MatrixFactory {
 		return new DefaultListMatrix<Object>(list);
 	}
 
-	public static Matrix importFromString(String string, Object... parameters) {
-		return ImportMatrix.fromString(string, parameters);
+	public static Matrix importFromStream(Format format, InputStream stream, Object... parameters)
+			throws MatrixException, IOException {
+		return ImportMatrix.fromStream(format, stream, parameters);
 	}
 
 	public static Matrix importFromString(Format format, String string, Object... parameters)
@@ -481,21 +479,9 @@ public abstract class MatrixFactory {
 		return ImportMatrix.fromFile(format, file, parameters);
 	}
 
-	public static Matrix importFromClipboard(Object... parameters) throws MatrixException {
-		return importFromClipboard(Format.CSV, parameters);
-	}
-
 	public static Matrix importFromClipboard(Format format, Object... parameters)
 			throws MatrixException {
-		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-		Transferable clipData = clipboard.getContents(null);
-		String s;
-		try {
-			s = (String) (clipData.getTransferData(DataFlavor.stringFlavor));
-		} catch (Exception ex) {
-			s = ex.toString();
-		}
-		return importFromString(format, s, parameters);
+		return ImportMatrix.fromClipboard(format, parameters);
 	}
 
 	// Wolfer's sunspot data 1700 - 1987

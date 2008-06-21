@@ -24,24 +24,35 @@
 package org.jdmp.matrix.io;
 
 import java.io.File;
-import java.lang.reflect.Constructor;
+import java.io.InputStream;
+import java.lang.reflect.Method;
 
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.exceptions.MatrixException;
 
 public abstract class ImportMatrixXLS {
 
-	public static final Matrix fromFile(File file, Object... parameters) throws MatrixException {
-		Matrix xls = null;
+	public static Matrix fromFile(File file, Object... parameters) {
 		try {
-			int sheet = 0;
-			Class<?> c = Class.forName("org.jdmp.jexcelapi.DenseExcelMatrix2D");
-			Constructor<?> constr = c.getConstructor(new Class[] { File.class, Integer.TYPE });
-			xls = (Matrix) constr.newInstance(new Object[] { file, sheet });
+			Class<?> c = Class.forName("org.jdmp.jexcelapi.ImportMatrixXLS");
+			Method method = c.getMethod("fromFile", new Class[] { File.class, Object[].class });
+			Matrix matrix = (Matrix) method.invoke(null, file, parameters);
+			return matrix;
 		} catch (Exception e) {
 			throw new MatrixException(e);
 		}
-		return xls;
+	}
+
+	public static Matrix fromStream(InputStream stream, Object... parameters) {
+		try {
+			Class<?> c = Class.forName("org.jdmp.jexcelapi.ImportMatrixXLS");
+			Method method = c.getMethod("fromStream", new Class[] { InputStream.class,
+					Object[].class });
+			Matrix matrix = (Matrix) method.invoke(null, stream, parameters);
+			return matrix;
+		} catch (Exception e) {
+			throw new MatrixException(e);
+		}
 	}
 
 }

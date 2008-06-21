@@ -26,6 +26,8 @@ package org.jdmp.matrix.io;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -50,6 +52,14 @@ public abstract class ImportMatrixCSV {
 		return m;
 	}
 
+	public static final Matrix fromStream(InputStream stream, Object... parameters)
+			throws MatrixException, IOException {
+		InputStreamReader r = new InputStreamReader(stream);
+		Matrix m = fromReader(r);
+		r.close();
+		return m;
+	}
+
 	public static final Matrix fromFile(File file, Object... parameters) throws MatrixException,
 			IOException {
 		FileReader lr = new FileReader(file);
@@ -61,7 +71,6 @@ public abstract class ImportMatrixCSV {
 
 	public static final Matrix fromReader(Reader reader, Object... parameters)
 			throws MatrixException {
-
 		List<String> rowData = new ArrayList<String>();
 
 		String separator = "[,;\t]";

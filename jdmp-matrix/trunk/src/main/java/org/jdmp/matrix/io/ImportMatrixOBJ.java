@@ -23,40 +23,31 @@
 
 package org.jdmp.matrix.io;
 
-import java.awt.Component;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
-import java.util.logging.Logger;
 
-import org.jdmp.matrix.io.util.FileSelector;
+import org.jdmp.matrix.Matrix;
 
 public class ImportMatrixOBJ {
-	private static final Logger logger = Logger.getLogger(ImportMatrixOBJ.class.getName());
 
-	public static final File selectFile() {
-		return selectFile(null);
+	public static Matrix fromFile(File file) throws FileNotFoundException, IOException,
+			ClassNotFoundException {
+		FileInputStream stream = new FileInputStream(file);
+		Matrix m = fromStream(stream);
+		stream.close();
+		return m;
 	}
 
-	public static final File selectFile(Component c) {
-		return FileSelector.selectFile(c, "OBJ Files", ".obj");
-	}
-
-	@SuppressWarnings("unchecked")
-	public static Object load(File file) {
-		ObjectInputStream ois = null;
-		try {
-			ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)));
-			Object o = ois.readObject();
-			return o;
-		} catch (Exception e) {
-		} finally {
-			try {
-				ois.close();
-			} catch (Exception e2) {
-			}
-		}
-		return null;
+	public static Matrix fromStream(InputStream stream) throws FileNotFoundException, IOException,
+			ClassNotFoundException {
+		ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(stream));
+		Matrix m = (Matrix) ois.readObject();
+		ois.close();
+		return m;
 	}
 }

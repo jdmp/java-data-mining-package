@@ -30,9 +30,9 @@ import org.jdmp.matrix.stubs.AbstractGraphMatrix;
 
 public abstract class ImportMatrixGML {
 
-	public static final AbstractGraphMatrix importFromGraphML(File file) {
+	public static final AbstractGraphMatrix fromFile(File file) {
 		DefaultGraphMatrix m = new DefaultGraphMatrix();
-		//m.importFromGML(file);
+		// m.importFromGML(file);
 		return m;
 	}
 

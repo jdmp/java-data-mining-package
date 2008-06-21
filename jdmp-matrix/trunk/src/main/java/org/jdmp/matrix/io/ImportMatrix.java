@@ -23,8 +23,14 @@
 
 package org.jdmp.matrix.io;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.Reader;
 import java.lang.reflect.Method;
 
 import org.jdmp.matrix.Matrix;
@@ -46,7 +52,7 @@ public abstract class ImportMatrix {
 			Matrix matrix=(Matrix)m.invoke(null, file,parameters);
 			return matrix;
 		} catch (Exception e) {
-			throw new MatrixException("file format not supported: " + format, e);
+			throw new MatrixException("format not supported: " + format, e);
 		}
 	}
 
@@ -56,13 +62,50 @@ public abstract class ImportMatrix {
 
 	public static Matrix fromString(Format format, String string, Object parameters)
 			throws MatrixException {
-		switch (format) {
-		case CSV:
-			return ImportMatrixCSV.fromString(string, parameters);
-		case M:
-			return ImportMatrixM.fromString(string, parameters);
-		default:
-			throw new MatrixException("Format " + format + " not yet supported.");
+		try {
+			Class<?> c = Class.forName("org.jdmp.matrix.io.ImportMatrix" + format.name());
+			Method m = c.getMethod("fromString", new Class<?>[] { String.class, Object[].class });
+			Matrix matrix=(Matrix)m.invoke(null, string,parameters);
+			return matrix;
+		} catch (Exception e) {
+			throw new MatrixException("format not supported: " + format, e);
 		}
+	}
+	
+	public static Matrix fromStream(Format format, InputStream stream, Object parameters)
+	throws MatrixException, IOException {
+		try {
+			Class<?> c = Class.forName("org.jdmp.matrix.io.ImportMatrix" + format.name());
+			Method m = c.getMethod("fromStream", new Class<?>[] { InputStream.class, Object[].class });
+			Matrix matrix=(Matrix)m.invoke(null, stream,parameters);
+			return matrix;
+		} catch (Exception e) {
+			throw new MatrixException("format not supported: " + format, e);
+		}
+	}
+	
+	public static Matrix fromReader(Format format, Reader reader, Object parameters)
+	throws MatrixException, IOException {
+		try {
+			Class<?> c = Class.forName("org.jdmp.matrix.io.ImportMatrix" + format.name());
+			Method m = c.getMethod("fromReader", new Class<?>[] { Reader.class, Object[].class });
+			Matrix matrix=(Matrix)m.invoke(null, reader,parameters);
+			return matrix;
+		} catch (Exception e) {
+			throw new MatrixException("format not supported: " + format, e);
+		}
+	}
+	
+	public static Matrix fromClipboard(Format format, Object... parameters)
+	throws MatrixException {
+		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+		Transferable clipData = clipboard.getContents(null);
+		String s;
+		try {
+			s = (String) (clipData.getTransferData(DataFlavor.stringFlavor));
+		} catch (Exception ex) {
+			s = ex.toString();
+		}
+		return fromString(format, s, parameters);
 	}
 }

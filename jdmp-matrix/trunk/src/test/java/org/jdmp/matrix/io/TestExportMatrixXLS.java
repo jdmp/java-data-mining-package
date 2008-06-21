@@ -23,10 +23,6 @@
 
 package org.jdmp.matrix.io;
 
-import java.io.File;
-
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.Matrix.Format;
 import org.jdmp.matrix.exceptions.MatrixException;
 
@@ -37,24 +33,21 @@ public class TestExportMatrixXLS extends AbstractExportMatrixTest {
 	}
 
 	public void testExportToFile() throws Exception {
-
 		try {
-			Class.forName("org.jdmp.jexcelapi.DenseExcelMatrix2D");
+			Class.forName("org.jdmp.jexcelapi.ExportMatrixXLS");
 		} catch (ClassNotFoundException e) {
 			return;
 		}
-
 		super.testExportToFile();
-
 	}
 
 	public void testExportToStream() throws Exception {
 		try {
-			super.testExportToStream();
-		} catch (MatrixException e) {
+			Class.forName("org.jdmp.jexcelapi.ExportMatrixXLS");
+		} catch (ClassNotFoundException e) {
 			return;
 		}
-		throw new Exception("this method should not be supported");
+		super.testExportToFile();
 	}
 
 	public void testExportToWriter() throws Exception {

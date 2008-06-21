@@ -23,9 +23,9 @@
 
 package org.jdmp.matrix.io;
 
-import java.io.Closeable;
 import java.io.File;
-import java.lang.reflect.Constructor;
+import java.io.OutputStream;
+import java.lang.reflect.Method;
 
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.exceptions.MatrixException;
@@ -33,12 +33,22 @@ import org.jdmp.matrix.exceptions.MatrixException;
 public class ExportMatrixXLS {
 
 	public static void toFile(File file, Matrix matrix, Object... parameters) {
-		Matrix xls = null;
 		try {
-			Class<?> c = Class.forName("org.jdmp.jexcelapi.DenseExcelMatrix2D");
-			Constructor<?> constr = c.getConstructor(new Class[] { File.class, Matrix.class });
-			xls = (Matrix) constr.newInstance(new Object[] { file, matrix });
-			((Closeable) xls).close();
+			Class<?> c = Class.forName("org.jdmp.jexcelapi.ExportMatrixXLS");
+			Method method = c.getMethod("toFile", new Class[] { File.class, Matrix.class,
+					Object[].class });
+			method.invoke(null, file, matrix, parameters);
+		} catch (Exception e) {
+			throw new MatrixException(e);
+		}
+	}
+
+	public static void toStream(OutputStream stream, Matrix matrix, Object... parameters) {
+		try {
+			Class<?> c = Class.forName("org.jdmp.jexcelapi.ExportMatrixXLS");
+			Method method = c.getMethod("toStream", new Class[] { OutputStream.class, Matrix.class,
+					Object[].class });
+			method.invoke(null, stream, matrix, parameters);
 		} catch (Exception e) {
 			throw new MatrixException(e);
 		}

@@ -23,8 +23,18 @@
 
 package org.jdmp.matrix.io;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.LineNumberReader;
+import java.io.Reader;
+
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.implementations.basic.DefaultDenseStringMatrix2D;
+import org.jdmp.matrix.MatrixFactory;
+import org.jdmp.matrix.util.StringUtil;
 
 public abstract class ImportMatrixM {
 
@@ -40,8 +50,43 @@ public abstract class ImportMatrixM {
 	 *            the string to parse
 	 * @return a StringMatrix with the desired values
 	 */
-	public static Matrix fromString(String string,Object ... parameters) {
-		return new DefaultDenseStringMatrix2D(string);
+	public static Matrix fromString(String string, Object... parameters) {
+		string = string.replaceAll(StringUtil.BRACKETS, "");
+		String[] rows = string.split(StringUtil.SEMICOLONORNEWLINE);
+		String[] cols = rows[0].split(StringUtil.COLONORSPACES);
+		Object[][] values = new String[rows.length][cols.length];
+		for (int r = 0; r < rows.length; r++) {
+			cols = rows[r].split(StringUtil.COLONORSPACES);
+			for (int c = 0; c < cols.length; c++) {
+				values[r][c] = cols[c];
+			}
+		}
+		return MatrixFactory.linkToArray(values);
+	}
+
+	public static Matrix fromFile(File file, Object... parameters) throws IOException {
+		Reader reader = new BufferedReader(new FileReader(file));
+		Matrix matrix = fromReader(reader, parameters);
+		reader.close();
+		return matrix;
+	}
+
+	public static Matrix fromStream(InputStream stream, Object... parameters) throws IOException {
+		InputStreamReader r = new InputStreamReader(stream);
+		Matrix matrix = fromReader(r, parameters);
+		r.close();
+		return matrix;
+	}
+
+	public static Matrix fromReader(Reader reader, Object... parameters) throws IOException {
+		String EOL = System.getProperty("line.separator");
+		StringBuffer sb = new StringBuffer();
+		LineNumberReader lr = new LineNumberReader(reader);
+		String line = null;
+		while ((line = lr.readLine()) != null) {
+			sb.append(line + EOL);
+		}
+		return fromString(sb.toString(), parameters);
 	}
 
 }

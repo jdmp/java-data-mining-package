@@ -26,39 +26,25 @@ package org.jdmp.matrix.io;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.OutputStream;
 
 import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.io.util.FileSelector;
 
 public class ExportMatrixOBJ {
 
-	private static final Logger logger = Logger.getLogger(ExportMatrixOBJ.class.getName());
-
-	public static final File selectFile() {
-		return selectFile(null);
+	public static final void toFile(File file, Matrix m, Object... parameters) throws IOException {
+		FileOutputStream out = new FileOutputStream(file);
+		toStream(out, m, parameters);
+		out.close();
 	}
 
-	public static final File selectFile(Matrix m) {
-		return FileSelector.selectFile("OBJ Files", ".obj");
-	}
-
-	public static final void save(File file, Serializable o) {
-		ObjectOutputStream oos = null;
-		try {
-			oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
-			oos.writeObject(o);
-		} catch (Exception e) {
-			logger.log(Level.WARNING, "could not write to file " + file, e);
-		} finally {
-			try {
-				oos.close();
-			} catch (Exception e) {
-			}
-		}
+	public static final void toStream(OutputStream stream, Matrix m, Object... parameters)
+			throws IOException {
+		ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(stream));
+		oos.writeObject(m);
+		oos.close();
 	}
 
 }
