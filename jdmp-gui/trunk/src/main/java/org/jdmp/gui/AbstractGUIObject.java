@@ -4,8 +4,6 @@ import java.lang.reflect.Method;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.event.EventListenerList;
-
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.interfaces.GUIObject;
 
@@ -26,8 +24,6 @@ public abstract class AbstractGUIObject implements GUIObject {
 
 	public static final int ALL = Matrix.ALL;
 
-	private transient EventListenerList listenerList = null;
-
 	public AbstractGUIObject() {
 	}
 
@@ -40,8 +36,6 @@ public abstract class AbstractGUIObject implements GUIObject {
 		this(label);
 		setDescription(description);
 	}
-
-
 
 	public void fireValueChanged() {
 	}

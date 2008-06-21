@@ -2,6 +2,9 @@ package org.jdmp.core.sample;
 
 import javax.swing.event.EventListenerList;
 
+import org.jdmp.core.util.ObservableMap;
+import org.jdmp.core.variable.Variable;
+import org.jdmp.core.variable.VariableFactory;
 import org.jdmp.matrix.Matrix;
 
 public class DefaultSample extends AbstractSample {
@@ -9,9 +12,15 @@ public class DefaultSample extends AbstractSample {
 
 	private transient EventListenerList listenerList = null;
 
+	private final ObservableMap<Variable> variableMap = new ObservableMap<Variable>();
+
 	private String label = "";
 
 	private String description = "";
+
+	public ObservableMap<Variable> getVariableList() {
+		return variableMap;
+	}
 
 	public final String getDescription() {
 		return description;
@@ -60,6 +69,15 @@ public class DefaultSample extends AbstractSample {
 			s.setMatrix(TARGET, target.clone());
 		}
 		return s;
+	}
+
+	public void setMatrix(Object variableKey, Matrix matrix) {
+		Variable v = getVariableList().get(variableKey);
+		if (v == null) {
+			v = VariableFactory.labeledVariable(variableKey.toString());
+			getVariableList().put(variableKey, v);
+		}
+		v.addMatrix(matrix);
 	}
 
 }

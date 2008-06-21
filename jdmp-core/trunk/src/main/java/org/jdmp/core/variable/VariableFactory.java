@@ -17,4 +17,8 @@ public abstract class VariableFactory {
 		return new DefaultVariable();
 	}
 
+	public static final Variable singleMatrixVariable() {
+		return new SingleMatrixVariable();
+	}
+
 }

@@ -14,7 +14,7 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 
 	private transient GUIObject guiObject=null;
 	
-	private final ObservableMap<Variable> variableMap = new ObservableMap<Variable>();
+	
 
 	public AbstractSample() {
 		super();
@@ -28,9 +28,7 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 	public abstract Sample clone();
 
 
-	public ObservableMap<Variable> getVariableList() {
-		return variableMap;
-	}
+	
 	
 	
 	public final GUIObject getGUIObject() {
@@ -56,13 +54,6 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 		}
 	}
 
-	public void setMatrix(Object variableKey, Matrix matrix){
-		Variable v=getVariableList().get(variableKey);
-		if(v==null){
-			v=VariableFactory.labeledVariable(variableKey.toString());
-			getVariableList().put(variableKey, v);
-		}
-		v.addMatrix(matrix);
-	}
+	
 	
 }
