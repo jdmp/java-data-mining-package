@@ -1,8 +1,7 @@
 package org.jdmp.core.dataset;
 
-import org.jdmp.core.matrix.wrappers.DataSetDesiredOutputMatrixWrapper;
-import org.jdmp.core.matrix.wrappers.DataSetInputOutputMatrixWrapper;
-import org.jdmp.core.matrix.wrappers.DataSetOutputMatrixWrapper;
+import org.jdmp.core.matrix.wrappers.DataSetTargetOutputMatrixWrapper;
+import org.jdmp.core.matrix.wrappers.DataSetPredictedMatrixWrapper;
 import org.jdmp.core.sample.DefaultSample;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.DefaultVariable;
@@ -18,11 +17,9 @@ public class RegressionDataSet extends BasicDataSet {
 
 	public static final int RMSE = 0;
 
-	private Matrix inputOutputMatrix = null;
+	private Matrix predictedMatrix = null;
 
-	private Matrix outputMatrix = null;
-
-	private Matrix desiredOutputMatrix = null;
+	private Matrix targetMatrix = null;
 
 	public RegressionDataSet(String label) {
 		super(label);
@@ -63,16 +60,16 @@ public class RegressionDataSet extends BasicDataSet {
 		}
 	}
 
-	public RegressionDataSet(Matrix input, Matrix desiredOutput) {
-		this(null, input, desiredOutput);
+	public RegressionDataSet(Matrix input, Matrix targetOutput) {
+		this(null, input, targetOutput);
 	}
 
-	public static final RegressionDataSet create(String label, Matrix input, Matrix desiredOutput) {
-		return new RegressionDataSet(label, input, desiredOutput);
+	public static final RegressionDataSet create(String label, Matrix input, Matrix targetOutput) {
+		return new RegressionDataSet(label, input, targetOutput);
 	}
 
-	public static final RegressionDataSet create(Matrix input, Matrix desiredOutput) {
-		return new RegressionDataSet(null, input, desiredOutput);
+	public static final RegressionDataSet create(Matrix input, Matrix targetOutput) {
+		return new RegressionDataSet(null, input, targetOutput);
 	}
 
 	public Variable getRMSEVariable() {
@@ -83,18 +80,11 @@ public class RegressionDataSet extends BasicDataSet {
 		getRMSEVariable().addMatrix(m);
 	}
 
-	public Matrix getInputOutputMatrix() {
-		if (inputOutputMatrix == null) {
-			inputOutputMatrix = new DataSetInputOutputMatrixWrapper(this);
+	public Matrix getTargetMatrix() {
+		if (targetMatrix == null) {
+			targetMatrix = new DataSetTargetOutputMatrixWrapper(this);
 		}
-		return inputOutputMatrix;
-	}
-
-	public Matrix getDesiredOutputMatrix() {
-		if (desiredOutputMatrix == null) {
-			desiredOutputMatrix = new DataSetDesiredOutputMatrixWrapper(this);
-		}
-		return desiredOutputMatrix;
+		return targetMatrix;
 	}
 
 	public double getEarlyStoppingRMSE(int numberOfSteps) {
@@ -134,18 +124,17 @@ public class RegressionDataSet extends BasicDataSet {
 		if (matrixList == null) {
 			matrixList = new DefaultMatrixList();
 			matrixList.add(getInputMatrix());
-			matrixList.add(getOutputMatrix());
-			matrixList.add(getDesiredOutputMatrix());
-			matrixList.add(getInputOutputMatrix());
+			matrixList.add(getPredictedMatrix());
+			matrixList.add(getTargetMatrix());
 		}
 		return matrixList;
 	}
 
-	public Matrix getOutputMatrix() {
-		if (outputMatrix == null) {
-			outputMatrix = new DataSetOutputMatrixWrapper(this);
+	public Matrix getPredictedMatrix() {
+		if (predictedMatrix == null) {
+			predictedMatrix = new DataSetPredictedMatrixWrapper(this);
 		}
-		return outputMatrix;
+		return predictedMatrix;
 	}
 
 	public double getRMSE() throws MatrixException {

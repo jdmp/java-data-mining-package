@@ -15,7 +15,7 @@ public class CreateDataSetAction extends MatrixAction {
 		super(c, m, v);
 		putValue(Action.NAME, "Create DataSet");
 		putValue(Action.SHORT_DESCRIPTION,
-				"creates a DataSet from this matrix with input and desired output");
+				"creates a DataSet from this matrix with input and target output");
 	}
 
 	@Override

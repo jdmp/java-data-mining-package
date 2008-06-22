@@ -1,21 +1,19 @@
 package org.jdmp.core.matrix.wrappers;
 
-import org.jdmp.core.algorithm.regression.Regressor;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.sample.Sample;
+import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.Wrapper;
 import org.jdmp.matrix.stubs.AbstractDenseDoubleMatrix2D;
 
-public class DataSetInputOutputMatrixWrapper extends AbstractDenseDoubleMatrix2D implements
+public class DataSetPredictedMatrixWrapper extends AbstractDenseDoubleMatrix2D implements
 		Wrapper<RegressionDataSet> {
-	private static final long serialVersionUID = 677010635477854113L;
-
-	public static final Object INPUT = Regressor.INPUT;
+	private static final long serialVersionUID = 5197402551973462998L;
 
 	private RegressionDataSet dataSet = null;
 
-	public DataSetInputOutputMatrixWrapper(RegressionDataSet ds) {
+	public DataSetPredictedMatrixWrapper(RegressionDataSet ds) {
 		this.dataSet = ds;
 	}
 
@@ -23,24 +21,36 @@ public class DataSetInputOutputMatrixWrapper extends AbstractDenseDoubleMatrix2D
 		Sample p = dataSet.getSample(0);
 		if (p == null) {
 			return new long[] { 0, 0 };
-		} else {
-			return new long[] { dataSet.getSampleCount(), p.getMatrix(INPUT).getColumnCount() };
 		}
+		Matrix output = p.getMatrix(Sample.PREDICTED);
+		if (output != null) {
+			return new long[] { dataSet.getSampleCount(), output.getValueCount() };
+		} else {
+			return new long[] { 0, 0 };
+		}
+
 	}
 
 	public double getDouble(long row, long column) throws MatrixException {
 		Sample p = dataSet.getSample((int) row);
 		if (p != null) {
-			return p.getMatrix(INPUT).getDouble(0, column);
-		} else {
-			return 0.0;
+			if (p.getMatrix(Sample.PREDICTED) != null) {
+				long r = column / p.getMatrix(Sample.PREDICTED).getColumnCount();
+				long c = column % p.getMatrix(Sample.PREDICTED).getColumnCount();
+				return p.getMatrix(Sample.PREDICTED).getDouble(r, c);
+			}
 		}
+		return 0.0;
 	}
 
 	public void setDouble(double value, long row, long column) throws MatrixException {
 		Sample p = dataSet.getSample((int) row);
 		if (p != null) {
-			p.getMatrix(INPUT).setDouble(value, 0, column);
+			if (p.getMatrix(Sample.PREDICTED) != null) {
+				long r = column / p.getMatrix(Sample.PREDICTED).getColumnCount();
+				long c = column % p.getMatrix(Sample.PREDICTED).getColumnCount();
+				p.getMatrix(Sample.PREDICTED).setDouble(value, r, c);
+			}
 		}
 	}
 

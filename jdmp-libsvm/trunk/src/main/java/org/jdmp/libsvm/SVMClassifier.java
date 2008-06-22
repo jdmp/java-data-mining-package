@@ -86,7 +86,7 @@ public class SVMClassifier extends AbstractClassifier {
 		for (int i = 0; i < prob.l; i++) {
 			ClassificationSample p = (ClassificationSample) dataSet.getSample(i);
 			Matrix input = p.getMatrix(INPUT);
-			prob.y[i] = p.getDesiredClass();
+			prob.y[i] = p.getTargetClass();
 			for (int j = 0; j < columnCount; j++) {
 				prob.x[i][j] = new svm_node();
 				prob.x[i][j].index = j + 1;
@@ -145,7 +145,7 @@ public class SVMClassifier extends AbstractClassifier {
 	}
 
 	@Override
-	public void train(Matrix input, Matrix sampleWeight, Matrix desiredOutput) throws Exception {
+	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) throws Exception {
 		throw new Exception("not supported");
 	}
 

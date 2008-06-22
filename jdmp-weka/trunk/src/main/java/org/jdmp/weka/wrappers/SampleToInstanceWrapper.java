@@ -8,11 +8,11 @@ import weka.core.Instance;
 public class SampleToInstanceWrapper extends Instance {
 	private static final long serialVersionUID = 6525723600252564795L;
 
-	public SampleToInstanceWrapper(Matrix input, Matrix weight, Matrix desiredOutput,
+	public SampleToInstanceWrapper(Matrix input, Matrix sampleWeight, Matrix targetOutput,
 			boolean discrete, boolean includeTarget) throws MatrixException {
 		super((int) input.getColumnCount() + 1);
-		if (weight != null) {
-			setWeight(weight.getDoubleValue());
+		if (sampleWeight != null) {
+			setWeight(sampleWeight.getDoubleValue());
 		} else {
 			setWeight(1.0);
 		}
@@ -25,8 +25,8 @@ public class SampleToInstanceWrapper extends Instance {
 				}
 			}
 		}
-		if (includeTarget && desiredOutput != null) {
-			long[] c = desiredOutput.getCoordinatesOfMaximum();
+		if (includeTarget && targetOutput != null) {
+			long[] c = targetOutput.getCoordinatesOfMaximum();
 			setValue((int) input.getColumnCount(), c[Matrix.COLUMN]);
 		}
 	}

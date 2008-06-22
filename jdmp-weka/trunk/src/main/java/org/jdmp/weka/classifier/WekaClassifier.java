@@ -131,7 +131,7 @@ public class WekaClassifier extends AbstractClassifier {
 	}
 
 	@Override
-	public void train(Matrix input, Matrix sampleWeight, Matrix desiredOutput) {
+	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) {
 		logger.log(Level.WARNING, "this method is not supported for WEKA classifiers");
 	}
 

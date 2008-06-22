@@ -12,7 +12,6 @@ import java.util.Random;
 import java.util.Set;
 import java.util.logging.Level;
 
-import org.jdmp.core.matrix.wrappers.DataSetInputAndClassWrapper;
 import org.jdmp.core.sample.ClassificationSample;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.ObservableList;
@@ -38,9 +37,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 
 	public static final int ERRORCOUNT = 3;
 
-	private Matrix inputAndClassMatrix = null;
-
-	private Matrix desiredClassMatrix = null;
+	private Matrix targetClassMatrix = null;
 
 	public ClassificationDataSet(File file, String separator) throws MatrixException, IOException {
 		this(file.getName());
@@ -72,7 +69,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 		Map<Integer, Double> map = new HashMap<Integer, Double>();
 
 		for (Sample s : getSampleList()) {
-			int c = ((ClassificationSample) s).getDesiredClass();
+			int c = ((ClassificationSample) s).getTargetClass();
 			Double d = map.get(c);
 			if (d == null) {
 				d = 0.0;
@@ -118,20 +115,13 @@ public class ClassificationDataSet extends RegressionDataSet {
 		return ds;
 	}
 
-	public Matrix getInputAndClassMatrix() {
-		if (inputAndClassMatrix == null) {
-			inputAndClassMatrix = new DataSetInputAndClassWrapper(this);
+	public Matrix getTargetClassMatrix() {
+		if (targetClassMatrix == null) {
+			targetClassMatrix = new GenericCalculationMatrix(new IndexOfMax(COLUMN,
+					getTargetMatrix()));
+			targetClassMatrix.setLabel("Target Class");
 		}
-		return inputAndClassMatrix;
-	}
-
-	public Matrix getDesiredClassMatrix() {
-		if (desiredClassMatrix == null) {
-			desiredClassMatrix = new GenericCalculationMatrix(new IndexOfMax(COLUMN,
-					getDesiredOutputMatrix()));
-			desiredClassMatrix.setLabel("Desired Class");
-		}
-		return desiredClassMatrix;
+		return targetClassMatrix;
 	}
 
 	public final void createFromMatrix(Matrix m) throws MatrixException {
@@ -203,11 +193,9 @@ public class ClassificationDataSet extends RegressionDataSet {
 		if (matrixList == null) {
 			matrixList = new DefaultMatrixList();
 			matrixList.add(getInputMatrix());
-			matrixList.add(getOutputMatrix());
-			matrixList.add(getDesiredOutputMatrix());
-			matrixList.add(getDesiredClassMatrix());
-			matrixList.add(getInputOutputMatrix());
-			matrixList.add(getInputAndClassMatrix());
+			matrixList.add(getPredictedMatrix());
+			matrixList.add(getTargetMatrix());
+			matrixList.add(getTargetClassMatrix());
 		}
 		return matrixList;
 	}
@@ -258,7 +246,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 		for (int i = 0; i < getClassCount(); i++) {
 			ClassificationDataSet ds = new ClassificationDataSet("Class " + i);
 			for (Sample s : getSampleList()) {
-				if (((ClassificationSample) s).getDesiredClass() == i) {
+				if (((ClassificationSample) s).getTargetClass() == i) {
 					ds.addSample(s.clone());
 				}
 			}
@@ -282,7 +270,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 
 		// add samples to lists according to class
 		for (Sample s : getSampleList()) {
-			int targetClass = ((ClassificationSample) s).getDesiredClass();
+			int targetClass = ((ClassificationSample) s).getTargetClass();
 			sortedSamples.get(targetClass).add((ClassificationSample) s);
 		}
 

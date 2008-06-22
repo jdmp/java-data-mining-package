@@ -22,7 +22,7 @@ public class ClassificationSample extends DefaultSample {
 	}
 
 	public boolean isCorrect() throws MatrixException {
-		return getDesiredClass() == getRecognizedClass();
+		return getTargetClass() == getRecognizedClass();
 	}
 
 	public ClassificationSample clone() {
@@ -32,7 +32,7 @@ public class ClassificationSample extends DefaultSample {
 		return s;
 	}
 
-	public int getDesiredClass() throws MatrixException {
+	public int getTargetClass() throws MatrixException {
 		return (int) getMatrix(TARGET).getCoordinatesOfMaximum()[COLUMN];
 	}
 

@@ -49,7 +49,7 @@ public class MultiClassClassifier extends AbstractClassifier {
 			Classifier c = singleClassClassifier.emptyCopy();
 			singleClassClassifiers.add(c);
 			Matrix input = dataSet.getInputMatrix();
-			Matrix target1 = dataSet.getDesiredOutputMatrix().selectColumns(Ret.NEW, i);
+			Matrix target1 = dataSet.getTargetMatrix().selectColumns(Ret.NEW, i);
 			Matrix target2 = target1.minus(1).abs(Ret.NEW);
 			Matrix target = MatrixFactory.horCat(target1, target2);
 			ClassificationDataSet ds = ClassificationDataSet.copyFromMatrix(input, target);
@@ -59,7 +59,7 @@ public class MultiClassClassifier extends AbstractClassifier {
 	}
 
 	@Override
-	public void train(Matrix input, Matrix sampleWeight, Matrix desiredOutput) throws Exception {
+	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) throws Exception {
 		throw new Exception("not supported");
 	}
 

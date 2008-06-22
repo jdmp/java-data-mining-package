@@ -28,7 +28,7 @@ public abstract class AbstractClusterer extends AbstractAlgorithm implements Clu
 		Matrix output = predict(sample.getMatrix(INPUT), sample.getMatrix(WEIGHT));
 		sample.setMatrix(PREDICTED, output);
 		// List<Matrix> error = getOutputErrorAlgorithm().calculate(output,
-		// sample.getDesiredOutputMatrix());
+		// sample.getTargetMatrix());
 		// sample.setOutputErrorMatrix(error.get(0));
 		// sample.setRMSEMatrix(MatrixFactory.linkToValue(error.get(0).getRMS()));
 	}

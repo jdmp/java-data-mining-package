@@ -31,7 +31,7 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 
 	public abstract void reset() throws Exception;
 
-	public abstract void train(Matrix input, Matrix sampleWeight, Matrix desiredOutput)
+	public abstract void train(Matrix input, Matrix sampleWeight, Matrix targetOutput)
 			throws Exception;
 
 	public final void predict(Sample sample) throws Exception {
@@ -47,8 +47,8 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 		return predict(input.toRowVector(), null);
 	}
 
-	public final void train(Matrix input, Matrix desiredOutput) throws Exception {
-		train(input, MatrixFactory.linkToValue(1.0), desiredOutput);
+	public final void train(Matrix input, Matrix targetOutput) throws Exception {
+		train(input, MatrixFactory.linkToValue(1.0), targetOutput);
 	}
 
 	public abstract Matrix predict(Matrix input, Matrix sampleWeight) throws Exception;
@@ -95,13 +95,13 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 			if (sample instanceof ClassificationSample) {
 
 				int recognized = ((ClassificationSample) sample).getRecognizedClass();
-				int desired = ((ClassificationSample) sample).getDesiredClass();
+				int targetClass = ((ClassificationSample) sample).getTargetClass();
 
 				if (classCount == 1 || recognized == -1) {
 					confusion.setDouble(confusion.getDouble(0, 0) + 1, 0, 0);
 				} else {
-					confusion.setDouble(confusion.getDouble(recognized, desired) + 1, recognized,
-							desired);
+					confusion.setDouble(confusion.getDouble(recognized, targetClass) + 1, recognized,
+							targetClass);
 				}
 
 				if (((ClassificationSample) sample).isCorrect()) {

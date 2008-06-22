@@ -6,13 +6,13 @@ import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.Wrapper;
 import org.jdmp.matrix.stubs.AbstractDenseDoubleMatrix2D;
 
-public class DataSetDesiredOutputMatrixWrapper extends AbstractDenseDoubleMatrix2D implements
+public class DataSetTargetOutputMatrixWrapper extends AbstractDenseDoubleMatrix2D implements
 		Wrapper<RegressionDataSet> {
 	private static final long serialVersionUID = 5906451226992160036L;
 
 	private RegressionDataSet dataSet = null;
 
-	public DataSetDesiredOutputMatrixWrapper(RegressionDataSet ds) {
+	public DataSetTargetOutputMatrixWrapper(RegressionDataSet ds) {
 		this.dataSet = ds;
 	}
 

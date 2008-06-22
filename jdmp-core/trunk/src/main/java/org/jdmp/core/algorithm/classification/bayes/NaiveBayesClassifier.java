@@ -130,7 +130,7 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 	}
 
 	@Override
-	public void train(Matrix input, Matrix sampleWeight, Matrix desiredOutput) throws Exception {
+	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) throws Exception {
 		throw new MatrixException("sample by sample learning is not supported");
 	}
 

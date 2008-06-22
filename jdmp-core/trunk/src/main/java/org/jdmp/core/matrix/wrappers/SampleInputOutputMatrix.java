@@ -21,15 +21,15 @@ public class SampleInputOutputMatrix extends AbstractDenseDoubleMatrix2D impleme
 		return (m == null) ? MatrixFactory.linkToValue(0) : m;
 	}
 
-	public Matrix getDesiredOutputMatrix() {
+	public Matrix getTargetMatrix() {
 		Matrix m = sample.getMatrix(Sample.TARGET);
 		return (m == null) ? MatrixFactory.linkToValue(0) : m;
 	}
 
 	public long[] getSize() {
 		return new long[] {
-				Math.max(getInputMatrix().getRowCount(), getDesiredOutputMatrix().getRowCount()),
-				getInputMatrix().getColumnCount() + getDesiredOutputMatrix().getColumnCount() };
+				Math.max(getInputMatrix().getRowCount(), getTargetMatrix().getRowCount()),
+				getInputMatrix().getColumnCount() + getTargetMatrix().getColumnCount() };
 	}
 
 	public double getDouble(long row, long column) throws MatrixException {
@@ -37,7 +37,7 @@ public class SampleInputOutputMatrix extends AbstractDenseDoubleMatrix2D impleme
 			return getInputMatrix().getDouble(row, column);
 		} else {
 			column -= getInputMatrix().getColumnCount();
-			return getDesiredOutputMatrix().getDouble(row, column);
+			return getTargetMatrix().getDouble(row, column);
 		}
 	}
 
@@ -46,7 +46,7 @@ public class SampleInputOutputMatrix extends AbstractDenseDoubleMatrix2D impleme
 			getInputMatrix().setDouble(value, row, column);
 		} else {
 			column -= getInputMatrix().getColumnCount();
-			getDesiredOutputMatrix().setDouble(value, row, column);
+			getTargetMatrix().setDouble(value, row, column);
 		}
 	}
 
