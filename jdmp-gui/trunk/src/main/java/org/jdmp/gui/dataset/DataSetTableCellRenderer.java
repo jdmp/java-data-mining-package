@@ -38,9 +38,6 @@ public class DataSetTableCellRenderer implements TableCellRenderer {
 			case DataSetListTableModel.LABELCOLUMN:
 				o = dataSet.getLabel();
 				break;
-			case DataSetListTableModel.TYPECOLUMN:
-				o = dataSet.getDataSetType();
-				break;
 			case DataSetListTableModel.VARIABLECOLUMN:
 				return variableListTableCellRenderer.getTableCellRendererComponent(table, dataSet
 						.getVariableList(), isSelected, hasFocus, row, column);

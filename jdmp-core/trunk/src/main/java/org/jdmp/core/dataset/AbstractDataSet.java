@@ -29,8 +29,6 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		HasSamples, HasMatrixList {
 
 	private transient GUIObject guiObject=null;
-	
-	private DataSetType dataSetType = DataSetType.TRAININGSET;
 
 	private final ObservableList<Sample> sampleList = new ObservableList<Sample>();
 
@@ -107,14 +105,6 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 
 	public void removeSample(Sample p) {
 		sampleList.remove(p);
-	}
-
-	public DataSetType getDataSetType() {
-		return dataSetType;
-	}
-
-	public void setDataSetType(DataSetType dataSetType) {
-		this.dataSetType = dataSetType;
 	}
 
 	public int getVariableCount() {

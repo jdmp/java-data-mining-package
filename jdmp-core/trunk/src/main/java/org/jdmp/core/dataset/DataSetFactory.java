@@ -9,6 +9,7 @@ import org.jdmp.core.sample.Sample;
 import org.jdmp.core.sample.SampleFactory;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
+import org.jdmp.matrix.Matrix.EntryType;
 import org.jdmp.matrix.Matrix.Format;
 import org.jdmp.matrix.calculation.Calculation.Ret;
 import org.jdmp.matrix.exceptions.MatrixException;
@@ -507,7 +508,8 @@ public abstract class DataSetFactory {
 		Matrix input = m.selectColumns(Ret.NEW, 0, 1, 2, 3);
 		Matrix output = m.selectColumns(Ret.NEW, 4).discretizeToColumns(0);
 
-		ClassificationDataSet iris = ClassificationDataSet.copyFromMatrix(input, output);
+		ClassificationDataSet iris = ClassificationDataSet.copyFromMatrix(input
+				.convert(EntryType.DOUBLE), output.convert(EntryType.DOUBLE));
 		iris.setLabel("Iris flower dataset");
 
 		for (int i = 0; i < 50; i++) {

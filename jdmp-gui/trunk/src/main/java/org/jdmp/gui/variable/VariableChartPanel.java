@@ -137,9 +137,13 @@ public class VariableChartPanel extends ChartPanel implements CanBeRepainted, Ca
 		zeroMarker.setPaint(new Color(0, 0, 0, 128));
 		plot.addRangeMarker(zeroMarker, Layer.FOREGROUND);
 
-		plot.addRangeMarker(dataset.getMeanMarker(0));
-		plot.addRangeMarker(dataset.getStandardDeviationMarker(0));
-		plot.addRangeMarker(dataset.getMinMaxMarker(0));
+		try {
+			plot.addRangeMarker(dataset.getMeanMarker(0));
+			plot.addRangeMarker(dataset.getStandardDeviationMarker(0));
+			plot.addRangeMarker(dataset.getMinMaxMarker(0));
+		} catch (Exception e) {
+			System.out.println("error in VariableChartPanel");
+		}
 
 		rangeSelection.setPaint(new Color(200, 200, 235, 128));
 		rangeSelection.setLabelPaint(new Color(0, 0, 0));

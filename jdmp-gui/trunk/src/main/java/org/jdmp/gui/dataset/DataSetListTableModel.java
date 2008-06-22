@@ -9,18 +9,17 @@ import org.jdmp.core.dataset.DataSetListListener;
 import org.jdmp.core.dataset.DataSetListener;
 import org.jdmp.core.dataset.HasDataSets;
 
-public class DataSetListTableModel extends AbstractTableModel implements DataSetListListener, DataSetListener {
+public class DataSetListTableModel extends AbstractTableModel implements DataSetListListener,
+		DataSetListener {
 	private static final long serialVersionUID = 8897049622154020275L;
 
 	public static final int ICONCOLUMN = 0;
 
 	public static final int LABELCOLUMN = 1;
 
-	public static final int TYPECOLUMN = 2;
+	public static final int SAMPLECOUNTCOLUMN = 2;
 
-	public static final int SAMPLECOUNTCOLUMN = 3;
-
-	public static final int VARIABLECOLUMN = 4;
+	public static final int VARIABLECOLUMN = 3;
 
 	private HasDataSets iDataSets = null;
 
@@ -37,7 +36,7 @@ public class DataSetListTableModel extends AbstractTableModel implements DataSet
 	}
 
 	public int getColumnCount() {
-		return 5;
+		return 4;
 	}
 
 	public String getColumnName(int columnIndex) {
@@ -46,8 +45,6 @@ public class DataSetListTableModel extends AbstractTableModel implements DataSet
 			return "";
 		case LABELCOLUMN:
 			return "Label";
-		case TYPECOLUMN:
-			return "Type";
 		case SAMPLECOUNTCOLUMN:
 			return "SampleCount";
 		case VARIABLECOLUMN:

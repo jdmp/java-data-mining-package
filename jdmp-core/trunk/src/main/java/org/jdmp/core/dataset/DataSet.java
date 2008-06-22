@@ -16,10 +16,6 @@ public interface DataSet extends CoreObject, HasVariableMap, HasSampleList, HasM
 
 	public void setVariable(int index, Variable v);
 
-	public DataSetType getDataSetType();
-
-	public void setDataSetType(DataSetType dataSetType);
-
 	public void addVariableListener(VariableListener l);
 
 	public void removeVariableListener(VariableListener l);
