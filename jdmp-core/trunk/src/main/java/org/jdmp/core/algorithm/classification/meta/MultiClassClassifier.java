@@ -8,11 +8,15 @@ import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.dataset.ClassificationDataSet;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.MatrixFactory;
+import org.jdmp.matrix.calculation.Calculation.Ret;
 
 public class MultiClassClassifier extends AbstractClassifier {
 	private static final long serialVersionUID = 466059743021340944L;
 
 	private Classifier singleClassClassifier = null;
+
+	private int classCount = 0;
 
 	private List<Classifier> singleClassClassifiers = new ArrayList<Classifier>();
 
@@ -23,7 +27,12 @@ public class MultiClassClassifier extends AbstractClassifier {
 
 	@Override
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
-		return null;
+		double[] results = new double[classCount];
+		for (int i = 0; i < classCount; i++) {
+			Classifier c = singleClassClassifiers.get(i);
+			results[i] = c.predict(input, sampleWeight).getDouble(0, 0);
+		}
+		return MatrixFactory.linkToArray(results).transpose();
 	}
 
 	@Override
@@ -34,13 +43,17 @@ public class MultiClassClassifier extends AbstractClassifier {
 	@Override
 	public void train(RegressionDataSet dataSet) throws Exception {
 		clear();
-		int classCount = ((ClassificationDataSet) dataSet).getClassCount();
-
-		Classifier c = singleClassClassifier.emptyCopy();
-		c.reset();
+		classCount = ((ClassificationDataSet) dataSet).getClassCount();
 
 		for (int i = 0; i < classCount; i++) {
-			singleClassClassifiers.add(singleClassClassifier.emptyCopy());
+			Classifier c = singleClassClassifier.emptyCopy();
+			singleClassClassifiers.add(c);
+			Matrix input = dataSet.getInputMatrix();
+			Matrix target1 = dataSet.getDesiredOutputMatrix().selectColumns(Ret.NEW, i);
+			Matrix target2 = target1.minus(1).abs(Ret.NEW);
+			Matrix target = MatrixFactory.horCat(target1, target2);
+			ClassificationDataSet ds = ClassificationDataSet.copyFromMatrix(input, target);
+			c.train(ds);
 		}
 
 	}
