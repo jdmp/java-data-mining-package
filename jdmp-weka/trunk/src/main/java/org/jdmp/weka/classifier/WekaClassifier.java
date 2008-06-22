@@ -140,4 +140,8 @@ public class WekaClassifier extends AbstractClassifier {
 		createAlgorithm();
 	}
 
+	public org.jdmp.core.algorithm.classification.Classifier emptyCopy() throws Exception {
+		return new WekaClassifier(classifierName, discrete);
+	}
+
 }

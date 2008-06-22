@@ -7,6 +7,7 @@ import libsvm.svm_parameter;
 import libsvm.svm_problem;
 
 import org.jdmp.core.algorithm.classification.AbstractClassifier;
+import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.sample.ClassificationSample;
 import org.jdmp.matrix.Matrix;
@@ -151,6 +152,10 @@ public class SVMClassifier extends AbstractClassifier {
 	@Override
 	public void reset() throws MatrixException {
 		createAlgorithm();
+	}
+
+	public Classifier emptyCopy() {
+		return new SVMClassifier(kernel);
 	}
 
 }

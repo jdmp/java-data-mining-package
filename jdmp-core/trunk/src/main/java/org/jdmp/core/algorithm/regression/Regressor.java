@@ -36,4 +36,6 @@ public interface Regressor {
 
 	public void predict(RegressionDataSet dataSet) throws Exception;
 
+	public Regressor emptyCopy() throws Exception;
+
 }

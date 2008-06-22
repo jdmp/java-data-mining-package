@@ -17,6 +17,7 @@
 package org.jdmp.core.algorithm.classification.bayes;
 
 import org.jdmp.core.algorithm.classification.AbstractClassifier;
+import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.algorithm.estimator.DensityEstimator;
 import org.jdmp.core.algorithm.estimator.DiscreteDensityEstimator;
 import org.jdmp.core.dataset.ClassificationDataSet;
@@ -131,6 +132,10 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 	@Override
 	public void train(Matrix input, Matrix sampleWeight, Matrix desiredOutput) throws Exception {
 		throw new MatrixException("sample by sample learning is not supported");
+	}
+
+	public Classifier emptyCopy() {
+		return new NaiveBayesClassifier();
 	}
 
 }

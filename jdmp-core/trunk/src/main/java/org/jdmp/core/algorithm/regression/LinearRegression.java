@@ -1,6 +1,7 @@
 package org.jdmp.core.algorithm.regression;
 
 import org.jdmp.core.algorithm.classification.AbstractClassifier;
+import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.variable.DefaultVariable;
 import org.jdmp.core.variable.Variable;
@@ -13,7 +14,6 @@ import org.jdmp.matrix.exceptions.MatrixException;
  */
 public class LinearRegression extends AbstractClassifier {
 	private static final long serialVersionUID = 3483912497269476834L;
-
 
 	public static final int PARAMETERS = 1;
 
@@ -60,6 +60,10 @@ public class LinearRegression extends AbstractClassifier {
 	@Override
 	public void reset() throws MatrixException {
 		getParameterVariable().clear();
+	}
+
+	public Classifier emptyCopy() {
+		return new LinearRegression();
 	}
 
 }
