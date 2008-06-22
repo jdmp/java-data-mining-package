@@ -1,6 +1,7 @@
 package org.jdmp.core.dataset;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Random;
 
 import org.jdmp.core.sample.ClassificationSample;
@@ -108,69 +109,83 @@ public abstract class DataSetFactory {
 		BasicDataSet animals = new BasicDataSet("Animals");
 
 		Sample pigeon = SampleFactory.labeledSample("Pigeon");
-		pigeon.setMatrix(Sample.INPUT, MatrixFactory.importFromString("1 0 0 1 0 0 0 0 1 0 0 1 0"));
+		pigeon.setMatrix(Sample.INPUT, MatrixFactory.importFromString(Format.CSV,
+				"1 0 0 1 0 0 0 0 1 0 0 1 0"));
 		animals.addSample(pigeon);
 
 		Sample chicken = SampleFactory.labeledSample("Chicken");
-		chicken
-				.setMatrix(Sample.INPUT, MatrixFactory
-						.importFromString("1 0 0 1 0 0 0 0 1 0 0 0 0"));
+		chicken.setMatrix(Sample.INPUT, MatrixFactory.importFromString(Format.CSV,
+				"1 0 0 1 0 0 0 0 1 0 0 0 0"));
 		animals.addSample(chicken);
 
 		Sample duck = SampleFactory.labeledSample("Duck");
-		duck.setMatrix(Sample.INPUT, MatrixFactory.importFromString("1 0 0 1 0 0 0 0 1 0 0 0 1"));
+		duck.setMatrix(Sample.INPUT, MatrixFactory.importFromString(Format.CSV,
+				"1 0 0 1 0 0 0 0 1 0 0 0 1"));
 		animals.addSample(duck);
 
 		Sample goose = SampleFactory.labeledSample("Goose");
-		goose.setMatrix(Sample.INPUT, MatrixFactory.importFromString("1 0 0 1 0 0 0 0 1 0 0 1 1"));
+		goose.setMatrix(Sample.INPUT, MatrixFactory.importFromString(Format.CSV,
+				"1 0 0 1 0 0 0 0 1 0 0 1 1"));
 		animals.addSample(goose);
 
 		Sample owl = SampleFactory.labeledSample("Owl");
-		owl.setMatrix(Sample.INPUT, MatrixFactory.importFromString("1 0 0 1 0 0 0 0 1 1 0 1 0"));
+		owl.setMatrix(Sample.INPUT, MatrixFactory.importFromString(Format.CSV,
+				"1 0 0 1 0 0 0 0 1 1 0 1 0"));
 		animals.addSample(owl);
 
 		Sample falcon = SampleFactory.labeledSample("Falcon");
-		falcon.setMatrix(Sample.INPUT, MatrixFactory.importFromString("1 0 0 1 0 0 0 0 1 1 0 1 0"));
+		falcon.setMatrix(Sample.INPUT, MatrixFactory.importFromString(Format.CSV,
+				"1 0 0 1 0 0 0 0 1 1 0 1 0"));
 		animals.addSample(falcon);
 
 		Sample eagle = SampleFactory.labeledSample("Eagle");
-		eagle.setMatrix(Sample.INPUT, MatrixFactory.importFromString("0 1 0 1 0 0 0 0 1 1 0 1 0"));
+		eagle.setMatrix(Sample.INPUT, MatrixFactory.importFromString(Format.CSV,
+				"0 1 0 1 0 0 0 0 1 1 0 1 0"));
 		animals.addSample(eagle);
 
 		Sample fox = SampleFactory.labeledSample("Fox");
-		fox.setMatrix(Sample.INPUT, MatrixFactory.importFromString("0 1 0 0 1 1 0 0 0 1 0 0 0"));
+		fox.setMatrix(Sample.INPUT, MatrixFactory.importFromString(Format.CSV,
+				"0 1 0 0 1 1 0 0 0 1 0 0 0"));
 		animals.addSample(fox);
 
 		Sample dog = SampleFactory.labeledSample("Dog");
-		dog.setMatrix(Sample.INPUT, MatrixFactory.importFromString("0 1 0 0 1 1 0 0 0 0 1 0 0"));
+		dog.setMatrix(Sample.INPUT, MatrixFactory.importFromString(Format.CSV,
+				"0 1 0 0 1 1 0 0 0 0 1 0 0"));
 		animals.addSample(dog);
 
 		Sample wolf = SampleFactory.labeledSample("Wolf");
-		wolf.setMatrix(Sample.INPUT, MatrixFactory.importFromString("0 1 0 0 1 1 0 1 0 1 1 0 0"));
+		wolf.setMatrix(Sample.INPUT, MatrixFactory.importFromString(Format.CSV,
+				"0 1 0 0 1 1 0 1 0 1 1 0 0"));
 		animals.addSample(wolf);
 
 		Sample cat = SampleFactory.labeledSample("Cat");
-		cat.setMatrix(Sample.INPUT, MatrixFactory.importFromString("1 0 0 0 1 1 0 0 0 1 0 0 0"));
+		cat.setMatrix(Sample.INPUT, MatrixFactory.importFromString(Format.CSV,
+				"1 0 0 0 1 1 0 0 0 1 0 0 0"));
 		animals.addSample(cat);
 
 		Sample tiger = SampleFactory.labeledSample("Tiger");
-		tiger.setMatrix(Sample.INPUT, MatrixFactory.importFromString("0 0 1 0 1 1 0 0 0 1 1 0 0"));
+		tiger.setMatrix(Sample.INPUT, MatrixFactory.importFromString(Format.CSV,
+				"0 0 1 0 1 1 0 0 0 1 1 0 0"));
 		animals.addSample(tiger);
 
 		Sample lion = SampleFactory.labeledSample("Lion");
-		lion.setMatrix(Sample.INPUT, MatrixFactory.importFromString("0 0 1 0 1 1 0 1 0 1 1 0 0"));
+		lion.setMatrix(Sample.INPUT, MatrixFactory.importFromString(Format.CSV,
+				"0 0 1 0 1 1 0 1 0 1 1 0 0"));
 		animals.addSample(lion);
 
 		Sample horse = SampleFactory.labeledSample("Horse");
-		horse.setMatrix(Sample.INPUT, MatrixFactory.importFromString("0 0 1 0 1 1 1 1 0 0 1 0 0"));
+		horse.setMatrix(Sample.INPUT, MatrixFactory.importFromString(Format.CSV,
+				"0 0 1 0 1 1 1 1 0 0 1 0 0"));
 		animals.addSample(horse);
 
 		Sample zebra = SampleFactory.labeledSample("Zebra");
-		zebra.setMatrix(Sample.INPUT, MatrixFactory.importFromString("0 0 1 0 1 1 1 1 0 0 1 0 0"));
+		zebra.setMatrix(Sample.INPUT, MatrixFactory.importFromString(Format.CSV,
+				"0 0 1 0 1 1 1 1 0 0 1 0 0"));
 		animals.addSample(zebra);
 
 		Sample cow = SampleFactory.labeledSample("Cow");
-		cow.setMatrix(Sample.INPUT, MatrixFactory.importFromString("0 0 1 0 1 1 1 0 0 0 0 0 0"));
+		cow.setMatrix(Sample.INPUT, MatrixFactory.importFromString(Format.CSV,
+				"0 0 1 0 1 1 1 0 0 0 0 0 0"));
 		animals.addSample(cow);
 
 		return animals;
@@ -507,6 +522,17 @@ public abstract class DataSetFactory {
 		}
 
 		return iris;
+	}
+
+	public static ClassificationDataSet ABALONE() throws MatrixException, IOException {
+		InputStream stream = DataSetFactory.class
+				.getResourceAsStream("/datasets/classification/abalone.data");
+		Matrix input = MatrixFactory.importFromStream(Format.CSV, stream);
+		input = input.discretizeToColumns(0);
+		Matrix output = input.selectColumns(Ret.NEW, 10).discretizeToColumns(0);
+		input = input.deleteColumns(Ret.NEW, 10);
+		ClassificationDataSet abalone = ClassificationDataSet.copyFromMatrix(input, output);
+		return abalone;
 	}
 
 }
