@@ -38,4 +38,8 @@ public class ModuleGUIObject extends AbstractGUIObject {
 		module.setDescription(description);
 	}
 
+	public String toString() {
+		return module.toString();
+	}
+
 }

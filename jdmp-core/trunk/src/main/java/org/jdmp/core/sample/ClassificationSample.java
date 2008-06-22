@@ -32,11 +32,6 @@ public class ClassificationSample extends DefaultSample {
 		return s;
 	}
 
-	public String toString() {
-		return "ClassificationSample [" + Coordinates.toString(getMatrix(INPUT).getSize()) + "]->"
-				+ getDesiredClass();
-	}
-
 	public int getDesiredClass() throws MatrixException {
 		return (int) getMatrix(TARGET).getCoordinatesOfMaximum()[COLUMN];
 	}

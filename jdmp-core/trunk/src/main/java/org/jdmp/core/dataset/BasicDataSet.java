@@ -2,8 +2,6 @@ package org.jdmp.core.dataset;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
 import javax.swing.event.EventListenerList;
 

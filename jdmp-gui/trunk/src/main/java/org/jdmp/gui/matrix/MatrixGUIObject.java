@@ -21,6 +21,7 @@ import org.jdmp.matrix.calculation.Calculation.Ret;
 import org.jdmp.matrix.calculation.entrywise.creators.Fill;
 import org.jdmp.matrix.calculation.entrywise.creators.Rand;
 import org.jdmp.matrix.calculation.entrywise.creators.Randn;
+import org.jdmp.matrix.coordinates.Coordinates;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.HasColumnSelectionModel;
 import org.jdmp.matrix.interfaces.HasRowSelectionModel;
@@ -361,4 +362,13 @@ public class MatrixGUIObject extends AbstractGUIObject implements TableModel,
 	public void setDescription(String description) {
 	}
 
+	public String toString() {
+		if (matrix.getLabel() != null) {
+			return "[" + Coordinates.toString(matrix.getSize()) + "] "
+					+ matrix.getClass().getSimpleName() + " [" + matrix.getLabel() + "]";
+		} else {
+			return "[" + Coordinates.toString(matrix.getSize()) + "] "
+					+ matrix.getClass().getSimpleName();
+		}
+	}
 }

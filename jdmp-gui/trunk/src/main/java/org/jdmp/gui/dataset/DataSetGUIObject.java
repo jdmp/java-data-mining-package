@@ -42,4 +42,8 @@ public class DataSetGUIObject extends AbstractGUIObject {
 		dataSet.setDescription(description);
 	}
 
+	public String toString() {
+		return dataSet.toString();
+	}
+
 }

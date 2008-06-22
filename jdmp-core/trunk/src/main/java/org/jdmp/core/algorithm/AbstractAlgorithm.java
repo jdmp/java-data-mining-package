@@ -470,5 +470,13 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		}
 		return guiObject;
 	}
+	
+	public final String toString(){
+		if (getLabel()==null) {
+			return getClass().getSimpleName();
+		} else {
+			return getClass().getSimpleName() + " [" + getLabel() + "]";
+		}
+	}
 
 }

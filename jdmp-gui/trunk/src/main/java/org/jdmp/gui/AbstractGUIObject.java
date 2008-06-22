@@ -37,6 +37,8 @@ public abstract class AbstractGUIObject implements GUIObject {
 		setDescription(description);
 	}
 
+	public abstract String toString();
+
 	public void fireValueChanged() {
 	}
 
@@ -48,13 +50,6 @@ public abstract class AbstractGUIObject implements GUIObject {
 		} catch (Exception e) {
 			logger.log(Level.WARNING, "cannot show frame", e);
 		}
-	}
-
-	public String toString() {
-		if ("".equals(getLabel()))
-			return getClass().getSimpleName();
-		else
-			return getClass().getSimpleName() + " [" + getLabel() + "]";
 	}
 
 	public String getToolTipText() {

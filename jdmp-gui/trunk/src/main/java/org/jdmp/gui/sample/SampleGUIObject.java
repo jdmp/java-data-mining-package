@@ -41,4 +41,8 @@ public class SampleGUIObject extends AbstractGUIObject {
 		sample.setDescription(description);
 	}
 
+	public String toString() {
+		return sample.toString();
+	}
+
 }

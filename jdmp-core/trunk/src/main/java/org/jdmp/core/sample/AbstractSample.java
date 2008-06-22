@@ -4,9 +4,7 @@ import java.lang.reflect.Constructor;
 import java.util.logging.Level;
 
 import org.jdmp.core.AbstractCoreObject;
-import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.Variable;
-import org.jdmp.core.variable.VariableFactory;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.interfaces.GUIObject;
 
@@ -27,8 +25,13 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 
 	public abstract Sample clone();
 
-
-	
+	public final String toString(){
+		if (getLabel()==null) {
+			return getClass().getSimpleName();
+		} else {
+			return getClass().getSimpleName() + " [" + getLabel() + "]";
+		}
+	}
 	
 	
 	public final GUIObject getGUIObject() {

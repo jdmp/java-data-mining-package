@@ -35,4 +35,6 @@ public abstract class AbstractCoreObject implements CoreObject {
 	public final void notifyGUIObject() {
 	}
 
+	public abstract String toString();
+
 }

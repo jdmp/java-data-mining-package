@@ -83,4 +83,8 @@ public class VariableGUIObject extends AbstractGUIObject {
 		variable.setDescription(description);
 	}
 
+	public String toString() {
+		return variable.toString();
+	}
+
 }

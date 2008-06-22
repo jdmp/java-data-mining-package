@@ -202,4 +202,12 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 	}
 	
 	
+	public final String toString(){
+		if (getLabel()==null) {
+			return getClass().getSimpleName();
+		} else {
+			return getClass().getSimpleName() + " [" + getLabel() + "]";
+		}
+	}
+	
 }

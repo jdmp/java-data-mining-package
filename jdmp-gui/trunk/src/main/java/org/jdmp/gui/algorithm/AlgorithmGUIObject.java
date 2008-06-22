@@ -42,4 +42,8 @@ public class AlgorithmGUIObject extends AbstractGUIObject {
 		algorithm.setDescription(description);
 	}
 
+	public String toString() {
+		return algorithm.toString();
+	}
+
 }

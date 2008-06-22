@@ -58,7 +58,7 @@ public abstract class AbstractFrame extends JFrame {
 			String size = Coordinates.toString(m.getSize()).replaceAll(",", "x");
 			setTitle("[" + size + "] " + m.getClass().getSimpleName() + " [" + label + "]");
 		} else {
-			setTitle(o.getClass().getSimpleName() + " [" + label + "]");
+			setTitle(o.toString());
 		}
 
 		setIconImage(image);

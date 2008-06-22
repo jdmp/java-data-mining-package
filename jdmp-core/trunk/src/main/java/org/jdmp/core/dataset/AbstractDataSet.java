@@ -298,4 +298,12 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		}
 		return guiObject;
 	}
+	
+	public final String toString(){
+		if (getLabel()==null) {
+			return getClass().getSimpleName();
+		} else {
+			return getClass().getSimpleName() + " [" + getLabel() + "]";
+		}
+	}
 }

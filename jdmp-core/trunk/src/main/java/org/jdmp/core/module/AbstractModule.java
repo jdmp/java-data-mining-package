@@ -321,4 +321,12 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		return guiObject;
 	}
 
+	public final String toString(){
+		if (getLabel()==null) {
+			return getClass().getSimpleName();
+		} else {
+			return getClass().getSimpleName() + " [" + getLabel() + "]";
+		}
+	}
+	
 }
