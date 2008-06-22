@@ -62,11 +62,11 @@ public class DefaultSample extends AbstractSample {
 		DefaultSample s = new DefaultSample();
 		Matrix input = getMatrix(INPUT);
 		if (input != null) {
-			s.setMatrix(INPUT, input.clone());
+			s.setMatrix(INPUT, input);
 		}
 		Matrix target = getMatrix(TARGET);
 		if (target != null) {
-			s.setMatrix(TARGET, target.clone());
+			s.setMatrix(TARGET, target);
 		}
 		return s;
 	}

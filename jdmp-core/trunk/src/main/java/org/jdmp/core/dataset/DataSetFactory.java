@@ -1,7 +1,7 @@
 package org.jdmp.core.dataset;
 
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Random;
 
 import org.jdmp.core.sample.ClassificationSample;
@@ -10,11 +10,17 @@ import org.jdmp.core.sample.Sample;
 import org.jdmp.core.sample.SampleFactory;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
+import org.jdmp.matrix.Matrix.EntryType;
 import org.jdmp.matrix.Matrix.Format;
 import org.jdmp.matrix.calculation.Calculation.Ret;
 import org.jdmp.matrix.exceptions.MatrixException;
+import org.jdmp.matrix.util.JDMPSettings;
 
 public abstract class DataSetFactory {
+
+	public enum ClassificationDataSets {
+		ABALONE, IRIS, BREASTCANCER, BREASTCANCERWISCONSIN
+	};
 
 	public static RegressionDataSet HenonMap(int sampleCount, int inputLength, int predictionLength) {
 		RegressionDataSet henon = new RegressionDataSet("Henon Map");
@@ -524,15 +530,21 @@ public abstract class DataSetFactory {
 		return iris;
 	}
 
-	public static ClassificationDataSet ABALONE() throws MatrixException, IOException {
-		InputStream stream = DataSetFactory.class
-				.getResourceAsStream("/datasets/classification/abalone.data");
-		Matrix input = MatrixFactory.importFromStream(Format.CSV, stream);
-		input = input.discretizeToColumns(0);
-		Matrix output = input.selectColumns(Ret.NEW, 10).discretizeToColumns(0);
-		input = input.deleteColumns(Ret.NEW, 10);
-		ClassificationDataSet abalone = ClassificationDataSet.copyFromMatrix(input, output);
-		return abalone;
+	public static ClassificationDataSet example(ClassificationDataSets ds) throws MatrixException,
+			IOException {
+		switch (ds) {
+		case ABALONE:
+			return ABALONE();
+		case BREASTCANCER:
+			return BREASTCANCER();
+		case BREASTCANCERWISCONSIN:
+			return BREASTCANCERWISCONSIN();
+		case IRIS:
+			return IRIS();
+		}
+		return null;
 	}
+
+	
 
 }

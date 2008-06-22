@@ -23,6 +23,8 @@
 
 package org.jdmp.matrix.util;
 
+import java.io.File;
+
 import org.jdmp.matrix.io.util.RingBufferWriter;
 import org.jdmp.matrix.io.util.TeeStream;
 
@@ -33,6 +35,9 @@ public abstract class JDMPSettings {
 	private static int systemOutBufferSize = 1024 * 1024;
 
 	private static int systemErrBufferSize = 1024 * 1024;
+
+	private static String datasetFolder = System.getProperty("user.home") + File.separator
+			+ "datasets";
 
 	private static int numberOfThreads = 1;
 
@@ -160,4 +165,7 @@ public abstract class JDMPSettings {
 		JDMPSettings.maxToolTipRows = maxToolTipRows;
 	}
 
+	public static String getDataSetFolder() {
+		return datasetFolder;
+	}
 }

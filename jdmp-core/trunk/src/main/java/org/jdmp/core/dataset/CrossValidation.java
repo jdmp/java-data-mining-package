@@ -10,6 +10,11 @@ import org.jdmp.matrix.interfaces.ListMatrix;
 
 public class CrossValidation {
 
+	public static ListMatrix<Double> run(Classifier algorithm, ClassificationDataSet dataSet)
+			throws Exception {
+		return run(algorithm, dataSet, 10, 10, System.currentTimeMillis());
+	}
+
 	public static ListMatrix<Double> run(Classifier algorithm, ClassificationDataSet dataSet,
 			int folds, int runs, long randomSeed) throws Exception {
 

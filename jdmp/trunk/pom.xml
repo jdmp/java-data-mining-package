@@ -142,6 +142,18 @@
 		        <version>${jdmp.version}</version>
 				<scope>compile</scope>
 		    </dependency>
+		    <dependency>
+      			<groupId>org.jdmp</groupId>
+		        <artifactId>jdmp-mulan</artifactId>
+		        <version>${jdmp.version}</version>
+				<scope>compile</scope>
+		    </dependency>
+		    <dependency>
+      			<groupId>org.jdmp</groupId>
+		        <artifactId>jdmp-datasets</artifactId>
+		        <version>${jdmp.version}</version>
+				<scope>compile</scope>
+		    </dependency>
 
 
 			<dependency>
