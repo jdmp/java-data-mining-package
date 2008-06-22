@@ -35,6 +35,7 @@ import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.calculation.AbstractDoubleCalculation;
 import org.jdmp.matrix.exceptions.MatrixException;
+import org.jdmp.matrix.util.JDMPSettings;
 import org.jdmp.matrix.util.MathUtil;
 
 public class ImputeRegression extends AbstractDoubleCalculation {
