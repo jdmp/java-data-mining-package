@@ -37,6 +37,14 @@ public abstract class AbstractIntMatrix extends AbstractGenericMatrix<Integer> i
 		setAsDouble(MathUtil.getDouble(o), coordinates);
 	}
 
+	public final int getAsInt(long... coordinates) throws MatrixException {
+		return getInt(coordinates);
+	}
+
+	public final void setAsInt(int value, long... coordinates) throws MatrixException {
+		setInt(value, coordinates);
+	}
+
 	public final EntryType getEntryType() {
 		return EntryType.INTEGER;
 	}

@@ -27,6 +27,6 @@ import org.jdmp.matrix.exceptions.MatrixException;
 
 public interface GenericMatrix<A> extends Matrix {
 
-  public A getObject(long... coordinates) throws MatrixException;
-  
+	public A getObject(long... coordinates) throws MatrixException;
+
 }

@@ -36,7 +36,7 @@ public interface CharMatrix extends Matrix {
 	 * @return a char representation of the entry
 	 * @throws MatrixException
 	 */
-	public char getAsChar(long... coordinates) throws MatrixException;
+	public char getChar(long... coordinates) throws MatrixException;
 
 	/**
 	 * Sets an entry in the matrix to a char value. If the matrix cannot store
@@ -48,15 +48,6 @@ public interface CharMatrix extends Matrix {
 	 *            location of the entry
 	 * @throws MatrixException
 	 */
-	public void setAsChar(char value, long... coordinates) throws MatrixException;
-
-	/**
-	 * Converts the content of a matrix into a 2-dimensional array of char
-	 * values.
-	 * 
-	 * @return char array with matrix entries
-	 * @throws MatrixException
-	 */
-	public char[][] toCharArray() throws MatrixException;
+	public void setChar(char value, long... coordinates) throws MatrixException;
 
 }

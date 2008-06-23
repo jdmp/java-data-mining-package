@@ -36,7 +36,7 @@ public interface FloatMatrix extends Matrix {
 	 * @return a float representation of the entry
 	 * @throws MatrixException
 	 */
-	public float getAsFloat(long... coordinates) throws MatrixException;
+	public float getFloat(long... coordinates) throws MatrixException;
 
 	/**
 	 * Sets an entry in the matrix to a float value. If the matrix cannot store
@@ -48,15 +48,6 @@ public interface FloatMatrix extends Matrix {
 	 *            location of the entry
 	 * @throws MatrixException
 	 */
-	public void setAsFloat(float value, long... coordinates) throws MatrixException;
-
-	/**
-	 * Converts the content of a matrix into a 2-dimensional array of float
-	 * values.
-	 * 
-	 * @return float array with matrix entries
-	 * @throws MatrixException
-	 */
-	public float[][] toFloatArray() throws MatrixException;
+	public void setFloat(float value, long... coordinates) throws MatrixException;
 
 }

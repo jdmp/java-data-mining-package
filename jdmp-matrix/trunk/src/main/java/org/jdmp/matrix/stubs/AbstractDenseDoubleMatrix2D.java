@@ -33,11 +33,11 @@ public abstract class AbstractDenseDoubleMatrix2D extends AbstractDenseDoubleMat
 		return new CoordinateIterator2D(getSize());
 	}
 
-	public final double getAsDouble(long... coordinates) {
+	public final double getDouble(long... coordinates) {
 		return getDouble(coordinates[ROW], coordinates[COLUMN]);
 	}
 
-	public final void setAsDouble(double value, long... coordinates) {
+	public final void setDouble(double value, long... coordinates) {
 		setDouble(value, coordinates[ROW], coordinates[COLUMN]);
 	}
 

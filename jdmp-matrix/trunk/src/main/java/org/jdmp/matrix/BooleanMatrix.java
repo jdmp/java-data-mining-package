@@ -36,7 +36,7 @@ public interface BooleanMatrix extends Matrix {
 	 * @return a boolean representation of the entry
 	 * @throws MatrixException
 	 */
-	public boolean getAsBoolean(long... coordinates) throws MatrixException;
+	public boolean getBoolean(long... coordinates) throws MatrixException;
 
 	/**
 	 * Sets an entry in the matrix to a boolean value. If the matrix cannot
@@ -48,15 +48,6 @@ public interface BooleanMatrix extends Matrix {
 	 *            location of the entry
 	 * @throws MatrixException
 	 */
-	public void setAsBoolean(boolean value, long... coordinates) throws MatrixException;
-
-	/**
-	 * Converts the content of a matrix into a 2-dimensional array of boolean
-	 * values.
-	 * 
-	 * @return boolean array with matrix entries
-	 * @throws MatrixException
-	 */
-	public boolean[][] toBooleanArray() throws MatrixException;
+	public void setBoolean(boolean value, long... coordinates) throws MatrixException;
 
 }

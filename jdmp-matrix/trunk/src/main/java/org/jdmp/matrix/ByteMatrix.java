@@ -36,7 +36,7 @@ public interface ByteMatrix extends Matrix {
 	 * @return a byte representation of the entry
 	 * @throws MatrixException
 	 */
-	public byte getAsByte(long... coordinates) throws MatrixException;
+	public byte getByte(long... coordinates) throws MatrixException;
 
 	/**
 	 * Sets an entry in the matrix to a byte value. If the matrix cannot store
@@ -48,15 +48,6 @@ public interface ByteMatrix extends Matrix {
 	 *            location of the entry
 	 * @throws MatrixException
 	 */
-	public void setAsByte(byte value, long... coordinates) throws MatrixException;
-
-	/**
-	 * Converts the content of a matrix into a 2-dimensional array of byte
-	 * values.
-	 * 
-	 * @return byte array with matrix entries
-	 * @throws MatrixException
-	 */
-	public byte[][] toByteArray() throws MatrixException;
+	public void setByte(byte value, long... coordinates) throws MatrixException;
 
 }

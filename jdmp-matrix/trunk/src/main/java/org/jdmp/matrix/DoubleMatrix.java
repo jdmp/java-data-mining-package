@@ -36,7 +36,7 @@ public interface DoubleMatrix extends Matrix {
 	 * @return a double representation of the entry
 	 * @throws MatrixException
 	 */
-	public double getAsDouble(long... coordinates) throws MatrixException;
+	public double getDouble(long... coordinates) throws MatrixException;
 
 	/**
 	 * Sets an entry in the matrix to a double value. If the matrix cannot store
@@ -48,15 +48,6 @@ public interface DoubleMatrix extends Matrix {
 	 *            location of the entry
 	 * @throws MatrixException
 	 */
-	public void setAsDouble(double value, long... coordinates) throws MatrixException;
-
-	/**
-	 * Converts the content of a matrix into a 2-dimensional array of double
-	 * values.
-	 * 
-	 * @return double array with matrix entries
-	 * @throws MatrixException
-	 */
-	public double[][] toDoubleArray() throws MatrixException;
+	public void setDouble(double value, long... coordinates) throws MatrixException;
 
 }

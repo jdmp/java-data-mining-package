@@ -47,6 +47,14 @@ public abstract class AbstractStringMatrix extends AbstractGenericMatrix<String>
 		setAsString("" + value, coordinates);
 	}
 
+	public final String getAsString(long... coordinates) {
+		return getString(coordinates);
+	}
+
+	public final void setAsString(String string, long... coordinates) throws MatrixException {
+		setString(string, coordinates);
+	}
+
 	public final EntryType getEntryType() {
 		return EntryType.STRING;
 	}

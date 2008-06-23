@@ -28,11 +28,26 @@ import org.jdmp.matrix.exceptions.MatrixException;
 public interface StringMatrix extends Matrix {
 
 	/**
-	 * Converts the content of a matrix into a 2-dimensional array of Strings.
+	 * Returns a String representation of an entry in the matrix. The stored
+	 * value will be converted to a String as good as possible.
 	 * 
-	 * @return String array with matrix entries
+	 * @param coordinates
+	 *            location of the entry
+	 * @return a String representation of the entry
 	 * @throws MatrixException
 	 */
-	public String[][] toStringArray() throws MatrixException;
+	public String getString(long... coordinates) throws MatrixException;
+
+	/**
+	 * Sets an entry in the matrix to a String value. If the matrix cannot store
+	 * Strings, the value will be represented as good as possible.
+	 * 
+	 * @param value
+	 *            String value
+	 * @param coordinates
+	 *            location of the entry
+	 * @throws MatrixException
+	 */
+	public void setString(String string, long... coordinates) throws MatrixException;
 
 }

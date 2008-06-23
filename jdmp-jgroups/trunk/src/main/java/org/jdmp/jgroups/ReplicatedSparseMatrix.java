@@ -68,7 +68,7 @@ public class ReplicatedSparseMatrix extends AbstractSparseDoubleMatrix {
 		return size;
 	}
 
-	public double getAsDouble(long... coordinates) {
+	public double getDouble(long... coordinates) {
 		if (values != null) {
 			Double v = (Double) values.get(new Coordinates(coordinates));
 			return v == null ? defaultValue : v;
@@ -82,7 +82,7 @@ public class ReplicatedSparseMatrix extends AbstractSparseDoubleMatrix {
 		return values.size();
 	}
 
-	public void setAsDouble(double value, long... coordinates) {
+	public void setDouble(double value, long... coordinates) {
 		while (maximumNumberOfEntries > 0 && values.size() > maximumNumberOfEntries) {
 			values.remove(values.keySet().iterator().next());
 		}

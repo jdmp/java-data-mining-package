@@ -38,7 +38,7 @@ public interface DateMatrix extends Matrix {
 	 * @return a String representation of the entry
 	 * @throws MatrixException
 	 */
-	public Date getAsDate(long... coordinates) throws MatrixException;
+	public Date getDate(long... coordinates) throws MatrixException;
 
 	/**
 	 * Sets an entry in the matrix to a Date value. If the matrix cannot store
@@ -50,15 +50,6 @@ public interface DateMatrix extends Matrix {
 	 *            location of the entry
 	 * @throws MatrixException
 	 */
-	public void setAsDate(Date date, long... coordinates) throws MatrixException;
-
-	/**
-	 * Converts the content of a matrix into a 2-dimensional array of Date
-	 * values.
-	 * 
-	 * @return Date array with matrix entries
-	 * @throws MatrixException
-	 */
-	public Date[][] toDateArray() throws MatrixException;
+	public void setDate(Date date, long... coordinates) throws MatrixException;
 
 }

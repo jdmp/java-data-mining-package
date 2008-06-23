@@ -36,7 +36,7 @@ public interface LongMatrix extends Matrix {
 	 * @return a long representation of the entry
 	 * @throws MatrixException
 	 */
-	public long getAsLong(long... coordinates) throws MatrixException;
+	public long getLong(long... coordinates) throws MatrixException;
 
 	/**
 	 * Sets an entry in the matrix to a long value. If the matrix cannot store
@@ -48,15 +48,6 @@ public interface LongMatrix extends Matrix {
 	 *            location of the entry
 	 * @throws MatrixException
 	 */
-	public void setAsLong(long value, long... coordinates) throws MatrixException;
-
-	/**
-	 * Converts the content of a matrix into a 2-dimensional array of long
-	 * values.
-	 * 
-	 * @return long array with matrix entries
-	 * @throws MatrixException
-	 */
-	public long[][] toLongArray() throws MatrixException;
+	public void setLong(long value, long... coordinates) throws MatrixException;
 
 }
