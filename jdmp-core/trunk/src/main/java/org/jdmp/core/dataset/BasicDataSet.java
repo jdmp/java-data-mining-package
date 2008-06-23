@@ -48,7 +48,7 @@ public class BasicDataSet extends AbstractDataSet {
 		this.label = label;
 	}
 
-	private Matrix inputMatrix = null;
+	protected Matrix inputMatrix = null;
 
 	protected MatrixList matrixList = null;
 

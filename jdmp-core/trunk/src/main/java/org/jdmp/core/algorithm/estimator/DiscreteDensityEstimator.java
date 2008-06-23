@@ -18,51 +18,40 @@ package org.jdmp.core.algorithm.estimator;
 
 public class DiscreteDensityEstimator implements DensityEstimator {
 
-  private double[] counts;
+	private double[] counts;
 
-  private double sumOfCounts;
+	private double sumOfCounts;
 
+	public DiscreteDensityEstimator(int nmbVals, boolean laplace) {
+		counts = new double[nmbVals];
+		sumOfCounts = 0;
+		if (laplace) {
+			for (int i = 0; i < nmbVals; i++) {
+				counts[i] = 1;
+			}
+			sumOfCounts = (double) nmbVals;
+		}
+	}
 
+	public DiscreteDensityEstimator(int nmbVals, double correction) {
+		counts = new double[nmbVals];
+		sumOfCounts = 0;
+		for (int i = 0; i < nmbVals; i++) {
+			counts[i] = correction;
+		}
+		sumOfCounts = (double) nmbVals;
+	}
 
-  public DiscreteDensityEstimator(int nmbVals, boolean laplace) {
+	public void addValue(double val, double weight) {
+		counts[(int) val] += weight;
+		sumOfCounts += weight;
+	}
 
-    counts = new double[nmbVals];
-    sumOfCounts = 0;
-    if (laplace) {
-      for (int i = 0; i < nmbVals; i++) {
-        counts[i] = 1;
-      }
-      sumOfCounts = (double) nmbVals;
-    }
-  }
-
-    public DiscreteDensityEstimator(int nmbVals, double correction) {
-
-    counts = new double[nmbVals];
-    sumOfCounts = 0;
-      for (int i = 0; i < nmbVals; i++) {
-        counts[i] = correction;
-      }
-      sumOfCounts = (double) nmbVals;
-    }
-
-
-
-
-  public void addValue(double val, double weight) {
-    counts[(int) val] += weight;
-    sumOfCounts += weight;
-
-  }
-
-
-
-
-  public double getProbability(double val) {
-    if (sumOfCounts == 0) {
-      return 0;
-    }
-    return (double) counts[(int) val] / sumOfCounts;
-  }
+	public double getProbability(double val) {
+		if (sumOfCounts == 0) {
+			return 0;
+		}
+		return (double) counts[(int) val] / sumOfCounts;
+	}
 
 }

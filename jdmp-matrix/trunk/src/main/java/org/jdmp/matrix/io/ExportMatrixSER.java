@@ -32,7 +32,7 @@ import java.io.OutputStream;
 
 import org.jdmp.matrix.Matrix;
 
-public class ExportMatrixOBJ {
+public class ExportMatrixSER {
 
 	public static final void toFile(File file, Matrix m, Object... parameters) throws IOException {
 		FileOutputStream out = new FileOutputStream(file);

@@ -58,6 +58,26 @@ public class ClassificationDataSet extends RegressionDataSet {
 		return ds;
 	}
 
+	public static ClassificationDataSet linkToMatrix(Matrix input, Matrix target)
+			throws MatrixException {
+		ClassificationDataSet ds = new ClassificationDataSet();
+		ds.inputMatrix = input;
+		ds.targetMatrix = target;
+
+		for (int i = 0; i < input.getRowCount(); i++) {
+			if (i % 1000 == 0) {
+				System.out.println("Sample " + i);
+			}
+			ClassificationSample s = new ClassificationSample();
+			Matrix in = input.selectRows(Ret.LINK, i);
+			Matrix out = target.selectRows(Ret.LINK, i);
+			s.setMatrix(Sample.INPUT, in);
+			s.setMatrix(Sample.TARGET, out);
+			ds.addSample(s);
+		}
+		return ds;
+	}
+
 	public ClassificationDataSet(String label) {
 		this();
 		setLabel(label);

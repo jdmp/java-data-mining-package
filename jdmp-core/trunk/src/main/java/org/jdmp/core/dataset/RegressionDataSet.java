@@ -19,7 +19,7 @@ public class RegressionDataSet extends BasicDataSet {
 
 	private Matrix predictedMatrix = null;
 
-	private Matrix targetMatrix = null;
+	protected Matrix targetMatrix = null;
 
 	public RegressionDataSet(String label) {
 		super(label);

@@ -44,8 +44,12 @@ public class Selection extends AbstractObjectCalculation {
 	public Selection(Matrix m, List<? extends Number>... selection) {
 		super(m);
 		this.selection = new long[selection.length][];
-		this.selection[ROW] = MathUtil.listToLong(selection[ROW]);
-		this.selection[COLUMN] = MathUtil.listToLong(selection[COLUMN]);
+		if (selection[ROW] != null) {
+			this.selection[ROW] = MathUtil.listToLong(selection[ROW]);
+		}
+		if (selection[COLUMN] != null) {
+			this.selection[COLUMN] = MathUtil.listToLong(selection[COLUMN]);
+		}
 	}
 
 	public Selection(Matrix m, long[]... selection) {
@@ -54,16 +58,45 @@ public class Selection extends AbstractObjectCalculation {
 	}
 
 	public Object getObject(long... coordinates) throws MatrixException {
-		return getSource().getObject(selection[ROW][(int) coordinates[ROW]],
-				selection[COLUMN][(int) coordinates[COLUMN]]);
+		if (selection[ROW] != null && selection[COLUMN] != null) {
+			return getSource().getObject(selection[ROW][(int) coordinates[ROW]],
+					selection[COLUMN][(int) coordinates[COLUMN]]);
+		} else {
+			if (selection[ROW] == null) {
+				return getSource().getObject(coordinates[ROW],
+						selection[COLUMN][(int) coordinates[COLUMN]]);
+			} else {
+				return getSource().getObject(selection[ROW][(int) coordinates[ROW]],
+						coordinates[COLUMN]);
+			}
+		}
 	}
 
 	public void setObject(Object o, long... coordinates) throws MatrixException {
-		getSource().setObject(o, selection[ROW][(int) coordinates[ROW]], selection[COLUMN][(int) coordinates[COLUMN]]);
+		if (selection[ROW] != null && selection[COLUMN] != null) {
+			getSource().setObject(o, selection[ROW][(int) coordinates[ROW]],
+					selection[COLUMN][(int) coordinates[COLUMN]]);
+		} else {
+			if (selection[ROW] == null) {
+				getSource().setObject(o, coordinates[ROW],
+						selection[COLUMN][(int) coordinates[COLUMN]]);
+			} else {
+				getSource().setObject(o, selection[ROW][(int) coordinates[ROW]],
+						coordinates[COLUMN]);
+			}
+		}
 	}
 
 	public long[] getSize() {
-		return new long[] { selection[ROW].length, selection[COLUMN].length };
+		if (selection[ROW] != null && selection[COLUMN] != null) {
+			return new long[] { selection[ROW].length, selection[COLUMN].length };
+		} else {
+			if (selection[ROW] == null) {
+				return new long[] { getSource().getRowCount(), selection[COLUMN].length };
+			} else {
+				return new long[] { selection[ROW].length, getSource().getColumnCount() };
+			}
+		}
 	}
 
 }

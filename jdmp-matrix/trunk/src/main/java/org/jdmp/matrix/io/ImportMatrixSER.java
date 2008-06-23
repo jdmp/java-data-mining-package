@@ -21,22 +21,33 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.matrix.implementations;
+package org.jdmp.matrix.io;
 
-import junit.framework.TestSuite;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
 
-public class AllTests extends TestSuite {
+import org.jdmp.matrix.Matrix;
 
-	public static TestSuite suite() {
-		TestSuite suite = new TestSuite(AllTests.class.getName());
-		suite.addTestSuite(TestDefaultDenseDoubleMatrix2D.class);
-		suite.addTestSuite(TestDefaultDenseObjectMatrix2D.class);
-		suite.addTestSuite(TestDefaultDenseStringMatrix2D.class);
-		suite.addTestSuite(TestDefaultSparseRowMatrix2D.class);
-		suite.addTestSuite(TestDefaultSparseColumnMatrix2D.class);
-		suite.addTestSuite(TestCommonsMathRealMatrix.class);
-		suite.addTestSuite(TestDefaultTiledObjectMatrix2D.class);
-		return suite;
+public class ImportMatrixSER {
+
+	public static Matrix fromFile(File file, Object... parameters) throws FileNotFoundException,
+			IOException, ClassNotFoundException {
+		FileInputStream stream = new FileInputStream(file);
+		Matrix m = fromStream(stream);
+		stream.close();
+		return m;
 	}
 
+	public static Matrix fromStream(InputStream stream, Object... parameters)
+			throws FileNotFoundException, IOException, ClassNotFoundException {
+		ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(stream));
+		Matrix m = (Matrix) ois.readObject();
+		ois.close();
+		return m;
+	}
 }

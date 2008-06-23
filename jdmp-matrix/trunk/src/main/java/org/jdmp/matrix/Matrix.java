@@ -87,7 +87,7 @@ public interface Matrix extends Serializable, ExportMatrixInterface, CoordinateF
 	 * Import and export formats that are supported.
 	 */
 	public enum Format {
-		CSV, TXT, M, MAT, R, HTML, MTX, XLS, OBJ, SER, GraphML, TEX, WAV, BMP, TIFF, PLT, JPEG, PDF, PNG, XML, AML, ARFF, ATT, LOG, NET, XRFF
+		CSV, TXT, M, MAT, R, HTML, MTX, XLS, SER, GraphML, TEX, WAV, BMP, TIFF, PLT, JPEG, PDF, PNG, XML, AML, ARFF, ATT, LOG, NET, XRFF
 	};
 
 	public Matrix clone();

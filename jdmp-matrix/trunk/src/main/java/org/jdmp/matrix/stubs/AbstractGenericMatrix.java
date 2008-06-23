@@ -123,8 +123,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 	 * A logger used for <code>Matrix</code> and all subclasses
 	 */
 	protected transient static final Logger logger = Logger.getLogger(Matrix.class.getName());
-	
-	
+
 	static {
 		JDMPSettings.initialize();
 		long mem = Runtime.getRuntime().maxMemory();
@@ -133,48 +132,46 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 			logger.log(Level.FINE, "Use the parameter -Xmx512M to increase the available memory");
 		}
 	}
-	
+
 	private transient GUIObject guiObject = null;
-	
-	private Annotation annotation=null;
+
+	private Annotation annotation = null;
 
 	public abstract A getObject(long... coordinates) throws MatrixException;
 
-	
-	
 	public final Object getMatrixAnnotation() {
-        return annotation == null ? null : annotation.getMatrixAnnotation();
-    }
+		return annotation == null ? null : annotation.getMatrixAnnotation();
+	}
 
-    public final void setMatrixAnnotation(Object value) {
-        if (annotation == null) {
-            annotation = new DefaultAnnotation();
-        }
-        annotation.setMatrixAnnotation(value);
-    }
+	public final void setMatrixAnnotation(Object value) {
+		if (annotation == null) {
+			annotation = new DefaultAnnotation();
+		}
+		annotation.setMatrixAnnotation(value);
+	}
 
-    public final Object getAxisAnnotation(int axis, int positionOnAxis) {
-        return annotation == null ? null : annotation.getAxisAnnotation(axis, positionOnAxis);
-    }
+	public final Object getAxisAnnotation(int axis, int positionOnAxis) {
+		return annotation == null ? null : annotation.getAxisAnnotation(axis, positionOnAxis);
+	}
 
-    public final Object getAxisAnnotation(int axis) {
-        return annotation == null ? null : annotation.getAxisAnnotation(axis);
-    }
+	public final Object getAxisAnnotation(int axis) {
+		return annotation == null ? null : annotation.getAxisAnnotation(axis);
+	}
 
-    public final void setAxisAnnotation(int axis, int positionOnAxis, Object value) {
-        if (annotation == null) {
-            annotation = new DefaultAnnotation();
-        }
-        annotation.setAxisAnnotation(axis, positionOnAxis, value);
-    }
+	public final void setAxisAnnotation(int axis, int positionOnAxis, Object value) {
+		if (annotation == null) {
+			annotation = new DefaultAnnotation();
+		}
+		annotation.setAxisAnnotation(axis, positionOnAxis, value);
+	}
 
-    public final void setAxisAnnotation(int axis, Object value) {
-        if (annotation == null) {
-            annotation = new DefaultAnnotation();
-        }
-        annotation.setAxisAnnotation(axis, value);
-    }
-	
+	public final void setAxisAnnotation(int axis, Object value) {
+		if (annotation == null) {
+			annotation = new DefaultAnnotation();
+		}
+		annotation.setAxisAnnotation(axis, value);
+	}
+
 	public final GUIObject getGUIObject() {
 		if (guiObject == null) {
 			try {
@@ -188,7 +185,6 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		return guiObject;
 	}
 
-	
 	public final boolean containsMissingValues() throws MatrixException {
 		for (long[] c : allCoordinates()) {
 			double v = getDouble(c);
@@ -198,7 +194,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		}
 		return false;
 	}
-	
+
 	public final double getEuklideanValue() throws MatrixException {
 		double sum = 0.0;
 		for (long[] c : allCoordinates()) {
@@ -206,7 +202,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		}
 		return Math.sqrt(sum);
 	}
-	
+
 	public final Matrix clone() {
 		try {
 			return copy(AnnotationTransfer.COPY);
@@ -225,28 +221,28 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		return new Selection(this, selection).calc(returnType);
 	}
 
-	public final Matrix selectRows(Ret returnType, long... rows) throws MatrixException {
-		return select(returnType, rows, MathUtil.sequenceLong(0, getColumnCount() - 1));
+	public Matrix selectRows(Ret returnType, long... rows) throws MatrixException {
+		return select(returnType, rows, null);
 	}
 
 	public final Matrix select(Ret returnType, String selection) throws MatrixException {
 		return new Selection(this, selection).calc(returnType);
 	}
 
-	public final Matrix selectColumns(Ret returnType, long... columns) throws MatrixException {
-		return select(returnType, MathUtil.sequenceLong(0, getRowCount() - 1), columns);
+	public Matrix selectColumns(Ret returnType, long... columns) throws MatrixException {
+		return select(returnType, null, columns);
 	}
 
 	@SuppressWarnings("unchecked")
 	public final Matrix selectRows(Ret returnType, List<? extends Number> rows)
 			throws MatrixException {
-		return select(returnType, rows, MathUtil.sequenceListLong(0, getColumnCount() - 1));
+		return select(returnType, rows, null);
 	}
 
 	@SuppressWarnings("unchecked")
 	public final Matrix selectColumns(Ret returnType, List<? extends Number> columns)
 			throws MatrixException {
-		return select(returnType, MathUtil.sequenceListLong(0, getRowCount() - 1), columns);
+		return select(returnType, null, columns);
 	}
 
 	public Matrix imputeKNN(Ret returnType, int dimension) throws MatrixException {
@@ -257,13 +253,14 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		return new ImputeMean(dimension, this).calc(returnType);
 	}
 
-// public Matrix imputeNeuralNetwork(Ret returnType, int k, double tolerance,
-// double learningRate,
-// int maxIterations) throws MatrixException {
-// return new ImputeNeuralNetwork(this, k, tolerance, learningRate,
-// maxIterations)
-// .calc(returnType);
-// }
+	// public Matrix imputeNeuralNetwork(Ret returnType, int k, double
+	// tolerance,
+	// double learningRate,
+	// int maxIterations) throws MatrixException {
+	// return new ImputeNeuralNetwork(this, k, tolerance, learningRate,
+	// maxIterations)
+	// .calc(returnType);
+	// }
 
 	public Matrix imputeRegression(Ret returnType) throws MatrixException {
 		return new ImputeRegression(this).calc(returnType);
@@ -274,13 +271,13 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 	}
 
 	public Matrix imputeEM(Ret returnType) throws MatrixException {
-		return new ImputeEM( this).calc(returnType);
+		return new ImputeEM(this).calc(returnType);
 	}
 
-// public Matrix imputeRescale(Ret returnType, int dimension) throws
-// MatrixException {
-// return new ImputeRescale(dimension, this).calc(returnType);
-// }
+	// public Matrix imputeRescale(Ret returnType, int dimension) throws
+	// MatrixException {
+	// return new ImputeRescale(dimension, this).calc(returnType);
+	// }
 
 	public Matrix imputeZero(Ret returnType) throws MatrixException {
 		return new ImputeZero(this).calc(returnType);
@@ -968,8 +965,6 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		return Randn.calc(this);
 	}
 
-
-	
 	public final int compareTo(Matrix m) {
 		try {
 			return new Double(getEuklideanValue()).compareTo(m.getEuklideanValue());
@@ -1147,26 +1142,26 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 	public Matrix corrcoef(Ret returnType, boolean ignoreNaN) throws MatrixException {
 		return new Corrcoef(ignoreNaN, this).calc(returnType);
 	}
-	
+
 	public Matrix mutualInf(Ret returnType) throws MatrixException {
 		return new MutualInformation(this).calc(returnType);
 	}
-	
+
 	public Matrix pairedTTest(Ret returnType) throws MatrixException {
 		return new PairedTTest(this).calc(returnType);
 	}
-	
+
 	public Matrix bootstrap(Ret returnType) throws MatrixException {
-        return new Bootstrap(this).calc(returnType);
-    }
-	
-	public Matrix bootstrap(Ret returnType,int count) throws MatrixException {
-        return new Bootstrap(this,count).calc(returnType);
-    }
-	
+		return new Bootstrap(this).calc(returnType);
+	}
+
+	public Matrix bootstrap(Ret returnType, int count) throws MatrixException {
+		return new Bootstrap(this, count).calc(returnType);
+	}
+
 	public Matrix shuffle(Ret returnType) throws MatrixException {
-        return new Shuffle(this).calc(returnType);
-    }
+		return new Shuffle(this).calc(returnType);
+	}
 
 	public double trace() throws MatrixException {
 		double sum = 0.0;
@@ -1176,16 +1171,18 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		return sum;
 	}
 
-	public final void exportToFile(File file, Object... parameters) throws MatrixException, IOException {
+	public final void exportToFile(File file, Object... parameters) throws MatrixException,
+			IOException {
 		ExportMatrix.toFile(file, this, parameters);
 	}
-	
-	public final void exportToClipboard(Format format,Object... parameters) throws MatrixException, IOException {
-		ExportMatrix.toClipboard(format, this,parameters);
-	}
-	
 
-	public final void exportToFile(String file, Object... parameters) throws MatrixException, IOException {
+	public final void exportToClipboard(Format format, Object... parameters)
+			throws MatrixException, IOException {
+		ExportMatrix.toClipboard(format, this, parameters);
+	}
+
+	public final void exportToFile(String file, Object... parameters) throws MatrixException,
+			IOException {
 		ExportMatrix.toFile(file, this, parameters);
 	}
 
@@ -1198,14 +1195,14 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 			throws MatrixException, IOException {
 		ExportMatrix.toFile(format, file, this, parameters);
 	}
-	
+
 	public final void exportToStream(Format format, OutputStream outputStream, Object... parameters)
-	throws MatrixException, IOException {
+			throws MatrixException, IOException {
 		ExportMatrix.toStream(format, outputStream, this, parameters);
 	}
-	
+
 	public final void exportToWriter(Format format, Writer writer, Object... parameters)
-	throws MatrixException, IOException {
+			throws MatrixException, IOException {
 		ExportMatrix.toWriter(format, writer, this, parameters);
 	}
 
@@ -1260,11 +1257,11 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 	public final double getMeanValue() throws MatrixException {
 		return Mean.calc(this);
 	}
-	
+
 	public final double getStdValue() throws MatrixException {
-		return std(Ret.NEW,Matrix.ALL,true).getEuklideanValue();
+		return std(Ret.NEW, Matrix.ALL, true).getEuklideanValue();
 	}
-	
+
 	public final double getValueSum() throws MatrixException {
 		double sum = 0.0;
 		for (long[] c : allCoordinates()) {
@@ -1272,7 +1269,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		}
 		return sum;
 	}
-	
+
 	public final double getAbsoluteValueSum() throws MatrixException {
 		double sum = 0.0;
 		for (long[] c : allCoordinates()) {
@@ -1280,7 +1277,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		}
 		return sum;
 	}
-	
+
 	public final String getColumnLabel(int col) {
 		return StringUtil.format(getAxisAnnotation(COLUMN, col));
 	}
@@ -1312,11 +1309,11 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 	public final void setColumnObject(int col, Object o) {
 		setAxisAnnotation(COLUMN, col, o);
 	}
-	
+
 	public final double getAbsoluteValueMean() throws MatrixException {
 		return getAbsoluteValueSum() / getValueCount();
 	}
-	
+
 	public final Matrix toRowVector() throws MatrixException {
 		if (isRowVector()) {
 			return this;
@@ -1336,8 +1333,9 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 			return reshape(1, (int) Coordinates.product(getSize()));
 		}
 	}
-	
-	public final void rescaleEntries_(int axis, double targetMin, double targetMax) throws MatrixException {
+
+	public final void rescaleEntries_(int axis, double targetMin, double targetMax)
+			throws MatrixException {
 		if (axis == ALL) {
 			this.toRowVector().rescaleEntries(0, targetMin, targetMax);
 		} else {
@@ -1366,18 +1364,19 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		rescaleEntries_(ALL, -1.0, 1.0);
 	}
 
-	public final Matrix rescaleEntries(int axis, double targetMin, double targetMax) throws MatrixException {
+	public final Matrix rescaleEntries(int axis, double targetMin, double targetMax)
+			throws MatrixException {
 		Matrix ret = MatrixFactory.zeros(getSize());
 		ret.rescaleEntries_(axis, targetMin, targetMax);
 		return ret;
 	}
-	
+
 	public final void addNoise_(double noiselevel) throws MatrixException {
 		for (long[] c : allCoordinates()) {
 			setDouble(getDouble(c) + MathUtil.nextGaussian(0.0, noiselevel), c);
 		}
 	}
-	
+
 	public Matrix replaceMissingBy(Matrix matrix) throws MatrixException {
 		Matrix ret = MatrixFactory.zeros(getSize());
 		for (long[] c : allCoordinates()) {
@@ -1390,10 +1389,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		}
 		return ret;
 	}
-	
 
-
-	
 	public Matrix deleteColumnsWithMissingValues(Ret returnType) throws MatrixException {
 		Matrix mv = countMissing(Ret.NEW, Matrix.ROW);
 		List<Long> sel = new ArrayList<Long>();
@@ -1421,7 +1417,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		}
 		return selectRows(returnType, longsel);
 	}
-	
+
 	public final void fadeIn_(int axis, long start, long end) throws MatrixException {
 		if (axis == ALL) {
 			this.toRowVector().fadeIn_(0, start, end);
@@ -1497,7 +1493,6 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		return result;
 	}
 
-	
 	public final void fadeIn_() throws MatrixException {
 		fadeIn_(ROW, 0, getRowCount());
 	}
@@ -1505,7 +1500,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 	public final void fadeOut_() throws MatrixException {
 		fadeOut_(ROW, 0, getRowCount());
 	}
-	
+
 	public final void fadeOut_(int axis, long start, long end) throws MatrixException {
 		if (axis == ALL) {
 			this.toRowVector().fadeOut_(0, start, end);
@@ -1528,22 +1523,18 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		}
 		notifyGUIObject();
 	}
-	
+
 	public final Matrix discretizeToColumns(long column) throws MatrixException {
 		return new DiscretizeToColumns(this, false, column).calc(Ret.NEW);
 	}
-	
-	
 
-	
-	
-	public final Matrix subMatrix(Ret returnType,long startRow, long startColumn, long endRow, long endColumn)
-	throws MatrixException {
-		long[] rows=MathUtil.sequenceLong(startRow, endRow);
-		long[] columns=MathUtil.sequenceLong(startColumn, endColumn);
-		return select(returnType, rows,columns);
-    }
-	
+	public final Matrix subMatrix(Ret returnType, long startRow, long startColumn, long endRow,
+			long endColumn) throws MatrixException {
+		long[] rows = MathUtil.sequenceLong(startRow, endRow);
+		long[] columns = MathUtil.sequenceLong(startColumn, endColumn);
+		return select(returnType, rows, columns);
+	}
+
 	public Matrix addColumnWithOnes() throws MatrixException {
 		Matrix ret = MatrixFactory.zeros(getRowCount(), getColumnCount() + 1);
 		for (long[] c : allCoordinates()) {
@@ -1565,7 +1556,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		}
 		return ret;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public Matrix[] svd() throws MatrixException {
 		try {
@@ -1581,23 +1572,24 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 			throw new MatrixException(e);
 		}
 	}
-	
-	public String exportToString(Format format,Object... parameters) throws MatrixException, IOException {
-		return ExportMatrix.toString(format, this,parameters);
+
+	public String exportToString(Format format, Object... parameters) throws MatrixException,
+			IOException {
+		return ExportMatrix.toString(format, this, parameters);
 	}
-	
+
 	public void setSize(long... size) {
 		throw new MatrixException("operation not possible: cannot change size of matrix");
 	}
-	
+
 	public final Matrix reshape(long... newSize) {
 		return new ReshapedMatrix(this, newSize);
 	}
-	
+
 	public final double getDoubleValue() throws MatrixException {
 		return getEuklideanValue();
 	}
-	
+
 	public final double getRMS() throws MatrixException {
 		double sum = 0.0;
 		long count = 0;
@@ -1609,15 +1601,12 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		return Math.sqrt(sum);
 	}
 
-
-
-
 	public final Annotation getAnnotation() {
 		return annotation;
 	}
 
 	public final void setAnnotation(Annotation annotation) {
-	  this.annotation=annotation;
+		this.annotation = annotation;
 	}
 
 	public final boolean equalsAnnotation(Object o) {
@@ -1692,11 +1681,12 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 							return false;
 						}
 						if (o1 != null && o2 != null) {
-							if(o1.getClass().equals(o2.getClass())){
-							if (!o1.equals(o2)) {
-								return false;
-							}}else{
-								if(!MathUtil.equals(o1,o2)){
+							if (o1.getClass().equals(o2.getClass())) {
+								if (!o1.equals(o2)) {
+									return false;
+								}
+							} else {
+								if (!MathUtil.equals(o1, o2)) {
 									return false;
 								}
 							}

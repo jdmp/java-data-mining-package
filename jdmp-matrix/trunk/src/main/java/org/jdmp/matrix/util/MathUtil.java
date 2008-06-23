@@ -77,6 +77,19 @@ public abstract class MathUtil {
 		return random;
 	}
 
+	public static double[] logToProbs(double[] logs) {
+		double[] probs = new double[logs.length];
+		double sum = 0.0;
+		for (int i = 0; i < probs.length; i++) {
+			probs[i] = Math.exp(logs[i]);
+			sum += probs[i];
+		}
+		for (int i = 0; i < probs.length; i++) {
+			probs[i] = probs[i] / sum;
+		}
+		return probs;
+	}
+
 	public static final long getSeed() {
 		return seed;
 	}
@@ -166,6 +179,8 @@ public abstract class MathUtil {
 	public static final double getDouble(Object o) {
 		if (o == null) {
 			return 0.0;
+		} else if (o instanceof Double) {
+			return (Double) o;
 		} else if (o instanceof Date) {
 			return ((Date) o).getTime();
 		} else {

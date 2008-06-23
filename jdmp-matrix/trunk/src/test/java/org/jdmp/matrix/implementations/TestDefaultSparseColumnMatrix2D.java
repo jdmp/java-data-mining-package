@@ -21,33 +21,23 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.matrix.io;
+package org.jdmp.matrix.implementations;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-
+import org.jdmp.matrix.AbstractMatrixTest;
 import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.exceptions.MatrixException;
+import org.jdmp.matrix.implementations.basic.DefaultSparseColumnMatrix2D;
 
-public class ImportMatrixOBJ {
+public class TestDefaultSparseColumnMatrix2D extends AbstractMatrixTest {
 
-	public static Matrix fromFile(File file) throws FileNotFoundException, IOException,
-			ClassNotFoundException {
-		FileInputStream stream = new FileInputStream(file);
-		Matrix m = fromStream(stream);
-		stream.close();
-		return m;
+	@Override
+	public Matrix createMatrix(long... size) throws MatrixException {
+		return new DefaultSparseColumnMatrix2D(size);
 	}
 
-	public static Matrix fromStream(InputStream stream) throws FileNotFoundException, IOException,
-			ClassNotFoundException {
-		ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(stream));
-		Matrix m = (Matrix) ois.readObject();
-		ois.close();
-		return m;
+	@Override
+	public Matrix createMatrix(Matrix source) throws MatrixException {
+		return new DefaultSparseColumnMatrix2D(source);
 	}
+
 }
