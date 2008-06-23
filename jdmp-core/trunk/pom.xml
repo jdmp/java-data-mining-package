@@ -23,22 +23,6 @@
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-matrix</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>commons-math</groupId>
-			<artifactId>commons-math</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>dom4j</groupId>
-			<artifactId>dom4j</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>jaxen</groupId>
-			<artifactId>jaxen</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>xstream</groupId>
-			<artifactId>xstream</artifactId>
-		</dependency>
 	</dependencies>
 
 </project>
