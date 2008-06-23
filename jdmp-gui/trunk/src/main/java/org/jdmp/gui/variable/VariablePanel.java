@@ -8,7 +8,6 @@ import javax.swing.JTabbedPane;
 import org.jdmp.core.matrix.wrappers.MatrixListToMatrixWrapper;
 import org.jdmp.gui.matrix.MatrixEditorPanel;
 import org.jdmp.gui.matrix.MatrixGUIObject;
-import org.jdmp.gui.matrix.MatrixGraphPanel;
 import org.jdmp.gui.matrix.MatrixListPanel;
 import org.jdmp.gui.matrix.MatrixPaintPanel;
 import org.jdmp.gui.matrix.plot.MatrixPlot;
@@ -22,8 +21,6 @@ public class VariablePanel extends AbstractPanel {
 	private MatrixGUIObject matrixObject = null;
 
 	private MatrixListPanel matrixListPanel = null;
-
-	private MatrixGraphPanel matrixGraphPanel = null;
 
 	private MatrixPaintPanel matrixPaintPanel = null;
 
@@ -68,12 +65,8 @@ public class VariablePanel extends AbstractPanel {
 		tabbedPane.add("2D Visualization", matrixPaintPanel);
 		tabbedPane.add("Matrix Editor", matrixEditorPanel);
 
-		matrixGraphPanel = new MatrixGraphPanel(matrixListPanel.getSelectedMatrix());
-		tabbedPane.add("Matrix Graph", matrixGraphPanel);
-
 		matrixPaintPanel.setMatrix(matrixObject);
 		matrixEditorPanel.setMatrix(matrixObject);
-		matrixGraphPanel.setMatrix(matrixObject);
 
 		add(split1, BorderLayout.CENTER);
 

@@ -11,9 +11,6 @@ import org.jdmp.core.algorithm.HasAlgorithms;
 import org.jdmp.core.variable.HasVariables;
 import org.jdmp.gui.util.AbstractPanel;
 import org.jdmp.gui.util.ObjectListPanel;
-import org.jdmp.gui.util.TopologyPanel;
-
-import edu.uci.ics.jung.visualization.GraphZoomScrollPane;
 
 public class AlgorithmPanel extends AbstractPanel {
 	private static final long serialVersionUID = -1135182245042463188L;
@@ -28,8 +25,6 @@ public class AlgorithmPanel extends AbstractPanel {
 		super(a);
 
 		leftPanel.setLayout(new BorderLayout());
-		leftPanel.add(new GraphZoomScrollPane(new TopologyPanel(a.getAlgorithm())),
-				BorderLayout.CENTER);
 		leftPanel.setBorder(BorderFactory.createTitledBorder("Algorithms and Variables"));
 
 		rightPanel.setLayout(new GridLayout(2, 1));

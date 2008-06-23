@@ -14,8 +14,6 @@ import org.jdmp.core.variable.HasVariables;
 import org.jdmp.gui.util.AbstractPanel;
 import org.jdmp.gui.util.ObjectListPanel;
 
-import edu.uci.ics.jung.visualization.GraphZoomScrollPane;
-
 public class ModulePanel extends AbstractPanel {
 	private static final long serialVersionUID = -6907850964484891091L;
 
@@ -29,8 +27,6 @@ public class ModulePanel extends AbstractPanel {
 		super(m);
 
 		leftPanel.setLayout(new BorderLayout());
-		leftPanel.add(new GraphZoomScrollPane(new ModuleListGraphPanel((HasModules) m)),
-				BorderLayout.CENTER);
 		leftPanel.setBorder(BorderFactory.createTitledBorder("Modules in Module"));
 
 		rightPanel.setLayout(new GridLayout(4, 1));

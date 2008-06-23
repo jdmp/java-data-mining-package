@@ -40,24 +40,8 @@
 			<artifactId>commons-logging</artifactId>
 		</dependency>		
 		<dependency>
-			<groupId>vecmath</groupId>
-			<artifactId>vecmath</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>jung</groupId>
-			<artifactId>jung</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>colt</groupId>
-			<artifactId>colt</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-matrix</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>

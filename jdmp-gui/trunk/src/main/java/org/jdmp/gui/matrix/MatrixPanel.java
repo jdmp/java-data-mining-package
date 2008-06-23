@@ -51,10 +51,6 @@ public class MatrixPanel extends AbstractPanel {
 			tabbedPane.add("Tree View", new MatrixTreePanel(m));
 		}
 
-		if (m.isSquare()) {
-			tabbedPane.add("Matrix Graph", new MatrixGraphPanel(m));
-		}
-
 		if (Matlab.isAvailable()) {
 			MatlabPanel matlabPanel = new MatlabPanel(m);
 			tabbedPane.add("Matlab", matlabPanel);
