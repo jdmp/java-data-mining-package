@@ -38,15 +38,7 @@
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>jfreechart</groupId>
-			<artifactId>jfreechart</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>jcommon</groupId>
-			<artifactId>jcommon</artifactId>
-		</dependency>
+		</dependency>		
 		<dependency>
 			<groupId>vecmath</groupId>
 			<artifactId>vecmath</artifactId>

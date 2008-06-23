@@ -22,10 +22,6 @@
       <groupId>weka</groupId>
       <artifactId>weka</artifactId>
     </dependency>
-    <dependency>
-		<groupId>org.jdmp</groupId>
-		<artifactId>jdmp-matrix</artifactId>
-	</dependency>
 	<dependency>
 		<groupId>org.jdmp</groupId>
 		<artifactId>jdmp-core</artifactId>

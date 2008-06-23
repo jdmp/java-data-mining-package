@@ -11,6 +11,7 @@ import org.jdmp.gui.matrix.MatrixGUIObject;
 import org.jdmp.gui.matrix.MatrixGraphPanel;
 import org.jdmp.gui.matrix.MatrixListPanel;
 import org.jdmp.gui.matrix.MatrixPaintPanel;
+import org.jdmp.gui.matrix.plot.MatrixPlot;
 import org.jdmp.gui.util.AbstractPanel;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.HasMatrixList;
@@ -28,7 +29,7 @@ public class VariablePanel extends AbstractPanel {
 
 	private MatrixEditorPanel matrixEditorPanel = null;
 
-	private VariableChartPanel variableChartPanel = null;
+	private MatrixPlot variableChartPanel = null;
 
 	private JTabbedPane tabbedPane = new JTabbedPane();
 
@@ -44,7 +45,8 @@ public class VariablePanel extends AbstractPanel {
 
 		matrixListPanel = new MatrixListPanel((HasMatrixList) v.getVariable());
 
-		variableChartPanel = new VariableChartPanel(v, true);
+		variableChartPanel = new MatrixPlot((MatrixGUIObject) v.getVariable().getAsMatrix()
+				.getGUIObject(), true);
 
 		matrixPaintPanel = new MatrixPaintPanel(matrixListPanel.getSelectedMatrix(), false);
 		matrixEditorPanel = new MatrixEditorPanel(matrixListPanel.getSelectedMatrix());
