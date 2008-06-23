@@ -27,13 +27,15 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jdmp.matrix.DoubleMatrix;
+import org.jdmp.matrix.DoubleMatrix2D;
 import org.jdmp.matrix.IntMatrix;
+import org.jdmp.matrix.IntMatrix2D;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.Matrix.EntryType;
 import org.jdmp.matrix.calculation.AbstractDoubleCalculation;
 import org.jdmp.matrix.exceptions.MatrixException;
+import org.jdmp.matrix.implementations.basic.DefaultDenseIntMatrix2D;
 import org.jdmp.matrix.util.MathUtil;
 
 public class MutualInformation extends AbstractDoubleCalculation {
@@ -115,16 +117,18 @@ public class MutualInformation extends AbstractDoubleCalculation {
 		return mutualInformation;
 	}
 	
-	public static DoubleMatrix calcNew(Matrix matrix) {
+	public static DoubleMatrix2D calcNew(Matrix matrix) {
 		return calcNew((IntMatrix)matrix.convert(EntryType.INTEGER));
 	}
 
-	public static DoubleMatrix calcNew(IntMatrix matrix) {
+	public static DoubleMatrix2D calcNew(IntMatrix2D matrix) {
+		DefaultDenseIntMatrix2D matrix2 = (DefaultDenseIntMatrix2D)matrix;
 		long count = matrix.getColumnCount();
 		int samples = (int) matrix.getRowCount();
-		DoubleMatrix result = (DoubleMatrix) MatrixFactory.zeros(Matrix.EntryType.DOUBLE, count,
+		DoubleMatrix2D result = (DoubleMatrix2D) MatrixFactory.zeros(Matrix.EntryType.DOUBLE, count,
 				count);
 		int[] d_dc = new int[(int) count];
+		//int[][] matrixInt = matrix.toIntArray();
 		Arrays.fill(d_dc, (int)matrix.getMaxValue()+1);
 		int aVal, bVal;
 		for (int a = 0; a < count; a++) {
@@ -135,8 +139,10 @@ public class MutualInformation extends AbstractDoubleCalculation {
 				double[] Na = new double[d_dc[a]];
 				double[] Nb = new double[d_dc[b]];
 				for (int k = (int) matrix.getRowCount() - 1; k >= 0; k--) {
-					aVal = matrix.getInt(k,a);// dataset[aIndex][k];
-					bVal = matrix.getInt(k,b);// dataset[bIndex][k];
+					aVal = matrix2.getInt(k,a);// dataset[aIndex][k];
+					bVal = matrix2.getInt(k,b);// dataset[bIndex][k];
+//					aVal = matrixInt[k][a];
+//					bVal = matrixInt[k][b];
 					Na[aVal]++;
 					Nb[bVal]++;
 					Nab[aVal][bVal]++;

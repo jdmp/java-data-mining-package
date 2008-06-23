@@ -27,7 +27,7 @@ import java.util.Iterator;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import org.jdmp.matrix.LongMatrix;
+import org.jdmp.matrix.IntMatrix2D;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.Matrix.EntryType;
@@ -44,7 +44,7 @@ import org.jdmp.matrix.util.Sortable;
 public class Sort extends AbstractObjectCalculation {
 	private static final long serialVersionUID = -6935375114060680121L;
 
-	private LongMatrix index = null;
+	private IntMatrix2D index = null;
 
 	public Sort(Matrix m) {
 		super(m);
@@ -55,12 +55,12 @@ public class Sort extends AbstractObjectCalculation {
 		if (index == null) {
 			createSortIndex();
 		}
-		return getSource().getObject(coordinates[0], index.getLong(coordinates));
+		return getSource().getObject(coordinates[0], index.getInt(coordinates));
 	}
 
 	private void createSortIndex() {
 		Matrix m = getSource();
-		LongMatrix indexMatrix = (LongMatrix) MatrixFactory.zeros(EntryType.LONG, m.getSize());
+		IntMatrix2D indexMatrix = (IntMatrix2D) MatrixFactory.zeros(EntryType.INTEGER, m.getSize());
 		for (long i = 0; i < m.getRowCount(); i++) {
 			SortedSet<Sortable<?, Long>> sortedSet = new TreeSet<Sortable<?, Long>>();
 			for (long j = 0; j < m.getColumnCount(); j++) {
@@ -73,14 +73,14 @@ public class Sort extends AbstractObjectCalculation {
 			while (it.hasNext()) {
 				Sortable<?, Long> s = it.next();
 				long index = s.getObject();
-				indexMatrix.setLong(index, i, j);
+				indexMatrix.setInt((int) index, i, j);
 				j++;
 			}
 		}
 		this.index = indexMatrix;
 	}
 
-	public LongMatrix getIndex() {
+	public IntMatrix2D getIndex() {
 		return index;
 	}
 
