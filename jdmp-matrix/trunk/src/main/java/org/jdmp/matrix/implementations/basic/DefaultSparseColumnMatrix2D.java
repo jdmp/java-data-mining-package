@@ -59,7 +59,6 @@ public class DefaultSparseColumnMatrix2D<A> extends AbstractSparseGenericMatrix<
 		return (A) m.getObject(coordinates[ROW], 0);
 	}
 
-	@Override
 	public Iterable<long[]> allCoordinates() {
 		return new CoordinateIterator2D(getSize());
 	}
@@ -75,7 +74,6 @@ public class DefaultSparseColumnMatrix2D<A> extends AbstractSparseGenericMatrix<
 		return coordinates;
 	}
 
-	@Override
 	public boolean contains(long... coordinates) {
 		if (Coordinates.isSmallerThan(coordinates, size)) {
 			return getObject(coordinates) != null;
@@ -84,28 +82,23 @@ public class DefaultSparseColumnMatrix2D<A> extends AbstractSparseGenericMatrix<
 		}
 	}
 
-	@Override
 	public double getDouble(long... coordinates) throws MatrixException {
 		return MathUtil.getDouble(getObject(coordinates));
 	}
 
-	@Override
 	public void setDouble(double value, long... coordinates) throws MatrixException {
 		setObject(value, coordinates);
 	}
 
-	@Override
 	public void setObject(Object o, long... coordinates) throws MatrixException {
 		Matrix m = columns.get((int) coordinates[COLUMN]);
 		m.setObject(o, coordinates[ROW], 0);
 	}
 
-	@Override
 	public EntryType getEntryType() {
 		return EntryType.GENERIC;
 	}
 
-	@Override
 	public long[] getSize() {
 		return size;
 	}
