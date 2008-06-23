@@ -37,13 +37,13 @@ public class Abs extends AbstractDoubleCalculation {
 
 	@Override
 	public double getDouble(long... coordinates) throws MatrixException {
-		return Math.abs(getSource().getDouble(coordinates));
+		return Math.abs(getSource().getAsDouble(coordinates));
 	}
 
 	public static Matrix calc(Matrix source) throws MatrixException {
 		Matrix ret = MatrixFactory.zeros(source.getSize());
 		for (long[] c : source.availableCoordinates()) {
-			ret.setDouble(Math.abs(source.getDouble(c)), c);
+			ret.setAsDouble(Math.abs(source.getAsDouble(c)), c);
 		}
 		return ret;
 	}

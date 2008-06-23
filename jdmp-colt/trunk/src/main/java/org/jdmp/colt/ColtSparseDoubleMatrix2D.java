@@ -30,7 +30,7 @@ public class ColtSparseDoubleMatrix2D extends AbstractSparseDoubleMatrix2D imple
 	public ColtSparseDoubleMatrix2D(Matrix source) throws MatrixException {
 		this(source.getSize());
 		for (long[] c : source.availableCoordinates()) {
-			setDouble(source.getDouble(c), c);
+			setAsDouble(source.getAsDouble(c), c);
 		}
 	}
 
@@ -75,6 +75,6 @@ public class ColtSparseDoubleMatrix2D extends AbstractSparseDoubleMatrix2D imple
 	}
 
 	public final boolean contains(long... coordinates) {
-		return getDouble(coordinates) != 0.0;
+		return getAsDouble(coordinates) != 0.0;
 	}
 }

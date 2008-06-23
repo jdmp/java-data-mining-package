@@ -82,11 +82,11 @@ public class DefaultSparseRowMatrix2D<A> extends AbstractSparseGenericMatrix<A> 
 		}
 	}
 
-	public double getDouble(long... coordinates) throws MatrixException {
+	public double getAsDouble(long... coordinates) throws MatrixException {
 		return MathUtil.getDouble(getObject(coordinates));
 	}
 
-	public void setDouble(double value, long... coordinates) throws MatrixException {
+	public void setAsDouble(double value, long... coordinates) throws MatrixException {
 		setObject(value, coordinates);
 	}
 
@@ -127,18 +127,18 @@ public class DefaultSparseRowMatrix2D<A> extends AbstractSparseGenericMatrix<A> 
 			if (dimension == ROW) {
 				Matrix ret = MatrixFactory.zeros(1, getColumnCount());
 				for (long[] c : availableCoordinates()) {
-					double v = getDouble(c);
-					if (v > ret.getDouble(0, c[COLUMN])) {
-						ret.setDouble(v, 0, c[COLUMN]);
+					double v = getAsDouble(c);
+					if (v > ret.getAsDouble(0, c[COLUMN])) {
+						ret.setAsDouble(v, 0, c[COLUMN]);
 					}
 				}
 				return ret;
 			} else if (dimension == COLUMN) {
 				Matrix ret = MatrixFactory.zeros(getRowCount(), 1);
 				for (long[] c : availableCoordinates()) {
-					double v = getDouble(c);
-					if (v > ret.getDouble(c[ROW], 0)) {
-						ret.setDouble(v, c[ROW], 0);
+					double v = getAsDouble(c);
+					if (v > ret.getAsDouble(c[ROW], 0)) {
+						ret.setAsDouble(v, c[ROW], 0);
 					}
 				}
 				return ret;

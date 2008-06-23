@@ -217,7 +217,7 @@ public abstract class MatrixFactory {
 		Matrix m = MatrixFactory.zeros(rows, columns);
 		for (int i = rows - 1; i >= 0; i--) {
 			for (int j = values[i].length - 1; j >= 0; j--) {
-				m.setDouble(values[i][j], i, j);
+				m.setAsDouble(values[i][j], i, j);
 			}
 		}
 		return m;
@@ -280,8 +280,8 @@ public abstract class MatrixFactory {
 			Matrix rand = MatrixFactory.randn(rows, 1);
 
 			for (int r = 0; r < rows; r++) {
-				ret.setDouble((orig.getDouble(r, 0) * correlationFactor)
-						+ ((1.0 - correlationFactor) * rand.getDouble(r, 0)), r, c);
+				ret.setAsDouble((orig.getAsDouble(r, 0) * correlationFactor)
+						+ ((1.0 - correlationFactor) * rand.getAsDouble(r, 0)), r, c);
 			}
 		}
 
@@ -347,7 +347,7 @@ public abstract class MatrixFactory {
 	public static final Matrix createVectorForClass(int classID, int classCount)
 			throws MatrixException {
 		Matrix matrix = MatrixFactory.zeros(classCount, 1);
-		matrix.setDouble(1.0, classID, 0);
+		matrix.setAsDouble(1.0, classID, 0);
 		return matrix;
 	}
 

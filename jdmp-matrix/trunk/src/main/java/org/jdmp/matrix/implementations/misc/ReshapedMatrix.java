@@ -101,8 +101,8 @@ public class ReshapedMatrix<A> extends AbstractGenericMatrix<A> implements HasSo
 		return newSize;
 	}
 
-	public double getDouble(long... coordinates) throws MatrixException {
-		return source.getDouble(getOldCoordinates(coordinates));
+	public double getAsDouble(long... coordinates) throws MatrixException {
+		return source.getAsDouble(getOldCoordinates(coordinates));
 	}
 
 	public A getObject(long... coordinates) throws MatrixException {
@@ -123,8 +123,8 @@ public class ReshapedMatrix<A> extends AbstractGenericMatrix<A> implements HasSo
 		return source.isSparse();
 	}
 
-	public void setDouble(double value, long... coordinates) throws MatrixException {
-		source.setDouble(value, getOldCoordinates(coordinates));
+	public void setAsDouble(double value, long... coordinates) throws MatrixException {
+		source.setAsDouble(value, getOldCoordinates(coordinates));
 	}
 
 	public void setObject(Object value, long... coordinates) throws MatrixException {

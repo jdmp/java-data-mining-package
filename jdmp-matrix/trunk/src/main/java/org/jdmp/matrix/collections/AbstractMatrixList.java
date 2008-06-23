@@ -48,7 +48,7 @@ public abstract class AbstractMatrixList implements MatrixList {
 			for (int a = 0; a < hsize; a++) {
 				Matrix m = get(a);
 				ret[a][0] = 0.0;
-				ret[a][1] = m.getDouble(i % m.getRowCount(), i / m.getRowCount());
+				ret[a][1] = m.getAsDouble(i % m.getRowCount(), i / m.getRowCount());
 			}
 			return ret;
 		} catch (Exception e) {

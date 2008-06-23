@@ -42,15 +42,15 @@ public class ImputeMean extends AbstractDoubleCalculation {
 		if (mean == null) {
 			mean = getSource().calcNew(new Mean(getDimension(), true, getSource()));
 		}
-		double v = getSource().getDouble(coordinates);
+		double v = getSource().getAsDouble(coordinates);
 		if (MathUtil.isNaNOrInfinite(v)) {
 			switch (getDimension()) {
 			case ALL:
-				return mean.getDouble(0, 0);
+				return mean.getAsDouble(0, 0);
 			case ROW:
-				return mean.getDouble(0, coordinates[COLUMN]);
+				return mean.getAsDouble(0, coordinates[COLUMN]);
 			case COLUMN:
-				return mean.getDouble(coordinates[ROW], 0);
+				return mean.getAsDouble(coordinates[ROW], 0);
 			}
 		} else {
 			return v;

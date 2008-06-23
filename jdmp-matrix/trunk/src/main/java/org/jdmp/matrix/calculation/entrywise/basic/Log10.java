@@ -37,15 +37,15 @@ public class Log10 extends AbstractDoubleCalculation {
 
 	@Override
 	public double getDouble(long... coordinates) throws MatrixException {
-		double v = getSource().getDouble(coordinates);
+		double v = getSource().getAsDouble(coordinates);
 		return Math.log(v) / Math.log(10.0);
 	}
 
 	public static Matrix calc(Matrix source) throws MatrixException {
 		Matrix ret = MatrixFactory.zeros(source.getSize());
 		for (long[] c : source.availableCoordinates()) {
-			double v = source.getDouble(c);
-			ret.setDouble(Math.log(v) / Math.log(10.0), c);
+			double v = source.getAsDouble(c);
+			ret.setAsDouble(Math.log(v) / Math.log(10.0), c);
 		}
 		return ret;
 	}

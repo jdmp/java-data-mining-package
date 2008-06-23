@@ -29,7 +29,7 @@ public class VecMathMatrix extends AbstractDenseDoubleMatrix2D implements Wrappe
 	public VecMathMatrix(Matrix source) throws MatrixException {
 		this(source.getSize());
 		for (long[] c : source.availableCoordinates()) {
-			setDouble(source.getDouble(c), c);
+			setAsDouble(source.getAsDouble(c), c);
 		}
 	}
 

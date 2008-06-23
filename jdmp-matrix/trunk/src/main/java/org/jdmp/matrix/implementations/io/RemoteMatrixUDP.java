@@ -92,7 +92,7 @@ public class RemoteMatrixUDP<A> extends AbstractGenericMatrix<A> {
 		}
 	}
 
-	public synchronized double getDouble(long... coordinates) {
+	public synchronized double getAsDouble(long... coordinates) {
 		try {
 			ByteArrayOutputStream bos = new ByteArrayOutputStream(BUFFERSIZE);
 			ObjectOutputStream oos = new ObjectOutputStream(bos);
@@ -117,7 +117,7 @@ public class RemoteMatrixUDP<A> extends AbstractGenericMatrix<A> {
 		}
 	}
 
-	public synchronized void setDouble(double value, long... coordinates) {
+	public synchronized void setAsDouble(double value, long... coordinates) {
 		try {
 			ByteArrayOutputStream bos = new ByteArrayOutputStream(BUFFERSIZE);
 			ObjectOutputStream oos = new ObjectOutputStream(bos);
@@ -147,12 +147,12 @@ public class RemoteMatrixUDP<A> extends AbstractGenericMatrix<A> {
 
 		RemoteMatrixUDP rm = new RemoteMatrixUDP("localhost", 19000);
 
-		rm.setDouble(10.0, 4, 3);
-		rm.setDouble(10.0, 3, 3);
-		rm.setDouble(10.0, 2, 3);
+		rm.setAsDouble(10.0, 4, 3);
+		rm.setAsDouble(10.0, 3, 3);
+		rm.setAsDouble(10.0, 2, 3);
 
-		System.out.println("m:" + m.getDouble(4, 3));
-		System.out.println("server:" + sm.getDouble(4, 3));
+		System.out.println("m:" + m.getAsDouble(4, 3));
+		System.out.println("server:" + sm.getAsDouble(4, 3));
 
 		System.out.println(rm.toString());
 	}

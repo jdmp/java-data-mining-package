@@ -48,16 +48,16 @@ public class Pinv extends AbstractDoubleCalculation {
 			Matrix v = ms[2];
 
 			for (int i = (int) Math.min(s.getRowCount(), s.getColumnCount()); --i >= 0;) {
-				double d = s.getDouble(i, i);
+				double d = s.getAsDouble(i, i);
 				if (Math.abs(d) > JDMPSettings.getTolerance()) {
-					s.setDouble(1.0 / d, i, i);
+					s.setAsDouble(1.0 / d, i, i);
 				}
 			}
 
 			pinv = v.mtimes(s.transpose()).mtimes(u.transpose());
 
 		}
-		return pinv.getDouble(coordinates);
+		return pinv.getAsDouble(coordinates);
 	}
 
 	@Override

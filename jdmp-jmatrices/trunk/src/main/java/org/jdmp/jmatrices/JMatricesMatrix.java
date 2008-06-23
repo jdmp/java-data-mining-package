@@ -21,7 +21,7 @@ public class JMatricesMatrix extends AbstractDenseDoubleMatrix2D implements Wrap
 	public JMatricesMatrix(org.jdmp.matrix.Matrix source) throws MatrixException {
 		this(source.getSize());
 		for (long[] c : source.availableCoordinates()) {
-			setDouble(source.getDouble(c), c);
+			setAsDouble(source.getAsDouble(c), c);
 		}
 	}
 

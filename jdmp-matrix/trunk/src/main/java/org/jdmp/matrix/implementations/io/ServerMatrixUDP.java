@@ -76,8 +76,8 @@ public class ServerMatrixUDP<A> extends AbstractGenericMatrix<A> {
 		return matrix.getSize();
 	}
 
-	public double getDouble(long... coordinates) throws MatrixException {
-		return matrix.getDouble(coordinates);
+	public double getAsDouble(long... coordinates) throws MatrixException {
+		return matrix.getAsDouble(coordinates);
 	}
 
 	public A getObject(long... coordinates) throws MatrixException {
@@ -93,8 +93,8 @@ public class ServerMatrixUDP<A> extends AbstractGenericMatrix<A> {
 		return matrix.isSparse();
 	}
 
-	public void setDouble(double value, long... coordinates) throws MatrixException {
-		matrix.setDouble(value, coordinates);
+	public void setAsDouble(double value, long... coordinates) throws MatrixException {
+		matrix.setAsDouble(value, coordinates);
 	}
 
 	public void setObject(Object o, long... coordinates) throws MatrixException {
@@ -126,12 +126,12 @@ public class ServerMatrixUDP<A> extends AbstractGenericMatrix<A> {
 					case SETDOUBLEVALUE:
 						coordinates = (Coordinates) ois.readObject();
 						value = ois.readDouble();
-						setDouble(value, coordinates.dimensions);
+						setAsDouble(value, coordinates.dimensions);
 						oos.writeInt(SETDOUBLEVALUE);
 						break;
 					case GETDOUBLEVALUE:
 						coordinates = (Coordinates) ois.readObject();
-						value = getDouble(coordinates.dimensions);
+						value = getAsDouble(coordinates.dimensions);
 						oos.writeInt(GETDOUBLEVALUE);
 						oos.writeDouble(value);
 						break;

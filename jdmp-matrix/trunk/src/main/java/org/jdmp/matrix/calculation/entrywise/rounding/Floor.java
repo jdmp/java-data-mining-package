@@ -37,13 +37,13 @@ public class Floor extends AbstractDoubleCalculation {
 
 	@Override
 	public double getDouble(long... coordinates) throws MatrixException {
-		return Math.floor(getSource().getDouble(coordinates));
+		return Math.floor(getSource().getAsDouble(coordinates));
 	}
 
 	public static Matrix calcNew(Matrix source) throws MatrixException {
 		Matrix ret = MatrixFactory.zeros(source.getSize());
 		for (long[] c : source.availableCoordinates()) {
-			ret.setDouble(Math.floor(source.getDouble(c)), c);
+			ret.setAsDouble(Math.floor(source.getAsDouble(c)), c);
 		}
 		return ret;
 	}

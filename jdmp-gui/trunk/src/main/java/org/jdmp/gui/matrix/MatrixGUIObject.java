@@ -61,7 +61,7 @@ public class MatrixGUIObject extends AbstractGUIObject implements TableModel,
 		long t1;
 		double v = 0.0;
 		for (long[] c : matrix.availableCoordinates()) {
-			max = (v = matrix.getDouble(c)) > max ? v : max;
+			max = (v = matrix.getAsDouble(c)) > max ? v : max;
 			t1 = System.currentTimeMillis();
 			if (t1 - t0 > timeOut) {
 				return max;
@@ -76,7 +76,7 @@ public class MatrixGUIObject extends AbstractGUIObject implements TableModel,
 		long t1;
 		double v = 0.0;
 		for (long[] c : matrix.availableCoordinates()) {
-			min = (v = matrix.getDouble(c)) < min ? v : min;
+			min = (v = matrix.getAsDouble(c)) < min ? v : min;
 			t1 = System.currentTimeMillis();
 			if (t1 - t0 > timeOut) {
 				return min;
@@ -151,7 +151,7 @@ public class MatrixGUIObject extends AbstractGUIObject implements TableModel,
 					s.append("<tr>");
 					s.append("<th>" + matrix.getRowLabel(row) + "</th>");
 					for (int col = 0; col < columnCount && col < JDMPSettings.getMaxToolTipCols(); col++) {
-						s.append("<td align=right>" + StringUtil.format(matrix.getDouble(row, col))
+						s.append("<td align=right>" + StringUtil.format(matrix.getAsDouble(row, col))
 								+ "</td>");
 					}
 					if (getColumnCount() > JDMPSettings.getMaxToolTipCols()) {
@@ -265,7 +265,7 @@ public class MatrixGUIObject extends AbstractGUIObject implements TableModel,
 	}
 
 	public Double getDoubleValueAt(long... coordinates) throws MatrixException {
-		return matrix.getDouble(coordinates);
+		return matrix.getAsDouble(coordinates);
 	}
 
 	public boolean isSparse() {

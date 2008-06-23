@@ -34,19 +34,19 @@ public class SampleInputOutputMatrix extends AbstractDenseDoubleMatrix2D impleme
 
 	public double getDouble(long row, long column) throws MatrixException {
 		if (column < getInputMatrix().getColumnCount()) {
-			return getInputMatrix().getDouble(row, column);
+			return getInputMatrix().getAsDouble(row, column);
 		} else {
 			column -= getInputMatrix().getColumnCount();
-			return getTargetMatrix().getDouble(row, column);
+			return getTargetMatrix().getAsDouble(row, column);
 		}
 	}
 
 	public void setDouble(double value, long row, long column) throws MatrixException {
 		if (column < getInputMatrix().getColumnCount()) {
-			getInputMatrix().setDouble(value, row, column);
+			getInputMatrix().setAsDouble(value, row, column);
 		} else {
 			column -= getInputMatrix().getColumnCount();
-			getTargetMatrix().setDouble(value, row, column);
+			getTargetMatrix().setAsDouble(value, row, column);
 		}
 	}
 

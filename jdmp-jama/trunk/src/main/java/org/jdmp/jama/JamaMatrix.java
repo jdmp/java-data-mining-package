@@ -18,7 +18,7 @@ public class JamaMatrix extends AbstractDenseDoubleMatrix2D implements Wrapper<J
 	public JamaMatrix(org.jdmp.matrix.Matrix source) throws MatrixException {
 		this(source.getSize());
 		for (long[] c : source.availableCoordinates()) {
-			setDouble(source.getDouble(c), c);
+			setAsDouble(source.getAsDouble(c), c);
 		}
 	}
 

@@ -40,9 +40,9 @@ public class Dense2Sparse {
 				System.out.println("Row: " + r);
 			}
 
-			long row = (long) indices.getDouble(r, 0);
-			long col = (long) indices.getDouble(r, 1);
-			double val = indices.getDouble(r, 2);
+			long row = (long) indices.getAsDouble(r, 0);
+			long col = (long) indices.getAsDouble(r, 1);
+			double val = indices.getAsDouble(r, 2);
 
 			if (row >= mrow) {
 				mrow = row + 1;
@@ -54,7 +54,7 @@ public class Dense2Sparse {
 				m.setSize(mrow, mcol);
 			}
 
-			m.setDouble(val, row, col);
+			m.setAsDouble(val, row, col);
 
 		}
 

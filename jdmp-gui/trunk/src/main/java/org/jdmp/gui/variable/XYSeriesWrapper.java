@@ -66,7 +66,7 @@ public class XYSeriesWrapper extends XYSeries implements VariableListener {
 		Matrix matrix = variable.getVariable().getMatrix(id);
 		double value = 0.0;
 		try {
-			value = matrix.getDouble(number % matrix.getRowCount(), number / matrix.getRowCount());
+			value = matrix.getAsDouble(number % matrix.getRowCount(), number / matrix.getRowCount());
 		} catch (MatrixException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -132,8 +132,8 @@ class StandardDeviationMarkerForVariable extends IntervalMarker {
 	@Override
 	public double getEndValue() {
 		try {
-			return variable.getVariable().getMeanMatrix().getDouble(0, number)
-					+ variable.getVariable().getStandardDeviationMatrix().getDouble(0, number);
+			return variable.getVariable().getMeanMatrix().getAsDouble(0, number)
+					+ variable.getVariable().getStandardDeviationMatrix().getAsDouble(0, number);
 		} catch (MatrixException e) {
 			return 0.0;
 		}
@@ -142,8 +142,8 @@ class StandardDeviationMarkerForVariable extends IntervalMarker {
 	@Override
 	public double getStartValue() {
 		try {
-			return variable.getVariable().getMeanMatrix().getDouble(0, number)
-					- variable.getVariable().getStandardDeviationMatrix().getDouble(0, number);
+			return variable.getVariable().getMeanMatrix().getAsDouble(0, number)
+					- variable.getVariable().getStandardDeviationMatrix().getAsDouble(0, number);
 		} catch (MatrixException e) {
 			return 0.0;
 		}
@@ -167,7 +167,7 @@ class MinMaxMarkerForVariable extends IntervalMarker {
 	@Override
 	public double getEndValue() {
 		try {
-			return variable.getVariable().getMaxMatrix().getDouble(0, number);
+			return variable.getVariable().getMaxMatrix().getAsDouble(0, number);
 		} catch (MatrixException e) {
 			return 0.0;
 		}
@@ -176,7 +176,7 @@ class MinMaxMarkerForVariable extends IntervalMarker {
 	@Override
 	public double getStartValue() {
 		try {
-			return variable.getVariable().getMinMatrix().getDouble(0, number);
+			return variable.getVariable().getMinMatrix().getAsDouble(0, number);
 		} catch (MatrixException e) {
 			return 0.0;
 		}
@@ -203,7 +203,7 @@ class MeanMarkerForVariable extends ValueMarker {
 	@Override
 	public String getLabel() {
 		try {
-			return StringUtil.format(variable.getVariable().getMeanMatrix().getDouble(0, number));
+			return StringUtil.format(variable.getVariable().getMeanMatrix().getAsDouble(0, number));
 		} catch (MatrixException e) {
 			return "";
 		}
@@ -212,7 +212,7 @@ class MeanMarkerForVariable extends ValueMarker {
 	@Override
 	public double getValue() {
 		try {
-			return variable.getVariable().getMeanMatrix().getDouble(0, number);
+			return variable.getVariable().getMeanMatrix().getAsDouble(0, number);
 		} catch (MatrixException e) {
 			return 0.0;
 		}

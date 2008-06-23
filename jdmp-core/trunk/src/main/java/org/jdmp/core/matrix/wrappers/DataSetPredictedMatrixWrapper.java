@@ -37,7 +37,7 @@ public class DataSetPredictedMatrixWrapper extends AbstractDenseDoubleMatrix2D i
 			if (p.getMatrix(Sample.PREDICTED) != null) {
 				long r = column / p.getMatrix(Sample.PREDICTED).getColumnCount();
 				long c = column % p.getMatrix(Sample.PREDICTED).getColumnCount();
-				return p.getMatrix(Sample.PREDICTED).getDouble(r, c);
+				return p.getMatrix(Sample.PREDICTED).getAsDouble(r, c);
 			}
 		}
 		return 0.0;
@@ -49,7 +49,7 @@ public class DataSetPredictedMatrixWrapper extends AbstractDenseDoubleMatrix2D i
 			if (p.getMatrix(Sample.PREDICTED) != null) {
 				long r = column / p.getMatrix(Sample.PREDICTED).getColumnCount();
 				long c = column % p.getMatrix(Sample.PREDICTED).getColumnCount();
-				p.getMatrix(Sample.PREDICTED).setDouble(value, r, c);
+				p.getMatrix(Sample.PREDICTED).setAsDouble(value, r, c);
 			}
 		}
 	}

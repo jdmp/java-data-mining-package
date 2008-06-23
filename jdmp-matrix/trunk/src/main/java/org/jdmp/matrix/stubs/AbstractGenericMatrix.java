@@ -187,7 +187,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 
 	public final boolean containsMissingValues() throws MatrixException {
 		for (long[] c : allCoordinates()) {
-			double v = getDouble(c);
+			double v = getAsDouble(c);
 			if (v != v || v == Double.NEGATIVE_INFINITY || v == Double.POSITIVE_INFINITY) {
 				return true;
 			}
@@ -198,7 +198,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 	public final double getEuklideanValue() throws MatrixException {
 		double sum = 0.0;
 		for (long[] c : allCoordinates()) {
-			sum += Math.pow(getDouble(c), 2.0);
+			sum += Math.pow(getAsDouble(c), 2.0);
 		}
 		return Math.sqrt(sum);
 	}
@@ -392,7 +392,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		long[] maxc = Coordinates.copyOf(getSize());
 		Arrays.fill(maxc, -1);
 		for (long[] c : allCoordinates()) {
-			double v = getDouble(c);
+			double v = getAsDouble(c);
 			if (v > max) {
 				max = v;
 				maxc = Coordinates.copyOf(c);
@@ -406,7 +406,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		long[] minc = Coordinates.copyOf(getSize());
 		Arrays.fill(minc, -1);
 		for (long[] c : allCoordinates()) {
-			double v = getDouble(c);
+			double v = getAsDouble(c);
 			if (v < min) {
 				min = v;
 				minc = Coordinates.copyOf(c);
@@ -442,7 +442,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		double[][] values = new double[r][c];
 		for (int i = 0; i < r; i++) {
 			for (int j = 0; j < c; j++) {
-				values[i][j] = getDouble(i, j);
+				values[i][j] = getAsDouble(i, j);
 			}
 		}
 		return values;
@@ -466,7 +466,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		int[][] values = new int[r][c];
 		for (int i = 0; i < r; i++) {
 			for (int j = 0; j < c; j++) {
-				values[i][j] = getInt(i, j);
+				values[i][j] = getAsInt(i, j);
 			}
 		}
 		return values;
@@ -478,7 +478,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		long[][] values = new long[r][c];
 		for (int i = 0; i < r; i++) {
 			for (int j = 0; j < c; j++) {
-				values[i][j] = getLong(i, j);
+				values[i][j] = getAsLong(i, j);
 			}
 		}
 		return values;
@@ -490,7 +490,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		short[][] values = new short[r][c];
 		for (int i = 0; i < r; i++) {
 			for (int j = 0; j < c; j++) {
-				values[i][j] = getShort(i, j);
+				values[i][j] = getAsShort(i, j);
 			}
 		}
 		return values;
@@ -502,7 +502,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		char[][] values = new char[r][c];
 		for (int i = 0; i < r; i++) {
 			for (int j = 0; j < c; j++) {
-				values[i][j] = getChar(i, j);
+				values[i][j] = getAsChar(i, j);
 			}
 		}
 		return values;
@@ -514,7 +514,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		String[][] values = new String[r][c];
 		for (int i = 0; i < r; i++) {
 			for (int j = 0; j < c; j++) {
-				values[i][j] = getString(i, j);
+				values[i][j] = getAsString(i, j);
 			}
 		}
 		return values;
@@ -526,7 +526,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		byte[][] values = new byte[r][c];
 		for (int i = 0; i < r; i++) {
 			for (int j = 0; j < c; j++) {
-				values[i][j] = getByte(i, j);
+				values[i][j] = getAsByte(i, j);
 			}
 		}
 		return values;
@@ -538,7 +538,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		boolean[][] values = new boolean[r][c];
 		for (int i = 0; i < r; i++) {
 			for (int j = 0; j < c; j++) {
-				values[i][j] = getBoolean(i, j);
+				values[i][j] = getAsBoolean(i, j);
 			}
 		}
 		return values;
@@ -550,7 +550,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		float[][] values = new float[r][c];
 		for (int i = 0; i < r; i++) {
 			for (int j = 0; j < c; j++) {
-				values[i][j] = getFloat(i, j);
+				values[i][j] = getAsFloat(i, j);
 			}
 		}
 		return values;
@@ -562,7 +562,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		Date[][] values = new Date[r][c];
 		for (int i = 0; i < r; i++) {
 			for (int j = 0; j < c; j++) {
-				values[i][j] = getDate(i, j);
+				values[i][j] = getAsDate(i, j);
 			}
 		}
 		return values;
@@ -652,63 +652,63 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		return Mtimes.calc(false, this, matrix);
 	}
 
-	public final boolean getBoolean(long... coordinates) throws MatrixException {
-		return getDouble(coordinates) != 0.0;
+	public final boolean getAsBoolean(long... coordinates) throws MatrixException {
+		return getAsDouble(coordinates) != 0.0;
 	}
 
-	public final void setBoolean(boolean value, long... coordinates) throws MatrixException {
-		setDouble(value ? 1.0 : 0.0, coordinates);
+	public final void setAsBoolean(boolean value, long... coordinates) throws MatrixException {
+		setAsDouble(value ? 1.0 : 0.0, coordinates);
 	}
 
-	public int getInt(long... coordinates) throws MatrixException {
-		return (int) Math.round(getDouble(coordinates));
+	public int getAsInt(long... coordinates) throws MatrixException {
+		return (int) Math.round(getAsDouble(coordinates));
 	}
 
-	public void setInt(int value, long... coordinates) throws MatrixException {
-		setDouble(value, coordinates);
+	public void setAsInt(int value, long... coordinates) throws MatrixException {
+		setAsDouble(value, coordinates);
 	}
 
-	public final byte getByte(long... coordinates) throws MatrixException {
-		return (byte) getDouble(coordinates);
+	public final byte getAsByte(long... coordinates) throws MatrixException {
+		return (byte) getAsDouble(coordinates);
 	}
 
-	public final void setByte(byte value, long... coordinates) throws MatrixException {
-		setDouble(value, coordinates);
+	public final void setAsByte(byte value, long... coordinates) throws MatrixException {
+		setAsDouble(value, coordinates);
 	}
 
-	public final char getChar(long... coordinates) throws MatrixException {
-		return (char) getDouble(coordinates);
+	public final char getAsChar(long... coordinates) throws MatrixException {
+		return (char) getAsDouble(coordinates);
 	}
 
-	public final void setChar(char value, long... coordinates) throws MatrixException {
-		setDouble(value, coordinates);
+	public final void setAsChar(char value, long... coordinates) throws MatrixException {
+		setAsDouble(value, coordinates);
 	}
 
-	public final float getFloat(long... coordinates) throws MatrixException {
-		return (float) getDouble(coordinates);
+	public final float getAsFloat(long... coordinates) throws MatrixException {
+		return (float) getAsDouble(coordinates);
 	}
 
-	public final void setFloat(float value, long... coordinates) throws MatrixException {
-		setDouble(value, coordinates);
+	public final void setAsFloat(float value, long... coordinates) throws MatrixException {
+		setAsDouble(value, coordinates);
 	}
 
-	public final short getShort(long... coordinates) throws MatrixException {
-		return (short) getDouble(coordinates);
+	public final short getAsShort(long... coordinates) throws MatrixException {
+		return (short) getAsDouble(coordinates);
 	}
 
-	public final void setShort(short value, long... coordinates) throws MatrixException {
-		setDouble(value, coordinates);
+	public final void setAsShort(short value, long... coordinates) throws MatrixException {
+		setAsDouble(value, coordinates);
 	}
 
-	public final long getLong(long... coordinates) throws MatrixException {
-		return (long) getDouble(coordinates);
+	public final long getAsLong(long... coordinates) throws MatrixException {
+		return (long) getAsDouble(coordinates);
 	}
 
-	public final void setLong(long value, long... coordinates) throws MatrixException {
-		setDouble(value, coordinates);
+	public final void setAsLong(long value, long... coordinates) throws MatrixException {
+		setAsDouble(value, coordinates);
 	}
 
-	public final Date getDate(long... coordinates) throws MatrixException {
+	public final Date getAsDate(long... coordinates) throws MatrixException {
 		Object o = getObject(coordinates);
 		if (o == null) {
 			return null;
@@ -725,10 +725,10 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 			} catch (ParseException e) {
 			}
 		}
-		return new Date(getLong(coordinates));
+		return new Date(getAsLong(coordinates));
 	}
 
-	public final void setDate(Date date, long... coordinates) throws MatrixException {
+	public final void setAsDate(Date date, long... coordinates) throws MatrixException {
 		setObject(date, coordinates);
 	}
 
@@ -808,14 +808,14 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 					sum = 0.0;
 					count = 0;
 					for (k = 0; k < columnCount; k++) {
-						double v1 = getDouble(i, k);
-						double v2 = matrix.getDouble(k, j);
+						double v1 = getAsDouble(i, k);
+						double v2 = matrix.getAsDouble(k, j);
 						if (!MathUtil.isNaNOrInfinite(v1) && !MathUtil.isNaNOrInfinite(v2)) {
 							sum += v1 * v2;
 							count++;
 						}
 					}
-					ret.setDouble(sum / count, i, j);
+					ret.setAsDouble(sum / count, i, j);
 				}
 			}
 
@@ -826,12 +826,12 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 					sum = 0.0;
 					count = 0;
 					for (k = 0; k < columnCount; k++) {
-						double v1 = getDouble(i, k);
-						double v2 = matrix.getDouble(k, j);
+						double v1 = getAsDouble(i, k);
+						double v2 = matrix.getAsDouble(k, j);
 						sum += v1 * v2;
 						count++;
 					}
-					ret.setDouble(sum / count, i, j);
+					ret.setAsDouble(sum / count, i, j);
 				}
 			}
 
@@ -981,7 +981,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		Matrix s = usv[1];
 
 		for (int i = (int) Math.min(s.getSize(ROW), s.getSize(COLUMN)); --i >= 0;) {
-			if (Math.abs(s.getDouble(i, i)) > JDMPSettings.getTolerance()) {
+			if (Math.abs(s.getAsDouble(i, i)) > JDMPSettings.getTolerance()) {
 				rank++;
 			}
 		}
@@ -996,7 +996,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 
 	public boolean isEmpty() throws MatrixException {
 		for (long[] c : availableCoordinates()) {
-			if (getDouble(c) != 0.0) {
+			if (getAsDouble(c) != 0.0) {
 				return false;
 			}
 		}
@@ -1024,7 +1024,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 			return false;
 		}
 		for (long[] c : allCoordinates()) {
-			double v = getDouble(c);
+			double v = getAsDouble(c);
 			if (v != 0.0) {
 				for (int i = 1; i < c.length; i++) {
 					if (c[i - 1] != c[i]) {
@@ -1052,11 +1052,11 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		double sum = 0.0;
 		if (ignoreNaN) {
 			for (long[] c : allCoordinates()) {
-				sum += MathUtil.ignoreNaN(Math.pow(Math.abs((getDouble(c)) - m.getDouble(c)), p));
+				sum += MathUtil.ignoreNaN(Math.pow(Math.abs((getAsDouble(c)) - m.getAsDouble(c)), p));
 			}
 		} else {
 			for (long[] c : allCoordinates()) {
-				sum += Math.pow(Math.abs((getDouble(c)) - m.getDouble(c)), p);
+				sum += Math.pow(Math.abs((getAsDouble(c)) - m.getAsDouble(c)), p);
 			}
 		}
 		return Math.pow(sum, 1 / p);
@@ -1066,12 +1066,12 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		double max = 0.0;
 		if (ignoreNaN) {
 			for (long[] c : allCoordinates()) {
-				double v = MathUtil.ignoreNaN(Math.abs((getDouble(c) - m.getDouble(c))));
+				double v = MathUtil.ignoreNaN(Math.abs((getAsDouble(c) - m.getAsDouble(c))));
 				max = v > max ? v : max;
 			}
 		} else {
 			for (long[] c : allCoordinates()) {
-				double v = Math.abs((getDouble(c) - m.getDouble(c)));
+				double v = Math.abs((getAsDouble(c) - m.getAsDouble(c)));
 				max = v > max ? v : max;
 			}
 		}
@@ -1166,7 +1166,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 	public double trace() throws MatrixException {
 		double sum = 0.0;
 		for (long i = Math.min(getRowCount(), getColumnCount()); --i >= 0;) {
-			sum += getDouble(i, i);
+			sum += getAsDouble(i, i);
 		}
 		return sum;
 	}
@@ -1224,7 +1224,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		return o.toString();
 	}
 
-	public void setString(String string, long... coordinates) throws MatrixException {
+	public void setAsString(String string, long... coordinates) throws MatrixException {
 		setObject(string, coordinates);
 	}
 
@@ -1232,7 +1232,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		return false;
 	}
 
-	public String getString(long... coordinates) throws MatrixException {
+	public String getAsString(long... coordinates) throws MatrixException {
 		Object o = getObject(coordinates);
 		if (o == null) {
 			return null;
@@ -1265,7 +1265,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 	public final double getValueSum() throws MatrixException {
 		double sum = 0.0;
 		for (long[] c : allCoordinates()) {
-			sum += getDouble(c);
+			sum += getAsDouble(c);
 		}
 		return sum;
 	}
@@ -1273,7 +1273,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 	public final double getAbsoluteValueSum() throws MatrixException {
 		double sum = 0.0;
 		for (long[] c : allCoordinates()) {
-			sum += Math.abs(getDouble(c));
+			sum += Math.abs(getAsDouble(c));
 		}
 		return sum;
 	}
@@ -1350,7 +1350,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 			double scale = targetDiff / diffBefore;
 			double offet = targetMin - minValue;
 			for (long[] c : allCoordinates()) {
-				setDouble(getDouble(c) * scale + offet, c);
+				setAsDouble(getAsDouble(c) * scale + offet, c);
 			}
 		}
 		notifyGUIObject();
@@ -1373,18 +1373,18 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 
 	public final void addNoise_(double noiselevel) throws MatrixException {
 		for (long[] c : allCoordinates()) {
-			setDouble(getDouble(c) + MathUtil.nextGaussian(0.0, noiselevel), c);
+			setAsDouble(getAsDouble(c) + MathUtil.nextGaussian(0.0, noiselevel), c);
 		}
 	}
 
 	public Matrix replaceMissingBy(Matrix matrix) throws MatrixException {
 		Matrix ret = MatrixFactory.zeros(getSize());
 		for (long[] c : allCoordinates()) {
-			double v = getDouble(c);
+			double v = getAsDouble(c);
 			if (MathUtil.isNaNOrInfinite(v)) {
-				ret.setDouble(matrix.getDouble(c), c);
+				ret.setAsDouble(matrix.getAsDouble(c), c);
 			} else {
-				ret.setDouble(getDouble(c), c);
+				ret.setAsDouble(getAsDouble(c), c);
 			}
 		}
 		return ret;
@@ -1394,7 +1394,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		Matrix mv = countMissing(Ret.NEW, Matrix.ROW);
 		List<Long> sel = new ArrayList<Long>();
 		for (long c = 0; c < mv.getColumnCount(); c++) {
-			if (mv.getDouble(0, c) == 0.0)
+			if (mv.getAsDouble(0, c) == 0.0)
 				sel.add(c);
 		}
 		long[] longsel = new long[sel.size()];
@@ -1408,7 +1408,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		Matrix mv = countMissing(Ret.NEW, Matrix.COLUMN);
 		List<Long> sel = new ArrayList<Long>();
 		for (long r = 0; r < mv.getRowCount(); r++) {
-			if (mv.getDouble(r, 0) == 0.0)
+			if (mv.getAsDouble(r, 0) == 0.0)
 				sel.add(r);
 		}
 		long[] longsel = new long[sel.size()];
@@ -1426,7 +1426,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 			for (long r = start, i = 0; r < end; r++) {
 				double factor = (++i * stepsize);
 				for (int c = 0; c < getSize()[COLUMN]; c++) {
-					setDouble(getDouble(r, c) * factor, r, c);
+					setAsDouble(getAsDouble(r, c) * factor, r, c);
 				}
 			}
 		} else if (axis == COLUMN) {
@@ -1434,7 +1434,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 			for (long c = start, i = 0; c < end; c++) {
 				double factor = (++i * stepsize);
 				for (int r = 0; r < getSize()[ROW]; r++) {
-					setDouble(getDouble(r, c) * factor, r, c);
+					setAsDouble(getAsDouble(r, c) * factor, r, c);
 				}
 			}
 		}
@@ -1444,16 +1444,16 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 	public final Matrix convertIntToVector(int numberOfClasses) throws MatrixException {
 		Matrix m = MatrixFactory.zeros(numberOfClasses, 1);
 		for (int i = numberOfClasses - 1; i != -1; i--) {
-			m.setDouble(-1.0, i, 0);
+			m.setAsDouble(-1.0, i, 0);
 		}
-		m.setDouble(1.0, (int) getDouble(0, 0), 0);
+		m.setAsDouble(1.0, (int) getAsDouble(0, 0), 0);
 		return m;
 	}
 
 	public final void greaterOrZero_() throws MatrixException {
 		for (long[] c : allCoordinates()) {
-			double v = getDouble(c);
-			setDouble(v < 0.0 ? 0.0 : v, c);
+			double v = getAsDouble(c);
+			setAsDouble(v < 0.0 ? 0.0 : v, c);
 		}
 	}
 
@@ -1461,11 +1461,11 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		for (long r = getRowCount() - 1; r != -1; r--) {
 			double sum = 0.0;
 			for (long c = getColumnCount() - 1; c != -1; c--) {
-				sum += Math.abs(getDouble(r, c));
+				sum += Math.abs(getAsDouble(r, c));
 			}
 			sum = sum / getRowCount();
 			for (long c = getColumnCount() - 1; c != -1; c--) {
-				setDouble(getDouble(r, c) / sum, r, c);
+				setAsDouble(getAsDouble(r, c) / sum, r, c);
 			}
 		}
 	}
@@ -1483,12 +1483,12 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		newSize[dimension] += m.getSize()[dimension];
 		Matrix result = MatrixFactory.zeros(newSize);
 		for (long[] c : allCoordinates()) {
-			result.setDouble(getDouble(c), c);
+			result.setAsDouble(getAsDouble(c), c);
 		}
 		for (long[] c : m.allCoordinates()) {
 			long[] newC = Coordinates.copyOf(c);
 			newC[dimension] += getSize()[dimension];
-			result.setDouble(m.getDouble(c), newC);
+			result.setAsDouble(m.getAsDouble(c), newC);
 		}
 		return result;
 	}
@@ -1509,7 +1509,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 			for (long r = start, i = 0; r < end; r++) {
 				double factor = 1.0 - (++i * stepsize);
 				for (int c = 0; c < getSize()[COLUMN]; c++) {
-					setDouble(getDouble(r, c) * factor, r, c);
+					setAsDouble(getAsDouble(r, c) * factor, r, c);
 				}
 			}
 		} else if (axis == COLUMN) {
@@ -1517,7 +1517,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 			for (long c = start, i = 0; c < end; c++) {
 				double factor = 1.0 - (++i * stepsize);
 				for (int r = 0; r < getSize()[ROW]; r++) {
-					setDouble(getDouble(r, c) * factor, r, c);
+					setAsDouble(getAsDouble(r, c) * factor, r, c);
 				}
 			}
 		}
@@ -1538,10 +1538,10 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 	public Matrix addColumnWithOnes() throws MatrixException {
 		Matrix ret = MatrixFactory.zeros(getRowCount(), getColumnCount() + 1);
 		for (long[] c : allCoordinates()) {
-			ret.setDouble(getDouble(c), c);
+			ret.setAsDouble(getAsDouble(c), c);
 		}
 		for (long r = getRowCount() - 1; r != -1; r--) {
-			ret.setDouble(1.0, r, getColumnCount());
+			ret.setAsDouble(1.0, r, getColumnCount());
 		}
 		return ret;
 	}
@@ -1549,10 +1549,10 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 	public Matrix addRowWithOnes() throws MatrixException {
 		Matrix ret = MatrixFactory.zeros(getRowCount() + 1, getColumnCount());
 		for (long[] c : allCoordinates()) {
-			ret.setDouble(getDouble(c), c);
+			ret.setAsDouble(getAsDouble(c), c);
 		}
 		for (long c = getColumnCount() - 1; c != -1; c--) {
-			ret.setDouble(1.0, getRowCount(), c);
+			ret.setAsDouble(1.0, getRowCount(), c);
 		}
 		return ret;
 	}
@@ -1594,7 +1594,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		double sum = 0.0;
 		long count = 0;
 		for (long[] c : allCoordinates()) {
-			sum += Math.pow(getDouble(c), 2.0);
+			sum += Math.pow(getAsDouble(c), 2.0);
 			count++;
 		}
 		sum /= count;

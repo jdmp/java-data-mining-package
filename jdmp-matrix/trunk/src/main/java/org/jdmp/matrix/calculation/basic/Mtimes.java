@@ -44,9 +44,9 @@ public class Mtimes extends AbstractDoubleCalculation {
 
 	@Override
 	public double getDouble(long... coordinates) throws MatrixException {
-		return ignoreNaN ? MathUtil.ignoreNaN(getSources()[0].getDouble(coordinates))
-				* MathUtil.ignoreNaN(getSources()[1].getDouble(coordinates)) : getSources()[0].getDouble(coordinates)
-				* getSources()[1].getDouble(coordinates);
+		return ignoreNaN ? MathUtil.ignoreNaN(getSources()[0].getAsDouble(coordinates))
+				* MathUtil.ignoreNaN(getSources()[1].getAsDouble(coordinates)) : getSources()[0].getAsDouble(coordinates)
+				* getSources()[1].getAsDouble(coordinates);
 	}
 
 	public static Matrix calc(boolean ignoreNaN, Matrix m1, Matrix m2) throws MatrixException {
@@ -65,7 +65,7 @@ public class Mtimes extends AbstractDoubleCalculation {
 				for (j = ret[0].length; --j >= 0;) {
 					sum = 0.0;
 					for (k = (int) m1.getColumnCount(); --k >= 0;) {
-						sum += MathUtil.ignoreNaN(m1.getDouble(i, k)) * MathUtil.ignoreNaN(m2.getDouble(k, j));
+						sum += MathUtil.ignoreNaN(m1.getAsDouble(i, k)) * MathUtil.ignoreNaN(m2.getAsDouble(k, j));
 					}
 					ret[i][j] = sum;
 				}
@@ -75,7 +75,7 @@ public class Mtimes extends AbstractDoubleCalculation {
 				for (j = ret[0].length; --j >= 0;) {
 					sum = 0.0;
 					for (k = (int) m1.getColumnCount(); --k >= 0;) {
-						sum += m1.getDouble(i, k) * m2.getDouble(k, j);
+						sum += m1.getAsDouble(i, k) * m2.getAsDouble(k, j);
 					}
 					ret[i][j] = sum;
 				}

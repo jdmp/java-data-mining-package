@@ -57,11 +57,11 @@ public class GenericCalculationMatrix<A> extends AbstractGenericMatrix<A> {
 		return calculation.getSize();
 	}
 
-	public double getDouble(long... coordinates) throws MatrixException {
+	public double getAsDouble(long... coordinates) throws MatrixException {
 		return calculation.getDouble(coordinates);
 	}
 
-	public void setDouble(double value, long... coordinates) throws MatrixException {
+	public void setAsDouble(double value, long... coordinates) throws MatrixException {
 		calculation.setDouble(value, coordinates);
 	}
 
@@ -75,11 +75,11 @@ public class GenericCalculationMatrix<A> extends AbstractGenericMatrix<A> {
 	}
 
 	@Override
-	public String getString(long... coordinates) throws MatrixException {
+	public String getAsString(long... coordinates) throws MatrixException {
 		return calculation.getString(coordinates);
 	}
 
-	public void setString(String s, long... coordinates) throws MatrixException {
+	public void setAsString(String s, long... coordinates) throws MatrixException {
 		calculation.setString(s, coordinates);
 	}
 

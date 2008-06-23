@@ -36,7 +36,7 @@ public interface IntMatrix extends Matrix {
 	 * @return an int representation of the entry
 	 * @throws MatrixException
 	 */
-	public int getInt(long... coordinates) throws MatrixException;
+	public int getAsInt(long... coordinates) throws MatrixException;
 
 	/**
 	 * Sets an entry in the matrix to an int value. If the matrix cannot store
@@ -48,7 +48,7 @@ public interface IntMatrix extends Matrix {
 	 *            location of the entry
 	 * @throws MatrixException
 	 */
-	public void setInt(int value, long... coordinates) throws MatrixException;
+	public void setAsInt(int value, long... coordinates) throws MatrixException;
 
 	/**
 	 * Converts the content of a matrix into a 2-dimensional array of int

@@ -55,7 +55,7 @@ public class Sort extends AbstractObjectCalculation {
 		if (index == null) {
 			createSortIndex();
 		}
-		return getSource().getObject(coordinates[0], index.getInt(coordinates));
+		return getSource().getObject(coordinates[0], index.getAsInt(coordinates));
 	}
 
 	private void createSortIndex() {

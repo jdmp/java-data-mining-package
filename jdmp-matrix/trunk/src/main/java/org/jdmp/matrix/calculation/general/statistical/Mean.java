@@ -64,14 +64,14 @@ public class Mean extends AbstractDoubleCalculation {
 		if (ignoreNaN) {
 			switch (getDimension()) {
 			case ALL:
-				return sum.getDouble(0, 0)
-						/ (Coordinates.product(getSource().getSize()) - missingCount.getDouble(0, 0));
+				return sum.getAsDouble(0, 0)
+						/ (Coordinates.product(getSource().getSize()) - missingCount.getAsDouble(0, 0));
 			case ROW:
-				return sum.getDouble(0, coordinates[COLUMN])
-						/ (getSource().getRowCount() - missingCount.getDouble(0, coordinates[COLUMN]));
+				return sum.getAsDouble(0, coordinates[COLUMN])
+						/ (getSource().getRowCount() - missingCount.getAsDouble(0, coordinates[COLUMN]));
 			case COLUMN:
-				return sum.getDouble(coordinates[ROW], 0)
-						/ (getSource().getColumnCount() - missingCount.getDouble(coordinates[ROW], 0));
+				return sum.getAsDouble(coordinates[ROW], 0)
+						/ (getSource().getColumnCount() - missingCount.getAsDouble(coordinates[ROW], 0));
 			default:
 				return Double.NaN;
 			}
@@ -80,11 +80,11 @@ public class Mean extends AbstractDoubleCalculation {
 
 			switch (getDimension()) {
 			case ALL:
-				return sum.getDouble(0, 0) / (Coordinates.product(getSource().getSize()));
+				return sum.getAsDouble(0, 0) / (Coordinates.product(getSource().getSize()));
 			case ROW:
-				return sum.getDouble(0, coordinates[COLUMN]) / (getSource().getRowCount());
+				return sum.getAsDouble(0, coordinates[COLUMN]) / (getSource().getRowCount());
 			case COLUMN:
-				return sum.getDouble(coordinates[ROW], 0) / (getSource().getColumnCount());
+				return sum.getAsDouble(coordinates[ROW], 0) / (getSource().getColumnCount());
 			default:
 				return Double.NaN;
 			}
@@ -108,7 +108,7 @@ public class Mean extends AbstractDoubleCalculation {
 	public static double calc(Matrix m) throws MatrixException {
         double sum = 0.0;
         for (long[] c : m.availableCoordinates()) {
-            sum+= m.getDouble(c);
+            sum+= m.getAsDouble(c);
         }
         return sum/m.getValueCount();
     }

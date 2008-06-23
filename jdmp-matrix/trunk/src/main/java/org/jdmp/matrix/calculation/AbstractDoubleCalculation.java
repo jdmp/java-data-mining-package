@@ -60,7 +60,7 @@ public abstract class AbstractDoubleCalculation extends AbstractGenericCalculati
 		Matrix result = MatrixFactory.zeros(getEntryType(), getSize());
 		// TODO: copy annotation
 		for (long[] c : result.allCoordinates()) {
-			result.setDouble(getDouble(c), c);
+			result.setAsDouble(getDouble(c), c);
 		}
 		return result;
 	}
@@ -71,7 +71,7 @@ public abstract class AbstractDoubleCalculation extends AbstractGenericCalculati
 					"Cannot change Matrix size. Use calc(Ret.NEW) or calc(Ret.LINK) instead.");
 		}
 		for (long[] c : getSource().allCoordinates()) {
-			getSource().setDouble(getDouble(c), c);
+			getSource().setAsDouble(getDouble(c), c);
 		}
 		return getSource();
 	}

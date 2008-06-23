@@ -22,7 +22,7 @@ public class MLDoubleMatrix extends AbstractDenseDoubleMatrix2D implements Wrapp
 			setLabel(m.getLabel());
 		}
 		for (long[] c : m.availableCoordinates()) {
-			setDouble(m.getDouble(c), c);
+			setAsDouble(m.getAsDouble(c), c);
 		}
 	}
 

@@ -195,7 +195,7 @@ public class ReplicatedMatrixList extends AbstractMatrixList {
 	}
 
 	private double getDoubleValueAt(int row, int col) throws MatrixException {
-		return matrixList.get(row).getDouble(col);
+		return matrixList.get(row).getAsDouble(col);
 	}
 
 	public final double[][] toArray() throws MatrixException {

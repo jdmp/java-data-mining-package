@@ -165,11 +165,11 @@ public abstract class AbstractListMatrix<A> extends AbstractGenericMatrix<A> imp
         return coordinates[ROW]<getList().size()&&coordinates[COLUMN]<1;
     }
 
-    public double getDouble(long... coordinates) throws MatrixException {
+    public double getAsDouble(long... coordinates) throws MatrixException {
         return MathUtil.getDouble(getObject(coordinates));
     }
 
-    public void setDouble(double value, long... coordinates) throws MatrixException {
+    public void setAsDouble(double value, long... coordinates) throws MatrixException {
         setObject(value, coordinates);
     }
 

@@ -32,7 +32,7 @@ public class MatrixListToMatrixWrapper extends AbstractDenseDoubleMatrix2D imple
 	public double getDouble(long row, long column) throws MatrixException {
 		Matrix m = matrixList.get((int) row);
 		if (m != null) {
-			return m.getDouble(0, column);
+			return m.getAsDouble(0, column);
 		}
 		return 0.0;
 	}
@@ -40,7 +40,7 @@ public class MatrixListToMatrixWrapper extends AbstractDenseDoubleMatrix2D imple
 	public void setDouble(double value, long row, long column) throws MatrixException {
 		Matrix m = matrixList.get((int) row);
 		if (m != null) {
-			m.setDouble(value, 0, column);
+			m.setAsDouble(value, 0, column);
 		}
 	}
 

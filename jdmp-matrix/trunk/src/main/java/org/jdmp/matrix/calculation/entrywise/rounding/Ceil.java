@@ -37,13 +37,13 @@ public class Ceil extends AbstractDoubleCalculation {
 
 	@Override
 	public double getDouble(long... coordinates) throws MatrixException {
-		return Math.ceil(getSource().getDouble(coordinates));
+		return Math.ceil(getSource().getAsDouble(coordinates));
 	}
 
 	public static Matrix calcNew(Matrix source) throws MatrixException {
 		Matrix ret = MatrixFactory.zeros(source.getSize());
 		for (long[] c : source.availableCoordinates()) {
-			ret.setDouble(Math.ceil(source.getDouble(c)), c);
+			ret.setAsDouble(Math.ceil(source.getAsDouble(c)), c);
 		}
 		return ret;
 	}

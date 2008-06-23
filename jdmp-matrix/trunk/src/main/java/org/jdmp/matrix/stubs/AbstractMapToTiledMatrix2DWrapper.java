@@ -98,11 +98,11 @@ public abstract class AbstractMapToTiledMatrix2DWrapper<A> extends AbstractDense
 		}
 	}
 
-	public final double getDouble(long... coordinates) throws MatrixException {
+	public final double getAsDouble(long... coordinates) throws MatrixException {
 		return MathUtil.getDouble(getObject(coordinates));
 	}
 
-	public final void setDouble(double v, long... coordinates) throws MatrixException {
+	public final void setAsDouble(double v, long... coordinates) throws MatrixException {
 		setObject(v, coordinates);
 	}
 

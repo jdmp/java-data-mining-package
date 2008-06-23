@@ -139,8 +139,8 @@ public class ProjectionPanel extends JPanel implements MouseListener {
 				v.setUserDatum(Data.Label, m.getLabel(), UserData.SHARED);
 				v.setUserDatum(Data.Matrix, m, UserData.SHARED);
 				g.addVertex(v);
-				double x = m.getDouble(this.xAxis % m.getRowCount(), this.xAxis / m.getRowCount());
-				double y = m.getDouble(this.yAxis % m.getRowCount(), this.yAxis / m.getRowCount());
+				double x = m.getAsDouble(this.xAxis % m.getRowCount(), this.xAxis / m.getRowCount());
+				double y = m.getAsDouble(this.yAxis % m.getRowCount(), this.yAxis / m.getRowCount());
 				v.setUserDatum(layout.getBaseKey(), new Coordinates(x * 50, y * 50),
 						UserData.SHARED);
 				// layout.lockVertex(v);

@@ -50,7 +50,7 @@ public class ReplaceRegex extends AbstractStringCalculation {
 
 	@Override
 	public String getString(long... coordinates) throws MatrixException {
-		String src = getSource().getString(coordinates);
+		String src = getSource().getAsString(coordinates);
 
 		return (src == null) ? null : searchPattern.matcher(src).replaceAll(replaceString);
 	}
@@ -58,8 +58,8 @@ public class ReplaceRegex extends AbstractStringCalculation {
 	public static Matrix calc(Matrix source, Pattern search, String replacement) throws MatrixException {
 		Matrix ret = MatrixFactory.zeros(EntryType.STRING, source.getSize());
 		for (long[] c : source.availableCoordinates()) {
-			String src = source.getString(c);
-			ret.setString((src == null) ? null : search.matcher(src).replaceAll(replacement), c);
+			String src = source.getAsString(c);
+			ret.setAsString((src == null) ? null : search.matcher(src).replaceAll(replacement), c);
 		}
 		return ret;
 	}

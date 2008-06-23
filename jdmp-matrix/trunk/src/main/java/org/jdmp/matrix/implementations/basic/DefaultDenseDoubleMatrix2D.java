@@ -47,7 +47,7 @@ public class DefaultDenseDoubleMatrix2D extends AbstractDenseDoubleMatrix2D {
 		} else {
 			values = new double[(int) m.getRowCount()][(int) m.getColumnCount()];
 			for (long[] c : m.allCoordinates()) {
-				setDouble(m.getDouble(c), c);
+				setAsDouble(m.getAsDouble(c), c);
 			}
 		}
 	}
@@ -143,7 +143,7 @@ public class DefaultDenseDoubleMatrix2D extends AbstractDenseDoubleMatrix2D {
 		double[][] result = new double[values.length][values[0].length];
 		for (int r = result.length; --r >= 0;) {
 			for (int c = result[0].length; --c >= 0;) {
-				result[r][c] = values[r][c] + m2.getDouble(r, c);
+				result[r][c] = values[r][c] + m2.getAsDouble(r, c);
 			}
 		}
 		return new DefaultDenseDoubleMatrix2D(result);
@@ -153,7 +153,7 @@ public class DefaultDenseDoubleMatrix2D extends AbstractDenseDoubleMatrix2D {
 		double[][] result = new double[values.length][values[0].length];
 		for (int r = result.length; --r >= 0;) {
 			for (int c = result[0].length; --c >= 0;) {
-				result[r][c] = values[r][c] - m2.getDouble(r, c);
+				result[r][c] = values[r][c] - m2.getAsDouble(r, c);
 			}
 		}
 		return new DefaultDenseDoubleMatrix2D(result);
@@ -163,7 +163,7 @@ public class DefaultDenseDoubleMatrix2D extends AbstractDenseDoubleMatrix2D {
 		double[][] result = new double[values.length][values[0].length];
 		for (int r = result.length; --r >= 0;) {
 			for (int c = result[0].length; --c >= 0;) {
-				result[r][c] = values[r][c] * m2.getDouble(r, c);
+				result[r][c] = values[r][c] * m2.getAsDouble(r, c);
 			}
 		}
 		return new DefaultDenseDoubleMatrix2D(result);
@@ -173,7 +173,7 @@ public class DefaultDenseDoubleMatrix2D extends AbstractDenseDoubleMatrix2D {
 		double[][] result = new double[values.length][values[0].length];
 		for (int r = result.length; --r >= 0;) {
 			for (int c = result[0].length; --c >= 0;) {
-				result[r][c] = values[r][c] / m2.getDouble(r, c);
+				result[r][c] = values[r][c] / m2.getAsDouble(r, c);
 			}
 		}
 		return new DefaultDenseDoubleMatrix2D(result);
@@ -196,7 +196,7 @@ public class DefaultDenseDoubleMatrix2D extends AbstractDenseDoubleMatrix2D {
 			for (j = ret[0].length; --j >= 0;) {
 				sum = 0.0;
 				for (k = values[0].length; --k >= 0;) {
-					sum += values[i][k] * matrix.getDouble(k, j);
+					sum += values[i][k] * matrix.getAsDouble(k, j);
 				}
 				ret[i][j] = sum;
 			}

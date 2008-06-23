@@ -52,7 +52,7 @@ public class MTJDenseDoubleMatrix2D extends AbstractDenseDoubleMatrix2D implemen
 			double[] svs = svd.getS();
 			Matrix s = MatrixFactory.zeros(getSize());
 			for (int i = (int) Math.min(s.getRowCount(), s.getColumnCount()); --i >= 0;) {
-				s.setDouble(svs[i], i, i);
+				s.setAsDouble(svs[i], i, i);
 			}
 
 			return new Matrix[] { u, s, v };

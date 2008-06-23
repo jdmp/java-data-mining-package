@@ -31,7 +31,7 @@ public class DataSetToAttributeInfoWrapper extends FastVector {
 			weka.core.Attribute a = null;
 			if (discrete) {
 				FastVector values = new FastVector();
-				for (int i = 0; i < valueCounts.getDouble(0, j); i++) {
+				for (int i = 0; i < valueCounts.getAsDouble(0, j); i++) {
 					values.addElement("Attribute " + i);
 				}
 				a = new weka.core.Attribute(j + "", values);

@@ -19,9 +19,9 @@ public class SampleToInstanceWrapper extends Instance {
 		if (input != null) {
 			for (int i = 0; i < input.getColumnCount(); i++) {
 				if (discrete) {
-					setValue(i, (int) input.getDouble(0, i));
+					setValue(i, (int) input.getAsDouble(0, i));
 				} else {
-					setValue(i, input.getDouble(0, i));
+					setValue(i, input.getAsDouble(0, i));
 				}
 			}
 		}

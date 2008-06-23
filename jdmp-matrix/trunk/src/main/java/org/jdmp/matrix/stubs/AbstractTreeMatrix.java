@@ -80,7 +80,7 @@ public abstract class AbstractTreeMatrix<A> extends AbstractSparseDoubleMatrix i
 		return new long[] { getObjectList().size(), getObjectList().size() };
 	}
 
-	public final double getDouble(long... coordinates) {
+	public final double getAsDouble(long... coordinates) {
 		return isChild(coordinates[ROW], coordinates[COLUMN]) ? 1.0 : 0.0;
 	}
 
@@ -102,7 +102,7 @@ public abstract class AbstractTreeMatrix<A> extends AbstractSparseDoubleMatrix i
 		notifyGUIObject();
 	}
 
-	public void setDouble(double value, long... coordinates) {
+	public void setAsDouble(double value, long... coordinates) {
 		Object parent = getObject((int) coordinates[ROW]);
 		Object child = getObject((int) coordinates[COLUMN]);
 		if (value == 0.0) {

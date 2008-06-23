@@ -39,19 +39,19 @@ public class TestReplaceRegex extends TestCase {
 
 	private static Matrix getTestMatrix() throws MatrixException {
 		Matrix m = MatrixFactory.zeros(EntryType.STRING, 2, 2);
-		m.setString("aabbcabd", 0, 0);
-		m.setString(null, 0, 1);
-		m.setString("ad", 1, 0);
-		m.setString("aab", 1, 1);
+		m.setAsString("aabbcabd", 0, 0);
+		m.setAsString(null, 0, 1);
+		m.setAsString("ad", 1, 0);
+		m.setAsString("aab", 1, 1);
 		return m;
 	}
 
 	private static Matrix getResultMatrix() throws MatrixException {
 		Matrix m = MatrixFactory.zeros(EntryType.STRING, 2, 2);
-		m.setString("afgrbcfgrd", 0, 0);
-		m.setString(null, 0, 1);
-		m.setString("ad", 1, 0);
-		m.setString("afgr", 1, 1);
+		m.setAsString("afgrbcfgrd", 0, 0);
+		m.setAsString(null, 0, 1);
+		m.setAsString("ad", 1, 0);
+		m.setAsString("afgr", 1, 1);
 		return m;
 	}
 

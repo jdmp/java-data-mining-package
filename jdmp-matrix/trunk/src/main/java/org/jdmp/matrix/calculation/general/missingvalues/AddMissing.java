@@ -64,9 +64,9 @@ public class AddMissing extends AbstractDoubleCalculation {
 					do {
 						r = MathUtil.nextInteger(0, (int) getSource().getRowCount() - 1);
 						c = MathUtil.nextInteger(0, (int) getSource().getColumnCount() - 1);
-						v = missingValues.getDouble(r, c);
+						v = missingValues.getAsDouble(r, c);
 					} while (MathUtil.isNaNOrInfinite(v));
-					missingValues.setDouble(Double.NaN, r, c);
+					missingValues.setAsDouble(Double.NaN, r, c);
 				}
 				break;
 			case COLUMN:
@@ -77,9 +77,9 @@ public class AddMissing extends AbstractDoubleCalculation {
 						int c = 0;
 						do {
 							c = MathUtil.nextInteger(0, (int) getSource().getColumnCount() - 1);
-							v = missingValues.getDouble(r, c);
+							v = missingValues.getAsDouble(r, c);
 						} while (MathUtil.isNaNOrInfinite(v));
-						missingValues.setDouble(Double.NaN, r, c);
+						missingValues.setAsDouble(Double.NaN, r, c);
 					}
 				}
 			}
@@ -87,12 +87,12 @@ public class AddMissing extends AbstractDoubleCalculation {
 		if (missingValues.contains(coordinates)) {
 			return Double.NaN;
 		} else {
-			return getSource().getDouble(coordinates);
+			return getSource().getAsDouble(coordinates);
 		}
 	}
 
 	public void setDouble(double value, long... coordinates) throws MatrixException {
-		getSource().setDouble(value, coordinates);
+		getSource().setAsDouble(value, coordinates);
 	}
 
 }

@@ -40,7 +40,7 @@ public class IndexOfMin extends AbstractDoubleCalculation {
 		switch (getDimension()) {
 		case ROW:
 			for (long r = getSource().getSize()[ROW] - 1; r != -1; r--) {
-				double v = getSource().getDouble(r, coordinates[COLUMN]);
+				double v = getSource().getAsDouble(r, coordinates[COLUMN]);
 				if (v < min) {
 					min = v;
 					index = r;
@@ -49,7 +49,7 @@ public class IndexOfMin extends AbstractDoubleCalculation {
 			return index;
 		case COLUMN:
 			for (long c = getSource().getSize()[COLUMN] - 1; c != -1; c--) {
-				double v = getSource().getDouble(coordinates[ROW], c);
+				double v = getSource().getAsDouble(coordinates[ROW], c);
 				if (v < min) {
 					min = v;
 					index = c;

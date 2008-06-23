@@ -46,11 +46,11 @@ public class Center extends AbstractDoubleCalculation {
 		}
 		switch (getDimension()) {
 		case ALL:
-			return getSource().getDouble(coordinates) - mean.getDouble(0, 0);
+			return getSource().getAsDouble(coordinates) - mean.getAsDouble(0, 0);
 		case ROW:
-			return getSource().getDouble(coordinates) - mean.getDouble(0, coordinates[COLUMN]);
+			return getSource().getAsDouble(coordinates) - mean.getAsDouble(0, coordinates[COLUMN]);
 		case COLUMN:
-			return getSource().getDouble(coordinates) - mean.getDouble(coordinates[ROW], 0);
+			return getSource().getAsDouble(coordinates) - mean.getAsDouble(coordinates[ROW], 0);
 		}
 		return Double.NaN;
 	}

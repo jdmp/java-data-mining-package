@@ -63,7 +63,7 @@ public abstract class AbstractStringCalculation extends AbstractGenericCalculati
 					"Cannot change Matrix size. Use calc(Ret.NEW) or calc(Ret.LINK) instead.");
 		}
 		for (long[] c : getSource().allCoordinates()) {
-			getSource().setString(getString(c), c);
+			getSource().setAsString(getString(c), c);
 		}
 		return getSource();
 	}
@@ -72,7 +72,7 @@ public abstract class AbstractStringCalculation extends AbstractGenericCalculati
 		Matrix result = MatrixFactory.zeros(getEntryType(), getSize());
 		// TODO: copy annotation
 		for (long[] c : result.allCoordinates()) {
-			result.setString(getString(c), c);
+			result.setAsString(getString(c), c);
 		}
 		return result;
 	}

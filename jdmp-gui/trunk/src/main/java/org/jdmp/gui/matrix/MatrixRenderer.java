@@ -237,7 +237,7 @@ public class MatrixRenderer extends DefaultTableCellRenderer {
 
 			for (int col = 0; col < cols; col += xStepSize) {
 				for (int row = 0; row < rows; row += yStepSize) {
-					bg.setColor(ColorUtil.fromDouble(matrix.getDouble(row, col)));
+					bg.setColor(ColorUtil.fromDouble(matrix.getAsDouble(row, col)));
 					bg.fillRect(col / xStepSize, row / yStepSize, 1, 1);
 				}
 			}
@@ -247,7 +247,7 @@ public class MatrixRenderer extends DefaultTableCellRenderer {
 				g2d.setColor(ColorUtil.contrastBW(bg.getColor()));
 				GraphicsUtil.drawString(g2d, width / 2.0, height / 2.0 - 1.0,
 						GraphicsUtil.ALIGNCENTER, GraphicsUtil.ALIGNCENTER, StringUtil
-								.format(matrix.getDouble(0, 0)));
+								.format(matrix.getAsDouble(0, 0)));
 			}
 		} catch (Exception e) {
 			logger.log(Level.WARNING, "error painting matrix", e);
@@ -282,7 +282,7 @@ public class MatrixRenderer extends DefaultTableCellRenderer {
 			int y = 0;
 
 			for (int i = 0; i < valueCount; i++) {
-				bg.setColor(ColorUtil.fromDouble(matrix.getDouble(i % matrix.getRowCount(), i
+				bg.setColor(ColorUtil.fromDouble(matrix.getAsDouble(i % matrix.getRowCount(), i
 						/ matrix.getRowCount())));
 				bg.fillRect(x / xStepSize, y / yStepSize, 1, 1);
 				x++;
@@ -298,7 +298,7 @@ public class MatrixRenderer extends DefaultTableCellRenderer {
 				g2d.setColor(ColorUtil.contrastBW(bg.getColor()));
 				GraphicsUtil.drawString(g2d, width / 2.0, height / 2.0 - 1.0,
 						GraphicsUtil.ALIGNCENTER, GraphicsUtil.ALIGNCENTER, StringUtil
-								.format(matrix.getDouble(0, 0)));
+								.format(matrix.getAsDouble(0, 0)));
 			}
 		} catch (Exception e) {
 			logger.log(Level.WARNING, "error painting matrix", e);
@@ -333,7 +333,7 @@ public class MatrixRenderer extends DefaultTableCellRenderer {
 
 			for (int col = 0; col < cols; col += xStepSize) {
 				for (int row = 0; row < rows; row += yStepSize) {
-					bg.setColor(ColorUtil.fromDouble(matrix.getDouble(row, col)));
+					bg.setColor(ColorUtil.fromDouble(matrix.getAsDouble(row, col)));
 					bg.fillRect(row / yStepSize, col / xStepSize, 1, 1);
 				}
 			}
@@ -344,7 +344,7 @@ public class MatrixRenderer extends DefaultTableCellRenderer {
 				g2d.setColor(ColorUtil.contrastBW(bg.getColor()));
 				GraphicsUtil.drawString(g2d, width / 2.0, height / 2.0 - 1.0,
 						GraphicsUtil.ALIGNCENTER, GraphicsUtil.ALIGNCENTER, StringUtil
-								.format(matrix.getDouble(0, 0)));
+								.format(matrix.getAsDouble(0, 0)));
 			}
 		} catch (Exception e) {
 			logger.log(Level.WARNING, "error painting matrix", e);

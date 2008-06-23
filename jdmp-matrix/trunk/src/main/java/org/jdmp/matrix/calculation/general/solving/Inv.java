@@ -61,7 +61,7 @@ public class Inv extends AbstractDoubleCalculation {
 				throw new MatrixException(e);
 			}
 		}
-		return inv.getDouble(coordinates);
+		return inv.getAsDouble(coordinates);
 	}
 
 	@Override

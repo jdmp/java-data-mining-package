@@ -35,7 +35,7 @@ public class LogisticFunction extends AbstractDoubleCalculation {
 	}
 
 	public double getDouble(long... coordinates) throws MatrixException {
-		return 1.0 / (Math.exp(-getSource().getDouble(coordinates)) + 1);
+		return 1.0 / (Math.exp(-getSource().getAsDouble(coordinates)) + 1);
 	}
 
 }

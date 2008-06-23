@@ -36,7 +36,7 @@ public abstract class DataSetFactory {
 			Matrix input = MatrixFactory.zeros(1, inputLength);
 			for (int i = 0; i < inputLength; i++) {
 				q = henon(q1, q2);
-				input.setDouble(q / 2, 0, i);
+				input.setAsDouble(q / 2, 0, i);
 				q2 = q1;
 				q1 = q;
 			}
@@ -44,7 +44,7 @@ public abstract class DataSetFactory {
 			Matrix target = MatrixFactory.zeros(1, predictionLength);
 			for (int i = 0; i < predictionLength; i++) {
 				q = henon(q1, q2);
-				target.setDouble(q / 2, 0, i);
+				target.setAsDouble(q / 2, 0, i);
 				q2 = q1;
 				q1 = q;
 			}
@@ -86,13 +86,13 @@ public abstract class DataSetFactory {
 			Matrix input = MatrixFactory.zeros(1, inputLength);
 			for (int i = 0; i < inputLength; i++) {
 				x = r * x * (1 - x);
-				input.setDouble(x, 0, i);
+				input.setAsDouble(x, 0, i);
 			}
 
 			Matrix target = MatrixFactory.zeros(1, predictionLength);
 			for (int i = 0; i < predictionLength; i++) {
 				x = r * x * (1 - x);
-				target.setDouble(x, 0, i);
+				target.setAsDouble(x, 0, i);
 			}
 
 			Sample s = new DefaultSample("Sample " + si);

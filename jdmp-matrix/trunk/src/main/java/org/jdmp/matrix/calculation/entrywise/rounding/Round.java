@@ -37,13 +37,13 @@ public class Round extends AbstractDoubleCalculation {
 
 	@Override
 	public double getDouble(long... coordinates) throws MatrixException {
-		return Math.round(getSource().getDouble(coordinates));
+		return Math.round(getSource().getAsDouble(coordinates));
 	}
 
 	public static Matrix calcNew(Matrix source) throws MatrixException {
 		Matrix ret = MatrixFactory.zeros(source.getSize());
 		for (long[] c : source.availableCoordinates()) {
-			ret.setDouble(Math.round(source.getDouble(c)), c);
+			ret.setAsDouble(Math.round(source.getAsDouble(c)), c);
 		}
 		return ret;
 	}

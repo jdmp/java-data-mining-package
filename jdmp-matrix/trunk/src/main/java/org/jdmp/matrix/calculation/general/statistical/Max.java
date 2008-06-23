@@ -39,7 +39,7 @@ public class Max extends AbstractDoubleCalculation {
 		switch (getDimension()) {
 		case ROW:
 			for (long r = getSource().getSize()[ROW] - 1; r != -1; r--) {
-				double v = getSource().getDouble(r, coordinates[COLUMN]);
+				double v = getSource().getAsDouble(r, coordinates[COLUMN]);
 				if (v > max) {
 					max = v;
 				}
@@ -47,7 +47,7 @@ public class Max extends AbstractDoubleCalculation {
 			return max;
 		case COLUMN:
 			for (long c = getSource().getSize()[COLUMN] - 1; c != -1; c--) {
-				double v = getSource().getDouble(coordinates[ROW], c);
+				double v = getSource().getAsDouble(coordinates[ROW], c);
 				if (v > max) {
 					max = v;
 				}
@@ -56,7 +56,7 @@ public class Max extends AbstractDoubleCalculation {
 		case ALL:
 			for (long r = getSource().getSize()[ROW] - 1; r != -1; r--) {
 				for (long c = getSource().getSize()[COLUMN] - 1; c != -1; c--) {
-					double v = getSource().getDouble(r, c);
+					double v = getSource().getAsDouble(r, c);
 					if (v > max) {
 						max = v;
 					}
@@ -81,7 +81,7 @@ public class Max extends AbstractDoubleCalculation {
 		double max = -Double.MAX_VALUE;
 		double v = 0.0;
 		for (long[] c : m.availableCoordinates()) {
-			max = (v = m.getDouble(c)) > max ? v : max;
+			max = (v = m.getAsDouble(c)) > max ? v : max;
 		}
 		return max;
 	}

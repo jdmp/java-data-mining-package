@@ -43,8 +43,8 @@ public class PairedTTest extends AbstractDoubleCalculation {
 			double[] sample1 = new double[(int) getSource().getRowCount()];
 			double[] sample2 = new double[(int) getSource().getRowCount()];
 			for (int r = 0; r < getSource().getRowCount(); r++) {
-				sample1[r] = getSource().getDouble(r, var1);
-				sample2[r] = getSource().getDouble(r, var2);
+				sample1[r] = getSource().getAsDouble(r, var1);
+				sample2[r] = getSource().getAsDouble(r, var2);
 			}
 			double pValue = TestUtils.pairedTTest(sample1, sample2);
 			return pValue;

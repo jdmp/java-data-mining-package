@@ -37,13 +37,13 @@ public class Cos extends AbstractDoubleCalculation {
 
 	@Override
 	public double getDouble(long... coordinates) throws MatrixException {
-		return Math.cos(getSource().getDouble(coordinates));
+		return Math.cos(getSource().getAsDouble(coordinates));
 	}
 
 	public static Matrix calc(Matrix source) throws MatrixException {
 		Matrix ret = MatrixFactory.zeros(source.getSize());
 		for (long[] c : source.availableCoordinates()) {
-			ret.setDouble(Math.cos(source.getDouble(c)), c);
+			ret.setAsDouble(Math.cos(source.getAsDouble(c)), c);
 		}
 		return ret;
 	}

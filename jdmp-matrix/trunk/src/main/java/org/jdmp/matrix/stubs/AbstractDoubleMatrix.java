@@ -30,11 +30,11 @@ import org.jdmp.matrix.util.MathUtil;
 public abstract class AbstractDoubleMatrix extends AbstractGenericMatrix<Double> implements DoubleMatrix {
 
 	public final Double getObject(long... coordinates) throws MatrixException {
-		return getDouble(coordinates);
+		return getAsDouble(coordinates);
 	}
 
 	public final void setObject(Object o, long... coordinates) throws MatrixException {
-		setDouble(MathUtil.getDouble(o), coordinates);
+		setAsDouble(MathUtil.getDouble(o), coordinates);
 	}
 
 	public final EntryType getEntryType() {

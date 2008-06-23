@@ -32,19 +32,19 @@ public abstract class AbstractStringMatrix extends AbstractGenericMatrix<String>
 		StringMatrix {
 
 	public final String getObject(long... coordinates) throws MatrixException {
-		return getString(coordinates);
+		return getAsString(coordinates);
 	}
 
 	public final void setObject(Object o, long... coordinates) throws MatrixException {
-		setString(StringUtil.convert(o), coordinates);
+		setAsString(StringUtil.convert(o), coordinates);
 	}
 
-	public final double getDouble(long... coordinates) {
-		return MathUtil.getDouble(getString(coordinates));
+	public final double getAsDouble(long... coordinates) {
+		return MathUtil.getDouble(getAsString(coordinates));
 	}
 
-	public final void setDouble(double value, long... coordinates) throws MatrixException {
-		setString("" + value, coordinates);
+	public final void setAsDouble(double value, long... coordinates) throws MatrixException {
+		setAsString("" + value, coordinates);
 	}
 
 	public final EntryType getEntryType() {

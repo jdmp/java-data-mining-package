@@ -24,7 +24,7 @@ public class ColtDenseDoubleMatrix2D extends AbstractDenseDoubleMatrix2D impleme
 	public ColtDenseDoubleMatrix2D(Matrix source) throws MatrixException {
 		this(source.getSize());
 		for (long[] c : source.availableCoordinates()) {
-			setDouble(source.getDouble(c), c);
+			setAsDouble(source.getAsDouble(c), c);
 		}
 	}
 

@@ -41,13 +41,13 @@ public class Power extends AbstractDoubleCalculation {
 
 	@Override
 	public double getDouble(long... coordinates) throws MatrixException {
-		return Math.pow(getSource().getDouble(coordinates), getSources()[1].getDouble(coordinates));
+		return Math.pow(getSource().getAsDouble(coordinates), getSources()[1].getAsDouble(coordinates));
 	}
 
 	public static Matrix calc(Matrix source, Matrix power) throws MatrixException {
 		Matrix ret = MatrixFactory.zeros(source.getSize());
 		for (long[] c : source.availableCoordinates()) {
-			ret.setDouble(Math.pow(source.getDouble(c), power.getDouble(c)), c);
+			ret.setAsDouble(Math.pow(source.getAsDouble(c), power.getAsDouble(c)), c);
 		}
 		return ret;
 	}
@@ -55,7 +55,7 @@ public class Power extends AbstractDoubleCalculation {
 	public static Matrix calc(Matrix source, double power) throws MatrixException {
 		Matrix ret = MatrixFactory.zeros(source.getSize());
 		for (long[] c : source.availableCoordinates()) {
-			ret.setDouble(Math.pow(source.getDouble(c), power), c);
+			ret.setAsDouble(Math.pow(source.getAsDouble(c), power), c);
 		}
 		return ret;
 	}

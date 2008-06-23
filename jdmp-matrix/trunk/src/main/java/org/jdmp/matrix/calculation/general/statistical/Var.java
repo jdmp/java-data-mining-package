@@ -59,23 +59,23 @@ public class Var extends AbstractDoubleCalculation {
 			switch (getDimension()) {
 			case ROW:
 				for (long r = getSource().getSize()[ROW] - 1; r != -1; r--) {
-					sum += Math.pow(MathUtil.ignoreNaN(getSource().getDouble(r, coordinates[COLUMN]))
-							- mean.getDouble(0, coordinates[COLUMN]), 2.0);
+					sum += Math.pow(MathUtil.ignoreNaN(getSource().getAsDouble(r, coordinates[COLUMN]))
+							- mean.getAsDouble(0, coordinates[COLUMN]), 2.0);
 				}
-				return sum / (getSource().getRowCount() - missingCount.getDouble(0, coordinates[COLUMN]));
+				return sum / (getSource().getRowCount() - missingCount.getAsDouble(0, coordinates[COLUMN]));
 			case COLUMN:
 				for (long c = getSource().getSize()[COLUMN] - 1; c != -1; c--) {
-					sum += Math.pow(MathUtil.ignoreNaN(getSource().getDouble(coordinates[ROW], c))
-							- mean.getDouble(coordinates[ROW], 0), 2.0);
+					sum += Math.pow(MathUtil.ignoreNaN(getSource().getAsDouble(coordinates[ROW], c))
+							- mean.getAsDouble(coordinates[ROW], 0), 2.0);
 				}
-				return sum / (getSource().getColumnCount() - missingCount.getDouble(coordinates[ROW], 0));
+				return sum / (getSource().getColumnCount() - missingCount.getAsDouble(coordinates[ROW], 0));
 			case ALL:
 				for (long r = getSource().getSize()[ROW] - 1; r != -1; r--) {
 					for (long c = getSource().getSize()[COLUMN] - 1; c != -1; c--) {
-						sum += Math.pow(MathUtil.ignoreNaN(getSource().getDouble(r, c)) - mean.getDouble(0, 0), 2.0);
+						sum += Math.pow(MathUtil.ignoreNaN(getSource().getAsDouble(r, c)) - mean.getAsDouble(0, 0), 2.0);
 					}
 				}
-				return sum / (Coordinates.product(getSource().getSize()) - missingCount.getDouble(0, 0));
+				return sum / (Coordinates.product(getSource().getSize()) - missingCount.getAsDouble(0, 0));
 			default:
 				return 0.0;
 			}
@@ -83,23 +83,23 @@ public class Var extends AbstractDoubleCalculation {
 			switch (getDimension()) {
 			case ROW:
 				for (long r = getSource().getSize()[ROW] - 1; r != -1; r--) {
-					sum += Math.pow((getSource().getDouble(r, coordinates[COLUMN]))
-							- mean.getDouble(0, coordinates[COLUMN]), 2.0);
+					sum += Math.pow((getSource().getAsDouble(r, coordinates[COLUMN]))
+							- mean.getAsDouble(0, coordinates[COLUMN]), 2.0);
 				}
-				return sum / (getSource().getRowCount() - missingCount.getDouble(0, coordinates[COLUMN]));
+				return sum / (getSource().getRowCount() - missingCount.getAsDouble(0, coordinates[COLUMN]));
 			case COLUMN:
 				for (long c = getSource().getSize()[COLUMN] - 1; c != -1; c--) {
-					sum += Math.pow((getSource().getDouble(coordinates[ROW], c)) - mean.getDouble(coordinates[ROW], 0),
+					sum += Math.pow((getSource().getAsDouble(coordinates[ROW], c)) - mean.getAsDouble(coordinates[ROW], 0),
 							2.0);
 				}
-				return sum / (getSource().getColumnCount() - missingCount.getDouble(coordinates[ROW], 0));
+				return sum / (getSource().getColumnCount() - missingCount.getAsDouble(coordinates[ROW], 0));
 			case ALL:
 				for (long r = getSource().getSize()[ROW] - 1; r != -1; r--) {
 					for (long c = getSource().getSize()[COLUMN] - 1; c != -1; c--) {
-						sum += Math.pow((getSource().getDouble(r, c)) - mean.getDouble(0, 0), 2.0);
+						sum += Math.pow((getSource().getAsDouble(r, c)) - mean.getAsDouble(0, 0), 2.0);
 					}
 				}
-				return sum / (Coordinates.product(getSource().getSize()) - missingCount.getDouble(0, 0));
+				return sum / (Coordinates.product(getSource().getSize()) - missingCount.getAsDouble(0, 0));
 			default:
 				return 0.0;
 			}

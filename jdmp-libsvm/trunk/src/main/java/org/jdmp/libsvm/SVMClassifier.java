@@ -90,7 +90,7 @@ public class SVMClassifier extends AbstractClassifier {
 			for (int j = 0; j < columnCount; j++) {
 				prob.x[i][j] = new svm_node();
 				prob.x[i][j].index = j + 1;
-				prob.x[i][j].value = input.getDouble(0, j);
+				prob.x[i][j].value = input.getAsDouble(0, j);
 			}
 		}
 
@@ -129,7 +129,7 @@ public class SVMClassifier extends AbstractClassifier {
 		for (int j = 0; j < m; j++) {
 			x[j] = new svm_node();
 			x[j].index = j + 1;
-			x[j].value = input.getDouble(0, j);
+			x[j].value = input.getAsDouble(0, j);
 		}
 
 		svm.svm_predict_probability(model, x, prob_estimates);
@@ -138,7 +138,7 @@ public class SVMClassifier extends AbstractClassifier {
 		svm.svm_get_labels(model, label);
 
 		for (int i = 0; i < label.length; i++) {
-			output.setDouble(prob_estimates[i], 0, label[i]);
+			output.setAsDouble(prob_estimates[i], 0, label[i]);
 		}
 
 		return output;

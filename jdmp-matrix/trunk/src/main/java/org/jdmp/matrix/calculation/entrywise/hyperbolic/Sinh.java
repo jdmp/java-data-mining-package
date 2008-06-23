@@ -37,13 +37,13 @@ public class Sinh extends AbstractDoubleCalculation {
 
 	@Override
 	public double getDouble(long... coordinates) throws MatrixException {
-		return Math.sinh(getSource().getDouble(coordinates));
+		return Math.sinh(getSource().getAsDouble(coordinates));
 	}
 
 	public static Matrix calc(Matrix source) throws MatrixException {
 		Matrix ret = MatrixFactory.zeros(source.getSize());
 		for (long[] c : source.availableCoordinates()) {
-			ret.setDouble(Math.sinh(source.getDouble(c)), c);
+			ret.setAsDouble(Math.sinh(source.getAsDouble(c)), c);
 		}
 		return ret;
 	}

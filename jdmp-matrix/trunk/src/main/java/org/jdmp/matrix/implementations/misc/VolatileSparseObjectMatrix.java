@@ -43,7 +43,7 @@ public class VolatileSparseObjectMatrix extends AbstractSparseObjectMatrix {
 	public VolatileSparseObjectMatrix(Matrix m) throws MatrixException {
 		this.size = Coordinates.copyOf(m.getSize());
 		for (long[] c : m.allCoordinates()) {
-			setDouble(m.getDouble(c), c);
+			setAsDouble(m.getAsDouble(c), c);
 		}
 	}
 

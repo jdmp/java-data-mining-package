@@ -101,11 +101,11 @@ public class DefaultSparseGenericMatrix<A> extends AbstractSparseGenericMatrix<A
 		return values.containsKey(new Coordinates(coordinates));
 	}
 
-	public double getDouble(long... coordinates) throws MatrixException {
+	public double getAsDouble(long... coordinates) throws MatrixException {
 		return MathUtil.getDouble(getObject(coordinates));
 	}
 
-	public void setDouble(double value, long... coordinates) throws MatrixException {
+	public void setAsDouble(double value, long... coordinates) throws MatrixException {
 		setObject(value, coordinates);
 	}
 

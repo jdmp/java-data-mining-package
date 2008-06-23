@@ -51,14 +51,14 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 			// for all features
 			logs[i] = Math.log(classDists.getProbability(i));
 			for (int j = 0; j < input.getColumnCount(); j++) {
-				int val = (int) input.getDouble(0, j);
+				int val = (int) input.getAsDouble(0, j);
 				logs[i] += Math.log(dists[j][i].getProbability((double) val));
 			}
 		}
 		double[] probs = MathUtil.logToProbs(logs);
 		Matrix m = MatrixFactory.zeros(1, 2);
-		m.setDouble(probs[0], 0, 1);
-		m.setDouble(probs[1], 0, 0);
+		m.setAsDouble(probs[0], 0, 1);
+		m.setAsDouble(probs[1], 0, 0);
 		return m;
 		// Matrix r=MatrixFactory.fromArray(probs).transpose();
 	}
@@ -83,7 +83,7 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 
 		for (int i = 0; i < featureCount; i++) {
 			for (int j = 0; j < classCount; j++) {
-				dists[i][j] = new DiscreteDensityEstimator((int) max.getDouble(0, i) + 1, true);
+				dists[i][j] = new DiscreteDensityEstimator((int) max.getAsDouble(0, i) + 1, true);
 			}
 		}
 
@@ -100,7 +100,7 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 
 			double weight = 1.0;
 
-			int outputVal = (int) sampleTarget.getDouble(0, 0);
+			int outputVal = (int) sampleTarget.getAsDouble(0, 0);
 
 			// if (sampleInput.isSparse()) {
 			// long count = 0;
@@ -114,7 +114,7 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 			// dists[0][outputVal].addValue(diff, weight * diff);
 			// } else {
 			for (int j = 0; j < sampleInput.getColumnCount(); j++) {
-				int inputVal = (int) sampleInput.getDouble(0, j);
+				int inputVal = (int) sampleInput.getAsDouble(0, j);
 				dists[j][outputVal].addValue((double) inputVal, weight);
 			}
 			// }
@@ -142,10 +142,10 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 			long count = 0;
 			for (long[] sampleId : feature.availableCoordinates()) {
 				count++;
-				int inputVal = (int) feature.getDouble(sampleId[ROW], featureId);
+				int inputVal = (int) feature.getAsDouble(sampleId[ROW], featureId);
 
 				for (int classId = 0; classId < classCount; classId++) {
-					int outputVal = (int) dataSetTarget.getDouble(sampleId[ROW], classId);
+					int outputVal = (int) dataSetTarget.getAsDouble(sampleId[ROW], classId);
 					dists[featureId][outputVal].addValue((double) inputVal, weight);
 				}
 

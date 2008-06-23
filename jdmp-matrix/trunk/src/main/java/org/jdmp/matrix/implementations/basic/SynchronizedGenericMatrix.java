@@ -48,8 +48,8 @@ public class SynchronizedGenericMatrix<A> extends AbstractGenericMatrix<A> imple
 		return matrix.getSize();
 	}
 
-	public synchronized double getDouble(long... coordinates) throws MatrixException {
-		return matrix.getDouble(coordinates);
+	public synchronized double getAsDouble(long... coordinates) throws MatrixException {
+		return matrix.getAsDouble(coordinates);
 	}
 
 	@Override
@@ -61,8 +61,8 @@ public class SynchronizedGenericMatrix<A> extends AbstractGenericMatrix<A> imple
 		return matrix.isSparse();
 	}
 
-	public synchronized void setDouble(double value, long... coordinates) throws MatrixException {
-		matrix.setDouble(value, coordinates);
+	public synchronized void setAsDouble(double value, long... coordinates) throws MatrixException {
+		matrix.setAsDouble(value, coordinates);
 	}
 
 

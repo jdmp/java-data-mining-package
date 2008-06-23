@@ -23,8 +23,6 @@
 
 package org.jdmp.matrix;
 
-import java.util.Date;
-
 import org.jdmp.matrix.exceptions.MatrixException;
 
 public interface ShortMatrix extends Matrix {
@@ -38,7 +36,7 @@ public interface ShortMatrix extends Matrix {
 	 * @return a short representation of the entry
 	 * @throws MatrixException
 	 */
-	public short getShort(long... coordinates) throws MatrixException;
+	public short getAsShort(long... coordinates) throws MatrixException;
 
 	/**
 	 * Sets an entry in the matrix to a short value. If the matrix cannot store
@@ -50,15 +48,15 @@ public interface ShortMatrix extends Matrix {
 	 *            location of the entry
 	 * @throws MatrixException
 	 */
-	public void setShort(short value, long... coordinates) throws MatrixException;
+	public void setAsShort(short value, long... coordinates) throws MatrixException;
 
 	/**
-	 * Converts the content of a matrix into a 2-dimensional array of Date
+	 * Converts the content of a matrix into a 2-dimensional array of short
 	 * values.
 	 * 
-	 * @return Date array with matrix entries
+	 * @return short array with matrix entries
 	 * @throws MatrixException
 	 */
-	public Date[][] toDateArray() throws MatrixException;
+	public short[][] toShortArray() throws MatrixException;
 
 }

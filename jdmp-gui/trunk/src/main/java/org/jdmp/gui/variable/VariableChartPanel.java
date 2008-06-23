@@ -326,8 +326,8 @@ public class VariableChartPanel extends ChartPanel implements CanBeRepainted, Ca
 		for (int j = 0; j < variable.getVariable().getMatrixList().size(); j += stepSize) {
 			text = null;
 			Matrix m = variable.getVariable().getMatrixList().get(j);
-			double x = m.getDouble(0, 0);
-			double y = m.getDouble(0, 1);
+			double x = m.getAsDouble(0, 0);
+			double y = m.getAsDouble(0, 1);
 			ts.add(x, y);
 
 			if (isShowLabels() && isShowValues()) {
@@ -365,7 +365,7 @@ public class VariableChartPanel extends ChartPanel implements CanBeRepainted, Ca
 				text = null;
 				Matrix m = variable.getVariable().getMatrixList().get(j);
 				double x = j;
-				double y = m.getDouble(i % m.getRowCount(), i / m.getRowCount());
+				double y = m.getAsDouble(i % m.getRowCount(), i / m.getRowCount());
 				// ts.addOrUpdate(x, y);
 
 				if (isShowLabels() && isShowValues()) {
@@ -504,7 +504,7 @@ public class VariableChartPanel extends ChartPanel implements CanBeRepainted, Ca
 
 		if (isXyPlot()) {
 			CircleDrawer cd = new CircleDrawer(Color.red, new BasicStroke(1.0f));
-			circle = new XYDrawableAnnotation(m.getDouble(0, 0), m.getDouble(1, 0), 11, 11, cd);
+			circle = new XYDrawableAnnotation(m.getAsDouble(0, 0), m.getAsDouble(1, 0), 11, 11, cd);
 			plot.addAnnotation(circle);
 		} else {
 			ValueMarker vm = new ValueMarker(index);

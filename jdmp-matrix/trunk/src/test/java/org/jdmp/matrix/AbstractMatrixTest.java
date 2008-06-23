@@ -47,11 +47,11 @@ public abstract class AbstractMatrixTest extends TestCase {
 
 	public Matrix getTestMatrix() throws Exception {
 		Matrix m = createMatrix(3, 3);
-		m.setDouble(1.0, 0, 0);
-		m.setDouble(3.0, 1, 0);
-		m.setDouble(4.0, 1, 1);
-		m.setDouble(2.0, 2, 1);
-		m.setDouble(-2.0, 1, 2);
+		m.setAsDouble(1.0, 0, 0);
+		m.setAsDouble(3.0, 1, 0);
+		m.setAsDouble(4.0, 1, 1);
+		m.setAsDouble(2.0, 2, 1);
+		m.setAsDouble(-2.0, 1, 2);
 		return m;
 	}
 
@@ -172,10 +172,10 @@ public abstract class AbstractMatrixTest extends TestCase {
 		assertTrue(getLabel(), Coordinates.equals(c, new long[] { 1, 1 }));
 
 		m = createMatrix(2, 2);
-		m.setDouble(Double.NaN, 0, 0);
-		m.setDouble(Double.NaN, 0, 1);
-		m.setDouble(Double.NaN, 1, 0);
-		m.setDouble(Double.NaN, 1, 1);
+		m.setAsDouble(Double.NaN, 0, 0);
+		m.setAsDouble(Double.NaN, 0, 1);
+		m.setAsDouble(Double.NaN, 1, 0);
+		m.setAsDouble(Double.NaN, 1, 1);
 		c = m.getCoordinatesOfMaximum();
 		assertTrue(getLabel(), Coordinates.equals(c, new long[] { -1, -1 }));
 	}
@@ -186,10 +186,10 @@ public abstract class AbstractMatrixTest extends TestCase {
 		assertTrue(getLabel(), Coordinates.equals(c, new long[] { 1, 2 }));
 
 		m = createMatrix(2, 2);
-		m.setDouble(Double.NaN, 0, 0);
-		m.setDouble(Double.NaN, 0, 1);
-		m.setDouble(Double.NaN, 1, 0);
-		m.setDouble(Double.NaN, 1, 1);
+		m.setAsDouble(Double.NaN, 0, 0);
+		m.setAsDouble(Double.NaN, 0, 1);
+		m.setAsDouble(Double.NaN, 1, 0);
+		m.setAsDouble(Double.NaN, 1, 1);
 		c = m.getCoordinatesOfMaximum();
 		assertTrue(getLabel(), Coordinates.equals(c, new long[] { -1, -1 }));
 	}
@@ -231,10 +231,10 @@ public abstract class AbstractMatrixTest extends TestCase {
 
 	public void testClone() throws Exception {
 		Matrix m = createMatrix(2, 2);
-		m.setDouble(1.0, 0, 0);
-		m.setDouble(2.0, 0, 1);
-		m.setDouble(3.0, 1, 0);
-		m.setDouble(4.0, 1, 1);
+		m.setAsDouble(1.0, 0, 0);
+		m.setAsDouble(2.0, 0, 1);
+		m.setAsDouble(3.0, 1, 0);
+		m.setAsDouble(4.0, 1, 1);
 		m.setMatrixAnnotation("annotation");
 		m.setAxisAnnotation(Matrix.ROW, "row");
 		m.setAxisAnnotation(Matrix.COLUMN, "column");
@@ -249,10 +249,10 @@ public abstract class AbstractMatrixTest extends TestCase {
 
 	public void testAnnotation() throws Exception {
 		Matrix m = createMatrix(2, 2);
-		m.setDouble(1.0, 0, 0);
-		m.setDouble(2.0, 0, 1);
-		m.setDouble(3.0, 1, 0);
-		m.setDouble(4.0, 1, 1);
+		m.setAsDouble(1.0, 0, 0);
+		m.setAsDouble(2.0, 0, 1);
+		m.setAsDouble(3.0, 1, 0);
+		m.setAsDouble(4.0, 1, 1);
 		m.setMatrixAnnotation("annotation");
 		m.setAxisAnnotation(Matrix.ROW, "row");
 		m.setAxisAnnotation(Matrix.COLUMN, "column");
@@ -272,60 +272,60 @@ public abstract class AbstractMatrixTest extends TestCase {
 	public void testCountMissingValues() throws Exception {
 		Matrix m = createMatrix(4, 4);
 		m = m.zeros();
-		m.setDouble(Double.NaN, 1, 0);
-		m.setDouble(Double.NaN, 3, 0);
-		m.setDouble(Double.NaN, 2, 1);
-		m.setDouble(Double.NaN, 1, 1);
-		m.setDouble(Double.NaN, 3, 1);
-		m.setDouble(Double.NaN, 1, 2);
+		m.setAsDouble(Double.NaN, 1, 0);
+		m.setAsDouble(Double.NaN, 3, 0);
+		m.setAsDouble(Double.NaN, 2, 1);
+		m.setAsDouble(Double.NaN, 1, 1);
+		m.setAsDouble(Double.NaN, 3, 1);
+		m.setAsDouble(Double.NaN, 1, 2);
 
 		Matrix m1 = m.countMissing(Ret.NEW, Matrix.ROW);
 		Matrix m2 = m.countMissing(Ret.NEW, Matrix.COLUMN);
 		Matrix m3 = m.countMissing(Ret.NEW, Matrix.ALL);
 
-		assertEquals(getLabel(), 2.0, m1.getDouble(0, 0));
-		assertEquals(getLabel(), 3.0, m1.getDouble(0, 1));
-		assertEquals(getLabel(), 1.0, m1.getDouble(0, 2));
-		assertEquals(getLabel(), 0.0, m1.getDouble(0, 3));
+		assertEquals(getLabel(), 2.0, m1.getAsDouble(0, 0));
+		assertEquals(getLabel(), 3.0, m1.getAsDouble(0, 1));
+		assertEquals(getLabel(), 1.0, m1.getAsDouble(0, 2));
+		assertEquals(getLabel(), 0.0, m1.getAsDouble(0, 3));
 
-		assertEquals(getLabel(), 0.0, m2.getDouble(0, 0));
-		assertEquals(getLabel(), 3.0, m2.getDouble(1, 0));
-		assertEquals(getLabel(), 1.0, m2.getDouble(2, 0));
-		assertEquals(getLabel(), 2.0, m2.getDouble(3, 0));
+		assertEquals(getLabel(), 0.0, m2.getAsDouble(0, 0));
+		assertEquals(getLabel(), 3.0, m2.getAsDouble(1, 0));
+		assertEquals(getLabel(), 1.0, m2.getAsDouble(2, 0));
+		assertEquals(getLabel(), 2.0, m2.getAsDouble(3, 0));
 
-		assertEquals(getLabel(), 6.0, m3.getDouble(0, 0));
+		assertEquals(getLabel(), 6.0, m3.getAsDouble(0, 0));
 	}
 
 	public void testLink() throws Exception {
 		Matrix m = createMatrix(2, 2);
-		m.setDouble(1.0, 0, 0);
-		m.setDouble(2.0, 0, 1);
-		m.setDouble(3.0, 1, 0);
-		m.setDouble(4.0, 1, 1);
+		m.setAsDouble(1.0, 0, 0);
+		m.setAsDouble(2.0, 0, 1);
+		m.setAsDouble(3.0, 1, 0);
+		m.setAsDouble(4.0, 1, 1);
 		Matrix m2 = m.link();
 		assertEquals(getLabel(), m, m2);
 
-		m.setDouble(5.0, 0, 0);
-		m.setDouble(6.0, 0, 1);
-		m.setDouble(3.0, 1, 0);
-		m.setDouble(2.0, 1, 1);
+		m.setAsDouble(5.0, 0, 0);
+		m.setAsDouble(6.0, 0, 1);
+		m.setAsDouble(3.0, 1, 0);
+		m.setAsDouble(2.0, 1, 1);
 
 		assertEquals(getLabel(), m, m2);
 
-		m2.setDouble(3.0, 0, 0);
-		m2.setDouble(2.0, 0, 1);
-		m2.setDouble(1.0, 1, 0);
-		m2.setDouble(-9.0, 1, 1);
+		m2.setAsDouble(3.0, 0, 0);
+		m2.setAsDouble(2.0, 0, 1);
+		m2.setAsDouble(1.0, 1, 0);
+		m2.setAsDouble(-9.0, 1, 1);
 
 		assertEquals(getLabel(), m, m2);
 	}
 
 	public void testSerialize() throws Exception {
 		Matrix m = createMatrix(2, 2);
-		m.setDouble(1.0, 0, 0);
-		m.setDouble(2.0, 0, 1);
-		m.setDouble(3.0, 1, 0);
-		m.setDouble(4.0, 1, 1);
+		m.setAsDouble(1.0, 0, 0);
+		m.setAsDouble(2.0, 0, 1);
+		m.setAsDouble(3.0, 1, 0);
+		m.setAsDouble(4.0, 1, 1);
 		byte[] data = SerializationUtil.serialize(m);
 		Matrix m2 = (Matrix) SerializationUtil.deserialize(data);
 		if (m2.isTransient()) {
@@ -338,10 +338,10 @@ public abstract class AbstractMatrixTest extends TestCase {
 
 	public void testToDoubleArray() throws Exception {
 		Matrix m = createMatrix(2, 2);
-		m.setDouble(1.0, 0, 0);
-		m.setDouble(2.0, 0, 1);
-		m.setDouble(3.0, 1, 0);
-		m.setDouble(4.0, 1, 1);
+		m.setAsDouble(1.0, 0, 0);
+		m.setAsDouble(2.0, 0, 1);
+		m.setAsDouble(3.0, 1, 0);
+		m.setAsDouble(4.0, 1, 1);
 		double[][] values = m.toDoubleArray();
 		assertEquals(getLabel(), 1.0, values[0][0]);
 		assertEquals(getLabel(), 2.0, values[0][1]);
@@ -351,49 +351,49 @@ public abstract class AbstractMatrixTest extends TestCase {
 
 	public void testSetAndGet() throws Exception {
 		Matrix m = createMatrix(2, 2);
-		m.setDouble(1.0, 0, 0);
-		m.setDouble(2.0, 0, 1);
-		m.setDouble(3.0, 1, 0);
-		m.setDouble(4.0, 1, 1);
-		assertEquals(getLabel(), 1.0, m.getDouble(0, 0));
-		assertEquals(getLabel(), 2.0, m.getDouble(0, 1));
-		assertEquals(getLabel(), 3.0, m.getDouble(1, 0));
-		assertEquals(getLabel(), 4.0, m.getDouble(1, 1));
+		m.setAsDouble(1.0, 0, 0);
+		m.setAsDouble(2.0, 0, 1);
+		m.setAsDouble(3.0, 1, 0);
+		m.setAsDouble(4.0, 1, 1);
+		assertEquals(getLabel(), 1.0, m.getAsDouble(0, 0));
+		assertEquals(getLabel(), 2.0, m.getAsDouble(0, 1));
+		assertEquals(getLabel(), 3.0, m.getAsDouble(1, 0));
+		assertEquals(getLabel(), 4.0, m.getAsDouble(1, 1));
 	}
 
 	public void testPlus() throws Exception {
 		Matrix m = createMatrix(2, 2);
-		m.setDouble(1.0, 0, 0);
-		m.setDouble(2.0, 0, 1);
-		m.setDouble(3.0, 1, 0);
-		m.setDouble(4.0, 1, 1);
+		m.setAsDouble(1.0, 0, 0);
+		m.setAsDouble(2.0, 0, 1);
+		m.setAsDouble(3.0, 1, 0);
+		m.setAsDouble(4.0, 1, 1);
 		m = m.plus(1.0);
-		assertEquals(getLabel(), 2.0, m.getDouble(0, 0));
-		assertEquals(getLabel(), 3.0, m.getDouble(0, 1));
-		assertEquals(getLabel(), 4.0, m.getDouble(1, 0));
-		assertEquals(getLabel(), 5.0, m.getDouble(1, 1));
+		assertEquals(getLabel(), 2.0, m.getAsDouble(0, 0));
+		assertEquals(getLabel(), 3.0, m.getAsDouble(0, 1));
+		assertEquals(getLabel(), 4.0, m.getAsDouble(1, 0));
+		assertEquals(getLabel(), 5.0, m.getAsDouble(1, 1));
 	}
 
 	public void testTranspose() throws Exception {
 		Matrix m = createMatrix(2, 2);
-		m.setDouble(1.0, 0, 0);
-		m.setDouble(2.0, 0, 1);
-		m.setDouble(3.0, 1, 0);
-		m.setDouble(4.0, 1, 1);
+		m.setAsDouble(1.0, 0, 0);
+		m.setAsDouble(2.0, 0, 1);
+		m.setAsDouble(3.0, 1, 0);
+		m.setAsDouble(4.0, 1, 1);
 		m = m.transpose();
-		assertEquals(getLabel(), 1.0, m.getDouble(0, 0));
-		assertEquals(getLabel(), 3.0, m.getDouble(0, 1));
-		assertEquals(getLabel(), 2.0, m.getDouble(1, 0));
-		assertEquals(getLabel(), 4.0, m.getDouble(1, 1));
+		assertEquals(getLabel(), 1.0, m.getAsDouble(0, 0));
+		assertEquals(getLabel(), 3.0, m.getAsDouble(0, 1));
+		assertEquals(getLabel(), 2.0, m.getAsDouble(1, 0));
+		assertEquals(getLabel(), 4.0, m.getAsDouble(1, 1));
 	}
 
 	public void testEmpty() throws Exception {
 		Matrix m = createMatrix(2, 2);
 		if (m instanceof AbstractDoubleMatrix) {
-			assertEquals(getLabel(), 0.0, m.getDouble(0, 0));
-			assertEquals(getLabel(), 0.0, m.getDouble(0, 1));
-			assertEquals(getLabel(), 0.0, m.getDouble(1, 0));
-			assertEquals(getLabel(), 0.0, m.getDouble(1, 1));
+			assertEquals(getLabel(), 0.0, m.getAsDouble(0, 0));
+			assertEquals(getLabel(), 0.0, m.getAsDouble(0, 1));
+			assertEquals(getLabel(), 0.0, m.getAsDouble(1, 0));
+			assertEquals(getLabel(), 0.0, m.getAsDouble(1, 1));
 		} else {
 			assertEquals(getLabel(), null, m.getObject(0, 0));
 			assertEquals(getLabel(), null, m.getObject(0, 1));
@@ -404,58 +404,58 @@ public abstract class AbstractMatrixTest extends TestCase {
 
 	public void testMinus() throws Exception {
 		Matrix m = createMatrix(2, 2);
-		m.setDouble(1.0, 0, 0);
-		m.setDouble(2.0, 0, 1);
-		m.setDouble(3.0, 1, 0);
-		m.setDouble(4.0, 1, 1);
+		m.setAsDouble(1.0, 0, 0);
+		m.setAsDouble(2.0, 0, 1);
+		m.setAsDouble(3.0, 1, 0);
+		m.setAsDouble(4.0, 1, 1);
 		m = m.minus(1.0);
-		assertEquals(getLabel(), 0.0, m.getDouble(0, 0));
-		assertEquals(getLabel(), 1.0, m.getDouble(0, 1));
-		assertEquals(getLabel(), 2.0, m.getDouble(1, 0));
-		assertEquals(getLabel(), 3.0, m.getDouble(1, 1));
+		assertEquals(getLabel(), 0.0, m.getAsDouble(0, 0));
+		assertEquals(getLabel(), 1.0, m.getAsDouble(0, 1));
+		assertEquals(getLabel(), 2.0, m.getAsDouble(1, 0));
+		assertEquals(getLabel(), 3.0, m.getAsDouble(1, 1));
 	}
 
 	public void testMultiply() throws Exception {
 		Matrix m1 = createMatrix(2, 2);
-		m1.setDouble(1.0, 0, 0);
-		m1.setDouble(2.0, 0, 1);
-		m1.setDouble(3.0, 1, 0);
-		m1.setDouble(4.0, 1, 1);
+		m1.setAsDouble(1.0, 0, 0);
+		m1.setAsDouble(2.0, 0, 1);
+		m1.setAsDouble(3.0, 1, 0);
+		m1.setAsDouble(4.0, 1, 1);
 		Matrix m2 = createMatrix(2, 2);
-		m2.setDouble(1.0, 0, 0);
-		m2.setDouble(2.0, 0, 1);
-		m2.setDouble(3.0, 1, 0);
-		m2.setDouble(4.0, 1, 1);
+		m2.setAsDouble(1.0, 0, 0);
+		m2.setAsDouble(2.0, 0, 1);
+		m2.setAsDouble(3.0, 1, 0);
+		m2.setAsDouble(4.0, 1, 1);
 		Matrix m3 = m1.mtimes(m2);
-		assertEquals(getLabel(), 7.0, m3.getDouble(0, 0));
-		assertEquals(getLabel(), 10.0, m3.getDouble(0, 1));
-		assertEquals(getLabel(), 15.0, m3.getDouble(1, 0));
-		assertEquals(getLabel(), 22.0, m3.getDouble(1, 1));
+		assertEquals(getLabel(), 7.0, m3.getAsDouble(0, 0));
+		assertEquals(getLabel(), 10.0, m3.getAsDouble(0, 1));
+		assertEquals(getLabel(), 15.0, m3.getAsDouble(1, 0));
+		assertEquals(getLabel(), 22.0, m3.getAsDouble(1, 1));
 	}
 
 	public void testInverse() throws Exception {
 		Matrix m1 = createMatrix(3, 3);
-		m1.setDouble(1.0, 0, 0);
-		m1.setDouble(2.0, 1, 0);
-		m1.setDouble(3.0, 2, 0);
-		m1.setDouble(4.0, 0, 1);
-		m1.setDouble(1.0, 1, 1);
-		m1.setDouble(2.0, 2, 1);
-		m1.setDouble(3.0, 0, 2);
-		m1.setDouble(7.0, 1, 2);
-		m1.setDouble(1.0, 2, 2);
+		m1.setAsDouble(1.0, 0, 0);
+		m1.setAsDouble(2.0, 1, 0);
+		m1.setAsDouble(3.0, 2, 0);
+		m1.setAsDouble(4.0, 0, 1);
+		m1.setAsDouble(1.0, 1, 1);
+		m1.setAsDouble(2.0, 2, 1);
+		m1.setAsDouble(3.0, 0, 2);
+		m1.setAsDouble(7.0, 1, 2);
+		m1.setAsDouble(1.0, 2, 2);
 
 		Matrix m2 = m1.inv();
 
-		assertEquals(getLabel(), -0.1970, m2.getDouble(0, 0), 0.001);
-		assertEquals(getLabel(), 0.2879, m2.getDouble(1, 0), 0.001);
-		assertEquals(getLabel(), 0.0152, m2.getDouble(2, 0), 0.001);
-		assertEquals(getLabel(), 0.0303, m2.getDouble(0, 1), 0.001);
-		assertEquals(getLabel(), -0.1212, m2.getDouble(1, 1), 0.001);
-		assertEquals(getLabel(), 0.1515, m2.getDouble(2, 1), 0.001);
-		assertEquals(getLabel(), 0.3788, m2.getDouble(0, 2), 0.001);
-		assertEquals(getLabel(), -0.0152, m2.getDouble(1, 2), 0.001);
-		assertEquals(getLabel(), -0.1061, m2.getDouble(2, 2), 0.001);
+		assertEquals(getLabel(), -0.1970, m2.getAsDouble(0, 0), 0.001);
+		assertEquals(getLabel(), 0.2879, m2.getAsDouble(1, 0), 0.001);
+		assertEquals(getLabel(), 0.0152, m2.getAsDouble(2, 0), 0.001);
+		assertEquals(getLabel(), 0.0303, m2.getAsDouble(0, 1), 0.001);
+		assertEquals(getLabel(), -0.1212, m2.getAsDouble(1, 1), 0.001);
+		assertEquals(getLabel(), 0.1515, m2.getAsDouble(2, 1), 0.001);
+		assertEquals(getLabel(), 0.3788, m2.getAsDouble(0, 2), 0.001);
+		assertEquals(getLabel(), -0.0152, m2.getAsDouble(1, 2), 0.001);
+		assertEquals(getLabel(), -0.1061, m2.getAsDouble(2, 2), 0.001);
 	}
 
 	public static void main(String[] args) throws MatrixException {

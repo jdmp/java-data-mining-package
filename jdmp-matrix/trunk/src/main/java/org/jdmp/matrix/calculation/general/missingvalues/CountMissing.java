@@ -40,18 +40,18 @@ public class CountMissing extends AbstractDoubleCalculation {
 		switch (getDimension()) {
 		case ROW:
 			for (long r = getSource().getSize()[ROW] - 1; r != -1; r--) {
-				sum += MathUtil.isNaNOrInfinite(getSource().getDouble(r, coordinates[COLUMN])) ? 1 : 0;
+				sum += MathUtil.isNaNOrInfinite(getSource().getAsDouble(r, coordinates[COLUMN])) ? 1 : 0;
 			}
 			return sum;
 		case COLUMN:
 			for (long c = getSource().getSize()[COLUMN] - 1; c != -1; c--) {
-				sum += MathUtil.isNaNOrInfinite(getSource().getDouble(coordinates[ROW], c)) ? 1 : 0;
+				sum += MathUtil.isNaNOrInfinite(getSource().getAsDouble(coordinates[ROW], c)) ? 1 : 0;
 			}
 			return sum;
 		case ALL:
 			for (long r = getSource().getSize()[ROW] - 1; r != -1; r--) {
 				for (long c = getSource().getSize()[COLUMN] - 1; c != -1; c--) {
-					sum += MathUtil.isNaNOrInfinite(getSource().getDouble(r, c)) ? 1 : 0;
+					sum += MathUtil.isNaNOrInfinite(getSource().getAsDouble(r, c)) ? 1 : 0;
 				}
 			}
 			return sum;

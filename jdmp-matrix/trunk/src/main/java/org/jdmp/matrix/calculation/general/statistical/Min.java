@@ -39,7 +39,7 @@ public class Min extends AbstractDoubleCalculation {
 		switch (getDimension()) {
 		case ROW:
 			for (long r = getSource().getSize()[ROW] - 1; r != -1; r--) {
-				double v = getSource().getDouble(r, coordinates[COLUMN]);
+				double v = getSource().getAsDouble(r, coordinates[COLUMN]);
 				if (v < min) {
 					min = v;
 				}
@@ -47,7 +47,7 @@ public class Min extends AbstractDoubleCalculation {
 			return min;
 		case COLUMN:
 			for (long c = getSource().getSize()[COLUMN] - 1; c != -1; c--) {
-				double v = getSource().getDouble(coordinates[ROW], c);
+				double v = getSource().getAsDouble(coordinates[ROW], c);
 				if (v < min) {
 					min = v;
 				}
@@ -56,7 +56,7 @@ public class Min extends AbstractDoubleCalculation {
 		case ALL:
 			for (long r = getSource().getSize()[ROW] - 1; r != -1; r--) {
 				for (long c = getSource().getSize()[COLUMN] - 1; c != -1; c--) {
-					double v = getSource().getDouble(r, c);
+					double v = getSource().getAsDouble(r, c);
 					if (v < min) {
 						min = v;
 					}
@@ -81,7 +81,7 @@ public class Min extends AbstractDoubleCalculation {
 		double min = Double.MAX_VALUE;
 		double v = 0.0;
 		for (long[] c : m.availableCoordinates()) {
-			min = (v = m.getDouble(c)) < min ? v : min;
+			min = (v = m.getAsDouble(c)) < min ? v : min;
 		}
 		return min;
 	}

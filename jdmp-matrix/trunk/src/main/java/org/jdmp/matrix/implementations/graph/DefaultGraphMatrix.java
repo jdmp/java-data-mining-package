@@ -213,12 +213,12 @@ public class DefaultGraphMatrix<N, E> extends AbstractGraphMatrix<N, E> {
 		throw new MatrixException("not implemented!");
 	}
 
-	public double getDouble(long... coordinates) throws MatrixException {
+	public double getAsDouble(long... coordinates) throws MatrixException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	public void setDouble(double value, long... coordinates) throws MatrixException {
+	public void setAsDouble(double value, long... coordinates) throws MatrixException {
 		// TODO Auto-generated method stub
 
 	}

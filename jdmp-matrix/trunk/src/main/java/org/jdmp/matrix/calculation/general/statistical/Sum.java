@@ -46,18 +46,18 @@ public class Sum extends AbstractDoubleCalculation {
 			switch (getDimension()) {
 			case ROW:
 				for (long r = getSource().getSize()[ROW] - 1; r != -1; r--) {
-					sum += MathUtil.ignoreNaN(getSource().getDouble(r, coordinates[COLUMN]));
+					sum += MathUtil.ignoreNaN(getSource().getAsDouble(r, coordinates[COLUMN]));
 				}
 				return sum;
 			case COLUMN:
 				for (long c = getSource().getSize()[COLUMN] - 1; c != -1; c--) {
-					sum += MathUtil.ignoreNaN(getSource().getDouble(coordinates[ROW], c));
+					sum += MathUtil.ignoreNaN(getSource().getAsDouble(coordinates[ROW], c));
 				}
 				return sum;
 			case ALL:
 				for (long r = getSource().getSize()[ROW] - 1; r != -1; r--) {
 					for (long c = getSource().getSize()[COLUMN] - 1; c != -1; c--) {
-						sum += MathUtil.ignoreNaN(getSource().getDouble(r, c));
+						sum += MathUtil.ignoreNaN(getSource().getAsDouble(r, c));
 					}
 				}
 				return sum;
@@ -68,18 +68,18 @@ public class Sum extends AbstractDoubleCalculation {
 			switch (getDimension()) {
 			case ROW:
 				for (long r = getSource().getSize()[ROW] - 1; r != -1; r--) {
-					sum += getSource().getDouble(r, coordinates[COLUMN]);
+					sum += getSource().getAsDouble(r, coordinates[COLUMN]);
 				}
 				return sum;
 			case COLUMN:
 				for (long c = getSource().getSize()[COLUMN] - 1; c != -1; c--) {
-					sum += getSource().getDouble(coordinates[ROW], c);
+					sum += getSource().getAsDouble(coordinates[ROW], c);
 				}
 				return sum;
 			case ALL:
 				for (long r = getSource().getSize()[ROW] - 1; r != -1; r--) {
 					for (long c = getSource().getSize()[COLUMN] - 1; c != -1; c--) {
-						sum += getSource().getDouble(r, c);
+						sum += getSource().getAsDouble(r, c);
 					}
 				}
 				return sum;

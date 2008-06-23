@@ -57,7 +57,7 @@ public class ExportMatrixR {
 		writer.append("matrix(c(");
 		for (int r = 0; r < nrow; r++) {
 			for (int c = 0; c < ncol; c++) {
-				writer.append("" + matrix.getDouble(r, c));
+				writer.append("" + matrix.getAsDouble(r, c));
 				if (!((r == nrow - 1) && (c == ncol - 1))) {
 					writer.append(",");
 				}

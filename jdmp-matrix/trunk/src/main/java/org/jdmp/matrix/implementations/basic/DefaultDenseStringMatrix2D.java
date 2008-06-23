@@ -49,7 +49,7 @@ public class DefaultDenseStringMatrix2D extends AbstractDenseStringMatrix2D {
 	public DefaultDenseStringMatrix2D(Matrix source) throws MatrixException {
 		this(source.getSize());
 		for (long[] c : source.availableCoordinates()) {
-			setString(source.getString(c), c);
+			setAsString(source.getAsString(c), c);
 		}
 	}
 

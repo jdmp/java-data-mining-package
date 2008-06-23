@@ -143,8 +143,8 @@ public class BufferedObjectMatrix extends AbstractObjectMatrix implements Flusha
 					while (outputBuffer != null && !outputBuffer.isEmpty()) {
 						Coordinates c = outputBuffer.iterator().next();
 						outputBuffer.remove(c);
-						double value = inputBuffer.getDouble(c.dimensions);
-						original.setDouble(value, c.dimensions);
+						double value = inputBuffer.getAsDouble(c.dimensions);
+						original.setAsDouble(value, c.dimensions);
 					}
 					Thread.sleep(100);
 				} catch (Exception e) {

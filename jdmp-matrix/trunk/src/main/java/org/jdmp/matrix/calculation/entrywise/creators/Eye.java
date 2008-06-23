@@ -49,7 +49,7 @@ public class Eye extends AbstractDoubleCalculation {
 		long[] c = Coordinates.copyOf(source.getSize());
 		for (int i = 0; Coordinates.isSmallerThan(c, source.getSize()); i++) {
 			Arrays.fill(c, i);
-			ret.setDouble(1.0, c);
+			ret.setAsDouble(1.0, c);
 		}
 		return ret;
 	}
@@ -62,7 +62,7 @@ public class Eye extends AbstractDoubleCalculation {
 		Matrix ret = MatrixFactory.zeros(entryType, size);
 		long[] c = new long[size.length];
 		for (int i = 0; Coordinates.isSmallerThan(c, size); i++) {
-			ret.setDouble(1.0, c);
+			ret.setAsDouble(1.0, c);
 			Arrays.fill(c, i + 1);
 		}
 		return ret;

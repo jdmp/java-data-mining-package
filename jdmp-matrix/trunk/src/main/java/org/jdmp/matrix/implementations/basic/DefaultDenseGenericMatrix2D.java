@@ -65,12 +65,12 @@ public class DefaultDenseGenericMatrix2D<A> extends AbstractDenseGenericMatrix2D
 		values[(int) row][(int) column] = (A) value;
 	}
 
-	public double getDouble(long... coordinates) throws MatrixException {
+	public double getAsDouble(long... coordinates) throws MatrixException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	public void setDouble(double value, long... coordinates) throws MatrixException {
+	public void setAsDouble(double value, long... coordinates) throws MatrixException {
 		// TODO Auto-generated method stub
 
 	}

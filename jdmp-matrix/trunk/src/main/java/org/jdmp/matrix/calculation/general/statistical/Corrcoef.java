@@ -67,8 +67,8 @@ public class Corrcoef extends AbstractDoubleCalculation {
 		if (ignoreNaN) {
 
 			for (int i = 0; i < rows; i++) {
-				deltaX = getSource().getDouble(i, coordinates[ROW]) - mean.getDouble(0, coordinates[ROW]);
-				deltaY = getSource().getDouble(i, coordinates[COLUMN]) - mean.getDouble(0, coordinates[COLUMN]);
+				deltaX = getSource().getAsDouble(i, coordinates[ROW]) - mean.getAsDouble(0, coordinates[ROW]);
+				deltaY = getSource().getAsDouble(i, coordinates[COLUMN]) - mean.getAsDouble(0, coordinates[COLUMN]);
 
 				if (!MathUtil.isNaNOrInfinite(deltaX) && !MathUtil.isNaNOrInfinite(deltaY)) {
 					N++;
@@ -83,8 +83,8 @@ public class Corrcoef extends AbstractDoubleCalculation {
 
 			N = rows;
 			for (int i = 0; i < rows; i++) {
-				deltaX = getSource().getDouble(i, coordinates[ROW]) - mean.getDouble(0, coordinates[ROW]);
-				deltaY = getSource().getDouble(i, coordinates[COLUMN]) - mean.getDouble(0, coordinates[COLUMN]);
+				deltaX = getSource().getAsDouble(i, coordinates[ROW]) - mean.getAsDouble(0, coordinates[ROW]);
+				deltaY = getSource().getAsDouble(i, coordinates[COLUMN]) - mean.getAsDouble(0, coordinates[COLUMN]);
 				sumSqX += deltaX * deltaX;
 				sumSqY += deltaY * deltaY;
 				sumProd += deltaX * deltaY;

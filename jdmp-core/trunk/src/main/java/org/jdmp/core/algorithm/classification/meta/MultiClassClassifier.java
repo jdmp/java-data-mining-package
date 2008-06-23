@@ -30,7 +30,7 @@ public class MultiClassClassifier extends AbstractClassifier {
 		double[] results = new double[classCount];
 		for (int i = 0; i < classCount; i++) {
 			Classifier c = singleClassClassifiers.get(i);
-			results[i] = c.predict(input, sampleWeight).getDouble(0, 0);
+			results[i] = c.predict(input, sampleWeight).getAsDouble(0, 0);
 		}
 		return MatrixFactory.linkToArray(results).transpose();
 	}

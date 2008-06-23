@@ -37,13 +37,13 @@ public class Sign extends AbstractDoubleCalculation {
 
 	@Override
 	public double getDouble(long... coordinates) throws MatrixException {
-		return Math.signum(getSource().getDouble(coordinates));
+		return Math.signum(getSource().getAsDouble(coordinates));
 	}
 
 	public static Matrix calc(Matrix source) throws MatrixException {
 		Matrix ret = MatrixFactory.zeros(source.getSize());
 		for (long[] c : source.availableCoordinates()) {
-			ret.setDouble(Math.signum(source.getDouble(c)), c);
+			ret.setAsDouble(Math.signum(source.getAsDouble(c)), c);
 		}
 		return ret;
 	}

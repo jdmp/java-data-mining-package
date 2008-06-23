@@ -37,13 +37,13 @@ public class Cosh extends AbstractDoubleCalculation {
 
 	@Override
 	public double getDouble(long... coordinates) throws MatrixException {
-		return Math.cosh(getSource().getDouble(coordinates));
+		return Math.cosh(getSource().getAsDouble(coordinates));
 	}
 
 	public static Matrix calc(Matrix source) throws MatrixException {
 		Matrix ret = MatrixFactory.zeros(source.getSize());
 		for (long[] c : source.availableCoordinates()) {
-			ret.setDouble(Math.cosh(source.getDouble(c)), c);
+			ret.setAsDouble(Math.cosh(source.getAsDouble(c)), c);
 		}
 		return ret;
 	}

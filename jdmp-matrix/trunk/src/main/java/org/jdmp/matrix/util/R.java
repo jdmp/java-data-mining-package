@@ -189,7 +189,7 @@ public class R {
 			int i = 0;
 			for (int r = 0; r < rows; r++) {
 				for (int c = 0; c < cols; c++) {
-					matrix.setDouble(Double.parseDouble(rawValues[i++]), r, c);
+					matrix.setAsDouble(Double.parseDouble(rawValues[i++]), r, c);
 				}
 			}
 

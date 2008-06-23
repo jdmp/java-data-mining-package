@@ -47,7 +47,7 @@ public class Princomp extends AbstractDoubleCalculation {
 			pca = u.mtimes(s);
 
 		}
-		return pca.getDouble(coordinates);
+		return pca.getAsDouble(coordinates);
 	}
 
 }

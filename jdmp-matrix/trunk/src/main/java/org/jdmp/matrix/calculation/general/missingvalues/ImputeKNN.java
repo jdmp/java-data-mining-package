@@ -47,7 +47,7 @@ public class ImputeKNN extends AbstractDoubleCalculation {
 			for (long r = getSource().getRowCount() - 1; r != -1; r--) {
 				if (r != coordinates[ROW]) {
 					Matrix candidate = getSource().selectRows(Ret.LINK, r);
-					if (!MathUtil.isNaNOrInfinite(candidate.getDouble(0, coordinates[COLUMN]))) {
+					if (!MathUtil.isNaNOrInfinite(candidate.getAsDouble(0, coordinates[COLUMN]))) {
 						double distance = toReplace.euklideanDistanceTo(candidate, true);
 						if (distance < bestDistance) {
 							bestDistance = distance;
@@ -78,13 +78,13 @@ public class ImputeKNN extends AbstractDoubleCalculation {
 		if (sourceCopy == null) {
 			sourceCopy = getSource().clone();
 		}
-		double v = sourceCopy.getDouble(coordinates);
+		double v = sourceCopy.getAsDouble(coordinates);
 		if (MathUtil.isNaNOrInfinite(v)) {
 			switch (getDimension()) {
 			case ROW:
-				return getNearestNeighbor(coordinates).getDouble(0, coordinates[COLUMN]);
+				return getNearestNeighbor(coordinates).getAsDouble(0, coordinates[COLUMN]);
 			case COLUMN:
-				return getNearestNeighbor(coordinates).getDouble(coordinates[ROW], 0);
+				return getNearestNeighbor(coordinates).getAsDouble(coordinates[ROW], 0);
 			}
 		} else {
 			return v;

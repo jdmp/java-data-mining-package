@@ -103,7 +103,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 			if (d == null) {
 				d = 0.0;
 			}
-			m.setDouble(d / getSampleCount(), i, 0);
+			m.setAsDouble(d / getSampleCount(), i, 0);
 		}
 		return m;
 	}
@@ -167,13 +167,13 @@ public class ClassificationDataSet extends RegressionDataSet {
 			Matrix target = MatrixFactory.zeros(1, classes.size());
 
 			for (int c = 0; c < cols - 1; c++) {
-				input.setDouble(m.getDouble(i, c), 0, c);
+				input.setAsDouble(m.getAsDouble(i, c), 0, c);
 			}
 
 			int classId = classList.indexOf(m.getObject(i, cols - 1));
 			for (int c = 0; c < classList.size(); c++) {
 				if (classId == c) {
-					target.setDouble(1.0, 0, c);
+					target.setAsDouble(1.0, 0, c);
 				} else {
 					// output.setDoubleValueAt(-1.0, 0, c);
 				}

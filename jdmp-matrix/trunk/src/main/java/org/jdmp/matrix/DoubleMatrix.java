@@ -23,6 +23,40 @@
 
 package org.jdmp.matrix;
 
+import org.jdmp.matrix.exceptions.MatrixException;
+
 public interface DoubleMatrix extends Matrix {
+
+	/**
+	 * Returns a double representation of an entry in the matrix. The stored
+	 * value will be converted to a double as good as possible.
+	 * 
+	 * @param coordinates
+	 *            location of the entry
+	 * @return a double representation of the entry
+	 * @throws MatrixException
+	 */
+	public double getAsDouble(long... coordinates) throws MatrixException;
+
+	/**
+	 * Sets an entry in the matrix to a double value. If the matrix cannot store
+	 * double values, the value will be represented as good as possible.
+	 * 
+	 * @param value
+	 *            double value
+	 * @param coordinates
+	 *            location of the entry
+	 * @throws MatrixException
+	 */
+	public void setAsDouble(double value, long... coordinates) throws MatrixException;
+
+	/**
+	 * Converts the content of a matrix into a 2-dimensional array of double
+	 * values.
+	 * 
+	 * @return double array with matrix entries
+	 * @throws MatrixException
+	 */
+	public double[][] toDoubleArray() throws MatrixException;
 
 }

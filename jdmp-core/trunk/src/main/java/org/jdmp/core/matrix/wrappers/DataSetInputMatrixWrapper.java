@@ -40,7 +40,7 @@ public class DataSetInputMatrixWrapper extends AbstractDenseDoubleMatrix2D imple
 			if (p.getMatrix(INPUT) != null) {
 				long r = column / p.getMatrix(INPUT).getColumnCount();
 				long c = column % p.getMatrix(INPUT).getColumnCount();
-				return p.getMatrix(INPUT).getDouble(r, c);
+				return p.getMatrix(INPUT).getAsDouble(r, c);
 			}
 		}
 		return 0.0;
@@ -52,7 +52,7 @@ public class DataSetInputMatrixWrapper extends AbstractDenseDoubleMatrix2D imple
 			if (p.getMatrix(INPUT) != null) {
 				long r = column / p.getMatrix(INPUT).getColumnCount();
 				long c = column % p.getMatrix(INPUT).getColumnCount();
-				p.getMatrix(INPUT).setDouble(value, r, c);
+				p.getMatrix(INPUT).setAsDouble(value, r, c);
 			}
 		}
 	}

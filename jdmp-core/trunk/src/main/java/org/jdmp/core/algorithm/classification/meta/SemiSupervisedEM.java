@@ -44,9 +44,9 @@ public class SemiSupervisedEM extends AbstractClassifier implements SemiSupervis
 		classifier.predict(unlabeledData);
 		for (Sample s : unlabeledData.getSampleList()) {
 			Matrix predicted = s.getMatrix(Sample.PREDICTED);
-			int max = (int) predicted.indexOfMax(Ret.NEW, Matrix.COLUMN).getDouble(0, 0);
+			int max = (int) predicted.indexOfMax(Ret.NEW, Matrix.COLUMN).getAsDouble(0, 0);
 			Matrix target = MatrixFactory.zeros(1, classCount);
-			target.setDouble(1.0, 0, max);
+			target.setAsDouble(1.0, 0, max);
 			s.setMatrix(Sample.TARGET, target);
 		}
 		ClassificationDataSet completeData = new ClassificationDataSet();
@@ -60,9 +60,9 @@ public class SemiSupervisedEM extends AbstractClassifier implements SemiSupervis
 			classifier.predict(unlabeledData);
 			for (Sample s : unlabeledData.getSampleList()) {
 				Matrix predicted = s.getMatrix(Sample.PREDICTED);
-				int max = (int) predicted.indexOfMax(Ret.NEW, Matrix.COLUMN).getDouble(0, 0);
+				int max = (int) predicted.indexOfMax(Ret.NEW, Matrix.COLUMN).getAsDouble(0, 0);
 				Matrix target = MatrixFactory.zeros(1, classCount);
-				target.setDouble(1.0, 0, max);
+				target.setAsDouble(1.0, 0, max);
 				s.setMatrix(Sample.TARGET, target);
 			}
 			completeData = new ClassificationDataSet();

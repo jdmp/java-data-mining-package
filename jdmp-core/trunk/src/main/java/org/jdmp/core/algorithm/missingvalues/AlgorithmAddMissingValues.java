@@ -25,7 +25,7 @@ public class AlgorithmAddMissingValues extends AlgorithmTwoSources {
 			for (long c = source.getColumnCount() - 1; c != -1; c--) {
 				double rand = Math.random();
 				if (rand < probability) {
-					source.setDouble(Double.NaN, r, c);
+					source.setAsDouble(Double.NaN, r, c);
 				}
 			}
 		}

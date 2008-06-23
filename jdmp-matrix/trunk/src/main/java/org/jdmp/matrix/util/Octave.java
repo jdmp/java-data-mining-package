@@ -180,7 +180,7 @@ public class Octave {
 			int i = 0;
 			for (int c = 0; c < cols; c++) {
 				for (int r = 0; r < rows; r++) {
-					matrix.setDouble(Double.parseDouble(rawValues[i++]), r, c);
+					matrix.setAsDouble(Double.parseDouble(rawValues[i++]), r, c);
 				}
 			}
 

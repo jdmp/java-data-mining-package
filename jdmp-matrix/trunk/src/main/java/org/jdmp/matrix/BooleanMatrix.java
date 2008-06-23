@@ -29,26 +29,26 @@ public interface BooleanMatrix extends Matrix {
 
 	/**
 	 * Returns a byte representation of an entry in the matrix. The stored value
-	 * will be converted to a byte as good as possible.
+	 * will be converted to a boolean as good as possible.
 	 * 
 	 * @param coordinates
 	 *            location of the entry
-	 * @return a byte representation of the entry
+	 * @return a boolean representation of the entry
 	 * @throws MatrixException
 	 */
-	public byte getByte(long... coordinates) throws MatrixException;
+	public boolean getAsBoolean(long... coordinates) throws MatrixException;
 
 	/**
-	 * Sets an entry in the matrix to a byte value. If the matrix cannot store
-	 * byte values, the value will be represented as good as possible.
+	 * Sets an entry in the matrix to a boolean value. If the matrix cannot
+	 * store byte values, the value will be represented as good as possible.
 	 * 
 	 * @param value
-	 *            byte value
+	 *            boolean value
 	 * @param coordinates
 	 *            location of the entry
 	 * @throws MatrixException
 	 */
-	public void setByte(byte value, long... coordinates) throws MatrixException;
+	public void setAsBoolean(boolean value, long... coordinates) throws MatrixException;
 
 	/**
 	 * Converts the content of a matrix into a 2-dimensional array of boolean

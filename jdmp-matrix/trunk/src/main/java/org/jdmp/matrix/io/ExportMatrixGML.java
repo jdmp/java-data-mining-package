@@ -73,7 +73,7 @@ public class ExportMatrixGML {
 
 		int id = 0;
 		for (long[] c : m.allCoordinates()) {
-			if (m.getDouble(c) > 0.0) {
+			if (m.getAsDouble(c) > 0.0) {
 				w.write("<edge id=\"edge" + (id++) + "\" ");
 				w.write("source=\"node" + c[Matrix.ROW] + "\" ");
 				w.write("target=\"node" + c[Matrix.COLUMN] + "\">\n");

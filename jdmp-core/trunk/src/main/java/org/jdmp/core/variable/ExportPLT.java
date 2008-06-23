@@ -51,7 +51,7 @@ public abstract class ExportPLT {
 				out.write("3.14\t");
 				long valueCount = m.getValueCount();
 				for (int j = 0; j < valueCount; j++) {
-					out.write("" + m.getDouble(i % m.getRowCount(), i / m.getRowCount()));
+					out.write("" + m.getAsDouble(i % m.getRowCount(), i / m.getRowCount()));
 					if (j < valueCount - 1)
 						out.write("\t");
 					else

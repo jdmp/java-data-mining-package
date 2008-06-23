@@ -40,14 +40,14 @@ public class Convert extends AbstractGenericCalculation {
 
 	@Override
 	public double getDouble(long... coordinates) throws MatrixException {
-		return getSource().getDouble(coordinates);
+		return getSource().getAsDouble(coordinates);
 	}
 
 	public static Matrix calcNew(EntryType entryType, AnnotationTransfer annotationTransfer, Matrix source)
 			throws MatrixException {
 		Matrix ret = MatrixFactory.zeros(entryType, source.getSize());
 		for (long[] c : source.availableCoordinates()) {
-			ret.setDouble(source.getDouble(c), c);
+			ret.setAsDouble(source.getAsDouble(c), c);
 		}
 		switch (annotationTransfer) {
 		case LINK:
@@ -81,12 +81,12 @@ public class Convert extends AbstractGenericCalculation {
 
 	@Override
 	public String getString(long... coordinates) throws MatrixException {
-		return getSource().getString(coordinates);
+		return getSource().getAsString(coordinates);
 	}
 
 	@Override
 	public void setDouble(double value, long... coordinates) throws MatrixException {
-		getSource().setDouble(value, coordinates);
+		getSource().setAsDouble(value, coordinates);
 	}
 
 	@Override
@@ -96,7 +96,7 @@ public class Convert extends AbstractGenericCalculation {
 
 	@Override
 	public void setString(String value, long... coordinates) throws MatrixException {
-		getSource().setString(value, coordinates);
+		getSource().setAsString(value, coordinates);
 	}
 
 	public Matrix calcNew() throws MatrixException {

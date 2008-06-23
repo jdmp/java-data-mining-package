@@ -40,14 +40,14 @@ public class AlgorithmMean extends AlgorithmOneSource {
 				double sum = 0;
 				int count = 0;
 				for (long r = source.getRowCount() - 1; r != -1; r--) {
-					double v = source.getDouble(r, c);
+					double v = source.getAsDouble(r, c);
 					if (!MathUtil.isNaNOrInfinite(v)) {
 						sum += v;
 						count++;
 					}
 				}
 				count = (count == 0) ? 1 : count;
-				meanMatrix.setDouble(sum / count, 0, c);
+				meanMatrix.setAsDouble(sum / count, 0, c);
 			}
 		} else {
 			meanMatrix = MatrixFactory.zeros(source.getRowCount(), 1);
@@ -58,14 +58,14 @@ public class AlgorithmMean extends AlgorithmOneSource {
 				sum = 0.0;
 				count = 0;
 				for (c = columns; --c >= 0;) {
-					v = source.getDouble(r, c);
+					v = source.getAsDouble(r, c);
 					if (!MathUtil.isNaNOrInfinite(v)) {
 						sum += v;
 						count++;
 					}
 				}
 				count = (count == 0) ? 1 : count;
-				meanMatrix.setDouble(sum / count, r, 0);
+				meanMatrix.setAsDouble(sum / count, r, 0);
 			}
 		}
 

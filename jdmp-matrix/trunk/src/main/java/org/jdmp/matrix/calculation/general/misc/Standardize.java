@@ -51,11 +51,11 @@ public class Standardize extends AbstractDoubleCalculation {
 		}
 		switch (getDimension()) {
 		case ALL:
-			return center.getDouble(coordinates) / sigma.getDouble(0, 0);
+			return center.getAsDouble(coordinates) / sigma.getAsDouble(0, 0);
 		case ROW:
-			return center.getDouble(coordinates) / sigma.getDouble(0, coordinates[COLUMN]);
+			return center.getAsDouble(coordinates) / sigma.getAsDouble(0, coordinates[COLUMN]);
 		case COLUMN:
-			return center.getDouble(coordinates) / sigma.getDouble(coordinates[ROW], 0);
+			return center.getAsDouble(coordinates) / sigma.getAsDouble(coordinates[ROW], 0);
 		}
 		return Double.NaN;
 	}

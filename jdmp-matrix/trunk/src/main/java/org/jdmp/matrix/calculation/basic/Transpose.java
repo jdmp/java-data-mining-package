@@ -50,7 +50,7 @@ public class Transpose extends AbstractDoubleCalculation {
 
 	@Override
 	public double getDouble(long... coordinates) throws MatrixException {
-		return getSource().getDouble(Coordinates.transpose(coordinates, swap1, swap2));
+		return getSource().getAsDouble(Coordinates.transpose(coordinates, swap1, swap2));
 	}
 
 	public long[] getSize() {
@@ -58,7 +58,7 @@ public class Transpose extends AbstractDoubleCalculation {
 	}
 
 	public void setDouble(double value, long... coordinates) throws MatrixException {
-		getSource().setDouble(value, Coordinates.transpose(coordinates, swap1, swap2));
+		getSource().setAsDouble(value, Coordinates.transpose(coordinates, swap1, swap2));
 	}
 
 	public boolean contains(long... coordinates) {
@@ -105,7 +105,7 @@ public class Transpose extends AbstractDoubleCalculation {
 			ret = MatrixFactory.zeros(Coordinates.transpose(m.getSize()));
 		}
 		for (long[] c : m.availableCoordinates()) {
-			ret.setDouble(m.getDouble(c), Coordinates.transpose(c));
+			ret.setAsDouble(m.getAsDouble(c), Coordinates.transpose(c));
 		}
 		return ret;
 	}

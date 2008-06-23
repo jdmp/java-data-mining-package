@@ -43,7 +43,7 @@ public class Std extends AbstractDoubleCalculation {
 		if (variance == null) {
 			variance = getSource().calcNew(new Var(getDimension(), ignoreNaN, getSource()));
 		}
-		return Math.sqrt(variance.getDouble(coordinates));
+		return Math.sqrt(variance.getAsDouble(coordinates));
 	}
 
 	public long[] getSize() {

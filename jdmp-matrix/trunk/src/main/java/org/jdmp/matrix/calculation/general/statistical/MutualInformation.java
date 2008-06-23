@@ -64,8 +64,8 @@ public class MutualInformation extends AbstractDoubleCalculation {
 
 		// count absolute frequency
 		for (int r = 0; r < matrix.getRowCount(); r++) {
-			double value1 = matrix.getDouble(r, var1);
-			double value2 = matrix.getDouble(r, var2);
+			double value1 = matrix.getAsDouble(r, var1);
+			double value2 = matrix.getAsDouble(r, var2);
 
 			Double c1 = count1.get(value1);
 			c1 = (c1 == null) ? 0.0 : c1;

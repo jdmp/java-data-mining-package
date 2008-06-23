@@ -67,7 +67,7 @@ public abstract class AbstractObjectCalculation extends AbstractGenericCalculati
 		switch (getEntryType()) {
 		case DOUBLE:
 			for (long[] c : result.allCoordinates()) {
-				result.setDouble(getDouble(c), c);
+				result.setAsDouble(getDouble(c), c);
 			}
 			break;
 		default:

@@ -68,9 +68,9 @@ public class ImputeEM extends AbstractDoubleCalculation {
 		if (imputed == null) {
 			createMatrix();
 		}
-		double v = getSource().getDouble(coordinates);
+		double v = getSource().getAsDouble(coordinates);
 		if (MathUtil.isNaNOrInfinite(v)) {
-			return imputed.getDouble(coordinates);
+			return imputed.getAsDouble(coordinates);
 		} else {
 			return v;
 		}
@@ -154,7 +154,7 @@ public class ImputeEM extends AbstractDoubleCalculation {
 		public Long call() throws Exception {
 			Matrix newColumn = replaceInColumn(getSource(), bestGuess, column);
 			for (int r = 0; r < newColumn.getRowCount(); r++) {
-				imputed.setDouble(newColumn.getDouble(r, 0), r, column);
+				imputed.setAsDouble(newColumn.getAsDouble(r, 0), r, column);
 			}
 			return column;
 		}
@@ -169,7 +169,7 @@ public class ImputeEM extends AbstractDoubleCalculation {
 
 		List<Long> missingRows = new ArrayList<Long>();
 		for (long i = y.getRowCount(); --i >= 0;) {
-			double v = y.getDouble(i, 0);
+			double v = y.getAsDouble(i, 0);
 			if (MathUtil.isNaNOrInfinite(v)) {
 				missingRows.add(i);
 			}
@@ -188,9 +188,9 @@ public class ImputeEM extends AbstractDoubleCalculation {
 
 		// set non-missing values back to original values
 		for (int row = 0; row < y.getRowCount(); row++) {
-			double v = y.getDouble(row, 0);
+			double v = y.getAsDouble(row, 0);
 			if (!Double.isNaN(v)) {
-				yPredicted.setDouble(v, row, 0);
+				yPredicted.setAsDouble(v, row, 0);
 			}
 		}
 

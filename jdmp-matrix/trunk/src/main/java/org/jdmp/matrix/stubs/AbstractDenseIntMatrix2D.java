@@ -31,11 +31,11 @@ public abstract class AbstractDenseIntMatrix2D extends AbstractDenseIntMatrix {
 		return new CoordinateIterator2D(getSize());
 	}
 
-	public final int getInt(long... coordinates) {
-		return getInt(coordinates[ROW], coordinates[COLUMN]);
+	public final int getAsInt(long... coordinates) {
+		return getAsInt(coordinates[ROW], coordinates[COLUMN]);
 	}
 
-	public final void setInt(int value, long... coordinates) {
-		setInt(value, coordinates[ROW], coordinates[COLUMN]);
+	public final void setAsInt(int value, long... coordinates) {
+		setAsInt(value, coordinates[ROW], coordinates[COLUMN]);
 	}
 }
