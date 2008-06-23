@@ -43,12 +43,14 @@ import org.jdmp.matrix.calculation.entrywise.creators.Fill;
 import org.jdmp.matrix.calculation.entrywise.creators.Ones;
 import org.jdmp.matrix.calculation.entrywise.creators.Rand;
 import org.jdmp.matrix.calculation.entrywise.creators.Randn;
+import org.jdmp.matrix.calculation.general.misc.Dense2Sparse;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.implementations.basic.DefaultDenseDoubleMatrix2D;
 import org.jdmp.matrix.implementations.basic.DefaultDenseIntMatrix2D;
 import org.jdmp.matrix.implementations.basic.DefaultDenseObjectMatrix2D;
 import org.jdmp.matrix.implementations.basic.DefaultDenseStringMatrix2D;
 import org.jdmp.matrix.implementations.basic.DefaultSparseGenericMatrix;
+import org.jdmp.matrix.implementations.basic.DefaultSparseRowMatrix2D;
 import org.jdmp.matrix.implementations.basic.SynchronizedGenericMatrix;
 import org.jdmp.matrix.implementations.collections.DefaultListMatrix;
 import org.jdmp.matrix.implementations.collections.DefaultMapMatrix;
@@ -91,11 +93,9 @@ public abstract class MatrixFactory {
 
 	private static String denseStringMatrix2DClassName = DefaultDenseStringMatrix2D.class.getName();
 
-	private static String sparseDoubleMatrix2DClassName = DefaultSparseGenericMatrix.class
-			.getName();
+	private static String sparseDoubleMatrix2DClassName = DefaultSparseRowMatrix2D.class.getName();
 
-	private static String sparseObjectMatrix2DClassName = DefaultSparseGenericMatrix.class
-			.getName();
+	private static String sparseObjectMatrix2DClassName = DefaultSparseRowMatrix2D.class.getName();
 
 	private static Constructor<? extends Matrix> denseDoubleMatrix2DConstructor = null;
 
@@ -430,6 +430,10 @@ public abstract class MatrixFactory {
 		} catch (Exception e) {
 			throw new MatrixException("could not create Matrix", e);
 		}
+	}
+
+	public static final Matrix sparse(Matrix indices) {
+		return Dense2Sparse.calc(indices);
 	}
 
 	public final static Matrix sparse(EntryType entryType, long... size) throws MatrixException {

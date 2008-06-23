@@ -21,21 +21,8 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.matrix.implementations;
+package org.jdmp.matrix.io;
 
-import junit.framework.TestSuite;
-
-public class AllTests extends TestSuite {
-
-	public static TestSuite suite() {
-		TestSuite suite = new TestSuite(AllTests.class.getName());
-		suite.addTestSuite(TestDefaultDenseDoubleMatrix2D.class);
-		suite.addTestSuite(TestDefaultDenseObjectMatrix2D.class);
-		suite.addTestSuite(TestDefaultDenseStringMatrix2D.class);
-		suite.addTestSuite(TestDefaultSparseRowMatrix2D.class);
-		suite.addTestSuite(TestCommonsMathRealMatrix.class);
-		suite.addTestSuite(TestDefaultTiledObjectMatrix2D.class);
-		return suite;
-	}
+public abstract class ImportMatrixTXT extends ImportMatrixCSV {
 
 }

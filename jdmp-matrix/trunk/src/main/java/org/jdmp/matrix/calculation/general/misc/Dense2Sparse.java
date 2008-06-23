@@ -21,21 +21,44 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.matrix.implementations;
+package org.jdmp.matrix.calculation.general.misc;
 
-import junit.framework.TestSuite;
+import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.MatrixFactory;
 
-public class AllTests extends TestSuite {
+public class Dense2Sparse {
 
-	public static TestSuite suite() {
-		TestSuite suite = new TestSuite(AllTests.class.getName());
-		suite.addTestSuite(TestDefaultDenseDoubleMatrix2D.class);
-		suite.addTestSuite(TestDefaultDenseObjectMatrix2D.class);
-		suite.addTestSuite(TestDefaultDenseStringMatrix2D.class);
-		suite.addTestSuite(TestDefaultSparseRowMatrix2D.class);
-		suite.addTestSuite(TestCommonsMathRealMatrix.class);
-		suite.addTestSuite(TestDefaultTiledObjectMatrix2D.class);
-		return suite;
+	public static Matrix calc(Matrix indices) {
+		Matrix m = MatrixFactory.sparse(1, 1);
+
+		long mrow = 1;
+		long mcol = 1;
+
+		for (int r = 0; r < indices.getRowCount(); r++) {
+
+			if (r % 1000 == 0) {
+				System.out.println("Row: " + r);
+			}
+
+			long row = (long) indices.getDouble(r, 0);
+			long col = (long) indices.getDouble(r, 1);
+			double val = indices.getDouble(r, 2);
+
+			if (row >= mrow) {
+				mrow = row + 1;
+				m.setSize(mrow, mcol);
+			}
+
+			if (col >= mcol) {
+				mcol = col + 1;
+				m.setSize(mrow, mcol);
+			}
+
+			m.setDouble(val, row, col);
+
+		}
+
+		return m;
 	}
 
 }

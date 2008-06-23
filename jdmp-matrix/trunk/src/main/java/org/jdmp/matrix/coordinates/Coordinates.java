@@ -214,6 +214,14 @@ public class Coordinates implements Serializable {
 		}
 		return true;
 	}
+	
+	public static boolean isSmallerOrEqual(long[] coordinates, long[] size) {
+		for (int i = coordinates.length - 1; i != -1; i--) {
+			if (coordinates[i] > size[i])
+				return false;
+		}
+		return true;
+	}
 
 	public static long[] minusOne(long[] coordinates) {
 		long[] ret = new long[coordinates.length];
