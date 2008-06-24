@@ -47,6 +47,11 @@ public class DiscreteDensityEstimator implements DensityEstimator {
 		sumOfCounts += weight;
 	}
 
+	public void addValue(int val) {
+		counts[(int) val]++;
+		sumOfCounts++;
+	}
+
 	public double getProbability(double val) {
 		if (sumOfCounts == 0) {
 			return 0;

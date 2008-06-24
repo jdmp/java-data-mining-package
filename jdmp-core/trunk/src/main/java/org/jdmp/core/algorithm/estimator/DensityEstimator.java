@@ -20,6 +20,8 @@ public interface DensityEstimator {
 
 	void addValue(double val, double weight);
 
+	void addValue(int val);
+
 	double getProbability(double val);
 
 }

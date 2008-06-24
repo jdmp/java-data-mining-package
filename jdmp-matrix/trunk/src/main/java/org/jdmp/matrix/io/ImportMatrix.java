@@ -31,6 +31,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import org.jdmp.matrix.Matrix;
@@ -49,10 +50,16 @@ public abstract class ImportMatrix {
 		try {
 			Class<?> c = Class.forName("org.jdmp.matrix.io.ImportMatrix" + format.name());
 			Method m = c.getMethod("fromFile", new Class<?>[] { File.class, Object[].class });
-			Matrix matrix=(Matrix)m.invoke(null, file,parameters);
+			Matrix matrix = (Matrix) m.invoke(null, file, parameters);
 			return matrix;
-		} catch (Exception e) {
+		} catch (ClassNotFoundException e) {
 			throw new MatrixException("format not supported: " + format, e);
+		} catch (NoSuchMethodException e) {
+			throw new MatrixException("format not supported: " + format, e);
+		} catch (IllegalAccessException e) {
+			throw new MatrixException("format not supported: " + format, e);
+		} catch (InvocationTargetException e) {
+			throw new MatrixException("could not import", e);
 		}
 	}
 
@@ -65,39 +72,57 @@ public abstract class ImportMatrix {
 		try {
 			Class<?> c = Class.forName("org.jdmp.matrix.io.ImportMatrix" + format.name());
 			Method m = c.getMethod("fromString", new Class<?>[] { String.class, Object[].class });
-			Matrix matrix=(Matrix)m.invoke(null, string,parameters);
+			Matrix matrix = (Matrix) m.invoke(null, string, parameters);
 			return matrix;
-		} catch (Exception e) {
+		} catch (ClassNotFoundException e) {
 			throw new MatrixException("format not supported: " + format, e);
+		} catch (NoSuchMethodException e) {
+			throw new MatrixException("format not supported: " + format, e);
+		} catch (IllegalAccessException e) {
+			throw new MatrixException("format not supported: " + format, e);
+		} catch (InvocationTargetException e) {
+			throw new MatrixException("could not import", e);
 		}
 	}
-	
+
 	public static Matrix fromStream(Format format, InputStream stream, Object parameters)
-	throws MatrixException, IOException {
+			throws MatrixException, IOException {
 		try {
 			Class<?> c = Class.forName("org.jdmp.matrix.io.ImportMatrix" + format.name());
-			Method m = c.getMethod("fromStream", new Class<?>[] { InputStream.class, Object[].class });
-			Matrix matrix=(Matrix)m.invoke(null, stream,parameters);
+			Method m = c.getMethod("fromStream",
+					new Class<?>[] { InputStream.class, Object[].class });
+			Matrix matrix = (Matrix) m.invoke(null, stream, parameters);
 			return matrix;
-		} catch (Exception e) {
+		} catch (ClassNotFoundException e) {
 			throw new MatrixException("format not supported: " + format, e);
+		} catch (NoSuchMethodException e) {
+			throw new MatrixException("format not supported: " + format, e);
+		} catch (IllegalAccessException e) {
+			throw new MatrixException("format not supported: " + format, e);
+		} catch (InvocationTargetException e) {
+			throw new MatrixException("could not import", e);
 		}
 	}
-	
+
 	public static Matrix fromReader(Format format, Reader reader, Object parameters)
-	throws MatrixException, IOException {
+			throws MatrixException, IOException {
 		try {
 			Class<?> c = Class.forName("org.jdmp.matrix.io.ImportMatrix" + format.name());
 			Method m = c.getMethod("fromReader", new Class<?>[] { Reader.class, Object[].class });
-			Matrix matrix=(Matrix)m.invoke(null, reader,parameters);
+			Matrix matrix = (Matrix) m.invoke(null, reader, parameters);
 			return matrix;
-		} catch (Exception e) {
+		} catch (ClassNotFoundException e) {
 			throw new MatrixException("format not supported: " + format, e);
+		} catch (NoSuchMethodException e) {
+			throw new MatrixException("format not supported: " + format, e);
+		} catch (IllegalAccessException e) {
+			throw new MatrixException("format not supported: " + format, e);
+		} catch (InvocationTargetException e) {
+			throw new MatrixException("could not import", e);
 		}
 	}
-	
-	public static Matrix fromClipboard(Format format, Object... parameters)
-	throws MatrixException {
+
+	public static Matrix fromClipboard(Format format, Object... parameters) throws MatrixException {
 		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 		Transferable clipData = clipboard.getContents(null);
 		String s;

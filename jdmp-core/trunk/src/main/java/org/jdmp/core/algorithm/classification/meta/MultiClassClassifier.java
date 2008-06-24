@@ -42,18 +42,21 @@ public class MultiClassClassifier extends AbstractClassifier {
 
 	@Override
 	public void train(RegressionDataSet dataSet) throws Exception {
-		clear();
+		reset();
 		classCount = ((ClassificationDataSet) dataSet).getClassCount();
 
 		for (int i = 0; i < classCount; i++) {
 			Classifier c = singleClassClassifier.emptyCopy();
 			singleClassClassifiers.add(c);
 			Matrix input = dataSet.getInputMatrix();
-			Matrix target1 = dataSet.getTargetMatrix().selectColumns(Ret.NEW, i);
-			Matrix target2 = target1.minus(1).abs(Ret.NEW);
-			Matrix target = MatrixFactory.horCat(target1, target2);
-			ClassificationDataSet ds = ClassificationDataSet.copyFromMatrix(input, target);
+			Matrix target1 = dataSet.getTargetMatrix().selectColumns(Ret.LINK, i);
+			// Matrix target2 = target1.minus(1).abs(Ret.NEW);
+			// Matrix target = MatrixFactory.horCat(target1, target2);
+			ClassificationDataSet ds = ClassificationDataSet.linkToMatrix(input, target1);
+			ds.showGUI();
 			c.train(ds);
+			c.predict(ds);
+
 		}
 
 	}

@@ -100,8 +100,8 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 				if (classCount == 1 || recognized == -1) {
 					confusion.setAsDouble(confusion.getAsDouble(0, 0) + 1, 0, 0);
 				} else {
-					confusion.setAsDouble(confusion.getAsDouble(recognized, targetClass) + 1, recognized,
-							targetClass);
+					confusion.setAsDouble(confusion.getAsDouble(recognized, targetClass) + 1,
+							recognized, targetClass);
 				}
 
 				if (((ClassificationSample) sample).isCorrect()) {
