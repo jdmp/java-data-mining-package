@@ -58,8 +58,10 @@ public class MultiLabelNaiveBayesClassifier extends AbstractClassifier {
 				logs[labelId][classId] = Math.log(labelDists[labelId].getProbability(classId));
 				for (int featureId = 0; featureId < input.getColumnCount(); featureId++) {
 					double val = input.getAsDouble(0, featureId);
-					logs[labelId][classId] += Math.log(dists[featureId][labelId][classId]
-							.getProbability((double) val));
+					//logs[labelId][classId] += Math.log(dists[featureId][labelId][classId]
+					//		.getProbability((double) val));
+					logs[labelId][classId] += dists[featureId][labelId][classId]
+							.getProbability((double) val);
 				}
 			}
 		}
