@@ -6,7 +6,6 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
-import org.jdmp.core.variable.WorkspaceVariable;
 import org.jdmp.gui.matrix.MatrixGUIObject;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.interfaces.HasMatrixList;
@@ -25,7 +24,6 @@ public class CopyMatrixAction extends MatrixAction {
 	@Override
 	public Object call() {
 		Matrix m = getMatrixObject().getMatrix().clone();
-		WorkspaceVariable.getInstance().addMatrix(m);
 		m.showGUI();
 		return m;
 	}

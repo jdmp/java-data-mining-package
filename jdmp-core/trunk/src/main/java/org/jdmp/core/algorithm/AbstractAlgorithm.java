@@ -4,7 +4,6 @@ import java.io.File;
 import java.lang.reflect.Constructor;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,8 +13,6 @@ import javax.swing.event.EventListenerList;
 import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.util.AbstractEvent.EventType;
-import org.jdmp.core.util.interfaces.HasAlgorithmsAndVariables;
-import org.jdmp.core.variable.HasVariables;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableListEvent;
 import org.jdmp.core.variable.VariableListListener;
@@ -23,8 +20,7 @@ import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.interfaces.GUIObject;
 
-public abstract class AbstractAlgorithm extends AbstractCoreObject implements Algorithm,
-		HasAlgorithmsAndVariables, HasVariables, HasAlgorithms, Callable<List<Matrix>> {
+public abstract class AbstractAlgorithm extends AbstractCoreObject implements Algorithm {
 
 	protected static transient Logger logger = Logger.getLogger(Algorithm.class.getName());
 

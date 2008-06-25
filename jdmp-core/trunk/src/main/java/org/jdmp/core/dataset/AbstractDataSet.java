@@ -11,22 +11,18 @@ import java.util.logging.Level;
 import javax.swing.ListSelectionModel;
 
 import org.jdmp.core.AbstractCoreObject;
-import org.jdmp.core.sample.HasSamples;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.ObservableList;
 import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.util.AbstractEvent.EventType;
-import org.jdmp.core.variable.HasVariables;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableListEvent;
 import org.jdmp.core.variable.VariableListListener;
 import org.jdmp.core.variable.VariableListener;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.interfaces.GUIObject;
-import org.jdmp.matrix.interfaces.HasMatrixList;
 
-public abstract class AbstractDataSet extends AbstractCoreObject implements DataSet, HasVariables,
-		HasSamples, HasMatrixList {
+public abstract class AbstractDataSet extends AbstractCoreObject implements DataSet {
 
 	private transient GUIObject guiObject = null;
 

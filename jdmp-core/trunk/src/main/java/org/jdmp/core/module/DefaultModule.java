@@ -5,8 +5,6 @@ import javax.swing.event.EventListenerList;
 public class DefaultModule extends AbstractModule {
 	private static final long serialVersionUID = 4932183248766877797L;
 
-	private transient EventListenerList listenerList = null;
-
 	private String label = "";
 
 	private String description = "";
@@ -28,10 +26,7 @@ public class DefaultModule extends AbstractModule {
 	}
 
 	public final EventListenerList getListenerList() {
-		if (listenerList == null) {
-			listenerList = new EventListenerList();
-		}
-		return listenerList;
+		return null;
 	}
 
 }

@@ -17,7 +17,6 @@ import org.jdmp.core.matrix.system.MatrixSystemEnvironment;
 import org.jdmp.core.matrix.system.MatrixSystemProperties;
 import org.jdmp.core.matrix.system.MatrixSystemTime;
 import org.jdmp.core.matrix.system.MatrixUIDefaults;
-import org.jdmp.core.module.AbstractModule;
 import org.jdmp.core.module.Module;
 import org.jdmp.gui.actions.AboutAction;
 import org.jdmp.gui.actions.ObjectActions;
@@ -66,8 +65,6 @@ public class DefaultMenuBar extends JMenuBar {
 
 		JMenu optionsMenu = new JMenu("Tools");
 		optionsMenu.setMnemonic(KeyEvent.VK_T);
-		optionsMenu.add(new JMenuItem(new ShowInFrameAction(component, AbstractModule.getInstance()
-				.getGUIObject())));
 		optionsMenu.add(new JSeparator());
 		optionsMenu.add(new JMenuItem(new ShowInFrameAction(component, MatrixGlobalConfiguration
 				.getInstance())));

@@ -4,12 +4,8 @@ import javax.swing.table.AbstractTableModel;
 
 import org.jdmp.core.module.HasModules;
 import org.jdmp.core.module.Module;
-import org.jdmp.core.module.ModuleEvent;
-import org.jdmp.core.module.ModuleListEvent;
-import org.jdmp.core.module.ModuleListListener;
-import org.jdmp.core.module.ModuleListener;
 
-public class ModuleListTableModel extends AbstractTableModel implements ModuleListener, ModuleListListener {
+public class ModuleListTableModel extends AbstractTableModel {
 	private static final long serialVersionUID = -1372599464095754625L;
 
 	public static final int ICONCOLUMN = 0;
@@ -28,13 +24,10 @@ public class ModuleListTableModel extends AbstractTableModel implements ModuleLi
 
 	public ModuleListTableModel(HasModules iModules) {
 		this.iModules = iModules;
-		iModules.addModuleListListener(this);
-		for (Module i : iModules.getModuleList())
-			i.addModuleListener(this);
 	}
 
 	public int getRowCount() {
-		return iModules.getModuleCount();
+		return iModules.getModuleList().getSize();
 	}
 
 	public int getColumnCount() {
@@ -66,60 +59,8 @@ public class ModuleListTableModel extends AbstractTableModel implements ModuleLi
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		Module i = iModules.getModule(rowIndex);
+		Module i = iModules.getModuleList().getElementAt(rowIndex);
 		return i;
 	}
 
-	public void nextDataSetSelected(ModuleEvent e) {
-		fireTableDataChanged();
-	}
-
-	public void nextModuleSelected(ModuleEvent e) {
-		fireTableDataChanged();
-	}
-
-	public void epochIncreased(ModuleEvent e) {
-		fireTableDataChanged();
-	}
-
-	public void variableAdded(ModuleEvent e) {
-		fireTableDataChanged();
-	}
-
-	public void variableDeleted(ModuleEvent e) {
-		fireTableDataChanged();
-	}
-
-	public void clientConnected(ModuleEvent e) {
-		fireTableDataChanged();
-	}
-
-	public void clientDisconnected(ModuleEvent e) {
-		fireTableDataChanged();
-	}
-
-	public void connected(ModuleEvent e) {
-		fireTableDataChanged();
-	}
-
-	public void disconnected(ModuleEvent e) {
-		fireTableDataChanged();
-	}
-
-	public void moduleAdded(ModuleListEvent e) {
-		Module i = (Module) e.getData();
-		i.addModuleListener(this);
-		fireTableDataChanged();
-	}
-
-	public void moduleRemoved(ModuleListEvent e) {
-		Module i = (Module) e.getData();
-		i.removeModuleListener(this);
-		fireTableDataChanged();
-	}
-
-	public void moduleUpdated(ModuleListEvent e) {
-		Module i = (Module) e.getData();
-		fireTableDataChanged();
-	}
 }

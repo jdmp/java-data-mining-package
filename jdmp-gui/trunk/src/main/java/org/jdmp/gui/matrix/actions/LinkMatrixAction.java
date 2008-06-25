@@ -6,7 +6,6 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
-import org.jdmp.core.variable.WorkspaceVariable;
 import org.jdmp.gui.matrix.MatrixGUIObject;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.exceptions.MatrixException;
@@ -26,7 +25,6 @@ public class LinkMatrixAction extends MatrixAction {
 	@Override
 	public Object call() throws MatrixException {
 		Matrix m = getMatrixObject().getMatrix().link();
-		WorkspaceVariable.getInstance().addMatrix(m);
 		m.showGUI();
 		return m;
 	}

@@ -32,7 +32,7 @@ public class AddModuleAction extends ModuleListAction {
 		if (module == null) {
 			module = new DefaultModule();
 		}
-		getIModules().addModule(module);
+		getIModules().getModuleList().add(module);
 		return module;
 	}
 

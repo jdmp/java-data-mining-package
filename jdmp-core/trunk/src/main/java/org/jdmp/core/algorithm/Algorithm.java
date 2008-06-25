@@ -5,13 +5,12 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import org.jdmp.core.CoreObject;
-import org.jdmp.core.util.interfaces.HasAlgorithmsAndVariables;
 import org.jdmp.core.variable.HasVariableMap;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.matrix.Matrix;
 
-public interface Algorithm extends CoreObject, HasAlgorithmsAndVariables, HasVariableMap,
-		HasAlgorithms, Callable<List<Matrix>> {
+public interface Algorithm extends CoreObject, HasVariableMap, HasAlgorithms,
+		Callable<List<Matrix>> {
 
 	public static final int NOTCONNECTED = 0;
 

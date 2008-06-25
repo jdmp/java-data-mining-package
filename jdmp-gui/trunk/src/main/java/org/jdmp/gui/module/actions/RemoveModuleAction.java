@@ -29,7 +29,7 @@ public class RemoveModuleAction extends ModuleListAction {
 
 	public Object call() {
 		if (module != null) {
-			getIModules().removeModule(module);
+			getIModules().getModuleList().remove(module);
 			return module;
 		}
 		return null;

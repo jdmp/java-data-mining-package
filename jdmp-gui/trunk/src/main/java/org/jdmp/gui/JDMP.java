@@ -13,7 +13,6 @@ import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.PosixParser;
 import org.jdmp.core.matrix.system.LogMatrix;
 import org.jdmp.gui.actions.ObjectAction;
-import org.jdmp.gui.module.ModuleFrame;
 import org.jdmp.gui.util.GlobalConfiguration;
 
 public class JDMP {
@@ -78,8 +77,6 @@ public class JDMP {
 			logger.info("starting in text mode");
 		} else {
 			logger.info("starting in graphics mode");
-			ModuleFrame mf = ModuleFrame.getInstance();
-			mf.setVisible(true);
 		}
 
 	}

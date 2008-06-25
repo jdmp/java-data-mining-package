@@ -21,7 +21,7 @@ public class AddLocalModuleAction extends ModuleListAction {
 	}
 
 	public Object call() {
-		getIModules().addModule(new DefaultModule());
+		getIModules().getModuleList().add(new DefaultModule());
 		return null;
 	}
 

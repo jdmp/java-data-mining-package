@@ -9,26 +9,15 @@ import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.algorithm.AlgorithmListEvent;
 import org.jdmp.core.algorithm.AlgorithmListListener;
-import org.jdmp.core.algorithm.HasAlgorithms;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DataSetListEvent;
 import org.jdmp.core.dataset.DataSetListListener;
-import org.jdmp.core.dataset.HasDataSets;
 import org.jdmp.core.util.ObservableList;
 import org.jdmp.core.util.AbstractEvent.EventType;
-import org.jdmp.core.util.interfaces.HasAlgorithmsAndVariables;
-import org.jdmp.core.variable.HasVariables;
 import org.jdmp.core.variable.Variable;
-import org.jdmp.core.variable.VariableListEvent;
-import org.jdmp.core.variable.VariableListListener;
-import org.jdmp.core.variable.WorkspaceVariable;
 import org.jdmp.matrix.interfaces.GUIObject;
 
-public abstract class AbstractModule extends AbstractCoreObject implements Module,
-		HasAlgorithmsAndVariables, HasModules, HasAlgorithms, HasVariables, HasDataSets {
-
-	private static Module module = null;
-
+public abstract class AbstractModule extends AbstractCoreObject implements Module {
 	private transient GUIObject guiObject = null;
 
 	protected final List<Algorithm> algorithmList = new CopyOnWriteArrayList<Algorithm>();
@@ -37,39 +26,8 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 
 	protected final ObservableList<Variable> variableList = new ObservableList<Variable>();
 
-	protected final List<Module> moduleList = new CopyOnWriteArrayList<Module>();
+	protected final ObservableList<Module> moduleList = new ObservableList<Module>();
 
-	public static final Module getInstance() {
-		if (module == null) {
-			module = new DefaultModule();
-			module.getVariableList().add(WorkspaceVariable.getInstance());
-		}
-		return module;
-	}
-
-	public final void fireVariableAdded(VariableListEvent e) {
-		for (Object o : getListenerList().getListenerList()) {
-			if (o instanceof VariableListListener) {
-				((VariableListListener) o).variableAdded(e);
-			}
-		}
-	}
-
-	public final void fireVariableRemoved(VariableListEvent e) {
-		for (Object o : getListenerList().getListenerList()) {
-			if (o instanceof VariableListListener) {
-				((VariableListListener) o).variableRemoved(e);
-			}
-		}
-	}
-
-	public final void fireVariableUpdated(VariableListEvent e) {
-		for (Object o : getListenerList().getListenerList()) {
-			if (o instanceof VariableListListener) {
-				((VariableListListener) o).variableUpdated(e);
-			}
-		}
-	}
 
 	public final void fireDataSetAdded(DataSetListEvent e) {
 		for (Object o : getListenerList().getListenerList()) {
@@ -91,30 +49,6 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		for (Object o : getListenerList().getListenerList()) {
 			if (o instanceof DataSetListListener) {
 				((DataSetListListener) o).dataSetUpdated(e);
-			}
-		}
-	}
-
-	public final void fireModuleAdded(ModuleListEvent e) {
-		for (Object o : getListenerList().getListenerList()) {
-			if (o instanceof ModuleListListener) {
-				((ModuleListListener) o).moduleAdded(e);
-			}
-		}
-	}
-
-	public final void fireModuleRemoved(ModuleListEvent e) {
-		for (Object o : getListenerList().getListenerList()) {
-			if (o instanceof ModuleListListener) {
-				((ModuleListListener) o).moduleRemoved(e);
-			}
-		}
-	}
-
-	public final void fireModuleUpdated(ModuleListEvent e) {
-		for (Object o : getListenerList().getListenerList()) {
-			if (o instanceof ModuleListListener) {
-				((ModuleListListener) o).moduleUpdated(e);
 			}
 		}
 	}
@@ -148,17 +82,7 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		fireAlgorithmAdded(new AlgorithmListEvent(this, EventType.ADDED, a));
 	}
 
-	public void addVariable(Variable v) {
-		variableList.add(v);
-		fireVariableAdded(new VariableListEvent(this, EventType.ADDED, v));
-	}
-
-	public void addModule(Module m) {
-		moduleList.add(m);
-		fireModuleAdded(new ModuleListEvent(this, EventType.ADDED, m));
-	}
-
-	public List<Module> getModuleList() {
+	public ObservableList<Module> getModuleList() {
 		return moduleList;
 	}
 
@@ -179,45 +103,18 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		return dataSetList.get(pos);
 	}
 
-	public final Module getModule(int pos) {
-		return moduleList.get(pos);
-	}
-
-	public void addModuleListListener(ModuleListListener l) {
-		getListenerList().add(ModuleListListener.class, l);
-	}
-
-	public int getIndexOfModule(Module m) {
-		return moduleList.indexOf(m);
-	}
-
-	public int getModuleCount() {
-		return moduleList.size();
-	}
 
 	public void removeAlgorithm(Algorithm algorithm) {
 		algorithmList.remove(algorithm);
 		fireAlgorithmRemoved(new AlgorithmListEvent(this, EventType.REMOVED, algorithm));
 	}
 
-	public void removeVariable(Variable variable) {
-		variableList.remove(variable);
-		fireVariableRemoved(new VariableListEvent(this, EventType.REMOVED, variable));
-	}
 
 	public void removeDataSet(DataSet ds) {
 		dataSetList.remove(ds);
 		fireDataSetRemoved(new DataSetListEvent(this, EventType.REMOVED, ds));
 	}
 
-	public void removeModule(Module m) {
-		moduleList.remove(m);
-		fireModuleRemoved(new ModuleListEvent(this, EventType.REMOVED, m));
-	}
-
-	public void removeModuleListListener(ModuleListListener l) {
-		getListenerList().remove(ModuleListListener.class, l);
-	}
 
 	public final int getDataSetCount() {
 		return dataSetList.size();
@@ -251,59 +148,17 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		getListenerList().remove(DataSetListListener.class, l);
 	}
 
-	public final void addModuleListener(ModuleListener l) {
-		getListenerList().add(ModuleListener.class, l);
-	}
-
-	public final void removeModuleListener(ModuleListener l) {
-		getListenerList().remove(ModuleListener.class, l);
-	}
-
 	public final List<Algorithm> getAlgorithmList() {
 		return algorithmList;
 	}
 
-	public final int getVariableCount() {
-		return variableList.getSize();
-	}
-
-	public final Variable getVariable(int pos) {
-		return variableList.getElementAt(pos);
-	}
 
 	public final ObservableList<Variable> getVariableList() {
 		return variableList;
 	}
 
-	public final int getIndexOfVariable(Variable variable) {
-		return variableList.indexOf(variable);
-	}
-
-	public final void addVariableListListener(VariableListListener l) {
-		getListenerList().add(VariableListListener.class, l);
-	}
-
-	public final void removeVariableListListener(VariableListListener l) {
-		getListenerList().add(VariableListListener.class, l);
-	}
 
 	public void clear() {
-		while (!moduleList.isEmpty()) {
-			Module m = moduleList.get(0);
-			removeModule(m);
-		}
-		while (!dataSetList.isEmpty()) {
-			DataSet ds = dataSetList.get(0);
-			removeDataSet(ds);
-		}
-		while (!variableList.isEmpty()) {
-			Variable v = variableList.getElementAt(0);
-			removeVariable(v);
-		}
-		while (!algorithmList.isEmpty()) {
-			Algorithm a = algorithmList.get(0);
-			removeAlgorithm(a);
-		}
 	}
 
 	public final GUIObject getGUIObject() {

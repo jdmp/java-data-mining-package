@@ -11,7 +11,6 @@ import javax.swing.JComponent;
 import javax.swing.JMenuItem;
 
 import org.jdmp.core.CoreObject;
-import org.jdmp.core.module.AbstractModule;
 import org.jdmp.core.module.Module;
 import org.jdmp.gui.actions.ObjectAction;
 import org.jdmp.gui.algorithm.AlgorithmFrame;
@@ -86,20 +85,6 @@ public abstract class FrameManager {
 			if (frame == null) {
 				frame = new AlgorithmFrame(a);
 				frames.put(a, frame);
-			}
-			frame.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static void showFrame() {
-		try {
-			AbstractFrame frame = frames.get(AbstractModule.getInstance());
-			if (frame == null) {
-				frame = new ModuleFrame((ModuleGUIObject) AbstractModule.getInstance()
-						.getGUIObject());
-				frames.put(AbstractModule.getInstance().getGUIObject(), frame);
 			}
 			frame.setVisible(true);
 		} catch (Exception e) {
