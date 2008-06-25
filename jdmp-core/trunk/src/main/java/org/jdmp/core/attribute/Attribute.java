@@ -1,4 +1,4 @@
-package org.jdmp.core.sample;
+package org.jdmp.core.attribute;
 
 import java.io.Serializable;
 
