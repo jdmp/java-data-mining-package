@@ -7,12 +7,12 @@ import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
 import org.jdmp.core.module.DefaultModule;
-import org.jdmp.core.module.HasModules;
+import org.jdmp.core.module.HasModuleList;
 
 public class AddLocalModuleAction extends ModuleListAction {
 	private static final long serialVersionUID = 5647028718703205997L;
 
-	public AddLocalModuleAction(JComponent c, HasModules i) {
+	public AddLocalModuleAction(JComponent c, HasModuleList i) {
 		super(c, i);
 		putValue(Action.NAME, "Add LocalModule");
 		putValue(Action.SHORT_DESCRIPTION, "Add a new LocalModule");

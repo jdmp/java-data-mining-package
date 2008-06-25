@@ -7,7 +7,7 @@ import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
 import org.jdmp.core.module.DefaultModule;
-import org.jdmp.core.module.HasModules;
+import org.jdmp.core.module.HasModuleList;
 import org.jdmp.core.module.Module;
 
 public class AddModuleAction extends ModuleListAction {
@@ -15,12 +15,12 @@ public class AddModuleAction extends ModuleListAction {
 
 	private Module module = null;
 
-	public AddModuleAction(JComponent c, HasModules i, Module m) {
+	public AddModuleAction(JComponent c, HasModuleList i, Module m) {
 		this(c, i);
 		module = m;
 	}
 
-	public AddModuleAction(JComponent c, HasModules i) {
+	public AddModuleAction(JComponent c, HasModuleList i) {
 		super(c, i);
 		putValue(Action.NAME, "Add Module");
 		putValue(Action.SHORT_DESCRIPTION, "Add a new Module");

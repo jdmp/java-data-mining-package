@@ -9,7 +9,7 @@ import javax.swing.JSeparator;
 
 import org.jdmp.core.algorithm.HasAlgorithms;
 import org.jdmp.core.dataset.HasDataSets;
-import org.jdmp.core.module.HasModules;
+import org.jdmp.core.module.HasModuleList;
 import org.jdmp.core.variable.HasVariables;
 import org.jdmp.gui.algorithm.actions.AlgorithmListActions;
 import org.jdmp.gui.dataset.actions.DataSetListActions;
@@ -60,9 +60,9 @@ public class ObjectActions extends ArrayList<JComponent> {
 		add(new JMenuItem(new SetLabelAction(component, o)));
 		add(new JSeparator());
 
-		if (o instanceof HasModules) {
+		if (o instanceof HasModuleList) {
 			JMenu instanceActions = new JMenu("Modules");
-			for (JComponent c : new ModuleListActions(component, (HasModules) o)) {
+			for (JComponent c : new ModuleListActions(component, (HasModuleList) o)) {
 				instanceActions.add(c);
 			}
 			add(instanceActions);

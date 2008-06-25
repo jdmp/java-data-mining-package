@@ -2,18 +2,18 @@ package org.jdmp.gui.module.actions;
 
 import javax.swing.JComponent;
 
-import org.jdmp.core.module.HasModules;
+import org.jdmp.core.module.HasModuleList;
 import org.jdmp.gui.actions.ObjectAction;
 import org.jdmp.matrix.interfaces.GUIObject;
 
 public abstract class ModuleListAction extends ObjectAction {
 
-	public ModuleListAction(JComponent c, HasModules iModules) {
+	public ModuleListAction(JComponent c, HasModuleList iModules) {
 		super(c, (GUIObject) iModules);
 	}
 
-	public HasModules getIModules() {
-		return (HasModules) getObject();
+	public HasModuleList getIModules() {
+		return (HasModuleList) getObject();
 	}
 
 }

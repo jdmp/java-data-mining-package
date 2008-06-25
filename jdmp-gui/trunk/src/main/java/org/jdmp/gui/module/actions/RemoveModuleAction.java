@@ -6,7 +6,7 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
-import org.jdmp.core.module.HasModules;
+import org.jdmp.core.module.HasModuleList;
 import org.jdmp.core.module.Module;
 
 public class RemoveModuleAction extends ModuleListAction {
@@ -14,12 +14,12 @@ public class RemoveModuleAction extends ModuleListAction {
 
 	private Module module = null;
 
-	public RemoveModuleAction(JComponent c, HasModules i, Module m) {
+	public RemoveModuleAction(JComponent c, HasModuleList i, Module m) {
 		this(c, i);
 		this.module = m;
 	}
 
-	public RemoveModuleAction(JComponent c, HasModules i) {
+	public RemoveModuleAction(JComponent c, HasModuleList i) {
 		super(c, i);
 		putValue(Action.NAME, "Remove Module...");
 		putValue(Action.SHORT_DESCRIPTION, "Remove a Module");

@@ -32,7 +32,7 @@ import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.algorithm.HasAlgorithms;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.HasDataSets;
-import org.jdmp.core.module.HasModules;
+import org.jdmp.core.module.HasModuleList;
 import org.jdmp.core.module.Module;
 import org.jdmp.core.sample.ClassificationSample;
 import org.jdmp.core.sample.HasSampleList;
@@ -178,7 +178,7 @@ public class ObjectListPanel extends JPanel implements MouseListener, KeyListene
 		updateTitle();
 	}
 
-	public ObjectListPanel(HasModules iModules) {
+	public ObjectListPanel(HasModuleList iModules) {
 		this();
 		this.object = (GUIObject) iModules;
 		this.type = IMODULES;
@@ -295,7 +295,7 @@ public class ObjectListPanel extends JPanel implements MouseListener, KeyListene
 				actions = new DataSetListActions(this, (HasDataSets) object);
 				break;
 			case IMODULES:
-				actions = new ModuleListActions(this, (HasModules) object);
+				actions = new ModuleListActions(this, (HasModuleList) object);
 				break;
 			case ISAMPLES:
 				actions = new SampleListActions(this, (HasSampleList) object);
