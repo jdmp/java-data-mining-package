@@ -14,10 +14,7 @@ import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.ObservableList;
 import org.jdmp.core.util.ObservableMap;
-import org.jdmp.core.util.AbstractEvent.EventType;
 import org.jdmp.core.variable.Variable;
-import org.jdmp.core.variable.VariableListEvent;
-import org.jdmp.core.variable.VariableListListener;
 import org.jdmp.core.variable.VariableListener;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.interfaces.GUIObject;
@@ -53,29 +50,7 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		return variableList;
 	}
 
-	public void fireVariableAdded(VariableListEvent e) {
-		for (Object o : getListenerList().getListenerList()) {
-			if (o instanceof VariableListListener) {
-				((VariableListListener) o).variableAdded(e);
-			}
-		}
-	}
-
-	public void fireVariableRemoved(VariableListEvent e) {
-		for (Object o : getListenerList().getListenerList()) {
-			if (o instanceof VariableListListener) {
-				((VariableListListener) o).variableRemoved(e);
-			}
-		}
-	}
-
-	public void fireVariableUpdated(VariableListEvent e) {
-		for (Object o : getListenerList().getListenerList()) {
-			if (o instanceof VariableListListener) {
-				((VariableListListener) o).variableUpdated(e);
-			}
-		}
-	}
+	
 
 	public int getSampleCount() {
 		return sampleList.getSize();
@@ -90,7 +65,6 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 
 	public void setVariable(int index, Variable v) {
 		variableList.put(index, v);
-		fireVariableAdded(new VariableListEvent(this, EventType.ADDED, v));
 	}
 
 	public void addSample(Sample sample) {

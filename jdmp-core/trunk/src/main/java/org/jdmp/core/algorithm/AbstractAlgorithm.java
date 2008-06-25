@@ -14,8 +14,6 @@ import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.util.AbstractEvent.EventType;
 import org.jdmp.core.variable.Variable;
-import org.jdmp.core.variable.VariableListEvent;
-import org.jdmp.core.variable.VariableListListener;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.interfaces.GUIObject;
@@ -92,7 +90,6 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 
 	public void setVariable(int index, Variable variable) {
 		variableList.put(index, variable);
-		fireVariableAdded(new VariableListEvent(this, EventType.ADDED, variable));
 	}
 
 	public final void setAlgorithm(int index, Algorithm a) {
@@ -104,30 +101,6 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 	}
 
 	public void createVariablesAndAlgorithms() {
-	}
-
-	public void fireVariableAdded(VariableListEvent e) {
-		for (Object o : getListenerList().getListenerList()) {
-			if (o instanceof VariableListListener) {
-				((VariableListListener) o).variableAdded(e);
-			}
-		}
-	}
-
-	public void fireVariableRemoved(VariableListEvent e) {
-		for (Object o : getListenerList().getListenerList()) {
-			if (o instanceof VariableListListener) {
-				((VariableListListener) o).variableRemoved(e);
-			}
-		}
-	}
-
-	public void fireVariableUpdated(VariableListEvent e) {
-		for (Object o : getListenerList().getListenerList()) {
-			if (o instanceof VariableListListener) {
-				((VariableListListener) o).variableUpdated(e);
-			}
-		}
 	}
 
 	public void fireAlgorithmAdded(AlgorithmListEvent e) {
@@ -317,10 +290,6 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 	public void addVariable(Variable v) {
 	}
 
-	public void addVariableListListener(VariableListListener l) {
-		getListenerList().add(VariableListListener.class, l);
-	}
-
 	public final int getIndexOfVariable(Variable v) {
 		return variableList.indexOf(v);
 	}
@@ -378,10 +347,6 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 	}
 
 	public void removeVariable(Variable variable) {
-	}
-
-	public void removeVariableListListener(VariableListListener l) {
-		getListenerList().remove(VariableListListener.class, l);
 	}
 
 	public void addAlgorithm(Algorithm a) {

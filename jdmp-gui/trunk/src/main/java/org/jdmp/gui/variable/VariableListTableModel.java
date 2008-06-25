@@ -5,12 +5,9 @@ import javax.swing.table.AbstractTableModel;
 import org.jdmp.core.variable.HasVariables;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableEvent;
-import org.jdmp.core.variable.VariableListEvent;
-import org.jdmp.core.variable.VariableListListener;
 import org.jdmp.core.variable.VariableListener;
 
-public class VariableListTableModel extends AbstractTableModel implements VariableListener,
-		VariableListListener {
+public class VariableListTableModel extends AbstractTableModel implements VariableListener {
 	private static final long serialVersionUID = -1032855724069297926L;
 
 	public static final int ICONCOLUMN = 0;
@@ -87,22 +84,6 @@ public class VariableListTableModel extends AbstractTableModel implements Variab
 		if (row >= 0) {
 			fireTableRowsUpdated(row, row);
 		}
-	}
-
-	public void variableAdded(VariableListEvent e) {
-		Variable v = (Variable) e.getData();
-		v.addVariableListener(this);
-		fireTableDataChanged();
-	}
-
-	public void variableRemoved(VariableListEvent e) {
-		Variable v = (Variable) e.getData();
-		v.removeVariableListener(this);
-		fireTableDataChanged();
-	}
-
-	public void variableUpdated(VariableListEvent e) {
-		fireTableDataChanged();
 	}
 
 }
