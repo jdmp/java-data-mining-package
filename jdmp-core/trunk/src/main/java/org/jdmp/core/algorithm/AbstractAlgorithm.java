@@ -14,6 +14,7 @@ import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.util.AbstractEvent.EventType;
 import org.jdmp.core.variable.Variable;
+import org.jdmp.core.variable.VariableFactory;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.interfaces.GUIObject;
@@ -231,7 +232,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		for (int v = 0, i = 0; v < size; v++) {
 			if (getEdgeDirectionForVariable(v) == OUTGOING
 					|| getEdgeDirectionForVariable(v) == BIDIRECTIONAL) {
-				addMatrixForVariable(v, output.get(i++));
+				setMatrix(v, output.get(i++));
 			}
 		}
 		return output;
@@ -322,10 +323,22 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 			return v.getMatrix(matrixIndex);
 	}
 
-	public final void addMatrixForVariable(int variableIndex, Matrix matrix) {
-		Variable v = getVariable(variableIndex);
-		if (v != null)
-			v.addMatrix(matrix);
+	public Matrix getMatrix(Object variableKey) {
+		Variable v = getVariableList().get(variableKey);
+		if (v != null) {
+			return v.getMatrix();
+		} else {
+			return null;
+		}
+	}
+	
+	public void setMatrix(Object variableKey, Matrix matrix) {
+		Variable v = getVariableList().get(variableKey);
+		if (v == null) {
+			v = VariableFactory.labeledVariable(variableKey.toString());
+			getVariableList().put(variableKey, v);
+		}
+		v.addMatrix(matrix);
 	}
 
 	public final void setMatrixForVariable(int variableIndex, int matrixIndex, Matrix matrix) {

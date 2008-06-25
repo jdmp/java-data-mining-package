@@ -54,7 +54,7 @@ public class LinearRegression extends AbstractClassifier {
 	}
 
 	public void setParameterMatrix(Matrix parameters) {
-		addMatrixForVariable(PARAMETERS, parameters);
+		setMatrix(PARAMETERS, parameters);
 	}
 
 	@Override

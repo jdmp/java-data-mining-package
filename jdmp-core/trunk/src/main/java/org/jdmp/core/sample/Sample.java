@@ -21,8 +21,6 @@ public interface Sample extends CoreObject, HasVariableMap {
 
 	public Sample clone();
 
-	public Matrix getMatrix(Object variableKey);
-
-	public void setMatrix(Object variableKey, Matrix matrix);
+	
 
 }

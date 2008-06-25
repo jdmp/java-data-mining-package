@@ -82,13 +82,9 @@ public interface Algorithm extends CoreObject, HasVariableMap, HasAlgorithms,
 
 	public int getEdgeDirectionForAlgorithm(int index);
 
-	public Matrix getMatrixFromVariable(int variableIndex);
-
 	public List<Matrix> calculateAlgorithmForId(int id) throws Exception;
 
 	public Matrix getMatrixFromVariable(int variableIndex, int matrixIndex);
-
-	public void addMatrixForVariable(int variableIndex, Matrix matrix);
 
 	public void setMatrixForVariable(int variableIndex, int matrixIndex, Matrix matrix);
 

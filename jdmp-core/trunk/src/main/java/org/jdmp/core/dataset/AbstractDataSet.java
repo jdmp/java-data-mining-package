@@ -15,6 +15,7 @@ import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.ObservableList;
 import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.Variable;
+import org.jdmp.core.variable.VariableFactory;
 import org.jdmp.core.variable.VariableListener;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.interfaces.GUIObject;
@@ -35,11 +36,23 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		this();
 		setLabel(label);
 	}
-
-	public void addVariable(Variable v) {
+	
+	public Matrix getMatrix(Object variableKey) {
+		Variable v = getVariableList().get(variableKey);
+		if (v != null) {
+			return v.getMatrix();
+		} else {
+			return null;
+		}
 	}
-
-	public void removeVariable(Variable v) {
+	
+	public void setMatrix(Object variableKey, Matrix matrix) {
+		Variable v = getVariableList().get(variableKey);
+		if (v == null) {
+			v = VariableFactory.labeledVariable(variableKey.toString());
+			getVariableList().put(variableKey, v);
+		}
+		v.addMatrix(matrix);
 	}
 
 	public ObservableList<Sample> getSampleList() {
