@@ -16,9 +16,12 @@ public class SemiSupervisedEM extends AbstractClassifier implements SemiSupervis
 
 	private Classifier classifier = null;
 
-	public SemiSupervisedEM(Classifier singleClassClassifier) {
+	private boolean useRawPrediction = false;
+
+	public SemiSupervisedEM(Classifier singleClassClassifier, boolean useRawPrediction) {
 		super("MultiClassClassifier [" + singleClassClassifier.toString() + "]");
 		this.classifier = singleClassClassifier;
+		this.useRawPrediction = useRawPrediction;
 	}
 
 	@Override
@@ -44,10 +47,14 @@ public class SemiSupervisedEM extends AbstractClassifier implements SemiSupervis
 		classifier.predict(unlabeledData);
 		for (Sample s : unlabeledData.getSampleList()) {
 			Matrix predicted = s.getMatrix(Sample.PREDICTED);
-			int max = (int) predicted.indexOfMax(Ret.NEW, Matrix.COLUMN).getAsDouble(0, 0);
-			Matrix target = MatrixFactory.zeros(1, classCount);
-			target.setAsDouble(1.0, 0, max);
-			s.setMatrix(Sample.TARGET, target);
+			if (useRawPrediction) {
+				s.setMatrix(Sample.TARGET, predicted);
+			} else {
+				int max = (int) predicted.indexOfMax(Ret.NEW, Matrix.COLUMN).getAsDouble(0, 0);
+				Matrix target = MatrixFactory.zeros(1, classCount);
+				target.setAsDouble(1.0, 0, max);
+				s.setMatrix(Sample.TARGET, target);
+			}
 		}
 		ClassificationDataSet completeData = new ClassificationDataSet();
 		completeData.addAllSamples(labeledData.getSampleList().toCollection());
@@ -74,7 +81,7 @@ public class SemiSupervisedEM extends AbstractClassifier implements SemiSupervis
 	}
 
 	public Classifier emptyCopy() throws Exception {
-		return new SemiSupervisedEM(classifier.emptyCopy());
+		return new SemiSupervisedEM(classifier.emptyCopy(), useRawPrediction);
 	}
 
 	@Override
