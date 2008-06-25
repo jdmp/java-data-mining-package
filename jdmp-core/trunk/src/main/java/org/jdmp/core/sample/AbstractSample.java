@@ -10,9 +10,7 @@ import org.jdmp.matrix.interfaces.GUIObject;
 
 public abstract class AbstractSample extends AbstractCoreObject implements Sample {
 
-	private transient GUIObject guiObject=null;
-	
-	
+	private transient GUIObject guiObject = null;
 
 	public AbstractSample() {
 		super();
@@ -25,15 +23,14 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 
 	public abstract Sample clone();
 
-	public final String toString(){
-		if (getLabel()==null) {
+	public final String toString() {
+		if (getLabel() == null) {
 			return getClass().getSimpleName();
 		} else {
 			return getClass().getSimpleName() + " [" + getLabel() + "]";
 		}
 	}
-	
-	
+
 	public final GUIObject getGUIObject() {
 		if (guiObject == null) {
 			try {
@@ -47,16 +44,13 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 		return guiObject;
 	}
 
-	
-	public Matrix getMatrix(Object variableKey){
-		Variable v=getVariableList().get(variableKey);
-		if(v!=null){
+	public Matrix getMatrix(Object variableKey) {
+		Variable v = getVariableList().get(variableKey);
+		if (v != null) {
 			return v.getMatrix();
-		}else{
+		} else {
 			return null;
 		}
 	}
 
-	
-	
 }

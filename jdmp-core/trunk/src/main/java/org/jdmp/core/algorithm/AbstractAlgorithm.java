@@ -28,8 +28,8 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 
 	protected static transient Logger logger = Logger.getLogger(Algorithm.class.getName());
 
-	private transient GUIObject guiObject =null;
-	
+	private transient GUIObject guiObject = null;
+
 	public static final int NOTCONNECTED = 0;
 
 	public static final int INCOMING = 1;
@@ -61,7 +61,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 	private transient Thread algorithmSpeedThread = null;
 
 	private transient EventListenerList listenerList = null;
-	
+
 	private String label = "";
 
 	private String description = "";
@@ -88,7 +88,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		}
 		return listenerList;
 	}
-	
+
 	public AbstractAlgorithm(String label) {
 		super();
 		setLabel(label);
@@ -157,8 +157,6 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 			}
 		}
 	}
-
-
 
 	public void clear() {
 
@@ -320,8 +318,6 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		this.callsPerSecond = i;
 	}
 
-
-
 	public void addVariable(Variable v) {
 	}
 
@@ -457,7 +453,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		if (file.getAbsolutePath().toLowerCase().endsWith(".alg")) {
 		}
 	}
-	
+
 	public final GUIObject getGUIObject() {
 		if (guiObject == null) {
 			try {
@@ -470,9 +466,9 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		}
 		return guiObject;
 	}
-	
-	public final String toString(){
-		if (getLabel()==null) {
+
+	public final String toString() {
+		if (getLabel() == null) {
 			return getClass().getSimpleName();
 		} else {
 			return getClass().getSimpleName() + " [" + getLabel() + "]";

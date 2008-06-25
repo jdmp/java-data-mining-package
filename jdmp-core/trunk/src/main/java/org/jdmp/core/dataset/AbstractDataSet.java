@@ -28,7 +28,7 @@ import org.jdmp.matrix.interfaces.HasMatrixList;
 public abstract class AbstractDataSet extends AbstractCoreObject implements DataSet, HasVariables,
 		HasSamples, HasMatrixList {
 
-	private transient GUIObject guiObject=null;
+	private transient GUIObject guiObject = null;
 
 	private final ObservableList<Sample> sampleList = new ObservableList<Sample>();
 
@@ -80,8 +80,6 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 			}
 		}
 	}
-
-
 
 	public int getSampleCount() {
 		return sampleList.getSize();
@@ -155,15 +153,9 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 			v.setMatrix(matrixIndex, matrix);
 	}
 
-	
-
-
-
 	public int getIndexOfSample(Sample p) {
 		return sampleList.indexOf(p);
 	}
-
-
 
 	public void addDataSetListener(DataSetListener l) {
 		getListenerList().add(DataSetListener.class, l);
@@ -227,7 +219,7 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 	public List<DataSet> splitForCV(int numberOfCVSets, int idOfCVSet, long randomSeed) {
 		List<DataSet> returnDataSets = new ArrayList<DataSet>();
 		List<List<Sample>> tempSampleLists = new ArrayList<List<Sample>>();
-		List<Sample> allSamples = new ArrayList<Sample>(getSampleList().toCollection());		
+		List<Sample> allSamples = new ArrayList<Sample>(getSampleList().toCollection());
 		Collections.shuffle(allSamples, new Random(randomSeed));
 
 		for (int set = 0; set < numberOfCVSets; set++) {
@@ -275,7 +267,7 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 	public void removeAllSamples() {
 		sampleList.clear();
 	}
-	
+
 	public final GUIObject getGUIObject() {
 		if (guiObject == null) {
 			try {
@@ -288,9 +280,9 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		}
 		return guiObject;
 	}
-	
-	public final String toString(){
-		if (getLabel()==null) {
+
+	public final String toString() {
+		if (getLabel() == null) {
 			return getClass().getSimpleName();
 		} else {
 			return getClass().getSimpleName() + " [" + getLabel() + "]";

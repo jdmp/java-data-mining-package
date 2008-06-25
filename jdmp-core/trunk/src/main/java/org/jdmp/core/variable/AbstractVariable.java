@@ -15,13 +15,13 @@ import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.interfaces.GUIObject;
 
 public abstract class AbstractVariable extends AbstractCoreObject implements Variable {
-	
-	private transient GUIObject guiObject=null;
+
+	private transient GUIObject guiObject = null;
 
 	protected AbstractVariable() {
 		super();
 	}
-	
+
 	public final int getMemorySize() {
 		if (getMatrixList() == null) {
 			return 0;
@@ -46,15 +46,11 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 		}
 	}
 
-
 	public final Matrix getMatrix(int index) {
 		if (getMatrixList() == null)
 			return null;
 		return getMatrixList().get(index);
 	}
-
-	
-
 
 	public final double getValue() throws MatrixException {
 		if (getMatrix() != null)
@@ -67,25 +63,23 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 		Matrix m = MatrixFactory.linkToValue(value);
 		addMatrix(m);
 	}
-	
 
 	public final void fireValueChanged(Matrix m) {
 		fireVariableEvent(new VariableEvent(this, EventType.UPDATED, getIndexOfMatrix(m), m));
 	}
 
 	public final void addMatrix(Matrix m) {
-		if(m==null){
+		if (m == null) {
 			throw new RuntimeException("tried to add null Matrix");
 		}
-		
-		if (getSize()==null) {
+
+		if (getSize() == null) {
 			setSize(Coordinates.copyOf(m.getSize()));
 		}
-		
+
 		getMatrixList().add(m);
-		fireVariableEvent(new VariableEvent(this, EventType.ADDED, getMatrixList().size() - 1,
-				m));
-		
+		fireVariableEvent(new VariableEvent(this, EventType.ADDED, getMatrixList().size() - 1, m));
+
 	}
 
 	public final void removeVariableListener(VariableListener l) {
@@ -152,7 +146,6 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 		}
 	}
 
-
 	public final double getMinValue() throws MatrixException {
 		return getAsMatrix().getMinValue();
 	}
@@ -188,6 +181,7 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 	public final Matrix getStandardDeviationMatrix() throws MatrixException {
 		return getAsMatrix().std(Ret.NEW, ROW, true);
 	}
+
 	public final GUIObject getGUIObject() {
 		if (guiObject == null) {
 			try {
@@ -200,14 +194,13 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 		}
 		return guiObject;
 	}
-	
-	
-	public final String toString(){
-		if (getLabel()==null) {
+
+	public final String toString() {
+		if (getLabel() == null) {
 			return getClass().getSimpleName();
 		} else {
 			return getClass().getSimpleName() + " [" + getLabel() + "]";
 		}
 	}
-	
+
 }

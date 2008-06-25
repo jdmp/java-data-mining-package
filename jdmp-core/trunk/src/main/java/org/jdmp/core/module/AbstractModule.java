@@ -28,8 +28,8 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		HasAlgorithmsAndVariables, HasModules, HasAlgorithms, HasVariables, HasDataSets {
 
 	private static Module module = null;
-	
-	private transient GUIObject guiObject =null;
+
+	private transient GUIObject guiObject = null;
 
 	protected final List<Algorithm> algorithmList = new CopyOnWriteArrayList<Algorithm>();
 
@@ -287,8 +287,6 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		getListenerList().add(VariableListListener.class, l);
 	}
 
-
-
 	public void clear() {
 		while (!moduleList.isEmpty()) {
 			Module m = moduleList.get(0);
@@ -307,7 +305,7 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 			removeAlgorithm(a);
 		}
 	}
-	
+
 	public final GUIObject getGUIObject() {
 		if (guiObject == null) {
 			try {
@@ -321,12 +319,12 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		return guiObject;
 	}
 
-	public final String toString(){
-		if (getLabel()==null) {
+	public final String toString() {
+		if (getLabel() == null) {
 			return getClass().getSimpleName();
 		} else {
 			return getClass().getSimpleName() + " [" + getLabel() + "]";
 		}
 	}
-	
+
 }
