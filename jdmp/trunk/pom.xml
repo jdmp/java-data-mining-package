@@ -154,6 +154,12 @@
 		        <version>${jdmp.version}</version>
 				<scope>compile</scope>
 		    </dependency>
+		    <dependency>
+      			<groupId>org.jdmp</groupId>
+		        <artifactId>jdmp-mallet</artifactId>
+		        <version>${jdmp.version}</version>
+				<scope>compile</scope>
+		    </dependency>
 
 
 			<dependency>
@@ -377,6 +383,18 @@
       			<groupId>mulan</groupId>
 		        <artifactId>mulan</artifactId>
 		        <version>0.2</version>
+				<scope>compile</scope>
+		    </dependency>
+		    <dependency>
+      			<groupId>mallet</groupId>
+		        <artifactId>mallet</artifactId>
+		        <version>0.4</version>
+				<scope>compile</scope>
+		    </dependency>
+		    <dependency>
+      			<groupId>mallet-deps</groupId>
+		        <artifactId>mallet-deps</artifactId>
+		        <version>0.4</version>
 				<scope>compile</scope>
 		    </dependency>
 
