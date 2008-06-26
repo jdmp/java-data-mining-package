@@ -49,8 +49,8 @@ import org.jdmp.matrix.implementations.basic.DefaultDenseDoubleMatrix2D;
 import org.jdmp.matrix.implementations.basic.DefaultDenseIntMatrix2D;
 import org.jdmp.matrix.implementations.basic.DefaultDenseObjectMatrix2D;
 import org.jdmp.matrix.implementations.basic.DefaultDenseStringMatrix2D;
-import org.jdmp.matrix.implementations.basic.DefaultSparseColumnMatrix2D;
 import org.jdmp.matrix.implementations.basic.DefaultSparseGenericMatrix;
+import org.jdmp.matrix.implementations.basic.DefaultSparseRowMatrix2D;
 import org.jdmp.matrix.implementations.basic.SynchronizedGenericMatrix;
 import org.jdmp.matrix.implementations.collections.DefaultListMatrix;
 import org.jdmp.matrix.implementations.collections.DefaultMapMatrix;
@@ -93,10 +93,10 @@ public abstract class MatrixFactory {
 
 	private static String denseStringMatrix2DClassName = DefaultDenseStringMatrix2D.class.getName();
 
-	private static String sparseDoubleMatrix2DClassName = DefaultSparseColumnMatrix2D.class
+	private static String sparseDoubleMatrix2DClassName = DefaultSparseRowMatrix2D.class
 			.getName();
 
-	private static String sparseObjectMatrix2DClassName = DefaultSparseColumnMatrix2D.class
+	private static String sparseObjectMatrix2DClassName = DefaultSparseRowMatrix2D.class
 			.getName();
 
 	private static Constructor<? extends Matrix> denseDoubleMatrix2DConstructor = null;

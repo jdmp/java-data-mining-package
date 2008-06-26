@@ -22,9 +22,16 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 
 	public int mode = TRAIN;
 
+	private boolean evaluate = true;
+
 	public AbstractRegressor(String label) {
 		super(label);
 		setAlgorithm(OUTPUTERRORALGORITHM, new AlgorithmDifference());
+	}
+
+	public AbstractRegressor(String label, boolean evaluate) {
+		this(label);
+		this.evaluate = evaluate;
 	}
 
 	public abstract void train(RegressionDataSet dataSet) throws Exception;
@@ -37,10 +44,12 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 	public final void predict(Sample sample) throws Exception {
 		Matrix predicted = predict(sample.getMatrix(INPUT), sample.getMatrix(WEIGHT));
 		sample.setMatrix(PREDICTED, predicted);
-		List<Matrix> error = getOutputErrorAlgorithm().calculate(predicted,
-				sample.getMatrix(TARGET));
-		sample.setMatrix(DIFFERENCE, error.get(0));
-		sample.setMatrix(RMSE, MatrixFactory.linkToValue(error.get(0).getRMS()));
+		if (evaluate) {
+			List<Matrix> error = getOutputErrorAlgorithm().calculate(predicted,
+					sample.getMatrix(TARGET));
+			sample.setMatrix(DIFFERENCE, error.get(0));
+			sample.setMatrix(RMSE, MatrixFactory.linkToValue(error.get(0).getRMS()));
+		}
 	}
 
 	public final Matrix predict(Matrix input) throws Exception {
@@ -89,50 +98,53 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 
 			predict(sample);
 
-			double rmse = sample.getMatrix(RMSE).getEuklideanValue();
-			error += Math.pow(rmse, 2.0);
+			if (evaluate) {
+				double rmse = sample.getMatrix(RMSE).getEuklideanValue();
+				error += Math.pow(rmse, 2.0);
 
-			if (sample instanceof ClassificationSample) {
+				if ((sample instanceof ClassificationSample)) {
 
-				int recognized = ((ClassificationSample) sample).getRecognizedClass();
-				int targetClass = ((ClassificationSample) sample).getTargetClass();
+					int recognized = ((ClassificationSample) sample).getRecognizedClass();
+					int targetClass = ((ClassificationSample) sample).getTargetClass();
 
-				if (classCount == 1 || recognized == -1) {
-					confusion.setAsDouble(confusion.getAsDouble(0, 0) + 1, 0, 0);
-				} else {
-					confusion.setAsDouble(confusion.getAsDouble(recognized, targetClass) + 1,
-							recognized, targetClass);
+					if (classCount == 1 || recognized == -1) {
+						confusion.setAsDouble(confusion.getAsDouble(0, 0) + 1, 0, 0);
+					} else {
+						confusion.setAsDouble(confusion.getAsDouble(recognized, targetClass) + 1,
+								recognized, targetClass);
+					}
+
+					if (((ClassificationSample) sample).isCorrect()) {
+						correctCount++;
+						// weight = weight * 0.99;
+					} else {
+						errorCount++;
+						// weight = weight / 0.99;
+					}
+
+					// ((RegressionSample) sample).setWeight(weight);
 				}
 
-				if (((ClassificationSample) sample).isCorrect()) {
-					correctCount++;
-					// weight = weight * 0.99;
-				} else {
-					errorCount++;
-					// weight = weight / 0.99;
-				}
-
-				// ((RegressionSample) sample).setWeight(weight);
 			}
 
-		}
+			Matrix outputError = MatrixFactory.linkToValue(Math.sqrt(error
+					/ dataSet.getSampleCount()));
+			outputError.setLabel("Output Error with " + getLabel());
+			dataSet.appendRMSEMatrix(outputError);
 
-		Matrix outputError = MatrixFactory.linkToValue(Math.sqrt(error / dataSet.getSampleCount()));
-		outputError.setLabel("Output Error with " + getLabel());
-		dataSet.appendRMSEMatrix(outputError);
+			if ((dataSet instanceof ClassificationDataSet)) {
+				confusion.setLabel("Confusion with " + getLabel());
+				((ClassificationDataSet) dataSet).appendConfusionMatrix(confusion);
 
-		if (dataSet instanceof ClassificationDataSet) {
-			confusion.setLabel("Confusion with " + getLabel());
-			((ClassificationDataSet) dataSet).appendConfusionMatrix(confusion);
+				Matrix accuracy = MatrixFactory.linkToValue((double) correctCount
+						/ (double) dataSet.getSampleCount());
+				accuracy.setLabel("Accuracy with " + getLabel());
+				((ClassificationDataSet) dataSet).appendAccuracyMatrix(accuracy);
 
-			Matrix accuracy = MatrixFactory.linkToValue((double) correctCount
-					/ (double) dataSet.getSampleCount());
-			accuracy.setLabel("Accuracy with " + getLabel());
-			((ClassificationDataSet) dataSet).appendAccuracyMatrix(accuracy);
-
-			Matrix errorMatrix = MatrixFactory.linkToValue((double) errorCount);
-			errorMatrix.setLabel("Errors with " + getLabel());
-			((ClassificationDataSet) dataSet).appendErrorCountMatrix(errorMatrix);
+				Matrix errorMatrix = MatrixFactory.linkToValue((double) errorCount);
+				errorMatrix.setLabel("Errors with " + getLabel());
+				((ClassificationDataSet) dataSet).appendErrorCountMatrix(errorMatrix);
+			}
 		}
 	}
 

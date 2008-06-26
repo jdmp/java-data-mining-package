@@ -18,11 +18,14 @@ public class MultiClassClassifier extends AbstractClassifier {
 
 	private int classCount = 0;
 
+	private boolean twoColumns = false;
+
 	private List<Classifier> singleClassClassifiers = new ArrayList<Classifier>();
 
-	public MultiClassClassifier(Classifier singleClassClassifier) {
+	public MultiClassClassifier(Classifier singleClassClassifier, boolean twoColumns) {
 		super("MultiClassClassifier [" + singleClassClassifier.toString() + "]");
 		this.singleClassClassifier = singleClassClassifier;
+		this.twoColumns = twoColumns;
 	}
 
 	@Override
@@ -46,17 +49,19 @@ public class MultiClassClassifier extends AbstractClassifier {
 		classCount = ((ClassificationDataSet) dataSet).getClassCount();
 
 		for (int i = 0; i < classCount; i++) {
+			System.out.println("Training class " + i);
 			Classifier c = singleClassClassifier.emptyCopy();
 			singleClassClassifiers.add(c);
 			Matrix input = dataSet.getInputMatrix();
-			Matrix target1 = dataSet.getTargetMatrix().selectColumns(Ret.LINK, i);
-			// Matrix target2 = target1.minus(1).abs(Ret.NEW);
-			// Matrix target = MatrixFactory.horCat(target1, target2);
-			ClassificationDataSet ds = ClassificationDataSet.linkToMatrix(input, target1);
-			ds.showGUI();
+			Matrix target = dataSet.getTargetMatrix().selectColumns(Ret.LINK, i);
+			if (twoColumns) {
+				Matrix target2 = target.minus(1).abs(Ret.NEW);
+				target = MatrixFactory.horCat(target, target2);
+			}
+			ClassificationDataSet ds = ClassificationDataSet.linkToMatrix(input, target);
+			// ds.showGUI();
 			c.train(ds);
 			c.predict(ds);
-
 		}
 
 	}
@@ -67,6 +72,6 @@ public class MultiClassClassifier extends AbstractClassifier {
 	}
 
 	public Classifier emptyCopy() {
-		return new MultiClassClassifier(singleClassClassifier);
+		return new MultiClassClassifier(singleClassClassifier, twoColumns);
 	}
 }
