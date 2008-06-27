@@ -59,9 +59,7 @@ public class MultiClassClassifier extends AbstractClassifier {
 				target = MatrixFactory.horCat(target, target2);
 			}
 			ClassificationDataSet ds = ClassificationDataSet.linkToMatrix(input, target);
-			// ds.showGUI();
 			c.train(ds);
-			c.predict(ds);
 		}
 
 	}
