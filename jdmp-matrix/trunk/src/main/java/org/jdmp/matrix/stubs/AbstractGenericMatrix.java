@@ -245,8 +245,8 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		return select(returnType, null, columns);
 	}
 
-	public Matrix imputeKNN(Ret returnType, int dimension) throws MatrixException {
-		return new ImputeKNN(dimension, this).calc(returnType);
+	public Matrix imputeKNN(Ret returnType,int k) throws MatrixException {
+		return new ImputeKNN(this,k).calc(returnType);
 	}
 
 	public Matrix imputeMean(Ret returnType, int dimension) throws MatrixException {

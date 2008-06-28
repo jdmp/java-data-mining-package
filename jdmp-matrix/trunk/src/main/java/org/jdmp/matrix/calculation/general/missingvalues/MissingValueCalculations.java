@@ -88,12 +88,12 @@ public interface MissingValueCalculations {
 	 * @param returnType
 	 *            Select whether a new or a linked Matrix is returned, or if the
 	 *            operation is performed on the original Matrix
-	 * @param dimension
-	 *            The axis along which to calculate nearest neighbors
+	 * @param k
+	 *            number of neighbors to use
 	 * @return Matrix with missing values replaced
 	 * @throws MatrixException
 	 */
-	public Matrix imputeKNN(Ret returnType, int dimension) throws MatrixException;
+	public Matrix imputeKNN(Ret returnType, int k) throws MatrixException;
 
 	/**
 	 * Replaces missing values by regression on other variables

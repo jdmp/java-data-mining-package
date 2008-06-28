@@ -20,8 +20,8 @@ public class ReplaceByNearestNeighborAction extends MatrixAction {
 
 	@Override
 	public Object call() throws MatrixException {
-		return getMatrixObject().getMatrix().calc(
-				new ImputeKNN(getDimension(), getMatrixObject().getMatrix()), Ret.ORIG);
+		return getMatrixObject().getMatrix().calc(new ImputeKNN(getMatrixObject().getMatrix(), 3),
+				Ret.ORIG);
 	}
 
 }

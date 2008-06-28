@@ -23,73 +23,86 @@
 
 package org.jdmp.matrix.calculation.general.missingvalues;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import org.jdmp.matrix.Matrix;
+import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.matrix.calculation.AbstractDoubleCalculation;
 import org.jdmp.matrix.exceptions.MatrixException;
 import org.jdmp.matrix.util.MathUtil;
+import org.jdmp.matrix.util.Sortable;
 
 public class ImputeKNN extends AbstractDoubleCalculation {
 	private static final long serialVersionUID = -4923873199518001578L;
 
-	private Matrix sourceCopy = null;
+	private Matrix distanceMatrix = null;
 
-	public ImputeKNN(int dimension, Matrix matrix) {
-		super(dimension, matrix);
+	private int k = 1;
+
+	public ImputeKNN(Matrix matrix, int k) {
+		super(matrix);
+		this.k = k;
 	}
 
-	public Matrix getNearestNeighbor(long... coordinates) throws MatrixException {
-		double bestDistance = Double.MAX_VALUE;
-		Matrix bestMatrix = null;
-		Matrix toReplace = null;
-		switch (getDimension()) {
-		case ROW:
-			toReplace = getSource().selectRows(Ret.LINK, coordinates[ROW]);
-			for (long r = getSource().getRowCount() - 1; r != -1; r--) {
-				if (r != coordinates[ROW]) {
-					Matrix candidate = getSource().selectRows(Ret.LINK, r);
-					if (!MathUtil.isNaNOrInfinite(candidate.getAsDouble(0, coordinates[COLUMN]))) {
-						double distance = toReplace.euklideanDistanceTo(candidate, true);
-						if (distance < bestDistance) {
-							bestDistance = distance;
-							bestMatrix = candidate;
-						}
-					}
-				}
+	private List<Integer> getCandidates(long... coordinates) {
+		List<Integer> candidates = new ArrayList<Integer>();
+		for (int r = 0; r < getSource().getRowCount(); r++) {
+			if (coordinates[ROW] == r) {
+				continue;
 			}
-			break;
-		case COLUMN:
-			toReplace = getSource().selectColumns(Ret.LINK, coordinates[COLUMN]);
-			for (long c = getSource().getColumnCount() - 1; c != -1; c--) {
-				if (c != coordinates[COLUMN]) {
-					Matrix candidate = getSource().selectColumns(Ret.LINK, c);
-					double distance = toReplace.euklideanDistanceTo(candidate, true);
-					if (distance < bestDistance) {
-						bestDistance = distance;
-						bestMatrix = candidate;
-					}
-				}
+			if (!MathUtil.isNaNOrInfinite(getSource().getAsDouble(r, coordinates[COLUMN]))) {
+				candidates.add(r);
 			}
-			break;
 		}
-		return bestMatrix;
+		return candidates;
+	}
+
+	private Matrix getDistanceMatrix() {
+		Matrix distanceMatrix = MatrixFactory.zeros(getSource().getRowCount(), getSource()
+				.getRowCount());
+		for (int r = 0; r < getSource().getRowCount(); r++) {
+			for (int c = 0; c < getSource().getRowCount(); c++) {
+				if (r != c) {
+					Matrix m1 = getSource().selectRows(Ret.LINK, r);
+					Matrix m2 = getSource().selectRows(Ret.LINK, c);
+					double dist = m1.euklideanDistanceTo(m2, true);
+					distanceMatrix.setAsDouble(dist, r, c);
+				}
+			}
+		}
+		return distanceMatrix;
+	}
+
+	private List<Sortable<Double, Matrix>> getSortedNeighbors(long... coordinates) {
+		List<Sortable<Double, Matrix>> neighbors = new ArrayList<Sortable<Double, Matrix>>();
+		List<Integer> candidates = getCandidates(coordinates);
+
+		for (int candidateRow : candidates) {
+			double dist = distanceMatrix.getAsDouble(coordinates[ROW], candidateRow);
+			Matrix candidate = getSource().selectRows(Ret.LINK, candidateRow);
+			neighbors.add(new Sortable<Double, Matrix>(dist, candidate));
+		}
+
+		Collections.sort(neighbors);
+		return neighbors;
 	}
 
 	public double getDouble(long... coordinates) throws MatrixException {
-		if (sourceCopy == null) {
-			sourceCopy = getSource().clone();
+		if (distanceMatrix == null) {
+			distanceMatrix = getDistanceMatrix();
 		}
-		double v = sourceCopy.getAsDouble(coordinates);
-		if (MathUtil.isNaNOrInfinite(v)) {
-			switch (getDimension()) {
-			case ROW:
-				return getNearestNeighbor(coordinates).getAsDouble(0, coordinates[COLUMN]);
-			case COLUMN:
-				return getNearestNeighbor(coordinates).getAsDouble(coordinates[ROW], 0);
+		List<Sortable<Double, Matrix>> sortedNeighbors = getSortedNeighbors(coordinates);
+		double sum = 0;
+		int count = 0;
+		for (Sortable<Double, Matrix> s : sortedNeighbors) {
+			sum += s.getObject().getAsDouble(0, coordinates[COLUMN]);
+			if (++count == k) {
+				break;
 			}
-		} else {
-			return v;
 		}
-		return 0.0;
+		return sum / count;
 	}
 
 }
