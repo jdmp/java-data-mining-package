@@ -93,16 +93,21 @@ public class ImputeKNN extends AbstractDoubleCalculation {
 		if (distanceMatrix == null) {
 			distanceMatrix = getDistanceMatrix();
 		}
-		List<Sortable<Double, Matrix>> sortedNeighbors = getSortedNeighbors(coordinates);
-		double sum = 0;
-		int count = 0;
-		for (Sortable<Double, Matrix> s : sortedNeighbors) {
-			sum += s.getObject().getAsDouble(0, coordinates[COLUMN]);
-			if (++count == k) {
-				break;
+		double value = getSource().getAsDouble(coordinates);
+		if (MathUtil.isNaNOrInfinite(value)) {
+			List<Sortable<Double, Matrix>> sortedNeighbors = getSortedNeighbors(coordinates);
+			double sum = 0;
+			int count = 0;
+			for (Sortable<Double, Matrix> s : sortedNeighbors) {
+				sum += s.getObject().getAsDouble(0, coordinates[COLUMN]);
+				if (++count == k) {
+					break;
+				}
 			}
+			return sum / count;
+		} else {
+			return value;
 		}
-		return sum / count;
 	}
 
 }

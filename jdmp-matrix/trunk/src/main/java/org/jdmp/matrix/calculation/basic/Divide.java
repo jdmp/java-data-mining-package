@@ -55,23 +55,25 @@ public class Divide extends AbstractDoubleCalculation {
 	@Override
 	public double getDouble(long... coordinates) throws MatrixException {
 		return ignoreNaN ? MathUtil.ignoreNaN(getSources()[0].getAsDouble(coordinates))
-				/ MathUtil.ignoreNaN(getSources()[1].getAsDouble(coordinates)) : getSources()[0].getAsDouble(coordinates)
+				/ MathUtil.ignoreNaN(getSources()[1].getAsDouble(coordinates)) : getSources()[0]
+				.getAsDouble(coordinates)
 				/ getSources()[1].getAsDouble(coordinates);
 	}
 
 	public static Matrix calc(Matrix m1, Matrix m2) throws MatrixException {
-		return calc(m1, m2);
+		return calc(false, m1, m2);
 	}
 
 	public static Matrix calc(Matrix m1, double v2) throws MatrixException {
-		return calc(m1, v2);
+		return calc(false, m1, v2);
 	}
 
 	public static Matrix calc(boolean ignoreNaN, Matrix m1, Matrix m2) throws MatrixException {
 		Matrix ret = MatrixFactory.zeros(m1.getSize());
 		if (ignoreNaN) {
 			for (long[] c : m2.availableCoordinates()) {
-				ret.setAsDouble(MathUtil.ignoreNaN(m1.getAsDouble(c)) / MathUtil.ignoreNaN(m2.getAsDouble(c)), c);
+				ret.setAsDouble(MathUtil.ignoreNaN(m1.getAsDouble(c))
+						/ MathUtil.ignoreNaN(m2.getAsDouble(c)), c);
 			}
 		} else {
 			for (long[] c : m2.availableCoordinates()) {
