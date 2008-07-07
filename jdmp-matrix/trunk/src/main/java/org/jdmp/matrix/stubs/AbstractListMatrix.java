@@ -28,12 +28,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import org.jdmp.matrix.ListMatrix;
 import org.jdmp.matrix.coordinates.CoordinateIterator2D;
 import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.interfaces.ListMatrix;
 import org.jdmp.matrix.util.MathUtil;
 
-public abstract class AbstractListMatrix<A> extends AbstractGenericMatrix<A> implements ListMatrix<A> {
+public abstract class AbstractListMatrix<A> extends AbstractDenseGenericMatrix2D<A> implements
+		ListMatrix<A> {
 
 	public abstract List<A> getList();
 
@@ -138,14 +139,14 @@ public abstract class AbstractListMatrix<A> extends AbstractGenericMatrix<A> imp
 		return getList().subList(fromIndex, toIndex);
 	}
 
-	public A getObject(long... coordinates) {
-		A a = getList().get((int) coordinates[ROW]);
+	public A getObject(long row, long column) {
+		A a = getList().get((int) row);
 		return a;
 	}
 
 	@SuppressWarnings("unchecked")
-	public void setObject(Object value, long... coordinates) {
-		getList().set((int) coordinates[ROW], (A) value);
+	public void setObject(Object value, long row, long column) {
+		getList().set((int) row, (A) value);
 		notifyGUIObject();
 	}
 
@@ -156,29 +157,17 @@ public abstract class AbstractListMatrix<A> extends AbstractGenericMatrix<A> imp
 	public <T> T[] toArray(T[] a) {
 		return null;
 	}
-	
-	public Iterable<long[]> allCoordinates() {
-        return new CoordinateIterator2D(getSize());
-    }
 
-    public boolean contains(long... coordinates) {        
-        return coordinates[ROW]<getList().size()&&coordinates[COLUMN]<1;
-    }
+	public double getAsDouble(long... coordinates) throws MatrixException {
+		return MathUtil.getDouble(getObject(coordinates));
+	}
 
-    public double getAsDouble(long... coordinates) throws MatrixException {
-        return MathUtil.getDouble(getObject(coordinates));
-    }
+	public void setAsDouble(double value, long... coordinates) throws MatrixException {
+		setObject(value, coordinates);
+	}
 
-    public void setAsDouble(double value, long... coordinates) throws MatrixException {
-        setObject(value, coordinates);
-    }
-
-    public org.jdmp.matrix.Matrix.EntryType getEntryType() {
-       throw new MatrixException("not supported");
-    }
-
-    public boolean isSparse() {
-        return false;
-    }
+	public org.jdmp.matrix.Matrix.EntryType getEntryType() {
+		return EntryType.GENERIC;
+	}
 
 }

@@ -59,10 +59,6 @@ public class DefaultGraphMatrix<N, E> extends AbstractGraphMatrix<N, E> {
 		// return Collections.EMPTY_LIST;
 	}
 
-	public Iterable<long[]> allCoordinates() {
-		return new CoordinateSetToLongWrapper(edges.keySet());
-	}
-
 	public Iterable<long[]> availableCoordinates() {
 		return new CoordinateSetToLongWrapper(edges.keySet());
 	}
@@ -168,7 +164,7 @@ public class DefaultGraphMatrix<N, E> extends AbstractGraphMatrix<N, E> {
 		nodes.set((int) index, node);
 	}
 
-	public void setObject(Object o, long... coordinates) throws MatrixException {
+	public void setObject(Object o, long row, long column) throws MatrixException {
 		throw new MatrixException("not implemented!");
 	}
 
@@ -224,13 +220,7 @@ public class DefaultGraphMatrix<N, E> extends AbstractGraphMatrix<N, E> {
 	}
 
 	public org.jdmp.matrix.Matrix.EntryType getEntryType() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public boolean isSparse() {
-		// TODO Auto-generated method stub
-		return false;
+		return EntryType.GENERIC;
 	}
 
 }

@@ -3,10 +3,10 @@ package org.jdmp.core.dataset;
 import java.util.List;
 
 import org.jdmp.core.algorithm.classification.Classifier;
+import org.jdmp.matrix.ListMatrix;
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.calculation.Calculation.Ret;
 import org.jdmp.matrix.implementations.collections.DefaultListMatrix;
-import org.jdmp.matrix.interfaces.ListMatrix;
 
 public class CrossValidation {
 

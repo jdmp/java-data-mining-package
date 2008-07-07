@@ -29,12 +29,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.jdmp.matrix.interfaces.MapMatrix;
+import org.jdmp.matrix.MapMatrix;
 
-public abstract class AbstractMapMatrix extends AbstractDenseObjectMatrix2D implements
-		MapMatrix<Object, Object> {
+public abstract class AbstractMapMatrix<K, V> extends AbstractDenseObjectMatrix2D implements
+		MapMatrix<K, V> {
 
-	public abstract Map<Object, Object> getMap();
+	public abstract Map<K, V> getMap();
 
 	public final long[] getSize() {
 		return new long[] { size(), 2 };
@@ -59,7 +59,7 @@ public abstract class AbstractMapMatrix extends AbstractDenseObjectMatrix2D impl
 		if (getMap() instanceof List) {
 			return ((List) getMap()).get(index);
 		}
-		Iterator it = keySet().iterator();
+		Iterator<K> it = keySet().iterator();
 		for (int i = 0; it.hasNext() && i < index; i++) {
 			it.next();
 		}
@@ -74,11 +74,11 @@ public abstract class AbstractMapMatrix extends AbstractDenseObjectMatrix2D impl
 		return getMap().containsValue(value);
 	}
 
-	public final Set<java.util.Map.Entry<Object, Object>> entrySet() {
+	public final Set<java.util.Map.Entry<K, V>> entrySet() {
 		return getMap().entrySet();
 	}
 
-	public final Object get(Object key) {
+	public final V get(Object key) {
 		return getMap().get(key);
 	}
 
@@ -86,23 +86,23 @@ public abstract class AbstractMapMatrix extends AbstractDenseObjectMatrix2D impl
 		return getMap().isEmpty();
 	}
 
-	public final Set<Object> keySet() {
+	public final Set<K> keySet() {
 		return getMap().keySet();
 	}
 
-	public final Object put(Object key, Object value) {
-		Object v = getMap().put(key, value);
+	public final V put(K key, V value) {
+		V v = getMap().put(key, value);
 		notifyGUIObject();
 		return v;
 	}
 
-	public final void putAll(Map<? extends Object, ? extends Object> m) {
+	public final void putAll(Map<? extends K, ? extends V> m) {
 		getMap().putAll(m);
 		notifyGUIObject();
 	}
 
-	public final Object remove(Object key) {
-		Object v = getMap().remove(key);
+	public final V remove(Object key) {
+		V v = getMap().remove(key);
 		notifyGUIObject();
 		return v;
 	}
@@ -111,7 +111,7 @@ public abstract class AbstractMapMatrix extends AbstractDenseObjectMatrix2D impl
 		return getMap().size();
 	}
 
-	public final Collection<Object> values() {
+	public final Collection<V> values() {
 		return getMap().values();
 	}
 

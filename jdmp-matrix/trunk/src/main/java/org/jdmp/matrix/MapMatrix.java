@@ -21,10 +21,10 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.matrix.interfaces;
+package org.jdmp.matrix;
 
-import org.jdmp.matrix.GenericMatrix;
+import java.util.Map;
 
-public interface GraphMatrix<N, E> extends GenericMatrix<E>, GraphInterface<N, E> {
+public interface MapMatrix<K, V> extends GenericMatrix2D<Object>, Map<K, V> {
 
 }

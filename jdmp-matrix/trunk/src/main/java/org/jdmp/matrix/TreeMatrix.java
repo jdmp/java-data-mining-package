@@ -21,28 +21,10 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.matrix.implementations.collections;
+package org.jdmp.matrix;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.jdmp.matrix.interfaces.Tree;
 
-import org.jdmp.matrix.stubs.AbstractMapMatrix;
-
-public class DefaultMapMatrix<K, V> extends AbstractMapMatrix<K, V> {
-	private static final long serialVersionUID = -1764575977190231155L;
-
-	private Map<K, V> map = null;
-
-	public DefaultMapMatrix() {
-		this.map = new HashMap<K, V>();
-	}
-
-	public DefaultMapMatrix(Map<K, V> map) {
-		this.map = map;
-	}
-
-	public Map<K, V> getMap() {
-		return map;
-	}
+public interface TreeMatrix<A> extends GenericMatrix2D<A>, Tree<A> {
 
 }

@@ -26,10 +26,11 @@ package org.jdmp.matrix.stubs;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jdmp.matrix.GraphMatrix;
 import org.jdmp.matrix.coordinates.Coordinates;
-import org.jdmp.matrix.interfaces.GraphMatrix;
 
-public abstract class AbstractGraphMatrix<N, E> extends AbstractGenericMatrix<E> implements GraphMatrix<N, E> {
+public abstract class AbstractGraphMatrix<N, E> extends AbstractSparseGenericMatrix2D<E> implements
+		GraphMatrix<N, E> {
 	private static final long serialVersionUID = -4939918585100574441L;
 
 	public boolean contains(long... coordinates) {
@@ -143,7 +144,7 @@ public abstract class AbstractGraphMatrix<N, E> extends AbstractGenericMatrix<E>
 		removeDirectedEdge(index1, index2);
 	}
 
-	public Iterable<long[]> allCoordinates() {
+	public Iterable<long[]> availableCoordinates() {
 		return getEdgeList();
 	}
 
@@ -151,8 +152,8 @@ public abstract class AbstractGraphMatrix<N, E> extends AbstractGenericMatrix<E>
 		return new long[] { getNodeList().size(), getNodeList().size() };
 	}
 
-	public E getObject(long... coordinates) {
-		return getEdgeValue(coordinates[ROW], coordinates[COLUMN]);
+	public E getObject(long row, long column) {
+		return getEdgeValue(row, column);
 	}
 
 	public long getValueCount() {

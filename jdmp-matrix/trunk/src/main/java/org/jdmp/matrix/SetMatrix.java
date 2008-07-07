@@ -21,12 +21,10 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.matrix.interfaces;
+package org.jdmp.matrix;
 
-import java.util.List;
+import java.util.Set;
 
-import org.jdmp.matrix.GenericMatrix;
-
-public interface ListMatrix<A> extends GenericMatrix<A>, List<A> {
+public interface SetMatrix<A> extends GenericMatrix2D<A>, Set<A> {
 
 }
