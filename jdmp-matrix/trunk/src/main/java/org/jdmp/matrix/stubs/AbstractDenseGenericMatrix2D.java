@@ -23,9 +23,11 @@
 
 package org.jdmp.matrix.stubs;
 
+import org.jdmp.matrix.GenericMatrix2D;
 import org.jdmp.matrix.coordinates.CoordinateIterator2D;
 
-public abstract class AbstractDenseGenericMatrix2D<A> extends AbstractDenseGenericMatrix<A> {
+public abstract class AbstractDenseGenericMatrix2D<A> extends AbstractDenseGenericMatrix<A>
+		implements GenericMatrix2D<A>{
 
 	public final Iterable<long[]> allCoordinates() {
 		return new CoordinateIterator2D(getSize());
