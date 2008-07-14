@@ -23,6 +23,7 @@
 
 package org.jdmp.matrix.calculation.basic;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.jdmp.matrix.Matrix;
@@ -323,7 +324,7 @@ public interface BasicCalculations {
 	 * @return Link to original Matrix with desired rows and columns
 	 * @throws MatrixException
 	 */
-	public Matrix select(Ret returnType, List<? extends Number>... selection) throws MatrixException;
+	public Matrix select(Ret returnType, Collection<? extends Number>... selection) throws MatrixException;
 
 	/**
 	 * Delete rows and columns in the Matrix and returns a link to it.
@@ -335,7 +336,7 @@ public interface BasicCalculations {
 	 * @return Link to original Matrix with desired rows and columns
 	 * @throws MatrixException
 	 */
-	public Matrix delete(Ret returnType, List<? extends Number>... selection) throws MatrixException;
+	public Matrix delete(Ret returnType, Collection<? extends Number>... selection) throws MatrixException;
 
 	/**
 	 * Selects rows in the Matrix and returns a link to it.
@@ -371,7 +372,7 @@ public interface BasicCalculations {
 	 * @return Link to original Matrix with desired rows
 	 * @throws MatrixException
 	 */
-	public Matrix selectRows(Ret returnType, List<? extends Number> rows) throws MatrixException;
+	public Matrix selectRows(Ret returnType, Collection<? extends Number> rows) throws MatrixException;
 
 	/**
 	 * Deletes rows in the Matrix and returns a link to it.
@@ -383,7 +384,7 @@ public interface BasicCalculations {
 	 * @return Link to original Matrix with desired rows
 	 * @throws MatrixException
 	 */
-	public Matrix deleteRows(Ret returnType, List<? extends Number> rows) throws MatrixException;
+	public Matrix deleteRows(Ret returnType, Collection<? extends Number> rows) throws MatrixException;
 
 	/**
 	 * Selects columns in the Matrix and returns a link to it.
@@ -419,7 +420,7 @@ public interface BasicCalculations {
 	 * @return Link to original Matrix with desired columns
 	 * @throws MatrixException
 	 */
-	public Matrix selectColumns(Ret returnType, List<? extends Number> columns) throws MatrixException;
+	public Matrix selectColumns(Ret returnType, Collection<? extends Number> columns) throws MatrixException;
 
 	/**
 	 * Deletes columns in the Matrix and returns a link to it.
@@ -431,7 +432,7 @@ public interface BasicCalculations {
 	 * @return Link to original Matrix with desired columns
 	 * @throws MatrixException
 	 */
-	public Matrix deleteColumns(Ret returnType, List<? extends Number> columns) throws MatrixException;
+	public Matrix deleteColumns(Ret returnType, Collection<? extends Number> columns) throws MatrixException;
 
 	/**
 	 * Selects rows and columns in the Matrix and returns a link to it.

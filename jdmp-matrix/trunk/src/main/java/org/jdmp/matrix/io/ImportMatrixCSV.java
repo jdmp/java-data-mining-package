@@ -55,7 +55,7 @@ public abstract class ImportMatrixCSV {
 	public static final Matrix fromStream(InputStream stream, Object... parameters)
 			throws MatrixException, IOException {
 		InputStreamReader r = new InputStreamReader(stream);
-		Matrix m = fromReader(r);
+		Matrix m = fromReader(r, parameters);
 		r.close();
 		return m;
 	}

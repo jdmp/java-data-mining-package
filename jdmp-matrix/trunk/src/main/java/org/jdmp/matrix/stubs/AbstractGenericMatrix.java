@@ -33,6 +33,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -216,7 +217,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		return new Selection(this, selection).calc(returnType);
 	}
 
-	public final Matrix select(Ret returnType, List<? extends Number>... selection)
+	public final Matrix select(Ret returnType, Collection<? extends Number>... selection)
 			throws MatrixException {
 		return new Selection(this, selection).calc(returnType);
 	}
@@ -234,13 +235,13 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 	}
 
 	@SuppressWarnings("unchecked")
-	public final Matrix selectRows(Ret returnType, List<? extends Number> rows)
+	public final Matrix selectRows(Ret returnType, Collection<? extends Number> rows)
 			throws MatrixException {
 		return select(returnType, rows, null);
 	}
 
 	@SuppressWarnings("unchecked")
-	public final Matrix selectColumns(Ret returnType, List<? extends Number> columns)
+	public final Matrix selectColumns(Ret returnType, Collection<? extends Number> columns)
 			throws MatrixException {
 		return select(returnType, null, columns);
 	}
@@ -736,7 +737,7 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 		return new Deletion(this, selection).calc(returnType);
 	}
 
-	public final Matrix delete(Ret returnType, List<? extends Number>... selection)
+	public final Matrix delete(Ret returnType, Collection<? extends Number>... selection)
 			throws MatrixException {
 		return new Deletion(this, selection).calc(returnType);
 	}
@@ -750,13 +751,13 @@ public abstract class AbstractGenericMatrix<A> implements Matrix {
 	}
 
 	@SuppressWarnings("unchecked")
-	public final Matrix deleteRows(Ret returnType, List<? extends Number> rows)
+	public final Matrix deleteRows(Ret returnType, Collection<? extends Number> rows)
 			throws MatrixException {
 		return delete(returnType, rows, new ArrayList<Long>());
 	}
 
 	@SuppressWarnings("unchecked")
-	public final Matrix deleteColumns(Ret returnType, List<? extends Number> columns)
+	public final Matrix deleteColumns(Ret returnType, Collection<? extends Number> columns)
 			throws MatrixException {
 		return delete(returnType, new ArrayList<Long>(), columns);
 	}

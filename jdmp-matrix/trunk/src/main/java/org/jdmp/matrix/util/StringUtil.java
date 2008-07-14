@@ -161,7 +161,7 @@ public abstract class StringUtil {
 						list.add(Long.parseLong(dimsel.replaceAll("\\D", "")));
 					}
 				}
-				selection[i] = MathUtil.listToLong(list);
+				selection[i] = MathUtil.collectionToLong(list);
 			}
 
 		}

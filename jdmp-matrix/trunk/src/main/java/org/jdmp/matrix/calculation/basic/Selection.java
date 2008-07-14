@@ -23,7 +23,7 @@
 
 package org.jdmp.matrix.calculation.basic;
 
-import java.util.List;
+import java.util.Collection;
 
 import org.jdmp.matrix.Matrix;
 import org.jdmp.matrix.calculation.AbstractObjectCalculation;
@@ -41,14 +41,14 @@ public class Selection extends AbstractObjectCalculation {
 		selection = StringUtil.parseSelection(selectionString, m.getSize());
 	}
 
-	public Selection(Matrix m, List<? extends Number>... selection) {
+	public Selection(Matrix m, Collection<? extends Number>... selection) {
 		super(m);
 		this.selection = new long[selection.length][];
 		if (selection[ROW] != null) {
-			this.selection[ROW] = MathUtil.listToLong(selection[ROW]);
+			this.selection[ROW] = MathUtil.collectionToLong(selection[ROW]);
 		}
 		if (selection[COLUMN] != null) {
-			this.selection[COLUMN] = MathUtil.listToLong(selection[COLUMN]);
+			this.selection[COLUMN] = MathUtil.collectionToLong(selection[COLUMN]);
 		}
 	}
 

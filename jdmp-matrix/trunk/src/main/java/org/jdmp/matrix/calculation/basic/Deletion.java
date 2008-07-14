@@ -23,6 +23,7 @@
 
 package org.jdmp.matrix.calculation.basic;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.jdmp.matrix.Matrix;
@@ -40,23 +41,23 @@ public class Deletion extends AbstractObjectCalculation {
 		this(m, StringUtil.parseSelection(deletionString, m.getSize()));
 	}
 
-	public Deletion(Matrix m, List<? extends Number>... deletion) {
+	public Deletion(Matrix m, Collection<? extends Number>... deletion) {
 		super(m);
 
 		List<Long> rows = MathUtil.sequenceListLong(0, getSource().getRowCount() - 1);
 		List<Long> columns = MathUtil.sequenceListLong(0, getSource().getColumnCount() - 1);
 
-		for (int r = 0; r < deletion[ROW].size(); r++) {
-			rows.remove((Long) deletion[ROW].get(r).longValue());
+		for (Number n : deletion[ROW]) {
+			rows.remove((Long) n.longValue());
 		}
 
-		for (int c = 0; c < deletion[COLUMN].size(); c++) {
-			columns.remove((Long) deletion[COLUMN].get(c).longValue());
+		for (Number n : deletion[COLUMN]) {
+			columns.remove((Long) n.longValue());
 		}
 
 		selection = new long[2][];
-		selection[ROW] = MathUtil.listToLong(rows);
-		selection[COLUMN] = MathUtil.listToLong(columns);
+		selection[ROW] = MathUtil.collectionToLong(rows);
+		selection[COLUMN] = MathUtil.collectionToLong(columns);
 	}
 
 	public Deletion(Matrix m, long[]... deletion) {
@@ -74,8 +75,8 @@ public class Deletion extends AbstractObjectCalculation {
 		}
 
 		selection = new long[2][];
-		selection[ROW] = MathUtil.listToLong(rows);
-		selection[COLUMN] = MathUtil.listToLong(columns);
+		selection[ROW] = MathUtil.collectionToLong(rows);
+		selection[COLUMN] = MathUtil.collectionToLong(columns);
 	}
 
 	public Object getObject(long... coordinates) throws MatrixException {

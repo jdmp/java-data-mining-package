@@ -26,6 +26,7 @@ package org.jdmp.matrix.util;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -192,26 +193,29 @@ public abstract class MathUtil {
 		return Double.NaN;
 	}
 
-	public static long[] listToLong(List<? extends Number> numbers) {
+	public static long[] collectionToLong(Collection<? extends Number> numbers) {
 		long[] ret = new long[numbers.size()];
-		for (int i = ret.length; --i >= 0;) {
-			ret[i] = numbers.get(i).longValue();
+		int i = 0;
+		for (Number n : numbers) {
+			ret[i++] = n.longValue();
 		}
 		return ret;
 	}
 
-	public static double[] listToDouble(List<? extends Number> numbers) {
+	public static double[] collectionToDouble(Collection<? extends Number> numbers) {
 		double[] ret = new double[numbers.size()];
-		for (int i = ret.length; --i >= 0;) {
-			ret[i] = numbers.get(i).doubleValue();
+		int i = 0;
+		for (Number n : numbers) {
+			ret[i++] = n.doubleValue();
 		}
 		return ret;
 	}
 
-	public static int[] listToInt(List<? extends Number> numbers) {
+	public static int[] collectionToInt(Collection<? extends Number> numbers) {
 		int[] ret = new int[numbers.size()];
-		for (int i = ret.length; --i >= 0;) {
-			ret[i] = numbers.get(i).intValue();
+		int i = 0;
+		for (Number n : numbers) {
+			ret[i++] = n.intValue();
 		}
 		return ret;
 	}
@@ -294,7 +298,7 @@ public abstract class MathUtil {
 	}
 
 	public static long[] sequenceLong(long start, long end) {
-		return listToLong(sequenceListLong(start, end));
+		return collectionToLong(sequenceListLong(start, end));
 	}
 
 	public static List<Long> randPerm(long start, long end) {
