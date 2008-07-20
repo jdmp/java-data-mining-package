@@ -2,7 +2,7 @@ package org.jdmp.core.attribute;
 
 import java.io.Serializable;
 
-import org.jdmp.matrix.interfaces.HasLabel;
+import org.ujmp.core.interfaces.HasLabel;
 
 public class Attribute implements Serializable, Comparable<Attribute>, HasLabel {
 	private static final long serialVersionUID = 4184577547748510833L;

@@ -9,12 +9,12 @@ import java.util.WeakHashMap;
 
 import javax.swing.ListSelectionModel;
 
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.calculation.Calculation.Ret;
-import org.jdmp.matrix.collections.AbstractMatrixList;
-import org.jdmp.matrix.interfaces.HasColumnSelectionModel;
-import org.jdmp.matrix.interfaces.HasRowSelectionModel;
-import org.jdmp.matrix.interfaces.Wrapper;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.calculation.Calculation.Ret;
+import org.ujmp.core.collections.AbstractMatrixList;
+import org.ujmp.core.interfaces.HasColumnSelectionModel;
+import org.ujmp.core.interfaces.HasRowSelectionModel;
+import org.ujmp.core.interfaces.Wrapper;
 
 public class MatrixToMatrixListWrapper extends AbstractMatrixList implements Wrapper<Matrix> {
 	private static final long serialVersionUID = 7207765740833228177L;

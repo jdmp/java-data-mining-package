@@ -15,9 +15,9 @@ import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.util.AbstractEvent.EventType;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixFactory;
-import org.jdmp.matrix.interfaces.GUIObject;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.MatrixFactory;
+import org.ujmp.core.interfaces.GUIObject;
 
 public abstract class AbstractAlgorithm extends AbstractCoreObject implements Algorithm {
 

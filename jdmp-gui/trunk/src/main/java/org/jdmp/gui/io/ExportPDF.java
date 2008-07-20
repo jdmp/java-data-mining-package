@@ -6,7 +6,7 @@ import java.lang.reflect.Method;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.jdmp.matrix.io.util.FileSelector;
+import org.ujmp.core.util.io.FileSelector;
 
 public class ExportPDF {
 

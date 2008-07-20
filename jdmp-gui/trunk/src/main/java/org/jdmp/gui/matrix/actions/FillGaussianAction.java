@@ -7,8 +7,8 @@ import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
 import org.jdmp.gui.matrix.MatrixGUIObject;
-import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.interfaces.HasMatrixList;
+import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.interfaces.HasMatrixList;
 
 public class FillGaussianAction extends MatrixAction {
 	private static final long serialVersionUID = -8334744425028399100L;

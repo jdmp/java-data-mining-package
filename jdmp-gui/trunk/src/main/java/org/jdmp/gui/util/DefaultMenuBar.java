@@ -33,7 +33,7 @@ import org.jdmp.gui.sample.SampleGUIObject;
 import org.jdmp.gui.sample.actions.SampleActions;
 import org.jdmp.gui.variable.VariableGUIObject;
 import org.jdmp.gui.variable.actions.VariableActions;
-import org.jdmp.matrix.interfaces.GUIObject;
+import org.ujmp.core.interfaces.GUIObject;
 
 public class DefaultMenuBar extends JMenuBar {
 	private static final long serialVersionUID = -6115122804967308915L;

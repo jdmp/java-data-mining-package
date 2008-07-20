@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jdmp.core.algorithm.AlgorithmOneSource;
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixFactory;
-import org.jdmp.matrix.exceptions.MatrixException;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.MatrixFactory;
+import org.ujmp.core.exceptions.MatrixException;
 
 public class AlgorithmGauss extends AlgorithmOneSource {
 	private static final long serialVersionUID = 3127916742763698423L;

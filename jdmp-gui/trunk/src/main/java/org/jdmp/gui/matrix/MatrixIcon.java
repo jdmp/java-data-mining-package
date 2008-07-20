@@ -5,7 +5,7 @@ import java.awt.Graphics;
 
 import javax.swing.Icon;
 
-import org.jdmp.matrix.Matrix;
+import org.ujmp.core.Matrix;
 
 public class MatrixIcon extends MatrixRenderer implements Icon {
 	private static final long serialVersionUID = -3351801048513775919L;

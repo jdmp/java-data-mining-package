@@ -20,8 +20,8 @@
 			<artifactId>junit</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-matrix</artifactId>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-core</artifactId>
 		</dependency>
 	</dependencies>
 

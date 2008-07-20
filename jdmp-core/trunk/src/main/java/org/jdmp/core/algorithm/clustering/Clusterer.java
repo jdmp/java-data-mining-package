@@ -2,7 +2,7 @@ package org.jdmp.core.algorithm.clustering;
 
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.matrix.Matrix;
+import org.ujmp.core.Matrix;
 
 public interface Clusterer {
 

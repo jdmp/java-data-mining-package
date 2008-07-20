@@ -7,7 +7,7 @@ import javax.swing.JSeparator;
 import org.jdmp.gui.actions.ExitAction;
 import org.jdmp.gui.actions.ObjectActions;
 import org.jdmp.gui.matrix.MatrixGUIObject;
-import org.jdmp.matrix.interfaces.HasMatrixList;
+import org.ujmp.core.interfaces.HasMatrixList;
 
 public class MatrixActions extends ObjectActions {
 	private static final long serialVersionUID = -8960033736161810590L;

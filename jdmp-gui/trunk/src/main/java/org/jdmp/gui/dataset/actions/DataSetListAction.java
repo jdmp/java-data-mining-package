@@ -4,7 +4,7 @@ import javax.swing.JComponent;
 
 import org.jdmp.core.dataset.HasDataSets;
 import org.jdmp.gui.actions.ObjectAction;
-import org.jdmp.matrix.interfaces.GUIObject;
+import org.ujmp.core.interfaces.GUIObject;
 
 public abstract class DataSetListAction extends ObjectAction {
 

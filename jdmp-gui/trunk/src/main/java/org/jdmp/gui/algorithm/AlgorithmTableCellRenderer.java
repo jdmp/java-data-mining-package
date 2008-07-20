@@ -10,7 +10,7 @@ import javax.swing.table.TableCellRenderer;
 
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.gui.variable.VariableListTableCellRenderer;
-import org.jdmp.matrix.util.StringUtil;
+import org.ujmp.core.util.StringUtil;
 
 public class AlgorithmTableCellRenderer implements TableCellRenderer {
 	private static final long serialVersionUID = 990917492575992066L;

@@ -1,8 +1,8 @@
 package org.jdmp.gui.matrix;
 
 import org.jdmp.gui.util.AbstractFrame;
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.exceptions.MatrixException;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.exceptions.MatrixException;
 
 public class MatrixFrame extends AbstractFrame {
 	private static final long serialVersionUID = -3705093197648545721L;

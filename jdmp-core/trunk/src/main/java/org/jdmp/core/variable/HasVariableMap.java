@@ -1,7 +1,7 @@
 package org.jdmp.core.variable;
 
 import org.jdmp.core.util.ObservableMap;
-import org.jdmp.matrix.Matrix;
+import org.ujmp.core.Matrix;
 
 public interface HasVariableMap extends HasVariables {
 

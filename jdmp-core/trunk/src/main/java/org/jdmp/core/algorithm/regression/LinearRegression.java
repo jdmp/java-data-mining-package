@@ -5,8 +5,8 @@ import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.variable.DefaultVariable;
 import org.jdmp.core.variable.Variable;
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.exceptions.MatrixException;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.exceptions.MatrixException;
 
 /**
  * AlgorithmLinearRegression extends AlgorithmClassifier and not

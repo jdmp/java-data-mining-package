@@ -8,8 +8,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 
-import org.jdmp.matrix.interfaces.GUIObject;
-import org.jdmp.matrix.io.util.JDMPFileFilter;
+import org.ujmp.core.interfaces.GUIObject;
+import org.ujmp.core.util.io.UJMPFileFilter;
 
 public class ExportAction extends ObjectAction {
 	private static final long serialVersionUID = -3132833245167910507L;
@@ -24,10 +24,10 @@ public class ExportAction extends ObjectAction {
 		File file = null;
 		JFileChooser chooser = new JFileChooser();
 
-		for (FileFilter f : JDMPFileFilter.getChoosableFileFilters(getObject())) {
+		for (FileFilter f : UJMPFileFilter.getChoosableFileFilters(getObject())) {
 			chooser.addChoosableFileFilter(f);
 		}
-		for (FileFilter f : JDMPFileFilter.getChoosableFileFilters(getComponent())) {
+		for (FileFilter f : UJMPFileFilter.getChoosableFileFilters(getComponent())) {
 			chooser.addChoosableFileFilter(f);
 		}
 
@@ -40,7 +40,7 @@ public class ExportAction extends ObjectAction {
 
 			FileFilter filter = chooser.getFileFilter();
 
-			String suffix = ((JDMPFileFilter) filter).getSuffix();
+			String suffix = ((UJMPFileFilter) filter).getSuffix();
 			if (!file.getAbsolutePath().toLowerCase().endsWith(suffix)) {
 				file = new File(file.getAbsolutePath() + suffix);
 			}

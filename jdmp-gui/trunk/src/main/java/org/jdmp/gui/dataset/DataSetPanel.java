@@ -11,7 +11,7 @@ import org.jdmp.core.variable.HasVariables;
 import org.jdmp.gui.matrix.MatrixListPanel;
 import org.jdmp.gui.util.AbstractPanel;
 import org.jdmp.gui.util.ObjectListPanel;
-import org.jdmp.matrix.interfaces.HasMatrixList;
+import org.ujmp.core.interfaces.HasMatrixList;
 
 public class DataSetPanel extends AbstractPanel {
 	private static final long serialVersionUID = -742923218356821961L;

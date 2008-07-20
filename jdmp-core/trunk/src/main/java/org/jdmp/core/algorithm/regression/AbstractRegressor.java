@@ -9,8 +9,8 @@ import org.jdmp.core.dataset.ClassificationDataSet;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.sample.ClassificationSample;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixFactory;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.MatrixFactory;
 
 public abstract class AbstractRegressor extends AbstractAlgorithm implements Regressor {
 

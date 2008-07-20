@@ -1,8 +1,8 @@
 package org.jdmp.core.matrix.system;
 
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.stubs.AbstractDenseDoubleMatrix2D;
-import org.jdmp.matrix.util.MathUtil;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.matrices.stubs.AbstractDenseDoubleMatrix2D;
+import org.ujmp.core.util.MathUtil;
 
 public class MatrixRandomSeed extends AbstractDenseDoubleMatrix2D {
 	private static final long serialVersionUID = 1950244958868637395L;

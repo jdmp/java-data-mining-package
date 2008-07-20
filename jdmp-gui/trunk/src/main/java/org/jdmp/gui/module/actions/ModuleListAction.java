@@ -4,7 +4,7 @@ import javax.swing.JComponent;
 
 import org.jdmp.core.module.HasModuleList;
 import org.jdmp.gui.actions.ObjectAction;
-import org.jdmp.matrix.interfaces.GUIObject;
+import org.ujmp.core.interfaces.GUIObject;
 
 public abstract class ModuleListAction extends ObjectAction {
 

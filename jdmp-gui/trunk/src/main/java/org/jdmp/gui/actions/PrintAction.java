@@ -5,7 +5,7 @@ import java.util.logging.Level;
 import javax.swing.Action;
 import javax.swing.JComponent;
 
-import org.jdmp.matrix.interfaces.GUIObject;
+import org.ujmp.core.interfaces.GUIObject;
 
 public class PrintAction extends ObjectAction {
 	private static final long serialVersionUID = 5977367168891486978L;

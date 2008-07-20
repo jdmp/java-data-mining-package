@@ -4,7 +4,7 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
-import org.jdmp.matrix.interfaces.GUIObject;
+import org.ujmp.core.interfaces.GUIObject;
 
 public class SetLabelAction extends ObjectAction {
 	private static final long serialVersionUID = 8660922548207382801L;

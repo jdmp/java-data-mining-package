@@ -18,7 +18,7 @@ import org.jdmp.gui.matrix.actions.ClearMatrixAction;
 import org.jdmp.gui.matrix.actions.DeleteMatrixAction;
 import org.jdmp.gui.module.actions.ModuleListActions;
 import org.jdmp.gui.variable.actions.VariableListActions;
-import org.jdmp.matrix.interfaces.GUIObject;
+import org.ujmp.core.interfaces.GUIObject;
 
 public class ObjectActions extends ArrayList<JComponent> {
 	private static final long serialVersionUID = 5237673098669230511L;

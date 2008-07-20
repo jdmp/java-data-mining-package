@@ -7,7 +7,7 @@ import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
 import org.jdmp.gui.matrix.MatrixGUIObject;
-import org.jdmp.matrix.interfaces.HasMatrixList;
+import org.ujmp.core.interfaces.HasMatrixList;
 
 public class DeleteMatrixAction extends MatrixAction {
 	private static final long serialVersionUID = -6086020959987292649L;

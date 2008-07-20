@@ -4,7 +4,7 @@ import javax.swing.JComponent;
 
 import org.jdmp.core.sample.HasSampleList;
 import org.jdmp.gui.actions.ObjectAction;
-import org.jdmp.matrix.interfaces.GUIObject;
+import org.ujmp.core.interfaces.GUIObject;
 
 public abstract class SampleListAction extends ObjectAction {
 

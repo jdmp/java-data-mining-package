@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 import javax.swing.event.EventListenerList;
 
-import org.jdmp.matrix.interfaces.HasDescription;
-import org.jdmp.matrix.interfaces.HasGUIObject;
-import org.jdmp.matrix.interfaces.HasLabel;
+import org.ujmp.core.interfaces.HasDescription;
+import org.ujmp.core.interfaces.HasGUIObject;
+import org.ujmp.core.interfaces.HasLabel;
 
 public interface CoreObject extends Serializable, Cloneable, HasGUIObject, HasLabel, HasDescription {
 

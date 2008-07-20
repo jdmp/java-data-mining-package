@@ -13,9 +13,9 @@ import org.jdmp.gui.matrix.panels.RPanel;
 import org.jdmp.gui.matrix.plot.MatrixPlot;
 import org.jdmp.gui.util.AbstractPanel;
 import org.jdmp.gui.util.BufferedPanel;
-import org.jdmp.matrix.util.Matlab;
-import org.jdmp.matrix.util.Octave;
-import org.jdmp.matrix.util.R;
+import org.ujmp.core.util.Matlab;
+import org.ujmp.core.util.Octave;
+import org.ujmp.core.util.R;
 
 public class MatrixPanel extends AbstractPanel {
 	private static final long serialVersionUID = 3912987239953510584L;

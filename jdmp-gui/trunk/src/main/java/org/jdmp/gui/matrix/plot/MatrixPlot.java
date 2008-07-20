@@ -17,7 +17,7 @@ import org.jdmp.gui.matrix.MatrixGUIObject;
 import org.jdmp.gui.util.CanBeUpdated;
 import org.jdmp.gui.util.UIDefaults;
 import org.jdmp.gui.util.UpdateListener;
-import org.jdmp.matrix.Matrix;
+import org.ujmp.core.Matrix;
 
 public class MatrixPlot extends JPanel implements TableCellRenderer, CanBeUpdated,
 		ListSelectionListener {

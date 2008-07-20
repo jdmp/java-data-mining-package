@@ -7,12 +7,12 @@ import javax.swing.ListSelectionModel;
 
 import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.util.AbstractEvent.EventType;
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixFactory;
-import org.jdmp.matrix.calculation.Calculation.Ret;
-import org.jdmp.matrix.coordinates.Coordinates;
-import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.interfaces.GUIObject;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.MatrixFactory;
+import org.ujmp.core.calculation.Calculation.Ret;
+import org.ujmp.core.coordinates.Coordinates;
+import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.interfaces.GUIObject;
 
 public abstract class AbstractVariable extends AbstractCoreObject implements Variable {
 

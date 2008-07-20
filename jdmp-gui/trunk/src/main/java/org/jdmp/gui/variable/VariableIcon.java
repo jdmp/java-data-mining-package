@@ -1,7 +1,7 @@
 package org.jdmp.gui.variable;
 
 import org.jdmp.gui.matrix.MatrixIcon;
-import org.jdmp.matrix.Matrix;
+import org.ujmp.core.Matrix;
 
 public class VariableIcon extends MatrixIcon {
 	private static final long serialVersionUID = 67250050019574827L;

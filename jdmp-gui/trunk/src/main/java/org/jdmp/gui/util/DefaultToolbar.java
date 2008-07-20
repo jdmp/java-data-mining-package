@@ -15,7 +15,7 @@ import org.jdmp.gui.algorithm.AlgorithmGUIObject;
 import org.jdmp.gui.algorithm.actions.CalculateOnceAction;
 import org.jdmp.gui.algorithm.actions.StartAction;
 import org.jdmp.gui.algorithm.actions.StopAction;
-import org.jdmp.matrix.interfaces.GUIObject;
+import org.ujmp.core.interfaces.GUIObject;
 
 public class DefaultToolbar extends JToolBar {
 	private static final long serialVersionUID = 3044233848101292254L;

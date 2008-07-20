@@ -6,7 +6,7 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 
 import org.jdmp.gui.algorithm.AlgorithmGUIObject;
-import org.jdmp.matrix.Matrix;
+import org.ujmp.core.Matrix;
 
 public class CalculateOnceAction extends AlgorithmAction {
 	private static final long serialVersionUID = 2007146067856422375L;

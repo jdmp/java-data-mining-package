@@ -10,7 +10,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
 import org.jdmp.gui.matrix.plot.MatrixPlot;
-import org.jdmp.matrix.util.StringUtil;
+import org.ujmp.core.util.StringUtil;
 
 public class MatrixTableCellRenderer implements TableCellRenderer {
 	private static final long serialVersionUID = 4107015466785369684L;

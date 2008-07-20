@@ -15,7 +15,7 @@ import org.jdmp.core.dataset.DataSetListListener;
 import org.jdmp.core.util.ObservableList;
 import org.jdmp.core.util.AbstractEvent.EventType;
 import org.jdmp.core.variable.Variable;
-import org.jdmp.matrix.interfaces.GUIObject;
+import org.ujmp.core.interfaces.GUIObject;
 
 public abstract class AbstractModule extends AbstractCoreObject implements Module {
 	private transient GUIObject guiObject = null;

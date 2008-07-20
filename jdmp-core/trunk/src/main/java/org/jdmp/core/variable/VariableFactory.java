@@ -1,7 +1,7 @@
 package org.jdmp.core.variable;
 
 import org.jdmp.core.matrix.wrappers.MatrixToMatrixListWrapper;
-import org.jdmp.matrix.Matrix;
+import org.ujmp.core.Matrix;
 
 public abstract class VariableFactory {
 

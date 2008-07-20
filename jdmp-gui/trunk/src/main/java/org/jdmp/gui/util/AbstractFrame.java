@@ -29,10 +29,10 @@ import org.jdmp.gui.sample.SampleGUIObject;
 import org.jdmp.gui.sample.SamplePanel;
 import org.jdmp.gui.variable.VariableGUIObject;
 import org.jdmp.gui.variable.VariablePanel;
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.coordinates.Coordinates;
-import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.interfaces.GUIObject;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.coordinates.Coordinates;
+import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.interfaces.GUIObject;
 
 public abstract class AbstractFrame extends JFrame {
 	private static final long serialVersionUID = -4656308453503586700L;

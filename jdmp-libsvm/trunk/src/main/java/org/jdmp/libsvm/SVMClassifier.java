@@ -10,9 +10,9 @@ import org.jdmp.core.algorithm.classification.AbstractClassifier;
 import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.sample.ClassificationSample;
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixFactory;
-import org.jdmp.matrix.exceptions.MatrixException;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.MatrixFactory;
+import org.ujmp.core.exceptions.MatrixException;
 
 public class SVMClassifier extends AbstractClassifier {
 	private static final long serialVersionUID = -3809157647628200950L;

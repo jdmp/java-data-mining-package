@@ -5,7 +5,7 @@ import java.util.List;
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.matrix.Matrix;
+import org.ujmp.core.Matrix;
 
 public abstract class AbstractClusterer extends AbstractAlgorithm implements Clusterer {
 

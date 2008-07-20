@@ -1,8 +1,8 @@
 package org.jdmp.core.sample;
 
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.coordinates.Coordinates;
-import org.jdmp.matrix.exceptions.MatrixException;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.coordinates.Coordinates;
+import org.ujmp.core.exceptions.MatrixException;
 
 public class ClassificationSample extends DefaultSample {
 	private static final long serialVersionUID = 7327527059314579381L;

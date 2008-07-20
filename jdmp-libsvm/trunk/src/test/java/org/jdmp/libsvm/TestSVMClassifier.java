@@ -7,7 +7,7 @@ import org.jdmp.core.dataset.ClassificationDataSet;
 import org.jdmp.core.dataset.CrossValidation;
 import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.libsvm.SVMClassifier.Kernel;
-import org.jdmp.matrix.ListMatrix;
+import org.ujmp.core.ListMatrix;
 
 public class TestSVMClassifier extends TestCase {
 

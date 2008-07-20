@@ -7,12 +7,12 @@ import org.jdmp.core.sample.ClassificationSample;
 import org.jdmp.core.sample.DefaultSample;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.sample.SampleFactory;
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixFactory;
-import org.jdmp.matrix.Matrix.EntryType;
-import org.jdmp.matrix.Matrix.Format;
-import org.jdmp.matrix.calculation.Calculation.Ret;
-import org.jdmp.matrix.exceptions.MatrixException;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.MatrixFactory;
+import org.ujmp.core.Matrix.EntryType;
+import org.ujmp.core.Matrix.Format;
+import org.ujmp.core.calculation.Calculation.Ret;
+import org.ujmp.core.exceptions.MatrixException;
 
 public abstract class DataSetFactory {
 

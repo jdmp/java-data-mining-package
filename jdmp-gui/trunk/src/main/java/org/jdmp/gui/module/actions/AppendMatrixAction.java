@@ -4,7 +4,7 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 
 import org.jdmp.gui.module.ModuleGUIObject;
-import org.jdmp.matrix.Matrix;
+import org.ujmp.core.Matrix;
 
 public class AppendMatrixAction extends ModuleAction {
 	private static final long serialVersionUID = -4511306901854037104L;

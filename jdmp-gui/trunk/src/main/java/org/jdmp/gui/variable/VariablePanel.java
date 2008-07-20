@@ -12,8 +12,8 @@ import org.jdmp.gui.matrix.MatrixListPanel;
 import org.jdmp.gui.matrix.MatrixPaintPanel;
 import org.jdmp.gui.matrix.plot.MatrixPlot;
 import org.jdmp.gui.util.AbstractPanel;
-import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.interfaces.HasMatrixList;
+import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.interfaces.HasMatrixList;
 
 public class VariablePanel extends AbstractPanel {
 	private static final long serialVersionUID = -4809155917354071285L;

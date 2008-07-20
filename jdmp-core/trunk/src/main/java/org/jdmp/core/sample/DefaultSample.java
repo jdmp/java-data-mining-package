@@ -5,7 +5,7 @@ import javax.swing.event.EventListenerList;
 import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
-import org.jdmp.matrix.Matrix;
+import org.ujmp.core.Matrix;
 
 public class DefaultSample extends AbstractSample {
 	private static final long serialVersionUID = -3649758882404748630L;

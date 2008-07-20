@@ -3,10 +3,10 @@ package org.jdmp.core.matrix.wrappers;
 import org.jdmp.core.algorithm.regression.Regressor;
 import org.jdmp.core.dataset.BasicDataSet;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.interfaces.Wrapper;
-import org.jdmp.matrix.stubs.AbstractDenseDoubleMatrix2D;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.interfaces.Wrapper;
+import org.ujmp.core.matrices.stubs.AbstractDenseDoubleMatrix2D;
 
 public class DataSetInputMatrixWrapper extends AbstractDenseDoubleMatrix2D implements
 		Wrapper<BasicDataSet> {

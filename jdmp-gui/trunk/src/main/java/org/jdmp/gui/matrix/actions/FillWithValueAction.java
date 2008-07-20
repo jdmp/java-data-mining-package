@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 import org.jdmp.gui.matrix.MatrixGUIObject;
-import org.jdmp.matrix.interfaces.HasMatrixList;
+import org.ujmp.core.interfaces.HasMatrixList;
 
 public class FillWithValueAction extends MatrixAction {
 	private static final long serialVersionUID = 6318874871015478768L;

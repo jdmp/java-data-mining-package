@@ -9,8 +9,8 @@ import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.HasVariableMap;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableListener;
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.interfaces.HasMatrixList;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.interfaces.HasMatrixList;
 
 public interface DataSet extends CoreObject, HasVariableMap, HasSampleList, HasMatrixList {
 

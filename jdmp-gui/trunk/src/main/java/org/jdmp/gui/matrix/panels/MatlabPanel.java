@@ -8,8 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import org.jdmp.gui.matrix.MatrixGUIObject;
-import org.jdmp.matrix.calculation.Calculation.Ret;
-import org.jdmp.matrix.util.Matlab;
+import org.ujmp.core.calculation.Calculation.Ret;
+import org.ujmp.core.util.Matlab;
 
 public class MatlabPanel extends JPanel {
 	private static final long serialVersionUID = -2014717060178963100L;

@@ -17,9 +17,9 @@ import javax.swing.table.DefaultTableCellRenderer;
 import org.jdmp.gui.util.ColorUtil;
 import org.jdmp.gui.util.GraphicsUtil;
 import org.jdmp.gui.util.UIDefaults;
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.coordinates.Coordinates;
-import org.jdmp.matrix.util.StringUtil;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.coordinates.Coordinates;
+import org.ujmp.core.util.StringUtil;
 
 public class MatrixRenderer extends DefaultTableCellRenderer {
 	private static final long serialVersionUID = 942689931503793487L;

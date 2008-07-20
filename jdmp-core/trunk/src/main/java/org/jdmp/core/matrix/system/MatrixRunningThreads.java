@@ -10,8 +10,8 @@ import java.util.Set;
 import java.util.TimerTask;
 
 import org.jdmp.core.util.GlobalTimer;
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.stubs.AbstractMapMatrix;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.matrices.stubs.AbstractMapMatrix;
 
 public class MatrixRunningThreads extends AbstractMapMatrix {
 	private static final long serialVersionUID = -6988423129848472319L;

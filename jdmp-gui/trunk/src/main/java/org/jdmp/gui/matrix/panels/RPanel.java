@@ -8,7 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import org.jdmp.gui.matrix.MatrixGUIObject;
-import org.jdmp.matrix.util.R;
+import org.ujmp.core.util.R;
 
 public class RPanel extends JPanel {
 	private static final long serialVersionUID = -3779245352485347462L;

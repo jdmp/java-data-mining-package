@@ -2,7 +2,7 @@ package org.jdmp.core.algorithm.classification.meta;
 
 import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.dataset.RegressionDataSet;
-import org.jdmp.matrix.Matrix;
+import org.ujmp.core.Matrix;
 
 public interface SemiSupervisedClassifier {
 

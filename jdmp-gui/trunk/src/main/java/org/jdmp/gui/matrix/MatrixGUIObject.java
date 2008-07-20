@@ -16,17 +16,17 @@ import javax.swing.table.TableModel;
 
 import org.jdmp.core.util.FastListSelectionModel;
 import org.jdmp.gui.AbstractGUIObject;
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.calculation.Calculation.Ret;
-import org.jdmp.matrix.calculation.entrywise.creators.Fill;
-import org.jdmp.matrix.calculation.entrywise.creators.Rand;
-import org.jdmp.matrix.calculation.entrywise.creators.Randn;
-import org.jdmp.matrix.coordinates.Coordinates;
-import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.interfaces.HasColumnSelectionModel;
-import org.jdmp.matrix.interfaces.HasRowSelectionModel;
-import org.jdmp.matrix.util.JDMPSettings;
-import org.jdmp.matrix.util.StringUtil;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.calculation.Calculation.Ret;
+import org.ujmp.core.calculation.entrywise.creators.Fill;
+import org.ujmp.core.calculation.entrywise.creators.Rand;
+import org.ujmp.core.calculation.entrywise.creators.Randn;
+import org.ujmp.core.coordinates.Coordinates;
+import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.interfaces.HasColumnSelectionModel;
+import org.ujmp.core.interfaces.HasRowSelectionModel;
+import org.ujmp.core.util.UJMPSettings;
+import org.ujmp.core.util.StringUtil;
 
 public class MatrixGUIObject extends AbstractGUIObject implements TableModel,
 		HasColumnSelectionModel, HasRowSelectionModel {
@@ -139,34 +139,34 @@ public class MatrixGUIObject extends AbstractGUIObject implements TableModel,
 				// header
 				s.append("<tr>");
 				s.append("<th></th>");
-				for (int col = 0; col < columnCount && col < JDMPSettings.getMaxToolTipCols(); col++) {
+				for (int col = 0; col < columnCount && col < UJMPSettings.getMaxToolTipCols(); col++) {
 					s.append("<th>" + matrix.getColumnLabel(col) + "</th>");
 				}
-				if (getColumnCount() > JDMPSettings.getMaxToolTipCols()) {
+				if (getColumnCount() > UJMPSettings.getMaxToolTipCols()) {
 					s.append("<th>...</th>");
 				}
 				s.append("</tr>");
 
-				for (int row = 0; row < rowCount && row < JDMPSettings.getMaxToolTipRows(); row++) {
+				for (int row = 0; row < rowCount && row < UJMPSettings.getMaxToolTipRows(); row++) {
 					s.append("<tr>");
 					s.append("<th>" + matrix.getRowLabel(row) + "</th>");
-					for (int col = 0; col < columnCount && col < JDMPSettings.getMaxToolTipCols(); col++) {
+					for (int col = 0; col < columnCount && col < UJMPSettings.getMaxToolTipCols(); col++) {
 						s.append("<td align=right>" + StringUtil.format(matrix.getAsDouble(row, col))
 								+ "</td>");
 					}
-					if (getColumnCount() > JDMPSettings.getMaxToolTipCols()) {
+					if (getColumnCount() > UJMPSettings.getMaxToolTipCols()) {
 						s.append("<td align=right>...</td>");
 					}
 					s.append("</tr>");
 				}
-				if (getRowCount() > JDMPSettings.getMaxToolTipRows()) {
+				if (getRowCount() > UJMPSettings.getMaxToolTipRows()) {
 					s.append("<tr>");
 					s.append("<td></td>");
 					for (int col = 0; col < getColumnCount()
-							&& col < JDMPSettings.getMaxToolTipCols(); col++) {
+							&& col < UJMPSettings.getMaxToolTipCols(); col++) {
 						s.append("<td align=right>...</td>");
 					}
-					if (getColumnCount() > JDMPSettings.getMaxToolTipCols()) {
+					if (getColumnCount() > UJMPSettings.getMaxToolTipCols()) {
 						s.append("<td align=right>...</td>");
 					}
 					s.append("</tr>");

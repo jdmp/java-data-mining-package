@@ -5,8 +5,8 @@ import javax.swing.JComponent;
 
 import org.jdmp.core.dataset.ClassificationDataSet;
 import org.jdmp.gui.matrix.MatrixGUIObject;
-import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.interfaces.HasMatrixList;
+import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.interfaces.HasMatrixList;
 
 public class CreateDataSetAction extends MatrixAction {
 	private static final long serialVersionUID = -2894363441883457747L;

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jdmp.core.algorithm.AlgorithmOneSource;
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.exceptions.MatrixException;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.exceptions.MatrixException;
 
 public class AlgorithmTranspose extends AlgorithmOneSource {
 	private static final long serialVersionUID = 7132114769238742740L;

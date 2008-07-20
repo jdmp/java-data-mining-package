@@ -4,10 +4,10 @@ import java.lang.reflect.Constructor;
 
 import org.jdmp.core.algorithm.clustering.AbstractClusterer;
 import org.jdmp.core.dataset.RegressionDataSet;
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixFactory;
 import org.jdmp.weka.wrappers.DataSetToInstancesWrapper;
 import org.jdmp.weka.wrappers.SampleToInstanceWrapper;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.MatrixFactory;
 
 import weka.clusterers.Clusterer;
 import weka.clusterers.NumberOfClustersRequestable;

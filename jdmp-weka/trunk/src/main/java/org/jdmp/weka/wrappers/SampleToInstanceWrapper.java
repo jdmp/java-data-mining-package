@@ -1,7 +1,7 @@
 package org.jdmp.weka.wrappers;
 
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.exceptions.MatrixException;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.exceptions.MatrixException;
 
 import weka.core.Instance;
 

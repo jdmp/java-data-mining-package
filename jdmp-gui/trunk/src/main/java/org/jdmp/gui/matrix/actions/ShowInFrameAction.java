@@ -5,8 +5,8 @@ import javax.swing.JComponent;
 
 import org.jdmp.gui.actions.ObjectAction;
 import org.jdmp.gui.matrix.MatrixGUIObject;
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.interfaces.GUIObject;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.interfaces.GUIObject;
 
 public class ShowInFrameAction extends ObjectAction {
 	private static final long serialVersionUID = -5025569936825456099L;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jdmp.core.algorithm.AlgorithmTwoSources;
-import org.jdmp.matrix.Matrix;
+import org.ujmp.core.Matrix;
 
 public class AlgorithmProduct extends AlgorithmTwoSources {
 	private static final long serialVersionUID = 2620456326030867650L;

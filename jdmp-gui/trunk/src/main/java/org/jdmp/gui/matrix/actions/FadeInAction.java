@@ -7,8 +7,8 @@ import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
 import org.jdmp.gui.matrix.MatrixGUIObject;
-import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.interfaces.HasMatrixList;
+import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.interfaces.HasMatrixList;
 
 public class FadeInAction extends MatrixAction {
 	private static final long serialVersionUID = -485768320588021515L;

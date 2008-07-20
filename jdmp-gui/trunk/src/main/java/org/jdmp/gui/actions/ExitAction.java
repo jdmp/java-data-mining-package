@@ -7,7 +7,7 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
-import org.jdmp.matrix.interfaces.GUIObject;
+import org.ujmp.core.interfaces.GUIObject;
 
 public class ExitAction extends ObjectAction {
 	private static final long serialVersionUID = -4139646496876151305L;

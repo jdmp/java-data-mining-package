@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
 import org.jdmp.gui.actions.TaskQueue;
-import org.jdmp.matrix.interfaces.GUIObject;
+import org.ujmp.core.interfaces.GUIObject;
 
 public class StatusBar extends JPanel {
 	private static final long serialVersionUID = -92341245296146976L;

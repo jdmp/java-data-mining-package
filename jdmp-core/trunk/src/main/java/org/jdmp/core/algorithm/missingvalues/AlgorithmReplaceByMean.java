@@ -3,7 +3,7 @@ package org.jdmp.core.algorithm.missingvalues;
 import java.util.List;
 
 import org.jdmp.core.algorithm.AbstractAlgorithm;
-import org.jdmp.matrix.Matrix;
+import org.ujmp.core.Matrix;
 
 public class AlgorithmReplaceByMean extends AbstractAlgorithm {
 

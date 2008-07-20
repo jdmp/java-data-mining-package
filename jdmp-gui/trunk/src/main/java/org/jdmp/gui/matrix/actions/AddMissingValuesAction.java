@@ -5,9 +5,9 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
 import org.jdmp.gui.matrix.MatrixGUIObject;
-import org.jdmp.matrix.calculation.Calculation.Ret;
-import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.interfaces.HasMatrixList;
+import org.ujmp.core.calculation.Calculation.Ret;
+import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.interfaces.HasMatrixList;
 
 public class AddMissingValuesAction extends MatrixAction {
 	private static final long serialVersionUID = -7585669703654474086L;

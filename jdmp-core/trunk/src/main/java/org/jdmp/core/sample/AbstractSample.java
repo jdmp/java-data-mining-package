@@ -5,8 +5,8 @@ import java.util.logging.Level;
 
 import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.variable.Variable;
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.interfaces.GUIObject;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.interfaces.GUIObject;
 
 public abstract class AbstractSample extends AbstractCoreObject implements Sample {
 

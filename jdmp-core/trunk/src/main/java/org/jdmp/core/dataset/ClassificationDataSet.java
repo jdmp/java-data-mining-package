@@ -17,16 +17,16 @@ import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.ObservableList;
 import org.jdmp.core.variable.DefaultVariable;
 import org.jdmp.core.variable.Variable;
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixFactory;
-import org.jdmp.matrix.Matrix.Format;
-import org.jdmp.matrix.calculation.Calculation.Ret;
-import org.jdmp.matrix.calculation.general.statistical.IndexOfMax;
-import org.jdmp.matrix.collections.DefaultMatrixList;
-import org.jdmp.matrix.collections.MatrixList;
-import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.implementations.basic.GenericCalculationMatrix;
-import org.jdmp.matrix.util.MathUtil;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.MatrixFactory;
+import org.ujmp.core.Matrix.Format;
+import org.ujmp.core.calculation.Calculation.Ret;
+import org.ujmp.core.calculation.general.statistical.IndexOfMax;
+import org.ujmp.core.collections.DefaultMatrixList;
+import org.ujmp.core.collections.MatrixList;
+import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.matrices.basic.GenericCalculationMatrix;
+import org.ujmp.core.util.MathUtil;
 
 public class ClassificationDataSet extends RegressionDataSet {
 	private static final long serialVersionUID = 3969274321783319184L;

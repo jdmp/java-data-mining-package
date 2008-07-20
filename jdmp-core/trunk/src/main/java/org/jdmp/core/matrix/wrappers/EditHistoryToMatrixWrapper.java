@@ -3,11 +3,11 @@ package org.jdmp.core.matrix.wrappers;
 import javax.swing.DefaultListSelectionModel;
 import javax.swing.ListSelectionModel;
 
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.collections.MatrixList;
-import org.jdmp.matrix.interfaces.HasMatrixList;
-import org.jdmp.matrix.interfaces.HasSourceMatrix;
-import org.jdmp.matrix.interfaces.Wrapper;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.collections.MatrixList;
+import org.ujmp.core.interfaces.HasMatrixList;
+import org.ujmp.core.interfaces.HasSourceMatrix;
+import org.ujmp.core.interfaces.Wrapper;
 
 public class EditHistoryToMatrixWrapper implements Wrapper<HasSourceMatrix>, HasMatrixList {
 

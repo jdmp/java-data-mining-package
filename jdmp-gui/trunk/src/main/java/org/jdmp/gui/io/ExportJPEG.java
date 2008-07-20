@@ -9,7 +9,7 @@ import java.io.OutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.jdmp.matrix.io.util.FileSelector;
+import org.ujmp.core.util.io.FileSelector;
 
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGEncodeParam;

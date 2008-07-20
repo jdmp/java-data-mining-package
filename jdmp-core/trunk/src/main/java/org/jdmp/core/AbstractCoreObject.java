@@ -4,7 +4,7 @@ import java.lang.reflect.Method;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.jdmp.matrix.Matrix;
+import org.ujmp.core.Matrix;
 
 public abstract class AbstractCoreObject implements CoreObject {
 

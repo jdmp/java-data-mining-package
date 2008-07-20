@@ -9,8 +9,8 @@ import javax.swing.JSeparator;
 
 import org.jdmp.gui.actions.ObjectActions;
 import org.jdmp.gui.matrix.actions.MatrixActions;
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.calculation.Calculation.Ret;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.calculation.Calculation.Ret;
 
 public class MatrixPopupMenu extends JPopupMenu {
 	private static final long serialVersionUID = -5501347047922058729L;

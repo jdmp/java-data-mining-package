@@ -4,8 +4,8 @@ import java.lang.reflect.Method;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.interfaces.GUIObject;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.interfaces.GUIObject;
 
 public abstract class AbstractGUIObject implements GUIObject {
 	private static final long serialVersionUID = -2271465024665498798L;

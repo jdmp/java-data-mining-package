@@ -17,8 +17,8 @@ import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.jdmp.core.variable.VariableListener;
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.interfaces.GUIObject;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.interfaces.GUIObject;
 
 public abstract class AbstractDataSet extends AbstractCoreObject implements DataSet {
 

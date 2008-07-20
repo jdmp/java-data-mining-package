@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jdmp.core.algorithm.AlgorithmOneSource;
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixFactory;
-import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.util.MathUtil;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.MatrixFactory;
+import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.util.MathUtil;
 
 public class AlgorithmMean extends AlgorithmOneSource {
 	private static final long serialVersionUID = 5594989536534719762L;

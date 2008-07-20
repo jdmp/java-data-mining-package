@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jdmp.core.algorithm.AlgorithmOneSource;
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.calculation.Calculation.Ret;
-import org.jdmp.matrix.exceptions.MatrixException;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.calculation.Calculation.Ret;
+import org.ujmp.core.exceptions.MatrixException;
 
 public class AlgorithmTanhPlusOne extends AlgorithmOneSource {
 	private static final long serialVersionUID = 1972442317406585099L;

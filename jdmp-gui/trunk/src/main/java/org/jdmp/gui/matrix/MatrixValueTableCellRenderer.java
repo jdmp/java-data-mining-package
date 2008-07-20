@@ -10,7 +10,7 @@ import javax.swing.border.Border;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import org.jdmp.gui.util.ColorUtil;
-import org.jdmp.matrix.util.StringUtil;
+import org.ujmp.core.util.StringUtil;
 
 public class MatrixValueTableCellRenderer extends DefaultTableCellRenderer {
 	private static final long serialVersionUID = -1473046176750819621L;

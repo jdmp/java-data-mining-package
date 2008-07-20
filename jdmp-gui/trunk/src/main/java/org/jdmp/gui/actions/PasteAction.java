@@ -8,7 +8,7 @@ import java.awt.datatransfer.Transferable;
 import javax.swing.Action;
 import javax.swing.JComponent;
 
-import org.jdmp.matrix.interfaces.GUIObject;
+import org.ujmp.core.interfaces.GUIObject;
 
 public class PasteAction extends ObjectAction {
 	private static final long serialVersionUID = -4029079211237756552L;

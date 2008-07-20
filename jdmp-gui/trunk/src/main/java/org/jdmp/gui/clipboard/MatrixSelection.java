@@ -8,9 +8,9 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.io.Serializable;
 
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.Matrix.Format;
-import org.jdmp.matrix.exceptions.MatrixException;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.Matrix.Format;
+import org.ujmp.core.exceptions.MatrixException;
 
 public class MatrixSelection implements Transferable, ClipboardOwner, Serializable {
 	private static final long serialVersionUID = -8462961141636462510L;

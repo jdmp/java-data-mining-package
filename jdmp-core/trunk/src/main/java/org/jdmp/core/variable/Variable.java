@@ -1,12 +1,12 @@
 package org.jdmp.core.variable;
 
 import org.jdmp.core.CoreObject;
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.interfaces.HasDescription;
-import org.jdmp.matrix.interfaces.HasLabel;
-import org.jdmp.matrix.interfaces.HasMatrix;
-import org.jdmp.matrix.interfaces.HasMatrixList;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.interfaces.HasDescription;
+import org.ujmp.core.interfaces.HasLabel;
+import org.ujmp.core.interfaces.HasMatrix;
+import org.ujmp.core.interfaces.HasMatrixList;
 
 public interface Variable extends CoreObject, HasLabel, HasDescription, HasMatrix, HasMatrixList {
 

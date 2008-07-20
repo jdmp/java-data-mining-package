@@ -9,7 +9,7 @@ import javax.swing.JComponent;
 
 import org.jdmp.gui.clipboard.MatrixSelection;
 import org.jdmp.gui.matrix.MatrixGUIObject;
-import org.jdmp.matrix.interfaces.GUIObject;
+import org.ujmp.core.interfaces.GUIObject;
 
 public class CopyAction extends ObjectAction {
 	private static final long serialVersionUID = -2679630812122400202L;

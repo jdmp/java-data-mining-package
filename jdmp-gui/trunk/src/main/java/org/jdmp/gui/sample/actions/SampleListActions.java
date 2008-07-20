@@ -8,7 +8,7 @@ import javax.swing.JSeparator;
 
 import org.jdmp.core.sample.HasSampleList;
 import org.jdmp.gui.actions.ExitAction;
-import org.jdmp.matrix.interfaces.GUIObject;
+import org.ujmp.core.interfaces.GUIObject;
 
 public class SampleListActions extends ArrayList<JComponent> {
 	private static final long serialVersionUID = 864758348092666603L;

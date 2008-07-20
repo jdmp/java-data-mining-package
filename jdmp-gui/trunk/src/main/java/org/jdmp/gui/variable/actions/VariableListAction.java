@@ -4,7 +4,7 @@ import javax.swing.JComponent;
 
 import org.jdmp.core.variable.HasVariables;
 import org.jdmp.gui.actions.ObjectAction;
-import org.jdmp.matrix.interfaces.GUIObject;
+import org.ujmp.core.interfaces.GUIObject;
 
 public abstract class VariableListAction extends ObjectAction {
 

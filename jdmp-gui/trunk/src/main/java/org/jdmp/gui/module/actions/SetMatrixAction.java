@@ -8,7 +8,7 @@ import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
 import org.jdmp.gui.module.ModuleGUIObject;
-import org.jdmp.matrix.Matrix;
+import org.ujmp.core.Matrix;
 
 public class SetMatrixAction extends ModuleAction {
 	private static final long serialVersionUID = -3268204362414608614L;

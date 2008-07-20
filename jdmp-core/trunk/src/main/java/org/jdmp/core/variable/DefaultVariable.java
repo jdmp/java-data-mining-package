@@ -3,11 +3,11 @@ package org.jdmp.core.variable;
 import javax.swing.event.EventListenerList;
 
 import org.jdmp.core.matrix.wrappers.MatrixListToMatrixWrapper;
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixFactory;
-import org.jdmp.matrix.collections.DefaultMatrixList;
-import org.jdmp.matrix.collections.MatrixList;
-import org.jdmp.matrix.coordinates.Coordinates;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.MatrixFactory;
+import org.ujmp.core.collections.DefaultMatrixList;
+import org.ujmp.core.collections.MatrixList;
+import org.ujmp.core.coordinates.Coordinates;
 
 public class DefaultVariable extends AbstractVariable {
 	private static final long serialVersionUID = -7192491915167470355L;

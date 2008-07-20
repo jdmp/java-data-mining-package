@@ -1,7 +1,7 @@
 package org.jdmp.core.variable;
 
 import org.jdmp.core.util.AbstractEvent;
-import org.jdmp.matrix.Matrix;
+import org.ujmp.core.Matrix;
 
 public class VariableEvent extends AbstractEvent {
 	private static final long serialVersionUID = -8349940514872800903L;

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import javax.swing.JComponent;
 import javax.swing.JMenuItem;
 
-import org.jdmp.matrix.interfaces.GUIObject;
+import org.ujmp.core.interfaces.GUIObject;
 
 public class PanelActions extends ArrayList<JComponent> {
 	private static final long serialVersionUID = 4269896034756524809L;

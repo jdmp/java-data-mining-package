@@ -57,9 +57,9 @@ import org.jdmp.gui.variable.VariableGUIObject;
 import org.jdmp.gui.variable.VariableListTableModel;
 import org.jdmp.gui.variable.VariableTableCellRenderer;
 import org.jdmp.gui.variable.actions.VariableListActions;
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.interfaces.GUIObject;
-import org.jdmp.matrix.interfaces.HasToolTip;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.interfaces.GUIObject;
+import org.ujmp.core.interfaces.HasToolTip;
 
 public class ObjectListPanel extends JPanel implements MouseListener, KeyListener,
 		ListSelectionListener, TableModelListener {

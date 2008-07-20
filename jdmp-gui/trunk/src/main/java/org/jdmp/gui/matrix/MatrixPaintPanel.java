@@ -35,7 +35,7 @@ import org.jdmp.gui.io.ExportPNG;
 import org.jdmp.gui.matrix.actions.MatrixActions;
 import org.jdmp.gui.util.CanBeRepainted;
 import org.jdmp.gui.util.GraphicsExecutor;
-import org.jdmp.matrix.interfaces.HasToolTip;
+import org.ujmp.core.interfaces.HasToolTip;
 
 public class MatrixPaintPanel extends JPanel implements ComponentListener, TableModelListener,
 		MouseListener, MouseMotionListener, CanBeRepainted, HasToolTip, ListSelectionListener {

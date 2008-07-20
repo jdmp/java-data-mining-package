@@ -16,8 +16,8 @@ import javax.swing.JComponent;
 import javax.swing.UIManager;
 import javax.swing.event.SwingPropertyChangeSupport;
 
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.interfaces.GUIObject;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.interfaces.GUIObject;
 
 public abstract class ObjectAction implements Action, Callable<Object>, Serializable {
 

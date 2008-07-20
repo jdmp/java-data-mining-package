@@ -8,13 +8,13 @@ import javax.swing.event.EventListenerList;
 import org.jdmp.core.matrix.wrappers.DataSetInputMatrixWrapper;
 import org.jdmp.core.sample.DefaultSample;
 import org.jdmp.core.variable.Variable;
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.Matrix.Format;
-import org.jdmp.matrix.calculation.Calculation.Ret;
-import org.jdmp.matrix.collections.DefaultMatrixList;
-import org.jdmp.matrix.collections.MatrixList;
-import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.io.ExportMatrix;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.Matrix.Format;
+import org.ujmp.core.calculation.Calculation.Ret;
+import org.ujmp.core.collections.DefaultMatrixList;
+import org.ujmp.core.collections.MatrixList;
+import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.io.ExportMatrix;
 
 public class BasicDataSet extends AbstractDataSet {
 	private static final long serialVersionUID = -2887879051530049677L;

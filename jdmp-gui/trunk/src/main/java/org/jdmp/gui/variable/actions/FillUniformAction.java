@@ -8,7 +8,7 @@ import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
 import org.jdmp.gui.variable.VariableGUIObject;
-import org.jdmp.matrix.exceptions.MatrixException;
+import org.ujmp.core.exceptions.MatrixException;
 
 public class FillUniformAction extends VariableAction {
 	private static final long serialVersionUID = -3431785036087571881L;

@@ -8,8 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import org.jdmp.gui.matrix.MatrixGUIObject;
-import org.jdmp.matrix.calculation.Calculation.Ret;
-import org.jdmp.matrix.util.Octave;
+import org.ujmp.core.calculation.Calculation.Ret;
+import org.ujmp.core.util.Octave;
 
 public class OctavePanel extends JPanel {
 	private static final long serialVersionUID = -894693635404746973L;

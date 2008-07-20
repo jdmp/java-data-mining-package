@@ -7,7 +7,7 @@ import java.util.concurrent.Callable;
 import org.jdmp.core.CoreObject;
 import org.jdmp.core.variable.HasVariableMap;
 import org.jdmp.core.variable.Variable;
-import org.jdmp.matrix.Matrix;
+import org.ujmp.core.Matrix;
 
 public interface Algorithm extends CoreObject, HasVariableMap, HasAlgorithms,
 		Callable<List<Matrix>> {

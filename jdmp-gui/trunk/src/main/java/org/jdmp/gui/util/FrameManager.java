@@ -25,8 +25,8 @@ import org.jdmp.gui.sample.SampleFrame;
 import org.jdmp.gui.sample.SampleGUIObject;
 import org.jdmp.gui.variable.VariableFrame;
 import org.jdmp.gui.variable.VariableGUIObject;
-import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.interfaces.GUIObject;
+import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.interfaces.GUIObject;
 
 public abstract class FrameManager {
 
