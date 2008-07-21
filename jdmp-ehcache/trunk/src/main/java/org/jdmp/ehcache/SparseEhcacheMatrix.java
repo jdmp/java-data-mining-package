@@ -6,10 +6,10 @@ import java.io.ObjectOutputStream;
 import java.io.OptionalDataException;
 import java.util.Map;
 
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.coordinates.Coordinates;
-import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.stubs.AbstractMapToSparseMatrixWrapper;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.coordinates.Coordinates;
+import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.matrices.stubs.AbstractMapToSparseMatrixWrapper;
 
 public class SparseEhcacheMatrix<A> extends AbstractMapToSparseMatrixWrapper<A> {
 	private static final long serialVersionUID = -7743149828558906127L;

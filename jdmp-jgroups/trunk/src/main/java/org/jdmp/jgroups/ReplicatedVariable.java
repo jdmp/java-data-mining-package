@@ -4,10 +4,10 @@ import javax.swing.event.EventListenerList;
 
 import org.jdmp.core.matrix.wrappers.MatrixListToMatrixWrapper;
 import org.jdmp.core.variable.AbstractVariable;
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixFactory;
-import org.jdmp.matrix.collections.MatrixList;
-import org.jdmp.matrix.coordinates.Coordinates;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.MatrixFactory;
+import org.ujmp.core.collections.MatrixList;
+import org.ujmp.core.coordinates.Coordinates;
 
 public class ReplicatedVariable extends AbstractVariable {
 	private static final long serialVersionUID = -2486416251545919644L;

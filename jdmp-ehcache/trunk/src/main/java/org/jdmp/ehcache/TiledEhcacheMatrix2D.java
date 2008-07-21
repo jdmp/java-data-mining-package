@@ -6,10 +6,10 @@ import java.io.ObjectOutputStream;
 import java.io.OptionalDataException;
 import java.util.Map;
 
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.ObjectMatrix2D;
-import org.jdmp.matrix.coordinates.Coordinates;
-import org.jdmp.matrix.stubs.AbstractMapToTiledMatrix2DWrapper;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.ObjectMatrix2D;
+import org.ujmp.core.coordinates.Coordinates;
+import org.ujmp.core.matrices.stubs.AbstractMapToTiledMatrix2DWrapper;
 
 public class TiledEhcacheMatrix2D<A> extends AbstractMapToTiledMatrix2DWrapper<A> {
 	private static final long serialVersionUID = 4324063544046176423L;

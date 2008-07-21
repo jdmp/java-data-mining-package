@@ -17,17 +17,17 @@ import javax.swing.ListSelectionModel;
 import org.jdmp.core.util.AbstractEvent.EventType;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableEvent;
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.collections.AbstractMatrixList;
-import org.jdmp.matrix.collections.DefaultMatrixList;
-import org.jdmp.matrix.collections.MapToListWrapper;
-import org.jdmp.matrix.collections.MatrixList;
-import org.jdmp.matrix.exceptions.MatrixException;
 import org.jgroups.ChannelFactory;
 import org.jgroups.JChannelFactory;
 import org.jgroups.View;
 import org.jgroups.blocks.ReplicatedHashMap;
 import org.jgroups.blocks.ReplicatedHashMap.Notification;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.collections.AbstractMatrixList;
+import org.ujmp.core.collections.DefaultMatrixList;
+import org.ujmp.core.collections.MapToListWrapper;
+import org.ujmp.core.collections.MatrixList;
+import org.ujmp.core.exceptions.MatrixException;
 
 public class ReplicatedMatrixList extends AbstractMatrixList {
 	private static final Logger logger = Logger.getLogger(DefaultMatrixList.class.getName());

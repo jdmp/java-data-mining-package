@@ -6,16 +6,16 @@ import java.util.Map;
 import java.util.Vector;
 import java.util.logging.Level;
 
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.coordinates.CoordinateSetToLongWrapper;
-import org.jdmp.matrix.coordinates.Coordinates;
-import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.stubs.AbstractSparseDoubleMatrix;
 import org.jgroups.ChannelFactory;
 import org.jgroups.JChannelFactory;
 import org.jgroups.View;
 import org.jgroups.blocks.ReplicatedHashMap;
 import org.jgroups.blocks.ReplicatedHashMap.Notification;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.coordinates.CoordinateSetToLongWrapper;
+import org.ujmp.core.coordinates.Coordinates;
+import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.matrices.stubs.AbstractSparseDoubleMatrix;
 
 public class ReplicatedSparseMatrix extends AbstractSparseDoubleMatrix {
 	private static final long serialVersionUID = -2470092774104421146L;

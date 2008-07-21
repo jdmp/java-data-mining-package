@@ -25,10 +25,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-matrix</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-core</artifactId>
 		</dependency>
 	</dependencies>
