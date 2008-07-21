@@ -12,9 +12,9 @@ import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
 
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.util.StringUtil;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.util.StringUtil;
 
 public abstract class ExportMatrixXLS {
 

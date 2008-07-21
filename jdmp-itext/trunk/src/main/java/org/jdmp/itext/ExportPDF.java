@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 
 import org.jdmp.gui.util.CanRenderGraph;
-import org.jdmp.matrix.io.util.JDMPFileFilter;
+import org.ujmp.core.util.io.UJMPFileFilter;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.pdf.DefaultFontMapper;
@@ -28,7 +28,7 @@ public abstract class ExportPDF {
 
 	public static final File selectFile(Component c) {
 		JFileChooser chooser = new JFileChooser();
-		chooser.setFileFilter(JDMPFileFilter.PDFFilter);
+		chooser.setFileFilter(UJMPFileFilter.PDFFilter);
 		int returnVal = chooser.showOpenDialog(c);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			File file = chooser.getSelectedFile();

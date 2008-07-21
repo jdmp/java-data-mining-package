@@ -1,7 +1,7 @@
 package org.jdmp.jmatio;
 
-import org.jdmp.matrix.AbstractMatrixTest;
-import org.jdmp.matrix.Matrix;
+import org.ujmp.core.AbstractMatrixTest;
+import org.ujmp.core.Matrix;
 
 public class TestMLDoubleMatrix extends AbstractMatrixTest {
 

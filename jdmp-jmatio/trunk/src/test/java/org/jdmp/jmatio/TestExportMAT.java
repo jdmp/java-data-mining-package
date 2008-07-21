@@ -1,5 +1,5 @@
 package org.jdmp.jmatio;
 
-public class TestExportMAT extends org.jdmp.matrix.io.TestExportMatrixMAT {
+public class TestExportMAT extends org.ujmp.core.io.TestExportMatrixMAT {
 
 }

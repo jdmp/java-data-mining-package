@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
-import org.jdmp.matrix.Matrix;
+import org.ujmp.core.Matrix;
 
 import com.jmatio.io.MatFileReader;
 import com.jmatio.types.MLArray;

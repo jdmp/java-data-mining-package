@@ -3,9 +3,9 @@ package org.jdmp.jmatio;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jdmp.matrix.annotation.Annotation;
-import org.jdmp.matrix.annotation.DefaultAnnotation;
-import org.jdmp.matrix.util.StringUtil;
+import org.ujmp.core.annotation.Annotation;
+import org.ujmp.core.annotation.DefaultAnnotation;
+import org.ujmp.core.util.StringUtil;
 
 import com.jmatio.types.MLArray;
 

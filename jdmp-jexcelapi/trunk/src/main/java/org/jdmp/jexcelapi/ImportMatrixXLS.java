@@ -10,10 +10,10 @@ import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixFactory;
-import org.jdmp.matrix.Matrix.EntryType;
-import org.jdmp.matrix.exceptions.MatrixException;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.MatrixFactory;
+import org.ujmp.core.Matrix.EntryType;
+import org.ujmp.core.exceptions.MatrixException;
 
 public abstract class ImportMatrixXLS {
 
