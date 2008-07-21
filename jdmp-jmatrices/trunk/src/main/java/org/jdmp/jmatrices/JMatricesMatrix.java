@@ -1,9 +1,9 @@
 package org.jdmp.jmatrices;
 
-import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.interfaces.Wrapper;
-import org.jdmp.matrix.stubs.AbstractDenseDoubleMatrix2D;
 import org.jmatrices.dbl.MatrixFactory;
+import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.interfaces.Wrapper;
+import org.ujmp.core.matrices.stubs.AbstractDenseDoubleMatrix2D;
 
 public class JMatricesMatrix extends AbstractDenseDoubleMatrix2D implements Wrapper<org.jmatrices.dbl.Matrix> {
 	private static final long serialVersionUID = 513251881654621L;
@@ -18,7 +18,7 @@ public class JMatricesMatrix extends AbstractDenseDoubleMatrix2D implements Wrap
 		this.matrix = MatrixFactory.getMatrix((int) size[ROW], (int) size[COLUMN], null);
 	}
 
-	public JMatricesMatrix(org.jdmp.matrix.Matrix source) throws MatrixException {
+	public JMatricesMatrix(org.ujmp.core.Matrix source) throws MatrixException {
 		this(source.getSize());
 		for (long[] c : source.availableCoordinates()) {
 			setAsDouble(source.getAsDouble(c), c);

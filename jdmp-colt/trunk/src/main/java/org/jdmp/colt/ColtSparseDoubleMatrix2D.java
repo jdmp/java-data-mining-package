@@ -4,12 +4,12 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.coordinates.CoordinateSetToLongWrapper;
-import org.jdmp.matrix.coordinates.Coordinates;
-import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.interfaces.Wrapper;
-import org.jdmp.matrix.stubs.AbstractSparseDoubleMatrix2D;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.coordinates.CoordinateSetToLongWrapper;
+import org.ujmp.core.coordinates.Coordinates;
+import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.interfaces.Wrapper;
+import org.ujmp.core.matrices.stubs.AbstractSparseDoubleMatrix2D;
 
 import cern.colt.matrix.impl.SparseDoubleMatrix2D;
 

@@ -1,9 +1,9 @@
 package org.jdmp.jama;
 
 import org.jdmp.jama.JamaMatrix;
-import org.jdmp.matrix.AbstractMatrixTest;
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.exceptions.MatrixException;
+import org.ujmp.core.AbstractMatrixTest;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.exceptions.MatrixException;
 
 public class TestJamaMatrix extends AbstractMatrixTest {
 

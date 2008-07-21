@@ -8,12 +8,12 @@ import no.uib.cipr.matrix.DenseMatrix;
 import no.uib.cipr.matrix.Matrices;
 import no.uib.cipr.matrix.SVD;
 
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.MatrixFactory;
-import org.jdmp.matrix.calculation.Calculation.Ret;
-import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.interfaces.Wrapper;
-import org.jdmp.matrix.stubs.AbstractDenseDoubleMatrix2D;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.MatrixFactory;
+import org.ujmp.core.calculation.Calculation.Ret;
+import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.interfaces.Wrapper;
+import org.ujmp.core.matrices.stubs.AbstractDenseDoubleMatrix2D;
 
 public class MTJDenseDoubleMatrix2D extends AbstractDenseDoubleMatrix2D implements
 		Wrapper<DenseMatrix> {

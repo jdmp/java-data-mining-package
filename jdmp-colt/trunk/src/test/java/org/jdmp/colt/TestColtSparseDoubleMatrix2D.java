@@ -1,9 +1,9 @@
 package org.jdmp.colt;
 
 import org.jdmp.colt.ColtSparseDoubleMatrix2D;
-import org.jdmp.matrix.AbstractMatrixTest;
-import org.jdmp.matrix.Matrix;
-import org.jdmp.matrix.exceptions.MatrixException;
+import org.ujmp.core.AbstractMatrixTest;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.exceptions.MatrixException;
 
 public class TestColtSparseDoubleMatrix2D extends AbstractMatrixTest {
 

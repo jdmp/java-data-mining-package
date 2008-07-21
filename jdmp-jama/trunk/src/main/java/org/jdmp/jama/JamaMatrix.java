@@ -1,8 +1,8 @@
 package org.jdmp.jama;
 
-import org.jdmp.matrix.exceptions.MatrixException;
-import org.jdmp.matrix.interfaces.Wrapper;
-import org.jdmp.matrix.stubs.AbstractDenseDoubleMatrix2D;
+import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.interfaces.Wrapper;
+import org.ujmp.core.matrices.stubs.AbstractDenseDoubleMatrix2D;
 
 import Jama.Matrix;
 
@@ -15,7 +15,7 @@ public class JamaMatrix extends AbstractDenseDoubleMatrix2D implements Wrapper<J
 		matrix = new Jama.Matrix((int) size[ROW], (int) size[COLUMN]);
 	}
 
-	public JamaMatrix(org.jdmp.matrix.Matrix source) throws MatrixException {
+	public JamaMatrix(org.ujmp.core.Matrix source) throws MatrixException {
 		this(source.getSize());
 		for (long[] c : source.availableCoordinates()) {
 			setAsDouble(source.getAsDouble(c), c);
