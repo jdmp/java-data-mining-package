@@ -79,12 +79,7 @@
 				<version>${jdmp.version}</version>
 				<scope>compile</scope>
 			</dependency>
-			<dependency>
-				<groupId>org.jdmp</groupId>
-				<artifactId>jdmp-jexcelapi</artifactId>
-				<version>${jdmp.version}</version>
-				<scope>compile</scope>
-			</dependency>
+			
 			<dependency>
 				<groupId>org.jdmp</groupId>
 				<artifactId>jdmp-ehcache</artifactId>
@@ -230,12 +225,7 @@
 				<scope>compile</scope>
 			</dependency>
 			
-			<dependency>
-				<groupId>jxl</groupId>
-				<artifactId>jxl</artifactId>
-				<version>2.6.8</version>
-				<scope>compile</scope>
-			</dependency>
+			
 			<dependency>
 				<groupId>libsvm</groupId>
 				<artifactId>libsvm</artifactId>
