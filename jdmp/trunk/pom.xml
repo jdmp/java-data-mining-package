@@ -43,17 +43,11 @@
 
 			<dependency>
 				<groupId>org.ujmp</groupId>
-				<artifactId>ujmp-core</artifactId>
+				<artifactId>ujmp-all</artifactId>
 				<version>${ujmp.version}</version>
 				<scope>compile</scope>
 			</dependency>
-			<dependency>
-				<groupId>org.ujmp</groupId>
-				<artifactId>ujmp-jackcess</artifactId>
-				<version>${ujmp.version}</version>
-				<scope>compile</scope>
-			</dependency>
-			
+						
 			
 			<dependency>
 				<groupId>org.jdmp</groupId>
@@ -78,31 +72,7 @@
 				<artifactId>jdmp-mail</artifactId>
 				<version>${jdmp.version}</version>
 				<scope>compile</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.jdmp</groupId>
-				<artifactId>jdmp-mtj</artifactId>
-				<version>${jdmp.version}</version>
-				<scope>compile</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.ujmp</groupId>
-				<artifactId>ujmp-colt</artifactId>
-				<version>${ujmp.version}</version>
-				<scope>compile</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.ujmp</groupId>
-				<artifactId>ujmp-all</artifactId>
-				<version>${ujmp.version}</version>
-				<scope>compile</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.ujmp</groupId>
-				<artifactId>ujmp-jama</artifactId>
-				<version>${jdmp.version}</version>
-				<scope>compile</scope>
-			</dependency>
+			</dependency>			
 			<dependency>
 				<groupId>org.jdmp</groupId>
 				<artifactId>jdmp-gui</artifactId>
@@ -120,13 +90,7 @@
 				<artifactId>jdmp-ehcache</artifactId>
 				<version>${jdmp.version}</version>
 				<scope>compile</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.jdmp</groupId>
-				<artifactId>jdmp-vecmath</artifactId>
-				<version>${jdmp.version}</version>
-				<scope>compile</scope>
-			</dependency>
+			</dependency>			
 			<dependency>
 				<groupId>org.jdmp</groupId>
 				<artifactId>jdmp-jgroups</artifactId>
@@ -265,12 +229,7 @@
 				<version>1.2.14</version>
 				<scope>compile</scope>
 			</dependency>
-			<dependency>
-				<groupId>vecmath</groupId>
-				<artifactId>vecmath</artifactId>
-				<version>1.5.1</version>
-				<scope>compile</scope>
-			</dependency>
+			
 			<dependency>
 				<groupId>jxl</groupId>
 				<artifactId>jxl</artifactId>
@@ -344,12 +303,7 @@
 		        <version>0.4</version>
 				<scope>compile</scope>
 		    </dependency>
-		    <dependency>
-				<groupId>jackcess</groupId>
-				<artifactId>jackcess</artifactId>
-				<version>1.1.15</version>
-				<scope>compile</scope>
-			</dependency>
+		    
 
 		</dependencies>
 	</dependencyManagement>
