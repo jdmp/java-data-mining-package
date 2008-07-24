@@ -98,8 +98,8 @@
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
-				<groupId>org.jdmp</groupId>
-				<artifactId>jdmp-jama</artifactId>
+				<groupId>org.ujmp</groupId>
+				<artifactId>ujmp-jama</artifactId>
 				<version>${jdmp.version}</version>
 				<scope>compile</scope>
 			</dependency>
@@ -340,13 +340,7 @@
 				<artifactId>weka</artifactId>
 				<version>3.5.7</version>
 				<scope>compile</scope>
-			</dependency>
-			<dependency>
-				<groupId>jama</groupId>
-				<artifactId>jama</artifactId>
-				<version>1.0.2</version>
-				<scope>compile</scope>
-			</dependency>
+			</dependency>			
 			<dependency>
 				<groupId>ehcache</groupId>
 				<artifactId>ehcache</artifactId>
