@@ -43,6 +43,12 @@
 
 			<dependency>
 				<groupId>org.ujmp</groupId>
+				<artifactId>ujmp-core</artifactId>
+				<version>${ujmp.version}</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.ujmp</groupId>
 				<artifactId>ujmp-all</artifactId>
 				<version>${ujmp.version}</version>
 				<scope>compile</scope>
@@ -98,13 +104,7 @@
 				<version>${jdmp.version}</version>
 				<scope>compile</scope>
 			</dependency>
-			<dependency>
-				<groupId>org.jdmp</groupId>
-				<artifactId>jdmp-jmatio</artifactId>
-				<version>${jdmp.version}</version>
-				<scope>compile</scope>
-			</dependency>
-			
+						
 		    <dependency>
       			<groupId>org.jdmp</groupId>
 		        <artifactId>jdmp-jmathlib</artifactId>
@@ -262,12 +262,7 @@
 				<version>2.1.2u</version>
 				<scope>compile</scope>
 			</dependency>
-			<dependency>
-     			  <groupId>jmatio</groupId>
-			      <artifactId>jmatio</artifactId>
-			      <version>0.2.2</version>
-				  <scope>compile</scope>
-		    </dependency>
+			
 		    
 		    <dependency>
       			<groupId>jmathlib</groupId>
