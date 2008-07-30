@@ -7,12 +7,16 @@ import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.tree.TreeModel;
 
+import org.jdmp.gui.matrix.panels.GnuPlotPanel;
 import org.jdmp.gui.matrix.panels.MatlabPanel;
 import org.jdmp.gui.matrix.panels.OctavePanel;
 import org.jdmp.gui.matrix.panels.RPanel;
 import org.jdmp.gui.matrix.plot.MatrixPlot;
 import org.jdmp.gui.util.AbstractPanel;
 import org.jdmp.gui.util.BufferedPanel;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.MatrixFactory;
+import org.ujmp.core.util.GnuPlot;
 import org.ujmp.core.util.Matlab;
 import org.ujmp.core.util.Octave;
 import org.ujmp.core.util.R;
@@ -49,6 +53,11 @@ public class MatrixPanel extends AbstractPanel {
 
 		if (m.getMatrix() instanceof TreeModel) {
 			tabbedPane.add("Tree View", new MatrixTreePanel(m));
+		}
+
+		if (GnuPlot.isAvailable()) {
+			GnuPlotPanel gnuPlotPanel = new GnuPlotPanel(m);
+			tabbedPane.add("GnuPlot", gnuPlotPanel);
 		}
 
 		if (Matlab.isAvailable()) {
