@@ -6,7 +6,7 @@
 
     <properties>
       <jdmp.version>0.0.2</jdmp.version>
-      <ujmp.version>0.1.0</ujmp.version>
+      <ujmp.version>0.1.1</ujmp.version>
     </properties>
 
 	<groupId>org.jdmp</groupId>
