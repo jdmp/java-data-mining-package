@@ -14,8 +14,8 @@ import org.jgroups.blocks.ReplicatedHashMap.Notification;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.coordinates.CoordinateSetToLongWrapper;
 import org.ujmp.core.coordinates.Coordinates;
+import org.ujmp.core.doublematrix.AbstractSparseDoubleMatrix;
 import org.ujmp.core.exceptions.MatrixException;
-import org.ujmp.core.matrices.stubs.AbstractSparseDoubleMatrix;
 
 public class ReplicatedSparseMatrix extends AbstractSparseDoubleMatrix {
 	private static final long serialVersionUID = -2470092774104421146L;

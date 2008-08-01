@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.logging.LogRecord;
 
 import org.ujmp.core.Matrix;
-import org.ujmp.core.matrices.stubs.AbstractDenseObjectMatrix2D;
+import org.ujmp.core.objectmatrix.AbstractDenseObjectMatrix2D;
 
 public class LogMatrix extends AbstractDenseObjectMatrix2D {
 	private static final long serialVersionUID = 4054005288748742516L;

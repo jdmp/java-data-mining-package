@@ -4,7 +4,7 @@ import java.util.TimerTask;
 
 import org.jdmp.core.util.GlobalTimer;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.matrices.stubs.AbstractDenseDoubleMatrix2D;
+import org.ujmp.core.doublematrix.AbstractDenseDoubleMatrix2D;
 
 public class MatrixMemoryUsage extends AbstractDenseDoubleMatrix2D {
 	private static final long serialVersionUID = -3863745960302379726L;

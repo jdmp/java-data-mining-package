@@ -2,7 +2,9 @@ package org.jdmp.gui.matrix;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.lang.reflect.Constructor;
 
+import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.tree.TreeModel;
@@ -15,7 +17,6 @@ import org.jdmp.gui.matrix.plot.MatrixPlot;
 import org.jdmp.gui.util.AbstractPanel;
 import org.jdmp.gui.util.BufferedPanel;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.util.GnuPlot;
 import org.ujmp.core.util.Matlab;
 import org.ujmp.core.util.Octave;
@@ -24,9 +25,9 @@ import org.ujmp.core.util.R;
 public class MatrixPanel extends AbstractPanel {
 	private static final long serialVersionUID = 3912987239953510584L;
 
-	private JSplitPane splitPane1 = new JSplitPane();
+	private final JSplitPane splitPane1 = new JSplitPane();
 
-	private JSplitPane splitPane2 = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
+	private final JSplitPane splitPane2 = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
 
 	private MatrixPaintPanel matrixPaintPanel = null;
 
@@ -53,6 +54,19 @@ public class MatrixPanel extends AbstractPanel {
 
 		if (m.getMatrix() instanceof TreeModel) {
 			tabbedPane.add("Tree View", new MatrixTreePanel(m));
+		}
+
+		try {
+			Class<?> c = Class.forName("org.ujmp.jmathplot.JMathPlotBarPanel");
+			Constructor<?> con = c.getConstructor(Matrix.class);
+			JPanel panel = (JPanel) con.newInstance(m.getMatrix());
+			tabbedPane.add("Bar", panel);
+
+			c = Class.forName("org.ujmp.jmathplot.JMathPlotHistogramPanel");
+			con = c.getConstructor(Matrix.class);
+			panel = (JPanel) con.newInstance(m.getMatrix());
+			tabbedPane.add("Histogram", panel);
+		} catch (Exception e) {
 		}
 
 		if (GnuPlot.isAvailable()) {

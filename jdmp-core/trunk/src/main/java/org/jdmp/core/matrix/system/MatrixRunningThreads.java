@@ -11,7 +11,7 @@ import java.util.TimerTask;
 
 import org.jdmp.core.util.GlobalTimer;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.matrices.stubs.AbstractMapMatrix;
+import org.ujmp.core.mapmatrix.AbstractMapMatrix;
 
 public class MatrixRunningThreads extends AbstractMapMatrix {
 	private static final long serialVersionUID = -6988423129848472319L;

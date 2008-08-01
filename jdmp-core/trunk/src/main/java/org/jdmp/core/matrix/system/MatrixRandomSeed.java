@@ -1,7 +1,7 @@
 package org.jdmp.core.matrix.system;
 
 import org.ujmp.core.Matrix;
-import org.ujmp.core.matrices.stubs.AbstractDenseDoubleMatrix2D;
+import org.ujmp.core.doublematrix.AbstractDenseDoubleMatrix2D;
 import org.ujmp.core.util.MathUtil;
 
 public class MatrixRandomSeed extends AbstractDenseDoubleMatrix2D {

@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.swing.Action;
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 
 import org.jdmp.core.CoreObject;
@@ -34,29 +35,29 @@ public abstract class FrameManager {
 
 	private static List<JComponent> actions = null;
 
-	public static void showFrame(GUIObject o) {
+	public static JFrame showFrame(GUIObject o) {
 		if (o instanceof MatrixGUIObject) {
-			showFrame((MatrixGUIObject) o);
+			return showFrame((MatrixGUIObject) o);
 		} else if (o instanceof AlgorithmGUIObject) {
-			showFrame((AlgorithmGUIObject) o);
+			return showFrame((AlgorithmGUIObject) o);
 		} else if (o instanceof VariableGUIObject) {
-			showFrame((VariableGUIObject) o);
+			return showFrame((VariableGUIObject) o);
 		} else if (o instanceof DataSetGUIObject) {
-			showFrame((DataSetGUIObject) o);
+			return showFrame((DataSetGUIObject) o);
 		} else if (o instanceof SampleGUIObject) {
-			showFrame((SampleGUIObject) o);
+			return showFrame((SampleGUIObject) o);
 		} else if (o instanceof Module) {
-			showFrame((Module) o);
+			return showFrame((Module) o);
 		} else {
 			throw new MatrixException("cannot show frame for object: " + o);
 		}
 	}
 
-	public static void showFrame(Object o) {
+	public static JFrame showFrame(Object o) {
 		if (o instanceof GUIObject) {
-			showFrame((GUIObject) o);
+			return showFrame((GUIObject) o);
 		} else if (o instanceof CoreObject) {
-			showFrame(((CoreObject) o).getGUIObject());
+			return showFrame(((CoreObject) o).getGUIObject());
 		} else {
 			throw new MatrixException("wrong object type: " + o);
 		}
@@ -66,7 +67,7 @@ public abstract class FrameManager {
 		return frames.values();
 	}
 
-	public static void showFrame(MatrixGUIObject m) {
+	public static JFrame showFrame(MatrixGUIObject m) {
 		try {
 			AbstractFrame frame = frames.get(m);
 			if (frame == null) {
@@ -74,12 +75,14 @@ public abstract class FrameManager {
 				frames.put(m, frame);
 			}
 			frame.setVisible(true);
+			return frame;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
 	}
 
-	public static void showFrame(AlgorithmGUIObject a) {
+	public static JFrame showFrame(AlgorithmGUIObject a) {
 		try {
 			AbstractFrame frame = frames.get(a);
 			if (frame == null) {
@@ -87,12 +90,14 @@ public abstract class FrameManager {
 				frames.put(a, frame);
 			}
 			frame.setVisible(true);
+			return frame;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
 	}
 
-	public static void showFrame(VariableGUIObject v) {
+	public static JFrame showFrame(VariableGUIObject v) {
 		try {
 			AbstractFrame frame = frames.get(v);
 			if (frame == null) {
@@ -100,12 +105,14 @@ public abstract class FrameManager {
 				frames.put(v, frame);
 			}
 			frame.setVisible(true);
+			return frame;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
 	}
 
-	public static void showFrame(ModuleGUIObject m) {
+	public static JFrame showFrame(ModuleGUIObject m) {
 		try {
 			AbstractFrame frame = frames.get(m);
 			if (frame == null) {
@@ -113,12 +120,14 @@ public abstract class FrameManager {
 				frames.put(m, frame);
 			}
 			frame.setVisible(true);
+			return frame;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
 	}
 
-	public static void showFrame(DataSetGUIObject d) {
+	public static JFrame showFrame(DataSetGUIObject d) {
 		try {
 			AbstractFrame frame = frames.get(d);
 			if (frame == null) {
@@ -126,12 +135,14 @@ public abstract class FrameManager {
 				frames.put(d, frame);
 			}
 			frame.setVisible(true);
+			return frame;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
 	}
 
-	public static void showFrame(SampleGUIObject s) {
+	public static JFrame showFrame(SampleGUIObject s) {
 		try {
 			AbstractFrame frame = frames.get(s);
 			if (frame == null) {
@@ -139,8 +150,10 @@ public abstract class FrameManager {
 				frames.put(s, frame);
 			}
 			frame.setVisible(true);
+			return frame;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
 	}
 

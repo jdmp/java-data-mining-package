@@ -4,6 +4,8 @@ import java.lang.reflect.Method;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.JFrame;
+
 import org.ujmp.core.Matrix;
 
 public abstract class AbstractCoreObject implements CoreObject {
@@ -22,19 +24,21 @@ public abstract class AbstractCoreObject implements CoreObject {
 
 	public static final int ALL = Matrix.ALL;
 
-	public final void showGUI() {
+	public final JFrame showGUI() {
 		try {
 			Class<?> c = Class.forName("org.jdmp.gui.util.FrameManager");
 			Method method = c.getMethod("showFrame", new Class[] { Object.class });
-			method.invoke(null, new Object[] { this });
+			return (JFrame) method.invoke(null, new Object[] { this });
 		} catch (Exception e) {
 			logger.log(Level.WARNING, "cannot show frame", e);
+			return null;
 		}
 	}
 
 	public final void notifyGUIObject() {
 	}
 
+	@Override
 	public abstract String toString();
 
 }

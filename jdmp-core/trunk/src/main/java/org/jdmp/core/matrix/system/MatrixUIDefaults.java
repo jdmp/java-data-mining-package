@@ -5,7 +5,7 @@ import java.util.Map;
 import javax.swing.UIManager;
 
 import org.ujmp.core.Matrix;
-import org.ujmp.core.matrices.stubs.AbstractMapMatrix;
+import org.ujmp.core.mapmatrix.AbstractMapMatrix;
 
 public class MatrixUIDefaults extends AbstractMapMatrix {
 	private static final long serialVersionUID = 6721967669100263805L;

@@ -9,7 +9,7 @@ import java.util.Map;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.coordinates.Coordinates;
 import org.ujmp.core.exceptions.MatrixException;
-import org.ujmp.core.matrices.stubs.AbstractMapToSparseMatrixWrapper;
+import org.ujmp.core.genericmatrix.AbstractMapToSparseMatrixWrapper;
 
 public class SparseEhcacheMatrix<A> extends AbstractMapToSparseMatrixWrapper<A> {
 	private static final long serialVersionUID = -7743149828558906127L;

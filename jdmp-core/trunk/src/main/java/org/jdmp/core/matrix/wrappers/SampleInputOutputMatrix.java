@@ -3,9 +3,9 @@ package org.jdmp.core.matrix.wrappers;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
+import org.ujmp.core.doublematrix.AbstractDenseDoubleMatrix2D;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.interfaces.Wrapper;
-import org.ujmp.core.matrices.stubs.AbstractDenseDoubleMatrix2D;
 
 public class SampleInputOutputMatrix extends AbstractDenseDoubleMatrix2D implements Wrapper<Sample> {
 	private static final long serialVersionUID = -8005076916609420357L;

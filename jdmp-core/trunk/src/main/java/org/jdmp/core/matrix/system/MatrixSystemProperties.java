@@ -3,7 +3,7 @@ package org.jdmp.core.matrix.system;
 import java.util.Map;
 
 import org.ujmp.core.Matrix;
-import org.ujmp.core.matrices.stubs.AbstractMapMatrix;
+import org.ujmp.core.mapmatrix.AbstractMapMatrix;
 
 public class MatrixSystemProperties extends AbstractMapMatrix {
 	private static final long serialVersionUID = -5746939082111495919L;

@@ -7,7 +7,7 @@ import org.jdmp.core.dataset.ClassificationDataSet;
 import org.jdmp.core.dataset.CrossValidation;
 import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.weka.classifier.WekaClassifier.WekaClassifierType;
-import org.ujmp.core.ListMatrix;
+import org.ujmp.core.listmatrix.ListMatrix;
 
 public class TestWekaClassifier extends TestCase {
 

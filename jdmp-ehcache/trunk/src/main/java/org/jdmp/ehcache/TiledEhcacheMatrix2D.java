@@ -7,9 +7,9 @@ import java.io.OptionalDataException;
 import java.util.Map;
 
 import org.ujmp.core.Matrix;
-import org.ujmp.core.ObjectMatrix2D;
 import org.ujmp.core.coordinates.Coordinates;
-import org.ujmp.core.matrices.stubs.AbstractMapToTiledMatrix2DWrapper;
+import org.ujmp.core.genericmatrix.AbstractMapToTiledMatrix2DWrapper;
+import org.ujmp.core.objectmatrix.ObjectMatrix2D;
 
 public class TiledEhcacheMatrix2D<A> extends AbstractMapToTiledMatrix2DWrapper<A> {
 	private static final long serialVersionUID = 4324063544046176423L;

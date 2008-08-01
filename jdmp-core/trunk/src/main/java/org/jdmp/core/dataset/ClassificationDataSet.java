@@ -20,12 +20,12 @@ import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.Matrix.Format;
+import org.ujmp.core.calculation.GenericCalculationMatrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.calculation.general.statistical.IndexOfMax;
 import org.ujmp.core.collections.DefaultMatrixList;
 import org.ujmp.core.collections.MatrixList;
 import org.ujmp.core.exceptions.MatrixException;
-import org.ujmp.core.matrices.basic.GenericCalculationMatrix;
 import org.ujmp.core.util.MathUtil;
 
 public class ClassificationDataSet extends RegressionDataSet {

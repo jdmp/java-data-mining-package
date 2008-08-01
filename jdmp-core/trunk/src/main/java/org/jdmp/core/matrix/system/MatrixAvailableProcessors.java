@@ -1,7 +1,7 @@
 package org.jdmp.core.matrix.system;
 
 import org.ujmp.core.Matrix;
-import org.ujmp.core.matrices.stubs.AbstractDenseDoubleMatrix2D;
+import org.ujmp.core.doublematrix.AbstractDenseDoubleMatrix2D;
 
 public class MatrixAvailableProcessors extends AbstractDenseDoubleMatrix2D {
 	private static final long serialVersionUID = -3768846722489359117L;
