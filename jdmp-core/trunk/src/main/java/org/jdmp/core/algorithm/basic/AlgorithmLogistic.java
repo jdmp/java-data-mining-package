@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.jdmp.core.algorithm.AlgorithmOneSource;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.calculation.entrywise.misc.LogisticFunction;
+import org.ujmp.core.doublecalculation.entrywise.misc.LogisticFunction;
 import org.ujmp.core.exceptions.MatrixException;
 
 public class AlgorithmLogistic extends AlgorithmOneSource {

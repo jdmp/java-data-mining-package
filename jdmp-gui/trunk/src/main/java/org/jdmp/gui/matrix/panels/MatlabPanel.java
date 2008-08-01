@@ -8,7 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import org.jdmp.gui.matrix.MatrixGUIObject;
-import org.ujmp.core.calculation.Calculation.Ret;
+import org.ujmp.core.doublecalculation.Calculation.Ret;
 import org.ujmp.core.util.Matlab;
 
 public class MatlabPanel extends JPanel {

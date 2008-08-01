@@ -26,7 +26,7 @@ import org.jdmp.core.algorithm.estimator.DiscreteDensityEstimator;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
-import org.ujmp.core.calculation.Calculation.Ret;
+import org.ujmp.core.doublecalculation.Calculation.Ret;
 import org.ujmp.core.exceptions.MatrixException;
 
 public class NaiveBayesClassifierTest extends AbstractClassifier {

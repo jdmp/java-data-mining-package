@@ -10,8 +10,8 @@ import java.util.WeakHashMap;
 import javax.swing.ListSelectionModel;
 
 import org.ujmp.core.Matrix;
-import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.collections.AbstractMatrixList;
+import org.ujmp.core.doublecalculation.Calculation.Ret;
 import org.ujmp.core.interfaces.HasColumnSelectionModel;
 import org.ujmp.core.interfaces.HasRowSelectionModel;
 import org.ujmp.core.interfaces.Wrapper;

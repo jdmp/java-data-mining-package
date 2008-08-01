@@ -11,7 +11,7 @@ import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.Matrix.EntryType;
 import org.ujmp.core.Matrix.Format;
-import org.ujmp.core.calculation.Calculation.Ret;
+import org.ujmp.core.doublecalculation.Calculation.Ret;
 import org.ujmp.core.exceptions.MatrixException;
 
 public abstract class DataSetFactory {

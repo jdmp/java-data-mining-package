@@ -7,7 +7,7 @@ import org.jdmp.core.matrix.wrappers.MatrixListToMatrixWrapper;
 import org.jdmp.gui.actions.ObjectAction;
 import org.jdmp.gui.matrix.MatrixGUIObject;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.calculation.Calculation.Ret;
+import org.ujmp.core.doublecalculation.Calculation.Ret;
 import org.ujmp.core.interfaces.HasMatrixList;
 
 public abstract class MatrixAction extends ObjectAction {

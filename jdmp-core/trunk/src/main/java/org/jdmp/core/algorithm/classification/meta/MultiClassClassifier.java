@@ -9,7 +9,7 @@ import org.jdmp.core.dataset.ClassificationDataSet;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
-import org.ujmp.core.calculation.Calculation.Ret;
+import org.ujmp.core.doublecalculation.Calculation.Ret;
 
 public class MultiClassClassifier extends AbstractClassifier {
 	private static final long serialVersionUID = 466059743021340944L;

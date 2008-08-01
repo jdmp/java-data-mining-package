@@ -27,7 +27,7 @@ import org.jdmp.core.dataset.ClassificationDataSet;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
-import org.ujmp.core.calculation.Calculation.Ret;
+import org.ujmp.core.doublecalculation.Calculation.Ret;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.util.MathUtil;
 

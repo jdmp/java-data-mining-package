@@ -5,7 +5,7 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
 import org.jdmp.gui.matrix.MatrixGUIObject;
-import org.ujmp.core.calculation.Calculation.Ret;
+import org.ujmp.core.doublecalculation.Calculation.Ret;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.interfaces.HasMatrixList;
 
