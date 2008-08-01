@@ -22,10 +22,10 @@ import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.Matrix.Format;
 import org.ujmp.core.collections.DefaultMatrixList;
 import org.ujmp.core.collections.MatrixList;
+import org.ujmp.core.doublecalculation.GenericCalculationMatrix;
 import org.ujmp.core.doublecalculation.Calculation.Ret;
 import org.ujmp.core.doublecalculation.general.statistical.IndexOfMax;
 import org.ujmp.core.exceptions.MatrixException;
-import org.ujmp.core.genericcalculation.GenericCalculationMatrix;
 import org.ujmp.core.util.MathUtil;
 
 public class ClassificationDataSet extends RegressionDataSet {
@@ -116,6 +116,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 		return -1;
 	}
 
+	@Override
 	public ClassificationSample getSample(int pos) {
 		return (ClassificationSample) super.getSample(pos);
 	}
@@ -127,6 +128,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 		setVariable(ERRORCOUNT, new DefaultVariable("Error Count", 1000));
 	}
 
+	@Override
 	public ClassificationDataSet clone() {
 		ClassificationDataSet ds = new ClassificationDataSet();
 		for (Sample s : getSampleList()) {
@@ -209,6 +211,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 		}
 	}
 
+	@Override
 	public MatrixList getMatrixList() {
 		if (matrixList == null) {
 			matrixList = new DefaultMatrixList();
@@ -291,7 +294,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 		// add samples to lists according to class
 		for (Sample s : getSampleList()) {
 			int targetClass = ((ClassificationSample) s).getTargetClass();
-			sortedSamples.get(targetClass).add((ClassificationSample) s);
+			sortedSamples.get(targetClass).add(s);
 		}
 
 		// shuffle lists

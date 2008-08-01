@@ -30,8 +30,8 @@ import org.jdmp.core.variable.Variable;
 import org.jdmp.gui.matrix.actions.FillWithValueAction;
 import org.jdmp.gui.matrix.actions.MatrixActions;
 import org.ujmp.core.doublecalculation.Calculation.Ret;
-import org.ujmp.core.doublecalculation.entrywise.creator.Rand;
-import org.ujmp.core.doublecalculation.entrywise.creator.Randn;
+import org.ujmp.core.doublecalculation.entrywise.creators.Rand;
+import org.ujmp.core.doublecalculation.entrywise.creators.Randn;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.interfaces.HasMatrixList;
 import org.ujmp.core.interfaces.HasToolTip;
@@ -347,6 +347,7 @@ public class MatrixListPanel extends JPanel implements MouseListener, ListSelect
 		updateTitle();
 	}
 
+	@Override
 	public TitledBorder getBorder() {
 		return (TitledBorder) super.getBorder();
 	}

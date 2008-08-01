@@ -19,14 +19,14 @@ import org.jdmp.gui.AbstractGUIObject;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.coordinates.Coordinates;
 import org.ujmp.core.doublecalculation.Calculation.Ret;
-import org.ujmp.core.doublecalculation.entrywise.creator.Fill;
-import org.ujmp.core.doublecalculation.entrywise.creator.Rand;
-import org.ujmp.core.doublecalculation.entrywise.creator.Randn;
+import org.ujmp.core.doublecalculation.entrywise.creators.Fill;
+import org.ujmp.core.doublecalculation.entrywise.creators.Rand;
+import org.ujmp.core.doublecalculation.entrywise.creators.Randn;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.interfaces.HasColumnSelectionModel;
 import org.ujmp.core.interfaces.HasRowSelectionModel;
-import org.ujmp.core.util.UJMPSettings;
 import org.ujmp.core.util.StringUtil;
+import org.ujmp.core.util.UJMPSettings;
 
 public class MatrixGUIObject extends AbstractGUIObject implements TableModel,
 		HasColumnSelectionModel, HasRowSelectionModel {
@@ -112,6 +112,7 @@ public class MatrixGUIObject extends AbstractGUIObject implements TableModel,
 		getListenerList().add(TableModelListener.class, l);
 	}
 
+	@Override
 	public final String getToolTipText() {
 		try {
 			if (tooltipText == null) {
@@ -151,8 +152,8 @@ public class MatrixGUIObject extends AbstractGUIObject implements TableModel,
 					s.append("<tr>");
 					s.append("<th>" + matrix.getRowLabel(row) + "</th>");
 					for (int col = 0; col < columnCount && col < UJMPSettings.getMaxToolTipCols(); col++) {
-						s.append("<td align=right>" + StringUtil.format(matrix.getAsDouble(row, col))
-								+ "</td>");
+						s.append("<td align=right>"
+								+ StringUtil.format(matrix.getAsDouble(row, col)) + "</td>");
 					}
 					if (getColumnCount() > UJMPSettings.getMaxToolTipCols()) {
 						s.append("<td align=right>...</td>");
@@ -186,6 +187,7 @@ public class MatrixGUIObject extends AbstractGUIObject implements TableModel,
 		}
 	}
 
+	@Override
 	public final void fireValueChanged() {
 		for (Object o : getListenerList().getListenerList()) {
 			if (o instanceof TableModelListener)
@@ -362,6 +364,7 @@ public class MatrixGUIObject extends AbstractGUIObject implements TableModel,
 	public void setDescription(String description) {
 	}
 
+	@Override
 	public String toString() {
 		if (matrix.getLabel() != null) {
 			return "[" + Coordinates.toString(matrix.getSize()) + "] "
