@@ -8,8 +8,8 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.io.Serializable;
 
-import org.ujmp.core.FileFormat;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.enums.FileFormat;
 import org.ujmp.core.exceptions.MatrixException;
 
 public class MatrixSelection implements Transferable, ClipboardOwner, Serializable {

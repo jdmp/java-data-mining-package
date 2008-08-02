@@ -8,11 +8,11 @@ import javax.swing.event.EventListenerList;
 import org.jdmp.core.matrix.wrappers.DataSetInputMatrixWrapper;
 import org.jdmp.core.sample.DefaultSample;
 import org.jdmp.core.variable.Variable;
-import org.ujmp.core.FileFormat;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.collections.DefaultMatrixList;
 import org.ujmp.core.collections.MatrixList;
 import org.ujmp.core.doublecalculation.Calculation.Ret;
+import org.ujmp.core.enums.FileFormat;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.io.ExportMatrix;
 

@@ -7,11 +7,11 @@ import org.jdmp.core.sample.ClassificationSample;
 import org.jdmp.core.sample.DefaultSample;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.sample.SampleFactory;
-import org.ujmp.core.FileFormat;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
-import org.ujmp.core.Matrix.EntryType;
 import org.ujmp.core.doublecalculation.Calculation.Ret;
+import org.ujmp.core.enums.ValueType;
+import org.ujmp.core.enums.FileFormat;
 import org.ujmp.core.exceptions.MatrixException;
 
 public abstract class DataSetFactory {
@@ -509,7 +509,7 @@ public abstract class DataSetFactory {
 		Matrix output = m.selectColumns(Ret.NEW, 4).discretizeToColumns(0);
 
 		ClassificationDataSet iris = ClassificationDataSet.copyFromMatrix(input
-				.convert(EntryType.DOUBLE), output.convert(EntryType.DOUBLE));
+				.convert(ValueType.DOUBLE), output.convert(ValueType.DOUBLE));
 		iris.setLabel("Iris flower dataset");
 
 		for (int i = 0; i < 50; i++) {
