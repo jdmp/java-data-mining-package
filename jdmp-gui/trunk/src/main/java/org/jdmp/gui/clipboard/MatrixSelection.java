@@ -8,8 +8,8 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.io.Serializable;
 
+import org.ujmp.core.FileFormat;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.Matrix.Format;
 import org.ujmp.core.exceptions.MatrixException;
 
 public class MatrixSelection implements Transferable, ClipboardOwner, Serializable {
@@ -30,7 +30,7 @@ public class MatrixSelection implements Transferable, ClipboardOwner, Serializab
 	private String stringData = null;
 
 	public MatrixSelection(Matrix matrix) throws MatrixException, IOException {
-		stringData = matrix.exportToString(Format.CSV);
+		stringData = matrix.exportToString(FileFormat.CSV);
 	}
 
 	public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
@@ -42,7 +42,7 @@ public class MatrixSelection implements Transferable, ClipboardOwner, Serializab
 	}
 
 	public DataFlavor[] getTransferDataFlavors() {
-		return (DataFlavor[]) flavors.clone();
+		return flavors.clone();
 	}
 
 	public boolean isDataFlavorSupported(DataFlavor flavor) {

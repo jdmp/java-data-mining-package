@@ -7,10 +7,10 @@ import org.jdmp.core.sample.ClassificationSample;
 import org.jdmp.core.sample.DefaultSample;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.sample.SampleFactory;
+import org.ujmp.core.FileFormat;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.Matrix.EntryType;
-import org.ujmp.core.Matrix.Format;
 import org.ujmp.core.doublecalculation.Calculation.Ret;
 import org.ujmp.core.exceptions.MatrixException;
 
@@ -109,82 +109,82 @@ public abstract class DataSetFactory {
 		BasicDataSet animals = new BasicDataSet("Animals");
 
 		Sample pigeon = SampleFactory.labeledSample("Pigeon");
-		pigeon.setMatrix(Sample.INPUT, MatrixFactory.importFromString(Format.CSV,
+		pigeon.setMatrix(Sample.INPUT, MatrixFactory.importFromString(FileFormat.CSV,
 				"1 0 0 1 0 0 0 0 1 0 0 1 0"));
 		animals.addSample(pigeon);
 
 		Sample chicken = SampleFactory.labeledSample("Chicken");
-		chicken.setMatrix(Sample.INPUT, MatrixFactory.importFromString(Format.CSV,
+		chicken.setMatrix(Sample.INPUT, MatrixFactory.importFromString(FileFormat.CSV,
 				"1 0 0 1 0 0 0 0 1 0 0 0 0"));
 		animals.addSample(chicken);
 
 		Sample duck = SampleFactory.labeledSample("Duck");
-		duck.setMatrix(Sample.INPUT, MatrixFactory.importFromString(Format.CSV,
+		duck.setMatrix(Sample.INPUT, MatrixFactory.importFromString(FileFormat.CSV,
 				"1 0 0 1 0 0 0 0 1 0 0 0 1"));
 		animals.addSample(duck);
 
 		Sample goose = SampleFactory.labeledSample("Goose");
-		goose.setMatrix(Sample.INPUT, MatrixFactory.importFromString(Format.CSV,
+		goose.setMatrix(Sample.INPUT, MatrixFactory.importFromString(FileFormat.CSV,
 				"1 0 0 1 0 0 0 0 1 0 0 1 1"));
 		animals.addSample(goose);
 
 		Sample owl = SampleFactory.labeledSample("Owl");
-		owl.setMatrix(Sample.INPUT, MatrixFactory.importFromString(Format.CSV,
+		owl.setMatrix(Sample.INPUT, MatrixFactory.importFromString(FileFormat.CSV,
 				"1 0 0 1 0 0 0 0 1 1 0 1 0"));
 		animals.addSample(owl);
 
 		Sample falcon = SampleFactory.labeledSample("Falcon");
-		falcon.setMatrix(Sample.INPUT, MatrixFactory.importFromString(Format.CSV,
+		falcon.setMatrix(Sample.INPUT, MatrixFactory.importFromString(FileFormat.CSV,
 				"1 0 0 1 0 0 0 0 1 1 0 1 0"));
 		animals.addSample(falcon);
 
 		Sample eagle = SampleFactory.labeledSample("Eagle");
-		eagle.setMatrix(Sample.INPUT, MatrixFactory.importFromString(Format.CSV,
+		eagle.setMatrix(Sample.INPUT, MatrixFactory.importFromString(FileFormat.CSV,
 				"0 1 0 1 0 0 0 0 1 1 0 1 0"));
 		animals.addSample(eagle);
 
 		Sample fox = SampleFactory.labeledSample("Fox");
-		fox.setMatrix(Sample.INPUT, MatrixFactory.importFromString(Format.CSV,
+		fox.setMatrix(Sample.INPUT, MatrixFactory.importFromString(FileFormat.CSV,
 				"0 1 0 0 1 1 0 0 0 1 0 0 0"));
 		animals.addSample(fox);
 
 		Sample dog = SampleFactory.labeledSample("Dog");
-		dog.setMatrix(Sample.INPUT, MatrixFactory.importFromString(Format.CSV,
+		dog.setMatrix(Sample.INPUT, MatrixFactory.importFromString(FileFormat.CSV,
 				"0 1 0 0 1 1 0 0 0 0 1 0 0"));
 		animals.addSample(dog);
 
 		Sample wolf = SampleFactory.labeledSample("Wolf");
-		wolf.setMatrix(Sample.INPUT, MatrixFactory.importFromString(Format.CSV,
+		wolf.setMatrix(Sample.INPUT, MatrixFactory.importFromString(FileFormat.CSV,
 				"0 1 0 0 1 1 0 1 0 1 1 0 0"));
 		animals.addSample(wolf);
 
 		Sample cat = SampleFactory.labeledSample("Cat");
-		cat.setMatrix(Sample.INPUT, MatrixFactory.importFromString(Format.CSV,
+		cat.setMatrix(Sample.INPUT, MatrixFactory.importFromString(FileFormat.CSV,
 				"1 0 0 0 1 1 0 0 0 1 0 0 0"));
 		animals.addSample(cat);
 
 		Sample tiger = SampleFactory.labeledSample("Tiger");
-		tiger.setMatrix(Sample.INPUT, MatrixFactory.importFromString(Format.CSV,
+		tiger.setMatrix(Sample.INPUT, MatrixFactory.importFromString(FileFormat.CSV,
 				"0 0 1 0 1 1 0 0 0 1 1 0 0"));
 		animals.addSample(tiger);
 
 		Sample lion = SampleFactory.labeledSample("Lion");
-		lion.setMatrix(Sample.INPUT, MatrixFactory.importFromString(Format.CSV,
+		lion.setMatrix(Sample.INPUT, MatrixFactory.importFromString(FileFormat.CSV,
 				"0 0 1 0 1 1 0 1 0 1 1 0 0"));
 		animals.addSample(lion);
 
 		Sample horse = SampleFactory.labeledSample("Horse");
-		horse.setMatrix(Sample.INPUT, MatrixFactory.importFromString(Format.CSV,
+		horse.setMatrix(Sample.INPUT, MatrixFactory.importFromString(FileFormat.CSV,
 				"0 0 1 0 1 1 1 1 0 0 1 0 0"));
 		animals.addSample(horse);
 
 		Sample zebra = SampleFactory.labeledSample("Zebra");
-		zebra.setMatrix(Sample.INPUT, MatrixFactory.importFromString(Format.CSV,
+		zebra.setMatrix(Sample.INPUT, MatrixFactory.importFromString(FileFormat.CSV,
 				"0 0 1 0 1 1 1 1 0 0 1 0 0"));
 		animals.addSample(zebra);
 
 		Sample cow = SampleFactory.labeledSample("Cow");
-		cow.setMatrix(Sample.INPUT, MatrixFactory.importFromString(Format.CSV,
+		cow.setMatrix(Sample.INPUT, MatrixFactory.importFromString(FileFormat.CSV,
 				"0 0 1 0 1 1 1 0 0 0 0 0 0"));
 		animals.addSample(cow);
 
@@ -504,7 +504,7 @@ public abstract class DataSetFactory {
 		s.append("6.2,3.4,5.4,2.3,Iris-virginica\n");
 		s.append("5.9,3.0,5.1,1.8,Iris-virginica\n");
 
-		Matrix m = MatrixFactory.importFromString(Format.CSV, s.toString());
+		Matrix m = MatrixFactory.importFromString(FileFormat.CSV, s.toString());
 		Matrix input = m.selectColumns(Ret.NEW, 0, 1, 2, 3);
 		Matrix output = m.selectColumns(Ret.NEW, 4).discretizeToColumns(0);
 

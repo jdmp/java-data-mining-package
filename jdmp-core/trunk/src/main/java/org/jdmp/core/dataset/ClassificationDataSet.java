@@ -17,9 +17,9 @@ import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.ObservableList;
 import org.jdmp.core.variable.DefaultVariable;
 import org.jdmp.core.variable.Variable;
+import org.ujmp.core.FileFormat;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
-import org.ujmp.core.Matrix.Format;
 import org.ujmp.core.collections.DefaultMatrixList;
 import org.ujmp.core.collections.MatrixList;
 import org.ujmp.core.doublecalculation.Calculation.Ret;
@@ -193,7 +193,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 
 	public final void importFromCSV(File file, String separator) throws MatrixException,
 			IOException {
-		Matrix m = MatrixFactory.importFromFile(Format.CSV, file, separator);
+		Matrix m = MatrixFactory.importFromFile(FileFormat.CSV, file, separator);
 		createFromMatrix(m);
 	}
 

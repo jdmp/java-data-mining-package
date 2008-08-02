@@ -8,8 +8,8 @@ import javax.swing.event.EventListenerList;
 import org.jdmp.core.matrix.wrappers.DataSetInputMatrixWrapper;
 import org.jdmp.core.sample.DefaultSample;
 import org.jdmp.core.variable.Variable;
+import org.ujmp.core.FileFormat;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.Matrix.Format;
 import org.ujmp.core.collections.DefaultMatrixList;
 import org.ujmp.core.collections.MatrixList;
 import org.ujmp.core.doublecalculation.Calculation.Ret;
@@ -68,6 +68,7 @@ public class BasicDataSet extends AbstractDataSet {
 		super();
 	}
 
+	@Override
 	public DefaultSample getSample(int pos) {
 		return (DefaultSample) super.getSample(pos);
 	}
@@ -96,11 +97,11 @@ public class BasicDataSet extends AbstractDataSet {
 	}
 
 	public final String toCSV() throws MatrixException, IOException {
-		return ExportMatrix.toString(Format.CSV, this.getInputMatrix());
+		return ExportMatrix.toString(FileFormat.CSV, this.getInputMatrix());
 	}
 
 	public final void exportToCSV(File file) throws MatrixException, IOException {
-		ExportMatrix.toFile(Format.CSV, file, this.getInputMatrix());
+		ExportMatrix.toFile(FileFormat.CSV, file, this.getInputMatrix());
 	}
 
 }
