@@ -57,15 +57,88 @@ public class MatrixPanel extends AbstractPanel {
 		}
 
 		try {
+			Class<?> c = Class.forName("org.ujmp.jmathplot.JMathPlotLinePanel");
+			Constructor<?> con = c.getConstructor(Matrix.class);
+			JPanel panel = (JPanel) con.newInstance(m.getMatrix());
+			tabbedPane.add("Line Plot", panel);
+		} catch (Exception e) {
+		}
+
+		try {
+			Class<?> c = Class.forName("org.ujmp.jmathplot.JMathPlotXYPanel");
+			Constructor<?> con = c.getConstructor(Matrix.class);
+			JPanel panel = (JPanel) con.newInstance(m.getMatrix());
+			tabbedPane.add("XY Plot", panel);
+		} catch (Exception e) {
+		}
+
+		try {
+			Class<?> c = Class.forName("org.ujmp.jmathplot.JMathPlotScatterPanel");
+			Constructor<?> con = c.getConstructor(Matrix.class);
+			JPanel panel = (JPanel) con.newInstance(m.getMatrix());
+			tabbedPane.add("Scatter Plot", panel);
+		} catch (Exception e) {
+		}
+
+		try {
 			Class<?> c = Class.forName("org.ujmp.jmathplot.JMathPlotBarPanel");
 			Constructor<?> con = c.getConstructor(Matrix.class);
 			JPanel panel = (JPanel) con.newInstance(m.getMatrix());
-			tabbedPane.add("Bar", panel);
+			tabbedPane.add("Bar Plot", panel);
+		} catch (Exception e) {
+		}
 
-			c = Class.forName("org.ujmp.jmathplot.JMathPlotHistogramPanel");
-			con = c.getConstructor(Matrix.class);
-			panel = (JPanel) con.newInstance(m.getMatrix());
+		try {
+			Class<?> c = Class.forName("org.ujmp.jmathplot.JMathPlotHistogramPanel");
+			Constructor<?> con = c.getConstructor(Matrix.class);
+			JPanel panel = (JPanel) con.newInstance(m.getMatrix());
 			tabbedPane.add("Histogram", panel);
+		} catch (Exception e) {
+		}
+
+		try {
+			Class<?> c = Class.forName("org.ujmp.jmathplot.JMathPlotStaircasePanel");
+			Constructor<?> con = c.getConstructor(Matrix.class);
+			JPanel panel = (JPanel) con.newInstance(m.getMatrix());
+			tabbedPane.add("Staircase Plot", panel);
+		} catch (Exception e) {
+		}
+
+		try {
+			Class<?> c = Class.forName("org.ujmp.jmathplot.JMathPlotGridPanel");
+			Constructor<?> con = c.getConstructor(Matrix.class);
+			JPanel panel = (JPanel) con.newInstance(m.getMatrix());
+			tabbedPane.add("Grid Plot", panel);
+		} catch (Exception e) {
+		}
+
+		try {
+			if (m.getColumnCount() >= 3) {
+				Class<?> c = Class.forName("org.ujmp.jmathplot.JMathPlotBar3DPanel");
+				Constructor<?> con = c.getConstructor(Matrix.class);
+				JPanel panel = (JPanel) con.newInstance(m.getMatrix());
+				tabbedPane.add("Bar Plot 3D", panel);
+			}
+		} catch (Exception e) {
+		}
+
+		try {
+			if (m.getColumnCount() >= 3) {
+				Class<?> c = Class.forName("org.ujmp.jmathplot.JMathPlotScatter3DPanel");
+				Constructor<?> con = c.getConstructor(Matrix.class);
+				JPanel panel = (JPanel) con.newInstance(m.getMatrix());
+				tabbedPane.add("Scatter Plot 3D", panel);
+			}
+		} catch (Exception e) {
+		}
+
+		try {
+			if (m.getColumnCount() >= 3) {
+				Class<?> c = Class.forName("org.ujmp.jmathplot.JMathPlotLine3DPanel");
+				Constructor<?> con = c.getConstructor(Matrix.class);
+				JPanel panel = (JPanel) con.newInstance(m.getMatrix());
+				tabbedPane.add("Line Plot 3D", panel);
+			}
 		} catch (Exception e) {
 		}
 
