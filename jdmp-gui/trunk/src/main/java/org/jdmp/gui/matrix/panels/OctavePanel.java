@@ -24,6 +24,7 @@ public class OctavePanel extends JPanel {
 		add(new JButton(new MatrixPlotAction()));
 		add(new JButton(new XYPlotAction()));
 		add(new JButton(new ScatterPlotAction()));
+		add(new JButton(new HistogramPlotAction()));
 	}
 
 	class MatrixPlotAction extends AbstractAction {
@@ -69,6 +70,21 @@ public class OctavePanel extends JPanel {
 			try {
 				Octave.getInstance().plot(matrix.getMatrix().selectColumns(Ret.NEW, 0),
 						matrix.getMatrix().selectColumns(Ret.NEW, 1), "x");
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
+	
+	class HistogramPlotAction extends AbstractAction {
+		
+		public HistogramPlotAction() {
+			super("Histogram");
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			try {
+				Octave.getInstance().hist(matrix.getMatrix());
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
