@@ -13,6 +13,7 @@ public class MatrixSystemEnvironment extends AbstractMapMatrix {
 	public static Matrix getInstance() {
 		if (matrix == null) {
 			matrix = new MatrixSystemEnvironment();
+			matrix.setLabel("System Environment");
 		}
 		return matrix;
 	}

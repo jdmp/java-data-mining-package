@@ -32,6 +32,7 @@ public class MatrixRunningThreads extends AbstractMapMatrix {
 	public static Matrix getInstance() {
 		if (matrix == null) {
 			matrix = new MatrixRunningThreads();
+			matrix.setLabel("Running Threads");
 		}
 		return matrix;
 	}

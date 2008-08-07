@@ -13,6 +13,7 @@ public class MatrixGlobalConfiguration extends AbstractMapMatrix {
 	public static Matrix getInstance() {
 		if (matrix == null) {
 			matrix = new MatrixGlobalConfiguration();
+			matrix.setLabel("Global Configuration");
 		}
 		return matrix;
 	}

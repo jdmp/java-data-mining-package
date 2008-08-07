@@ -270,12 +270,7 @@
 			</dependency>
 			
 		    
-		    <dependency>
-      			<groupId>jmathlib</groupId>
-		        <artifactId>jmathlib</artifactId>
-		        <version>0.9.0</version>
-				<scope>compile</scope>
-		    </dependency>
+		    
 		    <dependency>
       			<groupId>mulan</groupId>
 		        <artifactId>mulan</artifactId>

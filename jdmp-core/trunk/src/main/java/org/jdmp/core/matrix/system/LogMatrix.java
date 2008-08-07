@@ -15,6 +15,7 @@ public class LogMatrix extends AbstractDenseObjectMatrix2D {
 	public static final LogMatrix getInstance() {
 		if (matrix == null) {
 			matrix = new LogMatrix();
+			matrix.setLabel("Log");
 		}
 		return matrix;
 	}
@@ -27,7 +28,7 @@ public class LogMatrix extends AbstractDenseObjectMatrix2D {
 
 		private static HandlerWrapper handler = null;
 
-		private List<LogRecord> list = new ArrayList<LogRecord>();
+		private final List<LogRecord> list = new ArrayList<LogRecord>();
 
 		private Matrix matrix = null;
 

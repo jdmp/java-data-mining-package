@@ -15,6 +15,7 @@ public class MatrixRandomSeed extends AbstractDenseDoubleMatrix2D {
 	public static Matrix getInstance() {
 		if (matrix == null) {
 			matrix = new MatrixRandomSeed();
+			matrix.setLabel("Random Seed");
 		}
 		return matrix;
 	}

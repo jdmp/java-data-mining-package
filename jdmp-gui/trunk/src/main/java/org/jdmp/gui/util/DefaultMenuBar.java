@@ -1,7 +1,10 @@
 package org.jdmp.gui.util;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -34,6 +37,7 @@ import org.jdmp.gui.sample.actions.SampleActions;
 import org.jdmp.gui.variable.VariableGUIObject;
 import org.jdmp.gui.variable.actions.VariableActions;
 import org.ujmp.core.interfaces.GUIObject;
+import org.ujmp.core.util.JMathLib;
 
 public class DefaultMenuBar extends JMenuBar {
 	private static final long serialVersionUID = -6115122804967308915L;
@@ -87,6 +91,10 @@ public class DefaultMenuBar extends JMenuBar {
 				.getInstance())));
 		optionsMenu.add(new JSeparator());
 		optionsMenu.add(new JMenuItem(new ShowInFrameAction(component, LogMatrix.getInstance())));
+		if (JMathLib.isAvailable()) {
+			optionsMenu.add(new JSeparator());
+			optionsMenu.add(new JMathLibAction());
+		}
 		add(optionsMenu);
 
 		JMenu windowMenu = new JMenu("Window");
@@ -102,6 +110,21 @@ public class DefaultMenuBar extends JMenuBar {
 		helpMenu.add(new AboutAction(component, o));
 
 		add(helpMenu);
+
+	}
+
+	class JMathLibAction extends AbstractAction {
+		private static final long serialVersionUID = 1895232937545702538L;
+
+		public JMathLibAction() {
+			putValue(Action.NAME, "JMathLib");
+			putValue(Action.SHORT_DESCRIPTION, "Show JMathlib in a new Window");
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JMathLib.showGUI();
+		}
 
 	}
 

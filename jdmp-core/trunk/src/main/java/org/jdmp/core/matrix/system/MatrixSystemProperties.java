@@ -13,6 +13,7 @@ public class MatrixSystemProperties extends AbstractMapMatrix {
 	public static Matrix getInstance() {
 		if (matrix == null) {
 			matrix = new MatrixSystemProperties();
+			matrix.setLabel("System Properties");
 		}
 		return matrix;
 	}

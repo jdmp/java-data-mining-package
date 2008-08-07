@@ -27,6 +27,8 @@ public class MatrixActions extends ObjectActions {
 		this.add(new JMenuItem(new FadeInAction(c, m, v)));
 		this.add(new JMenuItem(new FadeOutAction(c, m, v)));
 		this.add(new JMenuItem(new CreateDataSetAction(c, m, v)));
+		this.add(new JMenuItem(new MinAction(c, m, v)));
+		this.add(new JMenuItem(new MaxAction(c, m, v)));
 		this.add(new JMenuItem(new SumAction(c, m, v)));
 		this.add(new JMenuItem(new MeanAction(c, m, v)));
 		this.add(new JMenuItem(new VarianceAction(c, m, v)));

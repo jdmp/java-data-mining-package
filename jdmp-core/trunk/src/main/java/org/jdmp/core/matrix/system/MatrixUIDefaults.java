@@ -15,6 +15,7 @@ public class MatrixUIDefaults extends AbstractMapMatrix {
 	public static Matrix getInstance() {
 		if (matrix == null) {
 			matrix = new MatrixUIDefaults();
+			matrix.setLabel("UI Defaults");
 		}
 		return matrix;
 	}

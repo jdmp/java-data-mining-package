@@ -14,6 +14,7 @@ public class MatrixAvailableProcessors extends AbstractDenseDoubleMatrix2D {
 	public static Matrix getInstance() {
 		if (matrix == null) {
 			matrix = new MatrixAvailableProcessors();
+			matrix.setLabel("Available Processors");
 		}
 		return matrix;
 	}
@@ -29,6 +30,7 @@ public class MatrixAvailableProcessors extends AbstractDenseDoubleMatrix2D {
 	public void setDouble(double value, long row, long column) {
 	}
 
+	@Override
 	public boolean isReadOnly() {
 		return true;
 	}

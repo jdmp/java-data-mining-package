@@ -25,6 +25,7 @@ public class MatrixSystemTime extends AbstractDenseDoubleMatrix2D {
 	public static Matrix getInstance() {
 		if (matrix == null) {
 			matrix = new MatrixSystemTime();
+			matrix.setLabel("System Time");
 		}
 		return matrix;
 	}
@@ -40,6 +41,7 @@ public class MatrixSystemTime extends AbstractDenseDoubleMatrix2D {
 	public void setDouble(double value, long row, long column) {
 	}
 
+	@Override
 	public boolean isReadOnly() {
 		return true;
 	}

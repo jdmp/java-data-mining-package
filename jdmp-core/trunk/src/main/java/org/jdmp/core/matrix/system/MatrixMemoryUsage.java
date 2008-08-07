@@ -25,6 +25,7 @@ public class MatrixMemoryUsage extends AbstractDenseDoubleMatrix2D {
 	public static Matrix getInstance() {
 		if (matrix == null) {
 			matrix = new MatrixMemoryUsage();
+			matrix.setLabel("Memory Usage");
 		}
 		return matrix;
 	}
@@ -47,6 +48,7 @@ public class MatrixMemoryUsage extends AbstractDenseDoubleMatrix2D {
 	public void setDouble(double value, long row, long column) {
 	}
 
+	@Override
 	public boolean isReadOnly() {
 		return true;
 	}
