@@ -4,10 +4,17 @@
 	 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-    <properties>
+	<properties>
       <jdmp.version>0.0.2</jdmp.version>
       <ujmp.version>0.1.1</ujmp.version>
     </properties>
+
+	<parent>
+		<groupId>org.ujmp</groupId>
+		<artifactId>ujmp</artifactId>
+		<version>${ujmp.version}</version>
+		<relativePath>../ujmp</relativePath>
+	</parent>
 
 	<groupId>org.jdmp</groupId>
 	<artifactId>jdmp</artifactId>
@@ -40,26 +47,13 @@
 
 	<dependencyManagement>
 		<dependencies>
-
-			<dependency>
-				<groupId>org.ujmp</groupId>
-				<artifactId>ujmp-core</artifactId>
-				<version>${ujmp.version}</version>
-				<scope>compile</scope>
-			</dependency>
+			
 			<dependency>
 				<groupId>org.ujmp</groupId>
 				<artifactId>ujmp-all</artifactId>
 				<version>${ujmp.version}</version>
 				<scope>compile</scope>
 			</dependency>
-			<dependency>
-				<groupId>org.ujmp</groupId>
-				<artifactId>ujmp-jdbc</artifactId>
-				<version>${ujmp.version}</version>
-				<scope>compile</scope>
-			</dependency>
-						
 			
 			<dependency>
 				<groupId>org.jdmp</groupId>
@@ -142,14 +136,7 @@
 				<artifactId>junit</artifactId>
 				<version>4.4</version>
 				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>commons-math</groupId>
-				<artifactId>commons-math</artifactId>
-				<version>1.2</version>
-				<scope>compile</scope>
-			</dependency>
-			
+			</dependency>			
 
 			<dependency>
 				<groupId>dom4j</groupId>
@@ -261,15 +248,7 @@
 				<artifactId>jgroups</artifactId>
 				<version>2.6.3.GA</version>
 				<scope>compile</scope>
-			</dependency>
-			<dependency>
-				<groupId>iText</groupId>
-				<artifactId>iText</artifactId>
-				<version>2.1.2u</version>
-				<scope>compile</scope>
-			</dependency>
-			
-		    
+			</dependency>		    
 		    
 		    <dependency>
       			<groupId>mulan</groupId>
@@ -313,39 +292,6 @@
       			<version>2.0.6</version>
 				<scope>compile</scope>
     		</dependency>
-		    
-		    
-		    <dependency>
-			      <groupId>mysql-connector-java</groupId>
-			      <artifactId>mysql-connector-java</artifactId>
-			      <version>5.1.6</version>
-			      <scope>compile</scope>
-		    </dependency>
-		    <dependency>
-			      <groupId>postgresql</groupId>
-			      <artifactId>postgresql</artifactId>
-			      <version>8.3-603.jdbc4</version>
-			      <scope>compile</scope>
-		    </dependency>
-		    <dependency>
-			      <groupId>derby</groupId>
-			      <artifactId>derby</artifactId>
-			      <version>10.4.1.3</version>
-			      <scope>compile</scope>
-		    </dependency>
-			<dependency>
-			      <groupId>hsqldb</groupId>
-			      <artifactId>hsqldb</artifactId>
-			      <version>1.8.0.10</version>
-			      <scope>compile</scope>
-		    </dependency>
-		    
-		    <dependency>
-				<groupId>jmathlib</groupId>
-				<artifactId>jmathlib</artifactId>
-				<version>0.9.0</version>
-			    <scope>compile</scope>
-			</dependency>
 
 		</dependencies>
 	</dependencyManagement>
