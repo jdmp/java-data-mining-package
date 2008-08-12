@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.util.ConcurrentModificationException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,6 +16,7 @@ import javax.swing.border.Border;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import org.jdmp.gui.util.ColorUtil;
+import org.jdmp.gui.util.GraphicsExecutor;
 import org.jdmp.gui.util.GraphicsUtil;
 import org.jdmp.gui.util.UIDefaults;
 import org.ujmp.core.Matrix;
@@ -176,6 +178,8 @@ public class MatrixRenderer extends DefaultTableCellRenderer {
 				g2d.drawLine(PADDINGX, PADDINGY, width - PADDINGX, height - PADDINGY);
 				g2d.drawLine(PADDINGX, height - PADDINGY, width - PADDINGX, 0 + PADDINGY);
 			}
+		} catch (ConcurrentModificationException e) {
+			// not too bad
 		} catch (Exception e) {
 			logger.log(Level.WARNING, "could not paint", e);
 		}
