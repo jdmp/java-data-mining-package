@@ -3,7 +3,7 @@ package org.jdmp.gui.sample;
 import javax.swing.Icon;
 
 import org.jdmp.core.sample.Sample;
-import org.jdmp.gui.AbstractGUIObject;
+import org.ujmp.gui.AbstractGUIObject;
 
 public class SampleGUIObject extends AbstractGUIObject {
 	private static final long serialVersionUID = -3436220704455373493L;
@@ -41,6 +41,7 @@ public class SampleGUIObject extends AbstractGUIObject {
 		sample.setDescription(description);
 	}
 
+	@Override
 	public String toString() {
 		return sample.toString();
 	}

@@ -9,17 +9,17 @@ import javax.swing.JSplitPane;
 
 import org.jdmp.core.algorithm.HasAlgorithms;
 import org.jdmp.core.variable.HasVariables;
-import org.jdmp.gui.util.AbstractPanel;
 import org.jdmp.gui.util.ObjectListPanel;
+import org.ujmp.gui.util.AbstractPanel;
 
 public class AlgorithmPanel extends AbstractPanel {
 	private static final long serialVersionUID = -1135182245042463188L;
 
-	private JSplitPane splitPane = new JSplitPane();
+	private final JSplitPane splitPane = new JSplitPane();
 
-	private JPanel leftPanel = new JPanel();
+	private final JPanel leftPanel = new JPanel();
 
-	private JPanel rightPanel = new JPanel();
+	private final JPanel rightPanel = new JPanel();
 
 	public AlgorithmPanel(AlgorithmGUIObject a) {
 		super(a);

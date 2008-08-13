@@ -12,8 +12,8 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.PosixParser;
 import org.jdmp.core.matrix.system.LogMatrix;
-import org.jdmp.gui.actions.ObjectAction;
 import org.jdmp.gui.util.GlobalConfiguration;
+import org.ujmp.gui.actions.ObjectAction;
 
 public class JDMP {
 	private static final transient Logger logger = Logger.getLogger(JDMP.class.getName());

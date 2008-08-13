@@ -2,12 +2,12 @@ package org.jdmp.core.variable;
 
 import javax.swing.event.EventListenerList;
 
-import org.jdmp.core.matrix.wrappers.MatrixListToMatrixWrapper;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.collections.DefaultMatrixList;
 import org.ujmp.core.collections.MatrixList;
 import org.ujmp.core.coordinates.Coordinates;
+import org.ujmp.core.util.MatrixListToMatrixWrapper;
 
 public class DefaultVariable extends AbstractVariable {
 	private static final long serialVersionUID = -7192491915167470355L;

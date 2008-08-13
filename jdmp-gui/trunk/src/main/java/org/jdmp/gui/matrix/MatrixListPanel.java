@@ -27,14 +27,16 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
 import org.jdmp.core.variable.Variable;
-import org.jdmp.gui.matrix.actions.FillWithValueAction;
-import org.jdmp.gui.matrix.actions.MatrixActions;
 import org.ujmp.core.doublecalculation.Calculation.Ret;
 import org.ujmp.core.doublecalculation.entrywise.creators.Rand;
 import org.ujmp.core.doublecalculation.entrywise.creators.Randn;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.interfaces.HasMatrixList;
 import org.ujmp.core.interfaces.HasToolTip;
+import org.ujmp.gui.matrix.MatrixFrame;
+import org.ujmp.gui.matrix.MatrixGUIObject;
+import org.ujmp.gui.matrix.actions.FillWithValueAction;
+import org.ujmp.gui.matrix.actions.MatrixActions;
 
 public class MatrixListPanel extends JPanel implements MouseListener, ListSelectionListener,
 		TableModelListener {

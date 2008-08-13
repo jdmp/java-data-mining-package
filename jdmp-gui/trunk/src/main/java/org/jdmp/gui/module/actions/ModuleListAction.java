@@ -3,8 +3,8 @@ package org.jdmp.gui.module.actions;
 import javax.swing.JComponent;
 
 import org.jdmp.core.module.HasModuleList;
-import org.jdmp.gui.actions.ObjectAction;
 import org.ujmp.core.interfaces.GUIObject;
+import org.ujmp.gui.actions.ObjectAction;
 
 public abstract class ModuleListAction extends ObjectAction {
 

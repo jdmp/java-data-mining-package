@@ -12,15 +12,15 @@ import org.jdmp.core.algorithm.regression.Regressor;
 import org.jdmp.core.sample.DefaultSample;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
-import org.jdmp.gui.matrix.MatrixRenderer;
+import org.ujmp.gui.matrix.MatrixRenderer;
 
 public class SampleTableCellRenderer implements TableCellRenderer {
 
 	public static final Object WEIGHT = Regressor.WEIGHT;
 
-	private DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+	private final DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
 
-	private MatrixRenderer matrixRenderer = new MatrixRenderer();
+	private final MatrixRenderer matrixRenderer = new MatrixRenderer();
 
 	private DefaultSample sample = null;
 
@@ -28,7 +28,7 @@ public class SampleTableCellRenderer implements TableCellRenderer {
 
 	private JLabel c = null;
 
-	private Variable v = null;
+	private final Variable v = null;
 
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
 			boolean hasFocus, int row, int column) {

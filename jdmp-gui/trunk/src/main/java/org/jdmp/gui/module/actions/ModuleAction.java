@@ -2,8 +2,8 @@ package org.jdmp.gui.module.actions;
 
 import javax.swing.JComponent;
 
-import org.jdmp.gui.actions.ObjectAction;
 import org.jdmp.gui.module.ModuleGUIObject;
+import org.ujmp.gui.actions.ObjectAction;
 
 public abstract class ModuleAction extends ObjectAction {
 

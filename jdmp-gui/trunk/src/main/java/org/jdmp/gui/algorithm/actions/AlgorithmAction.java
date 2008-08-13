@@ -2,8 +2,8 @@ package org.jdmp.gui.algorithm.actions;
 
 import javax.swing.JComponent;
 
-import org.jdmp.gui.actions.ObjectAction;
 import org.jdmp.gui.algorithm.AlgorithmGUIObject;
+import org.ujmp.gui.actions.ObjectAction;
 
 public abstract class AlgorithmAction extends ObjectAction {
 

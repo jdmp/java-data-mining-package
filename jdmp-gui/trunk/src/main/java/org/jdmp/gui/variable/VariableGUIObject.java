@@ -11,7 +11,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 
 import org.jdmp.core.variable.Variable;
-import org.jdmp.gui.AbstractGUIObject;
+import org.ujmp.gui.AbstractGUIObject;
 
 public class VariableGUIObject extends AbstractGUIObject {
 	private static final long serialVersionUID = 9145766876402222560L;
@@ -83,6 +83,7 @@ public class VariableGUIObject extends AbstractGUIObject {
 		variable.setDescription(description);
 	}
 
+	@Override
 	public String toString() {
 		return variable.toString();
 	}

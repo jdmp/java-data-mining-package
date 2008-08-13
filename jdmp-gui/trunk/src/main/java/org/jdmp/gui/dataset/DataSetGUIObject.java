@@ -3,7 +3,7 @@ package org.jdmp.gui.dataset;
 import javax.swing.Icon;
 
 import org.jdmp.core.dataset.DataSet;
-import org.jdmp.gui.AbstractGUIObject;
+import org.ujmp.gui.AbstractGUIObject;
 
 public class DataSetGUIObject extends AbstractGUIObject {
 	private static final long serialVersionUID = -329942434062359920L;
@@ -42,6 +42,7 @@ public class DataSetGUIObject extends AbstractGUIObject {
 		dataSet.setDescription(description);
 	}
 
+	@Override
 	public String toString() {
 		return dataSet.toString();
 	}

@@ -20,9 +20,9 @@ public class GlobalConfiguration implements Serializable, Map<Object, Object> {
 
 	private static final Logger logger = Logger.getLogger(GlobalConfiguration.class.getName());
 
-	private static final String VERSION = "0.4";
+	private static final String VERSION = "0.0.1";
 
-	private static final String YEAR = "2007";
+	private static final String YEAR = "2008";
 
 	private static GlobalConfiguration globalConfiguration = null;
 
@@ -250,15 +250,15 @@ public class GlobalConfiguration implements Serializable, Map<Object, Object> {
 	}
 
 	public boolean isIgnoreNaN() {
-		return (Boolean) getBoolean("jdmp.ignoreNaN");
+		return getBoolean("jdmp.ignoreNaN");
 	}
 
 	public int getMaxToolTipRows() {
-		return (Integer) getInteger("jdmp.maxToolTipRows");
+		return getInteger("jdmp.maxToolTipRows");
 	}
 
 	public int getMaxToolTipCols() {
-		return (Integer) getInteger("jdmp.maxToolTipCols");
+		return getInteger("jdmp.maxToolTipCols");
 	}
 
 	public int getMaxRowsToPrint() {

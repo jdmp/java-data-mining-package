@@ -3,7 +3,7 @@ package org.jdmp.gui.module;
 import javax.swing.Icon;
 
 import org.jdmp.core.module.Module;
-import org.jdmp.gui.AbstractGUIObject;
+import org.ujmp.gui.AbstractGUIObject;
 
 public class ModuleGUIObject extends AbstractGUIObject {
 	private static final long serialVersionUID = -317629566695423286L;
@@ -38,6 +38,7 @@ public class ModuleGUIObject extends AbstractGUIObject {
 		module.setDescription(description);
 	}
 
+	@Override
 	public String toString() {
 		return module.toString();
 	}

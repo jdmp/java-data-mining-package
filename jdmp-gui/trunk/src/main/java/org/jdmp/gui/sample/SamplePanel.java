@@ -6,24 +6,23 @@ import java.awt.GridLayout;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
-import org.jdmp.core.variable.HasVariables;
-import org.jdmp.gui.util.AbstractPanel;
 import org.jdmp.gui.util.ObjectListPanel;
+import org.ujmp.gui.util.AbstractPanel;
 
 public class SamplePanel extends AbstractPanel {
 	private static final long serialVersionUID = -3851417196195726237L;
 
-	private JSplitPane splitPane = new JSplitPane();
+	private final JSplitPane splitPane = new JSplitPane();
 
-	private JPanel leftPanel = new JPanel();
+	private final JPanel leftPanel = new JPanel();
 
-	private JPanel rightPanel = new JPanel();
+	private final JPanel rightPanel = new JPanel();
 
 	public SamplePanel(SampleGUIObject s) {
 		super(s);
 
 		rightPanel.setLayout(new GridLayout(1, 1));
-		rightPanel.add(new ObjectListPanel((HasVariables) s.getSample()));
+		rightPanel.add(new ObjectListPanel(s.getSample()));
 
 		splitPane.setLeftComponent(leftPanel);
 		splitPane.setRightComponent(rightPanel);

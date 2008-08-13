@@ -5,15 +5,14 @@ import java.awt.BorderLayout;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 
-import org.jdmp.core.matrix.wrappers.MatrixListToMatrixWrapper;
-import org.jdmp.gui.matrix.MatrixEditorPanel;
-import org.jdmp.gui.matrix.MatrixGUIObject;
 import org.jdmp.gui.matrix.MatrixListPanel;
-import org.jdmp.gui.matrix.MatrixPaintPanel;
-import org.jdmp.gui.matrix.plot.MatrixPlot;
-import org.jdmp.gui.util.AbstractPanel;
 import org.ujmp.core.exceptions.MatrixException;
-import org.ujmp.core.interfaces.HasMatrixList;
+import org.ujmp.core.util.MatrixListToMatrixWrapper;
+import org.ujmp.gui.matrix.MatrixEditorPanel;
+import org.ujmp.gui.matrix.MatrixGUIObject;
+import org.ujmp.gui.matrix.MatrixPaintPanel;
+import org.ujmp.gui.matrix.plot.MatrixPlot;
+import org.ujmp.gui.util.AbstractPanel;
 
 public class VariablePanel extends AbstractPanel {
 	private static final long serialVersionUID = -4809155917354071285L;
@@ -28,11 +27,11 @@ public class VariablePanel extends AbstractPanel {
 
 	private MatrixPlot variableChartPanel = null;
 
-	private JTabbedPane tabbedPane = new JTabbedPane();
+	private final JTabbedPane tabbedPane = new JTabbedPane();
 
-	private JSplitPane split1 = new JSplitPane();
+	private final JSplitPane split1 = new JSplitPane();
 
-	private JSplitPane split2 = new JSplitPane();
+	private final JSplitPane split2 = new JSplitPane();
 
 	public VariablePanel(VariableGUIObject v) throws MatrixException {
 		super(v);
@@ -40,7 +39,7 @@ public class VariablePanel extends AbstractPanel {
 		matrixObject = (MatrixGUIObject) new MatrixListToMatrixWrapper(v.getVariable())
 				.getGUIObject();
 
-		matrixListPanel = new MatrixListPanel((HasMatrixList) v.getVariable());
+		matrixListPanel = new MatrixListPanel(v.getVariable());
 
 		variableChartPanel = new MatrixPlot((MatrixGUIObject) v.getVariable().getAsMatrix()
 				.getGUIObject(), true);

@@ -17,24 +17,24 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.TableCellRenderer;
 
 import org.jdmp.core.variable.Variable;
-import org.jdmp.gui.matrix.Matrix3DTableCellRenderer;
-import org.jdmp.gui.matrix.MatrixRenderer;
-import org.jdmp.gui.util.UIDefaults;
+import org.ujmp.gui.matrix.Matrix3DTableCellRenderer;
+import org.ujmp.gui.matrix.MatrixRenderer;
+import org.ujmp.gui.util.UIDefaults;
 
 public class VariableListTableCellRenderer extends JPanel implements TableCellRenderer {
 	private static final long serialVersionUID = 6410777671579311509L;
 
-	private BufferedImage bufferedImage = null;
+	private final BufferedImage bufferedImage = null;
 
-	private VariableListImageObserver variableListImageObserver = new VariableListImageObserver();
+	private final VariableListImageObserver variableListImageObserver = new VariableListImageObserver();
 
 	protected static Border noFocusBorder = new EmptyBorder(1, 1, 1, 1);
 
 	private List variableList = null;
 
-	private MatrixRenderer matrixRenderer = new MatrixRenderer();
+	private final MatrixRenderer matrixRenderer = new MatrixRenderer();
 
-	private Matrix3DTableCellRenderer timeSeriesRenderer = new Matrix3DTableCellRenderer();
+	private final Matrix3DTableCellRenderer timeSeriesRenderer = new Matrix3DTableCellRenderer();
 
 	private static int PADDINGX = UIManager.getInt("Table.paddingX");
 
@@ -48,8 +48,8 @@ public class VariableListTableCellRenderer extends JPanel implements TableCellRe
 
 	private boolean hasFocus;
 
-	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-			int row, int column) {
+	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+			boolean hasFocus, int row, int column) {
 
 		this.isSelected = isSelected;
 		this.hasFocus = hasFocus;
@@ -103,8 +103,8 @@ public class VariableListTableCellRenderer extends JPanel implements TableCellRe
 				if (o instanceof Variable) {
 					Variable v = (Variable) o;
 
-					this.add(matrixRenderer.getTableCellRendererComponent(table, v.getMatrix(), isSelected, hasFocus,
-							row, column));
+					this.add(matrixRenderer.getTableCellRendererComponent(table, v.getMatrix(),
+							isSelected, hasFocus, row, column));
 				}
 			}
 		}
@@ -112,6 +112,7 @@ public class VariableListTableCellRenderer extends JPanel implements TableCellRe
 		return this;
 	}
 
+	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
 		if (variableList == null) {
@@ -143,7 +144,8 @@ public class VariableListTableCellRenderer extends JPanel implements TableCellRe
 		for (Object o : variableList) {
 			if (o != null && o instanceof Variable) {
 				Variable v = (Variable) o;
-				MatrixRenderer.paintMatrix(g, v.getMatrix(), componentWidth, height + PADDINGY + PADDINGY);
+				MatrixRenderer.paintMatrix(g, v.getMatrix(), componentWidth, height + PADDINGY
+						+ PADDINGY);
 				g.translate(componentWidth, 0);
 			}
 		}

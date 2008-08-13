@@ -3,7 +3,7 @@ package org.jdmp.gui.algorithm;
 import javax.swing.Icon;
 
 import org.jdmp.core.algorithm.Algorithm;
-import org.jdmp.gui.AbstractGUIObject;
+import org.ujmp.gui.AbstractGUIObject;
 
 public class AlgorithmGUIObject extends AbstractGUIObject {
 	private static final long serialVersionUID = 2744384245306464106L;
@@ -42,6 +42,7 @@ public class AlgorithmGUIObject extends AbstractGUIObject {
 		algorithm.setDescription(description);
 	}
 
+	@Override
 	public String toString() {
 		return algorithm.toString();
 	}

@@ -40,26 +40,35 @@ import org.jdmp.core.sample.HasSamples;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.HasVariables;
 import org.jdmp.core.variable.Variable;
-import org.jdmp.gui.actions.ObjectActions;
+import org.jdmp.gui.algorithm.AlgorithmGUIObject;
 import org.jdmp.gui.algorithm.AlgorithmListTableModel;
 import org.jdmp.gui.algorithm.AlgorithmTableCellRenderer;
+import org.jdmp.gui.algorithm.actions.AlgorithmActions;
 import org.jdmp.gui.algorithm.actions.AlgorithmListActions;
+import org.jdmp.gui.dataset.DataSetGUIObject;
 import org.jdmp.gui.dataset.DataSetListTableModel;
 import org.jdmp.gui.dataset.DataSetTableCellRenderer;
+import org.jdmp.gui.dataset.actions.DataSetActions;
 import org.jdmp.gui.dataset.actions.DataSetListActions;
+import org.jdmp.gui.module.ModuleGUIObject;
 import org.jdmp.gui.module.ModuleListTableModel;
 import org.jdmp.gui.module.ModuleTableCellRenderer;
+import org.jdmp.gui.module.actions.ModuleActions;
 import org.jdmp.gui.module.actions.ModuleListActions;
+import org.jdmp.gui.sample.SampleGUIObject;
 import org.jdmp.gui.sample.SampleListTableModel;
 import org.jdmp.gui.sample.SampleTableCellRenderer;
+import org.jdmp.gui.sample.actions.SampleActions;
 import org.jdmp.gui.sample.actions.SampleListActions;
 import org.jdmp.gui.variable.VariableGUIObject;
 import org.jdmp.gui.variable.VariableListTableModel;
 import org.jdmp.gui.variable.VariableTableCellRenderer;
+import org.jdmp.gui.variable.actions.VariableActions;
 import org.jdmp.gui.variable.actions.VariableListActions;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.core.interfaces.HasToolTip;
+import org.ujmp.gui.util.FrameManager;
 
 public class ObjectListPanel extends JPanel implements MouseListener, KeyListener,
 		ListSelectionListener, TableModelListener {
@@ -83,7 +92,7 @@ public class ObjectListPanel extends JPanel implements MouseListener, KeyListene
 
 	private GUIObject object = null;
 
-	private int ICONWIDTH = UIManager.getInt("Table.iconWidth");
+	private final int ICONWIDTH = UIManager.getInt("Table.iconWidth");
 
 	private TableModel dataModel = null;
 
@@ -135,6 +144,7 @@ public class ObjectListPanel extends JPanel implements MouseListener, KeyListene
 
 	}
 
+	@Override
 	public TitledBorder getBorder() {
 		return (TitledBorder) super.getBorder();
 	}
@@ -363,7 +373,21 @@ public class ObjectListPanel extends JPanel implements MouseListener, KeyListene
 				// }
 				if (o != null) {
 					JPopupMenu popup = new JPopupMenu();
-					for (JComponent jc : new ObjectActions(this, o)) {
+					List<JComponent> objectActions = null;
+
+					if (o instanceof AlgorithmGUIObject) {
+						objectActions = new AlgorithmActions(this, (AlgorithmGUIObject) o);
+					} else if (o instanceof ModuleGUIObject) {
+						objectActions = new ModuleActions(this, (ModuleGUIObject) o);
+					} else if (o instanceof SampleGUIObject) {
+						objectActions = new SampleActions(this, (SampleGUIObject) o);
+					} else if (o instanceof VariableGUIObject) {
+						objectActions = new VariableActions(this, (VariableGUIObject) o);
+					} else if (o instanceof DataSetGUIObject) {
+						objectActions = new DataSetActions(this, (DataSetGUIObject) o);
+					}
+
+					for (JComponent jc : objectActions) {
 						popup.add(jc);
 					}
 					popup.show(jTable, e.getX(), e.getY());

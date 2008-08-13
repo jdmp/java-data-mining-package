@@ -9,8 +9,10 @@ import org.jdmp.core.variable.VariableListener;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.collections.MatrixList;
 import org.ujmp.core.interfaces.HasMatrixList;
+import org.ujmp.gui.matrix.MatrixGUIObject;
 
-public class MatrixListTableModel extends AbstractTableModel implements VariableListener, HasMatrixList {
+public class MatrixListTableModel extends AbstractTableModel implements VariableListener,
+		HasMatrixList {
 	private static final long serialVersionUID = 1820859033991171760L;
 
 	private HasMatrixList variable = null;
@@ -20,7 +22,6 @@ public class MatrixListTableModel extends AbstractTableModel implements Variable
 	public static final int MATRIXCOLUMN = 1;
 
 	public static final int MATRIXPLOTCOLUMN = 2;
-
 
 	public static final int SIZECOLUMN = 3;
 
@@ -41,6 +42,7 @@ public class MatrixListTableModel extends AbstractTableModel implements Variable
 		return 5;
 	}
 
+	@Override
 	public String getColumnName(int columnIndex) {
 		switch (columnIndex) {
 		case INDEXCOLUMN:
@@ -58,6 +60,7 @@ public class MatrixListTableModel extends AbstractTableModel implements Variable
 		}
 	}
 
+	@Override
 	public Class<?> getColumnClass(int columnIndex) {
 		return MatrixGUIObject.class;
 	}

@@ -9,17 +9,17 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
 import org.jdmp.core.variable.Variable;
-import org.jdmp.gui.matrix.Matrix3DTableCellRenderer;
-import org.jdmp.gui.matrix.MatrixRenderer;
+import org.ujmp.gui.matrix.Matrix3DTableCellRenderer;
+import org.ujmp.gui.matrix.MatrixRenderer;
 
 public class VariableTableCellRenderer implements TableCellRenderer {
 	private static final long serialVersionUID = 990917492575992066L;
 
-	private DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+	private final DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
 
-	private MatrixRenderer matrixRenderer = new MatrixRenderer();
+	private final MatrixRenderer matrixRenderer = new MatrixRenderer();
 
-	private Matrix3DTableCellRenderer timeSeriesRenderer = new Matrix3DTableCellRenderer();
+	private final Matrix3DTableCellRenderer timeSeriesRenderer = new Matrix3DTableCellRenderer();
 
 	private Variable variable = null;
 

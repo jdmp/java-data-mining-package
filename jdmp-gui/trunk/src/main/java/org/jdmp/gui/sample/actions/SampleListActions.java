@@ -7,8 +7,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 
 import org.jdmp.core.sample.HasSampleList;
-import org.jdmp.gui.actions.ExitAction;
 import org.ujmp.core.interfaces.GUIObject;
+import org.ujmp.gui.actions.ExitAction;
 
 public class SampleListActions extends ArrayList<JComponent> {
 	private static final long serialVersionUID = 864758348092666603L;

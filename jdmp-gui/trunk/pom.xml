@@ -47,5 +47,9 @@
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-core</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-gui</artifactId>
+		</dependency>
 	</dependencies>
 </project>

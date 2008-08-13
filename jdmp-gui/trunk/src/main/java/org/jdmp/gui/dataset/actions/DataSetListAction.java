@@ -3,8 +3,8 @@ package org.jdmp.gui.dataset.actions;
 import javax.swing.JComponent;
 
 import org.jdmp.core.dataset.HasDataSets;
-import org.jdmp.gui.actions.ObjectAction;
 import org.ujmp.core.interfaces.GUIObject;
+import org.ujmp.gui.actions.ObjectAction;
 
 public abstract class DataSetListAction extends ObjectAction {
 
