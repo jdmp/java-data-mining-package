@@ -106,6 +106,12 @@ public class DefaultVariable extends AbstractVariable {
 	}
 
 	public final long[] getSize() {
+		if (Coordinates.product(size) == 0) {
+			Matrix m = getMatrix();
+			if (m != null) {
+				setSize(Coordinates.copyOf(m.getSize()));
+			}
+		}
 		return size;
 	}
 

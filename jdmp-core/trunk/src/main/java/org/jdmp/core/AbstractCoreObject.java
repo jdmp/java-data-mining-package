@@ -26,7 +26,7 @@ public abstract class AbstractCoreObject implements CoreObject {
 
 	public final JFrame showGUI() {
 		try {
-			Class<?> c = Class.forName("org.jdmp.gui.util.FrameManager");
+			Class<?> c = Class.forName("org.jdmp.gui.util.JDMPFrameManager");
 			Method method = c.getMethod("showFrame", new Class[] { Object.class });
 			return (JFrame) method.invoke(null, new Object[] { this });
 		} catch (Exception e) {
