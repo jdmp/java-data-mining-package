@@ -19,13 +19,13 @@ import org.jdmp.core.variable.DefaultVariable;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
+import org.ujmp.core.calculation.CalculationMatrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.collections.DefaultMatrixList;
 import org.ujmp.core.collections.MatrixList;
 import org.ujmp.core.doublecalculation.general.statistical.IndexOfMax;
 import org.ujmp.core.enums.FileFormat;
 import org.ujmp.core.exceptions.MatrixException;
-import org.ujmp.core.genericcalculation.GenericCalculationMatrix;
 import org.ujmp.core.util.MathUtil;
 
 public class ClassificationDataSet extends RegressionDataSet {
@@ -139,7 +139,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 
 	public Matrix getTargetClassMatrix() {
 		if (targetClassMatrix == null) {
-			targetClassMatrix = new GenericCalculationMatrix(new IndexOfMax(COLUMN,
+			targetClassMatrix = new CalculationMatrix(new IndexOfMax(COLUMN,
 					getTargetMatrix()));
 			targetClassMatrix.setLabel("Target Class");
 		}
