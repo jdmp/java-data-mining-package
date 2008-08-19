@@ -3,7 +3,7 @@ package org.jdmp.weka.wrappers;
 import org.jdmp.core.dataset.ClassificationDataSet;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.doublecalculation.Calculation.Ret;
+import org.ujmp.core.calculation.Calculation.Ret;
 
 import weka.core.FastVector;
 

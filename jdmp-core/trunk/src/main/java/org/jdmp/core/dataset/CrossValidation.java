@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.jdmp.core.algorithm.classification.Classifier;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.doublecalculation.Calculation.Ret;
+import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.listmatrix.DefaultListMatrix;
 import org.ujmp.core.listmatrix.ListMatrix;
 
