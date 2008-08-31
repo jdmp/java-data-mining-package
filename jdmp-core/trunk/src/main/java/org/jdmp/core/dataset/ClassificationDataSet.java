@@ -125,7 +125,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 		super();
 		setVariable(ACCURACY, new DefaultVariable("Accuracy", 10000));
 		setVariable(CONFUSION, new DefaultVariable("Confusion", 1000));
-		setVariable(ERRORCOUNT, new DefaultVariable("Error Count", 1000));
+		setVariable(ERRORCOUNT, new DefaultVariable("Error Count", 10000));
 	}
 
 	@Override
