@@ -24,7 +24,6 @@
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-complete</artifactId>
 		</dependency>
-
 		
 		<dependency>
 			<groupId>org.jdmp</groupId>
