@@ -50,7 +50,7 @@
 			
 			<dependency>
 				<groupId>org.ujmp</groupId>
-				<artifactId>ujmp-all</artifactId>
+				<artifactId>ujmp-complete</artifactId>
 				<version>${ujmp.version}</version>
 				<scope>compile</scope>
 			</dependency>
@@ -64,6 +64,12 @@
 			<dependency>
 				<groupId>org.jdmp</groupId>
 				<artifactId>jdmp-core</artifactId>
+				<version>${jdmp.version}</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.jdmp</groupId>
+				<artifactId>jdmp-complete</artifactId>
 				<version>${jdmp.version}</version>
 				<scope>compile</scope>
 			</dependency>
