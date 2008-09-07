@@ -57,10 +57,21 @@
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-weka</artifactId>
-		</dependency>		
-
-
+		</dependency>
 		
 	</dependencies>
+	
+	
+	<modules>
+    <module>../jdmp-core</module>
+    <module>../jdmp-gui</module>
+    <module>../jdmp-mail</module>
+    <module>../jdmp-ehcache</module>
+    <module>../jdmp-jgroups</module>
+    <module>../jdmp-itext</module>
+    <module>../jdmp-libsvm</module>
+    <module>../jdmp-weka</module>
+  </modules>
+	
 
 </project>
