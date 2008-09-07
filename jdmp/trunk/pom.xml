@@ -332,8 +332,9 @@
 		        <linksource>true</linksource>
 		        <links>
 		          <link>http://java.sun.com/javase/6/docs/api/</link>
-		          <link>http://www.jdmp.org/jdmp/${project.version}/docs/jdmp-matrix/apidocs</link>
-		          <link>http://www.jdmp.org/jdmp/${project.version}/docs/jdmp-core/apidocs</link>
+		          <link>http://www.ujmp.org/ujmp/${ujmp.version}/docs/ujmp-core/apidocs</link>
+		          <link>http://www.ujmp.org/ujmp/${ujmp.version}/docs/ujmp-gui/apidocs</link>
+		          <link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-core/apidocs</link>
 		        </links>
 		        </configuration>
 			</plugin>
