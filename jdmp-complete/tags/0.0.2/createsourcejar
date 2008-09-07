@@ -1,0 +1,23 @@
+DIR="/home/arndt/workspace/jdmp-complete"
+VERSION="0.0.2"
+PACKAGES="jdmp-core jdmp-gui jdmp-ehcache jdmp-jgroups jdmp-itext jdmp-libsvm jdmp-weka jdmp-mail"
+
+cd $DIR
+rm -rf target
+mkdir -p target
+
+for p in $PACKAGES
+do
+  cp ../$p/target/$p-$VERSION-sources.jar target/$p-$VERSION-sources.zip
+done
+
+cd target
+
+for p in $PACKAGES
+do
+  unzip -o $p-$VERSION-sources.zip
+done
+
+rm -rf *.zip
+
+zip -r jdmp-complete-$VERSION-sources.jar *
