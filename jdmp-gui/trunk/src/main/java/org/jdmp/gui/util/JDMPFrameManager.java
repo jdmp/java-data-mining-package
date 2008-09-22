@@ -3,7 +3,6 @@ package org.jdmp.gui.util;
 import javax.swing.JFrame;
 
 import org.jdmp.core.CoreObject;
-import org.jdmp.core.module.Module;
 import org.jdmp.gui.algorithm.AlgorithmFrame;
 import org.jdmp.gui.algorithm.AlgorithmGUIObject;
 import org.jdmp.gui.dataset.DataSetFrame;
@@ -34,8 +33,8 @@ public abstract class JDMPFrameManager {
 			return showFrame((DataSetGUIObject) o);
 		} else if (o instanceof SampleGUIObject) {
 			return showFrame((SampleGUIObject) o);
-		} else if (o instanceof Module) {
-			return showFrame((Module) o);
+		} else if (o instanceof ModuleGUIObject) {
+			return showFrame((ModuleGUIObject) o);
 		} else {
 			throw new MatrixException("cannot show frame for object: " + o);
 		}

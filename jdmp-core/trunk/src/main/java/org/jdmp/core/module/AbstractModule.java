@@ -13,6 +13,7 @@ import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DataSetListEvent;
 import org.jdmp.core.dataset.DataSetListListener;
 import org.jdmp.core.util.ObservableList;
+import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.util.AbstractEvent.EventType;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.interfaces.GUIObject;
@@ -24,10 +25,9 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 
 	protected final List<DataSet> dataSetList = new CopyOnWriteArrayList<DataSet>();
 
-	protected final ObservableList<Variable> variableList = new ObservableList<Variable>();
+	protected final ObservableMap<Variable> variableList = new ObservableMap<Variable>();
 
 	protected final ObservableList<Module> moduleList = new ObservableList<Module>();
-
 
 	public final void fireDataSetAdded(DataSetListEvent e) {
 		for (Object o : getListenerList().getListenerList()) {
@@ -103,18 +103,15 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		return dataSetList.get(pos);
 	}
 
-
 	public void removeAlgorithm(Algorithm algorithm) {
 		algorithmList.remove(algorithm);
 		fireAlgorithmRemoved(new AlgorithmListEvent(this, EventType.REMOVED, algorithm));
 	}
 
-
 	public void removeDataSet(DataSet ds) {
 		dataSetList.remove(ds);
 		fireDataSetRemoved(new DataSetListEvent(this, EventType.REMOVED, ds));
 	}
-
 
 	public final int getDataSetCount() {
 		return dataSetList.size();
@@ -152,11 +149,9 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		return algorithmList;
 	}
 
-
-	public final ObservableList<Variable> getVariableList() {
+	public final ObservableMap<Variable> getVariableList() {
 		return variableList;
 	}
-
 
 	public void clear() {
 	}

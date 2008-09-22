@@ -43,4 +43,8 @@ public class ModuleGUIObject extends AbstractGUIObject {
 		return module.toString();
 	}
 
+	public Module getModule() {
+		return module;
+	}
+
 }

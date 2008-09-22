@@ -7,9 +7,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
-import org.jdmp.core.algorithm.HasAlgorithms;
-import org.jdmp.core.dataset.HasDataSets;
-import org.jdmp.core.module.HasModuleList;
 import org.jdmp.core.variable.HasVariables;
 import org.jdmp.gui.util.ObjectListPanel;
 import org.ujmp.gui.util.AbstractPanel;
@@ -30,10 +27,10 @@ public class ModulePanel extends AbstractPanel {
 		leftPanel.setBorder(BorderFactory.createTitledBorder("Modules in Module"));
 
 		rightPanel.setLayout(new GridLayout(4, 1));
-		rightPanel.add(new ObjectListPanel((HasModuleList) m));
-		rightPanel.add(new ObjectListPanel((HasVariables) m));
-		rightPanel.add(new ObjectListPanel((HasAlgorithms) m));
-		rightPanel.add(new ObjectListPanel((HasDataSets) m));
+		// rightPanel.add(new ObjectListPanel((HasModuleList) m.getModule()));
+		rightPanel.add(new ObjectListPanel((HasVariables) m.getModule()));
+		// rightPanel.add(new ObjectListPanel((HasAlgorithms) m.getModule()));
+		// rightPanel.add(new ObjectListPanel((HasDataSets) m.getModule()));
 
 		splitPane.setLeftComponent(leftPanel);
 		splitPane.setRightComponent(rightPanel);
