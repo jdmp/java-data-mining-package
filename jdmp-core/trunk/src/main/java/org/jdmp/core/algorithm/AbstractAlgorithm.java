@@ -37,16 +37,6 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 
 	private final List<Algorithm> algorithmList = new CopyOnWriteArrayList<Algorithm>();
 
-	private int totalCount = 0;
-
-	private long startTime = 0l;
-
-	private int callsPerSecond = 0;
-
-	private long calculateTime = 0;
-
-	private long runtime = 0;
-
 	private transient final Thread algorithmSpeedThread = null;
 
 	private transient EventListenerList listenerList = null;
@@ -127,22 +117,10 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 	}
 
 	public void startCalculate() {
-		startTime = System.nanoTime();
 		createVariablesAndAlgorithms();
 	}
 
 	public void endCalculate() {
-		calculateTime = System.nanoTime() - startTime;
-		increaseCount();
-	}
-
-	public final void increaseCount() {
-		totalCount++;
-		fireCountIncreased();
-	}
-
-	public int getCallsPerSecond() {
-		return callsPerSecond;
 	}
 
 	public final List<Matrix> calculate() throws Exception {
@@ -186,10 +164,6 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 
 	public abstract List<Matrix> calculate(List<Matrix> matrices) throws Exception;
 
-	public int getCount() {
-		return totalCount;
-	}
-
 	public void fireCountIncreased() {
 		fireCountIncreased(new AlgorithmEvent(this, EventType.UPDATED));
 	}
@@ -210,15 +184,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		getListenerList().remove(AlgorithmListener.class, l);
 	}
 
-	public void setCallsPerSecond(int i) {
-		this.callsPerSecond = i;
-	}
-
 	public void addVariable(Variable v) {
-	}
-
-	public final int getIndexOfVariable(Variable v) {
-		return variableList.indexOf(v);
 	}
 
 	public int getEdgeDirectionForVariable(int index) {
@@ -319,24 +285,12 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		getListenerList().remove(AlgorithmListListener.class, l);
 	}
 
-	public long getRuntime() {
-		return runtime;
-	}
-
-	public void setRuntime(long runTime) {
-		this.runtime = runTime;
-	}
-
 	public String getEdgeLabelForVariable(int index) {
 		return "";
 	}
 
 	public String getEdgeLabelForAlgorithm(int index) {
 		return "";
-	}
-
-	public double getCalculateTime() {
-		return calculateTime;
 	}
 
 	public final void importFromFile(File file) {

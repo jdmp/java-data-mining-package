@@ -21,8 +21,6 @@ public class AlgorithmListTableModel extends AbstractTableModel implements Algor
 
 	public static final int ALGORITHMLISTCOLUMN = 3;
 
-	public static final int COUNTCOLUMN = 4;
-
 	private HasAlgorithms iAlgorithms = null;
 
 	public AlgorithmListTableModel(HasAlgorithms iAlgorithms) {
@@ -40,7 +38,7 @@ public class AlgorithmListTableModel extends AbstractTableModel implements Algor
 	}
 
 	public int getColumnCount() {
-		return 5;
+		return 4;
 	}
 
 	@Override
@@ -54,8 +52,6 @@ public class AlgorithmListTableModel extends AbstractTableModel implements Algor
 			return "Algorithms";
 		case LABELCOLUMN:
 			return "Label";
-		case COUNTCOLUMN:
-			return "Count";
 		default:
 			return "x";
 		}

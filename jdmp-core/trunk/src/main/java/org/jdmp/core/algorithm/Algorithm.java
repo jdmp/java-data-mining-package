@@ -39,12 +39,6 @@ public interface Algorithm extends CoreObject, HasVariableMap, HasAlgorithms,
 
 	public abstract List<Matrix> calculate(List<Matrix> matrices) throws Exception;
 
-	public int getCount();
-
-	public void fireCountIncreased();
-
-	public void fireCountIncreased(AlgorithmEvent e);
-
 	public void addAlgorithmListener(AlgorithmListener l);
 
 	public void removeAlgorithmListener(AlgorithmListener l);

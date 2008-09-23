@@ -39,9 +39,6 @@ public class AlgorithmTableCellRenderer implements TableCellRenderer {
 			case AlgorithmListTableModel.LABELCOLUMN:
 				o = algorithm.getLabel();
 				break;
-			case AlgorithmListTableModel.COUNTCOLUMN:
-				o = algorithm.getCount();
-				break;
 			case AlgorithmListTableModel.VARIABLECOLUMN:
 				return variableListTableCellRenderer.getTableCellRendererComponent(table, algorithm
 						.getVariableList(), isSelected, hasFocus, row, column);
