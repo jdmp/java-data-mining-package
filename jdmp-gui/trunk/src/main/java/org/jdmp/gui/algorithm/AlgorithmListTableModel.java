@@ -9,7 +9,8 @@ import org.jdmp.core.algorithm.AlgorithmListListener;
 import org.jdmp.core.algorithm.AlgorithmListener;
 import org.jdmp.core.algorithm.HasAlgorithms;
 
-public class AlgorithmListTableModel extends AbstractTableModel implements AlgorithmListener, AlgorithmListListener {
+public class AlgorithmListTableModel extends AbstractTableModel implements AlgorithmListener,
+		AlgorithmListListener {
 	private static final long serialVersionUID = -3779798282436020436L;
 
 	public static final int ICONCOLUMN = 0;
@@ -21,16 +22,6 @@ public class AlgorithmListTableModel extends AbstractTableModel implements Algor
 	public static final int ALGORITHMLISTCOLUMN = 3;
 
 	public static final int COUNTCOLUMN = 4;
-
-	public static final int CALLSCOLUMN = 5;
-
-	public static final int INTERVALCOLUMN = 6;
-
-	public static final int RUNTIMECOLUMN = 7;
-
-	public static final int CALCTIMECOLUMN = 8;
-
-	public static final int STEPSTODOCOLUMN = 9;
 
 	private HasAlgorithms iAlgorithms = null;
 
@@ -49,9 +40,10 @@ public class AlgorithmListTableModel extends AbstractTableModel implements Algor
 	}
 
 	public int getColumnCount() {
-		return 10;
+		return 5;
 	}
 
+	@Override
 	public String getColumnName(int columnIndex) {
 		switch (columnIndex) {
 		case ICONCOLUMN:
@@ -64,21 +56,12 @@ public class AlgorithmListTableModel extends AbstractTableModel implements Algor
 			return "Label";
 		case COUNTCOLUMN:
 			return "Count";
-		case CALLSCOLUMN:
-			return "CallsPerSecond";
-		case INTERVALCOLUMN:
-			return "Interval";
-		case RUNTIMECOLUMN:
-			return "Runtime [s]";
-		case CALCTIMECOLUMN:
-			return "CalcTime [�s]";
-		case STEPSTODOCOLUMN:
-			return "StepsToDo";
 		default:
 			return "x";
 		}
 	}
 
+	@Override
 	public Class<?> getColumnClass(int columnIndex) {
 		switch (columnIndex) {
 		default:

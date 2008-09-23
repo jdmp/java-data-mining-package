@@ -37,8 +37,6 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 
 	private final List<Algorithm> algorithmList = new CopyOnWriteArrayList<Algorithm>();
 
-	private int interval = 0;
-
 	private int totalCount = 0;
 
 	private long startTime = 0l;
@@ -47,13 +45,9 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 
 	private long calculateTime = 0;
 
-	private int stepsToDo = 0;
-
 	private long runtime = 0;
 
-	private transient AlgorithmThread algorithmThread = null;
-
-	private transient Thread algorithmSpeedThread = null;
+	private transient final Thread algorithmSpeedThread = null;
 
 	private transient EventListenerList listenerList = null;
 
@@ -142,70 +136,6 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		increaseCount();
 	}
 
-	public boolean isRunning() {
-		return getStepsToDo() > 0;
-	}
-
-	public void start() {
-		setStepsToDo(1000000);
-	}
-
-	public void stop() {
-		setStepsToDo(0);
-	}
-
-	public int getInterval() {
-		return interval;
-	}
-
-	public int getStepsToDo() {
-		return stepsToDo;
-	}
-
-	public void increaseStepsToDo() {
-		stepsToDo++;
-		if (stepsToDo > 0)
-			createAndStartThreads();
-	}
-
-	public void decreaseStepsToDo() {
-		stepsToDo--;
-		if (stepsToDo <= 0) {
-			stepsToDo = 0;
-			stopAndDestroyThreads();
-		}
-	}
-
-	public void setStepsToDo(int stepsToDo) {
-		if (stepsToDo > 0)
-			createAndStartThreads();
-		else
-			stopAndDestroyThreads();
-		this.stepsToDo = stepsToDo;
-	}
-
-	public void createAndStartThreads() {
-		if (algorithmSpeedThread == null) {
-			algorithmSpeedThread = new AlgorithmSpeedThread(this);
-			algorithmSpeedThread.start();
-		}
-		if (algorithmThread == null) {
-			algorithmThread = new AlgorithmThread(this);
-			algorithmThread.start();
-		}
-	}
-
-	public void stopAndDestroyThreads() {
-		if (algorithmThread != null) {
-			algorithmThread.interrupt();
-			algorithmThread = null;
-		}
-		if (algorithmSpeedThread != null) {
-			algorithmSpeedThread.interrupt();
-			algorithmSpeedThread = null;
-		}
-	}
-
 	public final void increaseCount() {
 		totalCount++;
 		fireCountIncreased();
@@ -255,10 +185,6 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 	}
 
 	public abstract List<Matrix> calculate(List<Matrix> matrices) throws Exception;
-
-	public void _calculate() {
-		increaseStepsToDo();
-	}
 
 	public int getCount() {
 		return totalCount;
@@ -331,7 +257,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 			return null;
 		}
 	}
-	
+
 	public void setMatrix(Object variableKey, Matrix matrix) {
 		Variable v = getVariableList().get(variableKey);
 		if (v == null) {
@@ -393,11 +319,6 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		getListenerList().remove(AlgorithmListListener.class, l);
 	}
 
-	public void setInterval(int intervall) {
-		if (interval >= 0)
-			this.interval = intervall;
-	}
-
 	public long getRuntime() {
 		return runtime;
 	}
@@ -441,6 +362,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		return guiObject;
 	}
 
+	@Override
 	public final String toString() {
 		if (getLabel() == null) {
 			return getClass().getSimpleName();

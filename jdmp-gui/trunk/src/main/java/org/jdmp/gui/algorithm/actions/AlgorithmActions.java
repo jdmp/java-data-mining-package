@@ -52,7 +52,6 @@ public class AlgorithmActions extends ArrayList<JComponent> {
 		}
 		add(algorithmActions);
 
-		add(new JMenuItem(new SetIntervalAction(component, algorithm)));
 		add(new JMenuItem(new CalculateOnceAction(component, algorithm)));
 
 		this.add(new JSeparator());

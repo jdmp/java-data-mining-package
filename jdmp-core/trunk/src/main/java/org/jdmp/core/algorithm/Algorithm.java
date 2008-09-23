@@ -1,6 +1,5 @@
 package org.jdmp.core.algorithm;
 
-import java.io.File;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -32,30 +31,6 @@ public interface Algorithm extends CoreObject, HasVariableMap, HasAlgorithms,
 
 	public void endCalculate();
 
-	public boolean isRunning();
-
-	public void start();
-
-	public void stop();
-
-	public int getInterval();
-
-	public int getStepsToDo();
-
-	public void increaseStepsToDo();
-
-	public void decreaseStepsToDo();
-
-	public void setStepsToDo(int stepsToDo);
-
-	public void createAndStartThreads();
-
-	public void stopAndDestroyThreads();
-
-	public void increaseCount();
-
-	public int getCallsPerSecond();
-
 	public List<Matrix> calculate() throws Exception;
 
 	public List<Matrix> calculate(Matrix... input) throws Exception;
@@ -63,8 +38,6 @@ public interface Algorithm extends CoreObject, HasVariableMap, HasAlgorithms,
 	public List<Matrix> calculate(double... input) throws Exception;
 
 	public abstract List<Matrix> calculate(List<Matrix> matrices) throws Exception;
-
-	public void _calculate();
 
 	public int getCount();
 
@@ -76,8 +49,6 @@ public interface Algorithm extends CoreObject, HasVariableMap, HasAlgorithms,
 
 	public void removeAlgorithmListener(AlgorithmListener l);
 
-	public void setCallsPerSecond(int i);
-
 	public int getEdgeDirectionForVariable(int index);
 
 	public int getEdgeDirectionForAlgorithm(int index);
@@ -88,17 +59,8 @@ public interface Algorithm extends CoreObject, HasVariableMap, HasAlgorithms,
 
 	public void setMatrixForVariable(int variableIndex, int matrixIndex, Matrix matrix);
 
-	public void setInterval(int intervall);
-
-	public long getRuntime();
-
-	public void setRuntime(long runTime);
-
 	public String getEdgeLabelForVariable(int index);
 
 	public String getEdgeLabelForAlgorithm(int index);
 
-	public double getCalculateTime();
-
-	public void importFromFile(File file);
 }

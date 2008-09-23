@@ -10,14 +10,13 @@ import javax.swing.table.TableCellRenderer;
 
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.gui.variable.VariableListTableCellRenderer;
-import org.ujmp.core.util.StringUtil;
 
 public class AlgorithmTableCellRenderer implements TableCellRenderer {
 	private static final long serialVersionUID = 990917492575992066L;
 
-	private DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+	private final DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
 
-	private VariableListTableCellRenderer variableListTableCellRenderer = new VariableListTableCellRenderer();
+	private final VariableListTableCellRenderer variableListTableCellRenderer = new VariableListTableCellRenderer();
 
 	private Algorithm algorithm = null;
 
@@ -25,8 +24,8 @@ public class AlgorithmTableCellRenderer implements TableCellRenderer {
 
 	private JLabel c = null;
 
-	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-			int row, int column) {
+	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+			boolean hasFocus, int row, int column) {
 
 		c = null;
 
@@ -40,27 +39,12 @@ public class AlgorithmTableCellRenderer implements TableCellRenderer {
 			case AlgorithmListTableModel.LABELCOLUMN:
 				o = algorithm.getLabel();
 				break;
-			case AlgorithmListTableModel.CALLSCOLUMN:
-				o = algorithm.getCallsPerSecond();
-				break;
 			case AlgorithmListTableModel.COUNTCOLUMN:
 				o = algorithm.getCount();
 				break;
-			case AlgorithmListTableModel.INTERVALCOLUMN:
-				o = algorithm.getInterval();
-				break;
-			case AlgorithmListTableModel.RUNTIMECOLUMN:
-				o = StringUtil.format(algorithm.getRuntime() / 1000.0 / 1000.0 / 1000.0);
-				break;
-			case AlgorithmListTableModel.CALCTIMECOLUMN:
-				o = StringUtil.format(algorithm.getCalculateTime() / 1000.0);
-				break;
-			case AlgorithmListTableModel.STEPSTODOCOLUMN:
-				o = algorithm.getStepsToDo();
-				break;
 			case AlgorithmListTableModel.VARIABLECOLUMN:
-				return variableListTableCellRenderer.getTableCellRendererComponent(table, algorithm.getVariableList(),
-						isSelected, hasFocus, row, column);
+				return variableListTableCellRenderer.getTableCellRendererComponent(table, algorithm
+						.getVariableList(), isSelected, hasFocus, row, column);
 			case AlgorithmListTableModel.ALGORITHMLISTCOLUMN:
 				o = algorithm.getAlgorithmList();
 				break;
@@ -69,7 +53,8 @@ public class AlgorithmTableCellRenderer implements TableCellRenderer {
 				break;
 			}
 
-			c = (JLabel) renderer.getTableCellRendererComponent(table, o, isSelected, hasFocus, row, column);
+			c = (JLabel) renderer.getTableCellRendererComponent(table, o, isSelected, hasFocus,
+					row, column);
 
 			switch (column) {
 			case AlgorithmListTableModel.ICONCOLUMN:
