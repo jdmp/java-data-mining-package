@@ -7,6 +7,7 @@ import javax.swing.event.EventListenerList;
 import org.jdmp.core.executor.Executor;
 import org.jdmp.core.interpreter.Command;
 import org.jdmp.core.interpreter.Interpreter;
+import org.jdmp.core.interpreter.Result;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 
@@ -60,8 +61,8 @@ public class DefaultModule extends AbstractModule {
 	}
 
 	@Override
-	public void execute(Command... commands) {
-		getExecutor().execute(commands);
+	public Result execute(Command... commands) {
+		return getExecutor().execute(commands);
 	}
 
 	public Executor getExecutor() {
@@ -79,13 +80,13 @@ public class DefaultModule extends AbstractModule {
 	}
 
 	@Override
-	public void execute(List<Command> commands) {
-		getExecutor().execute(commands);
+	public Result execute(List<Command> commands) {
+		return getExecutor().execute(commands);
 	}
 
 	@Override
-	public void execute(String script) {
+	public Result execute(String script) {
 		List<Command> commands = getInterpreter().parseScript(script);
-		execute(commands);
+		return execute(commands);
 	}
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.jdmp.core.interpreter.AlgorithmCommand;
 import org.jdmp.core.interpreter.Command;
+import org.jdmp.core.interpreter.Result;
 import org.jdmp.core.interpreter.VariableCommand;
 import org.jdmp.core.module.Module;
 import org.jdmp.core.variable.DefaultVariable;
@@ -18,7 +19,7 @@ public class Executor {
 		this.module = module;
 	}
 
-	public void execute(Command... commands) {
+	public Result execute(Command... commands) {
 		for (Command command : commands) {
 			if (command instanceof AlgorithmCommand) {
 				executeAlgorithmCommand((AlgorithmCommand) command);
@@ -26,9 +27,10 @@ public class Executor {
 				executeVariableCommand((VariableCommand) command);
 			}
 		}
+		return new Result("no result can be displayed for an array of commands");
 	}
 
-	private void executeVariableCommand(VariableCommand command) {
+	private Result executeVariableCommand(VariableCommand command) {
 		String variableName = command.getVariable();
 		Matrix matrix = command.getValue();
 
@@ -38,15 +40,18 @@ public class Executor {
 			module.getVariableList().put(variableName, variable);
 		}
 		variable.addMatrix(matrix);
+		return new Result();
 	}
 
-	private void executeAlgorithmCommand(AlgorithmCommand command) {
+	private Result executeAlgorithmCommand(AlgorithmCommand command) {
+		return new Result("function not defined");
 	}
 
-	public void execute(List<Command> commands) {
+	public Result execute(List<Command> commands) {
 		for (Command command : commands) {
 			execute(command);
 		}
+		return new Result("no result can be displayed for an array of commands");
 	}
 
 }
