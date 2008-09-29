@@ -27,4 +27,16 @@ public class AlgorithmCommand extends Command {
 		return targets + " = " + algorithm + "(" + sources + ")";
 	}
 
+	public List<String> getSources() {
+		return sources;
+	}
+
+	public List<String> getTargets() {
+		return targets;
+	}
+
+	public String getAlgorithm() {
+		return algorithm;
+	}
+
 }

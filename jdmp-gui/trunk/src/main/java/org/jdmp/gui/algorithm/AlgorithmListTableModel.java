@@ -25,7 +25,7 @@ public class AlgorithmListTableModel extends AbstractTableModel implements Algor
 
 	public AlgorithmListTableModel(HasAlgorithms iAlgorithms) {
 		this.iAlgorithms = iAlgorithms;
-		iAlgorithms.addAlgorithmListListener(this);
+		//iAlgorithms.addAlgorithmListListener(this);
 		for (Algorithm a : iAlgorithms.getAlgorithmList()) {
 			if (a != null) {
 				a.addAlgorithmListener(this);

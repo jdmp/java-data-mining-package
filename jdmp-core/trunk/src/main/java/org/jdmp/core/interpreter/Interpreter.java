@@ -28,6 +28,7 @@ public class Interpreter {
 			String algorithm = matcher.group(2);
 			String sourceString = matcher.group(3);
 			acommand.setAlgorithm(algorithm);
+			acommand.setOriginalText(input);
 
 			String[] targets = targetString.replaceAll("[\\[\\]]", "").split(",");
 			for (String target : targets) {
@@ -51,11 +52,15 @@ public class Interpreter {
 			Matrix matrix = MatrixFactory.importFromString(FileFormat.M, matrixString);
 			vcommand.setVariable(variable);
 			vcommand.setValue(matrix);
+			vcommand.setOriginalText(input);
 			return vcommand;
 		} else {
-			// cannot understand this command
-			System.out.println("unparseable command: " + input);
-			return new CommentCommand("unparseable command: " + input);
+			// print value of a variable
+			PrintCommand pcommand = new PrintCommand();
+			String variable = input;
+			pcommand.setVariable(variable);
+			pcommand.setOriginalText(input);
+			return pcommand;
 		}
 	}
 

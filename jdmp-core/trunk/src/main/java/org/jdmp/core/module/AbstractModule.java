@@ -7,7 +7,6 @@ import java.util.logging.Level;
 
 import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.algorithm.Algorithm;
-import org.jdmp.core.algorithm.AlgorithmListEvent;
 import org.jdmp.core.algorithm.AlgorithmListListener;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DataSetListEvent;
@@ -53,33 +52,8 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		}
 	}
 
-	public final void fireAlgorithmAdded(AlgorithmListEvent e) {
-		for (Object o : getListenerList().getListenerList()) {
-			if (o instanceof AlgorithmListListener) {
-				((AlgorithmListListener) o).algorithmAdded(e);
-			}
-		}
-	}
-
-	public final void fireAlgorithmUpdated(AlgorithmListEvent e) {
-		for (Object o : getListenerList().getListenerList()) {
-			if (o instanceof AlgorithmListListener) {
-				((AlgorithmListListener) o).algorithmUpdated(e);
-			}
-		}
-	}
-
-	public final void fireAlgorithmRemoved(AlgorithmListEvent e) {
-		for (Object o : getListenerList().getListenerList()) {
-			if (o instanceof AlgorithmListListener) {
-				((AlgorithmListListener) o).algorithmRemoved(e);
-			}
-		}
-	}
-
 	public void addAlgorithm(Algorithm a) {
 		algorithmList.add(a);
-		fireAlgorithmAdded(new AlgorithmListEvent(this, EventType.ADDED, a));
 	}
 
 	public ObservableList<Module> getModuleList() {
@@ -101,11 +75,6 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 
 	public final DataSet getDataSet(int pos) {
 		return dataSetList.get(pos);
-	}
-
-	public void removeAlgorithm(Algorithm algorithm) {
-		algorithmList.remove(algorithm);
-		fireAlgorithmRemoved(new AlgorithmListEvent(this, EventType.REMOVED, algorithm));
 	}
 
 	public void removeDataSet(DataSet ds) {
