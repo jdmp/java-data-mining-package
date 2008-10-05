@@ -3,14 +3,11 @@ package org.jdmp.gui.algorithm;
 import javax.swing.table.AbstractTableModel;
 
 import org.jdmp.core.algorithm.Algorithm;
-import org.jdmp.core.algorithm.AlgorithmEvent;
 import org.jdmp.core.algorithm.AlgorithmListEvent;
 import org.jdmp.core.algorithm.AlgorithmListListener;
-import org.jdmp.core.algorithm.AlgorithmListener;
 import org.jdmp.core.algorithm.HasAlgorithms;
 
-public class AlgorithmListTableModel extends AbstractTableModel implements AlgorithmListener,
-		AlgorithmListListener {
+public class AlgorithmListTableModel extends AbstractTableModel implements AlgorithmListListener {
 	private static final long serialVersionUID = -3779798282436020436L;
 
 	public static final int ICONCOLUMN = 0;
@@ -25,12 +22,7 @@ public class AlgorithmListTableModel extends AbstractTableModel implements Algor
 
 	public AlgorithmListTableModel(HasAlgorithms iAlgorithms) {
 		this.iAlgorithms = iAlgorithms;
-		//iAlgorithms.addAlgorithmListListener(this);
-		for (Algorithm a : iAlgorithms.getAlgorithmList()) {
-			if (a != null) {
-				a.addAlgorithmListener(this);
-			}
-		}
+		// iAlgorithms.addAlgorithmListListener(this);
 	}
 
 	public int getRowCount() {
@@ -73,21 +65,13 @@ public class AlgorithmListTableModel extends AbstractTableModel implements Algor
 		}
 	}
 
-	public void algorithmCountIncreased(AlgorithmEvent e) {
-		int row = iAlgorithms.getIndexOfAlgorithm((Algorithm) e.getSource());
-		if (row >= 0)
-			fireTableRowsUpdated(row, row);
-	}
-
 	public void algorithmAdded(AlgorithmListEvent e) {
 		Algorithm a = (Algorithm) e.getData();
-		a.addAlgorithmListener(this);
 		fireTableDataChanged();
 	}
 
 	public void algorithmRemoved(AlgorithmListEvent e) {
 		Algorithm a = (Algorithm) e.getData();
-		a.removeAlgorithmListener(this);
 		fireTableDataChanged();
 	}
 

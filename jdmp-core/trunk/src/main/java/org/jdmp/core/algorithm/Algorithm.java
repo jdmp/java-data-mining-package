@@ -39,10 +39,6 @@ public interface Algorithm extends CoreObject, HasVariableMap, HasAlgorithms,
 
 	public abstract List<Matrix> calculate(List<Matrix> matrices) throws Exception;
 
-	public void addAlgorithmListener(AlgorithmListener l);
-
-	public void removeAlgorithmListener(AlgorithmListener l);
-
 	public int getEdgeDirectionForVariable(int index);
 
 	public int getEdgeDirectionForAlgorithm(int index);

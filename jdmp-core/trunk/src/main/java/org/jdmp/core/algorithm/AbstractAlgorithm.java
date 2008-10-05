@@ -164,26 +164,6 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 
 	public abstract List<Matrix> calculate(List<Matrix> matrices) throws Exception;
 
-	public void fireCountIncreased() {
-		fireCountIncreased(new AlgorithmEvent(this, EventType.UPDATED));
-	}
-
-	public void fireCountIncreased(AlgorithmEvent e) {
-		for (Object o : getListenerList().getListenerList()) {
-			if (o instanceof AlgorithmListener) {
-				((AlgorithmListener) o).algorithmCountIncreased(e);
-			}
-		}
-	}
-
-	public void addAlgorithmListener(AlgorithmListener l) {
-		getListenerList().add(AlgorithmListener.class, l);
-	}
-
-	public void removeAlgorithmListener(AlgorithmListener l) {
-		getListenerList().remove(AlgorithmListener.class, l);
-	}
-
 	public void addVariable(Variable v) {
 	}
 
