@@ -9,7 +9,7 @@ import org.ujmp.core.Matrix;
 public class AlgorithmRepeat extends AbstractAlgorithm {
 	private static final long serialVersionUID = 1469854394519674382L;
 
-	private int REPEATEDALGORITHM = 0;
+	private final int REPEATEDALGORITHM = 0;
 
 	private int repeatCount = 1;
 
@@ -18,19 +18,22 @@ public class AlgorithmRepeat extends AbstractAlgorithm {
 		setDescription("calls another Algorithms several times");
 	}
 
+	@Override
 	public List<Matrix> calculate(List<Matrix> matrixList) throws Exception {
 		List<Matrix> result = null;
 		for (int i = 0; i < repeatCount; i++) {
-			result = getAlgorithm(REPEATEDALGORITHM).calculate(matrixList);
+			result = getAlgorithmList().get(REPEATEDALGORITHM).calculate(matrixList);
 		}
 		return result;
 
 	}
 
+	@Override
 	public String getEdgeLabelForAlgorithm(int i) {
 		return "Repeat " + repeatCount + " times";
 	}
 
+	@Override
 	public int getEdgeDirectionForAlgorithm(int i) {
 		return Algorithm.OUTGOING;
 	}
@@ -48,6 +51,6 @@ public class AlgorithmRepeat extends AbstractAlgorithm {
 	}
 
 	public Algorithm getRepeatedAlgorithm() {
-		return getAlgorithm(REPEATEDALGORITHM);
+		return getAlgorithmList().get(REPEATEDALGORITHM);
 	}
 }

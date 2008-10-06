@@ -19,7 +19,7 @@ import org.ujmp.core.interfaces.GUIObject;
 public abstract class AbstractModule extends AbstractCoreObject implements Module {
 	private transient GUIObject guiObject = null;
 
-	protected final List<Algorithm> algorithmList = new CopyOnWriteArrayList<Algorithm>();
+	protected final ObservableList<Algorithm> algorithmList = new ObservableList<Algorithm>();
 
 	protected final List<DataSet> dataSetList = new CopyOnWriteArrayList<DataSet>();
 
@@ -86,11 +86,11 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 	}
 
 	public int getAlgorithmCount() {
-		return algorithmList.size();
+		return algorithmList.getSize();
 	}
 
 	public final Algorithm getAlgorithm(int pos) {
-		return algorithmList.get(pos);
+		return algorithmList.getElementAt(pos);
 	}
 
 	public final int getIndexOfAlgorithm(Algorithm algorithm) {
@@ -105,7 +105,7 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		getListenerList().remove(DataSetListListener.class, l);
 	}
 
-	public final List<Algorithm> getAlgorithmList() {
+	public final ObservableList<Algorithm> getAlgorithmList() {
 		return algorithmList;
 	}
 

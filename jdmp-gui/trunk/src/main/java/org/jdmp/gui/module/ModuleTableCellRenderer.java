@@ -13,7 +13,7 @@ import org.jdmp.core.module.Module;
 public class ModuleTableCellRenderer implements TableCellRenderer {
 	private static final long serialVersionUID = 990917492575992066L;
 
-	private DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+	private final DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
 
 	private Module module = null;
 
@@ -47,7 +47,7 @@ public class ModuleTableCellRenderer implements TableCellRenderer {
 				o = null;
 				break;
 			case ModuleListTableModel.ALGORITHMCOUNTCOLUMN:
-				o = module.getAlgorithmCount();
+				o = module.getAlgorithmList().getSize();
 				break;
 			default:
 				o = null;

@@ -3,7 +3,6 @@ package org.jdmp.core.algorithm;
 import java.lang.reflect.Constructor;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -33,7 +32,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 
 	private final ObservableMap<Variable> variableMap = new ObservableMap<Variable>();
 
-	private final List<Algorithm> algorithmList = new CopyOnWriteArrayList<Algorithm>();
+	private final ObservableMap<Algorithm> algorithmList = new ObservableMap<Algorithm>();
 
 	private transient EventListenerList listenerList = null;
 
@@ -74,10 +73,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 	}
 
 	public final void setAlgorithm(int index, Algorithm a) {
-		while (algorithmList.size() <= index) {
-			algorithmList.add(null);
-		}
-		algorithmList.set(index, a);
+		algorithmList.put(index, a);
 	}
 
 	public void createVariablesAndAlgorithms() {
@@ -141,10 +137,6 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 			return v.getMatrix();
 	}
 
-	public final List<Matrix> calculateAlgorithmForId(int id) throws Exception {
-		return getAlgorithm(id).calculate();
-	}
-
 	public final Matrix getMatrixFromVariable(int variableIndex, int matrixIndex) {
 		Variable v = variableMap.get(variableIndex);
 		if (v == null)
@@ -181,24 +173,8 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		return variableMap;
 	}
 
-	public void addAlgorithm(Algorithm a) {
-		setAlgorithm(getAlgorithmCount(), a);
-	}
-
-	public final int getAlgorithmCount() {
-		return algorithmList.size();
-	}
-
-	public final List<Algorithm> getAlgorithmList() {
+	public final ObservableMap<Algorithm> getAlgorithmList() {
 		return algorithmList;
-	}
-
-	public final int getIndexOfAlgorithm(Algorithm a) {
-		return algorithmList.indexOf(a);
-	}
-
-	public final Algorithm getAlgorithm(int pos) {
-		return algorithmList.get(pos);
 	}
 
 	public String getEdgeLabelForVariable(int index) {

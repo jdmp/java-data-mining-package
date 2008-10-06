@@ -24,7 +24,7 @@ public class AlgorithmListTableModel extends AbstractTableModel {
 	}
 
 	public int getRowCount() {
-		return iAlgorithms.getAlgorithmCount();
+		return iAlgorithms.getAlgorithmList().getSize();
 	}
 
 	public int getColumnCount() {
@@ -58,7 +58,7 @@ public class AlgorithmListTableModel extends AbstractTableModel {
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		switch (columnIndex) {
 		default:
-			Algorithm a = iAlgorithms.getAlgorithm(rowIndex);
+			Algorithm a = iAlgorithms.getAlgorithmList().getElementAt(rowIndex);
 			return a;
 		}
 	}

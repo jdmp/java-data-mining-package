@@ -7,7 +7,7 @@ import org.jdmp.core.variable.HasVariableMap;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 
-public interface Algorithm extends CoreObject, HasVariableMap, HasAlgorithms {
+public interface Algorithm extends CoreObject, HasVariableMap, HasAlgorithmMap {
 
 	public static final int NOTCONNECTED = 0;
 
@@ -20,8 +20,6 @@ public interface Algorithm extends CoreObject, HasVariableMap, HasAlgorithms {
 	public void setVariable(int index, Variable variable);
 
 	public void setAlgorithm(int index, Algorithm a);
-
-	public void createVariablesAndAlgorithms();
 
 	public void clear();
 
@@ -36,8 +34,6 @@ public interface Algorithm extends CoreObject, HasVariableMap, HasAlgorithms {
 	public int getEdgeDirectionForVariable(int index);
 
 	public int getEdgeDirectionForAlgorithm(int index);
-
-	public List<Matrix> calculateAlgorithmForId(int id) throws Exception;
 
 	public Matrix getMatrixFromVariable(int variableIndex, int matrixIndex);
 

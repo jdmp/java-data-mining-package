@@ -27,16 +27,13 @@ public class AlgorithmSerialExecution extends AbstractAlgorithm {
 		return result;
 	}
 
+	@Override
 	public String getEdgeLabelForAlgorithm(int i) {
 		return "Task " + (i + 1);
 	}
 
 	public int getEdgeDirectionForReference(int i) {
 		return OUTGOING;
-	}
-
-	public void addAlgorithm(Algorithm a) {
-		setAlgorithm(getAlgorithmCount(), a);
 	}
 
 }

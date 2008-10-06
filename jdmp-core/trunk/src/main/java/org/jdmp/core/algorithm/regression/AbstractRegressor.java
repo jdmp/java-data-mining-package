@@ -62,6 +62,7 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 
 	public abstract Matrix predict(Matrix input, Matrix sampleWeight) throws Exception;
 
+	@Override
 	public final List<Matrix> calculate(List<Matrix> input) throws Exception {
 		switch (getMode()) {
 		case TRAIN:
@@ -141,7 +142,7 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 			accuracy.setLabel("Accuracy with " + getLabel());
 			((ClassificationDataSet) dataSet).appendAccuracyMatrix(accuracy);
 
-			Matrix errorMatrix = MatrixFactory.linkToValue((double) errorCount);
+			Matrix errorMatrix = MatrixFactory.linkToValue(errorCount);
 			errorMatrix.setLabel("Errors with " + getLabel());
 			((ClassificationDataSet) dataSet).appendErrorCountMatrix(errorMatrix);
 		}
@@ -149,7 +150,7 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 	}
 
 	public Algorithm getOutputErrorAlgorithm() {
-		return getAlgorithm(OUTPUTERRORALGORITHM);
+		return getAlgorithmList().get(OUTPUTERRORALGORITHM);
 	}
 
 	public void setOutputErrorAlgorithm(Algorithm a) {
