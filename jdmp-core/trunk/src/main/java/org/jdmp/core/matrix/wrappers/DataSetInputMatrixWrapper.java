@@ -4,6 +4,7 @@ import org.jdmp.core.algorithm.regression.Regressor;
 import org.jdmp.core.dataset.BasicDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.coordinates.Coordinates;
 import org.ujmp.core.doublematrix.AbstractDenseDoubleMatrix2D;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.interfaces.Wrapper;
@@ -23,13 +24,13 @@ public class DataSetInputMatrixWrapper extends AbstractDenseDoubleMatrix2D imple
 	public long[] getSize() {
 		Sample p = dataSet.getSample(0);
 		if (p == null) {
-			return new long[] { 0, 0 };
+			return Coordinates.ZERO2D;
 		}
 		Matrix input = p.getMatrix(INPUT);
 		if (input != null) {
 			return new long[] { dataSet.getSampleCount(), input.getValueCount() };
 		} else {
-			return new long[] { 0, 0 };
+			return Coordinates.ZERO2D;
 		}
 
 	}

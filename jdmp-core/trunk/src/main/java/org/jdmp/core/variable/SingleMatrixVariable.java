@@ -9,11 +9,12 @@ import javax.swing.event.EventListenerList;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.collections.AbstractMatrixList;
 import org.ujmp.core.collections.MatrixList;
+import org.ujmp.core.coordinates.Coordinates;
 
 public class SingleMatrixVariable extends AbstractVariable {
 	private static final long serialVersionUID = -566983410531753971L;
 
-	private MatrixList matrixList = new SingleMatrixList();
+	private final MatrixList matrixList = new SingleMatrixList();
 
 	public final EventListenerList getListenerList() {
 		return null;
@@ -43,7 +44,7 @@ public class SingleMatrixVariable extends AbstractVariable {
 
 	public long[] getSize() {
 		Matrix m = getMatrix();
-		return m == null ? new long[] { 0, 0 } : m.getSize();
+		return m == null ? Coordinates.ZERO2D : m.getSize();
 	}
 
 	public void setSize(long... size) {

@@ -47,7 +47,7 @@ public class ReplicatedVariable extends AbstractVariable {
 		return listenerList;
 	}
 
-	private long[] size = new long[] { 0, 0 };
+	private long[] size = Coordinates.ZERO2D;
 
 	public ReplicatedVariable() {
 		this("Variable" + runningId++, 100, 0, 0);

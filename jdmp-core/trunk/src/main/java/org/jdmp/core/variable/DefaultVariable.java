@@ -14,7 +14,7 @@ public class DefaultVariable extends AbstractVariable {
 
 	private transient Matrix matrixListMatrix = null;
 
-	private long[] size = new long[] { 0, 0 };
+	private long[] size = Coordinates.ZERO2D;
 
 	private MatrixList matrixList = null;
 
