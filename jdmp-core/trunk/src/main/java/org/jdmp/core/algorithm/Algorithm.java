@@ -1,15 +1,13 @@
 package org.jdmp.core.algorithm;
 
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import org.jdmp.core.CoreObject;
 import org.jdmp.core.variable.HasVariableMap;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 
-public interface Algorithm extends CoreObject, HasVariableMap, HasAlgorithms,
-		Callable<List<Matrix>> {
+public interface Algorithm extends CoreObject, HasVariableMap, HasAlgorithms {
 
 	public static final int NOTCONNECTED = 0;
 
@@ -26,8 +24,6 @@ public interface Algorithm extends CoreObject, HasVariableMap, HasAlgorithms,
 	public void createVariablesAndAlgorithms();
 
 	public void clear();
-
-	public void startCalculate();
 
 	public List<Matrix> calculate() throws Exception;
 

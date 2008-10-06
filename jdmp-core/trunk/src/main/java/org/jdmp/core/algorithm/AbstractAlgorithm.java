@@ -84,17 +84,11 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 	}
 
 	public void clear() {
-	}
-
-	public void startCalculate() {
-		createVariablesAndAlgorithms();
+		algorithmList.clear();
+		variableMap.clear();
 	}
 
 	public final List<Matrix> calculate() throws Exception {
-		return call();
-	}
-
-	public final List<Matrix> call() throws Exception {
 		List<Matrix> input = new LinkedList<Matrix>();
 		int size = variableMap.getSize();
 		for (int v = 0; v < size; v++) {
