@@ -84,7 +84,6 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 	}
 
 	public void clear() {
-
 	}
 
 	public void startCalculate() {
@@ -131,9 +130,6 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 	}
 
 	public abstract List<Matrix> calculate(List<Matrix> matrices) throws Exception;
-
-	public void addVariable(Variable v) {
-	}
 
 	public int getEdgeDirectionForVariable(int index) {
 		return NOTCONNECTED;

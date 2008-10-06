@@ -3,11 +3,9 @@ package org.jdmp.gui.algorithm;
 import javax.swing.table.AbstractTableModel;
 
 import org.jdmp.core.algorithm.Algorithm;
-import org.jdmp.core.algorithm.AlgorithmListEvent;
-import org.jdmp.core.algorithm.AlgorithmListListener;
 import org.jdmp.core.algorithm.HasAlgorithms;
 
-public class AlgorithmListTableModel extends AbstractTableModel implements AlgorithmListListener {
+public class AlgorithmListTableModel extends AbstractTableModel {
 	private static final long serialVersionUID = -3779798282436020436L;
 
 	public static final int ICONCOLUMN = 0;
@@ -65,19 +63,4 @@ public class AlgorithmListTableModel extends AbstractTableModel implements Algor
 		}
 	}
 
-	public void algorithmAdded(AlgorithmListEvent e) {
-		Algorithm a = (Algorithm) e.getData();
-		fireTableDataChanged();
-	}
-
-	public void algorithmRemoved(AlgorithmListEvent e) {
-		Algorithm a = (Algorithm) e.getData();
-		fireTableDataChanged();
-	}
-
-	public void algorithmUpdated(AlgorithmListEvent e) {
-		int row = iAlgorithms.getIndexOfAlgorithm((Algorithm) e.getData());
-		if (row >= 0)
-			fireTableRowsUpdated(row, row);
-	}
 }

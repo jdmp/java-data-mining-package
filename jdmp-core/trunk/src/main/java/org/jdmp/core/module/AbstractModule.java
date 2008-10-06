@@ -7,7 +7,6 @@ import java.util.logging.Level;
 
 import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.algorithm.Algorithm;
-import org.jdmp.core.algorithm.AlgorithmListListener;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DataSetListEvent;
 import org.jdmp.core.dataset.DataSetListListener;
@@ -98,14 +97,6 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		return algorithmList.indexOf(algorithm);
 	}
 
-	public final void addAlgorithmListListener(AlgorithmListListener l) {
-		getListenerList().add(AlgorithmListListener.class, l);
-	}
-
-	public final void removeAlgorithmListListener(AlgorithmListListener l) {
-		getListenerList().add(AlgorithmListListener.class, l);
-	}
-
 	public final void addDataSetListListener(DataSetListListener l) {
 		getListenerList().add(DataSetListListener.class, l);
 	}
@@ -138,6 +129,7 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		return guiObject;
 	}
 
+	@Override
 	public final String toString() {
 		if (getLabel() == null) {
 			return getClass().getSimpleName();
