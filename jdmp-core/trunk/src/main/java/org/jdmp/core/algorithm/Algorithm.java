@@ -29,8 +29,6 @@ public interface Algorithm extends CoreObject, HasVariableMap, HasAlgorithms,
 
 	public void startCalculate();
 
-	public void endCalculate();
-
 	public List<Matrix> calculate() throws Exception;
 
 	public List<Matrix> calculate(Matrix... input) throws Exception;

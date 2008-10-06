@@ -27,7 +27,7 @@ public class LinearRegression extends AbstractClassifier {
 	}
 
 	public Variable getParameterVariable() {
-		return getVariable(PARAMETERS);
+		return getVariableList().get(PARAMETERS);
 	}
 
 	public Matrix getParameterMatrix() {
@@ -44,6 +44,7 @@ public class LinearRegression extends AbstractClassifier {
 		throw (new Exception("pattern-by-pattern learning not supported"));
 	}
 
+	@Override
 	public void train(RegressionDataSet dataSet) throws Exception {
 		Matrix x = dataSet.getInputMatrix().addColumnWithOnes();
 		Matrix y = dataSet.getTargetMatrix();

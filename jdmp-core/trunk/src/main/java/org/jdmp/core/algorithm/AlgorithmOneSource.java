@@ -13,6 +13,7 @@ public abstract class AlgorithmOneSource extends AbstractAlgorithm {
 
 	public static final int TARGET = 1;
 
+	@Override
 	public final String getEdgeLabelForVariable(int index) {
 		switch (index) {
 		case SOURCE:
@@ -24,6 +25,7 @@ public abstract class AlgorithmOneSource extends AbstractAlgorithm {
 		}
 	}
 
+	@Override
 	public final int getEdgeDirectionForVariable(int index) {
 		switch (index) {
 		case SOURCE:
@@ -37,11 +39,11 @@ public abstract class AlgorithmOneSource extends AbstractAlgorithm {
 
 	@Override
 	public void createVariablesAndAlgorithms() {
-		if (getVariable(SOURCE) == null) {
+		if (getVariableList().get(SOURCE) == null) {
 			setVariable(SOURCE, new DefaultVariable("Source Variable"));
 		}
 
-		if (getVariable(TARGET) == null) {
+		if (getVariableList().get(TARGET) == null) {
 			setVariable(TARGET, new DefaultVariable("Target Variable"));
 		}
 	}

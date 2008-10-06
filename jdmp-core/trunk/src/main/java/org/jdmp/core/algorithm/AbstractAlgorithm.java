@@ -1,6 +1,5 @@
 package org.jdmp.core.algorithm;
 
-import java.io.File;
 import java.lang.reflect.Constructor;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,7 +11,6 @@ import javax.swing.event.EventListenerList;
 
 import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.util.ObservableMap;
-import org.jdmp.core.util.AbstractEvent.EventType;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
@@ -33,11 +31,9 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 
 	public static final int BIDIRECTIONAL = 3;
 
-	private final ObservableMap<Variable> variableList = new ObservableMap<Variable>();
+	private final ObservableMap<Variable> variableMap = new ObservableMap<Variable>();
 
 	private final List<Algorithm> algorithmList = new CopyOnWriteArrayList<Algorithm>();
-
-	private transient final Thread algorithmSpeedThread = null;
 
 	private transient EventListenerList listenerList = null;
 
@@ -74,7 +70,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 	}
 
 	public void setVariable(int index, Variable variable) {
-		variableList.put(index, variable);
+		variableMap.put(index, variable);
 	}
 
 	public final void setAlgorithm(int index, Algorithm a) {
@@ -82,34 +78,9 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 			algorithmList.add(null);
 		}
 		algorithmList.set(index, a);
-		fireAlgorithmAdded(new AlgorithmListEvent(this, EventType.ADDED, a));
 	}
 
 	public void createVariablesAndAlgorithms() {
-	}
-
-	public void fireAlgorithmAdded(AlgorithmListEvent e) {
-		for (Object o : getListenerList().getListenerList()) {
-			if (o instanceof AlgorithmListListener) {
-				((AlgorithmListListener) o).algorithmAdded(e);
-			}
-		}
-	}
-
-	public void fireAlgorithmRemoved(AlgorithmListEvent e) {
-		for (Object o : getListenerList().getListenerList()) {
-			if (o instanceof AlgorithmListListener) {
-				((AlgorithmListListener) o).algorithmRemoved(e);
-			}
-		}
-	}
-
-	public void fireAlgorithmUpdated(AlgorithmListEvent e) {
-		for (Object o : getListenerList().getListenerList()) {
-			if (o instanceof AlgorithmListListener) {
-				((AlgorithmListListener) o).algorithmUpdated(e);
-			}
-		}
 	}
 
 	public void clear() {
@@ -120,16 +91,13 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		createVariablesAndAlgorithms();
 	}
 
-	public void endCalculate() {
-	}
-
 	public final List<Matrix> calculate() throws Exception {
 		return call();
 	}
 
 	public final List<Matrix> call() throws Exception {
 		List<Matrix> input = new LinkedList<Matrix>();
-		int size = variableList.getSize();
+		int size = variableMap.getSize();
 		for (int v = 0; v < size; v++) {
 			if (getEdgeDirectionForVariable(v) == INCOMING
 					|| getEdgeDirectionForVariable(v) == BIDIRECTIONAL) {
@@ -176,7 +144,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 	}
 
 	public final Matrix getMatrixFromVariable(int variableIndex) {
-		Variable v = getVariable(variableIndex);
+		Variable v = variableMap.get(variableIndex);
 		if (v == null)
 			return null;
 		else
@@ -188,7 +156,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 	}
 
 	public final Matrix getMatrixFromVariable(int variableIndex, int matrixIndex) {
-		Variable v = getVariable(variableIndex);
+		Variable v = variableMap.get(variableIndex);
 		if (v == null)
 			return null;
 		else
@@ -214,32 +182,17 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 	}
 
 	public final void setMatrixForVariable(int variableIndex, int matrixIndex, Matrix matrix) {
-		Variable v = getVariable(variableIndex);
+		Variable v = variableMap.get(variableIndex);
 		if (v != null)
 			v.setMatrix(matrixIndex, matrix);
 	}
 
-	public final Variable getVariable(int index) {
-		return variableList.get(index);
-	}
-
-	public int getVariableCount() {
-		return variableList.getSize();
-	}
-
 	public final ObservableMap<Variable> getVariableList() {
-		return variableList;
-	}
-
-	public void removeVariable(Variable variable) {
+		return variableMap;
 	}
 
 	public void addAlgorithm(Algorithm a) {
 		setAlgorithm(getAlgorithmCount(), a);
-	}
-
-	public void addAlgorithmListListener(AlgorithmListListener l) {
-		getListenerList().add(AlgorithmListListener.class, l);
 	}
 
 	public final int getAlgorithmCount() {
@@ -258,29 +211,12 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		return algorithmList.get(pos);
 	}
 
-	public void removeAlgorithm(Algorithm algorithm) {
-	}
-
-	public void removeAlgorithmListListener(AlgorithmListListener l) {
-		getListenerList().remove(AlgorithmListListener.class, l);
-	}
-
 	public String getEdgeLabelForVariable(int index) {
 		return "";
 	}
 
 	public String getEdgeLabelForAlgorithm(int index) {
 		return "";
-	}
-
-	public final void importFromFile(File file) {
-		if (file == null) {
-			logger.log(Level.WARNING, "no filename provided");
-			return;
-		}
-
-		if (file.getAbsolutePath().toLowerCase().endsWith(".alg")) {
-		}
 	}
 
 	public final GUIObject getGUIObject() {
