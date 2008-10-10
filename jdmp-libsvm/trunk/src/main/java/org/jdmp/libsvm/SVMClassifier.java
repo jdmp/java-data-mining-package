@@ -75,16 +75,17 @@ public class SVMClassifier extends AbstractClassifier {
 	}
 
 	public void train(RegressionDataSet dataSet) throws MatrixException {
-		int columnCount = (int) dataSet.getSample(0).getMatrix(INPUT).getColumnCount();
+		int columnCount = (int) dataSet.getSampleList().getElementAt(0).getMatrix(INPUT)
+				.getColumnCount();
 
 		prob = new svm_problem();
-		prob.l = dataSet.getSampleCount();
+		prob.l = dataSet.getSampleList().getSize();
 
 		prob.x = new svm_node[prob.l][columnCount];
 		prob.y = new double[prob.l];
 
 		for (int i = 0; i < prob.l; i++) {
-			ClassificationSample p = (ClassificationSample) dataSet.getSample(i);
+			ClassificationSample p = (ClassificationSample) dataSet.getSampleList().getElementAt(i);
 			Matrix input = p.getMatrix(INPUT);
 			prob.y[i] = p.getTargetClass();
 			for (int j = 0; j < columnCount; j++) {
