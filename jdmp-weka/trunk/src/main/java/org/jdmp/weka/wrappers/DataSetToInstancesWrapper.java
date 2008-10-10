@@ -19,7 +19,7 @@ public class DataSetToInstancesWrapper extends Instances {
 	public DataSetToInstancesWrapper(RegressionDataSet dataSet, boolean discrete,
 			boolean includeTarget) throws MatrixException {
 		super(dataSet.getLabel(), new DataSetToAttributeInfoWrapper(dataSet, discrete), dataSet
-				.getSampleCount());
+				.getSampleList().getSize());
 
 		if (includeTarget) {
 			setClassIndex(dataSet.getFeatureCount());
