@@ -4,13 +4,13 @@ import java.util.List;
 
 import org.jdmp.core.CoreObject;
 import org.jdmp.core.algorithm.HasAlgorithmList;
-import org.jdmp.core.dataset.HasDataSets;
+import org.jdmp.core.dataset.HasDataSetList;
 import org.jdmp.core.interpreter.Command;
 import org.jdmp.core.interpreter.Result;
 import org.jdmp.core.variable.HasVariableMap;
 
 public interface Module extends CoreObject, HasModuleList, HasAlgorithmList, HasVariableMap,
-		HasDataSets {
+		HasDataSetList {
 
 	public Result execute(Command... commands);
 

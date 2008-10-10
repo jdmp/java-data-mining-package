@@ -10,8 +10,6 @@ import org.ujmp.core.Matrix;
 public class DefaultSample extends AbstractSample {
 	private static final long serialVersionUID = -3649758882404748630L;
 
-	private transient EventListenerList listenerList = null;
-
 	private final ObservableMap<Variable> variableMap = new ObservableMap<Variable>();
 
 	private String label = "";
@@ -39,10 +37,7 @@ public class DefaultSample extends AbstractSample {
 	}
 
 	public final EventListenerList getListenerList() {
-		if (listenerList == null) {
-			listenerList = new EventListenerList();
-		}
-		return listenerList;
+		return null;
 	}
 
 	public DefaultSample(Matrix m) {
@@ -78,6 +73,11 @@ public class DefaultSample extends AbstractSample {
 			getVariableList().put(variableKey, v);
 		}
 		v.addMatrix(matrix);
+	}
+
+	@Override
+	public void clear() {
+		variableMap.clear();
 	}
 
 }

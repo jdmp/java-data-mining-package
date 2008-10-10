@@ -110,8 +110,8 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 		}
 
 		// go over all samples an count
-		for (int i = 0; i < dataSet.getSampleCount(); i++) {
-			ClassificationSample s = (ClassificationSample) dataSet.getSample(i);
+		for (int i = 0; i < dataSet.getSampleList().getSize(); i++) {
+			ClassificationSample s = (ClassificationSample) dataSet.getSampleList().getElementAt(i);
 			Matrix sampleInput = s.getMatrix(INPUT);
 			Matrix sampleTarget = s.getMatrix(TARGET);
 			double weight = 1.0;

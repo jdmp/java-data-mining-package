@@ -1,7 +1,6 @@
 package org.jdmp.core.sample;
 
 import org.ujmp.core.Matrix;
-import org.ujmp.core.coordinates.Coordinates;
 import org.ujmp.core.exceptions.MatrixException;
 
 public class ClassificationSample extends DefaultSample {

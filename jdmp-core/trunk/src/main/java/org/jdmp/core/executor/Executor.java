@@ -3,7 +3,6 @@ package org.jdmp.core.executor;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.interpreter.AlgorithmCommand;
 import org.jdmp.core.interpreter.Command;
 import org.jdmp.core.interpreter.PrintCommand;
@@ -90,7 +89,7 @@ public class Executor {
 		}
 
 		String algorithmName = command.getAlgorithm();
-		//Algorithm algorithm = module.getAlgorithmList().get(algorithmName);
+		// Algorithm algorithm = module.getAlgorithmList().get(algorithmName);
 
 		return new Result("function not defined");
 	}

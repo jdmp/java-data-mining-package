@@ -11,5 +11,7 @@ import org.ujmp.core.interfaces.HasLabel;
 public interface CoreObject extends Serializable, Cloneable, HasGUIObject, HasLabel, HasDescription {
 
 	public EventListenerList getListenerList();
+	
+	public void clear();
 
 }

@@ -57,7 +57,8 @@ public class NaiveBayesClassifierTest extends AbstractClassifier {
 			logs[labelId] = Math.log(classDists.getProbability(labelId));
 			for (int featureId = 0; featureId < featureCount; featureId++) {
 				int val = (int) input.getAsDouble(0, featureId);
-				//logs[labelId] += Math.log(dists[featureId][labelId].getProbability(val));
+				// logs[labelId] +=
+				// Math.log(dists[featureId][labelId].getProbability(val));
 				logs[labelId] += dists[featureId][labelId].getProbability(val);
 			}
 		}
@@ -99,7 +100,7 @@ public class NaiveBayesClassifierTest extends AbstractClassifier {
 		// labelCount = ((ClassificationDataSet) dataSet).getClassCount();
 		// TODO: hack!!!
 		labelCount = 2;
-		int sampleCount = dataSet.getSampleCount();
+		int sampleCount = dataSet.getSampleList().getSize();
 		int featureCount = dataSet.getFeatureCount();
 		Matrix featureMatrix = dataSet.getInputMatrix();
 		Matrix labelMatrix = dataSet.getTargetMatrix();

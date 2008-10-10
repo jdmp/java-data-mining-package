@@ -3,7 +3,6 @@ package org.jdmp.core.sample;
 import org.jdmp.core.CoreObject;
 import org.jdmp.core.algorithm.regression.Regressor;
 import org.jdmp.core.variable.HasVariableMap;
-import org.ujmp.core.Matrix;
 
 public interface Sample extends CoreObject, HasVariableMap {
 
@@ -20,7 +19,5 @@ public interface Sample extends CoreObject, HasVariableMap {
 	public static final Object DIFFERENCE = Regressor.DIFFERENCE;
 
 	public Sample clone();
-
-	
 
 }

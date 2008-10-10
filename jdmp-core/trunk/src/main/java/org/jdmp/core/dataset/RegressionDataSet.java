@@ -1,7 +1,7 @@
 package org.jdmp.core.dataset;
 
-import org.jdmp.core.matrix.wrappers.DataSetTargetOutputMatrixWrapper;
 import org.jdmp.core.matrix.wrappers.DataSetPredictedMatrixWrapper;
+import org.jdmp.core.matrix.wrappers.DataSetTargetOutputMatrixWrapper;
 import org.jdmp.core.sample.DefaultSample;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.DefaultVariable;
@@ -23,7 +23,7 @@ public class RegressionDataSet extends BasicDataSet {
 
 	public RegressionDataSet(String label) {
 		super(label);
-		setVariable(RMSE, new DefaultVariable("RMSE", 10000));
+		getVariableList().put(RMSE, new DefaultVariable("RMSE", 10000));
 	}
 
 	public RegressionDataSet() {
@@ -39,7 +39,7 @@ public class RegressionDataSet extends BasicDataSet {
 			Matrix out = target.subMatrix(Ret.NEW, i, 0, i, target.getColumnCount() - 1);
 			s.setMatrix(Sample.INPUT, in);
 			s.setMatrix(Sample.TARGET, out);
-			ds.addSample(s);
+			ds.getSampleList().add(s);
 		}
 		return ds;
 	}
@@ -56,7 +56,7 @@ public class RegressionDataSet extends BasicDataSet {
 			s.setMatrix(Sample.INPUT, si);
 			s.setMatrix(Sample.TARGET, so);
 
-			addSample(s);
+			getSampleList().add(s);
 		}
 	}
 
@@ -73,7 +73,7 @@ public class RegressionDataSet extends BasicDataSet {
 	}
 
 	public Variable getRMSEVariable() {
-		return getVariable(RMSE);
+		return getVariableList().get(RMSE);
 	}
 
 	public void appendRMSEMatrix(Matrix m) {
@@ -147,7 +147,7 @@ public class RegressionDataSet extends BasicDataSet {
 	}
 
 	public Matrix getRMSEMatrix() {
-		return getMatrixFromVariable(RMSE);
+		return getRMSEVariable().getMatrix();
 	}
 
 	public int getFeatureCount() {

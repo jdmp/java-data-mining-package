@@ -19,13 +19,8 @@ import org.ujmp.core.io.ExportMatrix;
 public class BasicDataSet extends AbstractDataSet {
 	private static final long serialVersionUID = -2887879051530049677L;
 
-	private transient EventListenerList listenerList = null;
-
 	public final EventListenerList getListenerList() {
-		if (listenerList == null) {
-			listenerList = new EventListenerList();
-		}
-		return listenerList;
+		return null;
 	}
 
 	private String label = "";
@@ -56,7 +51,7 @@ public class BasicDataSet extends AbstractDataSet {
 		this(v.getLabel());
 		for (Matrix m : v.getMatrixList()) {
 			DefaultSample s = new DefaultSample(m);
-			addSample(s);
+			getSampleList().add(s);
 		}
 	}
 
@@ -66,11 +61,6 @@ public class BasicDataSet extends AbstractDataSet {
 
 	public BasicDataSet() {
 		super();
-	}
-
-	@Override
-	public DefaultSample getSample(int pos) {
-		return (DefaultSample) super.getSample(pos);
 	}
 
 	public final void standardize(int dimension) throws MatrixException {

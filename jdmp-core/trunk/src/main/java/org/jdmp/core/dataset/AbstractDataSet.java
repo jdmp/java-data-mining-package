@@ -2,7 +2,6 @@ package org.jdmp.core.dataset;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -16,7 +15,6 @@ import org.jdmp.core.util.ObservableList;
 import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
-import org.jdmp.core.variable.VariableListener;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.interfaces.GUIObject;
 
@@ -36,7 +34,7 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		this();
 		setLabel(label);
 	}
-	
+
 	public Matrix getMatrix(Object variableKey) {
 		Variable v = getVariableList().get(variableKey);
 		if (v != null) {
@@ -45,7 +43,7 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 			return null;
 		}
 	}
-	
+
 	public void setMatrix(Object variableKey, Matrix matrix) {
 		Variable v = getVariableList().get(variableKey);
 		if (v == null) {
@@ -61,91 +59,6 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 
 	public final ObservableMap<Variable> getVariableList() {
 		return variableList;
-	}
-
-	
-
-	public int getSampleCount() {
-		return sampleList.getSize();
-	}
-
-	public Sample getSample(int pos) {
-		if (pos >= 0 && pos < sampleList.getSize())
-			return sampleList.getElementAt(pos);
-		else
-			return null;
-	}
-
-	public void setVariable(int index, Variable v) {
-		variableList.put(index, v);
-	}
-
-	public void addSample(Sample sample) {
-		sampleList.add(sample);
-	}
-
-	public void removeSample(Sample p) {
-		sampleList.remove(p);
-	}
-
-	public int getVariableCount() {
-		return variableList.getSize();
-	}
-
-	public final Variable getVariable(int index) {
-		return variableList.get(index);
-	}
-
-	public final int getIndexOfVariable(Variable v) {
-		return variableList.indexOf(v);
-	}
-
-	public void addVariableListener(VariableListener l) {
-		getListenerList().add(VariableListener.class, l);
-	}
-
-	public void removeVariableListener(VariableListener l) {
-		getListenerList().add(VariableListener.class, l);
-	}
-
-	public final Matrix getMatrixFromVariable(int variableIndex) {
-		Variable v = getVariable(variableIndex);
-		if (v == null)
-			return null;
-		else
-			return v.getMatrix();
-	}
-
-	public final Matrix getMatrixFromVariable(int variableIndex, int matrixIndex) {
-		Variable v = getVariable(variableIndex);
-		if (v == null)
-			return null;
-		else
-			return v.getMatrix(matrixIndex);
-	}
-
-	public final void addMatrixForVariable(int variableIndex, Matrix matrix) {
-		Variable v = getVariable(variableIndex);
-		if (v != null)
-			v.addMatrix(matrix);
-	}
-
-	public final void setMatrixForVariable(int variableIndex, int matrixIndex, Matrix matrix) {
-		Variable v = getVariable(variableIndex);
-		if (v != null)
-			v.setMatrix(matrixIndex, matrix);
-	}
-
-	public int getIndexOfSample(Sample p) {
-		return sampleList.indexOf(p);
-	}
-
-	public void addDataSetListener(DataSetListener l) {
-		getListenerList().add(DataSetListener.class, l);
-	}
-
-	public void removeDataSetListener(DataSetListener l) {
-		getListenerList().remove(DataSetListener.class, l);
 	}
 
 	public void clear() {
@@ -174,8 +87,8 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 	public List<DataSet> splitByCount(boolean shuffle, int... count) {
 		List<DataSet> dataSets = new ArrayList<DataSet>();
 
-		List<Integer> ids = new ArrayList<Integer>(getSampleCount());
-		for (int i = getSampleCount() - 1; i != -1; i--) {
+		List<Integer> ids = new ArrayList<Integer>(getSampleList().getSize());
+		for (int i = getSampleList().getSize() - 1; i != -1; i--) {
 			ids.add(i);
 		}
 
@@ -186,13 +99,13 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		for (int i = 0; i < count.length; i++) {
 			DataSet ds = new ClassificationDataSet("DataSet" + i);
 			for (int c = 0; c < count[i]; c++) {
-				ds.getSampleList().add(getSample(ids.remove(0)).clone());
+				ds.getSampleList().add(getSampleList().getElementAt(ids.remove(0)).clone());
 			}
 			dataSets.add(ds);
 		}
 		DataSet ds = new ClassificationDataSet("DataSet" + count.length);
 		while (ids.size() != 0) {
-			ds.getSampleList().add(getSample(ids.remove(0)).clone());
+			ds.getSampleList().add(getSampleList().getElementAt(ids.remove(0)).clone());
 		}
 		dataSets.add(ds);
 
@@ -219,12 +132,12 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		}
 
 		DataSet testSet = new ClassificationDataSet("TestSet" + randomSeed + "-" + idOfCVSet);
-		testSet.addAllSamples(tempSampleLists.get(idOfCVSet));
+		testSet.getSampleList().addAll(tempSampleLists.get(idOfCVSet));
 		DataSet trainingSet = new ClassificationDataSet("TrainingSet" + randomSeed + "-"
 				+ idOfCVSet);
 		for (int i = 0; i < numberOfCVSets; i++) {
 			if (i != idOfCVSet) {
-				trainingSet.addAllSamples(tempSampleLists.get(i));
+				trainingSet.getSampleList().addAll(tempSampleLists.get(i));
 			}
 		}
 
@@ -234,21 +147,13 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		return returnDataSets;
 	}
 
-	public void addAllSamples(Collection<Sample> samples) {
-		sampleList.addAll(samples);
-	}
-
 	public List<DataSet> splitByPercent(boolean shuffle, double... percent) {
 		int[] counts = new int[percent.length];
-		int sampleCount = getSampleCount();
+		int sampleCount = getSampleList().getSize();
 		for (int i = 0; i < percent.length; i++) {
 			counts[i] = (int) Math.round(percent[i] * sampleCount);
 		}
 		return splitByCount(shuffle, counts);
-	}
-
-	public void removeAllSamples() {
-		sampleList.clear();
 	}
 
 	public final GUIObject getGUIObject() {

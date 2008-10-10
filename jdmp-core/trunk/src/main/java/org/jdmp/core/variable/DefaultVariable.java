@@ -18,8 +18,6 @@ public class DefaultVariable extends AbstractVariable {
 
 	private MatrixList matrixList = null;
 
-	private transient EventListenerList listenerList = null;
-
 	private String label = "";
 
 	private String description = "";
@@ -41,10 +39,7 @@ public class DefaultVariable extends AbstractVariable {
 	}
 
 	public final EventListenerList getListenerList() {
-		if (listenerList == null) {
-			listenerList = new EventListenerList();
-		}
-		return listenerList;
+		return null;
 	}
 
 	public DefaultVariable() {

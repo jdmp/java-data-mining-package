@@ -53,7 +53,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 			Matrix out = target.subMatrix(Ret.NEW, i, 0, i, target.getColumnCount() - 1);
 			s.setMatrix(Sample.INPUT, in);
 			s.setMatrix(Sample.TARGET, out);
-			ds.addSample(s);
+			ds.getSampleList().add(s);
 		}
 		return ds;
 	}
@@ -73,7 +73,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 			Matrix out = target.selectRows(Ret.LINK, i);
 			s.setMatrix(Sample.INPUT, in);
 			s.setMatrix(Sample.TARGET, out);
-			ds.addSample(s);
+			ds.getSampleList().add(s);
 		}
 		return ds;
 	}
@@ -103,7 +103,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 			if (d == null) {
 				d = 0.0;
 			}
-			m.setAsDouble(d / getSampleCount(), i, 0);
+			m.setAsDouble(d / getSampleList().getSize(), i, 0);
 		}
 		return m;
 	}
@@ -116,31 +116,25 @@ public class ClassificationDataSet extends RegressionDataSet {
 		return -1;
 	}
 
-	@Override
-	public ClassificationSample getSample(int pos) {
-		return (ClassificationSample) super.getSample(pos);
-	}
-
 	public ClassificationDataSet() {
 		super();
-		setVariable(ACCURACY, new DefaultVariable("Accuracy", 10000));
-		setVariable(CONFUSION, new DefaultVariable("Confusion", 1000));
-		setVariable(ERRORCOUNT, new DefaultVariable("Error Count", 10000));
+		getVariableList().put(ACCURACY, new DefaultVariable("Accuracy", 10000));
+		getVariableList().put(CONFUSION, new DefaultVariable("Confusion", 1000));
+		getVariableList().put(ERRORCOUNT, new DefaultVariable("Error Count", 10000));
 	}
 
 	@Override
 	public ClassificationDataSet clone() {
 		ClassificationDataSet ds = new ClassificationDataSet();
 		for (Sample s : getSampleList()) {
-			ds.addSample(s.clone());
+			ds.getSampleList().add(s.clone());
 		}
 		return ds;
 	}
 
 	public Matrix getTargetClassMatrix() {
 		if (targetClassMatrix == null) {
-			targetClassMatrix = new CalculationMatrix(new IndexOfMax(COLUMN,
-					getTargetMatrix()));
+			targetClassMatrix = new CalculationMatrix(new IndexOfMax(COLUMN, getTargetMatrix()));
 			targetClassMatrix.setLabel("Target Class");
 		}
 		return targetClassMatrix;
@@ -183,12 +177,12 @@ public class ClassificationDataSet extends RegressionDataSet {
 
 			s.setMatrix(Sample.INPUT, input);
 			s.setMatrix(Sample.TARGET, target);
-			addSample(s);
+			getSampleList().add(s);
 		}
 	}
 
 	public int getClassCount() {
-		return (int) getSample(0).getMatrix(Sample.TARGET).getColumnCount();
+		return (int) getSampleList().getElementAt(0).getMatrix(Sample.TARGET).getColumnCount();
 	}
 
 	public final void importFromCSV(File file, String separator) throws MatrixException,
@@ -224,11 +218,11 @@ public class ClassificationDataSet extends RegressionDataSet {
 	}
 
 	public Variable getConfusionVariable() {
-		return getVariable(CONFUSION);
+		return getVariableList().get(CONFUSION);
 	}
 
 	public Variable getErrorCountVariable() {
-		return getVariable(ERRORCOUNT);
+		return getVariableList().get(ERRORCOUNT);
 	}
 
 	public int getErrorCount() throws MatrixException {
@@ -236,7 +230,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 	}
 
 	public Variable getAccuracyVariable() {
-		return getVariable(ACCURACY);
+		return getVariableList().get(ACCURACY);
 	}
 
 	public void appendConfusionMatrix(Matrix m) {
@@ -270,7 +264,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 			ClassificationDataSet ds = new ClassificationDataSet("Class " + i);
 			for (Sample s : getSampleList()) {
 				if (((ClassificationSample) s).getTargetClass() == i) {
-					ds.addSample(s.clone());
+					ds.getSampleList().add(s.clone());
 				}
 			}
 			returnDataSets.add(ds);
@@ -319,7 +313,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 
 				List<Sample> to = cvSets.get(toPointer);
 
-				while (to.size() < (double) getSampleCount() / numberOfCVSets
+				while (to.size() < (double) getSampleList().getSize() / numberOfCVSets
 						&& fromPointer < sortedSamples.size()) {
 					List<Sample> from = sortedSamples.get(fromPointer);
 
@@ -343,10 +337,10 @@ public class ClassificationDataSet extends RegressionDataSet {
 		ClassificationDataSet test = new ClassificationDataSet("TestSet " + idOfCVSet + "/"
 				+ numberOfCVSets + "(" + randomSeed + ")");
 
-		test.addAllSamples(cvSets.remove(idOfCVSet));
+		test.getSampleList().addAll(cvSets.remove(idOfCVSet));
 
 		for (List<Sample> list : cvSets) {
-			train.addAllSamples(list);
+			train.getSampleList().addAll(list);
 		}
 
 		returnDataSets.add(train);
@@ -377,7 +371,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 		ObservableList<Sample> sampleList = getSampleList();
 		for (int i = 0; i < numberOfSamples; i++) {
 			int rand = MathUtil.nextInteger(0, sampleList.getSize() - 1);
-			ds.addSample(sampleList.getElementAt(rand).clone());
+			ds.getSampleList().add(sampleList.getElementAt(rand).clone());
 		}
 		return ds;
 	}

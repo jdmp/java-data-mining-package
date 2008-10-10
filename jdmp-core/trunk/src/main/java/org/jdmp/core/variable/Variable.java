@@ -34,8 +34,6 @@ public interface Variable extends CoreObject, HasLabel, HasDescription, HasMatri
 
 	public int getIndexOfMatrix(Matrix m);
 
-	public void clear();
-
 	public long getRowCount();
 
 	public long getColumnCount();

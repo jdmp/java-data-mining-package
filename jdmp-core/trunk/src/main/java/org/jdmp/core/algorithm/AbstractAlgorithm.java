@@ -34,8 +34,6 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 
 	private final ObservableMap<Algorithm> algorithmList = new ObservableMap<Algorithm>();
 
-	private transient EventListenerList listenerList = null;
-
 	private String label = "";
 
 	private String description = "";
@@ -57,10 +55,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 	}
 
 	public final EventListenerList getListenerList() {
-		if (listenerList == null) {
-			listenerList = new EventListenerList();
-		}
-		return listenerList;
+		return null;
 	}
 
 	public AbstractAlgorithm(String label) {
