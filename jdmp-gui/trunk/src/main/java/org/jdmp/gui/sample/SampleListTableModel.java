@@ -1,11 +1,13 @@
 package org.jdmp.gui.sample;
 
+import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
 import javax.swing.table.AbstractTableModel;
 
 import org.jdmp.core.sample.HasSamples;
 import org.jdmp.core.sample.Sample;
 
-public class SampleListTableModel extends AbstractTableModel {
+public class SampleListTableModel extends AbstractTableModel implements ListDataListener {
 	private static final long serialVersionUID = -5468178300746964431L;
 
 	public static final int ICONCOLUMN = 0;
@@ -28,6 +30,7 @@ public class SampleListTableModel extends AbstractTableModel {
 
 	public SampleListTableModel(HasSamples iSamples) {
 		this.iSamples = iSamples;
+		iSamples.getSampleList().addListDataListener(this);
 	}
 
 	public int getRowCount() {
@@ -62,18 +65,26 @@ public class SampleListTableModel extends AbstractTableModel {
 	}
 
 	public Class<?> getColumnClass(int columnIndex) {
-		switch (columnIndex) {
-		default:
-			return Sample.class;
-		}
+		return Sample.class;
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		Sample p = iSamples.getSampleList().getElementAt(rowIndex);
-		switch (columnIndex) {
-		default:
-			return p;
-		}
+		return iSamples.getSampleList().getElementAt(rowIndex);
+	}
+
+	@Override
+	public void contentsChanged(ListDataEvent e) {
+		fireTableRowsUpdated(e.getIndex0(), e.getIndex1());
+	}
+
+	@Override
+	public void intervalAdded(ListDataEvent e) {
+		fireTableRowsInserted(e.getIndex0(), e.getIndex1());
+	}
+
+	@Override
+	public void intervalRemoved(ListDataEvent e) {
+		fireTableRowsDeleted(e.getIndex0(), e.getIndex1());
 	}
 
 }

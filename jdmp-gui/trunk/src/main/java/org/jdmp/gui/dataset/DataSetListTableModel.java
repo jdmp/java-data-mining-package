@@ -1,16 +1,13 @@
 package org.jdmp.gui.dataset;
 
+import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
 import javax.swing.table.AbstractTableModel;
 
 import org.jdmp.core.dataset.DataSet;
-import org.jdmp.core.dataset.DataSetEvent;
-import org.jdmp.core.dataset.DataSetListEvent;
-import org.jdmp.core.dataset.DataSetListListener;
-import org.jdmp.core.dataset.DataSetListener;
 import org.jdmp.core.dataset.HasDataSets;
 
-public class DataSetListTableModel extends AbstractTableModel implements DataSetListListener,
-		DataSetListener {
+public class DataSetListTableModel extends AbstractTableModel implements ListDataListener {
 	private static final long serialVersionUID = 8897049622154020275L;
 
 	public static final int ICONCOLUMN = 0;
@@ -25,14 +22,11 @@ public class DataSetListTableModel extends AbstractTableModel implements DataSet
 
 	public DataSetListTableModel(HasDataSets iDataSets) {
 		this.iDataSets = iDataSets;
-		iDataSets.addDataSetListListener(this);
-		for (DataSet ds : iDataSets.getDataSetList()) {
-			ds.addDataSetListener(this);
-		}
+		iDataSets.getDataSetList().addListDataListener(this);
 	}
 
 	public int getRowCount() {
-		return iDataSets.getDataSetCount();
+		return iDataSets.getDataSetList().getSize();
 	}
 
 	public int getColumnCount() {
@@ -59,31 +53,22 @@ public class DataSetListTableModel extends AbstractTableModel implements DataSet
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		DataSet d = iDataSets.getDataSet(rowIndex);
-		return d;
+		return iDataSets.getDataSetList().getElementAt(rowIndex);
 	}
 
-	public void dataSetShuffled(DataSetEvent e) {
-		int row = iDataSets.getIndexOfDataSet((DataSet) e.getSource());
-		if (row >= 0)
-			fireTableRowsUpdated(row, row);
+	@Override
+	public void contentsChanged(ListDataEvent e) {
+		fireTableRowsUpdated(e.getIndex0(), e.getIndex1());
 	}
 
-	public void dataSetAdded(DataSetListEvent e) {
-		DataSet ds = (DataSet) e.getData();
-		ds.addDataSetListener(this);
-		fireTableDataChanged();
+	@Override
+	public void intervalAdded(ListDataEvent e) {
+		fireTableRowsInserted(e.getIndex0(), e.getIndex1());
 	}
 
-	public void dataSetUpdated(DataSetListEvent e) {
-		int row = iDataSets.getIndexOfDataSet((DataSet) e.getData());
-		if (row >= 0)
-			fireTableDataChanged();
+	@Override
+	public void intervalRemoved(ListDataEvent e) {
+		fireTableRowsDeleted(e.getIndex0(), e.getIndex1());
 	}
 
-	public void dataSetRemoved(DataSetListEvent e) {
-		DataSet ds = (DataSet) e.getData();
-		ds.removeDataSetListener(this);
-		fireTableDataChanged();
-	}
 }

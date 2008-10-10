@@ -29,7 +29,7 @@ public class RemoveDataSetAction extends DataSetListAction {
 
 	public Object call() {
 		if (ds != null) {
-			getIDataSets().removeDataSet(ds);
+			// ()getIDataSets().removeDataSet(ds);
 			return ds;
 		}
 		return null;

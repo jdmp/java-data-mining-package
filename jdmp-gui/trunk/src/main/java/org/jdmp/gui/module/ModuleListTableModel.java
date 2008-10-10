@@ -1,11 +1,13 @@
 package org.jdmp.gui.module;
 
+import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
 import javax.swing.table.AbstractTableModel;
 
 import org.jdmp.core.module.HasModuleList;
 import org.jdmp.core.module.Module;
 
-public class ModuleListTableModel extends AbstractTableModel {
+public class ModuleListTableModel extends AbstractTableModel implements ListDataListener {
 	private static final long serialVersionUID = -1372599464095754625L;
 
 	public static final int ICONCOLUMN = 0;
@@ -24,6 +26,7 @@ public class ModuleListTableModel extends AbstractTableModel {
 
 	public ModuleListTableModel(HasModuleList iModules) {
 		this.iModules = iModules;
+		iModules.getModuleList().addListDataListener(this);
 	}
 
 	public int getRowCount() {
@@ -59,8 +62,22 @@ public class ModuleListTableModel extends AbstractTableModel {
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		Module i = iModules.getModuleList().getElementAt(rowIndex);
-		return i;
+		return iModules.getModuleList().getElementAt(rowIndex);
+	}
+
+	@Override
+	public void contentsChanged(ListDataEvent e) {
+		fireTableRowsUpdated(e.getIndex0(), e.getIndex1());
+	}
+
+	@Override
+	public void intervalAdded(ListDataEvent e) {
+		fireTableRowsInserted(e.getIndex0(), e.getIndex1());
+	}
+
+	@Override
+	public void intervalRemoved(ListDataEvent e) {
+		fireTableRowsDeleted(e.getIndex0(), e.getIndex1());
 	}
 
 }

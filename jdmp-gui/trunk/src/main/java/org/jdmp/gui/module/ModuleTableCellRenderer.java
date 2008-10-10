@@ -38,7 +38,7 @@ public class ModuleTableCellRenderer implements TableCellRenderer {
 				o = module.getLabel();
 				break;
 			case ModuleListTableModel.DATASETCOUNTCOLUMN:
-				o = module.getDataSetCount();
+				o = module.getDataSetList().getSize();
 				break;
 			case ModuleListTableModel.VARIABLECOUNTCOLUMN:
 				o = module.getVariableList().getSize();

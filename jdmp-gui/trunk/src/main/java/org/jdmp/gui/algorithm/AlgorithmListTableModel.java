@@ -1,11 +1,13 @@
 package org.jdmp.gui.algorithm;
 
+import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
 import javax.swing.table.AbstractTableModel;
 
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.algorithm.HasAlgorithms;
 
-public class AlgorithmListTableModel extends AbstractTableModel {
+public class AlgorithmListTableModel extends AbstractTableModel implements ListDataListener {
 	private static final long serialVersionUID = -3779798282436020436L;
 
 	public static final int ICONCOLUMN = 0;
@@ -20,7 +22,7 @@ public class AlgorithmListTableModel extends AbstractTableModel {
 
 	public AlgorithmListTableModel(HasAlgorithms iAlgorithms) {
 		this.iAlgorithms = iAlgorithms;
-		// iAlgorithms.addAlgorithmListListener(this);
+		iAlgorithms.getAlgorithmList().addListDataListener(this);
 	}
 
 	public int getRowCount() {
@@ -49,18 +51,26 @@ public class AlgorithmListTableModel extends AbstractTableModel {
 
 	@Override
 	public Class<?> getColumnClass(int columnIndex) {
-		switch (columnIndex) {
-		default:
-			return Algorithm.class;
-		}
+		return Algorithm.class;
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		switch (columnIndex) {
-		default:
-			Algorithm a = iAlgorithms.getAlgorithmList().getElementAt(rowIndex);
-			return a;
-		}
+		return iAlgorithms.getAlgorithmList().getElementAt(rowIndex);
+	}
+
+	@Override
+	public void contentsChanged(ListDataEvent e) {
+		fireTableRowsUpdated(e.getIndex0(), e.getIndex1());
+	}
+
+	@Override
+	public void intervalAdded(ListDataEvent e) {
+		fireTableRowsInserted(e.getIndex0(), e.getIndex1());
+	}
+
+	@Override
+	public void intervalRemoved(ListDataEvent e) {
+		fireTableRowsDeleted(e.getIndex0(), e.getIndex1());
 	}
 
 }

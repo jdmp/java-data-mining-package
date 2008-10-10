@@ -8,6 +8,7 @@ import javax.swing.KeyStroke;
 
 import org.jdmp.core.dataset.ClassificationDataSet;
 import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.HasDataSetList;
 import org.jdmp.core.dataset.HasDataSets;
 
 public class AddDataSetAction extends DataSetListAction {
@@ -32,7 +33,7 @@ public class AddDataSetAction extends DataSetListAction {
 		if (ds == null) {
 			ds = new ClassificationDataSet();
 		}
-		getIDataSets().addDataSet(ds);
+		((HasDataSetList) getIDataSets()).getDataSetList().add(ds);
 		return ds;
 	}
 
