@@ -1,7 +1,7 @@
 package org.jdmp.core.algorithm.basic;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.jdmp.core.algorithm.AlgorithmOneSource;
 import org.ujmp.core.Matrix;
@@ -23,17 +23,13 @@ public class AlgorithmSum extends AlgorithmOneSource {
 		this.dimension = dimension;
 	}
 
-	public List<Matrix> calculate(List<Matrix> input) throws MatrixException {
-		List<Matrix> result = new ArrayList<Matrix>();
-
-		if (input == null || input.size() < 1) {
-			return result;
-		}
+	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
+		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
 
 		Matrix source = input.get(SOURCE);
 		Matrix sumMatrix = source.sum(Ret.NEW, dimension, true);
 
-		result.add(sumMatrix);
+		result.put(TARGET, sumMatrix);
 
 		return result;
 	}

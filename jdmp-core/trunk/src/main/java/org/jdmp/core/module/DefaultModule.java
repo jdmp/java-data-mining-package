@@ -2,8 +2,6 @@ package org.jdmp.core.module;
 
 import java.util.List;
 
-import javax.swing.event.EventListenerList;
-
 import org.jdmp.core.executor.Executor;
 import org.jdmp.core.interpreter.Command;
 import org.jdmp.core.interpreter.Interpreter;
@@ -36,10 +34,6 @@ public class DefaultModule extends AbstractModule {
 
 	public final void setLabel(String label) {
 		this.label = label;
-	}
-
-	public final EventListenerList getListenerList() {
-		return null;
 	}
 
 	@Override

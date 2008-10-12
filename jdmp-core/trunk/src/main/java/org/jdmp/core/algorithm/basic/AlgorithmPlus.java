@@ -1,7 +1,7 @@
 package org.jdmp.core.algorithm.basic;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.jdmp.core.algorithm.AlgorithmTwoSources;
 import org.ujmp.core.Matrix;
@@ -15,16 +15,12 @@ public class AlgorithmPlus extends AlgorithmTwoSources {
 		setDescription("target = source1 + source2");
 	}
 
-	public List<Matrix> calculate(List<Matrix> input) throws MatrixException {
-		List<Matrix> result = new ArrayList<Matrix>();
-
-		if (input == null || input.size() < 2) {
-			return result;
-		}
+	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
+		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
 
 		Matrix source1 = input.get(SOURCE1);
 		Matrix source2 = input.get(SOURCE2);
-		result.add(source1.plus(source2));
+		result.put(TARGET, source1.plus(source2));
 
 		return result;
 	}

@@ -1,7 +1,7 @@
 package org.jdmp.core.algorithm.basic;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.algorithm.Algorithm;
@@ -15,21 +15,15 @@ public class AlgorithmSerialExecution extends AbstractAlgorithm {
 		setDescription("calls other Algorithms in defined order");
 	}
 
-	@Override
-	public List<Matrix> calculate(List<Matrix> matrices) throws Exception {
-		List<Matrix> result = new ArrayList<Matrix>();
+	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws Exception {
+		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
 
 		for (Algorithm a : getAlgorithmList()) {
-			List<Matrix> r = a.calculate();
-			result.addAll(r);
+			Map<Object, Matrix> r = a.calculate();
+			result.putAll(r);
 		}
 
 		return result;
-	}
-
-	@Override
-	public String getEdgeLabelForAlgorithm(int i) {
-		return "Task " + (i + 1);
 	}
 
 	public int getEdgeDirectionForReference(int i) {

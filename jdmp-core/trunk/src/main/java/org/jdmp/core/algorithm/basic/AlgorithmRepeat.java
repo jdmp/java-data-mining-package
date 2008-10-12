@@ -1,6 +1,7 @@
 package org.jdmp.core.algorithm.basic;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.algorithm.Algorithm;
@@ -18,24 +19,14 @@ public class AlgorithmRepeat extends AbstractAlgorithm {
 		setDescription("calls another Algorithms several times");
 	}
 
-	@Override
-	public List<Matrix> calculate(List<Matrix> matrixList) throws Exception {
-		List<Matrix> result = null;
+	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws Exception {
+		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
+
 		for (int i = 0; i < repeatCount; i++) {
-			result = getAlgorithmList().get(REPEATEDALGORITHM).calculate(matrixList);
+			result = getAlgorithmList().get(REPEATEDALGORITHM).calculate(input);
 		}
 		return result;
 
-	}
-
-	@Override
-	public String getEdgeLabelForAlgorithm(int i) {
-		return "Repeat " + repeatCount + " times";
-	}
-
-	@Override
-	public int getEdgeDirectionForAlgorithm(int i) {
-		return Algorithm.OUTGOING;
 	}
 
 	public int getRepeatCount() {

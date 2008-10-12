@@ -83,15 +83,15 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 	}
 
 	public final void removeVariableListener(VariableListener l) {
-		getListenerList().add(VariableListener.class, l);
+		//getListenerList().add(VariableListener.class, l);
 	}
 
 	public final void fireVariableEvent(VariableEvent e) {
-		for (Object o : getListenerList().getListenerList()) {
-			if (o instanceof VariableListener) {
-				((VariableListener) o).valueChanged(e);
-			}
-		}
+//		for (Object o : getListenerList().getListenerList()) {
+//			if (o instanceof VariableListener) {
+//				((VariableListener) o).valueChanged(e);
+//			}
+//		}
 	}
 
 	public final void setMatrix(int index, Matrix m) {
@@ -105,7 +105,7 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 	}
 
 	public final void addVariableListener(VariableListener l) {
-		getListenerList().add(VariableListener.class, l);
+		//getListenerList().add(VariableListener.class, l);
 	}
 
 	public final int getIndexOfMatrix(Matrix m) {

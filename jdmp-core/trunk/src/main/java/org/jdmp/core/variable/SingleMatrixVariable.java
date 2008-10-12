@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import javax.swing.ListSelectionModel;
-import javax.swing.event.EventListenerList;
 
 import org.ujmp.core.Matrix;
 import org.ujmp.core.collections.AbstractMatrixList;
@@ -15,10 +14,6 @@ public class SingleMatrixVariable extends AbstractVariable {
 	private static final long serialVersionUID = -566983410531753971L;
 
 	private final MatrixList matrixList = new SingleMatrixList();
-
-	public final EventListenerList getListenerList() {
-		return null;
-	}
 
 	public final String getDescription() {
 		return null;

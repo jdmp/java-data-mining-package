@@ -1,7 +1,5 @@
 package org.jdmp.core.sample;
 
-import javax.swing.event.EventListenerList;
-
 import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
@@ -34,10 +32,6 @@ public class DefaultSample extends AbstractSample {
 
 	public final void setLabel(String label) {
 		this.label = label;
-	}
-
-	public final EventListenerList getListenerList() {
-		return null;
 	}
 
 	public DefaultSample(Matrix m) {

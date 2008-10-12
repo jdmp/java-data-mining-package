@@ -1,10 +1,8 @@
 package org.jdmp.core.algorithm.regression;
 
-import java.util.List;
-
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.algorithm.Algorithm;
-import org.jdmp.core.algorithm.basic.AlgorithmDifference;
+import org.jdmp.core.algorithm.basic.Minus;
 import org.jdmp.core.dataset.ClassificationDataSet;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.sample.ClassificationSample;
@@ -26,7 +24,7 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 
 	public AbstractRegressor(String label) {
 		super(label);
-		setAlgorithm(OUTPUTERRORALGORITHM, new AlgorithmDifference());
+		setAlgorithm(OUTPUTERRORALGORITHM, new Minus());
 	}
 
 	public AbstractRegressor(String label, boolean evaluate) {
@@ -45,10 +43,10 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 		Matrix predicted = predict(sample.getMatrix(INPUT), sample.getMatrix(WEIGHT));
 		sample.setMatrix(PREDICTED, predicted);
 		if (evaluate) {
-			List<Matrix> error = getOutputErrorAlgorithm().calculate(predicted,
-					sample.getMatrix(TARGET));
-			sample.setMatrix(DIFFERENCE, error.get(0));
-			sample.setMatrix(RMSE, MatrixFactory.linkToValue(error.get(0).getRMS()));
+			Matrix error = getOutputErrorAlgorithm().calculate(predicted, sample.getMatrix(TARGET))
+					.values().iterator().next();
+			sample.setMatrix(DIFFERENCE, error);
+			sample.setMatrix(RMSE, MatrixFactory.linkToValue(error.getRMS()));
 		}
 	}
 
@@ -61,19 +59,6 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 	}
 
 	public abstract Matrix predict(Matrix input, Matrix sampleWeight) throws Exception;
-
-	@Override
-	public final List<Matrix> calculate(List<Matrix> input) throws Exception {
-		switch (getMode()) {
-		case TRAIN:
-			train(input.get(0), input.get(1), input.get(2));
-			return null;
-		case PREDICT:
-			predict(input.get(0), input.get(1));
-			return null;
-		}
-		return null;
-	}
 
 	public final void train(Sample sample) throws Exception {
 		Matrix input = sample.getMatrix(INPUT);

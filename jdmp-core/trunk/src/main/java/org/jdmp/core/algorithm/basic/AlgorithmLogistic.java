@@ -1,7 +1,7 @@
 package org.jdmp.core.algorithm.basic;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.jdmp.core.algorithm.AlgorithmOneSource;
 import org.ujmp.core.Matrix;
@@ -16,15 +16,11 @@ public class AlgorithmLogistic extends AlgorithmOneSource {
 		setDescription("target = 1/(exp(-x)+1)");
 	}
 
-	public List<Matrix> calculate(List<Matrix> input) throws MatrixException {
-		List<Matrix> result = new ArrayList<Matrix>();
-
-		if (input == null || input.size() < 1) {
-			return result;
-		}
+	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
+		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
 
 		Matrix in = input.get(SOURCE);
-		result.add(in.calcNew(new LogisticFunction(in)));
+		result.put(TARGET, in.calcNew(new LogisticFunction(in)));
 		return result;
 	}
 

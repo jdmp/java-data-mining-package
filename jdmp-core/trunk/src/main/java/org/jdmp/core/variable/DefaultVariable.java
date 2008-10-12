@@ -38,10 +38,6 @@ public class DefaultVariable extends AbstractVariable {
 		this.label = label;
 	}
 
-	public final EventListenerList getListenerList() {
-		return null;
-	}
-
 	public DefaultVariable() {
 		super();
 		matrixList = new DefaultMatrixList();

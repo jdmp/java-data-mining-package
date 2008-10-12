@@ -1,12 +1,13 @@
 package org.jdmp.core.algorithm;
 
 import java.lang.reflect.Constructor;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javax.swing.event.EventListenerList;
 
 import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.util.ObservableMap;
@@ -34,9 +35,27 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 
 	private final ObservableMap<Algorithm> algorithmList = new ObservableMap<Algorithm>();
 
+	private final Map<Object, String> edgeLabels = new HashMap<Object, String>();
+
+	private final Map<Object, EdgeDirection> edgeDirections = new HashMap<Object, EdgeDirection>();
+
+	private final List<Object> variableKeys = new ArrayList<Object>();
+
 	private String label = "";
 
 	private String description = "";
+
+	public final void setEdgeLabel(Object key, String edgeLabel) {
+		edgeLabels.put(key, edgeLabel);
+	}
+
+	public final void addVariableKey(Object key) {
+		variableKeys.add(key);
+	}
+
+	public final List<Object> getVariableKeys() {
+		return variableKeys;
+	}
 
 	public final String getDescription() {
 		return description;
@@ -54,24 +73,21 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		this.label = label;
 	}
 
-	public final EventListenerList getListenerList() {
-		return null;
-	}
-
 	public AbstractAlgorithm(String label) {
 		super();
 		setLabel(label);
 	}
 
-	public void setVariable(int index, Variable variable) {
+	public final void setEdgeDirection(Object key, EdgeDirection direction) {
+		edgeDirections.put(key, direction);
+	}
+
+	public void setVariable(Object index, Variable variable) {
 		variableMap.put(index, variable);
 	}
 
-	public final void setAlgorithm(int index, Algorithm a) {
+	public final void setAlgorithm(Object index, Algorithm a) {
 		algorithmList.put(index, a);
-	}
-
-	public void createVariablesAndAlgorithms() {
 	}
 
 	public void clear() {
@@ -79,26 +95,38 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		variableMap.clear();
 	}
 
-	public final List<Matrix> calculate() throws Exception {
-		List<Matrix> input = new LinkedList<Matrix>();
-		int size = variableMap.getSize();
-		for (int v = 0; v < size; v++) {
-			if (getEdgeDirectionForVariable(v) == INCOMING
-					|| getEdgeDirectionForVariable(v) == BIDIRECTIONAL) {
-				input.add(getMatrixFromVariable(v));
-			}
+	public final Map<Object, Matrix> calculate() throws Exception {
+		Map<Object, Matrix> input = new HashMap<Object, Matrix>();
+		for (Object v : getInputKeys()) {
+			input.put(v, getMatrixFromVariable(v));
 		}
-		List<Matrix> output = calculate(input);
-		for (int v = 0, i = 0; v < size; v++) {
-			if (getEdgeDirectionForVariable(v) == OUTGOING
-					|| getEdgeDirectionForVariable(v) == BIDIRECTIONAL) {
-				setMatrix(v, output.get(i++));
-			}
-		}
+		Map<Object, Matrix> output = calculate(input);
 		return output;
 	}
 
-	public final List<Matrix> calculate(Matrix... input) throws Exception {
+	public final List<Object> getInputKeys() {
+		List<Object> inputKeys = new ArrayList<Object>();
+		for (Object v : getVariableKeys()) {
+			if (EdgeDirection.Incoming.equals(getEdgeDirection(v))
+					|| EdgeDirection.Bidirectional.equals(getEdgeDirection(v))) {
+				inputKeys.add(v);
+			}
+		}
+		return inputKeys;
+	}
+
+	public final List<Object> getOutputKeys() {
+		List<Object> outputKeys = new ArrayList<Object>();
+		for (Object v : getVariableKeys()) {
+			if (EdgeDirection.Outgoing.equals(getEdgeDirection(v))
+					|| EdgeDirection.Bidirectional.equals(getEdgeDirection(v))) {
+				outputKeys.add(v);
+			}
+		}
+		return outputKeys;
+	}
+
+	public final Map<Object, Matrix> calculate(Matrix... input) throws Exception {
 		List<Matrix> inputA = new LinkedList<Matrix>();
 		for (int i = 0; i < input.length; i++) {
 			inputA.add(input[i]);
@@ -106,7 +134,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		return calculate(inputA);
 	}
 
-	public final List<Matrix> calculate(double... input) throws Exception {
+	public final Map<Object, Matrix> calculate(double... input) throws Exception {
 		List<Matrix> inputA = new LinkedList<Matrix>();
 		for (int i = 0; i < input.length; i++) {
 			inputA.add(MatrixFactory.linkToValue(input[i]));
@@ -114,17 +142,26 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		return calculate(inputA);
 	}
 
-	public abstract List<Matrix> calculate(List<Matrix> matrices) throws Exception;
-
-	public int getEdgeDirectionForVariable(int index) {
-		return NOTCONNECTED;
+	public final Map<Object, Matrix> calculate(List<Matrix> matrices) throws Exception {
+		Map<Object, Matrix> map = new HashMap<Object, Matrix>();
+		List<Object> keys = getInputKeys();
+		for (int i = 0; i < keys.size(); i++) {
+			Object key = keys.get(i);
+			map.put(key, matrices.get(i));
+		}
+		return calculate(map);
 	}
 
-	public int getEdgeDirectionForAlgorithm(int index) {
-		return NOTCONNECTED;
+	public Map<Object, Matrix> calculate(Map<Object, Matrix> matrices) throws Exception {
+		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
+		return result;
 	}
 
-	public final Matrix getMatrixFromVariable(int variableIndex) {
+	public final EdgeDirection getEdgeDirection(Object key) {
+		return edgeDirections.get(key);
+	}
+
+	public final Matrix getMatrixFromVariable(Object variableIndex) {
 		Variable v = variableMap.get(variableIndex);
 		if (v == null)
 			return null;
@@ -132,7 +169,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 			return v.getMatrix();
 	}
 
-	public final Matrix getMatrixFromVariable(int variableIndex, int matrixIndex) {
+	public final Matrix getMatrixFromVariable(Object variableIndex, int matrixIndex) {
 		Variable v = variableMap.get(variableIndex);
 		if (v == null)
 			return null;
@@ -158,7 +195,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		v.addMatrix(matrix);
 	}
 
-	public final void setMatrixForVariable(int variableIndex, int matrixIndex, Matrix matrix) {
+	public final void setMatrixForVariable(Object variableIndex, int matrixIndex, Matrix matrix) {
 		Variable v = variableMap.get(variableIndex);
 		if (v != null)
 			v.setMatrix(matrixIndex, matrix);
@@ -172,12 +209,8 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		return algorithmList;
 	}
 
-	public String getEdgeLabelForVariable(int index) {
-		return "";
-	}
-
-	public String getEdgeLabelForAlgorithm(int index) {
-		return "";
+	public final String getEdgeLabel(Object key) {
+		return edgeLabels.get(key);
 	}
 
 	public final GUIObject getGUIObject() {

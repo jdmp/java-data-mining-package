@@ -1,7 +1,7 @@
 package org.jdmp.core.algorithm.basic;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.jdmp.core.algorithm.AlgorithmOneSource;
 import org.ujmp.core.Matrix;
@@ -20,24 +20,21 @@ public class AlgorithmGauss extends AlgorithmOneSource {
 		setDescription("target = gauss(source)");
 	}
 
-	public List<Matrix> calculate(List<Matrix> input) throws MatrixException {
-		List<Matrix> result = new ArrayList<Matrix>();
-
-		if (input == null || input.size() < 1) {
-			return result;
-		}
+	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
+		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
 
 		Matrix in = MatrixFactory.copyFromMatrix(input.get(SOURCE));
 		for (long[] c : in.allCoordinates()) {
 			in.setAsDouble(getProbability(in.getAsDouble(c)), c);
 		}
 
-		result.add(in);
+		result.put(TARGET, in);
 		return result;
 	}
 
 	public double getProbability(double x) {
-		return 1.0 / (sigma * Math.sqrt(2 * Math.PI)) * Math.exp(-Math.pow(x - mu, 2) / (2 * sigma * sigma));
+		return 1.0 / (sigma * Math.sqrt(2 * Math.PI))
+				* Math.exp(-Math.pow(x - mu, 2) / (2 * sigma * sigma));
 	}
 
 }

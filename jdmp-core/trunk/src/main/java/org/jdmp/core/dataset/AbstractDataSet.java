@@ -26,6 +26,26 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 
 	private final ObservableMap<Variable> variableList = new ObservableMap<Variable>();
 
+	private String label = "";
+
+	private String description = "";
+
+	public final String getDescription() {
+		return description;
+	}
+
+	public final void setDescription(String description) {
+		this.description = description;
+	}
+
+	public final String getLabel() {
+		return label;
+	}
+
+	public final void setLabel(String label) {
+		this.label = label;
+	}
+
 	public AbstractDataSet() {
 		super();
 	}

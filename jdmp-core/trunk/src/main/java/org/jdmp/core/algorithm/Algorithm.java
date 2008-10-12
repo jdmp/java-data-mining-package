@@ -1,6 +1,7 @@
 package org.jdmp.core.algorithm;
 
 import java.util.List;
+import java.util.Map;
 
 import org.jdmp.core.CoreObject;
 import org.jdmp.core.variable.HasVariableMap;
@@ -8,6 +9,10 @@ import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 
 public interface Algorithm extends CoreObject, HasVariableMap, HasAlgorithmMap {
+
+	public enum EdgeDirection {
+		NotConnected, Incoming, Outgoing, Bidirectional
+	};
 
 	public static final int NOTCONNECTED = 0;
 
@@ -17,30 +22,38 @@ public interface Algorithm extends CoreObject, HasVariableMap, HasAlgorithmMap {
 
 	public static final int BIDIRECTIONAL = 3;
 
-	public void setVariable(int index, Variable variable);
+	public void setVariable(Object key, Variable variable);
 
-	public void setAlgorithm(int index, Algorithm a);
+	public void setAlgorithm(Object key, Algorithm a);
 
-	public void clear();
+	public Map<Object, Matrix> calculate() throws Exception;
 
-	public List<Matrix> calculate() throws Exception;
+	public Map<Object, Matrix> calculate(Matrix... input) throws Exception;
 
-	public List<Matrix> calculate(Matrix... input) throws Exception;
+	public Map<Object, Matrix> calculate(double... input) throws Exception;
 
-	public List<Matrix> calculate(double... input) throws Exception;
+	public Map<Object, Matrix> calculate(List<Matrix> matrices) throws Exception;
 
-	public abstract List<Matrix> calculate(List<Matrix> matrices) throws Exception;
+	public Map<Object, Matrix> calculate(Map<Object, Matrix> matrices) throws Exception;
 
-	public int getEdgeDirectionForVariable(int index);
+	public EdgeDirection getEdgeDirection(Object key);
 
-	public int getEdgeDirectionForAlgorithm(int index);
+	public Matrix getMatrixFromVariable(Object key, int matrixIndex);
 
-	public Matrix getMatrixFromVariable(int variableIndex, int matrixIndex);
+	public void setMatrixForVariable(Object key, int matrixIndex, Matrix matrix);
 
-	public void setMatrixForVariable(int variableIndex, int matrixIndex, Matrix matrix);
+	public String getEdgeLabel(Object key);
 
-	public String getEdgeLabelForVariable(int index);
+	public void setEdgeDirection(Object key, EdgeDirection direction);
 
-	public String getEdgeLabelForAlgorithm(int index);
+	public void setEdgeLabel(Object key, String edgeLabel);
+
+	public void addVariableKey(Object key);
+
+	public List<Object> getVariableKeys();
+
+	public List<Object> getInputKeys();
+
+	public List<Object> getOutputKeys();
 
 }
