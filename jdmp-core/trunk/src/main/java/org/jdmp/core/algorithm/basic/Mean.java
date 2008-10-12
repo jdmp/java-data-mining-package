@@ -5,24 +5,22 @@ import java.util.Map;
 
 import org.jdmp.core.algorithm.AlgorithmOneSource;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.MatrixFactory;
+import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.exceptions.MatrixException;
 
-public class AlgorithmCopy extends AlgorithmOneSource {
-	private static final long serialVersionUID = 4425454677556747249L;
+public class Mean extends AlgorithmOneSource {
+	private static final long serialVersionUID = 5594989536534719762L;
 
-	public AlgorithmCopy() {
-		super("Copy");
-		setDescription("target = source");
+	public Mean() {
+		super("Mean");
+		setDescription("target = mean(source)");
 	}
 
 	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
 		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
-
 		Matrix source = input.get(SOURCE);
-		Matrix target = MatrixFactory.copyFromMatrix(source);
+		Matrix target = source.mean(Ret.NEW, Matrix.ROW, true);
 		result.put(TARGET, target);
-
 		return result;
 	}
 }

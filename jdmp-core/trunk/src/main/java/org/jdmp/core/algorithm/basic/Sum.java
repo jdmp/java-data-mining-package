@@ -8,29 +8,19 @@ import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.exceptions.MatrixException;
 
-public class AlgorithmSum extends AlgorithmOneSource {
+public class Sum extends AlgorithmOneSource {
 	private static final long serialVersionUID = -6902623124007218820L;
 
-	private int dimension = ROW;
-
-	public AlgorithmSum() {
+	public Sum() {
 		super("Sum");
 		setDescription("target = sum(source)");
 	}
 
-	public AlgorithmSum(int dimension) {
-		this();
-		this.dimension = dimension;
-	}
-
 	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
 		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
-
 		Matrix source = input.get(SOURCE);
-		Matrix sumMatrix = source.sum(Ret.NEW, dimension, true);
-
-		result.put(TARGET, sumMatrix);
-
+		Matrix target = source.sum(Ret.NEW, Matrix.ROW, true);
+		result.put(TARGET, target);
 		return result;
 	}
 

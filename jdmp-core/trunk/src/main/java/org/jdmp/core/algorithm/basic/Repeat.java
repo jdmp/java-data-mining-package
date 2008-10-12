@@ -7,14 +7,14 @@ import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.algorithm.Algorithm;
 import org.ujmp.core.Matrix;
 
-public class AlgorithmRepeat extends AbstractAlgorithm {
+public class Repeat extends AbstractAlgorithm {
 	private static final long serialVersionUID = 1469854394519674382L;
 
 	private final int REPEATEDALGORITHM = 0;
 
 	private int repeatCount = 1;
 
-	public AlgorithmRepeat() {
+	public Repeat() {
 		super("Repeat");
 		setDescription("calls another Algorithms several times");
 	}

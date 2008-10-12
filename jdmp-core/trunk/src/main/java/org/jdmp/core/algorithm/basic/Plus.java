@@ -7,10 +7,10 @@ import org.jdmp.core.algorithm.AlgorithmTwoSources;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.exceptions.MatrixException;
 
-public class AlgorithmPlus extends AlgorithmTwoSources {
+public class Plus extends AlgorithmTwoSources {
 	private static final long serialVersionUID = -5630277400123182400L;
 
-	public AlgorithmPlus() {
+	public Plus() {
 		super("Plus");
 		setDescription("target = source1 + source2");
 	}

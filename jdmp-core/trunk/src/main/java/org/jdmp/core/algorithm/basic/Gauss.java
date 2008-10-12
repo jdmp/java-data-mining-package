@@ -8,14 +8,14 @@ import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.exceptions.MatrixException;
 
-public class AlgorithmGauss extends AlgorithmOneSource {
+public class Gauss extends AlgorithmOneSource {
 	private static final long serialVersionUID = 3127916742763698423L;
 
 	private double sigma = 1;
 
 	private double mu = 0.0;
 
-	public AlgorithmGauss() {
+	public Gauss() {
 		super("Gaussian Distribution");
 		setDescription("target = gauss(source)");
 	}

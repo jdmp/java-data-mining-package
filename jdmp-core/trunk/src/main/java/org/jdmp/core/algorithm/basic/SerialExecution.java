@@ -7,10 +7,10 @@ import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.algorithm.Algorithm;
 import org.ujmp.core.Matrix;
 
-public class AlgorithmSerialExecution extends AbstractAlgorithm {
+public class SerialExecution extends AbstractAlgorithm {
 	private static final long serialVersionUID = -3635082316760868682L;
 
-	public AlgorithmSerialExecution() {
+	public SerialExecution() {
 		super("Serial Execution");
 		setDescription("calls other Algorithms in defined order");
 	}

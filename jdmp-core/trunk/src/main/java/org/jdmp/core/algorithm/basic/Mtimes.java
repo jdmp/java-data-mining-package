@@ -7,10 +7,10 @@ import org.jdmp.core.algorithm.AlgorithmTwoSources;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.exceptions.MatrixException;
 
-public class AlgorithmProduct extends AlgorithmTwoSources {
+public class Mtimes extends AlgorithmTwoSources {
 	private static final long serialVersionUID = 2620456326030867650L;
 
-	public AlgorithmProduct() {
+	public Mtimes() {
 		super("Multiply");
 		setDescription("target = source1 * source2");
 	}

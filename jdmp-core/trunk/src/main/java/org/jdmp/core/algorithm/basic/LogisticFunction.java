@@ -5,22 +5,22 @@ import java.util.Map;
 
 import org.jdmp.core.algorithm.AlgorithmOneSource;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.exceptions.MatrixException;
 
-public class AlgorithmTanhPlusOne extends AlgorithmOneSource {
-	private static final long serialVersionUID = 1972442317406585099L;
+public class LogisticFunction extends AlgorithmOneSource {
+	private static final long serialVersionUID = -6185025728766094423L;
 
-	public AlgorithmTanhPlusOne() {
-		super("TanhPlusOne");
-		setDescription("target = tanh(source+1)");
+	public LogisticFunction() {
+		super("Logistic Function");
+		setDescription("target = 1/(exp(-x)+1)");
 	}
 
 	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
 		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
 
 		Matrix in = input.get(SOURCE);
-		result.put(TARGET, in.plus(1.0).tanh(Ret.NEW));
+		result.put(TARGET, new org.ujmp.core.doublecalculation.entrywise.misc.LogisticFunction(in)
+				.calcNew());
 		return result;
 	}
 

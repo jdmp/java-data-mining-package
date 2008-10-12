@@ -18,7 +18,7 @@ public class Transpose extends AlgorithmOneSource {
 	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
 		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
 		Matrix source = input.get(SOURCE);
-		Matrix target = new org.ujmp.core.objectcalculation.Transpose(source).calcNew();
+		Matrix target = source.transpose();
 		result.put(TARGET, target);
 		return result;
 	}
