@@ -1,7 +1,5 @@
 package org.jdmp.gui.algorithm.actions;
 
-import java.util.List;
-
 import javax.swing.Action;
 import javax.swing.JComponent;
 
@@ -30,12 +28,7 @@ public class CalculateOnceAction extends AlgorithmAction {
 		if (matrix == null) {
 			getAlgorithm().getAlgorithm().calculate();
 		} else {
-			List<Matrix> ml = getAlgorithm().getAlgorithm().calculate(matrix);
-			if (ml != null) {
-				for (Matrix m : ml) {
-					// m.showFrame();
-				}
-			}
+			getAlgorithm().getAlgorithm().calculate(matrix);
 		}
 		return null;
 	}
