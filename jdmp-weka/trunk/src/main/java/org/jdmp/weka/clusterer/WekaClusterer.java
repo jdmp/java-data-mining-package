@@ -33,7 +33,7 @@ public class WekaClusterer extends AbstractClusterer {
 
 	public WekaClusterer(WekaClustererType classifierName, boolean discrete, String... options)
 			throws Exception {
-		super("Weka-" + classifierName.name());
+		setLabel("Weka-" + classifierName.name());
 		this.clustererName = classifierName;
 		this.options = options;
 		this.discrete = discrete;

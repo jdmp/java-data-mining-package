@@ -33,7 +33,7 @@ public class WekaClassifier extends AbstractClassifier {
 
 	public WekaClassifier(WekaClassifierType classifierName, boolean discrete, String... options)
 			throws Exception {
-		super("Weka-" + classifierName);
+		setLabel("Weka-" + classifierName);
 		this.classifierName = classifierName;
 		this.options = options;
 		this.discrete = discrete;
