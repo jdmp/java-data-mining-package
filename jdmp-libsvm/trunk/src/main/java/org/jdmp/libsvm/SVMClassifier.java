@@ -34,7 +34,8 @@ public class SVMClassifier extends AbstractClassifier {
 	}
 
 	public SVMClassifier(Kernel kernel) {
-		super("SVM " + kernel.name());
+		super();
+		setLabel("SVM " + kernel.name());
 		this.kernel = kernel;
 		createAlgorithm();
 	}
