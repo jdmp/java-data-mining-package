@@ -9,6 +9,7 @@ import org.ujmp.core.interfaces.HasMatrix;
 import org.ujmp.core.interfaces.HasMatrixList;
 
 public interface Variable extends CoreObject, HasLabel, HasDescription, HasMatrix, HasMatrixList {
+	public static final Class<?>[] VARIABLEARRAY = new Class<?>[] { new Variable[] {}.getClass() };
 
 	public long[] getSize();
 

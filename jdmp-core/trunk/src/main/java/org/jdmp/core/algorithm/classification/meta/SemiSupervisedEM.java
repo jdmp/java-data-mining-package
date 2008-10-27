@@ -19,7 +19,8 @@ public class SemiSupervisedEM extends AbstractClassifier implements SemiSupervis
 	private boolean useRawPrediction = false;
 
 	public SemiSupervisedEM(Classifier singleClassClassifier, boolean useRawPrediction) {
-		super("MultiClassClassifier [" + singleClassClassifier.toString() + "]");
+		super();
+		setLabel("SemiSupervisedEM [" + singleClassClassifier.toString() + "]");
 		this.classifier = singleClassClassifier;
 		this.useRawPrediction = useRawPrediction;
 	}

@@ -42,7 +42,7 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 	// private double[] classDist = null;
 
 	public NaiveBayesClassifier() {
-		super("Naive Bayes");
+		super();
 	}
 
 	@Override

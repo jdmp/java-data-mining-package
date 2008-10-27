@@ -9,6 +9,7 @@ import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 
 public interface Algorithm extends CoreObject, HasVariableMap, HasAlgorithmMap {
+	public static final Class<?>[] ALGORITHMARRAY = new Class<?>[] { new Algorithm[] {}.getClass() };
 
 	public enum EdgeDirection {
 		NotConnected, Incoming, Outgoing, Bidirectional
@@ -49,6 +50,8 @@ public interface Algorithm extends CoreObject, HasVariableMap, HasAlgorithmMap {
 	public void setEdgeLabel(Object key, String edgeLabel);
 
 	public void addVariableKey(Object key);
+
+	public void setVariables(Variable... variables);
 
 	public List<Object> getVariableKeys();
 

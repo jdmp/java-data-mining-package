@@ -7,8 +7,8 @@ import org.ujmp.core.Matrix;
 
 public abstract class AbstractClusterer extends AbstractAlgorithm implements Clusterer {
 
-	public AbstractClusterer(String label) {
-		super(label);
+	public AbstractClusterer() {
+		super();
 	}
 
 	public void predict(RegressionDataSet dataSet) throws Exception {

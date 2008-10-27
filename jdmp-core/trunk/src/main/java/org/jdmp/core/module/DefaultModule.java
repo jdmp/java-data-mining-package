@@ -55,7 +55,7 @@ public class DefaultModule extends AbstractModule {
 	}
 
 	@Override
-	public Result execute(Command... commands) {
+	public Result execute(Command... commands) throws Exception {
 		return getExecutor().execute(commands);
 	}
 
@@ -74,12 +74,12 @@ public class DefaultModule extends AbstractModule {
 	}
 
 	@Override
-	public Result execute(List<Command> commands) {
+	public Result execute(List<Command> commands) throws Exception {
 		return getExecutor().execute(commands);
 	}
 
 	@Override
-	public Result execute(String script) {
+	public Result execute(String script) throws Exception {
 		List<Command> commands = getInterpreter().parseScript(script);
 		return execute(commands);
 	}

@@ -53,6 +53,12 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		variableKeys.add(key);
 	}
 
+	public void setVariables(Variable... variables) {
+		for (int i = 0; i < variables.length && i < getVariableKeys().size(); i++) {
+			variableMap.put(variableKeys.get(i), variables[i]);
+		}
+	}
+
 	public final List<Object> getVariableKeys() {
 		return variableKeys;
 	}
@@ -73,9 +79,9 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		this.label = label;
 	}
 
-	public AbstractAlgorithm(String label) {
+	public AbstractAlgorithm() {
 		super();
-		setLabel(label);
+		setLabel(getClass().getSimpleName());
 	}
 
 	public final void setEdgeDirection(Object key, EdgeDirection direction) {
@@ -97,10 +103,17 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 
 	public final Map<Object, Matrix> calculate() throws Exception {
 		Map<Object, Matrix> input = new HashMap<Object, Matrix>();
+
 		for (Object v : getInputKeys()) {
 			input.put(v, getMatrixFromVariable(v));
 		}
+
 		Map<Object, Matrix> output = calculate(input);
+
+		for (Object v : getOutputKeys()) {
+			setMatrix(v, output.get(v));
+		}
+
 		return output;
 	}
 

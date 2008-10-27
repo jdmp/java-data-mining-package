@@ -15,7 +15,7 @@ public class Repeat extends AbstractAlgorithm {
 	private int repeatCount = 1;
 
 	public Repeat() {
-		super("Repeat");
+		super();
 		setDescription("calls another Algorithms several times");
 	}
 

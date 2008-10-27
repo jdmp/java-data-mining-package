@@ -4,14 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jdmp.core.algorithm.AlgorithmTwoSources;
+import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.exceptions.MatrixException;
 
 public class Minus extends AlgorithmTwoSources {
 	private static final long serialVersionUID = 2476001103906791183L;
 
-	public Minus() {
-		super("Difference");
+	public Minus(Variable... variables) {
+		super(variables);
 		setDescription("target = source1 - source2");
 	}
 

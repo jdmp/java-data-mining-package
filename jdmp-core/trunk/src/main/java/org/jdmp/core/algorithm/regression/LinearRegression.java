@@ -18,7 +18,7 @@ public class LinearRegression extends AbstractClassifier {
 	public static final int PARAMETERS = 1;
 
 	public LinearRegression() {
-		super("Linear Regression");
+		super();
 		setParameterVariable(new DefaultVariable("Regression Parameters"));
 	}
 

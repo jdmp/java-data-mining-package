@@ -8,14 +8,15 @@ public abstract class AlgorithmOneSource extends AbstractAlgorithm {
 
 	public static final String TARGET = "Target";
 
-	public AlgorithmOneSource(String label) {
-		super(label);
+	public AlgorithmOneSource(Variable... variables) {
+		super();
 		addVariableKey(SOURCE);
 		addVariableKey(TARGET);
 		setEdgeLabel(SOURCE, "Source");
 		setEdgeLabel(TARGET, "Target");
 		setEdgeDirection(SOURCE, EdgeDirection.Incoming);
 		setEdgeDirection(TARGET, EdgeDirection.Outgoing);
+		setVariables(variables);
 	}
 
 	public void setSourceVariable(Variable source) {

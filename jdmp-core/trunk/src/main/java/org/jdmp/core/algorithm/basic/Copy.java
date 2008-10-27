@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jdmp.core.algorithm.AlgorithmOneSource;
+import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.exceptions.MatrixException;
@@ -11,8 +12,8 @@ import org.ujmp.core.exceptions.MatrixException;
 public class Copy extends AlgorithmOneSource {
 	private static final long serialVersionUID = 4425454677556747249L;
 
-	public Copy() {
-		super("Copy");
+	public Copy(Variable... variables) {
+		super(variables);
 		setDescription("target = source");
 	}
 

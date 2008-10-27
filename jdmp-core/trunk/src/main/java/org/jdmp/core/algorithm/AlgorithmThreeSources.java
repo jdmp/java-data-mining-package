@@ -1,5 +1,7 @@
 package org.jdmp.core.algorithm;
 
+import org.jdmp.core.variable.Variable;
+
 public abstract class AlgorithmThreeSources extends AbstractAlgorithm {
 
 	public static final String SOURCE1 = "Source 1";
@@ -10,8 +12,8 @@ public abstract class AlgorithmThreeSources extends AbstractAlgorithm {
 
 	public static final String TARGET = "Target";
 
-	public AlgorithmThreeSources(String label) {
-		super(label);
+	public AlgorithmThreeSources(Variable... variables) {
+		super();
 		addVariableKey(SOURCE1);
 		addVariableKey(SOURCE2);
 		addVariableKey(SOURCE3);
@@ -24,6 +26,7 @@ public abstract class AlgorithmThreeSources extends AbstractAlgorithm {
 		setEdgeDirection(SOURCE2, EdgeDirection.Incoming);
 		setEdgeDirection(SOURCE3, EdgeDirection.Incoming);
 		setEdgeDirection(TARGET, EdgeDirection.Outgoing);
+		setVariables(variables);
 	}
 
 }

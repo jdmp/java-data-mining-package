@@ -4,14 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jdmp.core.algorithm.AlgorithmOneSource;
+import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.exceptions.MatrixException;
 
 public class LogisticFunction extends AlgorithmOneSource {
 	private static final long serialVersionUID = -6185025728766094423L;
 
-	public LogisticFunction() {
-		super("Logistic Function");
+	public LogisticFunction(Variable... variables) {
+		super(variables);
 		setDescription("target = 1/(exp(-x)+1)");
 	}
 

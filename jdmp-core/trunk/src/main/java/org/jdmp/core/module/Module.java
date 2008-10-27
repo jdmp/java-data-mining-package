@@ -12,11 +12,11 @@ import org.jdmp.core.variable.HasVariableMap;
 public interface Module extends CoreObject, HasModuleList, HasAlgorithmList, HasVariableMap,
 		HasDataSetList {
 
-	public Result execute(Command... commands);
+	public Result execute(Command... commands) throws Exception;
 
-	public Result execute(List<Command> commands);
+	public Result execute(List<Command> commands) throws Exception;
 
-	public Result execute(String script);
+	public Result execute(String script) throws Exception;
 
 	public void clear();
 

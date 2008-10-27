@@ -4,14 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jdmp.core.algorithm.AlgorithmTwoSources;
+import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.exceptions.MatrixException;
 
 public class Plus extends AlgorithmTwoSources {
 	private static final long serialVersionUID = -5630277400123182400L;
 
-	public Plus() {
-		super("Plus");
+	public Plus(Variable... variables) {
+		super(variables);
 		setDescription("target = source1 + source2");
 	}
 

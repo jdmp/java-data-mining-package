@@ -4,14 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jdmp.core.algorithm.AlgorithmTwoSources;
+import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.exceptions.MatrixException;
 
 public class Mtimes extends AlgorithmTwoSources {
 	private static final long serialVersionUID = 2620456326030867650L;
 
-	public Mtimes() {
-		super("Multiply");
+	public Mtimes(Variable... variables) {
+		super(variables);
 		setDescription("target = source1 * source2");
 	}
 

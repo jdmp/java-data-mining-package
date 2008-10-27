@@ -22,13 +22,13 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 
 	private boolean evaluate = true;
 
-	public AbstractRegressor(String label) {
-		super(label);
+	public AbstractRegressor() {
+		super();
 		setAlgorithm(OUTPUTERRORALGORITHM, new Minus());
 	}
 
-	public AbstractRegressor(String label, boolean evaluate) {
-		this(label);
+	public AbstractRegressor(boolean evaluate) {
+		this();
 		this.evaluate = evaluate;
 	}
 

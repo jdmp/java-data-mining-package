@@ -11,7 +11,7 @@ public class SerialExecution extends AbstractAlgorithm {
 	private static final long serialVersionUID = -3635082316760868682L;
 
 	public SerialExecution() {
-		super("Serial Execution");
+		super();
 		setDescription("calls other Algorithms in defined order");
 	}
 

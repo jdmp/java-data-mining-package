@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jdmp.core.algorithm.AlgorithmOneSource;
+import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.exceptions.MatrixException;
@@ -15,8 +16,8 @@ public class Gauss extends AlgorithmOneSource {
 
 	private double mu = 0.0;
 
-	public Gauss() {
-		super("Gaussian Distribution");
+	public Gauss(Variable... variables) {
+		super(variables);
 		setDescription("target = gauss(source)");
 	}
 

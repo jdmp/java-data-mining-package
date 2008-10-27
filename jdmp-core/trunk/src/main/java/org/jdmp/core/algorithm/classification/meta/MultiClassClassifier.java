@@ -23,7 +23,8 @@ public class MultiClassClassifier extends AbstractClassifier {
 	private List<Classifier> singleClassClassifiers = new ArrayList<Classifier>();
 
 	public MultiClassClassifier(Classifier singleClassClassifier, boolean twoColumns) {
-		super("MultiClassClassifier [" + singleClassClassifier.toString() + "]");
+		super();
+		setLabel("MultiClassClassifier [" + singleClassClassifier.toString() + "]");
 		this.singleClassClassifier = singleClassClassifier;
 		this.twoColumns = twoColumns;
 	}

@@ -44,7 +44,7 @@ public class MultiLabelNaiveBayesClassifier extends AbstractClassifier {
 	private int classCount = 2;
 
 	public MultiLabelNaiveBayesClassifier() {
-		super("Naive Bayes");
+		super();
 	}
 
 	@Override
