@@ -2,7 +2,6 @@ package org.jdmp.core.executor;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.jdmp.core.algorithm.Algorithm;
@@ -135,11 +134,11 @@ public class Executor {
 
 	public static void main(String[] args) throws Exception {
 		Module m = new DefaultModule();
-		System.out.println(m.execute("a=[5.6 4];"));
+		System.out.println(m.execute("a=[3];"));
 		System.out.println(m.execute("a"));
-		System.out.println(m.execute("b=[3 2]"));
+		System.out.println(m.execute("b=[5]"));
 		System.out.println(m.execute("b"));
-		System.out.println(m.execute("c=plus(a,b)"));
+		System.out.println(m.execute("c=randn(a,b)"));
 		System.out.println(m.execute("c"));
 	}
 
