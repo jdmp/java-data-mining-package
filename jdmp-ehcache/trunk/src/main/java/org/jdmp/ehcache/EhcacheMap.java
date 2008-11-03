@@ -1,3 +1,26 @@
+/*
+ * Copyright (C) 2008 Holger Arndt, Andreas Naegele and Markus Bundschus
+ *
+ * This file is part of the Java Data Mining Package (JDMP).
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership and licensing.
+ *
+ * JDMP is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * JDMP is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with JDMP; if not, write to the
+ * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+ * Boston, MA  02110-1301  USA
+ */
+
 package org.jdmp.ehcache;
 
 import java.io.Closeable;
@@ -24,37 +47,37 @@ import org.ujmp.core.exceptions.MatrixException;
 public class EhcacheMap<K, V> implements Map<K, V>, Flushable, Closeable {
 	private static final long serialVersionUID = -2405059234958626645L;
 
-	private int maxElementsInMemory = 1000;
+	private final int maxElementsInMemory = 1000;
 
-	private int maxElementsOnDisk = Integer.MAX_VALUE - 1;
+	private final int maxElementsOnDisk = Integer.MAX_VALUE - 1;
 
-	private boolean overflowToDisk = true;
+	private final boolean overflowToDisk = true;
 
-	private boolean eternal = true;
+	private final boolean eternal = true;
 
-	private boolean diskPersistent = true;
+	private final boolean diskPersistent = true;
 
 	private transient File diskStorePath = null;
 
 	private transient String name = null;
 
-	private transient RegisteredEventListeners registeredEventListeners = null;
+	private transient final RegisteredEventListeners registeredEventListeners = null;
 
-	private int timeToLiveSeconds = Integer.MAX_VALUE - 1;
+	private final int timeToLiveSeconds = Integer.MAX_VALUE - 1;
 
-	private int timeToIdleSeconds = 120;
+	private final int timeToIdleSeconds = 120;
 
-	private int diskSpoolBufferSizeMB = 16;
+	private final int diskSpoolBufferSizeMB = 16;
 
-	private int diskExpiryThreadIntervalSeconds = 300;
+	private final int diskExpiryThreadIntervalSeconds = 300;
 
-	private MemoryStoreEvictionPolicy memoryStoreEvictionPolicy = MemoryStoreEvictionPolicy.LFU;
+	private final MemoryStoreEvictionPolicy memoryStoreEvictionPolicy = MemoryStoreEvictionPolicy.LFU;
 
 	private transient CacheManager manager = null;
 
 	private transient Cache cache = null;
 
-	private BootstrapCacheLoader bootstrapCacheLoader = null;
+	private final BootstrapCacheLoader bootstrapCacheLoader = null;
 
 	public EhcacheMap() throws IOException {
 		this(null);
@@ -192,6 +215,7 @@ public class EhcacheMap<K, V> implements Map<K, V>, Flushable, Closeable {
 		throw new MatrixException("not implemented");
 	}
 
+	@Override
 	public void finalize() {
 		getCacheManager().removeCache(getCache().getName());
 	}
