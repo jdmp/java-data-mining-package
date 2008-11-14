@@ -31,9 +31,9 @@ import javax.swing.JTabbedPane;
 import org.jdmp.gui.matrix.MatrixListPanel;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.gui.MatrixGUIObject;
-import org.ujmp.gui.matrix.panels.AbstractPanel;
-import org.ujmp.gui.matrix.panels.MatrixEditorPanel;
-import org.ujmp.gui.matrix.panels.MatrixPaintPanel;
+import org.ujmp.gui.panels.AbstractPanel;
+import org.ujmp.gui.panels.MatrixEditorPanel;
+import org.ujmp.gui.panels.MatrixPaintPanel;
 import org.ujmp.gui.plot.MatrixPlot;
 
 public class VariablePanel extends AbstractPanel {

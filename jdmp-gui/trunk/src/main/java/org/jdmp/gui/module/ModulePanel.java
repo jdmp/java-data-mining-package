@@ -32,7 +32,7 @@ import javax.swing.JSplitPane;
 import org.jdmp.core.variable.HasVariables;
 import org.jdmp.gui.interpreter.CommandWindow;
 import org.jdmp.gui.util.ObjectListPanel;
-import org.ujmp.gui.matrix.panels.AbstractPanel;
+import org.ujmp.gui.panels.AbstractPanel;
 
 public class ModulePanel extends AbstractPanel {
 	private static final long serialVersionUID = -6907850964484891091L;

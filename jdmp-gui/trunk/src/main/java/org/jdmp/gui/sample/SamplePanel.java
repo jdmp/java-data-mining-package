@@ -30,7 +30,7 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
 import org.jdmp.gui.util.ObjectListPanel;
-import org.ujmp.gui.matrix.panels.AbstractPanel;
+import org.ujmp.gui.panels.AbstractPanel;
 
 public class SamplePanel extends AbstractPanel {
 	private static final long serialVersionUID = -3851417196195726237L;

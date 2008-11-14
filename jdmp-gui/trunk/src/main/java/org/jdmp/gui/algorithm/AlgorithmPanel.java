@@ -33,7 +33,7 @@ import javax.swing.JSplitPane;
 import org.jdmp.core.algorithm.HasAlgorithms;
 import org.jdmp.core.variable.HasVariables;
 import org.jdmp.gui.util.ObjectListPanel;
-import org.ujmp.gui.matrix.panels.AbstractPanel;
+import org.ujmp.gui.panels.AbstractPanel;
 
 public class AlgorithmPanel extends AbstractPanel {
 	private static final long serialVersionUID = -1135182245042463188L;
