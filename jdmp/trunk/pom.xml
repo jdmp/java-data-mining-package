@@ -84,13 +84,7 @@
 				<artifactId>jdmp-weka</artifactId>
 				<version>${jdmp.version}</version>
 				<scope>compile</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.jdmp</groupId>
-				<artifactId>jdmp-mail</artifactId>
-				<version>${jdmp.version}</version>
-				<scope>compile</scope>
-			</dependency>			
+			</dependency>		
 			<dependency>
 				<groupId>org.jdmp</groupId>
 				<artifactId>jdmp-gui</artifactId>

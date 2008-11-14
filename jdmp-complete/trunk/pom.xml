@@ -35,10 +35,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-mail</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-ehcache</artifactId>
 		</dependency>
 		<dependency>
@@ -60,10 +56,8 @@
 	<modules>
     <module>../jdmp-core</module>
     <module>../jdmp-gui</module>
-    <module>../jdmp-mail</module>
     <module>../jdmp-ehcache</module>
     <module>../jdmp-jgroups</module>
-    <module>../jdmp-itext</module>
     <module>../jdmp-libsvm</module>
     <module>../jdmp-weka</module>
   </modules>
