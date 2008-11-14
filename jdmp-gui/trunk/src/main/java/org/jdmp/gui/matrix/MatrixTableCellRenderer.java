@@ -33,7 +33,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
 import org.ujmp.core.util.StringUtil;
-import org.ujmp.gui.matrix.MatrixGUIObject;
+import org.ujmp.gui.MatrixGUIObject;
 import org.ujmp.gui.matrix.MatrixRenderer;
 import org.ujmp.gui.plot.MatrixPlot;
 

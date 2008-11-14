@@ -35,8 +35,6 @@ import javax.swing.ListSelectionModel;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.collections.AbstractMatrixList;
-import org.ujmp.core.interfaces.HasColumnSelectionModel;
-import org.ujmp.core.interfaces.HasRowSelectionModel;
 import org.ujmp.core.interfaces.Wrapper;
 
 public class MatrixToMatrixListWrapper extends AbstractMatrixList implements Wrapper<Matrix> {
@@ -44,7 +42,7 @@ public class MatrixToMatrixListWrapper extends AbstractMatrixList implements Wra
 
 	private Matrix matrix = null;
 
-	private Map<Integer, Matrix> matrixList = new WeakHashMap<Integer, Matrix>();
+	private final Map<Integer, Matrix> matrixList = new WeakHashMap<Integer, Matrix>();
 
 	public MatrixToMatrixListWrapper(Matrix matrix) {
 		this.matrix = matrix;
@@ -163,11 +161,15 @@ public class MatrixToMatrixListWrapper extends AbstractMatrixList implements Wra
 	}
 
 	public ListSelectionModel getRowSelectionModel() {
-		return ((HasRowSelectionModel) matrix.getGUIObject()).getRowSelectionModel();
+		// return ((HasRowSelectionModel)
+		// matrix.getGUIObject()).getRowSelectionModel();
+		return null;
 	}
 
 	public ListSelectionModel getColumnSelectionModel() {
-		return ((HasColumnSelectionModel) matrix.getGUIObject()).getColumnSelectionModel();
+		// return ((HasColumnSelectionModel)
+		// matrix.getGUIObject()).getColumnSelectionModel();
+		return null;
 	}
 
 	public boolean isSynchronized() {

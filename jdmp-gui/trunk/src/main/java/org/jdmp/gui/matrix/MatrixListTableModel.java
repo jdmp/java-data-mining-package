@@ -32,7 +32,7 @@ import org.jdmp.core.variable.VariableListener;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.collections.MatrixList;
 import org.ujmp.core.interfaces.HasMatrixList;
-import org.ujmp.gui.matrix.MatrixGUIObject;
+import org.ujmp.gui.MatrixGUIObject;
 
 public class MatrixListTableModel extends AbstractTableModel implements VariableListener,
 		HasMatrixList {
