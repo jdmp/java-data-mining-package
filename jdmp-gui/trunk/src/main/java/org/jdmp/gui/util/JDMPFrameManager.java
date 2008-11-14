@@ -40,7 +40,7 @@ import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.gui.MatrixGUIObject;
 import org.ujmp.gui.frame.AbstractFrame;
-import org.ujmp.gui.matrix.MatrixFrame;
+import org.ujmp.gui.frame.MatrixFrame;
 import org.ujmp.gui.util.FrameManager;
 
 public abstract class JDMPFrameManager {

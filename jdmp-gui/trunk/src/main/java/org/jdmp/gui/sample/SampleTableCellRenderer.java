@@ -35,7 +35,7 @@ import org.jdmp.core.algorithm.regression.Regressor;
 import org.jdmp.core.sample.DefaultSample;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
-import org.ujmp.gui.matrix.MatrixRenderer;
+import org.ujmp.gui.renderer.MatrixRenderer;
 
 public class SampleTableCellRenderer implements TableCellRenderer {
 

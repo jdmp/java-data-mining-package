@@ -35,8 +35,8 @@ import javax.swing.table.TableCellRenderer;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.util.StringUtil;
 import org.ujmp.gui.MatrixGUIObject;
-import org.ujmp.gui.matrix.MatrixRenderer;
 import org.ujmp.gui.plot.MatrixPlot;
+import org.ujmp.gui.renderer.MatrixRenderer;
 
 public class MatrixTableCellRenderer implements TableCellRenderer {
 	private static final long serialVersionUID = 4107015466785369684L;

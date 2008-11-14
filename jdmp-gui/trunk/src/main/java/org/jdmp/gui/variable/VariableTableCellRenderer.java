@@ -32,7 +32,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
 import org.jdmp.core.variable.Variable;
-import org.ujmp.gui.matrix.MatrixRenderer;
+import org.ujmp.gui.renderer.MatrixRenderer;
 
 public class VariableTableCellRenderer implements TableCellRenderer {
 	private static final long serialVersionUID = 990917492575992066L;

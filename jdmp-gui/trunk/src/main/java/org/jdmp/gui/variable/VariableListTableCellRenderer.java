@@ -40,7 +40,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.TableCellRenderer;
 
 import org.jdmp.core.variable.Variable;
-import org.ujmp.gui.matrix.MatrixRenderer;
+import org.ujmp.gui.renderer.MatrixRenderer;
 import org.ujmp.gui.util.UIDefaults;
 
 public class VariableListTableCellRenderer extends JPanel implements TableCellRenderer {
