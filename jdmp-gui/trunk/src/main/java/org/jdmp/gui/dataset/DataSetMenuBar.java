@@ -29,7 +29,7 @@ import javax.swing.JComponent;
 import javax.swing.JMenu;
 
 import org.jdmp.gui.dataset.actions.DataSetActions;
-import org.ujmp.gui.util.DefaultMenuBar;
+import org.ujmp.gui.menu.DefaultMenuBar;
 
 public class DataSetMenuBar extends DefaultMenuBar {
 	private static final long serialVersionUID = 7982201026132757168L;

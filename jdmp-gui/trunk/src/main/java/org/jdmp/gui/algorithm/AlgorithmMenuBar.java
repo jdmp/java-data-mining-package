@@ -29,7 +29,7 @@ import javax.swing.JComponent;
 import javax.swing.JMenu;
 
 import org.jdmp.gui.algorithm.actions.AlgorithmActions;
-import org.ujmp.gui.util.DefaultMenuBar;
+import org.ujmp.gui.menu.DefaultMenuBar;
 
 public class AlgorithmMenuBar extends DefaultMenuBar {
 	private static final long serialVersionUID = -6724827875524793049L;

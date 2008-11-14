@@ -34,8 +34,8 @@ import org.ujmp.core.util.MatrixListToMatrixWrapper;
 import org.ujmp.gui.matrix.MatrixEditorPanel;
 import org.ujmp.gui.matrix.MatrixGUIObject;
 import org.ujmp.gui.matrix.MatrixPaintPanel;
-import org.ujmp.gui.matrix.plot.MatrixPlot;
-import org.ujmp.gui.util.AbstractPanel;
+import org.ujmp.gui.matrix.panels.AbstractPanel;
+import org.ujmp.gui.plot.MatrixPlot;
 
 public class VariablePanel extends AbstractPanel {
 	private static final long serialVersionUID = -4809155917354071285L;

@@ -24,7 +24,7 @@
 package org.jdmp.gui.variable;
 
 import org.ujmp.core.exceptions.MatrixException;
-import org.ujmp.gui.util.AbstractFrame;
+import org.ujmp.gui.frame.AbstractFrame;
 
 public class VariableFrame extends AbstractFrame {
 	private static final long serialVersionUID = -7217906612334653535L;

@@ -24,7 +24,7 @@
 package org.jdmp.gui.dataset;
 
 import org.ujmp.core.exceptions.MatrixException;
-import org.ujmp.gui.util.AbstractFrame;
+import org.ujmp.gui.frame.AbstractFrame;
 
 public class DataSetFrame extends AbstractFrame {
 	private static final long serialVersionUID = 4488466762680050937L;
