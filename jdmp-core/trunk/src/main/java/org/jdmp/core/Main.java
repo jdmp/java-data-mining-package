@@ -21,12 +21,18 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.core.module;
+package org.jdmp.core;
 
-public abstract class ModuleFactory {
+public class Main {
 
-	public static Module emptyModule() {
-		return new DefaultModule();
+	public static void main(String[] args) {
+		System.out.println("Welcome to the Java Data Mining Package (JDMP)");
+		System.out.println();
+		System.out.println("JDMP is not a standalone program, but a Java library.");
+		System.out.println("You can use it for analyzing data in your own applications.");
+		System.out.println("If you would like to find out more, please take a look at the");
+		System.out.println("JDMP homepage at http://www.jdmp.org");
+		System.out.println();
 	}
 
 }

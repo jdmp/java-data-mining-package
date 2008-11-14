@@ -26,8 +26,6 @@ package org.jdmp.core.variable;
 import java.lang.reflect.Constructor;
 import java.util.logging.Level;
 
-import javax.swing.ListSelectionModel;
-
 import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.util.AbstractEvent.EventType;
 import org.ujmp.core.Matrix;
@@ -49,7 +47,8 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 		if (getMatrixList() == null) {
 			return 0;
 		} else {
-			return getMatrixList().getMaxSize();
+			// return getMatrixList().getMaxSize();
+			return 0;
 		}
 	}
 
@@ -57,7 +56,7 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 		if (getMatrixList() == null) {
 			return 0;
 		} else {
-			return getMatrixList().size();
+			return getMatrixList().getSize();
 		}
 	}
 
@@ -65,14 +64,14 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 		if (getMatrixList() == null) {
 			return null;
 		} else {
-			return getMatrixList().getLast();
+			return getMatrixList().getElementAt(getMatrixList().getSize() - 1);
 		}
 	}
 
 	public final Matrix getMatrix(int index) {
 		if (getMatrixList() == null)
 			return null;
-		return getMatrixList().get(index);
+		return getMatrixList().getElementAt(index);
 	}
 
 	public final double getValue() throws MatrixException {
@@ -101,20 +100,20 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 		}
 
 		getMatrixList().add(m);
-		fireVariableEvent(new VariableEvent(this, EventType.ADDED, getMatrixList().size() - 1, m));
+		fireVariableEvent(new VariableEvent(this, EventType.ADDED, getMatrixList().getSize() - 1, m));
 
 	}
 
 	public final void removeVariableListener(VariableListener l) {
-		//getListenerList().add(VariableListener.class, l);
+		// getListenerList().add(VariableListener.class, l);
 	}
 
 	public final void fireVariableEvent(VariableEvent e) {
-//		for (Object o : getListenerList().getListenerList()) {
-//			if (o instanceof VariableListener) {
-//				((VariableListener) o).valueChanged(e);
-//			}
-//		}
+		// for (Object o : getListenerList().getListenerList()) {
+		// if (o instanceof VariableListener) {
+		// ((VariableListener) o).valueChanged(e);
+		// }
+		// }
 	}
 
 	public final void setMatrix(int index, Matrix m) {
@@ -122,13 +121,13 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 			if (getColumnCount() == 0 || getRowCount() == 0) {
 				setSize(m.getRowCount(), m.getColumnCount());
 			}
-			getMatrixList().set(index, m);
+			// getMatrixList()..set(index, m);
 			fireVariableEvent(new VariableEvent(this, EventType.UPDATED, index, m));
 		}
 	}
 
 	public final void addVariableListener(VariableListener l) {
-		//getListenerList().add(VariableListener.class, l);
+		// getListenerList().add(VariableListener.class, l);
 	}
 
 	public final int getIndexOfMatrix(Matrix m) {
@@ -151,22 +150,6 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 
 	public final long getColumnCount() {
 		return getSize()[COLUMN];
-	}
-
-	public final ListSelectionModel getRowSelectionModel() {
-		if (getMatrixList() != null) {
-			return getMatrixList().getRowSelectionModel();
-		} else {
-			return null;
-		}
-	}
-
-	public final ListSelectionModel getColumnSelectionModel() {
-		if (getMatrixList() != null) {
-			return getMatrixList().getColumnSelectionModel();
-		} else {
-			return null;
-		}
 	}
 
 	public final double getMinValue() throws MatrixException {
@@ -218,6 +201,7 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 		return guiObject;
 	}
 
+	@Override
 	public final String toString() {
 		if (getLabel() == null) {
 			return getClass().getSimpleName();

@@ -32,7 +32,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
 import org.jdmp.core.variable.Variable;
-import org.ujmp.gui.matrix.Matrix3DTableCellRenderer;
 import org.ujmp.gui.matrix.MatrixRenderer;
 
 public class VariableTableCellRenderer implements TableCellRenderer {
@@ -42,7 +41,8 @@ public class VariableTableCellRenderer implements TableCellRenderer {
 
 	private final MatrixRenderer matrixRenderer = new MatrixRenderer();
 
-	private final Matrix3DTableCellRenderer timeSeriesRenderer = new Matrix3DTableCellRenderer();
+	// private final Matrix3DTableCellRenderer timeSeriesRenderer = new
+	// Matrix3DTableCellRenderer();
 
 	private Variable variable = null;
 
@@ -73,8 +73,10 @@ public class VariableTableCellRenderer implements TableCellRenderer {
 				o = variable.getMemorySize();
 				break;
 			case VariableListTableModel.HISTORYCOLUMN:
-				return timeSeriesRenderer.getTableCellRendererComponent(table, variable
-						.getMatrixList(), isSelected, hasFocus, row, column);
+				// return
+				// timeSeriesRenderer.getTableCellRendererComponent(table,
+				// variable
+				// .getMatrixList(), isSelected, hasFocus, row, column);
 			case VariableListTableModel.MATRIXCOLUMN:
 				return matrixRenderer.getTableCellRendererComponent(table, variable.getMatrix(),
 						isSelected, hasFocus, row, column);

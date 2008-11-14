@@ -33,7 +33,6 @@ import org.jdmp.core.interpreter.Command;
 import org.jdmp.core.interpreter.PrintCommand;
 import org.jdmp.core.interpreter.Result;
 import org.jdmp.core.interpreter.VariableCommand;
-import org.jdmp.core.module.DefaultModule;
 import org.jdmp.core.module.Module;
 import org.jdmp.core.variable.DefaultVariable;
 import org.jdmp.core.variable.Variable;
@@ -153,16 +152,6 @@ public class Executor {
 	public Result execute(List<Command> commands) throws Exception {
 		Command[] c = new Command[commands.size()];
 		return execute(commands.toArray(c));
-	}
-
-	public static void main(String[] args) throws Exception {
-		Module m = new DefaultModule();
-		System.out.println(m.execute("a=[3];"));
-		System.out.println(m.execute("a"));
-		System.out.println(m.execute("b=[5]"));
-		System.out.println(m.execute("b"));
-		System.out.println(m.execute("c=randn(a,b)"));
-		System.out.println(m.execute("c"));
 	}
 
 }

@@ -30,7 +30,6 @@ import javax.swing.JTabbedPane;
 
 import org.jdmp.gui.matrix.MatrixListPanel;
 import org.ujmp.core.exceptions.MatrixException;
-import org.ujmp.core.util.MatrixListToMatrixWrapper;
 import org.ujmp.gui.MatrixGUIObject;
 import org.ujmp.gui.matrix.MatrixEditorPanel;
 import org.ujmp.gui.matrix.MatrixPaintPanel;
@@ -40,7 +39,7 @@ import org.ujmp.gui.plot.MatrixPlot;
 public class VariablePanel extends AbstractPanel {
 	private static final long serialVersionUID = -4809155917354071285L;
 
-	private MatrixGUIObject matrixObject = null;
+	private final MatrixGUIObject matrixObject = null;
 
 	private MatrixListPanel matrixListPanel = null;
 
@@ -59,8 +58,9 @@ public class VariablePanel extends AbstractPanel {
 	public VariablePanel(VariableGUIObject v) throws MatrixException {
 		super(v);
 
-		matrixObject = (MatrixGUIObject) new MatrixListToMatrixWrapper(v.getVariable())
-				.getGUIObject();
+		// matrixObject = (MatrixGUIObject) new
+		// MatrixListToMatrixWrapper(v.getVariable())
+		// .getGUIObject();
 
 		matrixListPanel = new MatrixListPanel(v.getVariable());
 

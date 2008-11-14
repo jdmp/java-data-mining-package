@@ -33,8 +33,6 @@ import java.awt.event.MouseListener;
 
 import javax.swing.Action;
 import javax.swing.BorderFactory;
-import javax.swing.JComponent;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
@@ -50,16 +48,11 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
 import org.jdmp.core.variable.Variable;
-import org.ujmp.core.calculation.Calculation.Ret;
-import org.ujmp.core.doublematrix.calculation.entrywise.creators.Rand;
-import org.ujmp.core.doublematrix.calculation.entrywise.creators.Randn;
+import org.ujmp.core.Matrix;
 import org.ujmp.core.exceptions.MatrixException;
-import org.ujmp.core.interfaces.HasMatrixList;
 import org.ujmp.core.interfaces.HasToolTip;
 import org.ujmp.gui.MatrixGUIObject;
 import org.ujmp.gui.matrix.MatrixFrame;
-import org.ujmp.gui.matrix.actions.FillWithValueAction;
-import org.ujmp.gui.matrix.actions.MatrixActions;
 
 public class MatrixListPanel extends JPanel implements MouseListener, ListSelectionListener,
 		TableModelListener {
@@ -67,13 +60,13 @@ public class MatrixListPanel extends JPanel implements MouseListener, ListSelect
 
 	private JTable jTable = null;
 
-	private HasMatrixList variable = null;
+	private Variable variable = null;
 
 	private MatrixListTableModel dataModel = null;
 
 	private boolean scroll = true;
 
-	public MatrixListPanel(HasMatrixList variable) {
+	public MatrixListPanel(Variable variable) {
 		this.variable = variable;
 		this.setLayout(new GridBagLayout());
 
@@ -97,8 +90,8 @@ public class MatrixListPanel extends JPanel implements MouseListener, ListSelect
 			}
 		};
 
-		jTable.setSelectionModel(dataModel.getRowSelectionModel());
-		jTable.getSelectionModel().addListSelectionListener(this);
+		// jTable.setSelectionModel(dataModel.getRowSelectionModel());
+		// jTable.getSelectionModel().addListSelectionListener(this);
 		jTable.addMouseListener(this);
 		addMouseListener(this);
 		// jTable.addKeyListener(this);
@@ -126,11 +119,11 @@ public class MatrixListPanel extends JPanel implements MouseListener, ListSelect
 	}
 
 	private void registerKeyboardActions() {
-		for (JComponent c : new MatrixActions(this, null, dataModel)) {
-			if (c instanceof JMenuItem) {
-				registerKeyboardAction(((JMenuItem) c).getAction());
-			}
-		}
+		// for (JComponent c : new MatrixActions(this, null, dataModel)) {
+		// if (c instanceof JMenuItem) {
+		// registerKeyboardAction(((JMenuItem) c).getAction());
+		// }
+		// }
 	}
 
 	private void registerKeyboardAction(Action a) {
@@ -171,8 +164,8 @@ public class MatrixListPanel extends JPanel implements MouseListener, ListSelect
 			if (e.getClickCount() == 2) {
 				int row = jTable.rowAtPoint(e.getPoint());
 				jTable.setRowSelectionInterval(row, row);
-				MatrixGUIObject m = (MatrixGUIObject) dataModel.getValueAt(jTable.getSelectedRow(),
-						0);
+				MatrixGUIObject m = (MatrixGUIObject) ((Matrix) dataModel.getValueAt(jTable
+						.getSelectedRow(), 0)).getGUIObject();
 				MatrixFrame mf = new MatrixFrame(m);
 				mf.setVisible(true);
 			}
@@ -182,17 +175,18 @@ public class MatrixListPanel extends JPanel implements MouseListener, ListSelect
 		case MouseEvent.BUTTON3:
 			int row = jTable.rowAtPoint(e.getPoint());
 			jTable.setRowSelectionInterval(row, row);
-			MatrixGUIObject m = (MatrixGUIObject) dataModel.getValueAt(jTable.getSelectedRow(), 0);
+			MatrixGUIObject m = (MatrixGUIObject) ((Matrix) dataModel.getValueAt(jTable
+					.getSelectedRow(), 0));
 			JPopupMenu popup = new JPopupMenu();
 
 			if (variable instanceof Variable) {
-				for (JComponent c : new MatrixActions(this, m, variable)) {
-					popup.add(c);
-				}
+				// for (JComponent c : new MatrixActions(this, m, variable)) {
+				// popup.add(c);
+				// }
 			} else {
-				for (JComponent c : new MatrixActions(this, m, variable)) {
-					popup.add(c);
-				}
+				// for (JComponent c : new MatrixActions(this, m, variable)) {
+				// popup.add(c);
+				// }
 			}
 
 			popup.show(jTable, e.getX(), e.getY());
@@ -247,64 +241,6 @@ public class MatrixListPanel extends JPanel implements MouseListener, ListSelect
 			if (variable instanceof Variable) {
 				if (m != null) {
 					switch (e.getKeyChar()) {
-					case '.':
-						new FillWithValueAction(null, m, variable, "" + e.getKeyChar())
-								.actionPerformed(null);
-						break;
-					case '-':
-						new FillWithValueAction(null, m, variable, "" + e.getKeyChar())
-								.actionPerformed(null);
-						break;
-					case '0':
-						new FillWithValueAction(null, m, variable, "" + e.getKeyChar())
-								.actionPerformed(null);
-						break;
-					case '1':
-						new FillWithValueAction(null, m, variable, "" + e.getKeyChar())
-								.actionPerformed(null);
-						break;
-					case '2':
-						new FillWithValueAction(null, m, variable, "" + e.getKeyChar())
-								.actionPerformed(null);
-						break;
-					case '3':
-						new FillWithValueAction(null, m, variable, "" + e.getKeyChar())
-								.actionPerformed(null);
-						break;
-					case '4':
-						new FillWithValueAction(null, m, variable, "" + e.getKeyChar())
-								.actionPerformed(null);
-						break;
-					case '5':
-						new FillWithValueAction(null, m, variable, "" + e.getKeyChar())
-								.actionPerformed(null);
-						break;
-					case '6':
-						new FillWithValueAction(null, m, variable, "" + e.getKeyChar())
-								.actionPerformed(null);
-						break;
-					case '7':
-						new FillWithValueAction(null, m, variable, "" + e.getKeyChar())
-								.actionPerformed(null);
-						break;
-					case '8':
-						new FillWithValueAction(null, m, variable, "" + e.getKeyChar())
-								.actionPerformed(null);
-						break;
-					case '9':
-						new FillWithValueAction(null, m, variable, "" + e.getKeyChar())
-								.actionPerformed(null);
-						break;
-					case 'g':
-						new Randn(m.getMatrix()).calc(Ret.ORIG);
-						((Variable) variable).fireValueChanged(m.getMatrix());
-						break;
-					case 'u':
-						new Rand(m.getMatrix()).calc(Ret.ORIG);
-						((Variable) variable).fireValueChanged(m.getMatrix());
-						break;
-					default:
-						break;
 					}
 				}
 			}

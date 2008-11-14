@@ -23,6 +23,7 @@
 
 package org.jdmp.core.dataset;
 
+import org.jdmp.core.matrix.MatrixList;
 import org.jdmp.core.matrix.wrappers.DataSetPredictedMatrixWrapper;
 import org.jdmp.core.matrix.wrappers.DataSetTargetOutputMatrixWrapper;
 import org.jdmp.core.sample.DefaultSample;
@@ -31,8 +32,6 @@ import org.jdmp.core.variable.DefaultVariable;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
-import org.ujmp.core.collections.DefaultMatrixList;
-import org.ujmp.core.collections.MatrixList;
 import org.ujmp.core.exceptions.MatrixException;
 
 public class RegressionDataSet extends BasicDataSet {
@@ -143,9 +142,10 @@ public class RegressionDataSet extends BasicDataSet {
 		return -1;
 	}
 
+	@Override
 	public MatrixList getMatrixList() {
 		if (matrixList == null) {
-			matrixList = new DefaultMatrixList();
+			matrixList = new MatrixList();
 			matrixList.add(getInputMatrix());
 			matrixList.add(getPredictedMatrix());
 			matrixList.add(getTargetMatrix());

@@ -23,13 +23,12 @@
 
 package org.jdmp.core.dataset;
 
+import org.jdmp.core.matrix.MatrixList;
 import org.jdmp.core.matrix.wrappers.DataSetInputMatrixWrapper;
 import org.jdmp.core.sample.DefaultSample;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
-import org.ujmp.core.collections.DefaultMatrixList;
-import org.ujmp.core.collections.MatrixList;
 import org.ujmp.core.exceptions.MatrixException;
 
 public class BasicDataSet extends AbstractDataSet {
@@ -72,7 +71,7 @@ public class BasicDataSet extends AbstractDataSet {
 
 	public MatrixList getMatrixList() {
 		if (matrixList == null) {
-			matrixList = new DefaultMatrixList();
+			matrixList = new MatrixList();
 			matrixList.add(getInputMatrix());
 		}
 		return matrixList;

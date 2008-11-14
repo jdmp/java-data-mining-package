@@ -31,7 +31,6 @@ import javax.swing.JSplitPane;
 
 import org.jdmp.core.sample.HasSamples;
 import org.jdmp.core.variable.HasVariables;
-import org.jdmp.gui.matrix.MatrixListPanel;
 import org.jdmp.gui.util.ObjectListPanel;
 import org.ujmp.gui.matrix.panels.AbstractPanel;
 
@@ -47,8 +46,7 @@ public class DataSetPanel extends AbstractPanel {
 	public DataSetPanel(DataSetGUIObject ds) {
 		super(ds);
 
-		rightPanel.setLayout(new GridLayout(3, 1));
-		rightPanel.add(new MatrixListPanel(ds.getDataSet()));
+		rightPanel.setLayout(new GridLayout(2, 1));
 		rightPanel.add(new ObjectListPanel((HasVariables) ds.getDataSet()));
 		rightPanel.add(new ObjectListPanel((HasSamples) ds.getDataSet()));
 

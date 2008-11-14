@@ -23,22 +23,17 @@
 
 package org.jdmp.gui.matrix;
 
-import javax.swing.ListSelectionModel;
+import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
 import javax.swing.table.AbstractTableModel;
 
 import org.jdmp.core.variable.Variable;
-import org.jdmp.core.variable.VariableEvent;
-import org.jdmp.core.variable.VariableListener;
-import org.ujmp.core.Matrix;
-import org.ujmp.core.collections.MatrixList;
-import org.ujmp.core.interfaces.HasMatrixList;
 import org.ujmp.gui.MatrixGUIObject;
 
-public class MatrixListTableModel extends AbstractTableModel implements VariableListener,
-		HasMatrixList {
+public class MatrixListTableModel extends AbstractTableModel implements ListDataListener {
 	private static final long serialVersionUID = 1820859033991171760L;
 
-	private HasMatrixList variable = null;
+	private Variable variable = null;
 
 	public static final int INDEXCOLUMN = 0;
 
@@ -50,11 +45,8 @@ public class MatrixListTableModel extends AbstractTableModel implements Variable
 
 	public static final int LABELCOLUMN = 4;
 
-	public MatrixListTableModel(HasMatrixList v) {
+	public MatrixListTableModel(Variable v) {
 		this.variable = v;
-		if (v instanceof Variable) {
-			((Variable) variable).addVariableListener(this);
-		}
 	}
 
 	public int getRowCount() {
@@ -89,48 +81,22 @@ public class MatrixListTableModel extends AbstractTableModel implements Variable
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		MatrixGUIObject o = (MatrixGUIObject) variable.getMatrixList().get(rowIndex).getGUIObject();
-		return o;
+		return variable.getMatrixList().getElementAt(rowIndex);
 	}
 
-	public void valueChanged(VariableEvent e) {
-		switch (e.getType()) {
-		case ALLUPDATED:
-			super.fireTableDataChanged();
-			break;
-		case UPDATED:
-			super.fireTableRowsUpdated(e.getIndex(), e.getIndex());
-			break;
-		case ADDED:
-			super.fireTableRowsInserted(e.getIndex(), e.getIndex());
-			break;
-		case REMOVED:
-			super.fireTableRowsDeleted(e.getIndex(), e.getIndex());
-			break;
-		}
+	@Override
+	public void contentsChanged(ListDataEvent e) {
+		fireTableRowsUpdated(e.getIndex0(), e.getIndex1());
 	}
 
-	public ListSelectionModel getRowSelectionModel() {
-		return variable.getRowSelectionModel();
+	@Override
+	public void intervalAdded(ListDataEvent e) {
+		fireTableRowsInserted(e.getIndex0(), e.getIndex1());
 	}
 
-	public ListSelectionModel getColumnSelectionModel() {
-		return variable.getColumnSelectionModel();
-	}
-
-	public void fireValueChanged(Matrix m) {
-	}
-
-	public int getMatrixCount() {
-		return variable.getMatrixCount();
-	}
-
-	public MatrixList getMatrixList() {
-		return variable.getMatrixList();
-	}
-
-	public Matrix getMatrix(int index) {
-		return variable.getMatrix(index);
+	@Override
+	public void intervalRemoved(ListDataEvent e) {
+		fireTableRowsDeleted(e.getIndex0(), e.getIndex1());
 	}
 
 }

@@ -23,14 +23,11 @@
 
 package org.jdmp.core.variable;
 
-import javax.swing.event.EventListenerList;
-
+import org.jdmp.core.matrix.MatrixList;
+import org.jdmp.core.util.MatrixListToMatrixWrapper;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
-import org.ujmp.core.collections.DefaultMatrixList;
-import org.ujmp.core.collections.MatrixList;
 import org.ujmp.core.coordinates.Coordinates;
-import org.ujmp.core.util.MatrixListToMatrixWrapper;
 
 public class DefaultVariable extends AbstractVariable {
 	private static final long serialVersionUID = -7192491915167470355L;
@@ -63,12 +60,12 @@ public class DefaultVariable extends AbstractVariable {
 
 	public DefaultVariable() {
 		super();
-		matrixList = new DefaultMatrixList();
+		matrixList = new MatrixList();
 	}
 
 	public DefaultVariable(int count) {
 		this();
-		matrixList = new DefaultMatrixList(count);
+		matrixList = new MatrixList(count);
 	}
 
 	public DefaultVariable(MatrixList matrixList) {
@@ -79,7 +76,7 @@ public class DefaultVariable extends AbstractVariable {
 
 	public DefaultVariable(Matrix matrix) {
 		this();
-		matrixList = new DefaultMatrixList(1);
+		matrixList = new MatrixList(1);
 		addMatrix(matrix);
 	}
 
@@ -102,20 +99,20 @@ public class DefaultVariable extends AbstractVariable {
 	public DefaultVariable(String label, int memorySize) {
 		this();
 		setLabel(label);
-		this.matrixList = new DefaultMatrixList(memorySize);
+		this.matrixList = new MatrixList(memorySize);
 	}
 
 	public DefaultVariable(String label, int rows, int columns) {
 		this();
 		setLabel(label);
 		setSize(rows, columns);
-		this.matrixList = new DefaultMatrixList((int) Math.ceil(1000000.0 / rows / columns));
+		this.matrixList = new MatrixList((int) Math.ceil(1000000.0 / rows / columns));
 	}
 
 	public DefaultVariable(String label, int memorySize, int rows, int columns) {
 		this();
 		setSize(rows, columns);
-		this.matrixList = new DefaultMatrixList(memorySize);
+		this.matrixList = new MatrixList(memorySize);
 		setLabel(label);
 	}
 

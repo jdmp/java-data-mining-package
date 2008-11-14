@@ -40,7 +40,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.TableCellRenderer;
 
 import org.jdmp.core.variable.Variable;
-import org.ujmp.gui.matrix.Matrix3DTableCellRenderer;
 import org.ujmp.gui.matrix.MatrixRenderer;
 import org.ujmp.gui.util.UIDefaults;
 
@@ -56,8 +55,6 @@ public class VariableListTableCellRenderer extends JPanel implements TableCellRe
 	private List variableList = null;
 
 	private final MatrixRenderer matrixRenderer = new MatrixRenderer();
-
-	private final Matrix3DTableCellRenderer timeSeriesRenderer = new Matrix3DTableCellRenderer();
 
 	private static int PADDINGX = UIManager.getInt("Table.paddingX");
 

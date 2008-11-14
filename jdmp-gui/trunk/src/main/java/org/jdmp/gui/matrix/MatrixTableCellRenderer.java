@@ -32,6 +32,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
+import org.ujmp.core.Matrix;
 import org.ujmp.core.util.StringUtil;
 import org.ujmp.gui.MatrixGUIObject;
 import org.ujmp.gui.matrix.MatrixRenderer;
@@ -67,10 +68,11 @@ public class MatrixTableCellRenderer implements TableCellRenderer {
 
 		l = null;
 
-		if (value instanceof MatrixGUIObject)
-			matrix = (MatrixGUIObject) value;
-		else
+		if (value instanceof Matrix) {
+			matrix = (MatrixGUIObject) ((Matrix) value).getGUIObject();
+		} else {
 			matrix = null;
+		}
 
 		if (matrix != null) {
 			switch (column) {

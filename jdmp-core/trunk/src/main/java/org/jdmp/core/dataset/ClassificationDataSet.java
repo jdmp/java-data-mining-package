@@ -35,6 +35,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.logging.Level;
 
+import org.jdmp.core.matrix.MatrixList;
 import org.jdmp.core.sample.ClassificationSample;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.ObservableList;
@@ -44,8 +45,6 @@ import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.calculation.CalculationMatrix;
 import org.ujmp.core.calculation.Calculation.Ret;
-import org.ujmp.core.collections.DefaultMatrixList;
-import org.ujmp.core.collections.MatrixList;
 import org.ujmp.core.doublematrix.calculation.general.statistical.IndexOfMax;
 import org.ujmp.core.enums.FileFormat;
 import org.ujmp.core.exceptions.MatrixException;
@@ -231,7 +230,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 	@Override
 	public MatrixList getMatrixList() {
 		if (matrixList == null) {
-			matrixList = new DefaultMatrixList();
+			matrixList = new MatrixList();
 			matrixList.add(getInputMatrix());
 			matrixList.add(getPredictedMatrix());
 			matrixList.add(getTargetMatrix());

@@ -24,14 +24,12 @@
 package org.jdmp.core.variable;
 
 import org.jdmp.core.CoreObject;
+import org.jdmp.core.matrix.HasMatrixList;
+import org.jdmp.core.matrix.MatrixList;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.exceptions.MatrixException;
-import org.ujmp.core.interfaces.HasDescription;
-import org.ujmp.core.interfaces.HasLabel;
-import org.ujmp.core.interfaces.HasMatrix;
-import org.ujmp.core.interfaces.HasMatrixList;
 
-public interface Variable extends CoreObject, HasLabel, HasDescription, HasMatrix, HasMatrixList {
+public interface Variable extends CoreObject, HasMatrixList {
 	public static final Class<?>[] VARIABLEARRAY = new Class<?>[] { new Variable[] {}.getClass() };
 
 	public long[] getSize();
@@ -46,7 +44,15 @@ public interface Variable extends CoreObject, HasLabel, HasDescription, HasMatri
 
 	public Matrix getAsMatrix();
 
+	public MatrixList getMatrixList();
+
 	public void addMatrix(Matrix m);
+
+	public int getMatrixCount();
+
+	public Matrix getMatrix();
+
+	public Matrix getMatrix(int index);
 
 	public void removeVariableListener(VariableListener l);
 
