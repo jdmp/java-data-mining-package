@@ -36,7 +36,7 @@ public class AlgorithmMenuBar extends DefaultMenuBar {
 
 	public AlgorithmMenuBar(JComponent component, AlgorithmGUIObject o) {
 		super(component, o);
-		JMenu menu = new JMenu("" + o.getClass().getSimpleName());
+		JMenu menu = new JMenu("Algorithm");
 		List<JComponent> actions = new AlgorithmActions(component, o);
 		for (JComponent c : actions) {
 			menu.add(c);

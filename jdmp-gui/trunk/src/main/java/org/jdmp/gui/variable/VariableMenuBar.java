@@ -36,7 +36,7 @@ public class VariableMenuBar extends DefaultMenuBar {
 
 	public VariableMenuBar(JComponent component, VariableGUIObject o) {
 		super(component, o);
-		JMenu menu = new JMenu("" + o.getClass().getSimpleName());
+		JMenu menu = new JMenu("Variable");
 		List<JComponent> actions = new VariableActions(component, o);
 		for (JComponent c : actions) {
 			menu.add(c);

@@ -31,6 +31,7 @@ public class ModuleFrame extends AbstractFrame {
 
 	public ModuleFrame(ModuleGUIObject m) throws MatrixException {
 		super(m, new ModulePanel(m));
+		setJMenuBar(new ModuleMenuBar(m));
 	}
 
 }

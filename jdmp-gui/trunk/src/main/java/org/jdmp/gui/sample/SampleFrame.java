@@ -31,6 +31,7 @@ public class SampleFrame extends AbstractFrame {
 
 	public SampleFrame(SampleGUIObject p) throws MatrixException {
 		super(p, new SamplePanel(p));
+		setJMenuBar(new SampleMenuBar(null, p));
 	}
 
 }

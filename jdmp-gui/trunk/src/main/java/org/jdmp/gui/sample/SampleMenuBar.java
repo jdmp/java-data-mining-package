@@ -36,7 +36,7 @@ public class SampleMenuBar extends DefaultMenuBar {
 
 	public SampleMenuBar(JComponent component, SampleGUIObject o) {
 		super(component, o);
-		JMenu menu = new JMenu("" + o.getClass().getSimpleName());
+		JMenu menu = new JMenu("Sample");
 		List<JComponent> actions = new SampleActions(component, o);
 		for (JComponent c : actions) {
 			menu.add(c);

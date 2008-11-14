@@ -31,6 +31,7 @@ public class VariableFrame extends AbstractFrame {
 
 	public VariableFrame(VariableGUIObject v) throws MatrixException {
 		super(v, new VariablePanel(v));
+		setJMenuBar(new VariableMenuBar(null, v));
 	}
 
 }

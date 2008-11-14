@@ -36,7 +36,7 @@ public class DataSetMenuBar extends DefaultMenuBar {
 
 	public DataSetMenuBar(JComponent component, DataSetGUIObject o) {
 		super(component, o);
-		JMenu menu = new JMenu("" + o.getClass().getSimpleName());
+		JMenu menu = new JMenu("DataSet");
 		List<JComponent> actions = new DataSetActions(component, o);
 		for (JComponent c : actions) {
 			menu.add(c);

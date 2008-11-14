@@ -31,6 +31,7 @@ public class DataSetFrame extends AbstractFrame {
 
 	public DataSetFrame(DataSetGUIObject ds) throws MatrixException {
 		super(ds, new DataSetPanel(ds));
+		setJMenuBar(new DataSetMenuBar(null, ds));
 	}
 
 }

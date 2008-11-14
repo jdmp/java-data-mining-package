@@ -31,6 +31,7 @@ public class AlgorithmFrame extends AbstractFrame {
 
 	public AlgorithmFrame(AlgorithmGUIObject a) throws MatrixException {
 		super(a, new AlgorithmPanel(a));
+		setJMenuBar(new AlgorithmMenuBar(null, a));
 	}
 
 }
