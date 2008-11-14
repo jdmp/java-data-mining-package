@@ -110,12 +110,6 @@
 				<version>${jdmp.version}</version>
 				<scope>compile</scope>
 			</dependency>
-			<dependency>
-				<groupId>org.jdmp</groupId>
-				<artifactId>jdmp-itext</artifactId>
-				<version>${jdmp.version}</version>
-				<scope>compile</scope>
-			</dependency>
 						
 		    <dependency>
       			<groupId>org.jdmp</groupId>

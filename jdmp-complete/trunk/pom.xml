@@ -47,10 +47,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-itext</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-libsvm</artifactId>
 		</dependency>
 		<dependency>
