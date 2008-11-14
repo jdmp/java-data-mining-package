@@ -43,7 +43,7 @@ public class Minus extends AlgorithmTwoSources {
 		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
 		Matrix source1 = input.get(SOURCE1);
 		Matrix source2 = input.get(SOURCE2);
-		Matrix target = new org.ujmp.core.doublecalculation.basic.Minus(source1, source2).calcNew();
+		Matrix target = new org.ujmp.core.doublematrix.calculation.basic.Minus(source1, source2).calcNew();
 		result.put(TARGET, target);
 		return result;
 	}

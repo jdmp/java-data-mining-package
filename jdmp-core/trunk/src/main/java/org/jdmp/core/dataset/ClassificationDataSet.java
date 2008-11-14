@@ -46,7 +46,7 @@ import org.ujmp.core.calculation.CalculationMatrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.collections.DefaultMatrixList;
 import org.ujmp.core.collections.MatrixList;
-import org.ujmp.core.doublecalculation.general.statistical.IndexOfMax;
+import org.ujmp.core.doublematrix.calculation.general.statistical.IndexOfMax;
 import org.ujmp.core.enums.FileFormat;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.util.MathUtil;

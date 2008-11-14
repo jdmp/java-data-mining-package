@@ -43,7 +43,7 @@ public class LogisticFunction extends AlgorithmOneSource {
 		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
 
 		Matrix in = input.get(SOURCE);
-		result.put(TARGET, new org.ujmp.core.doublecalculation.entrywise.misc.LogisticFunction(in)
+		result.put(TARGET, new org.ujmp.core.doublematrix.calculation.entrywise.misc.LogisticFunction(in)
 				.calcNew());
 		return result;
 	}

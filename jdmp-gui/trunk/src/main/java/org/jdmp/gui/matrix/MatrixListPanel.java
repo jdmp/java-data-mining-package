@@ -51,8 +51,8 @@ import javax.swing.event.TableModelListener;
 
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.calculation.Calculation.Ret;
-import org.ujmp.core.doublecalculation.entrywise.creators.Rand;
-import org.ujmp.core.doublecalculation.entrywise.creators.Randn;
+import org.ujmp.core.doublematrix.calculation.entrywise.creators.Rand;
+import org.ujmp.core.doublematrix.calculation.entrywise.creators.Randn;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.interfaces.HasMatrixList;
 import org.ujmp.core.interfaces.HasToolTip;
