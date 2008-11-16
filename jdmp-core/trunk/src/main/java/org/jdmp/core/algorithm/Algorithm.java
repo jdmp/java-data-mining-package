@@ -38,14 +38,6 @@ public interface Algorithm extends CoreObject, HasVariableMap, HasAlgorithmMap {
 		NotConnected, Incoming, Outgoing, Bidirectional
 	};
 
-	public static final int NOTCONNECTED = 0;
-
-	public static final int INCOMING = 1;
-
-	public static final int OUTGOING = 2;
-
-	public static final int BIDIRECTIONAL = 3;
-
 	public void setVariable(Object key, Variable variable);
 
 	public void setAlgorithm(Object key, Algorithm a);
@@ -62,7 +54,6 @@ public interface Algorithm extends CoreObject, HasVariableMap, HasAlgorithmMap {
 
 	public EdgeDirection getEdgeDirection(Object key);
 
-	
 	public String getEdgeLabel(Object key);
 
 	public void setEdgeDirection(Object key, EdgeDirection direction);
