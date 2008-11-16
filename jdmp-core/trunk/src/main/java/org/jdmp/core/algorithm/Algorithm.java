@@ -62,10 +62,7 @@ public interface Algorithm extends CoreObject, HasVariableMap, HasAlgorithmMap {
 
 	public EdgeDirection getEdgeDirection(Object key);
 
-	public Matrix getMatrixFromVariable(Object key, int matrixIndex);
-
-	public void setMatrixForVariable(Object key, int matrixIndex, Matrix matrix);
-
+	
 	public String getEdgeLabel(Object key);
 
 	public void setEdgeDirection(Object key, EdgeDirection direction);

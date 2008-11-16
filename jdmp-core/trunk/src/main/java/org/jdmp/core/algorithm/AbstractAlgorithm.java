@@ -205,14 +205,6 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 			return v.getMatrix();
 	}
 
-	public final Matrix getMatrixFromVariable(Object variableIndex, int matrixIndex) {
-		Variable v = variableMap.get(variableIndex);
-		if (v == null)
-			return null;
-		else
-			return v.getMatrix(matrixIndex);
-	}
-
 	public Matrix getMatrix(Object variableKey) {
 		Variable v = getVariableList().get(variableKey);
 		if (v != null) {
@@ -229,12 +221,6 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 			getVariableList().put(variableKey, v);
 		}
 		v.addMatrix(matrix);
-	}
-
-	public final void setMatrixForVariable(Object variableIndex, int matrixIndex, Matrix matrix) {
-		Variable v = variableMap.get(variableIndex);
-		if (v != null)
-			v.setMatrix(matrixIndex, matrix);
 	}
 
 	public final ObservableMap<Variable> getVariableList() {

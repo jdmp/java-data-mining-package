@@ -25,7 +25,6 @@ package org.jdmp.core.variable;
 
 import org.jdmp.core.CoreObject;
 import org.jdmp.core.matrix.HasMatrixList;
-import org.jdmp.core.matrix.MatrixList;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.exceptions.MatrixException;
 
@@ -44,8 +43,6 @@ public interface Variable extends CoreObject, HasMatrixList {
 
 	public Matrix getAsMatrix();
 
-	public MatrixList getMatrixList();
-
 	public void addMatrix(Matrix m);
 
 	public int getMatrixCount();
@@ -54,13 +51,7 @@ public interface Variable extends CoreObject, HasMatrixList {
 
 	public Matrix getMatrix(int index);
 
-	public void removeVariableListener(VariableListener l);
-
-	public void fireVariableEvent(VariableEvent e);
-
 	public void setMatrix(int index, Matrix m);
-
-	public void addVariableListener(VariableListener l);
 
 	public int getIndexOfMatrix(Matrix m);
 
@@ -72,17 +63,4 @@ public interface Variable extends CoreObject, HasMatrixList {
 
 	public double getMaxValue() throws MatrixException;
 
-	public long getIndexOfMaximum() throws MatrixException;
-
-	public long getIndexOfMinimum() throws MatrixException;
-
-	public Matrix getMeanMatrix() throws MatrixException;
-
-	public Matrix getMaxMatrix() throws MatrixException;
-
-	public Matrix getMinMatrix() throws MatrixException;
-
-	public Matrix getVarianceMatrix() throws MatrixException;
-
-	public Matrix getStandardDeviationMatrix() throws MatrixException;
 }
