@@ -30,8 +30,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 
-import javax.swing.ListSelectionModel;
-
 import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.ObservableList;
@@ -106,25 +104,6 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 
 	public void clear() {
 		sampleList.clear();
-	}
-
-	public void fireValueChanged(Matrix m) {
-	}
-
-	public ListSelectionModel getColumnSelectionModel() {
-		return getMatrixList().getColumnSelectionModel();
-	}
-
-	public int getMatrixCount() {
-		return getMatrixList().size();
-	}
-
-	public final Matrix getMatrix(int index) {
-		return getMatrixList().get(index);
-	}
-
-	public ListSelectionModel getRowSelectionModel() {
-		return getMatrixList().getRowSelectionModel();
 	}
 
 	public List<DataSet> splitByCount(boolean shuffle, int... count) {

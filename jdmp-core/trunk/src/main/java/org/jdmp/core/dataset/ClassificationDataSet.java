@@ -35,7 +35,6 @@ import java.util.Random;
 import java.util.Set;
 import java.util.logging.Level;
 
-import org.jdmp.core.matrix.MatrixList;
 import org.jdmp.core.sample.ClassificationSample;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.ObservableList;
@@ -53,11 +52,11 @@ import org.ujmp.core.util.MathUtil;
 public class ClassificationDataSet extends RegressionDataSet {
 	private static final long serialVersionUID = 3969274321783319184L;
 
-	public static final int ACCURACY = 1;
+	public static final String ACCURACY = "Accuracy";
 
-	public static final int CONFUSION = 2;
+	public static final String CONFUSION = "Confusion";
 
-	public static final int ERRORCOUNT = 3;
+	public static final String ERRORCOUNT = "ErrorCount";
 
 	private Matrix targetClassMatrix = null;
 
@@ -83,8 +82,8 @@ public class ClassificationDataSet extends RegressionDataSet {
 	public static ClassificationDataSet linkToMatrix(Matrix input, Matrix target)
 			throws MatrixException {
 		ClassificationDataSet ds = new ClassificationDataSet();
-		ds.inputMatrix = input;
-		ds.targetMatrix = target;
+		ds.getInputVariable().addMatrix(input);
+		ds.getTargetVariable().addMatrix(target);
 
 		for (int i = 0; i < input.getRowCount(); i++) {
 			if (i % 1000 == 0) {
@@ -227,18 +226,6 @@ public class ClassificationDataSet extends RegressionDataSet {
 		}
 	}
 
-	@Override
-	public MatrixList getMatrixList() {
-		if (matrixList == null) {
-			matrixList = new MatrixList();
-			matrixList.add(getInputMatrix());
-			matrixList.add(getPredictedMatrix());
-			matrixList.add(getTargetMatrix());
-			matrixList.add(getTargetClassMatrix());
-		}
-		return matrixList;
-	}
-
 	public Variable getConfusionVariable() {
 		return getVariableList().get(CONFUSION);
 	}
@@ -265,10 +252,6 @@ public class ClassificationDataSet extends RegressionDataSet {
 
 	public void appendErrorCountMatrix(Matrix m) {
 		getErrorCountVariable().addMatrix(m);
-	}
-
-	public void addMissingValues(int dimension, double percentMissing) throws MatrixException {
-		getInputMatrix().addMissing(Ret.ORIG, dimension, percentMissing);
 	}
 
 	public double getAccuracy() throws MatrixException {

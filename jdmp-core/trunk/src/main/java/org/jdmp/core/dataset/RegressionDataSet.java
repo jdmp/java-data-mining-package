@@ -23,13 +23,13 @@
 
 package org.jdmp.core.dataset;
 
-import org.jdmp.core.matrix.MatrixList;
 import org.jdmp.core.matrix.wrappers.DataSetPredictedMatrixWrapper;
-import org.jdmp.core.matrix.wrappers.DataSetTargetOutputMatrixWrapper;
+import org.jdmp.core.matrix.wrappers.DataSetTargetMatrixWrapper;
 import org.jdmp.core.sample.DefaultSample;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.DefaultVariable;
 import org.jdmp.core.variable.Variable;
+import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.exceptions.MatrixException;
@@ -37,15 +37,23 @@ import org.ujmp.core.exceptions.MatrixException;
 public class RegressionDataSet extends BasicDataSet {
 	private static final long serialVersionUID = -3243395577983195632L;
 
-	public static final int RMSE = 0;
+	public static final String RMSE = "RMSE";
 
-	private Matrix predictedMatrix = null;
+	public static final String PREDICTED = "Predicted";
 
-	protected Matrix targetMatrix = null;
+	public static final String TARGET = "Target";
 
 	public RegressionDataSet(String label) {
 		super(label);
 		getVariableList().put(RMSE, new DefaultVariable("RMSE", 10000));
+		Matrix targetMatrix = new DataSetTargetMatrixWrapper(this);
+		Variable target = VariableFactory.labeledVariable("Target");
+		target.addMatrix(targetMatrix);
+		getVariableList().put(TARGET, target);
+		Matrix predictedMatrix = new DataSetTargetMatrixWrapper(this);
+		Variable predicted = VariableFactory.labeledVariable("Predicted");
+		predicted.addMatrix(predictedMatrix);
+		getVariableList().put(PREDICTED, predicted);
 	}
 
 	public RegressionDataSet() {
@@ -97,16 +105,17 @@ public class RegressionDataSet extends BasicDataSet {
 	public Variable getRMSEVariable() {
 		return getVariableList().get(RMSE);
 	}
+	
+	public Variable getTargetVariable() {
+		return getVariableList().get(TARGET);
+	}
 
 	public void appendRMSEMatrix(Matrix m) {
 		getRMSEVariable().addMatrix(m);
 	}
 
 	public Matrix getTargetMatrix() {
-		if (targetMatrix == null) {
-			targetMatrix = new DataSetTargetOutputMatrixWrapper(this);
-		}
-		return targetMatrix;
+		return getTargetVariable().getMatrix();
 	}
 
 	public double getEarlyStoppingRMSE(int numberOfSteps) {
@@ -142,22 +151,12 @@ public class RegressionDataSet extends BasicDataSet {
 		return -1;
 	}
 
-	@Override
-	public MatrixList getMatrixList() {
-		if (matrixList == null) {
-			matrixList = new MatrixList();
-			matrixList.add(getInputMatrix());
-			matrixList.add(getPredictedMatrix());
-			matrixList.add(getTargetMatrix());
-		}
-		return matrixList;
+	public Variable getPredictedVariable() {
+		return getVariableList().get(PREDICTED);
 	}
-
+	
 	public Matrix getPredictedMatrix() {
-		if (predictedMatrix == null) {
-			predictedMatrix = new DataSetPredictedMatrixWrapper(this);
-		}
-		return predictedMatrix;
+		return getPredictedVariable().getMatrix();
 	}
 
 	public double getRMSE() throws MatrixException {
@@ -173,12 +172,4 @@ public class RegressionDataSet extends BasicDataSet {
 		return getRMSEVariable().getMatrix();
 	}
 
-	public int getFeatureCount() {
-		Matrix m = getInputMatrix();
-		if (m == null) {
-			return 0;
-		} else {
-			return (int) m.getColumnCount();
-		}
-	}
 }

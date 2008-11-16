@@ -97,7 +97,7 @@ public class MultiLabelNaiveBayesClassifier extends AbstractClassifier {
 		int featureCount = dataSet.getFeatureCount();
 		int sampleCount = dataSet.getSampleList().getSize();
 
-		Matrix featureMatrix = dataSet.getInputMatrix();
+		Matrix featureMatrix = dataSet.getInputVariable().getMatrix();
 		Matrix labelMatrix = dataSet.getTargetMatrix();
 		Matrix maxMatrix = MatrixFactory.zeros(1, featureCount);
 

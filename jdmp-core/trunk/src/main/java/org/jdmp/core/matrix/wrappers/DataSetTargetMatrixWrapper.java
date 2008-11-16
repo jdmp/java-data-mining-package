@@ -30,13 +30,13 @@ import org.ujmp.core.doublematrix.AbstractDenseDoubleMatrix2D;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.interfaces.Wrapper;
 
-public class DataSetTargetOutputMatrixWrapper extends AbstractDenseDoubleMatrix2D implements
+public class DataSetTargetMatrixWrapper extends AbstractDenseDoubleMatrix2D implements
 		Wrapper<RegressionDataSet> {
 	private static final long serialVersionUID = 5906451226992160036L;
 
 	private RegressionDataSet dataSet = null;
 
-	public DataSetTargetOutputMatrixWrapper(RegressionDataSet ds) {
+	public DataSetTargetMatrixWrapper(RegressionDataSet ds) {
 		this.dataSet = ds;
 	}
 

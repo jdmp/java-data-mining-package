@@ -23,10 +23,10 @@
 
 package org.jdmp.core.dataset;
 
-import org.jdmp.core.matrix.MatrixList;
 import org.jdmp.core.matrix.wrappers.DataSetInputMatrixWrapper;
 import org.jdmp.core.sample.DefaultSample;
 import org.jdmp.core.variable.Variable;
+import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.exceptions.MatrixException;
@@ -34,9 +34,7 @@ import org.ujmp.core.exceptions.MatrixException;
 public class BasicDataSet extends AbstractDataSet {
 	private static final long serialVersionUID = -2887879051530049677L;
 
-	protected Matrix inputMatrix = null;
-
-	protected MatrixList matrixList = null;
+	public static final String INPUT = "Input";
 
 	public BasicDataSet(Variable v) {
 		this(v.getLabel());
@@ -47,34 +45,45 @@ public class BasicDataSet extends AbstractDataSet {
 	}
 
 	public BasicDataSet(String label) {
-		super(label);
+		this();
+		setLabel(label);
 	}
 
 	public BasicDataSet() {
 		super();
+		Matrix inputMatrix = new DataSetInputMatrixWrapper(this);
+		Variable input = VariableFactory.labeledVariable("Input");
+		input.addMatrix(inputMatrix);
+		getVariableList().put(INPUT, input);
+	}
+
+	public final Variable getInputVariable() {
+		return getVariableList().get(INPUT);
 	}
 
 	public final void standardize(int dimension) throws MatrixException {
-		getInputMatrix().standardize(Ret.ORIG, dimension, true);
+		getInputVariable().getMatrix().standardize(Ret.ORIG, dimension, true);
 	}
 
 	public final void center(int dimension) throws MatrixException {
-		getInputMatrix().center(Ret.ORIG, dimension, true);
+		getInputVariable().getMatrix().center(Ret.ORIG, dimension, true);
 	}
 
-	public final Matrix getInputMatrix() {
-		if (inputMatrix == null) {
-			inputMatrix = new DataSetInputMatrixWrapper(this);
-		}
-		return inputMatrix;
+	public void addMissingValues(int dimension, double percentMissing) throws MatrixException {
+		getInputVariable().getMatrix().addMissing(Ret.ORIG, dimension, percentMissing);
 	}
 
-	public MatrixList getMatrixList() {
-		if (matrixList == null) {
-			matrixList = new MatrixList();
-			matrixList.add(getInputMatrix());
+	public Matrix getInputMatrix() {
+		return getInputVariable().getMatrix();
+	}
+
+	public int getFeatureCount() {
+		Matrix m = getInputVariable().getMatrix();
+		if (m == null) {
+			return 0;
+		} else {
+			return (int) m.getColumnCount();
 		}
-		return matrixList;
 	}
 
 }
