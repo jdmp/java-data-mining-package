@@ -30,7 +30,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -48,80 +47,41 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 
 import org.jdmp.core.CoreObject;
 import org.jdmp.core.algorithm.Algorithm;
-import org.jdmp.core.algorithm.HasAlgorithms;
-import org.jdmp.core.dataset.DataSet;
-import org.jdmp.core.dataset.HasDataSets;
-import org.jdmp.core.module.HasModuleList;
-import org.jdmp.core.module.Module;
-import org.jdmp.core.sample.ClassificationSample;
-import org.jdmp.core.sample.HasSampleList;
-import org.jdmp.core.sample.HasSamples;
-import org.jdmp.core.sample.Sample;
-import org.jdmp.core.variable.HasVariables;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.gui.algorithm.AlgorithmGUIObject;
-import org.jdmp.gui.algorithm.AlgorithmListTableModel;
-import org.jdmp.gui.algorithm.AlgorithmTableCellRenderer;
 import org.jdmp.gui.algorithm.actions.AlgorithmActions;
-import org.jdmp.gui.algorithm.actions.AlgorithmListActions;
 import org.jdmp.gui.dataset.DataSetGUIObject;
-import org.jdmp.gui.dataset.DataSetListTableModel;
-import org.jdmp.gui.dataset.DataSetTableCellRenderer;
 import org.jdmp.gui.dataset.actions.DataSetActions;
-import org.jdmp.gui.dataset.actions.DataSetListActions;
 import org.jdmp.gui.module.ModuleGUIObject;
-import org.jdmp.gui.module.ModuleListTableModel;
-import org.jdmp.gui.module.ModuleTableCellRenderer;
 import org.jdmp.gui.module.actions.ModuleActions;
-import org.jdmp.gui.module.actions.ModuleListActions;
 import org.jdmp.gui.sample.SampleGUIObject;
-import org.jdmp.gui.sample.SampleListTableModel;
-import org.jdmp.gui.sample.SampleTableCellRenderer;
 import org.jdmp.gui.sample.actions.SampleActions;
-import org.jdmp.gui.sample.actions.SampleListActions;
 import org.jdmp.gui.variable.VariableGUIObject;
-import org.jdmp.gui.variable.VariableListTableModel;
-import org.jdmp.gui.variable.VariableTableCellRenderer;
 import org.jdmp.gui.variable.actions.VariableActions;
-import org.jdmp.gui.variable.actions.VariableListActions;
-import org.ujmp.core.Matrix;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.core.interfaces.HasToolTip;
 import org.ujmp.gui.util.FrameManager;
 
-public class ObjectListPanel extends JPanel implements MouseListener, KeyListener,
+public abstract class AbstractListPanel extends JPanel implements MouseListener, KeyListener,
 		ListSelectionListener, TableModelListener {
 	private static final long serialVersionUID = -8449938064172061258L;
 
-	protected static final Logger logger = Logger.getLogger(ObjectListPanel.class.getName());
+	protected static final Logger logger = Logger.getLogger(AbstractListPanel.class.getName());
 
-	private static final int IVARIABLES = 1;
+	protected JTable jTable = null;
 
-	private static final int IALGORITHMS = 2;
+	protected GUIObject object = null;
 
-	private static final int IDATASETS = 3;
+	public final int ICONWIDTH = UIManager.getInt("Table.iconWidth");
 
-	private static final int IMODULES = 4;
+	protected TableModel dataModel = null;
 
-	private static final int ISAMPLES = 5;
+	protected JScrollPane scrollPane = null;
 
-	private JTable jTable = null;
-
-	private int type = 0;
-
-	private GUIObject object = null;
-
-	private final int ICONWIDTH = UIManager.getInt("Table.iconWidth");
-
-	private TableModel dataModel = null;
-
-	private JScrollPane scrollPane = null;
-
-	public ObjectListPanel() {
+	public AbstractListPanel() {
 		this.setLayout(new GridBagLayout());
 
 		setBorder(BorderFactory.createTitledBorder("Object List"));
@@ -172,136 +132,6 @@ public class ObjectListPanel extends JPanel implements MouseListener, KeyListene
 		return (TitledBorder) super.getBorder();
 	}
 
-	public ObjectListPanel(HasAlgorithms iAlgorithms) {
-		this();
-		this.object = ((CoreObject) iAlgorithms).getGUIObject();
-		this.type = IALGORITHMS;
-
-		dataModel = new AlgorithmListTableModel(iAlgorithms);
-		dataModel.addTableModelListener(this);
-		jTable.setDefaultRenderer(Algorithm.class, new AlgorithmTableCellRenderer());
-		jTable.setModel(dataModel);
-
-		jTable.getColumnModel().getColumn(AlgorithmListTableModel.ICONCOLUMN)
-				.setMinWidth(ICONWIDTH);
-		jTable.getColumnModel().getColumn(AlgorithmListTableModel.ICONCOLUMN)
-				.setMaxWidth(ICONWIDTH);
-		jTable.getColumnModel().getColumn(AlgorithmListTableModel.ICONCOLUMN).setPreferredWidth(
-				ICONWIDTH);
-
-		updateTitle();
-	}
-
-	public ObjectListPanel(HasDataSets iDataSets) {
-		this();
-		this.object = (GUIObject) iDataSets;
-		this.type = IDATASETS;
-
-		dataModel = new DataSetListTableModel(iDataSets);
-		dataModel.addTableModelListener(this);
-		jTable.setDefaultRenderer(DataSet.class, new DataSetTableCellRenderer());
-
-		jTable.setModel(dataModel);
-
-		jTable.getColumnModel().getColumn(DataSetListTableModel.ICONCOLUMN).setMinWidth(ICONWIDTH);
-		jTable.getColumnModel().getColumn(DataSetListTableModel.ICONCOLUMN).setMaxWidth(ICONWIDTH);
-		jTable.getColumnModel().getColumn(DataSetListTableModel.ICONCOLUMN).setPreferredWidth(
-				ICONWIDTH);
-
-		updateTitle();
-	}
-
-	public ObjectListPanel(HasModuleList iModules) {
-		this();
-		this.object = (GUIObject) iModules;
-		this.type = IMODULES;
-
-		dataModel = new ModuleListTableModel(iModules);
-		dataModel.addTableModelListener(this);
-		jTable.setDefaultRenderer(Module.class, new ModuleTableCellRenderer());
-
-		jTable.setModel(dataModel);
-
-		jTable.getColumnModel().getColumn(ModuleListTableModel.ICONCOLUMN).setMinWidth(ICONWIDTH);
-		jTable.getColumnModel().getColumn(ModuleListTableModel.ICONCOLUMN).setMaxWidth(ICONWIDTH);
-		jTable.getColumnModel().getColumn(ModuleListTableModel.ICONCOLUMN).setPreferredWidth(
-				ICONWIDTH);
-
-		updateTitle();
-	}
-
-	public ObjectListPanel(HasSamples iSamples) {
-		this();
-		if (iSamples instanceof CoreObject) {
-			this.object = ((CoreObject) iSamples).getGUIObject();
-		} else {
-			this.object = (GUIObject) iSamples;
-		}
-		this.type = ISAMPLES;
-
-		dataModel = new SampleListTableModel(iSamples);
-		dataModel.addTableModelListener(this);
-		jTable.setDefaultRenderer(Sample.class, new SampleTableCellRenderer());
-
-		jTable.setModel(dataModel);
-
-		TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(jTable.getModel()) {
-
-			@Override
-			public Comparator<?> getComparator(int column) {
-				switch (column) {
-				case SampleListTableModel.RMSECOLUMN:
-					return new Comparator<ClassificationSample>() {
-
-						public int compare(ClassificationSample s1, ClassificationSample s2) {
-							Matrix m1 = s1.getMatrix(Sample.RMSE);
-							Matrix m2 = s2.getMatrix(Sample.RMSE);
-							if (m1 != null && m2 != null) {
-								return m1.compareTo(m2);
-							} else {
-								return 0;
-							}
-						}
-
-					};
-				}
-				return super.getComparator(column);
-			}
-
-		};
-		jTable.setRowSorter(sorter);
-
-		jTable.getColumnModel().getColumn(SampleListTableModel.ICONCOLUMN).setMinWidth(ICONWIDTH);
-		jTable.getColumnModel().getColumn(SampleListTableModel.ICONCOLUMN).setMaxWidth(ICONWIDTH);
-		jTable.getColumnModel().getColumn(SampleListTableModel.ICONCOLUMN).setPreferredWidth(
-				ICONWIDTH);
-
-		updateTitle();
-	}
-
-	public ObjectListPanel(HasVariables iVariables) {
-		this();
-		if (iVariables instanceof CoreObject) {
-			this.object = ((CoreObject) iVariables).getGUIObject();
-		} else {
-			this.object = (GUIObject) iVariables;
-		}
-		this.type = IVARIABLES;
-
-		dataModel = new VariableListTableModel(iVariables);
-		dataModel.addTableModelListener(this);
-		jTable.setDefaultRenderer(Variable.class, new VariableTableCellRenderer());
-
-		jTable.setModel(dataModel);
-
-		jTable.getColumnModel().getColumn(VariableListTableModel.ICONCOLUMN).setMinWidth(ICONWIDTH);
-		jTable.getColumnModel().getColumn(VariableListTableModel.ICONCOLUMN).setMaxWidth(ICONWIDTH);
-		jTable.getColumnModel().getColumn(VariableListTableModel.ICONCOLUMN).setPreferredWidth(
-				ICONWIDTH);
-
-		updateTitle();
-	}
-
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == this)
 			mouseClickedOnObjectList(e);
@@ -317,23 +147,23 @@ public class ObjectListPanel extends JPanel implements MouseListener, KeyListene
 			break;
 		case MouseEvent.BUTTON3:
 			List<JComponent> actions = null;
-			switch (type) {
-			case IVARIABLES:
-				actions = new VariableListActions(this, (HasVariables) object);
-				break;
-			case IALGORITHMS:
-				actions = new AlgorithmListActions(this, (HasAlgorithms) object);
-				break;
-			case IDATASETS:
-				actions = new DataSetListActions(this, (HasDataSets) object);
-				break;
-			case IMODULES:
-				actions = new ModuleListActions(this, (HasModuleList) object);
-				break;
-			case ISAMPLES:
-				actions = new SampleListActions(this, (HasSampleList) object);
-				break;
-			}
+			// switch (type) {
+			// case IVARIABLES:
+			// actions = new VariableListActions(this, (HasVariables) object);
+			// break;
+			// case IALGORITHMS:
+			// actions = new AlgorithmListActions(this, (HasAlgorithms) object);
+			// break;
+			// case IDATASETS:
+			// actions = new DataSetListActions(this, (HasDataSets) object);
+			// break;
+			// case IMODULES:
+			// actions = new ModuleListActions(this, (HasModuleList) object);
+			// break;
+			// case ISAMPLES:
+			// actions = new SampleListActions(this, (HasSampleList) object);
+			// break;
+			// }
 			if (actions != null) {
 				JPopupMenu popup = new JPopupMenu();
 				for (JComponent jc : actions) {
@@ -499,28 +329,7 @@ public class ObjectListPanel extends JPanel implements MouseListener, KeyListene
 	public void valueChanged(ListSelectionEvent e) {
 	}
 
-	public void updateTitle() {
-		String name = "";
-		switch (type) {
-		case IALGORITHMS:
-			name = "Algorithms";
-			break;
-		case IVARIABLES:
-			name = "Variables";
-			break;
-		case IDATASETS:
-			name = "DataSets";
-			break;
-		case IMODULES:
-			name = "Modules";
-			break;
-		case ISAMPLES:
-			name = "Samples";
-			break;
-		}
-		getBorder().setTitle(name + " (" + jTable.getRowCount() + ")");
-		repaint(1000);
-	}
+	public abstract void updateTitle();
 
 	public void tableChanged(TableModelEvent e) {
 		updateTitle();

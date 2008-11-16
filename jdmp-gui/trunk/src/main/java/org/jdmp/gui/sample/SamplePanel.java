@@ -29,7 +29,7 @@ import java.awt.GridLayout;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
-import org.jdmp.gui.util.ObjectListPanel;
+import org.jdmp.gui.variable.VariableListPanel;
 import org.ujmp.gui.panels.AbstractPanel;
 
 public class SamplePanel extends AbstractPanel {
@@ -45,7 +45,7 @@ public class SamplePanel extends AbstractPanel {
 		super(s);
 
 		rightPanel.setLayout(new GridLayout(1, 1));
-		rightPanel.add(new ObjectListPanel(s.getSample()));
+		rightPanel.add(new VariableListPanel(s.getSample()));
 
 		splitPane.setLeftComponent(leftPanel);
 		splitPane.setRightComponent(rightPanel);

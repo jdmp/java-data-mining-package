@@ -32,7 +32,7 @@ import javax.swing.JSplitPane;
 
 import org.jdmp.core.algorithm.HasAlgorithms;
 import org.jdmp.core.variable.HasVariables;
-import org.jdmp.gui.util.ObjectListPanel;
+import org.jdmp.gui.variable.VariableListPanel;
 import org.ujmp.gui.panels.AbstractPanel;
 
 public class AlgorithmPanel extends AbstractPanel {
@@ -51,8 +51,8 @@ public class AlgorithmPanel extends AbstractPanel {
 		leftPanel.setBorder(BorderFactory.createTitledBorder("Algorithms and Variables"));
 
 		rightPanel.setLayout(new GridLayout(2, 1));
-		rightPanel.add(new ObjectListPanel((HasVariables) a.getAlgorithm()));
-		rightPanel.add(new ObjectListPanel((HasAlgorithms) a.getAlgorithm()));
+		rightPanel.add(new VariableListPanel((HasVariables) a.getAlgorithm()));
+		rightPanel.add(new AlgorithmListPanel((HasAlgorithms) a.getAlgorithm()));
 
 		splitPane.setLeftComponent(leftPanel);
 		splitPane.setRightComponent(rightPanel);
