@@ -42,9 +42,7 @@ import org.jdmp.core.variable.DefaultVariable;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
-import org.ujmp.core.calculation.CalculationMatrix;
 import org.ujmp.core.calculation.Calculation.Ret;
-import org.ujmp.core.doublematrix.calculation.general.statistical.IndexOfMax;
 import org.ujmp.core.enums.FileFormat;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.util.MathUtil;
@@ -57,8 +55,6 @@ public class ClassificationDataSet extends RegressionDataSet {
 	public static final String CONFUSION = "Confusion";
 
 	public static final String ERRORCOUNT = "ErrorCount";
-
-	private Matrix targetClassMatrix = null;
 
 	public ClassificationDataSet(File file, String separator) throws MatrixException, IOException {
 		this(file.getName());
@@ -151,14 +147,6 @@ public class ClassificationDataSet extends RegressionDataSet {
 			ds.getSampleList().add(s.clone());
 		}
 		return ds;
-	}
-
-	public Matrix getTargetClassMatrix() {
-		if (targetClassMatrix == null) {
-			targetClassMatrix = new CalculationMatrix(new IndexOfMax(COLUMN, getTargetMatrix()));
-			targetClassMatrix.setLabel("Target Class");
-		}
-		return targetClassMatrix;
 	}
 
 	public final void createFromMatrix(Matrix m) throws MatrixException {
