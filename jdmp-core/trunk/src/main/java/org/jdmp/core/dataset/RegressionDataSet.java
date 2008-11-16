@@ -50,7 +50,7 @@ public class RegressionDataSet extends BasicDataSet {
 		Variable target = VariableFactory.labeledVariable("Target");
 		target.addMatrix(targetMatrix);
 		getVariableList().put(TARGET, target);
-		Matrix predictedMatrix = new DataSetTargetMatrixWrapper(this);
+		Matrix predictedMatrix = new DataSetPredictedMatrixWrapper(this);
 		Variable predicted = VariableFactory.labeledVariable("Predicted");
 		predicted.addMatrix(predictedMatrix);
 		getVariableList().put(PREDICTED, predicted);
@@ -105,7 +105,7 @@ public class RegressionDataSet extends BasicDataSet {
 	public Variable getRMSEVariable() {
 		return getVariableList().get(RMSE);
 	}
-	
+
 	public Variable getTargetVariable() {
 		return getVariableList().get(TARGET);
 	}
@@ -154,7 +154,7 @@ public class RegressionDataSet extends BasicDataSet {
 	public Variable getPredictedVariable() {
 		return getVariableList().get(PREDICTED);
 	}
-	
+
 	public Matrix getPredictedMatrix() {
 		return getPredictedVariable().getMatrix();
 	}
