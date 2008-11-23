@@ -83,7 +83,7 @@ public class DefaultModule extends AbstractModule {
 
 	public Interpreter getInterpreter() {
 		if (interpreter == null) {
-			interpreter = new Interpreter();
+			interpreter = new Interpreter(this);
 		}
 		return interpreter;
 	}
