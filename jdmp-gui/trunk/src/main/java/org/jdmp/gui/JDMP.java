@@ -35,6 +35,8 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.PosixParser;
 import org.jdmp.core.matrix.system.LogMatrix;
+import org.jdmp.core.module.Module;
+import org.jdmp.core.module.ModuleFactory;
 import org.jdmp.gui.util.GlobalConfiguration;
 import org.ujmp.gui.actions.ObjectAction;
 
@@ -98,8 +100,11 @@ public class JDMP {
 
 		if (cmdLine.hasOption("t")) {
 			logger.info("starting in text mode");
+			Module m = ModuleFactory.emptyModule();
 		} else {
 			logger.info("starting in graphics mode");
+			Module m = ModuleFactory.emptyModule();
+			m.showGUI();
 		}
 
 	}

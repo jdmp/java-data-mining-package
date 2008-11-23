@@ -23,11 +23,8 @@
 
 package org.jdmp.core.module;
 
-import java.util.List;
-
 import org.jdmp.core.executor.Executor;
-import org.jdmp.core.interpreter.Command;
-import org.jdmp.core.interpreter.Interpreter;
+import org.jdmp.core.grammar.jdmp.interpreter.Interpreter;
 import org.jdmp.core.interpreter.Result;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
@@ -77,11 +74,6 @@ public class DefaultModule extends AbstractModule {
 		}
 	}
 
-	@Override
-	public Result execute(Command... commands) throws Exception {
-		return getExecutor().execute(commands);
-	}
-
 	public Executor getExecutor() {
 		if (executor == null) {
 			executor = new Executor(this);
@@ -97,13 +89,7 @@ public class DefaultModule extends AbstractModule {
 	}
 
 	@Override
-	public Result execute(List<Command> commands) throws Exception {
-		return getExecutor().execute(commands);
-	}
-
-	@Override
 	public Result execute(String script) throws Exception {
-		List<Command> commands = getInterpreter().parseScript(script);
-		return execute(commands);
+		return getInterpreter().execute(script);
 	}
 }
