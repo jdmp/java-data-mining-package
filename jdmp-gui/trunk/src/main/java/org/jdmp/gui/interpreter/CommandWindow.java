@@ -40,6 +40,8 @@ public class CommandWindow extends JPanel implements KeyListener {
 
 	private Module module = null;
 
+	private int endPos = 0;
+
 	private final JTextArea textField = new JTextArea();
 
 	public CommandWindow(Module m) {
@@ -48,6 +50,7 @@ public class CommandWindow extends JPanel implements KeyListener {
 		textField.addKeyListener(this);
 
 		textField.setText(">> ");
+		endPos = textField.getText().length();
 
 		setBorder(BorderFactory.createTitledBorder("Command Window"));
 		setLayout(new BorderLayout());
@@ -57,29 +60,30 @@ public class CommandWindow extends JPanel implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		filterKeys(e);
+
 		try {
-			int line = textField.getLineCount() - 1;
-			int lineStart = textField.getLineStartOffset(line);
-			int lineEnd = textField.getLineEndOffset(line);
-			int length = lineEnd - lineStart;
-			String text = textField.getText(lineStart + 3, length - 3);
 
-			if (e.getKeyCode() == KeyEvent.VK_UP) {
-				e.consume();
-			} else if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
-				if (text.length() == 3 && text.startsWith(">> ")) {
+			if (textField.getCaretPosition() >= endPos) {
+
+				int line = textField.getLineCount() - 1;
+				int lineStart = textField.getLineStartOffset(line);
+				int lineEnd = textField.getLineEndOffset(line);
+				int length = lineEnd - lineStart;
+				String text = textField.getText(lineStart + 3, length - 3);
+
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					Result result = module.execute(text);
+					textField.append("\n" + result + "\n>> ");
+					endPos = textField.getText().length();
+					textField.setCaretPosition(endPos);
 					e.consume();
+					return;
 				}
-			} else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-				Result result = module.execute(text);
-				textField.append("\n" + result + "\n>> ");
-				e.consume();
 			}
-
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-
 	}
 
 	@Override
@@ -88,6 +92,36 @@ public class CommandWindow extends JPanel implements KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
+		filterKeys(e);
+
+	}
+
+	public void filterKeys(KeyEvent e) {
+		try {
+
+			if (textField.getCaretPosition() < endPos) {
+				e.consume();
+				return;
+			}
+
+			if (e.getKeyCode() == KeyEvent.VK_UP) {
+				e.consume();
+				return;
+			}
+
+			if (textField.getCaretPosition() <= endPos) {
+				if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+					e.consume();
+					return;
+				} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+					e.consume();
+					return;
+				}
+			}
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 
 }
