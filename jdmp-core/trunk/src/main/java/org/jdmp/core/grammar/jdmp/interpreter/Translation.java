@@ -8,10 +8,13 @@ import org.jdmp.core.grammar.jdmp.node.ACharacterValue;
 import org.jdmp.core.grammar.jdmp.node.AColumn;
 import org.jdmp.core.grammar.jdmp.node.AColumnMatrix;
 import org.jdmp.core.grammar.jdmp.node.ACommaValue;
+import org.jdmp.core.grammar.jdmp.node.ADivisionFactor;
+import org.jdmp.core.grammar.jdmp.node.AExpressionTerm;
 import org.jdmp.core.grammar.jdmp.node.AFactorExpression;
 import org.jdmp.core.grammar.jdmp.node.AFloatingPointValue;
 import org.jdmp.core.grammar.jdmp.node.AIntegerValue;
 import org.jdmp.core.grammar.jdmp.node.AMatrixTerm;
+import org.jdmp.core.grammar.jdmp.node.AMultiplicationFactor;
 import org.jdmp.core.grammar.jdmp.node.ARow;
 import org.jdmp.core.grammar.jdmp.node.ARowMatrix;
 import org.jdmp.core.grammar.jdmp.node.AScalarMatrix;
@@ -70,14 +73,34 @@ public class Translation extends DepthFirstAdapter {
 	private Matrix getMatrix(PFactor factor) {
 		if (factor instanceof ATermFactor) {
 			return getMatrix(((ATermFactor) factor).getTerm());
+		} else if (factor instanceof AMultiplicationFactor) {
+			return getMatrixProduct(((AMultiplicationFactor) factor).getFactor(),
+					((AMultiplicationFactor) factor).getTerm());
+		} else if (factor instanceof ADivisionFactor) {
+			return getMatrixDivision(((ADivisionFactor) factor).getFactor(),
+					((ADivisionFactor) factor).getTerm());
 		} else {
 			throw new MatrixException("unknown factor type: " + factor.getClass().getSimpleName());
 		}
 	}
 
+	private Matrix getMatrixProduct(PFactor factor, PTerm term) {
+		Matrix m1 = getMatrix(factor);
+		Matrix m2 = getMatrix(term);
+		return m1.mtimes(m2);
+	}
+
+	private Matrix getMatrixDivision(PFactor factor, PTerm term) {
+		Matrix m1 = getMatrix(factor);
+		Matrix m2 = getMatrix(term);
+		return m1.divide(m2);
+	}
+
 	private Matrix getMatrix(PTerm term) {
 		if (term instanceof AMatrixTerm) {
 			return getMatrix(((AMatrixTerm) term).getMatrix());
+		} else if (term instanceof AExpressionTerm) {
+			return getMatrix(((AExpressionTerm) term).getExpression());
 		} else {
 			throw new MatrixException("unknown term type: " + term.getClass().getSimpleName());
 		}
@@ -242,7 +265,7 @@ public class Translation extends DepthFirstAdapter {
 
 	public static void main(String[] args) throws Exception {
 		Module m = ModuleFactory.emptyModule();
-		m.execute("a=[ 5.034,'d',True;3,5,3 ; 7,8]");
+		m.execute("a= (1/6)+5;");
 	}
 
 }
