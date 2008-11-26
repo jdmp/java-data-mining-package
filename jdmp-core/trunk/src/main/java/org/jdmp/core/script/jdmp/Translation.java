@@ -1,5 +1,8 @@
 package org.jdmp.core.script.jdmp;
 
+import java.lang.reflect.Method;
+
+import org.jdmp.core.CoreObject;
 import org.jdmp.core.interpreter.Result;
 import org.jdmp.core.module.Module;
 import org.jdmp.core.script.jdmp.analysis.DepthFirstAdapter;
@@ -28,15 +31,18 @@ import org.jdmp.core.script.jdmp.node.AMatrixValue;
 import org.jdmp.core.script.jdmp.node.AMinusExpression;
 import org.jdmp.core.script.jdmp.node.AParameterFunction;
 import org.jdmp.core.script.jdmp.node.APlusExpression;
+import org.jdmp.core.script.jdmp.node.AQualifiedName;
 import org.jdmp.core.script.jdmp.node.ARow;
 import org.jdmp.core.script.jdmp.node.ARowMatrix;
 import org.jdmp.core.script.jdmp.node.ASemicolonRow;
 import org.jdmp.core.script.jdmp.node.ASemicolonValue;
+import org.jdmp.core.script.jdmp.node.ASimpleName;
 import org.jdmp.core.script.jdmp.node.AStatement;
 import org.jdmp.core.script.jdmp.node.AStringLiteral;
 import org.jdmp.core.script.jdmp.node.AValueExpression;
 import org.jdmp.core.script.jdmp.node.AValueMatrix;
 import org.jdmp.core.script.jdmp.node.Node;
+import org.jdmp.core.script.jdmp.node.PArgumentList;
 import org.jdmp.core.script.jdmp.node.PArray;
 import org.jdmp.core.script.jdmp.node.PColumn;
 import org.jdmp.core.script.jdmp.node.PCommaValue;
@@ -249,15 +255,87 @@ public class Translation extends DepthFirstAdapter {
 		throw e;
 	}
 
+	public Matrix executeFunction(PName name, PArgumentList arguments) {
+		if (name instanceof ASimpleName) {
+			ASimpleName sn = (ASimpleName) name;
+			String id = sn.getIdentifier().toString();
+			CoreObject object = getAlgorithm(id);
+			if (object == null) {
+				MatrixException e = new MatrixException("Unknown algorithm: " + id);
+				result = new Result(e);
+				throw e;
+			}
+			executeAlgorithm(object, arguments);
+		} else if (name instanceof AQualifiedName) {
+			AQualifiedName qn = (AQualifiedName) name;
+			String id = qn.getName().toString().trim();
+			CoreObject object = getObject(id);
+			if (object == null) {
+				MatrixException e = new MatrixException("Unknown identifier: " + id);
+				result = new Result(e);
+				throw e;
+			}
+			return executeMethod(object, qn.getIdentifier().toString().trim(), arguments);
+		}
+
+		MatrixException e = new MatrixException("Unknown function: "
+				+ name.getClass().getSimpleName());
+		result = new Result(e);
+		throw e;
+	}
+
+	private void executeAlgorithm(CoreObject object, PArgumentList arguments) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private CoreObject getAlgorithm(String trim) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private Matrix executeMethod(CoreObject object, String name, PArgumentList argumentList) {
+		try {
+			Object[] arguments = getArguments(argumentList);
+			for (Method method : object.getClass().getMethods()) {
+				if (method.getName().equals(name)
+						&& method.getParameterTypes().length == arguments.length) {
+					Object o = method.invoke(object, arguments);
+					return getMatrixFromMethodResult(o);
+				}
+			}
+		} catch (Exception e) {
+			result = new Result(e);
+			throw new MatrixException(e);
+		}
+
+		MatrixException e = new MatrixException("Unknown method: " + name);
+		result = new Result(e);
+		throw e;
+	}
+
+	private Matrix getMatrixFromMethodResult(Object o) {
+		return MatrixFactory.linkToValue(o);
+	}
+
+	private Object[] getArguments(PArgumentList argumentList) {
+		return new Object[] {};
+	}
+
+	private CoreObject getObject(String name) {
+		CoreObject o = module.getVariableList().get(name);
+		if (o != null) {
+			return o;
+		}
+		return o;
+	}
+
 	private Matrix getMatrix(PFunction function) {
 		if (function instanceof AParameterFunction) {
-			String name = ((AParameterFunction) function).getName().toString().trim();
-			result = new Result("should not execute function: " + name);
-			return MatrixFactory.rand(5, 5);
+			return executeFunction(((AParameterFunction) function).getName(),
+					((AParameterFunction) function).getArgumentList());
 		} else if (function instanceof AEmptyFunction) {
-			String name = ((AEmptyFunction) function).getName().toString().trim();
-			result = new Result("should not execute function: " + name);
-			return MatrixFactory.rand(5, 5);
+			return executeFunction(((AEmptyFunction) function).getName(), null);
 		}
 		MatrixException e = new MatrixException("Unknown function type: "
 				+ function.getClass().getSimpleName());
