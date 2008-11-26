@@ -172,46 +172,54 @@ public class Translation extends DepthFirstAdapter {
 	 * TODO: many expressions are not parsed correctly
 	 */
 	private Matrix getMatrix(PExpression expression) {
-		if (expression instanceof AValueExpression) {
-			return getMatrix(((AValueExpression) expression).getValue());
-		} else if (expression instanceof AExpressionPlusExpression) {
-			AExpressionPlusExpression op = (AExpressionPlusExpression) expression;
-			PValue left = op.getLeft();
-			PExpression right = op.getRight();
-			Matrix leftM = getMatrix(left);
-			Matrix rightM = getMatrix(right);
-			return leftM.plus(rightM);
-		} else if (expression instanceof AExpressionMinusExpression) {
-			AExpressionMinusExpression op = (AExpressionMinusExpression) expression;
-			PValue left = op.getLeft();
-			PExpression right = op.getRight();
-			Matrix leftM = getMatrix(left);
-			Matrix rightM = getMatrix(right);
-			return leftM.minus(rightM);
-		} else if (expression instanceof AExpressionMultExpression) {
-			AExpressionMultExpression op = (AExpressionMultExpression) expression;
-			PValue left = op.getLeft();
-			PExpression right = op.getRight();
-			Matrix leftM = getMatrix(left);
-			Matrix rightM = getMatrix(right);
-			return leftM.mtimes(rightM);
-		} else if (expression instanceof AExpressionDivExpression) {
-			AExpressionDivExpression op = (AExpressionDivExpression) expression;
-			PValue left = op.getLeft();
-			PExpression right = op.getRight();
-			Matrix leftM = getMatrix(left);
-			Matrix rightM = getMatrix(right);
-			return leftM.divide(rightM);
-		} else if (expression instanceof AMinusExpression) {
-			AMinusExpression op = (AMinusExpression) expression;
-			PExpression right = op.getRight();
-			Matrix rightM = getMatrix(right);
-			return rightM.times(-1);
-		} else if (expression instanceof APlusExpression) {
-			APlusExpression op = (APlusExpression) expression;
-			PExpression right = op.getRight();
-			Matrix rightM = getMatrix(right);
-			return rightM;
+
+		try {
+
+			if (expression instanceof AValueExpression) {
+				return getMatrix(((AValueExpression) expression).getValue());
+			} else if (expression instanceof AExpressionPlusExpression) {
+				AExpressionPlusExpression op = (AExpressionPlusExpression) expression;
+				PValue left = op.getLeft();
+				PExpression right = op.getRight();
+				Matrix leftM = getMatrix(left);
+				Matrix rightM = getMatrix(right);
+				return leftM.plus(rightM);
+			} else if (expression instanceof AExpressionMinusExpression) {
+				AExpressionMinusExpression op = (AExpressionMinusExpression) expression;
+				PValue left = op.getLeft();
+				PExpression right = op.getRight();
+				Matrix leftM = getMatrix(left);
+				Matrix rightM = getMatrix(right);
+				return leftM.minus(rightM);
+			} else if (expression instanceof AExpressionMultExpression) {
+				AExpressionMultExpression op = (AExpressionMultExpression) expression;
+				PValue left = op.getLeft();
+				PExpression right = op.getRight();
+				Matrix leftM = getMatrix(left);
+				Matrix rightM = getMatrix(right);
+				return leftM.mtimes(rightM);
+			} else if (expression instanceof AExpressionDivExpression) {
+				AExpressionDivExpression op = (AExpressionDivExpression) expression;
+				PValue left = op.getLeft();
+				PExpression right = op.getRight();
+				Matrix leftM = getMatrix(left);
+				Matrix rightM = getMatrix(right);
+				return leftM.divide(rightM);
+			} else if (expression instanceof AMinusExpression) {
+				AMinusExpression op = (AMinusExpression) expression;
+				PExpression right = op.getRight();
+				Matrix rightM = getMatrix(right);
+				return rightM.times(-1);
+			} else if (expression instanceof APlusExpression) {
+				APlusExpression op = (APlusExpression) expression;
+				PExpression right = op.getRight();
+				Matrix rightM = getMatrix(right);
+				return rightM;
+			}
+
+		} catch (Exception e) {
+			result = new Result(e);
+			throw new MatrixException(e);
 		}
 
 		MatrixException e = new MatrixException("Unknown expression type: "

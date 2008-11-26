@@ -27,29 +27,30 @@ public class Result {
 
 	private String text = "";
 
-	private Exception exception = null;
+	private Throwable exception = null;
 
 	public Result(String text) {
 		this(text, null);
 	}
 
-	public Result(Exception e) {
+	public Result(Throwable e) {
 		this(null, e);
 	}
 
-	public Result(String s, Exception e) {
+	public Result(String s, Throwable e) {
 		this.text = s;
 		this.exception = e;
 	}
 
-	public Exception getException() {
+	public Throwable getException() {
 		return exception;
 	}
 
-	public void setException(Exception exception) {
+	public void setException(Throwable exception) {
 		this.exception = exception;
 	}
 
+	@Override
 	public String toString() {
 		if (exception == null) {
 			return text;

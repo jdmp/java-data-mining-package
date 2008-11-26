@@ -30,7 +30,11 @@ public class Interpreter {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new Result("Unparseable expression", e);
+			if (e.getCause() != null) {
+				return new Result("Error", e.getCause());
+			} else {
+				return new Result("Unparseable expression", e);
+			}
 		}
 	}
 
