@@ -44,7 +44,9 @@ public class ObservableList<V> extends AbstractListModel implements CoreObjectLi
 	}
 
 	public synchronized void clear() {
+		int size = values.size();
 		values.clear();
+		fireIntervalRemoved(this, 0, size - 1);
 	}
 
 	public synchronized int getSize() {

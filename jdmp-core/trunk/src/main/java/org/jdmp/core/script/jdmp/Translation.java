@@ -309,8 +309,37 @@ public class Translation extends DepthFirstAdapter {
 		throw e;
 	}
 
+	private boolean parseReservedKeywords(AStatement node) {
+		PExpression expr = node.getExpression();
+
+		if (expr instanceof AValueExpression) {
+			AValueExpression avexpr = (AValueExpression) expr;
+			if (avexpr.getValue() instanceof AIdentifierValue) {
+
+				String name = avexpr.toString().trim();
+
+				if ("exit".equals(name)) {
+					System.exit(0);
+				} else if ("clear".equals(name)) {
+					module.clear();
+					return true;
+				}
+
+			}
+		}
+
+		return false;
+	}
+
 	@Override
 	public void outAStatement(AStatement node) {
+		boolean executed = parseReservedKeywords(node);
+
+		if (executed) {
+			result = new Result("");
+			return;
+		}
+
 		PExpression expr = node.getExpression();
 
 		if (expr instanceof AValueExpression) {

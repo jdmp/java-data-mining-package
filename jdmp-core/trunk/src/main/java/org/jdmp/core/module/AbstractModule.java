@@ -62,6 +62,10 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 	}
 
 	public void clear() {
+		algorithmList.clear();
+		dataSetList.clear();
+		moduleList.clear();
+		variableList.clear();
 	}
 
 	public final GUIObject getGUIObject() {

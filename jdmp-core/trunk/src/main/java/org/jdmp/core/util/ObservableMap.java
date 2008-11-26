@@ -94,7 +94,9 @@ public class ObservableMap<V> extends AbstractListModel implements CoreObjectLis
 	}
 
 	public void clear() {
+		int size = map.size();
 		map.clear();
+		fireIntervalRemoved(this, 0, size - 1);
 	}
 
 	public Collection<V> toCollection() {
