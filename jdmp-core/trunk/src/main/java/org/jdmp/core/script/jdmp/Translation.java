@@ -2,35 +2,58 @@ package org.jdmp.core.script.jdmp;
 
 import org.jdmp.core.interpreter.Result;
 import org.jdmp.core.module.Module;
-import org.jdmp.core.module.ModuleFactory;
 import org.jdmp.core.script.jdmp.analysis.DepthFirstAdapter;
+import org.jdmp.core.script.jdmp.node.AArray;
 import org.jdmp.core.script.jdmp.node.AArrayAssignment;
+import org.jdmp.core.script.jdmp.node.AArrayMatrix;
 import org.jdmp.core.script.jdmp.node.ABooleanLiteral;
 import org.jdmp.core.script.jdmp.node.ACharLiteral;
+import org.jdmp.core.script.jdmp.node.AColumn;
+import org.jdmp.core.script.jdmp.node.AColumnMatrix;
+import org.jdmp.core.script.jdmp.node.ACommaValue;
+import org.jdmp.core.script.jdmp.node.AEmptyFunction;
+import org.jdmp.core.script.jdmp.node.AEmptyMatrix;
 import org.jdmp.core.script.jdmp.node.AExpressionDivExpression;
 import org.jdmp.core.script.jdmp.node.AExpressionMinusExpression;
 import org.jdmp.core.script.jdmp.node.AExpressionMultExpression;
 import org.jdmp.core.script.jdmp.node.AExpressionPlusExpression;
 import org.jdmp.core.script.jdmp.node.AExpressionValue;
 import org.jdmp.core.script.jdmp.node.AFloatingPointLiteral;
+import org.jdmp.core.script.jdmp.node.AFunctionValue;
 import org.jdmp.core.script.jdmp.node.AIdentifierAssignment;
 import org.jdmp.core.script.jdmp.node.AIdentifierValue;
 import org.jdmp.core.script.jdmp.node.AIntegerLiteral;
 import org.jdmp.core.script.jdmp.node.ALiteralValue;
 import org.jdmp.core.script.jdmp.node.AMatrixValue;
+import org.jdmp.core.script.jdmp.node.AMinusExpression;
+import org.jdmp.core.script.jdmp.node.AParameterFunction;
+import org.jdmp.core.script.jdmp.node.APlusExpression;
+import org.jdmp.core.script.jdmp.node.ARow;
+import org.jdmp.core.script.jdmp.node.ARowMatrix;
+import org.jdmp.core.script.jdmp.node.ASemicolonRow;
+import org.jdmp.core.script.jdmp.node.ASemicolonValue;
 import org.jdmp.core.script.jdmp.node.AStatement;
 import org.jdmp.core.script.jdmp.node.AStringLiteral;
 import org.jdmp.core.script.jdmp.node.AValueExpression;
+import org.jdmp.core.script.jdmp.node.AValueMatrix;
 import org.jdmp.core.script.jdmp.node.Node;
+import org.jdmp.core.script.jdmp.node.PArray;
+import org.jdmp.core.script.jdmp.node.PColumn;
+import org.jdmp.core.script.jdmp.node.PCommaValue;
 import org.jdmp.core.script.jdmp.node.PExpression;
+import org.jdmp.core.script.jdmp.node.PFunction;
 import org.jdmp.core.script.jdmp.node.PLiteral;
 import org.jdmp.core.script.jdmp.node.PMatrix;
 import org.jdmp.core.script.jdmp.node.PName;
+import org.jdmp.core.script.jdmp.node.PRow;
+import org.jdmp.core.script.jdmp.node.PSemicolonRow;
+import org.jdmp.core.script.jdmp.node.PSemicolonValue;
 import org.jdmp.core.script.jdmp.node.PValue;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
+import org.ujmp.core.enums.ValueType;
 import org.ujmp.core.exceptions.MatrixException;
 
 public class Translation extends DepthFirstAdapter {
@@ -53,155 +76,80 @@ public class Translation extends DepthFirstAdapter {
 		return v;
 	}
 
-	// private Matrix getMatrix(PFactor factor) {
-	// if (factor instanceof ATermFactor) {
-	// return getMatrix(((ATermFactor) factor).getTerm());
-	// } else if (factor instanceof AMultiplicationFactor) {
-	// return getMatrixProduct(((AMultiplicationFactor) factor).getFactor(),
-	// ((AMultiplicationFactor) factor).getTerm());
-	// } else if (factor instanceof ADivisionFactor) {
-	// return getMatrixDivision(((ADivisionFactor) factor).getFactor(),
-	// ((ADivisionFactor) factor).getTerm());
-	// } else {
-	// throw new MatrixException("unknown factor type: " +
-	// factor.getClass().getSimpleName());
-	// }
-	// }
-	//
-	//	
-	//
-	//	
-	//
-	//
-	// private Matrix getMatrix(PArray array) {
-	// AArray aArray = (AArray) array;
-	//
-	// ARow aRow = (ARow) aArray.getRow();
-	//
-	// int rows = aArray.getAdditionalRows().size() + 1;
-	// int columns = aRow.getAdditionalValues().size() + 1;
-	//
-	// for (PSemicolonRow semicolonRow : aArray.getAdditionalRows()) {
-	// aRow = (ARow) ((ASemicolonRow) semicolonRow).getRow();
-	// columns = Math.max(columns, aRow.getAdditionalValues().size() + 1);
-	// }
-	// Matrix m = MatrixFactory.zeros(ValueType.OBJECT, rows, columns);
-	//
-	// aRow = (ARow) aArray.getRow();
-	// PValue value = aRow.getValue();
-	// m.setObject(getValue(value), 0, 0);
-	// int c = 1;
-	// for (PCommaValue commaValue : aRow.getAdditionalValues()) {
-	// ACommaValue aCommaValue = (ACommaValue) commaValue;
-	// value = aCommaValue.getValue();
-	// m.setObject(getValue(value), 0, c++);
-	// }
-	//
-	// int r = 1;
-	// for (PSemicolonRow semicolonRow : aArray.getAdditionalRows()) {
-	// aRow = (ARow) ((ASemicolonRow) semicolonRow).getRow();
-	// value = aRow.getValue();
-	// m.setObject(getValue(value), r, 0);
-	// c = 1;
-	// for (PCommaValue commaValue : aRow.getAdditionalValues()) {
-	// ACommaValue aCommaValue = (ACommaValue) commaValue;
-	// value = aCommaValue.getValue();
-	// m.setObject(getValue(value), r, c++);
-	// }
-	// r++;
-	// }
-	//
-	// return m;
-	// }
-	//
-	// private Matrix getMatrix(PRow row) {
-	// ARow aRow = (ARow) row;
-	// int columns = aRow.getAdditionalValues().size() + 1;
-	// Matrix m = MatrixFactory.zeros(ValueType.OBJECT, 1, columns);
-	// m.setObject(getValue(aRow.getValue()), 0, 0);
-	// int i = 1;
-	// for (PCommaValue commaValue : aRow.getAdditionalValues()) {
-	// PValue value = ((ACommaValue) commaValue).getValue();
-	// m.setObject(getValue(value), 0, i++);
-	// }
-	// return m;
-	// }
-	//
-	// private Matrix getMatrix(PColumn column) {
-	// AColumn aColumn = (AColumn) column;
-	// int rows = aColumn.getAdditionalValues().size() + 1;
-	// Matrix m = MatrixFactory.zeros(ValueType.OBJECT, rows, 1);
-	// m.setObject(getValue(aColumn.getValue()), 0, 0);
-	// int i = 1;
-	// for (PSemicolonValue semicolonValue : aColumn.getAdditionalValues()) {
-	// PValue value = ((ASemicolonValue) semicolonValue).getValue();
-	// m.setObject(getValue(value), i++, 0);
-	// }
-	// return m;
-	// }
-	//
-	// private Object getValue(PValue value) {
-	// if (value instanceof AIntegerValue) {
-	// return Integer.parseInt(value.toString().trim());
-	// } else if (value instanceof AFloatingPointValue) {
-	// return Double.parseDouble(value.toString().trim());
-	// } else if (value instanceof ABooleanValue) {
-	// return Boolean.parseBoolean(value.toString().trim());
-	// } else if (value instanceof ACharacterValue) {
-	// String s = value.toString().trim();
-	// return s.substring(1, s.length() - 1);
-	// } else if (value instanceof AStringValue) {
-	// String s = value.toString().trim();
-	// return s.substring(1, s.length() - 1);
-	// } else {
-	// throw new MatrixException("unknown value type: " +
-	// value.getClass().getSimpleName());
-	// }
-	// }
-	//
-	// private Matrix getMatrix(PValue value) {
-	// return MatrixFactory.linkToValue(getValue(value));
-	// }
+	private Matrix getMatrix(PArray array) {
+		AArray aArray = (AArray) array;
+
+		ARow aRow = (ARow) aArray.getRow();
+
+		int rows = aArray.getAdditionalRows().size() + 1;
+		int columns = aRow.getAdditionalValues().size() + 1;
+
+		for (PSemicolonRow semicolonRow : aArray.getAdditionalRows()) {
+			aRow = (ARow) ((ASemicolonRow) semicolonRow).getRow();
+			columns = Math.max(columns, aRow.getAdditionalValues().size() + 1);
+		}
+		Matrix m = MatrixFactory.zeros(ValueType.OBJECT, rows, columns);
+
+		aRow = (ARow) aArray.getRow();
+		PExpression expr = aRow.getExpression();
+		m.setObject(getValue(expr), 0, 0);
+		int c = 1;
+		for (PCommaValue commaValue : aRow.getAdditionalValues()) {
+			ACommaValue aCommaValue = (ACommaValue) commaValue;
+			expr = aCommaValue.getExpression();
+			m.setObject(getValue(expr), 0, c++);
+		}
+
+		int r = 1;
+		for (PSemicolonRow semicolonRow : aArray.getAdditionalRows()) {
+			aRow = (ARow) ((ASemicolonRow) semicolonRow).getRow();
+			expr = aRow.getExpression();
+			m.setObject(getValue(expr), r, 0);
+			c = 1;
+			for (PCommaValue commaValue : aRow.getAdditionalValues()) {
+				ACommaValue aCommaValue = (ACommaValue) commaValue;
+				expr = aCommaValue.getExpression();
+				m.setObject(getValue(expr), r, c++);
+			}
+			r++;
+		}
+
+		return m;
+	}
+
+	private Matrix getMatrix(PRow row) {
+		ARow aRow = (ARow) row;
+		int columns = aRow.getAdditionalValues().size() + 1;
+		Matrix m = MatrixFactory.zeros(ValueType.OBJECT, 1, columns);
+		m.setObject(getValue(aRow.getExpression()), 0, 0);
+		int i = 1;
+		for (PCommaValue commaValue : aRow.getAdditionalValues()) {
+			PExpression expr = ((ACommaValue) commaValue).getExpression();
+			m.setObject(getValue(expr), 0, i++);
+		}
+		return m;
+	}
+
+	private Matrix getMatrix(PColumn column) {
+		AColumn aColumn = (AColumn) column;
+		int rows = aColumn.getAdditionalValues().size() + 1;
+		Matrix m = MatrixFactory.zeros(ValueType.OBJECT, rows, 1);
+		m.setObject(getValue(aColumn.getExpression()), 0, 0);
+		int i = 1;
+		for (PSemicolonValue semicolonValue : aColumn.getAdditionalValues()) {
+			PExpression expr = ((ASemicolonValue) semicolonValue).getExpression();
+			m.setObject(getValue(expr), i++, 0);
+		}
+		return m;
+	}
 
 	@Override
 	public void defaultOut(Node node) {
 		System.out.println(node.getClass().getSimpleName() + ": " + node);
 	}
 
-	// @Override
-	// public void outAVerboseAssignment(AVerboseAssignment node) {
-	// super.outAVerboseAssignment(node);
-	// System.out.println(" " + node.getIdentifier() + " = " +
-	// node.getExpression());
-	// Variable v = getVariable(node.getIdentifier());
-	// Matrix m = getMatrix(node.getExpression());
-	// v.addMatrix(m);
-	// result = new Result(v.getLabel() + " = " + m.toString());
-	// System.out.println(v.getLabel() + " = " + m.toString());
-	// }
-	//
-	// @Override
-	// public void outASilentAssignment(ASilentAssignment node) {
-	// super.outASilentAssignment(node);
-	// System.out.println(" " + node.getIdentifier() + " = " +
-	// node.getExpression());
-	// Variable v = getVariable(node.getIdentifier());
-	// Matrix m = getMatrix(node.getExpression());
-	// v.addMatrix(m);
-	// result = new Result("");
-	// System.out.println(v.getLabel() + " = " + m.toString());
-	// }
-
 	public Result getResult() {
 		return result;
-	}
-
-	public static void main(String[] args) throws Exception {
-		Module m = ModuleFactory.emptyModule();
-		m.execute("a=5;");
-		m.execute("b=5;");
-		m.execute("c=a;");
-		m.execute("c;");
 	}
 
 	@Override
@@ -254,9 +202,19 @@ public class Translation extends DepthFirstAdapter {
 			Matrix leftM = getMatrix(left);
 			Matrix rightM = getMatrix(right);
 			return leftM.divide(rightM);
+		} else if (expression instanceof AMinusExpression) {
+			AMinusExpression op = (AMinusExpression) expression;
+			PExpression right = op.getRight();
+			Matrix rightM = getMatrix(right);
+			return rightM.times(-1);
+		} else if (expression instanceof APlusExpression) {
+			APlusExpression op = (APlusExpression) expression;
+			PExpression right = op.getRight();
+			Matrix rightM = getMatrix(right);
+			return rightM;
 		}
 
-		MatrixException e = new MatrixException("unknown expression type: "
+		MatrixException e = new MatrixException("Unknown expression type: "
 				+ expression.getClass().getSimpleName());
 		result = new Result(e);
 		throw e;
@@ -273,26 +231,74 @@ public class Translation extends DepthFirstAdapter {
 			return getMatrix(((AMatrixValue) value).getMatrix());
 		} else if (value instanceof AExpressionValue) {
 			return getMatrix(((AExpressionValue) value).getExpression());
+		} else if (value instanceof AFunctionValue) {
+			return getMatrix(((AFunctionValue) value).getFunction());
 		}
 
-		MatrixException e = new MatrixException("unknown value type: "
+		MatrixException e = new MatrixException("Unknown value type: "
 				+ value.getClass().getSimpleName());
 		result = new Result(e);
 		throw e;
 	}
 
+	private Matrix getMatrix(PFunction function) {
+		if (function instanceof AParameterFunction) {
+			String name = ((AParameterFunction) function).getName().toString().trim();
+			result = new Result("should not execute function: " + name);
+			return MatrixFactory.rand(5, 5);
+		} else if (function instanceof AEmptyFunction) {
+			String name = ((AEmptyFunction) function).getName().toString().trim();
+			result = new Result("should not execute function: " + name);
+			return MatrixFactory.rand(5, 5);
+		}
+		MatrixException e = new MatrixException("Unknown function type: "
+				+ function.getClass().getSimpleName());
+		result = new Result(e);
+		throw e;
+	}
+
 	private Matrix getMatrix(PMatrix matrix) {
-		MatrixException e = new MatrixException("unknown matrix type: "
+		if (matrix instanceof AEmptyMatrix) {
+			return MatrixFactory.emptyMatrix();
+		} else if (matrix instanceof AValueMatrix) {
+			return MatrixFactory.linkToValue(((AValueMatrix) matrix).getExpression());
+		} else if (matrix instanceof ARowMatrix) {
+			return getMatrix(((ARowMatrix) matrix).getRow());
+		} else if (matrix instanceof AColumnMatrix) {
+			return getMatrix(((AColumnMatrix) matrix).getColumn());
+		} else if (matrix instanceof AArrayMatrix) {
+			return getMatrix(((AArrayMatrix) matrix).getArray());
+		}
+		MatrixException e = new MatrixException("Unknown matrix type: "
 				+ matrix.getClass().getSimpleName());
 		result = new Result(e);
 		throw e;
+	}
+
+	private Object getValue(PExpression expression) {
+		Matrix m = getMatrix(expression);
+		if (m.isScalar()) {
+			return m.getObject(0, 0);
+		} else {
+			return m.getEuklideanValue();
+		}
 	}
 
 	private Object getValue(PLiteral literal) {
 		if (literal instanceof AIntegerLiteral) {
 			return Long.parseLong(literal.toString().trim());
 		} else if (literal instanceof AFloatingPointLiteral) {
-			return Double.parseDouble(literal.toString().trim());
+			String s = literal.toString().trim();
+			if ("NaN".equalsIgnoreCase(s)) {
+				return Double.NaN;
+			}
+			if ("Inf".equalsIgnoreCase(s)) {
+				return Double.POSITIVE_INFINITY;
+			}
+			if ("-Inf".equalsIgnoreCase(s)) {
+				return Double.NEGATIVE_INFINITY;
+			}
+			return Double.parseDouble(s);
 		} else if (literal instanceof ABooleanLiteral) {
 			return Boolean.parseBoolean(literal.toString().trim());
 		} else if (literal instanceof ACharLiteral) {
@@ -303,7 +309,7 @@ public class Translation extends DepthFirstAdapter {
 			return s.substring(1, s.length() - 1);
 		}
 
-		MatrixException e = new MatrixException("unknown literal type: "
+		MatrixException e = new MatrixException("Unknown literal type: "
 				+ literal.getClass().getSimpleName());
 		result = new Result(e);
 		throw e;
@@ -355,8 +361,11 @@ public class Translation extends DepthFirstAdapter {
 				Matrix m = null;
 				if (v != null) {
 					m = v.getMatrix();
+					result = new Result(id + " = " + m);
+				} else {
+					MatrixException e = new MatrixException("Unknown object or command: " + id);
+					result = new Result(e);
 				}
-				result = new Result(id + " = " + m);
 				return;
 			}
 		}
