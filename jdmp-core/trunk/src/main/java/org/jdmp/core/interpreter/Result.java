@@ -27,15 +27,39 @@ public class Result {
 
 	private String text = "";
 
+	private Exception exception = null;
+
 	public Result(String text) {
-		this.text = text;
+		this(text, null);
 	}
 
-	public Result() {
+	public Result(Exception e) {
+		this(null, e);
+	}
+
+	public Result(String s, Exception e) {
+		this.text = s;
+		this.exception = e;
+	}
+
+	public Exception getException() {
+		return exception;
+	}
+
+	public void setException(Exception exception) {
+		this.exception = exception;
 	}
 
 	public String toString() {
-		return text;
+		if (exception == null) {
+			return text;
+		} else {
+			if (text == null) {
+				return exception.getMessage();
+			} else {
+				return text + ": " + exception.getMessage();
+			}
+		}
 	}
 
 	public String getText() {

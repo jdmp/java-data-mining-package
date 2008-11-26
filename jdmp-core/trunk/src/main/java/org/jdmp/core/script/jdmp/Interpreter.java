@@ -19,19 +19,19 @@ public class Interpreter {
 
 	public Result execute(String s) {
 		try {
+			Translation translation = new Translation(module);
 			StringReader sr = new StringReader(s);
 			Parser p = new Parser(new Lexer(new PushbackReader(sr, 1024)));
 
 			Start tree = p.parse();
-
-			Translation translation = new Translation(module);
 			tree.apply(translation);
+
 			return translation.getResult();
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
+			return new Result("Unparseable expression", e);
 		}
-		return null;
 	}
 
 }

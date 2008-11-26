@@ -23,7 +23,6 @@
 
 package org.jdmp.core.module;
 
-import org.jdmp.core.executor.Executor;
 import org.jdmp.core.interpreter.Result;
 import org.jdmp.core.script.jdmp.Interpreter;
 import org.jdmp.core.variable.Variable;
@@ -35,8 +34,6 @@ public class DefaultModule extends AbstractModule {
 	private String label = "";
 
 	private String description = "";
-
-	private Executor executor = null;
 
 	private Interpreter interpreter = null;
 
@@ -72,13 +69,6 @@ public class DefaultModule extends AbstractModule {
 		if (v != null) {
 			v.addMatrix(matrix);
 		}
-	}
-
-	public Executor getExecutor() {
-		if (executor == null) {
-			executor = new Executor(this);
-		}
-		return executor;
 	}
 
 	public Interpreter getInterpreter() {
