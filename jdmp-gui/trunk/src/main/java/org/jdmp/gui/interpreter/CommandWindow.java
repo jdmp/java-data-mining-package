@@ -24,13 +24,21 @@
 package org.jdmp.gui.interpreter;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.JTextPane;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.Document;
+import javax.swing.text.Element;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyleContext;
 
 import org.jdmp.core.interpreter.Result;
 import org.jdmp.core.module.Module;
@@ -41,11 +49,14 @@ public class CommandWindow extends JPanel implements KeyListener {
 	private Module module = null;
 
 	private int endPos = 0;
+	private final JTextPane textField = new JTextPane();
 
-	private final JTextArea textField = new JTextArea();
+	private Document doc = textField.getDocument();
 
 	public CommandWindow(Module m) {
 		this.module = m;
+
+		textField.setFont(new Font("Monospaced", Font.PLAIN, 13));
 
 		textField.addKeyListener(this);
 
@@ -66,15 +77,36 @@ public class CommandWindow extends JPanel implements KeyListener {
 
 			if (textField.getCaretPosition() >= endPos) {
 
-				int line = textField.getLineCount() - 1;
-				int lineStart = textField.getLineStartOffset(line);
-				int lineEnd = textField.getLineEndOffset(line);
+				int line = doc.getDefaultRootElement().getElementCount() - 1;
+
+				Element map = doc.getDefaultRootElement();
+				Element lineElem = map.getElement(line);
+				int lineStart = lineElem.getStartOffset();
+
+				int lineCount = map.getElementCount();
+				int endOffset = lineElem.getEndOffset();
+				int lineEnd = ((line == lineCount - 1) ? (endOffset - 1) : endOffset);
+
 				int length = lineEnd - lineStart;
-				String text = textField.getText(lineStart + 3, length - 3);
+				String text = doc.getText(lineStart + 3, length - 3);
 
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					Result result = module.execute(text);
-					textField.append("\n" + result + "\n>> ");
+
+					if (text.endsWith(";")) {
+						Result result = module.execute(text);
+						if (result.getException() != null) {
+							appendError("\n" + result);
+						}
+					} else {
+						Result result = module.execute(text + ";");
+						if (result.getException() != null) {
+							appendError("\n" + result);
+						} else {
+							appendText("\n" + result);
+						}
+					}
+
+					appendText("\n\n>> ");
 					endPos = textField.getText().length();
 					textField.setCaretPosition(endPos);
 					e.consume();
@@ -96,12 +128,33 @@ public class CommandWindow extends JPanel implements KeyListener {
 
 	}
 
+	public void appendError(String s) {
+		StyleContext sc = StyleContext.getDefaultStyleContext();
+		AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground,
+				Color.RED);
+
+		int len = doc.getLength();
+		textField.setCaretPosition(len);
+		textField.setCharacterAttributes(aset, false);
+		textField.replaceSelection(s);
+	}
+
+	public void appendText(String s) {
+		StyleContext sc = StyleContext.getDefaultStyleContext();
+		AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground,
+				Color.BLACK);
+
+		int len = doc.getLength();
+		textField.setCaretPosition(len);
+		textField.setCharacterAttributes(aset, false);
+		textField.replaceSelection(s);
+	}
+
 	public void filterKeys(KeyEvent e) {
 		try {
 
 			if (textField.getCaretPosition() < endPos) {
-				e.consume();
-				return;
+				textField.setCaretPosition(doc.getLength());
 			}
 
 			if (e.getKeyCode() == KeyEvent.VK_UP) {
