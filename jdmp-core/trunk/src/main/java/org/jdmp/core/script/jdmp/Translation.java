@@ -265,7 +265,7 @@ public class Translation extends DepthFirstAdapter {
 				result = new Result(e);
 				throw e;
 			}
-			executeAlgorithm(object, arguments);
+			return executeAlgorithm(object, arguments);
 		} else if (name instanceof AQualifiedName) {
 			AQualifiedName qn = (AQualifiedName) name;
 			String id = qn.getName().toString().trim();
@@ -284,7 +284,7 @@ public class Translation extends DepthFirstAdapter {
 		throw e;
 	}
 
-	private void executeAlgorithm(CoreObject object, PArgumentList arguments) {
+	private Matrix executeAlgorithm(CoreObject object, PArgumentList arguments) {
 		// TODO Auto-generated method stub
 
 	}
