@@ -318,10 +318,13 @@ public class Translation extends DepthFirstAdapter {
 
 				String name = avexpr.toString().trim();
 
-				if ("exit".equals(name)) {
+				if ("exit".equals(name) || "quit".equals(name)) {
 					System.exit(0);
 				} else if ("clear".equals(name)) {
 					module.clear();
+					return true;
+				} else if ("help".equals(name) || "info".equals(name) || "doc".equals(name)) {
+					result = new Result("Please visit http://www.jdmp.org/ for more information.");
 					return true;
 				}
 
@@ -336,7 +339,9 @@ public class Translation extends DepthFirstAdapter {
 		boolean executed = parseReservedKeywords(node);
 
 		if (executed) {
-			result = new Result("");
+			if (result == null) {
+				result = new Result("");
+			}
 			return;
 		}
 
