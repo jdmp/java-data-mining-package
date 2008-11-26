@@ -1,11 +1,18 @@
 package org.jdmp.core.script.jdmp;
 
+import java.lang.reflect.Array;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import org.jdmp.core.CoreObject;
+import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.interpreter.Result;
 import org.jdmp.core.module.Module;
 import org.jdmp.core.script.jdmp.analysis.DepthFirstAdapter;
+import org.jdmp.core.script.jdmp.node.AArgumentListArgumentList;
 import org.jdmp.core.script.jdmp.node.AArray;
 import org.jdmp.core.script.jdmp.node.AArrayAssignment;
 import org.jdmp.core.script.jdmp.node.AArrayMatrix;
@@ -16,6 +23,7 @@ import org.jdmp.core.script.jdmp.node.AColumnMatrix;
 import org.jdmp.core.script.jdmp.node.ACommaValue;
 import org.jdmp.core.script.jdmp.node.AEmptyFunction;
 import org.jdmp.core.script.jdmp.node.AEmptyMatrix;
+import org.jdmp.core.script.jdmp.node.AExpressionArgumentList;
 import org.jdmp.core.script.jdmp.node.AExpressionDivExpression;
 import org.jdmp.core.script.jdmp.node.AExpressionMinusExpression;
 import org.jdmp.core.script.jdmp.node.AExpressionMultExpression;
@@ -240,6 +248,11 @@ public class Translation extends DepthFirstAdapter {
 		} else if (value instanceof AIdentifierValue) {
 			String name = ((AIdentifierValue) value).getName().toString().trim();
 			Variable v = module.getVariableList().get(name);
+			if (v == null) {
+				MatrixException e = new MatrixException("Unknown variable: " + name);
+				result = new Result(e);
+				throw e;
+			}
 			return v.getMatrix();
 		} else if (value instanceof AMatrixValue) {
 			return getMatrix(((AMatrixValue) value).getMatrix());
@@ -258,14 +271,14 @@ public class Translation extends DepthFirstAdapter {
 	public Matrix executeFunction(PName name, PArgumentList arguments) {
 		if (name instanceof ASimpleName) {
 			ASimpleName sn = (ASimpleName) name;
-			String id = sn.getIdentifier().toString();
-			CoreObject object = getAlgorithm(id);
-			if (object == null) {
+			String id = sn.getIdentifier().toString().trim();
+			Algorithm algorithm = getAlgorithm(id);
+			if (algorithm == null) {
 				MatrixException e = new MatrixException("Unknown algorithm: " + id);
 				result = new Result(e);
 				throw e;
 			}
-			return executeAlgorithm(object, arguments);
+			return executeAlgorithm(algorithm, arguments);
 		} else if (name instanceof AQualifiedName) {
 			AQualifiedName qn = (AQualifiedName) name;
 			String id = qn.getName().toString().trim();
@@ -284,14 +297,64 @@ public class Translation extends DepthFirstAdapter {
 		throw e;
 	}
 
-	private Matrix executeAlgorithm(CoreObject object, PArgumentList arguments) {
-		// TODO Auto-generated method stub
+	private List<Matrix> getArgumentsAsMatrices(PArgumentList arguments) {
+		List<Matrix> matrices = new ArrayList<Matrix>();
+		if (arguments instanceof AExpressionArgumentList) {
+			PExpression expr = ((AExpressionArgumentList) arguments).getExpression();
+			matrices.add(getMatrix(expr));
+			return matrices;
+		} else if (arguments instanceof AArgumentListArgumentList) {
+			PExpression expr = ((AArgumentListArgumentList) arguments).getExpression();		
+			matrices.addAll(getArgumentsAsMatrices(((AArgumentListArgumentList) arguments)
+					.getArgumentList()));
+			matrices.add(getMatrix(expr));
+			return matrices;
+		}
+		MatrixException e = new MatrixException("Unknown arguments: "
+				+ arguments.getClass().getSimpleName());
+		result = new Result(e);
+		throw e;
+	}
+
+	private Matrix executeAlgorithm(Algorithm algorithm, PArgumentList arguments) {
+		List<Matrix> matrices = getArgumentsAsMatrices(arguments);
+		try {
+			Map<Object, Matrix> ret = algorithm.calculate(matrices);
+			return ret.values().iterator().next();
+		} catch (Exception e) {
+			throw new MatrixException(e);
+		}
 
 	}
 
-	private CoreObject getAlgorithm(String trim) {
-		// TODO Auto-generated method stub
-		return null;
+	private Algorithm getAlgorithm(String id) {
+		id = id.substring(0, 1).toUpperCase() + id.substring(1, id.length()).toLowerCase();
+		List<String> packages = new ArrayList<String>();
+
+		packages.add("org.jdmp.core.algorithm.basic");
+		packages.add("org.jdmp.core.algorithm.classification");
+		packages.add("org.jdmp.core.algorithm.regression");
+
+		Class<?> c = null;
+
+		for (String p : packages) {
+			if (c == null) {
+				try {
+					c = Class.forName(p + "." + id);
+					break;
+				} catch (Exception e) {
+				}
+			}
+		}
+
+		try {
+			Constructor<?> constr = c.getConstructor(Variable.VARIABLEARRAY);
+			Algorithm algorithm = (Algorithm) constr
+					.newInstance(new Object[] { new Variable[] {} });
+			return algorithm;
+		} catch (Exception e) {
+			throw new MatrixException(e);
+		}
 	}
 
 	private Matrix executeMethod(CoreObject object, String name, PArgumentList argumentList) {

@@ -37,7 +37,7 @@ public class Zeros extends AlgorithmTwoSources {
 
 	public Zeros(Variable... variables) {
 		super(variables);
-		setDescription("FIlls a matrix with zeros");
+		setDescription("Fills a matrix with zeros");
 	}
 
 	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {

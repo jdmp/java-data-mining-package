@@ -37,7 +37,7 @@ public class Ones extends AlgorithmTwoSources {
 
 	public Ones(Variable... variables) {
 		super(variables);
-		setDescription("FIlls a matrix with ones");
+		setDescription("Fills a matrix with ones");
 	}
 
 	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {

@@ -37,7 +37,7 @@ public class Randn extends AlgorithmTwoSources {
 
 	public Randn(Variable... variables) {
 		super(variables);
-		setDescription("FIlls a matrix with gaussian values");
+		setDescription("Fills a matrix with gaussian values");
 	}
 
 	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {

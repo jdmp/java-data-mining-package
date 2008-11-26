@@ -37,7 +37,7 @@ public class Rand extends AlgorithmTwoSources {
 
 	public Rand(Variable... variables) {
 		super(variables);
-		setDescription("FIlls a matrix with random values");
+		setDescription("Fills a matrix with random values");
 	}
 
 	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
