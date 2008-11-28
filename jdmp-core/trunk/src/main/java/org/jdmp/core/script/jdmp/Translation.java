@@ -1,6 +1,5 @@
 package org.jdmp.core.script.jdmp;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -304,7 +303,7 @@ public class Translation extends DepthFirstAdapter {
 			matrices.add(getMatrix(expr));
 			return matrices;
 		} else if (arguments instanceof AArgumentListArgumentList) {
-			PExpression expr = ((AArgumentListArgumentList) arguments).getExpression();		
+			PExpression expr = ((AArgumentListArgumentList) arguments).getExpression();
 			matrices.addAll(getArgumentsAsMatrices(((AArgumentListArgumentList) arguments)
 					.getArgumentList()));
 			matrices.add(getMatrix(expr));
@@ -345,6 +344,11 @@ public class Translation extends DepthFirstAdapter {
 				} catch (Exception e) {
 				}
 			}
+		}
+
+		// no algorithm found, maybe its a module method
+		if (c == null) {
+			return null;
 		}
 
 		try {

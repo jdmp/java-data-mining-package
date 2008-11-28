@@ -31,7 +31,7 @@ import org.jdmp.core.interpreter.Result;
 import org.jdmp.core.module.Module;
 import org.jdmp.core.module.ModuleFactory;
 
-public class Main {
+public class JDMP {
 
 	protected static final PrintStream out = System.out;
 
