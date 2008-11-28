@@ -30,6 +30,7 @@ import java.io.PrintStream;
 import org.jdmp.core.interpreter.Result;
 import org.jdmp.core.module.Module;
 import org.jdmp.core.module.ModuleFactory;
+import org.ujmp.core.util.io.IntelligentFileReader;
 
 public class JDMP {
 
@@ -53,6 +54,12 @@ public class JDMP {
 
 				if (args[i].equals("-e") || args[i].equals("--execute")) {
 					script = args[++i];
+					if (script.startsWith("\"")) {
+						script = script.substring(1);
+					}
+					if (script.endsWith("\"")) {
+						script = script.substring(1, script.length() - 1);
+					}
 				} else if (args[i].equals("-f") || args[i].equals("--file")) {
 					file = args[++i];
 				} else if (args[i].equals("-g") || args[i].equals("--gui")) {
@@ -109,6 +116,7 @@ public class JDMP {
 
 		Module module = ModuleFactory.emptyModule();
 
+		// show GUI if necessary and possible
 		if (textMode == false) {
 			try {
 				Class.forName("org.jdmp.gui.JDMP");
@@ -120,8 +128,18 @@ public class JDMP {
 			}
 		}
 
-		// read from standard input
+		// execute script file if there is one
+		if (file != null) {
+			String script = IntelligentFileReader.load(file);
+			module.execute(script);
+		}
 
+		// execute command if there is one
+		if (script != null) {
+			module.execute(script);
+		}
+
+		// read from standard input
 		LineNumberReader lr = new LineNumberReader(new InputStreamReader(System.in));
 
 		while (true) {
