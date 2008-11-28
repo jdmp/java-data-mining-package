@@ -58,9 +58,6 @@ public abstract class AbstractCoreObject implements CoreObject {
 		}
 	}
 
-	public final void notifyGUIObject() {
-	}
-
 	@Override
 	public abstract String toString();
 

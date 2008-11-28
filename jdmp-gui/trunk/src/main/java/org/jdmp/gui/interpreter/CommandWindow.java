@@ -51,7 +51,7 @@ public class CommandWindow extends JPanel implements KeyListener {
 	private int endPos = 0;
 	private final JTextPane textField = new JTextPane();
 
-	private Document doc = textField.getDocument();
+	private final Document doc = textField.getDocument();
 
 	public CommandWindow(Module m) {
 		this.module = m;
@@ -60,7 +60,11 @@ public class CommandWindow extends JPanel implements KeyListener {
 
 		textField.addKeyListener(this);
 
-		textField.setText(">> ");
+		appendText("PARSER PROBLEM:\n");
+		appendText("PLEASE USE PARENTHESES TO DEFINE THE ORDER OF CALCULATIONS!\n");
+		appendText("Examples: ((2*3)+5)+4 and 2-(7*8)\n");
+		appendText("\n");
+		appendText(">> ");
 		endPos = textField.getText().length();
 
 		setBorder(BorderFactory.createTitledBorder("Command Window"));
@@ -110,6 +114,11 @@ public class CommandWindow extends JPanel implements KeyListener {
 					endPos = textField.getText().length();
 					textField.setCaretPosition(endPos);
 					e.consume();
+
+					// TODO: this is a hack and should be solved via
+					// EventListeners correctly
+					getParent().getParent().repaint();
+
 					return;
 				}
 			}

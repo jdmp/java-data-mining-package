@@ -44,8 +44,10 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 		setLabel(label);
 	}
 
+	@Override
 	public abstract Sample clone();
 
+	@Override
 	public final String toString() {
 		if (getLabel() == null) {
 			return getClass().getSimpleName();
@@ -74,6 +76,10 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 		} else {
 			return null;
 		}
+	}
+
+	public void notifyGUIObject() {
+		guiObject.fireValueChanged();
 	}
 
 }

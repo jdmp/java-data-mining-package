@@ -90,4 +90,8 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		}
 	}
 
+	public void notifyGUIObject() {
+		guiObject.fireValueChanged();
+	}
+
 }

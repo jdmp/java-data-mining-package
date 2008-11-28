@@ -80,6 +80,8 @@ public class DefaultModule extends AbstractModule {
 
 	@Override
 	public Result execute(String script) throws Exception {
-		return getInterpreter().execute(script);
+		Result result = getInterpreter().execute(script);
+		notifyGUIObject();
+		return result;
 	}
 }

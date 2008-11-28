@@ -156,4 +156,8 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 		}
 	}
 
+	public void notifyGUIObject() {
+		guiObject.fireValueChanged();
+	}
+
 }

@@ -257,4 +257,8 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		}
 	}
 
+	public void notifyGUIObject() {
+		guiObject.fireValueChanged();
+	}
+
 }
