@@ -201,6 +201,8 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 	}
 
 	public void notifyGUIObject() {
-		guiObject.fireValueChanged();
+		if (guiObject != null) {
+			guiObject.fireValueChanged();
+		}
 	}
 }

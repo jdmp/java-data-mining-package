@@ -23,15 +23,24 @@
 
 package org.jdmp.core;
 
-import junit.framework.TestSuite;
+import junit.framework.TestCase;
 
-public class AllTests extends TestSuite {
+import org.jdmp.core.module.Module;
+import org.jdmp.core.module.ModuleFactory;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.MatrixFactory;
 
-	public static TestSuite suite() {
-		TestSuite suite = new TestSuite(AllTests.class.getName());
-		suite.addTestSuite(TestScript.class);
-		suite.addTestSuite(TestMLP.class);
-		return suite;
+public class TestScript extends TestCase {
+
+	public void testScript() throws Exception {
+		Module m = ModuleFactory.emptyModule();
+		m.execute("a=[1,2,3;4,5,6];");
+		m.execute("b=[4,5,6;1,2,3];");
+		m.execute("c=a+b;");
+
+		Matrix actual = m.getVariableList().get("c").getMatrix();
+		Matrix expected = MatrixFactory.linkToArray(new double[][] { { 5, 7, 9 }, { 5, 7, 9 } });
+
+		assertEquals(expected, actual);
 	}
-
 }

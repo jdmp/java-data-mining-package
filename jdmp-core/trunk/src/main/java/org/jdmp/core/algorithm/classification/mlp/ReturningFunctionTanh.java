@@ -21,17 +21,36 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.core;
+package org.jdmp.core.algorithm.classification.mlp;
 
-import junit.framework.TestSuite;
+import java.util.HashMap;
+import java.util.Map;
 
-public class AllTests extends TestSuite {
+import org.jdmp.core.algorithm.AlgorithmTwoSources;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.exceptions.MatrixException;
 
-	public static TestSuite suite() {
-		TestSuite suite = new TestSuite(AllTests.class.getName());
-		suite.addTestSuite(TestScript.class);
-		suite.addTestSuite(TestMLP.class);
-		return suite;
+public class ReturningFunctionTanh extends AlgorithmTwoSources {
+	private static final long serialVersionUID = -6450772877472534795L;
+
+	public ReturningFunctionTanh() {
+		setDescription("target = (1-output^2) * outputdeviation");
+	}
+
+	@Override
+	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
+		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
+
+		Matrix output = input.get(SOURCE1);
+		Matrix outputdeviation = input.get(SOURCE2);
+
+		Matrix product = output.times(output);
+		Matrix factor1 = product.times(-1).plus(1);
+		Matrix target = factor1.times(outputdeviation);
+
+		result.put(TARGET, target);
+
+		return result;
 	}
 
 }
