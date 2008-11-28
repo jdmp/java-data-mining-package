@@ -8,8 +8,13 @@ import java.util.Map;
 
 import org.jdmp.core.CoreObject;
 import org.jdmp.core.algorithm.Algorithm;
+import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.core.interpreter.Result;
 import org.jdmp.core.module.Module;
+import org.jdmp.core.module.ModuleFactory;
+import org.jdmp.core.sample.Sample;
+import org.jdmp.core.sample.SampleFactory;
 import org.jdmp.core.script.jdmp.analysis.DepthFirstAdapter;
 import org.jdmp.core.script.jdmp.node.AArgumentListArgumentList;
 import org.jdmp.core.script.jdmp.node.AArray;
@@ -105,24 +110,24 @@ public class Translation extends DepthFirstAdapter {
 
 		aRow = (ARow) aArray.getRow();
 		PExpression expr = aRow.getExpression();
-		m.setObject(getValue(expr), 0, 0);
+		m.setObject(getSingleValue(expr), 0, 0);
 		int c = 1;
 		for (PCommaValue commaValue : aRow.getAdditionalValues()) {
 			ACommaValue aCommaValue = (ACommaValue) commaValue;
 			expr = aCommaValue.getExpression();
-			m.setObject(getValue(expr), 0, c++);
+			m.setObject(getSingleValue(expr), 0, c++);
 		}
 
 		int r = 1;
 		for (PSemicolonRow semicolonRow : aArray.getAdditionalRows()) {
 			aRow = (ARow) ((ASemicolonRow) semicolonRow).getRow();
 			expr = aRow.getExpression();
-			m.setObject(getValue(expr), r, 0);
+			m.setObject(getSingleValue(expr), r, 0);
 			c = 1;
 			for (PCommaValue commaValue : aRow.getAdditionalValues()) {
 				ACommaValue aCommaValue = (ACommaValue) commaValue;
 				expr = aCommaValue.getExpression();
-				m.setObject(getValue(expr), r, c++);
+				m.setObject(getSingleValue(expr), r, c++);
 			}
 			r++;
 		}
@@ -134,11 +139,11 @@ public class Translation extends DepthFirstAdapter {
 		ARow aRow = (ARow) row;
 		int columns = aRow.getAdditionalValues().size() + 1;
 		Matrix m = MatrixFactory.zeros(ValueType.OBJECT, 1, columns);
-		m.setObject(getValue(aRow.getExpression()), 0, 0);
+		m.setObject(getSingleValue(aRow.getExpression()), 0, 0);
 		int i = 1;
 		for (PCommaValue commaValue : aRow.getAdditionalValues()) {
 			PExpression expr = ((ACommaValue) commaValue).getExpression();
-			m.setObject(getValue(expr), 0, i++);
+			m.setObject(getSingleValue(expr), 0, i++);
 		}
 		return m;
 	}
@@ -147,11 +152,11 @@ public class Translation extends DepthFirstAdapter {
 		AColumn aColumn = (AColumn) column;
 		int rows = aColumn.getAdditionalValues().size() + 1;
 		Matrix m = MatrixFactory.zeros(ValueType.OBJECT, rows, 1);
-		m.setObject(getValue(aColumn.getExpression()), 0, 0);
+		m.setObject(getSingleValue(aColumn.getExpression()), 0, 0);
 		int i = 1;
 		for (PSemicolonValue semicolonValue : aColumn.getAdditionalValues()) {
 			PExpression expr = ((ASemicolonValue) semicolonValue).getExpression();
-			m.setObject(getValue(expr), i++, 0);
+			m.setObject(getSingleValue(expr), i++, 0);
 		}
 		return m;
 	}
@@ -172,19 +177,35 @@ public class Translation extends DepthFirstAdapter {
 
 	@Override
 	public void outAIdentifierAssignment(AIdentifierAssignment node) {
-		Matrix m = getMatrix(node.getExpression());
-		if (m != null) {
-			Variable v = getVariable(node.getName());
-			v.addMatrix(m);
-			result = new Result(v.getLabel() + " = " + m.toString());
-			System.out.println(v.getLabel() + " = " + m.toString());
+		String id = node.getName().toString().trim();
+		Object o = getMatrix(node.getExpression());
+		if (o instanceof Module) {
+			Module m = (Module) o;
+			module.getModuleList().add(m);
+			result = new Result("Module = " + m.toString());
+		} else if (o instanceof DataSet) {
+			DataSet ds = (DataSet) o;
+			module.getDataSetList().put(id, ds);
+			result = new Result(id + " = " + ds.toString());
+		} else if (o instanceof Sample) {
+			Sample s = (Sample) o;
+			// TODO: add to sample list
+			result = new Result("Sample = " + s.toString());
+		} else {
+			Matrix m = getMatrixFromObject(o);
+			if (m != null) {
+				Variable v = getVariable(node.getName());
+				v.addMatrix(m);
+				result = new Result(v.getLabel() + " = " + m.toString());
+				System.out.println(v.getLabel() + " = " + m.toString());
+			}
 		}
 	}
 
 	/*
 	 * TODO: many expressions are not parsed correctly
 	 */
-	private Matrix getMatrix(PExpression expression) {
+	private Object getMatrix(PExpression expression) {
 
 		try {
 
@@ -194,39 +215,39 @@ public class Translation extends DepthFirstAdapter {
 				AExpressionPlusExpression op = (AExpressionPlusExpression) expression;
 				PValue left = op.getLeft();
 				PExpression right = op.getRight();
-				Matrix leftM = getMatrix(left);
-				Matrix rightM = getMatrix(right);
+				Matrix leftM = getMatrixFromObject(getMatrix(left));
+				Matrix rightM = getMatrixFromObject(getMatrix(right));
 				return leftM.plus(rightM);
 			} else if (expression instanceof AExpressionMinusExpression) {
 				AExpressionMinusExpression op = (AExpressionMinusExpression) expression;
 				PValue left = op.getLeft();
 				PExpression right = op.getRight();
-				Matrix leftM = getMatrix(left);
-				Matrix rightM = getMatrix(right);
+				Matrix leftM = getMatrixFromObject(getMatrix(left));
+				Matrix rightM = getMatrixFromObject(getMatrix(right));
 				return leftM.minus(rightM);
 			} else if (expression instanceof AExpressionMultExpression) {
 				AExpressionMultExpression op = (AExpressionMultExpression) expression;
 				PValue left = op.getLeft();
 				PExpression right = op.getRight();
-				Matrix leftM = getMatrix(left);
-				Matrix rightM = getMatrix(right);
+				Matrix leftM = getMatrixFromObject(getMatrix(left));
+				Matrix rightM = getMatrixFromObject(getMatrix(right));
 				return leftM.mtimes(rightM);
 			} else if (expression instanceof AExpressionDivExpression) {
 				AExpressionDivExpression op = (AExpressionDivExpression) expression;
 				PValue left = op.getLeft();
 				PExpression right = op.getRight();
-				Matrix leftM = getMatrix(left);
-				Matrix rightM = getMatrix(right);
+				Matrix leftM = getMatrixFromObject(getMatrix(left));
+				Matrix rightM = getMatrixFromObject(getMatrix(right));
 				return leftM.divide(rightM);
 			} else if (expression instanceof AMinusExpression) {
 				AMinusExpression op = (AMinusExpression) expression;
 				PExpression right = op.getRight();
-				Matrix rightM = getMatrix(right);
+				Matrix rightM = getMatrixFromObject(getMatrix(right));
 				return rightM.times(-1);
 			} else if (expression instanceof APlusExpression) {
 				APlusExpression op = (APlusExpression) expression;
 				PExpression right = op.getRight();
-				Matrix rightM = getMatrix(right);
+				Matrix rightM = getMatrixFromObject(getMatrix(right));
 				return rightM;
 			}
 
@@ -241,11 +262,17 @@ public class Translation extends DepthFirstAdapter {
 		throw e;
 	}
 
-	private Matrix getMatrix(PValue value) {
+	private Object getMatrix(PValue value) {
 		if (value instanceof ALiteralValue) {
 			return MatrixFactory.linkToValue(getValue(((ALiteralValue) value).getLiteral()));
 		} else if (value instanceof AIdentifierValue) {
 			String name = ((AIdentifierValue) value).getName().toString().trim();
+
+			DataSet ds = module.getDataSetList().get(name);
+			if (ds != null) {
+				return ds;
+			}
+
 			Variable v = module.getVariableList().get(name);
 			if (v == null) {
 				MatrixException e = new MatrixException("Unknown variable: " + name);
@@ -267,7 +294,7 @@ public class Translation extends DepthFirstAdapter {
 		throw e;
 	}
 
-	public Matrix executeFunction(PName name, PArgumentList arguments) {
+	public Object executeFunction(PName name, PArgumentList arguments) {
 		if (name instanceof ASimpleName) {
 			ASimpleName sn = (ASimpleName) name;
 			String id = sn.getIdentifier().toString().trim();
@@ -283,11 +310,31 @@ public class Translation extends DepthFirstAdapter {
 			String id = qn.getName().toString().trim();
 			CoreObject object = getObject(id);
 			if (object == null) {
+
+				// try other classes
+				String methodName = qn.getIdentifier().toString().trim();
+				Class<?> c = null;
+				if ("MatrixFactory".equals(id)) {
+					c = MatrixFactory.class;
+				} else if ("VariableFactory".equals(id)) {
+					c = VariableFactory.class;
+				} else if ("SampleFactory".equals(id)) {
+					c = SampleFactory.class;
+				} else if ("ModuleFactory".equals(id)) {
+					c = ModuleFactory.class;
+				} else if ("DataSetFactory".equals(id)) {
+					c = DataSetFactory.class;
+				}
+				if (c != null) {
+					return executeMethod(c, null, methodName, arguments);
+				}
+
 				MatrixException e = new MatrixException("Unknown identifier: " + id);
 				result = new Result(e);
 				throw e;
 			}
-			return executeMethod(object, qn.getIdentifier().toString().trim(), arguments);
+			return getMatrixFromObject(executeMethod(object.getClass(), object, qn.getIdentifier()
+					.toString().trim(), arguments));
 		}
 
 		MatrixException e = new MatrixException("Unknown function: "
@@ -298,15 +345,18 @@ public class Translation extends DepthFirstAdapter {
 
 	private List<Matrix> getArgumentsAsMatrices(PArgumentList arguments) {
 		List<Matrix> matrices = new ArrayList<Matrix>();
+		if (arguments == null) {
+			return matrices;
+		}
 		if (arguments instanceof AExpressionArgumentList) {
 			PExpression expr = ((AExpressionArgumentList) arguments).getExpression();
-			matrices.add(getMatrix(expr));
+			matrices.add(getMatrixFromObject(getMatrix(expr)));
 			return matrices;
 		} else if (arguments instanceof AArgumentListArgumentList) {
 			PExpression expr = ((AArgumentListArgumentList) arguments).getExpression();
 			matrices.addAll(getArgumentsAsMatrices(((AArgumentListArgumentList) arguments)
 					.getArgumentList()));
-			matrices.add(getMatrix(expr));
+			matrices.add(getMatrixFromObject(getMatrix(expr)));
 			return matrices;
 		}
 		MatrixException e = new MatrixException("Unknown arguments: "
@@ -361,14 +411,15 @@ public class Translation extends DepthFirstAdapter {
 		}
 	}
 
-	private Matrix executeMethod(CoreObject object, String name, PArgumentList argumentList) {
+	private Object executeMethod(Class<?> c, Object object, String name, PArgumentList argumentList) {
 		try {
-			Object[] arguments = getArguments(argumentList);
-			for (Method method : object.getClass().getMethods()) {
+			List<Matrix> matrices = getArgumentsAsMatrices(argumentList);
+			for (Method method : c.getMethods()) {
 				if (method.getName().equals(name)
-						&& method.getParameterTypes().length == arguments.length) {
+						&& method.getParameterTypes().length == matrices.size()) {
+					Object[] arguments = getMatricesAsObjects(matrices, method.getParameterTypes());
 					Object o = method.invoke(object, arguments);
-					return getMatrixFromMethodResult(o);
+					return o;
 				}
 			}
 		} catch (Exception e) {
@@ -381,12 +432,33 @@ public class Translation extends DepthFirstAdapter {
 		throw e;
 	}
 
-	private Matrix getMatrixFromMethodResult(Object o) {
+	private Matrix getMatrixFromObject(Object o) {
+		if (o instanceof Matrix) {
+			return (Matrix) o;
+		}
 		return MatrixFactory.linkToValue(o);
 	}
 
-	private Object[] getArguments(PArgumentList argumentList) {
-		return new Object[] {};
+	private Object[] getMatricesAsObjects(List<Matrix> matrices, Class<?>[] classes) {
+		List<Object> objects = new ArrayList<Object>();
+		for (int i = 0; i < classes.length; i++) {
+			Class<?> c = classes[i];
+			Matrix m = matrices.get(i);
+			Object o = convertMatrixToObject(m, c);
+		}
+		return objects.toArray();
+	}
+
+	private Object convertMatrixToObject(Matrix m, Class<?> c) {
+		if (c == Matrix.class) {
+			return m;
+		} else if (c == Integer.TYPE) {
+			return (int) m.getEuklideanValue();
+		}
+		MatrixException e = new MatrixException("cannot convert matrix to object "
+				+ c.getSimpleName());
+		result = new Result(e);
+		throw e;
 	}
 
 	private CoreObject getObject(String name) {
@@ -394,10 +466,14 @@ public class Translation extends DepthFirstAdapter {
 		if (o != null) {
 			return o;
 		}
+		o = module.getDataSetList().get(name);
+		if (o != null) {
+			return o;
+		}
 		return o;
 	}
 
-	private Matrix getMatrix(PFunction function) {
+	private Object getMatrix(PFunction function) {
 		if (function instanceof AParameterFunction) {
 			return executeFunction(((AParameterFunction) function).getName(),
 					((AParameterFunction) function).getArgumentList());
@@ -428,8 +504,8 @@ public class Translation extends DepthFirstAdapter {
 		throw e;
 	}
 
-	private Object getValue(PExpression expression) {
-		Matrix m = getMatrix(expression);
+	private Object getSingleValue(PExpression expression) {
+		Matrix m = getMatrixFromObject(getMatrix(expression));
 		if (m.isScalar()) {
 			return m.getObject(0, 0);
 		} else {
@@ -509,16 +585,25 @@ public class Translation extends DepthFirstAdapter {
 		if (expr instanceof AValueExpression) {
 			AValueExpression avexpr = (AValueExpression) expr;
 			if (avexpr.getValue() instanceof AIdentifierValue) {
+
 				String id = avexpr.getValue().toString().trim();
+
+				DataSet ds = module.getDataSetList().get(id);
+				if (ds != null) {
+					result = new Result(id + " = " + ds);
+					return;
+				}
+
 				Variable v = module.getVariableList().get(id);
 				Matrix m = null;
 				if (v != null) {
 					m = v.getMatrix();
 					result = new Result(id + " = " + m);
-				} else {
-					MatrixException e = new MatrixException("Unknown object or command: " + id);
-					result = new Result(e);
+					return;
 				}
+
+				MatrixException e = new MatrixException("Unknown object or command: " + id);
+				result = new Result(e);
 				return;
 			}
 		}
@@ -529,7 +614,7 @@ public class Translation extends DepthFirstAdapter {
 			v = VariableFactory.labeledVariable(label);
 			module.getVariableList().put(label, v);
 		}
-		Matrix m = getMatrix(node.getExpression());
+		Matrix m = getMatrixFromObject(getMatrix(node.getExpression()));
 		v.addMatrix(m);
 		result = new Result(v.getLabel() + " = " + m);
 		System.out.println(v.getLabel() + " = " + m);

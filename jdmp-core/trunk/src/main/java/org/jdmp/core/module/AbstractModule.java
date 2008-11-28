@@ -39,7 +39,7 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 
 	protected final ObservableList<Algorithm> algorithmList = new ObservableList<Algorithm>();
 
-	protected final ObservableList<DataSet> dataSetList = new ObservableList<DataSet>();
+	protected final ObservableMap<DataSet> dataSetList = new ObservableMap<DataSet>();
 
 	protected final ObservableMap<Variable> variableList = new ObservableMap<Variable>();
 
@@ -49,7 +49,7 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		return moduleList;
 	}
 
-	public final ObservableList<DataSet> getDataSetList() {
+	public final ObservableMap<DataSet> getDataSetList() {
 		return dataSetList;
 	}
 

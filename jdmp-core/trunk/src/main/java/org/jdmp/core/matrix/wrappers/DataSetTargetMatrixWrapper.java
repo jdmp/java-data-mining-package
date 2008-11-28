@@ -41,6 +41,9 @@ public class DataSetTargetMatrixWrapper extends AbstractDenseDoubleMatrix2D impl
 	}
 
 	public long[] getSize() {
+		if (dataSet.getSampleList().isEmpty()) {
+			return Coordinates.ZERO2D;
+		}
 		Sample p = dataSet.getSampleList().getElementAt(0);
 		if (p == null) {
 			return Coordinates.ZERO2D;
