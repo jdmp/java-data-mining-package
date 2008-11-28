@@ -35,15 +35,23 @@ import org.ujmp.core.exceptions.MatrixException;
 public class Sum extends AlgorithmOneSource {
 	private static final long serialVersionUID = -6902623124007218820L;
 
+	private int dimension = Matrix.ROW;
+
 	public Sum(Variable... variables) {
+		this(Matrix.ROW, variables);
+	}
+
+	public Sum(int dimension, Variable... variables) {
 		super(variables);
+		this.dimension = dimension;
 		setDescription("target = sum(source)");
 	}
 
+	@Override
 	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
 		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
 		Matrix source = input.get(SOURCE);
-		Matrix target = source.sum(Ret.NEW, Matrix.ROW, true);
+		Matrix target = source.sum(Ret.NEW, dimension, true);
 		result.put(TARGET, target);
 		return result;
 	}

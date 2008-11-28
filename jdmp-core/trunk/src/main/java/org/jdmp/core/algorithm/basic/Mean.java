@@ -35,15 +35,23 @@ import org.ujmp.core.exceptions.MatrixException;
 public class Mean extends AlgorithmOneSource {
 	private static final long serialVersionUID = 5594989536534719762L;
 
+	private int dimension = Matrix.ROW;
+
 	public Mean(Variable... variables) {
+		this(Matrix.ROW, variables);
+	}
+
+	public Mean(int dimension, Variable... variables) {
 		super(variables);
+		this.dimension = dimension;
 		setDescription("target = mean(source)");
 	}
 
+	@Override
 	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
 		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
 		Matrix source = input.get(SOURCE);
-		Matrix target = source.mean(Ret.NEW, Matrix.ROW, true);
+		Matrix target = source.mean(Ret.NEW, dimension, true);
 		result.put(TARGET, target);
 		return result;
 	}
