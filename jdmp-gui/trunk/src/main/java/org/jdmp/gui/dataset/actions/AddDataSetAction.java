@@ -57,7 +57,7 @@ public class AddDataSetAction extends DataSetListAction {
 		if (ds == null) {
 			ds = new ClassificationDataSet();
 		}
-		((HasDataSetList) getIDataSets()).getDataSetList().add(ds);
+		((HasDataSetList) getIDataSets()).getDataSets().add(ds);
 		return ds;
 	}
 

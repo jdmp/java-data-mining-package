@@ -107,11 +107,11 @@ public class MultiLayerNetwork extends AbstractClassifier {
 					hiddenLayer = new NetworkLayer(aggregationDefault, transferDefault,
 							biasDefault, hiddenNeurons[i]);
 				}
-				getAlgorithmList()
+				getAlgorithms()
 						.put("hidden" + i + "-forward", hiddenLayer.getAlgorithmForward());
-				getAlgorithmList().put("hidden" + i + "-backward",
+				getAlgorithms().put("hidden" + i + "-backward",
 						hiddenLayer.getAlgorithmBackward());
-				getAlgorithmList().put("hidden" + i + "-update",
+				getAlgorithms().put("hidden" + i + "-update",
 						hiddenLayer.getAlgorithmWeightUpdate());
 				hiddenLayer.setLayer(i);
 				networkLayers.add(hiddenLayer);
@@ -124,9 +124,9 @@ public class MultiLayerNetwork extends AbstractClassifier {
 		}
 
 		NetworkLayer outputLayer = new NetworkLayer(aggregationOutput, transferOutput, biasOutput);
-		getAlgorithmList().put("output" + "-forward", outputLayer.getAlgorithmForward());
-		getAlgorithmList().put("output" + "-backward", outputLayer.getAlgorithmBackward());
-		getAlgorithmList().put("output" + "-update", outputLayer.getAlgorithmWeightUpdate());
+		getAlgorithms().put("output" + "-forward", outputLayer.getAlgorithmForward());
+		getAlgorithms().put("output" + "-backward", outputLayer.getAlgorithmBackward());
+		getAlgorithms().put("output" + "-update", outputLayer.getAlgorithmWeightUpdate());
 		outputLayer.setLayer(hiddenNeurons.length);
 		networkLayers.add(outputLayer);
 		if (previousLayer != null) {
@@ -338,7 +338,7 @@ public class MultiLayerNetwork extends AbstractClassifier {
 	public void trainOnce(RegressionDataSet dataSet) throws Exception {
 		if (useInnerCV) {
 
-			List<Sample> samples = new ArrayList<Sample>(dataSet.getSampleList().toCollection());
+			List<Sample> samples = new ArrayList<Sample>(dataSet.getSamples().toCollection());
 			Collections.shuffle(samples);
 
 			int last10Percent = (int) Math.ceil((samples.size() * 0.1));
@@ -365,7 +365,7 @@ public class MultiLayerNetwork extends AbstractClassifier {
 			}
 
 		} else {
-			List<Sample> samples = new ArrayList<Sample>(dataSet.getSampleList().toCollection());
+			List<Sample> samples = new ArrayList<Sample>(dataSet.getSamples().toCollection());
 			Collections.shuffle(samples);
 			for (Sample s : samples) {
 				train(s);

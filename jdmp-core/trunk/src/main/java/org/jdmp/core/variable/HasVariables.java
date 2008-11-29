@@ -27,6 +27,6 @@ import org.jdmp.core.util.CoreObjectList;
 
 public interface HasVariables {
 
-	public CoreObjectList<Variable> getVariableList();
+	public CoreObjectList<Variable> getVariables();
 
 }

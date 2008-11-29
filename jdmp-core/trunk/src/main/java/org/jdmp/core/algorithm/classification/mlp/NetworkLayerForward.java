@@ -102,7 +102,7 @@ public class NetworkLayerForward extends AbstractAlgorithm {
 	}
 
 	public Variable getInputVariable() {
-		Variable v = getVariableList().get(INPUT);
+		Variable v = getVariables().get(INPUT);
 		return v;
 	}
 
@@ -116,7 +116,7 @@ public class NetworkLayerForward extends AbstractAlgorithm {
 	}
 
 	public Variable getWeightVariable() {
-		Variable v = getVariableList().get(WEIGHT);
+		Variable v = getVariables().get(WEIGHT);
 		return v;
 	}
 
@@ -130,7 +130,7 @@ public class NetworkLayerForward extends AbstractAlgorithm {
 	}
 
 	public Variable getWeightedInputVariable() {
-		Variable v = getVariableList().get(WEIGHTEDINPUT);
+		Variable v = getVariables().get(WEIGHTEDINPUT);
 		return v;
 	}
 
@@ -173,22 +173,22 @@ public class NetworkLayerForward extends AbstractAlgorithm {
 	}
 
 	public Algorithm getWeightingFunction() {
-		Algorithm a = getAlgorithmList().get(WEIGHTINGFUNCTION);
+		Algorithm a = getAlgorithms().get(WEIGHTINGFUNCTION);
 		return a;
 	}
 
 	public Algorithm getAggregationFunction() {
-		Algorithm a = getAlgorithmList().get(AGGREGATIONFUNCTION);
+		Algorithm a = getAlgorithms().get(AGGREGATIONFUNCTION);
 		return a;
 	}
 
 	public Algorithm getTransferFunction() {
-		Algorithm a = getAlgorithmList().get(TRANSFERFUNCTION);
+		Algorithm a = getAlgorithms().get(TRANSFERFUNCTION);
 		return a;
 	}
 
 	public Variable getNetInputVariable() {
-		Variable v = getVariableList().get(NETINPUT);
+		Variable v = getVariables().get(NETINPUT);
 		return v;
 	}
 
@@ -201,7 +201,7 @@ public class NetworkLayerForward extends AbstractAlgorithm {
 	}
 
 	public Variable getOutputVariable() {
-		Variable v = getVariableList().get(OUTPUT);
+		Variable v = getVariables().get(OUTPUT);
 		return v;
 	}
 
@@ -211,7 +211,7 @@ public class NetworkLayerForward extends AbstractAlgorithm {
 
 	public void setOutputVariable(Variable v) {
 		setVariable(OUTPUT, v);
-		getAlgorithmList().get(TRANSFERFUNCTION).setVariable(AlgorithmOneSource.TARGET, v);
+		getAlgorithms().get(TRANSFERFUNCTION).setVariable(AlgorithmOneSource.TARGET, v);
 	}
 
 	// public static void main(String[] args) throws Exception {

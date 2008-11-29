@@ -95,7 +95,7 @@ public class MultiLabelNaiveBayesClassifier extends AbstractClassifier {
 	public void train(RegressionDataSet dataSet) throws Exception {
 		labelCount = ((ClassificationDataSet) dataSet).getClassCount();
 		int featureCount = dataSet.getFeatureCount();
-		int sampleCount = dataSet.getSampleList().getSize();
+		int sampleCount = dataSet.getSamples().getSize();
 
 		Matrix featureMatrix = dataSet.getInputVariable().getMatrix();
 		Matrix labelMatrix = dataSet.getTargetMatrix();

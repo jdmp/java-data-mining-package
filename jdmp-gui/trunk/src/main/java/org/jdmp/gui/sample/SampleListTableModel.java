@@ -53,11 +53,11 @@ public class SampleListTableModel extends AbstractTableModel implements ListData
 
 	public SampleListTableModel(HasSamples iSamples) {
 		this.iSamples = iSamples;
-		iSamples.getSampleList().addListDataListener(this);
+		iSamples.getSamples().addListDataListener(this);
 	}
 
 	public int getRowCount() {
-		return iSamples.getSampleList().getSize();
+		return iSamples.getSamples().getSize();
 	}
 
 	public int getColumnCount() {
@@ -94,7 +94,7 @@ public class SampleListTableModel extends AbstractTableModel implements ListData
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		return iSamples.getSampleList().getElementAt(rowIndex);
+		return iSamples.getSamples().getElementAt(rowIndex);
 	}
 
 	@Override

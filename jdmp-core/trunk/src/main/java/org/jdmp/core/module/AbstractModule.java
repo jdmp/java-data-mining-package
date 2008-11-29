@@ -45,19 +45,19 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 
 	protected final ObservableList<Module> moduleList = new ObservableList<Module>();
 
-	public ObservableList<Module> getModuleList() {
+	public ObservableList<Module> getModules() {
 		return moduleList;
 	}
 
-	public final ObservableMap<DataSet> getDataSetList() {
+	public final ObservableMap<DataSet> getDataSets() {
 		return dataSetList;
 	}
 
-	public final ObservableList<Algorithm> getAlgorithmList() {
+	public final ObservableList<Algorithm> getAlgorithms() {
 		return algorithmList;
 	}
 
-	public final ObservableMap<Variable> getVariableList() {
+	public final ObservableMap<Variable> getVariables() {
 		return variableList;
 	}
 

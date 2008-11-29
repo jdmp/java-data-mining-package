@@ -107,7 +107,7 @@ public class NaiveBayesClassifierTest extends AbstractClassifier {
 		// labelCount = ((ClassificationDataSet) dataSet).getClassCount();
 		// TODO: hack!!!
 		labelCount = 2;
-		int sampleCount = dataSet.getSampleList().getSize();
+		int sampleCount = dataSet.getSamples().getSize();
 		int featureCount = dataSet.getFeatureCount();
 		Matrix featureMatrix = dataSet.getInputMatrix();
 		Matrix labelMatrix = dataSet.getTargetMatrix();

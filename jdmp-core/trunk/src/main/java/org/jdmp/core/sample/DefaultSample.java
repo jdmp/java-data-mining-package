@@ -37,7 +37,7 @@ public class DefaultSample extends AbstractSample {
 
 	private String description = "";
 
-	public ObservableMap<Variable> getVariableList() {
+	public ObservableMap<Variable> getVariables() {
 		return variableMap;
 	}
 
@@ -84,10 +84,10 @@ public class DefaultSample extends AbstractSample {
 	}
 
 	public void setMatrix(Object variableKey, Matrix matrix) {
-		Variable v = getVariableList().get(variableKey);
+		Variable v = getVariables().get(variableKey);
 		if (v == null) {
 			v = VariableFactory.labeledVariable(variableKey.toString());
-			getVariableList().put(variableKey, v);
+			getVariables().put(variableKey, v);
 		}
 		v.addMatrix(matrix);
 	}

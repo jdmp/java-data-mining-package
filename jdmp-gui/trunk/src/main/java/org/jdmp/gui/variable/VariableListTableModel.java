@@ -51,11 +51,11 @@ public class VariableListTableModel extends AbstractTableModel implements ListDa
 
 	public VariableListTableModel(HasVariables iVariables) {
 		this.iVariables = iVariables;
-		iVariables.getVariableList().addListDataListener(this);
+		iVariables.getVariables().addListDataListener(this);
 	}
 
 	public int getRowCount() {
-		return iVariables.getVariableList().getSize();
+		return iVariables.getVariables().getSize();
 	}
 
 	public int getColumnCount() {
@@ -90,7 +90,7 @@ public class VariableListTableModel extends AbstractTableModel implements ListDa
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		return iVariables.getVariableList().getElementAt(rowIndex);
+		return iVariables.getVariables().getElementAt(rowIndex);
 	}
 
 	@Override

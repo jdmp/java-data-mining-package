@@ -69,7 +69,7 @@ public class SemiSupervisedEM extends AbstractClassifier implements SemiSupervis
 		classifier.reset();
 		classifier.train(labeledData);
 		classifier.predict(unlabeledData);
-		for (Sample s : unlabeledData.getSampleList()) {
+		for (Sample s : unlabeledData.getSamples()) {
 			Matrix predicted = s.getMatrix(Sample.PREDICTED);
 			if (useRawPrediction) {
 				s.setMatrix(Sample.TARGET, predicted);
@@ -81,15 +81,15 @@ public class SemiSupervisedEM extends AbstractClassifier implements SemiSupervis
 			}
 		}
 		ClassificationDataSet completeData = new ClassificationDataSet();
-		completeData.getSampleList().addAll(labeledData.getSampleList().toCollection());
-		completeData.getSampleList().addAll(unlabeledData.getSampleList().toCollection());
+		completeData.getSamples().addAll(labeledData.getSamples().toCollection());
+		completeData.getSamples().addAll(unlabeledData.getSamples().toCollection());
 		classifier.reset();
 		classifier.train(completeData);
 
 		for (int i = 0; i < iterations; i++) {
 			System.out.println("Step " + (i + 1));
 			classifier.predict(unlabeledData);
-			for (Sample s : unlabeledData.getSampleList()) {
+			for (Sample s : unlabeledData.getSamples()) {
 				Matrix predicted = s.getMatrix(Sample.PREDICTED);
 				int max = (int) predicted.indexOfMax(Ret.NEW, Matrix.COLUMN).getAsDouble(0, 0);
 				Matrix target = MatrixFactory.zeros(1, classCount);
@@ -97,8 +97,8 @@ public class SemiSupervisedEM extends AbstractClassifier implements SemiSupervis
 				s.setMatrix(Sample.TARGET, target);
 			}
 			completeData = new ClassificationDataSet();
-			completeData.getSampleList().addAll(labeledData.getSampleList().toCollection());
-			completeData.getSampleList().addAll(unlabeledData.getSampleList().toCollection());
+			completeData.getSamples().addAll(labeledData.getSamples().toCollection());
+			completeData.getSamples().addAll(unlabeledData.getSamples().toCollection());
 			classifier.reset();
 			classifier.train(completeData);
 		}

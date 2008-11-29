@@ -63,9 +63,9 @@ public class DataSetTableCellRenderer implements TableCellRenderer {
 				break;
 			case DataSetListTableModel.VARIABLECOLUMN:
 				return variableListTableCellRenderer.getTableCellRendererComponent(table, dataSet
-						.getVariableList(), isSelected, hasFocus, row, column);
+						.getVariables(), isSelected, hasFocus, row, column);
 			case DataSetListTableModel.SAMPLECOUNTCOLUMN:
-				o = "" + dataSet.getSampleList().getSize();
+				o = "" + dataSet.getSamples().getSize();
 				break;
 			default:
 				o = null;

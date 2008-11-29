@@ -40,7 +40,7 @@ public class BasicDataSet extends AbstractDataSet {
 		this(v.getLabel());
 		for (Matrix m : v.getMatrixList()) {
 			DefaultSample s = new DefaultSample(m);
-			getSampleList().add(s);
+			getSamples().add(s);
 		}
 	}
 
@@ -54,11 +54,11 @@ public class BasicDataSet extends AbstractDataSet {
 		Matrix inputMatrix = new DataSetInputMatrixWrapper(this);
 		Variable input = VariableFactory.labeledVariable("Input");
 		input.addMatrix(inputMatrix);
-		getVariableList().put(INPUT, input);
+		getVariables().put(INPUT, input);
 	}
 
 	public final Variable getInputVariable() {
-		return getVariableList().get(INPUT);
+		return getVariables().get(INPUT);
 	}
 
 	public final void standardize(int dimension) throws MatrixException {

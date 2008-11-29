@@ -42,13 +42,13 @@ public class DataSetToInstancesWrapper extends Instances {
 	public DataSetToInstancesWrapper(RegressionDataSet dataSet, boolean discrete,
 			boolean includeTarget) throws MatrixException {
 		super(dataSet.getLabel(), new DataSetToAttributeInfoWrapper(dataSet, discrete), dataSet
-				.getSampleList().getSize());
+				.getSamples().getSize());
 
 		if (includeTarget) {
 			setClassIndex(dataSet.getFeatureCount());
 		}
 
-		for (Sample s : dataSet.getSampleList()) {
+		for (Sample s : dataSet.getSamples()) {
 			Matrix input = ((ClassificationSample) s).getMatrix(INPUT);
 			Matrix weight = ((ClassificationSample) s).getMatrix(WEIGHT);
 			Matrix target = ((ClassificationSample) s).getMatrix(TARGET);

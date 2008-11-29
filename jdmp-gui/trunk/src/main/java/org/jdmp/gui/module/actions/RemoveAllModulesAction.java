@@ -46,7 +46,7 @@ public class RemoveAllModulesAction extends ModuleListAction {
 
 	@Override
 	public Object call() {
-		getIModules().getModuleList().clear();
+		getIModules().getModules().clear();
 		return null;
 	}
 

@@ -45,7 +45,7 @@ public class AddLocalModuleAction extends ModuleListAction {
 
 	@Override
 	public Object call() {
-		getIModules().getModuleList().add(new DefaultModule());
+		getIModules().getModules().add(new DefaultModule());
 		return null;
 	}
 

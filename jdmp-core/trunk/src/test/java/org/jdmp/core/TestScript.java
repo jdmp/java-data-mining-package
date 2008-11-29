@@ -38,7 +38,7 @@ public class TestScript extends TestCase {
 		m.execute("b=[4,5,6;1,2,3];");
 		m.execute("c=a+b;");
 
-		Matrix actual = m.getVariableList().get("c").getMatrix();
+		Matrix actual = m.getVariables().get("c").getMatrix();
 		Matrix expected = MatrixFactory.linkToArray(new double[][] { { 5, 7, 9 }, { 5, 7, 9 } });
 
 		assertEquals(expected, actual);

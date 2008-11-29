@@ -77,7 +77,7 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 	}
 
 	public Matrix getMatrix(Object variableKey) {
-		Variable v = getVariableList().get(variableKey);
+		Variable v = getVariables().get(variableKey);
 		if (v != null) {
 			return v.getMatrix();
 		} else {
@@ -86,19 +86,19 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 	}
 
 	public void setMatrix(Object variableKey, Matrix matrix) {
-		Variable v = getVariableList().get(variableKey);
+		Variable v = getVariables().get(variableKey);
 		if (v == null) {
 			v = VariableFactory.labeledVariable(variableKey.toString());
-			getVariableList().put(variableKey, v);
+			getVariables().put(variableKey, v);
 		}
 		v.addMatrix(matrix);
 	}
 
-	public ObservableList<Sample> getSampleList() {
+	public ObservableList<Sample> getSamples() {
 		return sampleList;
 	}
 
-	public final ObservableMap<Variable> getVariableList() {
+	public final ObservableMap<Variable> getVariables() {
 		return variableList;
 	}
 
@@ -109,8 +109,8 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 	public List<DataSet> splitByCount(boolean shuffle, int... count) {
 		List<DataSet> dataSets = new ArrayList<DataSet>();
 
-		List<Integer> ids = new ArrayList<Integer>(getSampleList().getSize());
-		for (int i = getSampleList().getSize() - 1; i != -1; i--) {
+		List<Integer> ids = new ArrayList<Integer>(getSamples().getSize());
+		for (int i = getSamples().getSize() - 1; i != -1; i--) {
 			ids.add(i);
 		}
 
@@ -121,13 +121,13 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		for (int i = 0; i < count.length; i++) {
 			DataSet ds = new ClassificationDataSet("DataSet" + i);
 			for (int c = 0; c < count[i]; c++) {
-				ds.getSampleList().add(getSampleList().getElementAt(ids.remove(0)).clone());
+				ds.getSamples().add(getSamples().getElementAt(ids.remove(0)).clone());
 			}
 			dataSets.add(ds);
 		}
 		DataSet ds = new ClassificationDataSet("DataSet" + count.length);
 		while (ids.size() != 0) {
-			ds.getSampleList().add(getSampleList().getElementAt(ids.remove(0)).clone());
+			ds.getSamples().add(getSamples().getElementAt(ids.remove(0)).clone());
 		}
 		dataSets.add(ds);
 
@@ -137,7 +137,7 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 	public List<DataSet> splitForCV(int numberOfCVSets, int idOfCVSet, long randomSeed) {
 		List<DataSet> returnDataSets = new ArrayList<DataSet>();
 		List<List<Sample>> tempSampleLists = new ArrayList<List<Sample>>();
-		List<Sample> allSamples = new ArrayList<Sample>(getSampleList().toCollection());
+		List<Sample> allSamples = new ArrayList<Sample>(getSamples().toCollection());
 		Collections.shuffle(allSamples, new Random(randomSeed));
 
 		for (int set = 0; set < numberOfCVSets; set++) {
@@ -154,12 +154,12 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		}
 
 		DataSet testSet = new ClassificationDataSet("TestSet" + randomSeed + "-" + idOfCVSet);
-		testSet.getSampleList().addAll(tempSampleLists.get(idOfCVSet));
+		testSet.getSamples().addAll(tempSampleLists.get(idOfCVSet));
 		DataSet trainingSet = new ClassificationDataSet("TrainingSet" + randomSeed + "-"
 				+ idOfCVSet);
 		for (int i = 0; i < numberOfCVSets; i++) {
 			if (i != idOfCVSet) {
-				trainingSet.getSampleList().addAll(tempSampleLists.get(i));
+				trainingSet.getSamples().addAll(tempSampleLists.get(i));
 			}
 		}
 
@@ -171,7 +171,7 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 
 	public List<DataSet> splitByPercent(boolean shuffle, double... percent) {
 		int[] counts = new int[percent.length];
-		int sampleCount = getSampleList().getSize();
+		int sampleCount = getSamples().getSize();
 		for (int i = 0; i < percent.length; i++) {
 			counts[i] = (int) Math.round(percent[i] * sampleCount);
 		}

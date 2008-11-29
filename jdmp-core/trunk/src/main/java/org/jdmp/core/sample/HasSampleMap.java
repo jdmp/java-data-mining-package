@@ -21,12 +21,12 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.core.algorithm;
+package org.jdmp.core.sample;
 
-import org.jdmp.core.util.ObservableList;
+import org.jdmp.core.util.ObservableMap;
 
-public interface HasAlgorithmList extends HasAlgorithms {
+public interface HasSampleMap extends HasSamples {
 
-	public ObservableList<Algorithm> getAlgorithms();
+	public ObservableMap<Sample> getSamples();
 
 }

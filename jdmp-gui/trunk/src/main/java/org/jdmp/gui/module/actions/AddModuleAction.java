@@ -56,7 +56,7 @@ public class AddModuleAction extends ModuleListAction {
 		if (module == null) {
 			module = new DefaultModule();
 		}
-		getIModules().getModuleList().add(module);
+		getIModules().getModules().add(module);
 		return module;
 	}
 

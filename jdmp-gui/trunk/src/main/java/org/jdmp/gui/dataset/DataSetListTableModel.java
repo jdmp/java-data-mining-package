@@ -45,11 +45,11 @@ public class DataSetListTableModel extends AbstractTableModel implements ListDat
 
 	public DataSetListTableModel(HasDataSets iDataSets) {
 		this.iDataSets = iDataSets;
-		iDataSets.getDataSetList().addListDataListener(this);
+		iDataSets.getDataSets().addListDataListener(this);
 	}
 
 	public int getRowCount() {
-		return iDataSets.getDataSetList().getSize();
+		return iDataSets.getDataSets().getSize();
 	}
 
 	public int getColumnCount() {
@@ -78,7 +78,7 @@ public class DataSetListTableModel extends AbstractTableModel implements ListDat
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		return iDataSets.getDataSetList().getElementAt(rowIndex);
+		return iDataSets.getDataSets().getElementAt(rowIndex);
 	}
 
 	@Override

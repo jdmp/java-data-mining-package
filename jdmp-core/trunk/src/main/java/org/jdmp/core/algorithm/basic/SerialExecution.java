@@ -41,7 +41,7 @@ public class SerialExecution extends AbstractAlgorithm {
 	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws Exception {
 		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
 
-		for (Algorithm a : getAlgorithmList()) {
+		for (Algorithm a : getAlgorithms()) {
 			Map<Object, Matrix> r = a.calculate();
 			result.putAll(r);
 		}

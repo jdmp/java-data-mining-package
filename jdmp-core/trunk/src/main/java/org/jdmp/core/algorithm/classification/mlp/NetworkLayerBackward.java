@@ -137,7 +137,7 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 	}
 
 	public Variable getOutputDeviationVariable() {
-		Variable v = getVariableList().get(OUTPUTDEVIATION);
+		Variable v = getVariables().get(OUTPUTDEVIATION);
 		return v;
 	}
 
@@ -151,7 +151,7 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 	}
 
 	public Algorithm getReturningFunction() {
-		Algorithm a = getAlgorithmList().get(RETURNINGFUNCTION);
+		Algorithm a = getAlgorithms().get(RETURNINGFUNCTION);
 		return a;
 	}
 
@@ -160,7 +160,7 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 	}
 
 	public Algorithm getSplittingFunction() {
-		Algorithm a = getAlgorithmList().get(SPLITTINGFUNCTION);
+		Algorithm a = getAlgorithms().get(SPLITTINGFUNCTION);
 		return a;
 	}
 
@@ -169,7 +169,7 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 	}
 
 	public Algorithm getDimmingFunction() {
-		Algorithm a = getAlgorithmList().get(DIMMINGFUNCTION);
+		Algorithm a = getAlgorithms().get(DIMMINGFUNCTION);
 		return a;
 	}
 
@@ -178,7 +178,7 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 	}
 
 	public Variable getNetDeviationVariable() {
-		Variable v = getVariableList().get(NETDEVIATION);
+		Variable v = getVariables().get(NETDEVIATION);
 		return v;
 	}
 
@@ -191,7 +191,7 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 	}
 
 	public Variable getContactDeviationVariable() {
-		Variable v = getVariableList().get(CONTACTDEVIATION);
+		Variable v = getVariables().get(CONTACTDEVIATION);
 		return v;
 	}
 
@@ -204,7 +204,7 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 	}
 
 	public Variable getInputDeviationVariable() {
-		Variable v = getVariableList().get(INPUTDEVIATION);
+		Variable v = getVariables().get(INPUTDEVIATION);
 		return v;
 	}
 
@@ -217,7 +217,7 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 	}
 
 	public Variable getWeightVariable() {
-		Variable v = getVariableList().get(WEIGHT);
+		Variable v = getVariables().get(WEIGHT);
 		return v;
 	}
 
@@ -231,7 +231,7 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 	}
 
 	public Variable getOutputVariable() {
-		Variable v = getVariableList().get(OUTPUT);
+		Variable v = getVariables().get(OUTPUT);
 		return v;
 	}
 

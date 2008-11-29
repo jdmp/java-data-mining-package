@@ -46,7 +46,7 @@ public class Repeat extends AbstractAlgorithm {
 		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
 
 		for (int i = 0; i < repeatCount; i++) {
-			result = getAlgorithmList().get(REPEATEDALGORITHM).calculate(input);
+			result = getAlgorithms().get(REPEATEDALGORITHM).calculate(input);
 		}
 		return result;
 
@@ -65,6 +65,6 @@ public class Repeat extends AbstractAlgorithm {
 	}
 
 	public Algorithm getRepeatedAlgorithm() {
-		return getAlgorithmList().get(REPEATEDALGORITHM);
+		return getAlgorithms().get(REPEATEDALGORITHM);
 	}
 }

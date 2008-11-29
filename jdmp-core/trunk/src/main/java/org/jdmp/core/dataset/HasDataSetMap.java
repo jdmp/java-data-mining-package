@@ -4,6 +4,6 @@ import org.jdmp.core.util.ObservableMap;
 
 public interface HasDataSetMap extends HasDataSets {
 
-	public ObservableMap<DataSet> getDataSetList();
+	public ObservableMap<DataSet> getDataSets();
 
 }

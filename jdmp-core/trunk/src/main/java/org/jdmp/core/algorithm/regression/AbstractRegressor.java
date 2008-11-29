@@ -103,7 +103,7 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 			confusion = MatrixFactory.zeros(classCount, classCount);
 		}
 
-		for (Sample sample : dataSet.getSampleList()) {
+		for (Sample sample : dataSet.getSamples()) {
 
 			predict(sample);
 
@@ -138,7 +138,7 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 		}
 
 		Matrix outputError = MatrixFactory.linkToValue(Math.sqrt(error
-				/ dataSet.getSampleList().getSize()));
+				/ dataSet.getSamples().getSize()));
 		outputError.setLabel("Output Error with " + getLabel());
 		dataSet.appendRMSEMatrix(outputError);
 
@@ -147,7 +147,7 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 			((ClassificationDataSet) dataSet).appendConfusionMatrix(confusion);
 
 			Matrix accuracy = MatrixFactory.linkToValue((double) correctCount
-					/ (double) dataSet.getSampleList().getSize());
+					/ (double) dataSet.getSamples().getSize());
 			accuracy.setLabel("Accuracy with " + getLabel());
 			((ClassificationDataSet) dataSet).appendAccuracyMatrix(accuracy);
 
@@ -159,7 +159,7 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 	}
 
 	public Algorithm getOutputErrorAlgorithm() {
-		return getAlgorithmList().get(OUTPUTERRORALGORITHM);
+		return getAlgorithms().get(OUTPUTERRORALGORITHM);
 	}
 
 	public void setOutputErrorAlgorithm(Algorithm a) {

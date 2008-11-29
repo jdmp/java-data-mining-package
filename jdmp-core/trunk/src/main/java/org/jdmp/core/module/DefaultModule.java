@@ -55,7 +55,7 @@ public class DefaultModule extends AbstractModule {
 
 	@Override
 	public Matrix getMatrix(Object variableKey) {
-		Variable v = getVariableList().get(variableKey);
+		Variable v = getVariables().get(variableKey);
 		if (v == null) {
 			return null;
 		} else {
@@ -65,7 +65,7 @@ public class DefaultModule extends AbstractModule {
 
 	@Override
 	public void setMatrix(Object variableKey, Matrix matrix) {
-		Variable v = getVariableList().get(variableKey);
+		Variable v = getVariables().get(variableKey);
 		if (v != null) {
 			v.addMatrix(matrix);
 		}

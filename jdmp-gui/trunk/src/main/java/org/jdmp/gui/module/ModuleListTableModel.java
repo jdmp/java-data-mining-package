@@ -49,11 +49,11 @@ public class ModuleListTableModel extends AbstractTableModel implements ListData
 
 	public ModuleListTableModel(HasModuleList iModules) {
 		this.iModules = iModules;
-		iModules.getModuleList().addListDataListener(this);
+		iModules.getModules().addListDataListener(this);
 	}
 
 	public int getRowCount() {
-		return iModules.getModuleList().getSize();
+		return iModules.getModules().getSize();
 	}
 
 	public int getColumnCount() {
@@ -87,7 +87,7 @@ public class ModuleListTableModel extends AbstractTableModel implements ListData
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		return iModules.getModuleList().getElementAt(rowIndex);
+		return iModules.getModules().getElementAt(rowIndex);
 	}
 
 	@Override

@@ -27,6 +27,6 @@ import org.jdmp.core.util.CoreObjectList;
 
 public interface HasSamples {
 
-	public CoreObjectList<Sample> getSampleList();
+	public CoreObjectList<Sample> getSamples();
 
 }

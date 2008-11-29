@@ -21,12 +21,12 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.core.algorithm;
+package org.jdmp.core.module;
 
-import org.jdmp.core.util.ObservableList;
+import org.jdmp.core.util.CoreObjectList;
 
-public interface HasAlgorithmList extends HasAlgorithms {
+public interface HasModules {
 
-	public ObservableList<Algorithm> getAlgorithms();
+	public CoreObjectList<Module> getModules();
 
 }

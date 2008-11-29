@@ -70,7 +70,7 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 	}
 
 	public Matrix getMatrix(Object variableKey) {
-		Variable v = getVariableList().get(variableKey);
+		Variable v = getVariables().get(variableKey);
 		if (v != null) {
 			return v.getMatrix();
 		} else {

@@ -27,5 +27,5 @@ import org.jdmp.core.util.CoreObjectList;
 
 public interface HasDataSets {
 
-	public CoreObjectList<DataSet> getDataSetList();
+	public CoreObjectList<DataSet> getDataSets();
 }

@@ -25,8 +25,8 @@ package org.jdmp.core.module;
 
 import org.jdmp.core.util.ObservableList;
 
-public interface HasModuleList {
+public interface HasModuleList extends HasModules {
 
-	public ObservableList<Module> getModuleList();
+	public ObservableList<Module> getModules();
 
 }

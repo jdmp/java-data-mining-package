@@ -28,7 +28,7 @@ import org.ujmp.core.Matrix;
 
 public interface HasVariableMap extends HasVariables {
 
-	public ObservableMap<Variable> getVariableList();
+	public ObservableMap<Variable> getVariables();
 
 	public Matrix getMatrix(Object variableKey);
 

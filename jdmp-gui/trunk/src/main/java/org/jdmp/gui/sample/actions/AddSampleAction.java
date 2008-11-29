@@ -40,7 +40,7 @@ public class AddSampleAction extends SampleListAction {
 
 	@Override
 	public Object call() {
-		getISamples().getSampleList().add(new ClassificationSample());
+		getISamples().getSamples().add(new ClassificationSample());
 		return null;
 	}
 

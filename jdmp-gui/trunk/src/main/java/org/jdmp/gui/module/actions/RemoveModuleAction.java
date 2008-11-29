@@ -53,7 +53,7 @@ public class RemoveModuleAction extends ModuleListAction {
 	@Override
 	public Object call() {
 		if (module != null) {
-			getIModules().getModuleList().remove(module);
+			getIModules().getModules().remove(module);
 			return module;
 		}
 		return null;

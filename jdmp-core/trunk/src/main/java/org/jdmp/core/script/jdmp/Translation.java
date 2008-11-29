@@ -86,10 +86,10 @@ public class Translation extends DepthFirstAdapter {
 
 	private Variable getVariable(PName identifier) {
 		String label = identifier.toString().trim();
-		Variable v = module.getVariableList().get(label);
+		Variable v = module.getVariables().get(label);
 		if (v == null) {
 			v = VariableFactory.labeledVariable(label);
-			module.getVariableList().put(label, v);
+			module.getVariables().put(label, v);
 		}
 		return v;
 	}
@@ -181,11 +181,11 @@ public class Translation extends DepthFirstAdapter {
 		Object o = getMatrix(node.getExpression());
 		if (o instanceof Module) {
 			Module m = (Module) o;
-			module.getModuleList().add(m);
+			module.getModules().add(m);
 			result = new Result("Module = " + m.toString());
 		} else if (o instanceof DataSet) {
 			DataSet ds = (DataSet) o;
-			module.getDataSetList().put(id, ds);
+			module.getDataSets().put(id, ds);
 			result = new Result(id + " = " + ds.toString());
 		} else if (o instanceof Sample) {
 			Sample s = (Sample) o;
@@ -268,12 +268,12 @@ public class Translation extends DepthFirstAdapter {
 		} else if (value instanceof AIdentifierValue) {
 			String name = ((AIdentifierValue) value).getName().toString().trim();
 
-			DataSet ds = module.getDataSetList().get(name);
+			DataSet ds = module.getDataSets().get(name);
 			if (ds != null) {
 				return ds;
 			}
 
-			Variable v = module.getVariableList().get(name);
+			Variable v = module.getVariables().get(name);
 			if (v == null) {
 				MatrixException e = new MatrixException("Unknown variable: " + name);
 				result = new Result(e);
@@ -462,11 +462,11 @@ public class Translation extends DepthFirstAdapter {
 	}
 
 	private CoreObject getObject(String name) {
-		CoreObject o = module.getVariableList().get(name);
+		CoreObject o = module.getVariables().get(name);
 		if (o != null) {
 			return o;
 		}
-		o = module.getDataSetList().get(name);
+		o = module.getDataSets().get(name);
 		if (o != null) {
 			return o;
 		}
@@ -588,13 +588,13 @@ public class Translation extends DepthFirstAdapter {
 
 				String id = avexpr.getValue().toString().trim();
 
-				DataSet ds = module.getDataSetList().get(id);
+				DataSet ds = module.getDataSets().get(id);
 				if (ds != null) {
 					result = new Result(id + " = " + ds);
 					return;
 				}
 
-				Variable v = module.getVariableList().get(id);
+				Variable v = module.getVariables().get(id);
 				Matrix m = null;
 				if (v != null) {
 					m = v.getMatrix();
@@ -609,10 +609,10 @@ public class Translation extends DepthFirstAdapter {
 		}
 
 		String label = "ans";
-		Variable v = module.getVariableList().get(label);
+		Variable v = module.getVariables().get(label);
 		if (v == null) {
 			v = VariableFactory.labeledVariable(label);
-			module.getVariableList().put(label, v);
+			module.getVariables().put(label, v);
 		}
 		Matrix m = getMatrixFromObject(getMatrix(node.getExpression()));
 		v.addMatrix(m);
