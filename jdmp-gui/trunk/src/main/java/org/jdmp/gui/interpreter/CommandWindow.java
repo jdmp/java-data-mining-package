@@ -112,7 +112,6 @@ public class CommandWindow extends JPanel implements KeyListener {
 
 					appendText("\n\n>> ");
 					endPos = textField.getText().length();
-					textField.setCaretPosition(endPos);
 					e.consume();
 
 					// TODO: this is a hack and should be solved via
