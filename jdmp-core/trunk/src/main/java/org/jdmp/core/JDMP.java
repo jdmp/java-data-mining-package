@@ -128,6 +128,7 @@ public class JDMP {
 				out.println("Graphics mode is not available, probably because jdmp-gui is not");
 				out.println("in the class path.");
 				out.println();
+				textMode = true;
 			}
 		}
 
@@ -142,34 +143,36 @@ public class JDMP {
 			module.execute(script);
 		}
 
-		// read from standard input
-		LineNumberReader lr = new LineNumberReader(new InputStreamReader(System.in));
+		if (textMode == true) {
 
-		while (true) {
+			// read from standard input
+			LineNumberReader lr = new LineNumberReader(new InputStreamReader(System.in));
 
-			try {
+			while (true) {
 
-				out.print(">> ");
+				try {
 
-				String line = lr.readLine();
+					out.print(">> ");
 
-				if (line.startsWith(">> ")) {
-					line = line.substring(3);
+					String line = lr.readLine();
+
+					if (line.startsWith(">> ")) {
+						line = line.substring(3);
+					}
+
+					if (!line.endsWith(";")) {
+						Result result = module.execute(line + ";");
+						out.println(result);
+					} else {
+						module.execute(line);
+					}
+
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 
-				if (!line.endsWith(";")) {
-					Result result = module.execute(line + ";");
-					out.println(result);
-				} else {
-					module.execute(line);
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
 			}
-
 		}
-
 	}
 
 }
