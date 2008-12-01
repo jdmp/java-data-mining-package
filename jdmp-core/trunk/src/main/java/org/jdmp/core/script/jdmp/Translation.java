@@ -10,11 +10,11 @@ import org.jdmp.core.CoreObject;
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DataSetFactory;
-import org.jdmp.core.interpreter.Result;
 import org.jdmp.core.module.Module;
 import org.jdmp.core.module.ModuleFactory;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.sample.SampleFactory;
+import org.jdmp.core.script.Result;
 import org.jdmp.core.script.jdmp.analysis.DepthFirstAdapter;
 import org.jdmp.core.script.jdmp.node.AArgumentListArgumentList;
 import org.jdmp.core.script.jdmp.node.AArray;
@@ -196,8 +196,8 @@ public class Translation extends DepthFirstAdapter {
 			if (m != null) {
 				Variable v = getVariable(node.getName());
 				v.addMatrix(m);
-				result = new Result(v.getLabel() + " = " + m.toString());
-				System.out.println(v.getLabel() + " = " + m.toString());
+				result = new Result(v.getLabel() + " = \n" + m.toString());
+				System.out.println(v.getLabel() + " = \n" + m.toString());
 			}
 		}
 	}

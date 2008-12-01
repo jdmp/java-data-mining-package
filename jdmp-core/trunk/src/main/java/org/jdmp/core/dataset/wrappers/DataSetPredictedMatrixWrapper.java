@@ -21,7 +21,7 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.core.matrix.wrappers;
+package org.jdmp.core.dataset.wrappers;
 
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.sample.Sample;

@@ -21,21 +21,31 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.core.interpreter;
+package org.jdmp.core.algorithm.basic;
 
-public abstract class Command {
+import java.util.HashMap;
+import java.util.Map;
 
-	private String originalText = "";
+import org.jdmp.core.algorithm.AlgorithmNoSource;
+import org.jdmp.core.variable.Variable;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.MatrixFactory;
+import org.ujmp.core.exceptions.MatrixException;
 
-	public Command() {
+public class Systemtime extends AlgorithmNoSource {
+	private static final long serialVersionUID = 8746352489100162306L;
+
+	public Systemtime(Variable... variables) {
+		super(variables);
+		setDescription("target = systemTime()");
 	}
 
-	public String getOriginalText() {
-		return originalText;
-	}
-
-	public void setOriginalText(String originalText) {
-		this.originalText = originalText;
+	@Override
+	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
+		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
+		Matrix target = MatrixFactory.systemTime();
+		result.put(TARGET, target);
+		return result;
 	}
 
 }

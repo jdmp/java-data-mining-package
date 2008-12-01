@@ -23,7 +23,7 @@
 
 package org.jdmp.core.module;
 
-import org.jdmp.core.interpreter.Result;
+import org.jdmp.core.script.Result;
 import org.jdmp.core.script.jdmp.Interpreter;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;

@@ -23,8 +23,8 @@
 
 package org.jdmp.core.dataset;
 
-import org.jdmp.core.matrix.wrappers.DataSetPredictedMatrixWrapper;
-import org.jdmp.core.matrix.wrappers.DataSetTargetMatrixWrapper;
+import org.jdmp.core.dataset.wrappers.DataSetPredictedMatrixWrapper;
+import org.jdmp.core.dataset.wrappers.DataSetTargetMatrixWrapper;
 import org.jdmp.core.sample.DefaultSample;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.DefaultVariable;

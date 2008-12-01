@@ -23,7 +23,7 @@
 
 package org.jdmp.core.dataset;
 
-import org.jdmp.core.matrix.wrappers.DataSetInputMatrixWrapper;
+import org.jdmp.core.dataset.wrappers.DataSetInputMatrixWrapper;
 import org.jdmp.core.sample.DefaultSample;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;

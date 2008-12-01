@@ -21,16 +21,24 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.core.interpreter;
+package org.jdmp.core.algorithm;
 
-public class CommentCommand extends Command {
+import org.jdmp.core.variable.Variable;
 
-	public CommentCommand(String text) {
-		setOriginalText(text);
+public abstract class AlgorithmNoSource extends AbstractAlgorithm {
+
+	public static final String TARGET = "Target";
+
+	public AlgorithmNoSource(Variable... variables) {
+		super();
+		addVariableKey(TARGET);
+		setEdgeLabel(TARGET, "Target");
+		setEdgeDirection(TARGET, EdgeDirection.Outgoing);
+		setVariables(variables);
 	}
 
-	public String toString() {
-		return getOriginalText();
+	public void setTargetVariable(Variable target) {
+		setVariable(TARGET, target);
 	}
 
 }

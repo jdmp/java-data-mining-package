@@ -21,29 +21,53 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.core.interpreter;
+package org.jdmp.core.script;
 
-public class PrintCommand extends Command {
+public class Result {
 
-	private String variable = null;
+	private String text = "";
 
-	public PrintCommand() {
+	private Throwable exception = null;
+
+	public Result(String text) {
+		this(text, null);
 	}
 
-	public PrintCommand(String variable) {
-		this.variable = variable;
+	public Result(Throwable e) {
+		this(null, e);
 	}
 
+	public Result(String s, Throwable e) {
+		this.text = s;
+		this.exception = e;
+	}
+
+	public Throwable getException() {
+		return exception;
+	}
+
+	public void setException(Throwable exception) {
+		this.exception = exception;
+	}
+
+	@Override
 	public String toString() {
-		return variable;
+		if (exception == null) {
+			return text;
+		} else {
+			if (text == null) {
+				return exception.getMessage();
+			} else {
+				return text + ": " + exception.getMessage();
+			}
+		}
 	}
 
-	public String getVariable() {
-		return variable;
+	public String getText() {
+		return text;
 	}
 
-	public void setVariable(String variable) {
-		this.variable = variable;
+	public void setText(String text) {
+		this.text = text;
 	}
-
 }

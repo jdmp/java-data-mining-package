@@ -3,8 +3,8 @@ package org.jdmp.core.script.jdmp;
 import java.io.PushbackReader;
 import java.io.StringReader;
 
-import org.jdmp.core.interpreter.Result;
 import org.jdmp.core.module.Module;
+import org.jdmp.core.script.Result;
 import org.jdmp.core.script.jdmp.lexer.Lexer;
 import org.jdmp.core.script.jdmp.node.Start;
 import org.jdmp.core.script.jdmp.parser.Parser;

@@ -27,9 +27,9 @@ import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.io.PrintStream;
 
-import org.jdmp.core.interpreter.Result;
 import org.jdmp.core.module.Module;
 import org.jdmp.core.module.ModuleFactory;
+import org.jdmp.core.script.Result;
 import org.ujmp.core.util.io.IntelligentFileReader;
 
 public class JDMP {

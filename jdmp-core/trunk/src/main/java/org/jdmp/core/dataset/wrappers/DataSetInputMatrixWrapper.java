@@ -21,22 +21,26 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.core.matrix.wrappers;
+package org.jdmp.core.dataset.wrappers;
 
-import org.jdmp.core.dataset.RegressionDataSet;
+import org.jdmp.core.algorithm.regression.Regressor;
+import org.jdmp.core.dataset.BasicDataSet;
 import org.jdmp.core.sample.Sample;
+import org.ujmp.core.Matrix;
 import org.ujmp.core.coordinates.Coordinates;
 import org.ujmp.core.doublematrix.AbstractDenseDoubleMatrix2D;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.interfaces.Wrapper;
 
-public class DataSetTargetMatrixWrapper extends AbstractDenseDoubleMatrix2D implements
-		Wrapper<RegressionDataSet> {
-	private static final long serialVersionUID = 5906451226992160036L;
+public class DataSetInputMatrixWrapper extends AbstractDenseDoubleMatrix2D implements
+		Wrapper<BasicDataSet> {
+	private static final long serialVersionUID = -817570097594349208L;
 
-	private RegressionDataSet dataSet = null;
+	public static final Object INPUT = Regressor.INPUT;
 
-	public DataSetTargetMatrixWrapper(RegressionDataSet ds) {
+	private BasicDataSet dataSet = null;
+
+	public DataSetInputMatrixWrapper(BasicDataSet ds) {
 		this.dataSet = ds;
 	}
 
@@ -48,31 +52,43 @@ public class DataSetTargetMatrixWrapper extends AbstractDenseDoubleMatrix2D impl
 		if (p == null) {
 			return Coordinates.ZERO2D;
 		}
-		return new long[] { dataSet.getSamples().getSize(),
-				p.getMatrix(Sample.TARGET).getColumnCount() };
+		Matrix input = p.getMatrix(INPUT);
+		if (input != null) {
+			return new long[] { dataSet.getSamples().getSize(), input.getValueCount() };
+		} else {
+			return Coordinates.ZERO2D;
+		}
+
 	}
 
 	public double getDouble(long row, long column) throws MatrixException {
 		Sample p = dataSet.getSamples().getElementAt((int) row);
 		if (p != null) {
-			return p.getMatrix(Sample.TARGET).getAsDouble(0, column);
-		} else {
-			return 0.0;
+			if (p.getMatrix(INPUT) != null) {
+				long r = column / p.getMatrix(INPUT).getColumnCount();
+				long c = column % p.getMatrix(INPUT).getColumnCount();
+				return p.getMatrix(INPUT).getAsDouble(r, c);
+			}
 		}
+		return 0.0;
 	}
 
 	public void setDouble(double value, long row, long column) throws MatrixException {
 		Sample p = dataSet.getSamples().getElementAt((int) row);
 		if (p != null) {
-			p.getMatrix(Sample.TARGET).setAsDouble(value, 0, column);
+			if (p.getMatrix(INPUT) != null) {
+				long r = column / p.getMatrix(INPUT).getColumnCount();
+				long c = column % p.getMatrix(INPUT).getColumnCount();
+				p.getMatrix(INPUT).setAsDouble(value, r, c);
+			}
 		}
 	}
 
-	public RegressionDataSet getWrappedObject() {
+	public BasicDataSet getWrappedObject() {
 		return dataSet;
 	}
 
-	public void setWrappedObject(RegressionDataSet object) {
+	public void setWrappedObject(BasicDataSet object) {
 		this.dataSet = object;
 	}
 

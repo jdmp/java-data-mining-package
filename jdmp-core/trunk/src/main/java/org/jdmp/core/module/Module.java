@@ -26,7 +26,7 @@ package org.jdmp.core.module;
 import org.jdmp.core.CoreObject;
 import org.jdmp.core.algorithm.HasAlgorithmList;
 import org.jdmp.core.dataset.HasDataSetMap;
-import org.jdmp.core.interpreter.Result;
+import org.jdmp.core.script.Result;
 import org.jdmp.core.variable.HasVariableMap;
 
 public interface Module extends CoreObject, HasModuleList, HasAlgorithmList, HasVariableMap,
