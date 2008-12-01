@@ -40,8 +40,8 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 
-import org.jdmp.core.interpreter.Result;
 import org.jdmp.core.module.Module;
+import org.jdmp.core.script.Result;
 
 public class CommandWindow extends JPanel implements KeyListener {
 	private static final long serialVersionUID = 5931204715283753689L;
