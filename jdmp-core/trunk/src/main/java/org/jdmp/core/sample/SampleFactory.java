@@ -23,10 +23,17 @@
 
 package org.jdmp.core.sample;
 
+import org.ujmp.core.Matrix;
+
 public abstract class SampleFactory {
 
 	public static final Sample labeledSample(String label) {
 		Sample s = new DefaultSample(label);
+		return s;
+	}
+
+	public static final ClassificationSample classificationSample(Matrix input, Matrix target) {
+		ClassificationSample s = new ClassificationSample(input, target);
 		return s;
 	}
 

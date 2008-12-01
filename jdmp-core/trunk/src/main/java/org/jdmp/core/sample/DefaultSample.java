@@ -76,10 +76,6 @@ public class DefaultSample extends AbstractSample {
 		if (input != null) {
 			s.setMatrix(INPUT, input);
 		}
-		Matrix target = getMatrix(TARGET);
-		if (target != null) {
-			s.setMatrix(TARGET, target);
-		}
 		return s;
 	}
 
