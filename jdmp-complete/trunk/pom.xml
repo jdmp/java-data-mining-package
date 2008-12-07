@@ -60,6 +60,10 @@
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-weka</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-mallet</artifactId>
+		</dependency>
 
 
 
@@ -164,6 +168,13 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-mallet</artifactId>
+			<version>${jdmp.version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-gui</artifactId>
 			<version>${jdmp.version}</version>
 			<classifier>tests</classifier>
@@ -201,6 +212,7 @@
 		<module>../jdmp-ehcache</module>
 		<module>../jdmp-jgroups</module>
 		<module>../jdmp-libsvm</module>
+		<module>../jdmp-mallet</module>
 		<module>../jdmp-weka</module>
 	</modules>
 
