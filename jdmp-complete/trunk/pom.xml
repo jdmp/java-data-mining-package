@@ -64,6 +64,10 @@
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-mallet</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-mantissa</artifactId>
+		</dependency>
 
 
 
@@ -201,6 +205,13 @@
 			<classifier>tests</classifier>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-mantissa</artifactId>
+			<version>${jdmp.version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
 
 
 	</dependencies>
@@ -213,6 +224,7 @@
 		<module>../jdmp-jgroups</module>
 		<module>../jdmp-libsvm</module>
 		<module>../jdmp-mallet</module>
+		<module>../jdmp-mantissa</module>
 		<module>../jdmp-weka</module>
 	</modules>
 

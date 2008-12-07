@@ -78,6 +78,12 @@
 				<version>${ujmp.version}</version>
 				<scope>compile</scope>
 			</dependency>
+			<dependency>
+				<groupId>org.ujmp</groupId>
+				<artifactId>ujmp-core</artifactId>
+				<version>${ujmp.version}</version>
+				<scope>compile</scope>
+			</dependency>
 			
 			<dependency>
 				<groupId>org.jdmp</groupId>
@@ -150,6 +156,12 @@
 		    <dependency>
       			<groupId>org.jdmp</groupId>
 		        <artifactId>jdmp-mallet</artifactId>
+		        <version>${jdmp.version}</version>
+				<scope>compile</scope>
+		    </dependency>
+		    <dependency>
+      			<groupId>org.jdmp</groupId>
+		        <artifactId>jdmp-mantissa</artifactId>
 		        <version>${jdmp.version}</version>
 				<scope>compile</scope>
 		    </dependency>
@@ -350,6 +362,12 @@
      			  <groupId>sablecc</groupId>
 			      <artifactId>sablecc</artifactId>
 			      <version>3.2</version>
+				  <scope>compile</scope>
+		    </dependency>
+		    <dependency>
+     			  <groupId>mantissa</groupId>
+			      <artifactId>mantissa</artifactId>
+			      <version>7.2</version>
 				  <scope>compile</scope>
 		    </dependency>
 
