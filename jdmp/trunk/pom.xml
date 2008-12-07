@@ -9,16 +9,9 @@
       <ujmp.version>0.1.2</ujmp.version>
     </properties>
 
-	<parent>
-		<groupId>org.ujmp</groupId>
-		<artifactId>ujmp</artifactId>
-		<version>${ujmp.version}</version>
-		<relativePath>../ujmp</relativePath>
-	</parent>
-
 	<groupId>org.jdmp</groupId>
 	<artifactId>jdmp</artifactId>
-	<version>${jdmp.version}</version>
+	<version>0.0.3</version>
 	<packaging>pom</packaging>
     <url>http://www.jdmp.org</url>
 
@@ -42,7 +35,32 @@
 					<target>1.6</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<inherited>true</inherited>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>test-jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
+		
 	</build>
 
 	<dependencyManagement>

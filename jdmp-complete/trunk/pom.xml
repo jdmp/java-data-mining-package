@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.jdmp</groupId>
@@ -7,10 +6,14 @@
 	<packaging>pom</packaging>
 	<name>jdmp-complete</name>
 
+	<properties>
+		<jdmp.version>0.0.3</jdmp.version>
+	</properties>
+
 	<parent>
 		<groupId>org.jdmp</groupId>
 		<artifactId>jdmp</artifactId>
-		<version>${jdmp.version}</version>
+		<version>0.0.3</version>
 		<relativePath>../jdmp</relativePath>
 	</parent>
 
@@ -18,13 +21,21 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-		</dependency>		
-		
+		</dependency>
+
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-complete</artifactId>
+			<version>${ujmp.version}</version>
+			<scope>compile</scope>
 		</dependency>
-		
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-core</artifactId>
+			<version>${ujmp.version}</version>
+			<scope>compile</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-core</artifactId>
@@ -49,18 +60,149 @@
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-weka</artifactId>
 		</dependency>
-		
+
+
+
+
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-core</artifactId>
+			<version>${ujmp.version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-complete</artifactId>
+			<version>${ujmp.version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-commonsmath</artifactId>
+			<version>${ujmp.version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-colt</artifactId>
+			<version>${ujmp.version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-jama</artifactId>
+			<version>${ujmp.version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-jmatrices</artifactId>
+			<version>${ujmp.version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-mtj</artifactId>
+			<version>${ujmp.version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-vecmath</artifactId>
+			<version>${ujmp.version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-jackcess</artifactId>
+			<version>${ujmp.version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-jexcelapi</artifactId>
+			<version>${ujmp.version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-jmatio</artifactId>
+			<version>${ujmp.version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-itext</artifactId>
+			<version>${ujmp.version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-mail</artifactId>
+			<version>${ujmp.version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-ehcache</artifactId>
+			<version>${jdmp.version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-gui</artifactId>
+			<version>${jdmp.version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-weka</artifactId>
+			<version>${jdmp.version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-core</artifactId>
+			<version>${jdmp.version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-libsvm</artifactId>
+			<version>${jdmp.version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+
+
 	</dependencies>
-	
-	
+
+
 	<modules>
-    <module>../jdmp-core</module>
-    <module>../jdmp-gui</module>
-    <module>../jdmp-ehcache</module>
-    <module>../jdmp-jgroups</module>
-    <module>../jdmp-libsvm</module>
-    <module>../jdmp-weka</module>
-  </modules>
-	
+		<module>../jdmp-core</module>
+		<module>../jdmp-gui</module>
+		<module>../jdmp-ehcache</module>
+		<module>../jdmp-jgroups</module>
+		<module>../jdmp-libsvm</module>
+		<module>../jdmp-weka</module>
+	</modules>
+
 
 </project>

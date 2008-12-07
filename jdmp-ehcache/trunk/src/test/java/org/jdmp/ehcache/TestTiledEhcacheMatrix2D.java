@@ -23,8 +23,8 @@
 
 package org.jdmp.ehcache;
 
-import org.ujmp.core.AbstractMatrixTest;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.util.test.AbstractMatrixTest;
 
 public class TestTiledEhcacheMatrix2D extends AbstractMatrixTest {
 
