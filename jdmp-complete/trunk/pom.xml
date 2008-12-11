@@ -164,6 +164,13 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-jung</artifactId>
+			<version>${ujmp.version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-ehcache</artifactId>
 			<version>${jdmp.version}</version>
@@ -212,6 +219,7 @@
 			<classifier>tests</classifier>
 			<scope>test</scope>
 		</dependency>
+		
 
 
 	</dependencies>
