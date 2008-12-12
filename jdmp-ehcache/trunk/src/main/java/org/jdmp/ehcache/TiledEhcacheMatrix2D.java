@@ -67,7 +67,7 @@ public class TiledEhcacheMatrix2D<A> extends AbstractMapToTiledMatrix2DWrapper<A
 	private void writeObject(ObjectOutputStream s) throws IOException {
 		s.defaultWriteObject();
 		for (long[] c : availableCoordinates()) {
-			s.writeObject(c);
+			s.writeObject(new Coordinates(c));
 			s.writeObject(getObject(c));
 		}
 	}
@@ -76,9 +76,9 @@ public class TiledEhcacheMatrix2D<A> extends AbstractMapToTiledMatrix2DWrapper<A
 		s.defaultReadObject();
 		while (true) {
 			try {
-				long[] c = (long[]) s.readObject();
+				Coordinates c = (Coordinates) s.readObject();
 				Object o = s.readObject();
-				setObject(o, c);
+				setObject(o, c.dimensions);
 			} catch (OptionalDataException e) {
 				return;
 			}
