@@ -31,10 +31,10 @@ import java.util.Map;
 
 import org.ujmp.core.Matrix;
 import org.ujmp.core.coordinates.Coordinates;
-import org.ujmp.core.genericmatrix.AbstractMapToTiledMatrix2DWrapper;
+import org.ujmp.core.objectmatrix.AbstractMapToTiledMatrix2DWrapper;
 import org.ujmp.core.objectmatrix.ObjectMatrix2D;
 
-public class TiledEhcacheMatrix2D<A> extends AbstractMapToTiledMatrix2DWrapper<A> {
+public class TiledEhcacheMatrix2D extends AbstractMapToTiledMatrix2DWrapper {
 	private static final long serialVersionUID = 4324063544046176423L;
 
 	private transient Map<Coordinates, ObjectMatrix2D> values = null;

@@ -30,12 +30,12 @@ public class TestSparseEhcacheMatrix extends AbstractMatrixTest {
 
 	@Override
 	public Matrix createMatrix(long... size) throws Exception {
-		return new SparseEhcacheMatrix<String>(size);
+		return new SparseEhcacheMatrix(size);
 	}
 
 	@Override
 	public Matrix createMatrix(Matrix source) throws Exception {
-		return new SparseEhcacheMatrix<String>(source);
+		return new SparseEhcacheMatrix(source);
 	}
 
 }

@@ -28,9 +28,9 @@ import java.util.List;
 import java.util.logging.LogRecord;
 
 import org.ujmp.core.Matrix;
-import org.ujmp.core.objectmatrix.AbstractDenseObjectMatrix2D;
+import org.ujmp.core.objectmatrix.AbstractDenseMatrix2D;
 
-public class LogMatrix extends AbstractDenseObjectMatrix2D {
+public class LogMatrix extends AbstractDenseMatrix2D {
 	private static final long serialVersionUID = 4054005288748742516L;
 
 	private static LogMatrix matrix = null;
