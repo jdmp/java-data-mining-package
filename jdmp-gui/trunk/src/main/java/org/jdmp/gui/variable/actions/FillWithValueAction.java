@@ -32,6 +32,7 @@ import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 import org.jdmp.gui.variable.VariableGUIObject;
+import org.ujmp.core.calculation.Calculation.Ret;
 
 public class FillWithValueAction extends VariableAction {
 	private static final long serialVersionUID = -3609906043755395315L;
@@ -52,7 +53,7 @@ public class FillWithValueAction extends VariableAction {
 		try {
 			value = Double.parseDouble(s);
 			getVariable().getVariable().addMatrix(
-					getVariable().getVariable().getMatrix().fill(value));
+					getVariable().getVariable().getMatrix().fill(Ret.NEW, value));
 		} catch (Exception ex) {
 		}
 		return null;

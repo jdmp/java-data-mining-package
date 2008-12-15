@@ -31,6 +31,7 @@ import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
 import org.jdmp.gui.variable.VariableGUIObject;
+import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.exceptions.MatrixException;
 
 public class FillGaussianAction extends VariableAction {
@@ -47,7 +48,8 @@ public class FillGaussianAction extends VariableAction {
 
 	@Override
 	public Object call() throws MatrixException {
-		getVariable().getVariable().addMatrix(getVariable().getVariable().getMatrix().randn());
+		getVariable().getVariable().addMatrix(
+				getVariable().getVariable().getMatrix().randn(Ret.NEW));
 		return null;
 	}
 
