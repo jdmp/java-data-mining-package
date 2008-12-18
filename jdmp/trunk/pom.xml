@@ -165,6 +165,12 @@
 		        <version>${jdmp.version}</version>
 				<scope>compile</scope>
 		    </dependency>
+		    <dependency>
+      			<groupId>org.jdmp</groupId>
+		        <artifactId>jdmp-bsh</artifactId>
+		        <version>${jdmp.version}</version>
+				<scope>compile</scope>
+		    </dependency>
 
 
 			<dependency>
