@@ -60,6 +60,10 @@ public interface Algorithm extends CoreObject, HasVariableMap, HasAlgorithmMap {
 
 	public Map<Object, Matrix> calculate(Map<Object, Matrix> matrices) throws Exception;
 
+	public Map<Object, Object> calculateObjects(Map<Object, Object> objects) throws Exception;
+
+	public Map<Object, Object> calculateObjects(List<Object> objects) throws Exception;
+
 	public EdgeDirection getEdgeDirection(Object key);
 
 	public String getEdgeLabel(Object key);

@@ -114,6 +114,7 @@ import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.enums.ValueType;
 import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.util.MathUtil;
 
 public class Translation extends DepthFirstAdapter {
 
@@ -236,7 +237,7 @@ public class Translation extends DepthFirstAdapter {
 				// TODO: add to sample list
 				result = new Result("Sample = \n" + s.toString());
 			} else {
-				Matrix m = getMatrixFromObject(o);
+				Matrix m = MathUtil.getMatrix(o);
 				if (m != null) {
 					Variable v = getVariable(node.getName());
 					v.addMatrix(m);
@@ -265,8 +266,8 @@ public class Translation extends DepthFirstAdapter {
 			return getObject(((ALevel9Level10) expression).getLevel9());
 		} else if (expression instanceof ALogicalOrLevel10) {
 			ALogicalOrLevel10 exp = (ALogicalOrLevel10) expression;
-			Matrix left = getMatrixFromObject(getObject(exp.getLeft()));
-			Matrix right = getMatrixFromObject(getObject(exp.getRight()));
+			Matrix left = MathUtil.getMatrix(getObject(exp.getLeft()));
+			Matrix right = MathUtil.getMatrix(getObject(exp.getRight()));
 			return left.or(Ret.NEW, right);
 		}
 		MatrixException e = new MatrixException("Unknown expression type: "
@@ -280,8 +281,8 @@ public class Translation extends DepthFirstAdapter {
 			return getObject(((ALevel8Level9) expression).getLevel8());
 		} else if (expression instanceof ALogicalAndLevel9) {
 			ALogicalAndLevel9 exp = (ALogicalAndLevel9) expression;
-			Matrix left = getMatrixFromObject(getObject(exp.getLeft()));
-			Matrix right = getMatrixFromObject(getObject(exp.getRight()));
+			Matrix left = MathUtil.getMatrix(getObject(exp.getLeft()));
+			Matrix right = MathUtil.getMatrix(getObject(exp.getRight()));
 			return left.and(Ret.NEW, right);
 		}
 		MatrixException e = new MatrixException("Unknown expression type: "
@@ -319,33 +320,33 @@ public class Translation extends DepthFirstAdapter {
 			return getObject(((ALevel5Level6) expression).getLevel5());
 		} else if (expression instanceof AEqLevel6) {
 			AEqLevel6 exp = (AEqLevel6) expression;
-			Matrix left = getMatrixFromObject(getObject(exp.getLeft()));
-			Matrix right = getMatrixFromObject(getObject(exp.getRight()));
+			Matrix left = MathUtil.getMatrix(getObject(exp.getLeft()));
+			Matrix right = MathUtil.getMatrix(getObject(exp.getRight()));
 			return left.eq(Ret.NEW, right);
 		} else if (expression instanceof ANeqLevel6) {
 			ANeqLevel6 exp = (ANeqLevel6) expression;
-			Matrix left = getMatrixFromObject(getObject(exp.getLeft()));
-			Matrix right = getMatrixFromObject(getObject(exp.getRight()));
+			Matrix left = MathUtil.getMatrix(getObject(exp.getLeft()));
+			Matrix right = MathUtil.getMatrix(getObject(exp.getRight()));
 			return left.ne(Ret.NEW, right);
 		} else if (expression instanceof AGtLevel6) {
 			AGtLevel6 exp = (AGtLevel6) expression;
-			Matrix left = getMatrixFromObject(getObject(exp.getLeft()));
-			Matrix right = getMatrixFromObject(getObject(exp.getRight()));
+			Matrix left = MathUtil.getMatrix(getObject(exp.getLeft()));
+			Matrix right = MathUtil.getMatrix(getObject(exp.getRight()));
 			return left.gt(Ret.NEW, right);
 		} else if (expression instanceof ALtLevel6) {
 			ALtLevel6 exp = (ALtLevel6) expression;
-			Matrix left = getMatrixFromObject(getObject(exp.getLeft()));
-			Matrix right = getMatrixFromObject(getObject(exp.getRight()));
+			Matrix left = MathUtil.getMatrix(getObject(exp.getLeft()));
+			Matrix right = MathUtil.getMatrix(getObject(exp.getRight()));
 			return left.lt(Ret.NEW, right);
 		} else if (expression instanceof AGteqLevel6) {
 			AGteqLevel6 exp = (AGteqLevel6) expression;
-			Matrix left = getMatrixFromObject(getObject(exp.getLeft()));
-			Matrix right = getMatrixFromObject(getObject(exp.getRight()));
+			Matrix left = MathUtil.getMatrix(getObject(exp.getLeft()));
+			Matrix right = MathUtil.getMatrix(getObject(exp.getRight()));
 			return left.ge(Ret.NEW, right);
 		} else if (expression instanceof ALteqLevel6) {
 			ALteqLevel6 exp = (ALteqLevel6) expression;
-			Matrix left = getMatrixFromObject(getObject(exp.getLeft()));
-			Matrix right = getMatrixFromObject(getObject(exp.getRight()));
+			Matrix left = MathUtil.getMatrix(getObject(exp.getLeft()));
+			Matrix right = MathUtil.getMatrix(getObject(exp.getRight()));
 			return left.le(Ret.NEW, right);
 		}
 		MatrixException e = new MatrixException("Unknown expression type: "
@@ -373,15 +374,15 @@ public class Translation extends DepthFirstAdapter {
 			APlusLevel4 op = (APlusLevel4) calculation;
 			PLevel4 left = op.getLeft();
 			PLevel3 right = op.getRight();
-			Matrix leftM = getMatrixFromObject(getObject(left));
-			Matrix rightM = getMatrixFromObject(getObject(right));
+			Matrix leftM = MathUtil.getMatrix(getObject(left));
+			Matrix rightM = MathUtil.getMatrix(getObject(right));
 			return leftM.plus(Ret.NEW, ignoreNaN, rightM);
 		} else if (calculation instanceof AMinusLevel4) {
 			AMinusLevel4 op = (AMinusLevel4) calculation;
 			PLevel4 left = op.getLeft();
 			PLevel3 right = op.getRight();
-			Matrix leftM = getMatrixFromObject(getObject(left));
-			Matrix rightM = getMatrixFromObject(getObject(right));
+			Matrix leftM = MathUtil.getMatrix(getObject(left));
+			Matrix rightM = MathUtil.getMatrix(getObject(right));
 			return leftM.minus(Ret.NEW, ignoreNaN, rightM);
 		}
 		MatrixException e = new MatrixException("Unknown expression type: "
@@ -394,28 +395,28 @@ public class Translation extends DepthFirstAdapter {
 		if (term instanceof ALevel2Level3) {
 			return getObject(((ALevel2Level3) term).getLevel2());
 		} else if (term instanceof AMultLevel3) {
-			Matrix left = getMatrixFromObject(getObject(((AMultLevel3) term).getLeft()));
-			Matrix right = getMatrixFromObject(getObject(((AMultLevel3) term).getRight()));
+			Matrix left = MathUtil.getMatrix(getObject(((AMultLevel3) term).getLeft()));
+			Matrix right = MathUtil.getMatrix(getObject(((AMultLevel3) term).getRight()));
 			return left.mtimes(Ret.NEW, ignoreNaN, right);
 		} else if (term instanceof ADotMultLevel3) {
-			Matrix left = getMatrixFromObject(getObject(((ADotMultLevel3) term).getLeft()));
-			Matrix right = getMatrixFromObject(getObject(((ADotMultLevel3) term).getRight()));
+			Matrix left = MathUtil.getMatrix(getObject(((ADotMultLevel3) term).getLeft()));
+			Matrix right = MathUtil.getMatrix(getObject(((ADotMultLevel3) term).getRight()));
 			return left.times(Ret.NEW, ignoreNaN, right);
 		} else if (term instanceof ARdivLevel3) {
-			Matrix left = getMatrixFromObject(getObject(((ARdivLevel3) term).getLeft()));
-			Matrix right = getMatrixFromObject(getObject(((ARdivLevel3) term).getRight()));
+			Matrix left = MathUtil.getMatrix(getObject(((ARdivLevel3) term).getLeft()));
+			Matrix right = MathUtil.getMatrix(getObject(((ARdivLevel3) term).getRight()));
 			// TODO
 		} else if (term instanceof ADotRdivLevel3) {
-			Matrix left = getMatrixFromObject(getObject(((ADotRdivLevel3) term).getLeft()));
-			Matrix right = getMatrixFromObject(getObject(((ADotRdivLevel3) term).getRight()));
+			Matrix left = MathUtil.getMatrix(getObject(((ADotRdivLevel3) term).getLeft()));
+			Matrix right = MathUtil.getMatrix(getObject(((ADotRdivLevel3) term).getRight()));
 			return left.divide(Ret.NEW, ignoreNaN, right);
 		} else if (term instanceof ALdivLevel3) {
-			Matrix left = getMatrixFromObject(getObject(((ALdivLevel3) term).getLeft()));
-			Matrix right = getMatrixFromObject(getObject(((ALdivLevel3) term).getRight()));
+			Matrix left = MathUtil.getMatrix(getObject(((ALdivLevel3) term).getLeft()));
+			Matrix right = MathUtil.getMatrix(getObject(((ALdivLevel3) term).getRight()));
 			// TODO
 		} else if (term instanceof ADotLdivLevel3) {
-			Matrix left = getMatrixFromObject(getObject(((ADotLdivLevel3) term).getLeft()));
-			Matrix right = getMatrixFromObject(getObject(((ADotLdivLevel3) term).getRight()));
+			Matrix left = MathUtil.getMatrix(getObject(((ADotLdivLevel3) term).getLeft()));
+			Matrix right = MathUtil.getMatrix(getObject(((ADotLdivLevel3) term).getRight()));
 			// TODO
 		}
 		MatrixException e = new MatrixException("Unknown expression type: "
@@ -466,12 +467,12 @@ public class Translation extends DepthFirstAdapter {
 		if (factor instanceof ALevel1Level2) {
 			return getObject(((ALevel1Level2) factor).getLevel1());
 		} else if (factor instanceof AMinusLevel2) {
-			Matrix m = getMatrixFromObject(getObject(((AMinusLevel2) factor).getLevel1()));
+			Matrix m = MathUtil.getMatrix(getObject(((AMinusLevel2) factor).getLevel1()));
 			return m.times(-1);
 		} else if (factor instanceof APlusLevel2) {
 			return getObject(((APlusLevel2) factor).getLevel1());
 		} else if (factor instanceof AComplementLevel2) {
-			Matrix m = getMatrixFromObject(getObject(((AComplementLevel2) factor).getLevel1()));
+			Matrix m = MathUtil.getMatrix(getObject(((AComplementLevel2) factor).getLevel1()));
 			return m.not(Ret.NEW);
 		} else if (factor instanceof ABitComplementLevel2) {
 			// TODO
@@ -486,18 +487,18 @@ public class Translation extends DepthFirstAdapter {
 		if (factor instanceof ALevel0Level1) {
 			return getObject(((ALevel0Level1) factor).getLevel0());
 		} else if (factor instanceof APowerLevel1) {
-			Matrix left = getMatrixFromObject(getObject(((APowerLevel1) factor).getLeft()));
-			Matrix right = getMatrixFromObject(getObject(((APowerLevel1) factor).getRight()));
+			Matrix left = MathUtil.getMatrix(getObject(((APowerLevel1) factor).getLeft()));
+			Matrix right = MathUtil.getMatrix(getObject(((APowerLevel1) factor).getRight()));
 			// TODO
 		} else if (factor instanceof ADotPowerLevel1) {
-			Matrix left = getMatrixFromObject(getObject(((ADotPowerLevel1) factor).getLeft()));
-			Matrix right = getMatrixFromObject(getObject(((ADotPowerLevel1) factor).getRight()));
+			Matrix left = MathUtil.getMatrix(getObject(((ADotPowerLevel1) factor).getLeft()));
+			Matrix right = MathUtil.getMatrix(getObject(((ADotPowerLevel1) factor).getRight()));
 			return left.power(Ret.NEW, right);
 		} else if (factor instanceof ATransposeLevel1) {
-			Matrix m = getMatrixFromObject(getObject(((ATransposeLevel1) factor).getLevel0()));
+			Matrix m = MathUtil.getMatrix(getObject(((ATransposeLevel1) factor).getLevel0()));
 			return m.transpose();
 		} else if (factor instanceof ADotTransposeLevel1) {
-			Matrix m = getMatrixFromObject(getObject(((ADotTransposeLevel1) factor).getLevel0()));
+			Matrix m = MathUtil.getMatrix(getObject(((ADotTransposeLevel1) factor).getLevel0()));
 			return m.transpose();
 		}
 		MatrixException e = new MatrixException("Unknown expression type: "
@@ -545,7 +546,7 @@ public class Translation extends DepthFirstAdapter {
 				result = new Result(e);
 				throw e;
 			}
-			return getMatrixFromObject(executeMethod(object.getClass(), object, qn.getIdentifier()
+			return MathUtil.getMatrix(executeMethod(object.getClass(), object, qn.getIdentifier()
 					.toString().trim(), arguments));
 		}
 
@@ -555,20 +556,20 @@ public class Translation extends DepthFirstAdapter {
 		throw e;
 	}
 
-	private List<Matrix> getArgumentsAsMatrices(PArgumentList arguments) throws Exception {
-		List<Matrix> matrices = new ArrayList<Matrix>();
+	private List<Object> getArgumentsAsObjects(PArgumentList arguments) throws Exception {
+		List<Object> matrices = new ArrayList<Object>();
 		if (arguments == null) {
 			return matrices;
 		}
 		if (arguments instanceof AExpressionArgumentList) {
 			PExpression expr = ((AExpressionArgumentList) arguments).getExpression();
-			matrices.add(getMatrixFromObject(getObject(expr)));
+			matrices.add(MathUtil.getMatrix(getObject(expr)));
 			return matrices;
 		} else if (arguments instanceof AArgumentListArgumentList) {
 			PExpression expr = ((AArgumentListArgumentList) arguments).getExpression();
-			matrices.addAll(getArgumentsAsMatrices(((AArgumentListArgumentList) arguments)
+			matrices.addAll(getArgumentsAsObjects(((AArgumentListArgumentList) arguments)
 					.getArgumentList()));
-			matrices.add(getMatrixFromObject(getObject(expr)));
+			matrices.add(MathUtil.getMatrix(getObject(expr)));
 			return matrices;
 		}
 		MatrixException e = new MatrixException("Unknown arguments: "
@@ -577,9 +578,9 @@ public class Translation extends DepthFirstAdapter {
 		throw e;
 	}
 
-	private Matrix executeAlgorithm(Algorithm algorithm, PArgumentList arguments) throws Exception {
-		List<Matrix> matrices = getArgumentsAsMatrices(arguments);
-		Map<Object, Matrix> ret = algorithm.calculate(matrices);
+	private Object executeAlgorithm(Algorithm algorithm, PArgumentList arguments) throws Exception {
+		List<Object> matrices = getArgumentsAsObjects(arguments);
+		Map<Object, Object> ret = algorithm.calculateObjects(matrices);
 		return ret.values().iterator().next();
 	}
 
@@ -612,11 +613,11 @@ public class Translation extends DepthFirstAdapter {
 
 	private Object executeMethod(Class<?> c, Object object, String name, PArgumentList argumentList)
 			throws Exception {
-		List<Matrix> matrices = getArgumentsAsMatrices(argumentList);
+		List<Object> matrices = getArgumentsAsObjects(argumentList);
 		for (Method method : c.getMethods()) {
 			if (method.getName().equals(name)
 					&& method.getParameterTypes().length == matrices.size()) {
-				Object[] arguments = getMatricesAsObjects(matrices, method.getParameterTypes());
+				Object[] arguments = convertObjects(matrices, method.getParameterTypes());
 				Object o = method.invoke(object, arguments);
 				return o;
 			}
@@ -626,30 +627,24 @@ public class Translation extends DepthFirstAdapter {
 		throw e;
 	}
 
-	private Matrix getMatrixFromObject(Object o) {
-		if (o instanceof Matrix) {
-			return (Matrix) o;
-		}
-		return MatrixFactory.linkToValue(o);
-	}
-
-	private Object[] getMatricesAsObjects(List<Matrix> matrices, Class<?>[] classes) {
+	private Object[] convertObjects(List<Object> matrices, Class<?>[] classes) {
 		List<Object> objects = new ArrayList<Object>();
 		for (int i = 0; i < classes.length; i++) {
 			Class<?> c = classes[i];
-			Matrix m = matrices.get(i);
-			Object o = convertMatrixToObject(m, c);
+			Object m = matrices.get(i);
+			Object o = convertObject(m, c);
+			objects.add(o);
 		}
 		return objects.toArray();
 	}
 
-	private Object convertMatrixToObject(Matrix m, Class<?> c) {
+	private Object convertObject(Object m, Class<?> c) {
 		if (c == Matrix.class) {
-			return m;
+			return MathUtil.getMatrix(m);
 		} else if (c == Integer.TYPE) {
-			return (int) m.getEuklideanValue();
+			return MathUtil.getInt(m);
 		}
-		MatrixException e = new MatrixException("cannot convert matrix to object "
+		MatrixException e = new MatrixException("cannot convert to desired object type "
 				+ c.getSimpleName());
 		result = new Result(e);
 		throw e;
@@ -699,7 +694,7 @@ public class Translation extends DepthFirstAdapter {
 	}
 
 	private Object getSingleValue(PExpression expression) throws Exception {
-		Matrix m = getMatrixFromObject(getObject(expression));
+		Matrix m = MathUtil.getMatrix(getObject(expression));
 		if (m.isScalar()) {
 			return m.getObject(0, 0);
 		} else {
@@ -876,7 +871,7 @@ public class Translation extends DepthFirstAdapter {
 						v = VariableFactory.labeledVariable(label);
 						module.getVariables().put(label, v);
 					}
-					m = executeAlgorithm(a, null);
+					m = MathUtil.getMatrix(executeAlgorithm(a, null));
 					v.addMatrix(m);
 					result = new Result(v.getLabel() + " = \n" + m);
 					return;
@@ -893,7 +888,7 @@ public class Translation extends DepthFirstAdapter {
 				v = VariableFactory.labeledVariable(label);
 				module.getVariables().put(label, v);
 			}
-			Matrix m = getMatrixFromObject(getObject(node.getExpression()));
+			Matrix m = MathUtil.getMatrix(getObject(node.getExpression()));
 			v.addMatrix(m);
 			result = new Result(v.getLabel() + " = \n" + m);
 			System.out.println(v.getLabel() + " = \n" + m);

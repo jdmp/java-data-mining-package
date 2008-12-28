@@ -39,6 +39,7 @@ import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.interfaces.GUIObject;
+import org.ujmp.core.util.MathUtil;
 
 public abstract class AbstractAlgorithm extends AbstractCoreObject implements Algorithm {
 
@@ -180,8 +181,36 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		return calculate(map);
 	}
 
+	public final Map<Object, Object> calculateObjects(List<Object> matrices) throws Exception {
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		List<Object> keys = getInputKeys();
+		for (int i = 0; i < matrices.size(); i++) {
+			Object key = keys.get(i);
+			map.put(key, matrices.get(i));
+		}
+		return calculateObjects(map);
+	}
+
 	public Map<Object, Matrix> calculate(Map<Object, Matrix> matrices) throws Exception {
 		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
+		return result;
+	}
+
+	// this is not the best way
+	public Map<Object, Object> calculateObjects(Map<Object, Object> objects) throws Exception {
+		Map<Object, Object> result = new HashMap<Object, Object>();
+		Map<Object, Matrix> matrices = new HashMap<Object, Matrix>();
+
+		for (Object key : objects.keySet()) {
+			matrices.put(key, MathUtil.getMatrix(objects.get(key)));
+		}
+
+		Map<Object, Matrix> matrixResult = calculate(matrices);
+
+		for (Object key : matrixResult.keySet()) {
+			result.put(key, matrixResult.get(key));
+		}
+
 		return result;
 	}
 

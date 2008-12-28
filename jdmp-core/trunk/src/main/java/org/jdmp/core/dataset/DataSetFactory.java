@@ -23,7 +23,6 @@
 
 package org.jdmp.core.dataset;
 
-import java.io.IOException;
 import java.util.Random;
 
 import org.jdmp.core.sample.ClassificationSample;
@@ -374,7 +373,7 @@ public abstract class DataSetFactory {
 		return xor;
 	}
 
-	public static ClassificationDataSet IRIS() throws IOException {
+	public static ClassificationDataSet IRIS() throws MatrixException {
 		StringBuffer s = new StringBuffer();
 		s.append("5.1,3.5,1.4,0.2,Iris-setosa\n");
 		s.append("4.9,3.0,1.4,0.2,Iris-setosa\n");
