@@ -37,6 +37,8 @@ import org.jdmp.core.script.jdmp.node.AExpressionArgumentList;
 import org.jdmp.core.script.jdmp.node.AExpressionLevel0;
 import org.jdmp.core.script.jdmp.node.AFloatingPointLiteral;
 import org.jdmp.core.script.jdmp.node.AFunctionLevel0;
+import org.jdmp.core.script.jdmp.node.AGtLevel6;
+import org.jdmp.core.script.jdmp.node.AGteqLevel6;
 import org.jdmp.core.script.jdmp.node.AIdentifierAssignment;
 import org.jdmp.core.script.jdmp.node.AIdentifierLevel0;
 import org.jdmp.core.script.jdmp.node.AIntegerLiteral;
@@ -55,10 +57,13 @@ import org.jdmp.core.script.jdmp.node.ALevel9Level10;
 import org.jdmp.core.script.jdmp.node.ALiteralLevel0;
 import org.jdmp.core.script.jdmp.node.ALogicalAndLevel9;
 import org.jdmp.core.script.jdmp.node.ALogicalOrLevel10;
+import org.jdmp.core.script.jdmp.node.ALtLevel6;
+import org.jdmp.core.script.jdmp.node.ALteqLevel6;
 import org.jdmp.core.script.jdmp.node.AMatrixLevel0;
 import org.jdmp.core.script.jdmp.node.AMinusLevel2;
 import org.jdmp.core.script.jdmp.node.AMinusLevel4;
 import org.jdmp.core.script.jdmp.node.AMultLevel3;
+import org.jdmp.core.script.jdmp.node.ANeqLevel6;
 import org.jdmp.core.script.jdmp.node.AOrLevel8;
 import org.jdmp.core.script.jdmp.node.AParameterFunction;
 import org.jdmp.core.script.jdmp.node.APlusLevel2;
@@ -223,11 +228,11 @@ public class Translation extends DepthFirstAdapter {
 			} else if (o instanceof DataSet) {
 				DataSet ds = (DataSet) o;
 				module.getDataSets().put(id, ds);
-				result = new Result(id + " = " + ds.toString());
+				result = new Result(id + " = \n" + ds.toString());
 			} else if (o instanceof Sample) {
 				Sample s = (Sample) o;
 				// TODO: add to sample list
-				result = new Result("Sample = " + s.toString());
+				result = new Result("Sample = \n" + s.toString());
 			} else {
 				Matrix m = getMatrixFromObject(o);
 				if (m != null) {
@@ -308,7 +313,32 @@ public class Translation extends DepthFirstAdapter {
 			AEqLevel6 exp = (AEqLevel6) expression;
 			Matrix left = getMatrixFromObject(getObject(exp.getLeft()));
 			Matrix right = getMatrixFromObject(getObject(exp.getRight()));
-			return left.equals(right);
+			return left.eq(Ret.NEW, right);
+		} else if (expression instanceof ANeqLevel6) {
+			ANeqLevel6 exp = (ANeqLevel6) expression;
+			Matrix left = getMatrixFromObject(getObject(exp.getLeft()));
+			Matrix right = getMatrixFromObject(getObject(exp.getRight()));
+			return left.neq(Ret.NEW, right);
+		} else if (expression instanceof AGtLevel6) {
+			AGtLevel6 exp = (AGtLevel6) expression;
+			Matrix left = getMatrixFromObject(getObject(exp.getLeft()));
+			Matrix right = getMatrixFromObject(getObject(exp.getRight()));
+			return left.gt(Ret.NEW, right);
+		} else if (expression instanceof ALtLevel6) {
+			ALtLevel6 exp = (ALtLevel6) expression;
+			Matrix left = getMatrixFromObject(getObject(exp.getLeft()));
+			Matrix right = getMatrixFromObject(getObject(exp.getRight()));
+			return left.lt(Ret.NEW, right);
+		} else if (expression instanceof AGteqLevel6) {
+			AGteqLevel6 exp = (AGteqLevel6) expression;
+			Matrix left = getMatrixFromObject(getObject(exp.getLeft()));
+			Matrix right = getMatrixFromObject(getObject(exp.getRight()));
+			return left.gteq(Ret.NEW, right);
+		} else if (expression instanceof ALteqLevel6) {
+			ALteqLevel6 exp = (ALteqLevel6) expression;
+			Matrix left = getMatrixFromObject(getObject(exp.getLeft()));
+			Matrix right = getMatrixFromObject(getObject(exp.getRight()));
+			return left.lteq(Ret.NEW, right);
 		}
 		MatrixException e = new MatrixException("Unknown expression type: "
 				+ expression.getClass().getSimpleName());
@@ -358,7 +388,7 @@ public class Translation extends DepthFirstAdapter {
 		} else if (term instanceof AMultLevel3) {
 			Matrix left = getMatrixFromObject(getObject(((AMultLevel3) term).getLeft()));
 			Matrix right = getMatrixFromObject(getObject(((AMultLevel3) term).getRight()));
-			return left.mtimes(right);
+			return left.mtimes(Ret.NEW, ignoreNaN, right);
 		} else if (term instanceof ADotMultLevel3) {
 			Matrix left = getMatrixFromObject(getObject(((ADotMultLevel3) term).getLeft()));
 			Matrix right = getMatrixFromObject(getObject(((ADotMultLevel3) term).getRight()));
@@ -826,7 +856,7 @@ public class Translation extends DepthFirstAdapter {
 			if (id != null) {
 				DataSet ds = module.getDataSets().get(id);
 				if (ds != null) {
-					result = new Result(id + " = " + ds);
+					result = new Result(id + " = \n" + ds);
 					return;
 				}
 
@@ -834,7 +864,7 @@ public class Translation extends DepthFirstAdapter {
 				Matrix m = null;
 				if (v != null) {
 					m = v.getMatrix();
-					result = new Result(id + " = " + m);
+					result = new Result(id + " = \n" + m);
 					return;
 				}
 
