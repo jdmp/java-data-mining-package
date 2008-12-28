@@ -37,8 +37,7 @@ public class Exit extends AbstractAlgorithm {
 
 	public Exit(Variable... variables) {
 		super();
-		setDescription("termintes JDMP");
-		setDescription("target = tanh(source)");
+		setDescription("terminates JDMP");
 		addVariableKey(SOURCE);
 		addVariableKey(TARGET);
 		setEdgeLabel(SOURCE, "Source");
