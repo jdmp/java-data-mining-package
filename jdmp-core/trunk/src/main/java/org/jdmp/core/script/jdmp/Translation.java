@@ -21,10 +21,12 @@ import org.jdmp.core.script.jdmp.node.AArgumentListArgumentList;
 import org.jdmp.core.script.jdmp.node.AArray;
 import org.jdmp.core.script.jdmp.node.AArrayAssignment;
 import org.jdmp.core.script.jdmp.node.AArrayMatrix;
+import org.jdmp.core.script.jdmp.node.ABitComplementLevel2;
 import org.jdmp.core.script.jdmp.node.ABooleanLiteral;
 import org.jdmp.core.script.jdmp.node.AColumn;
 import org.jdmp.core.script.jdmp.node.AColumnMatrix;
 import org.jdmp.core.script.jdmp.node.ACommaValue;
+import org.jdmp.core.script.jdmp.node.AComplementLevel2;
 import org.jdmp.core.script.jdmp.node.ADotLdivLevel3;
 import org.jdmp.core.script.jdmp.node.ADotMultLevel3;
 import org.jdmp.core.script.jdmp.node.ADotPowerLevel1;
@@ -262,7 +264,10 @@ public class Translation extends DepthFirstAdapter {
 		if (expression instanceof ALevel9Level10) {
 			return getObject(((ALevel9Level10) expression).getLevel9());
 		} else if (expression instanceof ALogicalOrLevel10) {
-			// TODO
+			ALogicalOrLevel10 exp = (ALogicalOrLevel10) expression;
+			Matrix left = getMatrixFromObject(getObject(exp.getLeft()));
+			Matrix right = getMatrixFromObject(getObject(exp.getRight()));
+			return left.or(Ret.NEW, right);
 		}
 		MatrixException e = new MatrixException("Unknown expression type: "
 				+ expression.getClass().getSimpleName());
@@ -274,7 +279,10 @@ public class Translation extends DepthFirstAdapter {
 		if (expression instanceof ALevel8Level9) {
 			return getObject(((ALevel8Level9) expression).getLevel8());
 		} else if (expression instanceof ALogicalAndLevel9) {
-			// TODO
+			ALogicalAndLevel9 exp = (ALogicalAndLevel9) expression;
+			Matrix left = getMatrixFromObject(getObject(exp.getLeft()));
+			Matrix right = getMatrixFromObject(getObject(exp.getRight()));
+			return left.and(Ret.NEW, right);
 		}
 		MatrixException e = new MatrixException("Unknown expression type: "
 				+ expression.getClass().getSimpleName());
@@ -318,7 +326,7 @@ public class Translation extends DepthFirstAdapter {
 			ANeqLevel6 exp = (ANeqLevel6) expression;
 			Matrix left = getMatrixFromObject(getObject(exp.getLeft()));
 			Matrix right = getMatrixFromObject(getObject(exp.getRight()));
-			return left.neq(Ret.NEW, right);
+			return left.ne(Ret.NEW, right);
 		} else if (expression instanceof AGtLevel6) {
 			AGtLevel6 exp = (AGtLevel6) expression;
 			Matrix left = getMatrixFromObject(getObject(exp.getLeft()));
@@ -333,12 +341,12 @@ public class Translation extends DepthFirstAdapter {
 			AGteqLevel6 exp = (AGteqLevel6) expression;
 			Matrix left = getMatrixFromObject(getObject(exp.getLeft()));
 			Matrix right = getMatrixFromObject(getObject(exp.getRight()));
-			return left.gteq(Ret.NEW, right);
+			return left.ge(Ret.NEW, right);
 		} else if (expression instanceof ALteqLevel6) {
 			ALteqLevel6 exp = (ALteqLevel6) expression;
 			Matrix left = getMatrixFromObject(getObject(exp.getLeft()));
 			Matrix right = getMatrixFromObject(getObject(exp.getRight()));
-			return left.lteq(Ret.NEW, right);
+			return left.le(Ret.NEW, right);
 		}
 		MatrixException e = new MatrixException("Unknown expression type: "
 				+ expression.getClass().getSimpleName());
@@ -455,6 +463,11 @@ public class Translation extends DepthFirstAdapter {
 			return m.times(-1);
 		} else if (factor instanceof APlusLevel2) {
 			return getObject(((APlusLevel2) factor).getLevel1());
+		} else if (factor instanceof AComplementLevel2) {
+			Matrix m = getMatrixFromObject(getObject(((AComplementLevel2) factor).getLevel1()));
+			return m.not(Ret.NEW);
+		} else if (factor instanceof ABitComplementLevel2) {
+			// TODO
 		}
 		MatrixException e = new MatrixException("Unknown expression type: "
 				+ factor.getClass().getSimpleName());
@@ -808,9 +821,23 @@ public class Translation extends DepthFirstAdapter {
 
 	private String getLiteral(PLevel0 expr) {
 		if (expr instanceof ALiteralLevel0) {
-			return expr.toString().trim();
+			String s = expr.toString().trim();
+			if ("true".equalsIgnoreCase(s)) {
+				return null;
+			}
+			if ("false".equalsIgnoreCase(s)) {
+				return null;
+			}
+			return s;
 		} else if (expr instanceof AIdentifierLevel0) {
-			return expr.toString().trim();
+			String s = expr.toString().trim();
+			if ("true".equalsIgnoreCase(s)) {
+				return null;
+			}
+			if ("false".equalsIgnoreCase(s)) {
+				return null;
+			}
+			return s;
 		} else {
 			return null;
 		}
