@@ -442,12 +442,19 @@ public class Translation extends DepthFirstAdapter {
 			}
 
 			Variable v = module.getVariables().get(name);
-			if (v == null) {
-				MatrixException e = new MatrixException("Unknown variable: " + name);
-				result = new Result(e);
-				throw e;
+			if (v != null) {
+				return v.getMatrix();
 			}
-			return v.getMatrix();
+
+			Algorithm a = getAlgorithm(name);
+			if (a != null) {
+				return executeAlgorithm(a, null);
+			}
+
+			MatrixException e = new MatrixException("Unknown object or command: " + name);
+			result = new Result(e);
+			throw e;
+
 		}
 		MatrixException e = new MatrixException("Unknown expression type: "
 				+ factor.getClass().getSimpleName());
@@ -578,15 +585,12 @@ public class Translation extends DepthFirstAdapter {
 
 	private Algorithm getAlgorithm(String id) throws Exception {
 		id = id.substring(0, 1).toUpperCase() + id.substring(1, id.length()).toLowerCase();
-		List<String> packages = new ArrayList<String>();
-
-		packages.add("org.jdmp.core.algorithm.basic");
-		packages.add("org.jdmp.core.algorithm.classification");
-		packages.add("org.jdmp.core.algorithm.regression");
 
 		Class<?> c = null;
 
-		for (String p : packages) {
+		String[] PACKAGES = new String[] { "org.jdmp.core.algorithm.basic" };
+
+		for (String p : PACKAGES) {
 			if (c == null) {
 				try {
 					c = Class.forName(p + "." + id);
@@ -843,40 +847,9 @@ public class Translation extends DepthFirstAdapter {
 		}
 	}
 
-	private boolean parseReservedKeywords(AStatement node) {
-		PExpression expr = node.getExpression();
-
-		String name = getLiteral(expr);
-
-		if (name == null) {
-			return false;
-		}
-
-		if ("exit".equals(name) || "quit".equals(name)) {
-			System.exit(0);
-		} else if ("clear".equals(name)) {
-			module.clear();
-			return true;
-		} else if ("help".equals(name) || "info".equals(name) || "doc".equals(name)) {
-			result = new Result("Please visit http://www.jdmp.org/ for more information.");
-			return true;
-		}
-
-		return false;
-	}
-
 	@Override
 	public void outAStatement(AStatement node) {
 		try {
-			boolean executed = parseReservedKeywords(node);
-
-			if (executed) {
-				if (result == null) {
-					result = new Result("");
-				}
-				return;
-			}
-
 			PExpression expr = node.getExpression();
 			String id = getLiteral(expr);
 
@@ -895,10 +868,23 @@ public class Translation extends DepthFirstAdapter {
 					return;
 				}
 
+				Algorithm a = getAlgorithm(id);
+				if (a != null) {
+					String label = "ans";
+					v = module.getVariables().get(label);
+					if (v == null) {
+						v = VariableFactory.labeledVariable(label);
+						module.getVariables().put(label, v);
+					}
+					m = executeAlgorithm(a, null);
+					v.addMatrix(m);
+					result = new Result(v.getLabel() + " = \n" + m);
+					return;
+				}
+
 				MatrixException e = new MatrixException("Unknown object or command: " + id);
 				result = new Result(e);
 				return;
-
 			}
 
 			String label = "ans";
