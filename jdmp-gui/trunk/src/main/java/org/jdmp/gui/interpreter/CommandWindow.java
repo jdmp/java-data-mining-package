@@ -60,10 +60,6 @@ public class CommandWindow extends JPanel implements KeyListener {
 
 		textField.addKeyListener(this);
 
-		appendText("PARSER PROBLEM:\n");
-		appendText("PLEASE USE PARENTHESES TO DEFINE THE ORDER OF CALCULATIONS!\n");
-		appendText("Examples: ((2*3)+5)+4 and 2-(7*8)\n");
-		appendText("\n");
 		appendText(">> ");
 		endPos = textField.getText().length();
 
