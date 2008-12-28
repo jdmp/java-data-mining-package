@@ -28,7 +28,6 @@ import java.util.Map;
 
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.algorithm.Algorithm;
-import org.jdmp.core.algorithm.AlgorithmOneSource;
 import org.jdmp.core.algorithm.AlgorithmTwoSources;
 import org.jdmp.core.algorithm.basic.Copy;
 import org.jdmp.core.algorithm.basic.LogisticFunction;
@@ -135,7 +134,7 @@ public class NetworkLayerForward extends AbstractAlgorithm {
 	}
 
 	public void setAggregationFunction(Aggregation aggregationFunction) {
-		AlgorithmOneSource a = null;
+		Algorithm a = null;
 		switch (aggregationFunction) {
 		case MEAN:
 			a = new Mean(Matrix.COLUMN);
@@ -143,13 +142,13 @@ public class NetworkLayerForward extends AbstractAlgorithm {
 		case SUM:
 			a = new Sum(Matrix.COLUMN);
 		}
-		a.setVariable(AlgorithmOneSource.SOURCE, getWeightedInputVariable());
-		a.setVariable(AlgorithmOneSource.TARGET, getNetInputVariable());
+		a.setVariable(SOURCE, getWeightedInputVariable());
+		a.setVariable(TARGET, getNetInputVariable());
 		setAlgorithm(AGGREGATIONFUNCTION, a);
 	}
 
 	public void setTransferFunction(Transfer transferFunction) {
-		AlgorithmOneSource a = null;
+		Algorithm a = null;
 		switch (transferFunction) {
 		case TANH:
 			a = new Tanh();
@@ -164,7 +163,7 @@ public class NetworkLayerForward extends AbstractAlgorithm {
 			a = new LogisticFunction();
 			break;
 		}
-		a.setVariable(AlgorithmOneSource.SOURCE, getNetInputVariable());
+		a.setVariable(SOURCE, getNetInputVariable());
 		setAlgorithm(TRANSFERFUNCTION, a);
 	}
 
@@ -211,7 +210,7 @@ public class NetworkLayerForward extends AbstractAlgorithm {
 
 	public void setOutputVariable(Variable v) {
 		setVariable(OUTPUT, v);
-		getAlgorithms().get(TRANSFERFUNCTION).setVariable(AlgorithmOneSource.TARGET, v);
+		getAlgorithms().get(TRANSFERFUNCTION).setVariable(TARGET, v);
 	}
 
 	// public static void main(String[] args) throws Exception {

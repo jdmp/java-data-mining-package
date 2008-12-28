@@ -38,6 +38,7 @@ public class SerialExecution extends AbstractAlgorithm {
 		setDescription("calls other Algorithms in defined order");
 	}
 
+	@Override
 	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws Exception {
 		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
 
@@ -47,10 +48,6 @@ public class SerialExecution extends AbstractAlgorithm {
 		}
 
 		return result;
-	}
-
-	public int getEdgeDirectionForReference(int i) {
-		return OUTGOING;
 	}
 
 }

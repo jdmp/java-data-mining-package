@@ -26,20 +26,28 @@ package org.jdmp.core.algorithm.basic;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jdmp.core.algorithm.AlgorithmOneSource;
+import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.exceptions.MatrixException;
 
-public class Tanh extends AlgorithmOneSource {
+public class Tanh extends AbstractAlgorithm {
 	private static final long serialVersionUID = 1972442317406585099L;
 
 	public Tanh(Variable... variables) {
-		super(variables);
+		super();
 		setDescription("target = tanh(source)");
+		addVariableKey(SOURCE);
+		addVariableKey(TARGET);
+		setEdgeLabel(SOURCE, "Source");
+		setEdgeLabel(TARGET, "Target");
+		setEdgeDirection(SOURCE, EdgeDirection.Incoming);
+		setEdgeDirection(TARGET, EdgeDirection.Outgoing);
+		setVariables(variables);
 	}
 
+	@Override
 	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
 		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
 		Matrix in = input.get(SOURCE);

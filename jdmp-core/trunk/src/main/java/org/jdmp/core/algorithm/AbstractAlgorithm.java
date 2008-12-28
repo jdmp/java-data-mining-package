@@ -46,14 +46,6 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 
 	private transient GUIObject guiObject = null;
 
-	public static final int NOTCONNECTED = 0;
-
-	public static final int INCOMING = 1;
-
-	public static final int OUTGOING = 2;
-
-	public static final int BIDIRECTIONAL = 3;
-
 	private final ObservableMap<Variable> variableMap = new ObservableMap<Variable>();
 
 	private final ObservableMap<Algorithm> algorithmList = new ObservableMap<Algorithm>();
@@ -181,7 +173,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 	public final Map<Object, Matrix> calculate(List<Matrix> matrices) throws Exception {
 		Map<Object, Matrix> map = new HashMap<Object, Matrix>();
 		List<Object> keys = getInputKeys();
-		for (int i = 0; i < keys.size(); i++) {
+		for (int i = 0; i < matrices.size(); i++) {
 			Object key = keys.get(i);
 			map.put(key, matrices.get(i));
 		}

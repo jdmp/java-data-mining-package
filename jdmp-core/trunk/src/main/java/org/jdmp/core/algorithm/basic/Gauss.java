@@ -26,24 +26,32 @@ package org.jdmp.core.algorithm.basic;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jdmp.core.algorithm.AlgorithmOneSource;
+import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.exceptions.MatrixException;
 
-public class Gauss extends AlgorithmOneSource {
+public class Gauss extends AbstractAlgorithm {
 	private static final long serialVersionUID = 3127916742763698423L;
 
-	private double sigma = 1;
+	private final double sigma = 1;
 
-	private double mu = 0.0;
+	private final double mu = 0.0;
 
 	public Gauss(Variable... variables) {
-		super(variables);
+		super();
 		setDescription("target = gauss(source)");
+		addVariableKey(SOURCE);
+		addVariableKey(TARGET);
+		setEdgeLabel(SOURCE, "Source");
+		setEdgeLabel(TARGET, "Target");
+		setEdgeDirection(SOURCE, EdgeDirection.Incoming);
+		setEdgeDirection(TARGET, EdgeDirection.Outgoing);
+		setVariables(variables);
 	}
 
+	@Override
 	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
 		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
 
@@ -59,6 +67,14 @@ public class Gauss extends AlgorithmOneSource {
 	public double getProbability(double x) {
 		return 1.0 / (sigma * Math.sqrt(2 * Math.PI))
 				* Math.exp(-Math.pow(x - mu, 2) / (2 * sigma * sigma));
+	}
+
+	public void setSourceVariable(Variable source) {
+		setVariable(SOURCE, source);
+	}
+
+	public void setTargetVariable(Variable target) {
+		setVariable(TARGET, target);
 	}
 
 }

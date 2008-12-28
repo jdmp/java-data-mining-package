@@ -38,6 +38,14 @@ public interface Algorithm extends CoreObject, HasVariableMap, HasAlgorithmMap {
 		NotConnected, Incoming, Outgoing, Bidirectional
 	};
 
+	public static final String SOURCE = "Source";
+
+	public static final String DIMENSION = "Dimension";
+
+	public static final String IGNORENAN = "IgnoreNaN";
+
+	public static final String TARGET = "Target";
+
 	public void setVariable(Object key, Variable variable);
 
 	public void setAlgorithm(Object key, Algorithm a);

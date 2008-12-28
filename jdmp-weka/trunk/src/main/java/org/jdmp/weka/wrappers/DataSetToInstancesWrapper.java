@@ -23,6 +23,7 @@
 
 package org.jdmp.weka.wrappers;
 
+import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.sample.ClassificationSample;
@@ -37,7 +38,7 @@ public class DataSetToInstancesWrapper extends Instances {
 
 	public static final Object INPUT = Classifier.INPUT;
 	public static final Object WEIGHT = Classifier.WEIGHT;
-	public static final Object TARGET = Classifier.TARGET;
+	public static final Object TARGET = Algorithm.TARGET;
 
 	public DataSetToInstancesWrapper(RegressionDataSet dataSet, boolean discrete,
 			boolean includeTarget) throws MatrixException {

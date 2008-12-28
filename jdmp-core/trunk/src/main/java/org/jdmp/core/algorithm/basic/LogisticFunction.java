@@ -26,26 +26,43 @@ package org.jdmp.core.algorithm.basic;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jdmp.core.algorithm.AlgorithmOneSource;
+import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.exceptions.MatrixException;
 
-public class LogisticFunction extends AlgorithmOneSource {
+public class LogisticFunction extends AbstractAlgorithm {
 	private static final long serialVersionUID = -6185025728766094423L;
 
 	public LogisticFunction(Variable... variables) {
-		super(variables);
+		super();
 		setDescription("target = 1/(exp(-x)+1)");
+		addVariableKey(SOURCE);
+		addVariableKey(TARGET);
+		setEdgeLabel(SOURCE, "Source");
+		setEdgeLabel(TARGET, "Target");
+		setEdgeDirection(SOURCE, EdgeDirection.Incoming);
+		setEdgeDirection(TARGET, EdgeDirection.Outgoing);
+		setVariables(variables);
 	}
 
+	@Override
 	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
 		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
 
 		Matrix in = input.get(SOURCE);
-		result.put(TARGET, new org.ujmp.core.doublematrix.calculation.entrywise.misc.LogisticFunction(in)
-				.calcNew());
+		result.put(TARGET,
+				new org.ujmp.core.doublematrix.calculation.entrywise.misc.LogisticFunction(in)
+						.calcNew());
 		return result;
+	}
+
+	public void setSourceVariable(Variable source) {
+		setVariable(SOURCE, source);
+	}
+
+	public void setTargetVariable(Variable target) {
+		setVariable(TARGET, target);
 	}
 
 }
