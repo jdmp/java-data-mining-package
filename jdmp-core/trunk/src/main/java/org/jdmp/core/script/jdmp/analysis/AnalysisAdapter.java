@@ -99,47 +99,7 @@ public class AnalysisAdapter implements Analysis
         defaultCase(node);
     }
 
-    public void caseAValueExpression(AValueExpression node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseAMaximumRangeExpression(AMaximumRangeExpression node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseADefaultRangeExpression(ADefaultRangeExpression node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseAPlusExpression(APlusExpression node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseAMinusExpression(AMinusExpression node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseAExpressionPlusExpression(AExpressionPlusExpression node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseAExpressionMinusExpression(AExpressionMinusExpression node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseAExpressionMultExpression(AExpressionMultExpression node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseAExpressionDivExpression(AExpressionDivExpression node)
+    public void caseALevel10Expression(ALevel10Expression node)
     {
         defaultCase(node);
     }
@@ -149,27 +109,212 @@ public class AnalysisAdapter implements Analysis
         defaultCase(node);
     }
 
-    public void caseALiteralValue(ALiteralValue node)
+    public void caseALevel9Level10(ALevel9Level10 node)
     {
         defaultCase(node);
     }
 
-    public void caseAMatrixValue(AMatrixValue node)
+    public void caseALogicalOrLevel10(ALogicalOrLevel10 node)
     {
         defaultCase(node);
     }
 
-    public void caseAFunctionValue(AFunctionValue node)
+    public void caseALevel8Level9(ALevel8Level9 node)
     {
         defaultCase(node);
     }
 
-    public void caseAIdentifierValue(AIdentifierValue node)
+    public void caseALogicalAndLevel9(ALogicalAndLevel9 node)
     {
         defaultCase(node);
     }
 
-    public void caseAExpressionValue(AExpressionValue node)
+    public void caseALevel7Level8(ALevel7Level8 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAOrLevel8(AOrLevel8 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseALevel6Level7(ALevel6Level7 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAAndLevel7(AAndLevel7 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseALevel5Level6(ALevel5Level6 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAEqLevel6(AEqLevel6 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseANeqLevel6(ANeqLevel6 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseALteqLevel6(ALteqLevel6 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAGteqLevel6(AGteqLevel6 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAGtLevel6(AGtLevel6 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseALtLevel6(ALtLevel6 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseALevel4Level5(ALevel4Level5 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseARangeLevel5(ARangeLevel5 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseALevel3Level4(ALevel3Level4 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAPlusLevel4(APlusLevel4 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAMinusLevel4(AMinusLevel4 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseALevel2Level3(ALevel2Level3 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAMultLevel3(AMultLevel3 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseADotMultLevel3(ADotMultLevel3 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseARdivLevel3(ARdivLevel3 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseADotRdivLevel3(ADotRdivLevel3 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseALdivLevel3(ALdivLevel3 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseADotLdivLevel3(ADotLdivLevel3 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseALevel1Level2(ALevel1Level2 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAComplementLevel2(AComplementLevel2 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseABitComplementLevel2(ABitComplementLevel2 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAPlusLevel2(APlusLevel2 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAMinusLevel2(AMinusLevel2 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseALevel0Level1(ALevel0Level1 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseATransposeLevel1(ATransposeLevel1 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseADotTransposeLevel1(ADotTransposeLevel1 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAPowerLevel1(APowerLevel1 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseADotPowerLevel1(ADotPowerLevel1 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseALiteralLevel0(ALiteralLevel0 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAMatrixLevel0(AMatrixLevel0 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAFunctionLevel0(AFunctionLevel0 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAIdentifierLevel0(AIdentifierLevel0 node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAExpressionLevel0(AExpressionLevel0 node)
     {
         defaultCase(node);
     }
@@ -205,11 +350,6 @@ public class AnalysisAdapter implements Analysis
     }
 
     public void caseAStringLiteral(AStringLiteral node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseACharLiteral(ACharLiteral node)
     {
         defaultCase(node);
     }
@@ -384,22 +524,32 @@ public class AnalysisAdapter implements Analysis
         defaultCase(node);
     }
 
-    public void caseTLt(TLt node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseTGt(TGt node)
-    {
-        defaultCase(node);
-    }
-
     public void caseTComplement(TComplement node)
     {
         defaultCase(node);
     }
 
     public void caseTBitComplement(TBitComplement node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseTAnd(TAnd node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseTOr(TOr node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseTLogicalAnd(TLogicalAnd node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseTLogicalOr(TLogicalOr node)
     {
         defaultCase(node);
     }
@@ -415,6 +565,16 @@ public class AnalysisAdapter implements Analysis
     }
 
     public void caseTEq(TEq node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseTLt(TLt node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseTGt(TGt node)
     {
         defaultCase(node);
     }
@@ -444,12 +604,52 @@ public class AnalysisAdapter implements Analysis
         defaultCase(node);
     }
 
-    public void caseTStar(TStar node)
+    public void caseTMult(TMult node)
     {
         defaultCase(node);
     }
 
-    public void caseTDiv(TDiv node)
+    public void caseTDotMult(TDotMult node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseTRdiv(TRdiv node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseTDotRdiv(TDotRdiv node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseTLdiv(TLdiv node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseTDotLdiv(TDotLdiv node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseTTranspose(TTranspose node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseTDotTranspose(TDotTranspose node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseTPower(TPower node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseTDotPower(TDotPower node)
     {
         defaultCase(node);
     }
@@ -460,11 +660,6 @@ public class AnalysisAdapter implements Analysis
     }
 
     public void caseTFloatingPoint(TFloatingPoint node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseTChar(TChar node)
     {
         defaultCase(node);
     }

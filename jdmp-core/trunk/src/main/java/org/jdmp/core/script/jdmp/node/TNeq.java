@@ -7,14 +7,14 @@ import org.jdmp.core.script.jdmp.analysis.*;
 @SuppressWarnings("nls")
 public final class TNeq extends Token
 {
-    public TNeq()
+    public TNeq(String text)
     {
-        super.setText("!=");
+        setText(text);
     }
 
-    public TNeq(int line, int pos)
+    public TNeq(String text, int line, int pos)
     {
-        super.setText("!=");
+        setText(text);
         setLine(line);
         setPos(pos);
     }
@@ -22,17 +22,11 @@ public final class TNeq extends Token
     @Override
     public Object clone()
     {
-      return new TNeq(getLine(), getPos());
+      return new TNeq(getText(), getLine(), getPos());
     }
 
     public void apply(Switch sw)
     {
         ((Analysis) sw).caseTNeq(this);
-    }
-
-    @Override
-    public void setText(@SuppressWarnings("unused") String text)
-    {
-        throw new RuntimeException("Cannot change TNeq text.");
     }
 }

@@ -112,10 +112,6 @@ public class JDMP {
 		out.println(" * homepage of JDMP at http://www.jdmp.org/");
 		out.println(" */");
 		out.println();
-		out.println("PARSER PROBLEM:");
-		out.println("PLEASE USE PARENTHESES TO DEFINE THE ORDER OF CALCULATIONS!");
-		out.println("Examples: ((2*3)+5)+4 and 2-(7*8)");
-		out.println();
 
 		Module module = ModuleFactory.emptyModule();
 

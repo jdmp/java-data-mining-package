@@ -23,6 +23,8 @@
 
 package org.jdmp.core.script;
 
+import org.ujmp.core.exceptions.MatrixException;
+
 public class Result {
 
 	private String text = "";
@@ -56,10 +58,18 @@ public class Result {
 			return text;
 		} else {
 			if (text == null) {
-				return exception.getMessage();
+				return getExceptionText();
 			} else {
-				return text + ": " + exception.getMessage();
+				return text + ": " + getExceptionText();
 			}
+		}
+	}
+
+	public String getExceptionText() {
+		if (exception instanceof MatrixException) {
+			return exception.getMessage();
+		} else {
+			return exception.toString();
 		}
 	}
 

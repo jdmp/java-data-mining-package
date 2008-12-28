@@ -193,245 +193,25 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outAArrayAssignment(node);
     }
 
-    public void inAValueExpression(AValueExpression node)
+    public void inALevel10Expression(ALevel10Expression node)
     {
         defaultIn(node);
     }
 
-    public void outAValueExpression(AValueExpression node)
+    public void outALevel10Expression(ALevel10Expression node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAValueExpression(AValueExpression node)
+    public void caseALevel10Expression(ALevel10Expression node)
     {
-        inAValueExpression(node);
-        if(node.getValue() != null)
+        inALevel10Expression(node);
+        if(node.getLevel10() != null)
         {
-            node.getValue().apply(this);
+            node.getLevel10().apply(this);
         }
-        outAValueExpression(node);
-    }
-
-    public void inAMaximumRangeExpression(AMaximumRangeExpression node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAMaximumRangeExpression(AMaximumRangeExpression node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAMaximumRangeExpression(AMaximumRangeExpression node)
-    {
-        inAMaximumRangeExpression(node);
-        if(node.getColon() != null)
-        {
-            node.getColon().apply(this);
-        }
-        outAMaximumRangeExpression(node);
-    }
-
-    public void inADefaultRangeExpression(ADefaultRangeExpression node)
-    {
-        defaultIn(node);
-    }
-
-    public void outADefaultRangeExpression(ADefaultRangeExpression node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseADefaultRangeExpression(ADefaultRangeExpression node)
-    {
-        inADefaultRangeExpression(node);
-        if(node.getMin() != null)
-        {
-            node.getMin().apply(this);
-        }
-        if(node.getColon() != null)
-        {
-            node.getColon().apply(this);
-        }
-        if(node.getStepsize() != null)
-        {
-            node.getStepsize().apply(this);
-        }
-        if(node.getMax() != null)
-        {
-            node.getMax().apply(this);
-        }
-        outADefaultRangeExpression(node);
-    }
-
-    public void inAPlusExpression(APlusExpression node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAPlusExpression(APlusExpression node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAPlusExpression(APlusExpression node)
-    {
-        inAPlusExpression(node);
-        if(node.getPlus() != null)
-        {
-            node.getPlus().apply(this);
-        }
-        if(node.getRight() != null)
-        {
-            node.getRight().apply(this);
-        }
-        outAPlusExpression(node);
-    }
-
-    public void inAMinusExpression(AMinusExpression node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAMinusExpression(AMinusExpression node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAMinusExpression(AMinusExpression node)
-    {
-        inAMinusExpression(node);
-        if(node.getMinus() != null)
-        {
-            node.getMinus().apply(this);
-        }
-        if(node.getRight() != null)
-        {
-            node.getRight().apply(this);
-        }
-        outAMinusExpression(node);
-    }
-
-    public void inAExpressionPlusExpression(AExpressionPlusExpression node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAExpressionPlusExpression(AExpressionPlusExpression node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAExpressionPlusExpression(AExpressionPlusExpression node)
-    {
-        inAExpressionPlusExpression(node);
-        if(node.getLeft() != null)
-        {
-            node.getLeft().apply(this);
-        }
-        if(node.getPlus() != null)
-        {
-            node.getPlus().apply(this);
-        }
-        if(node.getRight() != null)
-        {
-            node.getRight().apply(this);
-        }
-        outAExpressionPlusExpression(node);
-    }
-
-    public void inAExpressionMinusExpression(AExpressionMinusExpression node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAExpressionMinusExpression(AExpressionMinusExpression node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAExpressionMinusExpression(AExpressionMinusExpression node)
-    {
-        inAExpressionMinusExpression(node);
-        if(node.getLeft() != null)
-        {
-            node.getLeft().apply(this);
-        }
-        if(node.getMinus() != null)
-        {
-            node.getMinus().apply(this);
-        }
-        if(node.getRight() != null)
-        {
-            node.getRight().apply(this);
-        }
-        outAExpressionMinusExpression(node);
-    }
-
-    public void inAExpressionMultExpression(AExpressionMultExpression node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAExpressionMultExpression(AExpressionMultExpression node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAExpressionMultExpression(AExpressionMultExpression node)
-    {
-        inAExpressionMultExpression(node);
-        if(node.getLeft() != null)
-        {
-            node.getLeft().apply(this);
-        }
-        if(node.getStar() != null)
-        {
-            node.getStar().apply(this);
-        }
-        if(node.getRight() != null)
-        {
-            node.getRight().apply(this);
-        }
-        outAExpressionMultExpression(node);
-    }
-
-    public void inAExpressionDivExpression(AExpressionDivExpression node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAExpressionDivExpression(AExpressionDivExpression node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAExpressionDivExpression(AExpressionDivExpression node)
-    {
-        inAExpressionDivExpression(node);
-        if(node.getLeft() != null)
-        {
-            node.getLeft().apply(this);
-        }
-        if(node.getDiv() != null)
-        {
-            node.getDiv().apply(this);
-        }
-        if(node.getRight() != null)
-        {
-            node.getRight().apply(this);
-        }
-        outAExpressionDivExpression(node);
+        outALevel10Expression(node);
     }
 
     public void inAStepsize(AStepsize node)
@@ -448,9 +228,9 @@ public class DepthFirstAdapter extends AnalysisAdapter
     public void caseAStepsize(AStepsize node)
     {
         inAStepsize(node);
-        if(node.getValue() != null)
+        if(node.getLevel4() != null)
         {
-            node.getValue().apply(this);
+            node.getLevel4().apply(this);
         }
         if(node.getColon() != null)
         {
@@ -459,104 +239,1077 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outAStepsize(node);
     }
 
-    public void inALiteralValue(ALiteralValue node)
+    public void inALevel9Level10(ALevel9Level10 node)
     {
         defaultIn(node);
     }
 
-    public void outALiteralValue(ALiteralValue node)
+    public void outALevel9Level10(ALevel9Level10 node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseALiteralValue(ALiteralValue node)
+    public void caseALevel9Level10(ALevel9Level10 node)
     {
-        inALiteralValue(node);
+        inALevel9Level10(node);
+        if(node.getLevel9() != null)
+        {
+            node.getLevel9().apply(this);
+        }
+        outALevel9Level10(node);
+    }
+
+    public void inALogicalOrLevel10(ALogicalOrLevel10 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outALogicalOrLevel10(ALogicalOrLevel10 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseALogicalOrLevel10(ALogicalOrLevel10 node)
+    {
+        inALogicalOrLevel10(node);
+        if(node.getLeft() != null)
+        {
+            node.getLeft().apply(this);
+        }
+        if(node.getLogicalOr() != null)
+        {
+            node.getLogicalOr().apply(this);
+        }
+        if(node.getRight() != null)
+        {
+            node.getRight().apply(this);
+        }
+        outALogicalOrLevel10(node);
+    }
+
+    public void inALevel8Level9(ALevel8Level9 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outALevel8Level9(ALevel8Level9 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseALevel8Level9(ALevel8Level9 node)
+    {
+        inALevel8Level9(node);
+        if(node.getLevel8() != null)
+        {
+            node.getLevel8().apply(this);
+        }
+        outALevel8Level9(node);
+    }
+
+    public void inALogicalAndLevel9(ALogicalAndLevel9 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outALogicalAndLevel9(ALogicalAndLevel9 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseALogicalAndLevel9(ALogicalAndLevel9 node)
+    {
+        inALogicalAndLevel9(node);
+        if(node.getLeft() != null)
+        {
+            node.getLeft().apply(this);
+        }
+        if(node.getLogicalAnd() != null)
+        {
+            node.getLogicalAnd().apply(this);
+        }
+        if(node.getRight() != null)
+        {
+            node.getRight().apply(this);
+        }
+        outALogicalAndLevel9(node);
+    }
+
+    public void inALevel7Level8(ALevel7Level8 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outALevel7Level8(ALevel7Level8 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseALevel7Level8(ALevel7Level8 node)
+    {
+        inALevel7Level8(node);
+        if(node.getLevel7() != null)
+        {
+            node.getLevel7().apply(this);
+        }
+        outALevel7Level8(node);
+    }
+
+    public void inAOrLevel8(AOrLevel8 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAOrLevel8(AOrLevel8 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAOrLevel8(AOrLevel8 node)
+    {
+        inAOrLevel8(node);
+        if(node.getLeft() != null)
+        {
+            node.getLeft().apply(this);
+        }
+        if(node.getOr() != null)
+        {
+            node.getOr().apply(this);
+        }
+        if(node.getRight() != null)
+        {
+            node.getRight().apply(this);
+        }
+        outAOrLevel8(node);
+    }
+
+    public void inALevel6Level7(ALevel6Level7 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outALevel6Level7(ALevel6Level7 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseALevel6Level7(ALevel6Level7 node)
+    {
+        inALevel6Level7(node);
+        if(node.getLevel6() != null)
+        {
+            node.getLevel6().apply(this);
+        }
+        outALevel6Level7(node);
+    }
+
+    public void inAAndLevel7(AAndLevel7 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAndLevel7(AAndLevel7 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAndLevel7(AAndLevel7 node)
+    {
+        inAAndLevel7(node);
+        if(node.getLeft() != null)
+        {
+            node.getLeft().apply(this);
+        }
+        if(node.getAnd() != null)
+        {
+            node.getAnd().apply(this);
+        }
+        if(node.getRight() != null)
+        {
+            node.getRight().apply(this);
+        }
+        outAAndLevel7(node);
+    }
+
+    public void inALevel5Level6(ALevel5Level6 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outALevel5Level6(ALevel5Level6 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseALevel5Level6(ALevel5Level6 node)
+    {
+        inALevel5Level6(node);
+        if(node.getLevel5() != null)
+        {
+            node.getLevel5().apply(this);
+        }
+        outALevel5Level6(node);
+    }
+
+    public void inAEqLevel6(AEqLevel6 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAEqLevel6(AEqLevel6 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAEqLevel6(AEqLevel6 node)
+    {
+        inAEqLevel6(node);
+        if(node.getLeft() != null)
+        {
+            node.getLeft().apply(this);
+        }
+        if(node.getEq() != null)
+        {
+            node.getEq().apply(this);
+        }
+        if(node.getRight() != null)
+        {
+            node.getRight().apply(this);
+        }
+        outAEqLevel6(node);
+    }
+
+    public void inANeqLevel6(ANeqLevel6 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outANeqLevel6(ANeqLevel6 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseANeqLevel6(ANeqLevel6 node)
+    {
+        inANeqLevel6(node);
+        if(node.getLeft() != null)
+        {
+            node.getLeft().apply(this);
+        }
+        if(node.getNeq() != null)
+        {
+            node.getNeq().apply(this);
+        }
+        if(node.getRight() != null)
+        {
+            node.getRight().apply(this);
+        }
+        outANeqLevel6(node);
+    }
+
+    public void inALteqLevel6(ALteqLevel6 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outALteqLevel6(ALteqLevel6 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseALteqLevel6(ALteqLevel6 node)
+    {
+        inALteqLevel6(node);
+        if(node.getLeft() != null)
+        {
+            node.getLeft().apply(this);
+        }
+        if(node.getLteq() != null)
+        {
+            node.getLteq().apply(this);
+        }
+        if(node.getRight() != null)
+        {
+            node.getRight().apply(this);
+        }
+        outALteqLevel6(node);
+    }
+
+    public void inAGteqLevel6(AGteqLevel6 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAGteqLevel6(AGteqLevel6 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAGteqLevel6(AGteqLevel6 node)
+    {
+        inAGteqLevel6(node);
+        if(node.getLeft() != null)
+        {
+            node.getLeft().apply(this);
+        }
+        if(node.getGteq() != null)
+        {
+            node.getGteq().apply(this);
+        }
+        if(node.getRight() != null)
+        {
+            node.getRight().apply(this);
+        }
+        outAGteqLevel6(node);
+    }
+
+    public void inAGtLevel6(AGtLevel6 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAGtLevel6(AGtLevel6 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAGtLevel6(AGtLevel6 node)
+    {
+        inAGtLevel6(node);
+        if(node.getLeft() != null)
+        {
+            node.getLeft().apply(this);
+        }
+        if(node.getGt() != null)
+        {
+            node.getGt().apply(this);
+        }
+        if(node.getRight() != null)
+        {
+            node.getRight().apply(this);
+        }
+        outAGtLevel6(node);
+    }
+
+    public void inALtLevel6(ALtLevel6 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outALtLevel6(ALtLevel6 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseALtLevel6(ALtLevel6 node)
+    {
+        inALtLevel6(node);
+        if(node.getLeft() != null)
+        {
+            node.getLeft().apply(this);
+        }
+        if(node.getLt() != null)
+        {
+            node.getLt().apply(this);
+        }
+        if(node.getRight() != null)
+        {
+            node.getRight().apply(this);
+        }
+        outALtLevel6(node);
+    }
+
+    public void inALevel4Level5(ALevel4Level5 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outALevel4Level5(ALevel4Level5 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseALevel4Level5(ALevel4Level5 node)
+    {
+        inALevel4Level5(node);
+        if(node.getLevel4() != null)
+        {
+            node.getLevel4().apply(this);
+        }
+        outALevel4Level5(node);
+    }
+
+    public void inARangeLevel5(ARangeLevel5 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outARangeLevel5(ARangeLevel5 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseARangeLevel5(ARangeLevel5 node)
+    {
+        inARangeLevel5(node);
+        if(node.getMin() != null)
+        {
+            node.getMin().apply(this);
+        }
+        if(node.getColon() != null)
+        {
+            node.getColon().apply(this);
+        }
+        if(node.getStepsize() != null)
+        {
+            node.getStepsize().apply(this);
+        }
+        if(node.getMax() != null)
+        {
+            node.getMax().apply(this);
+        }
+        outARangeLevel5(node);
+    }
+
+    public void inALevel3Level4(ALevel3Level4 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outALevel3Level4(ALevel3Level4 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseALevel3Level4(ALevel3Level4 node)
+    {
+        inALevel3Level4(node);
+        if(node.getLevel3() != null)
+        {
+            node.getLevel3().apply(this);
+        }
+        outALevel3Level4(node);
+    }
+
+    public void inAPlusLevel4(APlusLevel4 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAPlusLevel4(APlusLevel4 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAPlusLevel4(APlusLevel4 node)
+    {
+        inAPlusLevel4(node);
+        if(node.getLeft() != null)
+        {
+            node.getLeft().apply(this);
+        }
+        if(node.getPlus() != null)
+        {
+            node.getPlus().apply(this);
+        }
+        if(node.getRight() != null)
+        {
+            node.getRight().apply(this);
+        }
+        outAPlusLevel4(node);
+    }
+
+    public void inAMinusLevel4(AMinusLevel4 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAMinusLevel4(AMinusLevel4 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAMinusLevel4(AMinusLevel4 node)
+    {
+        inAMinusLevel4(node);
+        if(node.getLeft() != null)
+        {
+            node.getLeft().apply(this);
+        }
+        if(node.getMinus() != null)
+        {
+            node.getMinus().apply(this);
+        }
+        if(node.getRight() != null)
+        {
+            node.getRight().apply(this);
+        }
+        outAMinusLevel4(node);
+    }
+
+    public void inALevel2Level3(ALevel2Level3 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outALevel2Level3(ALevel2Level3 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseALevel2Level3(ALevel2Level3 node)
+    {
+        inALevel2Level3(node);
+        if(node.getLevel2() != null)
+        {
+            node.getLevel2().apply(this);
+        }
+        outALevel2Level3(node);
+    }
+
+    public void inAMultLevel3(AMultLevel3 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAMultLevel3(AMultLevel3 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAMultLevel3(AMultLevel3 node)
+    {
+        inAMultLevel3(node);
+        if(node.getLeft() != null)
+        {
+            node.getLeft().apply(this);
+        }
+        if(node.getMult() != null)
+        {
+            node.getMult().apply(this);
+        }
+        if(node.getRight() != null)
+        {
+            node.getRight().apply(this);
+        }
+        outAMultLevel3(node);
+    }
+
+    public void inADotMultLevel3(ADotMultLevel3 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outADotMultLevel3(ADotMultLevel3 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseADotMultLevel3(ADotMultLevel3 node)
+    {
+        inADotMultLevel3(node);
+        if(node.getLeft() != null)
+        {
+            node.getLeft().apply(this);
+        }
+        if(node.getDotMult() != null)
+        {
+            node.getDotMult().apply(this);
+        }
+        if(node.getRight() != null)
+        {
+            node.getRight().apply(this);
+        }
+        outADotMultLevel3(node);
+    }
+
+    public void inARdivLevel3(ARdivLevel3 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outARdivLevel3(ARdivLevel3 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseARdivLevel3(ARdivLevel3 node)
+    {
+        inARdivLevel3(node);
+        if(node.getLeft() != null)
+        {
+            node.getLeft().apply(this);
+        }
+        if(node.getRdiv() != null)
+        {
+            node.getRdiv().apply(this);
+        }
+        if(node.getRight() != null)
+        {
+            node.getRight().apply(this);
+        }
+        outARdivLevel3(node);
+    }
+
+    public void inADotRdivLevel3(ADotRdivLevel3 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outADotRdivLevel3(ADotRdivLevel3 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseADotRdivLevel3(ADotRdivLevel3 node)
+    {
+        inADotRdivLevel3(node);
+        if(node.getLeft() != null)
+        {
+            node.getLeft().apply(this);
+        }
+        if(node.getDotRdiv() != null)
+        {
+            node.getDotRdiv().apply(this);
+        }
+        if(node.getRight() != null)
+        {
+            node.getRight().apply(this);
+        }
+        outADotRdivLevel3(node);
+    }
+
+    public void inALdivLevel3(ALdivLevel3 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outALdivLevel3(ALdivLevel3 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseALdivLevel3(ALdivLevel3 node)
+    {
+        inALdivLevel3(node);
+        if(node.getLeft() != null)
+        {
+            node.getLeft().apply(this);
+        }
+        if(node.getLdiv() != null)
+        {
+            node.getLdiv().apply(this);
+        }
+        if(node.getRight() != null)
+        {
+            node.getRight().apply(this);
+        }
+        outALdivLevel3(node);
+    }
+
+    public void inADotLdivLevel3(ADotLdivLevel3 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outADotLdivLevel3(ADotLdivLevel3 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseADotLdivLevel3(ADotLdivLevel3 node)
+    {
+        inADotLdivLevel3(node);
+        if(node.getLeft() != null)
+        {
+            node.getLeft().apply(this);
+        }
+        if(node.getDotLdiv() != null)
+        {
+            node.getDotLdiv().apply(this);
+        }
+        if(node.getRight() != null)
+        {
+            node.getRight().apply(this);
+        }
+        outADotLdivLevel3(node);
+    }
+
+    public void inALevel1Level2(ALevel1Level2 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outALevel1Level2(ALevel1Level2 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseALevel1Level2(ALevel1Level2 node)
+    {
+        inALevel1Level2(node);
+        if(node.getLevel1() != null)
+        {
+            node.getLevel1().apply(this);
+        }
+        outALevel1Level2(node);
+    }
+
+    public void inAComplementLevel2(AComplementLevel2 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAComplementLevel2(AComplementLevel2 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAComplementLevel2(AComplementLevel2 node)
+    {
+        inAComplementLevel2(node);
+        if(node.getComplement() != null)
+        {
+            node.getComplement().apply(this);
+        }
+        if(node.getLevel1() != null)
+        {
+            node.getLevel1().apply(this);
+        }
+        outAComplementLevel2(node);
+    }
+
+    public void inABitComplementLevel2(ABitComplementLevel2 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outABitComplementLevel2(ABitComplementLevel2 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseABitComplementLevel2(ABitComplementLevel2 node)
+    {
+        inABitComplementLevel2(node);
+        if(node.getBitComplement() != null)
+        {
+            node.getBitComplement().apply(this);
+        }
+        if(node.getLevel1() != null)
+        {
+            node.getLevel1().apply(this);
+        }
+        outABitComplementLevel2(node);
+    }
+
+    public void inAPlusLevel2(APlusLevel2 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAPlusLevel2(APlusLevel2 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAPlusLevel2(APlusLevel2 node)
+    {
+        inAPlusLevel2(node);
+        if(node.getPlus() != null)
+        {
+            node.getPlus().apply(this);
+        }
+        if(node.getLevel1() != null)
+        {
+            node.getLevel1().apply(this);
+        }
+        outAPlusLevel2(node);
+    }
+
+    public void inAMinusLevel2(AMinusLevel2 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAMinusLevel2(AMinusLevel2 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAMinusLevel2(AMinusLevel2 node)
+    {
+        inAMinusLevel2(node);
+        if(node.getMinus() != null)
+        {
+            node.getMinus().apply(this);
+        }
+        if(node.getLevel1() != null)
+        {
+            node.getLevel1().apply(this);
+        }
+        outAMinusLevel2(node);
+    }
+
+    public void inALevel0Level1(ALevel0Level1 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outALevel0Level1(ALevel0Level1 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseALevel0Level1(ALevel0Level1 node)
+    {
+        inALevel0Level1(node);
+        if(node.getLevel0() != null)
+        {
+            node.getLevel0().apply(this);
+        }
+        outALevel0Level1(node);
+    }
+
+    public void inATransposeLevel1(ATransposeLevel1 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outATransposeLevel1(ATransposeLevel1 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseATransposeLevel1(ATransposeLevel1 node)
+    {
+        inATransposeLevel1(node);
+        if(node.getLevel0() != null)
+        {
+            node.getLevel0().apply(this);
+        }
+        if(node.getTranspose() != null)
+        {
+            node.getTranspose().apply(this);
+        }
+        outATransposeLevel1(node);
+    }
+
+    public void inADotTransposeLevel1(ADotTransposeLevel1 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outADotTransposeLevel1(ADotTransposeLevel1 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseADotTransposeLevel1(ADotTransposeLevel1 node)
+    {
+        inADotTransposeLevel1(node);
+        if(node.getLevel0() != null)
+        {
+            node.getLevel0().apply(this);
+        }
+        if(node.getDotTranspose() != null)
+        {
+            node.getDotTranspose().apply(this);
+        }
+        outADotTransposeLevel1(node);
+    }
+
+    public void inAPowerLevel1(APowerLevel1 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAPowerLevel1(APowerLevel1 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAPowerLevel1(APowerLevel1 node)
+    {
+        inAPowerLevel1(node);
+        if(node.getLeft() != null)
+        {
+            node.getLeft().apply(this);
+        }
+        if(node.getPower() != null)
+        {
+            node.getPower().apply(this);
+        }
+        if(node.getRight() != null)
+        {
+            node.getRight().apply(this);
+        }
+        outAPowerLevel1(node);
+    }
+
+    public void inADotPowerLevel1(ADotPowerLevel1 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outADotPowerLevel1(ADotPowerLevel1 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseADotPowerLevel1(ADotPowerLevel1 node)
+    {
+        inADotPowerLevel1(node);
+        if(node.getLeft() != null)
+        {
+            node.getLeft().apply(this);
+        }
+        if(node.getDotPower() != null)
+        {
+            node.getDotPower().apply(this);
+        }
+        if(node.getRight() != null)
+        {
+            node.getRight().apply(this);
+        }
+        outADotPowerLevel1(node);
+    }
+
+    public void inALiteralLevel0(ALiteralLevel0 node)
+    {
+        defaultIn(node);
+    }
+
+    public void outALiteralLevel0(ALiteralLevel0 node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseALiteralLevel0(ALiteralLevel0 node)
+    {
+        inALiteralLevel0(node);
         if(node.getLiteral() != null)
         {
             node.getLiteral().apply(this);
         }
-        outALiteralValue(node);
+        outALiteralLevel0(node);
     }
 
-    public void inAMatrixValue(AMatrixValue node)
+    public void inAMatrixLevel0(AMatrixLevel0 node)
     {
         defaultIn(node);
     }
 
-    public void outAMatrixValue(AMatrixValue node)
+    public void outAMatrixLevel0(AMatrixLevel0 node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAMatrixValue(AMatrixValue node)
+    public void caseAMatrixLevel0(AMatrixLevel0 node)
     {
-        inAMatrixValue(node);
+        inAMatrixLevel0(node);
         if(node.getMatrix() != null)
         {
             node.getMatrix().apply(this);
         }
-        outAMatrixValue(node);
+        outAMatrixLevel0(node);
     }
 
-    public void inAFunctionValue(AFunctionValue node)
+    public void inAFunctionLevel0(AFunctionLevel0 node)
     {
         defaultIn(node);
     }
 
-    public void outAFunctionValue(AFunctionValue node)
+    public void outAFunctionLevel0(AFunctionLevel0 node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAFunctionValue(AFunctionValue node)
+    public void caseAFunctionLevel0(AFunctionLevel0 node)
     {
-        inAFunctionValue(node);
+        inAFunctionLevel0(node);
         if(node.getFunction() != null)
         {
             node.getFunction().apply(this);
         }
-        outAFunctionValue(node);
+        outAFunctionLevel0(node);
     }
 
-    public void inAIdentifierValue(AIdentifierValue node)
+    public void inAIdentifierLevel0(AIdentifierLevel0 node)
     {
         defaultIn(node);
     }
 
-    public void outAIdentifierValue(AIdentifierValue node)
+    public void outAIdentifierLevel0(AIdentifierLevel0 node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAIdentifierValue(AIdentifierValue node)
+    public void caseAIdentifierLevel0(AIdentifierLevel0 node)
     {
-        inAIdentifierValue(node);
+        inAIdentifierLevel0(node);
         if(node.getName() != null)
         {
             node.getName().apply(this);
         }
-        outAIdentifierValue(node);
+        outAIdentifierLevel0(node);
     }
 
-    public void inAExpressionValue(AExpressionValue node)
+    public void inAExpressionLevel0(AExpressionLevel0 node)
     {
         defaultIn(node);
     }
 
-    public void outAExpressionValue(AExpressionValue node)
+    public void outAExpressionLevel0(AExpressionLevel0 node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAExpressionValue(AExpressionValue node)
+    public void caseAExpressionLevel0(AExpressionLevel0 node)
     {
-        inAExpressionValue(node);
+        inAExpressionLevel0(node);
         if(node.getLParenthese() != null)
         {
             node.getLParenthese().apply(this);
@@ -569,7 +1322,7 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getRParenthese().apply(this);
         }
-        outAExpressionValue(node);
+        outAExpressionLevel0(node);
     }
 
     public void inAEmptyFunction(AEmptyFunction node)
@@ -745,27 +1498,6 @@ public class DepthFirstAdapter extends AnalysisAdapter
             node.getString().apply(this);
         }
         outAStringLiteral(node);
-    }
-
-    public void inACharLiteral(ACharLiteral node)
-    {
-        defaultIn(node);
-    }
-
-    public void outACharLiteral(ACharLiteral node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseACharLiteral(ACharLiteral node)
-    {
-        inACharLiteral(node);
-        if(node.getChar() != null)
-        {
-            node.getChar().apply(this);
-        }
-        outACharLiteral(node);
     }
 
     public void inABooleanLiteral(ABooleanLiteral node)
