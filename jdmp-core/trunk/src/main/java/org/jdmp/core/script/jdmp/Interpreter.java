@@ -19,6 +19,10 @@ public class Interpreter {
 
 	public Result execute(String s) {
 		try {
+			if (!s.endsWith(";")) {
+				s = s + ";";
+			}
+
 			Translation translation = new Translation(module);
 			StringReader sr = new StringReader(s);
 			Parser p = new Parser(new Lexer(new PushbackReader(sr, 1024)));

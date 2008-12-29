@@ -29,7 +29,7 @@ import java.util.logging.Level;
 import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.dataset.DataSet;
-import org.jdmp.core.util.ObservableList;
+import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.interfaces.GUIObject;
@@ -37,35 +37,42 @@ import org.ujmp.core.interfaces.GUIObject;
 public abstract class AbstractModule extends AbstractCoreObject implements Module {
 	private transient GUIObject guiObject = null;
 
-	protected final ObservableList<Algorithm> algorithmList = new ObservableList<Algorithm>();
+	protected final ObservableMap<Algorithm> algorithms = new ObservableMap<Algorithm>();
 
-	protected final ObservableMap<DataSet> dataSetList = new ObservableMap<DataSet>();
+	protected final ObservableMap<Sample> samples = new ObservableMap<Sample>();
 
-	protected final ObservableMap<Variable> variableList = new ObservableMap<Variable>();
+	protected final ObservableMap<DataSet> dataSets = new ObservableMap<DataSet>();
 
-	protected final ObservableList<Module> moduleList = new ObservableList<Module>();
+	protected final ObservableMap<Variable> variables = new ObservableMap<Variable>();
 
-	public ObservableList<Module> getModules() {
-		return moduleList;
+	protected final ObservableMap<Module> modules = new ObservableMap<Module>();
+
+	public ObservableMap<Module> getModules() {
+		return modules;
 	}
 
 	public final ObservableMap<DataSet> getDataSets() {
-		return dataSetList;
+		return dataSets;
 	}
 
-	public final ObservableList<Algorithm> getAlgorithms() {
-		return algorithmList;
+	public final ObservableMap<Algorithm> getAlgorithms() {
+		return algorithms;
 	}
 
 	public final ObservableMap<Variable> getVariables() {
-		return variableList;
+		return variables;
+	}
+
+	public final ObservableMap<Sample> getSamples() {
+		return samples;
 	}
 
 	public void clear() {
-		algorithmList.clear();
-		dataSetList.clear();
-		moduleList.clear();
-		variableList.clear();
+		algorithms.clear();
+		dataSets.clear();
+		modules.clear();
+		samples.clear();
+		variables.clear();
 	}
 
 	public final GUIObject getGUIObject() {

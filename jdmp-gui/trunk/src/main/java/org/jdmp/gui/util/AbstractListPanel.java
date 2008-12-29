@@ -184,8 +184,9 @@ public abstract class AbstractListPanel extends JPanel implements MouseListener,
 			Object o = dataModel.getValueAt(selectedRow, 0);
 			if (o instanceof CoreObject) {
 				otemp = ((CoreObject) o).getGUIObject();
-			} else
+			} else {
 				otemp = (GUIObject) o;
+			}
 		}
 
 		switch (e.getButton()) {
@@ -202,7 +203,12 @@ public abstract class AbstractListPanel extends JPanel implements MouseListener,
 			int row = jTable.rowAtPoint(e.getPoint());
 			jTable.setRowSelectionInterval(row, row);
 			selectedRow = jTable.getSelectedRow();
-			otemp = (GUIObject) dataModel.getValueAt(selectedRow, 0);
+			Object obj = dataModel.getValueAt(selectedRow, 0);
+			if (obj instanceof CoreObject) {
+				otemp = ((CoreObject) obj).getGUIObject();
+			} else {
+				otemp = (GUIObject) obj;
+			}
 			if (otemp != null) {
 				// Reference ref = otemp.getReference();
 				GUIObject o = otemp;

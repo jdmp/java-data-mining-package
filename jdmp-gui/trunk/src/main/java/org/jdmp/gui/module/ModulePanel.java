@@ -29,8 +29,9 @@ import java.awt.GridLayout;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
-import org.jdmp.core.variable.HasVariables;
+import org.jdmp.gui.dataset.DataSetListPanel;
 import org.jdmp.gui.interpreter.CommandWindow;
+import org.jdmp.gui.sample.SampleListPanel;
 import org.jdmp.gui.variable.VariableListPanel;
 import org.ujmp.gui.panels.AbstractPanel;
 
@@ -46,17 +47,18 @@ public class ModulePanel extends AbstractPanel {
 	public ModulePanel(ModuleGUIObject m) {
 		super(m);
 
-		leftPanel.setLayout(new BorderLayout());
+		leftPanel.setLayout(new GridLayout(4, 1));
+		leftPanel.add(new VariableListPanel(m.getModule()));
+		leftPanel.add(new SampleListPanel(m.getModule()));
+		leftPanel.add(new DataSetListPanel(m.getModule()));
+		leftPanel.add(new ModuleListPanel(m.getModule()));
 
 		rightPanel.setLayout(new GridLayout(1, 1));
-		// rightPanel.add(new ObjectListPanel((HasModuleList) m.getModule()));
-		leftPanel.add(new VariableListPanel((HasVariables) m.getModule()));
-		// rightPanel.add(new ObjectListPanel((HasAlgorithms) m.getModule()));
-		// rightPanel.add(new ObjectListPanel((HasDataSets) m.getModule()));
 		rightPanel.add(new CommandWindow(m.getModule()));
 
 		splitPane.setLeftComponent(leftPanel);
 		splitPane.setRightComponent(rightPanel);
+
 		add(splitPane, BorderLayout.CENTER);
 	}
 

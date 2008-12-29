@@ -118,6 +118,8 @@ import org.ujmp.core.util.MathUtil;
 
 public class Translation extends DepthFirstAdapter {
 
+	public static final String ANS = "ans";
+
 	private Module module = null;
 
 	private Result result = null;
@@ -216,7 +218,9 @@ public class Translation extends DepthFirstAdapter {
 
 	@Override
 	public void outAArrayAssignment(AArrayAssignment node) {
-
+		Exception e = new MatrixException("array assignments are not supported yet.");
+		result = new Result(e);
+		e.printStackTrace();
 	}
 
 	@Override
@@ -226,23 +230,41 @@ public class Translation extends DepthFirstAdapter {
 			Object o = getObject(node.getExpression());
 			if (o instanceof Module) {
 				Module m = (Module) o;
-				module.getModules().add(m);
-				result = new Result("Module = " + m.toString());
+				if (!ANS.equals(id)) {
+					module.getModules().put(id, m);
+				}
+				result = new Result(id, m);
 			} else if (o instanceof DataSet) {
 				DataSet ds = (DataSet) o;
-				module.getDataSets().put(id, ds);
-				result = new Result(id + " = \n" + ds.toString());
+				if (!ANS.equals(id)) {
+					module.getDataSets().put(id, ds);
+				}
+				result = new Result(id, ds);
 			} else if (o instanceof Sample) {
 				Sample s = (Sample) o;
-				// TODO: add to sample list
-				result = new Result("Sample = \n" + s.toString());
+				if (!ANS.equals(id)) {
+					module.getSamples().put(id, s);
+				}
+				result = new Result(id, s);
+			} else if (o instanceof Variable) {
+				Variable v = (Variable) o;
+				if (!ANS.equals(id)) {
+					module.getVariables().put(id, v);
+				}
+				result = new Result(id, v);
+			} else if (o instanceof Algorithm) {
+				Algorithm a = (Algorithm) o;
+				if (!ANS.equals(id)) {
+					module.getAlgorithms().put(id, a);
+				}
+				result = new Result(id, a);
 			} else {
 				Matrix m = MathUtil.getMatrix(o);
 				if (m != null) {
 					Variable v = getVariable(node.getName());
 					v.addMatrix(m);
-					result = new Result(v.getLabel() + " = \n" + m.toString());
-					System.out.println(v.getLabel() + " = \n" + m.toString());
+					result = new Result(v.getLabel(), m);
+					System.out.println(result.toString());
 				}
 			}
 		} catch (Exception e) {
@@ -557,20 +579,20 @@ public class Translation extends DepthFirstAdapter {
 	}
 
 	private List<Object> getArgumentsAsObjects(PArgumentList arguments) throws Exception {
-		List<Object> matrices = new ArrayList<Object>();
+		List<Object> obj = new ArrayList<Object>();
 		if (arguments == null) {
-			return matrices;
+			return obj;
 		}
 		if (arguments instanceof AExpressionArgumentList) {
 			PExpression expr = ((AExpressionArgumentList) arguments).getExpression();
-			matrices.add(MathUtil.getMatrix(getObject(expr)));
-			return matrices;
+			obj.add(getObject(expr));
+			return obj;
 		} else if (arguments instanceof AArgumentListArgumentList) {
 			PExpression expr = ((AArgumentListArgumentList) arguments).getExpression();
-			matrices.addAll(getArgumentsAsObjects(((AArgumentListArgumentList) arguments)
+			obj.addAll(getArgumentsAsObjects(((AArgumentListArgumentList) arguments)
 					.getArgumentList()));
-			matrices.add(MathUtil.getMatrix(getObject(expr)));
-			return matrices;
+			obj.add(getObject(expr));
+			return obj;
 		}
 		MatrixException e = new MatrixException("Unknown arguments: "
 				+ arguments.getClass().getSimpleName());
@@ -845,53 +867,33 @@ public class Translation extends DepthFirstAdapter {
 	@Override
 	public void outAStatement(AStatement node) {
 		try {
-			PExpression expr = node.getExpression();
-			String id = getLiteral(expr);
-
+			// handle already known objects
+			String id = getLiteral(node.getExpression());
 			if (id != null) {
+				Variable v = module.getVariables().get(id);
+				if (v != null) {
+					result = new Result(id, v.getMatrix());
+					return;
+				}
 				DataSet ds = module.getDataSets().get(id);
 				if (ds != null) {
-					result = new Result(id + " = \n" + ds);
+					result = new Result(id, ds);
 					return;
 				}
-
-				Variable v = module.getVariables().get(id);
-				Matrix m = null;
-				if (v != null) {
-					m = v.getMatrix();
-					result = new Result(id + " = \n" + m);
-					return;
-				}
-
-				Algorithm a = getAlgorithm(id);
-				if (a != null) {
-					String label = "ans";
-					v = module.getVariables().get(label);
-					if (v == null) {
-						v = VariableFactory.labeledVariable(label);
-						module.getVariables().put(label, v);
-					}
-					m = MathUtil.getMatrix(executeAlgorithm(a, null));
-					v.addMatrix(m);
-					result = new Result(v.getLabel() + " = \n" + m);
-					return;
-				}
-
-				MatrixException e = new MatrixException("Unknown object or command: " + id);
-				result = new Result(e);
-				return;
 			}
 
-			String label = "ans";
-			Variable v = module.getVariables().get(label);
+			// handle unknown objects or algorithms
+			Object o = getObject(node.getExpression());
+
+			Variable v = module.getVariables().get(ANS);
 			if (v == null) {
-				v = VariableFactory.labeledVariable(label);
-				module.getVariables().put(label, v);
+				v = VariableFactory.labeledVariable(ANS);
+				module.getVariables().put(ANS, v);
 			}
-			Matrix m = MathUtil.getMatrix(getObject(node.getExpression()));
-			v.addMatrix(m);
-			result = new Result(v.getLabel() + " = \n" + m);
-			System.out.println(v.getLabel() + " = \n" + m);
+			v.addMatrix(MathUtil.getMatrix(o));
+
+			result = new Result(ANS, o);
+			System.out.println(result);
 		} catch (Exception e) {
 			result = new Result(e);
 			e.printStackTrace();

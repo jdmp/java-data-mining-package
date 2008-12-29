@@ -23,7 +23,8 @@
 
 package org.jdmp.gui.module;
 
-import org.jdmp.core.module.HasModuleList;
+import org.jdmp.core.CoreObject;
+import org.jdmp.core.module.HasModules;
 import org.jdmp.core.module.Module;
 import org.jdmp.gui.util.AbstractListPanel;
 import org.ujmp.core.interfaces.GUIObject;
@@ -31,9 +32,13 @@ import org.ujmp.core.interfaces.GUIObject;
 public class ModuleListPanel extends AbstractListPanel {
 	private static final long serialVersionUID = -4213201884857411875L;
 
-	public ModuleListPanel(HasModuleList iModules) {
+	public ModuleListPanel(HasModules iModules) {
 		super();
-		this.object = (GUIObject) iModules;
+		if (iModules instanceof CoreObject) {
+			this.object = ((CoreObject) iModules).getGUIObject();
+		} else {
+			this.object = (GUIObject) iModules;
+		}
 
 		dataModel = new ModuleListTableModel(iModules);
 		dataModel.addTableModelListener(this);
@@ -49,6 +54,7 @@ public class ModuleListPanel extends AbstractListPanel {
 		updateTitle();
 	}
 
+	@Override
 	public void updateTitle() {
 		getBorder().setTitle("Modules (" + jTable.getRowCount() + ")");
 		repaint(1000);

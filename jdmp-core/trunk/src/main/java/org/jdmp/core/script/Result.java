@@ -27,19 +27,33 @@ import org.ujmp.core.exceptions.MatrixException;
 
 public class Result {
 
-	private String text = "";
+	private Object object = null;
+
+	private String text = null;
+
+	private String label = null;
 
 	private Throwable exception = null;
 
 	public Result(String text) {
-		this(text, null);
+		this(null, null, text, null);
 	}
 
 	public Result(Throwable e) {
-		this(null, e);
+		this(null, null, null, e);
 	}
 
 	public Result(String s, Throwable e) {
+		this(null, null, s, e);
+	}
+
+	public Result(String s, Object o) {
+		this(s, o, null, null);
+	}
+
+	public Result(String label, Object o, String s, Throwable e) {
+		this.label = label;
+		this.object = o;
 		this.text = s;
 		this.exception = e;
 	}
@@ -54,15 +68,23 @@ public class Result {
 
 	@Override
 	public String toString() {
-		if (exception == null) {
-			return text;
-		} else {
-			if (text == null) {
-				return getExceptionText();
-			} else {
-				return text + ": " + getExceptionText();
-			}
+		StringBuffer s = new StringBuffer();
+		if (label != null) {
+			s.append(label + " =\n");
 		}
+		if (object != null) {
+			s.append(object.toString());
+		}
+		if (text != null) {
+			s.append(text);
+		}
+		if (text != null && exception != null) {
+			s.append(": ");
+		}
+		if (exception != null) {
+			s.append(getExceptionText());
+		}
+		return s.toString();
 	}
 
 	public String getExceptionText() {
@@ -79,5 +101,21 @@ public class Result {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public Object getObject() {
+		return object;
+	}
+
+	public void setObject(Object object) {
+		this.object = object;
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
 	}
 }

@@ -1,5 +1,6 @@
 package org.jdmp.gui.dataset;
 
+import org.jdmp.core.CoreObject;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.HasDataSets;
 import org.jdmp.gui.util.AbstractListPanel;
@@ -10,7 +11,11 @@ public class DataSetListPanel extends AbstractListPanel {
 
 	public DataSetListPanel(HasDataSets iDataSets) {
 		super();
-		this.object = (GUIObject) iDataSets;
+		if (iDataSets instanceof CoreObject) {
+			this.object = ((CoreObject) iDataSets).getGUIObject();
+		} else {
+			this.object = (GUIObject) iDataSets;
+		}
 
 		dataModel = new DataSetListTableModel(iDataSets);
 		dataModel.addTableModelListener(this);
@@ -26,6 +31,7 @@ public class DataSetListPanel extends AbstractListPanel {
 		updateTitle();
 	}
 
+	@Override
 	public void updateTitle() {
 		getBorder().setTitle("DataSets (" + jTable.getRowCount() + ")");
 		repaint(1000);
