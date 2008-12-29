@@ -32,6 +32,11 @@ public abstract class SampleFactory {
 		return s;
 	}
 
+	public static final Sample basicSample(Matrix input) {
+		Sample s = new DefaultSample(input);
+		return s;
+	}
+
 	public static final ClassificationSample classificationSample(Matrix input, Matrix target) {
 		ClassificationSample s = new ClassificationSample(input, target);
 		return s;

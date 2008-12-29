@@ -25,6 +25,7 @@ package org.jdmp.gui.interpreter;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -49,15 +50,31 @@ public class CommandWindow extends JPanel implements KeyListener {
 	private Module module = null;
 
 	private int endPos = 0;
-	private final JTextPane textField = new JTextPane();
+	private JTextPane textField = null;
 
-	private final Document doc = textField.getDocument();
+	private Document doc = null;
 
 	public CommandWindow(Module m) {
 		this.module = m;
 
-		textField.setFont(new Font("Monospaced", Font.PLAIN, 13));
+		textField = new JTextPane() {
+			@Override
+			public boolean getScrollableTracksViewportWidth() {
+				return false;
+			}
 
+			@Override
+			public void setSize(Dimension d) {
+				if (d.width < getParent().getSize().width) {
+					d.width = getParent().getSize().width;
+				}
+				super.setSize(d);
+			}
+		};
+
+		doc = textField.getDocument();
+
+		textField.setFont(new Font("Monospaced", Font.PLAIN, 13));
 		textField.addKeyListener(this);
 
 		appendText(">> ");
@@ -65,8 +82,8 @@ public class CommandWindow extends JPanel implements KeyListener {
 
 		setBorder(BorderFactory.createTitledBorder("Command Window"));
 		setLayout(new BorderLayout());
-		add(new JScrollPane(textField), BorderLayout.CENTER);
-
+		JScrollPane scrollPane = new JScrollPane(textField);
+		add(scrollPane, BorderLayout.CENTER);
 	}
 
 	@Override

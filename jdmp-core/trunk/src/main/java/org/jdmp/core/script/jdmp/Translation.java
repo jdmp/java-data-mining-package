@@ -115,6 +115,7 @@ import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.enums.ValueType;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.util.MathUtil;
+import org.ujmp.core.util.StringUtil;
 
 public class Translation extends DepthFirstAdapter {
 
@@ -459,17 +460,32 @@ public class Translation extends DepthFirstAdapter {
 		} else if (factor instanceof AIdentifierLevel0) {
 			String name = ((AIdentifierLevel0) factor).getName().toString().trim();
 
-			DataSet ds = module.getDataSets().get(name);
-			if (ds != null) {
-				return ds;
-			}
-
 			Variable v = module.getVariables().get(name);
 			if (v != null) {
 				return v.getMatrix();
 			}
 
-			Algorithm a = getAlgorithm(name);
+			DataSet ds = module.getDataSets().get(name);
+			if (ds != null) {
+				return ds;
+			}
+
+			Module m = module.getModules().get(name);
+			if (m != null) {
+				return m;
+			}
+
+			Sample s = module.getSamples().get(name);
+			if (s != null) {
+				return s;
+			}
+
+			Algorithm a = module.getAlgorithms().get(name);
+			if (a != null) {
+				return a;
+			}
+
+			a = getAlgorithm(name);
 			if (a != null) {
 				return executeAlgorithm(a, null);
 			}
@@ -665,6 +681,14 @@ public class Translation extends DepthFirstAdapter {
 			return MathUtil.getMatrix(m);
 		} else if (c == Integer.TYPE) {
 			return MathUtil.getInt(m);
+		} else if (c == Double.TYPE) {
+			return MathUtil.getDouble(m);
+		} else if (c == Long.TYPE) {
+			return MathUtil.getLong(m);
+		} else if (c == Boolean.TYPE) {
+			return MathUtil.getBoolean(m);
+		} else if (c == String.class) {
+			return StringUtil.convert(m);
 		}
 		MatrixException e = new MatrixException("cannot convert to desired object type "
 				+ c.getSimpleName());
@@ -678,6 +702,18 @@ public class Translation extends DepthFirstAdapter {
 			return o;
 		}
 		o = module.getDataSets().get(name);
+		if (o != null) {
+			return o;
+		}
+		o = module.getAlgorithms().get(name);
+		if (o != null) {
+			return o;
+		}
+		o = module.getSamples().get(name);
+		if (o != null) {
+			return o;
+		}
+		o = module.getModules().get(name);
 		if (o != null) {
 			return o;
 		}
@@ -878,6 +914,21 @@ public class Translation extends DepthFirstAdapter {
 				DataSet ds = module.getDataSets().get(id);
 				if (ds != null) {
 					result = new Result(id, ds);
+					return;
+				}
+				Algorithm a = module.getAlgorithms().get(id);
+				if (a != null) {
+					result = new Result(id, a);
+					return;
+				}
+				Sample s = module.getSamples().get(id);
+				if (s != null) {
+					result = new Result(id, s);
+					return;
+				}
+				Module m = module.getModules().get(id);
+				if (m != null) {
+					result = new Result(id, m);
 					return;
 				}
 			}
