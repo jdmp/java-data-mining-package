@@ -28,16 +28,14 @@ import java.util.Map;
 
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.variable.Variable;
-import org.ujmp.core.Matrix;
-import org.ujmp.core.exceptions.MatrixException;
-import org.ujmp.core.util.MathUtil;
+import org.ujmp.core.util.StringUtil;
 
-public class Exit extends AbstractAlgorithm {
-	private static final long serialVersionUID = 4882872380135378593L;
+public class Exec extends AbstractAlgorithm {
+	private static final long serialVersionUID = -47358904261935093L;
 
-	public Exit(Variable... variables) {
+	public Exec(Variable... variables) {
 		super();
-		setDescription("terminates JDMP");
+		setDescription("executes a System command");
 		addVariableKey(SOURCE);
 		addVariableKey(TARGET);
 		setEdgeLabel(SOURCE, "Source");
@@ -48,11 +46,14 @@ public class Exit extends AbstractAlgorithm {
 	}
 
 	@Override
-	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
-		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
-		Matrix in = input.get(SOURCE);
-		java.lang.System.exit(MathUtil.getInt(in));
+	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws Exception {
+		Map<Object, Object> result = new HashMap<Object, Object>();
+		String command = StringUtil.convert(input.get(SOURCE));
+		Process p = Runtime.getRuntime().exec(command);
+
+		int ret = p.waitFor();
+
+		result.put(TARGET, ret);
 		return result;
 	}
-
 }

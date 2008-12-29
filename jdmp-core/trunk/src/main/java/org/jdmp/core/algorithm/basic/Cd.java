@@ -23,21 +23,21 @@
 
 package org.jdmp.core.algorithm.basic;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.variable.Variable;
-import org.ujmp.core.Matrix;
 import org.ujmp.core.exceptions.MatrixException;
-import org.ujmp.core.util.MathUtil;
+import org.ujmp.core.util.StringUtil;
 
-public class Exit extends AbstractAlgorithm {
-	private static final long serialVersionUID = 4882872380135378593L;
+public class Cd extends AbstractAlgorithm {
+	private static final long serialVersionUID = 9205990622002828042L;
 
-	public Exit(Variable... variables) {
+	public Cd(Variable... variables) {
 		super();
-		setDescription("terminates JDMP");
+		setDescription("changes the directory");
 		addVariableKey(SOURCE);
 		addVariableKey(TARGET);
 		setEdgeLabel(SOURCE, "Source");
@@ -48,10 +48,28 @@ public class Exit extends AbstractAlgorithm {
 	}
 
 	@Override
-	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
-		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
-		Matrix in = input.get(SOURCE);
-		java.lang.System.exit(MathUtil.getInt(in));
+	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws MatrixException {
+		Map<Object, Object> result = new HashMap<Object, Object>();
+		String in = StringUtil.convert(input.get(SOURCE));
+
+		String ret = null;
+
+		if (in == null || "".equals(in)) {
+			ret = java.lang.System.getProperty("user.home");
+			java.lang.System.setProperty("user.dir", ret);
+		} else if (in.startsWith(".")) {
+			String dir = java.lang.System.getProperty("user.dir") + File.separator + in;
+			File file = new File(dir);
+			ret = file.getAbsolutePath();
+			java.lang.System.setProperty("user.dir", ret);
+		} else {
+			File file = new File(in);
+			ret = file.getAbsolutePath();
+			java.lang.System.setProperty("user.dir", ret);
+		}
+
+		result.put(TARGET, ret);
+
 		return result;
 	}
 

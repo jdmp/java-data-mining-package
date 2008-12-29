@@ -28,31 +28,24 @@ import java.util.Map;
 
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.variable.Variable;
-import org.ujmp.core.Matrix;
 import org.ujmp.core.exceptions.MatrixException;
-import org.ujmp.core.util.MathUtil;
 
-public class Exit extends AbstractAlgorithm {
-	private static final long serialVersionUID = 4882872380135378593L;
+public class Pwd extends AbstractAlgorithm {
+	private static final long serialVersionUID = 4169977810242322322L;
 
-	public Exit(Variable... variables) {
+	public Pwd(Variable... variables) {
 		super();
-		setDescription("terminates JDMP");
-		addVariableKey(SOURCE);
+		setDescription("prints the current working directory");
 		addVariableKey(TARGET);
-		setEdgeLabel(SOURCE, "Source");
 		setEdgeLabel(TARGET, "Target");
-		setEdgeDirection(SOURCE, EdgeDirection.Incoming);
 		setEdgeDirection(TARGET, EdgeDirection.Outgoing);
 		setVariables(variables);
 	}
 
 	@Override
-	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
-		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
-		Matrix in = input.get(SOURCE);
-		java.lang.System.exit(MathUtil.getInt(in));
+	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws MatrixException {
+		Map<Object, Object> result = new HashMap<Object, Object>();
+		result.put(TARGET, java.lang.System.getProperty("user.dir"));
 		return result;
 	}
-
 }
