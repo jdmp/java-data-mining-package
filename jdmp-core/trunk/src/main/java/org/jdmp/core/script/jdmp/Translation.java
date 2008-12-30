@@ -428,7 +428,7 @@ public class Translation extends DepthFirstAdapter {
 		} else if (term instanceof ARdivLevel3) {
 			Matrix left = MathUtil.getMatrix(getObject(((ARdivLevel3) term).getLeft()));
 			Matrix right = MathUtil.getMatrix(getObject(((ARdivLevel3) term).getRight()));
-			// TODO
+			return left.divide(Ret.NEW, ignoreNaN, right);
 		} else if (term instanceof ADotRdivLevel3) {
 			Matrix left = MathUtil.getMatrix(getObject(((ADotRdivLevel3) term).getLeft()));
 			Matrix right = MathUtil.getMatrix(getObject(((ADotRdivLevel3) term).getRight()));
@@ -559,7 +559,7 @@ public class Translation extends DepthFirstAdapter {
 		} else if (name instanceof AQualifiedName) {
 			AQualifiedName qn = (AQualifiedName) name;
 			String id = qn.getName().toString().trim();
-			CoreObject object = getObject(id);
+			Object object = getObject(id);
 			if (object == null) {
 
 				// try other classes
@@ -584,8 +584,8 @@ public class Translation extends DepthFirstAdapter {
 				result = new Result(e);
 				throw e;
 			}
-			return MathUtil.getMatrix(executeMethod(object.getClass(), object, qn.getIdentifier()
-					.toString().trim(), arguments));
+			return executeMethod(object.getClass(), object, qn.getIdentifier().toString().trim(),
+					arguments);
 		}
 
 		MatrixException e = new MatrixException("Unknown function: "
@@ -679,6 +679,8 @@ public class Translation extends DepthFirstAdapter {
 	private Object convertObject(Object m, Class<?> c) {
 		if (c == Matrix.class) {
 			return MathUtil.getMatrix(m);
+		} else if (c == Object.class) {
+			return m;
 		} else if (c == Integer.TYPE) {
 			return MathUtil.getInt(m);
 		} else if (c == Double.TYPE) {
@@ -696,10 +698,10 @@ public class Translation extends DepthFirstAdapter {
 		throw e;
 	}
 
-	private CoreObject getObject(String name) {
-		CoreObject o = module.getVariables().get(name);
+	private Object getObject(String name) {
+		Object o = module.getVariables().get(name);
 		if (o != null) {
-			return o;
+			return ((Variable) o).getMatrix();
 		}
 		o = module.getDataSets().get(name);
 		if (o != null) {

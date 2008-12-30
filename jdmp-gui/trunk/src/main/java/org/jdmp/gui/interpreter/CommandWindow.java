@@ -78,7 +78,7 @@ public class CommandWindow extends JPanel implements KeyListener {
 		textField.addKeyListener(this);
 
 		appendText(">> ");
-		endPos = textField.getText().length();
+		endPos = doc.getLength();
 
 		setBorder(BorderFactory.createTitledBorder("Command Window"));
 		setLayout(new BorderLayout());
@@ -122,7 +122,7 @@ public class CommandWindow extends JPanel implements KeyListener {
 				}
 
 				appendText("\n\n>> ");
-				endPos = textField.getText().length();
+				endPos = doc.getLength();
 				e.consume();
 
 				// TODO: this is a hack and should be solved via
@@ -143,7 +143,6 @@ public class CommandWindow extends JPanel implements KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		filterKeys(e);
 	}
 
 	public void appendError(String s) {
@@ -170,15 +169,15 @@ public class CommandWindow extends JPanel implements KeyListener {
 
 	public void filterKeys(KeyEvent e) {
 		try {
-			if (textField.getCaretPosition() < endPos) {
-				textField.setCaretPosition(doc.getLength());
-			}
+
+			textField.setCaretPosition(doc.getLength());
 
 			if (e.getKeyCode() == KeyEvent.VK_UP) {
 				e.consume();
 				return;
 			}
 
+			int cp = textField.getCaretPosition();
 			if (textField.getCaretPosition() <= endPos) {
 				if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
 					e.consume();

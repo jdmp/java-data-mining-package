@@ -31,10 +31,10 @@ import org.jdmp.core.variable.Variable;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.exceptions.MatrixException;
 
-public class Environment extends AbstractAlgorithm {
+public class Env extends AbstractAlgorithm {
 	private static final long serialVersionUID = -8242367467772492055L;
 
-	public Environment(Variable... variables) {
+	public Env(Variable... variables) {
 		super();
 		setDescription("shows the system environment");
 		addVariableKey(TARGET);
