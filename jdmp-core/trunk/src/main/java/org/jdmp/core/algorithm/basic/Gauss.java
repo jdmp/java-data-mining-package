@@ -35,13 +35,15 @@ import org.ujmp.core.exceptions.MatrixException;
 public class Gauss extends AbstractAlgorithm {
 	private static final long serialVersionUID = 3127916742763698423L;
 
+	public static final String DESCRIPTION = "target = gauss(source)";
+
 	private final double sigma = 1;
 
 	private final double mu = 0.0;
 
 	public Gauss(Variable... variables) {
 		super();
-		setDescription("target = gauss(source)");
+		setDescription(DESCRIPTION);
 		addVariableKey(SOURCE);
 		addVariableKey(TARGET);
 		setEdgeLabel(SOURCE, "Source");

@@ -34,9 +34,11 @@ import org.ujmp.core.exceptions.MatrixException;
 public class Memory extends AbstractAlgorithm {
 	private static final long serialVersionUID = 8701182618460480801L;
 
+	public static final String DESCRIPTION = "shows the available memory";
+
 	public Memory(Variable... variables) {
 		super();
-		setDescription("shows the available memory");
+		setDescription(DESCRIPTION);
 		addVariableKey(TARGET);
 		setEdgeLabel(TARGET, "Target");
 		setEdgeDirection(TARGET, EdgeDirection.Outgoing);

@@ -34,11 +34,14 @@ import org.ujmp.core.exceptions.MatrixException;
 public class Plus extends AlgorithmTwoSources {
 	private static final long serialVersionUID = -5630277400123182400L;
 
+	public static final String DESCRIPTION = "target = source1 + source2";
+
 	public Plus(Variable... variables) {
 		super(variables);
-		setDescription("target = source1 + source2");
+		setDescription(DESCRIPTION);
 	}
 
+	@Override
 	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
 		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
 

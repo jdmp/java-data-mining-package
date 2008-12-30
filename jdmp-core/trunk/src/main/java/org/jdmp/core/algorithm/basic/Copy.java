@@ -35,9 +35,11 @@ import org.ujmp.core.exceptions.MatrixException;
 public class Copy extends AbstractAlgorithm {
 	private static final long serialVersionUID = 4425454677556747249L;
 
+	public static final String DESCRIPTION = "target = source";
+
 	public Copy(Variable... variables) {
 		super();
-		setDescription("target = source");
+		setDescription(DESCRIPTION);
 		addVariableKey(SOURCE);
 		addVariableKey(TARGET);
 		setEdgeLabel(SOURCE, "Source");

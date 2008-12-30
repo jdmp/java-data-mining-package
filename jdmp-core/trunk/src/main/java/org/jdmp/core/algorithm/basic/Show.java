@@ -39,9 +39,11 @@ import org.ujmp.core.interfaces.GUIObject;
 public class Show extends AbstractAlgorithm {
 	private static final long serialVersionUID = -5552405417194118742L;
 
+	public static final String DESCRIPTION = "shows an Object in a JFrame";
+
 	public Show(Variable... variables) {
 		super();
-		setDescription("shows an Object in a JFrame");
+		setDescription(DESCRIPTION);
 		addVariableKey(SOURCE);
 		addVariableKey(TARGET);
 		setEdgeLabel(SOURCE, "Source");

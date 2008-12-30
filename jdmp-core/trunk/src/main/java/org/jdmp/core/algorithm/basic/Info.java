@@ -23,31 +23,44 @@
 
 package org.jdmp.core.algorithm.basic;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.jdmp.core.algorithm.AbstractAlgorithm;
+import org.jdmp.core.algorithm.AlgorithmMapping;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.listmatrix.DefaultListMatrix;
+import org.ujmp.core.listmatrix.ListMatrix;
 
-public class Time extends AbstractAlgorithm {
-	private static final long serialVersionUID = 4621796830600053247L;
+public class Info extends AbstractAlgorithm {
+	private static final long serialVersionUID = 1803332964924212288L;
 
-	public Time(Variable... variables) {
+	public static final String DESCRIPTION = "returns an empty matrix";
+
+	public Info(Variable... variables) {
 		super();
-		setDescription("shows the system time");
-		addVariableKey(TARGET);
-		setEdgeLabel(TARGET, "Target");
-		setEdgeDirection(TARGET, EdgeDirection.Outgoing);
-		setVariables(variables);
+		setDescription(DESCRIPTION);
 	}
 
 	@Override
 	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws MatrixException {
 		Map<Object, Object> result = new HashMap<Object, Object>();
-		result.put(TARGET, MatrixFactory.systemTime());
+		ListMatrix<String> algorithms = AlgorithmMapping.list();
+		ListMatrix<String> descriptions = new DefaultListMatrix<String>();
+		for (String s : algorithms) {
+			try {
+				String cname = AlgorithmMapping.get(s);
+				Class<?> c = Class.forName(cname);
+				Field f = c.getField("DESCRIPTION");
+				descriptions.add("   " + f.get(null));
+			} catch (Exception e) {
+				descriptions.add("   [this method is not available]");
+			}
+		}
+		result.put(TARGET, MatrixFactory.horCat(algorithms, descriptions));
 		return result;
 	}
-
 }

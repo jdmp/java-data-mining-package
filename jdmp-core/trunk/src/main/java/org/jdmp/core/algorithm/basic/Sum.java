@@ -36,6 +36,8 @@ import org.ujmp.core.util.MathUtil;
 public class Sum extends AbstractAlgorithm {
 	private static final long serialVersionUID = -6902623124007218820L;
 
+	public static final String DESCRIPTION = "target = sum(source)";
+
 	private int defaultDimension = Matrix.ROW;
 
 	private final boolean defaultIgnoreNaN = true;
@@ -47,7 +49,7 @@ public class Sum extends AbstractAlgorithm {
 
 	public Sum(Variable... variables) {
 		super();
-		setDescription("target = sum(source)");
+		setDescription(DESCRIPTION);
 		addVariableKey(SOURCE);
 		addVariableKey(DIMENSION);
 		addVariableKey(IGNORENAN);

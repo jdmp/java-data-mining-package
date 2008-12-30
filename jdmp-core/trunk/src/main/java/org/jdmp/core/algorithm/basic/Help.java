@@ -33,9 +33,11 @@ import org.ujmp.core.exceptions.MatrixException;
 public class Help extends AbstractAlgorithm {
 	private static final long serialVersionUID = 8419287687514349926L;
 
+	public static final String DESCRIPTION = "displays a help message";
+
 	public Help(Variable... variables) {
 		super();
-		setDescription("displays a help message");
+		setDescription(DESCRIPTION);
 	}
 
 	@Override

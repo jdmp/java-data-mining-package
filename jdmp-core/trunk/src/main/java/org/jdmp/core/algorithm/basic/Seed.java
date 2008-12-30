@@ -35,9 +35,11 @@ import org.ujmp.core.util.MathUtil;
 public class Seed extends AbstractAlgorithm {
 	private static final long serialVersionUID = -3548797710763315844L;
 
+	public static final String DESCRIPTION = "sets or gets the random seed";
+
 	public Seed(Variable... variables) {
 		super();
-		setDescription("sets or gets the random seed");
+		setDescription(DESCRIPTION);
 		addVariableKey(SOURCE);
 		addVariableKey(TARGET);
 		setEdgeLabel(SOURCE, "Source");

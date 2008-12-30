@@ -34,9 +34,11 @@ import org.ujmp.core.exceptions.MatrixException;
 public class LogisticFunction extends AbstractAlgorithm {
 	private static final long serialVersionUID = -6185025728766094423L;
 
+	public static final String DESCRIPTION = "target = 1/(exp(-x)+1)";
+
 	public LogisticFunction(Variable... variables) {
 		super();
-		setDescription("target = 1/(exp(-x)+1)");
+		setDescription(DESCRIPTION);
 		addVariableKey(SOURCE);
 		addVariableKey(TARGET);
 		setEdgeLabel(SOURCE, "Source");

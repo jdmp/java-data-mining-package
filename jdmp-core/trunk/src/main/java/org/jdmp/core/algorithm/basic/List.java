@@ -34,9 +34,11 @@ import org.ujmp.core.listmatrix.DefaultListMatrix;
 public class List extends AbstractAlgorithm {
 	private static final long serialVersionUID = 8658224266397965616L;
 
+	public static final String DESCRIPTION = "creates a ListMatrix";
+
 	public List(Variable... variables) {
 		super();
-		setDescription("creates a ListMatrix");
+		setDescription(DESCRIPTION);
 		addVariableKey(TARGET);
 		setEdgeLabel(TARGET, "Target");
 		setEdgeDirection(TARGET, EdgeDirection.Outgoing);

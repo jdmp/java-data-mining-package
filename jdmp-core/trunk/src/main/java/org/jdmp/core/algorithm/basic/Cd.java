@@ -35,9 +35,11 @@ import org.ujmp.core.util.StringUtil;
 public class Cd extends AbstractAlgorithm {
 	private static final long serialVersionUID = 9205990622002828042L;
 
+	public static final String DESCRIPTION = "changes the directory";
+
 	public Cd(Variable... variables) {
 		super();
-		setDescription("changes the directory");
+		setDescription(DESCRIPTION);
 		addVariableKey(SOURCE);
 		addVariableKey(TARGET);
 		setEdgeLabel(SOURCE, "Source");

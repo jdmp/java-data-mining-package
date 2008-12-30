@@ -34,9 +34,11 @@ import org.ujmp.core.exceptions.MatrixException;
 public class Iris extends AbstractAlgorithm {
 	private static final long serialVersionUID = 5005634034611593171L;
 
+	public static final String DESCRIPTION = "generates the Iris flower DataSet";
+
 	public Iris(Variable... variables) {
 		super();
-		setDescription("generates the Iris flower DataSet");
+		setDescription(DESCRIPTION);
 		addVariableKey(TARGET);
 		setEdgeLabel(TARGET, "Target");
 		setEdgeDirection(TARGET, EdgeDirection.Outgoing);

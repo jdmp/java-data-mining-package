@@ -33,9 +33,11 @@ import org.ujmp.core.Matrix;
 public class SerialExecution extends AbstractAlgorithm {
 	private static final long serialVersionUID = -3635082316760868682L;
 
+	public static final String DESCRIPTION = "calls other Algorithms in defined order";
+
 	public SerialExecution() {
 		super();
-		setDescription("calls other Algorithms in defined order");
+		setDescription(DESCRIPTION);
 	}
 
 	@Override

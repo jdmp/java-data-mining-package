@@ -34,9 +34,11 @@ import org.ujmp.core.exceptions.MatrixException;
 public class Transpose extends AbstractAlgorithm {
 	private static final long serialVersionUID = 7132114769238742740L;
 
+	public static final String DESCRIPTION = "target = source^T";
+
 	public Transpose(Variable... variables) {
 		super();
-		setDescription("target = source^T");
+		setDescription(DESCRIPTION);
 		addVariableKey(SOURCE);
 		addVariableKey(TARGET);
 		setEdgeLabel(SOURCE, "Source");

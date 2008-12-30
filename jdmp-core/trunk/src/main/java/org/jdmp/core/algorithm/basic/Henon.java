@@ -35,13 +35,15 @@ import org.ujmp.core.util.MathUtil;
 public class Henon extends AbstractAlgorithm {
 	private static final long serialVersionUID = -8708014294068489839L;
 
+	public static final String DESCRIPTION = "generates a HenonMap DataSet";
+
 	public static final String SAMPLECOUNT = "SampleCount";
 	public static final String INPUTLENGTH = "InputLength";
 	public static final String TARGETLENGTH = "TargetLength";
 
 	public Henon(Variable... variables) {
 		super();
-		setDescription("generates a HenonMap DataSet");
+		setDescription(DESCRIPTION);
 		addVariableKey(SAMPLECOUNT);
 		addVariableKey(INPUTLENGTH);
 		addVariableKey(TARGETLENGTH);

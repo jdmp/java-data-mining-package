@@ -33,15 +33,18 @@ import org.ujmp.core.Matrix;
 public class Repeat extends AbstractAlgorithm {
 	private static final long serialVersionUID = 1469854394519674382L;
 
+	public static final String DESCRIPTION = "calls another Algorithm several times";
+
 	private final int REPEATEDALGORITHM = 0;
 
 	private int repeatCount = 1;
 
 	public Repeat() {
 		super();
-		setDescription("calls another Algorithms several times");
+		setDescription(DESCRIPTION);
 	}
 
+	@Override
 	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws Exception {
 		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
 

@@ -35,13 +35,15 @@ import org.ujmp.core.util.MathUtil;
 public class Logisticmap extends AbstractAlgorithm {
 	private static final long serialVersionUID = 5130302022560101472L;
 
+	public static final String DESCRIPTION = "generates a LogisticMap DataSet";
+
 	public static final String SAMPLECOUNT = "SampleCount";
 	public static final String INPUTLENGTH = "InputLength";
 	public static final String TARGETLENGTH = "TargetLength";
 
 	public Logisticmap(Variable... variables) {
 		super();
-		setDescription("generates a LogisticMap DataSet");
+		setDescription(DESCRIPTION);
 		addVariableKey(SAMPLECOUNT);
 		addVariableKey(INPUTLENGTH);
 		addVariableKey(TARGETLENGTH);

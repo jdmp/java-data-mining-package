@@ -35,11 +35,14 @@ import org.ujmp.core.exceptions.MatrixException;
 public class Randn extends AlgorithmTwoSources {
 	private static final long serialVersionUID = -3218599515259241080L;
 
+	public static final String DESCRIPTION = "Fills a matrix with gaussian values";
+
 	public Randn(Variable... variables) {
 		super(variables);
-		setDescription("Fills a matrix with gaussian values");
+		setDescription(DESCRIPTION);
 	}
 
+	@Override
 	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
 		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
 

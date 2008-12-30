@@ -35,9 +35,11 @@ import org.ujmp.core.exceptions.MatrixException;
 public class Tanh extends AbstractAlgorithm {
 	private static final long serialVersionUID = 1972442317406585099L;
 
+	public static final String DESCRIPTION = "target = tanh(source)";
+
 	public Tanh(Variable... variables) {
 		super();
-		setDescription("target = tanh(source)");
+		setDescription(DESCRIPTION);
 		addVariableKey(SOURCE);
 		addVariableKey(TARGET);
 		setEdgeLabel(SOURCE, "Source");

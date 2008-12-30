@@ -35,11 +35,14 @@ import org.ujmp.core.exceptions.MatrixException;
 public class Ones extends AlgorithmTwoSources {
 	private static final long serialVersionUID = -7410191356948561970L;
 
+	public static final String DESCRIPTION = "Fills a matrix with ones";
+
 	public Ones(Variable... variables) {
 		super(variables);
-		setDescription("Fills a matrix with ones");
+		setDescription(DESCRIPTION);
 	}
 
+	@Override
 	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
 		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
 

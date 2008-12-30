@@ -36,13 +36,15 @@ import org.ujmp.core.util.MathUtil;
 public class Sample extends AbstractAlgorithm {
 	private static final long serialVersionUID = -8708014294068489839L;
 
+	public static final String DESCRIPTION = "creates a sample from data";
+
 	public static final String INPUT = "Input";
 	public static final String TARGET = "Target";
 	public static final String RESULT = "Result";
 
 	public Sample(Variable... variables) {
 		super();
-		setDescription("creates a sample from datat");
+		setDescription(DESCRIPTION);
 		addVariableKey(INPUT);
 		addVariableKey(TARGET);
 		addVariableKey(RESULT);

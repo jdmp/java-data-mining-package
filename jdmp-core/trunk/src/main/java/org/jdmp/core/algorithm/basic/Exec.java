@@ -33,9 +33,11 @@ import org.ujmp.core.util.StringUtil;
 public class Exec extends AbstractAlgorithm {
 	private static final long serialVersionUID = -47358904261935093L;
 
+	public static final String DESCRIPTION = "executes a System command";
+
 	public Exec(Variable... variables) {
 		super();
-		setDescription("executes a System command");
+		setDescription(DESCRIPTION);
 		addVariableKey(SOURCE);
 		addVariableKey(TARGET);
 		setEdgeLabel(SOURCE, "Source");

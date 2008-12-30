@@ -35,9 +35,11 @@ import org.ujmp.core.util.MathUtil;
 public class Exit extends AbstractAlgorithm {
 	private static final long serialVersionUID = 4882872380135378593L;
 
+	public static final String DESCRIPTION = "terminates JDMP";
+
 	public Exit(Variable... variables) {
 		super();
-		setDescription("terminates JDMP");
+		setDescription(DESCRIPTION);
 		addVariableKey(SOURCE);
 		addVariableKey(TARGET);
 		setEdgeLabel(SOURCE, "Source");

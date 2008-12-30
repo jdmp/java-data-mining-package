@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.jdmp.core.CoreObject;
 import org.jdmp.core.algorithm.Algorithm;
+import org.jdmp.core.algorithm.AlgorithmMapping;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.core.module.Module;
@@ -623,19 +623,13 @@ public class Translation extends DepthFirstAdapter {
 	}
 
 	private Algorithm getAlgorithm(String id) throws Exception {
-		id = id.substring(0, 1).toUpperCase() + id.substring(1, id.length()).toLowerCase();
-
 		Class<?> c = null;
 
-		String[] PACKAGES = new String[] { "org.jdmp.core.algorithm.basic" };
-
-		for (String p : PACKAGES) {
-			if (c == null) {
-				try {
-					c = Class.forName(p + "." + id);
-					break;
-				} catch (Exception e) {
-				}
+		String cname = AlgorithmMapping.get(id);
+		if (cname != null) {
+			try {
+				c = Class.forName(cname);
+			} catch (Exception e) {
 			}
 		}
 

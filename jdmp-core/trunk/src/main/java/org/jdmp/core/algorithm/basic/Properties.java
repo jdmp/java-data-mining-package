@@ -34,9 +34,11 @@ import org.ujmp.core.exceptions.MatrixException;
 public class Properties extends AbstractAlgorithm {
 	private static final long serialVersionUID = 1999085052166796787L;
 
+	public static final String DESCRIPTION = "shows the system properties";
+
 	public Properties(Variable... variables) {
 		super();
-		setDescription("shows the system properties");
+		setDescription(DESCRIPTION);
 		addVariableKey(TARGET);
 		setEdgeLabel(TARGET, "Target");
 		setEdgeDirection(TARGET, EdgeDirection.Outgoing);

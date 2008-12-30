@@ -34,9 +34,11 @@ import org.ujmp.core.exceptions.MatrixException;
 public class Threads extends AbstractAlgorithm {
 	private static final long serialVersionUID = 2859056337649862319L;
 
+	public static final String DESCRIPTION = "returns a matrix with the running threads";
+
 	public Threads(Variable... variables) {
 		super();
-		setDescription("returns a matrix with the running threads");
+		setDescription(DESCRIPTION);
 		addVariableKey(TARGET);
 		setEdgeLabel(TARGET, "Target");
 		setEdgeDirection(TARGET, EdgeDirection.Outgoing);

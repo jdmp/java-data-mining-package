@@ -36,6 +36,8 @@ import org.ujmp.core.util.MathUtil;
 public class Mean extends AbstractAlgorithm {
 	private static final long serialVersionUID = 5594989536534719762L;
 
+	public static final String DESCRIPTION = "target = mean(source)";
+
 	private int defaultDimension = Matrix.ROW;
 
 	private final boolean defaultIgnoreNaN = true;
@@ -47,7 +49,7 @@ public class Mean extends AbstractAlgorithm {
 
 	public Mean(Variable... variables) {
 		super();
-		setDescription("target = mean(source)");
+		setDescription(DESCRIPTION);
 		addVariableKey(SOURCE);
 		addVariableKey(DIMENSION);
 		addVariableKey(IGNORENAN);

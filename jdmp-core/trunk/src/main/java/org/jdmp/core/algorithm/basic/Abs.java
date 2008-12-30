@@ -35,9 +35,11 @@ import org.ujmp.core.exceptions.MatrixException;
 public class Abs extends AbstractAlgorithm {
 	private static final long serialVersionUID = 8963883977304138269L;
 
+	public static final String DESCRIPTION = "target = abs(source)";
+
 	public Abs(Variable... variables) {
 		super();
-		setDescription("target = abs(source)");
+		setDescription(DESCRIPTION);
 		addVariableKey(SOURCE);
 		addVariableKey(TARGET);
 		setEdgeLabel(SOURCE, "Source");

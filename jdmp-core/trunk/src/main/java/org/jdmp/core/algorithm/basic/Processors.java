@@ -34,9 +34,11 @@ import org.ujmp.core.exceptions.MatrixException;
 public class Processors extends AbstractAlgorithm {
 	private static final long serialVersionUID = -8040110473265347176L;
 
+	public static final String DESCRIPTION = "shows the number of processors";
+
 	public Processors(Variable... variables) {
 		super();
-		setDescription("shows the number of processors");
+		setDescription(DESCRIPTION);
 		addVariableKey(TARGET);
 		setEdgeLabel(TARGET, "Target");
 		setEdgeDirection(TARGET, EdgeDirection.Outgoing);

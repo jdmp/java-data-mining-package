@@ -35,9 +35,11 @@ import org.ujmp.core.exceptions.MatrixException;
 public class Systemtime extends AlgorithmNoSource {
 	private static final long serialVersionUID = 8746352489100162306L;
 
+	public static final String DESCRIPTION = "target = systemTime()";
+
 	public Systemtime(Variable... variables) {
 		super(variables);
-		setDescription("target = systemTime()");
+		setDescription(DESCRIPTION);
 	}
 
 	@Override

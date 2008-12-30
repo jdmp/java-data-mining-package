@@ -34,9 +34,11 @@ import org.ujmp.core.exceptions.MatrixException;
 public class Empty extends AbstractAlgorithm {
 	private static final long serialVersionUID = 1999085052166796787L;
 
+	public static final String DESCRIPTION = "returns an empty matrix";
+
 	public Empty(Variable... variables) {
 		super();
-		setDescription("returns an empty matrix");
+		setDescription(DESCRIPTION);
 		addVariableKey(TARGET);
 		setEdgeLabel(TARGET, "Target");
 		setEdgeDirection(TARGET, EdgeDirection.Outgoing);

@@ -34,9 +34,11 @@ import org.ujmp.core.exceptions.MatrixException;
 public class Env extends AbstractAlgorithm {
 	private static final long serialVersionUID = -8242367467772492055L;
 
+	public static final String DESCRIPTION = "shows the system environment";
+
 	public Env(Variable... variables) {
 		super();
-		setDescription("shows the system environment");
+		setDescription(DESCRIPTION);
 		addVariableKey(TARGET);
 		setEdgeLabel(TARGET, "Target");
 		setEdgeDirection(TARGET, EdgeDirection.Outgoing);

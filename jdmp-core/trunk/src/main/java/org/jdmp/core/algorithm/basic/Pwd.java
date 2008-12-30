@@ -33,9 +33,11 @@ import org.ujmp.core.exceptions.MatrixException;
 public class Pwd extends AbstractAlgorithm {
 	private static final long serialVersionUID = 4169977810242322322L;
 
+	public static final String DESCRIPTION = "prints the current working directory";
+
 	public Pwd(Variable... variables) {
 		super();
-		setDescription("prints the current working directory");
+		setDescription(DESCRIPTION);
 		addVariableKey(TARGET);
 		setEdgeLabel(TARGET, "Target");
 		setEdgeDirection(TARGET, EdgeDirection.Outgoing);

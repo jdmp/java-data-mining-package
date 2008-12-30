@@ -33,9 +33,11 @@ import org.ujmp.core.mapmatrix.DefaultMapMatrix;
 public class Map extends AbstractAlgorithm {
 	private static final long serialVersionUID = 6510838679487707613L;
 
+	public static final String DESCRIPTION = "creates a MapMatrix";
+
 	public Map(Variable... variables) {
 		super();
-		setDescription("creates a MapMatrix");
+		setDescription(DESCRIPTION);
 		addVariableKey(TARGET);
 		setEdgeLabel(TARGET, "Target");
 		setEdgeDirection(TARGET, EdgeDirection.Outgoing);

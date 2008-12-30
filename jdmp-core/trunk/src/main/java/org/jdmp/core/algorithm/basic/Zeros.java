@@ -35,11 +35,13 @@ import org.ujmp.core.exceptions.MatrixException;
 public class Zeros extends AlgorithmTwoSources {
 	private static final long serialVersionUID = -6698288195664853309L;
 
+	public static final String DESCRIPTION = "returns a matrix filled with zeros";
+
 	public Zeros(Variable... variables) {
 		super(variables);
-		setDescription("Fills a matrix with zeros");
 	}
 
+	@Override
 	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
 		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
 
