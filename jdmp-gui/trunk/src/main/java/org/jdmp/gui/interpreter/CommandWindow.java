@@ -92,10 +92,6 @@ public class CommandWindow extends JPanel implements KeyListener {
 
 		try {
 
-			int caretPos = textField.getCaretPosition();
-			int endpos = endPos;
-			int docLength = textField.getDocument().getLength();
-
 			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 
 				int line = doc.getDefaultRootElement().getElementCount() - 1;
