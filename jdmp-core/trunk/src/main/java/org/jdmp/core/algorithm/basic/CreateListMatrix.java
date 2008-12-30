@@ -24,18 +24,19 @@
 package org.jdmp.core.algorithm.basic;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.exceptions.MatrixException;
-import org.ujmp.core.mapmatrix.DefaultMapMatrix;
+import org.ujmp.core.listmatrix.DefaultListMatrix;
 
-public class Map extends AbstractAlgorithm {
-	private static final long serialVersionUID = 6510838679487707613L;
+public class CreateListMatrix extends AbstractAlgorithm {
+	private static final long serialVersionUID = 8658224266397965616L;
 
-	public static final String DESCRIPTION = "creates a MapMatrix";
+	public static final String DESCRIPTION = "creates a ListMatrix";
 
-	public Map(Variable... variables) {
+	public CreateListMatrix(Variable... variables) {
 		super();
 		setDescription(DESCRIPTION);
 		addVariableKey(TARGET);
@@ -45,10 +46,9 @@ public class Map extends AbstractAlgorithm {
 	}
 
 	@Override
-	public java.util.Map<Object, Object> calculateObjects(java.util.Map<Object, Object> input)
-			throws MatrixException {
-		java.util.Map<Object, Object> result = new HashMap<Object, Object>();
-		result.put(TARGET, new DefaultMapMatrix<Object, Object>());
+	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws MatrixException {
+		Map<Object, Object> result = new HashMap<Object, Object>();
+		result.put(TARGET, new DefaultListMatrix<Object>());
 		return result;
 	}
 

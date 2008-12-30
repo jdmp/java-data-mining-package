@@ -27,29 +27,49 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jdmp.core.algorithm.AbstractAlgorithm;
+import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.core.variable.Variable;
-import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.util.MathUtil;
 
-public class Empty extends AbstractAlgorithm {
-	private static final long serialVersionUID = 1999085052166796787L;
+public class CreateHenon extends AbstractAlgorithm {
+	private static final long serialVersionUID = -8708014294068489839L;
 
-	public static final String DESCRIPTION = "returns an empty matrix";
+	public static final String DESCRIPTION = "generates a HenonMap DataSet";
 
-	public Empty(Variable... variables) {
+	public static final String SAMPLECOUNT = "SampleCount";
+	public static final String INPUTLENGTH = "InputLength";
+	public static final String TARGETLENGTH = "TargetLength";
+
+	public CreateHenon(Variable... variables) {
 		super();
 		setDescription(DESCRIPTION);
+		addVariableKey(SAMPLECOUNT);
+		addVariableKey(INPUTLENGTH);
+		addVariableKey(TARGETLENGTH);
 		addVariableKey(TARGET);
+		setEdgeLabel(SAMPLECOUNT, "SampleCount");
+		setEdgeLabel(INPUTLENGTH, "InputLength");
+		setEdgeLabel(TARGETLENGTH, "TargetLength");
 		setEdgeLabel(TARGET, "Target");
+		setEdgeDirection(SAMPLECOUNT, EdgeDirection.Incoming);
+		setEdgeDirection(INPUTLENGTH, EdgeDirection.Incoming);
+		setEdgeDirection(TARGETLENGTH, EdgeDirection.Incoming);
 		setEdgeDirection(TARGET, EdgeDirection.Outgoing);
-		setVariables(variables);
 	}
 
 	@Override
 	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws MatrixException {
 		Map<Object, Object> result = new HashMap<Object, Object>();
-		result.put(TARGET, MatrixFactory.emptyMatrix());
+
+		int sampleCount = MathUtil.getInt(input.get(SAMPLECOUNT));
+		sampleCount = sampleCount == 0 ? 100 : sampleCount;
+		int inputLength = MathUtil.getInt(input.get(INPUTLENGTH));
+		inputLength = inputLength == 0 ? 10 : inputLength;
+		int targetLength = MathUtil.getInt(input.get(TARGETLENGTH));
+		targetLength = targetLength == 0 ? 5 : targetLength;
+
+		result.put(TARGET, DataSetFactory.HenonMap(sampleCount, inputLength, targetLength));
 		return result;
 	}
-
 }

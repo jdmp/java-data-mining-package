@@ -24,19 +24,19 @@
 package org.jdmp.core.algorithm.basic;
 
 import java.util.HashMap;
-import java.util.Map;
 
 import org.jdmp.core.algorithm.AbstractAlgorithm;
-import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.core.variable.Variable;
+import org.ujmp.core.collections.serializedmap.SerializedObjectMap;
 import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.mapmatrix.DefaultMapMatrix;
 
-public class Iris extends AbstractAlgorithm {
-	private static final long serialVersionUID = 5005634034611593171L;
+public class CreateDiskMap extends AbstractAlgorithm {
+	private static final long serialVersionUID = -3349464669618035104L;
 
-	public static final String DESCRIPTION = "generates the Iris flower DataSet";
+	public static final String DESCRIPTION = "creates a DiskMapMatrix";
 
-	public Iris(Variable... variables) {
+	public CreateDiskMap(Variable... variables) {
 		super();
 		setDescription(DESCRIPTION);
 		addVariableKey(TARGET);
@@ -46,10 +46,11 @@ public class Iris extends AbstractAlgorithm {
 	}
 
 	@Override
-	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws MatrixException {
-		Map<Object, Object> result = new HashMap<Object, Object>();
-
-		result.put(TARGET, DataSetFactory.IRIS());
+	public java.util.Map<Object, Object> calculateObjects(java.util.Map<Object, Object> input)
+			throws MatrixException {
+		java.util.Map<Object, Object> result = new HashMap<Object, Object>();
+		java.util.Map<Object, Object> map = new SerializedObjectMap<Object, Object>();
+		result.put(TARGET, new DefaultMapMatrix<Object, Object>(map));
 		return result;
 	}
 }

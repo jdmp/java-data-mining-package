@@ -27,53 +27,29 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jdmp.core.algorithm.AbstractAlgorithm;
-import org.jdmp.core.sample.SampleFactory;
 import org.jdmp.core.variable.Variable;
-import org.ujmp.core.Matrix;
+import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.exceptions.MatrixException;
-import org.ujmp.core.util.MathUtil;
 
-public class Sample extends AbstractAlgorithm {
-	private static final long serialVersionUID = -8708014294068489839L;
+public class CreateEmptyMatrix extends AbstractAlgorithm {
+	private static final long serialVersionUID = 1999085052166796787L;
 
-	public static final String DESCRIPTION = "creates a sample from data";
+	public static final String DESCRIPTION = "returns an empty matrix";
 
-	public static final String INPUT = "Input";
-	public static final String TARGET = "Target";
-	public static final String RESULT = "Result";
-
-	public Sample(Variable... variables) {
+	public CreateEmptyMatrix(Variable... variables) {
 		super();
 		setDescription(DESCRIPTION);
-		addVariableKey(INPUT);
 		addVariableKey(TARGET);
-		addVariableKey(RESULT);
-		setEdgeLabel(INPUT, "Input");
 		setEdgeLabel(TARGET, "Target");
-		setEdgeLabel(RESULT, "Result");
-		setEdgeDirection(INPUT, EdgeDirection.Incoming);
-		setEdgeDirection(TARGET, EdgeDirection.Incoming);
-		setEdgeDirection(RESULT, EdgeDirection.Outgoing);
+		setEdgeDirection(TARGET, EdgeDirection.Outgoing);
+		setVariables(variables);
 	}
 
 	@Override
 	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws MatrixException {
 		Map<Object, Object> result = new HashMap<Object, Object>();
-
-		Matrix in = MathUtil.getMatrix(input.get(INPUT));
-		Matrix target = MathUtil.getMatrix(input.get(TARGET));
-
-		org.jdmp.core.sample.Sample s = null;
-
-		if (in == null && target == null) {
-			s = SampleFactory.emptySample();
-		} else if (in != null && target == null) {
-			s = SampleFactory.basicSample(in);
-		} else if (in != null && target != null) {
-			s = SampleFactory.classificationSample(in, target);
-		}
-
-		result.put(RESULT, s);
+		result.put(TARGET, MatrixFactory.emptyMatrix());
 		return result;
 	}
+
 }

@@ -27,49 +27,53 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jdmp.core.algorithm.AbstractAlgorithm;
-import org.jdmp.core.dataset.DataSetFactory;
+import org.jdmp.core.sample.SampleFactory;
 import org.jdmp.core.variable.Variable;
+import org.ujmp.core.Matrix;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.util.MathUtil;
 
-public class Henon extends AbstractAlgorithm {
+public class CreateSample extends AbstractAlgorithm {
 	private static final long serialVersionUID = -8708014294068489839L;
 
-	public static final String DESCRIPTION = "generates a HenonMap DataSet";
+	public static final String DESCRIPTION = "creates a sample from data";
 
-	public static final String SAMPLECOUNT = "SampleCount";
-	public static final String INPUTLENGTH = "InputLength";
-	public static final String TARGETLENGTH = "TargetLength";
+	public static final String INPUT = "Input";
+	public static final String TARGET = "Target";
+	public static final String RESULT = "Result";
 
-	public Henon(Variable... variables) {
+	public CreateSample(Variable... variables) {
 		super();
 		setDescription(DESCRIPTION);
-		addVariableKey(SAMPLECOUNT);
-		addVariableKey(INPUTLENGTH);
-		addVariableKey(TARGETLENGTH);
+		addVariableKey(INPUT);
 		addVariableKey(TARGET);
-		setEdgeLabel(SAMPLECOUNT, "SampleCount");
-		setEdgeLabel(INPUTLENGTH, "InputLength");
-		setEdgeLabel(TARGETLENGTH, "TargetLength");
+		addVariableKey(RESULT);
+		setEdgeLabel(INPUT, "Input");
 		setEdgeLabel(TARGET, "Target");
-		setEdgeDirection(SAMPLECOUNT, EdgeDirection.Incoming);
-		setEdgeDirection(INPUTLENGTH, EdgeDirection.Incoming);
-		setEdgeDirection(TARGETLENGTH, EdgeDirection.Incoming);
-		setEdgeDirection(TARGET, EdgeDirection.Outgoing);
+		setEdgeLabel(RESULT, "Result");
+		setEdgeDirection(INPUT, EdgeDirection.Incoming);
+		setEdgeDirection(TARGET, EdgeDirection.Incoming);
+		setEdgeDirection(RESULT, EdgeDirection.Outgoing);
 	}
 
 	@Override
 	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws MatrixException {
 		Map<Object, Object> result = new HashMap<Object, Object>();
 
-		int sampleCount = MathUtil.getInt(input.get(SAMPLECOUNT));
-		sampleCount = sampleCount == 0 ? 100 : sampleCount;
-		int inputLength = MathUtil.getInt(input.get(INPUTLENGTH));
-		inputLength = inputLength == 0 ? 10 : inputLength;
-		int targetLength = MathUtil.getInt(input.get(TARGETLENGTH));
-		targetLength = targetLength == 0 ? 5 : targetLength;
+		Matrix in = MathUtil.getMatrix(input.get(INPUT));
+		Matrix target = MathUtil.getMatrix(input.get(TARGET));
 
-		result.put(TARGET, DataSetFactory.HenonMap(sampleCount, inputLength, targetLength));
+		org.jdmp.core.sample.Sample s = null;
+
+		if (in == null && target == null) {
+			s = SampleFactory.emptySample();
+		} else if (in != null && target == null) {
+			s = SampleFactory.basicSample(in);
+		} else if (in != null && target != null) {
+			s = SampleFactory.classificationSample(in, target);
+		}
+
+		result.put(RESULT, s);
 		return result;
 	}
 }
