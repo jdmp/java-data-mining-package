@@ -92,7 +92,11 @@ public class CommandWindow extends JPanel implements KeyListener {
 
 		try {
 
-			if (textField.getCaretPosition() >= endPos) {
+			int caretPos = textField.getCaretPosition();
+			int endpos = endPos;
+			int docLength = textField.getDocument().getLength();
+
+			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 
 				int line = doc.getDefaultRootElement().getElementCount() - 1;
 
@@ -107,32 +111,30 @@ public class CommandWindow extends JPanel implements KeyListener {
 				int length = lineEnd - lineStart;
 				String text = doc.getText(lineStart + 3, length - 3);
 
-				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-
-					if (text.endsWith(";")) {
-						Result result = module.execute(text);
-						if (result.getException() != null) {
-							appendError("\n" + result);
-						}
-					} else {
-						Result result = module.execute(text + ";");
-						if (result.getException() != null) {
-							appendError("\n" + result);
-						} else {
-							appendText("\n" + result);
-						}
+				if (text.endsWith(";")) {
+					Result result = module.execute(text);
+					if (result.getException() != null) {
+						appendError("\n" + result);
 					}
-
-					appendText("\n\n>> ");
-					endPos = textField.getText().length();
-					e.consume();
-
-					// TODO: this is a hack and should be solved via
-					// EventListeners correctly
-					getParent().getParent().repaint();
-
-					return;
+				} else {
+					Result result = module.execute(text + ";");
+					if (result.getException() != null) {
+						appendError("\n" + result);
+					} else {
+						appendText("\n" + result);
+					}
 				}
+
+				appendText("\n\n>> ");
+				endPos = textField.getText().length();
+				e.consume();
+
+				// TODO: this is a hack and should be solved via
+				// EventListeners correctly
+				getParent().getParent().repaint();
+
+				return;
+
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -146,7 +148,6 @@ public class CommandWindow extends JPanel implements KeyListener {
 	@Override
 	public void keyTyped(KeyEvent e) {
 		filterKeys(e);
-
 	}
 
 	public void appendError(String s) {
@@ -154,10 +155,10 @@ public class CommandWindow extends JPanel implements KeyListener {
 		AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground,
 				Color.RED);
 
-		int len = doc.getLength();
-		textField.setCaretPosition(len);
 		textField.setCharacterAttributes(aset, false);
 		textField.replaceSelection(s);
+		int len = doc.getLength();
+		textField.setCaretPosition(len);
 	}
 
 	public void appendText(String s) {
@@ -165,15 +166,14 @@ public class CommandWindow extends JPanel implements KeyListener {
 		AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground,
 				Color.BLACK);
 
-		int len = doc.getLength();
-		textField.setCaretPosition(len);
 		textField.setCharacterAttributes(aset, false);
 		textField.replaceSelection(s);
+		int len = doc.getLength();
+		textField.setCaretPosition(len);
 	}
 
 	public void filterKeys(KeyEvent e) {
 		try {
-
 			if (textField.getCaretPosition() < endPos) {
 				textField.setCaretPosition(doc.getLength());
 			}
