@@ -80,15 +80,16 @@ public class WeightUpdate extends AlgorithmFiveSources {
 	}
 
 	@Override
-	public Map<Object, Matrix> calculate(Map<Object, Matrix> matrices) throws MatrixException {
-		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
+	public Map<Object, Object> calculateObjects(Map<Object, Object> matrices)
+			throws MatrixException {
+		Map<Object, Object> result = new HashMap<Object, Object>();
 
-		Matrix weight = matrices.get(WEIGHT);
-		double eta = matrices.get(ETA).getEuklideanValue();
-		Matrix contactDeviation = matrices.get(CONTACTDEVIATION);
-		double sampleWeight = matrices.get(SAMPLEWEIGHT).getEuklideanValue();
+		Matrix weight = MathUtil.getMatrix(matrices.get(WEIGHT));
+		double eta = MathUtil.getMatrix(matrices.get(ETA)).getDoubleValue();
+		Matrix contactDeviation = MathUtil.getMatrix(matrices.get(CONTACTDEVIATION));
+		double sampleWeight = MathUtil.getMatrix(matrices.get(SAMPLEWEIGHT)).getDoubleValue();
 
-		Matrix transposedInput = matrices.get(INPUT).toColumnVector();
+		Matrix transposedInput = MathUtil.getMatrix(matrices.get(INPUT)).toColumnVector();
 
 		switch (biasType) {
 		case SINGLE:

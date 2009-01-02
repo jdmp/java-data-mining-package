@@ -31,6 +31,7 @@ import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.util.MathUtil;
 
 public class Abs extends AbstractAlgorithm {
 	private static final long serialVersionUID = 8963883977304138269L;
@@ -50,9 +51,9 @@ public class Abs extends AbstractAlgorithm {
 	}
 
 	@Override
-	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
-		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
-		Matrix source = input.get(SOURCE);
+	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws MatrixException {
+		Map<Object, Object> result = new HashMap<Object, Object>();
+		Matrix source = MathUtil.getMatrix(input.get(SOURCE));
 		result.put(TARGET, source.abs(Ret.NEW));
 		return result;
 	}

@@ -114,10 +114,12 @@ public class CommandWindow extends JPanel implements KeyListener {
 					}
 				} else {
 					Result result = module.execute(text + ";");
-					if (result.getException() != null) {
-						appendError("\n" + result);
-					} else {
-						appendText("\n" + result);
+					if (result != null) {
+						if (result.getException() != null) {
+							appendError("\n" + result);
+						} else {
+							appendText("\n" + result);
+						}
 					}
 				}
 

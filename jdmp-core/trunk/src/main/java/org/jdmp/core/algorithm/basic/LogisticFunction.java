@@ -30,6 +30,7 @@ import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.util.MathUtil;
 
 public class LogisticFunction extends AbstractAlgorithm {
 	private static final long serialVersionUID = -6185025728766094423L;
@@ -49,10 +50,10 @@ public class LogisticFunction extends AbstractAlgorithm {
 	}
 
 	@Override
-	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
-		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
+	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws MatrixException {
+		Map<Object, Object> result = new HashMap<Object, Object>();
 
-		Matrix in = input.get(SOURCE);
+		Matrix in = MathUtil.getMatrix(input.get(SOURCE));
 		result.put(TARGET,
 				new org.ujmp.core.doublematrix.calculation.entrywise.misc.LogisticFunction(in)
 						.calcNew());

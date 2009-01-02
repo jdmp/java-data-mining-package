@@ -66,20 +66,20 @@ public class Sum extends AbstractAlgorithm {
 	}
 
 	@Override
-	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
+	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws MatrixException {
 		int dimension = defaultDimension;
 		boolean ignoreNaN = defaultIgnoreNaN;
 
-		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
+		Map<Object, Object> result = new HashMap<Object, Object>();
 
-		Matrix source = input.get(SOURCE);
-		Matrix m2 = input.get(DIMENSION);
-		if (m2 != null) {
-			dimension = MathUtil.getInt(m2);
+		Matrix source = MathUtil.getMatrix(input.get(SOURCE));
+		Object o2 = input.get(DIMENSION);
+		if (o2 != null) {
+			dimension = MathUtil.getInt(o2);
 		}
-		Matrix m3 = input.get(IGNORENAN);
-		if (m3 != null) {
-			ignoreNaN = MathUtil.getBoolean(m3);
+		Object o3 = input.get(IGNORENAN);
+		if (o3 != null) {
+			ignoreNaN = MathUtil.getBoolean(o3);
 		}
 
 		Matrix target = source.sum(Ret.NEW, dimension, ignoreNaN);

@@ -31,6 +31,7 @@ import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.util.MathUtil;
 
 public class Randn extends AlgorithmTwoSources {
 	private static final long serialVersionUID = -3218599515259241080L;
@@ -43,11 +44,11 @@ public class Randn extends AlgorithmTwoSources {
 	}
 
 	@Override
-	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
-		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
+	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws MatrixException {
+		Map<Object, Object> result = new HashMap<Object, Object>();
 
-		Matrix source1 = input.get(SOURCE1);
-		Matrix source2 = input.get(SOURCE2);
+		Matrix source1 = MathUtil.getMatrix(input.get(SOURCE1));
+		Matrix source2 = MathUtil.getMatrix(input.get(SOURCE2));
 
 		result.put(TARGET, MatrixFactory.randn((long) source1.getDoubleValue(), (long) source2
 				.getDoubleValue()));

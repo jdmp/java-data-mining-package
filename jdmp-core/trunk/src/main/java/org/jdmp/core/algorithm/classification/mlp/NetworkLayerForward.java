@@ -81,8 +81,8 @@ public class NetworkLayerForward extends AbstractAlgorithm {
 	}
 
 	@Override
-	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws Exception {
-		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
+	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws Exception {
+		Map<Object, Object> result = new HashMap<Object, Object>();
 
 		Algorithm weightingFunction = getWeightingFunction();
 		weightingFunction.calculate();

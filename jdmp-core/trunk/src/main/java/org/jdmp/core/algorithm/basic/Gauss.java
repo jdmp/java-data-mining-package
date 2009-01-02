@@ -31,6 +31,7 @@ import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.util.MathUtil;
 
 public class Gauss extends AbstractAlgorithm {
 	private static final long serialVersionUID = 3127916742763698423L;
@@ -54,10 +55,10 @@ public class Gauss extends AbstractAlgorithm {
 	}
 
 	@Override
-	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
-		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
+	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws MatrixException {
+		Map<Object, Object> result = new HashMap<Object, Object>();
 
-		Matrix in = MatrixFactory.copyFromMatrix(input.get(SOURCE));
+		Matrix in = MatrixFactory.copyFromMatrix(MathUtil.getMatrix(input.get(SOURCE)));
 		for (long[] c : in.allCoordinates()) {
 			in.setAsDouble(getProbability(in.getAsDouble(c)), c);
 		}

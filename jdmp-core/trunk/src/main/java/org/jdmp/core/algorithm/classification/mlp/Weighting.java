@@ -45,11 +45,11 @@ public class Weighting extends AlgorithmTwoSources {
 	}
 
 	@Override
-	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
-		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
+	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws MatrixException {
+		Map<Object, Object> result = new HashMap<Object, Object>();
 
-		Matrix weight = input.get(SOURCE1);
-		Matrix x = input.get(SOURCE2).toRowVector();
+		Matrix weight = MathUtil.getMatrix(input.get(SOURCE1));
+		Matrix x = MathUtil.getMatrix(input.get(SOURCE2)).toRowVector();
 
 		switch (biasType) {
 		case SINGLE:

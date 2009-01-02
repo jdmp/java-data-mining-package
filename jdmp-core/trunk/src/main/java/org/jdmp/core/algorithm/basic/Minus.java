@@ -30,6 +30,7 @@ import org.jdmp.core.algorithm.AlgorithmTwoSources;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.util.MathUtil;
 
 public class Minus extends AlgorithmTwoSources {
 	private static final long serialVersionUID = 2476001103906791183L;
@@ -42,10 +43,10 @@ public class Minus extends AlgorithmTwoSources {
 	}
 
 	@Override
-	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
-		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
-		Matrix source1 = input.get(SOURCE1);
-		Matrix source2 = input.get(SOURCE2);
+	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws MatrixException {
+		Map<Object, Object> result = new HashMap<Object, Object>();
+		Matrix source1 = MathUtil.getMatrix(input.get(SOURCE1));
+		Matrix source2 = MathUtil.getMatrix(input.get(SOURCE2));
 		Matrix target = new org.ujmp.core.doublematrix.calculation.basic.Minus(source1, source2)
 				.calcNew();
 		result.put(TARGET, target);

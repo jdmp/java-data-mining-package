@@ -25,6 +25,7 @@ package org.jdmp.core.algorithm;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -117,17 +118,17 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		variableMap.clear();
 	}
 
-	public final Map<Object, Matrix> calculate() throws Exception {
-		Map<Object, Matrix> input = new HashMap<Object, Matrix>();
+	public final Map<Object, Object> calculate() throws Exception {
+		Map<Object, Object> input = new HashMap<Object, Object>();
 
 		for (Object v : getInputKeys()) {
 			input.put(v, getMatrixFromVariable(v));
 		}
 
-		Map<Object, Matrix> output = calculate(input);
+		Map<Object, Object> output = calculateObjects(input);
 
 		for (Object v : getOutputKeys()) {
-			setMatrix(v, output.get(v));
+			setMatrix(v, MathUtil.getMatrix(output.get(v)));
 		}
 
 		return output;
@@ -155,15 +156,15 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		return outputKeys;
 	}
 
-	public final Map<Object, Matrix> calculate(Matrix... input) throws Exception {
-		List<Matrix> inputA = new LinkedList<Matrix>();
-		for (int i = 0; i < input.length; i++) {
-			inputA.add(input[i]);
-		}
-		return calculate(inputA);
+	public final Map<Object, Object> calculate(Matrix... input) throws Exception {
+		return calculate(Arrays.asList(input));
 	}
 
-	public final Map<Object, Matrix> calculate(double... input) throws Exception {
+	public final Map<Object, Object> calculateObjects(Object... input) throws Exception {
+		return calculateObjects(Arrays.asList(input));
+	}
+
+	public final Map<Object, Object> calculate(double... input) throws Exception {
 		List<Matrix> inputA = new LinkedList<Matrix>();
 		for (int i = 0; i < input.length; i++) {
 			inputA.add(MatrixFactory.linkToValue(input[i]));
@@ -171,14 +172,14 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		return calculate(inputA);
 	}
 
-	public final Map<Object, Matrix> calculate(List<Matrix> matrices) throws Exception {
-		Map<Object, Matrix> map = new HashMap<Object, Matrix>();
+	public final Map<Object, Object> calculate(List<Matrix> matrices) throws Exception {
+		Map<Object, Object> map = new HashMap<Object, Object>();
 		List<Object> keys = getInputKeys();
 		for (int i = 0; i < matrices.size(); i++) {
 			Object key = keys.get(i);
 			map.put(key, matrices.get(i));
 		}
-		return calculate(map);
+		return calculateObjects(map);
 	}
 
 	public final Map<Object, Object> calculateObjects(List<Object> matrices) throws Exception {
@@ -191,26 +192,9 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		return calculateObjects(map);
 	}
 
-	public Map<Object, Matrix> calculate(Map<Object, Matrix> matrices) throws Exception {
-		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
-		return result;
-	}
-
 	// this is not the best way
 	public Map<Object, Object> calculateObjects(Map<Object, Object> objects) throws Exception {
 		Map<Object, Object> result = new HashMap<Object, Object>();
-		Map<Object, Matrix> matrices = new HashMap<Object, Matrix>();
-
-		for (Object key : objects.keySet()) {
-			matrices.put(key, MathUtil.getMatrix(objects.get(key)));
-		}
-
-		Map<Object, Matrix> matrixResult = calculate(matrices);
-
-		for (Object key : matrixResult.keySet()) {
-			result.put(key, matrixResult.get(key));
-		}
-
 		return result;
 	}
 

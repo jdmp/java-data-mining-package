@@ -26,33 +26,32 @@ package org.jdmp.core.algorithm.basic;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jdmp.core.algorithm.AlgorithmTwoSources;
+import org.jdmp.core.algorithm.AbstractAlgorithm;
+import org.jdmp.core.algorithm.regression.LinearRegression;
 import org.jdmp.core.variable.Variable;
-import org.ujmp.core.Matrix;
-import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.exceptions.MatrixException;
-import org.ujmp.core.util.MathUtil;
+import org.ujmp.core.mapmatrix.DefaultMapMatrix;
 
-public class Zeros extends AlgorithmTwoSources {
-	private static final long serialVersionUID = -6698288195664853309L;
+public class CreateLinReg extends AbstractAlgorithm {
+	private static final long serialVersionUID = -4667986159489642214L;
 
-	public static final String DESCRIPTION = "returns a matrix filled with zeros";
+	public static final String DESCRIPTION = "creates a Linear Regressor";
 
-	public Zeros(Variable... variables) {
-		super(variables);
+	public CreateLinReg(Variable... variables) {
+		super();
+		setDescription(DESCRIPTION);
+		addVariableKey(TARGET);
+		setEdgeLabel(TARGET, "Target");
+		setEdgeDirection(TARGET, EdgeDirection.Outgoing);
+		setVariables(variables);
 	}
 
 	@Override
-	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws MatrixException {
+	public Map<Object, Object> calculateObjects(java.util.Map<Object, Object> input)
+			throws MatrixException {
 		Map<Object, Object> result = new HashMap<Object, Object>();
-
-		Matrix source1 = MathUtil.getMatrix(input.get(SOURCE1));
-		Matrix source2 = MathUtil.getMatrix(input.get(SOURCE2));
-
-		result.put(TARGET, MatrixFactory.zeros((long) source1.getDoubleValue(), (long) source2
-				.getDoubleValue()));
-
+		result.put(TARGET, new LinearRegression());
 		return result;
-
 	}
+
 }

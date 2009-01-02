@@ -31,6 +31,7 @@ import org.jdmp.core.algorithm.classification.mlp.MultiLayerNetwork.BiasType;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.util.MathUtil;
 
 public class DimmingFunction extends AlgorithmTwoSources {
 	private static final long serialVersionUID = -1391123608571352340L;
@@ -43,11 +44,11 @@ public class DimmingFunction extends AlgorithmTwoSources {
 	}
 
 	@Override
-	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
-		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
+	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws MatrixException {
+		Map<Object, Object> result = new HashMap<Object, Object>();
 
-		Matrix weight = input.get(SOURCE1);
-		Matrix contactdeviation = input.get(SOURCE2);
+		Matrix weight = MathUtil.getMatrix(input.get(SOURCE1));
+		Matrix contactdeviation = MathUtil.getMatrix(input.get(SOURCE2));
 
 		Matrix transposedWeight = weight.transpose();
 		Matrix target = transposedWeight.mtimes(contactdeviation);

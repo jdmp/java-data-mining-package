@@ -21,37 +21,13 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.core.algorithm.basic;
+package org.jdmp.complete;
 
-import java.util.HashMap;
-import java.util.Map;
 
-import org.jdmp.core.algorithm.AlgorithmTwoSources;
-import org.jdmp.core.variable.Variable;
-import org.ujmp.core.Matrix;
-import org.ujmp.core.exceptions.MatrixException;
-import org.ujmp.core.util.MathUtil;
+public abstract class JDMP {
 
-public class Mtimes extends AlgorithmTwoSources {
-	private static final long serialVersionUID = 2620456326030867650L;
-
-	public static final String DESCRIPTION = "target = source1 * source2";
-
-	public Mtimes(Variable... variables) {
-		super(variables);
-		setDescription(DESCRIPTION);
+	public static void main(String[] args) throws Exception {
+		org.jdmp.gui.JDMP.main(args);
 	}
 
-	@Override
-	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws MatrixException {
-		Map<Object, Object> result = new HashMap<Object, Object>();
-
-		Matrix source1 = MathUtil.getMatrix(input.get(SOURCE1));
-		Matrix source2 = MathUtil.getMatrix(input.get(SOURCE2));
-
-		result.put(TARGET, source1.mtimes(source2));
-
-		return result;
-
-	}
 }

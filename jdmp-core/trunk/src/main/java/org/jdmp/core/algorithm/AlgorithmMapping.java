@@ -29,12 +29,16 @@ import java.util.Map;
 
 import org.jdmp.core.algorithm.basic.Abs;
 import org.jdmp.core.algorithm.basic.Cd;
+import org.jdmp.core.algorithm.basic.ClassPath;
 import org.jdmp.core.algorithm.basic.Copy;
 import org.jdmp.core.algorithm.basic.CreateDiskMap;
 import org.jdmp.core.algorithm.basic.CreateEmptyMatrix;
 import org.jdmp.core.algorithm.basic.CreateHenon;
 import org.jdmp.core.algorithm.basic.CreateIris;
+import org.jdmp.core.algorithm.basic.CreateLinReg;
 import org.jdmp.core.algorithm.basic.CreateListMatrix;
+import org.jdmp.core.algorithm.basic.CreateMLP;
+import org.jdmp.core.algorithm.basic.CreateNaiveBayes;
 import org.jdmp.core.algorithm.basic.Env;
 import org.jdmp.core.algorithm.basic.Exec;
 import org.jdmp.core.algorithm.basic.Exit;
@@ -77,6 +81,7 @@ public abstract class AlgorithmMapping {
 		mapping.put("abs", Abs.class.getName());
 		mapping.put("cd", Cd.class.getName());
 		mapping.put("copy", Copy.class.getName());
+		mapping.put("classpath", ClassPath.class.getName());
 		mapping.put("diskmap", CreateDiskMap.class.getName());
 		mapping.put("empty", CreateEmptyMatrix.class.getName());
 		mapping.put("env", Env.class.getName());
@@ -87,6 +92,7 @@ public abstract class AlgorithmMapping {
 		mapping.put("henon", CreateHenon.class.getName());
 		mapping.put("info", Info.class.getName());
 		mapping.put("iris", CreateIris.class.getName());
+		mapping.put("linreg", CreateLinReg.class.getName());
 		mapping.put("list", CreateListMatrix.class.getName());
 		mapping.put("logistic", LogisticFunction.class.getName());
 		mapping.put("logmap", Logisticmap.class.getName());
@@ -94,7 +100,9 @@ public abstract class AlgorithmMapping {
 		mapping.put("mean", Mean.class.getName());
 		mapping.put("memory", Memory.class.getName());
 		mapping.put("minus", Minus.class.getName());
+		mapping.put("mlp", CreateMLP.class.getName());
 		mapping.put("mtimes", Mtimes.class.getName());
+		mapping.put("naivebayes", CreateNaiveBayes.class.getName());
 		mapping.put("ones", Ones.class.getName());
 		mapping.put("plus", Plus.class.getName());
 		mapping.put("processors", Processors.class.getName());

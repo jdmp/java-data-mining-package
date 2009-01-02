@@ -43,7 +43,8 @@ public class Help extends AbstractAlgorithm {
 	@Override
 	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws MatrixException {
 		Map<Object, Object> result = new HashMap<Object, Object>();
-		result.put(TARGET, "Please visit http://www.jdmp.org/ for more information.");
+		result.put(TARGET, "Please visit http://www.jdmp.org/ for more information."
+				+ "\nYou can get a list of available commands with 'info'.");
 		return result;
 	}
 

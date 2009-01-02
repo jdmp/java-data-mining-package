@@ -29,6 +29,7 @@ import java.awt.GridLayout;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
+import org.jdmp.gui.algorithm.AlgorithmListPanel;
 import org.jdmp.gui.dataset.DataSetListPanel;
 import org.jdmp.gui.interpreter.CommandWindow;
 import org.jdmp.gui.sample.SampleListPanel;
@@ -47,11 +48,12 @@ public class ModulePanel extends AbstractPanel {
 	public ModulePanel(ModuleGUIObject m) {
 		super(m);
 
-		leftPanel.setLayout(new GridLayout(4, 1));
+		leftPanel.setLayout(new GridLayout(5, 1));
 		leftPanel.add(new VariableListPanel(m.getModule()));
 		leftPanel.add(new SampleListPanel(m.getModule()));
 		leftPanel.add(new DataSetListPanel(m.getModule()));
 		leftPanel.add(new ModuleListPanel(m.getModule()));
+		leftPanel.add(new AlgorithmListPanel(m.getModule()));
 
 		rightPanel.setLayout(new GridLayout(1, 1));
 		rightPanel.add(new CommandWindow(m.getModule()));

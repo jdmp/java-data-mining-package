@@ -43,8 +43,8 @@ public class Systemtime extends AlgorithmNoSource {
 	}
 
 	@Override
-	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
-		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
+	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws MatrixException {
+		Map<Object, Object> result = new HashMap<Object, Object>();
 		Matrix target = MatrixFactory.systemTime();
 		result.put(TARGET, target);
 		return result;

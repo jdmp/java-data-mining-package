@@ -36,6 +36,7 @@ import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.DefaultVariable;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.coordinates.Coordinates;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.listmatrix.DefaultListMatrix;
@@ -75,8 +76,6 @@ public class MultiLayerNetwork extends AbstractClassifier {
 		NONE, SINGLE, MULTIPLE
 	};
 
-	private final boolean useInnerCV = false;
-
 	private final List<NetworkLayer> networkLayers = new ArrayList<NetworkLayer>();
 
 	public MultiLayerNetwork(Aggregation aggregationInput, Transfer transferInput,
@@ -107,10 +106,8 @@ public class MultiLayerNetwork extends AbstractClassifier {
 					hiddenLayer = new NetworkLayer(aggregationDefault, transferDefault,
 							biasDefault, hiddenNeurons[i]);
 				}
-				getAlgorithms()
-						.put("hidden" + i + "-forward", hiddenLayer.getAlgorithmForward());
-				getAlgorithms().put("hidden" + i + "-backward",
-						hiddenLayer.getAlgorithmBackward());
+				getAlgorithms().put("hidden" + i + "-forward", hiddenLayer.getAlgorithmForward());
+				getAlgorithms().put("hidden" + i + "-backward", hiddenLayer.getAlgorithmBackward());
 				getAlgorithms().put("hidden" + i + "-update",
 						hiddenLayer.getAlgorithmWeightUpdate());
 				hiddenLayer.setLayer(i);
@@ -280,11 +277,10 @@ public class MultiLayerNetwork extends AbstractClassifier {
 	@Override
 	public void train(Matrix input, Matrix sampleWeight, Matrix desiredOutput) throws Exception {
 		addDesiredOutputMatrix(desiredOutput.toRowVector());
-		double weight = 1.0;
-		if (sampleWeight != null) {
-			weight = sampleWeight.getEuklideanValue();
+		if (sampleWeight == null) {
+			sampleWeight = MatrixFactory.linkToValue(1.0);
 		}
-		setSampleWeight(weight);
+		setSampleWeight(sampleWeight.getDoubleValue());
 		predict(input, sampleWeight);
 		getOutputErrorAlgorithm().calculate();
 
@@ -332,46 +328,43 @@ public class MultiLayerNetwork extends AbstractClassifier {
 
 	@Override
 	public void train(RegressionDataSet dataSet) throws Exception {
-		throw new Exception("you have to train several times using trainOnce()");
+
+		// TODO: fix!
+
+		List<Sample> samples = new ArrayList<Sample>(dataSet.getSamples().toCollection());
+		Collections.shuffle(samples);
+
+		int last10Percent = (int) Math.ceil((samples.size() * 0.1));
+		int first90Percent = samples.size() - last10Percent;
+
+		for (int i = 0; i < first90Percent; i++) {
+			train(samples.get(i));
+		}
+
+		// Crossvalidation
+		double rmse = 0;
+		for (int i = first90Percent; i < samples.size(); i++) {
+			Sample rs = samples.get(i);
+			Matrix output = predict(rs.getMatrix(INPUT), rs.getMatrix(WEIGHT));
+			rmse += output.minus(rs.getMatrix(TARGET)).getRMS();
+			train(samples.get(i));
+		}
+		rmse /= last10Percent;
+
+		System.out.println("RMSE on " + last10Percent + " Samples: " + rmse);
+
+		for (int i = first90Percent; i < samples.size(); i++) {
+			train(samples.get(i));
+		}
 	}
 
 	public void trainOnce(RegressionDataSet dataSet) throws Exception {
-		if (useInnerCV) {
-
-			List<Sample> samples = new ArrayList<Sample>(dataSet.getSamples().toCollection());
-			Collections.shuffle(samples);
-
-			int last10Percent = (int) Math.ceil((samples.size() * 0.1));
-			int first90Percent = samples.size() - last10Percent;
-
-			for (int i = 0; i < first90Percent; i++) {
-				train(samples.get(i));
-			}
-
-			// Crossvalidation
-			double rmse = 0;
-			for (int i = first90Percent; i < samples.size(); i++) {
-				Sample rs = samples.get(i);
-				Matrix output = predict(rs.getMatrix(INPUT), rs.getMatrix(WEIGHT));
-				rmse += output.minus(rs.getMatrix(TARGET)).getRMS();
-				train(samples.get(i));
-			}
-			rmse /= last10Percent;
-
-			System.out.println("RMSE on " + last10Percent + " Samples: " + rmse);
-
-			for (int i = first90Percent; i < samples.size(); i++) {
-				train(samples.get(i));
-			}
-
-		} else {
-			List<Sample> samples = new ArrayList<Sample>(dataSet.getSamples().toCollection());
-			Collections.shuffle(samples);
-			for (Sample s : samples) {
-				train(s);
-			}
-			dataSet.notifyGUIObject();
+		List<Sample> samples = new ArrayList<Sample>(dataSet.getSamples().toCollection());
+		Collections.shuffle(samples);
+		for (Sample s : samples) {
+			train(s);
 		}
+		dataSet.notifyGUIObject();
 	}
 
 	@Override

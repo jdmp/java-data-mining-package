@@ -31,6 +31,7 @@ import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.util.MathUtil;
 
 public class Copy extends AbstractAlgorithm {
 	private static final long serialVersionUID = 4425454677556747249L;
@@ -50,9 +51,9 @@ public class Copy extends AbstractAlgorithm {
 	}
 
 	@Override
-	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
-		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
-		Matrix source = input.get(SOURCE);
+	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws MatrixException {
+		Map<Object, Object> result = new HashMap<Object, Object>();
+		Matrix source = MathUtil.getMatrix(input.get(SOURCE));
 		Matrix target = MatrixFactory.copyFromMatrix(source);
 		result.put(TARGET, target);
 		return result;

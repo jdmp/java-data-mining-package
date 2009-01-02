@@ -27,34 +27,58 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jdmp.core.algorithm.AbstractAlgorithm;
+import org.jdmp.core.algorithm.classification.mlp.MultiLayerNetwork;
 import org.jdmp.core.variable.Variable;
-import org.ujmp.core.Matrix;
 import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.mapmatrix.DefaultMapMatrix;
 import org.ujmp.core.util.MathUtil;
 
-public class Transpose extends AbstractAlgorithm {
-	private static final long serialVersionUID = 7132114769238742740L;
+public class CreateMLP extends AbstractAlgorithm {
+	private static final long serialVersionUID = -5372885309350915607L;
+	public static final String DESCRIPTION = "creates a MultiLayerPerceptron";
 
-	public static final String DESCRIPTION = "target = source^T";
+	public static final String HIDDEN1 = "Hidden1";
+	public static final String HIDDEN2 = "Hidden2";
+	public static final String HIDDEN3 = "Hidden3";
 
-	public Transpose(Variable... variables) {
+	public CreateMLP(Variable... variables) {
 		super();
 		setDescription(DESCRIPTION);
-		addVariableKey(SOURCE);
+		addVariableKey(HIDDEN1);
+		addVariableKey(HIDDEN2);
+		addVariableKey(HIDDEN3);
 		addVariableKey(TARGET);
-		setEdgeLabel(SOURCE, "Source");
+		setEdgeLabel(HIDDEN1, "neurons in hidden layer 1");
+		setEdgeLabel(HIDDEN2, "neurons in hidden layer 2");
+		setEdgeLabel(HIDDEN3, "neurons in hidden layer 3");
 		setEdgeLabel(TARGET, "Target");
-		setEdgeDirection(SOURCE, EdgeDirection.Incoming);
+		setEdgeDirection(HIDDEN1, EdgeDirection.Incoming);
+		setEdgeDirection(HIDDEN2, EdgeDirection.Incoming);
+		setEdgeDirection(HIDDEN3, EdgeDirection.Incoming);
 		setEdgeDirection(TARGET, EdgeDirection.Outgoing);
-		setVariables(variables);
 	}
 
 	@Override
-	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws MatrixException {
+	public Map<Object, Object> calculateObjects(java.util.Map<Object, Object> input)
+			throws MatrixException {
 		Map<Object, Object> result = new HashMap<Object, Object>();
-		Matrix source = MathUtil.getMatrix(input.get(SOURCE));
-		Matrix target = source.transpose();
-		result.put(TARGET, target);
+
+		Object h1 = input.get(HIDDEN1);
+		Object h2 = input.get(HIDDEN2);
+		Object h3 = input.get(HIDDEN3);
+
+		int[] hidden = null;
+		if (h3 != null) {
+			hidden = new int[] { MathUtil.getInt(h1), MathUtil.getInt(h2), MathUtil.getInt(h3) };
+		} else if (h2 != null) {
+			hidden = new int[] { MathUtil.getInt(h1), MathUtil.getInt(h2) };
+		} else if (h1 != null) {
+			hidden = new int[] { MathUtil.getInt(h1) };
+		} else {
+			hidden = new int[] {};
+		}
+
+		result.put(TARGET, new MultiLayerNetwork(hidden));
 		return result;
 	}
 

@@ -32,6 +32,7 @@ import org.jdmp.core.sample.ClassificationSample;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
+import org.ujmp.core.util.MathUtil;
 
 public abstract class AbstractRegressor extends AbstractAlgorithm implements Regressor {
 
@@ -66,8 +67,8 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 		Matrix predicted = predict(sample.getMatrix(INPUT), sample.getMatrix(WEIGHT));
 		sample.setMatrix(PREDICTED, predicted);
 		if (evaluate) {
-			Matrix error = getOutputErrorAlgorithm().calculate(predicted, sample.getMatrix(TARGET))
-					.values().iterator().next();
+			Matrix error = MathUtil.getMatrix(getOutputErrorAlgorithm().calculate(predicted,
+					MathUtil.getMatrix(sample.getMatrix(TARGET))).values().iterator().next());
 			sample.setMatrix(DIFFERENCE, error);
 			sample.setMatrix(RMSE, MatrixFactory.linkToValue(error.getRMS()));
 		}

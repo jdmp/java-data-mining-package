@@ -29,6 +29,7 @@ import java.util.Map;
 import org.jdmp.core.algorithm.AlgorithmTwoSources;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.util.MathUtil;
 
 public class ReturningFunctionOne extends AlgorithmTwoSources {
 	private static final long serialVersionUID = 4572373369476358229L;
@@ -38,11 +39,11 @@ public class ReturningFunctionOne extends AlgorithmTwoSources {
 	}
 
 	@Override
-	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
-		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
+	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws MatrixException {
+		Map<Object, Object> result = new HashMap<Object, Object>();
 
-		Matrix output = input.get(SOURCE1);
-		Matrix outputdeviation = input.get(SOURCE2);
+		Matrix output = MathUtil.getMatrix(input.get(SOURCE1));
+		Matrix outputdeviation = MathUtil.getMatrix(input.get(SOURCE2));
 
 		Matrix target = outputdeviation.clone();
 

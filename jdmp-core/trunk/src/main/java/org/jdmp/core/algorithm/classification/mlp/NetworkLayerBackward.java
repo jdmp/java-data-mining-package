@@ -96,8 +96,7 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 	}
 
 	public static void main(String[] args) throws Exception {
-		NetworkLayerBackward a = new NetworkLayerBackward(Transfer.TANH,
-				BiasType.SINGLE);
+		NetworkLayerBackward a = new NetworkLayerBackward(Transfer.TANH, BiasType.SINGLE);
 
 		Variable outputDeviation = new DefaultVariable("Output Deviation");
 		Matrix d = MatrixFactory.linkToArray(new double[][] { { 1 }, { 2 }, { 3 }, { 4 }, { 5 },
@@ -121,8 +120,8 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 	}
 
 	@Override
-	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws Exception {
-		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
+	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws Exception {
+		Map<Object, Object> result = new HashMap<Object, Object>();
 
 		Algorithm returningFunction = getReturningFunction();
 		returningFunction.calculate();

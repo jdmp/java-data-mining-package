@@ -50,9 +50,9 @@ public class Exit extends AbstractAlgorithm {
 	}
 
 	@Override
-	public Map<Object, Matrix> calculate(Map<Object, Matrix> input) throws MatrixException {
-		Map<Object, Matrix> result = new HashMap<Object, Matrix>();
-		Matrix in = input.get(SOURCE);
+	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws MatrixException {
+		Map<Object, Object> result = new HashMap<Object, Object>();
+		Matrix in = MathUtil.getMatrix(input.get(SOURCE));
 		java.lang.System.exit(MathUtil.getInt(in));
 		return result;
 	}
