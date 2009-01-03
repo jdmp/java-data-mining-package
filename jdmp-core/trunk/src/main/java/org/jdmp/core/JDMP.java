@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 Holger Arndt, Andreas Naegele and Markus Bundschus
+ * Copyright (C) 2008-2009 Holger Arndt, A. Naegele and M. Bundschus
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -96,7 +96,7 @@ public class JDMP {
 	public static void run() throws Exception {
 		out.println("/*");
 		out.println(" *       Welcome to the Java Data Mining Package (JDMP)");
-		out.println(" * Copyright (C) 2008 by Holger Arndt, A. Naegele and M. Bundschus");
+		out.println(" * Copyright (C) 2008-2009 Holger Arndt, A. Naegele and M. Bundschus");
 		out.println(" *");
 		out.println(" * JDMP is free software; you can redistribute it and/or modify");
 		out.println(" * it under the terms of the GNU Lesser General Public License as");
