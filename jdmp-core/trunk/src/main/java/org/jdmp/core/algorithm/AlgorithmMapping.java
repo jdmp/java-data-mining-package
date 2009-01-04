@@ -54,6 +54,7 @@ import org.jdmp.core.algorithm.basic.Memory;
 import org.jdmp.core.algorithm.basic.Minus;
 import org.jdmp.core.algorithm.basic.Mtimes;
 import org.jdmp.core.algorithm.basic.Ones;
+import org.jdmp.core.algorithm.basic.Paste;
 import org.jdmp.core.algorithm.basic.Plus;
 import org.jdmp.core.algorithm.basic.Processors;
 import org.jdmp.core.algorithm.basic.Properties;
@@ -110,6 +111,7 @@ public abstract class AlgorithmMapping {
 		mapping.put("mtimes", Mtimes.class.getName());
 		mapping.put("naivebayes", CreateNaiveBayes.class.getName());
 		mapping.put("ones", Ones.class.getName());
+		mapping.put("paste", Paste.class.getName());
 		mapping.put("plus", Plus.class.getName());
 		mapping.put("processors", Processors.class.getName());
 		mapping.put("properties", Properties.class.getName());
