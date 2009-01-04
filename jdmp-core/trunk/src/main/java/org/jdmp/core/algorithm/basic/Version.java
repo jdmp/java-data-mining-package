@@ -26,16 +26,17 @@ package org.jdmp.core.algorithm.basic;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.jdmp.core.JDMP;
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.exceptions.MatrixException;
 
-public class Help extends AbstractAlgorithm {
-	private static final long serialVersionUID = 8419287687514349926L;
+public class Version extends AbstractAlgorithm {
+	private static final long serialVersionUID = -5926495980259773197L;
 
-	public static final String DESCRIPTION = "displays a help message";
+	public static final String DESCRIPTION = "displays version information about JDMP";
 
-	public Help(Variable... variables) {
+	public Version(Variable... variables) {
 		super();
 		setDescription(DESCRIPTION);
 	}
@@ -43,11 +44,7 @@ public class Help extends AbstractAlgorithm {
 	@Override
 	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws MatrixException {
 		Map<Object, Object> result = new HashMap<Object, Object>();
-		String s = "\n";
-		s += "Please visit http://www.jdmp.org/ for more information.\n";
-		s += "You can get a list of available commands with 'info'.\n";
-		s += "\n";
-		result.put(TARGET, s);
+		result.put(TARGET, JDMP.JDMPVERSION);
 		return result;
 	}
 

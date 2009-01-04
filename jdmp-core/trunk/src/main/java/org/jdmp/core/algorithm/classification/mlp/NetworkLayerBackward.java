@@ -30,7 +30,7 @@ import java.util.logging.Level;
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.algorithm.AlgorithmTwoSources;
-import org.jdmp.core.algorithm.basic.Copy;
+import org.jdmp.core.algorithm.basic.Clone;
 import org.jdmp.core.algorithm.classification.mlp.MultiLayerNetwork.BiasType;
 import org.jdmp.core.algorithm.classification.mlp.MultiLayerNetwork.Transfer;
 import org.jdmp.core.variable.DefaultVariable;
@@ -83,9 +83,9 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 		ar.setVariable(ReturningFunctionTanh.TARGET, getNetDeviationVariable());
 		setAlgorithm(RETURNINGFUNCTION, ar);
 
-		Copy as = new Copy();
-		as.setVariable(Copy.SOURCE, getNetDeviationVariable());
-		as.setVariable(Copy.TARGET, getContactDeviationVariable());
+		Clone as = new Clone();
+		as.setVariable(Clone.SOURCE, getNetDeviationVariable());
+		as.setVariable(Clone.TARGET, getContactDeviationVariable());
 		setAlgorithm(SPLITTINGFUNCTION, as);
 
 		DimmingFunction ad = new DimmingFunction(biasType);

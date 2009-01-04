@@ -86,6 +86,35 @@ public class CommandWindow extends JPanel implements KeyListener {
 		add(scrollPane, BorderLayout.CENTER);
 	}
 
+	public synchronized Result execute(String text) throws Exception {
+		Result result = null;
+
+		if (text.endsWith(";")) {
+			result = module.execute(text);
+			if (result.getException() != null) {
+				appendError("\n" + result);
+			}
+		} else {
+			result = module.execute(text + ";");
+			if (result != null) {
+				if (result.getException() != null) {
+					appendError("\n" + result);
+				} else {
+					appendText("\n" + result);
+				}
+			}
+		}
+
+		appendText("\n\n>> ");
+		endPos = doc.getLength();
+
+		// TODO: this is a hack and should be solved via
+		// EventListeners correctly
+		getParent().getParent().repaint();
+
+		return result;
+	}
+
 	@Override
 	public void keyPressed(KeyEvent e) {
 		filterKeys(e);
@@ -107,29 +136,8 @@ public class CommandWindow extends JPanel implements KeyListener {
 				int length = lineEnd - lineStart;
 				String text = doc.getText(lineStart + 3, length - 3);
 
-				if (text.endsWith(";")) {
-					Result result = module.execute(text);
-					if (result.getException() != null) {
-						appendError("\n" + result);
-					}
-				} else {
-					Result result = module.execute(text + ";");
-					if (result != null) {
-						if (result.getException() != null) {
-							appendError("\n" + result);
-						} else {
-							appendText("\n" + result);
-						}
-					}
-				}
-
-				appendText("\n\n>> ");
-				endPos = doc.getLength();
+				execute(text);
 				e.consume();
-
-				// TODO: this is a hack and should be solved via
-				// EventListeners correctly
-				getParent().getParent().repaint();
 
 				return;
 
@@ -179,7 +187,6 @@ public class CommandWindow extends JPanel implements KeyListener {
 				return;
 			}
 
-			int cp = textField.getCaretPosition();
 			if (textField.getCaretPosition() <= endPos) {
 				if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
 					e.consume();

@@ -28,27 +28,42 @@ import java.util.Map;
 
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.variable.Variable;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.util.MathUtil;
 
-public class Help extends AbstractAlgorithm {
-	private static final long serialVersionUID = 8419287687514349926L;
+public class Clone extends AbstractAlgorithm {
+	private static final long serialVersionUID = 4425454677556747249L;
 
-	public static final String DESCRIPTION = "displays a help message";
+	public static final String DESCRIPTION = "target = source";
 
-	public Help(Variable... variables) {
+	public Clone(Variable... variables) {
 		super();
 		setDescription(DESCRIPTION);
+		addVariableKey(SOURCE);
+		addVariableKey(TARGET);
+		setEdgeLabel(SOURCE, "Source");
+		setEdgeLabel(TARGET, "Target");
+		setEdgeDirection(SOURCE, EdgeDirection.Incoming);
+		setEdgeDirection(TARGET, EdgeDirection.Outgoing);
+		setVariables(variables);
 	}
 
 	@Override
 	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws MatrixException {
 		Map<Object, Object> result = new HashMap<Object, Object>();
-		String s = "\n";
-		s += "Please visit http://www.jdmp.org/ for more information.\n";
-		s += "You can get a list of available commands with 'info'.\n";
-		s += "\n";
-		result.put(TARGET, s);
+		Matrix source = MathUtil.getMatrix(input.get(SOURCE));
+		Matrix target = MatrixFactory.copyFromMatrix(source);
+		result.put(TARGET, target);
 		return result;
 	}
 
+	public void setSourceVariable(Variable source) {
+		setVariable(SOURCE, source);
+	}
+
+	public void setTargetVariable(Variable target) {
+		setVariable(TARGET, target);
+	}
 }

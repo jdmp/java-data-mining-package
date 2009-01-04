@@ -29,7 +29,7 @@ import java.util.Map;
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.algorithm.AlgorithmTwoSources;
-import org.jdmp.core.algorithm.basic.Copy;
+import org.jdmp.core.algorithm.basic.Clone;
 import org.jdmp.core.algorithm.basic.LogisticFunction;
 import org.jdmp.core.algorithm.basic.Mean;
 import org.jdmp.core.algorithm.basic.Sum;
@@ -154,7 +154,7 @@ public class NetworkLayerForward extends AbstractAlgorithm {
 			a = new Tanh();
 			break;
 		case LINEAR:
-			a = new Copy();
+			a = new Clone();
 			break;
 		case TANHPLUSONE:
 			a = new TanhPlusOne();

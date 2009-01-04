@@ -21,39 +21,28 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.gui.module;
+package org.jdmp.gui.module.actions;
 
-import java.util.List;
-
+import javax.swing.Action;
 import javax.swing.JComponent;
-import javax.swing.JMenu;
 
-import org.jdmp.core.algorithm.basic.About;
-import org.jdmp.core.algorithm.basic.Help;
-import org.jdmp.core.algorithm.basic.ShowLicense;
-import org.jdmp.gui.module.actions.ModuleActions;
-import org.jdmp.gui.module.actions.ScriptAction;
-import org.ujmp.gui.menu.DefaultMenuBar;
+import org.jdmp.gui.module.ModuleGUIObject;
 
-public class ModuleMenuBar extends DefaultMenuBar {
-	private static final long serialVersionUID = 4019937863391146452L;
+public class ScriptAction extends ModuleAction {
+	private static final long serialVersionUID = -7530054655486550744L;
 
-	public ModuleMenuBar(ModuleGUIObject o) {
-		super(o);
-		JMenu menu = new JMenu("Module");
-		List<JComponent> actions = new ModuleActions(null, o);
-		for (JComponent c : actions) {
-			menu.add(c);
-		}
-		add(menu);
-		init(o);
+	private String script = null;
 
-		JMenu help = new JMenu("Help");
-		help.add(new ScriptAction(null, o, "Help", Help.DESCRIPTION, "help"));
-		help.add(new ScriptAction(null, o, "About", About.DESCRIPTION, "about"));
-		help.add(new ScriptAction(null, o, "License", ShowLicense.DESCRIPTION, "license"));
-		add(help);
-
+	public ScriptAction(JComponent c, ModuleGUIObject module, String name, String description,
+			String script) {
+		super(c, module);
+		this.script = script;
+		putValue(Action.NAME, name);
+		putValue(Action.SHORT_DESCRIPTION, description);
 	}
 
+	@Override
+	public Object call() throws Exception {
+		return getModule().getCommandWindow().execute(script);
+	}
 }

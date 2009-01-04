@@ -27,10 +27,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.jdmp.core.algorithm.basic.About;
 import org.jdmp.core.algorithm.basic.Abs;
 import org.jdmp.core.algorithm.basic.Cd;
 import org.jdmp.core.algorithm.basic.ClassPath;
-import org.jdmp.core.algorithm.basic.Copy;
+import org.jdmp.core.algorithm.basic.Clone;
 import org.jdmp.core.algorithm.basic.CreateDiskMap;
 import org.jdmp.core.algorithm.basic.CreateEmptyMatrix;
 import org.jdmp.core.algorithm.basic.CreateHenon;
@@ -62,6 +63,7 @@ import org.jdmp.core.algorithm.basic.Repeat;
 import org.jdmp.core.algorithm.basic.Seed;
 import org.jdmp.core.algorithm.basic.SerialExecution;
 import org.jdmp.core.algorithm.basic.Show;
+import org.jdmp.core.algorithm.basic.ShowLicense;
 import org.jdmp.core.algorithm.basic.Sum;
 import org.jdmp.core.algorithm.basic.Systemtime;
 import org.jdmp.core.algorithm.basic.Tanh;
@@ -69,6 +71,7 @@ import org.jdmp.core.algorithm.basic.TanhPlusOne;
 import org.jdmp.core.algorithm.basic.Threads;
 import org.jdmp.core.algorithm.basic.Times;
 import org.jdmp.core.algorithm.basic.Transpose;
+import org.jdmp.core.algorithm.basic.Version;
 import org.jdmp.core.algorithm.basic.Zeros;
 import org.ujmp.core.listmatrix.DefaultListMatrix;
 import org.ujmp.core.listmatrix.ListMatrix;
@@ -78,9 +81,10 @@ public abstract class AlgorithmMapping {
 	private static Map<String, String> mapping = new HashMap<String, String>();
 
 	static {
+		mapping.put("about", About.class.getName());
 		mapping.put("abs", Abs.class.getName());
 		mapping.put("cd", Cd.class.getName());
-		mapping.put("copy", Copy.class.getName());
+		mapping.put("clone", Clone.class.getName());
 		mapping.put("classpath", ClassPath.class.getName());
 		mapping.put("diskmap", CreateDiskMap.class.getName());
 		mapping.put("empty", CreateEmptyMatrix.class.getName());
@@ -92,13 +96,14 @@ public abstract class AlgorithmMapping {
 		mapping.put("henon", CreateHenon.class.getName());
 		mapping.put("info", Info.class.getName());
 		mapping.put("iris", CreateIris.class.getName());
+		mapping.put("license", ShowLicense.class.getName());
 		mapping.put("linreg", CreateLinReg.class.getName());
 		mapping.put("list", CreateListMatrix.class.getName());
 		mapping.put("logistic", LogisticFunction.class.getName());
 		mapping.put("logmap", Logisticmap.class.getName());
 		mapping.put("map", org.jdmp.core.algorithm.basic.CreateMapMatrix.class.getName());
 		mapping.put("mean", Mean.class.getName());
-		mapping.put("memory", Memory.class.getName());
+		mapping.put("mem", Memory.class.getName());
 		mapping.put("minus", Minus.class.getName());
 		mapping.put("mlp", CreateMLP.class.getName());
 		mapping.put("mtimes", Mtimes.class.getName());
@@ -123,6 +128,7 @@ public abstract class AlgorithmMapping {
 		mapping.put("time", Systemtime.class.getName());
 		mapping.put("times", Times.class.getName());
 		mapping.put("transpose", Transpose.class.getName());
+		mapping.put("version", Version.class.getName());
 		mapping.put("zeros", Zeros.class.getName());
 	}
 

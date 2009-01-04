@@ -26,15 +26,23 @@ package org.jdmp.gui.module;
 import javax.swing.Icon;
 
 import org.jdmp.core.module.Module;
+import org.jdmp.gui.interpreter.CommandWindow;
 import org.ujmp.gui.AbstractGUIObject;
 
 public class ModuleGUIObject extends AbstractGUIObject {
 	private static final long serialVersionUID = -317629566695423286L;
 
+	private CommandWindow commandWindow = null;
+
 	private Module module = null;
 
 	public ModuleGUIObject(Module module) {
 		this.module = module;
+		commandWindow = new CommandWindow(this.getModule());
+	}
+
+	public CommandWindow getCommandWindow() {
+		return commandWindow;
 	}
 
 	public void clear() {

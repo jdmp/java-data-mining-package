@@ -30,9 +30,18 @@ import java.io.PrintStream;
 import org.jdmp.core.module.Module;
 import org.jdmp.core.module.ModuleFactory;
 import org.jdmp.core.script.Result;
+import org.ujmp.core.UJMP;
 import org.ujmp.core.util.io.IntelligentFileReader;
 
 public class JDMP {
+
+	public static final String JDMPVERSION = "0.0.2";
+
+	public static final String UJMPVERSION = UJMP.UJMPVERSION;
+
+	public static final String AUTHOR = "Holger Arndt, A. Naegele and M. Bundschus";
+
+	public static final String COPYRIGHT = "2008-2009";
 
 	protected static final PrintStream out = System.out;
 
