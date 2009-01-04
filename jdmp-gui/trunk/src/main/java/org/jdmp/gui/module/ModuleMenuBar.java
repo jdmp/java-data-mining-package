@@ -29,6 +29,9 @@ import javax.swing.JComponent;
 import javax.swing.JMenu;
 
 import org.jdmp.core.algorithm.basic.About;
+import org.jdmp.core.algorithm.basic.CreateHenon;
+import org.jdmp.core.algorithm.basic.CreateIris;
+import org.jdmp.core.algorithm.basic.CreateSunSpotData;
 import org.jdmp.core.algorithm.basic.Help;
 import org.jdmp.core.algorithm.basic.ShowLicense;
 import org.jdmp.gui.module.actions.ModuleActions;
@@ -47,6 +50,15 @@ public class ModuleMenuBar extends DefaultMenuBar {
 		}
 		add(menu);
 		init(o);
+
+		JMenu examples = new JMenu("Examples");
+		examples.add(new ScriptAction(null, o, "SunSpot Data Matrix",
+				CreateSunSpotData.DESCRIPTION, "sunspot"));
+		examples.add(new ScriptAction(null, o, "Iris DataSet", CreateIris.DESCRIPTION,
+				"dataset=iris"));
+		examples.add(new ScriptAction(null, o, "Henon Map DataSet", CreateHenon.DESCRIPTION,
+				"dataset=henon"));
+		add(examples);
 
 		JMenu help = new JMenu("Help");
 		help.add(new ScriptAction(null, o, "Help", Help.DESCRIPTION, "help"));

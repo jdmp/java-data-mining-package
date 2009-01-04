@@ -40,6 +40,7 @@ import org.jdmp.core.algorithm.basic.CreateLinReg;
 import org.jdmp.core.algorithm.basic.CreateListMatrix;
 import org.jdmp.core.algorithm.basic.CreateMLP;
 import org.jdmp.core.algorithm.basic.CreateNaiveBayes;
+import org.jdmp.core.algorithm.basic.CreateSunSpotData;
 import org.jdmp.core.algorithm.basic.Env;
 import org.jdmp.core.algorithm.basic.Exec;
 import org.jdmp.core.algorithm.basic.Exit;
@@ -120,6 +121,7 @@ public abstract class AlgorithmMapping {
 		mapping.put("seed", Seed.class.getName());
 		mapping.put("serial", SerialExecution.class.getName());
 		mapping.put("show", Show.class.getName());
+		mapping.put("sunspot", CreateSunSpotData.class.getName());
 		mapping.put("sum", Sum.class.getName());
 		mapping.put("time", Systemtime.class.getName());
 		mapping.put("tanh", Tanh.class.getName());
