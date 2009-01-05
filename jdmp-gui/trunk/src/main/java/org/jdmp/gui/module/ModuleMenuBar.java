@@ -29,10 +29,12 @@ import javax.swing.JComponent;
 import javax.swing.JMenu;
 
 import org.jdmp.core.algorithm.basic.About;
+import org.jdmp.core.algorithm.basic.Copy;
 import org.jdmp.core.algorithm.basic.CreateHenon;
 import org.jdmp.core.algorithm.basic.CreateIris;
 import org.jdmp.core.algorithm.basic.CreateSunSpotData;
 import org.jdmp.core.algorithm.basic.Help;
+import org.jdmp.core.algorithm.basic.Paste;
 import org.jdmp.core.algorithm.basic.ShowLicense;
 import org.jdmp.gui.module.actions.ModuleActions;
 import org.jdmp.gui.module.actions.ScriptAction;
@@ -49,8 +51,14 @@ public class ModuleMenuBar extends DefaultMenuBar {
 			menu.add(c);
 		}
 		add(menu);
-		init(o);
+		
+		JMenu edit = new JMenu("Edit");
+		edit.add(new ScriptAction(null, o, "Copy", Copy.DESCRIPTION, "copy(ans)"));
+		edit.add(new ScriptAction(null, o, "Paste", Paste.DESCRIPTION, "paste"));
+		add(edit);
 
+		init(o);
+		
 		JMenu examples = new JMenu("Examples");
 		examples.add(new ScriptAction(null, o, "SunSpot Data Matrix",
 				CreateSunSpotData.DESCRIPTION, "sunspot"));

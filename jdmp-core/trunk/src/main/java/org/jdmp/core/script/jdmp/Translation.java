@@ -461,6 +461,10 @@ public class Translation extends DepthFirstAdapter {
 		} else if (factor instanceof AIdentifierLevel0) {
 			String name = ((AIdentifierLevel0) factor).getName().toString().trim();
 
+			if (ANS.equals(name) && module.getVariables().get(ANS) == null) {
+				module.getVariables().put(ANS, VariableFactory.labeledVariable(ANS));
+			}
+
 			Variable v = module.getVariables().get(name);
 			if (v != null) {
 				return v.getMatrix();
@@ -620,7 +624,11 @@ public class Translation extends DepthFirstAdapter {
 	private Object executeAlgorithm(Algorithm algorithm, PArgumentList arguments) throws Exception {
 		List<Object> matrices = getArgumentsAsObjects(arguments);
 		Map<Object, Object> ret = algorithm.calculateObjects(matrices);
-		return ret.values().iterator().next();
+		if (ret.isEmpty()) {
+			return null;
+		} else {
+			return ret.values().iterator().next();
+		}
 	}
 
 	private Algorithm getAlgorithm(String id) throws Exception {
