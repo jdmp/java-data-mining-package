@@ -40,6 +40,7 @@ import org.jdmp.core.algorithm.basic.CreateIris;
 import org.jdmp.core.algorithm.basic.CreateLinReg;
 import org.jdmp.core.algorithm.basic.CreateListMatrix;
 import org.jdmp.core.algorithm.basic.CreateMLP;
+import org.jdmp.core.algorithm.basic.CreateModule;
 import org.jdmp.core.algorithm.basic.CreateNaiveBayes;
 import org.jdmp.core.algorithm.basic.CreateSunSpotData;
 import org.jdmp.core.algorithm.basic.Env;
@@ -114,6 +115,7 @@ public abstract class AlgorithmMapping {
 		mapping.put("mem", Memory.class.getName());
 		mapping.put("minus", Minus.class.getName());
 		mapping.put("mlp", CreateMLP.class.getName());
+		mapping.put("module", CreateModule.class.getName());
 		mapping.put("mtimes", Mtimes.class.getName());
 		mapping.put("naivebayes", CreateNaiveBayes.class.getName());
 		mapping.put("ones", Ones.class.getName());

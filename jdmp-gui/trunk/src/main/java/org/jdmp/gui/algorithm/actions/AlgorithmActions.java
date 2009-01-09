@@ -32,10 +32,8 @@ import javax.swing.JSeparator;
 
 import org.jdmp.gui.algorithm.AlgorithmGUIObject;
 import org.jdmp.gui.variable.actions.VariableListActions;
-import org.ujmp.gui.actions.CopyAction;
 import org.ujmp.gui.actions.ExitAction;
 import org.ujmp.gui.actions.ExportAction;
-import org.ujmp.gui.actions.PasteAction;
 import org.ujmp.gui.actions.PrintAction;
 import org.ujmp.gui.actions.SetLabelAction;
 
@@ -45,11 +43,6 @@ public class AlgorithmActions extends ArrayList<JComponent> {
 	public AlgorithmActions(JComponent component, AlgorithmGUIObject algorithm) {
 
 		add(new JMenuItem(new ExportAction(component, algorithm)));
-
-		add(new JSeparator());
-
-		add(new JMenuItem(new CopyAction(component, algorithm)));
-		add(new JMenuItem(new PasteAction(component, algorithm)));
 
 		add(new JSeparator());
 
