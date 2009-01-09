@@ -32,6 +32,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
 import org.jdmp.core.variable.Variable;
+import org.ujmp.gui.plot.MatrixPlot;
 import org.ujmp.gui.renderer.MatrixRenderer;
 
 public class VariableTableCellRenderer implements TableCellRenderer {
@@ -41,12 +42,19 @@ public class VariableTableCellRenderer implements TableCellRenderer {
 
 	private final MatrixRenderer matrixRenderer = new MatrixRenderer();
 
-	// private final Matrix3DTableCellRenderer timeSeriesRenderer = new
-	// Matrix3DTableCellRenderer();
+	private final MatrixPlot matrixPlot = new MatrixPlot();
 
 	private Variable variable = null;
 
 	private Object o = null;
+
+	public VariableTableCellRenderer() {
+		matrixPlot.getPlotSettings().setShowXAxis(false);
+		matrixPlot.getPlotSettings().setShowYAxis(false);
+		matrixPlot.getPlotSettings().setShowXGrid(false);
+		matrixPlot.getPlotSettings().setShowYGrid(false);
+		matrixPlot.getPlotSettings().setTimeLimit(10);
+	}
 
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
 			boolean hasFocus, int row, int column) {
@@ -72,11 +80,9 @@ public class VariableTableCellRenderer implements TableCellRenderer {
 			case VariableListTableModel.MEMORYSIZECOLUMN:
 				o = variable.getMemorySize();
 				break;
-			case VariableListTableModel.HISTORYCOLUMN:
-				// return
-				// timeSeriesRenderer.getTableCellRendererComponent(table,
-				// variable
-				// .getMatrixList(), isSelected, hasFocus, row, column);
+			case VariableListTableModel.PLOTCOLUMN:
+				return matrixPlot.getTableCellRendererComponent(table, variable.getMatrix(),
+						isSelected, hasFocus, row, column);
 			case VariableListTableModel.MATRIXCOLUMN:
 				return matrixRenderer.getTableCellRendererComponent(table, variable.getMatrix(),
 						isSelected, hasFocus, row, column);

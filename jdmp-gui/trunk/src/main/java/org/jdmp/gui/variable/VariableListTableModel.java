@@ -41,7 +41,7 @@ public class VariableListTableModel extends AbstractTableModel implements ListDa
 
 	public static final int MATRIXCOLUMN = 3;
 
-	public static final int HISTORYCOLUMN = 4;
+	public static final int PLOTCOLUMN = 4;
 
 	public static final int MATRIXCOUNTCOLUMN = 5;
 
@@ -73,8 +73,8 @@ public class VariableListTableModel extends AbstractTableModel implements ListDa
 			return "Size";
 		case MATRIXCOLUMN:
 			return "Matrix";
-		case HISTORYCOLUMN:
-			return "History";
+		case PLOTCOLUMN:
+			return "Plot";
 		case MATRIXCOUNTCOLUMN:
 			return "MatrixCount";
 		case MEMORYSIZECOLUMN:
