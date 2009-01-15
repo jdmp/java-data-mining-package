@@ -169,6 +169,20 @@
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-bpca</artifactId>
+			<version>${ujmp.version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-lsimpute</artifactId>
+			<version>${ujmp.version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jung</artifactId>
 			<version>${ujmp.version}</version>
 			<classifier>tests</classifier>
@@ -230,6 +244,7 @@
 			<classifier>tests</classifier>
 			<scope>test</scope>
 		</dependency>
+		
 		
 
 
