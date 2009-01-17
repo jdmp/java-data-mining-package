@@ -25,11 +25,9 @@ package org.jdmp.gui.sample;
 
 import java.util.Comparator;
 
-import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import org.jdmp.core.CoreObject;
-import org.jdmp.core.sample.ClassificationSample;
 import org.jdmp.core.sample.HasSamples;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.gui.util.AbstractListPanel;
@@ -53,31 +51,19 @@ public class SampleListPanel extends AbstractListPanel {
 
 		jTable.setModel(dataModel);
 
-		TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(jTable.getModel()) {
-
-			@Override
-			public Comparator<?> getComparator(int column) {
-				switch (column) {
-				case SampleListTableModel.RMSECOLUMN:
-					return new Comparator<ClassificationSample>() {
-
-						public int compare(ClassificationSample s1, ClassificationSample s2) {
-							Matrix m1 = s1.getMatrix(Sample.RMSE);
-							Matrix m2 = s2.getMatrix(Sample.RMSE);
-							if (m1 != null && m2 != null) {
-								return m1.compareTo(m2);
-							} else {
-								return 0;
-							}
-						}
-
-					};
-				}
-				return super.getComparator(column);
-			}
-
-		};
-		jTable.setRowSorter(sorter);
+		TableRowSorter<?> rs = (TableRowSorter<?>) jTable.getRowSorter();
+		rs.setComparator(SampleListTableModel.PROBABILITYCOLUMN, new SampleCollator(
+				Sample.PROBABILITY));
+		rs.setComparator(SampleListTableModel.RMSECOLUMN, new SampleCollator(Sample.RMSE));
+		rs.setComparator(SampleListTableModel.COUNTCOLUMN, new SampleCollator(Sample.COUNT));
+		rs.setComparator(SampleListTableModel.INPUTCOLUMN, new SampleCollator(Sample.INPUT));
+		rs.setComparator(SampleListTableModel.TARGETCOLUMN, new SampleCollator(Sample.TARGET));
+		rs.setComparator(SampleListTableModel.DIFFERENCECOLUMN, new SampleCollator(
+				Sample.DIFFERENCE));
+		rs
+				.setComparator(SampleListTableModel.PREDICTEDCOLUMN, new SampleCollator(
+						Sample.PREDICTED));
+		rs.setComparator(SampleListTableModel.WEIGHTCOLUMN, new SampleCollator(Sample.WEIGHT));
 
 		jTable.getColumnModel().getColumn(SampleListTableModel.ICONCOLUMN).setMinWidth(ICONWIDTH);
 		jTable.getColumnModel().getColumn(SampleListTableModel.ICONCOLUMN).setMaxWidth(ICONWIDTH);
@@ -87,9 +73,35 @@ public class SampleListPanel extends AbstractListPanel {
 		updateTitle();
 	}
 
+	@Override
 	public void updateTitle() {
 		getBorder().setTitle("Samples (" + jTable.getRowCount() + ")");
 		repaint(1000);
+	}
+
+}
+
+class SampleCollator implements Comparator {
+
+	private String column = null;
+
+	public SampleCollator(String column) {
+		this.column = column;
+	}
+
+	@Override
+	public int compare(Object source, Object target) {
+		return compare((Sample) source, (Sample) target);
+	}
+
+	public int compare(Sample s1, Sample s2) {
+		Matrix m1 = s1.getMatrix(column);
+		Matrix m2 = s2.getMatrix(column);
+		if (m1 != null && m2 != null) {
+			return m1.compareTo(m2);
+		} else {
+			return 0;
+		}
 	}
 
 }

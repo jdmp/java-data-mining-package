@@ -49,6 +49,10 @@ public class SampleListTableModel extends AbstractTableModel implements ListData
 
 	public static final int RMSECOLUMN = 7;
 
+	public static final int COUNTCOLUMN = 8;
+
+	public static final int PROBABILITYCOLUMN = 9;
+
 	private HasSamples iSamples = null;
 
 	public SampleListTableModel(HasSamples iSamples) {
@@ -61,7 +65,7 @@ public class SampleListTableModel extends AbstractTableModel implements ListData
 	}
 
 	public int getColumnCount() {
-		return 8;
+		return 10;
 	}
 
 	@Override
@@ -83,6 +87,10 @@ public class SampleListTableModel extends AbstractTableModel implements ListData
 			return "Difference";
 		case RMSECOLUMN:
 			return "RMSE";
+		case COUNTCOLUMN:
+			return "Count";
+		case PROBABILITYCOLUMN:
+			return "Probability";
 		default:
 			return "unknown";
 		}

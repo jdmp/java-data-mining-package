@@ -63,13 +63,15 @@ public class DefaultSample extends AbstractSample {
 	}
 
 	public DefaultSample(String label) {
-		super(label);
+		super();
+		setLabel(label);
 	}
 
 	public DefaultSample() {
 		super();
 	}
 
+	@Override
 	public DefaultSample clone() {
 		DefaultSample s = new DefaultSample();
 		Matrix input = getMatrix(INPUT);

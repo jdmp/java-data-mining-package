@@ -26,19 +26,34 @@ package org.jdmp.core.sample;
 import java.util.Collection;
 
 import org.ujmp.core.Matrix;
-import org.ujmp.core.setmatrix.DefaultSetMatrix;
+import org.ujmp.core.listmatrix.DefaultListMatrix;
 
 public class RelationalSample extends DefaultSample {
 	private static final long serialVersionUID = -277834378747296531L;
 
+	public RelationalSample() {
+		super();
+	}
+
+	public RelationalSample(String label) {
+		super(label);
+	}
+
+	public RelationalSample(Collection<?> products) {
+		super();
+		for (Object o : products) {
+			addObject(o);
+		}
+	}
+
 	public void addObject(Object o) {
 		Matrix input = getMatrix(INPUT);
 		if (input == null) {
-			input = new DefaultSetMatrix<Object>();
+			input = new DefaultListMatrix<Object>();
 			setMatrix(INPUT, input);
 		}
 		if (!(input instanceof Collection<?>)) {
-			input = new DefaultSetMatrix<Object>(input);
+			input = new DefaultListMatrix<Object>(input);
 			setMatrix(INPUT, input);
 		}
 		((Collection) input).add(o);
@@ -47,14 +62,27 @@ public class RelationalSample extends DefaultSample {
 	public void removeObject(Object o) {
 		Matrix input = getMatrix(INPUT);
 		if (input == null) {
-			input = new DefaultSetMatrix<Object>();
+			input = new DefaultListMatrix<Object>();
 			setMatrix(INPUT, input);
 		}
 		if (!(input instanceof Collection<?>)) {
-			input = new DefaultSetMatrix<Object>(input);
+			input = new DefaultListMatrix<Object>(input);
 			setMatrix(INPUT, input);
 		}
 		((Collection<?>) input).remove(o);
+	}
+
+	public Collection<?> getObjects() {
+		Matrix input = getMatrix(INPUT);
+		if (input == null) {
+			input = new DefaultListMatrix<Object>();
+			setMatrix(INPUT, input);
+		}
+		if (!(input instanceof Collection<?>)) {
+			input = new DefaultListMatrix<Object>(input);
+			setMatrix(INPUT, input);
+		}
+		return (Collection<?>) input;
 	}
 
 }

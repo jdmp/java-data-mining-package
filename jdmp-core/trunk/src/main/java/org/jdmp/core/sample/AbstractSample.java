@@ -39,11 +39,6 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 		super();
 	}
 
-	public AbstractSample(String label) {
-		this();
-		setLabel(label);
-	}
-
 	@Override
 	public abstract Sample clone();
 

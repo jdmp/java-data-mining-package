@@ -34,7 +34,6 @@ import javax.swing.table.TableCellRenderer;
 import org.jdmp.core.algorithm.regression.Regressor;
 import org.jdmp.core.sample.DefaultSample;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.variable.Variable;
 import org.ujmp.gui.renderer.MatrixRenderer;
 
 public class SampleTableCellRenderer implements TableCellRenderer {
@@ -50,8 +49,6 @@ public class SampleTableCellRenderer implements TableCellRenderer {
 	private Object o = null;
 
 	private JLabel c = null;
-
-	private final Variable v = null;
 
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
 			boolean hasFocus, int row, int column) {
@@ -75,6 +72,12 @@ public class SampleTableCellRenderer implements TableCellRenderer {
 			case SampleListTableModel.PREDICTEDCOLUMN:
 				return matrixRenderer.getTableCellRendererComponent(table, sample
 						.getMatrix(Sample.PREDICTED), isSelected, hasFocus, row, column);
+			case SampleListTableModel.COUNTCOLUMN:
+				return matrixRenderer.getTableCellRendererComponent(table, sample
+						.getMatrix(Sample.COUNT), isSelected, hasFocus, row, column);
+			case SampleListTableModel.PROBABILITYCOLUMN:
+				return matrixRenderer.getTableCellRendererComponent(table, sample
+						.getMatrix(Sample.PROBABILITY), isSelected, hasFocus, row, column);
 			case SampleListTableModel.WEIGHTCOLUMN:
 				return matrixRenderer.getTableCellRendererComponent(table, sample
 						.getMatrix(Sample.WEIGHT), isSelected, hasFocus, row, column);

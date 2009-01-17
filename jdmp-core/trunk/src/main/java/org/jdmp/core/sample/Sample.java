@@ -30,17 +30,21 @@ import org.jdmp.core.variable.HasVariableMap;
 
 public interface Sample extends CoreObject, HasVariableMap {
 
-	public static final Object INPUT = Regressor.INPUT;
+	public static final String INPUT = Regressor.INPUT;
 
-	public static final Object WEIGHT = Regressor.WEIGHT;
+	public static final String PROBABILITY = "Probability";
 
-	public static final Object TARGET = Algorithm.TARGET;
+	public static final String COUNT = "Count";
 
-	public static final Object PREDICTED = Regressor.PREDICTED;
+	public static final String WEIGHT = Regressor.WEIGHT;
 
-	public static final Object RMSE = Regressor.RMSE;
+	public static final String TARGET = Algorithm.TARGET;
 
-	public static final Object DIFFERENCE = Regressor.DIFFERENCE;
+	public static final String PREDICTED = Regressor.PREDICTED;
+
+	public static final String RMSE = Regressor.RMSE;
+
+	public static final String DIFFERENCE = Regressor.DIFFERENCE;
 
 	public Sample clone();
 
