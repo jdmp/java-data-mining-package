@@ -21,37 +21,40 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.weka.wrappers;
+package org.jdmp.core.sample;
+
+import java.util.Collection;
 
 import org.ujmp.core.Matrix;
-import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.setmatrix.DefaultSetMatrix;
 
-import weka.core.Instance;
+public class RelationalSample extends DefaultSample {
+	private static final long serialVersionUID = -277834378747296531L;
 
-public class SampleToInstanceWrapper extends Instance {
-	private static final long serialVersionUID = 6525723600252564795L;
+	public void addObject(Object o) {
+		Matrix input = getMatrix(INPUT);
+		if (input == null) {
+			input = new DefaultSetMatrix<Object>();
+			setMatrix(INPUT, input);
+		}
+		if (!(input instanceof Collection<?>)) {
+			input = new DefaultSetMatrix<Object>(input);
+			setMatrix(INPUT, input);
+		}
+		((Collection) input).add(o);
+	}
 
-	public SampleToInstanceWrapper(Matrix input, Matrix sampleWeight, Matrix targetOutput,
-			boolean discrete, boolean includeTarget) throws MatrixException {
-		super((int) input.getColumnCount() + 1);
-		if (sampleWeight != null) {
-			setWeight(sampleWeight.doubleValue());
-		} else {
-			setWeight(1.0);
+	public void removeObject(Object o) {
+		Matrix input = getMatrix(INPUT);
+		if (input == null) {
+			input = new DefaultSetMatrix<Object>();
+			setMatrix(INPUT, input);
 		}
-		if (input != null) {
-			for (int i = 0; i < input.getColumnCount(); i++) {
-				if (discrete) {
-					setValue(i, (int) input.getAsDouble(0, i));
-				} else {
-					setValue(i, input.getAsDouble(0, i));
-				}
-			}
+		if (!(input instanceof Collection<?>)) {
+			input = new DefaultSetMatrix<Object>(input);
+			setMatrix(INPUT, input);
 		}
-		if (includeTarget && targetOutput != null) {
-			long[] c = targetOutput.getCoordinatesOfMaximum();
-			setValue((int) input.getColumnCount(), c[Matrix.COLUMN]);
-		}
+		((Collection<?>) input).remove(o);
 	}
 
 }

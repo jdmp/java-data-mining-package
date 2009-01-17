@@ -50,8 +50,8 @@ public class Ones extends AlgorithmTwoSources {
 		Matrix source1 = MathUtil.getMatrix(input.get(SOURCE1));
 		Matrix source2 = MathUtil.getMatrix(input.get(SOURCE2));
 
-		result.put(TARGET, MatrixFactory.ones((long) source1.getDoubleValue(), (long) source2
-				.getDoubleValue()));
+		result.put(TARGET, MatrixFactory.ones((long) source1.doubleValue(), (long) source2
+				.doubleValue()));
 
 		return result;
 

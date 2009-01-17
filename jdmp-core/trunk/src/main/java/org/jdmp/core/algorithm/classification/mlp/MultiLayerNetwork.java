@@ -280,7 +280,7 @@ public class MultiLayerNetwork extends AbstractClassifier {
 		if (sampleWeight == null) {
 			sampleWeight = MatrixFactory.linkToValue(1.0);
 		}
-		setSampleWeight(sampleWeight.getDoubleValue());
+		setSampleWeight(sampleWeight.doubleValue());
 		predict(input, sampleWeight);
 		getOutputErrorAlgorithm().calculate();
 

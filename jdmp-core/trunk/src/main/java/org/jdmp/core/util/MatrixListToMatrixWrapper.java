@@ -5,9 +5,9 @@ import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.interfaces.Wrapper;
-import org.ujmp.core.objectmatrix.AbstractDenseMatrix2D;
+import org.ujmp.core.objectmatrix.AbstractDenseObjectMatrix2D;
 
-public class MatrixListToMatrixWrapper extends AbstractDenseMatrix2D implements Wrapper<MatrixList> {
+public class MatrixListToMatrixWrapper extends AbstractDenseObjectMatrix2D implements Wrapper<MatrixList> {
 	private static final long serialVersionUID = 3023715319099124633L;
 
 	private MatrixList matrixList = null;

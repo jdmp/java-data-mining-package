@@ -695,7 +695,7 @@ public class Translation extends DepthFirstAdapter {
 		} else if (c == String.class) {
 			return StringUtil.convert(m);
 		} else if (c == RegressionDataSet.class) {
-			return (RegressionDataSet) m;
+			return m;
 		}
 		MatrixException e = new MatrixException("cannot convert to desired object type "
 				+ c.getSimpleName());
@@ -763,7 +763,7 @@ public class Translation extends DepthFirstAdapter {
 		if (m.isScalar()) {
 			return m.getObject(0, 0);
 		} else {
-			return m.getEuklideanValue();
+			return m.doubleValue();
 		}
 	}
 

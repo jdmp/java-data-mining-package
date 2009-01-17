@@ -128,7 +128,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 	public double getEarlyStoppingErrorCount(int numberOfSteps) {
 		int index = getEarlyStoppingIndex(numberOfSteps);
 		if (index >= 0) {
-			return getErrorCountVariable().getMatrix(index).getEuklideanValue();
+			return getErrorCountVariable().getMatrix(index).doubleValue();
 		}
 		return -1;
 	}
@@ -223,7 +223,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 	}
 
 	public int getErrorCount() throws MatrixException {
-		return (int) getErrorCountVariable().getMatrix().getEuklideanValue();
+		return (int) getErrorCountVariable().getMatrix().doubleValue();
 	}
 
 	public Variable getAccuracyVariable() {
@@ -243,7 +243,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 	}
 
 	public double getAccuracy() throws MatrixException {
-		return getAccuracyVariable().getMatrix().getEuklideanValue();
+		return getAccuracyVariable().getMatrix().doubleValue();
 	}
 
 	public double getMaxAccuracy() throws MatrixException {
@@ -354,7 +354,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 	public double getEarlyStoppingAccuracy(int numberOfSteps) {
 		int index = getEarlyStoppingIndex(numberOfSteps);
 		if (index >= 0) {
-			return getAccuracyVariable().getMatrix(index).getEuklideanValue();
+			return getAccuracyVariable().getMatrix(index).doubleValue();
 		}
 		return -1;
 	}

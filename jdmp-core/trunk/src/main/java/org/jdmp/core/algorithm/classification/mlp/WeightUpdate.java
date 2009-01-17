@@ -71,7 +71,7 @@ public class WeightUpdate extends AlgorithmFiveSources {
 	}
 
 	public double getLearningRate() {
-		return getMatrixFromVariable(ETA).getEuklideanValue();
+		return getMatrixFromVariable(ETA).doubleValue();
 	}
 
 	public void setSampleWeight(double v) {
@@ -85,9 +85,9 @@ public class WeightUpdate extends AlgorithmFiveSources {
 		Map<Object, Object> result = new HashMap<Object, Object>();
 
 		Matrix weight = MathUtil.getMatrix(matrices.get(WEIGHT));
-		double eta = MathUtil.getMatrix(matrices.get(ETA)).getDoubleValue();
+		double eta = MathUtil.getMatrix(matrices.get(ETA)).doubleValue();
 		Matrix contactDeviation = MathUtil.getMatrix(matrices.get(CONTACTDEVIATION));
-		double sampleWeight = MathUtil.getMatrix(matrices.get(SAMPLEWEIGHT)).getDoubleValue();
+		double sampleWeight = MathUtil.getMatrix(matrices.get(SAMPLEWEIGHT)).doubleValue();
 
 		Matrix transposedInput = MathUtil.getMatrix(matrices.get(INPUT)).toColumnVector();
 
@@ -109,7 +109,7 @@ public class WeightUpdate extends AlgorithmFiveSources {
 		}
 
 		double totalValueCount = transposedInput.getValueCount();
-		double missingValueCount = transposedInput.countMissing(Ret.NEW, ALL).getEuklideanValue();
+		double missingValueCount = transposedInput.countMissing(Ret.NEW, ALL).doubleValue();
 
 		double boost = 1.0;
 

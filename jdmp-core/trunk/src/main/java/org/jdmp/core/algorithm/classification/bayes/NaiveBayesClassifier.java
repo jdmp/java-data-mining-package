@@ -61,7 +61,7 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 			logs[i] = Math.log(classDists.getProbability(i));
 			for (int j = 0; j < input.getColumnCount(); j++) {
 				int val = (int) input.getAsDouble(0, j);
-				logs[i] += Math.log(dists[j][i].getProbability((double) val));
+				logs[i] += Math.log(dists[j][i].getProbability(val));
 			}
 		}
 		double[] probs = logToProbs(logs);
@@ -124,12 +124,12 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 			double weight = 1.0;
 			Matrix w = s.getMatrix(WEIGHT);
 			if (w != null) {
-				weight = w.getEuklideanValue();
+				weight = w.doubleValue();
 			}
 			int outputVal = (int) sampleTarget.getAsDouble(0, 0);
 			for (int j = 0; j < sampleInput.getColumnCount(); j++) {
 				int inputVal = (int) sampleInput.getAsDouble(0, j);
-				dists[j][outputVal].addValue((double) inputVal, weight);
+				dists[j][outputVal].addValue(inputVal, weight);
 			}
 			classDists.addValue(outputVal, weight);
 		}

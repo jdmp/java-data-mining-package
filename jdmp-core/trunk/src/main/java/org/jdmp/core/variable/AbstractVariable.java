@@ -73,7 +73,7 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 
 	public final double getValue() throws MatrixException {
 		if (getMatrix() != null)
-			return getMatrix().getEuklideanValue();
+			return getMatrix().doubleValue();
 		else
 			return 0.0;
 	}
