@@ -34,6 +34,7 @@ public class TestMLP extends TestCase {
 
 	public void testMLP() throws Exception {
 		ClassificationDataSet iris = DataSetFactory.IRIS();
+
 		iris.standardize(Matrix.ROW);
 		MultiLayerNetwork mlp = new MultiLayerNetwork(10);
 		mlp.setLearningRate(0.01);

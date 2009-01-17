@@ -68,10 +68,7 @@ public class DataSetInputMatrixWrapper extends AbstractDenseDoubleMatrix2D imple
 				if (p.getMatrix(INPUT) != null) {
 					long r = column / p.getMatrix(INPUT).getColumnCount();
 					long c = column % p.getMatrix(INPUT).getColumnCount();
-					Matrix m = p.getMatrix(INPUT);
-					if (r < m.getColumnCount() && c < m.getRowCount()) {
-						return p.getMatrix(INPUT).getAsDouble(r, c);
-					}
+					return p.getMatrix(INPUT).getAsDouble(r, c);
 				}
 			}
 			return 0.0;
