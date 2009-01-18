@@ -26,7 +26,7 @@ package org.jdmp.mantissa;
 import org.jdmp.mantissa.MantissaMatrix2D;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.exceptions.MatrixException;
-import org.ujmp.core.util.test.AbstractMatrixTest;
+import org.ujmp.core.implementations.AbstractMatrixTest;
 
 public class TestMantissaMatrix2D extends AbstractMatrixTest {
 
