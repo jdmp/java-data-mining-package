@@ -47,10 +47,11 @@ public class ClassificationSample extends DefaultSample {
 		return getTargetClass() == getRecognizedClass();
 	}
 
+	@Override
 	public ClassificationSample clone() {
 		ClassificationSample s = new ClassificationSample();
-		s.setMatrix(INPUT, getMatrix(INPUT).clone());
-		s.setMatrix(TARGET, getMatrix(TARGET).clone());
+		s.setMatrix(INPUT, getMatrix(INPUT).copy());
+		s.setMatrix(TARGET, getMatrix(TARGET).copy());
 		return s;
 	}
 

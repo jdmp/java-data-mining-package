@@ -1,31 +1,30 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
 	 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<properties>
-      <jdmp.version>0.0.3</jdmp.version>
-      <ujmp.version>0.2.0</ujmp.version>
-    </properties>
+		<jdmp.version>0.0.3</jdmp.version>
+		<ujmp.version>0.2.1</ujmp.version>
+	</properties>
 
 	<groupId>org.jdmp</groupId>
 	<artifactId>jdmp</artifactId>
 	<version>0.0.3</version>
 	<packaging>pom</packaging>
-    <url>http://www.jdmp.org</url>
+	<url>http://www.jdmp.org</url>
 
 	<build>
-    <resources>
-      <resource>
-        <targetPath>META-INF</targetPath>
-        <filtering>false</filtering>
-        <directory>${basedir}/src/main/resource/META-INF</directory>
-        <includes>
-          <include>**</include>
-        </includes>
-      </resource>
-    </resources>
+		<resources>
+			<resource>
+				<targetPath>META-INF</targetPath>
+				<filtering>false</filtering>
+				<directory>${basedir}/src/main/resource/META-INF</directory>
+				<includes>
+					<include>**</include>
+				</includes>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -60,12 +59,12 @@
 				</executions>
 			</plugin>
 		</plugins>
-		
+
 	</build>
 
 	<dependencyManagement>
 		<dependencies>
-			
+
 			<dependency>
 				<groupId>org.ujmp</groupId>
 				<artifactId>ujmp-complete</artifactId>
@@ -84,7 +83,7 @@
 				<version>${ujmp.version}</version>
 				<scope>compile</scope>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>org.jdmp</groupId>
 				<artifactId>jdmp-core</artifactId>
@@ -108,69 +107,69 @@
 				<artifactId>jdmp-weka</artifactId>
 				<version>${jdmp.version}</version>
 				<scope>compile</scope>
-			</dependency>		
+			</dependency>
 			<dependency>
 				<groupId>org.jdmp</groupId>
 				<artifactId>jdmp-gui</artifactId>
 				<version>${jdmp.version}</version>
 				<scope>compile</scope>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>org.jdmp</groupId>
 				<artifactId>jdmp-ehcache</artifactId>
 				<version>${jdmp.version}</version>
 				<scope>compile</scope>
-			</dependency>			
+			</dependency>
 			<dependency>
 				<groupId>org.jdmp</groupId>
 				<artifactId>jdmp-jgroups</artifactId>
 				<version>${jdmp.version}</version>
 				<scope>compile</scope>
 			</dependency>
-						
-		    <dependency>
-      			<groupId>org.jdmp</groupId>
-		        <artifactId>jdmp-jmathlib</artifactId>
-		        <version>${jdmp.version}</version>
+
+			<dependency>
+				<groupId>org.jdmp</groupId>
+				<artifactId>jdmp-jmathlib</artifactId>
+				<version>${jdmp.version}</version>
 				<scope>compile</scope>
-		    </dependency>
-		    <dependency>
-      			<groupId>org.jdmp</groupId>
-		        <artifactId>jdmp-mulan</artifactId>
-		        <version>${jdmp.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jdmp</groupId>
+				<artifactId>jdmp-mulan</artifactId>
+				<version>${jdmp.version}</version>
 				<scope>compile</scope>
-		    </dependency>
-		    <dependency>
-      			<groupId>org.jdmp</groupId>
-		        <artifactId>jdmp-datasets</artifactId>
-		        <version>${jdmp.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jdmp</groupId>
+				<artifactId>jdmp-datasets</artifactId>
+				<version>${jdmp.version}</version>
 				<scope>compile</scope>
-		    </dependency>
-		    <dependency>
-      			<groupId>org.jdmp</groupId>
-		        <artifactId>jdmp-google</artifactId>
-		        <version>${jdmp.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jdmp</groupId>
+				<artifactId>jdmp-google</artifactId>
+				<version>${jdmp.version}</version>
 				<scope>compile</scope>
-		    </dependency>
-		    <dependency>
-      			<groupId>org.jdmp</groupId>
-		        <artifactId>jdmp-mallet</artifactId>
-		        <version>${jdmp.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jdmp</groupId>
+				<artifactId>jdmp-mallet</artifactId>
+				<version>${jdmp.version}</version>
 				<scope>compile</scope>
-		    </dependency>
-		    <dependency>
-      			<groupId>org.jdmp</groupId>
-		        <artifactId>jdmp-mantissa</artifactId>
-		        <version>${jdmp.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jdmp</groupId>
+				<artifactId>jdmp-mantissa</artifactId>
+				<version>${jdmp.version}</version>
 				<scope>compile</scope>
-		    </dependency>
-		    <dependency>
-      			<groupId>org.jdmp</groupId>
-		        <artifactId>jdmp-bsh</artifactId>
-		        <version>${jdmp.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jdmp</groupId>
+				<artifactId>jdmp-bsh</artifactId>
+				<version>${jdmp.version}</version>
 				<scope>compile</scope>
-		    </dependency>
+			</dependency>
 
 
 			<dependency>
@@ -178,7 +177,7 @@
 				<artifactId>junit</artifactId>
 				<version>4.5</version>
 				<scope>test</scope>
-			</dependency>			
+			</dependency>
 
 			<dependency>
 				<groupId>dom4j</groupId>
@@ -209,7 +208,7 @@
 				<artifactId>mail</artifactId>
 				<version>1.4.1</version>
 				<scope>compile</scope>
-			</dependency>			
+			</dependency>
 			<dependency>
 				<groupId>commons-cli</groupId>
 				<artifactId>commons-cli</artifactId>
@@ -251,13 +250,13 @@
 				<artifactId>jfreechart</artifactId>
 				<version>1.0.9</version>
 				<scope>compile</scope>
-			</dependency>			
+			</dependency>
 			<dependency>
 				<groupId>log4j</groupId>
 				<artifactId>log4j</artifactId>
 				<version>1.2.14</version>
 				<scope>compile</scope>
-			</dependency>			
+			</dependency>
 			<dependency>
 				<groupId>libsvm</groupId>
 				<artifactId>libsvm</artifactId>
@@ -269,7 +268,7 @@
 				<artifactId>weka</artifactId>
 				<version>3.5.8</version>
 				<scope>compile</scope>
-			</dependency>			
+			</dependency>
 			<dependency>
 				<groupId>ehcache</groupId>
 				<artifactId>ehcache</artifactId>
@@ -287,62 +286,62 @@
 				<artifactId>jgroups</artifactId>
 				<version>2.6.3.GA</version>
 				<scope>compile</scope>
-			</dependency>	
-		    <dependency>
-      			<groupId>mulan</groupId>
-		        <artifactId>mulan</artifactId>
-		        <version>0.2</version>
+			</dependency>
+			<dependency>
+				<groupId>mulan</groupId>
+				<artifactId>mulan</artifactId>
+				<version>0.2</version>
 				<scope>compile</scope>
-		    </dependency>
-		    <dependency>
-      			<groupId>mallet</groupId>
-		        <artifactId>mallet</artifactId>
-		        <version>2.0-RC1</version>
+			</dependency>
+			<dependency>
+				<groupId>mallet</groupId>
+				<artifactId>mallet</artifactId>
+				<version>2.0-RC1</version>
 				<scope>compile</scope>
-		    </dependency>
-		    <dependency>
-      			<groupId>mallet-deps</groupId>
-		        <artifactId>mallet-deps</artifactId>
-		        <version>2.0-RC1</version>
+			</dependency>
+			<dependency>
+				<groupId>mallet-deps</groupId>
+				<artifactId>mallet-deps</artifactId>
+				<version>2.0-RC1</version>
 				<scope>compile</scope>
-		    </dependency>
-		    <dependency>
-      			<groupId>tct-core</groupId>
-      			<artifactId>tct-core</artifactId>
-      			<version>070227</version>
+			</dependency>
+			<dependency>
+				<groupId>tct-core</groupId>
+				<artifactId>tct-core</artifactId>
+				<version>070227</version>
 				<scope>compile</scope>
-    		</dependency>
-    		<dependency>
-      			<groupId>tct-matrix</groupId>
-      			<artifactId>tct-matrix</artifactId>
-      			<version>070227</version>
+			</dependency>
+			<dependency>
+				<groupId>tct-matrix</groupId>
+				<artifactId>tct-matrix</artifactId>
+				<version>070227</version>
 				<scope>compile</scope>
-    		</dependency>
-    		<dependency>
-      			<groupId>tct-text</groupId>
-      			<artifactId>tct-text</artifactId>
-      			<version>070227</version>
+			</dependency>
+			<dependency>
+				<groupId>tct-text</groupId>
+				<artifactId>tct-text</artifactId>
+				<version>070227</version>
 				<scope>compile</scope>
-    		</dependency>
-    		<dependency>
-      			<groupId>args4j</groupId>
-      			<artifactId>args4j</artifactId>
-      			<version>2.0.6</version>
+			</dependency>
+			<dependency>
+				<groupId>args4j</groupId>
+				<artifactId>args4j</artifactId>
+				<version>2.0.6</version>
 				<scope>compile</scope>
-    		</dependency>
-    		<dependency>
-      			<groupId>iText</groupId>
-      			<artifactId>iText</artifactId>
-      			<version>2.1.4</version>
+			</dependency>
+			<dependency>
+				<groupId>iText</groupId>
+				<artifactId>iText</artifactId>
+				<version>2.1.4</version>
 				<scope>compile</scope>
-    		</dependency>
-    		<dependency>
-      			<groupId>jmathlib</groupId>
-      			<artifactId>jmathlib</artifactId>
-      			<version>0.9.0</version>
+			</dependency>
+			<dependency>
+				<groupId>jmathlib</groupId>
+				<artifactId>jmathlib</artifactId>
+				<version>0.9.0</version>
 				<scope>compile</scope>
-    		</dependency>    		
-    		<dependency>
+			</dependency>
+			<dependency>
 				<groupId>jackcess</groupId>
 				<artifactId>jackcess</artifactId>
 				<version>1.1.18</version>
@@ -355,23 +354,23 @@
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
-     			  <groupId>jmathplot</groupId>
-			      <artifactId>jmathplot</artifactId>
-			      <version>20081031</version>
-				  <scope>compile</scope>
-		    </dependency>
-		    <dependency>
-     			  <groupId>sablecc</groupId>
-			      <artifactId>sablecc</artifactId>
-			      <version>3.2</version>
-				  <scope>compile</scope>
-		    </dependency>
-		    <dependency>
-     			  <groupId>mantissa</groupId>
-			      <artifactId>mantissa</artifactId>
-			      <version>7.2</version>
-				  <scope>compile</scope>
-		    </dependency>
+				<groupId>jmathplot</groupId>
+				<artifactId>jmathplot</artifactId>
+				<version>20081031</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>sablecc</groupId>
+				<artifactId>sablecc</artifactId>
+				<version>3.2</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>mantissa</groupId>
+				<artifactId>mantissa</artifactId>
+				<version>7.2</version>
+				<scope>compile</scope>
+			</dependency>
 
 		</dependencies>
 	</dependencyManagement>
@@ -381,18 +380,43 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-        		<inherited>true</inherited>
-		        <configuration>
-		        <outputDirectory>../jdmp/target/${project.version}/docs/${project.name}</outputDirectory>
-		        <reportOutputDirectory>../jdmp/target/${project.version}/docs/${project.name}</reportOutputDirectory>
-		        <linksource>true</linksource>
-		        <links>
-		          <link>http://java.sun.com/javase/6/docs/api/</link>
-		          <link>http://www.ujmp.org/ujmp/${ujmp.version}/docs/ujmp-core/apidocs</link>
-		          <link>http://www.ujmp.org/ujmp/${ujmp.version}/docs/ujmp-gui/apidocs</link>
-		          <link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-core/apidocs</link>
-		        </links>
-		        </configuration>
+				<inherited>true</inherited>
+				<configuration>
+					<outputDirectory>../jdmp/target/${project.version}/docs/${project.name}</outputDirectory>
+					<reportOutputDirectory>../jdmp/target/${project.version}/docs/${project.name}</reportOutputDirectory>
+					<linksource>true</linksource>
+					<links>
+						<link>http://java.sun.com/javase/6/docs/api/</link>
+						<link>http://www.ujmp.org/ujmp/${ujmp.version}/docs/ujmp-core/apidocs</link>
+						<link>http://www.ujmp.org/ujmp/${ujmp.version}/docs/ujmp-gui/apidocs</link>
+						<link>http://www.ujmp.org/ujmp/${ujmp.version}/docs/ujmp-bpca/apidocs</link>
+						<link>http://www.ujmp.org/ujmp/${ujmp.version}/docs/ujmp-colt/apidocs</link>
+						<link>http://www.ujmp.org/ujmp/${ujmp.version}/docs/ujmp-commonsmath/apidocs</link>
+						<link>http://www.ujmp.org/ujmp/${ujmp.version}/docs/ujmp-itext/apidocs</link>
+						<link>http://www.ujmp.org/ujmp/${ujmp.version}/docs/ujmp-jackcess/apidocs</link>
+						<link>http://www.ujmp.org/ujmp/${ujmp.version}/docs/ujmp-jama/apidocs</link>
+						<link>http://www.ujmp.org/ujmp/${ujmp.version}/docs/ujmp-jdbc/apidocs</link>
+						<link>http://www.ujmp.org/ujmp/${ujmp.version}/docs/ujmp-jexcelapi/apidocs</link>
+						<link>http://www.ujmp.org/ujmp/${ujmp.version}/docs/ujmp-jmathplot/apidocs</link>
+						<link>http://www.ujmp.org/ujmp/${ujmp.version}/docs/ujmp-jmatio/apidocs</link>
+						<link>http://www.ujmp.org/ujmp/${ujmp.version}/docs/ujmp-jmatrices/apidocs</link>
+						<link>http://www.ujmp.org/ujmp/${ujmp.version}/docs/ujmp-jung/apidocs</link>
+						<link>http://www.ujmp.org/ujmp/${ujmp.version}/docs/ujmp-lsimpute/apidocs</link>
+						<link>http://www.ujmp.org/ujmp/${ujmp.version}/docs/ujmp-mail/apidocs</link>
+						<link>http://www.ujmp.org/ujmp/${ujmp.version}/docs/ujmp-mtj/apidocs</link>
+						<link>http://www.ujmp.org/ujmp/${ujmp.version}/docs/ujmp-vecmath/apidocs</link>
+						<link>http://www.ujmp.org/ujmp/${ujmp.version}/docs/ujmp-sst/apidocs</link>
+						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-core/apidocs</link>
+						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-gui/apidocs</link>
+						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-ehcache/apidocs</link>
+						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-jgroups/apidocs</link>
+						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-libsvm/apidocs</link>
+						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-mallet/apidocs</link>
+						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-mantissa/apidocs</link>
+						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-bsh/apidocs</link>
+						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-weka/apidocs</link>
+					</links>
+				</configuration>
 			</plugin>
 		</plugins>
 	</reporting>

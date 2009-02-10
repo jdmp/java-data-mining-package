@@ -45,7 +45,7 @@ public class ReturningFunctionOne extends AlgorithmTwoSources {
 		Matrix output = MathUtil.getMatrix(input.get(SOURCE1));
 		Matrix outputdeviation = MathUtil.getMatrix(input.get(SOURCE2));
 
-		Matrix target = outputdeviation.clone();
+		Matrix target = outputdeviation.copy();
 
 		result.put("TARGET", target);
 
