@@ -103,8 +103,12 @@ public class LogMatrix extends AbstractDenseObjectMatrix2D {
 	}
 
 	public Object getObject(long row, long column) {
-		LogRecord record = HandlerWrapper.getInstance().getList().get((int) row);
-		switch ((int) column) {
+		return getObject((int) row, (int) column);
+	}
+
+	public Object getObject(int row, int column) {
+		LogRecord record = HandlerWrapper.getInstance().getList().get(row);
+		switch (column) {
 		case 0:
 			return record.getMillis();
 		case 1:
@@ -124,6 +128,9 @@ public class LogMatrix extends AbstractDenseObjectMatrix2D {
 	}
 
 	public void setObject(Object o, long row, long column) {
+	}
+
+	public void setObject(Object o, int row, int column) {
 	}
 
 }

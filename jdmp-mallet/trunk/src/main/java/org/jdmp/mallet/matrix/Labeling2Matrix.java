@@ -41,7 +41,15 @@ public class Labeling2Matrix extends AbstractSparseDoubleMatrix2D {
 		return labeling.valueAtLocation((int) column);
 	}
 
+	public double getDouble(int row, int column) {
+		return labeling.valueAtLocation(column);
+	}
+
 	public void setDouble(double value, long row, long column) {
+		throw new MatrixException("not allowed");
+	}
+
+	public void setDouble(double value, int row, int column) {
 		throw new MatrixException("not allowed");
 	}
 

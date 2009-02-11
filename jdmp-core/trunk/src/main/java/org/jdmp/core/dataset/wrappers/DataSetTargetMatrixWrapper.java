@@ -53,7 +53,15 @@ public class DataSetTargetMatrixWrapper extends AbstractDenseDoubleMatrix2D impl
 	}
 
 	public double getDouble(long row, long column) throws MatrixException {
-		Sample p = dataSet.getSamples().getElementAt((int) row);
+		return getDouble((int) row, (int) column);
+	}
+
+	public void setDouble(double value, long row, long column) throws MatrixException {
+		setDouble(value, (int) row, (int) column);
+	}
+
+	public double getDouble(int row, int column) throws MatrixException {
+		Sample p = dataSet.getSamples().getElementAt(row);
 		if (p != null) {
 			return p.getMatrix(Sample.TARGET).getAsDouble(0, column);
 		} else {
@@ -61,8 +69,8 @@ public class DataSetTargetMatrixWrapper extends AbstractDenseDoubleMatrix2D impl
 		}
 	}
 
-	public void setDouble(double value, long row, long column) throws MatrixException {
-		Sample p = dataSet.getSamples().getElementAt((int) row);
+	public void setDouble(double value, int row, int column) throws MatrixException {
+		Sample p = dataSet.getSamples().getElementAt(row);
 		if (p != null) {
 			p.getMatrix(Sample.TARGET).setAsDouble(value, 0, column);
 		}

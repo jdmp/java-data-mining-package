@@ -60,4 +60,11 @@ public class MalletOutputMatrix extends AbstractDenseDoubleMatrix2D implements
 	public void setDouble(double value, long row, long column) {
 	}
 
+	public double getDouble(int row, int column) {
+		return labelSequence.getIndexAtPosition(index) == column ? 1.0 : 0.0;
+	}
+
+	public void setDouble(double value, int row, int column) {
+	}
+
 }

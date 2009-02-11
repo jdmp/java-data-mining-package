@@ -244,6 +244,10 @@ class CountMatrix extends AbstractDenseObjectMatrix2D {
 		this.matrix = source;
 	}
 
+	public Object getObject(int row, int column) {
+		return getObject((long) row, (long) column);
+	}
+
 	@Override
 	public Object getObject(long row, long column) {
 		Object o = matrix.getObject(row, column);
@@ -256,6 +260,10 @@ class CountMatrix extends AbstractDenseObjectMatrix2D {
 
 	@Override
 	public void setObject(Object value, long row, long column) {
+	}
+
+	@Override
+	public void setObject(Object value, int row, int column) {
 	}
 
 	@Override

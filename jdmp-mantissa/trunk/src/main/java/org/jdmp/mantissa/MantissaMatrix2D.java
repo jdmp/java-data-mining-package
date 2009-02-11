@@ -57,13 +57,21 @@ public class MantissaMatrix2D extends AbstractDenseDoubleMatrix2D implements
 		return matrix.getElement((int) row, (int) column);
 	}
 
+	public double getDouble(int row, int column) {
+		return matrix.getElement(row, column);
+	}
+
 	public long[] getSize() {
-		return matrix == null ? Coordinates.ZERO2D : new long[] { matrix.getRows(),
-				matrix.getColumns() };
+		return matrix == null ? Coordinates.ZERO2D : new long[] {
+				matrix.getRows(), matrix.getColumns() };
 	}
 
 	public void setDouble(double value, long row, long column) {
 		matrix.setElement((int) row, (int) column, value);
+	}
+
+	public void setDouble(double value, int row, int column) {
+		matrix.setElement(row, column, value);
 	}
 
 	@Override

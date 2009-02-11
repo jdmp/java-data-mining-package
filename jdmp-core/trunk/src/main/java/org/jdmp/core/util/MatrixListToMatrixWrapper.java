@@ -7,7 +7,8 @@ import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.interfaces.Wrapper;
 import org.ujmp.core.objectmatrix.AbstractDenseObjectMatrix2D;
 
-public class MatrixListToMatrixWrapper extends AbstractDenseObjectMatrix2D implements Wrapper<MatrixList> {
+public class MatrixListToMatrixWrapper extends AbstractDenseObjectMatrix2D implements
+		Wrapper<MatrixList> {
 	private static final long serialVersionUID = 3023715319099124633L;
 
 	private MatrixList matrixList = null;
@@ -27,6 +28,10 @@ public class MatrixListToMatrixWrapper extends AbstractDenseObjectMatrix2D imple
 
 	}
 
+	public Object getObject(int row, int column) throws MatrixException {
+		return getObject((long) row, (long) column);
+	}
+
 	public Object getObject(long row, long column) throws MatrixException {
 		long rows = 0;
 		for (Matrix m : matrixList) {
@@ -41,6 +46,10 @@ public class MatrixListToMatrixWrapper extends AbstractDenseObjectMatrix2D imple
 			}
 		}
 		return 0.0;
+	}
+
+	public void setObject(Object value, int row, int column) throws MatrixException {
+		setObject(value, (long) row, (long) column);
 	}
 
 	public void setObject(Object value, long row, long column) throws MatrixException {
