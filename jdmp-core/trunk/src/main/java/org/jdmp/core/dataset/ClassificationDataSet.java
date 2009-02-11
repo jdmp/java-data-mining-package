@@ -154,7 +154,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 		long rows = m.getRowCount();
 		Set<Object> classes = new HashSet<Object>();
 		for (int i = 0; i < rows; i++) {
-			Object o = m.getObject(i, cols - 1);
+			Object o = m.getAsObject(i, cols - 1);
 			classes.add(o);
 		}
 
@@ -167,7 +167,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 
 		for (int i = 0; i < rows; i++) {
 			ClassificationSample s = new ClassificationSample("Sample" + i + " ("
-					+ m.getObject(i, cols - 1) + ")");
+					+ m.getAsObject(i, cols - 1) + ")");
 			Matrix input = MatrixFactory.zeros(1, cols - 1);
 			Matrix target = MatrixFactory.zeros(1, classes.size());
 
@@ -175,7 +175,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 				input.setAsDouble(m.getAsDouble(i, c), 0, c);
 			}
 
-			int classId = classList.indexOf(m.getObject(i, cols - 1));
+			int classId = classList.indexOf(m.getAsObject(i, cols - 1));
 			for (int c = 0; c < classList.size(); c++) {
 				if (classId == c) {
 					target.setAsDouble(1.0, 0, c);

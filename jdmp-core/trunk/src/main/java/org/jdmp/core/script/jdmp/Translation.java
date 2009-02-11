@@ -158,24 +158,24 @@ public class Translation extends DepthFirstAdapter {
 
 		aRow = (ARow) aArray.getRow();
 		PExpression expr = aRow.getExpression();
-		m.setObject(getSingleValue(expr), 0, 0);
+		m.setAsObject(getSingleValue(expr), 0, 0);
 		int c = 1;
 		for (PCommaValue commaValue : aRow.getAdditionalValues()) {
 			ACommaValue aCommaValue = (ACommaValue) commaValue;
 			expr = aCommaValue.getExpression();
-			m.setObject(getSingleValue(expr), 0, c++);
+			m.setAsObject(getSingleValue(expr), 0, c++);
 		}
 
 		int r = 1;
 		for (PSemicolonRow semicolonRow : aArray.getAdditionalRows()) {
 			aRow = (ARow) ((ASemicolonRow) semicolonRow).getRow();
 			expr = aRow.getExpression();
-			m.setObject(getSingleValue(expr), r, 0);
+			m.setAsObject(getSingleValue(expr), r, 0);
 			c = 1;
 			for (PCommaValue commaValue : aRow.getAdditionalValues()) {
 				ACommaValue aCommaValue = (ACommaValue) commaValue;
 				expr = aCommaValue.getExpression();
-				m.setObject(getSingleValue(expr), r, c++);
+				m.setAsObject(getSingleValue(expr), r, c++);
 			}
 			r++;
 		}
@@ -187,11 +187,11 @@ public class Translation extends DepthFirstAdapter {
 		ARow aRow = (ARow) row;
 		int columns = aRow.getAdditionalValues().size() + 1;
 		Matrix m = MatrixFactory.zeros(ValueType.OBJECT, 1, columns);
-		m.setObject(getSingleValue(aRow.getExpression()), 0, 0);
+		m.setAsObject(getSingleValue(aRow.getExpression()), 0, 0);
 		int i = 1;
 		for (PCommaValue commaValue : aRow.getAdditionalValues()) {
 			PExpression expr = ((ACommaValue) commaValue).getExpression();
-			m.setObject(getSingleValue(expr), 0, i++);
+			m.setAsObject(getSingleValue(expr), 0, i++);
 		}
 		return m;
 	}
@@ -200,11 +200,11 @@ public class Translation extends DepthFirstAdapter {
 		AColumn aColumn = (AColumn) column;
 		int rows = aColumn.getAdditionalValues().size() + 1;
 		Matrix m = MatrixFactory.zeros(ValueType.OBJECT, rows, 1);
-		m.setObject(getSingleValue(aColumn.getExpression()), 0, 0);
+		m.setAsObject(getSingleValue(aColumn.getExpression()), 0, 0);
 		int i = 1;
 		for (PSemicolonValue semicolonValue : aColumn.getAdditionalValues()) {
 			PExpression expr = ((ASemicolonValue) semicolonValue).getExpression();
-			m.setObject(getSingleValue(expr), i++, 0);
+			m.setAsObject(getSingleValue(expr), i++, 0);
 		}
 		return m;
 	}
@@ -761,7 +761,7 @@ public class Translation extends DepthFirstAdapter {
 	private Object getSingleValue(PExpression expression) throws Exception {
 		Matrix m = MathUtil.getMatrix(getObject(expression));
 		if (m.isScalar()) {
-			return m.getObject(0, 0);
+			return m.getAsObject(0, 0);
 		} else {
 			return m.doubleValue();
 		}

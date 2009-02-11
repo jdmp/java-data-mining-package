@@ -237,6 +237,7 @@ public class MarketBasketAnalysis extends AbstractRelationMiner {
 }
 
 class CountMatrix extends AbstractDenseObjectMatrix2D {
+	private static final long serialVersionUID = -3985951298755499721L;
 
 	Matrix matrix = null;
 
@@ -250,7 +251,7 @@ class CountMatrix extends AbstractDenseObjectMatrix2D {
 
 	@Override
 	public Object getObject(long row, long column) {
-		Object o = matrix.getObject(row, column);
+		Object o = matrix.getAsObject(row, column);
 		if (column == 0) {
 			return o;
 		} else {

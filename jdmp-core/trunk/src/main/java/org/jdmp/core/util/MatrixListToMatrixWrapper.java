@@ -39,7 +39,7 @@ public class MatrixListToMatrixWrapper extends AbstractDenseObjectMatrix2D imple
 			if (rows > row) {
 				long r = row - rows + m.getRowCount();
 				if (column < m.getColumnCount()) {
-					return m.getObject(r, column);
+					return m.getAsObject(r, column);
 				} else {
 					return 0.0;
 				}
@@ -59,7 +59,7 @@ public class MatrixListToMatrixWrapper extends AbstractDenseObjectMatrix2D imple
 			if (rows > row) {
 				long r = row - rows + m.getRowCount();
 				if (column < m.getColumnCount()) {
-					m.setObject(value, r, column);
+					m.setAsObject(value, r, column);
 					return;
 				} else {
 					return;
