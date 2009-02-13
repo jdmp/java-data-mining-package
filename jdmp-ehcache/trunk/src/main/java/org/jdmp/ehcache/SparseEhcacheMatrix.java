@@ -72,7 +72,7 @@ public class SparseEhcacheMatrix extends AbstractMapToSparseMatrixWrapper {
 	private void writeObject(ObjectOutputStream s) throws IOException {
 		s.defaultWriteObject();
 		for (long[] c : availableCoordinates()) {
-			s.writeObject(c);
+			s.writeObject(new Coordinates(c));
 			s.writeObject(getObject(c));
 		}
 	}
@@ -81,9 +81,9 @@ public class SparseEhcacheMatrix extends AbstractMapToSparseMatrixWrapper {
 		s.defaultReadObject();
 		while (true) {
 			try {
-				long[] c = (long[]) s.readObject();
+				Coordinates c = (Coordinates) s.readObject();
 				Object o = s.readObject();
-				setObject(o, c);
+				setObject(o, c.dimensions);
 			} catch (OptionalDataException e) {
 				return;
 			}
