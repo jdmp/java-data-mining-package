@@ -45,7 +45,6 @@ public class TestMLP extends TestCase {
 		mlp.predict(iris);
 
 		assertEquals(0.95, iris.getAccuracy(), 0.05);
-
 	}
 
 }
