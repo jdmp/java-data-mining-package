@@ -397,6 +397,9 @@
 						<link>http://www.ujmp.org/ujmp/${ujmp.version}/docs/ujmp-parallelcolt/apidocs</link>
 						<link>http://www.ujmp.org/ujmp/${ujmp.version}/docs/ujmp-ojalgo/apidocs</link>
 						<link>http://www.ujmp.org/ujmp/${ujmp.version}/docs/ujmp-mantissa/apidocs</link>
+						<link>http://www.ujmp.org/ujmp/${ujmp.version}/docs/ujmp-jscience/apidocs</link>
+						<link>http://www.ujmp.org/ujmp/${ujmp.version}/docs/ujmp-jsci/apidocs</link>
+						
 						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-core/apidocs</link>
 						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-gui/apidocs</link>
 						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-ehcache/apidocs</link>
