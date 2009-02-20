@@ -46,7 +46,7 @@ public class TestMalletClassifier extends TestCase {
 		ClassificationDataSet iris = DataSetFactory.IRIS();
 		Classifier c = new MalletClassifier(MalletClassifiers.AdaBoost);
 		ListMatrix<Double> results = CrossValidation.run(c, iris, 10, 10, 0);
-		assertEquals(0.93, results.getMeanValue(), 0.01);
+		assertEquals(0.93, results.getMeanValue(), 0.02);
 	}
 
 	public void testMalletNaiveBayes() throws Exception {
