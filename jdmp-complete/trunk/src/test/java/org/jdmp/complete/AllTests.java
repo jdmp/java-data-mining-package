@@ -37,7 +37,6 @@ public class AllTests extends TestSuite {
 		// suite.addTest(org.jdmp.jgroups.AllTests.suite());
 		suite.addTest(org.jdmp.libsvm.AllTests.suite());
 		suite.addTest(org.jdmp.mallet.AllTests.suite());
-		suite.addTest(org.jdmp.mantissa.AllTests.suite());
 		suite.addTest(org.jdmp.weka.AllTests.suite());
 		suite.addTest(org.jdmp.bsh.AllTests.suite());
 		return suite;
