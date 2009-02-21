@@ -53,7 +53,7 @@ public class ClassPath extends AbstractAlgorithm {
 		Map<Object, Object> result = new HashMap<Object, Object>();
 
 		URLClassLoader sysloader = (URLClassLoader) ClassLoader.getSystemClassLoader();
-		ListMatrix<Object> m = new DefaultListMatrix<Object>(sysloader.getURLs());
+		ListMatrix<Object> m = new DefaultListMatrix<Object>((Object[]) sysloader.getURLs());
 
 		result.put(TARGET, m);
 		return result;
