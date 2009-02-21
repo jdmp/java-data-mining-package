@@ -104,7 +104,7 @@ public class JDMP {
 
 	public static void run() throws Exception {
 		out.println("/*");
-		out.println(" *       Welcome to the Java Data Mining Package (JDMP)");
+		out.println(" * Welcome to the Java Data Mining Package (JDMP) v" + JDMPVERSION);
 		out.println(" * Copyright (C) 2008-2009 Holger Arndt, A. Naegele and M. Bundschus");
 		out.println(" *");
 		out.println(" * JDMP is free software; you can redistribute it and/or modify");
