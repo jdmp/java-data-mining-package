@@ -226,6 +226,13 @@
 			<classifier>tests</classifier>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-lucene</artifactId>
+			<version>${ujmp.version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
 		
 		
 		<dependency>
