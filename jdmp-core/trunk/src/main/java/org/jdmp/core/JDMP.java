@@ -35,7 +35,7 @@ import org.ujmp.core.util.io.IntelligentFileReader;
 
 public class JDMP {
 
-	public static final String JDMPVERSION = "0.0.2";
+	public static final String JDMPVERSION = "0.0.3";
 
 	public static final String UJMPVERSION = UJMP.UJMPVERSION;
 
