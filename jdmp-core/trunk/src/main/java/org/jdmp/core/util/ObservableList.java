@@ -39,6 +39,10 @@ public class ObservableList<V> extends AbstractListModel implements CoreObjectLi
 		values = new ArrayList<V>();
 	}
 
+	public ObservableList(List<V> values) {
+		this.values = values;
+	}
+
 	public synchronized V getElementAt(int index) {
 		return values.get(index);
 	}

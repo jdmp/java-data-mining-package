@@ -44,7 +44,7 @@ public abstract class SampleFactory {
 		return s;
 	}
 
-	public static final Sample linkToMap(Map<Object, Object> map) {
+	public static final Sample linkToMap(Map<?, ?> map) {
 		Sample s = new DefaultSample();
 		for (Object k : map.keySet()) {
 			Object v = map.get(k);
