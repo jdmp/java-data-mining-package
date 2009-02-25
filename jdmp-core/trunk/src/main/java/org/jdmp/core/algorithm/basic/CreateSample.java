@@ -68,7 +68,7 @@ public class CreateSample extends AbstractAlgorithm {
 		if (in == null && target == null) {
 			s = SampleFactory.emptySample();
 		} else if (in != null && target == null) {
-			s = SampleFactory.basicSample(in);
+			s = SampleFactory.linkToMatrix(in);
 		} else if (in != null && target != null) {
 			s = SampleFactory.classificationSample(in, target);
 		}

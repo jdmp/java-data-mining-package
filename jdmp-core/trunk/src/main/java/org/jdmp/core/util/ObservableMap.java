@@ -27,10 +27,12 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 import javax.swing.AbstractListModel;
 
-public class ObservableMap<V> extends AbstractListModel implements CoreObjectList<V> {
+public class ObservableMap<V> extends AbstractListModel implements CoreObjectList<V>,
+		Map<Object, V> {
 	private static final long serialVersionUID = -1811632376295464484L;
 
 	private Map<Object, V> map = null;
@@ -100,6 +102,43 @@ public class ObservableMap<V> extends AbstractListModel implements CoreObjectLis
 	}
 
 	public Collection<V> toCollection() {
+		return map.values();
+	}
+
+	public Set<Object> keySet() {
+		return map.keySet();
+	}
+
+	@Override
+	public boolean containsKey(Object key) {
+		return map.containsKey(key);
+	}
+
+	@Override
+	public boolean containsValue(Object value) {
+		return map.containsValue(value);
+	}
+
+	@Override
+	public Set<java.util.Map.Entry<Object, V>> entrySet() {
+		return map.entrySet();
+	}
+
+	@Override
+	public void putAll(Map<? extends Object, ? extends V> m) {
+		for (Object k : m.keySet()) {
+			V v = m.get(k);
+			put(k, v);
+		}
+	}
+
+	@Override
+	public int size() {
+		return map.size();
+	}
+
+	@Override
+	public Collection<V> values() {
 		return map.values();
 	}
 

@@ -40,6 +40,7 @@ import org.ujmp.core.Matrix;
 import org.ujmp.core.interfaces.GUIObject;
 
 public abstract class AbstractDataSet extends AbstractCoreObject implements DataSet {
+	private static final long serialVersionUID = -4168834188998259018L;
 
 	private transient GUIObject guiObject = null;
 

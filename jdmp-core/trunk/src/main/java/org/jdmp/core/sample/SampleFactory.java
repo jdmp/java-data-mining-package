@@ -24,8 +24,10 @@
 package org.jdmp.core.sample;
 
 import java.util.Collection;
+import java.util.Map;
 
 import org.ujmp.core.Matrix;
+import org.ujmp.core.MatrixFactory;
 
 public abstract class SampleFactory {
 
@@ -35,10 +37,20 @@ public abstract class SampleFactory {
 		return s;
 	}
 
-	public static final Sample basicSample(Matrix input) {
+	public static final Sample linkToMatrix(Matrix input) {
 		Sample s = new DefaultSample();
 		s.setMatrix(Sample.INPUT, input);
 		s.setLabel(input.getLabel());
+		return s;
+	}
+
+	public static final Sample linkToMap(Map<Object, Object> map) {
+		Sample s = new DefaultSample();
+		for (Object k : map.keySet()) {
+			Object v = map.get(k);
+			Matrix m = MatrixFactory.linkToValue(v);
+			s.setMatrix(k, m);
+		}
 		return s;
 	}
 
