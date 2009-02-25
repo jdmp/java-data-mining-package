@@ -33,7 +33,6 @@ import javax.swing.table.TableCellRenderer;
 
 import org.jdmp.core.algorithm.regression.Regressor;
 import org.jdmp.core.sample.DefaultSample;
-import org.jdmp.core.sample.Sample;
 import org.ujmp.gui.renderer.MatrixRenderer;
 
 public class SampleTableCellRenderer implements TableCellRenderer {
@@ -66,33 +65,9 @@ public class SampleTableCellRenderer implements TableCellRenderer {
 			case SampleListTableModel.LABELCOLUMN:
 				o = sample.getLabel();
 				break;
-			case SampleListTableModel.INPUTCOLUMN:
-				return matrixRenderer.getTableCellRendererComponent(table, sample
-						.getMatrix(Sample.INPUT), isSelected, hasFocus, row, column);
-			case SampleListTableModel.PREDICTEDCOLUMN:
-				return matrixRenderer.getTableCellRendererComponent(table, sample
-						.getMatrix(Sample.PREDICTED), isSelected, hasFocus, row, column);
-			case SampleListTableModel.COUNTCOLUMN:
-				return matrixRenderer.getTableCellRendererComponent(table, sample
-						.getMatrix(Sample.COUNT), isSelected, hasFocus, row, column);
-			case SampleListTableModel.PROBABILITYCOLUMN:
-				return matrixRenderer.getTableCellRendererComponent(table, sample
-						.getMatrix(Sample.PROBABILITY), isSelected, hasFocus, row, column);
-			case SampleListTableModel.WEIGHTCOLUMN:
-				return matrixRenderer.getTableCellRendererComponent(table, sample
-						.getMatrix(Sample.WEIGHT), isSelected, hasFocus, row, column);
-			case SampleListTableModel.TARGETCOLUMN:
-				return matrixRenderer.getTableCellRendererComponent(table, sample
-						.getMatrix(Sample.TARGET), isSelected, hasFocus, row, column);
-			case SampleListTableModel.RMSECOLUMN:
-				return matrixRenderer.getTableCellRendererComponent(table, sample
-						.getMatrix(Sample.RMSE), isSelected, hasFocus, row, column);
-			case SampleListTableModel.DIFFERENCECOLUMN:
-				return matrixRenderer.getTableCellRendererComponent(table, sample
-						.getMatrix(Sample.DIFFERENCE), isSelected, hasFocus, row, column);
 			default:
-				o = "";
-				break;
+				return matrixRenderer.getTableCellRendererComponent(table, sample.getVariables()
+						.getElementAt(column - 2).getMatrix(), isSelected, hasFocus, row, column);
 			}
 
 			c = (JLabel) renderer.getTableCellRendererComponent(table, o, isSelected, hasFocus,

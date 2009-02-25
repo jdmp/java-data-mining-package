@@ -37,22 +37,6 @@ public class SampleListTableModel extends AbstractTableModel implements ListData
 
 	public static final int LABELCOLUMN = 1;
 
-	public static final int WEIGHTCOLUMN = 2;
-
-	public static final int INPUTCOLUMN = 3;
-
-	public static final int TARGETCOLUMN = 4;
-
-	public static final int PREDICTEDCOLUMN = 5;
-
-	public static final int DIFFERENCECOLUMN = 6;
-
-	public static final int RMSECOLUMN = 7;
-
-	public static final int COUNTCOLUMN = 8;
-
-	public static final int PROBABILITYCOLUMN = 9;
-
 	private HasSamples iSamples = null;
 
 	public SampleListTableModel(HasSamples iSamples) {
@@ -65,7 +49,11 @@ public class SampleListTableModel extends AbstractTableModel implements ListData
 	}
 
 	public int getColumnCount() {
-		return 10;
+		if (iSamples.getSamples().isEmpty()) {
+			return 2;
+		} else {
+			return 2 + iSamples.getSamples().getElementAt(0).getVariables().getSize();
+		}
 	}
 
 	@Override
@@ -75,24 +63,13 @@ public class SampleListTableModel extends AbstractTableModel implements ListData
 			return "";
 		case LABELCOLUMN:
 			return "Label";
-		case WEIGHTCOLUMN:
-			return "Weight";
-		case INPUTCOLUMN:
-			return "Input";
-		case TARGETCOLUMN:
-			return "Target";
-		case PREDICTEDCOLUMN:
-			return "Predicted";
-		case DIFFERENCECOLUMN:
-			return "Difference";
-		case RMSECOLUMN:
-			return "RMSE";
-		case COUNTCOLUMN:
-			return "Count";
-		case PROBABILITYCOLUMN:
-			return "Probability";
 		default:
-			return "unknown";
+			if (iSamples.getSamples().isEmpty()) {
+				return "unknown";
+			} else {
+				return iSamples.getSamples().getElementAt(0).getVariables().getElementAt(
+						columnIndex - 2).getLabel();
+			}
 		}
 	}
 

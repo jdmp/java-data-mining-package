@@ -30,6 +30,8 @@ import javax.swing.table.TableRowSorter;
 import org.jdmp.core.CoreObject;
 import org.jdmp.core.sample.HasSamples;
 import org.jdmp.core.sample.Sample;
+import org.jdmp.core.util.ObservableMap;
+import org.jdmp.core.variable.Variable;
 import org.jdmp.gui.util.AbstractListPanel;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.interfaces.GUIObject;
@@ -52,18 +54,11 @@ public class SampleListPanel extends AbstractListPanel {
 		jTable.setModel(dataModel);
 
 		TableRowSorter<?> rs = (TableRowSorter<?>) jTable.getRowSorter();
-		rs.setComparator(SampleListTableModel.PROBABILITYCOLUMN, new SampleCollator(
-				Sample.PROBABILITY));
-		rs.setComparator(SampleListTableModel.RMSECOLUMN, new SampleCollator(Sample.RMSE));
-		rs.setComparator(SampleListTableModel.COUNTCOLUMN, new SampleCollator(Sample.COUNT));
-		rs.setComparator(SampleListTableModel.INPUTCOLUMN, new SampleCollator(Sample.INPUT));
-		rs.setComparator(SampleListTableModel.TARGETCOLUMN, new SampleCollator(Sample.TARGET));
-		rs.setComparator(SampleListTableModel.DIFFERENCECOLUMN, new SampleCollator(
-				Sample.DIFFERENCE));
-		rs
-				.setComparator(SampleListTableModel.PREDICTEDCOLUMN, new SampleCollator(
-						Sample.PREDICTED));
-		rs.setComparator(SampleListTableModel.WEIGHTCOLUMN, new SampleCollator(Sample.WEIGHT));
+		ObservableMap<Variable> variables = iSamples.getSamples().getElementAt(0).getVariables();
+		int i = 2;
+		for (Object key : variables.keySet()) {
+			rs.setComparator(i++, new SampleCollator(key));
+		}
 
 		jTable.getColumnModel().getColumn(SampleListTableModel.ICONCOLUMN).setMinWidth(ICONWIDTH);
 		jTable.getColumnModel().getColumn(SampleListTableModel.ICONCOLUMN).setMaxWidth(ICONWIDTH);
@@ -81,11 +76,11 @@ public class SampleListPanel extends AbstractListPanel {
 
 }
 
-class SampleCollator implements Comparator {
+class SampleCollator implements Comparator<Object> {
 
-	private String column = null;
+	private Object column = null;
 
-	public SampleCollator(String column) {
+	public SampleCollator(Object column) {
 		this.column = column;
 	}
 
