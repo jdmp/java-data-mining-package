@@ -32,6 +32,7 @@ import org.ujmp.core.Matrix;
 import org.ujmp.core.interfaces.GUIObject;
 
 public abstract class AbstractSample extends AbstractCoreObject implements Sample {
+	private static final long serialVersionUID = 1693258179407382419L;
 
 	private transient GUIObject guiObject = null;
 

@@ -29,6 +29,7 @@ import java.util.List;
 import org.jdmp.core.algorithm.classification.AbstractClassifier;
 import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.dataset.ClassificationDataSet;
+import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
@@ -43,7 +44,7 @@ public class MultiClassClassifier extends AbstractClassifier {
 
 	private boolean twoColumns = false;
 
-	private List<Classifier> singleClassClassifiers = new ArrayList<Classifier>();
+	private final List<Classifier> singleClassClassifiers = new ArrayList<Classifier>();
 
 	public MultiClassClassifier(Classifier singleClassClassifier, boolean twoColumns) {
 		super();
@@ -82,7 +83,7 @@ public class MultiClassClassifier extends AbstractClassifier {
 				Matrix target2 = target.minus(1).abs(Ret.NEW);
 				target = MatrixFactory.horCat(target, target2);
 			}
-			ClassificationDataSet ds = ClassificationDataSet.linkToMatrix(input, target);
+			ClassificationDataSet ds = DataSetFactory.linkToMatrix(input, target);
 			c.train(ds);
 		}
 

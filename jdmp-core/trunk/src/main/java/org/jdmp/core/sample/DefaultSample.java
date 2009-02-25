@@ -37,6 +37,10 @@ public class DefaultSample extends AbstractSample {
 
 	private String description = "";
 
+	public DefaultSample() {
+		super();
+	}
+
 	public ObservableMap<Variable> getVariables() {
 		return variableMap;
 	}
@@ -55,20 +59,6 @@ public class DefaultSample extends AbstractSample {
 
 	public final void setLabel(String label) {
 		this.label = label;
-	}
-
-	public DefaultSample(Matrix m) {
-		this(m.getLabel());
-		setMatrix(INPUT, m);
-	}
-
-	public DefaultSample(String label) {
-		super();
-		setLabel(label);
-	}
-
-	public DefaultSample() {
-		super();
 	}
 
 	@Override

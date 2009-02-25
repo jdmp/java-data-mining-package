@@ -25,13 +25,9 @@ package org.jdmp.core.dataset;
 
 import org.jdmp.core.dataset.wrappers.DataSetPredictedMatrixWrapper;
 import org.jdmp.core.dataset.wrappers.DataSetTargetMatrixWrapper;
-import org.jdmp.core.sample.DefaultSample;
-import org.jdmp.core.sample.Sample;
-import org.jdmp.core.variable.DefaultVariable;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.exceptions.MatrixException;
 
 public class RegressionDataSet extends BasicDataSet {
@@ -43,9 +39,8 @@ public class RegressionDataSet extends BasicDataSet {
 
 	public static final String TARGET = "Target";
 
-	public RegressionDataSet(String label) {
-		super(label);
-		getVariables().put(RMSE, new DefaultVariable("RMSE", 10000));
+	public RegressionDataSet() {
+		getVariables().put(RMSE, VariableFactory.labeledVariable("RMSE", 10000));
 		Matrix targetMatrix = new DataSetTargetMatrixWrapper(this);
 		Variable target = VariableFactory.labeledVariable("Target");
 		target.addMatrix(targetMatrix);
@@ -54,52 +49,6 @@ public class RegressionDataSet extends BasicDataSet {
 		Variable predicted = VariableFactory.labeledVariable("Predicted");
 		predicted.addMatrix(predictedMatrix);
 		getVariables().put(PREDICTED, predicted);
-	}
-
-	public RegressionDataSet() {
-		this(null);
-	}
-
-	public static RegressionDataSet copyFromMatrix(Matrix input, Matrix target)
-			throws MatrixException {
-		RegressionDataSet ds = new RegressionDataSet();
-		for (int i = 0; i < input.getRowCount(); i++) {
-			Sample s = new DefaultSample();
-			Matrix in = input.subMatrix(Ret.NEW, i, 0, i, input.getColumnCount() - 1);
-			Matrix out = target.subMatrix(Ret.NEW, i, 0, i, target.getColumnCount() - 1);
-			s.setMatrix(Sample.INPUT, in);
-			s.setMatrix(Sample.TARGET, out);
-			ds.getSamples().add(s);
-		}
-		return ds;
-	}
-
-	public RegressionDataSet(String label, Matrix input, Matrix target) {
-		this(label);
-		long count = input.getRowCount();
-		for (int i = 0; i < count; i++) {
-			Sample s = new DefaultSample();
-
-			Matrix si = input.subMatrix(Ret.LINK, i, 0, i, input.getColumnCount() - 1);
-			Matrix so = target.subMatrix(Ret.LINK, i, 0, i, target.getColumnCount() - 1);
-
-			s.setMatrix(Sample.INPUT, si);
-			s.setMatrix(Sample.TARGET, so);
-
-			getSamples().add(s);
-		}
-	}
-
-	public RegressionDataSet(Matrix input, Matrix targetOutput) {
-		this(null, input, targetOutput);
-	}
-
-	public static final RegressionDataSet create(String label, Matrix input, Matrix targetOutput) {
-		return new RegressionDataSet(label, input, targetOutput);
-	}
-
-	public static final RegressionDataSet create(Matrix input, Matrix targetOutput) {
-		return new RegressionDataSet(null, input, targetOutput);
 	}
 
 	public Variable getRMSEVariable() {

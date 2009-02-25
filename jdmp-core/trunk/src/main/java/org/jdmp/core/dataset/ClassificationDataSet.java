@@ -23,27 +23,20 @@
 
 package org.jdmp.core.dataset;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.Set;
-import java.util.logging.Level;
 
 import org.jdmp.core.sample.ClassificationSample;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.ObservableList;
-import org.jdmp.core.variable.DefaultVariable;
 import org.jdmp.core.variable.Variable;
+import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
-import org.ujmp.core.calculation.Calculation.Ret;
-import org.ujmp.core.enums.FileFormat;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.util.MathUtil;
 
@@ -55,50 +48,6 @@ public class ClassificationDataSet extends RegressionDataSet {
 	public static final String CONFUSION = "Confusion";
 
 	public static final String ERRORCOUNT = "ErrorCount";
-
-	public ClassificationDataSet(File file, String separator) throws MatrixException, IOException {
-		this(file.getName());
-		importFromFile(file, separator);
-	}
-
-	public static ClassificationDataSet copyFromMatrix(Matrix input, Matrix target)
-			throws MatrixException {
-		ClassificationDataSet ds = new ClassificationDataSet();
-		for (int i = 0; i < input.getRowCount(); i++) {
-			ClassificationSample s = new ClassificationSample();
-			Matrix in = input.subMatrix(Ret.NEW, i, 0, i, input.getColumnCount() - 1);
-			Matrix out = target.subMatrix(Ret.NEW, i, 0, i, target.getColumnCount() - 1);
-			s.setMatrix(Sample.INPUT, in);
-			s.setMatrix(Sample.TARGET, out);
-			ds.getSamples().add(s);
-		}
-		return ds;
-	}
-
-	public static ClassificationDataSet linkToMatrix(Matrix input, Matrix target)
-			throws MatrixException {
-		ClassificationDataSet ds = new ClassificationDataSet();
-		ds.getInputVariable().addMatrix(input);
-		ds.getTargetVariable().addMatrix(target);
-
-		for (int i = 0; i < input.getRowCount(); i++) {
-			if (i % 1000 == 0) {
-				System.out.println("Sample " + i);
-			}
-			ClassificationSample s = new ClassificationSample();
-			Matrix in = input.selectRows(Ret.LINK, i);
-			Matrix out = target.selectRows(Ret.LINK, i);
-			s.setMatrix(Sample.INPUT, in);
-			s.setMatrix(Sample.TARGET, out);
-			ds.getSamples().add(s);
-		}
-		return ds;
-	}
-
-	public ClassificationDataSet(String label) {
-		this();
-		setLabel(label);
-	}
 
 	public Matrix getClassDistribution() {
 		Matrix m = MatrixFactory.zeros(getClassCount(), 1);
@@ -135,9 +84,9 @@ public class ClassificationDataSet extends RegressionDataSet {
 
 	public ClassificationDataSet() {
 		super();
-		getVariables().put(ACCURACY, new DefaultVariable("Accuracy", 10000));
-		getVariables().put(CONFUSION, new DefaultVariable("Confusion", 1000));
-		getVariables().put(ERRORCOUNT, new DefaultVariable("Error Count", 10000));
+		getVariables().put(ACCURACY, VariableFactory.labeledVariable("Accuracy", 10000));
+		getVariables().put(CONFUSION, VariableFactory.labeledVariable("Confusion", 1000));
+		getVariables().put(ERRORCOUNT, VariableFactory.labeledVariable("Error Count", 10000));
 	}
 
 	@Override
@@ -149,69 +98,8 @@ public class ClassificationDataSet extends RegressionDataSet {
 		return ds;
 	}
 
-	public final void createFromMatrix(Matrix m) throws MatrixException {
-		long cols = m.getColumnCount();
-		long rows = m.getRowCount();
-		Set<Object> classes = new HashSet<Object>();
-		for (int i = 0; i < rows; i++) {
-			Object o = m.getAsObject(i, cols - 1);
-			classes.add(o);
-		}
-
-		// insert dummy if only one class is there
-		if (classes.size() == 1) {
-			classes.add(Double.NEGATIVE_INFINITY);
-		}
-
-		List<Object> classList = new ArrayList<Object>(classes);
-
-		for (int i = 0; i < rows; i++) {
-			ClassificationSample s = new ClassificationSample("Sample" + i + " ("
-					+ m.getAsObject(i, cols - 1) + ")");
-			Matrix input = MatrixFactory.zeros(1, cols - 1);
-			Matrix target = MatrixFactory.zeros(1, classes.size());
-
-			for (int c = 0; c < cols - 1; c++) {
-				input.setAsDouble(m.getAsDouble(i, c), 0, c);
-			}
-
-			int classId = classList.indexOf(m.getAsObject(i, cols - 1));
-			for (int c = 0; c < classList.size(); c++) {
-				if (classId == c) {
-					target.setAsDouble(1.0, 0, c);
-				} else {
-					// output.setDoubleValueAt(-1.0, 0, c);
-				}
-			}
-
-			s.setMatrix(Sample.INPUT, input);
-			s.setMatrix(Sample.TARGET, target);
-			getSamples().add(s);
-		}
-	}
-
 	public int getClassCount() {
 		return (int) getSamples().getElementAt(0).getMatrix(Sample.TARGET).getColumnCount();
-	}
-
-	public final void importFromCSV(File file, String separator) throws MatrixException,
-			IOException {
-		Matrix m = MatrixFactory.importFromFile(FileFormat.CSV, file, separator);
-		createFromMatrix(m);
-	}
-
-	public final void importFromFile(File file, String separator) throws MatrixException,
-			IOException {
-		if (file == null) {
-			logger.log(Level.WARNING, "no filename provided");
-			return;
-		}
-
-		if (file.getAbsolutePath().toLowerCase().endsWith(".csv")) {
-			importFromCSV(file, separator);
-		} else {
-			importFromCSV(file, separator);
-		}
 	}
 
 	public Variable getConfusionVariable() {
@@ -254,7 +142,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 		List<ClassificationDataSet> returnDataSets = new ArrayList<ClassificationDataSet>();
 
 		for (int i = 0; i < getClassCount(); i++) {
-			ClassificationDataSet ds = new ClassificationDataSet("Class " + i);
+			ClassificationDataSet ds = DataSetFactory.classificationDataSet("Class " + i);
 			for (Sample s : getSamples()) {
 				if (((ClassificationSample) s).getTargetClass() == i) {
 					ds.getSamples().add(s.clone());
@@ -325,10 +213,10 @@ public class ClassificationDataSet extends RegressionDataSet {
 		}
 
 		// create the data sets
-		ClassificationDataSet train = new ClassificationDataSet("TrainingSet " + idOfCVSet + "/"
-				+ numberOfCVSets + "(" + randomSeed + ")");
-		ClassificationDataSet test = new ClassificationDataSet("TestSet " + idOfCVSet + "/"
-				+ numberOfCVSets + "(" + randomSeed + ")");
+		ClassificationDataSet train = DataSetFactory.classificationDataSet("TrainingSet "
+				+ idOfCVSet + "/" + numberOfCVSets + "(" + randomSeed + ")");
+		ClassificationDataSet test = DataSetFactory.classificationDataSet("TestSet " + idOfCVSet
+				+ "/" + numberOfCVSets + "(" + randomSeed + ")");
 
 		test.getSamples().addAll(cvSets.remove(idOfCVSet));
 
@@ -360,7 +248,8 @@ public class ClassificationDataSet extends RegressionDataSet {
 	}
 
 	public ClassificationDataSet bootstrap(int numberOfSamples) {
-		ClassificationDataSet ds = new ClassificationDataSet("Bootstrap of " + getLabel());
+		ClassificationDataSet ds = DataSetFactory.classificationDataSet("Bootstrap of "
+				+ getLabel());
 		ObservableList<Sample> sampleList = getSamples();
 		for (int i = 0; i < numberOfSamples; i++) {
 			int rand = MathUtil.nextInteger(0, sampleList.getSize() - 1);

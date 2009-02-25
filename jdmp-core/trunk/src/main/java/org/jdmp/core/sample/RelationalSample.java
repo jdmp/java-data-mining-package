@@ -35,17 +35,7 @@ public class RelationalSample extends DefaultSample {
 		super();
 	}
 
-	public RelationalSample(String label) {
-		super(label);
-	}
-
-	public RelationalSample(Collection<?> products) {
-		super();
-		for (Object o : products) {
-			addObject(o);
-		}
-	}
-
+	@SuppressWarnings("unchecked")
 	public void addObject(Object o) {
 		Matrix input = getMatrix(INPUT);
 		if (input == null) {

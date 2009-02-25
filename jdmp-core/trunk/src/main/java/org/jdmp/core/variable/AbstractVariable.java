@@ -34,6 +34,7 @@ import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.interfaces.GUIObject;
 
 public abstract class AbstractVariable extends AbstractCoreObject implements Variable {
+	private static final long serialVersionUID = -3393106211967497877L;
 
 	private transient GUIObject guiObject = null;
 

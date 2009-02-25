@@ -25,12 +25,15 @@ package org.jdmp.core.variable;
 
 import java.lang.reflect.Constructor;
 
+import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.exceptions.MatrixException;
 
 public abstract class VariableFactory {
 
 	public static final Variable labeledVariable(String label) {
-		return new DefaultVariable(label);
+		Variable v = new DefaultVariable();
+		v.setLabel(label);
+		return v;
 	}
 
 	public static final Variable emptyVariable() {
@@ -45,6 +48,19 @@ public abstract class VariableFactory {
 		} catch (Exception e) {
 			throw new MatrixException(e);
 		}
+	}
+
+	public static final Variable singleValue(String label, double value) {
+		Variable v = new DefaultVariable(1);
+		v.setLabel(label);
+		v.addMatrix(MatrixFactory.linkToValue(value));
+		return v;
+	}
+
+	public static final Variable labeledVariable(String label, int memorySize) {
+		Variable v = new DefaultVariable(memorySize);
+		v.setLabel(label);
+		return v;
 	}
 
 }

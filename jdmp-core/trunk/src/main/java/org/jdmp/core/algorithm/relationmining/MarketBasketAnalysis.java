@@ -34,6 +34,7 @@ import java.util.Set;
 import org.jdmp.core.dataset.RelationalDataSet;
 import org.jdmp.core.sample.RelationalSample;
 import org.jdmp.core.sample.Sample;
+import org.jdmp.core.sample.SampleFactory;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.enums.FileFormat;
@@ -91,7 +92,7 @@ public class MarketBasketAnalysis extends AbstractRelationMiner {
 
 			Collection<?> products = getProductsInLine(data, r);
 			if (products.size() != 0) {
-				RelationalSample s = new RelationalSample(products);
+				RelationalSample s = SampleFactory.relationalSample(products);
 				orig.getSamples().add(s);
 			}
 		}
@@ -122,14 +123,14 @@ public class MarketBasketAnalysis extends AbstractRelationMiner {
 				System.out.println(prod1 + " => " + prod2 + ": " + p1);
 				System.out.println(prod2 + " => " + prod1 + ": " + p2);
 
-				RelationalSample s12 = new RelationalSample(prod1 + " => " + prod2);
+				RelationalSample s12 = SampleFactory.relationalSample(prod1 + " => " + prod2);
 				s12.addObject(prod1);
 				s12.addObject(prod2);
 				s12.setMatrix(Sample.COUNT, MatrixFactory.linkToValue(count));
 				s12.setMatrix(Sample.PROBABILITY, MatrixFactory.linkToValue(p1));
 				ds.getSamples().add(s12);
 
-				RelationalSample s21 = new RelationalSample(prod2 + " => " + prod1);
+				RelationalSample s21 = SampleFactory.relationalSample(prod2 + " => " + prod1);
 				s21.addObject(prod1);
 				s21.addObject(prod2);
 				s21.setMatrix(Sample.COUNT, MatrixFactory.linkToValue(count));

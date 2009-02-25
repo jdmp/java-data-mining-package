@@ -26,8 +26,8 @@ package org.jdmp.core.algorithm.regression;
 import org.jdmp.core.algorithm.classification.AbstractClassifier;
 import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.dataset.RegressionDataSet;
-import org.jdmp.core.variable.DefaultVariable;
 import org.jdmp.core.variable.Variable;
+import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.exceptions.MatrixException;
 
@@ -42,7 +42,7 @@ public class LinearRegression extends AbstractClassifier {
 
 	public LinearRegression() {
 		super();
-		setParameterVariable(new DefaultVariable("Regression Parameters"));
+		setParameterVariable(VariableFactory.labeledVariable("Regression Parameters"));
 	}
 
 	public void setParameterVariable(Variable variable) {

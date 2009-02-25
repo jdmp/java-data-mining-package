@@ -23,27 +23,59 @@
 
 package org.jdmp.core.sample;
 
+import java.util.Collection;
+
 import org.ujmp.core.Matrix;
 
 public abstract class SampleFactory {
 
 	public static final Sample labeledSample(String label) {
-		Sample s = new DefaultSample(label);
+		Sample s = new DefaultSample();
+		s.setLabel(label);
 		return s;
 	}
 
 	public static final Sample basicSample(Matrix input) {
-		Sample s = new DefaultSample(input);
+		Sample s = new DefaultSample();
+		s.setMatrix(Sample.INPUT, input);
+		s.setLabel(input.getLabel());
 		return s;
 	}
 
 	public static final ClassificationSample classificationSample(Matrix input, Matrix target) {
-		ClassificationSample s = new ClassificationSample(input, target);
+		ClassificationSample s = new ClassificationSample();
+		s.setMatrix(Sample.INPUT, input);
+		s.setMatrix(Sample.TARGET, target);
 		return s;
 	}
 
 	public static final Sample emptySample() {
 		Sample s = new DefaultSample();
+		return s;
+	}
+
+	public static final RelationalSample relationalSample(Collection<?> items) {
+		RelationalSample s = new RelationalSample();
+		for (Object o : items) {
+			s.addObject(o);
+		}
+		return s;
+	}
+
+	public static final ClassificationSample classificationSample() {
+		ClassificationSample s = new ClassificationSample();
+		return s;
+	}
+
+	public static final ClassificationSample classificationSample(String label) {
+		ClassificationSample s = new ClassificationSample();
+		s.setLabel(label);
+		return s;
+	}
+
+	public static final RelationalSample relationalSample(String label) {
+		RelationalSample s = new RelationalSample();
+		s.setLabel(label);
 		return s;
 	}
 

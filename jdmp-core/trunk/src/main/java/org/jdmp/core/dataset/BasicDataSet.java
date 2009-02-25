@@ -24,7 +24,6 @@
 package org.jdmp.core.dataset;
 
 import org.jdmp.core.dataset.wrappers.DataSetInputMatrixWrapper;
-import org.jdmp.core.sample.DefaultSample;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
@@ -35,19 +34,6 @@ public class BasicDataSet extends AbstractDataSet {
 	private static final long serialVersionUID = -2887879051530049677L;
 
 	public static final String INPUT = "Input";
-
-	public BasicDataSet(Variable v) {
-		this(v.getLabel());
-		for (Matrix m : v.getMatrixList()) {
-			DefaultSample s = new DefaultSample(m);
-			getSamples().add(s);
-		}
-	}
-
-	public BasicDataSet(String label) {
-		this();
-		setLabel(label);
-	}
 
 	public BasicDataSet() {
 		super();

@@ -33,8 +33,8 @@ import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.dataset.ClassificationDataSet;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.variable.DefaultVariable;
 import org.jdmp.core.variable.Variable;
+import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.coordinates.Coordinates;
@@ -131,16 +131,16 @@ public class MultiLayerNetwork extends AbstractClassifier {
 			outputLayer.setPreviousLayer(previousLayer);
 		}
 
-		Variable output = new DefaultVariable("Output");
+		Variable output = VariableFactory.labeledVariable("Output");
 		setOutputVariable(output);
 
-		Variable outputDeviation = new DefaultVariable("Output Deviation");
+		Variable outputDeviation = VariableFactory.labeledVariable("Output Deviation");
 		setOutputDeviationVariable(outputDeviation);
 
-		Variable input = new DefaultVariable("Input");
+		Variable input = VariableFactory.labeledVariable("Input");
 		setInputVariable(input);
 
-		Variable desiredOutput = new DefaultVariable("Desired Output");
+		Variable desiredOutput = VariableFactory.labeledVariable("Desired Output");
 		setDesiredOutputVariable(desiredOutput);
 	}
 

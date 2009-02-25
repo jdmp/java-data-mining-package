@@ -28,8 +28,8 @@ import java.util.Map;
 
 import org.jdmp.core.algorithm.AlgorithmFiveSources;
 import org.jdmp.core.algorithm.classification.mlp.MultiLayerNetwork.BiasType;
-import org.jdmp.core.variable.DefaultVariable;
 import org.jdmp.core.variable.Variable;
+import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.calculation.Calculation.Ret;
@@ -54,12 +54,12 @@ public class WeightUpdate extends AlgorithmFiveSources {
 	public WeightUpdate(BiasType biasType) {
 		this.biasType = biasType;
 		setDescription("weight = weight + eta * sampleweight * inputdeviation * input");
-		Variable eta = new DefaultVariable("eta", 1);
+		Variable eta = VariableFactory.singleValue("eta", 1);
 		Matrix m = MatrixFactory.linkToValue(0.001);
 		eta.addMatrix(m);
 		setVariable(ETA, eta);
 
-		Variable sampleWeight = new DefaultVariable("Sample Weight", 1);
+		Variable sampleWeight = VariableFactory.singleValue("Sample Weight", 1);
 		Matrix s = MatrixFactory.linkToValue(1);
 		sampleWeight.addMatrix(s);
 		setVariable(SAMPLEWEIGHT, sampleWeight);

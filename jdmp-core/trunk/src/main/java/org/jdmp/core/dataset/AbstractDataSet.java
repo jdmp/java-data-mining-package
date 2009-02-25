@@ -119,13 +119,13 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		}
 
 		for (int i = 0; i < count.length; i++) {
-			DataSet ds = new ClassificationDataSet("DataSet" + i);
+			DataSet ds = DataSetFactory.classificationDataSet("DataSet" + i);
 			for (int c = 0; c < count[i]; c++) {
 				ds.getSamples().add(getSamples().getElementAt(ids.remove(0)).clone());
 			}
 			dataSets.add(ds);
 		}
-		DataSet ds = new ClassificationDataSet("DataSet" + count.length);
+		DataSet ds = DataSetFactory.classificationDataSet("DataSet" + count.length);
 		while (ids.size() != 0) {
 			ds.getSamples().add(getSamples().getElementAt(ids.remove(0)).clone());
 		}
@@ -153,9 +153,10 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 			}
 		}
 
-		DataSet testSet = new ClassificationDataSet("TestSet" + randomSeed + "-" + idOfCVSet);
+		DataSet testSet = DataSetFactory.classificationDataSet("TestSet" + randomSeed + "-"
+				+ idOfCVSet);
 		testSet.getSamples().addAll(tempSampleLists.get(idOfCVSet));
-		DataSet trainingSet = new ClassificationDataSet("TrainingSet" + randomSeed + "-"
+		DataSet trainingSet = DataSetFactory.classificationDataSet("TrainingSet" + randomSeed + "-"
 				+ idOfCVSet);
 		for (int i = 0; i < numberOfCVSets; i++) {
 			if (i != idOfCVSet) {

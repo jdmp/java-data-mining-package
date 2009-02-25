@@ -28,8 +28,8 @@ import java.io.Serializable;
 import org.jdmp.core.algorithm.classification.mlp.MultiLayerNetwork.Aggregation;
 import org.jdmp.core.algorithm.classification.mlp.MultiLayerNetwork.BiasType;
 import org.jdmp.core.algorithm.classification.mlp.MultiLayerNetwork.Transfer;
-import org.jdmp.core.variable.DefaultVariable;
 import org.jdmp.core.variable.Variable;
+import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.exceptions.MatrixException;
@@ -53,8 +53,7 @@ public class NetworkLayer implements Serializable {
 
 	public NetworkLayer(Aggregation aggregationFunction, Transfer transferFunction,
 			BiasType biasType) {
-		algorithmForward = new NetworkLayerForward(aggregationFunction, transferFunction,
-				biasType);
+		algorithmForward = new NetworkLayerForward(aggregationFunction, transferFunction, biasType);
 		algorithmBackward = new NetworkLayerBackward(transferFunction, biasType);
 		algorithmWeightUpdate = new WeightUpdate(biasType);
 		algorithmWeightUpdate.setContactDeviationVariable(algorithmBackward
@@ -66,10 +65,10 @@ public class NetworkLayer implements Serializable {
 	public NetworkLayer(Aggregation aggregationFunction, Transfer transferFunction,
 			BiasType biasType, int neuronCount) {
 		this(aggregationFunction, transferFunction, biasType);
-		Variable outputDeviation = new DefaultVariable("Output Deviation");
+		Variable outputDeviation = VariableFactory.labeledVariable("Output Deviation");
 		outputDeviation.setSize(neuronCount, 1);
 		setOutputDeviationVariable(outputDeviation);
-		Variable output = new DefaultVariable("Output");
+		Variable output = VariableFactory.labeledVariable("Output");
 		output.setSize(neuronCount, 1);
 		setOutputVariable(output);
 	}
@@ -167,7 +166,7 @@ public class NetworkLayer implements Serializable {
 
 	public void createVariablesIfNecessary() throws MatrixException {
 		if (getWeightVariable() == null) {
-			Variable weight = new DefaultVariable("Weight");
+			Variable weight = VariableFactory.labeledVariable("Weight");
 			Matrix w = null;
 
 			double scale = 1;
