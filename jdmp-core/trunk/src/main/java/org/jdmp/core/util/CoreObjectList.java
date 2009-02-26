@@ -23,11 +23,12 @@
 
 package org.jdmp.core.util;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import javax.swing.ListModel;
 
-public interface CoreObjectList<V> extends ListModel, Iterable<V> {
+public interface CoreObjectList<V> extends Serializable, ListModel, Iterable<V> {
 
 	public int indexOf(V value);
 

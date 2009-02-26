@@ -31,8 +31,7 @@ import java.util.Set;
 
 import javax.swing.AbstractListModel;
 
-public class DefaultObservableMap<V> extends AbstractListModel implements CoreObjectList<V>,
-		Map<Object, V> {
+public class DefaultObservableMap<V> extends AbstractListModel implements ObservableMap<V> {
 	private static final long serialVersionUID = -1811632376295464484L;
 
 	private Map<Object, V> map = null;
