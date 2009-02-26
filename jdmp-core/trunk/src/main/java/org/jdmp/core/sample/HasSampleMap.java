@@ -23,10 +23,10 @@
 
 package org.jdmp.core.sample;
 
-import org.jdmp.core.util.ObservableMap;
+import org.jdmp.core.util.DefaultObservableMap;
 
 public interface HasSampleMap extends HasSamples {
 
-	public ObservableMap<Sample> getSamples();
+	public DefaultObservableMap<Sample> getSamples();
 
 }

@@ -23,10 +23,10 @@
 
 package org.jdmp.core.sample;
 
-import org.jdmp.core.util.ObservableList;
+import org.jdmp.core.util.DefaultObservableList;
 
 public interface HasSampleList extends HasSamples {
 
-	public ObservableList<Sample> getSamples();
+	public DefaultObservableList<Sample> getSamples();
 
 }

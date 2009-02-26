@@ -34,7 +34,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.jdmp.core.AbstractCoreObject;
-import org.jdmp.core.util.ObservableMap;
+import org.jdmp.core.util.DefaultObservableMap;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
@@ -48,9 +48,9 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 
 	private transient GUIObject guiObject = null;
 
-	private final ObservableMap<Variable> variableMap = new ObservableMap<Variable>();
+	private final DefaultObservableMap<Variable> variableMap = new DefaultObservableMap<Variable>();
 
-	private final ObservableMap<Algorithm> algorithmList = new ObservableMap<Algorithm>();
+	private final DefaultObservableMap<Algorithm> algorithmList = new DefaultObservableMap<Algorithm>();
 
 	private final Map<Object, String> edgeLabels = new HashMap<Object, String>();
 
@@ -228,11 +228,11 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		v.addMatrix(matrix);
 	}
 
-	public final ObservableMap<Variable> getVariables() {
+	public final DefaultObservableMap<Variable> getVariables() {
 		return variableMap;
 	}
 
-	public final ObservableMap<Algorithm> getAlgorithms() {
+	public final DefaultObservableMap<Algorithm> getAlgorithms() {
 		return algorithmList;
 	}
 

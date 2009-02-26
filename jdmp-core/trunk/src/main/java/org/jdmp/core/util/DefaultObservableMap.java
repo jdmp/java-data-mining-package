@@ -31,13 +31,13 @@ import java.util.Set;
 
 import javax.swing.AbstractListModel;
 
-public class ObservableMap<V> extends AbstractListModel implements CoreObjectList<V>,
+public class DefaultObservableMap<V> extends AbstractListModel implements CoreObjectList<V>,
 		Map<Object, V> {
 	private static final long serialVersionUID = -1811632376295464484L;
 
 	private Map<Object, V> map = null;
 
-	public ObservableMap() {
+	public DefaultObservableMap() {
 		map = new HashMap<Object, V>(2);
 	}
 

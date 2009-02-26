@@ -23,12 +23,12 @@
 
 package org.jdmp.core.variable;
 
-import org.jdmp.core.util.ObservableMap;
+import org.jdmp.core.util.DefaultObservableMap;
 import org.ujmp.core.Matrix;
 
 public interface HasVariableMap extends HasVariables {
 
-	public ObservableMap<Variable> getVariables();
+	public DefaultObservableMap<Variable> getVariables();
 
 	public Matrix getMatrix(Object variableKey);
 

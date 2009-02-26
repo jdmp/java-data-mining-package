@@ -30,16 +30,16 @@ import java.util.List;
 
 import javax.swing.AbstractListModel;
 
-public class ObservableList<V> extends AbstractListModel implements CoreObjectList<V> {
+public class DefaultObservableList<V> extends AbstractListModel implements CoreObjectList<V> {
 	private static final long serialVersionUID = -2636828198788691727L;
 
 	private List<V> values = null;
 
-	public ObservableList() {
+	public DefaultObservableList() {
 		values = new ArrayList<V>();
 	}
 
-	public ObservableList(List<V> values) {
+	public DefaultObservableList(List<V> values) {
 		this.values = values;
 	}
 

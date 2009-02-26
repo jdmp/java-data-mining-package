@@ -30,40 +30,40 @@ import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.util.ObservableMap;
+import org.jdmp.core.util.DefaultObservableMap;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.interfaces.GUIObject;
 
 public abstract class AbstractModule extends AbstractCoreObject implements Module {
 	private transient GUIObject guiObject = null;
 
-	protected final ObservableMap<Algorithm> algorithms = new ObservableMap<Algorithm>();
+	protected final DefaultObservableMap<Algorithm> algorithms = new DefaultObservableMap<Algorithm>();
 
-	protected final ObservableMap<Sample> samples = new ObservableMap<Sample>();
+	protected final DefaultObservableMap<Sample> samples = new DefaultObservableMap<Sample>();
 
-	protected final ObservableMap<DataSet> dataSets = new ObservableMap<DataSet>();
+	protected final DefaultObservableMap<DataSet> dataSets = new DefaultObservableMap<DataSet>();
 
-	protected final ObservableMap<Variable> variables = new ObservableMap<Variable>();
+	protected final DefaultObservableMap<Variable> variables = new DefaultObservableMap<Variable>();
 
-	protected final ObservableMap<Module> modules = new ObservableMap<Module>();
+	protected final DefaultObservableMap<Module> modules = new DefaultObservableMap<Module>();
 
-	public ObservableMap<Module> getModules() {
+	public DefaultObservableMap<Module> getModules() {
 		return modules;
 	}
 
-	public final ObservableMap<DataSet> getDataSets() {
+	public final DefaultObservableMap<DataSet> getDataSets() {
 		return dataSets;
 	}
 
-	public final ObservableMap<Algorithm> getAlgorithms() {
+	public final DefaultObservableMap<Algorithm> getAlgorithms() {
 		return algorithms;
 	}
 
-	public final ObservableMap<Variable> getVariables() {
+	public final DefaultObservableMap<Variable> getVariables() {
 		return variables;
 	}
 
-	public final ObservableMap<Sample> getSamples() {
+	public final DefaultObservableMap<Sample> getSamples() {
 		return samples;
 	}
 
