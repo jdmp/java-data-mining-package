@@ -27,14 +27,23 @@ import org.jdmp.core.CoreObject;
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.algorithm.regression.Regressor;
 import org.jdmp.core.variable.HasVariableMap;
+import org.ujmp.core.interfaces.HasId;
 
-public interface Sample extends CoreObject, HasVariableMap {
+public interface Sample extends CoreObject, HasVariableMap, HasId {
 
 	public static final String INPUT = Regressor.INPUT;
 
 	public static final String PROBABILITY = "Probability";
 
 	public static final String COUNT = "Count";
+
+	public static final String ID = "Id";
+
+	public static final String LABEL = "Label";
+
+	public static final String SCORE = "Score";
+
+	public static final String DESCRIPTION = "Description";
 
 	public static final String WEIGHT = Regressor.WEIGHT;
 

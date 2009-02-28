@@ -34,6 +34,8 @@ import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.DefaultObservableList;
 import org.jdmp.core.util.DefaultObservableMap;
+import org.jdmp.core.util.ObservableList;
+import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
@@ -44,9 +46,9 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 
 	private transient GUIObject guiObject = null;
 
-	private final DefaultObservableList<Sample> sampleList = new DefaultObservableList<Sample>();
+	private ObservableList<Sample> sampleList = new DefaultObservableList<Sample>();
 
-	private final DefaultObservableMap<Variable> variableList = new DefaultObservableMap<Variable>();
+	private final ObservableMap<Variable> variableList = new DefaultObservableMap<Variable>();
 
 	private String label = "";
 
@@ -95,11 +97,11 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		v.addMatrix(matrix);
 	}
 
-	public DefaultObservableList<Sample> getSamples() {
+	public ObservableList<Sample> getSamples() {
 		return sampleList;
 	}
 
-	public final DefaultObservableMap<Variable> getVariables() {
+	public final ObservableMap<Variable> getVariables() {
 		return variableList;
 	}
 
@@ -200,6 +202,11 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		} else {
 			return getClass().getSimpleName() + " [" + getLabel() + "]";
 		}
+	}
+
+	@Override
+	public void setSamples(ObservableList<Sample> samples) {
+		this.sampleList = samples;
 	}
 
 	public void notifyGUIObject() {

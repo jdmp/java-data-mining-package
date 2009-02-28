@@ -26,13 +26,15 @@ package org.jdmp.core.algorithm.indexer;
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.Sample;
+import org.jdmp.core.sample.SampleFactory;
+import org.ujmp.core.Matrix;
 
 public abstract class AbstractIndexer extends AbstractAlgorithm implements Indexer {
 	private static final long serialVersionUID = 8854402303242176900L;
 
 	@Override
-	public void add(Sample sample) throws Exception {
-		add(sample.getMatrix(Sample.INPUT));
+	public void add(Matrix matrix) throws Exception {
+		add(SampleFactory.createFromObject(matrix));
 	}
 
 	@Override

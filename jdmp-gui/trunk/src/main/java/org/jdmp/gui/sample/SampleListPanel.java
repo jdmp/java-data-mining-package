@@ -30,7 +30,7 @@ import javax.swing.table.TableRowSorter;
 import org.jdmp.core.CoreObject;
 import org.jdmp.core.sample.HasSamples;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.util.DefaultObservableMap;
+import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.gui.util.AbstractListPanel;
 import org.ujmp.core.Matrix;
@@ -54,10 +54,13 @@ public class SampleListPanel extends AbstractListPanel {
 		jTable.setModel(dataModel);
 
 		TableRowSorter<?> rs = (TableRowSorter<?>) jTable.getRowSorter();
-		DefaultObservableMap<Variable> variables = iSamples.getSamples().getElementAt(0).getVariables();
-		int i = 2;
-		for (Object key : variables.keySet()) {
-			rs.setComparator(i++, new SampleCollator(key));
+		if (iSamples.getSamples().getSize() != 0) {
+			ObservableMap<Variable> variables = iSamples.getSamples().getElementAt(0)
+					.getVariables();
+			int i = 1;
+			for (Object key : variables.keySet()) {
+				rs.setComparator(i++, new SampleCollator(key));
+			}
 		}
 
 		jTable.getColumnModel().getColumn(SampleListTableModel.ICONCOLUMN).setMinWidth(ICONWIDTH);

@@ -30,6 +30,8 @@ import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.interfaces.GUIObject;
+import org.ujmp.core.util.MathUtil;
+import org.ujmp.core.util.StringUtil;
 
 public abstract class AbstractSample extends AbstractCoreObject implements Sample {
 	private static final long serialVersionUID = 1693258179407382419L;
@@ -42,6 +44,13 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 
 	@Override
 	public abstract Sample clone();
+
+	public final String getId() {
+		if (getMatrix(Sample.ID) == null) {
+			setId("Sample" + System.currentTimeMillis() + System.nanoTime());
+		}
+		return StringUtil.convert(getMatrix(Sample.ID));
+	}
 
 	@Override
 	public final String toString() {
@@ -65,7 +74,7 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 		return guiObject;
 	}
 
-	public Matrix getMatrix(Object variableKey) {
+	public final Matrix getMatrix(Object variableKey) {
 		Variable v = getVariables().get(variableKey);
 		if (v != null) {
 			return v.getMatrix();
@@ -74,8 +83,33 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 		}
 	}
 
-	public void notifyGUIObject() {
+	public final void notifyGUIObject() {
 		guiObject.fireValueChanged();
+	}
+
+	@Override
+	public void setId(String id) {
+		setMatrix(Sample.ID, MathUtil.getMatrix(id));
+	}
+
+	@Override
+	public String getDescription() {
+		return StringUtil.convert(getMatrix(Sample.DESCRIPTION));
+	}
+
+	@Override
+	public void setDescription(String description) {
+		setMatrix(Sample.DESCRIPTION, MathUtil.getMatrix(description));
+	}
+
+	@Override
+	public String getLabel() {
+		return StringUtil.convert(getMatrix(Sample.LABEL));
+	}
+
+	@Override
+	public void setLabel(String label) {
+		setMatrix(Sample.LABEL, MathUtil.getMatrix(label));
 	}
 
 }

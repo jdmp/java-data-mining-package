@@ -23,6 +23,7 @@
 
 package org.jdmp.core.dataset;
 
+import java.util.Map;
 import java.util.Random;
 
 import org.jdmp.core.sample.ClassificationSample;
@@ -36,6 +37,17 @@ import org.ujmp.core.enums.ValueType;
 import org.ujmp.core.exceptions.MatrixException;
 
 public abstract class DataSetFactory {
+
+	public static DataSet linkToMap(Map<? extends Object, ? extends Object> dataMap) {
+		SampleMapWrapper list = new SampleMapWrapper(dataMap);
+		DataSet ds = emptyDataSet();
+		ds.setSamples(list);
+		return ds;
+	}
+
+	public static DataSet emptyDataSet() {
+		return new BasicDataSet();
+	}
 
 	public static ClassificationDataSet copyFromMatrix(Matrix input, Matrix target)
 			throws MatrixException {

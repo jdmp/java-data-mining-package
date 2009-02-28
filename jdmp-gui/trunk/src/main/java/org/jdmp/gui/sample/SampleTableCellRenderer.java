@@ -62,12 +62,12 @@ public class SampleTableCellRenderer implements TableCellRenderer {
 		if (sample != null) {
 
 			switch (column) {
-			case SampleListTableModel.LABELCOLUMN:
-				o = sample.getLabel();
+			case SampleListTableModel.ICONCOLUMN:
+				o = "";
 				break;
 			default:
 				return matrixRenderer.getTableCellRendererComponent(table, sample.getVariables()
-						.getElementAt(column - 2).getMatrix(), isSelected, hasFocus, row, column);
+						.getElementAt(column - 1).getMatrix(), isSelected, hasFocus, row, column);
 			}
 
 			c = (JLabel) renderer.getTableCellRendererComponent(table, o, isSelected, hasFocus,

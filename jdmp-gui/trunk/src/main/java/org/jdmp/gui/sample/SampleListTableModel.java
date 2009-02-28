@@ -35,8 +35,6 @@ public class SampleListTableModel extends AbstractTableModel implements ListData
 
 	public static final int ICONCOLUMN = 0;
 
-	public static final int LABELCOLUMN = 1;
-
 	private HasSamples iSamples = null;
 
 	public SampleListTableModel(HasSamples iSamples) {
@@ -50,9 +48,9 @@ public class SampleListTableModel extends AbstractTableModel implements ListData
 
 	public int getColumnCount() {
 		if (iSamples.getSamples().isEmpty()) {
-			return 2;
+			return 1;
 		} else {
-			return 2 + iSamples.getSamples().getElementAt(0).getVariables().getSize();
+			return 1 + iSamples.getSamples().getElementAt(0).getVariables().getSize();
 		}
 	}
 
@@ -61,14 +59,12 @@ public class SampleListTableModel extends AbstractTableModel implements ListData
 		switch (columnIndex) {
 		case ICONCOLUMN:
 			return "";
-		case LABELCOLUMN:
-			return "Label";
 		default:
 			if (iSamples.getSamples().isEmpty()) {
 				return "unknown";
 			} else {
 				return iSamples.getSamples().getElementAt(0).getVariables().getElementAt(
-						columnIndex - 2).getLabel();
+						columnIndex - 1).getLabel();
 			}
 		}
 	}

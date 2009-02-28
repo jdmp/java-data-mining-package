@@ -33,32 +33,12 @@ public class DefaultSample extends AbstractSample {
 
 	private final DefaultObservableMap<Variable> variableMap = new DefaultObservableMap<Variable>();
 
-	private String label = "";
-
-	private String description = "";
-
 	public DefaultSample() {
 		super();
 	}
 
 	public DefaultObservableMap<Variable> getVariables() {
 		return variableMap;
-	}
-
-	public final String getDescription() {
-		return description;
-	}
-
-	public final void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getLabel() {
-		return label;
-	}
-
-	public final void setLabel(String label) {
-		this.label = label;
 	}
 
 	@Override

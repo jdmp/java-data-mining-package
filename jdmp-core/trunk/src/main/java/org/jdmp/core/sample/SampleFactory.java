@@ -28,8 +28,22 @@ import java.util.Map;
 
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
+import org.ujmp.core.interfaces.HasDataMap;
+import org.ujmp.core.util.MathUtil;
 
 public abstract class SampleFactory {
+
+	public static final Sample createFromObject(Object o) {
+		if (o instanceof Map) {
+			return linkToMap((Map) o);
+		} else if (o instanceof HasDataMap) {
+			return linkToMap(((HasDataMap) o).getDataMap());
+		} else if (o instanceof Matrix) {
+			return linkToMatrix((Matrix) o);
+		} else {
+			return linkToMatrix(MathUtil.getMatrix(o));
+		}
+	}
 
 	public static final Sample labeledSample(String label) {
 		Sample s = new DefaultSample();

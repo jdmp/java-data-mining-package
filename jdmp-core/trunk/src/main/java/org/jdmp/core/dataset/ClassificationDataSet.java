@@ -32,7 +32,7 @@ import java.util.Random;
 
 import org.jdmp.core.sample.ClassificationSample;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.util.DefaultObservableList;
+import org.jdmp.core.util.ObservableList;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
@@ -250,7 +250,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 	public ClassificationDataSet bootstrap(int numberOfSamples) {
 		ClassificationDataSet ds = DataSetFactory.classificationDataSet("Bootstrap of "
 				+ getLabel());
-		DefaultObservableList<Sample> sampleList = getSamples();
+		ObservableList<Sample> sampleList = getSamples();
 		for (int i = 0; i < numberOfSamples; i++) {
 			int rand = MathUtil.nextInteger(0, sampleList.getSize() - 1);
 			ds.getSamples().add(sampleList.getElementAt(rand).clone());

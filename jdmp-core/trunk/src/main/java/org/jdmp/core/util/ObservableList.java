@@ -23,8 +23,16 @@
 
 package org.jdmp.core.util;
 
+import java.util.Collection;
+
 import javax.swing.ListModel;
 
 public interface ObservableList<V> extends CoreObjectList<V>, ListModel {
+
+	public void add(V value);
+
+	public void addAll(Collection<V> values);
+
+	public boolean remove(V value);
 
 }
