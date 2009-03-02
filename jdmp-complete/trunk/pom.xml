@@ -68,6 +68,10 @@
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-bsh</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-lucene</artifactId>
+		</dependency>
 
 
 
@@ -284,6 +288,13 @@
 			<classifier>tests</classifier>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-lucene</artifactId>
+			<version>${jdmp.version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
 
 	</dependencies>
 
@@ -297,6 +308,7 @@
 		<module>../jdmp-mallet</module>
 		<module>../jdmp-bsh</module>
 		<module>../jdmp-weka</module>
+		<module>../jdmp-lucene</module>
 	</modules>
 
 

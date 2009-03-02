@@ -164,6 +164,12 @@
 				<version>${jdmp.version}</version>
 				<scope>compile</scope>
 			</dependency>
+			<dependency>
+				<groupId>org.jdmp</groupId>
+				<artifactId>jdmp-lucene</artifactId>
+				<version>${jdmp.version}</version>
+				<scope>compile</scope>
+			</dependency>
 
 
 			<dependency>
@@ -358,7 +364,13 @@
 				<artifactId>sablecc</artifactId>
 				<version>3.2</version>
 				<scope>compile</scope>
-			</dependency>			
+			</dependency>	
+			<dependency>
+				<groupId>lucene-core</groupId>
+				<artifactId>lucene-core</artifactId>
+				<version>2.4.0</version>
+				<scope>compile</scope>
+			</dependency>		
 
 		</dependencies>
 	</dependencyManagement>
@@ -409,6 +421,7 @@
 						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-mallet/apidocs</link>
 						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-bsh/apidocs</link>
 						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-weka/apidocs</link>
+						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-lucene/apidocs</link>
 					</links>
 				</configuration>
 			</plugin>
