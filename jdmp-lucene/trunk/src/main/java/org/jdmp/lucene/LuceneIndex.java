@@ -23,7 +23,9 @@
 
 package org.jdmp.lucene;
 
+import java.io.Closeable;
 import java.io.File;
+import java.io.Flushable;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
@@ -51,11 +53,14 @@ import org.jdmp.core.dataset.BasicDataSet;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
+import org.ujmp.core.interfaces.Erasable;
 import org.ujmp.core.util.MathUtil;
 import org.ujmp.core.util.SerializationUtil;
 import org.ujmp.core.util.StringUtil;
+import org.ujmp.core.util.io.FileUtil;
 
-public class LuceneIndex extends AbstractIndexer {
+public class LuceneIndex extends AbstractIndexer implements Flushable,
+		Closeable, Erasable {
 	private static final long serialVersionUID = -8483996550983833243L;
 
 	private IndexWriter indexWriter = null;
@@ -66,6 +71,8 @@ public class LuceneIndex extends AbstractIndexer {
 
 	private Directory directory = null;
 
+	private File path = null;
+
 	private long runningId = 0;
 
 	private final Analyzer analyzer = new StandardAnalyzer();
@@ -74,15 +81,17 @@ public class LuceneIndex extends AbstractIndexer {
 		this(null);
 	}
 
-	public LuceneIndex(File file) throws IOException {
-		if (file == null) {
-			file = File.createTempFile("lucene", "");
-			file.delete();
-			file.mkdir();
-			file.deleteOnExit();
+	public LuceneIndex(File path) throws IOException {
+		if (path == null) {
+			path = File.createTempFile("lucene", "");
+			path.delete();
+			path.mkdir();
+			path.deleteOnExit();
 		}
 
-		directory = FSDirectory.getDirectory(file);
+		this.path = path;
+
+		directory = FSDirectory.getDirectory(path);
 
 		if (IndexReader.indexExists(directory)) {
 			if (IndexWriter.isLocked(directory)) {
@@ -158,6 +167,26 @@ public class LuceneIndex extends AbstractIndexer {
 			indexSearcher.close();
 			indexSearcher = null;
 		}
+	}
+
+	@Override
+	public synchronized void flush() throws IOException {
+		indexWriter.commit();
+	}
+
+	@Override
+	public synchronized void close() throws IOException {
+		if (indexSearcher != null) {
+			indexSearcher.close();
+			indexSearcher = null;
+		}
+		indexWriter.close();
+	}
+
+	@Override
+	public void erase() throws IOException {
+		close();
+		FileUtil.deleteRecursive(path);
 	}
 
 }
