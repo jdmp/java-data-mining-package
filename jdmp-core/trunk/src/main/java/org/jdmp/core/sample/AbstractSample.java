@@ -47,18 +47,31 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 
 	public final String getId() {
 		if (getMatrix(Sample.ID) == null) {
-			setId("Sample" + System.currentTimeMillis() + System.nanoTime());
+			return null;
 		}
 		return StringUtil.convert(getMatrix(Sample.ID));
 	}
 
 	@Override
 	public final String toString() {
-		if (getLabel() == null) {
-			return getClass().getSimpleName();
-		} else {
-			return getClass().getSimpleName() + " [" + getLabel() + "]";
+		StringBuilder s = new StringBuilder();
+		s.append(getClass().getSimpleName());
+		if (getId() != null || getLabel() != null) {
+			s.append(" [");
 		}
+		if (getId() != null) {
+			s.append(getId());
+		}
+		if (getId() != null && getLabel() != null) {
+			s.append(": ");
+		}
+		if (getLabel() != null) {
+			s.append(getLabel());
+		}
+		if (getId() != null || getLabel() != null) {
+			s.append("]");
+		}
+		return s.toString();
 	}
 
 	public final GUIObject getGUIObject() {
@@ -94,7 +107,12 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 
 	@Override
 	public String getDescription() {
-		return StringUtil.convert(getMatrix(Sample.DESCRIPTION));
+		Matrix m = getMatrix(Sample.DESCRIPTION);
+		if (m == null) {
+			return null;
+		} else {
+			return StringUtil.convert(m);
+		}
 	}
 
 	@Override
@@ -104,7 +122,12 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 
 	@Override
 	public String getLabel() {
-		return StringUtil.convert(getMatrix(Sample.LABEL));
+		Matrix m = getMatrix(Sample.LABEL);
+		if (m == null) {
+			return null;
+		} else {
+			return StringUtil.convert(m);
+		}
 	}
 
 	@Override

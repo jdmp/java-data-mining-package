@@ -47,7 +47,7 @@ public class SampleMapWrapper<V> extends AbstractListModel implements Observable
 		}
 		int i = 0;
 		for (Object k : map.keySet()) {
-			if (i++ == index) {
+			if (i == index) {
 				V v = map.get(k);
 				Sample s = SampleFactory.createFromObject(v);
 				s.setId(StringUtil.convert(k));
@@ -55,6 +55,7 @@ public class SampleMapWrapper<V> extends AbstractListModel implements Observable
 				sampleToIndex.put(s, i);
 				return s;
 			}
+			i++;
 		}
 		return null;
 	}
@@ -145,6 +146,19 @@ public class SampleMapWrapper<V> extends AbstractListModel implements Observable
 	@Override
 	public synchronized boolean remove(Sample value) {
 		throw new MatrixException("not yet implemented");
+	}
+
+	public String toString() {
+		StringBuffer s = new StringBuffer();
+		s.append("[ ");
+		for (int i = 0; i < getSize(); i++) {
+			s.append(getElementAt(i));
+			if (i < getSize() - 1) {
+				s.append(", ");
+			}
+		}
+		s.append(" ]");
+		return s.toString();
 	}
 
 }
