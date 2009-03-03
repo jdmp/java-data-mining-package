@@ -50,7 +50,7 @@ public class MatrixListTableModel extends AbstractTableModel implements ListData
 	}
 
 	public int getRowCount() {
-		return variable.getMatrixList().size();
+		return variable.getMatrixList().getSize();
 	}
 
 	public int getColumnCount() {
