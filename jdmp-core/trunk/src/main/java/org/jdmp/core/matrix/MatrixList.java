@@ -28,11 +28,11 @@ import java.util.Iterator;
 
 import javax.swing.AbstractListModel;
 
-import org.jdmp.core.util.CoreObjectList;
+import org.jdmp.core.util.ObservableList;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.collections.RingBufferList;
 
-public class MatrixList extends AbstractListModel implements CoreObjectList<Matrix> {
+public class MatrixList extends AbstractListModel implements ObservableList<Matrix> {
 	private static final long serialVersionUID = -908619462706136008L;
 
 	private RingBufferList<Matrix> matrixList = null;
@@ -57,10 +57,9 @@ public class MatrixList extends AbstractListModel implements CoreObjectList<Matr
 		return matrixList.isEmpty();
 	}
 
-	public synchronized boolean add(Matrix matrix) {
-		boolean result = matrixList.add(matrix);
+	public synchronized void add(Matrix matrix) {
+		matrixList.add(matrix);
 		fireIntervalAdded(this, matrixList.size() - 1, matrixList.size() - 1);
-		return result;
 	}
 
 	public Iterator<Matrix> iterator() {
@@ -84,6 +83,23 @@ public class MatrixList extends AbstractListModel implements CoreObjectList<Matr
 	@Override
 	public int getSize() {
 		return matrixList.size();
+	}
+
+	@Override
+	public void addAll(Collection<Matrix> values) {
+		for (Matrix v : values) {
+			add(v);
+		}
+	}
+
+	@Override
+	public synchronized boolean remove(Matrix value) {
+		int index = matrixList.indexOf(value);
+		boolean b = matrixList.remove(value);
+		if (index >= 0) {
+			fireIntervalRemoved(this, index, index);
+		}
+		return b;
 	}
 
 }
