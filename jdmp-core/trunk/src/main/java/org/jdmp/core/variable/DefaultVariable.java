@@ -23,9 +23,11 @@
 
 package org.jdmp.core.variable;
 
-import org.jdmp.core.matrix.MatrixList;
+import org.jdmp.core.util.DefaultObservableList;
 import org.jdmp.core.util.MatrixListToMatrixWrapper;
+import org.jdmp.core.util.ObservableList;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.collections.RingBufferList;
 import org.ujmp.core.coordinates.Coordinates;
 
 public class DefaultVariable extends AbstractVariable {
@@ -35,7 +37,7 @@ public class DefaultVariable extends AbstractVariable {
 
 	private long[] size = Coordinates.ZERO2D;
 
-	private MatrixList matrixList = null;
+	private ObservableList<Matrix> matrixList = null;
 
 	private String label = "";
 
@@ -59,12 +61,12 @@ public class DefaultVariable extends AbstractVariable {
 
 	public DefaultVariable() {
 		super();
-		matrixList = new MatrixList();
+		matrixList = new DefaultObservableList<Matrix>(new RingBufferList<Matrix>());
 	}
 
 	public DefaultVariable(int memorySize) {
 		super();
-		matrixList = new MatrixList(memorySize);
+		matrixList = new DefaultObservableList<Matrix>(new RingBufferList<Matrix>(memorySize));
 	}
 
 	public final long[] getSize() {
@@ -88,7 +90,7 @@ public class DefaultVariable extends AbstractVariable {
 		return matrixListMatrix;
 	}
 
-	public MatrixList getMatrixList() {
+	public ObservableList<Matrix> getMatrixList() {
 		return matrixList;
 	}
 

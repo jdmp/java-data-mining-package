@@ -23,8 +23,11 @@
 
 package org.jdmp.core.matrix;
 
+import org.jdmp.core.util.ObservableList;
+import org.ujmp.core.Matrix;
+
 public interface HasMatrixList extends HasMatrices {
 
-	public MatrixList getMatrixList();
+	public ObservableList<Matrix> getMatrixList();
 
 }

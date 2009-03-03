@@ -1,6 +1,5 @@
 package org.jdmp.core.util;
 
-import org.jdmp.core.matrix.MatrixList;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.exceptions.MatrixException;
@@ -8,10 +7,10 @@ import org.ujmp.core.interfaces.Wrapper;
 import org.ujmp.core.objectmatrix.AbstractDenseObjectMatrix2D;
 
 public class MatrixListToMatrixWrapper extends AbstractDenseObjectMatrix2D implements
-		Wrapper<MatrixList> {
+		Wrapper<ObservableList<Matrix>> {
 	private static final long serialVersionUID = 3023715319099124633L;
 
-	private MatrixList matrixList = null;
+	private ObservableList<Matrix> matrixList = null;
 
 	public MatrixListToMatrixWrapper(Variable variable) {
 		this.matrixList = variable.getMatrixList();
@@ -68,11 +67,11 @@ public class MatrixListToMatrixWrapper extends AbstractDenseObjectMatrix2D imple
 		}
 	}
 
-	public MatrixList getWrappedObject() {
+	public ObservableList<Matrix> getWrappedObject() {
 		return matrixList;
 	}
 
-	public void setWrappedObject(MatrixList object) {
+	public void setWrappedObject(ObservableList<Matrix> object) {
 		this.matrixList = object;
 	}
 

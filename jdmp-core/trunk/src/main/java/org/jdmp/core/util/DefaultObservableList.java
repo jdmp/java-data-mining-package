@@ -44,7 +44,11 @@ public class DefaultObservableList<V> extends AbstractListModel implements Obser
 	}
 
 	public synchronized V getElementAt(int index) {
-		return values.get(index);
+		if (index >= 0 && index < values.size()) {
+			return values.get(index);
+		} else {
+			return null;
+		}
 	}
 
 	public synchronized void clear() {
