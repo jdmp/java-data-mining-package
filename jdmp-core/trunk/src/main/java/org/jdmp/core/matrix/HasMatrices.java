@@ -23,8 +23,11 @@
 
 package org.jdmp.core.matrix;
 
-public interface HasMatrixList extends HasMatrices {
+import org.jdmp.core.util.CoreObjectList;
+import org.ujmp.core.Matrix;
 
-	public MatrixList getMatrixList();
+public interface HasMatrices {
+
+	public CoreObjectList<Matrix> getMatrixList();
 
 }
