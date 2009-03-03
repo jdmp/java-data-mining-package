@@ -135,7 +135,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 	}
 
 	public double getMaxAccuracy() throws MatrixException {
-		return getAccuracyVariable().getMaxValue();
+		return getAccuracyVariable().getAsMatrix().getMaxValue();
 	}
 
 	public List<ClassificationDataSet> splitByClass() {

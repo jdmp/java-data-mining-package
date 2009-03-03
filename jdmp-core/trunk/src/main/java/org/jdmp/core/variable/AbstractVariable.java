@@ -28,9 +28,7 @@ import java.util.logging.Level;
 
 import org.jdmp.core.AbstractCoreObject;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.coordinates.Coordinates;
-import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.interfaces.GUIObject;
 
 public abstract class AbstractVariable extends AbstractCoreObject implements Variable {
@@ -40,14 +38,6 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 
 	protected AbstractVariable() {
 		super();
-	}
-
-	public final int getMemorySize() {
-		if (getMatrixList() == null) {
-			return 0;
-		} else {
-			return getMatrixList().getMaxSize();
-		}
 	}
 
 	public final int getMatrixCount() {
@@ -72,18 +62,6 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 		return getMatrixList().getElementAt(index);
 	}
 
-	public final double getValue() throws MatrixException {
-		if (getMatrix() != null)
-			return getMatrix().doubleValue();
-		else
-			return 0.0;
-	}
-
-	public final void setValue(double value) {
-		Matrix m = MatrixFactory.linkToValue(value);
-		addMatrix(m);
-	}
-
 	public final void addMatrix(Matrix m) {
 		if (m == null) {
 			throw new RuntimeException("tried to add null Matrix");
@@ -94,23 +72,6 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 		}
 
 		getMatrixList().add(m);
-	}
-
-	public final void setMatrix(int index, Matrix m) {
-		if (m != null) {
-			if (getColumnCount() == 0 || getRowCount() == 0) {
-				setSize(m.getRowCount(), m.getColumnCount());
-			}
-			// getMatrixList()..set(index, m);
-		}
-	}
-
-	public final int getIndexOfMatrix(Matrix m) {
-		if (getMatrixList() != null) {
-			return getMatrixList().indexOf(m);
-		} else {
-			return -1;
-		}
 	}
 
 	public final void clear() {
@@ -125,14 +86,6 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 
 	public final long getColumnCount() {
 		return getSize()[COLUMN];
-	}
-
-	public final double getMinValue() throws MatrixException {
-		return getAsMatrix().getMinValue();
-	}
-
-	public final double getMaxValue() throws MatrixException {
-		return getAsMatrix().getMaxValue();
 	}
 
 	public final GUIObject getGUIObject() {

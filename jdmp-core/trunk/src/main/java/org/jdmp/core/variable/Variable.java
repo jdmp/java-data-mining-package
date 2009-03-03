@@ -26,7 +26,6 @@ package org.jdmp.core.variable;
 import org.jdmp.core.CoreObject;
 import org.jdmp.core.matrix.HasMatrixList;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.exceptions.MatrixException;
 
 public interface Variable extends CoreObject, HasMatrixList {
 	public static final Class<?>[] VARIABLEARRAY = new Class<?>[] { new Variable[] {}.getClass() };
@@ -34,12 +33,6 @@ public interface Variable extends CoreObject, HasMatrixList {
 	public long[] getSize();
 
 	public void setSize(long... size);
-
-	public int getMemorySize();
-
-	public double getValue() throws MatrixException;
-
-	public void setValue(double value);
 
 	public Matrix getAsMatrix();
 
@@ -51,16 +44,8 @@ public interface Variable extends CoreObject, HasMatrixList {
 
 	public Matrix getMatrix(int index);
 
-	public void setMatrix(int index, Matrix m);
-
-	public int getIndexOfMatrix(Matrix m);
-
 	public long getRowCount();
 
 	public long getColumnCount();
-
-	public double getMinValue() throws MatrixException;
-
-	public double getMaxValue() throws MatrixException;
 
 }
