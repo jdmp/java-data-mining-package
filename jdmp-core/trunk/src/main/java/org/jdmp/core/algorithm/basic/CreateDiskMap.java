@@ -28,7 +28,6 @@ import java.util.HashMap;
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.collections.serializedmap.SerializedObjectMap;
-import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.mapmatrix.DefaultMapMatrix;
 
 public class CreateDiskMap extends AbstractAlgorithm {
@@ -47,7 +46,7 @@ public class CreateDiskMap extends AbstractAlgorithm {
 
 	@Override
 	public java.util.Map<Object, Object> calculateObjects(java.util.Map<Object, Object> input)
-			throws MatrixException {
+			throws Exception {
 		java.util.Map<Object, Object> result = new HashMap<Object, Object>();
 		java.util.Map<Object, Object> map = new SerializedObjectMap<Object, Object>();
 		result.put(TARGET, new DefaultMapMatrix<Object, Object>(map));
