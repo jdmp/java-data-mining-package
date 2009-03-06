@@ -58,7 +58,7 @@ public class PropsUDP {
 
 	@Override
 	public String toString() {
-		StringBuffer s = new StringBuffer();
+		StringBuilder s = new StringBuilder();
 
 		if (bindAddress == null) {
 			s.append(UDP + ":");

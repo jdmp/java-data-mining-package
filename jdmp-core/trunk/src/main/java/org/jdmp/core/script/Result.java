@@ -68,7 +68,7 @@ public class Result {
 
 	@Override
 	public String toString() {
-		StringBuffer s = new StringBuffer();
+		StringBuilder s = new StringBuilder();
 		if (label != null) {
 			s.append(label + " =\n");
 		}

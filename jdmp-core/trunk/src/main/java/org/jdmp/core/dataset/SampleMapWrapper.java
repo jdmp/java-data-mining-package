@@ -148,8 +148,9 @@ public class SampleMapWrapper<V> extends AbstractListModel implements Observable
 		throw new MatrixException("not yet implemented");
 	}
 
+	@Override
 	public String toString() {
-		StringBuffer s = new StringBuffer();
+		StringBuilder s = new StringBuilder();
 		s.append("[ ");
 		for (int i = 0; i < getSize(); i++) {
 			s.append(getElementAt(i));

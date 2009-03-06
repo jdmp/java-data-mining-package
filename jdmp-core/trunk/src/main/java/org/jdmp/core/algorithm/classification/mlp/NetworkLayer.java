@@ -217,7 +217,7 @@ public class NetworkLayer implements Serializable {
 
 	@Override
 	public String toString() {
-		StringBuffer s = new StringBuffer();
+		StringBuilder s = new StringBuilder();
 		if (getPreviousLayer() != null) {
 			s.append("(" + getPreviousLayer().getNeuronCount() + " -->) ");
 		}
