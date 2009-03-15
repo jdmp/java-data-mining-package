@@ -56,21 +56,7 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 	public final String toString() {
 		StringBuilder s = new StringBuilder();
 		s.append(getClass().getSimpleName());
-		if (getId() != null || getLabel() != null) {
-			s.append(" [");
-		}
-		if (getId() != null) {
-			s.append(getId());
-		}
-		if (getId() != null && getLabel() != null) {
-			s.append(": ");
-		}
-		if (getLabel() != null) {
-			s.append(getLabel());
-		}
-		if (getId() != null || getLabel() != null) {
-			s.append("]");
-		}
+		s.append(getVariables().toString());
 		return s.toString();
 	}
 
@@ -97,7 +83,9 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 	}
 
 	public final void notifyGUIObject() {
-		guiObject.fireValueChanged();
+		if (guiObject != null) {
+			guiObject.fireValueChanged();
+		}
 	}
 
 	@Override

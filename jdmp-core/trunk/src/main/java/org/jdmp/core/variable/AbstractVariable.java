@@ -114,4 +114,6 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 		guiObject.fireValueChanged();
 	}
 
+	public abstract Variable clone();
+
 }

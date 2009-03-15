@@ -94,4 +94,12 @@ public class DefaultVariable extends AbstractVariable {
 		return matrixList;
 	}
 
+	public Variable clone() {
+		Variable v = VariableFactory.labeledVariable(getLabel());
+		for (Matrix m : getMatrixList()) {
+			v.getMatrixList().add(m.copy());
+		}
+		return v;
+	}
+
 }

@@ -42,11 +42,16 @@ public class DefaultSample extends AbstractSample {
 	}
 
 	@Override
-	public DefaultSample clone() {
-		DefaultSample s = new DefaultSample();
-		Matrix input = getMatrix(INPUT);
-		if (input != null) {
-			s.setMatrix(INPUT, input);
+	public final DefaultSample clone() {
+		DefaultSample s = null;
+		try {
+			s = this.getClass().newInstance();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		for (Object k : getVariables().keySet()) {
+			Variable v = getVariables().get(k);
+			s.getVariables().put(k, v.clone());
 		}
 		return s;
 	}

@@ -25,6 +25,7 @@ package org.jdmp.core.dataset.wrappers;
 
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.sample.Sample;
+import org.ujmp.core.Matrix;
 import org.ujmp.core.coordinates.Coordinates;
 import org.ujmp.core.doublematrix.AbstractDenseDoubleMatrix2D;
 import org.ujmp.core.exceptions.MatrixException;
@@ -48,8 +49,11 @@ public class DataSetTargetMatrixWrapper extends AbstractDenseDoubleMatrix2D impl
 		if (p == null) {
 			return Coordinates.ZERO2D;
 		}
-		return new long[] { dataSet.getSamples().getSize(),
-				p.getMatrix(Sample.TARGET).getColumnCount() };
+		Matrix m = p.getMatrix(Sample.TARGET);
+		if (m == null) {
+			return Coordinates.ZERO2D;
+		}
+		return new long[] { dataSet.getSamples().getSize(), m.getColumnCount() };
 	}
 
 	public double getDouble(long row, long column) throws MatrixException {

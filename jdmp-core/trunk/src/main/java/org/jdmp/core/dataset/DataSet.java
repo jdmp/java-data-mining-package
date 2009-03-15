@@ -37,4 +37,5 @@ public interface DataSet extends CoreObject, HasVariableMap, HasSampleList {
 
 	public List<DataSet> splitByPercent(boolean shuffle, double... percent);
 
+	public DataSet clone();
 }

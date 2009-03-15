@@ -97,4 +97,8 @@ public class DefaultObservableList<V> extends AbstractListModel implements Obser
 		return values;
 	}
 
+	public String toString() {
+		return values.toString();
+	}
+
 }

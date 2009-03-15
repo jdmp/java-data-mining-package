@@ -48,4 +48,6 @@ public interface Variable extends CoreObject, HasMatrixList {
 
 	public long getColumnCount();
 
+	public Variable clone();
+
 }

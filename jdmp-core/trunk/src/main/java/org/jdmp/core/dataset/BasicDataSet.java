@@ -74,6 +74,18 @@ public class BasicDataSet extends AbstractDataSet {
 		}
 	}
 
-
+	@Override
+	public BasicDataSet clone() {
+		BasicDataSet ds = null;
+		try {
+			ds = this.getClass().newInstance();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		for (Sample s : getSamples()) {
+			ds.getSamples().add(s.clone());
+		}
+		return ds;
+	}
 
 }

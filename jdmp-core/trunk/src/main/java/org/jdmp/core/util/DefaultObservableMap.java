@@ -141,4 +141,8 @@ public class DefaultObservableMap<V> extends AbstractListModel implements Observ
 		return map.values();
 	}
 
+	public String toString() {
+		return map.toString();
+	}
+
 }

@@ -214,4 +214,7 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 			guiObject.fireValueChanged();
 		}
 	}
+
+	@Override
+	public abstract AbstractDataSet clone();
 }
