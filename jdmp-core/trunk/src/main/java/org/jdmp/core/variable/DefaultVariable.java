@@ -23,6 +23,9 @@
 
 package org.jdmp.core.variable;
 
+import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
+
 import org.jdmp.core.util.DefaultObservableList;
 import org.jdmp.core.util.MatrixListToMatrixWrapper;
 import org.jdmp.core.util.ObservableList;
@@ -62,11 +65,13 @@ public class DefaultVariable extends AbstractVariable {
 	public DefaultVariable() {
 		super();
 		matrixList = new DefaultObservableList<Matrix>(new RingBufferList<Matrix>());
+		matrixList.addListDataListener(new VariableListDataListener());
 	}
 
 	public DefaultVariable(int memorySize) {
 		super();
 		matrixList = new DefaultObservableList<Matrix>(new RingBufferList<Matrix>(memorySize));
+		matrixList.addListDataListener(new VariableListDataListener());
 	}
 
 	public final long[] getSize() {
@@ -100,6 +105,25 @@ public class DefaultVariable extends AbstractVariable {
 			v.getMatrixList().add(m.copy());
 		}
 		return v;
+	}
+
+	class VariableListDataListener implements ListDataListener {
+
+		@Override
+		public void contentsChanged(ListDataEvent e) {
+			notifyGUIObject();
+		}
+
+		@Override
+		public void intervalAdded(ListDataEvent e) {
+			notifyGUIObject();
+		}
+
+		@Override
+		public void intervalRemoved(ListDataEvent e) {
+			notifyGUIObject();
+		}
+
 	}
 
 }

@@ -27,13 +27,15 @@ import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 import javax.swing.table.AbstractTableModel;
 
+import org.jdmp.core.util.ObservableList;
 import org.jdmp.core.variable.Variable;
+import org.ujmp.core.Matrix;
 import org.ujmp.gui.MatrixGUIObject;
 
 public class MatrixListTableModel extends AbstractTableModel implements ListDataListener {
 	private static final long serialVersionUID = 1820859033991171760L;
 
-	private Variable variable = null;
+	private ObservableList<Matrix> matrixList = null;
 
 	public static final int INDEXCOLUMN = 0;
 
@@ -46,11 +48,12 @@ public class MatrixListTableModel extends AbstractTableModel implements ListData
 	public static final int LABELCOLUMN = 4;
 
 	public MatrixListTableModel(Variable v) {
-		this.variable = v;
+		this.matrixList = v.getMatrixList();
+		matrixList.addListDataListener(this);
 	}
 
 	public int getRowCount() {
-		return variable.getMatrixList().getSize();
+		return matrixList.getSize();
 	}
 
 	public int getColumnCount() {
@@ -81,7 +84,7 @@ public class MatrixListTableModel extends AbstractTableModel implements ListData
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		return variable.getMatrixList().getElementAt(rowIndex);
+		return matrixList.getElementAt(rowIndex);
 	}
 
 	@Override

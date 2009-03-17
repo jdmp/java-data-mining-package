@@ -29,6 +29,7 @@ import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 
 public abstract class AbstractClusterer extends AbstractAlgorithm implements Clusterer {
+	private static final long serialVersionUID = -8045773409890719666L;
 
 	public AbstractClusterer() {
 		super();

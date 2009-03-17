@@ -26,6 +26,7 @@ package org.jdmp.core.algorithm.classification;
 import org.jdmp.core.algorithm.regression.AbstractRegressor;
 
 public abstract class AbstractClassifier extends AbstractRegressor implements Classifier {
+	private static final long serialVersionUID = 1861479363608867190L;
 
 	public AbstractClassifier() {
 		super();

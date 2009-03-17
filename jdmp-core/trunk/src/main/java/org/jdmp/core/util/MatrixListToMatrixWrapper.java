@@ -1,5 +1,8 @@
 package org.jdmp.core.util;
 
+import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
+
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.exceptions.MatrixException;
@@ -7,13 +10,14 @@ import org.ujmp.core.interfaces.Wrapper;
 import org.ujmp.core.objectmatrix.AbstractDenseObjectMatrix2D;
 
 public class MatrixListToMatrixWrapper extends AbstractDenseObjectMatrix2D implements
-		Wrapper<ObservableList<Matrix>> {
+		Wrapper<ObservableList<Matrix>>, ListDataListener {
 	private static final long serialVersionUID = 3023715319099124633L;
 
 	private ObservableList<Matrix> matrixList = null;
 
 	public MatrixListToMatrixWrapper(Variable variable) {
 		this.matrixList = variable.getMatrixList();
+		matrixList.addListDataListener(this);
 	}
 
 	public long[] getSize() {
@@ -73,6 +77,21 @@ public class MatrixListToMatrixWrapper extends AbstractDenseObjectMatrix2D imple
 
 	public void setWrappedObject(ObservableList<Matrix> object) {
 		this.matrixList = object;
+	}
+
+	@Override
+	public void contentsChanged(ListDataEvent e) {
+		notifyGUIObject();
+	}
+
+	@Override
+	public void intervalAdded(ListDataEvent e) {
+		notifyGUIObject();
+	}
+
+	@Override
+	public void intervalRemoved(ListDataEvent e) {
+		notifyGUIObject();
 	}
 
 }

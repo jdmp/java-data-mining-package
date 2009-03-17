@@ -30,8 +30,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.util.DefaultObservableMap;
@@ -39,12 +37,12 @@ import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
+import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.core.util.MathUtil;
 
 public abstract class AbstractAlgorithm extends AbstractCoreObject implements Algorithm {
-
-	protected static transient Logger logger = Logger.getLogger(Algorithm.class.getName());
+	private static final long serialVersionUID = 3219035032582720106L;
 
 	private transient GUIObject guiObject = null;
 
@@ -247,7 +245,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 				Constructor<?> con = c.getConstructor(new Class<?>[] { Algorithm.class });
 				guiObject = (GUIObject) con.newInstance(new Object[] { this });
 			} catch (Exception e) {
-				logger.log(Level.WARNING, "cannot create sample gui object", e);
+				throw new MatrixException("cannot create sample gui object", e);
 			}
 		}
 		return guiObject;
