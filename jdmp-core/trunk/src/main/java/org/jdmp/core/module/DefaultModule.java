@@ -26,7 +26,9 @@ package org.jdmp.core.module;
 import org.jdmp.core.script.Result;
 import org.jdmp.core.script.jdmp.Interpreter;
 import org.jdmp.core.variable.Variable;
+import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.util.StringUtil;
 
 public class DefaultModule extends AbstractModule {
 	private static final long serialVersionUID = 4932183248766877797L;
@@ -66,9 +68,11 @@ public class DefaultModule extends AbstractModule {
 	@Override
 	public void setMatrix(Object variableKey, Matrix matrix) {
 		Variable v = getVariables().get(variableKey);
-		if (v != null) {
-			v.addMatrix(matrix);
+		if (v == null) {
+			v = VariableFactory.labeledVariable(StringUtil.format(variableKey));
+			getVariables().put(variableKey, v);
 		}
+		v.addMatrix(matrix);
 	}
 
 	public Interpreter getInterpreter() {
