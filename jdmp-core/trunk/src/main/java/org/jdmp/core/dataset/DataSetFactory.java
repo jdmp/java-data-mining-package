@@ -63,6 +63,22 @@ public abstract class DataSetFactory {
 		return ds;
 	}
 
+	public static ClassificationDataSet copyFromMatrix(Matrix input, Matrix target, Matrix label)
+			throws MatrixException {
+		ClassificationDataSet ds = new ClassificationDataSet();
+		for (int i = 0; i < input.getRowCount(); i++) {
+			ClassificationSample s = SampleFactory.classificationSample();
+			Matrix in = input.subMatrix(Ret.NEW, i, 0, i, input.getColumnCount() - 1);
+			Matrix out = target.subMatrix(Ret.NEW, i, 0, i, target.getColumnCount() - 1);
+			Matrix labelMatrix = label.subMatrix(Ret.NEW, i, 0, i, label.getColumnCount() - 1);
+			s.setMatrix(Sample.INPUT, in);
+			s.setMatrix(Sample.TARGET, out);
+			s.setMatrix(Sample.LABEL, labelMatrix);
+			ds.getSamples().add(s);
+		}
+		return ds;
+	}
+
 	public static ClassificationDataSet linkToMatrix(Matrix input, Matrix target)
 			throws MatrixException {
 		ClassificationDataSet ds = new ClassificationDataSet();
@@ -74,6 +90,24 @@ public abstract class DataSetFactory {
 			Matrix out = target.selectRows(Ret.LINK, i);
 			s.setMatrix(Sample.INPUT, in);
 			s.setMatrix(Sample.TARGET, out);
+			ds.getSamples().add(s);
+		}
+		return ds;
+	}
+
+	public static ClassificationDataSet linkToMatrix(Matrix input, Matrix target, Matrix label)
+			throws MatrixException {
+		ClassificationDataSet ds = new ClassificationDataSet();
+		ds.getInputVariable().addMatrix(input);
+		ds.getTargetVariable().addMatrix(target);
+		for (int i = 0; i < input.getRowCount(); i++) {
+			ClassificationSample s = SampleFactory.classificationSample();
+			Matrix in = input.selectRows(Ret.LINK, i);
+			Matrix out = target.selectRows(Ret.LINK, i);
+			Matrix labelMatrix = label.selectRows(Ret.LINK, i);
+			s.setMatrix(Sample.INPUT, in);
+			s.setMatrix(Sample.TARGET, out);
+			s.setMatrix(Sample.LABEL, labelMatrix);
 			ds.getSamples().add(s);
 		}
 		return ds;
