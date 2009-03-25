@@ -7,13 +7,13 @@
 	<name>jdmp-jgroups</name>
 
 	<properties>
-		<jdmp.version>0.1.0</jdmp.version>
+		<jdmp.version>0.1.1</jdmp.version>
 	</properties>
 
 	<parent>
 		<groupId>org.jdmp</groupId>
 		<artifactId>jdmp</artifactId>
-		<version>0.1.0</version>
+		<version>0.1.1</version>
 		<relativePath>../jdmp</relativePath>
 	</parent>
 
