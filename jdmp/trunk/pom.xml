@@ -170,6 +170,12 @@
 				<version>${jdmp.version}</version>
 				<scope>compile</scope>
 			</dependency>
+			<dependency>
+				<groupId>org.jdmp</groupId>
+				<artifactId>jdmp-liblinear</artifactId>
+				<version>${jdmp.version}</version>
+				<scope>compile</scope>
+			</dependency>
 
 
 			<dependency>
@@ -260,7 +266,7 @@
 			<dependency>
 				<groupId>libsvm</groupId>
 				<artifactId>libsvm</artifactId>
-				<version>2.88</version>
+				<version>2.89</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
@@ -371,6 +377,18 @@
 				<version>2.4.0</version>
 				<scope>compile</scope>
 			</dependency>		
+			<dependency>
+				<groupId>liblinear</groupId>
+				<artifactId>liblinear</artifactId>
+				<version>1.33</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>netlib-java</groupId>
+				<artifactId>netlib-java</artifactId>
+				<version>0.9.1</version>
+				<scope>compile</scope>
+			</dependency>	
 
 		</dependencies>
 	</dependencyManagement>
