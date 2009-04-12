@@ -23,10 +23,12 @@
 
 package org.jdmp.core.dataset;
 
+import java.io.File;
 import java.util.Map;
 import java.util.Random;
 
 import org.jdmp.core.sample.ClassificationSample;
+import org.jdmp.core.sample.DefaultSample;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.sample.SampleFactory;
 import org.ujmp.core.Matrix;
@@ -637,6 +639,25 @@ public abstract class DataSetFactory {
 	public static final ClassificationDataSet classificationDataSet(String label) {
 		ClassificationDataSet ds = new ClassificationDataSet();
 		ds.setLabel(label);
+		return ds;
+	}
+
+	public static DataSet linkToDir(File dir) {
+		DataSet ds = new BasicDataSet();
+		for (File f : dir.listFiles()) {
+			if (f.isDirectory()) {
+				DataSet dsdir = linkToDir(f);
+				ds.getSamples().addAll(dsdir.getSamples().toCollection());
+			} else if (".".equals(f.getName())) {
+			} else if ("..".equals(f.getName())) {
+			} else {
+				Sample s = new DefaultSample();
+				s.setMatrix("file", MatrixFactory.linkToValue(f));
+				s.setMatrix("name", MatrixFactory.linkToValue(f.getName()));
+				s.setMatrix("size", MatrixFactory.linkToValue(f.length()));
+				ds.getSamples().add(s);
+			}
+		}
 		return ds;
 	}
 
