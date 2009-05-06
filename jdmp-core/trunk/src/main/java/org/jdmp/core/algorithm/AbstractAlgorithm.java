@@ -78,6 +78,16 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		return variableKeys;
 	}
 
+	public final void setObject(Object variableKey, Object value) {
+		if (value == null) {
+			setMatrix(variableKey, MatrixFactory.emptyMatrix());
+		} else if (value instanceof Matrix) {
+			setMatrix(variableKey, (Matrix) value);
+		} else {
+			setMatrix(variableKey, MatrixFactory.linkToValue(value));
+		}
+	}
+
 	public final String getDescription() {
 		return description;
 	}

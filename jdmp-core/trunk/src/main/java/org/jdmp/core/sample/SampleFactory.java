@@ -23,11 +23,15 @@
 
 package org.jdmp.core.sample;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
+import org.ujmp.core.enums.FileFormat;
+import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.interfaces.HasDataMap;
 import org.ujmp.core.util.MathUtil;
 
@@ -66,6 +70,16 @@ public abstract class SampleFactory {
 			s.setMatrix(k, m);
 		}
 		return s;
+	}
+
+	public static Sample linkToFile(FileFormat fileFormat, File file, Object... parameters)
+			throws MatrixException, IOException {
+		Matrix map = MatrixFactory.linkToFile(FileFormat.FILE, file, fileFormat);
+		return linkToMap((Map) map);
+	}
+
+	public static Sample linkToFile(File file) throws MatrixException, IOException {
+		return linkToFile(FileFormat.guess(file), file);
 	}
 
 	public static final ClassificationSample classificationSample(Matrix input, Matrix target) {

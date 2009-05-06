@@ -34,4 +34,6 @@ public interface HasVariableMap extends HasVariables {
 
 	public void setMatrix(Object variableKey, Matrix matrix);
 
+	public void setObject(Object variableKey, Object value);
+
 }

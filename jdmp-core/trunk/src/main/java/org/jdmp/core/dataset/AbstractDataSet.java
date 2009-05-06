@@ -39,6 +39,7 @@ import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.interfaces.GUIObject;
 
 public abstract class AbstractDataSet extends AbstractCoreObject implements DataSet {
@@ -85,6 +86,16 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 			return v.getMatrix();
 		} else {
 			return null;
+		}
+	}
+
+	public final void setObject(Object variableKey, Object value) {
+		if (value == null) {
+			setMatrix(variableKey, MatrixFactory.emptyMatrix());
+		} else if (value instanceof Matrix) {
+			setMatrix(variableKey, (Matrix) value);
+		} else {
+			setMatrix(variableKey, MatrixFactory.linkToValue(value));
 		}
 	}
 

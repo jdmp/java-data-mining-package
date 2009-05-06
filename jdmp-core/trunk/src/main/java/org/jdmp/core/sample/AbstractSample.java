@@ -29,6 +29,7 @@ import java.util.logging.Level;
 import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.core.util.MathUtil;
 import org.ujmp.core.util.StringUtil;
@@ -121,6 +122,16 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 	@Override
 	public void setLabel(String label) {
 		setMatrix(Sample.LABEL, MathUtil.getMatrix(label));
+	}
+
+	public final void setObject(Object variableKey, Object value) {
+		if (value == null) {
+			setMatrix(variableKey, MatrixFactory.emptyMatrix());
+		} else if (value instanceof Matrix) {
+			setMatrix(variableKey, (Matrix) value);
+		} else {
+			setMatrix(variableKey, MatrixFactory.linkToValue(value));
+		}
 	}
 
 }

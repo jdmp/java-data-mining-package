@@ -24,6 +24,7 @@
 package org.jdmp.core.dataset;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 import java.util.Random;
 
@@ -642,7 +643,7 @@ public abstract class DataSetFactory {
 		return ds;
 	}
 
-	public static DataSet linkToDir(File dir) {
+	public static DataSet linkToDir(File dir) throws MatrixException, IOException {
 		DataSet ds = new BasicDataSet();
 		for (File f : dir.listFiles()) {
 			if (f.isDirectory()) {
@@ -651,10 +652,7 @@ public abstract class DataSetFactory {
 			} else if (".".equals(f.getName())) {
 			} else if ("..".equals(f.getName())) {
 			} else {
-				Sample s = new DefaultSample();
-				s.setMatrix("file", MatrixFactory.linkToValue(f));
-				s.setMatrix("name", MatrixFactory.linkToValue(f.getName()));
-				s.setMatrix("size", MatrixFactory.linkToValue(f.length()));
+				Sample s = SampleFactory.linkToFile(f);
 				ds.getSamples().add(s);
 			}
 		}
