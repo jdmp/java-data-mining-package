@@ -51,6 +51,8 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 
 	private final ObservableMap<Variable> variableList = new DefaultObservableMap<Variable>();
 
+	private final ObservableList<DataSet> dataSetList = new DefaultObservableList<DataSet>();
+
 	private String label = "";
 
 	private String description = "";
@@ -114,6 +116,10 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 
 	public final ObservableMap<Variable> getVariables() {
 		return variableList;
+	}
+
+	public final ObservableList<DataSet> getDataSets() {
+		return dataSetList;
 	}
 
 	public void clear() {

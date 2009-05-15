@@ -1,9 +1,9 @@
 package org.jdmp.core.dataset;
 
-import org.jdmp.core.util.DefaultObservableMap;
+import org.jdmp.core.util.ObservableMap;
 
 public interface HasDataSetMap extends HasDataSets {
 
-	public DefaultObservableMap<DataSet> getDataSets();
+	public ObservableMap<DataSet> getDataSets();
 
 }
