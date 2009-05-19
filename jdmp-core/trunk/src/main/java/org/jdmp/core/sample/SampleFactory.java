@@ -63,12 +63,7 @@ public abstract class SampleFactory {
 	}
 
 	public static final Sample linkToMap(Map<?, ?> map) {
-		Sample s = new DefaultSample();
-		for (Object k : map.keySet()) {
-			Object v = map.get(k);
-			Matrix m = MatrixFactory.linkToValue(v);
-			s.setMatrix(k, m);
-		}
+		Sample s = new MapSample(map);
 		return s;
 	}
 

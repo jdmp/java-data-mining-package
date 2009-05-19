@@ -134,4 +134,9 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 		}
 	}
 
+	@Override
+	public final void clear() {
+		getVariables().clear();
+	}
+
 }

@@ -65,9 +65,4 @@ public class DefaultSample extends AbstractSample {
 		v.addMatrix(matrix);
 	}
 
-	@Override
-	public void clear() {
-		variableMap.clear();
-	}
-
 }
