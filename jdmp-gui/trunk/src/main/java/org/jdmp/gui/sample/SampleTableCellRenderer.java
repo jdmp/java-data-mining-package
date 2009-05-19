@@ -24,6 +24,10 @@
 package org.jdmp.gui.sample;
 
 import java.awt.Component;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 import javax.swing.JLabel;
 import javax.swing.JTable;
@@ -33,6 +37,8 @@ import javax.swing.table.TableCellRenderer;
 
 import org.jdmp.core.algorithm.regression.Regressor;
 import org.jdmp.core.sample.Sample;
+import org.jdmp.core.util.ObservableMap;
+import org.jdmp.core.variable.Variable;
 import org.ujmp.gui.renderer.MatrixRenderer;
 
 public class SampleTableCellRenderer implements TableCellRenderer {
@@ -42,6 +48,10 @@ public class SampleTableCellRenderer implements TableCellRenderer {
 	private final DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
 
 	private final MatrixRenderer matrixRenderer = new MatrixRenderer();
+
+	private Set<Object> keys = new HashSet<Object>();
+
+	private Map<Integer, Object> columnMap = new HashMap<Integer, Object>();
 
 	private Sample sample = null;
 
@@ -54,10 +64,19 @@ public class SampleTableCellRenderer implements TableCellRenderer {
 
 		c = null;
 
-		if (value instanceof Sample)
+		if (value instanceof Sample) {
 			sample = (Sample) value;
-		else
+			Set<Object> ks = sample.getVariables().keySet();
+			for (Object key : ks) {
+				if (!keys.contains(key)) {
+					keys.add(key);
+					columnMap.put(columnMap.size(), key);
+				}
+			}
+
+		} else {
 			sample = null;
+		}
 
 		if (sample != null) {
 
@@ -66,8 +85,16 @@ public class SampleTableCellRenderer implements TableCellRenderer {
 				o = "";
 				break;
 			default:
-				return matrixRenderer.getTableCellRendererComponent(table, sample.getVariables()
-						.getElementAt(column - 1).getMatrix(), isSelected, hasFocus, row, column);
+				Object key = columnMap.get(column - 1);
+				ObservableMap<Variable> variables = sample.getVariables();
+				Variable v = variables.get(key);
+				if (v == null) {
+					o = "";
+					break;
+				} else {
+					return matrixRenderer.getTableCellRendererComponent(table, v.getMatrix(),
+							isSelected, hasFocus, row, column);
+				}
 			}
 
 			c = (JLabel) renderer.getTableCellRendererComponent(table, o, isSelected, hasFocus,
