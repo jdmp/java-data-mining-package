@@ -32,7 +32,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
 import org.jdmp.core.algorithm.regression.Regressor;
-import org.jdmp.core.sample.DefaultSample;
+import org.jdmp.core.sample.Sample;
 import org.ujmp.gui.renderer.MatrixRenderer;
 
 public class SampleTableCellRenderer implements TableCellRenderer {
@@ -43,7 +43,7 @@ public class SampleTableCellRenderer implements TableCellRenderer {
 
 	private final MatrixRenderer matrixRenderer = new MatrixRenderer();
 
-	private DefaultSample sample = null;
+	private Sample sample = null;
 
 	private Object o = null;
 
@@ -54,8 +54,8 @@ public class SampleTableCellRenderer implements TableCellRenderer {
 
 		c = null;
 
-		if (value instanceof DefaultSample)
-			sample = (DefaultSample) value;
+		if (value instanceof Sample)
+			sample = (Sample) value;
 		else
 			sample = null;
 
