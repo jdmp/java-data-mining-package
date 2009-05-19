@@ -27,9 +27,14 @@ import java.util.List;
 
 import org.jdmp.core.CoreObject;
 import org.jdmp.core.sample.HasSampleList;
+import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.HasVariableMap;
 
 public interface DataSet extends CoreObject, HasVariableMap, HasSampleList, HasDataSetList {
+
+	public static final String LABEL = Sample.LABEL;
+
+	public static final String DESCRIPTION = Sample.DESCRIPTION;
 
 	public List<DataSet> splitByCount(boolean shuffle, int... count);
 

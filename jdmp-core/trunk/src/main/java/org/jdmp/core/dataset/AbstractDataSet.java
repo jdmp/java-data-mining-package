@@ -41,6 +41,7 @@ import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.interfaces.GUIObject;
+import org.ujmp.core.util.StringUtil;
 
 public abstract class AbstractDataSet extends AbstractCoreObject implements DataSet {
 	private static final long serialVersionUID = -4168834188998259018L;
@@ -53,24 +54,20 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 
 	private final ObservableList<DataSet> dataSetList = new DefaultObservableList<DataSet>();
 
-	private String label = "";
-
-	private String description = "";
-
 	public final String getDescription() {
-		return description;
+		return getString(DataSet.DESCRIPTION);
 	}
 
 	public final void setDescription(String description) {
-		this.description = description;
+		setObject(DataSet.DESCRIPTION, description);
 	}
 
 	public final String getLabel() {
-		return label;
+		return getString(DataSet.LABEL);
 	}
 
 	public final void setLabel(String label) {
-		this.label = label;
+		setObject(DataSet.LABEL, label);
 	}
 
 	public AbstractDataSet() {
@@ -80,6 +77,10 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 	public AbstractDataSet(String label) {
 		this();
 		setLabel(label);
+	}
+
+	public final String getString(Object variableKey) {
+		return StringUtil.convert(getMatrix(variableKey));
 	}
 
 	public Matrix getMatrix(Object variableKey) {
