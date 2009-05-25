@@ -31,6 +31,7 @@ import java.util.Random;
 import java.util.logging.Level;
 
 import org.jdmp.core.AbstractCoreObject;
+import org.jdmp.core.dataset.wrappers.SampleListToMatrixWrapper;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.DefaultObservableList;
 import org.jdmp.core.util.DefaultObservableMap;
@@ -72,6 +73,10 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 
 	public AbstractDataSet() {
 		super();
+		Matrix m = new SampleListToMatrixWrapper(getSamples());
+		Variable v = VariableFactory.labeledVariable("AllSamples");
+		v.addMatrix(m);
+		getVariables().put("AllSamples", v);
 	}
 
 	public AbstractDataSet(String label) {

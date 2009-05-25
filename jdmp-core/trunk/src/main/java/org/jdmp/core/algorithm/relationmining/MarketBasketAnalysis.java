@@ -128,6 +128,8 @@ public class MarketBasketAnalysis extends AbstractRelationMiner {
 				s12.addObject(prod2);
 				s12.setMatrix(Sample.COUNT, MatrixFactory.linkToValue(count));
 				s12.setMatrix(Sample.PROBABILITY, MatrixFactory.linkToValue(p1));
+				s12.setObject("From", prod1);
+				s12.setObject("To", prod2);
 				ds.getSamples().add(s12);
 
 				RelationalSample s21 = SampleFactory.relationalSample(prod2 + " => " + prod1);
@@ -135,6 +137,8 @@ public class MarketBasketAnalysis extends AbstractRelationMiner {
 				s21.addObject(prod2);
 				s21.setMatrix(Sample.COUNT, MatrixFactory.linkToValue(count));
 				s21.setMatrix(Sample.PROBABILITY, MatrixFactory.linkToValue(p2));
+				s21.setObject("From", prod2);
+				s21.setObject("To", prod1);
 				ds.getSamples().add(s21);
 
 			}
@@ -168,6 +172,14 @@ public class MarketBasketAnalysis extends AbstractRelationMiner {
 	}
 
 	private void addProduct1Count(Collection<?> products, int row) {
+		// products must occur only once in set
+		products = new HashSet<Object>(products);
+
+		// skip sets with only one product
+		if (products.size() < 2) {
+			return;
+		}
+
 		for (Object s : products) {
 			List<Integer> ids = (List<Integer>) product1ToIds.get(s);
 			if (ids == null) {
@@ -195,6 +207,9 @@ public class MarketBasketAnalysis extends AbstractRelationMiner {
 	}
 
 	private void addProduct2Count(Collection<?> products, int row) {
+		// products must occur only once in set
+		products = new HashSet<Object>(products);
+
 		if (products.size() < 2) {
 			return;
 		}
