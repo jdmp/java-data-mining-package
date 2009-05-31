@@ -94,7 +94,7 @@ public class JDMP {
 		out.println("    JDMP [-tgh] [-e command] [-f file]");
 		out.println();
 		out.println("    -e, --execute     executes a command at startup");
-		out.println("    -f, --file        executes the commands in the specifiedfile");
+		out.println("    -f, --file        executes the commands in the specified file");
 		out.println("    -t, --text        starts JDMP in textmode");
 		out.println("    -g, --gui         starts JDMP in graphics mode");
 		out.println("    -h, --help        displays this help text");
