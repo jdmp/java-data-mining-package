@@ -27,8 +27,11 @@ import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
+import org.jdmp.core.util.JDMPPluginsMatrix;
 import org.jdmp.gui.variable.actions.VariableActions;
+import org.ujmp.gui.actions.ShowInFrameAction;
 import org.ujmp.gui.menu.DefaultMenuBar;
 
 public class VariableMenuBar extends DefaultMenuBar {
@@ -42,6 +45,7 @@ public class VariableMenuBar extends DefaultMenuBar {
 			menu.add(c);
 		}
 		add(menu);
+		toolsMenu.add(new JMenuItem(new ShowInFrameAction(null, new JDMPPluginsMatrix())));
 		init(component, o);
 	}
 

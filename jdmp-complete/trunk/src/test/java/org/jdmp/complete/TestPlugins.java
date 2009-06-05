@@ -23,25 +23,20 @@
 
 package org.jdmp.complete;
 
-import junit.framework.TestSuite;
+import junit.framework.TestCase;
 
-public class AllTests extends TestSuite {
+import org.jdmp.core.util.JDMPPluginsMatrix;
+import org.ujmp.core.Matrix;
 
-	public static TestSuite suite() {
-		TestSuite suite = new TestSuite(AllTests.class.getName());
-		suite.addTestSuite(org.jdmp.complete.TestPlugins.class);
-		suite.addTest(org.ujmp.complete.AllTests.suite());
-		suite.addTest(org.jdmp.core.AllTests.suite());
-		suite.addTest(org.jdmp.gui.AllTests.suite());
-		suite.addTest(org.jdmp.bsh.AllTests.suite());
-		suite.addTest(org.jdmp.ehcache.AllTests.suite());
-		suite.addTest(org.jdmp.jgroups.AllTests.suite());
-		suite.addTest(org.jdmp.libsvm.AllTests.suite());
-		suite.addTest(org.jdmp.liblinear.AllTests.suite());
-		suite.addTest(org.jdmp.lucene.AllTests.suite());
-		suite.addTest(org.jdmp.mallet.AllTests.suite());
-		suite.addTest(org.jdmp.weka.AllTests.suite());
-		return suite;
+public class TestPlugins extends TestCase {
+
+	public void testPlugins() {
+		Matrix m = new JDMPPluginsMatrix();
+		for (int r = 0; r < m.getRowCount(); r++) {
+			String name = m.getAsString(r, 0);
+			String status = m.getAsString(r, 4);
+			assertEquals(name, "ok", status);
+		}
 	}
 
 }

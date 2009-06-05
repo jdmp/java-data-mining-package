@@ -23,25 +23,39 @@
 
 package org.jdmp.complete;
 
-import junit.framework.TestSuite;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
-public class AllTests extends TestSuite {
+import org.ujmp.core.util.AbstractPlugin;
 
-	public static TestSuite suite() {
-		TestSuite suite = new TestSuite(AllTests.class.getName());
-		suite.addTestSuite(org.jdmp.complete.TestPlugins.class);
-		suite.addTest(org.ujmp.complete.AllTests.suite());
-		suite.addTest(org.jdmp.core.AllTests.suite());
-		suite.addTest(org.jdmp.gui.AllTests.suite());
-		suite.addTest(org.jdmp.bsh.AllTests.suite());
-		suite.addTest(org.jdmp.ehcache.AllTests.suite());
-		suite.addTest(org.jdmp.jgroups.AllTests.suite());
-		suite.addTest(org.jdmp.libsvm.AllTests.suite());
-		suite.addTest(org.jdmp.liblinear.AllTests.suite());
-		suite.addTest(org.jdmp.lucene.AllTests.suite());
-		suite.addTest(org.jdmp.mallet.AllTests.suite());
-		suite.addTest(org.jdmp.weka.AllTests.suite());
-		return suite;
+public class Plugin extends AbstractPlugin {
+
+	private final List<Object> dependencies = new ArrayList<Object>();
+
+	private final List<String> neededClasses = new ArrayList<String>();
+
+	public Plugin() {
+		dependencies.add("all");
+	}
+
+	@Override
+	public String getDescription() {
+		return "collection of all packages for JDMP";
+	}
+
+	@Override
+	public void setDescription(String description) {
+	}
+
+	@Override
+	public Collection<Object> getDependencies() {
+		return dependencies;
+	}
+
+	@Override
+	public Collection<String> getNeededClasses() {
+		return neededClasses;
 	}
 
 }

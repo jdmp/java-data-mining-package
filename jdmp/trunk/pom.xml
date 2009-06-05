@@ -157,7 +157,7 @@
 				<artifactId>jdmp-mallet</artifactId>
 				<version>${jdmp.version}</version>
 				<scope>compile</scope>
-			</dependency>			
+			</dependency>
 			<dependency>
 				<groupId>org.jdmp</groupId>
 				<artifactId>jdmp-bsh</artifactId>
@@ -181,7 +181,7 @@
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
-				<version>4.5</version>
+				<version>4.6</version>
 				<scope>test</scope>
 			</dependency>
 
@@ -272,7 +272,7 @@
 			<dependency>
 				<groupId>weka</groupId>
 				<artifactId>weka</artifactId>
-				<version>3.5.8</version>
+				<version>3.7.0</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
@@ -290,7 +290,7 @@
 			<dependency>
 				<groupId>jgroups</groupId>
 				<artifactId>jgroups</artifactId>
-				<version>2.6.8.GA</version>
+				<version>2.6.10.GA</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
@@ -302,13 +302,13 @@
 			<dependency>
 				<groupId>mallet</groupId>
 				<artifactId>mallet</artifactId>
-				<version>2.0-RC1</version>
+				<version>2.0-RC3</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
 				<groupId>mallet-deps</groupId>
 				<artifactId>mallet-deps</artifactId>
-				<version>2.0-RC1</version>
+				<version>2.0-RC3</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
@@ -370,13 +370,13 @@
 				<artifactId>sablecc</artifactId>
 				<version>3.2</version>
 				<scope>compile</scope>
-			</dependency>	
+			</dependency>
 			<dependency>
 				<groupId>lucene-core</groupId>
 				<artifactId>lucene-core</artifactId>
-				<version>2.4.0</version>
+				<version>2.4.1</version>
 				<scope>compile</scope>
-			</dependency>		
+			</dependency>
 			<dependency>
 				<groupId>liblinear</groupId>
 				<artifactId>liblinear</artifactId>
@@ -388,7 +388,7 @@
 				<artifactId>netlib-java</artifactId>
 				<version>0.9.1</version>
 				<scope>compile</scope>
-			</dependency>	
+			</dependency>
 
 		</dependencies>
 	</dependencyManagement>
@@ -430,7 +430,7 @@
 						<link>http://www.ujmp.org/ujmp/${ujmp.version}/docs/ujmp-jscience/apidocs</link>
 						<link>http://www.ujmp.org/ujmp/${ujmp.version}/docs/ujmp-jsci/apidocs</link>
 						<link>http://www.ujmp.org/ujmp/${ujmp.version}/docs/ujmp-lucene/apidocs</link>
-						
+
 						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-core/apidocs</link>
 						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-gui/apidocs</link>
 						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-ehcache/apidocs</link>

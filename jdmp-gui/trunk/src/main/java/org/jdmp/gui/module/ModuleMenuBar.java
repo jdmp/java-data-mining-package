@@ -27,6 +27,7 @@ import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 
 import org.jdmp.core.algorithm.basic.About;
@@ -36,8 +37,10 @@ import org.jdmp.core.algorithm.basic.CreateIris;
 import org.jdmp.core.algorithm.basic.Help;
 import org.jdmp.core.algorithm.basic.Paste;
 import org.jdmp.core.algorithm.basic.ShowLicense;
+import org.jdmp.core.util.JDMPPluginsMatrix;
 import org.jdmp.gui.module.actions.ModuleActions;
 import org.jdmp.gui.module.actions.ScriptAction;
+import org.ujmp.gui.actions.ShowInFrameAction;
 import org.ujmp.gui.menu.DefaultMenuBar;
 
 public class ModuleMenuBar extends DefaultMenuBar {
@@ -56,6 +59,8 @@ public class ModuleMenuBar extends DefaultMenuBar {
 		edit.add(new ScriptAction(null, o, "Copy", Copy.DESCRIPTION, "copy(ans)"));
 		edit.add(new ScriptAction(null, o, "Paste", Paste.DESCRIPTION, "paste"));
 		add(edit);
+
+		toolsMenu.add(new JMenuItem(new ShowInFrameAction(null, new JDMPPluginsMatrix())));
 
 		init(o);
 		examplesMenu.add(new JSeparator());
