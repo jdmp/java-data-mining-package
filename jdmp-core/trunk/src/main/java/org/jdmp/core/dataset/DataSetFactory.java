@@ -616,7 +616,7 @@ public abstract class DataSetFactory {
 		s.append("6.2,3.4,5.4,2.3,Iris-virginica\n");
 		s.append("5.9,3.0,5.1,1.8,Iris-virginica\n");
 
-		Matrix m = MatrixFactory.importFromString(FileFormat.CSV, s.toString());
+		Matrix m = MatrixFactory.importFromString(FileFormat.CSV, s.toString(), ",");
 		Matrix input = m.selectColumns(Ret.NEW, 0, 1, 2, 3);
 		Matrix output = m.selectColumns(Ret.NEW, 4).discretizeToColumns(0);
 
