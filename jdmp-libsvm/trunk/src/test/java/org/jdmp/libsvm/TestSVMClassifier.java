@@ -38,7 +38,7 @@ public class TestSVMClassifier extends TestCase {
 		ClassificationDataSet iris = DataSetFactory.IRIS();
 		Classifier c = new SVMClassifier(Kernel.RBF);
 		ListMatrix<Double> results = CrossValidation.run(c, iris, 10, 10, 0);
-		assertEquals(0.95, results.getMeanValue(), 0.05);
+		assertEquals(0.95, results.getMeanValue(), 0.04);
 	}
 
 }

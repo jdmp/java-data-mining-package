@@ -59,6 +59,10 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-liblinear</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-weka</artifactId>
 		</dependency>
 		<dependency>
@@ -291,6 +295,13 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-liblinear</artifactId>
+			<version>${jdmp.version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-bsh</artifactId>
 			<version>${jdmp.version}</version>
 			<classifier>tests</classifier>
@@ -320,6 +331,7 @@
 		<module>../jdmp-ehcache</module>
 		<module>../jdmp-jgroups</module>
 		<module>../jdmp-libsvm</module>
+		<module>../jdmp-liblinear</module>
 		<module>../jdmp-mallet</module>
 		<module>../jdmp-bsh</module>
 		<module>../jdmp-weka</module>
