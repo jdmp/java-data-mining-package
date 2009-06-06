@@ -23,19 +23,25 @@
 
 package org.jdmp.gui.sample;
 
+import java.awt.event.KeyEvent;
+import java.util.List;
+
 import javax.swing.JComponent;
-import javax.swing.JMenuBar;
+import javax.swing.JMenu;
 
-import org.jdmp.gui.util.JDMPToolsMenu;
-import org.ujmp.gui.menu.ExamplesMenu;
+import org.jdmp.gui.sample.actions.SampleActions;
+import org.ujmp.core.interfaces.GUIObject;
 
-public class SampleMenuBar extends JMenuBar {
-	private static final long serialVersionUID = -2293114754729075707L;
+public class SampleMenu extends JMenu {
+	private static final long serialVersionUID = 2720296520777577590L;
 
-	public SampleMenuBar(JComponent component, SampleGUIObject o) {
-		add(new SampleMenu(component, o, null));
-		add(new JDMPToolsMenu(component));
-		add(new ExamplesMenu(component));
+	public SampleMenu(JComponent component, SampleGUIObject o, GUIObject owner) {
+		super("Sample");
+		setMnemonic(KeyEvent.VK_S);
+		List<JComponent> actions = new SampleActions(component, o);
+		for (JComponent c : actions) {
+			add(c);
+		}
 	}
 
 }

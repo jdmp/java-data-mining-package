@@ -23,30 +23,19 @@
 
 package org.jdmp.gui.variable;
 
-import java.util.List;
-
 import javax.swing.JComponent;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
+import javax.swing.JMenuBar;
 
-import org.jdmp.core.util.JDMPPluginsMatrix;
-import org.jdmp.gui.variable.actions.VariableActions;
-import org.ujmp.gui.actions.ShowInFrameAction;
-import org.ujmp.gui.menu.DefaultMenuBar;
+import org.jdmp.gui.util.JDMPToolsMenu;
+import org.ujmp.gui.menu.ExamplesMenu;
 
-public class VariableMenuBar extends DefaultMenuBar {
+public class VariableMenuBar extends JMenuBar {
 	private static final long serialVersionUID = 4537110267416117135L;
 
 	public VariableMenuBar(JComponent component, VariableGUIObject o) {
-		super(component, o);
-		JMenu menu = new JMenu("Variable");
-		List<JComponent> actions = new VariableActions(component, o);
-		for (JComponent c : actions) {
-			menu.add(c);
-		}
-		add(menu);
-		toolsMenu.add(new JMenuItem(new ShowInFrameAction(null, new JDMPPluginsMatrix())));
-		init(component, o);
+		add(new VariableMenu(component, o, null));
+		add(new JDMPToolsMenu(component));
+		add(new ExamplesMenu(component));
 	}
 
 }

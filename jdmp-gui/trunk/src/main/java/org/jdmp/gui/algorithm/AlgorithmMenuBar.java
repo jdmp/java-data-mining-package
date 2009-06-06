@@ -23,26 +23,19 @@
 
 package org.jdmp.gui.algorithm;
 
-import java.util.List;
-
 import javax.swing.JComponent;
-import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 
-import org.jdmp.gui.algorithm.actions.AlgorithmActions;
-import org.ujmp.gui.menu.DefaultMenuBar;
+import org.jdmp.gui.util.JDMPToolsMenu;
+import org.ujmp.gui.menu.ExamplesMenu;
 
-public class AlgorithmMenuBar extends DefaultMenuBar {
+public class AlgorithmMenuBar extends JMenuBar {
 	private static final long serialVersionUID = -6724827875524793049L;
 
 	public AlgorithmMenuBar(JComponent component, AlgorithmGUIObject o) {
-		super(component, o);
-		JMenu menu = new JMenu("Algorithm");
-		List<JComponent> actions = new AlgorithmActions(component, o);
-		for (JComponent c : actions) {
-			menu.add(c);
-		}
-		add(menu);
-		init(component, o);
+		add(new AlgorithmMenu(component, o, null));
+		add(new JDMPToolsMenu(component));
+		add(new ExamplesMenu(component));
 	}
 
 }

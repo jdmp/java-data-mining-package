@@ -23,30 +23,19 @@
 
 package org.jdmp.gui.dataset;
 
-import java.util.List;
-
 import javax.swing.JComponent;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
+import javax.swing.JMenuBar;
 
-import org.jdmp.core.util.JDMPPluginsMatrix;
-import org.jdmp.gui.dataset.actions.DataSetActions;
-import org.ujmp.gui.actions.ShowInFrameAction;
-import org.ujmp.gui.menu.DefaultMenuBar;
+import org.jdmp.gui.util.JDMPToolsMenu;
+import org.ujmp.gui.menu.ExamplesMenu;
 
-public class DataSetMenuBar extends DefaultMenuBar {
+public class DataSetMenuBar extends JMenuBar {
 	private static final long serialVersionUID = 7982201026132757168L;
 
 	public DataSetMenuBar(JComponent component, DataSetGUIObject o) {
-		super(component, o);
-		JMenu menu = new JMenu("DataSet");
-		List<JComponent> actions = new DataSetActions(component, o);
-		for (JComponent c : actions) {
-			menu.add(c);
-		}
-		add(menu);
-		toolsMenu.add(new JMenuItem(new ShowInFrameAction(null, new JDMPPluginsMatrix())));
-		init(component, o);
+		add(new DataSetMenu(component, o, null));
+		add(new JDMPToolsMenu(component));
+		add(new ExamplesMenu(component));
 	}
 
 }

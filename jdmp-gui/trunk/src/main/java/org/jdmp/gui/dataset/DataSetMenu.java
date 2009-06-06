@@ -21,21 +21,27 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.gui.sample;
+package org.jdmp.gui.dataset;
+
+import java.awt.event.KeyEvent;
+import java.util.List;
 
 import javax.swing.JComponent;
-import javax.swing.JMenuBar;
+import javax.swing.JMenu;
 
-import org.jdmp.gui.util.JDMPToolsMenu;
-import org.ujmp.gui.menu.ExamplesMenu;
+import org.jdmp.gui.dataset.actions.DataSetActions;
+import org.ujmp.core.interfaces.GUIObject;
 
-public class SampleMenuBar extends JMenuBar {
-	private static final long serialVersionUID = -2293114754729075707L;
+public class DataSetMenu extends JMenu {
+	private static final long serialVersionUID = -2204597021528157745L;
 
-	public SampleMenuBar(JComponent component, SampleGUIObject o) {
-		add(new SampleMenu(component, o, null));
-		add(new JDMPToolsMenu(component));
-		add(new ExamplesMenu(component));
+	public DataSetMenu(JComponent component, DataSetGUIObject o, GUIObject owner) {
+		super("DataSet");
+		setMnemonic(KeyEvent.VK_D);
+		List<JComponent> actions = new DataSetActions(component, o);
+		for (JComponent c : actions) {
+			add(c);
+		}
 	}
 
 }

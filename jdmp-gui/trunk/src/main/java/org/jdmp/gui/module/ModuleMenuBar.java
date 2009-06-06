@@ -23,58 +23,20 @@
 
 package org.jdmp.gui.module;
 
-import java.util.List;
-
 import javax.swing.JComponent;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JSeparator;
+import javax.swing.JMenuBar;
 
-import org.jdmp.core.algorithm.basic.About;
-import org.jdmp.core.algorithm.basic.Copy;
-import org.jdmp.core.algorithm.basic.CreateHenon;
-import org.jdmp.core.algorithm.basic.CreateIris;
-import org.jdmp.core.algorithm.basic.Help;
-import org.jdmp.core.algorithm.basic.Paste;
-import org.jdmp.core.algorithm.basic.ShowLicense;
-import org.jdmp.core.util.JDMPPluginsMatrix;
-import org.jdmp.gui.module.actions.ModuleActions;
-import org.jdmp.gui.module.actions.ScriptAction;
-import org.ujmp.gui.actions.ShowInFrameAction;
-import org.ujmp.gui.menu.DefaultMenuBar;
+import org.jdmp.gui.util.JDMPToolsMenu;
+import org.ujmp.gui.menu.ExamplesMenu;
 
-public class ModuleMenuBar extends DefaultMenuBar {
+public class ModuleMenuBar extends JMenuBar {
 	private static final long serialVersionUID = 4019937863391146452L;
 
-	public ModuleMenuBar(ModuleGUIObject o) {
-		super(o);
-		JMenu menu = new JMenu("Module");
-		List<JComponent> actions = new ModuleActions(null, o);
-		for (JComponent c : actions) {
-			menu.add(c);
-		}
-		add(menu);
-
-		JMenu edit = new JMenu("Edit");
-		edit.add(new ScriptAction(null, o, "Copy", Copy.DESCRIPTION, "copy(ans)"));
-		edit.add(new ScriptAction(null, o, "Paste", Paste.DESCRIPTION, "paste"));
-		add(edit);
-
-		toolsMenu.add(new JMenuItem(new ShowInFrameAction(null, new JDMPPluginsMatrix())));
-
-		init(o);
-		examplesMenu.add(new JSeparator());
-		examplesMenu.add(new ScriptAction(null, o, "Iris DataSet", CreateIris.DESCRIPTION,
-				"dataset=iris"));
-		examplesMenu.add(new ScriptAction(null, o, "Henon Map DataSet", CreateHenon.DESCRIPTION,
-				"dataset=henon"));
-
-		JMenu help = new JMenu("Help");
-		help.add(new ScriptAction(null, o, "Help", Help.DESCRIPTION, "help"));
-		help.add(new ScriptAction(null, o, "About", About.DESCRIPTION, "about"));
-		help.add(new ScriptAction(null, o, "License", ShowLicense.DESCRIPTION, "license"));
-		add(help);
-
+	public ModuleMenuBar(JComponent component, ModuleGUIObject o) {
+		add(new ModuleMenu(component, o, null));
+		add(new JDMPToolsMenu(component));
+		add(new ExamplesMenu(component));
+		add(new ScriptExamplesMenu(component, o, null));
 	}
 
 }

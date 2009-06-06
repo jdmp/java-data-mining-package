@@ -21,21 +21,27 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.gui.sample;
+package org.jdmp.gui.module;
+
+import java.awt.event.KeyEvent;
+import java.util.List;
 
 import javax.swing.JComponent;
-import javax.swing.JMenuBar;
+import javax.swing.JMenu;
 
-import org.jdmp.gui.util.JDMPToolsMenu;
-import org.ujmp.gui.menu.ExamplesMenu;
+import org.jdmp.gui.module.actions.ModuleActions;
+import org.ujmp.core.interfaces.GUIObject;
 
-public class SampleMenuBar extends JMenuBar {
-	private static final long serialVersionUID = -2293114754729075707L;
+public class ModuleMenu extends JMenu {
+	private static final long serialVersionUID = -3287002838433741991L;
 
-	public SampleMenuBar(JComponent component, SampleGUIObject o) {
-		add(new SampleMenu(component, o, null));
-		add(new JDMPToolsMenu(component));
-		add(new ExamplesMenu(component));
+	public ModuleMenu(JComponent component, ModuleGUIObject o, GUIObject owner) {
+		super("Module");
+		setMnemonic(KeyEvent.VK_M);
+		List<JComponent> actions = new ModuleActions(component, o);
+		for (JComponent c : actions) {
+			add(c);
+		}
 	}
 
 }
