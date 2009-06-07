@@ -24,7 +24,7 @@
 package org.jdmp.core.dataset.wrappers;
 
 import org.jdmp.core.algorithm.regression.Regressor;
-import org.jdmp.core.dataset.BasicDataSet;
+import org.jdmp.core.dataset.DefaultDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.coordinates.Coordinates;
@@ -33,14 +33,14 @@ import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.interfaces.Wrapper;
 
 public class DataSetInputMatrixWrapper extends AbstractDenseDoubleMatrix2D implements
-		Wrapper<BasicDataSet> {
+		Wrapper<DefaultDataSet> {
 	private static final long serialVersionUID = -817570097594349208L;
 
 	public static final Object INPUT = Regressor.INPUT;
 
-	private BasicDataSet dataSet = null;
+	private DefaultDataSet dataSet = null;
 
-	public DataSetInputMatrixWrapper(BasicDataSet ds) {
+	public DataSetInputMatrixWrapper(DefaultDataSet ds) {
 		this.dataSet = ds;
 	}
 
@@ -97,11 +97,11 @@ public class DataSetInputMatrixWrapper extends AbstractDenseDoubleMatrix2D imple
 		}
 	}
 
-	public BasicDataSet getWrappedObject() {
+	public DefaultDataSet getWrappedObject() {
 		return dataSet;
 	}
 
-	public void setWrappedObject(BasicDataSet object) {
+	public void setWrappedObject(DefaultDataSet object) {
 		this.dataSet = object;
 	}
 

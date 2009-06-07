@@ -49,7 +49,7 @@ public abstract class DataSetFactory {
 	}
 
 	public static DataSet emptyDataSet() {
-		return new BasicDataSet();
+		return new DefaultDataSet();
 	}
 
 	public static ClassificationDataSet copyFromMatrix(Matrix input, Matrix target)
@@ -211,8 +211,8 @@ public abstract class DataSetFactory {
 		return ds;
 	}
 
-	public static BasicDataSet ANIMALS() throws MatrixException {
-		BasicDataSet animals = DataSetFactory.labeledDataSet("Animals");
+	public static DefaultDataSet ANIMALS() throws MatrixException {
+		DefaultDataSet animals = DataSetFactory.labeledDataSet("Animals");
 
 		Sample pigeon = SampleFactory.labeledSample("Pigeon");
 		pigeon.setMatrix(Sample.INPUT, MatrixFactory.importFromString(FileFormat.CSV,
@@ -297,8 +297,8 @@ public abstract class DataSetFactory {
 		return animals;
 	}
 
-	public static final BasicDataSet labeledDataSet(String label) {
-		BasicDataSet ds = new BasicDataSet();
+	public static final DefaultDataSet labeledDataSet(String label) {
+		DefaultDataSet ds = new DefaultDataSet();
 		ds.setLabel(label);
 		return ds;
 	}
@@ -644,7 +644,7 @@ public abstract class DataSetFactory {
 	}
 
 	public static DataSet linkToDir(File dir) throws MatrixException, IOException {
-		DataSet ds = new BasicDataSet();
+		DataSet ds = new DefaultDataSet();
 		for (File f : dir.listFiles()) {
 			if (f.isDirectory()) {
 				DataSet dsdir = linkToDir(f);

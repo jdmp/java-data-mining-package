@@ -32,12 +32,12 @@ import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.exceptions.MatrixException;
 
-public class BasicDataSet extends AbstractDataSet {
+public class DefaultDataSet extends AbstractDataSet {
 	private static final long serialVersionUID = -2887879051530049677L;
 
 	public static final String INPUT = "Input";
 
-	public BasicDataSet() {
+	public DefaultDataSet() {
 		super();
 		Matrix inputMatrix = new DataSetInputMatrixWrapper(this);
 		Variable input = VariableFactory.labeledVariable("Input");
@@ -75,8 +75,8 @@ public class BasicDataSet extends AbstractDataSet {
 	}
 
 	@Override
-	public BasicDataSet clone() {
-		BasicDataSet ds = null;
+	public DefaultDataSet clone() {
+		DefaultDataSet ds = null;
 		try {
 			ds = this.getClass().newInstance();
 		} catch (Exception e) {

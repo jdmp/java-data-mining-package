@@ -389,7 +389,42 @@
 				<version>0.9.1</version>
 				<scope>compile</scope>
 			</dependency>
-
+			<dependency>
+				<groupId>commons-discovery</groupId>
+				<artifactId>commons-discovery</artifactId>
+				<version>0.4</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>activation</groupId>
+				<artifactId>activation</artifactId>
+				<version>1.1.1</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>axis</groupId>
+				<artifactId>axis</artifactId>
+				<version>1.4</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>jaxrpc</groupId>
+				<artifactId>jaxrpc</artifactId>
+				<version>1.1</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>wsdl4j</groupId>
+				<artifactId>wsdl4j</artifactId>
+				<version>1.6.2</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>xerces</groupId>
+				<artifactId>xercesImpl</artifactId>
+				<version>2.6.2</version>
+				<scope>compile</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 

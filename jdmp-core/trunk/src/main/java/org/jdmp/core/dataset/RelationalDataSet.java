@@ -23,7 +23,7 @@
 
 package org.jdmp.core.dataset;
 
-public class RelationalDataSet extends BasicDataSet {
+public class RelationalDataSet extends DefaultDataSet {
 	private static final long serialVersionUID = 3067584941344782418L;
 
 }

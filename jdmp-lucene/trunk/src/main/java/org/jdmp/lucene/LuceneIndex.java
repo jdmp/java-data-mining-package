@@ -49,7 +49,7 @@ import org.apache.lucene.search.WildcardQuery;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.jdmp.core.algorithm.indexer.AbstractIndexer;
-import org.jdmp.core.dataset.BasicDataSet;
+import org.jdmp.core.dataset.DefaultDataSet;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
@@ -137,7 +137,7 @@ public class LuceneIndex extends AbstractIndexer implements Flushable,
 			q = p.parse(query);
 		}
 		TopDocs td = indexSearcher.search(q, 1000);
-		DataSet result = new BasicDataSet();
+		DataSet result = new DefaultDataSet();
 		for (ScoreDoc sd : td.scoreDocs) {
 			int id = sd.doc;
 			Document doc = indexSearcher.doc(id);

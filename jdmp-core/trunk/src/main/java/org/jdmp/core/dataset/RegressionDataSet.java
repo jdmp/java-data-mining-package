@@ -30,7 +30,7 @@ import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.exceptions.MatrixException;
 
-public class RegressionDataSet extends BasicDataSet {
+public class RegressionDataSet extends DefaultDataSet {
 	private static final long serialVersionUID = -3243395577983195632L;
 
 	public static final String RMSE = "RMSE";
