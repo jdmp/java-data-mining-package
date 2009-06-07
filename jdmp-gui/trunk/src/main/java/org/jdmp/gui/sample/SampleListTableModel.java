@@ -29,6 +29,7 @@ import javax.swing.table.AbstractTableModel;
 
 import org.jdmp.core.sample.HasSamples;
 import org.jdmp.core.sample.Sample;
+import org.ujmp.core.util.MathUtil;
 
 public class SampleListTableModel extends AbstractTableModel implements ListDataListener {
 	private static final long serialVersionUID = -5468178300746964431L;
@@ -50,7 +51,15 @@ public class SampleListTableModel extends AbstractTableModel implements ListData
 		if (iSamples.getSamples().isEmpty()) {
 			return 1;
 		} else {
-			return 1 + iSamples.getSamples().getElementAt(0).getVariables().getSize();
+			int max = 0;
+			int count = iSamples.getSamples().getSize();
+			for (int i = 0; i < 5 && i < count; i++) {
+				Sample s = iSamples.getSamples().getElementAt(i);
+				if (s != null) {
+					max = Math.max(max, s.getVariables().getSize());
+				}
+			}
+			return max + 1;
 		}
 	}
 
@@ -63,8 +72,14 @@ public class SampleListTableModel extends AbstractTableModel implements ListData
 			if (iSamples.getSamples().isEmpty()) {
 				return "unknown";
 			} else {
-				return iSamples.getSamples().getElementAt(0).getVariables().getElementAt(
-						columnIndex - 1).getLabel();
+				int count = iSamples.getSamples().getSize();
+				for (int i = 0; i < 5 && i < count; i++) {
+					Sample s = iSamples.getSamples().getElementAt(i);
+					if (s != null) {
+						return s.getVariables().getElementAt(columnIndex - 1).getLabel();
+					}
+				}
+				return null;
 			}
 		}
 	}

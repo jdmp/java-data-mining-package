@@ -54,12 +54,18 @@ public class SampleListPanel extends AbstractListPanel {
 		jTable.setModel(dataModel);
 
 		TableRowSorter<?> rs = (TableRowSorter<?>) jTable.getRowSorter();
-		if (iSamples.getSamples().getSize() != 0) {
-			ObservableMap<Variable> variables = iSamples.getSamples().getElementAt(0)
-					.getVariables();
-			int i = 1;
-			for (Object key : variables.keySet()) {
-				rs.setComparator(i++, new SampleCollator(key));
+		int count = iSamples.getSamples().getSize();
+		if (count != 0) {
+			for (int j = 0; j < 5 && j < count; j++) {
+				Sample s = iSamples.getSamples().getElementAt(j);
+				if (s != null) {
+					ObservableMap<Variable> variables = s.getVariables();
+					int i = 1;
+					for (Object key : variables.keySet()) {
+						rs.setComparator(i++, new SampleCollator(key));
+					}
+					break;
+				}
 			}
 		}
 
