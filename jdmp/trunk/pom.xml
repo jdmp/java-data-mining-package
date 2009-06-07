@@ -284,7 +284,7 @@
 			<dependency>
 				<groupId>backport-util-concurrent</groupId>
 				<artifactId>backport-util-concurrent</artifactId>
-				<version>3.0</version>
+				<version>3.1</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
@@ -408,6 +408,18 @@
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
+				<groupId>axis2</groupId>
+				<artifactId>axis2-kernel</artifactId>
+				<version>1.4.1</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>axis2</groupId>
+				<artifactId>axis2-adb</artifactId>
+				<version>1.4.1</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
 				<groupId>jaxrpc</groupId>
 				<artifactId>jaxrpc</artifactId>
 				<version>1.1</version>
@@ -423,6 +435,42 @@
 				<groupId>xerces</groupId>
 				<artifactId>xercesImpl</artifactId>
 				<version>2.6.2</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>axiom</groupId>
+				<artifactId>axiom-api</artifactId>
+				<version>1.2.7</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>axiom</groupId>
+				<artifactId>axiom-dom</artifactId>
+				<version>1.2.7</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>axiom</groupId>
+				<artifactId>axiom-impl</artifactId>
+				<version>1.2.7</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>XmlSchema</groupId>
+				<artifactId>XmlSchema</artifactId>
+				<version>1.4.2</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>neethi</groupId>
+				<artifactId>neethi</artifactId>
+				<version>2.0.4</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>commons-httpclient</groupId>
+				<artifactId>commons-httpclient</artifactId>
+				<version>3.1</version>
 				<scope>compile</scope>
 			</dependency>
 		</dependencies>
