@@ -57,7 +57,14 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 	public final String toString() {
 		StringBuilder s = new StringBuilder();
 		s.append(getClass().getSimpleName());
-		s.append(getVariables().toString());
+		s.append(" [ ");
+		for (Object key : getVariables().keySet()) {
+			Variable v = getVariables().get(key);
+			s.append(key + "=");
+			s.append(StringUtil.format(v.getMatrix()));
+			s.append(" ");
+		}
+		s.append("]");
 		return s.toString();
 	}
 
