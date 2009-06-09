@@ -24,13 +24,11 @@
 package org.jdmp.core.sample;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
 
 import javax.swing.AbstractListModel;
 
-import org.jdmp.core.util.DefaultObservableList;
 import org.jdmp.core.util.DefaultObservableMap;
 import org.jdmp.core.util.ObservableList;
 import org.jdmp.core.util.ObservableMap;
@@ -175,7 +173,7 @@ public class MapSample extends AbstractSample {
 
 		@Override
 		public void add(Matrix value) {
-			throw new MatrixException("not implemented");
+			((Map<Object, Object>) map).put(key, value);
 		}
 
 		@Override

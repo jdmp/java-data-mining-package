@@ -54,7 +54,7 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 	}
 
 	@Override
-	public final String toString() {
+	public String toString() {
 		StringBuilder s = new StringBuilder();
 		s.append(getClass().getSimpleName());
 		s.append(" [ ");
