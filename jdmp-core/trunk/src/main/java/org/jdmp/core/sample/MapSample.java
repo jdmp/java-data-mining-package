@@ -23,8 +23,12 @@
 
 package org.jdmp.core.sample;
 
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.Map;
+
+import javax.swing.AbstractListModel;
 
 import org.jdmp.core.util.DefaultObservableList;
 import org.jdmp.core.util.DefaultObservableMap;
@@ -35,6 +39,7 @@ import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.coordinates.Coordinates;
+import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.util.MathUtil;
 
 public class MapSample extends AbstractSample {
@@ -150,11 +155,74 @@ public class MapSample extends AbstractSample {
 		@Override
 		public synchronized ObservableList<Matrix> getMatrixList() {
 			if (matrixList == null) {
-				matrixList = new DefaultObservableList<Matrix>(Collections.singletonList(MathUtil
-						.getMatrix(map.get(key))));
+				matrixList = new SingletonObservableList(map, key);
 			}
 			return matrixList;
 		}
 	}
 
+	class SingletonObservableList extends AbstractListModel implements ObservableList<Matrix> {
+		private static final long serialVersionUID = 5626812327084186535L;
+
+		private Map<?, ?> map = null;
+
+		private Object key = null;
+
+		public SingletonObservableList(Map<?, ?> map, Object key) {
+			this.map = map;
+			this.key = key;
+		}
+
+		@Override
+		public void add(Matrix value) {
+			throw new MatrixException("not implemented");
+		}
+
+		@Override
+		public void addAll(Collection<Matrix> values) {
+			throw new MatrixException("not implemented");
+		}
+
+		@Override
+		public boolean remove(Matrix value) {
+			throw new MatrixException("not implemented");
+		}
+
+		@Override
+		public void clear() {
+			throw new MatrixException("not implemented");
+		}
+
+		@Override
+		public Matrix getElementAt(int index) {
+			return MathUtil.getMatrix(map.get(key));
+		}
+
+		@Override
+		public int indexOf(Matrix value) {
+			Matrix m = MathUtil.getMatrix(map.get(key));
+			return m == value ? 0 : -1;
+		}
+
+		@Override
+		public boolean isEmpty() {
+			return false;
+		}
+
+		@Override
+		public Collection<Matrix> toCollection() {
+			throw new MatrixException("not implemented");
+		}
+
+		@Override
+		public int getSize() {
+			return 1;
+		}
+
+		@Override
+		public Iterator<Matrix> iterator() {
+			throw new MatrixException("not implemented");
+		}
+
+	}
 }
