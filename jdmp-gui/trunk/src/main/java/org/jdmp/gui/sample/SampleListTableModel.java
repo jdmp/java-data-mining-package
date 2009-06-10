@@ -29,7 +29,7 @@ import javax.swing.table.AbstractTableModel;
 
 import org.jdmp.core.sample.HasSamples;
 import org.jdmp.core.sample.Sample;
-import org.ujmp.core.util.MathUtil;
+import org.jdmp.core.variable.Variable;
 
 public class SampleListTableModel extends AbstractTableModel implements ListDataListener {
 	private static final long serialVersionUID = -5468178300746964431L;
@@ -76,7 +76,10 @@ public class SampleListTableModel extends AbstractTableModel implements ListData
 				for (int i = 0; i < 5 && i < count; i++) {
 					Sample s = iSamples.getSamples().getElementAt(i);
 					if (s != null) {
-						return s.getVariables().getElementAt(columnIndex - 1).getLabel();
+						Variable v = s.getVariables().getElementAt(columnIndex - 1);
+						if (v != null) {
+							return v.getLabel();
+						}
 					}
 				}
 				return null;

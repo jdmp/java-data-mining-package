@@ -97,7 +97,7 @@ public class NetworkLayerForward extends AbstractAlgorithm {
 	}
 
 	public Matrix getInputMatrix() {
-		return getMatrixFromVariable(INPUT);
+		return getMatrix(INPUT);
 	}
 
 	public Variable getInputVariable() {
@@ -111,7 +111,7 @@ public class NetworkLayerForward extends AbstractAlgorithm {
 	}
 
 	public Matrix getWeightMatrix() {
-		return getMatrixFromVariable(WEIGHT);
+		return getMatrix(WEIGHT);
 	}
 
 	public Variable getWeightVariable() {
@@ -125,7 +125,7 @@ public class NetworkLayerForward extends AbstractAlgorithm {
 	}
 
 	public Matrix getWeightedInputMatrix() {
-		return getMatrixFromVariable(WEIGHTEDINPUT);
+		return getMatrix(WEIGHTEDINPUT);
 	}
 
 	public Variable getWeightedInputVariable() {
@@ -192,7 +192,7 @@ public class NetworkLayerForward extends AbstractAlgorithm {
 	}
 
 	public Matrix getNetInputMatrix() {
-		return getMatrixFromVariable(NETINPUT);
+		return getMatrix(NETINPUT);
 	}
 
 	public void setNetInputVariable(Variable v) {
@@ -205,7 +205,7 @@ public class NetworkLayerForward extends AbstractAlgorithm {
 	}
 
 	public Matrix getOutputMatrix() {
-		return getMatrixFromVariable(OUTPUT);
+		return getMatrix(OUTPUT);
 	}
 
 	public void setOutputVariable(Variable v) {

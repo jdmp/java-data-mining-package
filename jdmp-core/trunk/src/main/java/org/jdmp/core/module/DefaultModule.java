@@ -65,6 +65,10 @@ public class DefaultModule extends AbstractModule {
 		}
 	}
 
+	public final String getAsString(Object variableKey) {
+		return StringUtil.convert(getMatrix(variableKey));
+	}
+
 	@Override
 	public void setMatrix(Object variableKey, Matrix matrix) {
 		Variable v = getVariables().get(variableKey);

@@ -90,6 +90,15 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 		}
 	}
 
+	public final String getAsString(Object variableKey) {
+		Variable v = getVariables().get(variableKey);
+		if (v != null) {
+			return v.getAsString();
+		} else {
+			return null;
+		}
+	}
+
 	public final void notifyGUIObject() {
 		if (guiObject != null) {
 			guiObject.fireValueChanged();

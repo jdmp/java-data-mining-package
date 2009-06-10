@@ -42,6 +42,8 @@ public interface Variable extends CoreObject, HasMatrixList {
 
 	public Matrix getMatrix();
 
+	public String getAsString();
+
 	public Matrix getMatrix(int index);
 
 	public long getRowCount();

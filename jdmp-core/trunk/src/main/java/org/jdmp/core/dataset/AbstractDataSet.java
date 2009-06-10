@@ -97,6 +97,10 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		}
 	}
 
+	public final String getAsString(Object variableKey) {
+		return StringUtil.convert(getMatrix(variableKey));
+	}
+
 	public final void setObject(Object variableKey, Object value) {
 		if (value == null) {
 			setMatrix(variableKey, MatrixFactory.emptyMatrix());

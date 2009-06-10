@@ -146,7 +146,7 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 	}
 
 	public Matrix getOutputDeviationMatrix() {
-		return getMatrixFromVariable(OUTPUTDEVIATION);
+		return getMatrix(OUTPUTDEVIATION);
 	}
 
 	public Algorithm getReturningFunction() {
@@ -186,7 +186,7 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 	}
 
 	public Matrix getNetDeviationMatrix() {
-		return getMatrixFromVariable(NETDEVIATION);
+		return getMatrix(NETDEVIATION);
 	}
 
 	public Variable getContactDeviationVariable() {
@@ -199,7 +199,7 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 	}
 
 	public Matrix getContactDeviationMatrix() {
-		return getMatrixFromVariable(CONTACTDEVIATION);
+		return getMatrix(CONTACTDEVIATION);
 	}
 
 	public Variable getInputDeviationVariable() {
@@ -212,7 +212,7 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 	}
 
 	public Matrix getInputDeviationMatrix() {
-		return getMatrixFromVariable(INPUTDEVIATION);
+		return getMatrix(INPUTDEVIATION);
 	}
 
 	public Variable getWeightVariable() {
@@ -226,7 +226,7 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 	}
 
 	public Matrix getWeightMatrix() {
-		return getMatrixFromVariable(WEIGHT);
+		return getMatrix(WEIGHT);
 	}
 
 	public Variable getOutputVariable() {
@@ -240,7 +240,7 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 	}
 
 	public Matrix getOutputMatrix() {
-		return getMatrixFromVariable(OUTPUT);
+		return getMatrix(OUTPUT);
 	}
 
 	public void setLayer(int nr) {

@@ -71,7 +71,7 @@ public class WeightUpdate extends AlgorithmFiveSources {
 	}
 
 	public double getLearningRate() {
-		return getMatrixFromVariable(ETA).doubleValue();
+		return getMatrix(ETA).doubleValue();
 	}
 
 	public void setSampleWeight(double v) {

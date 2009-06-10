@@ -30,6 +30,7 @@ import org.jdmp.core.AbstractCoreObject;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.coordinates.Coordinates;
 import org.ujmp.core.interfaces.GUIObject;
+import org.ujmp.core.util.StringUtil;
 
 public abstract class AbstractVariable extends AbstractCoreObject implements Variable {
 	private static final long serialVersionUID = -3393106211967497877L;
@@ -53,6 +54,14 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 			return null;
 		} else {
 			return getMatrixList().getElementAt(getMatrixList().getSize() - 1);
+		}
+	}
+
+	public final String getAsString() {
+		if (getMatrixList() == null) {
+			return null;
+		} else {
+			return StringUtil.convert(getMatrixList().getElementAt(getMatrixList().getSize() - 1));
 		}
 	}
 

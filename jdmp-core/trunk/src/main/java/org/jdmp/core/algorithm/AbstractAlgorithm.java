@@ -40,6 +40,7 @@ import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.core.util.MathUtil;
+import org.ujmp.core.util.StringUtil;
 
 public abstract class AbstractAlgorithm extends AbstractCoreObject implements Algorithm {
 	private static final long serialVersionUID = 3219035032582720106L;
@@ -130,7 +131,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		Map<Object, Object> input = new HashMap<Object, Object>();
 
 		for (Object v : getInputKeys()) {
-			input.put(v, getMatrixFromVariable(v));
+			input.put(v, getMatrix(v));
 		}
 
 		Map<Object, Object> output = calculateObjects(input);
@@ -210,12 +211,8 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		return edgeDirections.get(key);
 	}
 
-	public final Matrix getMatrixFromVariable(Object variableIndex) {
-		Variable v = variableMap.get(variableIndex);
-		if (v == null)
-			return null;
-		else
-			return v.getMatrix();
+	public final String getAsString(Object variableKey) {
+		return StringUtil.convert(getMatrix(variableKey));
 	}
 
 	public Matrix getMatrix(Object variableKey) {
