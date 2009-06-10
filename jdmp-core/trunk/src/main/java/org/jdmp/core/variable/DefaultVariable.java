@@ -23,6 +23,8 @@
 
 package org.jdmp.core.variable;
 
+import java.util.LinkedList;
+
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 
@@ -64,7 +66,7 @@ public class DefaultVariable extends AbstractVariable {
 
 	public DefaultVariable() {
 		super();
-		matrixList = new DefaultObservableList<Matrix>(new RingBufferList<Matrix>());
+		matrixList = new DefaultObservableList<Matrix>(new LinkedList<Matrix>());
 		matrixList.addListDataListener(new VariableListDataListener());
 	}
 
