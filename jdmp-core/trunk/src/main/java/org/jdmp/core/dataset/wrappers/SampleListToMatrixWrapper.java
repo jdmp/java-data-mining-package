@@ -102,7 +102,9 @@ public class SampleListToMatrixWrapper extends AbstractDenseObjectMatrix2D imple
 		keys = new HashSet<Object>();
 		if (keysToShow == null || keysToShow.length == 0) {
 			for (Sample s : samples) {
-				keys.addAll(s.getVariables().keySet());
+				if (s != null) {
+					keys.addAll(s.getVariables().keySet());
+				}
 			}
 			int i = 0;
 			for (Object k : keys) {
