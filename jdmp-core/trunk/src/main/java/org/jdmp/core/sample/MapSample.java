@@ -182,6 +182,11 @@ public class MapSample extends AbstractSample {
 		}
 
 		@Override
+		public void fireContentsChanged() {
+			fireContentsChanged(this, -1, -1);
+		}
+
+		@Override
 		public boolean remove(Matrix value) {
 			throw new MatrixException("not implemented");
 		}
@@ -222,5 +227,9 @@ public class MapSample extends AbstractSample {
 			throw new MatrixException("not implemented");
 		}
 
+	}
+
+	@Override
+	public void setVariables(ObservableMap<Variable> variables) {
 	}
 }

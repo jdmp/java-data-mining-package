@@ -23,10 +23,10 @@
 
 package org.jdmp.core.algorithm;
 
-import org.jdmp.core.util.DefaultObservableMap;
+import org.jdmp.core.util.ObservableMap;
 
 public interface HasAlgorithmMap extends HasAlgorithms {
 
-	public DefaultObservableMap<Algorithm> getAlgorithms();
+	public ObservableMap<Algorithm> getAlgorithms();
 
 }

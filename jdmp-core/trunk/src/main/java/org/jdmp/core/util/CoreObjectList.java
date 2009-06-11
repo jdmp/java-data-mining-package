@@ -40,4 +40,6 @@ public interface CoreObjectList<V> extends Serializable, ListModel, Iterable<V> 
 
 	public Collection<V> toCollection();
 
+	public void fireContentsChanged();
+
 }

@@ -38,4 +38,6 @@ public interface HasVariableMap extends HasVariables {
 
 	public void setObject(Object variableKey, Object value);
 
+	public void setVariables(ObservableMap<Variable> variables);
+
 }

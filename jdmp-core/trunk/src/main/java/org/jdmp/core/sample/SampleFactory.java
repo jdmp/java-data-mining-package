@@ -37,6 +37,8 @@ import org.ujmp.core.util.MathUtil;
 
 public abstract class SampleFactory {
 
+	public static Sample EMPTYSAMPLE = new DefaultSample();
+
 	public static final Sample createFromObject(Object o) {
 		if (o instanceof Map) {
 			return linkToMap((Map) o);
@@ -85,8 +87,7 @@ public abstract class SampleFactory {
 	}
 
 	public static final Sample emptySample() {
-		Sample s = new DefaultSample();
-		return s;
+		return EMPTYSAMPLE;
 	}
 
 	public static final RelationalSample relationalSample(Collection<?> items) {

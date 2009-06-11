@@ -33,6 +33,7 @@ import java.util.Map;
 
 import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.util.DefaultObservableMap;
+import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
@@ -47,9 +48,9 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 
 	private transient GUIObject guiObject = null;
 
-	private final DefaultObservableMap<Variable> variableMap = new DefaultObservableMap<Variable>();
+	private ObservableMap<Variable> variableMap = new DefaultObservableMap<Variable>();
 
-	private final DefaultObservableMap<Algorithm> algorithmList = new DefaultObservableMap<Algorithm>();
+	private final ObservableMap<Algorithm> algorithmList = new DefaultObservableMap<Algorithm>();
 
 	private final Map<Object, String> edgeLabels = new HashMap<Object, String>();
 
@@ -233,11 +234,11 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		v.addMatrix(matrix);
 	}
 
-	public final DefaultObservableMap<Variable> getVariables() {
+	public final ObservableMap<Variable> getVariables() {
 		return variableMap;
 	}
 
-	public final DefaultObservableMap<Algorithm> getAlgorithms() {
+	public final ObservableMap<Algorithm> getAlgorithms() {
 		return algorithmList;
 	}
 
@@ -269,6 +270,10 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 
 	public void notifyGUIObject() {
 		guiObject.fireValueChanged();
+	}
+
+	public void setVariables(ObservableMap<Variable> variables) {
+		this.variableMap = variables;
 	}
 
 }

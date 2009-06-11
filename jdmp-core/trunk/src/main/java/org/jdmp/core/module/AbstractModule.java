@@ -31,41 +31,44 @@ import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.DefaultObservableMap;
+import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.interfaces.GUIObject;
 
 public abstract class AbstractModule extends AbstractCoreObject implements Module {
+	private static final long serialVersionUID = 4621466897617405575L;
+
 	private transient GUIObject guiObject = null;
 
-	protected final DefaultObservableMap<Algorithm> algorithms = new DefaultObservableMap<Algorithm>();
+	protected final ObservableMap<Algorithm> algorithms = new DefaultObservableMap<Algorithm>();
 
-	protected final DefaultObservableMap<Sample> samples = new DefaultObservableMap<Sample>();
+	protected final ObservableMap<Sample> samples = new DefaultObservableMap<Sample>();
 
-	protected final DefaultObservableMap<DataSet> dataSets = new DefaultObservableMap<DataSet>();
+	protected final ObservableMap<DataSet> dataSets = new DefaultObservableMap<DataSet>();
 
-	protected final DefaultObservableMap<Variable> variables = new DefaultObservableMap<Variable>();
+	protected ObservableMap<Variable> variables = new DefaultObservableMap<Variable>();
 
-	protected final DefaultObservableMap<Module> modules = new DefaultObservableMap<Module>();
+	protected final ObservableMap<Module> modules = new DefaultObservableMap<Module>();
 
-	public DefaultObservableMap<Module> getModules() {
+	public ObservableMap<Module> getModules() {
 		return modules;
 	}
 
-	public final DefaultObservableMap<DataSet> getDataSets() {
+	public final ObservableMap<DataSet> getDataSets() {
 		return dataSets;
 	}
 
-	public final DefaultObservableMap<Algorithm> getAlgorithms() {
+	public final ObservableMap<Algorithm> getAlgorithms() {
 		return algorithms;
 	}
 
-	public final DefaultObservableMap<Variable> getVariables() {
+	public final ObservableMap<Variable> getVariables() {
 		return variables;
 	}
 
-	public final DefaultObservableMap<Sample> getSamples() {
+	public final ObservableMap<Sample> getSamples() {
 		return samples;
 	}
 
@@ -113,6 +116,10 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		if (guiObject != null) {
 			guiObject.fireValueChanged();
 		}
+	}
+
+	public void setVariables(ObservableMap<Variable> variables) {
+		this.variables = variables;
 	}
 
 }

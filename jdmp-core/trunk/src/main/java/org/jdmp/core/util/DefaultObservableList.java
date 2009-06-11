@@ -101,4 +101,9 @@ public class DefaultObservableList<V> extends AbstractListModel implements Obser
 		return values.toString();
 	}
 
+	@Override
+	public void fireContentsChanged() {
+		fireContentsChanged(this, -1, -1);
+	}
+
 }

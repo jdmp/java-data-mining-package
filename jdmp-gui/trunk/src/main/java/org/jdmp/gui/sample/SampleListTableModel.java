@@ -23,6 +23,11 @@
 
 package org.jdmp.gui.sample;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 import javax.swing.table.AbstractTableModel;
@@ -36,6 +41,10 @@ public class SampleListTableModel extends AbstractTableModel implements ListData
 
 	public static final int ICONCOLUMN = 0;
 
+	private Set<String> keys = new HashSet<String>();
+
+	private Map<Integer, String> columnMap = new HashMap<Integer, String>();
+
 	private HasSamples iSamples = null;
 
 	public SampleListTableModel(HasSamples iSamples) {
@@ -48,19 +57,7 @@ public class SampleListTableModel extends AbstractTableModel implements ListData
 	}
 
 	public int getColumnCount() {
-		if (iSamples.getSamples().isEmpty()) {
-			return 1;
-		} else {
-			int max = 0;
-			int count = iSamples.getSamples().getSize();
-			for (int i = 0; i < 5 && i < count; i++) {
-				Sample s = iSamples.getSamples().getElementAt(i);
-				if (s != null) {
-					max = Math.max(max, s.getVariables().getSize());
-				}
-			}
-			return max + 1;
-		}
+		return keys.size() + 1;
 	}
 
 	@Override
@@ -69,21 +66,8 @@ public class SampleListTableModel extends AbstractTableModel implements ListData
 		case ICONCOLUMN:
 			return "";
 		default:
-			if (iSamples.getSamples().isEmpty()) {
-				return "unknown";
-			} else {
-				int count = iSamples.getSamples().getSize();
-				for (int i = 0; i < 5 && i < count; i++) {
-					Sample s = iSamples.getSamples().getElementAt(i);
-					if (s != null) {
-						Variable v = s.getVariables().getElementAt(columnIndex - 1);
-						if (v != null) {
-							return v.getLabel();
-						}
-					}
-				}
-				return null;
-			}
+			String s = columnMap.get(columnIndex - 1);
+			return s == null ? "unknown" : s;
 		}
 	}
 
@@ -93,22 +77,59 @@ public class SampleListTableModel extends AbstractTableModel implements ListData
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		return iSamples.getSamples().getElementAt(rowIndex);
+		Sample s = iSamples.getSamples().getElementAt(rowIndex);
+		if (s == null) {
+			return null;
+		}
+		for (Variable v : s.getVariables()) {
+			if (keys.add(v.getLabel())) {
+				columnMap.put(columnMap.size(), v.getLabel());
+				fireTableStructureChanged();
+			}
+		}
+		return s;
 	}
 
 	@Override
 	public void contentsChanged(ListDataEvent e) {
-		fireTableRowsUpdated(e.getIndex0(), e.getIndex1());
+		if (e.getIndex0() < 0 || e.getIndex1() < 0) {
+			fireTableDataChanged();
+		} else {
+			try {
+				fireTableRowsUpdated(e.getIndex0(), e.getIndex1());
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				fireTableDataChanged();
+			}
+		}
 	}
 
 	@Override
 	public void intervalAdded(ListDataEvent e) {
-		fireTableRowsInserted(e.getIndex0(), e.getIndex1());
+		try {
+			fireTableRowsInserted(e.getIndex0(), e.getIndex1());
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			fireTableDataChanged();
+		}
 	}
 
 	@Override
 	public void intervalRemoved(ListDataEvent e) {
-		fireTableRowsDeleted(e.getIndex0(), e.getIndex1());
+		try {
+			fireTableRowsDeleted(e.getIndex0(), e.getIndex1());
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			fireTableDataChanged();
+		}
+	}
+
+	public Set<String> getKeys() {
+		return keys;
+	}
+
+	public Map<Integer, String> getColumnMap() {
+		return columnMap;
 	}
 
 }

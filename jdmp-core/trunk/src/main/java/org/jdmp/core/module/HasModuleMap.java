@@ -23,10 +23,10 @@
 
 package org.jdmp.core.module;
 
-import org.jdmp.core.util.DefaultObservableMap;
+import org.jdmp.core.util.ObservableMap;
 
 public interface HasModuleMap extends HasModules {
 
-	public DefaultObservableMap<Module> getModules();
+	public ObservableMap<Module> getModules();
 
 }

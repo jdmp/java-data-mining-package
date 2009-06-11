@@ -51,7 +51,7 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 
 	private ObservableList<Sample> sampleList = new DefaultObservableList<Sample>();
 
-	private final ObservableMap<Variable> variableList = new DefaultObservableMap<Variable>();
+	private ObservableMap<Variable> variableList = new DefaultObservableMap<Variable>();
 
 	private final ObservableList<DataSet> dataSetList = new DefaultObservableList<DataSet>();
 
@@ -234,6 +234,10 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 	@Override
 	public void setSamples(ObservableList<Sample> samples) {
 		this.sampleList = samples;
+	}
+
+	public void setVariables(ObservableMap<Variable> variables) {
+		this.variableList = variables;
 	}
 
 	public void notifyGUIObject() {

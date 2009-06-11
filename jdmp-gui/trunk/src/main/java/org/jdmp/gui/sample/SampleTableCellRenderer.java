@@ -23,19 +23,18 @@
 
 package org.jdmp.gui.sample;
 
+import java.awt.Color;
 import java.awt.Component;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.UIManager;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
-import org.jdmp.core.algorithm.regression.Regressor;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.Variable;
@@ -43,15 +42,13 @@ import org.ujmp.gui.renderer.MatrixRenderer;
 
 public class SampleTableCellRenderer implements TableCellRenderer {
 
-	public static final Object WEIGHT = Regressor.WEIGHT;
+	private static final Border DEFAULT_NO_FOCUS_BORDER = new EmptyBorder(1, 1, 1, 1);
 
 	private final DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
 
 	private final MatrixRenderer matrixRenderer = new MatrixRenderer();
 
-	private Set<Object> keys = new HashSet<Object>();
-
-	private Map<Integer, Object> columnMap = new HashMap<Integer, Object>();
+	private Map<Integer, String> columnMap = null;
 
 	private Sample sample = null;
 
@@ -62,17 +59,12 @@ public class SampleTableCellRenderer implements TableCellRenderer {
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
 			boolean hasFocus, int row, int column) {
 
+		columnMap = ((SampleListTableModel) table.getModel()).getColumnMap();
+
 		c = null;
 
 		if (value instanceof Sample) {
 			sample = (Sample) value;
-			Set<Object> ks = sample.getVariables().keySet();
-			for (Object key : ks) {
-				if (!keys.contains(key)) {
-					keys.add(key);
-					columnMap.put(columnMap.size(), key);
-				}
-			}
 
 		} else {
 			sample = null;
@@ -110,6 +102,36 @@ public class SampleTableCellRenderer implements TableCellRenderer {
 			}
 
 			c.setHorizontalAlignment(JLabel.CENTER);
+
+		} else {
+
+			c = (JLabel) renderer.getTableCellRendererComponent(table, o, isSelected, hasFocus,
+					row, column);
+
+			if (hasFocus) {
+				Border border = null;
+				if (isSelected) {
+					border = UIManager.getBorder("Table.focusSelectedCellHighlightBorder");
+				}
+				if (border == null) {
+					border = UIManager.getBorder("Table.focusCellHighlightBorder");
+				}
+				c.setBorder(border);
+
+				if (!isSelected && table.isCellEditable(row, column)) {
+					Color col;
+					col = UIManager.getColor("Table.focusCellForeground");
+					if (col != null) {
+						c.setForeground(col);
+					}
+					col = UIManager.getColor("Table.focusCellBackground");
+					if (col != null) {
+						c.setBackground(col);
+					}
+				}
+			} else {
+				c.setBorder(DEFAULT_NO_FOCUS_BORDER);
+			}
 
 		}
 

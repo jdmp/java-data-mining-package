@@ -86,6 +86,11 @@ public class DefaultObservableMap<V> extends AbstractListModel implements Observ
 		return v;
 	}
 
+	@Override
+	public void fireContentsChanged() {
+		fireContentsChanged(this, -1, -1);
+	}
+
 	public synchronized Iterator<V> iterator() {
 		return map.values().iterator();
 	}

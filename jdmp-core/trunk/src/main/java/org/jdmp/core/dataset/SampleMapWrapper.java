@@ -162,4 +162,9 @@ public class SampleMapWrapper<V> extends AbstractListModel implements Observable
 		return s.toString();
 	}
 
+	@Override
+	public void fireContentsChanged() {
+		fireContentsChanged(this, -1, -1);
+	}
+
 }

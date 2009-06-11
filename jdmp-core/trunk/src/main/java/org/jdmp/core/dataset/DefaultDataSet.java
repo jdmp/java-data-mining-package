@@ -25,7 +25,6 @@ package org.jdmp.core.dataset;
 
 import org.jdmp.core.dataset.wrappers.DataSetInputMatrixWrapper;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.util.ObservableList;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
