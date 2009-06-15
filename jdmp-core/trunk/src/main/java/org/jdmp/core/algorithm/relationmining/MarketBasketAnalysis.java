@@ -40,7 +40,7 @@ import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.enums.FileFormat;
 import org.ujmp.core.mapmatrix.DefaultMapMatrix;
 import org.ujmp.core.mapmatrix.MapMatrix;
-import org.ujmp.core.objectmatrix.AbstractDenseObjectMatrix2D;
+import org.ujmp.core.objectmatrix.stub.AbstractDenseObjectMatrix2D;
 
 public class MarketBasketAnalysis extends AbstractRelationMiner {
 

@@ -25,7 +25,7 @@ package org.jdmp.mallet.matrix;
 
 import java.util.Arrays;
 
-import org.ujmp.core.doublematrix.AbstractDenseDoubleMatrix2D;
+import org.ujmp.core.doublematrix.stub.AbstractDenseDoubleMatrix2D;
 import org.ujmp.core.interfaces.Wrapper;
 
 import cc.mallet.types.FeatureVector;

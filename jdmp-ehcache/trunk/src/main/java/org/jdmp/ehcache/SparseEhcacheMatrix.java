@@ -32,7 +32,7 @@ import java.util.Map;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.coordinates.Coordinates;
 import org.ujmp.core.exceptions.MatrixException;
-import org.ujmp.core.objectmatrix.AbstractMapToSparseMatrixWrapper;
+import org.ujmp.core.objectmatrix.stub.AbstractMapToSparseMatrixWrapper;
 
 public class SparseEhcacheMatrix extends AbstractMapToSparseMatrixWrapper {
 	private static final long serialVersionUID = -7743149828558906127L;

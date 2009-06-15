@@ -7,7 +7,7 @@ import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.interfaces.Wrapper;
-import org.ujmp.core.objectmatrix.AbstractDenseObjectMatrix2D;
+import org.ujmp.core.objectmatrix.stub.AbstractDenseObjectMatrix2D;
 
 public class MatrixListToMatrixWrapper extends AbstractDenseObjectMatrix2D implements
 		Wrapper<ObservableList<Matrix>>, ListDataListener {

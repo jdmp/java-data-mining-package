@@ -31,8 +31,8 @@ import java.util.Map;
 
 import org.ujmp.core.Matrix;
 import org.ujmp.core.coordinates.Coordinates;
-import org.ujmp.core.objectmatrix.AbstractMapToTiledMatrix2DWrapper;
 import org.ujmp.core.objectmatrix.ObjectMatrix2D;
+import org.ujmp.core.objectmatrix.stub.AbstractMapToTiledMatrix2DWrapper;
 
 public class TiledEhcacheMatrix2D extends AbstractMapToTiledMatrix2DWrapper {
 	private static final long serialVersionUID = 4324063544046176423L;

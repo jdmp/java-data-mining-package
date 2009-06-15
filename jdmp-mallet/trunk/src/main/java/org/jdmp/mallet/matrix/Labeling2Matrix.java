@@ -23,7 +23,7 @@
 
 package org.jdmp.mallet.matrix;
 
-import org.ujmp.core.doublematrix.AbstractSparseDoubleMatrix2D;
+import org.ujmp.core.doublematrix.stub.AbstractSparseDoubleMatrix2D;
 import org.ujmp.core.exceptions.MatrixException;
 
 import cc.mallet.types.Labeling;

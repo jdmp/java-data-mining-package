@@ -30,7 +30,7 @@ import org.jdmp.core.algorithm.AlgorithmTwoSources;
 import org.jdmp.core.algorithm.classification.mlp.MultiLayerNetwork.BiasType;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
-import org.ujmp.core.doublematrix.ArrayDenseDoubleMatrix2D;
+import org.ujmp.core.doublematrix.impl.ArrayDenseDoubleMatrix2D;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.util.MathUtil;
 
