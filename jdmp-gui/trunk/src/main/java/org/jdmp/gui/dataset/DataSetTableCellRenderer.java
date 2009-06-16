@@ -67,6 +67,9 @@ public class DataSetTableCellRenderer implements TableCellRenderer {
 			case DataSetListTableModel.SAMPLECOUNTCOLUMN:
 				o = "" + dataSet.getSamples().getSize();
 				break;
+			case DataSetListTableModel.DATASETCOUNTCOLUMN:
+				o = "" + dataSet.getDataSets().getSize();
+				break;
 			default:
 				o = null;
 				break;

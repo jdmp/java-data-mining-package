@@ -37,9 +37,11 @@ public class DataSetListTableModel extends AbstractTableModel implements ListDat
 
 	public static final int LABELCOLUMN = 1;
 
-	public static final int SAMPLECOUNTCOLUMN = 2;
+	public static final int DATASETCOUNTCOLUMN = 2;
 
-	public static final int VARIABLECOLUMN = 3;
+	public static final int SAMPLECOUNTCOLUMN = 3;
+
+	public static final int VARIABLECOLUMN = 4;
 
 	private HasDataSets iDataSets = null;
 
@@ -53,7 +55,7 @@ public class DataSetListTableModel extends AbstractTableModel implements ListDat
 	}
 
 	public int getColumnCount() {
-		return 4;
+		return 5;
 	}
 
 	@Override
@@ -63,6 +65,8 @@ public class DataSetListTableModel extends AbstractTableModel implements ListDat
 			return "";
 		case LABELCOLUMN:
 			return "Label";
+		case DATASETCOUNTCOLUMN:
+			return "DataSetCount";
 		case SAMPLECOUNTCOLUMN:
 			return "SampleCount";
 		case VARIABLECOLUMN:
