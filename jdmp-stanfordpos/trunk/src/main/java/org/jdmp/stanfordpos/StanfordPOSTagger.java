@@ -47,6 +47,8 @@ public class StanfordPOSTagger extends AbstractTagger {
 
 	private MaxentTagger tagger = null;
 
+	private static StanfordPOSTagger instance = null;
+
 	public StanfordPOSTagger() throws Exception {
 		this(new File(MODELPATH + "/" + DEFAULTMODEL));
 	}
@@ -95,6 +97,17 @@ public class StanfordPOSTagger extends AbstractTagger {
 		list.add(m);
 
 		return list;
+	}
+
+	public static StanfordPOSTagger getInstance() {
+		if (instance == null) {
+			try {
+				instance = new StanfordPOSTagger();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return instance;
 	}
 
 }

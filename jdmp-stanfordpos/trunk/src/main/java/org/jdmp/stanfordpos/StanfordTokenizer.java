@@ -38,6 +38,8 @@ import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 public class StanfordTokenizer extends AbstractTokenizer {
 	private static final long serialVersionUID = -6822348129510526065L;
 
+	private static StanfordTokenizer instance = null;
+
 	public StanfordTokenizer() throws Exception {
 	}
 
@@ -57,6 +59,17 @@ public class StanfordTokenizer extends AbstractTokenizer {
 		String s = "But now and then, the state’s Western heritage comes storming through the saloon doors to remind one and all just what this place was like not so long ago.";
 		Tokenizer t = new StanfordTokenizer();
 		System.out.println(t.tokenize(s));
+	}
+
+	public static StanfordTokenizer getInstance() {
+		if (instance == null) {
+			try {
+				instance = new StanfordTokenizer();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return instance;
 	}
 
 }

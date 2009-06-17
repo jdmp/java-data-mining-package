@@ -30,7 +30,6 @@ import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
-import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
 
 public abstract class AbstractTokenizer extends AbstractAlgorithm implements Tokenizer {
@@ -38,14 +37,12 @@ public abstract class AbstractTokenizer extends AbstractAlgorithm implements Tok
 
 	public final void tokenize(Object variableKey, Sample sample) throws Exception {
 		Variable input = sample.getVariables().get(variableKey);
-		Variable result = VariableFactory.emptyVariable();
 		for (Matrix m : input.getMatrixList()) {
 			List<Matrix> r = tokenize(m);
 			for (Matrix n : r) {
-				result.addMatrix(n);
+				sample.setMatrix(Tokenizer.TOKENIZED, n);
 			}
 		}
-		sample.getVariables().put(Tokenizer.TOKENIZED, result);
 	}
 
 	public final void tokenize(Object variableKey, DataSet dataSet) throws Exception {
