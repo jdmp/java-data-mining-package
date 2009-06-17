@@ -164,6 +164,12 @@
 				<version>${jdmp.version}</version>
 				<scope>compile</scope>
 			</dependency>
+			<dependency>
+				<groupId>org.jdmp</groupId>
+				<artifactId>jdmp-stanfordpos</artifactId>
+				<version>${jdmp.version}</version>
+				<scope>compile</scope>
+			</dependency>
 
 
 			<dependency>
@@ -461,6 +467,12 @@
 				<version>3.1</version>
 				<scope>compile</scope>
 			</dependency>
+			<dependency>
+				<groupId>stanford</groupId>
+				<artifactId>stanford-postagger</artifactId>
+				<version>2008-09-28</version>
+				<scope>compile</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -504,13 +516,16 @@
 
 						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-core/apidocs</link>
 						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-gui/apidocs</link>
+						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-bsh/apidocs</link>
 						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-ehcache/apidocs</link>
 						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-jgroups/apidocs</link>
 						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-libsvm/apidocs</link>
-						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-mallet/apidocs</link>
-						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-bsh/apidocs</link>
-						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-weka/apidocs</link>
+						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-liblinear/apidocs</link>
 						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-lucene/apidocs</link>
+						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-mallet/apidocs</link>
+						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-stanfordpos/apidocs</link>
+						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-weka/apidocs</link>
+
 					</links>
 				</configuration>
 			</plugin>

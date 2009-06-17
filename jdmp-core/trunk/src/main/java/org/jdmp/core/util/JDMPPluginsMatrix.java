@@ -40,6 +40,7 @@ public class JDMPPluginsMatrix extends UJMPPluginsMatrix {
 		addClass("jdmp-libsvm");
 		addClass("jdmp-lucene");
 		addClass("jdmp-mallet");
+		addClass("jdmp-stanfordpos");
 		addClass("jdmp-weka");
 		refresh();
 	}

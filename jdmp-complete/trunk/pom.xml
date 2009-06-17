@@ -77,6 +77,10 @@
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-lucene</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-stanfordpos</artifactId>
+		</dependency>
 
 
 
@@ -249,8 +253,8 @@
 			<classifier>tests</classifier>
 			<scope>test</scope>
 		</dependency>
-		
-		
+
+
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-ehcache</artifactId>
@@ -321,6 +325,13 @@
 			<classifier>tests</classifier>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-stanfordpos</artifactId>
+			<version>${jdmp.version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
 
 	</dependencies>
 
@@ -328,14 +339,16 @@
 	<modules>
 		<module>../jdmp-core</module>
 		<module>../jdmp-gui</module>
+		<module>../jdmp-bsh</module>
 		<module>../jdmp-ehcache</module>
 		<module>../jdmp-jgroups</module>
 		<module>../jdmp-libsvm</module>
 		<module>../jdmp-liblinear</module>
-		<module>../jdmp-mallet</module>
-		<module>../jdmp-bsh</module>
-		<module>../jdmp-weka</module>
 		<module>../jdmp-lucene</module>
+		<module>../jdmp-mallet</module>
+		<module>../jdmp-stanfordpos</module>
+		<module>../jdmp-weka</module>
+
 	</modules>
 
 
