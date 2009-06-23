@@ -473,6 +473,11 @@
 				<version>2008-09-28</version>
 				<scope>compile</scope>
 			</dependency>
+			<dependency>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty</artifactId>
+				<version>6.1.18</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
