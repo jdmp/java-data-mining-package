@@ -21,7 +21,7 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.jetty;
+package org.jdmp.jetty.coreobject;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,12 +37,12 @@ import org.jdmp.jetty.html.Page;
 import org.jdmp.jetty.html.tags.BRTag;
 import org.jdmp.jetty.html.tags.H1Tag;
 
-public class HtmlListServlet extends HttpServlet {
+public class JettyCoreObjectListServlet extends HttpServlet {
 	private static final long serialVersionUID = -4311396653640425480L;
 
 	private CoreObjectList<? extends CoreObject> list = null;
 
-	public HtmlListServlet(CoreObjectList<? extends CoreObject> list) {
+	public JettyCoreObjectListServlet(CoreObjectList<? extends CoreObject> list) {
 		this.list = list;
 	}
 

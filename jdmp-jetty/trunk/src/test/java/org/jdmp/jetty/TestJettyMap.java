@@ -21,28 +21,34 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.complete;
+package org.jdmp.jetty;
 
-import junit.framework.TestSuite;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
-public class AllTests extends TestSuite {
+import org.jdmp.jetty.collections.JettyMapClient;
+import org.ujmp.core.collections.AbstractMapTest;
 
-	public static TestSuite suite() {
-		TestSuite suite = new TestSuite(AllTests.class.getName());
-		suite.addTestSuite(org.jdmp.complete.TestPlugins.class);
-		suite.addTest(org.ujmp.complete.AllTests.suite());
-		suite.addTest(org.jdmp.core.AllTests.suite());
-		suite.addTest(org.jdmp.gui.AllTests.suite());
-		suite.addTest(org.jdmp.bsh.AllTests.suite());
-		suite.addTest(org.jdmp.ehcache.AllTests.suite());
-		suite.addTest(org.jdmp.jetty.AllTests.suite());
-		suite.addTest(org.jdmp.jgroups.AllTests.suite());
-		suite.addTest(org.jdmp.libsvm.AllTests.suite());
-		suite.addTest(org.jdmp.liblinear.AllTests.suite());
-		suite.addTest(org.jdmp.lucene.AllTests.suite());
-		suite.addTest(org.jdmp.mallet.AllTests.suite());
-		suite.addTest(org.jdmp.weka.AllTests.suite());
-		return suite;
+public class TestJettyMap extends AbstractMapTest {
+
+	private JettyObjectServer server = null;
+
+	public void setUp() throws Exception {
+		Map<Object, Object> originalMap = new HashMap<Object, Object>();
+		server = new JettyObjectServer(originalMap, 8888);
+		server.start();
 	}
 
+	@Override
+	public Map<Object, Object> createMap() throws Exception {
+		JettyMapClient<Object, Object> map = new JettyMapClient<Object, Object>(
+				new URL("http://localhost:8888"));
+		return map;
+	}
+
+	public void tearDown() throws Exception {
+		server.stop();
+		server = null;
+	}
 }

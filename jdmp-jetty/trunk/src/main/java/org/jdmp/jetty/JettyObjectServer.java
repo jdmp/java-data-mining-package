@@ -21,28 +21,46 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.complete;
+package org.jdmp.jetty;
 
-import junit.framework.TestSuite;
+import org.mortbay.jetty.Server;
+import org.mortbay.jetty.handler.ContextHandlerCollection;
+import org.mortbay.jetty.servlet.Context;
+import org.mortbay.jetty.servlet.ServletHolder;
 
-public class AllTests extends TestSuite {
+public class JettyObjectServer {
 
-	public static TestSuite suite() {
-		TestSuite suite = new TestSuite(AllTests.class.getName());
-		suite.addTestSuite(org.jdmp.complete.TestPlugins.class);
-		suite.addTest(org.ujmp.complete.AllTests.suite());
-		suite.addTest(org.jdmp.core.AllTests.suite());
-		suite.addTest(org.jdmp.gui.AllTests.suite());
-		suite.addTest(org.jdmp.bsh.AllTests.suite());
-		suite.addTest(org.jdmp.ehcache.AllTests.suite());
-		suite.addTest(org.jdmp.jetty.AllTests.suite());
-		suite.addTest(org.jdmp.jgroups.AllTests.suite());
-		suite.addTest(org.jdmp.libsvm.AllTests.suite());
-		suite.addTest(org.jdmp.liblinear.AllTests.suite());
-		suite.addTest(org.jdmp.lucene.AllTests.suite());
-		suite.addTest(org.jdmp.mallet.AllTests.suite());
-		suite.addTest(org.jdmp.weka.AllTests.suite());
-		return suite;
+	private Server server = null;
+
+	private Object object = null;
+
+	private int port = 8888;
+
+	public JettyObjectServer(Object o, int port) {
+		this.object = o;
+		this.port = port;
+	}
+
+	public boolean isConnected() {
+		return server != null && server.isRunning();
+	}
+
+	public void start() throws Exception {
+		server = new Server(port);
+
+		ContextHandlerCollection contexts = new ContextHandlerCollection();
+		server.setHandler(contexts);
+
+		Context root = new Context(contexts, "/", Context.SESSIONS);
+		root
+				.addServlet(new ServletHolder(new JettyObjectServlet(object)),
+						"/*");
+
+		server.start();
+	}
+
+	public void stop() throws Exception {
+		server.stop();
 	}
 
 }

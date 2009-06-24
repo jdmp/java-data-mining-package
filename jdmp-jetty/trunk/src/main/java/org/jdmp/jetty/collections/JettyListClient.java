@@ -21,22 +21,23 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.jetty;
+package org.jdmp.jetty.collections;
 
-import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import org.jdmp.jetty.JettyObjectClient;
 import org.ujmp.core.exceptions.MatrixException;
 
 public class JettyListClient<V> implements List<V> {
 
-	private HttpObjectClient client = null;
+	private JettyObjectClient client = null;
 
-	public JettyListClient(String url) throws MalformedURLException {
-		client = new HttpObjectClient(url);
+	public JettyListClient(URL url) {
+		client = new JettyObjectClient(url);
 	}
 
 	@Override

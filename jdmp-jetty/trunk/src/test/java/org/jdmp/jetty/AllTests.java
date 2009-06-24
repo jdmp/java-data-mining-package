@@ -1,4 +1,4 @@
-/*
+ /*
  * Copyright (C) 2008-2009 Holger Arndt, A. Naegele and M. Bundschus
  *
  * This file is part of the Java Data Mining Package (JDMP).
@@ -21,7 +21,7 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.complete;
+package org.jdmp.jetty;
 
 import junit.framework.TestSuite;
 
@@ -29,19 +29,7 @@ public class AllTests extends TestSuite {
 
 	public static TestSuite suite() {
 		TestSuite suite = new TestSuite(AllTests.class.getName());
-		suite.addTestSuite(org.jdmp.complete.TestPlugins.class);
-		suite.addTest(org.ujmp.complete.AllTests.suite());
-		suite.addTest(org.jdmp.core.AllTests.suite());
-		suite.addTest(org.jdmp.gui.AllTests.suite());
-		suite.addTest(org.jdmp.bsh.AllTests.suite());
-		suite.addTest(org.jdmp.ehcache.AllTests.suite());
-		suite.addTest(org.jdmp.jetty.AllTests.suite());
-		suite.addTest(org.jdmp.jgroups.AllTests.suite());
-		suite.addTest(org.jdmp.libsvm.AllTests.suite());
-		suite.addTest(org.jdmp.liblinear.AllTests.suite());
-		suite.addTest(org.jdmp.lucene.AllTests.suite());
-		suite.addTest(org.jdmp.mallet.AllTests.suite());
-		suite.addTest(org.jdmp.weka.AllTests.suite());
+		suite.addTestSuite(TestJettyMap.class);
 		return suite;
 	}
 

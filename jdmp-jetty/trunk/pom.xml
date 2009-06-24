@@ -2,9 +2,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.jdmp</groupId>
-	<artifactId>jdmp-jetty2</artifactId>
+	<artifactId>jdmp-jetty</artifactId>
 	<packaging>jar</packaging>
-	<name>jdmp-jetty2</name>
+	<name>jdmp-jetty</name>
 
 	<properties>
 		<jdmp.version>0.1.1</jdmp.version>
@@ -29,6 +29,13 @@
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-core</artifactId>
+			<version>${ujmp.version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>

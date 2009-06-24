@@ -28,19 +28,14 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
-public class HttpObjectClient {
+public class JettyObjectClient {
 
 	private URL url = null;
 
-	public HttpObjectClient(URL url) {
+	public JettyObjectClient(URL url) {
 		this.url = url;
-	}
-
-	public HttpObjectClient(String url) throws MalformedURLException {
-		this.url = new URL(url);
 	}
 
 	public Object execute(String method, Object... parameters) throws Exception {

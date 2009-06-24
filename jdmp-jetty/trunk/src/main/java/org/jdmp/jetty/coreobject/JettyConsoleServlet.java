@@ -21,7 +21,7 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.jetty;
+package org.jdmp.jetty.coreobject;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -41,12 +41,12 @@ import org.jdmp.jetty.html.tags.H1Tag;
 import org.jdmp.jetty.html.tags.InputSubmitTag;
 import org.jdmp.jetty.html.tags.InputTextTag;
 
-public class ConsoleServlet extends HttpServlet {
+public class JettyConsoleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1786601018402743358L;
 
 	private Module module = null;
 
-	public ConsoleServlet(Module o) {
+	public JettyConsoleServlet(Module o) {
 		this.module = o;
 	}
 

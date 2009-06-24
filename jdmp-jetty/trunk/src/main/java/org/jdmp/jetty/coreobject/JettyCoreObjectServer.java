@@ -21,25 +21,26 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.jetty;
+package org.jdmp.jetty.coreobject;
 
 import org.jdmp.core.CoreObject;
 import org.jdmp.core.module.Module;
 import org.jdmp.core.variable.HasVariables;
+import org.jdmp.jetty.JettyObjectServlet;
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.handler.ContextHandlerCollection;
 import org.mortbay.jetty.servlet.Context;
 import org.mortbay.jetty.servlet.ServletHolder;
 
-public class HttpServer {
+public class JettyCoreObjectServer {
 
 	private Server server = null;
 
 	private CoreObject object = null;
 
-	private int port = 10000;
+	private int port = 8888;
 
-	public HttpServer(CoreObject o, int port) {
+	public JettyCoreObjectServer(CoreObject o, int port) {
 		this.object = o;
 		this.port = port;
 	}
@@ -55,25 +56,25 @@ public class HttpServer {
 		server.setHandler(contexts);
 
 		Context root = new Context(contexts, "/", Context.SESSIONS);
-		root.addServlet(new ServletHolder(new HtmlServlet(object)), "/*");
+		root.addServlet(new ServletHolder(new JettyCoreObjectServlet(object)), "/*");
 
 		Context io = new Context(contexts, "/io", Context.SESSIONS);
-		io.addServlet(new ServletHolder(new HttpObjectServlet(object)), "/*");
+		io.addServlet(new ServletHolder(new JettyObjectServlet(object)), "/*");
 
 		if (object instanceof Module) {
 			Context console = new Context(contexts, "/console",
 					Context.SESSIONS);
-			console.addServlet(new ServletHolder(new ConsoleServlet(
+			console.addServlet(new ServletHolder(new JettyConsoleServlet(
 					(Module) object)), "/*");
 		}
 
 		if (object instanceof HasVariables) {
 			Context list = new Context(contexts, "/variables", Context.SESSIONS);
-			list.addServlet(new ServletHolder(new HtmlListServlet(
+			list.addServlet(new ServletHolder(new JettyCoreObjectListServlet(
 					((HasVariables) object).getVariables())), "/*");
 			Context listio = new Context(contexts, "/io/variables",
 					Context.SESSIONS);
-			listio.addServlet(new ServletHolder(new HttpObjectServlet(
+			listio.addServlet(new ServletHolder(new JettyObjectServlet(
 					((HasVariables) object).getVariables())), "/*");
 		}
 

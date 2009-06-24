@@ -29,30 +29,32 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class HttpObjectServlet extends HttpServlet {
+public class JettyObjectServlet extends HttpServlet {
 	private static final long serialVersionUID = -3704890184419166703L;
 
 	private Object object = null;
 
-	public HttpObjectServlet(Object o) {
+	public JettyObjectServlet(Object o) {
 		this.object = o;
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 
 		InputStream is = request.getInputStream();
 
@@ -86,6 +88,11 @@ public class HttpObjectServlet extends HttpServlet {
 					method = m;
 					break;
 				}
+			}
+
+			if (method == null) {
+				throw new RuntimeException("method not found: " + methodName
+						+ Arrays.asList(parameters));
 			}
 
 			result = method.invoke(object, parameters);

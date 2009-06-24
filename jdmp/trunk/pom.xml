@@ -170,6 +170,12 @@
 				<version>${jdmp.version}</version>
 				<scope>compile</scope>
 			</dependency>
+			<dependency>
+				<groupId>org.jdmp</groupId>
+				<artifactId>jdmp-jetty</artifactId>
+				<version>${jdmp.version}</version>
+				<scope>compile</scope>
+			</dependency>
 
 
 			<dependency>
@@ -523,6 +529,7 @@
 						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-gui/apidocs</link>
 						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-bsh/apidocs</link>
 						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-ehcache/apidocs</link>
+						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-jetty/apidocs</link>
 						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-jgroups/apidocs</link>
 						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-libsvm/apidocs</link>
 						<link>http://www.jdmp.org/jdmp/${jdmp.version}/docs/jdmp-liblinear/apidocs</link>

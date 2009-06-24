@@ -21,21 +21,22 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.jetty;
+package org.jdmp.jetty.collections;
 
-import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
+import org.jdmp.jetty.JettyObjectClient;
 import org.ujmp.core.exceptions.MatrixException;
 
 public class JettyMapClient<K, V> implements Map<K, V> {
 
-	private HttpObjectClient client = null;
+	private JettyObjectClient client = null;
 
-	public JettyMapClient(String url) throws MalformedURLException {
-		client = new HttpObjectClient(url);
+	public JettyMapClient(URL url) {
+		client = new JettyObjectClient(url);
 	}
 
 	@Override
@@ -79,7 +80,7 @@ public class JettyMapClient<K, V> implements Map<K, V> {
 	@Override
 	public V get(Object key) {
 		try {
-			return (V) client.execute("get");
+			return (V) client.execute("get", key);
 		} catch (Exception e) {
 			throw new MatrixException(e);
 		}
