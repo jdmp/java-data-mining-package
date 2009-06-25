@@ -25,21 +25,32 @@ package org.jdmp.jetty.html.elements;
 
 import org.jdmp.core.sample.Sample;
 import org.jdmp.jetty.html.tags.DivTag;
+import org.ujmp.core.Matrix;
 
-public class DefaultSampleDiv extends DivTag implements SampleDiv {
+public class DefaultSampleDiv extends DivTag {
 	private static final long serialVersionUID = 6587788027413384557L;
 
 	public DefaultSampleDiv(Sample sample) {
-		setSample(sample);
-	}
-
-	@Override
-	public void setSample(Sample sample) {
-		clear();
 		setParameter("class", "sample");
 		if (sample == null) {
 			add("[]");
 		} else {
+			Matrix score = sample.getMatrix("Score");
+			if (score != null) {
+				// add(score.doubleValue() + " ");
+			}
+			Matrix subject = sample.getMatrix("Subject");
+			if (subject != null) {
+				add("[" + subject.stringValue() + "] ");
+			}
+			Matrix verb = sample.getMatrix("Verb");
+			if (verb != null) {
+				add("[" + verb.stringValue() + "] ");
+			}
+			Matrix object = sample.getMatrix("Object");
+			if (object != null) {
+				add("[" + object.stringValue() + "] ");
+			}
 			add(sample.getLabel());
 		}
 	}

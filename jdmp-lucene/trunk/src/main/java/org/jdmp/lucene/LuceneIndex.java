@@ -58,10 +58,10 @@ import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DefaultDataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
+import org.ujmp.core.Matrix;
 import org.ujmp.core.interfaces.Erasable;
 import org.ujmp.core.util.MathUtil;
 import org.ujmp.core.util.SerializationUtil;
-import org.ujmp.core.util.StringUtil;
 import org.ujmp.core.util.io.FileUtil;
 
 public class LuceneIndex extends AbstractIndexer implements Flushable,
@@ -149,8 +149,14 @@ public class LuceneIndex extends AbstractIndexer implements Flushable,
 		for (Variable v : sample.getVariables()) {
 			String key = v.getLabel();
 			if (!Sample.ID.equals(key)) {
-				String value = StringUtil.convert(v.getMatrix());
-				doc.add(new Field(key, value, Store.YES, Field.Index.ANALYZED));
+				String value = "";
+				for (Matrix m : v.getMatrixList()) {
+					for (long[] c : m.availableCoordinates()) {
+						value += " " + m.getAsString(c);
+					}
+				}
+				doc.add(new Field(key, value.trim(), Store.YES,
+						Field.Index.ANALYZED));
 				fields.add(key);
 			}
 		}
