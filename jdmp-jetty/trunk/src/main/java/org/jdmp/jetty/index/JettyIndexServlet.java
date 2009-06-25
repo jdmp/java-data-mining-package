@@ -72,7 +72,7 @@ public class JettyIndexServlet extends HttpServlet {
 
 		Page page = new Page("JDMP Search");
 		page.add(new H1Tag("JDMP Search"));
-		page.add("Command to execute:");
+		page.add(index.getSize() + " items in index");
 		page.add(new BRTag());
 		FormTag form = new FormTag("/");
 		form.setParameter("method", "get");

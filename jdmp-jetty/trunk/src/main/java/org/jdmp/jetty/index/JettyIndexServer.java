@@ -24,7 +24,6 @@
 package org.jdmp.jetty.index;
 
 import org.jdmp.core.algorithm.indexer.Indexer;
-import org.jdmp.jetty.JettyObjectServlet;
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.handler.ContextHandlerCollection;
 import org.mortbay.jetty.servlet.Context;

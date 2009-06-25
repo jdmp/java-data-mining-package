@@ -82,16 +82,24 @@ public class LuceneIndex extends AbstractIndexer implements Flushable,
 
 	private final Analyzer analyzer = new StandardAnalyzer();
 
+	private boolean readOnly = true;
+
 	public LuceneIndex() throws Exception {
-		this(null);
+		this(null, false);
 	}
 
 	public LuceneIndex(File path) throws Exception {
+		this(path, false);
+	}
+
+	public LuceneIndex(File path, boolean readOnly) throws Exception {
+		this.readOnly = readOnly;
 		if (path == null) {
 			path = File.createTempFile("lucene", "");
 			path.delete();
 			path.mkdir();
 			path.deleteOnExit();
+			readOnly = false;
 		}
 
 		fields.add(Sample.ID);
@@ -101,11 +109,13 @@ public class LuceneIndex extends AbstractIndexer implements Flushable,
 		directory = FSDirectory.getDirectory(path);
 
 		if (IndexReader.indexExists(directory)) {
-			if (IndexWriter.isLocked(directory)) {
-				IndexWriter.unlock(directory);
+			if (!readOnly) {
+				if (IndexWriter.isLocked(directory)) {
+					IndexWriter.unlock(directory);
+				}
+				indexWriter = new IndexWriter(directory, analyzer,
+						MaxFieldLength.UNLIMITED);
 			}
-			indexWriter = new IndexWriter(directory, analyzer,
-					MaxFieldLength.UNLIMITED);
 
 			prepareReader();
 			Collection<?> c = indexSearcher.getIndexReader().getFieldNames(
@@ -114,7 +124,7 @@ public class LuceneIndex extends AbstractIndexer implements Flushable,
 				fields.add((String) o);
 			}
 
-		} else {
+		} else if (!readOnly) {
 			indexWriter = new IndexWriter(directory, analyzer, true,
 					MaxFieldLength.UNLIMITED);
 		}
@@ -122,7 +132,7 @@ public class LuceneIndex extends AbstractIndexer implements Flushable,
 
 	@Override
 	public synchronized void add(Sample sample) throws Exception {
-		if (sample == null) {
+		if (readOnly || sample == null) {
 			return;
 		}
 
@@ -151,8 +161,18 @@ public class LuceneIndex extends AbstractIndexer implements Flushable,
 		indexWriter.updateDocument(new Term(Sample.ID, id), doc);
 	}
 
-	public int getSize() throws Exception {
-		return indexWriter.maxDoc();
+	public int getSize() {
+		try {
+			if (indexWriter != null) {
+				return indexWriter.maxDoc();
+			} else {
+				prepareReader();
+				return indexSearcher.maxDoc();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
 	}
 
 	public synchronized Sample get(int index) throws Exception {
@@ -168,6 +188,11 @@ public class LuceneIndex extends AbstractIndexer implements Flushable,
 	}
 
 	public synchronized DataSet search(List<String> query) throws Exception {
+		return search(query, 1000);
+	}
+
+	public synchronized DataSet search(List<String> query, int count)
+			throws Exception {
 		BooleanQuery bq = new BooleanQuery();
 		String[] fs = new String[fields.size()];
 		MultiFieldQueryParser p = new MultiFieldQueryParser(fields.toArray(fs),
@@ -183,10 +208,15 @@ public class LuceneIndex extends AbstractIndexer implements Flushable,
 			bq.add(new BooleanClause(q, Occur.SHOULD));
 		}
 
-		return search(bq);
+		return search(bq, count);
 	}
 
 	public synchronized DataSet search(String query) throws Exception {
+		return search(query, 1000);
+	}
+
+	public synchronized DataSet search(String query, int count)
+			throws Exception {
 		String[] fs = new String[fields.size()];
 		MultiFieldQueryParser p = new MultiFieldQueryParser(fields.toArray(fs),
 				analyzer);
@@ -198,12 +228,12 @@ public class LuceneIndex extends AbstractIndexer implements Flushable,
 		} else {
 			q = p.parse(query);
 		}
-		return search(q);
+		return search(q, count);
 	}
 
-	public synchronized DataSet search(Query query) throws Exception {
+	public synchronized DataSet search(Query query, int count) throws Exception {
 		prepareReader();
-		TopDocs td = indexSearcher.search(query, 1000);
+		TopDocs td = indexSearcher.search(query, count);
 		DataSet result = new DefaultDataSet();
 		for (ScoreDoc sd : td.scoreDocs) {
 			int id = sd.doc;
@@ -218,7 +248,9 @@ public class LuceneIndex extends AbstractIndexer implements Flushable,
 
 	private synchronized void prepareReader() throws CorruptIndexException,
 			IOException {
-		indexWriter.commit();
+		if (indexWriter != null) {
+			indexWriter.commit();
+		}
 		if (indexSearcher != null
 				&& !indexSearcher.getIndexReader().isCurrent()) {
 			indexSearcher.close();
@@ -238,11 +270,15 @@ public class LuceneIndex extends AbstractIndexer implements Flushable,
 
 	@Override
 	public synchronized void flush() throws IOException {
-		indexWriter.commit();
+		if (indexWriter != null) {
+			indexWriter.commit();
+		}
 	}
 
 	public synchronized void optimize() throws IOException {
-		indexWriter.optimize();
+		if (indexWriter != null) {
+			indexWriter.optimize();
+		}
 	}
 
 	@Override
@@ -251,11 +287,16 @@ public class LuceneIndex extends AbstractIndexer implements Flushable,
 			indexSearcher.close();
 			indexSearcher = null;
 		}
-		indexWriter.close();
+		if (indexWriter != null) {
+			indexWriter.close();
+		}
 	}
 
 	@Override
 	public synchronized void erase() throws IOException {
+		if (readOnly) {
+			return;
+		}
 		close();
 		FileUtil.deleteRecursive(path);
 	}

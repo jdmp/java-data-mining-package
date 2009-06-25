@@ -41,4 +41,6 @@ public interface Indexer {
 
 	public DataSet search(String query) throws Exception;
 
+	public int getSize();
+
 }
