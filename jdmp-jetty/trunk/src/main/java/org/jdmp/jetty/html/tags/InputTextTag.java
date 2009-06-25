@@ -31,7 +31,7 @@ public class InputTextTag extends InputTag {
 	}
 
 	public InputTextTag(String name, String value) {
-		super("text", name, "");
+		super("text", name, value == null ? "" : value);
 	}
 
 }

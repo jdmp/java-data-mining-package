@@ -85,7 +85,7 @@ public abstract class AbstractHtmlTag implements HtmlTag {
 		}
 		s.append("</");
 		s.append(getTagName());
-		s.append(">");
+		s.append(">\n");
 
 		return s.toString();
 	}

@@ -191,7 +191,9 @@ public class LuceneIndex extends AbstractIndexer implements Flushable,
 		MultiFieldQueryParser p = new MultiFieldQueryParser(fields.toArray(fs),
 				analyzer);
 		Query q = null;
-		if ("*".equals(query)) {
+		if (query == null || "".equals(query)) {
+			q = p.parse("*");
+		} else if ("*".equals(query)) {
 			q = p.parse("*");
 		} else {
 			q = p.parse(query);
