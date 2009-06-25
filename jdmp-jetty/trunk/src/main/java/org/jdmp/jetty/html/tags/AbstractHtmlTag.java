@@ -60,6 +60,11 @@ public abstract class AbstractHtmlTag implements HtmlTag {
 		}
 	}
 
+	public void clear() {
+		parameterMap.clear();
+		contentList.clear();
+	}
+
 	@Override
 	public void setParameter(String name, String value) {
 		parameterMap.put(name, value);

@@ -23,25 +23,24 @@
 
 package org.jdmp.jetty.html.elements;
 
-import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.jetty.html.tags.BRTag;
 import org.jdmp.jetty.html.tags.DivTag;
 
-public class DataSetDiv extends DivTag {
-	private static final long serialVersionUID = 5873327671800366757L;
+public class DefaultSampleDiv extends DivTag implements SampleDiv {
+	private static final long serialVersionUID = 6587788027413384557L;
 
-	public DataSetDiv(DataSet dataSet) {
-		setParameter("class", "dataset");
-		if (dataSet == null || dataSet.getSamples().isEmpty()) {
-			add("no results found.");
+	public DefaultSampleDiv(Sample sample) {
+		setSample(sample);
+	}
+
+	@Override
+	public void setSample(Sample sample) {
+		clear();
+		setParameter("class", "sample");
+		if (sample == null) {
+			add("[]");
 		} else {
-			add(dataSet.getSamples().getSize() + " results found:");
-			add(new BRTag());
-			add(new BRTag());
-			for (Sample s : dataSet.getSamples()) {
-				add(new DefaultSampleDiv(s));
-			}
+			add(sample.getLabel());
 		}
 	}
 

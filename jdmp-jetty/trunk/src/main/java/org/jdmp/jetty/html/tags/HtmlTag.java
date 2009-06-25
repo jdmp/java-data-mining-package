@@ -39,4 +39,6 @@ public interface HtmlTag extends Html {
 
 	public String getTagName();
 
+	public void clear();
+
 }
