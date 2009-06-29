@@ -38,9 +38,10 @@ import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.coordinates.Coordinates;
 import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.interfaces.Wrapper;
 import org.ujmp.core.util.MathUtil;
 
-public class MapSample extends AbstractSample {
+public class MapSample extends AbstractSample implements Wrapper<Map<?, ?>> {
 	private static final long serialVersionUID = -8219872482909787192L;
 
 	private VariableMapWrapper variableMapWrapper = null;
@@ -231,5 +232,15 @@ public class MapSample extends AbstractSample {
 
 	@Override
 	public void setVariables(ObservableMap<Variable> variables) {
+	}
+
+	@Override
+	public Map<?, ?> getWrappedObject() {
+		return map;
+	}
+
+	@Override
+	public void setWrappedObject(Map<?, ?> object) {
+		this.map = object;
 	}
 }
