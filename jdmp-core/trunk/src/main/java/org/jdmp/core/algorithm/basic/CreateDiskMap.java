@@ -27,7 +27,7 @@ import java.util.HashMap;
 
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.variable.Variable;
-import org.ujmp.core.collections.serializedmap.SerializedObjectMap;
+import org.ujmp.core.collections.SerializedObjectMap;
 import org.ujmp.core.mapmatrix.DefaultMapMatrix;
 
 public class CreateDiskMap extends AbstractAlgorithm {
