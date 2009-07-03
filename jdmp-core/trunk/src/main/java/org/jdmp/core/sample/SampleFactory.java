@@ -87,7 +87,7 @@ public abstract class SampleFactory {
 	}
 
 	public static final Sample emptySample() {
-		return EMPTYSAMPLE;
+		return new DefaultSample();
 	}
 
 	public static final RelationalSample relationalSample(Collection<?> items) {

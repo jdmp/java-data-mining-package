@@ -24,10 +24,18 @@
 package org.jdmp.gui;
 
 public class JDMP extends org.jdmp.core.JDMP {
+	private static final long serialVersionUID = 3072638067366652582L;
 
 	public static void main(String[] args) throws Exception {
 		textMode = false;
 		evaluateParameters(args);
 		run();
+	}
+
+	public void init() {
+		try {
+			main(new String[] {});
+		} catch (Exception e) {
+		}
 	}
 }

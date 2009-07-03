@@ -23,6 +23,7 @@
 
 package org.jdmp.core;
 
+import java.applet.Applet;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.io.PrintStream;
@@ -33,7 +34,8 @@ import org.jdmp.core.script.Result;
 import org.ujmp.core.UJMP;
 import org.ujmp.core.util.io.IntelligentFileReader;
 
-public class JDMP {
+public class JDMP extends Applet {
+	private static final long serialVersionUID = -6039550773857594839L;
 
 	public static final String JDMPVERSION = "0.1.1";
 
