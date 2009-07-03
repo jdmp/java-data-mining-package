@@ -24,10 +24,10 @@
 package org.jdmp.core.util;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 
 import javax.swing.AbstractListModel;
 
@@ -37,7 +37,8 @@ public class DefaultObservableMap<V> extends AbstractListModel implements Observ
 	private Map<Object, V> map = null;
 
 	public DefaultObservableMap() {
-		map = new TreeMap<Object, V>();
+		// must be a HashMap, because different object types cannot be compared
+		map = new HashMap<Object, V>(2);
 	}
 
 	public synchronized V getElementAt(int index) {
