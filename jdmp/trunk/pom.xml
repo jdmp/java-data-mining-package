@@ -385,46 +385,46 @@
 					<linksource>true</linksource>
 					<links>
 						<link>http://java.sun.com/javase/6/docs/api/</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-core</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-gui</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-bpca</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-colt</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-commonsmath</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-hadoop</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-itext</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jackcess</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jama</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jdbc</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jexcelapi</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jmathplot</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jmatio</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jmatrices</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jsci</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jscience</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jung</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-lsimpute</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-lucene</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-mail</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-mantissa</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-mtj</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-ojalgo</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-parallelcolt</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-pdfbox</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-sst</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-vecmath</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-core/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-gui/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-bpca/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-colt/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-commonsmath/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-hadoop/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-itext/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jackcess/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jama/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jdbc/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jexcelapi/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jmathplot/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jmatio/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jmatrices/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jsci/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jscience/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jung/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-lsimpute/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-lucene/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-mail/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-mantissa/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-mtj/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-ojalgo/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-parallelcolt/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-pdfbox/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-sst/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-vecmath/apidocs</link>
 
-						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-core</link>
-						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-gui</link>
-						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-bsh</link>
-						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-ehcache</link>
-						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-jetty</link>
-						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-jgroups</link>
-						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-liblinear</link>
-						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-libsvm</link>
-						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-lucene</link>
-						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-mallet</link>
-						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-stanfordpos</link>
-						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-weka</link>
+						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-core/apidocs</link>
+						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-gui/apidocs</link>
+						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-bsh/apidocs</link>
+						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-ehcache/apidocs</link>
+						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-jetty/apidocs</link>
+						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-jgroups/apidocs</link>
+						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-liblinear/apidocs</link>
+						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-libsvm/apidocs</link>
+						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-lucene/apidocs</link>
+						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-mallet/apidocs</link>
+						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-stanfordpos/apidocs</link>
+						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-weka/apidocs</link>
 					</links>
 				</configuration>
 			</plugin>
