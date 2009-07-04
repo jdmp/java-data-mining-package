@@ -27,21 +27,17 @@
 			<artifactId>libsvm</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.ujmp</groupId>
-			<artifactId>ujmp-core</artifactId>
-			<version>${ujmp.version}</version>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-core</artifactId>
+			<version>${jdmp.version}</version>
 			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.ujmp</groupId>
-			<artifactId>ujmp-core</artifactId>
-			<version>${ujmp.version}</version>
-			<classifier>tests</classifier>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-core</artifactId>
+			<version>${jdmp.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>

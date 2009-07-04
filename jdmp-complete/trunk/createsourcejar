@@ -1,6 +1,6 @@
 DIR="/home/arndt/workspace/jdmp-complete"
-VERSION="0.1.0"
-PACKAGES="jdmp-core jdmp-gui jdmp-ehcache jdmp-jgroups jdmp-libsvm jdmp-mallet jdmp-weka jdmp-lucene jdmp-bsh"
+VERSION="0.1.1"
+PACKAGES="jdmp-core jdmp-gui jdmp-bsh jdmp-ehcache jdmp-jetty jdmp-jgroups jdmp-liblinear jdmp-libsvm jdmp-lucene jdmp-mallet jdmp-stanfordpos jdmp-weka"
 
 cd $DIR
 rm -rf target

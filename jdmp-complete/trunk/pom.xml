@@ -30,320 +30,361 @@
 			<version>${ujmp.version}</version>
 			<scope>compile</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.ujmp</groupId>
-			<artifactId>ujmp-core</artifactId>
-			<version>${ujmp.version}</version>
-			<scope>compile</scope>
-		</dependency>
 
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-core</artifactId>
+			<version>${jdmp.version}</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-gui</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-ehcache</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-jgroups</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-libsvm</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-liblinear</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-weka</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-mallet</artifactId>
+			<version>${jdmp.version}</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-bsh</artifactId>
+			<version>${jdmp.version}</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-lucene</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-stanfordpos</artifactId>
+			<artifactId>jdmp-ehcache</artifactId>
+			<version>${jdmp.version}</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-jetty</artifactId>
+			<version>${jdmp.version}</version>
+			<scope>compile</scope>
 		</dependency>
-
-
-
-
 		<dependency>
-			<groupId>org.ujmp</groupId>
-			<artifactId>ujmp-core</artifactId>
-			<version>${ujmp.version}</version>
-			<classifier>tests</classifier>
-			<scope>test</scope>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-jgroups</artifactId>
+			<version>${jdmp.version}</version>
+			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-liblinear</artifactId>
+			<version>${jdmp.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-libsvm</artifactId>
+			<version>${jdmp.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-lucene</artifactId>
+			<version>${jdmp.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-mallet</artifactId>
+			<version>${jdmp.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-stanfordpos</artifactId>
+			<version>${jdmp.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-weka</artifactId>
+			<version>${jdmp.version}</version>
+			<scope>compile</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-complete</artifactId>
 			<version>${ujmp.version}</version>
-			<classifier>tests</classifier>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.ujmp</groupId>
-			<artifactId>ujmp-commonsmath</artifactId>
-			<version>${ujmp.version}</version>
-			<classifier>tests</classifier>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.ujmp</groupId>
-			<artifactId>ujmp-colt</artifactId>
-			<version>${ujmp.version}</version>
-			<classifier>tests</classifier>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.ujmp</groupId>
-			<artifactId>ujmp-jama</artifactId>
-			<version>${ujmp.version}</version>
-			<classifier>tests</classifier>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.ujmp</groupId>
-			<artifactId>ujmp-jmatrices</artifactId>
-			<version>${ujmp.version}</version>
-			<classifier>tests</classifier>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.ujmp</groupId>
-			<artifactId>ujmp-mtj</artifactId>
-			<version>${ujmp.version}</version>
-			<classifier>tests</classifier>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.ujmp</groupId>
-			<artifactId>ujmp-vecmath</artifactId>
-			<version>${ujmp.version}</version>
-			<classifier>tests</classifier>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.ujmp</groupId>
-			<artifactId>ujmp-jackcess</artifactId>
-			<version>${ujmp.version}</version>
-			<classifier>tests</classifier>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.ujmp</groupId>
-			<artifactId>ujmp-jexcelapi</artifactId>
-			<version>${ujmp.version}</version>
-			<classifier>tests</classifier>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.ujmp</groupId>
-			<artifactId>ujmp-jmatio</artifactId>
-			<version>${ujmp.version}</version>
-			<classifier>tests</classifier>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.ujmp</groupId>
-			<artifactId>ujmp-itext</artifactId>
-			<version>${ujmp.version}</version>
-			<classifier>tests</classifier>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.ujmp</groupId>
-			<artifactId>ujmp-mail</artifactId>
-			<version>${ujmp.version}</version>
-			<classifier>tests</classifier>
+			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-bpca</artifactId>
 			<version>${ujmp.version}</version>
-			<classifier>tests</classifier>
+			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
-			<artifactId>ujmp-sst</artifactId>
+			<artifactId>ujmp-colt</artifactId>
 			<version>${ujmp.version}</version>
-			<classifier>tests</classifier>
+			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
-			<artifactId>ujmp-parallelcolt</artifactId>
+			<artifactId>ujmp-commonsmath</artifactId>
 			<version>${ujmp.version}</version>
-			<classifier>tests</classifier>
+			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
-			<artifactId>ujmp-mantissa</artifactId>
+			<artifactId>ujmp-core</artifactId>
 			<version>${ujmp.version}</version>
-			<classifier>tests</classifier>
+			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
-			<artifactId>ujmp-ojalgo</artifactId>
+			<artifactId>ujmp-gui</artifactId>
 			<version>${ujmp.version}</version>
-			<classifier>tests</classifier>
+			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
-			<artifactId>ujmp-lsimpute</artifactId>
+			<artifactId>ujmp-hadoop</artifactId>
 			<version>${ujmp.version}</version>
-			<classifier>tests</classifier>
+			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
-			<artifactId>ujmp-jung</artifactId>
+			<artifactId>ujmp-itext</artifactId>
 			<version>${ujmp.version}</version>
-			<classifier>tests</classifier>
+			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
-			<artifactId>ujmp-jscience</artifactId>
+			<artifactId>ujmp-jackcess</artifactId>
 			<version>${ujmp.version}</version>
-			<classifier>tests</classifier>
+			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
-			<artifactId>ujmp-jsci</artifactId>
+			<artifactId>ujmp-jama</artifactId>
 			<version>${ujmp.version}</version>
-			<classifier>tests</classifier>
+			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
-			<artifactId>ujmp-lucene</artifactId>
+			<artifactId>ujmp-jdbc</artifactId>
 			<version>${ujmp.version}</version>
-			<classifier>tests</classifier>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-jexcelapi</artifactId>
+			<version>${ujmp.version}</version>
+			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jmathplot</artifactId>
 			<version>${ujmp.version}</version>
-			<classifier>tests</classifier>
-			<scope>test</scope>
-		</dependency>
-
-
-		<dependency>
-			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-ehcache</artifactId>
-			<version>${jdmp.version}</version>
-			<classifier>tests</classifier>
+			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-jmatio</artifactId>
+			<version>${ujmp.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-jmatrices</artifactId>
+			<version>${ujmp.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-jsci</artifactId>
+			<version>${ujmp.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-jscience</artifactId>
+			<version>${ujmp.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-jung</artifactId>
+			<version>${ujmp.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-lsimpute</artifactId>
+			<version>${ujmp.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-lucene</artifactId>
+			<version>${ujmp.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-mail</artifactId>
+			<version>${ujmp.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-mantissa</artifactId>
+			<version>${ujmp.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-mtj</artifactId>
+			<version>${ujmp.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-ojalgo</artifactId>
+			<version>${ujmp.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-parallelcolt</artifactId>
+			<version>${ujmp.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-pdfbox</artifactId>
+			<version>${ujmp.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-sst</artifactId>
+			<version>${ujmp.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-vecmath</artifactId>
+			<version>${ujmp.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
 			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-mallet</artifactId>
+			<artifactId>jdmp-core</artifactId>
 			<version>${jdmp.version}</version>
-			<classifier>tests</classifier>
+			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-gui</artifactId>
 			<version>${jdmp.version}</version>
-			<classifier>tests</classifier>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-weka</artifactId>
-			<version>${jdmp.version}</version>
-			<classifier>tests</classifier>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-core</artifactId>
-			<version>${jdmp.version}</version>
-			<classifier>tests</classifier>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-libsvm</artifactId>
-			<version>${jdmp.version}</version>
-			<classifier>tests</classifier>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-liblinear</artifactId>
-			<version>${jdmp.version}</version>
-			<classifier>tests</classifier>
+			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-bsh</artifactId>
 			<version>${jdmp.version}</version>
-			<classifier>tests</classifier>
+			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-lucene</artifactId>
+			<artifactId>jdmp-ehcache</artifactId>
 			<version>${jdmp.version}</version>
-			<classifier>tests</classifier>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-jgroups</artifactId>
-			<version>${jdmp.version}</version>
-			<classifier>tests</classifier>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-stanfordpos</artifactId>
-			<version>${jdmp.version}</version>
-			<classifier>tests</classifier>
+			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-jetty</artifactId>
 			<version>${jdmp.version}</version>
-			<classifier>tests</classifier>
+			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-jgroups</artifactId>
+			<version>${jdmp.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-mallet</artifactId>
+			<version>${jdmp.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-lucene</artifactId>
+			<version>${jdmp.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-liblinear</artifactId>
+			<version>${jdmp.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-libsvm</artifactId>
+			<version>${jdmp.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-stanfordpos</artifactId>
+			<version>${jdmp.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-weka</artifactId>
+			<version>${jdmp.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 
@@ -354,14 +395,13 @@
 		<module>../jdmp-ehcache</module>
 		<module>../jdmp-jetty</module>
 		<module>../jdmp-jgroups</module>
-		<module>../jdmp-libsvm</module>
 		<module>../jdmp-liblinear</module>
+		<module>../jdmp-libsvm</module>		
 		<module>../jdmp-lucene</module>
 		<module>../jdmp-mallet</module>
 		<module>../jdmp-stanfordpos</module>
 		<module>../jdmp-weka</module>
-
 	</modules>
-
+ 
 
 </project>

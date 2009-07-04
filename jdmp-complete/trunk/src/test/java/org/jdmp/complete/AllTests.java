@@ -37,10 +37,11 @@ public class AllTests extends TestSuite {
 		suite.addTest(org.jdmp.ehcache.AllTests.suite());
 		suite.addTest(org.jdmp.jetty.AllTests.suite());
 		suite.addTest(org.jdmp.jgroups.AllTests.suite());
-		suite.addTest(org.jdmp.libsvm.AllTests.suite());
 		suite.addTest(org.jdmp.liblinear.AllTests.suite());
+		suite.addTest(org.jdmp.libsvm.AllTests.suite());
 		suite.addTest(org.jdmp.lucene.AllTests.suite());
 		suite.addTest(org.jdmp.mallet.AllTests.suite());
+		suite.addTest(org.jdmp.stanfordpos.AllTests.suite());
 		suite.addTest(org.jdmp.weka.AllTests.suite());
 		return suite;
 	}
