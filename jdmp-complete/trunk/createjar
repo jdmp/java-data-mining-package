@@ -1,23 +1,28 @@
 DIR="/home/arndt/workspace/jdmp-complete"
-VERSION="0.1.1"
-PACKAGES="jdmp-core jdmp-gui jdmp-bsh jdmp-ehcache jdmp-jetty jdmp-jgroups jdmp-liblinear jdmp-libsvm jdmp-lucene jdmp-mallet jdmp-stanfordpos jdmp-weka"
+JDMPVERSION="0.1.1"
+JDMPPACKAGES="jdmp-core jdmp-gui jdmp-bsh jdmp-ehcache jdmp-jetty jdmp-jgroups jdmp-liblinear jdmp-libsvm jdmp-lucene jdmp-mallet jdmp-stanfordpos jdmp-weka"
 
 cd $DIR
 rm -rf target
 mkdir -p target
 
-for p in $PACKAGES
+for p in $JDMPPACKAGES
 do
-  cp ../$p/target/$p-$VERSION.jar target/$p-$VERSION.zip
+  cp ../$p/target/$p-$JDMPVERSION.jar target/$p-$JDMPVERSION.zip
 done
 
 cd target
 
-for p in $PACKAGES
+for p in $JDMPPACKAGES
 do
-  unzip -o $p-$VERSION.zip
+  unzip -o $p-$JDMPVERSION.zip
 done
 
 rm -rf *.zip
 
-zip -r jdmp-complete-$VERSION.jar *
+echo "Main-Class: org.jdmp.gui.JDMP" > META-INF/MF.MF
+cat META-INF/MANIFEST.MF >> META-INF/MF.MF
+rm -f META-INF/MANIFEST.MF
+mv META-INF/MF.MF META-INF/MANIFEST.MF
+
+zip -r jdmp-complete-$JDMPVERSION.jar *
