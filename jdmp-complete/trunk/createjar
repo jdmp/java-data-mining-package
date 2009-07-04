@@ -1,10 +1,17 @@
 DIR="/home/arndt/workspace/jdmp-complete"
 JDMPVERSION="0.1.1"
 JDMPPACKAGES="jdmp-core jdmp-gui jdmp-bsh jdmp-ehcache jdmp-jetty jdmp-jgroups jdmp-liblinear jdmp-libsvm jdmp-lucene jdmp-mallet jdmp-stanfordpos jdmp-weka"
+UJMPVERSION="0.2.3"
+UJMPPACKAGES="ujmp-core ujmp-gui ujmp-bpca ujmp-colt ujmp-commonsmath ujmp-hadoop ujmp-itext ujmp-jackcess ujmp-jama ujmp-jdbc ujmp-jexcelapi ujmp-jmathplot ujmp-jmatio ujmp-jmatrices ujmp-jsci ujmp-jscience ujmp-jung ujmp-lsimpute ujmp-lucene ujmp-mail ujmp-mantissa ujmp-mtj ujmp-ojalgo ujmp-parallelcolt ujmp-pdfbox ujmp-sst ujmp-vecmath"
 
 cd $DIR
 rm -rf target
 mkdir -p target
+
+for p in $UJMPPACKAGES
+do
+  cp ../$p/target/$p-$UJMPVERSION.jar target/$p-$UJMPVERSION.zip
+done
 
 for p in $JDMPPACKAGES
 do
@@ -12,6 +19,11 @@ do
 done
 
 cd target
+
+for p in $UJMPPACKAGES
+do
+  unzip -o $p-$UJMPVERSION.zip
+done
 
 for p in $JDMPPACKAGES
 do
