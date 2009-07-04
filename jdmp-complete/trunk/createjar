@@ -1,7 +1,7 @@
 DIR="/home/arndt/workspace/jdmp-complete"
-JDMPVERSION="0.1.1"
+JDMPVERSION="0.1.2"
 JDMPPACKAGES="jdmp-core jdmp-gui jdmp-bsh jdmp-ehcache jdmp-jetty jdmp-jgroups jdmp-liblinear jdmp-libsvm jdmp-lucene jdmp-mallet jdmp-stanfordpos jdmp-weka"
-UJMPVERSION="0.2.3"
+UJMPVERSION="0.2.4"
 UJMPPACKAGES="ujmp-core ujmp-gui ujmp-bpca ujmp-colt ujmp-commonsmath ujmp-hadoop ujmp-itext ujmp-jackcess ujmp-jama ujmp-jdbc ujmp-jexcelapi ujmp-jmathplot ujmp-jmatio ujmp-jmatrices ujmp-jsci ujmp-jscience ujmp-jung ujmp-lsimpute ujmp-lucene ujmp-mail ujmp-mantissa ujmp-mtj ujmp-ojalgo ujmp-parallelcolt ujmp-pdfbox ujmp-sst ujmp-vecmath"
 
 cd $DIR

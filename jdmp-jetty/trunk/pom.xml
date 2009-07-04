@@ -7,13 +7,13 @@
 	<name>jdmp-jetty</name>
 
 	<properties>
-		<jdmp.version>0.1.1</jdmp.version>
+		<jdmp.version>0.1.2</jdmp.version>
 	</properties>
 
 	<parent>
 		<groupId>org.jdmp</groupId>
 		<artifactId>jdmp</artifactId>
-		<version>0.1.1</version>
+		<version>0.1.2</version>
 		<relativePath>../jdmp</relativePath>
 	</parent>
 

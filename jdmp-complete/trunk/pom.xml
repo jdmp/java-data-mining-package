@@ -7,14 +7,14 @@
 	<name>jdmp-complete</name>
 
 	<properties>
-		<ujmp.version>0.2.3</ujmp.version>
-		<jdmp.version>0.1.1</jdmp.version>
+		<ujmp.version>0.2.4</ujmp.version>
+		<jdmp.version>0.1.2</jdmp.version>
 	</properties>
 
 	<parent>
 		<groupId>org.jdmp</groupId>
 		<artifactId>jdmp</artifactId>
-		<version>0.1.1</version>
+		<version>0.1.2</version>
 		<relativePath>../jdmp</relativePath>
 	</parent>
 

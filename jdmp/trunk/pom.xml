@@ -4,13 +4,13 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<properties>
-		<jdmp.version>0.1.1</jdmp.version>
-		<ujmp.version>0.2.3</ujmp.version>
+		<jdmp.version>0.1.2</jdmp.version>
+		<ujmp.version>0.2.4</ujmp.version>
 	</properties>
 
 	<groupId>org.jdmp</groupId>
 	<artifactId>jdmp</artifactId>
-	<version>0.1.1</version>
+	<version>0.1.2</version>
 	<packaging>pom</packaging>
 	<url>http://www.jdmp.org</url>
 
@@ -381,7 +381,7 @@
 				<inherited>true</inherited>
 				<configuration>
 					<outputDirectory>../jdmp/target/docs/${project.version}/${project.name}</outputDirectory>
-					<reportOutputDirectory>../jdmp/docs/target/${project.version}/${project.name}</reportOutputDirectory>
+					<reportOutputDirectory>../jdmp/target/docs/${project.version}/${project.name}</reportOutputDirectory>
 					<linksource>true</linksource>
 					<links>
 						<link>http://java.sun.com/javase/6/docs/api/</link>
