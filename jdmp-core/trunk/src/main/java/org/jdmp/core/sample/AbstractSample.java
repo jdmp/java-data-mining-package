@@ -23,21 +23,15 @@
 
 package org.jdmp.core.sample;
 
-import java.lang.reflect.Constructor;
-import java.util.logging.Level;
-
 import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
-import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.core.util.MathUtil;
 import org.ujmp.core.util.StringUtil;
 
 public abstract class AbstractSample extends AbstractCoreObject implements Sample {
 	private static final long serialVersionUID = 1693258179407382419L;
-
-	private transient GUIObject guiObject = null;
 
 	public AbstractSample() {
 		super();
@@ -68,19 +62,6 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 		return s.toString();
 	}
 
-	public final GUIObject getGUIObject() {
-		if (guiObject == null) {
-			try {
-				Class<?> c = Class.forName("org.jdmp.gui.sample.SampleGUIObject");
-				Constructor<?> con = c.getConstructor(new Class<?>[] { Sample.class });
-				guiObject = (GUIObject) con.newInstance(new Object[] { this });
-			} catch (Exception e) {
-				logger.log(Level.WARNING, "cannot create sample gui object", e);
-			}
-		}
-		return guiObject;
-	}
-
 	public final Matrix getMatrix(Object variableKey) {
 		Variable v = getVariables().get(variableKey);
 		if (v != null) {
@@ -96,12 +77,6 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 			return v.getAsString();
 		} else {
 			return null;
-		}
-	}
-
-	public final void notifyGUIObject() {
-		if (guiObject != null) {
-			guiObject.fireValueChanged();
 		}
 	}
 

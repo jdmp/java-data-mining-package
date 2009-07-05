@@ -44,9 +44,9 @@ public class DefaultVariable extends AbstractVariable {
 
 	private ObservableList<Matrix> matrixList = null;
 
-	private String label = "";
+	private String label = null;
 
-	private String description = "";
+	private String description = null;
 
 	public final String getDescription() {
 		return description;

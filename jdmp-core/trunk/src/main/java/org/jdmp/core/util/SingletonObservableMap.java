@@ -23,22 +23,16 @@
 
 package org.jdmp.core.util;
 
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.Map;
 
-public class DefaultObservableMap<V> extends AbstractObservableMap<V> {
-	private static final long serialVersionUID = -1811632376295464484L;
+public class SingletonObservableMap<V> extends AbstractObservableMap<V> {
+	private static final long serialVersionUID = 3665329356125156909L;
 
 	private Map<Object, V> map = null;
 
-	public DefaultObservableMap() {
-		// should be a HashMap, because different object types cannot be
-		// compared otherwise
-		this(new HashMap<Object, V>(2));
-	}
-
-	public DefaultObservableMap(Map<Object, V> map) {
-		this.map = map;
+	public SingletonObservableMap(Object key, V value) {
+		map = Collections.singletonMap(key, value);
 	}
 
 	@Override

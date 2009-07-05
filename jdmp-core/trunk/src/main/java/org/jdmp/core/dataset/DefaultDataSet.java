@@ -25,6 +25,10 @@ package org.jdmp.core.dataset;
 
 import org.jdmp.core.dataset.wrappers.DataSetInputMatrixWrapper;
 import org.jdmp.core.sample.Sample;
+import org.jdmp.core.util.DefaultObservableList;
+import org.jdmp.core.util.DefaultObservableMap;
+import org.jdmp.core.util.ObservableList;
+import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
@@ -36,12 +40,33 @@ public class DefaultDataSet extends AbstractDataSet {
 
 	public static final String INPUT = "Input";
 
+	private ObservableList<Sample> sampleList = null;
+
+	private ObservableMap<Variable> variableList = null;
+
+	private ObservableList<DataSet> dataSetList = null;
+
 	public DefaultDataSet() {
 		super();
+		sampleList = new DefaultObservableList<Sample>();
+		variableList = new DefaultObservableMap<Variable>();
+		dataSetList = new DefaultObservableList<DataSet>();
 		Matrix inputMatrix = new DataSetInputMatrixWrapper(this);
 		Variable input = VariableFactory.labeledVariable("Input");
 		input.addMatrix(inputMatrix);
 		getVariables().put(INPUT, input);
+	}
+
+	public ObservableList<Sample> getSamples() {
+		return sampleList;
+	}
+
+	public final ObservableMap<Variable> getVariables() {
+		return variableList;
+	}
+
+	public final ObservableList<DataSet> getDataSets() {
+		return dataSetList;
 	}
 
 	public final Variable getInputVariable() {
@@ -85,6 +110,19 @@ public class DefaultDataSet extends AbstractDataSet {
 			ds.getSamples().add(s.clone());
 		}
 		return ds;
+	}
+
+	@Override
+	public void setSamples(ObservableList<Sample> samples) {
+		this.sampleList = samples;
+	}
+
+	public void setVariables(ObservableMap<Variable> variables) {
+		this.variableList = variables;
+	}
+
+	public void setDataSets(ObservableList<DataSet> dataSets) {
+		this.dataSetList = dataSets;
 	}
 
 }

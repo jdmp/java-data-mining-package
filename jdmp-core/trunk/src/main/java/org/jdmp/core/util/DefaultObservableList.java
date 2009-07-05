@@ -24,86 +24,29 @@
 package org.jdmp.core.util;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
-import javax.swing.AbstractListModel;
-
-public class DefaultObservableList<V> extends AbstractListModel implements ObservableList<V> {
+public class DefaultObservableList<V> extends AbstractObservableList<V> {
 	private static final long serialVersionUID = -2636828198788691727L;
 
-	private List<V> values = null;
+	private List<V> list = null;
 
 	public DefaultObservableList() {
-		values = new ArrayList<V>();
+		this(new ArrayList<V>(2));
 	}
 
-	public DefaultObservableList(List<V> values) {
-		this.values = values;
-	}
-
-	public synchronized V getElementAt(int index) {
-		if (index >= 0 && index < values.size()) {
-			return values.get(index);
-		} else {
-			return null;
-		}
-	}
-
-	public synchronized void clear() {
-		int size = values.size();
-		values.clear();
-		fireIntervalRemoved(this, 0, size - 1);
-	}
-
-	public synchronized int getSize() {
-		return values.size();
-	}
-
-	public synchronized int indexOf(V value) {
-		return values.indexOf(value);
-	}
-
-	public synchronized void add(V value) {
-		values.add(value);
-		fireIntervalAdded(this, values.size() - 1, values.size() - 1);
-	}
-
-	public void addAll(Collection<V> values) {
-		for (V v : values) {
-			add(v);
-		}
-	}
-
-	public synchronized boolean remove(V value) {
-		int index = values.indexOf(value);
-		boolean b = values.remove(value);
-		if (index >= 0) {
-			fireIntervalRemoved(this, index, index);
-		}
-		return b;
-	}
-
-	public synchronized Iterator<V> iterator() {
-		return values.iterator();
-	}
-
-	public boolean isEmpty() {
-		return values.isEmpty();
-	}
-
-	public Collection<V> toCollection() {
-		return values;
-	}
-
-	public String toString() {
-		return values.toString();
+	public DefaultObservableList(List<V> list) {
+		this.list = list;
 	}
 
 	@Override
-	public void fireContentsChanged() {
-		fireContentsChanged(this, -1, -1);
+	public List<V> getList() {
+		return list;
+	}
+
+	@Override
+	public void setList(List<V> list) {
+		this.list = list;
 	}
 
 }

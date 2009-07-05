@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 
+import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.enums.FileFormat;
@@ -39,6 +40,7 @@ public abstract class SampleFactory {
 
 	public static Sample EMPTYSAMPLE = new DefaultSample();
 
+	@SuppressWarnings("unchecked")
 	public static final Sample createFromObject(Object o) {
 		if (o instanceof Map) {
 			return linkToMap((Map) o);
@@ -64,11 +66,12 @@ public abstract class SampleFactory {
 		return s;
 	}
 
-	public static final Sample linkToMap(Map<?, ?> map) {
-		Sample s = new MapSample(map);
+	public static final Sample linkToMap(Map<? extends Object, ? extends Object> map) {
+		Sample s = new DefaultMapSample(map);
 		return s;
 	}
 
+	@SuppressWarnings("unchecked")
 	public static Sample linkToFile(FileFormat fileFormat, File file, Object... parameters)
 			throws MatrixException, IOException {
 		Matrix map = MatrixFactory.linkToFile(FileFormat.FILE, file, fileFormat);
@@ -113,6 +116,19 @@ public abstract class SampleFactory {
 		RelationalSample s = new RelationalSample();
 		s.setLabel(label);
 		return s;
+	}
+
+	public static Sample clone(Sample s) {
+		Sample ret = SampleFactory.emptySample();
+		ret.setLabel(s.getLabel());
+		ret.setDescription(s.getDescription());
+		for (Object k : s.getVariables().keySet()) {
+			Variable v = s.getVariables().get(k);
+			if (v != null) {
+				ret.getVariables().put(k, v.clone());
+			}
+		}
+		return ret;
 	}
 
 }

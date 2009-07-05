@@ -23,37 +23,21 @@
 
 package org.jdmp.core.dataset;
 
-import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-import java.util.logging.Level;
 
 import org.jdmp.core.AbstractCoreObject;
-import org.jdmp.core.dataset.wrappers.SampleListToMatrixWrapper;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.util.DefaultObservableList;
-import org.jdmp.core.util.DefaultObservableMap;
-import org.jdmp.core.util.ObservableList;
-import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
-import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.core.util.StringUtil;
 
 public abstract class AbstractDataSet extends AbstractCoreObject implements DataSet {
 	private static final long serialVersionUID = -4168834188998259018L;
-
-	private transient GUIObject guiObject = null;
-
-	private ObservableList<Sample> sampleList = new DefaultObservableList<Sample>();
-
-	private ObservableMap<Variable> variableList = new DefaultObservableMap<Variable>();
-
-	private final ObservableList<DataSet> dataSetList = new DefaultObservableList<DataSet>();
 
 	public final String getDescription() {
 		return getString(DataSet.DESCRIPTION);
@@ -73,15 +57,6 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 
 	public AbstractDataSet() {
 		super();
-		Matrix m = new SampleListToMatrixWrapper(getSamples());
-		Variable v = VariableFactory.labeledVariable("AllSamples");
-		v.addMatrix(m);
-		getVariables().put("AllSamples", v);
-	}
-
-	public AbstractDataSet(String label) {
-		this();
-		setLabel(label);
 	}
 
 	public final String getString(Object variableKey) {
@@ -120,20 +95,10 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		v.addMatrix(matrix);
 	}
 
-	public ObservableList<Sample> getSamples() {
-		return sampleList;
-	}
-
-	public final ObservableMap<Variable> getVariables() {
-		return variableList;
-	}
-
-	public final ObservableList<DataSet> getDataSets() {
-		return dataSetList;
-	}
-
-	public void clear() {
-		sampleList.clear();
+	public final void clear() {
+		getSamples().clear();
+		getVariables().clear();
+		getDataSets().clear();
 	}
 
 	public List<DataSet> splitByCount(boolean shuffle, int... count) {
@@ -209,19 +174,6 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		return splitByCount(shuffle, counts);
 	}
 
-	public final GUIObject getGUIObject() {
-		if (guiObject == null) {
-			try {
-				Class<?> c = Class.forName("org.jdmp.gui.dataset.DataSetGUIObject");
-				Constructor<?> con = c.getConstructor(new Class<?>[] { DataSet.class });
-				guiObject = (GUIObject) con.newInstance(new Object[] { this });
-			} catch (Exception e) {
-				logger.log(Level.WARNING, "cannot create dataset gui object", e);
-			}
-		}
-		return guiObject;
-	}
-
 	@Override
 	public final String toString() {
 		if (getLabel() == null) {
@@ -232,20 +184,5 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 	}
 
 	@Override
-	public void setSamples(ObservableList<Sample> samples) {
-		this.sampleList = samples;
-	}
-
-	public void setVariables(ObservableMap<Variable> variables) {
-		this.variableList = variables;
-	}
-
-	public void notifyGUIObject() {
-		if (guiObject != null) {
-			guiObject.fireValueChanged();
-		}
-	}
-
-	@Override
-	public abstract AbstractDataSet clone();
+	public abstract DataSet clone();
 }

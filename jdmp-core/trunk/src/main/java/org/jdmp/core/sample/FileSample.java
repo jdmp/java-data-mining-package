@@ -21,34 +21,35 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.core.util;
+package org.jdmp.core.sample;
 
-import java.util.HashMap;
+import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 
-public class DefaultObservableMap<V> extends AbstractObservableMap<V> {
-	private static final long serialVersionUID = -1811632376295464484L;
+import org.ujmp.core.enums.FileFormat;
+import org.ujmp.core.objectmatrix.impl.FileMatrix;
 
-	private Map<Object, V> map = null;
+public class FileSample extends AbstractMapSample {
+	private static final long serialVersionUID = -9110879874007064140L;
 
-	public DefaultObservableMap() {
-		// should be a HashMap, because different object types cannot be
-		// compared otherwise
-		this(new HashMap<Object, V>(2));
+	private FileMatrix fileMatrix = null;
+
+	public FileSample(File file, Object... parameters) throws IOException {
+		this.fileMatrix = new FileMatrix(file, parameters);
 	}
 
-	public DefaultObservableMap(Map<Object, V> map) {
-		this.map = map;
-	}
-
-	@Override
-	public Map<Object, V> getMap() {
-		return map;
+	public FileSample(FileFormat fileFormat, File file, Object... parameters) throws IOException {
+		this.fileMatrix = new FileMatrix(fileFormat, file, parameters);
 	}
 
 	@Override
-	public void setMap(Map<Object, V> map) {
-		this.map = map;
+	public Map<Object, Object> getWrappedObject() {
+		return fileMatrix;
+	}
+
+	@Override
+	public void setWrappedObject(Map<Object, Object> object) {
 	}
 
 }

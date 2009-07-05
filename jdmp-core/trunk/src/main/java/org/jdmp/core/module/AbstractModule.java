@@ -24,7 +24,6 @@
 package org.jdmp.core.module;
 
 import java.lang.reflect.Constructor;
-import java.util.logging.Level;
 
 import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.algorithm.Algorithm;
@@ -39,8 +38,6 @@ import org.ujmp.core.interfaces.GUIObject;
 
 public abstract class AbstractModule extends AbstractCoreObject implements Module {
 	private static final long serialVersionUID = 4621466897617405575L;
-
-	private transient GUIObject guiObject = null;
 
 	protected final ObservableMap<Algorithm> algorithms = new DefaultObservableMap<Algorithm>();
 
@@ -80,18 +77,7 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		variables.clear();
 	}
 
-	public final GUIObject getGUIObject() {
-		if (guiObject == null) {
-			try {
-				Class<?> c = Class.forName("org.jdmp.gui.module.ModuleGUIObject");
-				Constructor<?> con = c.getConstructor(new Class<?>[] { Module.class });
-				guiObject = (GUIObject) con.newInstance(new Object[] { this });
-			} catch (Exception e) {
-				logger.log(Level.WARNING, "cannot create module gui object", e);
-			}
-		}
-		return guiObject;
-	}
+
 
 	@Override
 	public final String toString() {
@@ -112,11 +98,7 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		}
 	}
 
-	public void notifyGUIObject() {
-		if (guiObject != null) {
-			guiObject.fireValueChanged();
-		}
-	}
+	
 
 	public void setVariables(ObservableMap<Variable> variables) {
 		this.variables = variables;

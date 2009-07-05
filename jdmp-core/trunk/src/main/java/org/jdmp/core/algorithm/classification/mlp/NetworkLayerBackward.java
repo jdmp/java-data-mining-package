@@ -25,7 +25,6 @@ package org.jdmp.core.algorithm.classification.mlp;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
 
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.algorithm.Algorithm;
@@ -77,7 +76,7 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 			ar = new ReturningFunctionOne();
 			break;
 		default:
-			logger.log(Level.WARNING, "not implemented: " + transferFunction);
+			throw new RuntimeException("not implemented: " + transferFunction);
 		}
 
 		ar.setVariable(ReturningFunctionTanh.TARGET, getNetDeviationVariable());

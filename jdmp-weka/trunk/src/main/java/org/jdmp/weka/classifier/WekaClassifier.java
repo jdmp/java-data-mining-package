@@ -24,7 +24,6 @@
 package org.jdmp.weka.classifier;
 
 import java.lang.reflect.Constructor;
-import java.util.logging.Level;
 
 import org.jdmp.core.algorithm.classification.AbstractClassifier;
 import org.jdmp.core.dataset.RegressionDataSet;
@@ -156,7 +155,7 @@ public class WekaClassifier extends AbstractClassifier {
 
 	@Override
 	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) {
-		logger.log(Level.WARNING, "this method is not supported for WEKA classifiers");
+		throw new RuntimeException("this method is not supported for WEKA classifiers");
 	}
 
 	@Override

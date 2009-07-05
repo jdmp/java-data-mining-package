@@ -28,4 +28,6 @@ import org.jdmp.core.util.ObservableList;
 public interface HasDataSetList extends HasDataSets {
 
 	public ObservableList<DataSet> getDataSets();
+
+	public void setDataSets(ObservableList<DataSet> dataSets);
 }

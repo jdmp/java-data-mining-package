@@ -23,19 +23,13 @@
 
 package org.jdmp.core.variable;
 
-import java.lang.reflect.Constructor;
-import java.util.logging.Level;
-
 import org.jdmp.core.AbstractCoreObject;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.coordinates.Coordinates;
-import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.core.util.StringUtil;
 
 public abstract class AbstractVariable extends AbstractCoreObject implements Variable {
 	private static final long serialVersionUID = -3393106211967497877L;
-
-	private transient GUIObject guiObject = null;
 
 	protected AbstractVariable() {
 		super();
@@ -97,31 +91,12 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 		return getSize()[COLUMN];
 	}
 
-	public final GUIObject getGUIObject() {
-		if (guiObject == null) {
-			try {
-				Class<?> c = Class.forName("org.jdmp.gui.variable.VariableGUIObject");
-				Constructor<?> con = c.getConstructor(new Class<?>[] { Variable.class });
-				guiObject = (GUIObject) con.newInstance(new Object[] { this });
-			} catch (Exception e) {
-				logger.log(Level.WARNING, "cannot create variable gui object", e);
-			}
-		}
-		return guiObject;
-	}
-
 	@Override
 	public final String toString() {
 		if (getLabel() == null) {
 			return getClass().getSimpleName();
 		} else {
 			return getClass().getSimpleName() + " [" + getLabel() + "]";
-		}
-	}
-
-	public void notifyGUIObject() {
-		if (guiObject != null) {
-			guiObject.fireValueChanged();
 		}
 	}
 

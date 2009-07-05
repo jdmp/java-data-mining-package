@@ -23,7 +23,6 @@
 
 package org.jdmp.core.algorithm;
 
-import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -38,15 +37,11 @@ import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
-import org.ujmp.core.exceptions.MatrixException;
-import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.core.util.MathUtil;
 import org.ujmp.core.util.StringUtil;
 
 public abstract class AbstractAlgorithm extends AbstractCoreObject implements Algorithm {
 	private static final long serialVersionUID = 3219035032582720106L;
-
-	private transient GUIObject guiObject = null;
 
 	private ObservableMap<Variable> variableMap = new DefaultObservableMap<Variable>();
 
@@ -246,19 +241,6 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		return edgeLabels.get(key);
 	}
 
-	public final GUIObject getGUIObject() {
-		if (guiObject == null) {
-			try {
-				Class<?> c = Class.forName("org.jdmp.gui.algorithm.AlgorithmGUIObject");
-				Constructor<?> con = c.getConstructor(new Class<?>[] { Algorithm.class });
-				guiObject = (GUIObject) con.newInstance(new Object[] { this });
-			} catch (Exception e) {
-				throw new MatrixException("cannot create sample gui object", e);
-			}
-		}
-		return guiObject;
-	}
-
 	@Override
 	public final String toString() {
 		if (getLabel() == null) {
@@ -266,10 +248,6 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		} else {
 			return getClass().getSimpleName() + " [" + getLabel() + "]";
 		}
-	}
-
-	public void notifyGUIObject() {
-		guiObject.fireValueChanged();
 	}
 
 	public void setVariables(ObservableMap<Variable> variables) {

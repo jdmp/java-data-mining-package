@@ -21,34 +21,32 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.core.util;
+package org.jdmp.core.sample;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class DefaultObservableMap<V> extends AbstractObservableMap<V> {
-	private static final long serialVersionUID = -1811632376295464484L;
+public class DefaultMapSample extends AbstractMapSample {
+	private static final long serialVersionUID = -7381008972833175285L;
 
-	private Map<Object, V> map = null;
+	private Map<Object, Object> map = null;
 
-	public DefaultObservableMap() {
-		// should be a HashMap, because different object types cannot be
-		// compared otherwise
-		this(new HashMap<Object, V>(2));
+	public DefaultMapSample() {
+		map = new HashMap<Object, Object>(2);
 	}
 
-	public DefaultObservableMap(Map<Object, V> map) {
-		this.map = map;
+	@SuppressWarnings("unchecked")
+	public DefaultMapSample(Map<? extends Object, ? extends Object> map) {
+		this.map = (Map<Object, Object>) map;
 	}
 
 	@Override
-	public Map<Object, V> getMap() {
+	public Map<Object, Object> getWrappedObject() {
 		return map;
 	}
 
 	@Override
-	public void setMap(Map<Object, V> map) {
-		this.map = map;
+	public void setWrappedObject(Map<Object, Object> object) {
+		this.map = object;
 	}
-
 }
