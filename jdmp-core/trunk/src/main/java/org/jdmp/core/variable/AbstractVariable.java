@@ -24,6 +24,7 @@
 package org.jdmp.core.variable;
 
 import org.jdmp.core.AbstractCoreObject;
+import org.jdmp.core.util.ObservableList;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.coordinates.Coordinates;
 import org.ujmp.core.util.StringUtil;
@@ -44,25 +45,24 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 	}
 
 	public final Matrix getMatrix() {
-		if (getMatrixList() == null) {
+		ObservableList<Matrix> list = getMatrixList();
+		if (list == null || list.isEmpty()) {
 			return null;
 		} else {
-			return getMatrixList().getElementAt(getMatrixList().getSize() - 1);
+			return list.getElementAt(list.getSize() - 1);
 		}
 	}
 
 	public final String getAsString() {
-		if (getMatrixList() == null) {
-			return null;
-		} else {
-			return StringUtil.convert(getMatrixList().getElementAt(getMatrixList().getSize() - 1));
-		}
+		return StringUtil.convert(getMatrix());
 	}
 
 	public final Matrix getMatrix(int index) {
-		if (getMatrixList() == null)
+		if (getMatrixList() == null) {
 			return null;
-		return getMatrixList().getElementAt(index);
+		} else {
+			return getMatrixList().getElementAt(index);
+		}
 	}
 
 	public final void addMatrix(Matrix m) {
