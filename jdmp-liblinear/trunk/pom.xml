@@ -21,14 +21,6 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-		</dependency>		
-		<dependency>
-			<groupId>liblinear</groupId>
-			<artifactId>liblinear</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>netlib-java</groupId>
-			<artifactId>netlib-java</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
@@ -37,11 +29,12 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-core</artifactId>
-			<version>${jdmp.version}</version>
-			<type>test-jar</type>
-			<scope>test</scope>
+			<groupId>liblinear</groupId>
+			<artifactId>liblinear</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>netlib-java</groupId>
+			<artifactId>netlib-java</artifactId>
 		</dependency>
 	</dependencies>
 </project>
