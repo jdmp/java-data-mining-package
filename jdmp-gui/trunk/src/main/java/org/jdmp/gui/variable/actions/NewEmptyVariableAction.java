@@ -21,7 +21,7 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.gui.dataset.actions;
+package org.jdmp.gui.variable.actions;
 
 import java.awt.event.KeyEvent;
 
@@ -29,36 +29,37 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
-import org.jdmp.core.dataset.ClassificationDataSet;
-import org.jdmp.core.dataset.DataSet;
-import org.jdmp.core.dataset.HasDataSetList;
-import org.jdmp.core.dataset.HasDataSets;
+import org.jdmp.core.variable.HasVariableList;
+import org.jdmp.core.variable.Variable;
+import org.jdmp.core.variable.VariableFactory;
+import org.ujmp.core.interfaces.GUIObject;
+import org.ujmp.gui.actions.ObjectAction;
 
-public class AddDataSetAction extends DataSetListAction {
-	private static final long serialVersionUID = 8692069148375302589L;
+public class NewEmptyVariableAction extends ObjectAction {
+	private static final long serialVersionUID = 153544541533260702L;
 
-	private DataSet ds = null;
-
-	public AddDataSetAction(JComponent c, HasDataSets i, DataSet ds) {
-		this(c, i);
-		this.ds = ds;
-	}
-
-	public AddDataSetAction(JComponent c, HasDataSets i) {
+	public NewEmptyVariableAction(JComponent c, GUIObject i) {
 		super(c, i);
-		putValue(Action.NAME, "Add DataSet...");
-		putValue(Action.SHORT_DESCRIPTION, "Add a new DataSet");
-		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_D);
-		putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_D, 0));
+		putValue(Action.NAME, "Empty Variable");
+		putValue(Action.SHORT_DESCRIPTION, "Create a new empty Variable");
+		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_V);
+		putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_V,
+				KeyEvent.ALT_DOWN_MASK));
 	}
 
 	@Override
 	public Object call() {
-		if (ds == null) {
-			ds = new ClassificationDataSet();
+		Variable v = VariableFactory.emptyVariable();
+		if (getCoreObject() instanceof HasVariableList) {
+			try {
+				((HasVariableList) getCoreObject()).getVariables().add(v);
+			} catch (Exception e) {
+				v.showGUI();
+			}
+		} else {
+			v.showGUI();
 		}
-		((HasDataSetList) getIDataSets()).getDataSets().add(ds);
-		return ds;
+		return v;
 	}
 
 }

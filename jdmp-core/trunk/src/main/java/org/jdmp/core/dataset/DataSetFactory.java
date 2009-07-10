@@ -70,10 +70,16 @@ public abstract class DataSetFactory {
 		DataSet ds = emptyDataSet();
 		ds.setLabel(matrix.getLabel());
 		for (int r = 0; r < matrix.getRowCount(); r++) {
-			Sample s = SampleFactory.classificationSample();
-			for (int c = 0; c < matrix.getColumnCount(); c++) {
+			Sample s = SampleFactory.emptySample();
+			if (matrix.getRowLabel(r) != null) {
 				s.setLabel(matrix.getRowLabel(r));
-				s.setObject(matrix.getColumnLabel(c), matrix.getAsObject(r, c));
+			}
+			for (int c = 0; c < matrix.getColumnCount(); c++) {
+				Object label = matrix.getColumnLabel(c);
+				if (label == null) {
+					label = "col" + c;
+				}
+				s.setObject(label, matrix.getAsObject(r, c));
 			}
 			ds.getSamples().add(s);
 		}

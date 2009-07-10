@@ -25,6 +25,7 @@ package org.jdmp.gui.util;
 
 import javax.swing.JComponent;
 
+import org.jdmp.gui.dataset.actions.LinkDataSetMenu;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.gui.menu.UJMPLinkMenu;
 
@@ -33,6 +34,7 @@ public class JDMPLinkMenu extends UJMPLinkMenu {
 
 	public JDMPLinkMenu(JComponent c, GUIObject o) {
 		super(c, o);
+		add(new LinkDataSetMenu(c, o));
 	}
 
 }

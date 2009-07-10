@@ -23,18 +23,20 @@
 
 package org.jdmp.gui.dataset.actions;
 
-import java.util.ArrayList;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JComponent;
+import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-import org.jdmp.core.dataset.HasDataSets;
+import org.ujmp.core.interfaces.GUIObject;
 
-public class DataSetListActions extends ArrayList<JComponent> {
-	private static final long serialVersionUID = 7368610208934209148L;
+public class LinkDataSetMenu extends JMenu {
+	private static final long serialVersionUID = 5686070522042734821L;
 
-	public DataSetListActions(JComponent c, HasDataSets i) {
-		this.add(new JMenuItem(new AddDataSetAction(c, i)));
+	public LinkDataSetMenu(JComponent c, GUIObject o) {
+		super("DataSet");
+		setMnemonic(KeyEvent.VK_D);
+		add(new JMenuItem(new LinkDataSetToDirAction(c, o)));
 	}
-
 }

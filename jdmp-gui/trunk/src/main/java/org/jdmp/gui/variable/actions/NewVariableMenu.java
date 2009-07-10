@@ -21,26 +21,22 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.gui.util;
+package org.jdmp.gui.variable.actions;
+
+import java.awt.event.KeyEvent;
 
 import javax.swing.JComponent;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
-import org.jdmp.gui.dataset.actions.NewDataSetMenu;
-import org.jdmp.gui.module.actions.NewModuleMenu;
-import org.jdmp.gui.sample.actions.NewSampleMenu;
-import org.jdmp.gui.variable.actions.NewVariableMenu;
 import org.ujmp.core.interfaces.GUIObject;
-import org.ujmp.gui.menu.UJMPNewMenu;
 
-public class JDMPNewMenu extends UJMPNewMenu {
-	private static final long serialVersionUID = -3730564188631921010L;
+public class NewVariableMenu extends JMenu {
+	private static final long serialVersionUID = -3210570712127672059L;
 
-	public JDMPNewMenu(JComponent c, GUIObject o) {
-		super(c, o);
-		add(new NewVariableMenu(c, o));
-		add(new NewSampleMenu(c, o));
-		add(new NewDataSetMenu(c, o));
-		add(new NewModuleMenu(c, o));
+	public NewVariableMenu(JComponent c, GUIObject o) {
+		super("Variable");
+		setMnemonic(KeyEvent.VK_V);
+		add(new JMenuItem(new NewEmptyVariableAction(c, o)));
 	}
-
 }

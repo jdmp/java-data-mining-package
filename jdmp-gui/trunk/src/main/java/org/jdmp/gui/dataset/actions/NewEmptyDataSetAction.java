@@ -21,20 +21,45 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.gui.util;
+package org.jdmp.gui.dataset.actions;
 
+import java.awt.event.KeyEvent;
+
+import javax.swing.Action;
 import javax.swing.JComponent;
+import javax.swing.KeyStroke;
 
-import org.jdmp.gui.dataset.actions.ImportDataSetMenu;
+import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.DataSetFactory;
+import org.jdmp.core.dataset.HasDataSetList;
 import org.ujmp.core.interfaces.GUIObject;
-import org.ujmp.gui.menu.UJMPImportMenu;
+import org.ujmp.gui.actions.ObjectAction;
 
-public class JDMPImportMenu extends UJMPImportMenu {
-	private static final long serialVersionUID = 7552171548617325874L;
+public class NewEmptyDataSetAction extends ObjectAction {
+	private static final long serialVersionUID = 8692069148375302589L;
 
-	public JDMPImportMenu(JComponent c, GUIObject o) {
-		super(c, o);
-		add(new ImportDataSetMenu(c, o));
+	public NewEmptyDataSetAction(JComponent c, GUIObject i) {
+		super(c, i);
+		putValue(Action.NAME, "Empty DataSet");
+		putValue(Action.SHORT_DESCRIPTION, "Create a new empty DataSet");
+		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_D);
+		putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_D,
+				KeyEvent.ALT_DOWN_MASK));
+	}
+
+	@Override
+	public Object call() {
+		DataSet ds = DataSetFactory.emptyDataSet();
+		if (getCoreObject() instanceof HasDataSetList) {
+			try {
+				((HasDataSetList) getCoreObject()).getDataSets().add(ds);
+			} catch (Exception e) {
+				ds.showGUI();
+			}
+		} else {
+			ds.showGUI();
+		}
+		return ds;
 	}
 
 }
