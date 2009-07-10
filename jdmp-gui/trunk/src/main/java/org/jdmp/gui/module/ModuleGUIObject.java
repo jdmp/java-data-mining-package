@@ -38,7 +38,7 @@ public class ModuleGUIObject extends AbstractGUIObject {
 
 	public ModuleGUIObject(Module module) {
 		this.module = module;
-		commandWindow = new CommandWindow(this.getModule());
+		commandWindow = new CommandWindow(this.getCoreObject());
 	}
 
 	public CommandWindow getCommandWindow() {
@@ -74,7 +74,8 @@ public class ModuleGUIObject extends AbstractGUIObject {
 		return module.toString();
 	}
 
-	public Module getModule() {
+	@Override
+	public Module getCoreObject() {
 		return module;
 	}
 

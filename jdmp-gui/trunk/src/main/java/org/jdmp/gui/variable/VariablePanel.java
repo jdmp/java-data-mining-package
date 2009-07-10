@@ -58,7 +58,7 @@ public class VariablePanel extends AbstractPanel {
 	public VariablePanel(VariableGUIObject v) throws MatrixException {
 		super(v);
 
-		MatrixGUIObject m = (MatrixGUIObject) v.getVariable().getAsMatrix().getGUIObject();
+		MatrixGUIObject m = (MatrixGUIObject) v.getCoreObject().getAsMatrix().getGUIObject();
 
 		JSplitPane splitPane1 = new JSplitPane();
 		JSplitPane splitPane2 = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
@@ -199,7 +199,7 @@ public class VariablePanel extends AbstractPanel {
 		splitPane1.setLeftComponent(splitPane2);
 		splitPane1.setRightComponent(splitPane3);
 
-		splitPane3.setTopComponent(new MatrixListPanel(v.getVariable()));
+		splitPane3.setTopComponent(new MatrixListPanel(v.getCoreObject()));
 		splitPane3.setBottomComponent(new MatrixEditorPanel(m));
 
 		add(splitPane1, BorderLayout.CENTER);

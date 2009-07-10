@@ -25,7 +25,7 @@ package org.jdmp.gui.util;
 
 import javax.swing.JFrame;
 
-import org.jdmp.core.CoreObject;
+import org.jdmp.core.JDMPCoreObject;
 import org.jdmp.gui.algorithm.AlgorithmFrame;
 import org.jdmp.gui.algorithm.AlgorithmGUIObject;
 import org.jdmp.gui.dataset.DataSetFrame;
@@ -66,8 +66,8 @@ public abstract class JDMPFrameManager {
 	public static JFrame showFrame(Object o) {
 		if (o instanceof GUIObject) {
 			return showFrame((GUIObject) o);
-		} else if (o instanceof CoreObject) {
-			return showFrame(((CoreObject) o).getGUIObject());
+		} else if (o instanceof JDMPCoreObject) {
+			return showFrame(((JDMPCoreObject) o).getGUIObject());
 		} else {
 			throw new MatrixException("wrong object type: " + o);
 		}

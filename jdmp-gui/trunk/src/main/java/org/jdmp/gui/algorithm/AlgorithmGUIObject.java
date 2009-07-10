@@ -41,7 +41,7 @@ public class AlgorithmGUIObject extends AbstractGUIObject {
 		algorithm.clear();
 	}
 
-	public Algorithm getAlgorithm() {
+	public Algorithm getCoreObject() {
 		return algorithm;
 	}
 

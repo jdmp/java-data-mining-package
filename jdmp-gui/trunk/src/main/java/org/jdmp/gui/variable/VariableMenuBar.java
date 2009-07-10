@@ -26,16 +26,18 @@ package org.jdmp.gui.variable;
 import javax.swing.JComponent;
 import javax.swing.JMenuBar;
 
+import org.jdmp.gui.util.JDMPExamplesMenu;
+import org.jdmp.gui.util.JDMPFileMenu;
 import org.jdmp.gui.util.JDMPToolsMenu;
-import org.ujmp.gui.menu.ExamplesMenu;
 
 public class VariableMenuBar extends JMenuBar {
 	private static final long serialVersionUID = 4537110267416117135L;
 
 	public VariableMenuBar(JComponent component, VariableGUIObject o) {
+		add(new JDMPFileMenu(component, o));
 		add(new VariableMenu(component, o, null));
 		add(new JDMPToolsMenu(component));
-		add(new ExamplesMenu(component));
+		add(new JDMPExamplesMenu(component));
 	}
 
 }

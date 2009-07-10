@@ -36,6 +36,6 @@ public abstract class SampleListAction extends ObjectAction {
 	}
 
 	public HasSampleList getISamples() {
-		return (HasSampleList) getObject();
+		return (HasSampleList) getGUIObject();
 	}
 }

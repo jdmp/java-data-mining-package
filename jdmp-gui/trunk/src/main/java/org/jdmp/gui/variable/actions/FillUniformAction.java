@@ -48,8 +48,8 @@ public class FillUniformAction extends VariableAction {
 
 	@Override
 	public Object call() throws MatrixException {
-		getVariable().getVariable()
-				.addMatrix(getVariable().getVariable().getMatrix().rand(Ret.NEW));
+		getVariable().getCoreObject().addMatrix(
+				getVariable().getCoreObject().getMatrix().rand(Ret.NEW));
 		return null;
 	}
 

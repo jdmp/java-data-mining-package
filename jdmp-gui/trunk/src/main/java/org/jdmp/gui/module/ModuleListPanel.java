@@ -23,7 +23,7 @@
 
 package org.jdmp.gui.module;
 
-import org.jdmp.core.CoreObject;
+import org.jdmp.core.JDMPCoreObject;
 import org.jdmp.core.module.HasModules;
 import org.jdmp.core.module.Module;
 import org.jdmp.gui.util.AbstractListPanel;
@@ -34,8 +34,8 @@ public class ModuleListPanel extends AbstractListPanel {
 
 	public ModuleListPanel(HasModules iModules) {
 		super();
-		if (iModules instanceof CoreObject) {
-			this.object = ((CoreObject) iModules).getGUIObject();
+		if (iModules instanceof JDMPCoreObject) {
+			this.object = ((JDMPCoreObject) iModules).getGUIObject();
 		} else {
 			this.object = (GUIObject) iModules;
 		}

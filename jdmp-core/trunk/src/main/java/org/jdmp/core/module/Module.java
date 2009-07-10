@@ -23,14 +23,14 @@
 
 package org.jdmp.core.module;
 
-import org.jdmp.core.CoreObject;
+import org.jdmp.core.JDMPCoreObject;
 import org.jdmp.core.algorithm.HasAlgorithmMap;
 import org.jdmp.core.dataset.HasDataSetMap;
 import org.jdmp.core.sample.HasSampleMap;
 import org.jdmp.core.script.Result;
 import org.jdmp.core.variable.HasVariableMap;
 
-public interface Module extends CoreObject, HasModuleMap, HasAlgorithmMap, HasVariableMap,
+public interface Module extends JDMPCoreObject, HasModuleMap, HasAlgorithmMap, HasVariableMap,
 		HasSampleMap, HasDataSetMap {
 
 	public Result execute(String script) throws Exception;

@@ -26,16 +26,18 @@ package org.jdmp.gui.dataset;
 import javax.swing.JComponent;
 import javax.swing.JMenuBar;
 
+import org.jdmp.gui.util.JDMPExamplesMenu;
+import org.jdmp.gui.util.JDMPFileMenu;
 import org.jdmp.gui.util.JDMPToolsMenu;
-import org.ujmp.gui.menu.ExamplesMenu;
 
 public class DataSetMenuBar extends JMenuBar {
 	private static final long serialVersionUID = 7982201026132757168L;
 
 	public DataSetMenuBar(JComponent component, DataSetGUIObject o) {
+		add(new JDMPFileMenu(component, o));
 		add(new DataSetMenu(component, o, null));
 		add(new JDMPToolsMenu(component));
-		add(new ExamplesMenu(component));
+		add(new JDMPExamplesMenu(component));
 	}
 
 }

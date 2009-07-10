@@ -36,7 +36,7 @@ public abstract class DataSetListAction extends ObjectAction {
 	}
 
 	public HasDataSets getIDataSets() {
-		return (HasDataSets) getObject();
+		return (HasDataSets) getGUIObject();
 	}
 
 }

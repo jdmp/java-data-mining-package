@@ -46,9 +46,9 @@ public class DataSetPanel extends AbstractPanel {
 		super(ds);
 
 		rightPanel.setLayout(new GridLayout(3, 1));
-		rightPanel.add(new VariableListPanel(ds.getDataSet()));
-		rightPanel.add(new DataSetListPanel(ds.getDataSet()));
-		rightPanel.add(new SampleListPanel(ds.getDataSet()));
+		rightPanel.add(new VariableListPanel(ds.getCoreObject()));
+		rightPanel.add(new DataSetListPanel(ds.getCoreObject()));
+		rightPanel.add(new SampleListPanel(ds.getCoreObject()));
 
 		splitPane.setLeftComponent(leftPanel);
 		splitPane.setRightComponent(rightPanel);

@@ -50,9 +50,9 @@ public class CalculateOnceAction extends AlgorithmAction {
 	@Override
 	public Object call() throws Exception {
 		if (matrix == null) {
-			getAlgorithm().getAlgorithm().calculate();
+			getAlgorithm().getCoreObject().calculate();
 		} else {
-			getAlgorithm().getAlgorithm().calculate(matrix);
+			getAlgorithm().getCoreObject().calculate(matrix);
 		}
 		return null;
 	}

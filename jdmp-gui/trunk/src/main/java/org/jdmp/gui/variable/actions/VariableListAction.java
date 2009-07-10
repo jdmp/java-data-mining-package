@@ -36,7 +36,7 @@ public abstract class VariableListAction extends ObjectAction {
 	}
 
 	public HasVariables getIVariables() {
-		return (HasVariables) getObject();
+		return (HasVariables) getGUIObject();
 	}
 
 }

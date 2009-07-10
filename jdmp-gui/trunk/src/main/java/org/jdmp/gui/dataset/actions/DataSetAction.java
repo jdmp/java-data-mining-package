@@ -35,7 +35,7 @@ public abstract class DataSetAction extends ObjectAction {
 	}
 
 	public DataSetGUIObject getDataSet() {
-		return (DataSetGUIObject) getObject();
+		return (DataSetGUIObject) getGUIObject();
 	}
 
 }

@@ -33,7 +33,7 @@ public class DataSetGUIObject extends AbstractGUIObject {
 
 	private DataSet dataSet = null;
 
-	public DataSet getDataSet() {
+	public DataSet getCoreObject() {
 		return dataSet;
 	}
 

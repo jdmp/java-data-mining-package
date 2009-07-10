@@ -36,7 +36,7 @@ public class DataSetActions extends ArrayList<JComponent> {
 	private static final long serialVersionUID = 989312444370800368L;
 
 	public DataSetActions(JComponent component, DataSetGUIObject ds) {
-		add(new JMenuItem(new CreateAnimalDemoAction(component, ds)));
+		add(new DataSetExamplesMenu(component, ds));
 		this.add(new JSeparator());
 		this.add(new JMenuItem(new ExitAction(component, ds)));
 

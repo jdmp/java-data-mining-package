@@ -21,20 +21,22 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.gui.sample.actions;
+package org.jdmp.gui.dataset.actions;
 
 import javax.swing.JComponent;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
-import org.jdmp.gui.sample.SampleGUIObject;
-import org.ujmp.gui.actions.ObjectAction;
+import org.jdmp.gui.dataset.DataSetGUIObject;
 
-public abstract class SampleAction extends ObjectAction {
+public class DataSetExamplesMenu extends JMenu {
+	private static final long serialVersionUID = 4125290536630857445L;
 
-	public SampleAction(JComponent c, SampleGUIObject p) {
-		super(c, p);
+	public DataSetExamplesMenu(JComponent component, DataSetGUIObject ds) {
+		super("DataSet");
+		add(new JMenuItem(new IrisDataSetAction(component, ds)));
+		add(new JMenuItem(new HenonDataSetAction(component, ds)));
+		add(new JMenuItem(new AnimalDataSetAction(component, ds)));
 	}
 
-	public SampleGUIObject getSample() {
-		return (SampleGUIObject) getGUIObject();
-	}
 }

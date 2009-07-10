@@ -48,8 +48,8 @@ public class FillGaussianAction extends VariableAction {
 
 	@Override
 	public Object call() throws MatrixException {
-		getVariable().getVariable().addMatrix(
-				getVariable().getVariable().getMatrix().randn(Ret.NEW));
+		getVariable().getCoreObject().addMatrix(
+				getVariable().getCoreObject().getMatrix().randn(Ret.NEW));
 		return null;
 	}
 

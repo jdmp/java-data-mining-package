@@ -21,20 +21,25 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.gui.sample.actions;
+package org.jdmp.gui.util;
 
 import javax.swing.JComponent;
+import javax.swing.JMenuItem;
+import javax.swing.JSeparator;
 
-import org.jdmp.gui.sample.SampleGUIObject;
-import org.ujmp.gui.actions.ObjectAction;
+import org.ujmp.core.interfaces.GUIObject;
+import org.ujmp.gui.actions.ExitAction;
+import org.ujmp.gui.menu.UJMPFileMenu;
 
-public abstract class SampleAction extends ObjectAction {
+public class JDMPFileMenu extends UJMPFileMenu {
+	private static final long serialVersionUID = 6600296931097058595L;
 
-	public SampleAction(JComponent c, SampleGUIObject p) {
-		super(c, p);
+	public JDMPFileMenu(JComponent component, GUIObject object) {
+		super(component, object);
+		this.removeAll();
+		add(new JDMPNewMenu(component, object));
+		add(new JSeparator());
+		add(new JMenuItem(new ExitAction(component, object)));
 	}
 
-	public SampleGUIObject getSample() {
-		return (SampleGUIObject) getGUIObject();
-	}
 }

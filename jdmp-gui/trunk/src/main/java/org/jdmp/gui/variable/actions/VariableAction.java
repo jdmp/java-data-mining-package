@@ -35,6 +35,6 @@ public abstract class VariableAction extends ObjectAction {
 	}
 
 	public VariableGUIObject getVariable() {
-		return (VariableGUIObject) getObject();
+		return (VariableGUIObject) getGUIObject();
 	}
 }

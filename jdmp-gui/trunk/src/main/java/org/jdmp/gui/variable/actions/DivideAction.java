@@ -47,7 +47,8 @@ public class DivideAction extends VariableAction {
 
 	@Override
 	public Object call() throws MatrixException {
-		getVariable().getVariable().addMatrix(getVariable().getVariable().getMatrix().divide(2.0));
+		getVariable().getCoreObject().addMatrix(
+				getVariable().getCoreObject().getMatrix().divide(2.0));
 		return null;
 	}
 

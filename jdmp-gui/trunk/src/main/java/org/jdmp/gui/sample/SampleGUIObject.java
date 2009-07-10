@@ -40,10 +40,6 @@ public class SampleGUIObject extends AbstractGUIObject {
 	public void clear() {
 	}
 
-	public Sample getSample() {
-		return sample;
-	}
-
 	public Icon getIcon() {
 		return null;
 	}
@@ -67,6 +63,11 @@ public class SampleGUIObject extends AbstractGUIObject {
 	@Override
 	public String toString() {
 		return sample.toString();
+	}
+
+	@Override
+	public Sample getCoreObject() {
+		return sample;
 	}
 
 }

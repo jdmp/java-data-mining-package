@@ -35,11 +35,11 @@ public abstract class ModuleAction extends ObjectAction {
 	}
 
 	public ModuleGUIObject getModule() {
-		return (ModuleGUIObject) getObject();
+		return (ModuleGUIObject) getGUIObject();
 	}
 
 	public void setModule(ModuleGUIObject i) {
-		setObject(i);
+		setGUIObject(i);
 	}
 
 }

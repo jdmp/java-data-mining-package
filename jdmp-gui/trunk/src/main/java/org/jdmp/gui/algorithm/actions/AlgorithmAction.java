@@ -29,12 +29,13 @@ import org.jdmp.gui.algorithm.AlgorithmGUIObject;
 import org.ujmp.gui.actions.ObjectAction;
 
 public abstract class AlgorithmAction extends ObjectAction {
+	private static final long serialVersionUID = 3336571862451658110L;
 
 	public AlgorithmAction(JComponent c, AlgorithmGUIObject a) {
 		super(c, a);
 	}
 
 	public AlgorithmGUIObject getAlgorithm() {
-		return (AlgorithmGUIObject) getObject();
+		return (AlgorithmGUIObject) getGUIObject();
 	}
 }

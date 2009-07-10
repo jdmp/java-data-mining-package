@@ -49,10 +49,6 @@ public class VariableGUIObject extends AbstractGUIObject {
 		variable.clear();
 	}
 
-	public Variable getVariable() {
-		return variable;
-	}
-
 	public final Icon getIcon() {
 		try {
 			TableModel dataModel = new AbstractTableModel() {
@@ -67,7 +63,7 @@ public class VariableGUIObject extends AbstractGUIObject {
 				}
 
 				public Object getValueAt(int row, int col) {
-					return getVariable().getMatrix();
+					return getCoreObject().getMatrix();
 				}
 			};
 			JTable table = new JTable(dataModel);
@@ -79,8 +75,8 @@ public class VariableGUIObject extends AbstractGUIObject {
 
 			Class<?> cl = Class.forName("org.jdmp.gui.matrix.MatrixRenderer");
 			DefaultTableCellRenderer mr = (DefaultTableCellRenderer) cl.newInstance();
-			Component c = mr.getTableCellRendererComponent(table, getVariable().getMatrix(), false,
-					false, 0, 0);
+			Component c = mr.getTableCellRendererComponent(table, getCoreObject().getMatrix(),
+					false, false, 0, 0);
 			BufferedImage bi = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 			c.paint(bi.getGraphics());
 			return new ImageIcon(bi);
@@ -109,6 +105,11 @@ public class VariableGUIObject extends AbstractGUIObject {
 	@Override
 	public String toString() {
 		return variable.toString();
+	}
+
+	@Override
+	public Variable getCoreObject() {
+		return variable;
 	}
 
 }

@@ -23,7 +23,7 @@
 
 package org.jdmp.gui.algorithm;
 
-import org.jdmp.core.CoreObject;
+import org.jdmp.core.JDMPCoreObject;
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.algorithm.HasAlgorithms;
 import org.jdmp.gui.util.AbstractListPanel;
@@ -33,7 +33,7 @@ public class AlgorithmListPanel extends AbstractListPanel {
 
 	public AlgorithmListPanel(HasAlgorithms iAlgorithms) {
 		super();
-		this.object = ((CoreObject) iAlgorithms).getGUIObject();
+		this.object = ((JDMPCoreObject) iAlgorithms).getGUIObject();
 
 		dataModel = new AlgorithmListTableModel(iAlgorithms);
 		dataModel.addTableModelListener(this);

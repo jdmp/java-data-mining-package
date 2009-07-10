@@ -25,12 +25,12 @@ package org.jdmp.core.dataset;
 
 import java.util.List;
 
-import org.jdmp.core.CoreObject;
+import org.jdmp.core.JDMPCoreObject;
 import org.jdmp.core.sample.HasSampleList;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.HasVariableMap;
 
-public interface DataSet extends CoreObject, HasVariableMap, HasSampleList, HasDataSetList {
+public interface DataSet extends JDMPCoreObject, HasVariableMap, HasSampleList, HasDataSetList {
 
 	public static final String LABEL = Sample.LABEL;
 

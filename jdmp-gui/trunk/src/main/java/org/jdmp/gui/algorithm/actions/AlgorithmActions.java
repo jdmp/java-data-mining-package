@@ -57,13 +57,13 @@ public class AlgorithmActions extends ArrayList<JComponent> {
 		add(new JSeparator());
 
 		JMenu variableActions = new JMenu("Variables");
-		for (JComponent c : new VariableListActions(component, algorithm.getAlgorithm())) {
+		for (JComponent c : new VariableListActions(component, algorithm.getCoreObject())) {
 			variableActions.add(c);
 		}
 		add(variableActions);
 
 		JMenu algorithmActions = new JMenu("Algorithms");
-		for (JComponent c : new AlgorithmListActions(component, algorithm.getAlgorithm())) {
+		for (JComponent c : new AlgorithmListActions(component, algorithm.getCoreObject())) {
 			algorithmActions.add(c);
 		}
 		add(algorithmActions);

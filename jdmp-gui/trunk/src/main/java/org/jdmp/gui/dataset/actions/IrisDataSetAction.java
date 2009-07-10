@@ -35,23 +35,23 @@ import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.gui.dataset.DataSetGUIObject;
 import org.ujmp.core.exceptions.MatrixException;
 
-public class CreateAnimalDemoAction extends DataSetAction {
-	private static final long serialVersionUID = 6821548758392591613L;
+public class IrisDataSetAction extends DataSetAction {
+	private static final long serialVersionUID = 3110361907469109630L;
 
-	public CreateAnimalDemoAction(JComponent c, DataSetGUIObject ds) {
+	public IrisDataSetAction(JComponent c, DataSetGUIObject ds) {
 		super(c, ds);
-		putValue(Action.NAME, "Create Animal DataSet");
-		putValue(Action.SHORT_DESCRIPTION, "Creates a demo DataSet with animals");
-		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_A);
-		putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_A,
+		putValue(Action.NAME, "Iris DataSet");
+		putValue(Action.SHORT_DESCRIPTION, "Creates a demo DataSet with flowers");
+		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_I);
+		putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_I,
 				InputEvent.ALT_DOWN_MASK));
 	}
 
 	@Override
 	public Object call() throws MatrixException {
-		DataSet animals = DataSetFactory.ANIMALS();
-		animals.showGUI();
-		return animals;
+		DataSet iris = DataSetFactory.IRIS();
+		iris.showGUI();
+		return iris;
 	}
 
 }

@@ -23,7 +23,7 @@
 
 package org.jdmp.jetty.coreobject;
 
-import org.jdmp.core.CoreObject;
+import org.jdmp.core.JDMPCoreObject;
 import org.jdmp.core.module.Module;
 import org.jdmp.core.variable.HasVariables;
 import org.jdmp.jetty.JettyObjectServlet;
@@ -36,11 +36,11 @@ public class JettyCoreObjectServer {
 
 	private Server server = null;
 
-	private CoreObject object = null;
+	private JDMPCoreObject object = null;
 
 	private int port = 8888;
 
-	public JettyCoreObjectServer(CoreObject o, int port) {
+	public JettyCoreObjectServer(JDMPCoreObject o, int port) {
 		this.object = o;
 		this.port = port;
 	}

@@ -48,7 +48,7 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
-import org.jdmp.core.CoreObject;
+import org.jdmp.core.JDMPCoreObject;
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.gui.algorithm.AlgorithmGUIObject;
@@ -182,8 +182,8 @@ public abstract class AbstractListPanel extends JPanel implements MouseListener,
 		int selectedRow = jTable.getSelectedRow();
 		if (selectedRow >= 0) {
 			Object o = dataModel.getValueAt(selectedRow, 0);
-			if (o instanceof CoreObject) {
-				otemp = ((CoreObject) o).getGUIObject();
+			if (o instanceof JDMPCoreObject) {
+				otemp = ((JDMPCoreObject) o).getGUIObject();
 			} else {
 				otemp = (GUIObject) o;
 			}
@@ -204,8 +204,8 @@ public abstract class AbstractListPanel extends JPanel implements MouseListener,
 			jTable.setRowSelectionInterval(row, row);
 			selectedRow = jTable.getSelectedRow();
 			Object obj = dataModel.getValueAt(selectedRow, 0);
-			if (obj instanceof CoreObject) {
-				otemp = ((CoreObject) obj).getGUIObject();
+			if (obj instanceof JDMPCoreObject) {
+				otemp = ((JDMPCoreObject) obj).getGUIObject();
 			} else {
 				otemp = (GUIObject) obj;
 			}
@@ -300,7 +300,7 @@ public abstract class AbstractListPanel extends JPanel implements MouseListener,
 				System.out.println("char entered in ObjectListPanel: " + e.getKeyChar());
 
 			if (o instanceof VariableGUIObject) {
-				Variable v = ((VariableGUIObject) o).getVariable();
+				Variable v = ((VariableGUIObject) o).getCoreObject();
 				switch (e.getKeyChar()) {
 				case 'g':
 					// v.fillGaussian();

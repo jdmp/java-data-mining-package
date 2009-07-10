@@ -48,11 +48,11 @@ public class ModulePanel extends AbstractPanel {
 		super(m);
 
 		leftPanel.setLayout(new GridLayout(5, 1));
-		leftPanel.add(new VariableListPanel(m.getModule()));
-		leftPanel.add(new SampleListPanel(m.getModule()));
-		leftPanel.add(new DataSetListPanel(m.getModule()));
-		leftPanel.add(new ModuleListPanel(m.getModule()));
-		leftPanel.add(new AlgorithmListPanel(m.getModule()));
+		leftPanel.add(new VariableListPanel(m.getCoreObject()));
+		leftPanel.add(new SampleListPanel(m.getCoreObject()));
+		leftPanel.add(new DataSetListPanel(m.getCoreObject()));
+		leftPanel.add(new ModuleListPanel(m.getCoreObject()));
+		leftPanel.add(new AlgorithmListPanel(m.getCoreObject()));
 
 		rightPanel.setLayout(new GridLayout(1, 1));
 		rightPanel.add(m.getCommandWindow());

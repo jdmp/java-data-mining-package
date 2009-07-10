@@ -29,7 +29,7 @@ import java.util.Map;
 
 import javax.swing.JFrame;
 
-import org.jdmp.core.CoreObject;
+import org.jdmp.core.JDMPCoreObject;
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
@@ -58,8 +58,8 @@ public class Show extends AbstractAlgorithm {
 		Map<Object, Object> result = new HashMap<Object, Object>();
 		Object o = input.get(SOURCE);
 		Object ret = null;
-		if (o instanceof CoreObject) {
-			ret = ((CoreObject) o).showGUI();
+		if (o instanceof JDMPCoreObject) {
+			ret = ((JDMPCoreObject) o).showGUI();
 		} else if (o instanceof GUIObject) {
 			ret = ((GUIObject) o).showGUI();
 		} else if (o instanceof Matrix) {

@@ -31,7 +31,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.jdmp.core.CoreObject;
+import org.jdmp.core.JDMPCoreObject;
 import org.jdmp.core.algorithm.HasAlgorithms;
 import org.jdmp.core.dataset.HasDataSets;
 import org.jdmp.core.module.HasModules;
@@ -46,9 +46,9 @@ import org.jdmp.jetty.html.tags.LinkTag;
 public class JettyCoreObjectServlet extends HttpServlet {
 	private static final long serialVersionUID = -2077611823499422360L;
 
-	private CoreObject object = null;
+	private JDMPCoreObject object = null;
 
-	public JettyCoreObjectServlet(CoreObject o) {
+	public JettyCoreObjectServlet(JDMPCoreObject o) {
 		this.object = o;
 	}
 

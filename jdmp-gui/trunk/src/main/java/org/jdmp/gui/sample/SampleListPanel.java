@@ -27,7 +27,7 @@ import java.util.Comparator;
 
 import javax.swing.table.TableRowSorter;
 
-import org.jdmp.core.CoreObject;
+import org.jdmp.core.JDMPCoreObject;
 import org.jdmp.core.sample.HasSamples;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.ObservableMap;
@@ -41,8 +41,8 @@ public class SampleListPanel extends AbstractListPanel {
 
 	public SampleListPanel(HasSamples iSamples) {
 		super();
-		if (iSamples instanceof CoreObject) {
-			this.object = ((CoreObject) iSamples).getGUIObject();
+		if (iSamples instanceof JDMPCoreObject) {
+			this.object = ((JDMPCoreObject) iSamples).getGUIObject();
 		} else {
 			this.object = (GUIObject) iSamples;
 		}

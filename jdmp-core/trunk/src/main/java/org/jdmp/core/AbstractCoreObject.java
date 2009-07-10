@@ -36,7 +36,7 @@ import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.interfaces.GUIObject;
 
-public abstract class AbstractCoreObject implements CoreObject {
+public abstract class AbstractCoreObject implements JDMPCoreObject {
 	private static final long serialVersionUID = -4626483429334570721L;
 
 	public static final int X = Matrix.X;

@@ -36,7 +36,7 @@ public abstract class ModuleListAction extends ObjectAction {
 	}
 
 	public HasModuleList getIModules() {
-		return (HasModuleList) getObject();
+		return (HasModuleList) getGUIObject();
 	}
 
 }

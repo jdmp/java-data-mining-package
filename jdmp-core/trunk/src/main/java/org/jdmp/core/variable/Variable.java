@@ -23,11 +23,11 @@
 
 package org.jdmp.core.variable;
 
-import org.jdmp.core.CoreObject;
+import org.jdmp.core.JDMPCoreObject;
 import org.jdmp.core.matrix.HasMatrixList;
 import org.ujmp.core.Matrix;
 
-public interface Variable extends CoreObject, HasMatrixList {
+public interface Variable extends JDMPCoreObject, HasMatrixList {
 	public static final Class<?>[] VARIABLEARRAY = new Class<?>[] { new Variable[] {}.getClass() };
 
 	public long[] getSize();

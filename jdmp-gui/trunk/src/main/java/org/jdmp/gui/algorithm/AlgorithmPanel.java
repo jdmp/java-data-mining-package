@@ -51,8 +51,8 @@ public class AlgorithmPanel extends AbstractPanel {
 		leftPanel.setBorder(BorderFactory.createTitledBorder("Algorithms and Variables"));
 
 		rightPanel.setLayout(new GridLayout(2, 1));
-		rightPanel.add(new VariableListPanel((HasVariables) a.getAlgorithm()));
-		rightPanel.add(new AlgorithmListPanel((HasAlgorithms) a.getAlgorithm()));
+		rightPanel.add(new VariableListPanel((HasVariables) a.getCoreObject()));
+		rightPanel.add(new AlgorithmListPanel((HasAlgorithms) a.getCoreObject()));
 
 		splitPane.setLeftComponent(leftPanel);
 		splitPane.setRightComponent(rightPanel);

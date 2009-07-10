@@ -21,20 +21,19 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.gui.sample.actions;
+package org.jdmp.gui.util;
 
 import javax.swing.JComponent;
 
-import org.jdmp.gui.sample.SampleGUIObject;
-import org.ujmp.gui.actions.ObjectAction;
+import org.jdmp.gui.dataset.actions.DataSetExamplesMenu;
+import org.ujmp.gui.menu.UJMPExamplesMenu;
 
-public abstract class SampleAction extends ObjectAction {
+public class JDMPExamplesMenu extends UJMPExamplesMenu {
+	private static final long serialVersionUID = 9014575402594882100L;
 
-	public SampleAction(JComponent c, SampleGUIObject p) {
-		super(c, p);
+	public JDMPExamplesMenu(JComponent component) {
+		super(component);
+		add(new DataSetExamplesMenu(component, null));
 	}
 
-	public SampleGUIObject getSample() {
-		return (SampleGUIObject) getGUIObject();
-	}
 }

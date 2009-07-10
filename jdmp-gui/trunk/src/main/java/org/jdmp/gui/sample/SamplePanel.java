@@ -45,7 +45,7 @@ public class SamplePanel extends AbstractPanel {
 		super(s);
 
 		rightPanel.setLayout(new GridLayout(1, 1));
-		rightPanel.add(new VariableListPanel(s.getSample()));
+		rightPanel.add(new VariableListPanel(s.getCoreObject()));
 
 		splitPane.setLeftComponent(leftPanel);
 		splitPane.setRightComponent(rightPanel);
