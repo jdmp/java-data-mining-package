@@ -23,25 +23,20 @@
 
 package org.jdmp.gui.sample.actions;
 
-import javax.swing.Action;
+import java.awt.event.KeyEvent;
+
 import javax.swing.JComponent;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
-import org.jdmp.core.sample.ClassificationSample;
-import org.jdmp.core.sample.HasSampleList;
+import org.ujmp.core.interfaces.GUIObject;
 
-public class AddSampleAction extends SampleListAction {
-	private static final long serialVersionUID = 3370112393848013976L;
+public class NewSampleMenu extends JMenu {
+	private static final long serialVersionUID = -6212590429971646171L;
 
-	public AddSampleAction(JComponent c, HasSampleList p) {
-		super(c, p);
-		putValue(Action.NAME, "Add sample");
-		putValue(Action.SHORT_DESCRIPTION, "Add a sample");
+	public NewSampleMenu(JComponent c, GUIObject o) {
+		super("Sample");
+		setMnemonic(KeyEvent.VK_S);
+		add(new JMenuItem(new NewEmptySampleAction(c, o)));
 	}
-
-	@Override
-	public Object call() {
-		getISamples().getSamples().add(new ClassificationSample());
-		return null;
-	}
-
 }

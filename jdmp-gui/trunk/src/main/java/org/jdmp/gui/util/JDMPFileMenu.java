@@ -39,6 +39,9 @@ public class JDMPFileMenu extends UJMPFileMenu {
 		this.removeAll();
 		add(new JDMPNewMenu(component, object));
 		add(new JSeparator());
+		add(new JDMPImportMenu(component, object));
+		add(new JDMPLinkMenu(component, object));
+		add(new JSeparator());
 		add(new JMenuItem(new ExitAction(component, object)));
 	}
 

@@ -21,26 +21,18 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.gui.sample.actions;
-
-import java.util.ArrayList;
+package org.jdmp.gui.util;
 
 import javax.swing.JComponent;
-import javax.swing.JMenuItem;
-import javax.swing.JSeparator;
 
-import org.jdmp.core.sample.HasSampleList;
 import org.ujmp.core.interfaces.GUIObject;
-import org.ujmp.gui.actions.ExitAction;
+import org.ujmp.gui.menu.UJMPImportMenu;
 
-public class SampleListActions extends ArrayList<JComponent> {
-	private static final long serialVersionUID = 864758348092666603L;
+public class JDMPImportMenu extends UJMPImportMenu {
+	private static final long serialVersionUID = 7552171548617325874L;
 
-	public SampleListActions(JComponent c, HasSampleList v) {
-		this.add(new JMenuItem(new AddSampleAction(c, v)));
-
-		this.add(new JSeparator());
-		this.add(new JMenuItem(new ExitAction(c, (GUIObject) v)));
+	public JDMPImportMenu(JComponent c, GUIObject o) {
+		super(c, o);
 	}
 
 }

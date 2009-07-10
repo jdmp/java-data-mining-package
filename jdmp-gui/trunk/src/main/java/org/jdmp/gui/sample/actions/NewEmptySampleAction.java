@@ -23,19 +23,43 @@
 
 package org.jdmp.gui.sample.actions;
 
-import javax.swing.JComponent;
+import java.awt.event.KeyEvent;
 
-import org.jdmp.gui.sample.SampleGUIObject;
+import javax.swing.Action;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
+
+import org.jdmp.core.sample.HasSampleList;
+import org.jdmp.core.sample.Sample;
+import org.jdmp.core.sample.SampleFactory;
+import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.gui.actions.ObjectAction;
 
-public abstract class SampleAction extends ObjectAction {
-	private static final long serialVersionUID = 779960534963504237L;
+public class NewEmptySampleAction extends ObjectAction {
+	private static final long serialVersionUID = 3370112393848013976L;
 
-	public SampleAction(JComponent c, SampleGUIObject p) {
+	public NewEmptySampleAction(JComponent c, GUIObject p) {
 		super(c, p);
+		putValue(Action.NAME, "Empty Sample");
+		putValue(Action.SHORT_DESCRIPTION, "Create a new empty Sample");
+		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_S);
+		putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_S,
+				KeyEvent.ALT_DOWN_MASK));
 	}
 
-	public SampleGUIObject getSample() {
-		return (SampleGUIObject) getGUIObject();
+	@Override
+	public Object call() {
+		Sample s = SampleFactory.emptySample();
+		if (getCoreObject() != null && getCoreObject() instanceof HasSampleList) {
+			try {
+				((HasSampleList) getCoreObject()).getSamples().add(s);
+			} catch (Exception e) {
+				s.showGUI();
+			}
+		} else {
+			s.showGUI();
+		}
+		return s;
 	}
+
 }

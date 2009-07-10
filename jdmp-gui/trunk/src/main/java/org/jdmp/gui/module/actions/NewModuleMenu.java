@@ -37,6 +37,6 @@ public class NewModuleMenu extends JMenu {
 	public NewModuleMenu(JComponent c, GUIObject o) {
 		super("Module");
 		setMnemonic(KeyEvent.VK_M);
-		add(new JMenuItem(new AddModuleAction(c, o)));
+		add(new JMenuItem(new NewEmptyModuleAction(c, o)));
 	}
 }

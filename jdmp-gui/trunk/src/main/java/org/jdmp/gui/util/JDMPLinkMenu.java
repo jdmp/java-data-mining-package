@@ -21,21 +21,18 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.gui.sample.actions;
+package org.jdmp.gui.util;
 
 import javax.swing.JComponent;
 
-import org.jdmp.gui.sample.SampleGUIObject;
-import org.ujmp.gui.actions.ObjectAction;
+import org.ujmp.core.interfaces.GUIObject;
+import org.ujmp.gui.menu.UJMPLinkMenu;
 
-public abstract class SampleAction extends ObjectAction {
-	private static final long serialVersionUID = 779960534963504237L;
+public class JDMPLinkMenu extends UJMPLinkMenu {
+	private static final long serialVersionUID = 2023280467330346285L;
 
-	public SampleAction(JComponent c, SampleGUIObject p) {
-		super(c, p);
+	public JDMPLinkMenu(JComponent c, GUIObject o) {
+		super(c, o);
 	}
 
-	public SampleGUIObject getSample() {
-		return (SampleGUIObject) getGUIObject();
-	}
 }

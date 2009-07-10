@@ -25,6 +25,7 @@ package org.jdmp.core.dataset;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Map;
 import java.util.Random;
 
@@ -51,7 +52,7 @@ public abstract class DataSetFactory {
 		return new DefaultDataSet();
 	}
 
-	public static ClassificationDataSet copyFromMatrix(Matrix input, Matrix target)
+	public static ClassificationDataSet importFromMatrix(Matrix input, Matrix target)
 			throws MatrixException {
 		ClassificationDataSet ds = new ClassificationDataSet();
 		for (int i = 0; i < input.getRowCount(); i++) {
@@ -65,7 +66,21 @@ public abstract class DataSetFactory {
 		return ds;
 	}
 
-	public static ClassificationDataSet copyFromMatrix(Matrix input, Matrix target, Matrix label)
+	public static DataSet importFromMatrix(Matrix matrix) throws MatrixException {
+		DataSet ds = emptyDataSet();
+		ds.setLabel(matrix.getLabel());
+		for (int r = 0; r < matrix.getRowCount(); r++) {
+			Sample s = SampleFactory.classificationSample();
+			for (int c = 0; c < matrix.getColumnCount(); c++) {
+				s.setLabel(matrix.getRowLabel(r));
+				s.setObject(matrix.getColumnLabel(c), matrix.getAsObject(r, c));
+			}
+			ds.getSamples().add(s);
+		}
+		return ds;
+	}
+
+	public static ClassificationDataSet importFromMatrix(Matrix input, Matrix target, Matrix label)
 			throws MatrixException {
 		ClassificationDataSet ds = new ClassificationDataSet();
 		for (int i = 0; i < input.getRowCount(); i++) {
@@ -619,8 +634,8 @@ public abstract class DataSetFactory {
 		Matrix input = m.selectColumns(Ret.NEW, 0, 1, 2, 3);
 		Matrix output = m.selectColumns(Ret.NEW, 4).discretizeToColumns(0);
 
-		ClassificationDataSet iris = DataSetFactory.copyFromMatrix(input.convert(ValueType.DOUBLE),
-				output.convert(ValueType.DOUBLE));
+		ClassificationDataSet iris = DataSetFactory.importFromMatrix(input
+				.convert(ValueType.DOUBLE), output.convert(ValueType.DOUBLE));
 		iris.setLabel("Iris flower dataset");
 
 		for (int i = 0; i < 50; i++) {
@@ -650,6 +665,15 @@ public abstract class DataSetFactory {
 	public static DataSet linkToDir(FileFormat fileFormat, File dir, Object... parameters)
 			throws MatrixException, IOException {
 		return new DirDataSet(fileFormat, dir, parameters);
+	}
+
+	public static DataSet importFromURL(FileFormat fileFormat, URL url, Object... parameters)
+			throws Exception {
+		switch (fileFormat) {
+		default:
+			Matrix m = MatrixFactory.importFromURL(fileFormat, url, parameters);
+			return importFromMatrix(m);
+		}
 	}
 
 }

@@ -26,6 +26,7 @@ package org.jdmp.gui.util;
 import javax.swing.JComponent;
 
 import org.jdmp.gui.module.actions.NewModuleMenu;
+import org.jdmp.gui.sample.actions.NewSampleMenu;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.gui.menu.UJMPNewMenu;
 
@@ -34,9 +35,9 @@ public class JDMPNewMenu extends UJMPNewMenu {
 
 	public JDMPNewMenu(JComponent c, GUIObject o) {
 		super(c, o);
-		//add(new NewVariableMenu(c, o));
-		//add(new NewSampleMenu(c, o));
-		//add(new NewDataSetMenu(c, o));
+		// add(new NewVariableMenu(c, o));
+		add(new NewSampleMenu(c, o));
+		// add(new NewDataSetMenu(c, o));
 		add(new NewModuleMenu(c, o));
 	}
 

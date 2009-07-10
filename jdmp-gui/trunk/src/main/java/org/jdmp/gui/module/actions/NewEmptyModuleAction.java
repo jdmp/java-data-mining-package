@@ -35,22 +35,27 @@ import org.jdmp.core.module.ModuleFactory;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.gui.actions.ObjectAction;
 
-public class AddModuleAction extends ObjectAction {
+public class NewEmptyModuleAction extends ObjectAction {
 	private static final long serialVersionUID = -7138267828869404341L;
 
-	public AddModuleAction(JComponent c, GUIObject o) {
+	public NewEmptyModuleAction(JComponent c, GUIObject o) {
 		super(c, o);
 		putValue(Action.NAME, "Empty Module");
 		putValue(Action.SHORT_DESCRIPTION, "Create a new Module");
 		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_M);
-		putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_M, 0));
+		putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_M,
+				KeyEvent.ALT_DOWN_MASK));
 	}
 
 	@Override
 	public Object call() {
 		Module m = ModuleFactory.emptyModule();
 		if (getCoreObject() instanceof HasModuleList) {
-			((HasModuleList) getCoreObject()).getModules().add(m);
+			try {
+				((HasModuleList) getCoreObject()).getModules().add(m);
+			} catch (Exception e) {
+				m.showGUI();
+			}
 		} else {
 			m.showGUI();
 		}
