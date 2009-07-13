@@ -24,12 +24,10 @@
 package org.jdmp.gui.dataset;
 
 import java.awt.event.KeyEvent;
-import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JMenu;
 
-import org.jdmp.gui.dataset.actions.DataSetActions;
 import org.ujmp.core.interfaces.GUIObject;
 
 public class DataSetMenu extends JMenu {
@@ -38,10 +36,8 @@ public class DataSetMenu extends JMenu {
 	public DataSetMenu(JComponent component, DataSetGUIObject o, GUIObject owner) {
 		super("DataSet");
 		setMnemonic(KeyEvent.VK_D);
-		List<JComponent> actions = new DataSetActions(component, o);
-		for (JComponent c : actions) {
-			add(c);
-		}
+		add(new ClusterDataSetMenu(component, o, owner));
+		add(new ClassifyDataSetMenu(component, o, owner));
+		add(new IndexDataSetMenu(component, o, owner));
 	}
-
 }

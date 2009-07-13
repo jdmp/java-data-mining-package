@@ -37,6 +37,9 @@ public class ImportDataSetMenu extends JMenu {
 	public ImportDataSetMenu(JComponent c, GUIObject o) {
 		super("DataSet");
 		setMnemonic(KeyEvent.VK_D);
+		add(new JMenuItem(new ImportDataSetFromFileAction(c, o)));
+		add(new JMenuItem(new ImportDataSetFromClipboardAction(c, o)));
 		add(new JMenuItem(new ImportDataSetFromURLAction(c, o)));
+		add(new JMenuItem(new ImportDataSetFromDatabaseAction(c, o)));
 	}
 }

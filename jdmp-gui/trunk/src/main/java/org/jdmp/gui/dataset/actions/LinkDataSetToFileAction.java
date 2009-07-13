@@ -25,45 +25,59 @@ package org.jdmp.gui.dataset.actions;
 
 import java.awt.event.KeyEvent;
 import java.io.File;
-import java.io.IOException;
 
 import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
 
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.core.dataset.HasDataSetList;
-import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.enums.FileFormat;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.gui.actions.ObjectAction;
 
-public class LinkDataSetToDirAction extends ObjectAction {
-	private static final long serialVersionUID = 8692069148375302589L;
+public class LinkDataSetToFileAction extends ObjectAction {
+	private static final long serialVersionUID = 5742073625833450916L;
 
-	public LinkDataSetToDirAction(JComponent c, GUIObject i) {
-		super(c, i);
-		putValue(Action.NAME, "to Directory...");
-		putValue(Action.SHORT_DESCRIPTION, "Links a DataSet to a directory on disk");
-		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_D);
+	public LinkDataSetToFileAction(JComponent c, GUIObject m) {
+		super(c, m);
+		putValue(Action.NAME, "to File...");
+		putValue(Action.SHORT_DESCRIPTION, "link a dataset to a file on disk");
+		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_F);
 	}
 
 	@Override
-	public Object call() throws MatrixException, IOException {
+	public Object call() throws Exception {
 		File file = null;
+		FileFormat fileFormat = null;
 		JFileChooser chooser = new JFileChooser();
-		chooser.setDialogTitle("Link to Directory");
+
+		for (FileFormat f : FileFormat.values()) {
+			chooser.addChoosableFileFilter(f.getFileFilter());
+		}
+
+		chooser.setFileFilter(FileFormat.CSV.getFileFilter());
+		chooser.setAcceptAllFileFilterUsed(false);
+		chooser.setDialogTitle("Link");
 
 		int returnVal = chooser.showOpenDialog(null);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			file = chooser.getSelectedFile();
+			FileFilter filter = chooser.getFileFilter();
+			for (FileFormat f : FileFormat.values()) {
+				if (filter.equals(f.getFileFilter())) {
+					fileFormat = f;
+				}
+			}
+
 		}
 
-		if (file.isFile()) {
-			file = file.getParentFile();
-		}
+		if (file == null)
+			return null;
 
-		DataSet ds = DataSetFactory.linkToDir(file);
+		DataSet ds = DataSetFactory.linkToFile(fileFormat, file);
 		if (getCoreObject() instanceof HasDataSetList) {
 			try {
 				((HasDataSetList) getCoreObject()).getDataSets().add(ds);
@@ -75,5 +89,4 @@ public class LinkDataSetToDirAction extends ObjectAction {
 		}
 		return ds;
 	}
-
 }

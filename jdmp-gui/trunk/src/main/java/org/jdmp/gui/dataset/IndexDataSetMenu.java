@@ -21,25 +21,23 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.gui.dataset.actions;
+package org.jdmp.gui.dataset;
 
-import java.util.ArrayList;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JComponent;
+import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import javax.swing.JSeparator;
 
-import org.jdmp.gui.dataset.DataSetGUIObject;
-import org.ujmp.gui.actions.ExitAction;
+import org.jdmp.gui.dataset.actions.IndexDataSetLuceneAction;
+import org.ujmp.core.interfaces.GUIObject;
 
-public class DataSetActions extends ArrayList<JComponent> {
-	private static final long serialVersionUID = 989312444370800368L;
+public class IndexDataSetMenu extends JMenu {
+	private static final long serialVersionUID = -3390420864037731722L;
 
-	public DataSetActions(JComponent component, DataSetGUIObject ds) {
-		add(new DataSetExamplesMenu(component, ds));
-		this.add(new JSeparator());
-		this.add(new JMenuItem(new ExitAction(component, ds)));
-
+	public IndexDataSetMenu(JComponent component, DataSetGUIObject o, GUIObject owner) {
+		super("Index");
+		setMnemonic(KeyEvent.VK_I);
+		add(new JMenuItem(new IndexDataSetLuceneAction(component, o)));
 	}
-
 }

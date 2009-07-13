@@ -35,6 +35,7 @@ import org.jdmp.core.sample.SampleFactory;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.calculation.Calculation.Ret;
+import org.ujmp.core.enums.DB;
 import org.ujmp.core.enums.FileFormat;
 import org.ujmp.core.enums.ValueType;
 import org.ujmp.core.exceptions.MatrixException;
@@ -64,6 +65,29 @@ public abstract class DataSetFactory {
 			ds.getSamples().add(s);
 		}
 		return ds;
+	}
+
+	public static DataSet importFromFile(FileFormat format, File file, Object... parameters)
+			throws MatrixException, IOException {
+		switch (format) {
+		default:
+			Matrix m = MatrixFactory.importFromFile(format, file, parameters);
+			return importFromMatrix(m);
+		}
+	}
+
+	public static DataSet linkToFile(FileFormat format, File file, Object... parameters)
+			throws MatrixException, IOException {
+		switch (format) {
+		default:
+			Matrix m = MatrixFactory.linkToFile(format, file, parameters);
+			return linkToMatrix(m);
+		}
+	}
+
+	public static DataSet linkToMatrix(Matrix matrix) throws MatrixException {
+		// TODO: this should be improved
+		return importFromMatrix(matrix);
 	}
 
 	public static DataSet importFromMatrix(Matrix matrix) throws MatrixException {
@@ -680,6 +704,40 @@ public abstract class DataSetFactory {
 			Matrix m = MatrixFactory.importFromURL(fileFormat, url, parameters);
 			return importFromMatrix(m);
 		}
+	}
+
+	public static DataSet importFromClipboard(FileFormat fileFormat, Object... parameters) {
+		switch (fileFormat) {
+		default:
+			Matrix m = MatrixFactory.importFromClipboard(fileFormat, parameters);
+			return importFromMatrix(m);
+		}
+	}
+
+	public static DataSet importFromJDBC(DB type, String host, int port, String database,
+			String sqlStatement, String username, String password) {
+		Matrix m = MatrixFactory.importFromJDBC(type, host, port, database, sqlStatement, username,
+				password);
+		return importFromMatrix(m);
+	}
+
+	public static DataSet importFromJDBC(String url, String sqlStatement, String username,
+			String password) {
+		Matrix m = MatrixFactory.importFromJDBC(url, sqlStatement, username, password);
+		return importFromMatrix(m);
+	}
+
+	public static DataSet linkToJDBC(DB type, String host, int port, String database,
+			String sqlStatement, String username, String password) {
+		Matrix m = MatrixFactory.linkToJDBC(type, host, port, database, sqlStatement, username,
+				password);
+		return linkToMatrix(m);
+	}
+
+	public static DataSet linkToJDBC(String url, String sqlStatement, String username,
+			String password) {
+		Matrix m = MatrixFactory.linkToJDBC(url, sqlStatement, username, password);
+		return linkToMatrix(m);
 	}
 
 }

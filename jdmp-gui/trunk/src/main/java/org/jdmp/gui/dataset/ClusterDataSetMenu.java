@@ -21,24 +21,20 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.gui.dataset.actions;
+package org.jdmp.gui.dataset;
 
 import java.awt.event.KeyEvent;
 
 import javax.swing.JComponent;
 import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 
 import org.ujmp.core.interfaces.GUIObject;
 
-public class LinkDataSetMenu extends JMenu {
-	private static final long serialVersionUID = 5686070522042734821L;
+public class ClusterDataSetMenu extends JMenu {
+	private static final long serialVersionUID = -8739876327447006598L;
 
-	public LinkDataSetMenu(JComponent c, GUIObject o) {
-		super("DataSet");
-		setMnemonic(KeyEvent.VK_D);
-		add(new JMenuItem(new LinkDataSetToFileAction(c, o)));
-		add(new JMenuItem(new LinkDataSetToDirAction(c, o)));
-		add(new JMenuItem(new LinkDataSetToDatabaseAction(c, o)));
+	public ClusterDataSetMenu(JComponent component, DataSetGUIObject o, GUIObject owner) {
+		super("Clustering");
+		setMnemonic(KeyEvent.VK_C);
 	}
 }

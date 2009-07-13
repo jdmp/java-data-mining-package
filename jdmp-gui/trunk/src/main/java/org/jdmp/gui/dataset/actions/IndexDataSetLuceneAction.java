@@ -24,56 +24,30 @@
 package org.jdmp.gui.dataset.actions;
 
 import java.awt.event.KeyEvent;
-import java.io.File;
 import java.io.IOException;
 
 import javax.swing.Action;
 import javax.swing.JComponent;
-import javax.swing.JFileChooser;
 
-import org.jdmp.core.dataset.DataSet;
-import org.jdmp.core.dataset.DataSetFactory;
-import org.jdmp.core.dataset.HasDataSetList;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.interfaces.GUIObject;
+import org.ujmp.core.util.Lucene;
 import org.ujmp.gui.actions.ObjectAction;
 
-public class LinkDataSetToDirAction extends ObjectAction {
-	private static final long serialVersionUID = 8692069148375302589L;
+public class IndexDataSetLuceneAction extends ObjectAction {
+	private static final long serialVersionUID = 7775670958567679425L;
 
-	public LinkDataSetToDirAction(JComponent c, GUIObject i) {
+	public IndexDataSetLuceneAction(JComponent c, GUIObject i) {
 		super(c, i);
-		putValue(Action.NAME, "to Directory...");
-		putValue(Action.SHORT_DESCRIPTION, "Links a DataSet to a directory on disk");
-		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_D);
+		putValue(Action.NAME, "Lucene...");
+		putValue(Action.SHORT_DESCRIPTION, "Index a DataSet using Lucene");
+		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_L);
+		putValue("Enabled", Lucene.isAvailable());
 	}
 
 	@Override
 	public Object call() throws MatrixException, IOException {
-		File file = null;
-		JFileChooser chooser = new JFileChooser();
-		chooser.setDialogTitle("Link to Directory");
-
-		int returnVal = chooser.showOpenDialog(null);
-		if (returnVal == JFileChooser.APPROVE_OPTION) {
-			file = chooser.getSelectedFile();
-		}
-
-		if (file.isFile()) {
-			file = file.getParentFile();
-		}
-
-		DataSet ds = DataSetFactory.linkToDir(file);
-		if (getCoreObject() instanceof HasDataSetList) {
-			try {
-				((HasDataSetList) getCoreObject()).getDataSets().add(ds);
-			} catch (Exception e) {
-				ds.showGUI();
-			}
-		} else {
-			ds.showGUI();
-		}
-		return ds;
+		return null;
 	}
 
 }

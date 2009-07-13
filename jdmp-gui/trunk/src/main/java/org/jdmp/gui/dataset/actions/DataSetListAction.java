@@ -30,6 +30,7 @@ import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.gui.actions.ObjectAction;
 
 public abstract class DataSetListAction extends ObjectAction {
+	private static final long serialVersionUID = -1934258866331553465L;
 
 	public DataSetListAction(JComponent c, HasDataSets iDataSets) {
 		super(c, (GUIObject) iDataSets);

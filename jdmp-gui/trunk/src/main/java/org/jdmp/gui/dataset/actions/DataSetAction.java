@@ -29,6 +29,7 @@ import org.jdmp.gui.dataset.DataSetGUIObject;
 import org.ujmp.gui.actions.ObjectAction;
 
 public abstract class DataSetAction extends ObjectAction {
+	private static final long serialVersionUID = 1132725138991245451L;
 
 	public DataSetAction(JComponent c, DataSetGUIObject ds) {
 		super(c, ds);

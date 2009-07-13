@@ -24,22 +24,16 @@
 package org.jdmp.gui.dataset.actions;
 
 import java.awt.event.KeyEvent;
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
-import javax.swing.KeyStroke;
 
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.core.dataset.HasDataSetList;
-import org.ujmp.core.Matrix;
-import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.enums.FileFormat;
-import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.gui.actions.ObjectAction;
 
@@ -51,12 +45,10 @@ public class ImportDataSetFromURLAction extends ObjectAction {
 		putValue(Action.NAME, "from URL...");
 		putValue(Action.SHORT_DESCRIPTION, "Import a DataSet from an URL on the web");
 		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_U);
-		putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_U,
-				KeyEvent.ALT_DOWN_MASK));
 	}
 
 	@Override
-	public Object call() throws MatrixException, IOException {
+	public Object call() throws Exception {
 		URL url = null;
 		while (url == null) {
 			String s = JOptionPane.showInputDialog("Enter URL:", "http://");
@@ -66,9 +58,7 @@ public class ImportDataSetFromURLAction extends ObjectAction {
 				"Select format", "Import DataSet", JOptionPane.OK_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, FileFormat.values(), FileFormat.CSV)];
 
-		Matrix m = MatrixFactory.importFromURL(fileFormat, url);
-
-		DataSet ds = DataSetFactory.importFromMatrix(m);
+		DataSet ds = DataSetFactory.importFromURL(fileFormat, url);
 
 		if (getCoreObject() instanceof HasDataSetList) {
 			try {
