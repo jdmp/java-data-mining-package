@@ -45,17 +45,22 @@ public class DataSetInputMatrixWrapper extends AbstractDenseDoubleMatrix2D imple
 	}
 
 	public long[] getSize() {
-		if (dataSet.getSamples().isEmpty()) {
-			return Coordinates.ZERO2D;
-		}
-		Sample p = dataSet.getSamples().getElementAt(0);
-		if (p == null) {
-			return Coordinates.ZERO2D;
-		}
-		Matrix input = p.getMatrix(INPUT);
-		if (input != null) {
-			return new long[] { dataSet.getSamples().getSize(), input.getValueCount() };
-		} else {
+		try {
+			if (dataSet.getSamples().isEmpty()) {
+				return Coordinates.ZERO2D;
+			}
+			Sample p = dataSet.getSamples().getElementAt(0);
+			if (p == null) {
+				return Coordinates.ZERO2D;
+			}
+			Matrix input = p.getMatrix(INPUT);
+			if (input != null) {
+				return new long[] { dataSet.getSamples().getSize(), input.getValueCount() };
+			} else {
+				return Coordinates.ZERO2D;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 			return Coordinates.ZERO2D;
 		}
 
