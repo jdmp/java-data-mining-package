@@ -32,6 +32,11 @@ import org.ujmp.core.Matrix;
 public abstract class AbstractIndexer extends AbstractAlgorithm implements Indexer {
 	private static final long serialVersionUID = 8854402303242176900L;
 
+	public AbstractIndexer() {
+		super();
+		setObject("Size", getSize());
+	}
+
 	@Override
 	public void add(Matrix matrix) throws Exception {
 		add(SampleFactory.createFromObject(matrix));

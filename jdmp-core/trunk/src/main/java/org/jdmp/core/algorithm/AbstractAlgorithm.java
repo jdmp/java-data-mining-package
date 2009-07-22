@@ -31,7 +31,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.jdmp.core.AbstractCoreObject;
+import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.util.DefaultObservableList;
 import org.jdmp.core.util.DefaultObservableMap;
+import org.jdmp.core.util.ObservableList;
 import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
@@ -46,6 +49,8 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 	private ObservableMap<Variable> variableMap = new DefaultObservableMap<Variable>();
 
 	private final ObservableMap<Algorithm> algorithmList = new DefaultObservableMap<Algorithm>();
+
+	private ObservableList<DataSet> dataSetList = new DefaultObservableList<DataSet>();
 
 	private final Map<Object, String> edgeLabels = new HashMap<Object, String>();
 
@@ -237,6 +242,10 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		return algorithmList;
 	}
 
+	public final ObservableList<DataSet> getDataSets() {
+		return dataSetList;
+	}
+
 	public final String getEdgeLabel(Object key) {
 		return edgeLabels.get(key);
 	}
@@ -252,6 +261,10 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 
 	public void setVariables(ObservableMap<Variable> variables) {
 		this.variableMap = variables;
+	}
+
+	public void setDataSets(ObservableList<DataSet> dataSets) {
+		this.dataSetList = dataSets;
 	}
 
 }
