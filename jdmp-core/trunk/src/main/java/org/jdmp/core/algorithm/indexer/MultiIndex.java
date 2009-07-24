@@ -12,12 +12,12 @@ import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.core.sample.Sample;
 
-public class MultiIndex extends AbstractIndexer {
+public class MultiIndex extends AbstractIndex {
 	private static final long serialVersionUID = 3828613564416089927L;
 
 	private ExecutorService executors = Executors.newFixedThreadPool(4);
 
-	public MultiIndex(Indexer... indices) {
+	public MultiIndex(Index... indices) {
 		for (int i = 0; i < indices.length; i++) {
 			getAlgorithms().put("Index" + i, (Algorithm) indices[i]);
 		}
@@ -39,8 +39,8 @@ public class MultiIndex extends AbstractIndexer {
 			List<Future<DataSet>> futures = new ArrayList<Future<DataSet>>();
 			for (Object key : getAlgorithms().keySet()) {
 				Algorithm a = getAlgorithms().get(key);
-				if (a instanceof Indexer) {
-					futures.add(executors.submit(new SearchFuture((Indexer) a, query)));
+				if (a instanceof Index) {
+					futures.add(executors.submit(new SearchFuture((Index) a, query)));
 				}
 			}
 			for (Future<DataSet> f : futures) {
@@ -55,11 +55,11 @@ public class MultiIndex extends AbstractIndexer {
 
 	class SearchFuture implements Callable<DataSet> {
 
-		private Indexer index = null;
+		private Index index = null;
 
 		private String query = null;
 
-		public SearchFuture(Indexer index, String query) {
+		public SearchFuture(Index index, String query) {
 			this.index = index;
 			this.query = query;
 		}

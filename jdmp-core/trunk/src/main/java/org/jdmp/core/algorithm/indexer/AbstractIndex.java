@@ -29,12 +29,11 @@ import org.jdmp.core.sample.Sample;
 import org.jdmp.core.sample.SampleFactory;
 import org.ujmp.core.Matrix;
 
-public abstract class AbstractIndexer extends AbstractAlgorithm implements Indexer {
+public abstract class AbstractIndex extends AbstractAlgorithm implements Index {
 	private static final long serialVersionUID = 8854402303242176900L;
 
-	public AbstractIndexer() {
+	public AbstractIndex() {
 		super();
-		setObject("Size", getSize());
 	}
 
 	@Override

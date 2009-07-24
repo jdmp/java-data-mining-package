@@ -27,7 +27,7 @@ import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 
-public interface Indexer {
+public interface Index {
 
 	public static final String INPUT = "Input";
 

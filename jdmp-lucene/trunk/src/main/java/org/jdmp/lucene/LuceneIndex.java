@@ -53,7 +53,7 @@ import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.search.BooleanClause.Occur;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
-import org.jdmp.core.algorithm.indexer.AbstractIndexer;
+import org.jdmp.core.algorithm.indexer.AbstractIndex;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DefaultDataSet;
 import org.jdmp.core.sample.Sample;
@@ -64,7 +64,7 @@ import org.ujmp.core.util.MathUtil;
 import org.ujmp.core.util.SerializationUtil;
 import org.ujmp.core.util.io.FileUtil;
 
-public class LuceneIndex extends AbstractIndexer implements Flushable,
+public class LuceneIndex extends AbstractIndex implements Flushable,
 		Closeable, Erasable {
 	private static final long serialVersionUID = -8483996550983833243L;
 

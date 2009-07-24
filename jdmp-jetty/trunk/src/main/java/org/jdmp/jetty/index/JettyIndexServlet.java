@@ -31,7 +31,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.jdmp.core.algorithm.indexer.Indexer;
+import org.jdmp.core.algorithm.indexer.Index;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.jetty.html.Page;
 import org.jdmp.jetty.html.elements.DataSetDiv;
@@ -44,9 +44,9 @@ import org.jdmp.jetty.html.tags.InputTextTag;
 public class JettyIndexServlet extends HttpServlet {
 	private static final long serialVersionUID = -529359384170033358L;
 
-	private Indexer index = null;
+	private Index index = null;
 
-	public JettyIndexServlet(Indexer index) {
+	public JettyIndexServlet(Index index) {
 		this.index = index;
 	}
 

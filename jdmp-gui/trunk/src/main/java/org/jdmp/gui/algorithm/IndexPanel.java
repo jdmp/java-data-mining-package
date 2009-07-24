@@ -34,18 +34,18 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import org.jdmp.core.algorithm.indexer.Indexer;
+import org.jdmp.core.algorithm.indexer.Index;
 
-public class IndexerPanel extends JPanel implements KeyListener, ActionListener {
+public class IndexPanel extends JPanel implements KeyListener, ActionListener {
 	private static final long serialVersionUID = -7338702449011774328L;
 
-	private Indexer indexer = null;
+	private Index indexer = null;
 
 	private JTextField query = null;
 
 	private JButton button = null;
 
-	public IndexerPanel(Indexer indexer) {
+	public IndexPanel(Index indexer) {
 		this.indexer = indexer;
 		setLayout(new FlowLayout());
 		query = new JTextField();

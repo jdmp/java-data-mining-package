@@ -31,7 +31,7 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
 import org.jdmp.core.algorithm.HasAlgorithms;
-import org.jdmp.core.algorithm.indexer.Indexer;
+import org.jdmp.core.algorithm.indexer.Index;
 import org.jdmp.core.dataset.HasDataSets;
 import org.jdmp.core.variable.HasVariables;
 import org.jdmp.gui.dataset.DataSetListPanel;
@@ -53,9 +53,9 @@ public class AlgorithmPanel extends AbstractPanel {
 		leftPanel.setLayout(new BorderLayout());
 		leftPanel.setBorder(BorderFactory.createTitledBorder("Algorithms and Variables"));
 
-		if (a.getCoreObject() instanceof Indexer) {
+		if (a.getCoreObject() instanceof Index) {
 			rightPanel.setLayout(new GridLayout(4, 1));
-			rightPanel.add(new IndexerPanel((Indexer) a.getCoreObject()));
+			rightPanel.add(new IndexPanel((Index) a.getCoreObject()));
 		} else {
 			rightPanel.setLayout(new GridLayout(3, 1));
 		}
