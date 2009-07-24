@@ -23,7 +23,9 @@
 
 package org.jdmp.core.module;
 
-import java.lang.reflect.Constructor;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Date;
 
 import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.algorithm.Algorithm;
@@ -34,7 +36,8 @@ import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
-import org.ujmp.core.interfaces.GUIObject;
+import org.ujmp.core.util.MathUtil;
+import org.ujmp.core.util.StringUtil;
 
 public abstract class AbstractModule extends AbstractCoreObject implements Module {
 	private static final long serialVersionUID = 4621466897617405575L;
@@ -77,7 +80,53 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		variables.clear();
 	}
 
+	public final String getAsString(Object variableKey) {
+		return StringUtil.convert(getMatrix(variableKey));
+	}
 
+	public final boolean getAsBoolean(Object variableKey) {
+		return MathUtil.getBoolean(getMatrix(variableKey));
+	}
+
+	public final byte getAsByte(Object variableKey) {
+		return MathUtil.getByte(getMatrix(variableKey));
+	}
+
+	public final char getAsChar(Object variableKey) {
+		return MathUtil.getChar(getMatrix(variableKey));
+	}
+
+	public final double getAsDouble(Object variableKey) {
+		return MathUtil.getDouble(getMatrix(variableKey));
+	}
+
+	public final float getAsFloat(Object variableKey) {
+		return MathUtil.getFloat(getMatrix(variableKey));
+	}
+
+	public final int getAsInt(Object variableKey) {
+		return MathUtil.getInt(getMatrix(variableKey));
+	}
+
+	public final long getAsLong(Object variableKey) {
+		return MathUtil.getLong(getMatrix(variableKey));
+	}
+
+	public final short getAsShort(Object variableKey) {
+		return MathUtil.getShort(getMatrix(variableKey));
+	}
+
+	public final Date getAsDate(Object variableKey) {
+		return MathUtil.getDate(getMatrix(variableKey));
+	}
+
+	public final BigDecimal getAsBigDecimal(Object variableKey) {
+		return MathUtil.getBigDecimal(getMatrix(variableKey));
+	}
+
+	public final BigInteger getAsBigInteger(Object variableKey) {
+		return MathUtil.getBigInteger(getMatrix(variableKey));
+	}
 
 	@Override
 	public final String toString() {
@@ -97,8 +146,6 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 			setMatrix(variableKey, MatrixFactory.linkToValue(value));
 		}
 	}
-
-	
 
 	public void setVariables(ObservableMap<Variable> variables) {
 		this.variables = variables;

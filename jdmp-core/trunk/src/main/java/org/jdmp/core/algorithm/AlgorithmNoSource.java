@@ -26,6 +26,7 @@ package org.jdmp.core.algorithm;
 import org.jdmp.core.variable.Variable;
 
 public abstract class AlgorithmNoSource extends AbstractAlgorithm {
+	private static final long serialVersionUID = -7301807892963488133L;
 
 	public static final String TARGET = "Target";
 

@@ -26,6 +26,7 @@ package org.jdmp.core.algorithm;
 import org.jdmp.core.variable.Variable;
 
 public abstract class AlgorithmTwoSources extends AbstractAlgorithm {
+	private static final long serialVersionUID = 8817347583332070277L;
 
 	public static final String SOURCE1 = "Source 1";
 

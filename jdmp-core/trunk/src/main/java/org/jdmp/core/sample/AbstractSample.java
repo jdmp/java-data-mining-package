@@ -23,6 +23,10 @@
 
 package org.jdmp.core.sample;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Date;
+
 import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
@@ -41,10 +45,7 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 	public abstract Sample clone();
 
 	public final String getId() {
-		if (getMatrix(Sample.ID) == null) {
-			return null;
-		}
-		return StringUtil.convert(getMatrix(Sample.ID));
+		return getAsString(Sample.ID);
 	}
 
 	@Override
@@ -72,12 +73,51 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 	}
 
 	public final String getAsString(Object variableKey) {
-		Variable v = getVariables().get(variableKey);
-		if (v != null) {
-			return v.getAsString();
-		} else {
-			return null;
-		}
+		return StringUtil.convert(getMatrix(variableKey));
+	}
+
+	public final boolean getAsBoolean(Object variableKey) {
+		return MathUtil.getBoolean(getMatrix(variableKey));
+	}
+
+	public final byte getAsByte(Object variableKey) {
+		return MathUtil.getByte(getMatrix(variableKey));
+	}
+
+	public final char getAsChar(Object variableKey) {
+		return MathUtil.getChar(getMatrix(variableKey));
+	}
+
+	public final double getAsDouble(Object variableKey) {
+		return MathUtil.getDouble(getMatrix(variableKey));
+	}
+
+	public final float getAsFloat(Object variableKey) {
+		return MathUtil.getFloat(getMatrix(variableKey));
+	}
+
+	public final int getAsInt(Object variableKey) {
+		return MathUtil.getInt(getMatrix(variableKey));
+	}
+
+	public final long getAsLong(Object variableKey) {
+		return MathUtil.getLong(getMatrix(variableKey));
+	}
+
+	public final short getAsShort(Object variableKey) {
+		return MathUtil.getShort(getMatrix(variableKey));
+	}
+
+	public final Date getAsDate(Object variableKey) {
+		return MathUtil.getDate(getMatrix(variableKey));
+	}
+
+	public final BigDecimal getAsBigDecimal(Object variableKey) {
+		return MathUtil.getBigDecimal(getMatrix(variableKey));
+	}
+
+	public final BigInteger getAsBigInteger(Object variableKey) {
+		return MathUtil.getBigInteger(getMatrix(variableKey));
 	}
 
 	@Override
@@ -87,12 +127,7 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 
 	@Override
 	public String getDescription() {
-		Matrix m = getMatrix(Sample.DESCRIPTION);
-		if (m == null) {
-			return null;
-		} else {
-			return StringUtil.convert(m);
-		}
+		return getAsString(Sample.DESCRIPTION);
 	}
 
 	@Override
@@ -102,12 +137,7 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 
 	@Override
 	public String getLabel() {
-		Matrix m = getMatrix(Sample.LABEL);
-		if (m == null) {
-			return null;
-		} else {
-			return StringUtil.convert(m);
-		}
+		return getAsString(Sample.LABEL);
 	}
 
 	@Override

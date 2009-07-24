@@ -26,6 +26,7 @@ package org.jdmp.core.algorithm;
 import org.jdmp.core.variable.Variable;
 
 public abstract class AlgorithmFiveSources extends AbstractAlgorithm {
+	private static final long serialVersionUID = 4630006863059324104L;
 
 	public static final String SOURCE1 = "Source 1";
 

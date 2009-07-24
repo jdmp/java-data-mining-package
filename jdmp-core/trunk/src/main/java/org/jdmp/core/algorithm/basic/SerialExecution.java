@@ -28,7 +28,6 @@ import java.util.Map;
 
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.algorithm.Algorithm;
-import org.ujmp.core.Matrix;
 
 public class SerialExecution extends AbstractAlgorithm {
 	private static final long serialVersionUID = -3635082316760868682L;

@@ -23,8 +23,11 @@
 
 package org.jdmp.core.dataset;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -34,13 +37,14 @@ import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
+import org.ujmp.core.util.MathUtil;
 import org.ujmp.core.util.StringUtil;
 
 public abstract class AbstractDataSet extends AbstractCoreObject implements DataSet {
 	private static final long serialVersionUID = -4168834188998259018L;
 
 	public final String getDescription() {
-		return getString(DataSet.DESCRIPTION);
+		return getAsString(DataSet.DESCRIPTION);
 	}
 
 	public final void setDescription(String description) {
@@ -48,7 +52,7 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 	}
 
 	public final String getLabel() {
-		return getString(DataSet.LABEL);
+		return getAsString(DataSet.LABEL);
 	}
 
 	public final void setLabel(String label) {
@@ -57,10 +61,6 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 
 	public AbstractDataSet() {
 		super();
-	}
-
-	public final String getString(Object variableKey) {
-		return StringUtil.convert(getMatrix(variableKey));
 	}
 
 	public Matrix getMatrix(Object variableKey) {
@@ -74,6 +74,50 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 
 	public final String getAsString(Object variableKey) {
 		return StringUtil.convert(getMatrix(variableKey));
+	}
+
+	public final boolean getAsBoolean(Object variableKey) {
+		return MathUtil.getBoolean(getMatrix(variableKey));
+	}
+
+	public final byte getAsByte(Object variableKey) {
+		return MathUtil.getByte(getMatrix(variableKey));
+	}
+
+	public final char getAsChar(Object variableKey) {
+		return MathUtil.getChar(getMatrix(variableKey));
+	}
+
+	public final double getAsDouble(Object variableKey) {
+		return MathUtil.getDouble(getMatrix(variableKey));
+	}
+
+	public final float getAsFloat(Object variableKey) {
+		return MathUtil.getFloat(getMatrix(variableKey));
+	}
+
+	public final int getAsInt(Object variableKey) {
+		return MathUtil.getInt(getMatrix(variableKey));
+	}
+
+	public final long getAsLong(Object variableKey) {
+		return MathUtil.getLong(getMatrix(variableKey));
+	}
+
+	public final short getAsShort(Object variableKey) {
+		return MathUtil.getShort(getMatrix(variableKey));
+	}
+
+	public final Date getAsDate(Object variableKey) {
+		return MathUtil.getDate(getMatrix(variableKey));
+	}
+
+	public final BigDecimal getAsBigDecimal(Object variableKey) {
+		return MathUtil.getBigDecimal(getMatrix(variableKey));
+	}
+
+	public final BigInteger getAsBigInteger(Object variableKey) {
+		return MathUtil.getBigInteger(getMatrix(variableKey));
 	}
 
 	public final void setObject(Object variableKey, Object value) {

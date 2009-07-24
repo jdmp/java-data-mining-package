@@ -30,7 +30,6 @@ import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.algorithm.classification.mlp.MultiLayerNetwork;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.exceptions.MatrixException;
-import org.ujmp.core.mapmatrix.DefaultMapMatrix;
 import org.ujmp.core.util.MathUtil;
 
 public class CreateMLP extends AbstractAlgorithm {

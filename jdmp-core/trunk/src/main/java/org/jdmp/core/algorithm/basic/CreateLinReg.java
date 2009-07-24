@@ -30,7 +30,6 @@ import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.algorithm.regression.LinearRegression;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.exceptions.MatrixException;
-import org.ujmp.core.mapmatrix.DefaultMapMatrix;
 
 public class CreateLinReg extends AbstractAlgorithm {
 	private static final long serialVersionUID = -4667986159489642214L;

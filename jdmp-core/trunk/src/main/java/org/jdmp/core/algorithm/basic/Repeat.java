@@ -28,7 +28,6 @@ import java.util.Map;
 
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.algorithm.Algorithm;
-import org.ujmp.core.Matrix;
 
 public class Repeat extends AbstractAlgorithm {
 	private static final long serialVersionUID = 1469854394519674382L;

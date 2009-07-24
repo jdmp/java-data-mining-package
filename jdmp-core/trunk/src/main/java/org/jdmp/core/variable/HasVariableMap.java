@@ -23,6 +23,10 @@
 
 package org.jdmp.core.variable;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Date;
+
 import org.jdmp.core.util.ObservableMap;
 import org.ujmp.core.Matrix;
 
@@ -33,6 +37,28 @@ public interface HasVariableMap extends HasVariables {
 	public Matrix getMatrix(Object variableKey);
 
 	public String getAsString(Object variableKey);
+
+	public boolean getAsBoolean(Object variableKey);
+
+	public byte getAsByte(Object variableKey);
+
+	public char getAsChar(Object variableKey);
+
+	public double getAsDouble(Object variableKey);
+
+	public float getAsFloat(Object variableKey);
+
+	public int getAsInt(Object variableKey);
+
+	public long getAsLong(Object variableKey);
+
+	public short getAsShort(Object variableKey);
+
+	public Date getAsDate(Object variableKey);
+
+	public BigDecimal getAsBigDecimal(Object variableKey);
+
+	public BigInteger getAsBigInteger(Object variableKey);
 
 	public void setMatrix(Object variableKey, Matrix matrix);
 
