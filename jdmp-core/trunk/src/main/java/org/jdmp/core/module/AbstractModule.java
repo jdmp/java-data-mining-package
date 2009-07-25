@@ -80,6 +80,15 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		variables.clear();
 	}
 
+	public final String getAllAsString(Object variableKey) {
+		Variable v = getVariables().get(variableKey);
+		if (v != null) {
+			return StringUtil.getAllAsString(v.getMatrixList().toCollection());
+		} else {
+			return null;
+		}
+	}
+
 	public final String getAsString(Object variableKey) {
 		return StringUtil.convert(getMatrix(variableKey));
 	}

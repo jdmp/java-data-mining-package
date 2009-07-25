@@ -38,6 +38,8 @@ public interface HasVariableMap extends HasVariables {
 
 	public String getAsString(Object variableKey);
 
+	public String getAllAsString(Object variableKey);
+
 	public boolean getAsBoolean(Object variableKey);
 
 	public byte getAsByte(Object variableKey);

@@ -76,6 +76,15 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 		return StringUtil.convert(getMatrix(variableKey));
 	}
 
+	public final String getAllAsString(Object variableKey) {
+		Variable v = getVariables().get(variableKey);
+		if (v != null) {
+			return StringUtil.getAllAsString(v.getMatrixList().toCollection());
+		} else {
+			return null;
+		}
+	}
+
 	public final boolean getAsBoolean(Object variableKey) {
 		return MathUtil.getBoolean(getMatrix(variableKey));
 	}
