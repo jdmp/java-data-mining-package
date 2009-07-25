@@ -40,6 +40,7 @@ import org.jdmp.jetty.html.tags.FormTag;
 import org.jdmp.jetty.html.tags.H1Tag;
 import org.jdmp.jetty.html.tags.InputSubmitTag;
 import org.jdmp.jetty.html.tags.InputTextTag;
+import org.ujmp.core.interfaces.HasLabel;
 
 public class JettyIndexServlet extends HttpServlet {
 	private static final long serialVersionUID = -529359384170033358L;
@@ -72,8 +73,10 @@ public class JettyIndexServlet extends HttpServlet {
 			String path = request.getPathInfo().substring(1);
 			String action = null;
 
-			Page page = new Page("JDMP Search");
-			page.add(new H1Tag("JDMP Search"));
+			Page page = new Page("JDMP Search ["
+					+ ((HasLabel) index).getLabel() + "]");
+			page.add(new H1Tag("JDMP Search [" + ((HasLabel) index).getLabel()
+					+ "]"));
 			page.add(index.getSize() + " items in index");
 			page.add(new BRTag());
 			FormTag form = new FormTag("/");

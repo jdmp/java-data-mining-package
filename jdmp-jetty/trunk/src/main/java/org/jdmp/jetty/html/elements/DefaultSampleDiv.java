@@ -39,6 +39,7 @@ public class DefaultSampleDiv extends DivTag {
 		String type = sample.getAllAsString("Type");
 		String description = sample.getDescription();
 		String url = sample.getAsString("URL");
+		String id = sample.getId();
 
 		DivTag title = new DivTag();
 		title.setParameter("class", "title");
@@ -83,6 +84,10 @@ public class DefaultSampleDiv extends DivTag {
 				continue;
 			} else if ("URL".equals(key)) {
 				continue;
+			} else if ("Id".equals(key)) {
+				if (id.equals(url)) {
+					continue;
+				}
 			}
 			DivTag field = new DivTag();
 			field.setParameter("class", "field");

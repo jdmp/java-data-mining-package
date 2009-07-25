@@ -18,9 +18,15 @@ public class MultiIndex extends AbstractIndex {
 	private ExecutorService executors = Executors.newFixedThreadPool(4);
 
 	public MultiIndex(Index... indices) {
+		String label = "";
 		for (int i = 0; i < indices.length; i++) {
 			getAlgorithms().put("Index" + i, (Algorithm) indices[i]);
+			label += ((Algorithm) indices[i]).getLabel();
+			if (i < indices.length - 1) {
+				label += ", ";
+			}
 		}
+		setLabel(label);
 	}
 
 	@Override
