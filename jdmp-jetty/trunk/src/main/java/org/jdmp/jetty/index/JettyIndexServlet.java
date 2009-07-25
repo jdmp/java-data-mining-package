@@ -31,7 +31,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.jdmp.core.algorithm.indexer.Index;
+import org.jdmp.core.algorithm.index.Index;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.jetty.html.Page;
 import org.jdmp.jetty.html.elements.DataSetDiv;
@@ -60,40 +60,45 @@ public class JettyIndexServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		response.setContentType("text/html");
-		response.setStatus(HttpServletResponse.SC_OK);
+		try {
 
-		String query = request.getParameter("q");
+			response.setContentType("text/html");
+			response.setStatus(HttpServletResponse.SC_OK);
 
-		PrintWriter out = response.getWriter();
+			String query = request.getParameter("q");
 
-		String path = request.getPathInfo().substring(1);
-		String action = null;
+			PrintWriter out = response.getWriter();
 
-		Page page = new Page("JDMP Search");
-		page.add(new H1Tag("JDMP Search"));
-		page.add(index.getSize() + " items in index");
-		page.add(new BRTag());
-		FormTag form = new FormTag("/");
-		form.setParameter("method", "get");
-		form.add(new InputTextTag("q", query));
-		form.add(new InputSubmitTag("submit", "submit"));
-		page.add(form);
-		page.add(new BRTag());
+			String path = request.getPathInfo().substring(1);
+			String action = null;
 
-		if (query != null) {
-			DataSet result = null;
-			try {
-				result = index.search(query);
-			} catch (Exception e) {
-				e.printStackTrace();
+			Page page = new Page("JDMP Search");
+			page.add(new H1Tag("JDMP Search"));
+			page.add(index.getSize() + " items in index");
+			page.add(new BRTag());
+			FormTag form = new FormTag("/");
+			form.setParameter("method", "get");
+			form.add(new InputTextTag("q", query));
+			form.add(new InputSubmitTag("submit", "submit"));
+			page.add(form);
+			page.add(new BRTag());
+
+			if (query != null) {
+				DataSet result = null;
+				try {
+					result = index.search(query);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				page.add(new DataSetDiv(result, query.split("\\s")));
 			}
-			page.add(new DataSetDiv(result));
+
+			out.append(page.toString());
+
+			out.close();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-
-		out.append(page.toString());
-
-		out.close();
 	}
 
 }

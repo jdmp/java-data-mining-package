@@ -38,10 +38,17 @@ public class Page implements Html {
 
 	private BodyTag body = new BodyTag();
 
-	public Page(String titleString, Html... content) {
+	public Page(String titleString, Style style, Html... content) {
 		this.title.add(new Text(titleString));
 		head.add(title);
+		if (style != null) {
+			head.add(style);
+		}
 		body.add(content);
+	}
+
+	public Page(String titleString, Html... content) {
+		this(titleString, new Style(), content);
 	}
 
 	public void add(Html... content) {
@@ -60,7 +67,8 @@ public class Page implements Html {
 		StringBuilder s = new StringBuilder();
 		s
 				.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">");
-		s.append("<html xmlns=\"http://www.w3.org/1999/xhtml\" dir=\"ltr\" lang=\"en-US\">");
+		s
+				.append("<html xmlns=\"http://www.w3.org/1999/xhtml\" dir=\"ltr\" lang=\"en-US\">");
 
 		s.append(head);
 		s.append(body);

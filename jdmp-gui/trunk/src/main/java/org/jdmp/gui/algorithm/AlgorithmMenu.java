@@ -24,12 +24,13 @@
 package org.jdmp.gui.algorithm;
 
 import java.awt.event.KeyEvent;
-import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
-import org.jdmp.gui.algorithm.actions.AlgorithmActions;
+import org.jdmp.core.algorithm.index.Index;
+import org.jdmp.gui.algorithm.actions.JettyIndexServerAction;
 import org.ujmp.core.interfaces.GUIObject;
 
 public class AlgorithmMenu extends JMenu {
@@ -38,10 +39,16 @@ public class AlgorithmMenu extends JMenu {
 	public AlgorithmMenu(JComponent component, AlgorithmGUIObject o, GUIObject owner) {
 		super("Algorithm");
 		setMnemonic(KeyEvent.VK_A);
-		List<JComponent> actions = new AlgorithmActions(component, o);
-		for (JComponent c : actions) {
-			add(c);
-		}
-	}
 
+		if (o.getCoreObject() instanceof Index) {
+			JMenuItem jetty = new JMenuItem(new JettyIndexServerAction(component, o));
+			if (Boolean.TRUE.equals(jetty.getAction().getValue("enabled"))) {
+				jetty.setEnabled(true);
+			} else {
+				jetty.setEnabled(false);
+			}
+			add(jetty);
+		}
+
+	}
 }

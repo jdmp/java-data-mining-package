@@ -53,7 +53,7 @@ import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.search.BooleanClause.Occur;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
-import org.jdmp.core.algorithm.indexer.AbstractIndex;
+import org.jdmp.core.algorithm.index.AbstractIndex;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DefaultDataSet;
 import org.jdmp.core.sample.Sample;

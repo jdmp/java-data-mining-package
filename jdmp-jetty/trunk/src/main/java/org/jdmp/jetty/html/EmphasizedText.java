@@ -21,19 +21,38 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.jetty.html.tags;
+package org.jdmp.jetty.html;
 
-public class FormTag extends AbstractHtmlTag {
-	private static final long serialVersionUID = 5154872630683999821L;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-	public FormTag(String action) {
-		setParameter("method", "post");
-		setParameter("action", action);
+public class EmphasizedText implements Html {
+	private static final long serialVersionUID = 2822445985021115869L;
+
+	private String highlightedText = null;
+
+	public EmphasizedText(String text, String... highlightedWords) {
+		highlightedText = HtmlUtils.replaceSpecialChars(text);
+		for (String w : highlightedWords) {
+			w = w.replaceAll("\\+", "");
+			w = w.replaceAll("\\(", "");
+			w = w.replaceAll("\\)", "");
+			w = w.replaceAll("\\[", "");
+			w = w.replaceAll("\\]", "");
+			Pattern p = Pattern.compile(w, Pattern.CASE_INSENSITIVE);
+			Matcher m = p.matcher(highlightedText);
+			StringBuffer sb = new StringBuffer();
+			while (m.find()) {
+				m.appendReplacement(sb, "<b>" + m.group() + "</b>");
+			}
+			m.appendTail(sb);
+			highlightedText = sb.toString();
+		}
 	}
 
 	@Override
-	public String getTagName() {
-		return "form";
+	public String toString() {
+		return highlightedText;
 	}
 
 }

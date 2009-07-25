@@ -21,19 +21,42 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.jetty.html.tags;
+package org.jdmp.gui.plugins;
 
-public class FormTag extends AbstractHtmlTag {
-	private static final long serialVersionUID = 5154872630683999821L;
+import java.util.Collection;
+import java.util.LinkedList;
 
-	public FormTag(String action) {
-		setParameter("method", "post");
-		setParameter("action", action);
+import org.ujmp.core.util.AbstractPlugin;
+
+public class JettyPlugin extends AbstractPlugin {
+
+	private AbstractPlugin plugin = null;
+
+	public JettyPlugin() {
+		try {
+			Class<?> c = Class.forName("org.jdmp.jetty.Plugin");
+			plugin = (AbstractPlugin) c.newInstance();
+		} catch (Exception e) {
+		}
 	}
 
 	@Override
-	public String getTagName() {
-		return "form";
+	public Collection<String> getNeededClasses() {
+		return plugin == null ? new LinkedList<String>() : plugin.getNeededClasses();
+	}
+
+	@Override
+	public String getDescription() {
+		return plugin == null ? "n/a" : plugin.getDescription();
+	}
+
+	@Override
+	public void setDescription(String description) {
+	}
+
+	@Override
+	public Collection<Object> getDependencies() {
+		return plugin == null ? new LinkedList<Object>() : plugin.getDependencies();
 	}
 
 }

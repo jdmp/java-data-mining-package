@@ -52,7 +52,6 @@ import org.jdmp.core.JDMPCoreObject;
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.gui.algorithm.AlgorithmGUIObject;
-import org.jdmp.gui.algorithm.actions.AlgorithmActions;
 import org.jdmp.gui.module.ModuleGUIObject;
 import org.jdmp.gui.module.actions.ModuleActions;
 import org.jdmp.gui.sample.SampleGUIObject;
@@ -233,7 +232,6 @@ public abstract class AbstractListPanel extends JPanel implements MouseListener,
 					List<JComponent> objectActions = null;
 
 					if (o instanceof AlgorithmGUIObject) {
-						objectActions = new AlgorithmActions(this, (AlgorithmGUIObject) o);
 					} else if (o instanceof ModuleGUIObject) {
 						objectActions = new ModuleActions(this, (ModuleGUIObject) o);
 					} else if (o instanceof SampleGUIObject) {

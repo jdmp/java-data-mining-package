@@ -31,7 +31,7 @@ public class TestJGroupsMap extends AbstractMapTest {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Map<Object, Object> createMap() throws Exception {
+	public Map<String, Object> createMap() throws Exception {
 		return new JGroupsMap();
 	}
 

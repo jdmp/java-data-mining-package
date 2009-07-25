@@ -34,7 +34,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import org.jdmp.core.algorithm.indexer.Index;
+import org.jdmp.core.algorithm.index.Index;
 
 public class IndexPanel extends JPanel implements KeyListener, ActionListener {
 	private static final long serialVersionUID = -7338702449011774328L;
@@ -78,7 +78,7 @@ public class IndexPanel extends JPanel implements KeyListener, ActionListener {
 		if (s != null) {
 			s = s.trim();
 			try {
-				indexer.search(s);
+				indexer.search(s).showGUI();
 			} catch (Exception ex) {
 			}
 		}

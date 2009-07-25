@@ -31,7 +31,7 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
 import org.jdmp.core.algorithm.HasAlgorithms;
-import org.jdmp.core.algorithm.indexer.Index;
+import org.jdmp.core.algorithm.index.Index;
 import org.jdmp.core.dataset.HasDataSets;
 import org.jdmp.core.variable.HasVariables;
 import org.jdmp.gui.dataset.DataSetListPanel;

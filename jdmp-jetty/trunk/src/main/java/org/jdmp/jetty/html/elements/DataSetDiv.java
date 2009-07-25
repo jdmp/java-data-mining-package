@@ -31,7 +31,7 @@ import org.jdmp.jetty.html.tags.DivTag;
 public class DataSetDiv extends DivTag {
 	private static final long serialVersionUID = 5873327671800366757L;
 
-	public DataSetDiv(DataSet dataSet) {
+	public DataSetDiv(DataSet dataSet, String... highlightedWords) {
 		setParameter("class", "dataset");
 		if (dataSet == null || dataSet.getSamples().isEmpty()) {
 			add("no results found.");
@@ -40,7 +40,9 @@ public class DataSetDiv extends DivTag {
 			add(new BRTag());
 			add(new BRTag());
 			for (Sample s : dataSet.getSamples()) {
-				add(new DefaultSampleDiv(s));
+				if (s != null) {
+					add(new DefaultSampleDiv(s, highlightedWords));
+				}
 			}
 		}
 	}

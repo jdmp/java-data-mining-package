@@ -41,8 +41,8 @@ public class TestJettyMap extends AbstractMapTest {
 	}
 
 	@Override
-	public Map<Object, Object> createMap() throws Exception {
-		JettyMapClient<Object, Object> map = new JettyMapClient<Object, Object>(
+	public Map<String, Object> createMap() throws Exception {
+		JettyMapClient<String, Object> map = new JettyMapClient<String, Object>(
 				new URL("http://localhost:8888"));
 		return map;
 	}

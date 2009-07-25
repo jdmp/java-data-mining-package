@@ -24,35 +24,88 @@
 package org.jdmp.jetty.html.elements;
 
 import org.jdmp.core.sample.Sample;
+import org.jdmp.jetty.html.EmphasizedText;
 import org.jdmp.jetty.html.tags.DivTag;
-import org.ujmp.core.Matrix;
+import org.jdmp.jetty.html.tags.LinkTag;
+import org.jdmp.jetty.html.tags.SpanTag;
+import org.ujmp.core.util.StringUtil;
 
 public class DefaultSampleDiv extends DivTag {
 	private static final long serialVersionUID = 6587788027413384557L;
 
-	public DefaultSampleDiv(Sample sample) {
+	public DefaultSampleDiv(Sample sample, String... highlightedWords) {
 		setParameter("class", "sample");
-		if (sample == null) {
-			add("[]");
-		} else {
-			Matrix score = sample.getMatrix("Score");
-			if (score != null) {
-				// add(score.doubleValue() + " ");
-			}
-			Matrix subject = sample.getMatrix("Subject");
-			if (subject != null) {
-				add("[" + subject.stringValue() + "] ");
-			}
-			Matrix verb = sample.getMatrix("Verb");
-			if (verb != null) {
-				add("[" + verb.stringValue() + "] ");
-			}
-			Matrix object = sample.getMatrix("Object");
-			if (object != null) {
-				add("[" + object.stringValue() + "] ");
-			}
-			add(sample.getLabel());
-		}
-	}
+		String label = sample.getLabel();
+		String type = sample.getAllAsString("Type");
+		String description = sample.getDescription();
+		String url = sample.getAsString("URL");
 
+		DivTag title = new DivTag();
+		title.setParameter("class", "title");
+
+		SpanTag labelTag = null;
+		if (url != null && url.contains("://")) {
+			labelTag = new SpanTag(new LinkTag(url, new EmphasizedText(label,
+					highlightedWords)));
+		} else {
+			labelTag = new SpanTag(new EmphasizedText(label, highlightedWords));
+		}
+		labelTag.setParameter("class", "label");
+		title.add(labelTag);
+
+		if (type != null && type.length() > 0) {
+			SpanTag typeTag = new SpanTag(type);
+			typeTag.setParameter("class", "type");
+			title.add(typeTag);
+		}
+		add(title);
+
+		if (description != null && description.length() > 0) {
+			DivTag descriptionDiv = new DivTag(new EmphasizedText(description,
+					highlightedWords));
+			descriptionDiv.setParameter("class", "description");
+			add(descriptionDiv);
+		}
+
+		DivTag fields = new DivTag();
+		fields.setParameter("class", "fields");
+
+		for (Object key : sample.getVariables().keySet()) {
+			if (Sample.LABEL.equals(key)) {
+				continue;
+			} else if (Sample.DESCRIPTION.equals(key)) {
+				continue;
+			} else if ("Type".equals(key)) {
+				continue;
+			} else if ("URL".equals(key)) {
+				continue;
+			}
+			DivTag field = new DivTag();
+			field.setParameter("class", "field");
+
+			SpanTag keyTag = new SpanTag(StringUtil.format(key) + ":");
+			keyTag.setParameter("class", "key");
+			field.add(keyTag);
+			SpanTag valueTag = new SpanTag(StringUtil.format(sample
+					.getAllAsString(key)));
+			valueTag.setParameter("class", "value");
+			field.add(valueTag);
+
+			fields.add(field);
+		}
+
+		add(fields);
+
+		DivTag address = new DivTag();
+		address.setParameter("class", "address");
+
+		if (url != null && url.length() > 0) {
+			SpanTag urlTag = new SpanTag(new EmphasizedText(url,
+					highlightedWords));
+			urlTag.setParameter("class", "url");
+			address.add(urlTag);
+		}
+
+		add(address);
+	}
 }

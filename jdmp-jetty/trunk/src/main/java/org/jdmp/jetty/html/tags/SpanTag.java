@@ -23,17 +23,23 @@
 
 package org.jdmp.jetty.html.tags;
 
-public class FormTag extends AbstractHtmlTag {
-	private static final long serialVersionUID = 5154872630683999821L;
+import org.jdmp.jetty.html.Html;
+import org.jdmp.jetty.html.Text;
 
-	public FormTag(String action) {
-		setParameter("method", "post");
-		setParameter("action", action);
+public class SpanTag extends AbstractHtmlTag {
+	private static final long serialVersionUID = -3096974435263788186L;
+
+	public SpanTag(String label) {
+		this(new Text(label));
+	}
+
+	public SpanTag(Html... content) {
+		add(content);
 	}
 
 	@Override
 	public String getTagName() {
-		return "form";
+		return "span";
 	}
 
 }

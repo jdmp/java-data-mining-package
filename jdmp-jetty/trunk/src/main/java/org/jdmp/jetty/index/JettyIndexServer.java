@@ -23,7 +23,7 @@
 
 package org.jdmp.jetty.index;
 
-import org.jdmp.core.algorithm.indexer.Index;
+import org.jdmp.core.algorithm.index.Index;
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.handler.ContextHandlerCollection;
 import org.mortbay.jetty.servlet.Context;
@@ -35,11 +35,12 @@ public class JettyIndexServer {
 
 	private Index index = null;
 
-	private int port = 8888;
+	private int port = 5555;
 
-	public JettyIndexServer(Index index, int port) {
+	public JettyIndexServer(Index index, int port) throws Exception {
 		this.index = index;
 		this.port = port;
+		start();
 	}
 
 	public boolean isConnected() {
