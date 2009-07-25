@@ -48,4 +48,9 @@ public abstract class AbstractIndex extends AbstractAlgorithm implements Index {
 		}
 	}
 
+	@Override
+	public void add(Sample sample) throws Exception {
+		throw new Exception("cannot add to this index");
+	}
+
 }
