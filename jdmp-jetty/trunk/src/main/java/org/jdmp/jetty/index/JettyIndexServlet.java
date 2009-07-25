@@ -61,7 +61,7 @@ public class JettyIndexServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 
 		try {
-
+			response.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html");
 			response.setStatus(HttpServletResponse.SC_OK);
 

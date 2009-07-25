@@ -77,6 +77,10 @@ public class DefaultSampleDiv extends DivTag {
 				continue;
 			} else if ("Type".equals(key)) {
 				continue;
+			} else if ("Content".equals(key)) {
+				continue;
+			} else if ("Links".equals(key)) {
+				continue;
 			} else if ("URL".equals(key)) {
 				continue;
 			}
