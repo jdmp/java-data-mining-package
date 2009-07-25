@@ -33,7 +33,6 @@ import org.jdmp.core.algorithm.basic.Cd;
 import org.jdmp.core.algorithm.basic.ClassPath;
 import org.jdmp.core.algorithm.basic.Clone;
 import org.jdmp.core.algorithm.basic.Copy;
-import org.jdmp.core.algorithm.basic.CreateDiskMap;
 import org.jdmp.core.algorithm.basic.CreateEmptyMatrix;
 import org.jdmp.core.algorithm.basic.CreateHenon;
 import org.jdmp.core.algorithm.basic.CreateIris;
@@ -93,7 +92,6 @@ public abstract class AlgorithmMapping {
 		mapping.put("clone", Clone.class.getName());
 		mapping.put("copy", Copy.class.getName());
 		mapping.put("classpath", ClassPath.class.getName());
-		mapping.put("diskmap", CreateDiskMap.class.getName());
 		mapping.put("empty", CreateEmptyMatrix.class.getName());
 		mapping.put("env", Env.class.getName());
 		mapping.put("exec", Exec.class.getName());
