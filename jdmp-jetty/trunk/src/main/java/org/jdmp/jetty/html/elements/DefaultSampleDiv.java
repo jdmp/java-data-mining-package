@@ -95,8 +95,8 @@ public class DefaultSampleDiv extends DivTag {
 			SpanTag keyTag = new SpanTag(StringUtil.format(key) + ":");
 			keyTag.setParameter("class", "key");
 			field.add(keyTag);
-			SpanTag valueTag = new SpanTag(StringUtil.format(sample
-					.getAllAsString(key)));
+			SpanTag valueTag = new SpanTag(new EmphasizedText(StringUtil
+					.format(sample.getAllAsString(key)), highlightedWords));
 			valueTag.setParameter("class", "value");
 			field.add(valueTag);
 
