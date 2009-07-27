@@ -15,7 +15,7 @@ import org.jdmp.core.sample.Sample;
 public class MultiIndex extends AbstractIndex {
 	private static final long serialVersionUID = 3828613564416089927L;
 
-	private ExecutorService executors = Executors.newFixedThreadPool(4);
+	private ExecutorService executors = Executors.newCachedThreadPool();
 
 	public MultiIndex(Index... indices) {
 		String label = "";
