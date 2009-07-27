@@ -84,10 +84,6 @@ public class DefaultSampleDiv extends DivTag {
 				continue;
 			} else if ("URL".equals(key)) {
 				continue;
-			} else if ("Id".equals(key)) {
-				if (id.equals(url)) {
-					continue;
-				}
 			}
 			DivTag field = new DivTag();
 			field.setParameter("class", "field");
