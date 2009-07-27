@@ -30,6 +30,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 import org.jdmp.core.algorithm.index.Index;
+import org.jdmp.gui.algorithm.actions.CreateLuceneIndexAction;
 import org.jdmp.gui.algorithm.actions.JettyIndexServerAction;
 import org.ujmp.core.interfaces.GUIObject;
 
@@ -48,6 +49,14 @@ public class AlgorithmMenu extends JMenu {
 				jetty.setEnabled(false);
 			}
 			add(jetty);
+
+			JMenuItem lucene = new JMenuItem(new CreateLuceneIndexAction(component, o));
+			if (Boolean.TRUE.equals(lucene.getAction().getValue("enabled"))) {
+				lucene.setEnabled(true);
+			} else {
+				lucene.setEnabled(false);
+			}
+			add(lucene);
 		}
 
 	}

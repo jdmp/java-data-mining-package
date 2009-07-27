@@ -29,7 +29,14 @@ import java.io.Flushable;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
+import javax.swing.AbstractListModel;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
@@ -55,7 +62,9 @@ import org.jdmp.core.algorithm.index.Index;
 import org.jdmp.core.algorithm.index.MultiIndex;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DefaultDataSet;
+import org.jdmp.core.sample.HasSampleList;
 import org.jdmp.core.sample.Sample;
+import org.jdmp.core.util.ObservableList;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.interfaces.Erasable;
@@ -64,12 +73,14 @@ import org.ujmp.core.util.SerializationUtil;
 import org.ujmp.core.util.io.FileUtil;
 
 public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
-		Erasable {
+		Erasable, HasSampleList {
 	private static final long serialVersionUID = -8483996550983833243L;
 
 	private IndexWriter indexWriter = null;
 
 	private IndexSearcher indexSearcher = null;
+
+	private ThreadPoolExecutor executor = null;
 
 	private final Set<String> fields = new HashSet<String>();
 
@@ -82,6 +93,10 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 	private final Analyzer analyzer = new StandardAnalyzer();
 
 	private boolean readOnly = true;
+
+	public LuceneIndex(Index index) throws Exception {
+		this(null, false, new Index[] { index });
+	}
 
 	public LuceneIndex(Index... indices) throws Exception {
 		this(null, false, indices);
@@ -136,6 +151,11 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 			indexWriter = new IndexWriter(directory, analyzer, true,
 					MaxFieldLength.UNLIMITED);
 		}
+
+		setSamples(new LuceneSampleList(this));
+
+		executor = new ThreadPoolExecutor(0, 1, 1000L, TimeUnit.MILLISECONDS,
+				new LinkedBlockingQueue<Runnable>());
 	}
 
 	@Override
@@ -211,6 +231,10 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 	}
 
 	public synchronized DataSet search(String query) throws Exception {
+		if (executor.getQueue().size() < 1000) {
+			executor.submit(new SearchCallable(query));
+		}
+
 		String[] fs = new String[fields.size()];
 		MultiFieldQueryParser p = new MultiFieldQueryParser(fields.toArray(fs),
 				analyzer);
@@ -295,4 +319,126 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 		FileUtil.deleteRecursive(path);
 	}
 
+	@Override
+	public ObservableList<Sample> getSamples() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setSamples(ObservableList<Sample> samples) {
+		// TODO Auto-generated method stub
+
+	}
+
+	class LuceneSampleList extends AbstractListModel implements
+			ObservableList<Sample> {
+		private static final long serialVersionUID = -7189321183317113764L;
+
+		private LuceneIndex index = null;
+
+		public LuceneSampleList(LuceneIndex index) {
+			this.index = index;
+		}
+
+		@Override
+		public void add(Sample sample) {
+			try {
+				index.add(sample);
+				fireContentsChanged();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		@Override
+		public void addAll(Collection<Sample> values) {
+			throw new RuntimeException("not implemented");
+		}
+
+		@Override
+		public boolean remove(Sample value) {
+			throw new RuntimeException("not implemented");
+		}
+
+		@Override
+		public void clear() {
+			throw new RuntimeException("not implemented");
+		}
+
+		@Override
+		public Sample getElementAt(int i) {
+			try {
+				return index.getSampleAt(i);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+		}
+
+		@Override
+		public void fireContentsChanged() {
+			fireContentsChanged(this, -1, -1);
+		}
+
+		@Override
+		public int indexOf(Sample value) {
+			throw new RuntimeException("not implemented");
+		}
+
+		@Override
+		public boolean isEmpty() {
+			return getSize() == 0;
+		}
+
+		@Override
+		public Collection<Sample> toCollection() {
+			throw new RuntimeException("not implemented");
+		}
+
+		@Override
+		public int getSize() {
+			try {
+				return index.getSize();
+			} catch (Exception e) {
+				e.printStackTrace();
+				return 0;
+			}
+		}
+
+		@Override
+		public Iterator<Sample> iterator() {
+			throw new RuntimeException("not implemented");
+		}
+
+	}
+
+	class SearchCallable implements Callable<Object> {
+
+		private String query = null;
+
+		public SearchCallable(String query) {
+			this.query = query;
+		}
+
+		@Override
+		public Object call() throws Exception {
+			for (Algorithm a : getAlgorithms()) {
+				try {
+					if (a instanceof Index) {
+						System.out.println("searching for " + query + " in "
+								+ a);
+						DataSet ds = ((Index) a).search(query);
+						if (ds != null) {
+							add(ds);
+						}
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			return null;
+		}
+
+	}
 }
