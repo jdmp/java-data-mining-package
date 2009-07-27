@@ -40,13 +40,14 @@ public class DefaultSampleDiv extends DivTag {
 		String description = sample.getDescription();
 		String url = sample.getAsString("URL");
 		String id = sample.getId();
+		String idurl = "/?id=" + id;
 
 		DivTag title = new DivTag();
 		title.setParameter("class", "title");
 
 		SpanTag labelTag = null;
-		if (url != null && url.contains("://")) {
-			labelTag = new SpanTag(new LinkTag(url, new EmphasizedText(label,
+		if (idurl != null) {
+			labelTag = new SpanTag(new LinkTag(idurl, new EmphasizedText(label,
 					highlightedWords)));
 		} else {
 			labelTag = new SpanTag(new EmphasizedText(label, highlightedWords));

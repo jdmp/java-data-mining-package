@@ -33,14 +33,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.jdmp.core.algorithm.index.Index;
 import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.sample.Sample;
+import org.jdmp.core.variable.Variable;
 import org.jdmp.jetty.html.Page;
+import org.jdmp.jetty.html.Text;
 import org.jdmp.jetty.html.elements.DataSetDiv;
 import org.jdmp.jetty.html.tags.BRTag;
 import org.jdmp.jetty.html.tags.FormTag;
 import org.jdmp.jetty.html.tags.H1Tag;
+import org.jdmp.jetty.html.tags.H2Tag;
 import org.jdmp.jetty.html.tags.InputSubmitTag;
 import org.jdmp.jetty.html.tags.InputTextTag;
+import org.jdmp.jetty.html.tags.LinkTag;
+import org.ujmp.core.Matrix;
 import org.ujmp.core.interfaces.HasLabel;
+import org.ujmp.core.util.StringUtil;
 
 public class JettyIndexServlet extends HttpServlet {
 	private static final long serialVersionUID = -529359384170033358L;
@@ -57,21 +64,11 @@ public class JettyIndexServlet extends HttpServlet {
 		doPost(request, response);
 	}
 
-	@Override
-	protected void doPost(HttpServletRequest request,
+	private void searchPage(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
 		try {
-			response.setCharacterEncoding("UTF-8");
-			response.setContentType("text/html");
-			response.setStatus(HttpServletResponse.SC_OK);
-
 			String query = request.getParameter("q");
-
 			PrintWriter out = response.getWriter();
-
-			String path = request.getPathInfo().substring(1);
-			String action = null;
 
 			Page page = new Page("JDMP Search ["
 					+ ((HasLabel) index).getLabel() + "]");
@@ -101,6 +98,62 @@ public class JettyIndexServlet extends HttpServlet {
 			out.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	private void getPage(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		try {
+			String id = request.getParameter("id");
+			PrintWriter out = response.getWriter();
+
+			Sample sample = index.getSample(id);
+			Page page = null;
+
+			if (sample == null) {
+				page = new Page("JDMP Search: not found");
+				page.add(new H1Tag("not found: " + id));
+			} else {
+				page = new Page("JDMP Search: " + sample.getLabel());
+				page.add(new H1Tag(sample.getLabel()));
+
+				for (Object key : sample.getVariables().keySet()) {
+					if (Sample.LABEL.equals(key)) {
+						continue;
+					} else if ("Links".equals(key)) {
+						Variable links = sample.getVariables().get("Links");
+						page.add(new H2Tag(StringUtil.format(key)));
+						for (Matrix m : links.getMatrixList().toCollection()) {
+							String l = m.stringValue();
+							page.add(new LinkTag("/?q=" + l, l));
+						}
+					} else {
+						String value = sample.getAllAsString(key);
+						page.add(new H2Tag(StringUtil.format(key)));
+						page.add(new Text(value));
+					}
+				}
+			}
+			out.append(page.toString());
+			out.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html");
+		response.setStatus(HttpServletResponse.SC_OK);
+
+		String id = request.getParameter("id");
+
+		if (id != null) {
+			getPage(request, response);
+		} else {
+			searchPage(request, response);
 		}
 	}
 
