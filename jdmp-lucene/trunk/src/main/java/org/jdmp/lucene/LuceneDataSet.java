@@ -24,21 +24,19 @@
 package org.jdmp.lucene;
 
 import java.io.File;
+import java.io.Flushable;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 
 import javax.swing.AbstractListModel;
 
-import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DefaultDataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.ObservableList;
-import org.ujmp.core.listmatrix.ListMatrix;
 
-public class LuceneDataSet extends DefaultDataSet {
+public class LuceneDataSet extends DefaultDataSet implements Flushable {
 	private static final long serialVersionUID = -1783524677465942349L;
 
 	private LuceneIndex index = null;
@@ -56,27 +54,8 @@ public class LuceneDataSet extends DefaultDataSet {
 	}
 
 	public DataSet search(String query) {
-		return search(query, 1000);
-	}
-
-	public DataSet search(String query, int count) {
 		try {
-			DataSet ds = index.search(query, count);
-			ds.setLabel("Results for " + query);
-			return ds;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new DefaultDataSet();
-		}
-	}
-
-	public DataSet search(List<String> query) {
-		return search(query, 1000);
-	}
-
-	public DataSet search(List<String> query, int count) {
-		try {
-			DataSet ds = index.search(query, count);
+			DataSet ds = index.search(query);
 			ds.setLabel("Results for " + query);
 			return ds;
 		} catch (Exception e) {
@@ -142,7 +121,7 @@ public class LuceneDataSet extends DefaultDataSet {
 		@Override
 		public Sample getElementAt(int i) {
 			try {
-				return index.get(i);
+				return index.getSampleAt(i);
 			} catch (Exception e) {
 				e.printStackTrace();
 				return null;

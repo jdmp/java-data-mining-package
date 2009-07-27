@@ -29,7 +29,6 @@ import java.io.Flushable;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.apache.lucene.analysis.Analyzer;
@@ -44,16 +43,16 @@ import org.apache.lucene.index.Term;
 import org.apache.lucene.index.IndexReader.FieldOption;
 import org.apache.lucene.index.IndexWriter.MaxFieldLength;
 import org.apache.lucene.queryParser.MultiFieldQueryParser;
-import org.apache.lucene.search.BooleanClause;
-import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
-import org.apache.lucene.search.BooleanClause.Occur;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
+import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.algorithm.index.AbstractIndex;
+import org.jdmp.core.algorithm.index.Index;
+import org.jdmp.core.algorithm.index.MultiIndex;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DefaultDataSet;
 import org.jdmp.core.sample.Sample;
@@ -64,8 +63,8 @@ import org.ujmp.core.util.MathUtil;
 import org.ujmp.core.util.SerializationUtil;
 import org.ujmp.core.util.io.FileUtil;
 
-public class LuceneIndex extends AbstractIndex implements Flushable,
-		Closeable, Erasable {
+public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
+		Erasable {
 	private static final long serialVersionUID = -8483996550983833243L;
 
 	private IndexWriter indexWriter = null;
@@ -84,16 +83,25 @@ public class LuceneIndex extends AbstractIndex implements Flushable,
 
 	private boolean readOnly = true;
 
-	public LuceneIndex() throws Exception {
-		this(null, false);
+	public LuceneIndex(Index... indices) throws Exception {
+		this(null, false, indices);
 	}
 
-	public LuceneIndex(File path) throws Exception {
-		this(path, false);
+	public LuceneIndex(File path, Index... indices) throws Exception {
+		this(path, false, indices);
 	}
 
-	public LuceneIndex(File path, boolean readOnly) throws Exception {
+	public LuceneIndex(File path, boolean readOnly, Index... indices)
+			throws Exception {
 		this.readOnly = readOnly;
+
+		if (indices.length == 1) {
+			getAlgorithms().put("Index0", (Algorithm) indices[0]);
+		} else if (indices.length > 1) {
+			MultiIndex multiIndex = new MultiIndex(indices);
+			getAlgorithms().put("Index0", multiIndex);
+		}
+
 		if (path == null) {
 			path = File.createTempFile("lucene", "");
 			path.delete();
@@ -144,7 +152,8 @@ public class LuceneIndex extends AbstractIndex implements Flushable,
 			id = "" + runningId++;
 		}
 
-		doc.add(new Field(Sample.ID, id, Store.YES, Field.Index.NOT_ANALYZED));
+		doc.add(new Field(Sample.ID, id, Store.COMPRESS,
+				Field.Index.NOT_ANALYZED));
 
 		for (Variable v : sample.getVariables()) {
 			String key = v.getLabel();
@@ -155,13 +164,13 @@ public class LuceneIndex extends AbstractIndex implements Flushable,
 						value += " " + m.getAsString(c);
 					}
 				}
-				doc.add(new Field(key, value.trim(), Store.YES,
+				doc.add(new Field(key, value.trim(), Store.COMPRESS,
 						Field.Index.ANALYZED));
 				fields.add(key);
 			}
 		}
 
-		doc.add(new Field("rawdata", SerializationUtil.serialize(sample),
+		doc.add(new Field("RawData", SerializationUtil.serialize(sample),
 				Store.COMPRESS));
 
 		indexWriter.updateDocument(new Term(Sample.ID, id), doc);
@@ -181,7 +190,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable,
 		}
 	}
 
-	public synchronized Sample get(int index) throws Exception {
+	public synchronized Sample getSampleAt(int index) throws Exception {
 		prepareReader();
 		if (indexSearcher.getIndexReader().isDeleted(index)) {
 			return null;
@@ -193,36 +202,15 @@ public class LuceneIndex extends AbstractIndex implements Flushable,
 		}
 	}
 
-	public synchronized DataSet search(List<String> query) throws Exception {
-		return search(query, 1000);
-	}
-
-	public synchronized DataSet search(List<String> query, int count)
-			throws Exception {
-		BooleanQuery bq = new BooleanQuery();
-		String[] fs = new String[fields.size()];
-		MultiFieldQueryParser p = new MultiFieldQueryParser(fields.toArray(fs),
-				analyzer);
-
-		for (String s : query) {
-			Query q = null;
-			if ("*".equals(s)) {
-				q = p.parse("*");
-			} else {
-				q = p.parse(s);
-			}
-			bq.add(new BooleanClause(q, Occur.SHOULD));
+	public synchronized Sample getSample(String id) throws Exception {
+		DataSet ds = search("Id:" + id);
+		if (ds != null && !ds.getSamples().isEmpty()) {
+			return ds.getSamples().getElementAt(0);
 		}
-
-		return search(bq, count);
+		return null;
 	}
 
 	public synchronized DataSet search(String query) throws Exception {
-		return search(query, 1000);
-	}
-
-	public synchronized DataSet search(String query, int count)
-			throws Exception {
 		String[] fs = new String[fields.size()];
 		MultiFieldQueryParser p = new MultiFieldQueryParser(fields.toArray(fs),
 				analyzer);
@@ -234,7 +222,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable,
 		} else {
 			q = p.parse(query);
 		}
-		return search(q, count);
+		return search(q, 100);
 	}
 
 	public synchronized DataSet search(Query query, int count) throws Exception {
@@ -245,7 +233,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable,
 			int id = sd.doc;
 			Document doc = indexSearcher.doc(id);
 			Sample s = (Sample) SerializationUtil.deserialize(doc
-					.getBinaryValue("rawdata"));
+					.getBinaryValue("RawData"));
 			s.setMatrix(Sample.SCORE, MathUtil.getMatrix(sd.score));
 			result.getSamples().add(s);
 		}

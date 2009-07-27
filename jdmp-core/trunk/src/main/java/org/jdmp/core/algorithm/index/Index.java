@@ -41,6 +41,8 @@ public interface Index {
 
 	public DataSet search(String query) throws Exception;
 
-	public int getSize();
+	public int getSize() throws Exception;
+
+	public Sample getSample(String id) throws Exception;
 
 }

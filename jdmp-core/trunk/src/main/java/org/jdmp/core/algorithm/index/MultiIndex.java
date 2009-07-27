@@ -75,4 +75,40 @@ public class MultiIndex extends AbstractIndex {
 		}
 
 	}
+
+	class GetFuture implements Callable<Sample> {
+
+		private Index index = null;
+
+		private String id = null;
+
+		public GetFuture(Index index, String id) {
+			this.index = index;
+			this.id = id;
+		}
+
+		@Override
+		public Sample call() throws Exception {
+			return index.getSample(id);
+		}
+	}
+
+	@Override
+	public Sample getSample(String id) throws Exception {
+		List<Future<Sample>> futures = new ArrayList<Future<Sample>>();
+		for (Object key : getAlgorithms().keySet()) {
+			Algorithm a = getAlgorithms().get(key);
+			if (a instanceof Index) {
+				futures.add(executors.submit(new GetFuture((Index) a, id)));
+			}
+		}
+		Sample sample = null;
+		for (Future<Sample> f : futures) {
+			Sample s = f.get();
+			if (s != null) {
+				sample = s;
+			}
+		}
+		return sample;
+	}
 }
