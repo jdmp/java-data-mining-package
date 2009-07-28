@@ -29,4 +29,6 @@ public interface HasAlgorithmMap extends HasAlgorithms {
 
 	public ObservableMap<Algorithm> getAlgorithms();
 
+	public void setAlgorithms(ObservableMap<Algorithm> algorithms);
+
 }

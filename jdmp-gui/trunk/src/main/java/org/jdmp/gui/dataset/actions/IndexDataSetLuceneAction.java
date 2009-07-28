@@ -29,6 +29,9 @@ import java.io.IOException;
 import javax.swing.Action;
 import javax.swing.JComponent;
 
+import org.jdmp.core.algorithm.Algorithm;
+import org.jdmp.core.algorithm.index.Index;
+import org.jdmp.core.dataset.DataSet;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.core.util.Lucene;
@@ -39,7 +42,7 @@ public class IndexDataSetLuceneAction extends ObjectAction {
 
 	public IndexDataSetLuceneAction(JComponent c, GUIObject i) {
 		super(c, i);
-		putValue(Action.NAME, "Lucene...");
+		putValue(Action.NAME, "Lucene");
 		putValue(Action.SHORT_DESCRIPTION, "Index a DataSet using Lucene");
 		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_L);
 		putValue("Enabled", Lucene.isAvailable());
@@ -47,6 +50,15 @@ public class IndexDataSetLuceneAction extends ObjectAction {
 
 	@Override
 	public Object call() throws MatrixException, IOException {
+		try {
+			Class<?> c = Class.forName("org.jdmp.lucene.LuceneIndex");
+			Index i = (Index) c.newInstance();
+			((Algorithm) i).showGUI();
+			i.add((DataSet) getCoreObject());
+			return i;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 

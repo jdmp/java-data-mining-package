@@ -6,4 +6,6 @@ public interface HasDataSetMap extends HasDataSets {
 
 	public ObservableMap<DataSet> getDataSets();
 
+	public void setDataSets(ObservableMap<DataSet> dataSets);
+
 }

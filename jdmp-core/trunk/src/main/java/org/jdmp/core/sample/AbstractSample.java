@@ -28,6 +28,8 @@ import java.math.BigInteger;
 import java.util.Date;
 
 import org.jdmp.core.AbstractCoreObject;
+import org.jdmp.core.util.DefaultObservableMap;
+import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
@@ -37,19 +39,37 @@ import org.ujmp.core.util.StringUtil;
 public abstract class AbstractSample extends AbstractCoreObject implements Sample {
 	private static final long serialVersionUID = 1693258179407382419L;
 
+	private ObservableMap<Variable> variableMap = null;
+
 	public AbstractSample() {
 		super();
+	}
+
+	public final ObservableMap<Variable> getVariables() {
+		if (variableMap == null) {
+			variableMap = new DefaultObservableMap<Variable>();
+		}
+		return variableMap;
+	}
+
+	public final void setVariables(ObservableMap<Variable> variables) {
+		this.variableMap = variables;
 	}
 
 	@Override
 	public abstract Sample clone();
 
 	public final String getId() {
-		return getAsString(Sample.ID);
+		String id = getAsString(Sample.ID);
+		if (id == null) {
+			id = "Sample" + getCoreObjectId();
+			setId(id);
+		}
+		return id;
 	}
 
 	@Override
-	public String toString() {
+	public final String toString() {
 		StringBuilder s = new StringBuilder();
 		s.append(getClass().getSimpleName());
 		s.append(" [ ");
@@ -130,28 +150,28 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 	}
 
 	@Override
-	public void setId(String id) {
-		setMatrix(Sample.ID, MathUtil.getMatrix(id));
+	public final void setId(String id) {
+		setObject(Sample.ID, id);
 	}
 
 	@Override
-	public String getDescription() {
+	public final String getDescription() {
 		return getAsString(Sample.DESCRIPTION);
 	}
 
 	@Override
-	public void setDescription(String description) {
-		setMatrix(Sample.DESCRIPTION, MathUtil.getMatrix(description));
+	public final void setDescription(String description) {
+		setObject(Sample.DESCRIPTION, description);
 	}
 
 	@Override
-	public String getLabel() {
+	public final String getLabel() {
 		return getAsString(Sample.LABEL);
 	}
 
 	@Override
-	public void setLabel(String label) {
-		setMatrix(Sample.LABEL, MathUtil.getMatrix(label));
+	public final void setLabel(String label) {
+		setObject(Sample.LABEL, label);
 	}
 
 	public final void setObject(Object variableKey, Object value) {
@@ -166,7 +186,9 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 
 	@Override
 	public final void clear() {
-		getVariables().clear();
+		if (variableMap != null) {
+			variableMap.clear();
+		}
 	}
 
 }

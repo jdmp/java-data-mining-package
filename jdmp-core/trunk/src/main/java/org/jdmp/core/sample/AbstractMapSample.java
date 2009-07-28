@@ -29,7 +29,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.jdmp.core.util.AbstractObservableMap;
-import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.SingletonVariable;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
@@ -41,21 +40,15 @@ public abstract class AbstractMapSample extends AbstractSample implements
 		Wrapper<Map<Object, Object>> {
 	private static final long serialVersionUID = -8219872482909787192L;
 
-	private transient VariableMapWrapper variableMapWrapper = null;
-
 	private VariableMap variableMap = new VariableMap();
+
+	public AbstractMapSample() {
+		setVariables(new VariableMapWrapper());
+	}
 
 	@Override
 	public final Sample clone() {
 		return SampleFactory.clone(this);
-	}
-
-	@Override
-	public ObservableMap<Variable> getVariables() {
-		if (variableMapWrapper == null) {
-			variableMapWrapper = new VariableMapWrapper();
-		}
-		return variableMapWrapper;
 	}
 
 	public void setMatrix(Object variableKey, Matrix matrix) {
@@ -232,10 +225,6 @@ public abstract class AbstractMapSample extends AbstractSample implements
 			throw new RuntimeException("not implemented");
 		}
 
-	}
-
-	@Override
-	public void setVariables(ObservableMap<Variable> variables) {
 	}
 
 }

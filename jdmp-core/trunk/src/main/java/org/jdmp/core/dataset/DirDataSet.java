@@ -11,22 +11,12 @@ import java.util.Map;
 import org.jdmp.core.sample.FileSample;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.DefaultObservableList;
-import org.jdmp.core.util.DefaultObservableMap;
-import org.jdmp.core.util.ObservableList;
-import org.jdmp.core.util.ObservableMap;
-import org.jdmp.core.variable.Variable;
 import org.ujmp.core.collections.SoftHashMap;
 import org.ujmp.core.enums.FileFormat;
 import org.ujmp.core.interfaces.Refreshable;
 
 public class DirDataSet extends AbstractDataSet implements Refreshable {
 	private static final long serialVersionUID = -766353065930158949L;
-
-	private transient ObservableList<Sample> sampleList = null;
-
-	private ObservableMap<Variable> variableList = null;
-
-	private transient ObservableList<DataSet> dataSetList = null;
 
 	private FileFormat fileFormat = null;
 
@@ -46,7 +36,6 @@ public class DirDataSet extends AbstractDataSet implements Refreshable {
 		this.fileFormat = fileFormat;
 		this.dir = dir;
 		this.parameters = parameters;
-		this.variableList = new DefaultObservableMap<Variable>();
 		this.dirs = new ArrayList<File>();
 		this.files = new ArrayList<File>();
 		setLabel(dir.getAbsolutePath());
@@ -54,8 +43,8 @@ public class DirDataSet extends AbstractDataSet implements Refreshable {
 	}
 
 	public void refresh() {
-		sampleList = null;
-		dataSetList = null;
+		setSamples(new DefaultObservableList<Sample>(new FileList()));
+		setDataSets(new DefaultObservableList<DataSet>(new DirectoryList()));
 		dirs.clear();
 		files.clear();
 		File[] fs = dir.listFiles();
@@ -70,40 +59,9 @@ public class DirDataSet extends AbstractDataSet implements Refreshable {
 		}
 	}
 
-	public ObservableList<Sample> getSamples() {
-		if (sampleList == null) {
-			sampleList = new DefaultObservableList<Sample>(new FileList());
-		}
-		return sampleList;
-	}
-
-	public final ObservableMap<Variable> getVariables() {
-		return variableList;
-	}
-
-	public final ObservableList<DataSet> getDataSets() {
-		if (dataSetList == null) {
-			dataSetList = new DefaultObservableList<DataSet>(new DirectoryList());
-		}
-		return dataSetList;
-	}
-
 	@Override
 	public DataSet clone() {
 		throw new RuntimeException("not implemented");
-	}
-
-	@Override
-	public void setSamples(ObservableList<Sample> samples) {
-		this.sampleList = samples;
-	}
-
-	public void setVariables(ObservableMap<Variable> variables) {
-		this.variableList = variables;
-	}
-
-	public void setDataSets(ObservableList<DataSet> dataSets) {
-		this.dataSetList = dataSets;
 	}
 
 	class DirectoryList extends AbstractList<DataSet> implements Serializable {

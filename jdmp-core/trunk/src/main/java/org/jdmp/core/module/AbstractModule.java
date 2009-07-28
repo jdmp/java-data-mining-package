@@ -42,42 +42,87 @@ import org.ujmp.core.util.StringUtil;
 public abstract class AbstractModule extends AbstractCoreObject implements Module {
 	private static final long serialVersionUID = 4621466897617405575L;
 
-	protected final ObservableMap<Algorithm> algorithms = new DefaultObservableMap<Algorithm>();
+	private ObservableMap<Algorithm> algorithms = null;
 
-	protected final ObservableMap<Sample> samples = new DefaultObservableMap<Sample>();
+	private ObservableMap<Sample> samples = null;
 
-	protected final ObservableMap<DataSet> dataSets = new DefaultObservableMap<DataSet>();
+	private ObservableMap<DataSet> dataSets = null;
 
-	protected ObservableMap<Variable> variables = new DefaultObservableMap<Variable>();
+	private ObservableMap<Variable> variables = null;
 
-	protected final ObservableMap<Module> modules = new DefaultObservableMap<Module>();
+	private ObservableMap<Module> modules = null;
 
-	public ObservableMap<Module> getModules() {
+	@Override
+	public final String getDescription() {
+		return getAsString(Sample.DESCRIPTION);
+	}
+
+	@Override
+	public final void setDescription(String description) {
+		setObject(Sample.DESCRIPTION, description);
+	}
+
+	@Override
+	public final String getLabel() {
+		return getAsString(Sample.LABEL);
+	}
+
+	@Override
+	public final void setLabel(String label) {
+		setObject(Sample.LABEL, label);
+	}
+
+	public final ObservableMap<Module> getModules() {
+		if (modules == null) {
+			modules = new DefaultObservableMap<Module>();
+		}
 		return modules;
 	}
 
 	public final ObservableMap<DataSet> getDataSets() {
+		if (dataSets == null) {
+			dataSets = new DefaultObservableMap<DataSet>();
+		}
 		return dataSets;
 	}
 
 	public final ObservableMap<Algorithm> getAlgorithms() {
+		if (algorithms == null) {
+			algorithms = new DefaultObservableMap<Algorithm>();
+		}
 		return algorithms;
 	}
 
 	public final ObservableMap<Variable> getVariables() {
+		if (variables == null) {
+			variables = new DefaultObservableMap<Variable>();
+		}
 		return variables;
 	}
 
 	public final ObservableMap<Sample> getSamples() {
+		if (samples == null) {
+			samples = new DefaultObservableMap<Sample>();
+		}
 		return samples;
 	}
 
-	public void clear() {
-		algorithms.clear();
-		dataSets.clear();
-		modules.clear();
-		samples.clear();
-		variables.clear();
+	public final void clear() {
+		if (algorithms != null) {
+			algorithms.clear();
+		}
+		if (dataSets != null) {
+			dataSets.clear();
+		}
+		if (modules != null) {
+			modules.clear();
+		}
+		if (samples != null) {
+			samples.clear();
+		}
+		if (variables != null) {
+			variables.clear();
+		}
 	}
 
 	public final String getAllAsString(Object variableKey) {
@@ -87,6 +132,20 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		} else {
 			return null;
 		}
+	}
+
+	@Override
+	public final void setId(String id) {
+		setObject(Sample.ID, id);
+	}
+
+	public final String getId() {
+		String id = getAsString(Sample.ID);
+		if (id == null) {
+			id = "Sample" + getCoreObjectId();
+			setId(id);
+		}
+		return id;
 	}
 
 	public final String getAsString(Object variableKey) {
@@ -156,8 +215,24 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		}
 	}
 
-	public void setVariables(ObservableMap<Variable> variables) {
+	public final void setVariables(ObservableMap<Variable> variables) {
 		this.variables = variables;
+	}
+
+	public final void setModules(ObservableMap<Module> modules) {
+		this.modules = modules;
+	}
+
+	public final void setAlgorithms(ObservableMap<Algorithm> algorithms) {
+		this.algorithms = algorithms;
+	}
+
+	public final void setDataSets(ObservableMap<DataSet> dataSets) {
+		this.dataSets = dataSets;
+	}
+
+	public final void setSamples(ObservableMap<Sample> samples) {
+		this.samples = samples;
 	}
 
 }

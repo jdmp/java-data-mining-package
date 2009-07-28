@@ -32,8 +32,22 @@ import org.ujmp.core.util.StringUtil;
 public abstract class AbstractVariable extends AbstractCoreObject implements Variable {
 	private static final long serialVersionUID = -3393106211967497877L;
 
+	private String id = null;
+
 	protected AbstractVariable() {
 		super();
+	}
+
+	public final void setId(String id) {
+		this.id = id;
+	}
+
+	public final String getId() {
+		if (id == null) {
+			id = "Sample" + getCoreObjectId();
+			setId(id);
+		}
+		return id;
 	}
 
 	public final int getMatrixCount() {

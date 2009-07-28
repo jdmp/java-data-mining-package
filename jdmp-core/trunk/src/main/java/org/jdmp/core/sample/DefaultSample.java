@@ -32,19 +32,12 @@ import org.ujmp.core.Matrix;
 public class DefaultSample extends AbstractSample {
 	private static final long serialVersionUID = -3649758882404748630L;
 
-	private ObservableMap<Variable> variableMap = new DefaultObservableMap<Variable>();
-
+	
 	public DefaultSample() {
 		super();
 	}
 
-	public ObservableMap<Variable> getVariables() {
-		return variableMap;
-	}
-
-	public void setVariables(ObservableMap<Variable> variables) {
-		this.variableMap = variables;
-	}
+	
 
 	@Override
 	public final DefaultSample clone() {

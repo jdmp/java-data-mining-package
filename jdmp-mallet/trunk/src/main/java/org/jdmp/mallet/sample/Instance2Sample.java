@@ -34,7 +34,8 @@ import cc.mallet.types.FeatureVectorSequence;
 import cc.mallet.types.Instance;
 import cc.mallet.types.LabelSequence;
 
-public class Instance2Sample extends ClassificationSample implements Wrapper<Instance> {
+public class Instance2Sample extends ClassificationSample implements
+		Wrapper<Instance> {
 	private static final long serialVersionUID = 3834503288309969345L;
 
 	private Instance instance = null;
@@ -51,28 +52,24 @@ public class Instance2Sample extends ClassificationSample implements Wrapper<Ins
 		}
 		LabelSequence labelSequence = (LabelSequence) instance.getTarget();
 		setMatrix(Sample.TARGET, new MalletOutputMatrix(labelSequence, index));
-	}
 
-	public Instance getWrappedObject() {
-		return instance;
-	}
-
-	@Override
-	public String getLabel() {
-		Object data = instance.getData();
 		if (data instanceof FeatureVectorSequence) {
 			FeatureVectorSequence fvs = (FeatureVectorSequence) data;
 			FeatureVector fv = fvs.getFeatureVector(index);
 			for (int i = fv.numLocations() - 1; i != -1; i--) {
-				String word = (String) fv.getAlphabet().lookupObject(fv.getIndices()[i]);
+				String word = (String) fv.getAlphabet().lookupObject(
+						fv.getIndices()[i]);
 				if (word.startsWith("W=")) {
 					if (!word.matches(".*[0-9]$")) {
-						return word.substring(2);
+						setLabel(word.substring(2));
 					}
 				}
 			}
 		}
-		return null;
+	}
+
+	public Instance getWrappedObject() {
+		return instance;
 	}
 
 	public void setWrappedObject(Instance object) {

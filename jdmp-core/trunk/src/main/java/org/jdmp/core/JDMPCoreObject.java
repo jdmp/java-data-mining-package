@@ -25,7 +25,8 @@ package org.jdmp.core;
 
 import org.ujmp.core.interfaces.CoreObject;
 import org.ujmp.core.interfaces.HasDescription;
+import org.ujmp.core.interfaces.HasId;
 
-public interface JDMPCoreObject extends CoreObject, HasDescription {
+public interface JDMPCoreObject extends CoreObject, HasDescription, HasId {
 
 }

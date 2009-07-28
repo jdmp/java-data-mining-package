@@ -29,4 +29,6 @@ public interface HasSampleMap extends HasSamples {
 
 	public ObservableMap<Sample> getSamples();
 
+	public void setSamples(ObservableMap<Sample> samples);
+
 }

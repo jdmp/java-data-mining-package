@@ -28,6 +28,7 @@ import java.util.Map;
 
 import org.jdmp.core.JDMPCoreObject;
 import org.jdmp.core.dataset.HasDataSetList;
+import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.HasVariableMap;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
@@ -46,6 +47,12 @@ public interface Algorithm extends JDMPCoreObject, HasVariableMap, HasDataSetLis
 	public static final String IGNORENAN = "IgnoreNaN";
 
 	public static final String TARGET = "Target";
+
+	public static final String ID = Sample.ID;
+
+	public static final String DESCRIPTION = Sample.DESCRIPTION;
+
+	public static final String LABEL = Sample.LABEL;
 
 	public void setVariable(Object key, Variable variable);
 

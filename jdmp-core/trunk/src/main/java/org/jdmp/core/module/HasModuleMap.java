@@ -29,4 +29,6 @@ public interface HasModuleMap extends HasModules {
 
 	public ObservableMap<Module> getModules();
 
+	public void setModules(ObservableMap<Module> modules);
+
 }

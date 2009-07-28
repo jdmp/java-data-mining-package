@@ -53,6 +53,25 @@ public abstract class AbstractCoreObject implements JDMPCoreObject {
 
 	private transient GUIObject guiObject = null;
 
+	private static long runningId = 0;
+
+	private long coreObjectId = 0;
+
+	static {
+		try {
+			runningId = 31 * System.nanoTime() + System.currentTimeMillis();
+		} catch (Exception e) {
+		}
+	}
+
+	public AbstractCoreObject() {
+		coreObjectId = runningId++;
+	}
+
+	public final long getCoreObjectId() {
+		return coreObjectId;
+	}
+
 	public final JFrame showGUI() {
 		try {
 			Class<?> c = Class.forName("org.jdmp.gui.util.JDMPFrameManager");

@@ -32,6 +32,8 @@ import org.jdmp.core.variable.HasVariableMap;
 
 public interface DataSet extends JDMPCoreObject, HasVariableMap, HasSampleList, HasDataSetList {
 
+	public static final String ID = Sample.ID;
+
 	public static final String LABEL = Sample.LABEL;
 
 	public static final String DESCRIPTION = Sample.DESCRIPTION;

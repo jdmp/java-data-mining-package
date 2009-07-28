@@ -51,19 +51,15 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 
 	private ObservableMap<Variable> variableMap = new DefaultObservableMap<Variable>();
 
-	private final ObservableMap<Algorithm> algorithmList = new DefaultObservableMap<Algorithm>();
+	private ObservableMap<Algorithm> algorithmList = new DefaultObservableMap<Algorithm>();
 
 	private ObservableList<DataSet> dataSetList = new DefaultObservableList<DataSet>();
 
-	private final Map<Object, String> edgeLabels = new HashMap<Object, String>();
+	private final Map<Object, String> edgeLabels = new HashMap<Object, String>(2);
 
-	private final Map<Object, EdgeDirection> edgeDirections = new HashMap<Object, EdgeDirection>();
+	private final Map<Object, EdgeDirection> edgeDirections = new HashMap<Object, EdgeDirection>(2);
 
-	private final List<Object> variableKeys = new ArrayList<Object>();
-
-	private String label = "";
-
-	private String description = "";
+	private final List<Object> variableKeys = new ArrayList<Object>(2);
 
 	public final void setEdgeLabel(Object key, String edgeLabel) {
 		edgeLabels.put(key, edgeLabel);
@@ -73,7 +69,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		variableKeys.add(key);
 	}
 
-	public void setVariables(Variable... variables) {
+	public final void setVariables(Variable... variables) {
 		for (int i = 0; i < variables.length && i < getVariableKeys().size(); i++) {
 			variableMap.put(variableKeys.get(i), variables[i]);
 		}
@@ -102,20 +98,28 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		}
 	}
 
-	public final String getDescription() {
-		return description;
-	}
-
-	public final void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getLabel() {
-		return label;
+	public final String getLabel() {
+		return getAsString(Algorithm.LABEL);
 	}
 
 	public final void setLabel(String label) {
-		this.label = label;
+		setObject(Algorithm.LABEL, label);
+	}
+
+	public final String getId() {
+		return getAsString(Algorithm.ID);
+	}
+
+	public final void setId(String id) {
+		setObject(Algorithm.ID, id);
+	}
+
+	public final String getDescription() {
+		return getAsString(Algorithm.DESCRIPTION);
+	}
+
+	public final void setDescription(String description) {
+		setObject(Algorithm.DESCRIPTION, description);
 	}
 
 	public AbstractAlgorithm() {
@@ -135,9 +139,16 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		algorithmList.put(index, a);
 	}
 
-	public void clear() {
-		algorithmList.clear();
-		variableMap.clear();
+	public final void clear() {
+		if (algorithmList != null) {
+			algorithmList.clear();
+		}
+		if (variableMap != null) {
+			variableMap.clear();
+		}
+		if (dataSetList != null) {
+			dataSetList.clear();
+		}
 	}
 
 	public final Map<Object, Object> calculate() throws Exception {
@@ -272,7 +283,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		return MathUtil.getBigInteger(getMatrix(variableKey));
 	}
 
-	public Matrix getMatrix(Object variableKey) {
+	public final Matrix getMatrix(Object variableKey) {
 		Variable v = getVariables().get(variableKey);
 		if (v != null) {
 			return v.getMatrix();
@@ -281,7 +292,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		}
 	}
 
-	public void setMatrix(Object variableKey, Matrix matrix) {
+	public final void setMatrix(Object variableKey, Matrix matrix) {
 		Variable v = getVariables().get(variableKey);
 		if (v == null) {
 			v = VariableFactory.labeledVariable(variableKey.toString());
@@ -291,14 +302,23 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 	}
 
 	public final ObservableMap<Variable> getVariables() {
+		if (variableMap == null) {
+			variableMap = new DefaultObservableMap<Variable>();
+		}
 		return variableMap;
 	}
 
 	public final ObservableMap<Algorithm> getAlgorithms() {
+		if (algorithmList == null) {
+			algorithmList = new DefaultObservableMap<Algorithm>();
+		}
 		return algorithmList;
 	}
 
 	public final ObservableList<DataSet> getDataSets() {
+		if (dataSetList == null) {
+			dataSetList = new DefaultObservableList<DataSet>();
+		}
 		return dataSetList;
 	}
 
@@ -315,12 +335,16 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		}
 	}
 
-	public void setVariables(ObservableMap<Variable> variables) {
+	public final void setVariables(ObservableMap<Variable> variables) {
 		this.variableMap = variables;
 	}
 
-	public void setDataSets(ObservableList<DataSet> dataSets) {
+	public final void setDataSets(ObservableList<DataSet> dataSets) {
 		this.dataSetList = dataSets;
+	}
+
+	public final void setAlgorithms(ObservableMap<Algorithm> algorithms) {
+		this.algorithmList = algorithms;
 	}
 
 }

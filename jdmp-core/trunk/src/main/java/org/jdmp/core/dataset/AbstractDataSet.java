@@ -33,6 +33,10 @@ import java.util.Random;
 
 import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.sample.Sample;
+import org.jdmp.core.util.DefaultObservableList;
+import org.jdmp.core.util.DefaultObservableMap;
+import org.jdmp.core.util.ObservableList;
+import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
@@ -42,6 +46,33 @@ import org.ujmp.core.util.StringUtil;
 
 public abstract class AbstractDataSet extends AbstractCoreObject implements DataSet {
 	private static final long serialVersionUID = -4168834188998259018L;
+
+	private ObservableList<Sample> sampleList = null;
+
+	private ObservableMap<Variable> variableList = null;
+
+	private ObservableList<DataSet> dataSetList = null;
+
+	public final ObservableList<Sample> getSamples() {
+		if (sampleList == null) {
+			sampleList = new DefaultObservableList<Sample>();
+		}
+		return sampleList;
+	}
+
+	public final ObservableMap<Variable> getVariables() {
+		if (variableList == null) {
+			variableList = new DefaultObservableMap<Variable>();
+		}
+		return variableList;
+	}
+
+	public final ObservableList<DataSet> getDataSets() {
+		if (dataSetList == null) {
+			dataSetList = new DefaultObservableList<DataSet>();
+		}
+		return dataSetList;
+	}
 
 	public final String getDescription() {
 		return getAsString(DataSet.DESCRIPTION);
@@ -59,11 +90,19 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		setObject(DataSet.LABEL, label);
 	}
 
+	public final String getId() {
+		return getAsString(DataSet.ID);
+	}
+
+	public final void setId(String id) {
+		setObject(DataSet.ID, id);
+	}
+
 	public AbstractDataSet() {
 		super();
 	}
 
-	public Matrix getMatrix(Object variableKey) {
+	public final Matrix getMatrix(Object variableKey) {
 		Variable v = getVariables().get(variableKey);
 		if (v != null) {
 			return v.getMatrix();
@@ -139,7 +178,7 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		}
 	}
 
-	public void setMatrix(Object variableKey, Matrix matrix) {
+	public final void setMatrix(Object variableKey, Matrix matrix) {
 		Variable v = getVariables().get(variableKey);
 		if (v == null) {
 			v = VariableFactory.labeledVariable(variableKey.toString());
@@ -154,7 +193,7 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		getDataSets().clear();
 	}
 
-	public List<DataSet> splitByCount(boolean shuffle, int... count) {
+	public final List<DataSet> splitByCount(boolean shuffle, int... count) {
 		List<DataSet> dataSets = new ArrayList<DataSet>();
 
 		List<Integer> ids = new ArrayList<Integer>(getSamples().getSize());
@@ -182,7 +221,7 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		return dataSets;
 	}
 
-	public List<DataSet> splitForCV(int numberOfCVSets, int idOfCVSet, long randomSeed) {
+	public final List<DataSet> splitForCV(int numberOfCVSets, int idOfCVSet, long randomSeed) {
 		List<DataSet> returnDataSets = new ArrayList<DataSet>();
 		List<List<Sample>> tempSampleLists = new ArrayList<List<Sample>>();
 		List<Sample> allSamples = new ArrayList<Sample>(getSamples().toCollection());
@@ -218,7 +257,7 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		return returnDataSets;
 	}
 
-	public List<DataSet> splitByPercent(boolean shuffle, double... percent) {
+	public final List<DataSet> splitByPercent(boolean shuffle, double... percent) {
 		int[] counts = new int[percent.length];
 		int sampleCount = getSamples().getSize();
 		for (int i = 0; i < percent.length; i++) {
@@ -234,6 +273,19 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		} else {
 			return getClass().getSimpleName() + " [" + getLabel() + "]";
 		}
+	}
+
+	@Override
+	public final void setSamples(ObservableList<Sample> samples) {
+		this.sampleList = samples;
+	}
+
+	public final void setVariables(ObservableMap<Variable> variables) {
+		this.variableList = variables;
+	}
+
+	public final void setDataSets(ObservableList<DataSet> dataSets) {
+		this.dataSetList = dataSets;
 	}
 
 	@Override

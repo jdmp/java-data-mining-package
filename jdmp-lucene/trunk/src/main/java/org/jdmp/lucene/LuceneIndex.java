@@ -88,14 +88,16 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 
 	private File path = null;
 
-	private long runningId = 0;
-
 	private final Analyzer analyzer = new StandardAnalyzer();
 
 	private boolean readOnly = true;
 
 	public LuceneIndex(Index index) throws Exception {
 		this(null, false, new Index[] { index });
+	}
+
+	public LuceneIndex() throws Exception {
+		this(null, false, new Index[] {});
 	}
 
 	public LuceneIndex(Index... indices) throws Exception {
@@ -168,10 +170,6 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 		Document doc = new Document();
 
 		String id = sample.getId();
-		if (id == null) {
-			id = "" + runningId++;
-		}
-
 		doc.add(new Field(Sample.ID, id, Store.COMPRESS,
 				Field.Index.NOT_ANALYZED));
 
