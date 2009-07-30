@@ -23,6 +23,7 @@
 
 package org.jdmp.core.sample;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
@@ -68,7 +69,8 @@ public abstract class AbstractMapSample extends AbstractSample implements
 		}
 	}
 
-	class VariableMap implements Map<Object, Variable> {
+	class VariableMap implements Map<Object, Variable>, Serializable {
+		private static final long serialVersionUID = -8553571915359063034L;
 
 		@Override
 		public void clear() {
@@ -133,13 +135,13 @@ public abstract class AbstractMapSample extends AbstractSample implements
 
 		@Override
 		public Collection<Variable> values() {
-			return new CollectionWrapper() {
-			};
+			return new CollectionWrapper();
 		}
 
 	}
 
-	class CollectionWrapper implements Collection<Variable> {
+	class CollectionWrapper implements Collection<Variable>, Serializable {
+		private static final long serialVersionUID = 5598318867114474374L;
 
 		@Override
 		public boolean add(Variable e) {

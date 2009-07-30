@@ -47,7 +47,7 @@ import org.ujmp.core.exceptions.MatrixException;
 public class EhcacheMap<K, V> implements Map<K, V>, Flushable, Closeable {
 	private static final long serialVersionUID = -2405059234958626645L;
 
-	private final int maxElementsInMemory = 1000;
+	private int maxElementsInMemory = 1000;
 
 	private final int maxElementsOnDisk = Integer.MAX_VALUE - 1;
 
@@ -98,6 +98,14 @@ public class EhcacheMap<K, V> implements Map<K, V>, Flushable, Closeable {
 			name = "ehcache" + System.nanoTime();
 		}
 		return name;
+	}
+
+	public int getMaxElementsInMemory() {
+		return maxElementsInMemory;
+	}
+
+	public void setMaxElementsInMemory(int maxElementsInMemory) {
+		this.maxElementsInMemory = maxElementsInMemory;
 	}
 
 	public File getPath() {
