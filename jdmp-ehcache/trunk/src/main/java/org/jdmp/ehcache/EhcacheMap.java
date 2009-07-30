@@ -51,7 +51,7 @@ public class EhcacheMap<K, V> implements Map<K, V>, Flushable, Closeable {
 
 	private final int maxElementsOnDisk = Integer.MAX_VALUE - 1;
 
-	private final boolean overflowToDisk = true;
+	private boolean overflowToDisk = true;
 
 	private final boolean eternal = true;
 
@@ -91,6 +91,14 @@ public class EhcacheMap<K, V> implements Map<K, V>, Flushable, Closeable {
 		System.setProperty("net.sf.ehcache.enableShutdownHook", "true");
 		this.diskStorePath = path;
 		this.name = name;
+	}
+
+	public boolean isOverflowToDisk() {
+		return overflowToDisk;
+	}
+
+	public void setOverflowToDisk(boolean overflowToDisk) {
+		this.overflowToDisk = overflowToDisk;
 	}
 
 	public String getName() {
