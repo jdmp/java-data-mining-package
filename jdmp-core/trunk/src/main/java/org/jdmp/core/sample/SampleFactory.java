@@ -38,8 +38,6 @@ import org.ujmp.core.util.MathUtil;
 
 public abstract class SampleFactory {
 
-	public static Sample EMPTYSAMPLE = new DefaultSample();
-
 	@SuppressWarnings("unchecked")
 	public static final Sample createFromObject(Object o) {
 		if (o instanceof Map) {
