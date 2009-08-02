@@ -148,8 +148,10 @@ public class DefaultSampleDiv extends DivTag {
 		address.setParameter("class", "address");
 
 		if (url != null && url.length() > 0) {
-			SpanTag urlTag = new SpanTag(new EmphasizedText(url,
+			LinkTag link = new LinkTag(url, new EmphasizedText(url,
 					highlightedWords));
+			link.setParameter("class", "url");
+			SpanTag urlTag = new SpanTag(link);
 			urlTag.setParameter("class", "url");
 			address.add(urlTag);
 		}
