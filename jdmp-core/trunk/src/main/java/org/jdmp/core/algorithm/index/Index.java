@@ -39,7 +39,11 @@ public interface Index {
 
 	public void add(DataSet dataSet) throws Exception;
 
+	public DataSet search(String query, int start, int count) throws Exception;
+
 	public DataSet search(String query) throws Exception;
+
+	public DataSet search(String query, int count) throws Exception;
 
 	public int getSize() throws Exception;
 

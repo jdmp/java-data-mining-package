@@ -233,14 +233,15 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 	public synchronized Sample getSample(String id) throws Exception {
 		Term term = new Term(Sample.ID, id);
 		TermQuery tq = new TermQuery(term);
-		DataSet ds = search(tq, 1);
+		DataSet ds = search(tq, 0, 1);
 		if (ds != null && !ds.getSamples().isEmpty()) {
 			return ds.getSamples().getElementAt(0);
 		}
 		return null;
 	}
 
-	public synchronized DataSet search(String query) throws Exception {
+	public synchronized DataSet search(String query, int start, int count)
+			throws Exception {
 		if (executor.getQueue().size() < 1000) {
 			executor.submit(new SearchCallable(query));
 		}
@@ -257,13 +258,15 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 		} else {
 			q = p.parse(query);
 		}
-		return search(q, 100);
+		return search(q, start, count);
 	}
 
-	public synchronized DataSet search(Query query, int count) throws Exception {
+	public synchronized DataSet search(Query query, int start, int count)
+			throws Exception {
 		prepareReader();
 		TopDocs td = indexSearcher.search(query, count);
 		DataSet result = new DefaultDataSet();
+		result.setObject("Size", td.totalHits);
 		for (ScoreDoc sd : td.scoreDocs) {
 			int id = sd.doc;
 			Document doc = indexSearcher.doc(id);

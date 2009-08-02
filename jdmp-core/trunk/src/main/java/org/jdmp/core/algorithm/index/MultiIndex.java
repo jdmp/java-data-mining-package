@@ -39,14 +39,14 @@ public class MultiIndex extends AbstractIndex {
 	}
 
 	@Override
-	public DataSet search(String query) throws Exception {
+	public DataSet search(String query, int start, int count) throws Exception {
 		DataSet ds = DataSetFactory.emptyDataSet();
 		try {
 			List<Future<DataSet>> futures = new ArrayList<Future<DataSet>>();
 			for (Object key : getAlgorithms().keySet()) {
 				Algorithm a = getAlgorithms().get(key);
 				if (a instanceof Index) {
-					futures.add(executors.submit(new SearchFuture((Index) a, query)));
+					futures.add(executors.submit(new SearchFuture((Index) a, query, start, count)));
 				}
 			}
 			for (Future<DataSet> f : futures) {
@@ -64,14 +64,20 @@ public class MultiIndex extends AbstractIndex {
 
 		private String query = null;
 
-		public SearchFuture(Index index, String query) {
+		private int count = 0;
+
+		private int start = 0;
+
+		public SearchFuture(Index index, String query, int start, int count) {
 			this.index = index;
 			this.query = query;
+			this.start = start;
+			this.count = count;
 		}
 
 		@Override
 		public DataSet call() throws Exception {
-			return index.search(query);
+			return index.search(query, start, count);
 		}
 
 	}

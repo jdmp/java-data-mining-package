@@ -53,4 +53,12 @@ public abstract class AbstractIndex extends AbstractAlgorithm implements Index {
 		throw new Exception("cannot add to this index");
 	}
 
+	public final DataSet search(String query) throws Exception {
+		return search(query, 0, 100);
+	}
+
+	public final DataSet search(String query, int count) throws Exception {
+		return search(query, 0, count);
+	}
+
 }
