@@ -25,6 +25,8 @@ package org.jdmp.jetty.index;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -70,18 +72,52 @@ public class JettyIndexServlet extends HttpServlet {
 			String query = request.getParameter("q");
 			PrintWriter out = response.getWriter();
 
+			int maxid = 100;
+			try {
+				maxid = Integer.parseInt(request.getParameter("maxid"));
+			} catch (Exception e) {
+			}
+			for (int i = 0; i < maxid; i++) {
+				String tag = request.getParameter("tag" + i);
+				if (tag != null && tag.length() > 0) {
+					tag = tag.trim();
+					String[] splitTags = tag.split(",");
+					String id = request.getParameter("id" + i);
+					Sample sample = index.getSample(id);
+					if (sample != null) {
+						Variable tags = sample.getVariables().get("Tags");
+						for (String t : splitTags) {
+							boolean tagFound = false;
+							if (tags != null) {
+								for (Matrix m : tags.getMatrixList()) {
+									if (m != null
+											&& m.stringValue()
+													.equalsIgnoreCase(t)) {
+										tagFound = true;
+									}
+								}
+							}
+							if (!tagFound) {
+								sample.setObject("Tags", t);
+							}
+						}
+						System.out.println("updating sample " + id
+								+ " with new tag: " + tag);
+						index.add(sample);
+					}
+				}
+			}
+
 			Page page = new Page("JDMP Search ["
 					+ ((HasLabel) index).getLabel() + "]");
 			page.add(new H1Tag("JDMP Search [" + ((HasLabel) index).getLabel()
 					+ "]"));
 			page.add(index.getSize() + " items in index");
 			page.add(new BRTag());
-			FormTag form = new FormTag("/");
-			form.setParameter("method", "get");
-			form.add(new InputTextTag("q", query));
-			form.add(new InputSubmitTag("submit", "submit"));
-			page.add(form);
-			page.add(new BRTag());
+			FormTag searchform = new FormTag("/");
+			searchform.add(new InputTextTag("q", query));
+			searchform.add(new InputSubmitTag("submit", "submit"));
+			searchform.add(new BRTag());
 
 			if (query != null) {
 				DataSet result = null;
@@ -90,9 +126,11 @@ public class JettyIndexServlet extends HttpServlet {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				page.add(new DataSetDiv(result, query.split("\\s")));
+				searchform
+						.add(new DataSetDiv(result, query, query.split("\\s")));
 			}
 
+			page.add(searchform);
 			out.append(page.toString());
 
 			out.close();
@@ -148,12 +186,39 @@ public class JettyIndexServlet extends HttpServlet {
 		response.setContentType("text/html");
 		response.setStatus(HttpServletResponse.SC_OK);
 
-		String id = request.getParameter("id");
+		try {
 
-		if (id != null) {
-			getPage(request, response);
-		} else {
-			searchPage(request, response);
+			String id = request.getParameter("id");
+			String deltag = request.getParameter("deltag");
+
+			if (deltag != null) {
+				Sample sample = index.getSample(id);
+				if (sample != null) {
+					Variable tags = sample.getVariables().get("Tags");
+					List<Matrix> toDelete = new LinkedList<Matrix>();
+					for (Matrix m : tags.getMatrixList()) {
+						if (m != null
+								&& m.stringValue().equalsIgnoreCase(deltag)) {
+							toDelete.add(m);
+						}
+					}
+					for (Matrix m : toDelete) {
+						tags.getMatrixList().remove(m);
+					}
+					System.out.println("updating sample " + id
+							+ " deleting tag: " + deltag);
+					index.add(sample);
+				}
+			}
+
+			if (id != null && deltag == null) {
+				getPage(request, response);
+			} else {
+				searchPage(request, response);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 

@@ -24,16 +24,22 @@
 package org.jdmp.jetty.html.elements;
 
 import org.jdmp.core.sample.Sample;
+import org.jdmp.core.variable.Variable;
 import org.jdmp.jetty.html.EmphasizedText;
+import org.jdmp.jetty.html.Text;
 import org.jdmp.jetty.html.tags.DivTag;
+import org.jdmp.jetty.html.tags.InputHiddenTag;
+import org.jdmp.jetty.html.tags.InputTextTag;
 import org.jdmp.jetty.html.tags.LinkTag;
 import org.jdmp.jetty.html.tags.SpanTag;
+import org.ujmp.core.Matrix;
 import org.ujmp.core.util.StringUtil;
 
 public class DefaultSampleDiv extends DivTag {
 	private static final long serialVersionUID = 6587788027413384557L;
 
-	public DefaultSampleDiv(Sample sample, String... highlightedWords) {
+	public DefaultSampleDiv(int i, Sample sample, String query,
+			String... highlightedWords) {
 		setParameter("class", "sample");
 		String label = sample.getLabel();
 		String type = sample.getAllAsString("Type");
@@ -62,6 +68,40 @@ public class DefaultSampleDiv extends DivTag {
 		}
 		add(title);
 
+		DivTag tagsDiv = new DivTag();
+		tagsDiv.setParameter("class", "tags");
+		SpanTag tagTag = new SpanTag("Tags:");
+		tagTag.setParameter("class", "key");
+		tagsDiv.add(tagTag);
+
+		Variable tags = sample.getVariables().get("Tags");
+		if (tags != null) {
+			SpanTag tagsTag = new SpanTag();
+			tagsTag.setParameter("class", "value");
+			for (int t = 0; t < tags.getMatrixList().getSize(); t++) {
+				Matrix tagMatrix = tags.getMatrixList().getElementAt(t);
+				if (tagMatrix != null) {
+					String tag = tagMatrix.stringValue();
+					tagsTag.add(new EmphasizedText(StringUtil.format(tag),
+							highlightedWords));
+					LinkTag dellink = new LinkTag("/?q=" + query + "&id=" + id
+							+ "&deltag=" + tag, "[x]");
+					tagsTag.add(dellink);
+					if (t < tags.getMatrixList().getSize() - 1) {
+						tagsTag.add(new Text(", "));
+					}
+				}
+			}
+			tagsDiv.add(tagsTag);
+		}
+
+		InputTextTag inputTag = new InputTextTag("tag" + i);
+		inputTag.setParameter("style", "border: 0px;");
+		tagsDiv.add(inputTag);
+		InputHiddenTag inputId = new InputHiddenTag("id" + i, id);
+		tagsDiv.add(inputId);
+		add(tagsDiv);
+
 		if (description != null && description.length() > 0) {
 			DivTag descriptionDiv = new DivTag(new EmphasizedText(description,
 					highlightedWords));
@@ -82,6 +122,8 @@ public class DefaultSampleDiv extends DivTag {
 			} else if ("Content".equals(key)) {
 				continue;
 			} else if ("Links".equals(key)) {
+				continue;
+			} else if ("Tags".equals(key)) {
 				continue;
 			} else if ("URL".equals(key)) {
 				continue;

@@ -40,6 +40,10 @@ public class Style implements Html {
 		style += "  font-size: 12px;" + EOL;
 		style += "}" + EOL;
 		style += EOL;
+		style += "h1 {" + EOL;
+		style += "  color: #000066;" + EOL;
+		style += "}" + EOL;
+		style += EOL;
 		style += ".label {" + EOL;
 		style += "  font-size: 14px;" + EOL;
 		style += "  color: #0000dd;" + EOL;
@@ -53,12 +57,13 @@ public class Style implements Html {
 		style += "  color: #808080;" + EOL;
 		style += "}" + EOL;
 		style += EOL;
-		style += ".fields {" + EOL;
+		style += ".value {" + EOL;
 		style += "  color: #800000;" + EOL;
 		style += "}" + EOL;
 		style += EOL;
 		style += ".key {" + EOL;
 		style += "  font-weight: bold;" + EOL;
+		style += "  color: #800000;" + EOL;
 		style += "}" + EOL;
 		style += EOL;
 		style += ".url {" + EOL;

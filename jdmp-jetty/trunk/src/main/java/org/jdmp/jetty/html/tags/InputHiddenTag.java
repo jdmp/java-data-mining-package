@@ -21,33 +21,13 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.jetty.html.elements;
+package org.jdmp.jetty.html.tags;
 
-import org.jdmp.core.dataset.DataSet;
-import org.jdmp.core.sample.Sample;
-import org.jdmp.jetty.html.tags.BRTag;
-import org.jdmp.jetty.html.tags.DivTag;
-import org.jdmp.jetty.html.tags.InputHiddenTag;
+public class InputHiddenTag extends InputTag {
+	private static final long serialVersionUID = 2546496285052637036L;
 
-public class DataSetDiv extends DivTag {
-	private static final long serialVersionUID = 5873327671800366757L;
-
-	public DataSetDiv(DataSet dataSet, String query, String... highlightedWords) {
-		setParameter("class", "dataset");
-		if (dataSet == null || dataSet.getSamples().isEmpty()) {
-			add("no results found.");
-		} else {
-			add(dataSet.getSamples().getSize() + " results found:");
-			add(new BRTag());
-			add(new BRTag());
-			int i = 0;
-			for (Sample s : dataSet.getSamples()) {
-				if (s != null) {
-					add(new DefaultSampleDiv(i++, s, query, highlightedWords));
-				}
-			}
-			add(new InputHiddenTag("maxid", "" + i));
-		}
+	public InputHiddenTag(String name, String value) {
+		super("hidden", name, value == null ? "" : value);
 	}
 
 }

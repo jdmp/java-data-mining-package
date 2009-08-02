@@ -53,6 +53,7 @@ import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
+import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
@@ -98,6 +99,11 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 
 	public LuceneIndex() throws Exception {
 		this(null, false, new Index[] {});
+	}
+
+	public LuceneIndex(DataSet dataSet) throws Exception {
+		this(null, false, new Index[] {});
+		add(dataSet);
 	}
 
 	public LuceneIndex(Index... indices) throws Exception {
@@ -166,6 +172,9 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 			return;
 		}
 
+		// score must not be saved
+		sample.getVariables().remove("Score");
+
 		prepareWriter();
 		Document doc = new Document();
 
@@ -197,10 +206,11 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 	public int getSize() {
 		try {
 			if (indexWriter != null) {
-				return indexWriter.maxDoc();
+				indexWriter.commit();
+				return indexWriter.numDocs();
 			} else {
 				prepareReader();
-				return indexSearcher.maxDoc();
+				return indexSearcher.getIndexReader().numDeletedDocs();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -221,7 +231,9 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 	}
 
 	public synchronized Sample getSample(String id) throws Exception {
-		DataSet ds = search("Id:" + id);
+		Term term = new Term(Sample.ID, id);
+		TermQuery tq = new TermQuery(term);
+		DataSet ds = search(tq, 1);
 		if (ds != null && !ds.getSamples().isEmpty()) {
 			return ds.getSamples().getElementAt(0);
 		}
@@ -236,11 +248,12 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 		String[] fs = new String[fields.size()];
 		MultiFieldQueryParser p = new MultiFieldQueryParser(fields.toArray(fs),
 				analyzer);
+		p.setDefaultOperator(MultiFieldQueryParser.AND_OPERATOR);
 		Query q = null;
 		if (query == null || "".equals(query)) {
-			q = p.parse("*");
+			q = p.parse("Id:S*");
 		} else if ("*".equals(query)) {
-			q = p.parse("*");
+			q = p.parse("Id:S*");
 		} else {
 			q = p.parse(query);
 		}
@@ -428,7 +441,18 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 								+ a);
 						DataSet ds = ((Index) a).search(query);
 						if (ds != null) {
-							add(ds);
+							for (Sample sample : ds.getSamples()) {
+								Sample oldSample = getSample(sample.getId());
+								if (oldSample != null) {
+									Variable tags = oldSample.getVariables()
+											.get("Tags");
+									if (tags != null
+											&& !tags.getMatrixList().isEmpty()) {
+										sample.getVariables().put("Tags", tags);
+									}
+								}
+								add(sample);
+							}
 						}
 					}
 				} catch (Exception e) {
