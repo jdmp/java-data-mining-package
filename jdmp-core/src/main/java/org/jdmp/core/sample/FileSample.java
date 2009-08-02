@@ -1,0 +1,55 @@
+/*
+ * Copyright (C) 2008-2009 Holger Arndt, A. Naegele and M. Bundschus
+ *
+ * This file is part of the Java Data Mining Package (JDMP).
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership and licensing.
+ *
+ * JDMP is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * JDMP is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with JDMP; if not, write to the
+ * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+ * Boston, MA  02110-1301  USA
+ */
+
+package org.jdmp.core.sample;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Map;
+
+import org.ujmp.core.enums.FileFormat;
+import org.ujmp.core.objectmatrix.impl.FileMatrix;
+
+public class FileSample extends AbstractMapSample {
+	private static final long serialVersionUID = -9110879874007064140L;
+
+	private FileMatrix fileMatrix = null;
+
+	public FileSample(File file, Object... parameters) throws IOException {
+		this.fileMatrix = new FileMatrix(file, parameters);
+	}
+
+	public FileSample(FileFormat fileFormat, File file, Object... parameters) throws IOException {
+		this.fileMatrix = new FileMatrix(fileFormat, file, parameters);
+	}
+
+	@Override
+	public Map<Object, Object> getWrappedObject() {
+		return fileMatrix;
+	}
+
+	@Override
+	public void setWrappedObject(Map<Object, Object> object) {
+	}
+
+}
