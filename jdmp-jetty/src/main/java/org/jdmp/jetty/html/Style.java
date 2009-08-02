@@ -41,6 +41,8 @@ public class Style implements Html {
 		style += "}" + EOL;
 		style += EOL;
 		style += "h1 {" + EOL;
+		style += "  font-size: 16px;" + EOL;
+		style += "  font-weight: bold;" + EOL;
 		style += "  color: #000066;" + EOL;
 		style += "}" + EOL;
 		style += EOL;

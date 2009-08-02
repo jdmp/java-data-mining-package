@@ -114,20 +114,23 @@ public class JettyIndexServlet extends HttpServlet {
 					+ "]"));
 			page.add(index.getSize() + " items in index");
 			page.add(new BRTag());
-			FormTag searchform = new FormTag("/");
+			FormTag searchform = new FormTag("");
 			searchform.add(new InputTextTag("q", query));
 			searchform.add(new InputSubmitTag("submit", "submit"));
 			searchform.add(new BRTag());
 
+			int start = 1;
+			int count = 100;
+
 			if (query != null) {
 				DataSet result = null;
 				try {
-					result = index.search(query);
+					result = index.search(query, start, count);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				searchform
-						.add(new DataSetDiv(result, query, query.split("\\s")));
+				searchform.add(new DataSetDiv(result, query, start, query
+						.split("\\s")));
 			}
 
 			page.add(searchform);
@@ -163,7 +166,7 @@ public class JettyIndexServlet extends HttpServlet {
 						page.add(new H2Tag(StringUtil.format(key)));
 						for (Matrix m : links.getMatrixList().toCollection()) {
 							String l = m.stringValue();
-							page.add(new LinkTag("/?q=" + l, l));
+							page.add(new LinkTag("?q=" + l, l));
 						}
 					} else {
 						String value = sample.getAllAsString(key);
@@ -171,6 +174,14 @@ public class JettyIndexServlet extends HttpServlet {
 						page.add(new Text(value));
 					}
 				}
+				int start = 0;
+				int count = 10;
+				DataSet ds = index.searchSimilar(sample, 0, count);
+				if (ds != null && !ds.getSamples().isEmpty()) {
+					page.add(new H2Tag("Similar Results"));
+					page.add(new DataSetDiv(ds, null, start));
+				}
+
 			}
 			out.append(page.toString());
 			out.close();
