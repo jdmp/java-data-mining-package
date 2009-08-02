@@ -1,0 +1,76 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.jdmp</groupId>
+	<artifactId>jdmp-complete</artifactId>
+	<packaging>pom</packaging>
+	<name>jdmp-complete</name>
+
+	<parent>
+		<groupId>org.jdmp</groupId>
+		<artifactId>jdmp</artifactId>
+		<version>${jdmp.version}</version>
+		<relativePath>../jdmp</relativePath>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>		
+		
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-complete</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-gui</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-mail</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-ehcache</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-jgroups</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-itext</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-libsvm</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-weka</artifactId>
+		</dependency>
+		
+	</dependencies>
+	
+	
+	<modules>
+    <module>../jdmp-core</module>
+    <module>../jdmp-gui</module>
+    <module>../jdmp-mail</module>
+    <module>../jdmp-ehcache</module>
+    <module>../jdmp-jgroups</module>
+    <module>../jdmp-itext</module>
+    <module>../jdmp-libsvm</module>
+    <module>../jdmp-weka</module>
+  </modules>
+	
+
+</project>
