@@ -58,6 +58,27 @@ public class MultiIndex extends AbstractIndex {
 		return ds;
 	}
 
+	@Override
+	public DataSet searchSimilar(Sample sample, int start, int count) throws Exception {
+		DataSet ds = DataSetFactory.emptyDataSet();
+		try {
+			List<Future<DataSet>> futures = new ArrayList<Future<DataSet>>();
+			for (Object key : getAlgorithms().keySet()) {
+				Algorithm a = getAlgorithms().get(key);
+				if (a instanceof Index) {
+					futures.add(executors.submit(new SearchSimilarFuture((Index) a, sample, start,
+							count)));
+				}
+			}
+			for (Future<DataSet> f : futures) {
+				ds.getSamples().addAll(f.get().getSamples().toCollection());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ds;
+	}
+
 	class SearchFuture implements Callable<DataSet> {
 
 		private Index index = null;
@@ -78,6 +99,30 @@ public class MultiIndex extends AbstractIndex {
 		@Override
 		public DataSet call() throws Exception {
 			return index.search(query, start, count);
+		}
+
+	}
+
+	class SearchSimilarFuture implements Callable<DataSet> {
+
+		private Index index = null;
+
+		private Sample sample = null;
+
+		private int count = 0;
+
+		private int start = 0;
+
+		public SearchSimilarFuture(Index index, Sample sample, int start, int count) {
+			this.index = index;
+			this.sample = sample;
+			this.start = start;
+			this.count = count;
+		}
+
+		@Override
+		public DataSet call() throws Exception {
+			return index.searchSimilar(sample, start, count);
 		}
 
 	}

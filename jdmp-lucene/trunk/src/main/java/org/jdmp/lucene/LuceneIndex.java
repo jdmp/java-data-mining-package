@@ -55,6 +55,7 @@ import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.TopDocs;
+import org.apache.lucene.search.similar.MoreLikeThis;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.jdmp.core.algorithm.Algorithm;
@@ -62,6 +63,7 @@ import org.jdmp.core.algorithm.index.AbstractIndex;
 import org.jdmp.core.algorithm.index.Index;
 import org.jdmp.core.algorithm.index.MultiIndex;
 import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.core.dataset.DefaultDataSet;
 import org.jdmp.core.sample.HasSampleList;
 import org.jdmp.core.sample.Sample;
@@ -342,7 +344,22 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 	@Override
 	public void setSamples(ObservableList<Sample> samples) {
 		// TODO Auto-generated method stub
+	}
 
+	@Override
+	public synchronized DataSet searchSimilar(Sample sample, int start,
+			int count) throws Exception {
+		prepareReader();
+		Term term = new Term(Sample.ID, sample.getId());
+		TermQuery tq = new TermQuery(term);
+		TopDocs td = indexSearcher.search(tq, count);
+		if (td == null || td.totalHits == 0) {
+			DataSet ds = DataSetFactory.emptyDataSet();
+			return ds;
+		}
+		MoreLikeThis mlt = new MoreLikeThis(indexSearcher.getIndexReader());
+		Query query = mlt.like(td.scoreDocs[0].doc);
+		return search(query, start, count);
 	}
 
 	class LuceneSampleList extends AbstractListModel implements

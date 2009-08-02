@@ -45,6 +45,12 @@ public interface Index {
 
 	public DataSet search(String query, int count) throws Exception;
 
+	public DataSet searchSimilar(Sample sample, int start, int count) throws Exception;
+
+	public DataSet searchSimilar(Sample sample) throws Exception;
+
+	public DataSet searchSimilar(Sample sample, int count) throws Exception;
+
 	public int getSize() throws Exception;
 
 	public Sample getSample(String id) throws Exception;
