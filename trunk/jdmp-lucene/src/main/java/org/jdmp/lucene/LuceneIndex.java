@@ -27,9 +27,11 @@ import java.io.Closeable;
 import java.io.File;
 import java.io.Flushable;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -50,11 +52,14 @@ import org.apache.lucene.index.Term;
 import org.apache.lucene.index.IndexReader.FieldOption;
 import org.apache.lucene.index.IndexWriter.MaxFieldLength;
 import org.apache.lucene.queryParser.MultiFieldQueryParser;
+import org.apache.lucene.search.BooleanClause;
+import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.TopDocs;
+import org.apache.lucene.search.BooleanClause.Occur;
 import org.apache.lucene.search.similar.MoreLikeThis;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
@@ -122,9 +127,11 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 
 		if (indices.length == 1) {
 			getAlgorithms().put("Index0", (Algorithm) indices[0]);
+			setLabel(((Algorithm) indices[0]).getLabel());
 		} else if (indices.length > 1) {
 			MultiIndex multiIndex = new MultiIndex(indices);
 			getAlgorithms().put("Index0", multiIndex);
+			setLabel(multiIndex.getLabel());
 		}
 
 		if (path == null) {
@@ -244,7 +251,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 
 	public synchronized DataSet search(String query, int start, int count)
 			throws Exception {
-		if (executor.getQueue().size() < 1000) {
+		if (executor.getQueue().size() < 100000) {
 			executor.submit(new SearchCallable(query));
 		}
 
@@ -266,9 +273,10 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 	public synchronized DataSet search(Query query, int start, int count)
 			throws Exception {
 		prepareReader();
+		System.out.println("searching for: " + query);
 		TopDocs td = indexSearcher.search(query, count);
 		DataSet result = new DefaultDataSet();
-		result.setObject("Size", td.totalHits);
+		result.setObject("Total", td.totalHits);
 		for (ScoreDoc sd : td.scoreDocs) {
 			int id = sd.doc;
 			Document doc = indexSearcher.doc(id);
@@ -358,8 +366,31 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 			return ds;
 		}
 		MoreLikeThis mlt = new MoreLikeThis(indexSearcher.getIndexReader());
+		mlt.setFieldNames(new String[] { "Label", "Description", "Tags" });
+		mlt.setMaxWordLen(20);
 		Query query = mlt.like(td.scoreDocs[0].doc);
-		return search(query, start, count);
+		BooleanQuery bq = new BooleanQuery();
+		bq.add(query, Occur.MUST);
+		bq.add(new TermQuery(new Term("Id", sample.getId())), Occur.MUST_NOT);
+
+		if (query instanceof BooleanQuery) {
+			List<String> list = new ArrayList<String>();
+			BooleanQuery b = (BooleanQuery) query;
+			for (BooleanClause bc : b.getClauses()) {
+				Query q = bc.getQuery();
+				if (q instanceof TermQuery) {
+					TermQuery teq = (TermQuery) q;
+					list.add(teq.getTerm().text());
+				}
+			}
+			if (!list.isEmpty() && executor.getQueue().size() < 100000) {
+				for (String s : list) {
+					executor.submit(new SearchCallable(s));
+				}
+			}
+		}
+
+		return search(bq, start, count);
 	}
 
 	class LuceneSampleList extends AbstractListModel implements

@@ -40,13 +40,14 @@ public class DefaultSampleDiv extends DivTag {
 
 	public DefaultSampleDiv(int i, Sample sample, String query,
 			String... highlightedWords) {
+		query = query == null ? "" : query;
 		setParameter("class", "sample");
 		String label = sample.getLabel();
 		String type = sample.getAllAsString("Type");
 		String description = sample.getDescription();
 		String url = sample.getAsString("URL");
 		String id = sample.getId();
-		String idurl = "/?id=" + id;
+		String idurl = "?id=" + id;
 
 		DivTag title = new DivTag();
 		title.setParameter("class", "title");
@@ -84,7 +85,7 @@ public class DefaultSampleDiv extends DivTag {
 					String tag = tagMatrix.stringValue();
 					tagsTag.add(new EmphasizedText(StringUtil.format(tag),
 							highlightedWords));
-					LinkTag dellink = new LinkTag("/?q=" + query + "&id=" + id
+					LinkTag dellink = new LinkTag("?q=" + query + "&id=" + id
 							+ "&deltag=" + tag, "[x]");
 					tagsTag.add(dellink);
 					if (t < tags.getMatrixList().getSize() - 1) {

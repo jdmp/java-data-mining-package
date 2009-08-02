@@ -32,12 +32,16 @@ import org.jdmp.jetty.html.tags.InputHiddenTag;
 public class DataSetDiv extends DivTag {
 	private static final long serialVersionUID = 5873327671800366757L;
 
-	public DataSetDiv(DataSet dataSet, String query, String... highlightedWords) {
+	public DataSetDiv(DataSet dataSet, String query, int start,
+			String... highlightedWords) {
+		start = start == 0 ? 1 : start;
 		setParameter("class", "dataset");
 		if (dataSet == null || dataSet.getSamples().isEmpty()) {
 			add("no results found.");
 		} else {
-			add(dataSet.getSamples().getSize() + " results found:");
+			add("Results " + start + " - "
+					+ (start + dataSet.getSamples().getSize()) + " of "
+					+ dataSet.getAsInt("Total"));
 			add(new BRTag());
 			add(new BRTag());
 			int i = 0;
@@ -49,5 +53,4 @@ public class DataSetDiv extends DivTag {
 			add(new InputHiddenTag("maxid", "" + i));
 		}
 	}
-
 }
