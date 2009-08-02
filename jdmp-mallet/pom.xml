@@ -1,0 +1,47 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.jdmp</groupId>
+	<artifactId>jdmp-mallet</artifactId>
+	<packaging>jar</packaging>
+	<name>jdmp-mallet</name>
+
+	<properties>
+		<jdmp.version>0.1.2</jdmp.version>
+	</properties>
+
+	<parent>
+		<groupId>org.jdmp</groupId>
+		<artifactId>jdmp</artifactId>
+		<version>0.1.2</version>
+		<relativePath>../jdmp</relativePath>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>mallet</groupId>
+			<artifactId>mallet</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>mallet-deps</groupId>
+			<artifactId>mallet-deps</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-core</artifactId>
+			<version>${jdmp.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-core</artifactId>
+			<version>${jdmp.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+</project>
