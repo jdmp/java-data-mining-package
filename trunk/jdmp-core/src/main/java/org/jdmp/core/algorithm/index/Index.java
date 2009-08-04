@@ -23,6 +23,8 @@
 
 package org.jdmp.core.algorithm.index;
 
+import java.util.List;
+
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
@@ -54,5 +56,7 @@ public interface Index {
 	public int getSize() throws Exception;
 
 	public Sample getSample(String id) throws Exception;
+
+	public List<String> getSuggestions(String word, int count) throws Exception;
 
 }
