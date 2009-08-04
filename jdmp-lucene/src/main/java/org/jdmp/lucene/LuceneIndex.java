@@ -28,6 +28,7 @@ import java.io.File;
 import java.io.Flushable;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -61,6 +62,8 @@ import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.search.BooleanClause.Occur;
 import org.apache.lucene.search.similar.MoreLikeThis;
+import org.apache.lucene.search.spell.LuceneDictionary;
+import org.apache.lucene.search.spell.SpellChecker;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.jdmp.core.algorithm.Algorithm;
@@ -97,6 +100,8 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 	private File path = null;
 
 	private final Analyzer analyzer = new StandardAnalyzer();
+
+	private SpellChecker spellchecker = null;
 
 	private boolean readOnly = true;
 
@@ -147,6 +152,8 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 		this.path = path;
 
 		directory = FSDirectory.getDirectory(path);
+
+		spellchecker = new SpellChecker(FSDirectory.getDirectory("/tmp/test/"));
 
 		if (IndexReader.indexExists(directory)) {
 			if (!readOnly) {
@@ -210,6 +217,22 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 				Store.COMPRESS));
 
 		indexWriter.updateDocument(new Term(Sample.ID, id), doc);
+	}
+
+	public synchronized List<String> getSuggestions(String word, int count)
+			throws Exception {
+		// To index a file containing words:
+		// spellchecker.indexDictionary(new PlainTextDictionary(new File(
+		// "myfile.txt")));
+		String[] suggestions = spellchecker.suggestSimilar(word, count);
+		return Arrays.asList(suggestions);
+	}
+
+	public void updateSuggestionsIndex() throws Exception {
+		prepareReader();
+		spellchecker.clearIndex();
+		spellchecker.indexDictionary(new LuceneDictionary(indexSearcher
+				.getIndexReader(), Sample.DESCRIPTION));
 	}
 
 	public int getSize() {

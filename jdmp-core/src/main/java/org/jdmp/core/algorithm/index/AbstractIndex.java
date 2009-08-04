@@ -23,6 +23,8 @@
 
 package org.jdmp.core.algorithm.index;
 
+import java.util.List;
+
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.Sample;
@@ -46,6 +48,10 @@ public abstract class AbstractIndex extends AbstractAlgorithm implements Index {
 		for (Sample sample : dataSet.getSamples()) {
 			add(sample);
 		}
+	}
+
+	public List<String> getSuggestions(String word, int count) throws Exception {
+		throw new Exception("not implemented");
 	}
 
 	@Override
