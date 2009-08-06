@@ -21,39 +21,31 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.core.variable;
+package org.jdmp.jetty.html.elements;
 
-import org.jdmp.core.JDMPCoreObject;
-import org.jdmp.core.matrix.HasMatrixList;
-import org.ujmp.core.Matrix;
+import org.jdmp.core.sample.Sample;
+import org.jdmp.jetty.html.EmphasizedText;
+import org.jdmp.jetty.html.tags.DivTag;
+import org.jdmp.jetty.html.tags.LinkTag;
+import org.jdmp.jetty.html.tags.SpanTag;
 
-public interface Variable extends JDMPCoreObject, HasMatrixList {
-	public static final Class<?>[] VARIABLEARRAY = new Class<?>[] { new Variable[] {}.getClass() };
+public class URLDiv extends DivTag {
+	private static final long serialVersionUID = 6835814533701702954L;
 
-	public static final String TAGS = "Tags";
+	public URLDiv(Sample sample, String... highlightedWords) {
+		setParameter("class", "url");
 
-	public static final String TOTAL = "Total";
+		String url = sample.getAsString(Sample.URL);
+		if (url != null && url.length() > 0) {
+			LinkTag link = new LinkTag(url, new EmphasizedText(url,
+					highlightedWords));
+			link.setParameter("class", "url");
+			link.setParameter("title", "go to " + url);
+			SpanTag urlTag = new SpanTag(link);
+			urlTag.setParameter("class", "url");
+			add(urlTag);
+		}
 
-	public long[] getSize();
-
-	public void setSize(long... size);
-
-	public Matrix getAsMatrix();
-
-	public void addMatrix(Matrix m);
-
-	public int getMatrixCount();
-
-	public Matrix getMatrix();
-
-	public String getAsString();
-
-	public Matrix getMatrix(int index);
-
-	public long getRowCount();
-
-	public long getColumnCount();
-
-	public Variable clone();
+	}
 
 }

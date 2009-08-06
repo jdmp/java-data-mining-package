@@ -24,16 +24,11 @@
 package org.jdmp.jetty.html.elements;
 
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.variable.Variable;
 import org.jdmp.jetty.html.EmphasizedText;
-import org.jdmp.jetty.html.Text;
 import org.jdmp.jetty.html.tags.DivTag;
-import org.jdmp.jetty.html.tags.InputHiddenTag;
-import org.jdmp.jetty.html.tags.InputTextTag;
 import org.jdmp.jetty.html.tags.LinkTag;
+import org.jdmp.jetty.html.tags.PTag;
 import org.jdmp.jetty.html.tags.SpanTag;
-import org.ujmp.core.Matrix;
-import org.ujmp.core.util.StringUtil;
 
 public class DefaultSampleDiv extends DivTag {
 	private static final long serialVersionUID = 6587788027413384557L;
@@ -44,10 +39,10 @@ public class DefaultSampleDiv extends DivTag {
 		setParameter("class", "sample");
 		String label = sample.getLabel();
 		String type = sample.getAllAsString("Type");
-		String description = sample.getDescription();
-		String url = sample.getAsString("URL");
 		String id = sample.getId();
 		String idurl = "?id=" + id;
+
+		PTag p = new PTag();
 
 		DivTag title = new DivTag();
 		title.setParameter("class", "title");
@@ -67,96 +62,11 @@ public class DefaultSampleDiv extends DivTag {
 			typeTag.setParameter("class", "type");
 			title.add(typeTag);
 		}
-		add(title);
+		p.add(title);
 
-		DivTag tagsDiv = new DivTag();
-		tagsDiv.setParameter("class", "tags");
-		SpanTag tagTag = new SpanTag("Tags:");
-		tagTag.setParameter("class", "key");
-		tagsDiv.add(tagTag);
-
-		Variable tags = sample.getVariables().get("Tags");
-		if (tags != null) {
-			SpanTag tagsTag = new SpanTag();
-			tagsTag.setParameter("class", "value");
-			for (int t = 0; t < tags.getMatrixList().getSize(); t++) {
-				Matrix tagMatrix = tags.getMatrixList().getElementAt(t);
-				if (tagMatrix != null) {
-					String tag = tagMatrix.stringValue();
-					tagsTag.add(new EmphasizedText(StringUtil.format(tag),
-							highlightedWords));
-					LinkTag dellink = new LinkTag("?q=" + query + "&id=" + id
-							+ "&deltag=" + tag, "[x]");
-					tagsTag.add(dellink);
-					if (t < tags.getMatrixList().getSize() - 1) {
-						tagsTag.add(new Text(", "));
-					}
-				}
-			}
-			tagsDiv.add(tagsTag);
-		}
-
-		InputTextTag inputTag = new InputTextTag("tag" + i);
-		inputTag.setParameter("style", "border: 0px;");
-		tagsDiv.add(inputTag);
-		InputHiddenTag inputId = new InputHiddenTag("id" + i, id);
-		tagsDiv.add(inputId);
-		add(tagsDiv);
-
-		if (description != null && description.length() > 0) {
-			DivTag descriptionDiv = new DivTag(new EmphasizedText(description,
-					highlightedWords));
-			descriptionDiv.setParameter("class", "description");
-			add(descriptionDiv);
-		}
-
-		DivTag fields = new DivTag();
-		fields.setParameter("class", "fields");
-
-		for (Object key : sample.getVariables().keySet()) {
-			if (Sample.LABEL.equals(key)) {
-				continue;
-			} else if (Sample.DESCRIPTION.equals(key)) {
-				continue;
-			} else if ("Type".equals(key)) {
-				continue;
-			} else if ("Content".equals(key)) {
-				continue;
-			} else if ("Links".equals(key)) {
-				continue;
-			} else if ("Tags".equals(key)) {
-				continue;
-			} else if ("URL".equals(key)) {
-				continue;
-			}
-			DivTag field = new DivTag();
-			field.setParameter("class", "field");
-
-			SpanTag keyTag = new SpanTag(StringUtil.format(key) + ":");
-			keyTag.setParameter("class", "key");
-			field.add(keyTag);
-			SpanTag valueTag = new SpanTag(new EmphasizedText(StringUtil
-					.format(sample.getAllAsString(key)), highlightedWords));
-			valueTag.setParameter("class", "value");
-			field.add(valueTag);
-
-			fields.add(field);
-		}
-
-		add(fields);
-
-		DivTag address = new DivTag();
-		address.setParameter("class", "address");
-
-		if (url != null && url.length() > 0) {
-			LinkTag link = new LinkTag(url, new EmphasizedText(url,
-					highlightedWords));
-			link.setParameter("class", "url");
-			SpanTag urlTag = new SpanTag(link);
-			urlTag.setParameter("class", "url");
-			address.add(urlTag);
-		}
-
-		add(address);
+		p.add(new DescriptionDiv(sample.getDescription(), highlightedWords));
+		p.add(new VariablesDiv(sample, highlightedWords));
+		p.add(new URLDiv(sample, highlightedWords));
+		add(p);
 	}
 }

@@ -21,39 +21,17 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.core.variable;
+package org.jdmp.core.algorithm.similarity;
 
-import org.jdmp.core.JDMPCoreObject;
-import org.jdmp.core.matrix.HasMatrixList;
-import org.ujmp.core.Matrix;
+import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.sample.Sample;
 
-public interface Variable extends JDMPCoreObject, HasMatrixList {
-	public static final Class<?>[] VARIABLEARRAY = new Class<?>[] { new Variable[] {}.getClass() };
+public interface SimilaritySearcher {
 
-	public static final String TAGS = "Tags";
+	public DataSet searchSimilar(Sample sample, int start, int count) throws Exception;
 
-	public static final String TOTAL = "Total";
+	public DataSet searchSimilar(Sample sample) throws Exception;
 
-	public long[] getSize();
-
-	public void setSize(long... size);
-
-	public Matrix getAsMatrix();
-
-	public void addMatrix(Matrix m);
-
-	public int getMatrixCount();
-
-	public Matrix getMatrix();
-
-	public String getAsString();
-
-	public Matrix getMatrix(int index);
-
-	public long getRowCount();
-
-	public long getColumnCount();
-
-	public Variable clone();
+	public DataSet searchSimilar(Sample sample, int count) throws Exception;
 
 }

@@ -21,39 +21,25 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.core.variable;
+package org.jdmp.jetty.html.tags;
 
-import org.jdmp.core.JDMPCoreObject;
-import org.jdmp.core.matrix.HasMatrixList;
-import org.ujmp.core.Matrix;
+import org.jdmp.jetty.html.Html;
+import org.jdmp.jetty.html.Text;
 
-public interface Variable extends JDMPCoreObject, HasMatrixList {
-	public static final Class<?>[] VARIABLEARRAY = new Class<?>[] { new Variable[] {}.getClass() };
+public class BTag extends AbstractHtmlTag {
+	private static final long serialVersionUID = -2268709505069947162L;
 
-	public static final String TAGS = "Tags";
+	public BTag(String label) {
+		this(new Text(label));
+	}
 
-	public static final String TOTAL = "Total";
+	public BTag(Html... content) {
+		add(content);
+	}
 
-	public long[] getSize();
-
-	public void setSize(long... size);
-
-	public Matrix getAsMatrix();
-
-	public void addMatrix(Matrix m);
-
-	public int getMatrixCount();
-
-	public Matrix getMatrix();
-
-	public String getAsString();
-
-	public Matrix getMatrix(int index);
-
-	public long getRowCount();
-
-	public long getColumnCount();
-
-	public Variable clone();
+	@Override
+	public String getTagName() {
+		return "b";
+	}
 
 }

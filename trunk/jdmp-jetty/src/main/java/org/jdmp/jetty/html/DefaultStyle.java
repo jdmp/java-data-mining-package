@@ -23,53 +23,21 @@
 
 package org.jdmp.jetty.html;
 
-public class Style implements Html {
+public class DefaultStyle implements Html {
 	private static final long serialVersionUID = -6723038450667039070L;
 
 	private String style = null;
 
-	public Style(String style) {
+	public DefaultStyle(String style) {
 		this.style = style;
 	}
 
-	public Style() {
+	public DefaultStyle() {
 		String EOL = System.getProperty("line.separator");
 		style = "html {" + EOL;
 		style += "  font-family: arial, helvetica, verdana, lucida, sans-serif;"
 				+ EOL;
 		style += "  font-size: 12px;" + EOL;
-		style += "}" + EOL;
-		style += EOL;
-		style += "h1 {" + EOL;
-		style += "  font-size: 16px;" + EOL;
-		style += "  font-weight: bold;" + EOL;
-		style += "  color: #000066;" + EOL;
-		style += "}" + EOL;
-		style += EOL;
-		style += ".label {" + EOL;
-		style += "  font-size: 14px;" + EOL;
-		style += "  color: #0000dd;" + EOL;
-		style += "}" + EOL;
-		style += EOL;
-		style += ".sample {" + EOL;
-		style += "  margin-bottom: 10px;" + EOL;
-		style += "}" + EOL;
-		style += EOL;
-		style += ".type {" + EOL;
-		style += "  color: #808080;" + EOL;
-		style += "}" + EOL;
-		style += EOL;
-		style += ".value {" + EOL;
-		style += "  color: #800000;" + EOL;
-		style += "}" + EOL;
-		style += EOL;
-		style += ".key {" + EOL;
-		style += "  font-weight: bold;" + EOL;
-		style += "  color: #800000;" + EOL;
-		style += "}" + EOL;
-		style += EOL;
-		style += ".url {" + EOL;
-		style += "  color: #008000;" + EOL;
 		style += "}" + EOL;
 	}
 

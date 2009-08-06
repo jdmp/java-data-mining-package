@@ -38,17 +38,33 @@ public class Page implements Html {
 
 	private BodyTag body = new BodyTag();
 
-	public Page(String titleString, Style style, Html... content) {
-		this.title.add(new Text(titleString));
+	private Html style = new DefaultStyle();
+
+	public Page(String titleString, Html... content) {
+		setTitle(titleString);
+		body.add(content);
+	}
+
+	public Page() {
+	}
+
+	public void setTitle(String t) {
+		title.clear();
+		title.add(new Text(t));
+		head.clear();
 		head.add(title);
 		if (style != null) {
 			head.add(style);
 		}
-		body.add(content);
 	}
 
-	public Page(String titleString, Html... content) {
-		this(titleString, new Style(), content);
+	public void setStyle(Html style) {
+		this.style = style;
+		head.clear();
+		head.add(title);
+		if (style != null) {
+			head.add(style);
+		}
 	}
 
 	public void add(Html... content) {
