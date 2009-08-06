@@ -67,12 +67,4 @@ public abstract class AbstractIndex extends AbstractAlgorithm implements Index {
 		return search(query, 0, count);
 	}
 
-	public final DataSet searchSimilar(Sample sample) throws Exception {
-		return searchSimilar(sample, 0, 100);
-	}
-
-	public final DataSet searchSimilar(Sample sample, int count) throws Exception {
-		return searchSimilar(sample, 0, count);
-	}
-
 }

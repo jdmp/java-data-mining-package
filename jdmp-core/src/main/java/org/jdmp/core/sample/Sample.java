@@ -55,6 +55,10 @@ public interface Sample extends JDMPCoreObject, HasVariableMap, HasId {
 
 	public static final String DIFFERENCE = Regressor.DIFFERENCE;
 
+	public static final String URL = "URL";
+
+	public static final String TAGS = "Tags";
+
 	public Sample clone();
 
 }

@@ -8,11 +8,12 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import org.jdmp.core.algorithm.Algorithm;
+import org.jdmp.core.algorithm.similarity.SimilaritySearcher;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.core.sample.Sample;
 
-public class MultiIndex extends AbstractIndex {
+public class MultiIndex extends AbstractIndex implements SimilaritySearcher {
 	private static final long serialVersionUID = 3828613564416089927L;
 
 	private ExecutorService executors = Executors.newCachedThreadPool();
@@ -65,9 +66,9 @@ public class MultiIndex extends AbstractIndex {
 			List<Future<DataSet>> futures = new ArrayList<Future<DataSet>>();
 			for (Object key : getAlgorithms().keySet()) {
 				Algorithm a = getAlgorithms().get(key);
-				if (a instanceof Index) {
-					futures.add(executors.submit(new SearchSimilarFuture((Index) a, sample, start,
-							count)));
+				if (a instanceof SimilaritySearcher) {
+					futures.add(executors.submit(new SearchSimilarFuture((SimilaritySearcher) a,
+							sample, start, count)));
 				}
 			}
 			for (Future<DataSet> f : futures) {
@@ -105,7 +106,7 @@ public class MultiIndex extends AbstractIndex {
 
 	class SearchSimilarFuture implements Callable<DataSet> {
 
-		private Index index = null;
+		private SimilaritySearcher index = null;
 
 		private Sample sample = null;
 
@@ -113,7 +114,7 @@ public class MultiIndex extends AbstractIndex {
 
 		private int start = 0;
 
-		public SearchSimilarFuture(Index index, Sample sample, int start, int count) {
+		public SearchSimilarFuture(SimilaritySearcher index, Sample sample, int start, int count) {
 			this.index = index;
 			this.sample = sample;
 			this.start = start;
@@ -161,5 +162,13 @@ public class MultiIndex extends AbstractIndex {
 			}
 		}
 		return sample;
+	}
+
+	public final DataSet searchSimilar(Sample sample) throws Exception {
+		return searchSimilar(sample, 0, 100);
+	}
+
+	public final DataSet searchSimilar(Sample sample, int count) throws Exception {
+		return searchSimilar(sample, 0, count);
 	}
 }

@@ -21,39 +21,35 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.core.variable;
+package org.jdmp.jetty.html.elements;
 
-import org.jdmp.core.JDMPCoreObject;
-import org.jdmp.core.matrix.HasMatrixList;
-import org.ujmp.core.Matrix;
+import javax.servlet.http.HttpServletRequest;
 
-public interface Variable extends JDMPCoreObject, HasMatrixList {
-	public static final Class<?>[] VARIABLEARRAY = new Class<?>[] { new Variable[] {}.getClass() };
+import org.jdmp.core.algorithm.index.Index;
+import org.jdmp.jetty.html.tags.BRTag;
+import org.jdmp.jetty.html.tags.DivTag;
+import org.jdmp.jetty.html.tags.H1Tag;
+import org.jdmp.jetty.html.tags.InputSubmitTag;
+import org.jdmp.jetty.html.tags.InputTextTag;
+import org.ujmp.core.interfaces.HasLabel;
 
-	public static final String TAGS = "Tags";
+public class SearchDiv extends DivTag {
+	private static final long serialVersionUID = -7692590820809423552L;
 
-	public static final String TOTAL = "Total";
+	public SearchDiv(Index index, HttpServletRequest request) {
+		try {
+			String query = request.getParameter("q");
 
-	public long[] getSize();
+			add(new H1Tag("JDMP Search [" + ((HasLabel) index).getLabel() + "]"));
+			add(index.getSize() + " items in index");
+			add(new BRTag());
 
-	public void setSize(long... size);
-
-	public Matrix getAsMatrix();
-
-	public void addMatrix(Matrix m);
-
-	public int getMatrixCount();
-
-	public Matrix getMatrix();
-
-	public String getAsString();
-
-	public Matrix getMatrix(int index);
-
-	public long getRowCount();
-
-	public long getColumnCount();
-
-	public Variable clone();
+			add(new InputTextTag("q", query));
+			add(new InputSubmitTag("submit", "submit"));
+			add(new BRTag());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 }

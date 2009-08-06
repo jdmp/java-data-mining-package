@@ -59,6 +59,7 @@ import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.TopDocs;
+import org.apache.lucene.search.WildcardQuery;
 import org.apache.lucene.search.BooleanClause.Occur;
 import org.apache.lucene.search.similar.MoreLikeThis;
 import org.apache.lucene.store.Directory;
@@ -67,6 +68,7 @@ import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.algorithm.index.AbstractIndex;
 import org.jdmp.core.algorithm.index.Index;
 import org.jdmp.core.algorithm.index.MultiIndex;
+import org.jdmp.core.algorithm.similarity.SimilaritySearcher;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.core.dataset.DefaultDataSet;
@@ -81,7 +83,7 @@ import org.ujmp.core.util.SerializationUtil;
 import org.ujmp.core.util.io.FileUtil;
 
 public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
-		Erasable, HasSampleList {
+		Erasable, HasSampleList, SimilaritySearcher {
 	private static final long serialVersionUID = -8483996550983833243L;
 
 	private IndexWriter indexWriter = null;
@@ -110,6 +112,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 
 	public LuceneIndex(DataSet dataSet) throws Exception {
 		this(null, false, new Index[] {});
+		setLabel(dataSet.getLabel());
 		add(dataSet);
 	}
 
@@ -212,6 +215,15 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 		indexWriter.updateDocument(new Term(Sample.ID, id), doc);
 	}
 
+	public final DataSet searchSimilar(Sample sample) throws Exception {
+		return searchSimilar(sample, 0, 100);
+	}
+
+	public final DataSet searchSimilar(Sample sample, int count)
+			throws Exception {
+		return searchSimilar(sample, 0, count);
+	}
+
 	public int getSize() {
 		try {
 			if (indexWriter != null) {
@@ -260,10 +272,24 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 				analyzer);
 		p.setDefaultOperator(MultiFieldQueryParser.AND_OPERATOR);
 		Query q = null;
-		if (query == null || "".equals(query)) {
-			q = p.parse("Id:S*");
-		} else if ("*".equals(query)) {
-			q = p.parse("Id:S*");
+		if (query == null || "".equals(query) || "*".equals(query)) {
+			BooleanQuery bq = new BooleanQuery();
+			for (int i = 0; i <= 9; i++) {
+				Term term = new Term(Sample.ID, i + "*");
+				WildcardQuery wq = new WildcardQuery(term);
+				bq.add(wq, Occur.SHOULD);
+			}
+			for (char i = 'a'; i <= 'z'; i++) {
+				Term term = new Term(Sample.ID, i + "*");
+				WildcardQuery wq = new WildcardQuery(term);
+				bq.add(wq, Occur.SHOULD);
+			}
+			for (char i = 'A'; i <= 'Z'; i++) {
+				Term term = new Term(Sample.ID, i + "*");
+				WildcardQuery wq = new WildcardQuery(term);
+				bq.add(wq, Occur.SHOULD);
+			}
+			q = bq;
 		} else {
 			q = p.parse(query);
 		}
