@@ -68,4 +68,6 @@ public interface HtmlFactory {
 
 	public Html createStyle();
 
+	public Html createVariablesDiv(Sample sample, String... highlightedWords);
+
 }

@@ -26,14 +26,16 @@ package org.jdmp.jetty.html.pages;
 import javax.servlet.http.HttpServletRequest;
 
 import org.jdmp.core.algorithm.index.Index;
+import org.jdmp.core.algorithm.spellchecker.SpellChecker;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.jetty.html.Page;
 import org.jdmp.jetty.html.elements.DefaultDataSetDiv;
+import org.jdmp.jetty.html.elements.ResultDiv;
 import org.jdmp.jetty.html.elements.SearchDiv;
+import org.jdmp.jetty.html.elements.SuggestionsDiv;
 import org.jdmp.jetty.html.tags.FormTag;
-import org.jdmp.jetty.html.tags.PTag;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.interfaces.HasLabel;
 
@@ -84,14 +86,17 @@ public class DefaultIndexPage extends Page {
 
 			setTitle("JDMP Search [" + ((HasLabel) index).getLabel() + "]");
 
-			FormTag searchform = new FormTag("");
+			FormTag searchform = new FormTag("./");
 
 			searchform.add(new SearchDiv(index, request));
+			if (index instanceof SpellChecker) {
+				searchform
+						.add(new SuggestionsDiv((SpellChecker) index, request));
+			}
 
-			int start = 1;
+			int start = 0;
 			try {
 				start = Integer.parseInt(request.getParameter("start"));
-				start = start == 0 ? 1 : start;
 			} catch (Exception e) {
 			}
 
@@ -105,21 +110,12 @@ public class DefaultIndexPage extends Page {
 			if (query != null) {
 				DataSet result = null;
 				try {
-					result = index.search(query, start - 1, count);
+					result = index.search(query, start, count);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 
-				PTag p = new PTag();
-				if (result.getSamples().isEmpty()) {
-					p.add("no results found.");
-				} else {
-					p.add("Results " + start + " - "
-							+ (start - 1 + result.getSamples().getSize())
-							+ " of " + result.getAsInt(Variable.TOTAL));
-				}
-
-				searchform.add(p);
+				searchform.add(new ResultDiv(result, start, count));
 				searchform.add(new DefaultDataSetDiv(result, request));
 			}
 
