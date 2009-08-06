@@ -44,14 +44,14 @@ import org.ujmp.core.Matrix;
 public class JettyIndexServlet extends HttpServlet {
 	private static final long serialVersionUID = -529359384170033358L;
 
-	private HtmlFactory factory = new DefaultHtmlFactory();
+	public static HtmlFactory factory = new DefaultHtmlFactory();
 
 	public HtmlFactory getFactory() {
 		return factory;
 	}
 
-	public void setFactory(HtmlFactory factory) {
-		this.factory = factory;
+	public static void setFactory(HtmlFactory factory) {
+		JettyIndexServlet.factory = factory;
 	}
 
 	public Index getIndex() {
@@ -71,6 +71,9 @@ public class JettyIndexServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		if (request.getParameterMap().containsKey("q")) {
+			request.getParameterMap().remove("q");
+		}
 		doPost(request, response);
 	}
 

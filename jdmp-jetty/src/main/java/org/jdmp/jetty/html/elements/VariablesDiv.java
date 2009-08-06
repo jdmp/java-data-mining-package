@@ -35,9 +35,12 @@ import org.ujmp.core.util.StringUtil;
 public class VariablesDiv extends DivTag {
 	private static final long serialVersionUID = -3857330921351894952L;
 
-	private Set<String> skippedVariables = new HashSet<String>();
-
 	public VariablesDiv(HasVariableMap variables, String... highlightedWords) {
+		this(variables, new HashSet<String>(), highlightedWords);
+	}
+
+	public VariablesDiv(HasVariableMap variables, Set<String> skippedVariables,
+			String... highlightedWords) {
 		setParameter("class", "fields");
 
 		for (Object key : variables.getVariables().keySet()) {
@@ -56,14 +59,6 @@ public class VariablesDiv extends DivTag {
 			field.add(valueTag);
 			add(field);
 		}
-	}
-
-	public void setSkippedVariables(Set<String> skippedVariables) {
-		this.skippedVariables = skippedVariables;
-	}
-
-	public Set<String> getSkippedVariables() {
-		return skippedVariables;
 	}
 
 }

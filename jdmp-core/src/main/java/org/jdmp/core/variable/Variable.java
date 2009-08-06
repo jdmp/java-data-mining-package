@@ -34,6 +34,18 @@ public interface Variable extends JDMPCoreObject, HasMatrixList {
 
 	public static final String TOTAL = "Total";
 
+	public static final String URL = "URL";
+
+	public static final String LABEL = "Label";
+
+	public static final String DESCRIPTION = "Description";
+
+	public static final String CONTENT = "Content";
+
+	public static final String LINKS = "Links";
+
+	public static final String TYPE = "Type";
+
 	public long[] getSize();
 
 	public void setSize(long... size);

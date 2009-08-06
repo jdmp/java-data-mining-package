@@ -34,6 +34,7 @@ import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.module.Module;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
+import org.jdmp.jetty.html.elements.VariablesDiv;
 import org.jdmp.jetty.html.pages.DefaultIndexPage;
 import org.jdmp.jetty.html.pages.DefaultSamplePage;
 import org.jdmp.jetty.html.tags.DivTag;
@@ -105,6 +106,11 @@ public class DefaultHtmlFactory implements HtmlFactory {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Html createVariablesDiv(Sample sample, String... highlightedWords) {
+		return new VariablesDiv(sample, highlightedWords);
 	}
 
 }
