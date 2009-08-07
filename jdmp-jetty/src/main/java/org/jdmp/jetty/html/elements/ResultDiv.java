@@ -34,7 +34,7 @@ public class ResultDiv extends DivTag {
 	public ResultDiv(DataSet dataSet, int start, int count) {
 		setParameter("class", "result");
 		PTag p = new PTag();
-		if (dataSet.getSamples().isEmpty()) {
+		if (dataSet == null || dataSet.getSamples().isEmpty()) {
 			p.add("no results found.");
 		} else {
 			p.add("Results " + (start + 1) + " - " + (start + count) + " of "

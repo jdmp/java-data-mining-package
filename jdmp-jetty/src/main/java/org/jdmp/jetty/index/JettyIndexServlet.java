@@ -71,9 +71,6 @@ public class JettyIndexServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		if (request.getParameterMap().containsKey("q")) {
-			request.getParameterMap().remove("q");
-		}
 		doPost(request, response);
 	}
 
@@ -113,9 +110,9 @@ public class JettyIndexServlet extends HttpServlet {
 			Page page = null;
 			if (id != null) {
 				Sample sample = index.getSample(id);
-				page = factory.createSamplePage(sample, request, index);
+				page = factory.createSamplePage(request, sample, index);
 			} else {
-				page = factory.createIndexPage(index, request);
+				page = factory.createIndexPage(request, index);
 			}
 
 			out.append(page.toString());

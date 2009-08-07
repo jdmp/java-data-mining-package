@@ -37,22 +37,9 @@ import org.jdmp.core.variable.Variable;
 import org.jdmp.jetty.html.elements.VariablesDiv;
 import org.jdmp.jetty.html.pages.DefaultIndexPage;
 import org.jdmp.jetty.html.pages.DefaultSamplePage;
-import org.jdmp.jetty.html.tags.DivTag;
 import org.ujmp.core.Matrix;
 
 public class DefaultHtmlFactory implements HtmlFactory {
-
-	@Override
-	public DivTag createDataSetDiv() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public DivTag createSample() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public Html createStyle() {
@@ -60,57 +47,58 @@ public class DefaultHtmlFactory implements HtmlFactory {
 	}
 
 	@Override
-	public Page createSamplePage(Sample sample, HttpServletRequest request,
+	public Page createSamplePage(HttpServletRequest request, Sample sample,
 			Object... parameters) throws ServletException, IOException {
 		return new DefaultSamplePage(sample, request, parameters);
 	}
 
 	@Override
-	public Page createIndexPage(Index index, HttpServletRequest request,
+	public Page createIndexPage(HttpServletRequest request, Index index,
 			Object... parameters) throws ServletException, IOException {
 		return new DefaultIndexPage(index, request, parameters);
 	}
 
 	@Override
-	public Page createAlgorithmPage(Algorithm algorithm,
-			HttpServletRequest request, Object... parameters)
-			throws ServletException, IOException {
+	public Page createAlgorithmPage(HttpServletRequest request,
+			Algorithm algorithm, Object... parameters) throws ServletException,
+			IOException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Page createDataSetPage(DataSet dataSet, HttpServletRequest request,
+	public Page createDataSetPage(HttpServletRequest request, DataSet dataSet,
 			Object... parameters) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Page createMatrixPage(Matrix matrix, HttpServletRequest request,
+	public Page createMatrixPage(HttpServletRequest request, Matrix matrix,
 			Object... parameters) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Page createModulePage(Module module, HttpServletRequest request,
+	public Page createModulePage(HttpServletRequest request, Module module,
 			Object... parameters) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Page createVariablePage(Variable variable,
-			HttpServletRequest request, Object... parameters)
-			throws ServletException, IOException {
+	public Page createVariablePage(HttpServletRequest request,
+			Variable variable, Object... parameters) throws ServletException,
+			IOException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Html createVariablesDiv(Sample sample, String... highlightedWords) {
-		return new VariablesDiv(sample, highlightedWords);
+	public Html createVariablesDiv(HttpServletRequest request, Sample sample,
+			String... highlightedWords) {
+		return new VariablesDiv(request, sample, highlightedWords);
 	}
 
 }

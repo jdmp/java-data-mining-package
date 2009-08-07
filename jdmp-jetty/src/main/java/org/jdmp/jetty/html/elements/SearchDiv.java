@@ -31,6 +31,8 @@ import org.jdmp.jetty.html.tags.DivTag;
 import org.jdmp.jetty.html.tags.H1Tag;
 import org.jdmp.jetty.html.tags.InputSubmitTag;
 import org.jdmp.jetty.html.tags.InputTextTag;
+import org.jdmp.jetty.html.tags.LinkTag;
+import org.jdmp.jetty.html.tags.PTag;
 import org.ujmp.core.interfaces.HasLabel;
 
 public class SearchDiv extends DivTag {
@@ -38,15 +40,29 @@ public class SearchDiv extends DivTag {
 
 	public SearchDiv(Index index, HttpServletRequest request) {
 		try {
+			setParameter("class", "search");
+
 			String query = request.getParameter("q");
 
-			add(new H1Tag("JDMP Search [" + ((HasLabel) index).getLabel() + "]"));
-			add(index.getSize() + " items in index");
-			add(new BRTag());
+			H1Tag h1 = new H1Tag("JDMP Search ["
+					+ ((HasLabel) index).getLabel() + "]");
+			LinkTag h1Link = new LinkTag("http://www.jdmp.org", h1);
+			h1Link
+					.setParameter("title",
+							"this search engine is powered by the Java Data Mining Package");
+			add(h1Link);
 
-			add(new InputTextTag("q", query));
-			add(new InputSubmitTag("submit", "submit"));
-			add(new BRTag());
+			PTag p = new PTag();
+			p.add(index.getSize() + " items in index");
+			p.add(new BRTag());
+
+			InputTextTag inputText = new InputTextTag("q", query);
+			inputText.setParameter("title", "enter your query here");
+			p.add(inputText);
+			InputSubmitTag submit = new InputSubmitTag("submit", "submit");
+			submit.setParameter("title", "submit query");
+			p.add(submit);
+			add(p);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
