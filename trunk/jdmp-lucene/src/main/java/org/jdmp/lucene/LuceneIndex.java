@@ -35,6 +35,8 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.AbstractListModel;
 
@@ -478,27 +480,21 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 		private String query = null;
 
 		public SearchCallable(Query query) {
-			if (query instanceof BooleanQuery) {
-				Set<String> list = new HashSet<String>();
-				BooleanQuery b = (BooleanQuery) query;
-				for (BooleanClause bc : b.getClauses()) {
-					Query q = bc.getQuery();
-					if (q instanceof TermQuery) {
-						TermQuery teq = (TermQuery) q;
-						list.add(teq.getTerm().text());
-					}
+			Set<String> terms = extractTerms(query);
+			String search = "";
+			int i = 0;
+			for (String s : terms) {
+				if (i > 10) {
+					break;
 				}
-				String search = "";
-				int i = 0;
-				for (String s : list) {
-					search += s;
-					if (i < list.size() - 1) {
-						search += " ";
-					}
-					i++;
+				search += s;
+				if (i < terms.size() - 1) {
+					search += " ";
 				}
-				this.query = search;
+				i++;
 			}
+			this.query = search;
+
 		}
 
 		public SearchCallable(String query) {
@@ -538,8 +534,26 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 	}
 
 	@Override
-	public int countResults(String query) throws Exception {
+	public synchronized int countResults(String query) throws Exception {
 		return countResults(parseQuery(query));
+	}
+
+	public Set<String> extractTerms(Query query) {
+		Set<String> terms = new HashSet<String>();
+		if (query instanceof BooleanQuery) {
+			BooleanQuery b = (BooleanQuery) query;
+			for (BooleanClause bc : b.getClauses()) {
+				Query q = bc.getQuery();
+				terms.addAll(extractTerms(q));
+			}
+		} else if (query instanceof TermQuery) {
+			TermQuery tq = (TermQuery) query;
+			terms.add(tq.getTerm().text());
+		} else if (query instanceof WildcardQuery) {
+			WildcardQuery wq = (WildcardQuery) query;
+			terms.add(wq.getTerm().text());
+		}
+		return terms;
 	}
 
 	public Query parseQuery(String query) throws ParseException {
@@ -567,12 +581,18 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 			}
 			q = bq;
 		} else {
+			for (String field : fields) {
+				Pattern pat = Pattern.compile(field + ":",
+						Pattern.CASE_INSENSITIVE);
+				Matcher mat = pat.matcher(query);
+				query = mat.replaceAll(field + ":");
+			}
 			q = p.parse(query);
 		}
 		return q;
 	}
 
-	public int countResults(Query query) throws Exception {
+	public synchronized int countResults(Query query) throws Exception {
 		prepareReader();
 		System.out.println("searching for: " + query);
 		TopDocs td = indexSearcher.search(query, 1);

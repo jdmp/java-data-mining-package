@@ -23,6 +23,9 @@
 
 package org.jdmp.jetty.html.elements;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.jdmp.core.dataset.DataSet;
@@ -39,7 +42,26 @@ public class DefaultDataSetDiv extends DivTag {
 		setParameter("class", "dataset");
 
 		String query = request.getParameter("q");
-		String[] highlightedWords = query.split("\\s");
+		query = query == null ? "" : query;
+
+		String[] highlightedWords = new String[] {};
+		if (query != null && query.trim().length() > 0) {
+			highlightedWords = query.split("\\s+");
+			Set<String> temp = new HashSet<String>();
+			for (String s : highlightedWords) {
+				if (s != null) {
+					s = s.replaceAll("\\+", "");
+					if (s.contains(":")) {
+						s = s.split(":+")[1];
+					}
+					s = s.trim();
+					if (s.length() > 0) {
+						temp.add(s);
+					}
+				}
+			}
+			highlightedWords = temp.toArray(new String[temp.size()]);
+		}
 
 		PTag p = new PTag();
 
@@ -47,7 +69,7 @@ public class DefaultDataSetDiv extends DivTag {
 			int maxid = 0;
 			for (Sample s : dataSet.getSamples()) {
 				if (s != null) {
-					p.add(new DefaultSampleDiv(maxid++, s, query,
+					p.add(new DefaultSampleDiv(request, maxid++, s, query,
 							highlightedWords));
 				}
 			}

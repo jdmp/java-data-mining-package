@@ -34,40 +34,36 @@ import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.module.Module;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
-import org.jdmp.jetty.html.tags.DivTag;
 import org.ujmp.core.Matrix;
 
 public interface HtmlFactory {
 
-	public Page createSamplePage(Sample sample, HttpServletRequest request,
+	public Page createSamplePage(HttpServletRequest request, Sample sample,
 			Object... parameters) throws ServletException, IOException;
 
-	public Page createAlgorithmPage(Algorithm algorithm,
-			HttpServletRequest request, Object... parameters)
-			throws ServletException, IOException;
+	public Page createAlgorithmPage(HttpServletRequest request,
+			Algorithm algorithm, Object... parameters) throws ServletException,
+			IOException;
 
-	public Page createIndexPage(Index index, HttpServletRequest request,
+	public Page createIndexPage(HttpServletRequest request, Index index,
 			Object... parameters) throws ServletException, IOException;
 
-	public Page createModulePage(Module module, HttpServletRequest request,
+	public Page createModulePage(HttpServletRequest request, Module module,
 			Object... parameters) throws ServletException, IOException;
 
-	public Page createVariablePage(Variable variable,
-			HttpServletRequest request, Object... parameters)
-			throws ServletException, IOException;
+	public Page createVariablePage(HttpServletRequest request,
+			Variable variable, Object... parameters) throws ServletException,
+			IOException;
 
-	public Page createDataSetPage(DataSet dataSet, HttpServletRequest request,
+	public Page createDataSetPage(HttpServletRequest request, DataSet dataSet,
 			Object... parameters) throws ServletException, IOException;
 
-	public Page createMatrixPage(Matrix matrix, HttpServletRequest request,
+	public Page createMatrixPage(HttpServletRequest request, Matrix matrix,
 			Object... parameters) throws ServletException, IOException;
-
-	public DivTag createDataSetDiv();
-
-	public DivTag createSample();
 
 	public Html createStyle();
 
-	public Html createVariablesDiv(Sample sample, String... highlightedWords);
+	public Html createVariablesDiv(HttpServletRequest request, Sample sample,
+			String... highlightedWords);
 
 }
