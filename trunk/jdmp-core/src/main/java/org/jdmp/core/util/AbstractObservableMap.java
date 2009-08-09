@@ -39,9 +39,9 @@ public abstract class AbstractObservableMap<V> implements ObservableMap<V> {
 
 	private EventListenerList listenerList = null;
 
-	public abstract Map<Object, V> getMap();
+	public abstract Map<String, V> getMap();
 
-	public abstract void setMap(Map<Object, V> map);
+	public abstract void setMap(Map<String, V> map);
 
 	public final synchronized V getElementAt(int index) {
 		Iterator<V> it = getMap().values().iterator();
@@ -83,7 +83,7 @@ public abstract class AbstractObservableMap<V> implements ObservableMap<V> {
 		return getMap().size();
 	}
 
-	public final synchronized V put(Object key, V value) {
+	public final synchronized V put(String key, V value) {
 		V v = getMap().put(key, value);
 		int index = indexOf(value);
 		if (v == null) {
@@ -126,7 +126,7 @@ public abstract class AbstractObservableMap<V> implements ObservableMap<V> {
 		return getMap().values();
 	}
 
-	public final Set<Object> keySet() {
+	public final Set<String> keySet() {
 		return getMap().keySet();
 	}
 
@@ -141,13 +141,13 @@ public abstract class AbstractObservableMap<V> implements ObservableMap<V> {
 	}
 
 	@Override
-	public final Set<java.util.Map.Entry<Object, V>> entrySet() {
+	public final Set<java.util.Map.Entry<String, V>> entrySet() {
 		return getMap().entrySet();
 	}
 
 	@Override
-	public final void putAll(Map<? extends Object, ? extends V> m) {
-		for (Object k : m.keySet()) {
+	public final void putAll(Map<? extends String, ? extends V> m) {
+		for (String k : m.keySet()) {
 			V v = m.get(k);
 			put(k, v);
 		}

@@ -46,7 +46,7 @@ public class DefaultModule extends AbstractModule {
 	}
 
 	@Override
-	public void setMatrix(Object variableKey, Matrix matrix) {
+	public void setMatrix(String variableKey, Matrix matrix) {
 		Variable v = getVariables().get(variableKey);
 		if (v == null) {
 			v = VariableFactory.labeledVariable(StringUtil.format(variableKey));

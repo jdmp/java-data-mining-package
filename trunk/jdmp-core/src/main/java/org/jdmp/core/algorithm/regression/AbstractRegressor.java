@@ -36,7 +36,7 @@ import org.ujmp.core.util.MathUtil;
 public abstract class AbstractRegressor extends AbstractAlgorithm implements Regressor {
 	private static final long serialVersionUID = 4674447558395794134L;
 
-	public static final int OUTPUTERRORALGORITHM = 0;
+	public static final String OUTPUTERRORALGORITHM = "OutputErrorAlgorithm";
 
 	public static final int TRAIN = 0;
 

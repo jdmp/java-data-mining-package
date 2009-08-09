@@ -34,7 +34,7 @@ public class Repeat extends AbstractAlgorithm {
 
 	public static final String DESCRIPTION = "calls another Algorithm several times";
 
-	private final int REPEATEDALGORITHM = 0;
+	private final String REPEATEDALGORITHM = "Repeat";
 
 	private int repeatCount = 1;
 

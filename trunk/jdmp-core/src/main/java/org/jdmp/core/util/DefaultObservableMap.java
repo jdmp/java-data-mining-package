@@ -30,15 +30,15 @@ import java.util.Map;
 public class DefaultObservableMap<V> extends AbstractObservableMap<V> {
 	private static final long serialVersionUID = -1811632376295464484L;
 
-	private Map<Object, V> map = null;
+	private Map<String, V> map = null;
 
 	public DefaultObservableMap() {
 		// should be a HashMap, because different object types cannot be
 		// compared otherwise
-		this(new HashMap<Object, V>(2));
+		this(new HashMap<String, V>(2));
 	}
 
-	public DefaultObservableMap(Map<Object, V> map) {
+	public DefaultObservableMap(Map<String, V> map) {
 		this.map = map;
 	}
 
@@ -49,12 +49,12 @@ public class DefaultObservableMap<V> extends AbstractObservableMap<V> {
 	}
 
 	@Override
-	public Map<Object, V> getMap() {
+	public Map<String, V> getMap() {
 		return map;
 	}
 
 	@Override
-	public void setMap(Map<Object, V> map) {
+	public void setMap(Map<String, V> map) {
 		this.map = map;
 	}
 

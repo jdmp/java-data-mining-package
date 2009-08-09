@@ -62,9 +62,9 @@ public interface HasVariableMap extends HasVariables {
 
 	public BigInteger getAsBigInteger(Object variableKey);
 
-	public void setMatrix(Object variableKey, Matrix matrix);
+	public void setMatrix(String variableKey, Matrix matrix);
 
-	public void setObject(Object variableKey, Object value);
+	public void setObject(String variableKey, Object value);
 
 	public void setVariables(ObservableMap<Variable> variables);
 

@@ -55,17 +55,17 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 
 	private ObservableList<DataSet> dataSetList = new DefaultObservableList<DataSet>();
 
-	private final Map<Object, String> edgeLabels = new HashMap<Object, String>(2);
+	private final Map<String, String> edgeLabels = new HashMap<String, String>(2);
 
-	private final Map<Object, EdgeDirection> edgeDirections = new HashMap<Object, EdgeDirection>(2);
+	private final Map<String, EdgeDirection> edgeDirections = new HashMap<String, EdgeDirection>(2);
 
-	private final List<Object> variableKeys = new ArrayList<Object>(2);
+	private final List<String> variableKeys = new ArrayList<String>(2);
 
-	public final void setEdgeLabel(Object key, String edgeLabel) {
+	public final void setEdgeLabel(String key, String edgeLabel) {
 		edgeLabels.put(key, edgeLabel);
 	}
 
-	public final void addVariableKey(Object key) {
+	public final void addVariableKey(String key) {
 		variableKeys.add(key);
 	}
 
@@ -75,11 +75,11 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		}
 	}
 
-	public final List<Object> getVariableKeys() {
+	public final List<String> getVariableKeys() {
 		return variableKeys;
 	}
 
-	public final void setObject(Object variableKey, Object value) {
+	public final void setObject(String variableKey, Object value) {
 		if (value == null) {
 			setMatrix(variableKey, MatrixFactory.emptyMatrix());
 		} else if (value instanceof Matrix) {
@@ -127,15 +127,15 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		setLabel(getClass().getSimpleName());
 	}
 
-	public final void setEdgeDirection(Object key, EdgeDirection direction) {
+	public final void setEdgeDirection(String key, EdgeDirection direction) {
 		edgeDirections.put(key, direction);
 	}
 
-	public void setVariable(Object index, Variable variable) {
+	public void setVariable(String index, Variable variable) {
 		variableMap.put(index, variable);
 	}
 
-	public final void setAlgorithm(Object index, Algorithm a) {
+	public final void setAlgorithm(String index, Algorithm a) {
 		algorithmList.put(index, a);
 	}
 
@@ -160,16 +160,16 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 
 		Map<Object, Object> output = calculateObjects(input);
 
-		for (Object v : getOutputKeys()) {
+		for (String v : getOutputKeys()) {
 			setMatrix(v, MathUtil.getMatrix(output.get(v)));
 		}
 
 		return output;
 	}
 
-	public final List<Object> getInputKeys() {
-		List<Object> inputKeys = new ArrayList<Object>();
-		for (Object v : getVariableKeys()) {
+	public final List<String> getInputKeys() {
+		List<String> inputKeys = new ArrayList<String>();
+		for (String v : getVariableKeys()) {
 			if (EdgeDirection.Incoming.equals(getEdgeDirection(v))
 					|| EdgeDirection.Bidirectional.equals(getEdgeDirection(v))) {
 				inputKeys.add(v);
@@ -178,9 +178,9 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		return inputKeys;
 	}
 
-	public final List<Object> getOutputKeys() {
-		List<Object> outputKeys = new ArrayList<Object>();
-		for (Object v : getVariableKeys()) {
+	public final List<String> getOutputKeys() {
+		List<String> outputKeys = new ArrayList<String>();
+		for (String v : getVariableKeys()) {
 			if (EdgeDirection.Outgoing.equals(getEdgeDirection(v))
 					|| EdgeDirection.Bidirectional.equals(getEdgeDirection(v))) {
 				outputKeys.add(v);
@@ -207,7 +207,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 
 	public final Map<Object, Object> calculate(List<Matrix> matrices) throws Exception {
 		Map<Object, Object> map = new HashMap<Object, Object>();
-		List<Object> keys = getInputKeys();
+		List<String> keys = getInputKeys();
 		for (int i = 0; i < matrices.size(); i++) {
 			Object key = keys.get(i);
 			map.put(key, matrices.get(i));
@@ -217,7 +217,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 
 	public final Map<Object, Object> calculateObjects(List<Object> matrices) throws Exception {
 		Map<Object, Object> map = new HashMap<Object, Object>();
-		List<Object> keys = getInputKeys();
+		List<String> keys = getInputKeys();
 		for (int i = 0; i < matrices.size(); i++) {
 			Object key = keys.get(i);
 			map.put(key, matrices.get(i));
@@ -231,7 +231,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		return result;
 	}
 
-	public final EdgeDirection getEdgeDirection(Object key) {
+	public final EdgeDirection getEdgeDirection(String key) {
 		return edgeDirections.get(key);
 	}
 
@@ -292,7 +292,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		}
 	}
 
-	public final void setMatrix(Object variableKey, Matrix matrix) {
+	public final void setMatrix(String variableKey, Matrix matrix) {
 		Variable v = getVariables().get(variableKey);
 		if (v == null) {
 			v = VariableFactory.labeledVariable(variableKey.toString());
@@ -322,7 +322,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		return dataSetList;
 	}
 
-	public final String getEdgeLabel(Object key) {
+	public final String getEdgeLabel(String key) {
 		return edgeLabels.get(key);
 	}
 
