@@ -42,14 +42,14 @@ public class DefaultSample extends AbstractSample {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		for (Object k : getVariables().keySet()) {
+		for (String k : getVariables().keySet()) {
 			Variable v = getVariables().get(k);
 			s.getVariables().put(k, v.clone());
 		}
 		return s;
 	}
 
-	public void setMatrix(Object variableKey, Matrix matrix) {
+	public void setMatrix(String variableKey, Matrix matrix) {
 		Variable v = getVariables().get(variableKey);
 		if (v == null) {
 			v = VariableFactory.labeledVariable(variableKey.toString());

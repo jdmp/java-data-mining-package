@@ -176,7 +176,7 @@ public class SampleMapWrapper<V> extends AbstractListModel implements Observable
 	}
 
 	@Override
-	public Set<java.util.Map.Entry<Object, Sample>> entrySet() {
+	public Set<java.util.Map.Entry<String, Sample>> entrySet() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -188,19 +188,19 @@ public class SampleMapWrapper<V> extends AbstractListModel implements Observable
 	}
 
 	@Override
-	public Set<Object> keySet() {
+	public Set<String> keySet() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Sample put(Object key, Sample value) {
+	public Sample put(String key, Sample value) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void putAll(Map<? extends Object, ? extends Sample> m) {
+	public void putAll(Map<? extends String, ? extends Sample> m) {
 		// TODO Auto-generated method stub
 
 	}

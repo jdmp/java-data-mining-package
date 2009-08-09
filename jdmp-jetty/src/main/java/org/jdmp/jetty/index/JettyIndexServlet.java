@@ -35,6 +35,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.algorithm.index.Index;
+import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.module.Module;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.jetty.html.DefaultHtmlFactory;
@@ -116,8 +118,19 @@ public class JettyIndexServlet extends HttpServlet {
 			Page page = null;
 			if (co instanceof Sample) {
 				page = factory.createSamplePage(request, (Sample) co, index);
+			} else if (co instanceof Variable) {
+				page = factory
+						.createVariablePage(request, (Variable) co, index);
+			} else if (co instanceof DataSet) {
+				page = factory.createDataSetPage(request, (DataSet) co, index);
+			} else if (co instanceof Module) {
+				page = factory.createModulePage(request, (Module) co, index);
 			} else if (co instanceof Index) {
 				page = factory.createIndexPage(request, (Index) co);
+			} else if (co instanceof Algorithm) {
+				page = factory.createAlgorithmPage(request, (Algorithm) co);
+			} else {
+				page = factory.createNotFoundPage(request);
 			}
 
 			out.append(page.toString());

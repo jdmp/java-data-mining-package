@@ -38,7 +38,7 @@ import org.ujmp.core.util.MathUtil;
 import org.ujmp.core.util.StringUtil;
 
 public abstract class AbstractMapSample extends AbstractSample implements
-		Wrapper<Map<Object, Object>> {
+		Wrapper<Map<String, Object>> {
 	private static final long serialVersionUID = -8219872482909787192L;
 
 	private VariableMap variableMap = new VariableMap();
@@ -52,7 +52,7 @@ public abstract class AbstractMapSample extends AbstractSample implements
 		return SampleFactory.clone(this);
 	}
 
-	public void setMatrix(Object variableKey, Matrix matrix) {
+	public void setMatrix(String variableKey, Matrix matrix) {
 		getWrappedObject().put(variableKey, matrix);
 	}
 
@@ -60,16 +60,16 @@ public abstract class AbstractMapSample extends AbstractSample implements
 		private static final long serialVersionUID = 1252960592502010150L;
 
 		@Override
-		public Map<Object, Variable> getMap() {
+		public Map<String, Variable> getMap() {
 			return variableMap;
 		}
 
 		@Override
-		public void setMap(Map<Object, Variable> map) {
+		public void setMap(Map<String, Variable> map) {
 		}
 	}
 
-	class VariableMap implements Map<Object, Variable>, Serializable {
+	class VariableMap implements Map<String, Variable>, Serializable {
 		private static final long serialVersionUID = -8553571915359063034L;
 
 		@Override
@@ -88,7 +88,7 @@ public abstract class AbstractMapSample extends AbstractSample implements
 		}
 
 		@Override
-		public Set<java.util.Map.Entry<Object, Variable>> entrySet() {
+		public Set<java.util.Map.Entry<String, Variable>> entrySet() {
 			throw new RuntimeException("not implemented");
 		}
 
@@ -105,19 +105,19 @@ public abstract class AbstractMapSample extends AbstractSample implements
 		}
 
 		@Override
-		public Set<Object> keySet() {
+		public Set<String> keySet() {
 			return getWrappedObject().keySet();
 		}
 
 		@Override
-		public Variable put(Object key, Variable value) {
+		public Variable put(String key, Variable value) {
 			getWrappedObject().put(key, value.getMatrix());
 			return null;
 		}
 
 		@Override
-		public void putAll(Map<? extends Object, ? extends Variable> m) {
-			for (Object key : m.keySet()) {
+		public void putAll(Map<? extends String, ? extends Variable> m) {
+			for (String key : m.keySet()) {
 				put(key, m.get(key));
 			}
 		}
@@ -177,7 +177,7 @@ public abstract class AbstractMapSample extends AbstractSample implements
 		public Iterator<Variable> iterator() {
 			return new Iterator<Variable>() {
 
-				Iterator<Object> it = getWrappedObject().keySet().iterator();
+				Iterator<String> it = getWrappedObject().keySet().iterator();
 
 				@Override
 				public boolean hasNext() {

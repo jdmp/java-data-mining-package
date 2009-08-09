@@ -63,9 +63,9 @@ public interface Algorithm extends JDMPCoreObject, HasVariableMap, HasDataSetLis
 
 	public static final String LABEL = Variable.LABEL;
 
-	public void setVariable(Object key, Variable variable);
+	public void setVariable(String key, Variable variable);
 
-	public void setAlgorithm(Object key, Algorithm a);
+	public void setAlgorithm(String key, Algorithm a);
 
 	public Map<Object, Object> calculate() throws Exception;
 
@@ -81,22 +81,22 @@ public interface Algorithm extends JDMPCoreObject, HasVariableMap, HasDataSetLis
 
 	public Map<Object, Object> calculateObjects(Map<Object, Object> objects) throws Exception;
 
-	public EdgeDirection getEdgeDirection(Object key);
+	public EdgeDirection getEdgeDirection(String key);
 
-	public String getEdgeLabel(Object key);
+	public String getEdgeLabel(String key);
 
-	public void setEdgeDirection(Object key, EdgeDirection direction);
+	public void setEdgeDirection(String key, EdgeDirection direction);
 
-	public void setEdgeLabel(Object key, String edgeLabel);
+	public void setEdgeLabel(String key, String edgeLabel);
 
-	public void addVariableKey(Object key);
+	public void addVariableKey(String key);
 
 	public void setVariables(Variable... variables);
 
-	public List<Object> getVariableKeys();
+	public List<String> getVariableKeys();
 
-	public List<Object> getInputKeys();
+	public List<String> getInputKeys();
 
-	public List<Object> getOutputKeys();
+	public List<String> getOutputKeys();
 
 }

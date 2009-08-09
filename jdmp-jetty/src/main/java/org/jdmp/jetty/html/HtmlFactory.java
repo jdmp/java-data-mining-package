@@ -66,4 +66,7 @@ public interface HtmlFactory {
 	public Html createVariablesDiv(HttpServletRequest request, Sample sample,
 			String... highlightedWords);
 
+	public Page createNotFoundPage(HttpServletRequest request,
+			Object... parameters);
+
 }

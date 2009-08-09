@@ -44,12 +44,12 @@ public class FileSample extends AbstractMapSample {
 	}
 
 	@Override
-	public Map<Object, Object> getWrappedObject() {
+	public Map<String, Object> getWrappedObject() {
 		return fileMatrix;
 	}
 
 	@Override
-	public void setWrappedObject(Map<Object, Object> object) {
+	public void setWrappedObject(Map<String, Object> object) {
 	}
 
 }

@@ -54,8 +54,8 @@ public class DefaultSamplePage extends Page {
 			for (Object key : sample.getVariables().keySet()) {
 				if (Sample.LABEL.equals(key)) {
 					continue;
-				} else if ("Links".equals(key)) {
-					Variable links = sample.getVariables().get("Links");
+				} else if (Variable.LINKS.equals(key)) {
+					Variable links = sample.getVariables().get(Variable.LINKS);
 					add(new H2Tag(StringUtil.format(key)));
 					for (Matrix m : links.getMatrixList().toCollection()) {
 						String l = m.stringValue();

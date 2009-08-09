@@ -64,7 +64,7 @@ public abstract class SampleFactory {
 		return s;
 	}
 
-	public static final Sample linkToMap(Map<? extends Object, ? extends Object> map) {
+	public static final Sample linkToMap(Map<? extends String, ? extends Object> map) {
 		Sample s = new DefaultMapSample(map);
 		return s;
 	}
@@ -109,7 +109,7 @@ public abstract class SampleFactory {
 		Sample ret = SampleFactory.emptySample();
 		ret.setLabel(s.getLabel());
 		ret.setDescription(s.getDescription());
-		for (Object k : s.getVariables().keySet()) {
+		for (String k : s.getVariables().keySet()) {
 			Variable v = s.getVariables().get(k);
 			if (v != null) {
 				ret.getVariables().put(k, v.clone());

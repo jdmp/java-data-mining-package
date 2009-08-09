@@ -38,7 +38,7 @@ import org.ujmp.core.exceptions.MatrixException;
 public class LinearRegression extends AbstractClassifier {
 	private static final long serialVersionUID = 3483912497269476834L;
 
-	public static final int PARAMETERS = 1;
+	public static final String PARAMETERS = "Parameters";
 
 	public LinearRegression() {
 		super();

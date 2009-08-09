@@ -98,7 +98,7 @@ public abstract class DataSetFactory {
 				s.setLabel(matrix.getRowLabel(r));
 			}
 			for (int c = 0; c < matrix.getColumnCount(); c++) {
-				Object label = matrix.getColumnLabel(c);
+				String label = matrix.getColumnLabel(c);
 				if (label == null) {
 					label = "col" + c;
 				}

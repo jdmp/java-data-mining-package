@@ -29,24 +29,24 @@ import java.util.Map;
 public class DefaultMapSample extends AbstractMapSample {
 	private static final long serialVersionUID = -7381008972833175285L;
 
-	private Map<Object, Object> map = null;
+	private Map<String, Object> map = null;
 
 	public DefaultMapSample() {
-		map = new HashMap<Object, Object>(2);
+		map = new HashMap<String, Object>(2);
 	}
 
 	@SuppressWarnings("unchecked")
-	public DefaultMapSample(Map<? extends Object, ? extends Object> map) {
-		this.map = (Map<Object, Object>) map;
+	public DefaultMapSample(Map<? extends String, ? extends Object> map) {
+		this.map = (Map<String, Object>) map;
 	}
 
 	@Override
-	public Map<Object, Object> getWrappedObject() {
+	public Map<String, Object> getWrappedObject() {
 		return map;
 	}
 
 	@Override
-	public void setWrappedObject(Map<Object, Object> object) {
+	public void setWrappedObject(Map<String, Object> object) {
 		this.map = object;
 	}
 }

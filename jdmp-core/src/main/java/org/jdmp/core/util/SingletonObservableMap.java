@@ -29,19 +29,19 @@ import java.util.Map;
 public class SingletonObservableMap<V> extends AbstractObservableMap<V> {
 	private static final long serialVersionUID = 3665329356125156909L;
 
-	private Map<Object, V> map = null;
+	private Map<String, V> map = null;
 
-	public SingletonObservableMap(Object key, V value) {
+	public SingletonObservableMap(String key, V value) {
 		map = Collections.singletonMap(key, value);
 	}
 
 	@Override
-	public Map<Object, V> getMap() {
+	public Map<String, V> getMap() {
 		return map;
 	}
 
 	@Override
-	public void setMap(Map<Object, V> map) {
+	public void setMap(Map<String, V> map) {
 		this.map = map;
 	}
 

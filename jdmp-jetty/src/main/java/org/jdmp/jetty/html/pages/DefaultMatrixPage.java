@@ -21,16 +21,27 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.core.util;
+package org.jdmp.jetty.html.pages;
 
-import java.util.Collection;
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 
-import javax.swing.ListModel;
+import org.jdmp.jetty.html.Page;
+import org.jdmp.jetty.html.tags.H1Tag;
+import org.ujmp.core.Matrix;
 
-public interface ObservableMap<V> extends CoreObjectList<V>, ListModel, Map<String, V> {
+public class DefaultMatrixPage extends Page {
+	private static final long serialVersionUID = -1585763405757847068L;
 
-	public void addAll(Collection<V> objects);
+	public DefaultMatrixPage(HttpServletRequest request, Matrix matrix,
+			Object... parameters) {
+		super();
+		if (matrix == null) {
+			setTitle("JDMP Search: not found");
+			add(new H1Tag("sample not found"));
+		} else {
+			setTitle("JDMP Search: " + matrix.getLabel());
+			add(new H1Tag(matrix.getLabel()));
+		}
+	}
 
-	public void add(V object);
 }

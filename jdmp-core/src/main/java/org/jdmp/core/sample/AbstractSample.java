@@ -187,7 +187,7 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 		setObject(Sample.LABEL, label);
 	}
 
-	public final void setObject(Object variableKey, Object value) {
+	public final void setObject(String variableKey, Object value) {
 		if (value == null) {
 			setMatrix(variableKey, MatrixFactory.emptyMatrix());
 		} else if (value instanceof Matrix) {
