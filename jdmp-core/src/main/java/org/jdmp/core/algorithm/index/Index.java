@@ -24,14 +24,16 @@
 package org.jdmp.core.algorithm.index;
 
 import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.sample.HasSampleMap;
 import org.jdmp.core.sample.Sample;
+import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 
-public interface Index {
+public interface Index extends HasSampleMap {
 
-	public static final String INPUT = "Input";
+	public static final String INPUT = Variable.INPUT;
 
-	public static final String SCORE = "Score";
+	public static final String SCORE = Variable.SCORE;
 
 	public void add(Matrix input) throws Exception;
 

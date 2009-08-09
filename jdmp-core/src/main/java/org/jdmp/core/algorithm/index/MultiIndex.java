@@ -12,6 +12,7 @@ import org.jdmp.core.algorithm.similarity.SimilaritySearcher;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.core.sample.Sample;
+import org.jdmp.core.util.ObservableMap;
 
 public class MultiIndex extends AbstractIndex implements SimilaritySearcher {
 	private static final long serialVersionUID = 3828613564416089927L;
@@ -170,5 +171,17 @@ public class MultiIndex extends AbstractIndex implements SimilaritySearcher {
 
 	public final DataSet searchSimilar(Sample sample, int count) throws Exception {
 		return searchSimilar(sample, 0, count);
+	}
+
+	@Override
+	public ObservableMap<Sample> getSamples() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setSamples(ObservableMap<Sample> samples) {
+		// TODO Auto-generated method stub
+		
 	}
 }
