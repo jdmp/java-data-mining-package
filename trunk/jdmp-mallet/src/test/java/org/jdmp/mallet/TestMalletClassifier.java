@@ -39,7 +39,7 @@ public class TestMalletClassifier extends TestCase {
 		ClassificationDataSet iris = DataSetFactory.IRIS();
 		Classifier c = new MalletClassifier(MalletClassifiers.DecisionTree);
 		ListMatrix<Double> results = CrossValidation.run(c, iris, 10, 10, 0);
-		assertEquals(0.934, results.getMeanValue(), 0.001);
+		assertEquals(0.934, results.getMeanValue(), 0.01);
 	}
 
 	public void testMalletAdaBoost() throws Exception {
@@ -53,7 +53,7 @@ public class TestMalletClassifier extends TestCase {
 		ClassificationDataSet iris = DataSetFactory.IRIS();
 		Classifier c = new MalletClassifier(MalletClassifiers.NaiveBayes);
 		ListMatrix<Double> results = CrossValidation.run(c, iris, 10, 10, 0);
-		assertEquals(0.9273, results.getMeanValue(), 0.001);
+		assertEquals(0.9273, results.getMeanValue(), 0.01);
 	}
 
 }

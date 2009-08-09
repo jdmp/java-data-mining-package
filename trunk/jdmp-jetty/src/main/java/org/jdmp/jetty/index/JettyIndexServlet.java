@@ -33,6 +33,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.algorithm.index.Index;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
@@ -40,6 +41,7 @@ import org.jdmp.jetty.html.DefaultHtmlFactory;
 import org.jdmp.jetty.html.HtmlFactory;
 import org.jdmp.jetty.html.Page;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.interfaces.CoreObject;
 
 public class JettyIndexServlet extends HttpServlet {
 	private static final long serialVersionUID = -529359384170033358L;
@@ -82,37 +84,40 @@ public class JettyIndexServlet extends HttpServlet {
 		response.setStatus(HttpServletResponse.SC_OK);
 
 		try {
-
+			String ref = request.getPathInfo();
 			String id = request.getParameter("id");
 			String deltag = request.getParameter("deltag");
 
-			if (deltag != null) {
-				Sample sample = index.getSample(id);
-				if (sample != null) {
-					Variable tags = sample.getVariables().get("Tags");
-					List<Matrix> toDelete = new LinkedList<Matrix>();
-					for (Matrix m : tags.getMatrixList()) {
-						if (m != null
-								&& m.stringValue().equalsIgnoreCase(deltag)) {
-							toDelete.add(m);
+			CoreObject co = ((Algorithm) index).getData(ref);
+
+			if (false) {
+				if (deltag != null) {
+					Sample sample = index.getSample(id);
+					if (sample != null) {
+						Variable tags = sample.getVariables().get("Tags");
+						List<Matrix> toDelete = new LinkedList<Matrix>();
+						for (Matrix m : tags.getMatrixList()) {
+							if (m != null
+									&& m.stringValue().equalsIgnoreCase(deltag)) {
+								toDelete.add(m);
+							}
 						}
+						for (Matrix m : toDelete) {
+							tags.getMatrixList().remove(m);
+						}
+						System.out.println("updating sample " + id
+								+ " deleting tag: " + deltag);
+						index.add(sample);
 					}
-					for (Matrix m : toDelete) {
-						tags.getMatrixList().remove(m);
-					}
-					System.out.println("updating sample " + id
-							+ " deleting tag: " + deltag);
-					index.add(sample);
 				}
 			}
 
 			PrintWriter out = response.getWriter();
 			Page page = null;
-			if (id != null) {
-				Sample sample = index.getSample(id);
-				page = factory.createSamplePage(request, sample, index);
-			} else {
-				page = factory.createIndexPage(request, index);
+			if (co instanceof Sample) {
+				page = factory.createSamplePage(request, (Sample) co, index);
+			} else if (co instanceof Index) {
+				page = factory.createIndexPage(request, (Index) co);
 			}
 
 			out.append(page.toString());

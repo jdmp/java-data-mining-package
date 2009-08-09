@@ -29,16 +29,6 @@ import org.ujmp.core.Matrix;
 
 public interface Regressor {
 
-	public static final String INPUT = "Input";
-
-	public static final String WEIGHT = "Weight";
-
-	public static final String PREDICTED = "Predicted";
-
-	public static final String DIFFERENCE = "Difference";
-
-	public static final String RMSE = "RMSE";
-
 	public void train(RegressionDataSet dataSet) throws Exception;
 
 	public void reset() throws Exception;

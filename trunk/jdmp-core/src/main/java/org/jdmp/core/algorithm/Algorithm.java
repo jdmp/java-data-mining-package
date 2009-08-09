@@ -28,7 +28,6 @@ import java.util.Map;
 
 import org.jdmp.core.JDMPCoreObject;
 import org.jdmp.core.dataset.HasDataSetList;
-import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.HasVariableMap;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
@@ -40,19 +39,29 @@ public interface Algorithm extends JDMPCoreObject, HasVariableMap, HasDataSetLis
 		NotConnected, Incoming, Outgoing, Bidirectional
 	};
 
-	public static final String SOURCE = "Source";
+	public static final String SOURCE = Variable.SOURCE;
 
-	public static final String DIMENSION = "Dimension";
+	public static final String DIMENSION = Variable.DIMENSION;
 
-	public static final String IGNORENAN = "IgnoreNaN";
+	public static final String IGNORENAN = Variable.IGNORENAN;
 
-	public static final String TARGET = "Target";
+	public static final String TARGET = Variable.TARGET;
 
-	public static final String ID = Sample.ID;
+	public static final String INPUT = Variable.INPUT;
 
-	public static final String DESCRIPTION = Sample.DESCRIPTION;
+	public static final String RMSE = Variable.RMSE;
 
-	public static final String LABEL = Sample.LABEL;
+	public static final String WEIGHT = Variable.WEIGHT;
+
+	public static final String DIFFERENCE = Variable.DIFFERENCE;
+
+	public static final String PREDICTED = Variable.PREDICTED;
+
+	public static final String ID = Variable.ID;
+
+	public static final String DESCRIPTION = Variable.DESCRIPTION;
+
+	public static final String LABEL = Variable.LABEL;
 
 	public void setVariable(Object key, Variable variable);
 

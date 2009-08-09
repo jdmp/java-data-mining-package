@@ -80,8 +80,8 @@ public abstract class SampleFactory {
 		return linkToFile(FileFormat.guess(file), file);
 	}
 
-	public static final ClassificationSample classificationSample(Matrix input, Matrix target) {
-		ClassificationSample s = new ClassificationSample();
+	public static final Sample classificationSample(Matrix input, Matrix target) {
+		Sample s = new DefaultSample();
 		s.setMatrix(Sample.INPUT, input);
 		s.setMatrix(Sample.TARGET, target);
 		return s;
@@ -96,17 +96,6 @@ public abstract class SampleFactory {
 		for (Object o : items) {
 			s.addObject(o);
 		}
-		return s;
-	}
-
-	public static final ClassificationSample classificationSample() {
-		ClassificationSample s = new ClassificationSample();
-		return s;
-	}
-
-	public static final ClassificationSample classificationSample(String label) {
-		ClassificationSample s = new ClassificationSample();
-		s.setLabel(label);
 		return s;
 	}
 

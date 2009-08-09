@@ -34,7 +34,7 @@ public class JettyObjectServer {
 
 	private Object object = null;
 
-	private int port = 8888;
+	private int port = 5555;
 
 	public JettyObjectServer(Object o, int port) {
 		this.object = o;

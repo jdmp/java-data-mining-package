@@ -23,8 +23,6 @@
 
 package org.jdmp.core.sample;
 
-import org.jdmp.core.util.DefaultObservableMap;
-import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
@@ -32,12 +30,9 @@ import org.ujmp.core.Matrix;
 public class DefaultSample extends AbstractSample {
 	private static final long serialVersionUID = -3649758882404748630L;
 
-	
 	public DefaultSample() {
 		super();
 	}
-
-	
 
 	@Override
 	public final DefaultSample clone() {

@@ -30,10 +30,11 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
-import org.jdmp.core.dataset.DataSet;
-import org.jdmp.core.dataset.DataSetFactory;
+import org.jdmp.core.algorithm.basic.CreateIris;
+import org.jdmp.core.sample.Sample;
 import org.jdmp.gui.dataset.DataSetGUIObject;
 import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.interfaces.CoreObject;
 
 public class IrisDataSetAction extends DataSetAction {
 	private static final long serialVersionUID = 3110361907469109630L;
@@ -49,9 +50,14 @@ public class IrisDataSetAction extends DataSetAction {
 
 	@Override
 	public Object call() throws MatrixException {
-		DataSet iris = DataSetFactory.IRIS();
-		iris.showGUI();
-		return iris;
+		try {
+			Object o = new CreateIris().calculate().get(Sample.TARGET);
+			((CoreObject) o).showGUI();
+			return o;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }

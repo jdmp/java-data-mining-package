@@ -36,14 +36,14 @@ public class TestJettyMap extends AbstractMapTest {
 
 	public void setUp() throws Exception {
 		Map<Object, Object> originalMap = new HashMap<Object, Object>();
-		server = new JettyObjectServer(originalMap, 8888);
+		server = new JettyObjectServer(originalMap, 5555);
 		server.start();
 	}
 
 	@Override
 	public Map<String, Object> createMap() throws Exception {
 		JettyMapClient<String, Object> map = new JettyMapClient<String, Object>(
-				new URL("http://localhost:8888"));
+				new URL("http://localhost:5555"));
 		return map;
 	}
 

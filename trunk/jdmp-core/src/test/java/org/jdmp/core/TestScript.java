@@ -29,7 +29,6 @@ import org.jdmp.core.dataset.ClassificationDataSet;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.module.Module;
 import org.jdmp.core.module.ModuleFactory;
-import org.jdmp.core.sample.ClassificationSample;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.script.Result;
 import org.ujmp.core.Matrix;
@@ -67,8 +66,8 @@ public class TestScript extends TestCase {
 		RegressionDataSet ds = (RegressionDataSet) o;
 		assertEquals(100, ds.getSamples().getSize());
 		Sample s = ds.getSamples().getElementAt(0);
-		long input = s.getVariables().get(ClassificationSample.INPUT).getColumnCount();
-		long target = s.getVariables().get(ClassificationSample.TARGET).getColumnCount();
+		long input = s.getVariables().get(Sample.INPUT).getColumnCount();
+		long target = s.getVariables().get(Sample.TARGET).getColumnCount();
 		assertEquals(10, input);
 		assertEquals(5, target);
 	}

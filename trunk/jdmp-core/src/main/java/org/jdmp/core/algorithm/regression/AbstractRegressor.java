@@ -28,7 +28,6 @@ import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.algorithm.basic.Minus;
 import org.jdmp.core.dataset.ClassificationDataSet;
 import org.jdmp.core.dataset.RegressionDataSet;
-import org.jdmp.core.sample.ClassificationSample;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
@@ -114,28 +113,25 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 				double rmse = sample.getMatrix(RMSE).getEuklideanValue();
 				error += Math.pow(rmse, 2.0);
 
-				if ((sample instanceof ClassificationSample)) {
+				int recognized = sample.getRecognizedClass();
+				int targetClass = sample.getTargetClass();
 
-					int recognized = ((ClassificationSample) sample).getRecognizedClass();
-					int targetClass = ((ClassificationSample) sample).getTargetClass();
-
-					if (classCount == 1 || recognized == -1) {
-						confusion.setAsDouble(confusion.getAsDouble(0, 0) + 1, 0, 0);
-					} else {
-						confusion.setAsDouble(confusion.getAsDouble(recognized, targetClass) + 1,
-								recognized, targetClass);
-					}
-
-					if (((ClassificationSample) sample).isCorrect()) {
-						correctCount++;
-						// weight = weight * 0.99;
-					} else {
-						errorCount++;
-						// weight = weight / 0.99;
-					}
-
-					// ((RegressionSample) sample).setWeight(weight);
+				if (classCount == 1 || recognized == -1) {
+					confusion.setAsDouble(confusion.getAsDouble(0, 0) + 1, 0, 0);
+				} else {
+					confusion.setAsDouble(confusion.getAsDouble(recognized, targetClass) + 1,
+							recognized, targetClass);
 				}
+
+				if (sample.isCorrect()) {
+					correctCount++;
+					// weight = weight * 0.99;
+				} else {
+					errorCount++;
+					// weight = weight / 0.99;
+				}
+
+				// ((RegressionSample) sample).setWeight(weight);
 
 			}
 		}

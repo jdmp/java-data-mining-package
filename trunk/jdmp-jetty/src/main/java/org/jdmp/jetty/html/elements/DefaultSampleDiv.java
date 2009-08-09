@@ -43,7 +43,7 @@ public class DefaultSampleDiv extends DivTag {
 		String label = sample.getLabel();
 		String type = sample.getAllAsString("Type");
 		String id = sample.getId();
-		String idurl = "?id=" + id;
+		String idurl = "./samples/" + id;
 
 		PTag p = new PTag();
 

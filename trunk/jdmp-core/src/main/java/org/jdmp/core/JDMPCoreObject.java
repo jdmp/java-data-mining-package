@@ -23,10 +23,18 @@
 
 package org.jdmp.core;
 
+import java.util.List;
+
 import org.ujmp.core.interfaces.CoreObject;
 import org.ujmp.core.interfaces.HasDescription;
 import org.ujmp.core.interfaces.HasId;
 
 public interface JDMPCoreObject extends CoreObject, HasDescription, HasId {
+
+	public CoreObject getData(String ref);
+
+	public void setData(CoreObject data, String ref);
+
+	public List<CoreObject> listData(String ref);
 
 }

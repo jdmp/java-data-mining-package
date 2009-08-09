@@ -47,17 +47,17 @@ import org.ujmp.core.util.StringUtil;
 public abstract class AbstractDataSet extends AbstractCoreObject implements DataSet {
 	private static final long serialVersionUID = -4168834188998259018L;
 
-	private ObservableList<Sample> sampleList = null;
+	private ObservableMap<Sample> sampleMap = null;
 
 	private ObservableMap<Variable> variableList = null;
 
 	private ObservableList<DataSet> dataSetList = null;
 
-	public final ObservableList<Sample> getSamples() {
-		if (sampleList == null) {
-			sampleList = new DefaultObservableList<Sample>();
+	public final ObservableMap<Sample> getSamples() {
+		if (sampleMap == null) {
+			sampleMap = new DefaultObservableMap<Sample>();
 		}
-		return sampleList;
+		return sampleMap;
 	}
 
 	public final ObservableMap<Variable> getVariables() {
@@ -276,8 +276,8 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 	}
 
 	@Override
-	public final void setSamples(ObservableList<Sample> samples) {
-		this.sampleList = samples;
+	public final void setSamples(ObservableMap<Sample> samples) {
+		this.sampleMap = samples;
 	}
 
 	public final void setVariables(ObservableMap<Variable> variables) {

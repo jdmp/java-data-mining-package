@@ -32,6 +32,8 @@ import javax.swing.event.EventListenerList;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 
+import org.ujmp.core.interfaces.HasId;
+
 public abstract class AbstractObservableMap<V> implements ObservableMap<V> {
 	private static final long serialVersionUID = 1138872662801106054L;
 
@@ -51,6 +53,20 @@ public abstract class AbstractObservableMap<V> implements ObservableMap<V> {
 
 	public final synchronized V get(Object key) {
 		return getMap().get(key);
+	}
+
+	public void addAll(Collection<V> objects) {
+		for (V v : objects) {
+			add(v);
+		}
+	}
+
+	public void add(V object) {
+		if (object instanceof HasId) {
+			put(((HasId) object).getId(), object);
+		} else {
+			throw new RuntimeException("object does not have an id");
+		}
 	}
 
 	public final synchronized int indexOf(V value) {

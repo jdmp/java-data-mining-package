@@ -27,7 +27,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.jdmp.core.dataset.ClassificationDataSet;
-import org.jdmp.core.sample.ClassificationSample;
+import org.jdmp.core.sample.Sample;
 import org.jdmp.mallet.sample.Instance2Sample;
 import org.ujmp.core.collections.SoftHashMap;
 import org.ujmp.core.interfaces.Wrapper;
@@ -36,7 +36,8 @@ import cc.mallet.types.FeatureVectorSequence;
 import cc.mallet.types.Instance;
 import cc.mallet.types.InstanceList;
 
-public class InstanceList2DataSet extends ClassificationDataSet implements Wrapper<InstanceList> {
+public class InstanceList2DataSet extends ClassificationDataSet implements
+		Wrapper<InstanceList> {
 	private static final long serialVersionUID = -4306499108417523670L;
 
 	private InstanceList instanceList = null;
@@ -69,7 +70,7 @@ public class InstanceList2DataSet extends ClassificationDataSet implements Wrapp
 		return count;
 	}
 
-	public ClassificationSample getSample(int index) {
+	public Sample getSample(int index) {
 		Instance2Sample s = integerToSampleMap.get(index);
 		if (s == null) {
 			int offset = 0;

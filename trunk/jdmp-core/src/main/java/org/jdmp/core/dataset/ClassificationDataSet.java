@@ -30,9 +30,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import org.jdmp.core.sample.ClassificationSample;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.util.ObservableList;
+import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
@@ -55,7 +54,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 		Map<Integer, Double> map = new HashMap<Integer, Double>();
 
 		for (Sample s : getSamples()) {
-			int c = ((ClassificationSample) s).getTargetClass();
+			int c = s.getTargetClass();
 			Double d = map.get(c);
 			if (d == null) {
 				d = 0.0;
@@ -144,7 +143,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 		for (int i = 0; i < getClassCount(); i++) {
 			ClassificationDataSet ds = DataSetFactory.classificationDataSet("Class " + i);
 			for (Sample s : getSamples()) {
-				if (((ClassificationSample) s).getTargetClass() == i) {
+				if (s.getTargetClass() == i) {
 					ds.getSamples().add(s.clone());
 				}
 			}
@@ -168,7 +167,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 
 		// add samples to lists according to class
 		for (Sample s : getSamples()) {
-			int targetClass = ((ClassificationSample) s).getTargetClass();
+			int targetClass = s.getTargetClass();
 			sortedSamples.get(targetClass).add(s);
 		}
 
@@ -250,7 +249,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 	public ClassificationDataSet bootstrap(int numberOfSamples) {
 		ClassificationDataSet ds = DataSetFactory.classificationDataSet("Bootstrap of "
 				+ getLabel());
-		ObservableList<Sample> sampleList = getSamples();
+		ObservableMap<Sample> sampleList = getSamples();
 		for (int i = 0; i < numberOfSamples; i++) {
 			int rand = MathUtil.nextInteger(0, sampleList.getSize() - 1);
 			ds.getSamples().add(sampleList.getElementAt(rand).clone());
