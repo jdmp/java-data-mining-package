@@ -107,6 +107,8 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 
 	private LuceneSampleMap sampleMap = null;
 
+	private static final int MAXWORDLENGTH = 20;
+
 	public LuceneIndex(Index index) throws Exception {
 		this(null, false, new Index[] { index });
 	}
@@ -265,6 +267,16 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 			Document doc = indexSearcher.doc(td.scoreDocs[0].doc);
 			Sample s = (Sample) SerializationUtil.deserialize(doc
 					.getBinaryValue("RawData"));
+
+			MoreLikeThis mlt = new MoreLikeThis(indexSearcher.getIndexReader());
+			mlt.setFieldNames(new String[] { Variable.LABEL,
+					Variable.DESCRIPTION, Variable.TAGS });
+			mlt.setMaxWordLen(MAXWORDLENGTH);
+			String[] terms = mlt.retrieveInterestingTerms(td.scoreDocs[0].doc);
+			for (int i = 0; i < 10 && i < terms.length; i++) {
+				s.setObject(Variable.SUGGESTEDTAGS, terms[i]);
+			}
+
 			return s;
 		} else {
 			return null;
@@ -285,6 +297,10 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 			executor.submit(new SearchCallable(query));
 		}
 
+		MoreLikeThis mlt = new MoreLikeThis(indexSearcher.getIndexReader());
+		mlt.setFieldNames(new String[] { Variable.LABEL, Variable.DESCRIPTION,
+				Variable.TAGS });
+		mlt.setMaxWordLen(MAXWORDLENGTH);
 		TopDocs td = indexSearcher.search(query, count);
 		DataSet result = new DefaultDataSet();
 		result.setObject("Total", td.totalHits);
@@ -294,6 +310,10 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 			Sample s = (Sample) SerializationUtil.deserialize(doc
 					.getBinaryValue("RawData"));
 			s.setMatrix(Sample.SCORE, MathUtil.getMatrix(sd.score));
+			String[] terms = mlt.retrieveInterestingTerms(id);
+			for (int i = 0; i < 10 && i < terms.length; i++) {
+				s.setObject(Variable.SUGGESTEDTAGS, terms[i]);
+			}
 			result.getSamples().add(s);
 		}
 		return result;
@@ -376,8 +396,9 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 			return ds;
 		}
 		MoreLikeThis mlt = new MoreLikeThis(indexSearcher.getIndexReader());
-		mlt.setFieldNames(new String[] { "Label", "Description", "Tags" });
-		mlt.setMaxWordLen(20);
+		mlt.setFieldNames(new String[] { Variable.LABEL, Variable.DESCRIPTION,
+				Variable.TAGS });
+		mlt.setMaxWordLen(MAXWORDLENGTH);
 		Query query = mlt.like(td.scoreDocs[0].doc);
 		BooleanQuery bq = new BooleanQuery();
 		bq.add(query, Occur.MUST);
