@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -73,18 +74,19 @@ import org.jdmp.core.algorithm.similarity.SimilaritySearcher;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.core.dataset.DefaultDataSet;
-import org.jdmp.core.sample.HasSampleList;
+import org.jdmp.core.sample.HasSampleMap;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.util.ObservableList;
+import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.interfaces.Erasable;
 import org.ujmp.core.util.MathUtil;
 import org.ujmp.core.util.SerializationUtil;
+import org.ujmp.core.util.StringUtil;
 import org.ujmp.core.util.io.FileUtil;
 
 public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
-		Erasable, HasSampleList, SimilaritySearcher {
+		Erasable, HasSampleMap, SimilaritySearcher {
 	private static final long serialVersionUID = -8483996550983833243L;
 
 	private IndexWriter indexWriter = null;
@@ -102,6 +104,8 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 	private final Analyzer analyzer = new StandardAnalyzer();
 
 	private boolean readOnly = true;
+
+	private LuceneSampleMap sampleMap = null;
 
 	public LuceneIndex(Index index) throws Exception {
 		this(null, false, new Index[] { index });
@@ -173,7 +177,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 					MaxFieldLength.UNLIMITED);
 		}
 
-		setSamples(new LuceneSampleList(this));
+		setSamples(new LuceneSampleMap(this));
 
 		executor = new ThreadPoolExecutor(0, 1, 1000L, TimeUnit.MILLISECONDS,
 				new LinkedBlockingQueue<Runnable>());
@@ -361,17 +365,6 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 	}
 
 	@Override
-	public ObservableList<Sample> getSamples() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setSamples(ObservableList<Sample> samples) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
 	public synchronized DataSet searchSimilar(Sample sample, int start,
 			int count) throws Exception {
 		prepareReader();
@@ -393,13 +386,13 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 		return search(bq, start, count);
 	}
 
-	class LuceneSampleList extends AbstractListModel implements
-			ObservableList<Sample> {
+	class LuceneSampleMap extends AbstractListModel implements
+			ObservableMap<Sample> {
 		private static final long serialVersionUID = -7189321183317113764L;
 
 		private LuceneIndex index = null;
 
-		public LuceneSampleList(LuceneIndex index) {
+		public LuceneSampleMap(LuceneIndex index) {
 			this.index = index;
 		}
 
@@ -415,11 +408,6 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 
 		@Override
 		public void addAll(Collection<Sample> values) {
-			throw new RuntimeException("not implemented");
-		}
-
-		@Override
-		public boolean remove(Sample value) {
 			throw new RuntimeException("not implemented");
 		}
 
@@ -471,6 +459,70 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 		@Override
 		public Iterator<Sample> iterator() {
 			throw new RuntimeException("not implemented");
+		}
+
+		@Override
+		public boolean containsKey(Object key) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean containsValue(Object value) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public Set<java.util.Map.Entry<Object, Sample>> entrySet() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public Sample get(Object key) {
+			try {
+				return index.getSample(StringUtil.convert(key));
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+		}
+
+		@Override
+		public Set<Object> keySet() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public Sample put(Object key, Sample value) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public void putAll(Map<? extends Object, ? extends Sample> m) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public Sample remove(Object key) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public int size() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public Collection<Sample> values() {
+			// TODO Auto-generated method stub
+			return null;
 		}
 
 	}
@@ -597,6 +649,18 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 		System.out.println("searching for: " + query);
 		TopDocs td = indexSearcher.search(query, 1);
 		return td.totalHits;
+	}
+
+	@Override
+	public void setSamples(ObservableMap<Sample> samples) {
+	}
+
+	@Override
+	public ObservableMap<Sample> getSamples() {
+		if (sampleMap == null) {
+			sampleMap = new LuceneSampleMap(this);
+		}
+		return sampleMap;
 	}
 
 }
