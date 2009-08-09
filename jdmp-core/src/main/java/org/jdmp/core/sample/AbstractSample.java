@@ -33,6 +33,7 @@ import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
+import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.util.MathUtil;
 import org.ujmp.core.util.StringUtil;
 
@@ -54,6 +55,18 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 
 	public final void setVariables(ObservableMap<Variable> variables) {
 		this.variableMap = variables;
+	}
+
+	public boolean isCorrect() throws MatrixException {
+		return getTargetClass() == getRecognizedClass();
+	}
+
+	public int getTargetClass() throws MatrixException {
+		return (int) getMatrix(TARGET).getCoordinatesOfMaximum()[COLUMN];
+	}
+
+	public int getRecognizedClass() throws MatrixException {
+		return (int) getMatrix(PREDICTED).getCoordinatesOfMaximum()[COLUMN];
 	}
 
 	@Override

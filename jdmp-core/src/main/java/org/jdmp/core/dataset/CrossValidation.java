@@ -56,6 +56,7 @@ public class CrossValidation {
 				algorithm.reset();
 				algorithm.train(train);
 				algorithm.predict(test);
+
 				acc.add(test.getAccuracy());
 				System.out.print(test.getAccuracy() + "\t");
 			}

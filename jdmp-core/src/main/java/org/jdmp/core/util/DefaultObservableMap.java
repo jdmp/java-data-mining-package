@@ -24,6 +24,7 @@
 package org.jdmp.core.util;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DefaultObservableMap<V> extends AbstractObservableMap<V> {
@@ -39,6 +40,12 @@ public class DefaultObservableMap<V> extends AbstractObservableMap<V> {
 
 	public DefaultObservableMap(Map<Object, V> map) {
 		this.map = map;
+	}
+
+	public DefaultObservableMap(List<V> list) {
+		for (V o : list) {
+			add(o);
+		}
 	}
 
 	@Override

@@ -3,18 +3,19 @@ package org.jdmp.core.dataset;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 import javax.swing.AbstractListModel;
 
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.sample.SampleFactory;
-import org.jdmp.core.util.ObservableList;
+import org.jdmp.core.util.ObservableMap;
 import org.ujmp.core.collections.SoftHashMap;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.interfaces.Wrapper;
 import org.ujmp.core.util.StringUtil;
 
-public class SampleMapWrapper<V> extends AbstractListModel implements ObservableList<Sample>,
+public class SampleMapWrapper<V> extends AbstractListModel implements ObservableMap<Sample>,
 		Wrapper<Map<? extends Object, V>> {
 	private static final long serialVersionUID = -699242401200223218L;
 
@@ -144,11 +145,6 @@ public class SampleMapWrapper<V> extends AbstractListModel implements Observable
 	}
 
 	@Override
-	public synchronized boolean remove(Sample value) {
-		throw new MatrixException("not yet implemented");
-	}
-
-	@Override
 	public String toString() {
 		StringBuilder s = new StringBuilder();
 		s.append("[ ");
@@ -165,6 +161,66 @@ public class SampleMapWrapper<V> extends AbstractListModel implements Observable
 	@Override
 	public void fireContentsChanged() {
 		fireContentsChanged(this, -1, -1);
+	}
+
+	@Override
+	public boolean containsKey(Object key) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean containsValue(Object value) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Set<java.util.Map.Entry<Object, Sample>> entrySet() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Sample get(Object key) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<Object> keySet() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Sample put(Object key, Sample value) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void putAll(Map<? extends Object, ? extends Sample> m) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public Sample remove(Object key) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int size() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Collection<Sample> values() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

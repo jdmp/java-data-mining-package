@@ -28,7 +28,7 @@ import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.algorithm.estimator.DensityEstimator;
 import org.jdmp.core.algorithm.estimator.DiscreteDensityEstimator;
 import org.jdmp.core.dataset.RegressionDataSet;
-import org.jdmp.core.sample.ClassificationSample;
+import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.calculation.Calculation.Ret;
@@ -118,7 +118,7 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 
 		// go over all samples an count
 		for (int i = 0; i < dataSet.getSamples().getSize(); i++) {
-			ClassificationSample s = (ClassificationSample) dataSet.getSamples().getElementAt(i);
+			Sample s = dataSet.getSamples().getElementAt(i);
 			Matrix sampleInput = s.getMatrix(INPUT);
 			Matrix sampleTarget = s.getMatrix(TARGET);
 			double weight = 1.0;

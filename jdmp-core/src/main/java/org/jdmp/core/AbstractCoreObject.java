@@ -25,15 +25,20 @@ package org.jdmp.core;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.module.Module;
+import org.jdmp.core.sample.HasSampleMap;
 import org.jdmp.core.sample.Sample;
+import org.jdmp.core.variable.HasVariableMap;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.interfaces.CoreObject;
 import org.ujmp.core.interfaces.GUIObject;
 
 public abstract class AbstractCoreObject implements JDMPCoreObject {
@@ -123,4 +128,48 @@ public abstract class AbstractCoreObject implements JDMPCoreObject {
 		return guiObject;
 	}
 
+	public CoreObject getData(String ref) {
+		if (ref == null || !ref.contains("/") || "/".equals(ref)) {
+			return this;
+		}
+		if (ref.startsWith("variables/")) {
+			ref = ref.substring(0, 10);
+			if (this instanceof HasVariableMap) {
+				int pos = ref.indexOf("/");
+				if (pos > 0) {
+					String id = ref.substring(1, pos);
+					ref = ref.substring(pos);
+					JDMPCoreObject co = ((HasVariableMap) this).getVariables().get(id);
+					return co.getData(ref);
+				} else {
+					return ((HasVariableMap) this).getVariables().get(ref);
+				}
+			}
+		} else if (ref.startsWith("samples/")) {
+			ref = ref.substring(0, 10);
+			if (this instanceof HasSampleMap) {
+				int pos = ref.indexOf("/");
+				if (pos > 0) {
+					String id = ref.substring(1, pos);
+					ref = ref.substring(pos);
+					JDMPCoreObject co = ((HasSampleMap) this).getSamples().get(id);
+					return co.getData(ref);
+				} else {
+					return ((HasSampleMap) this).getSamples().get(ref);
+				}
+			}
+
+		}
+		return null;
+	}
+
+	public void setData(CoreObject data, String ref) {
+
+	}
+
+	public List<CoreObject> listData(String ref) {
+
+		List<CoreObject> list = new ArrayList<CoreObject>();
+		return list;
+	}
 }

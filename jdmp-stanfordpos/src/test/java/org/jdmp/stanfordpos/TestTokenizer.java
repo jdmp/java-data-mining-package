@@ -43,16 +43,18 @@ public class TestTokenizer extends TestCase {
 		DataSet ds = new DefaultDataSet();
 		Sample sa1 = new DefaultSample();
 		sa1.setObject(Sample.INPUT, s1);
+		sa1.setId("sample1");
 		Sample sa2 = new DefaultSample();
 		sa2.setObject(Sample.INPUT, s2);
+		sa2.setId("sample2");
 		ds.getSamples().add(sa1);
 		ds.getSamples().add(sa2);
 
 		Tokenizer t = new StanfordTokenizer();
 		t.tokenize(Sample.INPUT, ds);
 
-		sa1 = ds.getSamples().getElementAt(0);
-		sa2 = ds.getSamples().getElementAt(1);
+		sa1 = ds.getSamples().get("sample1");
+		sa2 = ds.getSamples().get("sample2");
 
 		Matrix m1 = sa1.getMatrix(Tokenizer.TOKENIZED);
 		Matrix m2 = sa2.getMatrix(Tokenizer.TOKENIZED);

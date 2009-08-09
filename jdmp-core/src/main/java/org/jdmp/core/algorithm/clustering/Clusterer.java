@@ -29,12 +29,6 @@ import org.ujmp.core.Matrix;
 
 public interface Clusterer {
 
-	public static final Object INPUT = Sample.INPUT;
-
-	public static final Object WEIGHT = Sample.WEIGHT;
-
-	public static final Object PREDICTED = Sample.PREDICTED;
-
 	public void reset() throws Exception;
 
 	public void train(RegressionDataSet dataSet) throws Exception;

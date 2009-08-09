@@ -33,7 +33,7 @@ import liblinear.SolverType;
 import org.jdmp.core.algorithm.classification.AbstractClassifier;
 import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.dataset.RegressionDataSet;
-import org.jdmp.core.sample.ClassificationSample;
+import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.exceptions.MatrixException;
@@ -104,8 +104,7 @@ public class LibLinearClassifier extends AbstractClassifier {
 			if (i % 10 == 0) {
 				System.out.println("Converting sample " + i);
 			}
-			ClassificationSample p = (ClassificationSample) dataSet
-					.getSamples().getElementAt(i);
+			Sample p = dataSet.getSamples().getElementAt(i);
 			Matrix input = p.getMatrix(INPUT);
 			prob.y[i] = p.getTargetClass();
 			long columnCount = input.getColumnCount();

@@ -11,6 +11,7 @@ import java.util.Map;
 import org.jdmp.core.sample.FileSample;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.DefaultObservableList;
+import org.jdmp.core.util.DefaultObservableMap;
 import org.ujmp.core.collections.SoftHashMap;
 import org.ujmp.core.enums.FileFormat;
 import org.ujmp.core.interfaces.Refreshable;
@@ -43,7 +44,7 @@ public class DirDataSet extends AbstractDataSet implements Refreshable {
 	}
 
 	public void refresh() {
-		setSamples(new DefaultObservableList<Sample>(new FileList()));
+		setSamples(new DefaultObservableMap<Sample>(new FileList()));
 		setDataSets(new DefaultObservableList<DataSet>(new DirectoryList()));
 		dirs.clear();
 		files.clear();

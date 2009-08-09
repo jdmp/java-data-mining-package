@@ -23,7 +23,7 @@
 
 package org.jdmp.mallet.sample;
 
-import org.jdmp.core.sample.ClassificationSample;
+import org.jdmp.core.sample.DefaultSample;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.mallet.matrix.MalletInputMatrix;
 import org.jdmp.mallet.matrix.MalletOutputMatrix;
@@ -34,8 +34,7 @@ import cc.mallet.types.FeatureVectorSequence;
 import cc.mallet.types.Instance;
 import cc.mallet.types.LabelSequence;
 
-public class Instance2Sample extends ClassificationSample implements
-		Wrapper<Instance> {
+public class Instance2Sample extends DefaultSample implements Wrapper<Instance> {
 	private static final long serialVersionUID = 3834503288309969345L;
 
 	private Instance instance = null;
