@@ -48,13 +48,18 @@ public class CalculateOnceAction extends AlgorithmAction {
 	}
 
 	@Override
-	public Object call() throws Exception {
-		if (matrix == null) {
-			getAlgorithm().getCoreObject().calculate();
-		} else {
-			getAlgorithm().getCoreObject().calculate(matrix);
+	public Object call() {
+		try {
+			if (matrix == null) {
+				getAlgorithm().getCoreObject().calculate();
+			} else {
+				getAlgorithm().getCoreObject().calculate(matrix);
+			}
+			return null;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
 		}
-		return null;
 	}
 
 }

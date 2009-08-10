@@ -203,7 +203,13 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 
 		for (Variable v : sample.getVariables()) {
 			String key = v.getLabel();
-			if (!Sample.ID.equals(key)) {
+			if (Sample.ID.equals(key)) {
+				// skip
+			} else if (Variable.CONTENT.equals(key)) {
+				// skip
+			} else if (Variable.BYTES.equals(key)) {
+				// skip
+			} else {
 				String value = "";
 				for (Matrix m : v.getMatrixList()) {
 					for (long[] c : m.availableCoordinates()) {
@@ -307,7 +313,8 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 		for (ScoreDoc sd : td.scoreDocs) {
 			int id = sd.doc;
 			Document doc = indexSearcher.doc(id);
-			Sample s = (Sample) SerializationUtil.deserialize(doc
+			Sample s = null;
+			s = (Sample) SerializationUtil.deserialize(doc
 					.getBinaryValue("RawData"));
 			s.setMatrix(Sample.SCORE, MathUtil.getMatrix(sd.score));
 			String[] terms = mlt.retrieveInterestingTerms(id);

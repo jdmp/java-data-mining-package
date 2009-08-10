@@ -49,44 +49,49 @@ public class LinkDataSetToFileAction extends ObjectAction {
 	}
 
 	@Override
-	public Object call() throws Exception {
-		File file = null;
-		FileFormat fileFormat = null;
-		JFileChooser chooser = new JFileChooser();
+	public Object call() {
+		try {
+			File file = null;
+			FileFormat fileFormat = null;
+			JFileChooser chooser = new JFileChooser();
 
-		for (FileFormat f : FileFormat.values()) {
-			chooser.addChoosableFileFilter(f.getFileFilter());
-		}
-
-		chooser.setFileFilter(FileFormat.CSV.getFileFilter());
-		chooser.setAcceptAllFileFilterUsed(false);
-		chooser.setDialogTitle("Link");
-
-		int returnVal = chooser.showOpenDialog(null);
-		if (returnVal == JFileChooser.APPROVE_OPTION) {
-			file = chooser.getSelectedFile();
-			FileFilter filter = chooser.getFileFilter();
 			for (FileFormat f : FileFormat.values()) {
-				if (filter.equals(f.getFileFilter())) {
-					fileFormat = f;
-				}
+				chooser.addChoosableFileFilter(f.getFileFilter());
 			}
 
-		}
+			chooser.setFileFilter(FileFormat.CSV.getFileFilter());
+			chooser.setAcceptAllFileFilterUsed(false);
+			chooser.setDialogTitle("Link");
 
-		if (file == null)
-			return null;
+			int returnVal = chooser.showOpenDialog(null);
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				file = chooser.getSelectedFile();
+				FileFilter filter = chooser.getFileFilter();
+				for (FileFormat f : FileFormat.values()) {
+					if (filter.equals(f.getFileFilter())) {
+						fileFormat = f;
+					}
+				}
 
-		DataSet ds = DataSetFactory.linkToFile(fileFormat, file);
-		if (getCoreObject() instanceof HasDataSetList) {
-			try {
-				((HasDataSetList) getCoreObject()).getDataSets().add(ds);
-			} catch (Exception e) {
+			}
+
+			if (file == null)
+				return null;
+
+			DataSet ds = DataSetFactory.linkToFile(fileFormat, file);
+			if (getCoreObject() instanceof HasDataSetList) {
+				try {
+					((HasDataSetList) getCoreObject()).getDataSets().add(ds);
+				} catch (Exception e) {
+					ds.showGUI();
+				}
+			} else {
 				ds.showGUI();
 			}
-		} else {
-			ds.showGUI();
+			return ds;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
 		}
-		return ds;
 	}
 }

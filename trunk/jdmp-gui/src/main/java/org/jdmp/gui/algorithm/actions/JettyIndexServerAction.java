@@ -49,16 +49,17 @@ public class JettyIndexServerAction extends ObjectAction {
 	}
 
 	@Override
-	public Object call() throws Exception {
-		int port = 0;
-		while (port <= 0 || port > 32000) {
-			String s = JOptionPane.showInputDialog("Port", "5555");
-			try {
-				port = Integer.parseInt(s);
-			} catch (Exception e) {
-			}
-		}
+	public Object call() {
 		try {
+			int port = 0;
+			while (port <= 0 || port > 32000) {
+				String s = JOptionPane.showInputDialog("Port", "5555");
+				try {
+					port = Integer.parseInt(s);
+				} catch (Exception e) {
+				}
+			}
+
 			Class<?> c = Class.forName("org.jdmp.jetty.index.JettyIndexServer");
 			Constructor<?> con = c.getConstructor(Index.class, Integer.TYPE);
 			return con.newInstance(getCoreObject(), port);

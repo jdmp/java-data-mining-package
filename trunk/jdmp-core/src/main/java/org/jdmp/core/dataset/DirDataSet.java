@@ -1,12 +1,37 @@
+/*
+ * Copyright (C) 2008-2009 Holger Arndt, A. Naegele and M. Bundschus
+ *
+ * This file is part of the Java Data Mining Package (JDMP).
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership and licensing.
+ *
+ * JDMP is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * JDMP is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with JDMP; if not, write to the
+ * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+ * Boston, MA  02110-1301  USA
+ */
+
 package org.jdmp.core.dataset;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.AbstractList;
+import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.jdmp.core.sample.FileSample;
 import org.jdmp.core.sample.Sample;
@@ -44,8 +69,6 @@ public class DirDataSet extends AbstractDataSet implements Refreshable {
 	}
 
 	public void refresh() {
-		setSamples(new DefaultObservableMap<Sample>(new FileList()));
-		setDataSets(new DefaultObservableList<DataSet>(new DirectoryList()));
 		dirs.clear();
 		files.clear();
 		File[] fs = dir.listFiles();
@@ -58,6 +81,8 @@ public class DirDataSet extends AbstractDataSet implements Refreshable {
 				}
 			}
 		}
+		setSamples(new DefaultObservableMap<Sample>(new FileMap()));
+		setDataSets(new DefaultObservableList<DataSet>(new DirectoryList()));
 	}
 
 	@Override
@@ -87,29 +112,35 @@ public class DirDataSet extends AbstractDataSet implements Refreshable {
 
 	}
 
-	class FileList extends AbstractList<Sample> implements Serializable {
+	class FileMap extends AbstractMap<String, Sample> implements Serializable {
 		private static final long serialVersionUID = -3756763351749907268L;
 
-		private Map<Integer, Sample> map = new SoftHashMap<Integer, Sample>();
+		private Map<String, Sample> map = new HashMap<String, Sample>();
 
-		@Override
-		public Sample get(int index) {
-			Sample s = map.get(index);
-			if (s == null) {
+		public FileMap() {
+			for (int i = 0; i < files.size(); i++) {
 				try {
-					s = new FileSample(fileFormat, files.get(index), parameters);
-					map.put(index, s);
-				} catch (IOException e) {
+					Sample s = new FileSample(fileFormat, files.get(i), parameters);
+					map.put(files.get(i).getAbsolutePath(), s);
+				} catch (Exception e) {
 					e.printStackTrace();
-
 				}
 			}
-			return s;
+		}
+
+		@Override
+		public Sample get(Object key) {
+			return map.get(key);
 		}
 
 		@Override
 		public int size() {
-			return files.size();
+			return map.size();
+		}
+
+		@Override
+		public Set<java.util.Map.Entry<String, Sample>> entrySet() {
+			return map.entrySet();
 		}
 
 	}

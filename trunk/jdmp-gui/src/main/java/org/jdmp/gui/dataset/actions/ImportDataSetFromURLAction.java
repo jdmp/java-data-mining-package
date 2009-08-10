@@ -48,28 +48,33 @@ public class ImportDataSetFromURLAction extends ObjectAction {
 	}
 
 	@Override
-	public Object call() throws Exception {
-		URL url = null;
-		while (url == null) {
-			String s = JOptionPane.showInputDialog("Enter URL:", "http://");
-			url = new URL(s);
-		}
-		FileFormat fileFormat = FileFormat.values()[JOptionPane.showOptionDialog(getComponent(),
-				"Select format", "Import DataSet", JOptionPane.OK_OPTION,
-				JOptionPane.QUESTION_MESSAGE, null, FileFormat.values(), FileFormat.CSV)];
+	public Object call() {
+		try {
+			URL url = null;
+			while (url == null) {
+				String s = JOptionPane.showInputDialog("Enter URL:", "http://");
+				url = new URL(s);
+			}
+			FileFormat fileFormat = FileFormat.values()[JOptionPane.showOptionDialog(
+					getComponent(), "Select format", "Import DataSet", JOptionPane.OK_OPTION,
+					JOptionPane.QUESTION_MESSAGE, null, FileFormat.values(), FileFormat.CSV)];
 
-		DataSet ds = DataSetFactory.importFromURL(fileFormat, url);
+			DataSet ds = DataSetFactory.importFromURL(fileFormat, url);
 
-		if (getCoreObject() instanceof HasDataSetList) {
-			try {
-				((HasDataSetList) getCoreObject()).getDataSets().add(ds);
-			} catch (Exception e) {
+			if (getCoreObject() instanceof HasDataSetList) {
+				try {
+					((HasDataSetList) getCoreObject()).getDataSets().add(ds);
+				} catch (Exception e) {
+					ds.showGUI();
+				}
+			} else {
 				ds.showGUI();
 			}
-		} else {
-			ds.showGUI();
+			return ds;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
 		}
-		return ds;
 	}
 
 }

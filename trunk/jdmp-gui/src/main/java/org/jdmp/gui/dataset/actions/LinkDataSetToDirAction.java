@@ -25,7 +25,6 @@ package org.jdmp.gui.dataset.actions;
 
 import java.awt.event.KeyEvent;
 import java.io.File;
-import java.io.IOException;
 
 import javax.swing.Action;
 import javax.swing.JComponent;
@@ -34,7 +33,6 @@ import javax.swing.JFileChooser;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.core.dataset.HasDataSetList;
-import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.gui.actions.ObjectAction;
 
@@ -49,31 +47,36 @@ public class LinkDataSetToDirAction extends ObjectAction {
 	}
 
 	@Override
-	public Object call() throws MatrixException, IOException {
-		File file = null;
-		JFileChooser chooser = new JFileChooser();
-		chooser.setDialogTitle("Link to Directory");
+	public Object call() {
+		try {
+			File file = null;
+			JFileChooser chooser = new JFileChooser();
+			chooser.setDialogTitle("Link to Directory");
 
-		int returnVal = chooser.showOpenDialog(null);
-		if (returnVal == JFileChooser.APPROVE_OPTION) {
-			file = chooser.getSelectedFile();
-		}
+			int returnVal = chooser.showOpenDialog(null);
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				file = chooser.getSelectedFile();
+			}
 
-		if (file.isFile()) {
-			file = file.getParentFile();
-		}
+			if (file.isFile()) {
+				file = file.getParentFile();
+			}
 
-		DataSet ds = DataSetFactory.linkToDir(file);
-		if (getCoreObject() instanceof HasDataSetList) {
-			try {
-				((HasDataSetList) getCoreObject()).getDataSets().add(ds);
-			} catch (Exception e) {
+			DataSet ds = DataSetFactory.linkToDir(file);
+			if (getCoreObject() instanceof HasDataSetList) {
+				try {
+					((HasDataSetList) getCoreObject()).getDataSets().add(ds);
+				} catch (Exception e) {
+					ds.showGUI();
+				}
+			} else {
 				ds.showGUI();
 			}
-		} else {
-			ds.showGUI();
+			return ds;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
 		}
-		return ds;
 	}
 
 }
