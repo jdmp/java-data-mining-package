@@ -24,7 +24,6 @@
 package org.jdmp.gui.dataset.actions;
 
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 
 import javax.swing.Action;
 import javax.swing.JComponent;
@@ -32,7 +31,6 @@ import javax.swing.JComponent;
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.algorithm.index.Index;
 import org.jdmp.core.dataset.DataSet;
-import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.core.util.Lucene;
 import org.ujmp.gui.actions.ObjectAction;
@@ -49,7 +47,7 @@ public class IndexDataSetLuceneAction extends ObjectAction {
 	}
 
 	@Override
-	public Object call() throws MatrixException, IOException {
+	public Object call() {
 		try {
 			Class<?> c = Class.forName("org.jdmp.lucene.LuceneIndex");
 			Index i = (Index) c.newInstance();

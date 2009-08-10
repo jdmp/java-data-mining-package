@@ -24,7 +24,6 @@
 package org.jdmp.gui.dataset.actions;
 
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 
 import javax.swing.Action;
 import javax.swing.JComponent;
@@ -34,7 +33,6 @@ import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.core.dataset.HasDataSetList;
 import org.ujmp.core.enums.FileFormat;
-import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.gui.actions.ObjectAction;
 
@@ -49,23 +47,28 @@ public class ImportDataSetFromClipboardAction extends ObjectAction {
 	}
 
 	@Override
-	public Object call() throws MatrixException, IOException {
-		FileFormat fileFormat = FileFormat.values()[JOptionPane.showOptionDialog(getComponent(),
-				"Select format", "Import DataSet", JOptionPane.OK_OPTION,
-				JOptionPane.QUESTION_MESSAGE, null, FileFormat.values(), FileFormat.CSV)];
+	public Object call() {
+		try {
+			FileFormat fileFormat = FileFormat.values()[JOptionPane.showOptionDialog(
+					getComponent(), "Select format", "Import DataSet", JOptionPane.OK_OPTION,
+					JOptionPane.QUESTION_MESSAGE, null, FileFormat.values(), FileFormat.CSV)];
 
-		DataSet ds = DataSetFactory.importFromClipboard(fileFormat);
+			DataSet ds = DataSetFactory.importFromClipboard(fileFormat);
 
-		if (getCoreObject() instanceof HasDataSetList) {
-			try {
-				((HasDataSetList) getCoreObject()).getDataSets().add(ds);
-			} catch (Exception e) {
+			if (getCoreObject() instanceof HasDataSetList) {
+				try {
+					((HasDataSetList) getCoreObject()).getDataSets().add(ds);
+				} catch (Exception e) {
+					ds.showGUI();
+				}
+			} else {
 				ds.showGUI();
 			}
-		} else {
-			ds.showGUI();
+			return ds;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
 		}
-		return ds;
 	}
 
 }

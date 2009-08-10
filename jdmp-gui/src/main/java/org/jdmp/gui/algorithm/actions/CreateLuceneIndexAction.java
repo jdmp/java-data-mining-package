@@ -49,7 +49,7 @@ public class CreateLuceneIndexAction extends ObjectAction {
 	}
 
 	@Override
-	public Object call() throws Exception {
+	public Object call() {
 		try {
 			Class<?> c = Class.forName("org.jdmp.lucene.LuceneIndex");
 			Constructor<?> con = c.getConstructor(Index.class);

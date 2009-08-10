@@ -74,6 +74,8 @@ public interface Variable extends JDMPCoreObject, HasMatrixList {
 
 	public static final String SUGGESTEDTAGS = "SuggestedTags";
 
+	public static final String BYTES = "Bytes";
+
 	public long[] getSize();
 
 	public void setSize(long... size);

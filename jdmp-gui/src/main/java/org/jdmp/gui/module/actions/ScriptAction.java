@@ -42,7 +42,12 @@ public class ScriptAction extends ModuleAction {
 	}
 
 	@Override
-	public Object call() throws Exception {
-		return getModule().getCommandWindow().execute(script);
+	public Object call() {
+		try {
+			return getModule().getCommandWindow().execute(script);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

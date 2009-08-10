@@ -33,9 +33,6 @@ public class DefaultObservableMap<V> extends AbstractObservableMap<V> {
 	private Map<String, V> map = null;
 
 	public DefaultObservableMap() {
-		// should be a HashMap, because different object types cannot be
-		// compared otherwise
-		this(new HashMap<String, V>(2));
 	}
 
 	public DefaultObservableMap(Map<String, V> map) {
@@ -50,6 +47,9 @@ public class DefaultObservableMap<V> extends AbstractObservableMap<V> {
 
 	@Override
 	public Map<String, V> getMap() {
+		if (map == null) {
+			map = new HashMap<String, V>(2);
+		}
 		return map;
 	}
 
