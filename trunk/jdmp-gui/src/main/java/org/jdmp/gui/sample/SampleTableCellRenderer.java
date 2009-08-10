@@ -72,35 +72,20 @@ public class SampleTableCellRenderer implements TableCellRenderer {
 
 		if (sample != null) {
 
-			switch (column) {
-			case SampleListTableModel.ICONCOLUMN:
+			Object key = columnMap.get(column);
+			ObservableMap<Variable> variables = sample.getVariables();
+			Variable v = variables.get(key);
+			if (v == null) {
 				o = "";
-				break;
-			default:
-				Object key = columnMap.get(column - 1);
-				ObservableMap<Variable> variables = sample.getVariables();
-				Variable v = variables.get(key);
-				if (v == null) {
-					o = "";
-					break;
-				} else {
-					return matrixRenderer.getTableCellRendererComponent(table, v.getMatrix(),
-							isSelected, hasFocus, row, column);
-				}
+			} else {
+				return matrixRenderer.getTableCellRendererComponent(table, v.getMatrix(),
+						isSelected, hasFocus, row, column);
 			}
 
 			c = (JLabel) renderer.getTableCellRendererComponent(table, o, isSelected, hasFocus,
 					row, column);
 
-			switch (column) {
-			case SampleListTableModel.ICONCOLUMN:
-				c.setIcon(UIManager.getIcon("Sample.icon"));
-				break;
-			default:
-				c.setIcon(null);
-				break;
-			}
-
+			c.setIcon(null);
 			c.setHorizontalAlignment(JLabel.CENTER);
 
 		} else {

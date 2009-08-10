@@ -28,6 +28,8 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -40,6 +42,10 @@ public class VariableGUIObject extends AbstractGUIObject {
 	private static final long serialVersionUID = 9145766876402222560L;
 
 	private Variable variable = null;
+
+	private transient JFrame frame = null;
+
+	private transient JPanel panel = null;
 
 	public VariableGUIObject(Variable v) {
 		this.variable = v;
@@ -110,6 +116,22 @@ public class VariableGUIObject extends AbstractGUIObject {
 	@Override
 	public Variable getCoreObject() {
 		return variable;
+	}
+
+	@Override
+	public JFrame getFrame() {
+		if (frame == null) {
+			frame = new VariableFrame(this);
+		}
+		return frame;
+	}
+
+	@Override
+	public JPanel getPanel() {
+		if (panel == null) {
+			panel = new VariablePanel(this);
+		}
+		return panel;
 	}
 
 }

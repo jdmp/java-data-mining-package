@@ -24,8 +24,8 @@
 package org.jdmp.core;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -78,15 +78,9 @@ public abstract class AbstractCoreObject implements JDMPCoreObject {
 	}
 
 	public final JFrame showGUI() {
-		try {
-			Class<?> c = Class.forName("org.jdmp.gui.util.JDMPFrameManager");
-			Method method = c.getMethod("showFrame", new Class[] { Object.class });
-			return (JFrame) method.invoke(null, new Object[] { this });
-		} catch (Exception e) {
-			System.err.println("cannot show frame");
-			e.printStackTrace();
-			return null;
-		}
+		JFrame frame = getGUIObject().getFrame();
+		frame.setVisible(true);
+		return frame;
 	}
 
 	@Override
@@ -129,60 +123,53 @@ public abstract class AbstractCoreObject implements JDMPCoreObject {
 	}
 
 	public CoreObject getData(String ref) {
-		if (ref == null || !ref.contains("/") || "/".equals(ref)) {
-			return this;
-		}
-		if (ref.startsWith("/")) {
-			ref = ref.substring(1);
-		}
-		if (ref.endsWith("/")) {
-			ref = ref.substring(0, ref.length() - 1);
-		}
-		if (ref.startsWith("variables/")) {
-			ref = ref.substring(10);
-			if (this instanceof HasVariableMap) {
-				int pos = ref.indexOf("/");
-				if (pos > 0) {
-					String id = ref.substring(0, pos);
-					ref = ref.substring(pos);
-					JDMPCoreObject co = ((HasVariableMap) this).getVariables().get(id);
-					if (co != null) {
-						return co.getData(ref);
-					} else {
-						return ((HasVariableMap) this).getVariables().get(ref);
-					}
-				} else {
-					return ((HasVariableMap) this).getVariables().get(ref);
-				}
+		List<String> strings = new LinkedList<String>();
+		String[] split = ref.split("/");
+		for (String s : split) {
+			if (s != null && s.length() > 0) {
+				strings.add(s);
 			}
-		} else if (ref.startsWith("samples/")) {
-			ref = ref.substring(8);
-			if (this instanceof HasSampleMap) {
-				int pos = ref.indexOf("/");
-				if (pos > 0) {
-					String id = ref.substring(0, pos);
-					ref = ref.substring(pos);
-					JDMPCoreObject co = ((HasSampleMap) this).getSamples().get(id);
-					if (co != null) {
-						return co.getData(ref);
-					} else {
-						return ((HasSampleMap) this).getSamples().get(ref);
-					}
-				} else {
-					return ((HasSampleMap) this).getSamples().get(ref);
-				}
-			}
+		}
+		return getData(strings);
+	}
 
+	public CoreObject getData(List<String> ref) {
+		try {
+			if (ref == null || ref.isEmpty()) {
+				return this;
+			}
+			String current = ref.remove(0);
+			if (current.equals("variables")) {
+				String id = ref.remove(0);
+				JDMPCoreObject co = ((HasVariableMap) this).getVariables().get(id);
+				return co.getData(ref);
+			} else if (current.equals("samples")) {
+				String id = ref.remove(0);
+				JDMPCoreObject co = ((HasSampleMap) this).getSamples().get(id);
+				return co.getData(ref);
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
 		}
-		return null;
 	}
 
 	public void setData(CoreObject data, String ref) {
 
 	}
 
-	public List<CoreObject> listData(String ref) {
+	public void setData(CoreObject data, List<String> ref) {
 
+	}
+
+	public List<CoreObject> listData(String ref) {
+		List<CoreObject> list = new ArrayList<CoreObject>();
+		return list;
+	}
+
+	public List<CoreObject> listData(List<String> ref) {
 		List<CoreObject> list = new ArrayList<CoreObject>();
 		return list;
 	}

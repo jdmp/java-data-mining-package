@@ -25,13 +25,9 @@ package org.jdmp.gui.sample;
 
 import java.util.Comparator;
 
-import javax.swing.table.TableRowSorter;
-
 import org.jdmp.core.JDMPCoreObject;
 import org.jdmp.core.sample.HasSamples;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.util.ObservableMap;
-import org.jdmp.core.variable.Variable;
 import org.jdmp.gui.util.AbstractListPanel;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.interfaces.GUIObject;
@@ -74,11 +70,6 @@ public class SampleListPanel extends AbstractListPanel {
 		// e.printStackTrace();
 		// // something goes wrong here
 		// }
-
-		jTable.getColumnModel().getColumn(SampleListTableModel.ICONCOLUMN).setMinWidth(ICONWIDTH);
-		jTable.getColumnModel().getColumn(SampleListTableModel.ICONCOLUMN).setMaxWidth(ICONWIDTH);
-		jTable.getColumnModel().getColumn(SampleListTableModel.ICONCOLUMN).setPreferredWidth(
-				ICONWIDTH);
 
 		updateTitle();
 	}

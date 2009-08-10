@@ -40,13 +40,6 @@ public class AlgorithmListPanel extends AbstractListPanel {
 		jTable.setDefaultRenderer(Algorithm.class, new AlgorithmTableCellRenderer());
 		jTable.setModel(dataModel);
 
-		jTable.getColumnModel().getColumn(AlgorithmListTableModel.ICONCOLUMN)
-				.setMinWidth(ICONWIDTH);
-		jTable.getColumnModel().getColumn(AlgorithmListTableModel.ICONCOLUMN)
-				.setMaxWidth(ICONWIDTH);
-		jTable.getColumnModel().getColumn(AlgorithmListTableModel.ICONCOLUMN).setPreferredWidth(
-				ICONWIDTH);
-
 		updateTitle();
 	}
 

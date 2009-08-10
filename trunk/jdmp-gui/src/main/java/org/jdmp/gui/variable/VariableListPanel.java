@@ -46,11 +46,6 @@ public class VariableListPanel extends AbstractListPanel {
 
 		jTable.setModel(dataModel);
 
-		jTable.getColumnModel().getColumn(VariableListTableModel.ICONCOLUMN).setMinWidth(ICONWIDTH);
-		jTable.getColumnModel().getColumn(VariableListTableModel.ICONCOLUMN).setMaxWidth(ICONWIDTH);
-		jTable.getColumnModel().getColumn(VariableListTableModel.ICONCOLUMN).setPreferredWidth(
-				ICONWIDTH);
-
 		updateTitle();
 	}
 

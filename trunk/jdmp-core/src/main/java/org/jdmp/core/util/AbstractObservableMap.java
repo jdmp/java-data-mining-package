@@ -84,6 +84,9 @@ public abstract class AbstractObservableMap<V> implements ObservableMap<V> {
 	}
 
 	public final synchronized V put(String key, V value) {
+		if (value != null && value instanceof HasId) {
+			((HasId) value).setId(key);
+		}
 		V v = getMap().put(key, value);
 		int index = indexOf(value);
 		if (v == null) {

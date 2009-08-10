@@ -30,7 +30,6 @@ import java.awt.Component;
 
 import javax.swing.JLabel;
 import javax.swing.JTable;
-import javax.swing.UIManager;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
@@ -60,6 +59,9 @@ public class ModuleTableCellRenderer implements TableCellRenderer {
 		if (module != null) {
 
 			switch (column) {
+			case ModuleListTableModel.IDCOLUMN:
+				o = module.getId();
+				break;
 			case ModuleListTableModel.LABELCOLUMN:
 				o = module.getLabel();
 				break;
@@ -82,15 +84,6 @@ public class ModuleTableCellRenderer implements TableCellRenderer {
 
 			c = (JLabel) renderer.getTableCellRendererComponent(table, o, isSelected, hasFocus,
 					row, column);
-
-			switch (column) {
-			case ModuleListTableModel.ICONCOLUMN:
-				c.setIcon(UIManager.getIcon("Module.icon"));
-				break;
-			default:
-				c.setIcon(null);
-				break;
-			}
 
 			c.setHorizontalAlignment(JLabel.CENTER);
 

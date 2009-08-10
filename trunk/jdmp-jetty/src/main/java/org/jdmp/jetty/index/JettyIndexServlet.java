@@ -25,8 +25,6 @@ package org.jdmp.jetty.index;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.LinkedList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -43,7 +41,6 @@ import org.jdmp.core.variable.Variable;
 import org.jdmp.jetty.html.DefaultHtmlFactory;
 import org.jdmp.jetty.html.HtmlFactory;
 import org.jdmp.jetty.html.Page;
-import org.ujmp.core.Matrix;
 import org.ujmp.core.interfaces.CoreObject;
 
 public class JettyIndexServlet extends HttpServlet {
@@ -82,39 +79,17 @@ public class JettyIndexServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html");
-		response.setStatus(HttpServletResponse.SC_OK);
-
 		try {
+
 			String ref = request.getPathInfo();
-			String id = request.getParameter("id");
-			String deltag = request.getParameter("deltag");
+			String format = request.getParameter("format");
+
+			response.setCharacterEncoding("UTF-8");
+			response.setStatus(HttpServletResponse.SC_OK);
 
 			CoreObject co = ((JDMPCoreObject) index).getData(ref);
 
-			if (false) {
-				if (deltag != null) {
-					Sample sample = index.getSample(id);
-					if (sample != null) {
-						Variable tags = sample.getVariables().get("Tags");
-						List<Matrix> toDelete = new LinkedList<Matrix>();
-						for (Matrix m : tags.getMatrixList()) {
-							if (m != null
-									&& m.stringValue().equalsIgnoreCase(deltag)) {
-								toDelete.add(m);
-							}
-						}
-						for (Matrix m : toDelete) {
-							tags.getMatrixList().remove(m);
-						}
-						System.out.println("updating sample " + id
-								+ " deleting tag: " + deltag);
-						index.add(sample);
-					}
-				}
-			}
-
+			response.setContentType("text/html");
 			PrintWriter out = response.getWriter();
 			String path = "./";
 			Page page = null;
@@ -141,6 +116,28 @@ public class JettyIndexServlet extends HttpServlet {
 
 			out.append(page.toString());
 			out.close();
+
+			// if (false) {
+			// if (deltag != null) {
+			// Sample sample = index.getSample(id);
+			// if (sample != null) {
+			// Variable tags = sample.getVariables().get("Tags");
+			// List<Matrix> toDelete = new LinkedList<Matrix>();
+			// for (Matrix m : tags.getMatrixList()) {
+			// if (m != null
+			// && m.stringValue().equalsIgnoreCase(deltag)) {
+			// toDelete.add(m);
+			// }
+			// }
+			// for (Matrix m : toDelete) {
+			// tags.getMatrixList().remove(m);
+			// }
+			// System.out.println("updating sample " + id
+			// + " deleting tag: " + deltag);
+			// index.add(sample);
+			// }
+			// }
+			// }
 
 		} catch (Exception e) {
 			e.printStackTrace();

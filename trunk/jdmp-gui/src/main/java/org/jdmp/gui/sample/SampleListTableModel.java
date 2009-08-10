@@ -39,8 +39,6 @@ import org.jdmp.core.variable.Variable;
 public class SampleListTableModel extends AbstractTableModel implements ListDataListener {
 	private static final long serialVersionUID = -5468178300746964431L;
 
-	public static final int ICONCOLUMN = 0;
-
 	private Set<String> keys = new HashSet<String>();
 
 	private Map<Integer, String> columnMap = new HashMap<Integer, String>();
@@ -57,18 +55,13 @@ public class SampleListTableModel extends AbstractTableModel implements ListData
 	}
 
 	public int getColumnCount() {
-		return keys.size() + 1;
+		return Math.max(1, keys.size());
 	}
 
 	@Override
 	public String getColumnName(int columnIndex) {
-		switch (columnIndex) {
-		case ICONCOLUMN:
-			return "";
-		default:
-			String s = columnMap.get(columnIndex - 1);
-			return s == null ? "unknown" : s;
-		}
+		String s = columnMap.get(columnIndex);
+		return s == null ? "unknown" : s;
 	}
 
 	@Override

@@ -33,8 +33,14 @@ public interface JDMPCoreObject extends CoreObject, HasDescription, HasId {
 
 	public CoreObject getData(String ref);
 
+	public CoreObject getData(List<String> ref);
+
 	public void setData(CoreObject data, String ref);
 
 	public List<CoreObject> listData(String ref);
+
+	public void setData(CoreObject data, List<String> ref);
+
+	public List<CoreObject> listData(List<String> ref);
 
 }

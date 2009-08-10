@@ -24,6 +24,8 @@
 package org.jdmp.gui.sample;
 
 import javax.swing.Icon;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import org.jdmp.core.sample.Sample;
 import org.ujmp.gui.AbstractGUIObject;
@@ -32,6 +34,10 @@ public class SampleGUIObject extends AbstractGUIObject {
 	private static final long serialVersionUID = -3436220704455373493L;
 
 	private Sample sample = null;
+
+	private transient JFrame frame = null;
+
+	private transient JPanel panel = null;
 
 	public SampleGUIObject(Sample s) {
 		this.sample = s;
@@ -68,6 +74,22 @@ public class SampleGUIObject extends AbstractGUIObject {
 	@Override
 	public Sample getCoreObject() {
 		return sample;
+	}
+
+	@Override
+	public JFrame getFrame() {
+		if (frame == null) {
+			frame = new SampleFrame(this);
+		}
+		return frame;
+	}
+
+	@Override
+	public JPanel getPanel() {
+		if (panel == null) {
+			panel = new SamplePanel(this);
+		}
+		return panel;
 	}
 
 }

@@ -27,7 +27,6 @@ import java.awt.Component;
 
 import javax.swing.JLabel;
 import javax.swing.JTable;
-import javax.swing.UIManager;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
@@ -59,6 +58,9 @@ public class AlgorithmTableCellRenderer implements TableCellRenderer {
 
 		if (algorithm != null) {
 			switch (column) {
+			case AlgorithmListTableModel.IDCOLUMN:
+				o = algorithm.getId();
+				break;
 			case AlgorithmListTableModel.LABELCOLUMN:
 				o = algorithm.getLabel();
 				break;
@@ -75,15 +77,6 @@ public class AlgorithmTableCellRenderer implements TableCellRenderer {
 
 			c = (JLabel) renderer.getTableCellRendererComponent(table, o, isSelected, hasFocus,
 					row, column);
-
-			switch (column) {
-			case AlgorithmListTableModel.ICONCOLUMN:
-				c.setIcon(UIManager.getIcon("Algorithm.icon"));
-				break;
-			default:
-				c.setIcon(null);
-				break;
-			}
 
 			c.setHorizontalAlignment(JLabel.CENTER);
 
