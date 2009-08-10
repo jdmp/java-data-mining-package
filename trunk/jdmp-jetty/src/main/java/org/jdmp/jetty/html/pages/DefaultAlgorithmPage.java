@@ -33,7 +33,7 @@ public class DefaultAlgorithmPage extends Page {
 	private static final long serialVersionUID = 6065270482807667894L;
 
 	public DefaultAlgorithmPage(HttpServletRequest request,
-			Algorithm algorithm, Object... parameters) {
+			String path, Algorithm algorithm, Object... parameters) {
 		super();
 		if (algorithm == null) {
 			setTitle("JDMP Search: not found");

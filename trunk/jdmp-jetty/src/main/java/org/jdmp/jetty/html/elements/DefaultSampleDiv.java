@@ -36,27 +36,22 @@ import org.jdmp.jetty.index.JettyIndexServlet;
 public class DefaultSampleDiv extends DivTag {
 	private static final long serialVersionUID = 6587788027413384557L;
 
-	public DefaultSampleDiv(HttpServletRequest request, int i, Sample sample,
-			String query, String... highlightedWords) {
+	public DefaultSampleDiv(HttpServletRequest request, String path, int i,
+			Sample sample, String query, String... highlightedWords) {
 		query = query == null ? "" : query;
 		setParameter("class", "sample");
 		String label = sample.getLabel();
 		String type = sample.getAllAsString("Type");
 		String id = sample.getId();
-		String idurl = "./samples/" + id;
+		path = path + "samples/" + id + "/";
 
 		PTag p = new PTag();
 
 		DivTag title = new DivTag();
 		title.setParameter("class", "title");
 
-		SpanTag labelTag = null;
-		if (idurl != null) {
-			labelTag = new SpanTag(new LinkTag(idurl, new EmphasizedText(label,
-					highlightedWords)));
-		} else {
-			labelTag = new SpanTag(new EmphasizedText(label, highlightedWords));
-		}
+		SpanTag labelTag = new SpanTag(new LinkTag(path, new EmphasizedText(
+				label, highlightedWords)));
 		labelTag.setParameter("class", "label");
 		title.add(labelTag);
 
@@ -68,8 +63,8 @@ public class DefaultSampleDiv extends DivTag {
 		p.add(title);
 
 		p.add(new DescriptionDiv(sample.getDescription(), highlightedWords));
-		p.add(JettyIndexServlet.factory.createVariablesDiv(request, sample,
-				highlightedWords));
+		p.add(JettyIndexServlet.factory.createVariablesDiv(request, path,
+				sample, highlightedWords));
 		p.add(new URLDiv(sample, highlightedWords));
 		add(p);
 	}

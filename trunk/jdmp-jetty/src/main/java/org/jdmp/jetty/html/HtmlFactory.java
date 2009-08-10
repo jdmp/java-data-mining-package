@@ -38,35 +38,40 @@ import org.ujmp.core.Matrix;
 
 public interface HtmlFactory {
 
-	public Page createSamplePage(HttpServletRequest request, Sample sample,
-			Object... parameters) throws ServletException, IOException;
+	public Page createSamplePage(HttpServletRequest request, String path,
+			Sample sample, Object... parameters) throws ServletException,
+			IOException;
 
-	public Page createAlgorithmPage(HttpServletRequest request,
+	public Page createAlgorithmPage(HttpServletRequest request, String path,
 			Algorithm algorithm, Object... parameters) throws ServletException,
 			IOException;
 
-	public Page createIndexPage(HttpServletRequest request, Index index,
-			Object... parameters) throws ServletException, IOException;
+	public Page createIndexPage(HttpServletRequest request, String path,
+			Index index, Object... parameters) throws ServletException,
+			IOException;
 
-	public Page createModulePage(HttpServletRequest request, Module module,
-			Object... parameters) throws ServletException, IOException;
+	public Page createModulePage(HttpServletRequest request, String path,
+			Module module, Object... parameters) throws ServletException,
+			IOException;
 
-	public Page createVariablePage(HttpServletRequest request,
+	public Page createVariablePage(HttpServletRequest request, String path,
 			Variable variable, Object... parameters) throws ServletException,
 			IOException;
 
-	public Page createDataSetPage(HttpServletRequest request, DataSet dataSet,
-			Object... parameters) throws ServletException, IOException;
+	public Page createDataSetPage(HttpServletRequest request, String path,
+			DataSet dataSet, Object... parameters) throws ServletException,
+			IOException;
 
-	public Page createMatrixPage(HttpServletRequest request, Matrix matrix,
-			Object... parameters) throws ServletException, IOException;
+	public Page createMatrixPage(HttpServletRequest request, String path,
+			Matrix matrix, Object... parameters) throws ServletException,
+			IOException;
 
 	public Html createStyle();
 
-	public Html createVariablesDiv(HttpServletRequest request, Sample sample,
-			String... highlightedWords);
+	public Html createVariablesDiv(HttpServletRequest request, String path,
+			Sample sample, String... highlightedWords);
 
-	public Page createNotFoundPage(HttpServletRequest request,
+	public Page createNotFoundPage(HttpServletRequest request, String path,
 			Object... parameters);
 
 }

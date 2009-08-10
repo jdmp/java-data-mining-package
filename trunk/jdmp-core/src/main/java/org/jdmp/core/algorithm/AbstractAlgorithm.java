@@ -107,7 +107,12 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 	}
 
 	public final String getId() {
-		return getAsString(Algorithm.ID);
+		String id = getAsString(Algorithm.ID);
+		if (id == null) {
+			id = "Algorithm" + getCoreObjectId();
+			setId(id);
+		}
+		return id;
 	}
 
 	public final void setId(String id) {

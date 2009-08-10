@@ -44,7 +44,7 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 
 	public final String getId() {
 		if (id == null) {
-			id = "Sample" + getCoreObjectId();
+			id = "Variable" + getCoreObjectId();
 			setId(id);
 		}
 		return id;

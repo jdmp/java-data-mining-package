@@ -32,8 +32,8 @@ import org.ujmp.core.Matrix;
 public class DefaultMatrixPage extends Page {
 	private static final long serialVersionUID = -1585763405757847068L;
 
-	public DefaultMatrixPage(HttpServletRequest request, Matrix matrix,
-			Object... parameters) {
+	public DefaultMatrixPage(HttpServletRequest request, String path,
+			Matrix matrix, Object... parameters) {
 		super();
 		if (matrix == null) {
 			setTitle("JDMP Search: not found");

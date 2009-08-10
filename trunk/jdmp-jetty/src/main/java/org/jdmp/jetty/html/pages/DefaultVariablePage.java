@@ -32,8 +32,8 @@ import org.jdmp.jetty.html.tags.H1Tag;
 public class DefaultVariablePage extends Page {
 	private static final long serialVersionUID = -5282473771094833624L;
 
-	public DefaultVariablePage(HttpServletRequest request, Variable variable,
-			Object... parameters) {
+	public DefaultVariablePage(HttpServletRequest request, String path,
+			Variable variable, Object... parameters) {
 		super();
 		if (variable == null) {
 			setTitle("JDMP Search: not found");

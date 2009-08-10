@@ -32,8 +32,8 @@ import org.jdmp.jetty.html.tags.H1Tag;
 public class DefaultModulePage extends Page {
 	private static final long serialVersionUID = -4607076573786682476L;
 
-	public DefaultModulePage(HttpServletRequest request, Module module,
-			Object... parameters) {
+	public DefaultModulePage(HttpServletRequest request, String path,
+			Module module, Object... parameters) {
 		super();
 		if (module == null) {
 			setTitle("JDMP Search: not found");

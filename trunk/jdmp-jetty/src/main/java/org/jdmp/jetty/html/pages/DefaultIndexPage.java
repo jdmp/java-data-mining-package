@@ -44,8 +44,8 @@ public class DefaultIndexPage extends Page {
 
 	public static final int DEFAULTCOUNT = 25;
 
-	public DefaultIndexPage(Index index, HttpServletRequest request,
-			Object... parameters) {
+	public DefaultIndexPage(Index index, String path,
+			HttpServletRequest request, Object... parameters) {
 		try {
 
 			int maxid = 100;
@@ -86,7 +86,7 @@ public class DefaultIndexPage extends Page {
 
 			setTitle("JDMP Search [" + ((HasLabel) index).getLabel() + "]");
 
-			FormTag searchform = new FormTag("./");
+			FormTag searchform = new FormTag(path);
 
 			searchform.add(new SearchDiv(index, request));
 			if (index instanceof SpellChecker) {
@@ -116,7 +116,7 @@ public class DefaultIndexPage extends Page {
 				}
 
 				searchform.add(new ResultDiv(result, start, count));
-				searchform.add(new DefaultDataSetDiv(result, request));
+				searchform.add(new DefaultDataSetDiv(result, path, request));
 			}
 
 			add(searchform);
