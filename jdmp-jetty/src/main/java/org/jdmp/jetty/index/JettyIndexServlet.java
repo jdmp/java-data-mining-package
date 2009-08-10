@@ -33,6 +33,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jdmp.core.JDMPCoreObject;
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.algorithm.index.Index;
 import org.jdmp.core.dataset.DataSet;
@@ -90,7 +91,7 @@ public class JettyIndexServlet extends HttpServlet {
 			String id = request.getParameter("id");
 			String deltag = request.getParameter("deltag");
 
-			CoreObject co = ((Algorithm) index).getData(ref);
+			CoreObject co = ((JDMPCoreObject) index).getData(ref);
 
 			if (false) {
 				if (deltag != null) {
@@ -115,22 +116,27 @@ public class JettyIndexServlet extends HttpServlet {
 			}
 
 			PrintWriter out = response.getWriter();
+			String path = "./";
 			Page page = null;
 			if (co instanceof Sample) {
-				page = factory.createSamplePage(request, (Sample) co, index);
+				page = factory.createSamplePage(request, path, (Sample) co,
+						index);
 			} else if (co instanceof Variable) {
-				page = factory
-						.createVariablePage(request, (Variable) co, index);
+				page = factory.createVariablePage(request, path, (Variable) co,
+						index);
 			} else if (co instanceof DataSet) {
-				page = factory.createDataSetPage(request, (DataSet) co, index);
+				page = factory.createDataSetPage(request, path, (DataSet) co,
+						index);
 			} else if (co instanceof Module) {
-				page = factory.createModulePage(request, (Module) co, index);
+				page = factory.createModulePage(request, path, (Module) co,
+						index);
 			} else if (co instanceof Index) {
-				page = factory.createIndexPage(request, (Index) co);
+				page = factory.createIndexPage(request, path, (Index) co);
 			} else if (co instanceof Algorithm) {
-				page = factory.createAlgorithmPage(request, (Algorithm) co);
+				page = factory.createAlgorithmPage(request, path,
+						(Algorithm) co);
 			} else {
-				page = factory.createNotFoundPage(request);
+				page = factory.createNotFoundPage(request, path);
 			}
 
 			out.append(page.toString());

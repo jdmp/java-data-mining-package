@@ -31,7 +31,7 @@ import org.jdmp.jetty.html.tags.H1Tag;
 public class DefaultNotFoundPage extends Page {
 	private static final long serialVersionUID = -5078447136232532740L;
 
-	public DefaultNotFoundPage(HttpServletRequest request, Object... parameters) {
+	public DefaultNotFoundPage(HttpServletRequest request, String path, Object... parameters) {
 		super();
 		setTitle("JDMP Search: not found");
 		add(new H1Tag("not found"));

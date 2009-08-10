@@ -142,7 +142,7 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 	public final String getId() {
 		String id = getAsString(Sample.ID);
 		if (id == null) {
-			id = "Sample" + getCoreObjectId();
+			id = "Module" + getCoreObjectId();
 			setId(id);
 		}
 		return id;

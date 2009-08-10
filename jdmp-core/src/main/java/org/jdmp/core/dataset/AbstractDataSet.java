@@ -91,7 +91,12 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 	}
 
 	public final String getId() {
-		return getAsString(DataSet.ID);
+		String id = getAsString(DataSet.ID);
+		if (id == null) {
+			id = "DataSet" + getCoreObjectId();
+			setId(id);
+		}
+		return id;
 	}
 
 	public final void setId(String id) {

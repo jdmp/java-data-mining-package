@@ -33,6 +33,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.jdmp.core.variable.HasVariableMap;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.jetty.html.EmphasizedText;
+import org.jdmp.jetty.html.Text;
 import org.jdmp.jetty.html.tags.BTag;
 import org.jdmp.jetty.html.tags.DivTag;
 import org.jdmp.jetty.html.tags.LinkTag;
@@ -40,18 +41,19 @@ import org.jdmp.jetty.html.tags.SpanTag;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.util.StringUtil;
 
-public class VariablesDiv extends DivTag {
+public class DefaultVariablesDiv extends DivTag {
 	private static final long serialVersionUID = -3857330921351894952L;
 
-	public VariablesDiv(HttpServletRequest request, HasVariableMap variables,
-			String... highlightedWords) {
-		this(request, variables, new HashSet<String>(Arrays
+	public DefaultVariablesDiv(HttpServletRequest request, String path,
+			HasVariableMap variables, String... highlightedWords) {
+		this(request, path, variables, new HashSet<String>(Arrays
 				.asList(new String[] { Variable.LABEL, Variable.DESCRIPTION,
 						Variable.CONTENT })), highlightedWords);
 	}
 
-	public VariablesDiv(HttpServletRequest request, HasVariableMap variables,
-			Set<String> skippedVariables, String... highlightedWords) {
+	public DefaultVariablesDiv(HttpServletRequest request, String path,
+			HasVariableMap variables, Set<String> skippedVariables,
+			String... highlightedWords) {
 		try {
 			setParameter("class", "fields");
 
@@ -62,15 +64,19 @@ public class VariablesDiv extends DivTag {
 				if (skippedVariables.contains(key)) {
 					continue;
 				}
+
+				Variable var = variables.getVariables().get(key);
+
 				DivTag field = new DivTag();
 				field.setParameter("class", "variable");
 
-				SpanTag keyTag = new SpanTag(new BTag(StringUtil.format(key)
-						+ ":"));
+				LinkTag varlink = new LinkTag(
+						path + "variables/" + var.getId(), StringUtil
+								.format(key));
+				SpanTag keyTag = new SpanTag(new BTag(varlink, new Text(":")));
 				keyTag.setParameter("class", "key");
 				field.add(keyTag);
 
-				Variable var = variables.getVariables().get(key);
 				if (var != null) {
 					for (Matrix matrix : var.getMatrixList()) {
 						if (matrix != null) {
@@ -81,7 +87,7 @@ public class VariablesDiv extends DivTag {
 										highlightedWords);
 								String qstring = new String(query + " +" + key
 										+ ":" + value).trim();
-								LinkTag link = new LinkTag("./?q="
+								LinkTag link = new LinkTag(path + "?q="
 										+ URLEncoder.encode(qstring, "utf-8"),
 										text);
 								link.setParameter("title",

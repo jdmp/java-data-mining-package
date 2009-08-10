@@ -41,8 +41,8 @@ import org.ujmp.core.util.StringUtil;
 public class DefaultSamplePage extends Page {
 	private static final long serialVersionUID = -3370405362982723837L;
 
-	public DefaultSamplePage(Sample sample, HttpServletRequest request,
-			Object... parameters) {
+	public DefaultSamplePage(Sample sample, String path,
+			HttpServletRequest request, Object... parameters) {
 		super();
 		if (sample == null) {
 			setTitle("JDMP Search: not found");
@@ -75,7 +75,7 @@ public class DefaultSamplePage extends Page {
 					DataSet ds = index.searchSimilar(sample, 0, 10);
 					if (ds != null && !ds.getSamples().isEmpty()) {
 						add(new H2Tag("Similar Results"));
-						add(new DefaultDataSetDiv(ds, request));
+						add(new DefaultDataSetDiv(ds, path, request));
 					}
 				}
 			} catch (Exception e) {

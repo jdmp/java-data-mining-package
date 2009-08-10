@@ -37,8 +37,8 @@ import org.jdmp.jetty.html.tags.PTag;
 public class DefaultDataSetDiv extends DivTag {
 	private static final long serialVersionUID = 5873327671800366757L;
 
-	public DefaultDataSetDiv(DataSet dataSet, HttpServletRequest request,
-			Object... parameters) {
+	public DefaultDataSetDiv(DataSet dataSet, String path,
+			HttpServletRequest request, Object... parameters) {
 		setParameter("class", "dataset");
 
 		String query = request.getParameter("q");
@@ -69,8 +69,8 @@ public class DefaultDataSetDiv extends DivTag {
 			int maxid = 0;
 			for (Sample s : dataSet.getSamples()) {
 				if (s != null) {
-					p.add(new DefaultSampleDiv(request, maxid++, s, query,
-							highlightedWords));
+					p.add(new DefaultSampleDiv(request, path, maxid++, s,
+							query, highlightedWords));
 				}
 			}
 			p.add(new InputHiddenTag("maxid", "" + maxid));

@@ -135,18 +135,21 @@ public abstract class AbstractCoreObject implements JDMPCoreObject {
 		if (ref.startsWith("/")) {
 			ref = ref.substring(1);
 		}
+		if (ref.endsWith("/")) {
+			ref = ref.substring(0, ref.length() - 1);
+		}
 		if (ref.startsWith("variables/")) {
 			ref = ref.substring(10);
 			if (this instanceof HasVariableMap) {
 				int pos = ref.indexOf("/");
 				if (pos > 0) {
-					String id = ref.substring(1, pos);
+					String id = ref.substring(0, pos);
 					ref = ref.substring(pos);
 					JDMPCoreObject co = ((HasVariableMap) this).getVariables().get(id);
 					if (co != null) {
 						return co.getData(ref);
 					} else {
-						return null;
+						return ((HasVariableMap) this).getVariables().get(ref);
 					}
 				} else {
 					return ((HasVariableMap) this).getVariables().get(ref);
@@ -157,13 +160,13 @@ public abstract class AbstractCoreObject implements JDMPCoreObject {
 			if (this instanceof HasSampleMap) {
 				int pos = ref.indexOf("/");
 				if (pos > 0) {
-					String id = ref.substring(1, pos);
+					String id = ref.substring(0, pos);
 					ref = ref.substring(pos);
 					JDMPCoreObject co = ((HasSampleMap) this).getSamples().get(id);
 					if (co != null) {
 						return co.getData(ref);
 					} else {
-						return null;
+						return ((HasSampleMap) this).getSamples().get(ref);
 					}
 				} else {
 					return ((HasSampleMap) this).getSamples().get(ref);

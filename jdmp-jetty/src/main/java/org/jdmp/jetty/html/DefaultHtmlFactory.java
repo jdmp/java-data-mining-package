@@ -34,7 +34,7 @@ import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.module.Module;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
-import org.jdmp.jetty.html.elements.VariablesDiv;
+import org.jdmp.jetty.html.elements.DefaultVariablesDiv;
 import org.jdmp.jetty.html.pages.DefaultAlgorithmPage;
 import org.jdmp.jetty.html.pages.DefaultDataSetPage;
 import org.jdmp.jetty.html.pages.DefaultIndexPage;
@@ -53,59 +53,64 @@ public class DefaultHtmlFactory implements HtmlFactory {
 	}
 
 	@Override
-	public Page createSamplePage(HttpServletRequest request, Sample sample,
-			Object... parameters) throws ServletException, IOException {
-		return new DefaultSamplePage(sample, request, parameters);
+	public Page createSamplePage(HttpServletRequest request, String path,
+			Sample sample, Object... parameters) throws ServletException,
+			IOException {
+		return new DefaultSamplePage(sample, path, request, parameters);
 	}
 
 	@Override
-	public Page createIndexPage(HttpServletRequest request, Index index,
-			Object... parameters) throws ServletException, IOException {
-		return new DefaultIndexPage(index, request, parameters);
+	public Page createIndexPage(HttpServletRequest request, String path,
+			Index index, Object... parameters) throws ServletException,
+			IOException {
+		return new DefaultIndexPage(index, path, request, parameters);
 	}
 
 	@Override
-	public Page createAlgorithmPage(HttpServletRequest request,
+	public Page createAlgorithmPage(HttpServletRequest request, String path,
 			Algorithm algorithm, Object... parameters) throws ServletException,
 			IOException {
-		return new DefaultAlgorithmPage(request, algorithm, parameters);
+		return new DefaultAlgorithmPage(request, path, algorithm, parameters);
 	}
 
 	@Override
-	public Page createDataSetPage(HttpServletRequest request, DataSet dataSet,
-			Object... parameters) throws ServletException, IOException {
-		return new DefaultDataSetPage(request, dataSet, parameters);
+	public Page createDataSetPage(HttpServletRequest request, String path,
+			DataSet dataSet, Object... parameters) throws ServletException,
+			IOException {
+		return new DefaultDataSetPage(request, path, dataSet, parameters);
 	}
 
 	@Override
-	public Page createMatrixPage(HttpServletRequest request, Matrix matrix,
-			Object... parameters) throws ServletException, IOException {
-		return new DefaultMatrixPage(request, matrix, parameters);
+	public Page createMatrixPage(HttpServletRequest request, String path,
+			Matrix matrix, Object... parameters) throws ServletException,
+			IOException {
+		return new DefaultMatrixPage(request, path, matrix, parameters);
 	}
 
 	@Override
-	public Page createModulePage(HttpServletRequest request, Module module,
-			Object... parameters) throws ServletException, IOException {
-		return new DefaultModulePage(request, module, parameters);
+	public Page createModulePage(HttpServletRequest request, String path,
+			Module module, Object... parameters) throws ServletException,
+			IOException {
+		return new DefaultModulePage(request, path, module, parameters);
 	}
 
 	@Override
-	public Page createVariablePage(HttpServletRequest request,
+	public Page createVariablePage(HttpServletRequest request, String path,
 			Variable variable, Object... parameters) throws ServletException,
 			IOException {
-		return new DefaultVariablePage(request, variable, parameters);
+		return new DefaultVariablePage(request, path, variable, parameters);
 	}
 
 	@Override
-	public Html createVariablesDiv(HttpServletRequest request, Sample sample,
-			String... highlightedWords) {
-		return new VariablesDiv(request, sample, highlightedWords);
+	public Html createVariablesDiv(HttpServletRequest request, String path,
+			Sample sample, String... highlightedWords) {
+		return new DefaultVariablesDiv(request, path, sample, highlightedWords);
 	}
 
 	@Override
-	public Page createNotFoundPage(HttpServletRequest request,
+	public Page createNotFoundPage(HttpServletRequest request, String path,
 			Object... parameters) {
-		return new DefaultNotFoundPage(request);
+		return new DefaultNotFoundPage(request, path);
 	}
 
 }
