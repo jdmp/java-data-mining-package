@@ -72,8 +72,6 @@ public abstract class AbstractListPanel extends JPanel implements MouseListener,
 
 	protected GUIObject object = null;
 
-	public final int ICONWIDTH = UIManager.getInt("Table.iconWidth");
-
 	protected TableModel dataModel = null;
 
 	protected JScrollPane scrollPane = null;

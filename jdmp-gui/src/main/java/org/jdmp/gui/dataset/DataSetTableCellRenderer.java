@@ -27,7 +27,6 @@ import java.awt.Component;
 
 import javax.swing.JLabel;
 import javax.swing.JTable;
-import javax.swing.UIManager;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
@@ -58,6 +57,9 @@ public class DataSetTableCellRenderer implements TableCellRenderer {
 
 		if (dataSet != null) {
 			switch (column) {
+			case DataSetListTableModel.IDCOLUMN:
+				o = dataSet.getId();
+				break;
 			case DataSetListTableModel.LABELCOLUMN:
 				o = dataSet.getLabel();
 				break;
@@ -77,15 +79,6 @@ public class DataSetTableCellRenderer implements TableCellRenderer {
 
 			c = (JLabel) renderer.getTableCellRendererComponent(table, o, isSelected, hasFocus,
 					row, column);
-
-			switch (column) {
-			case DataSetListTableModel.ICONCOLUMN:
-				c.setIcon(UIManager.getIcon("DataSet.icon"));
-				break;
-			default:
-				c.setIcon(null);
-				break;
-			}
 
 			c.setHorizontalAlignment(JLabel.CENTER);
 

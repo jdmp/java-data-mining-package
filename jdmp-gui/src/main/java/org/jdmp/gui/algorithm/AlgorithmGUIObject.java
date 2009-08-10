@@ -24,6 +24,8 @@
 package org.jdmp.gui.algorithm;
 
 import javax.swing.Icon;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import org.jdmp.core.algorithm.Algorithm;
 import org.ujmp.gui.AbstractGUIObject;
@@ -32,6 +34,10 @@ public class AlgorithmGUIObject extends AbstractGUIObject {
 	private static final long serialVersionUID = 2744384245306464106L;
 
 	private Algorithm algorithm = null;
+
+	private transient JFrame frame = null;
+
+	private transient JPanel panel = null;
 
 	public AlgorithmGUIObject(Algorithm a) {
 		this.algorithm = a;
@@ -68,6 +74,22 @@ public class AlgorithmGUIObject extends AbstractGUIObject {
 	@Override
 	public String toString() {
 		return algorithm.toString();
+	}
+
+	@Override
+	public JFrame getFrame() {
+		if (frame == null) {
+			frame = new AlgorithmFrame(this);
+		}
+		return frame;
+	}
+
+	@Override
+	public JPanel getPanel() {
+		if (panel == null) {
+			panel = new AlgorithmPanel(this);
+		}
+		return panel;
 	}
 
 }

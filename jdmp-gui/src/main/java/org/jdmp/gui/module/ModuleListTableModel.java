@@ -33,7 +33,7 @@ import org.jdmp.core.module.Module;
 public class ModuleListTableModel extends AbstractTableModel implements ListDataListener {
 	private static final long serialVersionUID = -1372599464095754625L;
 
-	public static final int ICONCOLUMN = 0;
+	public static final int IDCOLUMN = 0;
 
 	public static final int LABELCOLUMN = 1;
 
@@ -63,8 +63,8 @@ public class ModuleListTableModel extends AbstractTableModel implements ListData
 	@Override
 	public String getColumnName(int columnIndex) {
 		switch (columnIndex) {
-		case ICONCOLUMN:
-			return "";
+		case IDCOLUMN:
+			return "Id";
 		case LABELCOLUMN:
 			return "Label";
 		case VARIABLECOUNTCOLUMN:

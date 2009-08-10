@@ -33,7 +33,7 @@ import org.jdmp.core.dataset.HasDataSets;
 public class DataSetListTableModel extends AbstractTableModel implements ListDataListener {
 	private static final long serialVersionUID = 8897049622154020275L;
 
-	public static final int ICONCOLUMN = 0;
+	public static final int IDCOLUMN = 0;
 
 	public static final int LABELCOLUMN = 1;
 
@@ -61,8 +61,8 @@ public class DataSetListTableModel extends AbstractTableModel implements ListDat
 	@Override
 	public String getColumnName(int columnIndex) {
 		switch (columnIndex) {
-		case ICONCOLUMN:
-			return "";
+		case IDCOLUMN:
+			return "Id";
 		case LABELCOLUMN:
 			return "Label";
 		case DATASETCOUNTCOLUMN:

@@ -23,11 +23,6 @@ public class DataSetListPanel extends AbstractListPanel {
 
 		jTable.setModel(dataModel);
 
-		jTable.getColumnModel().getColumn(DataSetListTableModel.ICONCOLUMN).setMinWidth(ICONWIDTH);
-		jTable.getColumnModel().getColumn(DataSetListTableModel.ICONCOLUMN).setMaxWidth(ICONWIDTH);
-		jTable.getColumnModel().getColumn(DataSetListTableModel.ICONCOLUMN).setPreferredWidth(
-				ICONWIDTH);
-
 		updateTitle();
 	}
 

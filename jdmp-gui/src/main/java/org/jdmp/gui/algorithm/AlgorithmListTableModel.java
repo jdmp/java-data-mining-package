@@ -33,7 +33,7 @@ import org.jdmp.core.algorithm.HasAlgorithms;
 public class AlgorithmListTableModel extends AbstractTableModel implements ListDataListener {
 	private static final long serialVersionUID = -3779798282436020436L;
 
-	public static final int ICONCOLUMN = 0;
+	public static final int IDCOLUMN = 0;
 
 	public static final int LABELCOLUMN = 1;
 
@@ -59,8 +59,8 @@ public class AlgorithmListTableModel extends AbstractTableModel implements ListD
 	@Override
 	public String getColumnName(int columnIndex) {
 		switch (columnIndex) {
-		case ICONCOLUMN:
-			return "";
+		case IDCOLUMN:
+			return "Id";
 		case VARIABLECOLUMN:
 			return "Variables";
 		case ALGORITHMLISTCOLUMN:

@@ -46,11 +46,6 @@ public class ModuleListPanel extends AbstractListPanel {
 
 		jTable.setModel(dataModel);
 
-		jTable.getColumnModel().getColumn(ModuleListTableModel.ICONCOLUMN).setMinWidth(ICONWIDTH);
-		jTable.getColumnModel().getColumn(ModuleListTableModel.ICONCOLUMN).setMaxWidth(ICONWIDTH);
-		jTable.getColumnModel().getColumn(ModuleListTableModel.ICONCOLUMN).setPreferredWidth(
-				ICONWIDTH);
-
 		updateTitle();
 	}
 

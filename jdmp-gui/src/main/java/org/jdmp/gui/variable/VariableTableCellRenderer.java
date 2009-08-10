@@ -27,7 +27,6 @@ import java.awt.Component;
 
 import javax.swing.JLabel;
 import javax.swing.JTable;
-import javax.swing.UIManager;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
@@ -68,6 +67,9 @@ public class VariableTableCellRenderer implements TableCellRenderer {
 
 		if (variable != null) {
 			switch (column) {
+			case VariableListTableModel.IDCOLUMN:
+				o = variable.getId();
+				break;
 			case VariableListTableModel.LABELCOLUMN:
 				o = variable.getLabel();
 				break;
@@ -93,15 +95,6 @@ public class VariableTableCellRenderer implements TableCellRenderer {
 
 			l = (JLabel) renderer.getTableCellRendererComponent(table, o, isSelected, hasFocus,
 					row, column);
-
-			switch (column) {
-			case VariableListTableModel.ICONCOLUMN:
-				l.setIcon(UIManager.getIcon("Variable.icon"));
-				break;
-			default:
-				l.setIcon(null);
-				break;
-			}
 
 			l.setHorizontalAlignment(JLabel.CENTER);
 

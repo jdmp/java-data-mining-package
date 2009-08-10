@@ -24,6 +24,8 @@
 package org.jdmp.gui.module;
 
 import javax.swing.Icon;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import org.jdmp.core.module.Module;
 import org.jdmp.gui.interpreter.CommandWindow;
@@ -35,6 +37,10 @@ public class ModuleGUIObject extends AbstractGUIObject {
 	private CommandWindow commandWindow = null;
 
 	private Module module = null;
+
+	private transient JFrame frame = null;
+
+	private transient JPanel panel = null;
 
 	public ModuleGUIObject(Module module) {
 		this.module = module;
@@ -77,6 +83,22 @@ public class ModuleGUIObject extends AbstractGUIObject {
 	@Override
 	public Module getCoreObject() {
 		return module;
+	}
+
+	@Override
+	public JFrame getFrame() {
+		if (frame == null) {
+			frame = new ModuleFrame(this);
+		}
+		return frame;
+	}
+
+	@Override
+	public JPanel getPanel() {
+		if (panel == null) {
+			panel = new ModulePanel(this);
+		}
+		return panel;
 	}
 
 }

@@ -24,6 +24,8 @@
 package org.jdmp.gui.dataset;
 
 import javax.swing.Icon;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import org.jdmp.core.dataset.DataSet;
 import org.ujmp.gui.AbstractGUIObject;
@@ -32,6 +34,10 @@ public class DataSetGUIObject extends AbstractGUIObject {
 	private static final long serialVersionUID = -329942434062359920L;
 
 	private DataSet dataSet = null;
+
+	private transient JFrame frame = null;
+
+	private transient JPanel panel = null;
 
 	public DataSet getCoreObject() {
 		return dataSet;
@@ -68,6 +74,22 @@ public class DataSetGUIObject extends AbstractGUIObject {
 	@Override
 	public String toString() {
 		return dataSet.toString();
+	}
+
+	@Override
+	public JFrame getFrame() {
+		if (frame == null) {
+			frame = new DataSetFrame(this);
+		}
+		return frame;
+	}
+
+	@Override
+	public JPanel getPanel() {
+		if (panel == null) {
+			panel = new DataSetPanel(this);
+		}
+		return panel;
 	}
 
 }
