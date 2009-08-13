@@ -36,7 +36,7 @@ public class DefaultModule extends AbstractModule {
 	private Interpreter interpreter = null;
 
 	@Override
-	public Matrix getMatrix(Object variableKey) {
+	public Matrix getMatrix(String variableKey) {
 		Variable v = getVariables().get(variableKey);
 		if (v == null) {
 			return null;

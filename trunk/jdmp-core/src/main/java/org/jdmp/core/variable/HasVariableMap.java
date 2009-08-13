@@ -34,33 +34,35 @@ public interface HasVariableMap extends HasVariables {
 
 	public ObservableMap<Variable> getVariables();
 
-	public Matrix getMatrix(Object variableKey);
+	public Matrix getMatrix(String variableKey);
 
-	public String getAsString(Object variableKey);
+	public String getAsString(String variableKey);
 
-	public String getAllAsString(Object variableKey);
+	public Object getAsObject(String variableKey);
 
-	public boolean getAsBoolean(Object variableKey);
+	public String getAllAsString(String variableKey);
 
-	public byte getAsByte(Object variableKey);
+	public boolean getAsBoolean(String variableKey);
 
-	public char getAsChar(Object variableKey);
+	public byte getAsByte(String variableKey);
 
-	public double getAsDouble(Object variableKey);
+	public char getAsChar(String variableKey);
 
-	public float getAsFloat(Object variableKey);
+	public double getAsDouble(String variableKey);
 
-	public int getAsInt(Object variableKey);
+	public float getAsFloat(String variableKey);
 
-	public long getAsLong(Object variableKey);
+	public int getAsInt(String variableKey);
 
-	public short getAsShort(Object variableKey);
+	public long getAsLong(String variableKey);
 
-	public Date getAsDate(Object variableKey);
+	public short getAsShort(String variableKey);
 
-	public BigDecimal getAsBigDecimal(Object variableKey);
+	public Date getAsDate(String variableKey);
 
-	public BigInteger getAsBigInteger(Object variableKey);
+	public BigDecimal getAsBigDecimal(String variableKey);
+
+	public BigInteger getAsBigInteger(String variableKey);
 
 	public void setMatrix(String variableKey, Matrix matrix);
 
