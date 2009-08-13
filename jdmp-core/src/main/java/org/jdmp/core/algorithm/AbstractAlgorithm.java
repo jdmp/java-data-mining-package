@@ -89,7 +89,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		}
 	}
 
-	public final String getAllAsString(Object variableKey) {
+	public final String getAllAsString(String variableKey) {
 		Variable v = getVariables().get(variableKey);
 		if (v != null) {
 			return StringUtil.getAllAsString(v.getMatrixList().toCollection());
@@ -157,9 +157,9 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 	}
 
 	public final Map<Object, Object> calculate() throws Exception {
-		Map<Object, Object> input = new HashMap<Object, Object>();
+		Map<String, Object> input = new HashMap<String, Object>();
 
-		for (Object v : getInputKeys()) {
+		for (String v : getInputKeys()) {
 			input.put(v, getMatrix(v));
 		}
 
@@ -240,55 +240,59 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		return edgeDirections.get(key);
 	}
 
-	public final String getAsString(Object variableKey) {
+	public final String getAsString(String variableKey) {
 		return StringUtil.convert(getMatrix(variableKey));
 	}
 
-	public final boolean getAsBoolean(Object variableKey) {
+	public final boolean getAsBoolean(String variableKey) {
 		return MathUtil.getBoolean(getMatrix(variableKey));
 	}
 
-	public final byte getAsByte(Object variableKey) {
+	public final Object getAsObject(String variableKey) {
+		return MathUtil.getObject(getMatrix(variableKey));
+	}
+
+	public final byte getAsByte(String variableKey) {
 		return MathUtil.getByte(getMatrix(variableKey));
 	}
 
-	public final char getAsChar(Object variableKey) {
+	public final char getAsChar(String variableKey) {
 		return MathUtil.getChar(getMatrix(variableKey));
 	}
 
-	public final double getAsDouble(Object variableKey) {
+	public final double getAsDouble(String variableKey) {
 		return MathUtil.getDouble(getMatrix(variableKey));
 	}
 
-	public final float getAsFloat(Object variableKey) {
+	public final float getAsFloat(String variableKey) {
 		return MathUtil.getFloat(getMatrix(variableKey));
 	}
 
-	public final int getAsInt(Object variableKey) {
+	public final int getAsInt(String variableKey) {
 		return MathUtil.getInt(getMatrix(variableKey));
 	}
 
-	public final long getAsLong(Object variableKey) {
+	public final long getAsLong(String variableKey) {
 		return MathUtil.getLong(getMatrix(variableKey));
 	}
 
-	public final short getAsShort(Object variableKey) {
+	public final short getAsShort(String variableKey) {
 		return MathUtil.getShort(getMatrix(variableKey));
 	}
 
-	public final Date getAsDate(Object variableKey) {
+	public final Date getAsDate(String variableKey) {
 		return MathUtil.getDate(getMatrix(variableKey));
 	}
 
-	public final BigDecimal getAsBigDecimal(Object variableKey) {
+	public final BigDecimal getAsBigDecimal(String variableKey) {
 		return MathUtil.getBigDecimal(getMatrix(variableKey));
 	}
 
-	public final BigInteger getAsBigInteger(Object variableKey) {
+	public final BigInteger getAsBigInteger(String variableKey) {
 		return MathUtil.getBigInteger(getMatrix(variableKey));
 	}
 
-	public final Matrix getMatrix(Object variableKey) {
+	public final Matrix getMatrix(String variableKey) {
 		Variable v = getVariables().get(variableKey);
 		if (v != null) {
 			return v.getMatrix();

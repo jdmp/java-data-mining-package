@@ -84,9 +84,9 @@ public class SampleListPanel extends AbstractListPanel {
 
 class SampleCollator implements Comparator<Object> {
 
-	private Object column = null;
+	private String column = null;
 
-	public SampleCollator(Object column) {
+	public SampleCollator(String column) {
 		this.column = column;
 	}
 

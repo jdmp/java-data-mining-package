@@ -45,17 +45,17 @@ public class SampleListToMatrixWrapper extends AbstractDenseObjectMatrix2D imple
 
 	private int columnCount = 0;
 
-	private Set<Object> keys = new HashSet<Object>();
+	private Set<String> keys = new HashSet<String>();
 
-	private Object[] keysToShow = null;
+	private String[] keysToShow = null;
 
-	private Map<Integer, Object> columnMap = new HashMap<Integer, Object>();
+	private Map<Integer, String> columnMap = new HashMap<Integer, String>();
 
 	public SampleListToMatrixWrapper(CoreObjectList<Sample> samples) {
-		this(samples, new Object[0]);
+		this(samples, new String[0]);
 	}
 
-	public SampleListToMatrixWrapper(CoreObjectList<Sample> samples, Object... keysToShow) {
+	public SampleListToMatrixWrapper(CoreObjectList<Sample> samples, String... keysToShow) {
 		this.samples = samples;
 		this.keysToShow = keysToShow;
 		samples.addListDataListener(this);
@@ -70,7 +70,7 @@ public class SampleListToMatrixWrapper extends AbstractDenseObjectMatrix2D imple
 	public Object getObject(int row, int column) {
 		createIndex();
 		Sample s = samples.getElementAt(row);
-		Object key = columnMap.get(column);
+		String key = columnMap.get(column);
 		if (key == null) {
 			return null;
 		} else {
@@ -99,7 +99,7 @@ public class SampleListToMatrixWrapper extends AbstractDenseObjectMatrix2D imple
 		if (keys != null && !keys.isEmpty()) {
 			return;
 		}
-		keys = new HashSet<Object>();
+		keys = new HashSet<String>();
 		if (keysToShow == null || keysToShow.length == 0) {
 			for (Sample s : samples) {
 				if (s != null) {
@@ -107,7 +107,7 @@ public class SampleListToMatrixWrapper extends AbstractDenseObjectMatrix2D imple
 				}
 			}
 			int i = 0;
-			for (Object k : keys) {
+			for (String k : keys) {
 				columnMap.put(i, k);
 				setColumnLabel(i, StringUtil.convert(k));
 				i++;

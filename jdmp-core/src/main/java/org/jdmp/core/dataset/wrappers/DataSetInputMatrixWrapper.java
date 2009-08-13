@@ -36,7 +36,7 @@ public class DataSetInputMatrixWrapper extends AbstractDenseDoubleMatrix2D imple
 		Wrapper<DefaultDataSet> {
 	private static final long serialVersionUID = -817570097594349208L;
 
-	public static final Object INPUT = Variable.INPUT;
+	public static final String INPUT = Variable.INPUT;
 
 	private DefaultDataSet dataSet = null;
 
