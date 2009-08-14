@@ -51,7 +51,7 @@ public class DefaultSamplePage extends Page {
 			setTitle("JDMP Search: " + sample.getLabel());
 			add(new H1Tag(sample.getLabel()));
 
-			for (Object key : sample.getVariables().keySet()) {
+			for (String key : sample.getVariables().keySet()) {
 				if (Sample.LABEL.equals(key)) {
 					continue;
 				} else if (Variable.LINKS.equals(key)) {
