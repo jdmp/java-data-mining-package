@@ -211,10 +211,10 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 	}
 
 	public final Map<String, Object> calculate(List<Matrix> matrices) throws Exception {
-		Map<Object, Object> map = new HashMap<Object, Object>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		List<String> keys = getInputKeys();
 		for (int i = 0; i < matrices.size(); i++) {
-			Object key = keys.get(i);
+			String key = keys.get(i);
 			map.put(key, matrices.get(i));
 		}
 		return calculateObjects(map);
