@@ -97,17 +97,6 @@ public class LibLinearClassifier extends AbstractClassifier {
 		prob.x = new FeatureNode[prob.l][];
 		prob.y = new int[prob.l];
 
-		// calculate weights
-		// double[] targetCounts = dataSet.getTargetMatrix().sum(Ret.NEW,
-		// Matrix.ROW, true).toDoubleArray()[0];
-		// double[] weights = new double[targetCounts.length];
-		// int[] weightLabels = new int[targetCounts.length];
-		// for (int i = 0; i < targetCounts.length; i++) {
-		// weights[i] = 1 - targetCounts[i] / prob.l;
-		// weightLabels[i] = i;
-		// }
-		// param.setWeights(weights, weightLabels);
-
 		for (int i = 0; i < prob.l; i++) {
 			if (i % 10 == 0) {
 				System.out.println("Converting sample " + i);

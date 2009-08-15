@@ -40,11 +40,11 @@ public class SerialExecution extends AbstractAlgorithm {
 	}
 
 	@Override
-	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws Exception {
-		Map<Object, Object> result = new HashMap<Object, Object>();
+	public Map<String, Object> calculateObjects(Map<String, Object> input) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
 
 		for (Algorithm a : getAlgorithms()) {
-			Map<Object, Object> r = a.calculate();
+			Map<String, Object> r = a.calculate();
 			result.putAll(r);
 		}
 

@@ -51,8 +51,8 @@ public class TanhPlusOne extends AbstractAlgorithm {
 	}
 
 	@Override
-	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws MatrixException {
-		Map<Object, Object> result = new HashMap<Object, Object>();
+	public Map<String, Object> calculateObjects(Map<String, Object> input) throws MatrixException {
+		Map<String, Object> result = new HashMap<String, Object>();
 		Matrix in = MathUtil.getMatrix(input.get(SOURCE));
 		result.put(TARGET, in.plus(1.0).tanh(Ret.NEW));
 		return result;

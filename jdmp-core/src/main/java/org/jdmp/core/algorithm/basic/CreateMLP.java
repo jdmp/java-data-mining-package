@@ -58,9 +58,9 @@ public class CreateMLP extends AbstractAlgorithm {
 	}
 
 	@Override
-	public Map<Object, Object> calculateObjects(java.util.Map<Object, Object> input)
+	public Map<String, Object> calculateObjects(Map<String, Object> input)
 			throws MatrixException {
-		Map<Object, Object> result = new HashMap<Object, Object>();
+		Map<String, Object> result = new HashMap<String, Object>();
 
 		Object h1 = input.get(HIDDEN1);
 		Object h2 = input.get(HIDDEN2);

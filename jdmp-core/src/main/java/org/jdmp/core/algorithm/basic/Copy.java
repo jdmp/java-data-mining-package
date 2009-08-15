@@ -50,8 +50,8 @@ public class Copy extends AbstractAlgorithm {
 	}
 
 	@Override
-	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws Exception {
-		Map<Object, Object> result = new HashMap<Object, Object>();
+	public Map<String, Object> calculateObjects(Map<String, Object> input) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
 		Matrix in = MathUtil.getMatrix(input.get(SOURCE));
 		if (in != null) {
 			in.exportToClipboard(FileFormat.CSV);

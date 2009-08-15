@@ -64,11 +64,11 @@ public class Export extends AbstractAlgorithm {
 	}
 
 	@Override
-	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws Exception {
+	public Map<String, Object> calculateObjects(Map<String, Object> input) throws Exception {
 		FileFormat format = defaultFormat;
 		String file = null;
 
-		Map<Object, Object> result = new HashMap<Object, Object>();
+		Map<String, Object> result = new HashMap<String, Object>();
 
 		Matrix matrix = MathUtil.getMatrix(input.get(SOURCE));
 

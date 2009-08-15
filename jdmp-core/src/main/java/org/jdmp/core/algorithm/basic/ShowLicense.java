@@ -42,8 +42,8 @@ public class ShowLicense extends AbstractAlgorithm {
 	}
 
 	@Override
-	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws MatrixException {
-		Map<Object, Object> result = new HashMap<Object, Object>();
+	public Map<String, Object> calculateObjects(Map<String, Object> input) throws MatrixException {
+		Map<String, Object> result = new HashMap<String, Object>();
 		String s = "\n";
 		s += "                   Java Data Mining Package (JDMP)\n";
 		s += "                           Version " + JDMP.JDMPVERSION + "\n";

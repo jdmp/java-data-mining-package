@@ -58,10 +58,10 @@ public class Import extends AbstractAlgorithm {
 	}
 
 	@Override
-	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws Exception {
+	public Map<String, Object> calculateObjects(Map<String, Object> input) throws Exception {
 		FileFormat format = defaultFormat;
 
-		Map<Object, Object> result = new HashMap<Object, Object>();
+		Map<String, Object> result = new HashMap<String, Object>();
 
 		String file = StringUtil.format(input.get(SOURCE));
 

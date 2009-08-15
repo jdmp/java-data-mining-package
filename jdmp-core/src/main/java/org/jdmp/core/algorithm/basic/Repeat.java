@@ -44,8 +44,8 @@ public class Repeat extends AbstractAlgorithm {
 	}
 
 	@Override
-	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws Exception {
-		Map<Object, Object> result = new HashMap<Object, Object>();
+	public Map<String, Object> calculateObjects(Map<String, Object> input) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
 
 		for (int i = 0; i < repeatCount; i++) {
 			result = getAlgorithms().get(REPEATEDALGORITHM).calculateObjects(input);

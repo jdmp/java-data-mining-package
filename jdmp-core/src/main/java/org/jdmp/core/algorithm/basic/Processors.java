@@ -46,8 +46,8 @@ public class Processors extends AbstractAlgorithm {
 	}
 
 	@Override
-	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws MatrixException {
-		Map<Object, Object> result = new HashMap<Object, Object>();
+	public Map<String, Object> calculateObjects(Map<String, Object> input) throws MatrixException {
+		Map<String, Object> result = new HashMap<String, Object>();
 		result.put(TARGET, MatrixFactory.availableProcessors());
 		return result;
 	}
