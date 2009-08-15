@@ -23,6 +23,8 @@
 
 package org.jdmp.core.algorithm.regression;
 
+import java.util.Map;
+
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.algorithm.basic.Minus;
@@ -67,8 +69,9 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 		Matrix predicted = predict(sample.getMatrix(INPUT), sample.getMatrix(WEIGHT));
 		sample.setMatrix(PREDICTED, predicted);
 		if (evaluate) {
-			Matrix error = MathUtil.getMatrix(getOutputErrorAlgorithm().calculate(predicted,
-					MathUtil.getMatrix(sample.getMatrix(TARGET))).values().iterator().next());
+			Map<String, Object> result = getOutputErrorAlgorithm().calculate(predicted,
+					sample.getMatrix(TARGET));
+			Matrix error = MathUtil.getMatrix(result.get(TARGET));
 			sample.setMatrix(DIFFERENCE, error);
 			sample.setMatrix(RMSE, MatrixFactory.linkToValue(error.getRMS()));
 		}
