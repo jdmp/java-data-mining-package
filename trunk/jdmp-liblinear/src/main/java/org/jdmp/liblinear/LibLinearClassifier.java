@@ -50,6 +50,14 @@ public class LibLinearClassifier extends AbstractClassifier {
 
 	private final double bias = 1.0;
 
+	public LibLinearClassifier() {
+		this(new Parameter(SolverType.L2LOSS_SVM_DUAL, 1, 0.1));
+	}
+
+	public LibLinearClassifier(Parameter parameter) {
+		this.param = parameter;
+	}
+
 	@Override
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
 		long columnCount = input.getColumnCount();
@@ -143,10 +151,6 @@ public class LibLinearClassifier extends AbstractClassifier {
 	private void createAlgorithm() {
 		model = null;
 		prob = null;
-		// param = new Parameter(SolverType.L2LOSS_SVM_DUAL, 1,
-		// Double.POSITIVE_INFINITY);
-		param = new Parameter(SolverType.L2LOSS_SVM_DUAL, 1, 0.1);
-
 	}
 
 	@Override
