@@ -66,11 +66,11 @@ public class Sum extends AbstractAlgorithm {
 	}
 
 	@Override
-	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws MatrixException {
+	public Map<String, Object> calculateObjects(Map<String, Object> input) throws MatrixException {
 		int dimension = defaultDimension;
 		boolean ignoreNaN = defaultIgnoreNaN;
 
-		Map<Object, Object> result = new HashMap<Object, Object>();
+		Map<String, Object> result = new HashMap<String, Object>();
 
 		Matrix source = MathUtil.getMatrix(input.get(SOURCE));
 		Object o2 = input.get(DIMENSION);

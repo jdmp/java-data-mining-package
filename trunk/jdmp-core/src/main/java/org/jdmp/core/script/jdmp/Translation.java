@@ -623,7 +623,7 @@ public class Translation extends DepthFirstAdapter {
 
 	private Object executeAlgorithm(Algorithm algorithm, PArgumentList arguments) throws Exception {
 		List<Object> matrices = getArgumentsAsObjects(arguments);
-		Map<Object, Object> ret = algorithm.calculateObjects(matrices);
+		Map<String, Object> ret = algorithm.calculateObjects(matrices);
 		if (ret.isEmpty()) {
 			return null;
 		} else {

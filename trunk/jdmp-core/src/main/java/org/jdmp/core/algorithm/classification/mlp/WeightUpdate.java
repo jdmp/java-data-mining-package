@@ -80,9 +80,9 @@ public class WeightUpdate extends AlgorithmFiveSources {
 	}
 
 	@Override
-	public Map<Object, Object> calculateObjects(Map<Object, Object> matrices)
+	public Map<String, Object> calculateObjects(Map<String, Object> matrices)
 			throws MatrixException {
-		Map<Object, Object> result = new HashMap<Object, Object>();
+		Map<String, Object> result = new HashMap<String, Object>();
 
 		Matrix weight = MathUtil.getMatrix(matrices.get(WEIGHT));
 		double eta = MathUtil.getMatrix(matrices.get(ETA)).doubleValue();

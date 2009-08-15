@@ -43,8 +43,8 @@ public class Minus extends AlgorithmTwoSources {
 	}
 
 	@Override
-	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws MatrixException {
-		Map<Object, Object> result = new HashMap<Object, Object>();
+	public Map<String, Object> calculateObjects(Map<String, Object> input) throws MatrixException {
+		Map<String, Object> result = new HashMap<String, Object>();
 		Matrix source1 = MathUtil.getMatrix(input.get(SOURCE1));
 		Matrix source2 = MathUtil.getMatrix(input.get(SOURCE2));
 		Matrix target = new org.ujmp.core.doublematrix.calculation.basic.Minus(source1, source2)

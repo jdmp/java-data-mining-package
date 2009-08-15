@@ -67,19 +67,19 @@ public interface Algorithm extends JDMPCoreObject, HasVariableMap, HasDataSetLis
 
 	public void setAlgorithm(String key, Algorithm a);
 
-	public Map<Object, Object> calculate() throws Exception;
+	public Map<String, Object> calculate() throws Exception;
 
-	public Map<Object, Object> calculate(Matrix... input) throws Exception;
+	public Map<String, Object> calculate(Matrix... input) throws Exception;
 
-	public Map<Object, Object> calculateObjects(Object... input) throws Exception;
+	public Map<String, Object> calculateObjects(Object... input) throws Exception;
 
-	public Map<Object, Object> calculate(double... input) throws Exception;
+	public Map<String, Object> calculate(double... input) throws Exception;
 
-	public Map<Object, Object> calculate(List<Matrix> matrices) throws Exception;
+	public Map<String, Object> calculate(List<Matrix> matrices) throws Exception;
 
-	public Map<Object, Object> calculateObjects(List<Object> matrices) throws Exception;
+	public Map<String, Object> calculateObjects(List<Object> matrices) throws Exception;
 
-	public Map<Object, Object> calculateObjects(Map<Object, Object> objects) throws Exception;
+	public Map<String, Object> calculateObjects(Map<String, Object> objects) throws Exception;
 
 	public EdgeDirection getEdgeDirection(String key);
 

@@ -48,9 +48,8 @@ public class ClassPath extends AbstractAlgorithm {
 	}
 
 	@Override
-	public Map<Object, Object> calculateObjects(java.util.Map<Object, Object> input)
-			throws MatrixException {
-		Map<Object, Object> result = new HashMap<Object, Object>();
+	public Map<String, Object> calculateObjects(Map<String, Object> input) throws MatrixException {
+		Map<String, Object> result = new HashMap<String, Object>();
 
 		URLClassLoader sysloader = (URLClassLoader) ClassLoader.getSystemClassLoader();
 		ListMatrix<Object> m = new DefaultListMatrix<Object>((Object[]) sysloader.getURLs());

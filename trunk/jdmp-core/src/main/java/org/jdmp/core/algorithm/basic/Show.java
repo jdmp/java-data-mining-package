@@ -54,8 +54,8 @@ public class Show extends AbstractAlgorithm {
 	}
 
 	@Override
-	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws MatrixException {
-		Map<Object, Object> result = new HashMap<Object, Object>();
+	public Map<String, Object> calculateObjects(Map<String, Object> input) throws MatrixException {
+		Map<String, Object> result = new HashMap<String, Object>();
 		Object o = input.get(SOURCE);
 		Object ret = null;
 		if (o instanceof JDMPCoreObject) {

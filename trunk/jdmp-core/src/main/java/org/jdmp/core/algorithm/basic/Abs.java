@@ -51,8 +51,8 @@ public class Abs extends AbstractAlgorithm {
 	}
 
 	@Override
-	public Map<Object, Object> calculateObjects(Map<Object, Object> input) throws MatrixException {
-		Map<Object, Object> result = new HashMap<Object, Object>();
+	public Map<String, Object> calculateObjects(Map<String, Object> input) throws MatrixException {
+		Map<String, Object> result = new HashMap<String, Object>();
 		Matrix source = MathUtil.getMatrix(input.get(SOURCE));
 		result.put(TARGET, source.abs(Ret.NEW));
 		return result;
