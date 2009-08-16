@@ -21,42 +21,25 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.gui.plugins;
+package org.jdmp.gui.dataset;
 
-import java.util.Collection;
-import java.util.LinkedList;
+import java.awt.event.KeyEvent;
 
-import org.ujmp.core.util.AbstractPlugin;
+import javax.swing.JComponent;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
-public class JettyPlugin extends AbstractPlugin {
+import org.jdmp.core.plugin.LibSVMPlugin;
+import org.jdmp.gui.dataset.actions.ClassifyLibSVMAction;
+import org.ujmp.core.interfaces.GUIObject;
 
-	private AbstractPlugin plugin = null;
+public class ClassifyLibSVMMenu extends JMenu {
+	private static final long serialVersionUID = 2363094489277622310L;
 
-	public JettyPlugin() {
-		try {
-			Class<?> c = Class.forName("org.jdmp.jetty.Plugin");
-			plugin = (AbstractPlugin) c.newInstance();
-		} catch (Exception e) {
-		}
+	public ClassifyLibSVMMenu(JComponent component, DataSetGUIObject o, GUIObject owner) {
+		super("LibSVM");
+		setMnemonic(KeyEvent.VK_L);
+		setEnabled(new LibSVMPlugin().isAvailable());
+		add(new JMenuItem(new ClassifyLibSVMAction(component, o)));
 	}
-
-	@Override
-	public Collection<String> getNeededClasses() {
-		return plugin == null ? new LinkedList<String>() : plugin.getNeededClasses();
-	}
-
-	@Override
-	public String getDescription() {
-		return plugin == null ? "n/a" : plugin.getDescription();
-	}
-
-	@Override
-	public void setDescription(String description) {
-	}
-
-	@Override
-	public Collection<Object> getDependencies() {
-		return plugin == null ? new LinkedList<Object>() : plugin.getDependencies();
-	}
-
 }

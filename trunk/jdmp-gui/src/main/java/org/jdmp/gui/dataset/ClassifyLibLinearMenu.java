@@ -21,42 +21,25 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.gui.plugins;
+package org.jdmp.gui.dataset;
 
-import java.util.Collection;
-import java.util.LinkedList;
+import java.awt.event.KeyEvent;
 
-import org.ujmp.core.util.AbstractPlugin;
+import javax.swing.JComponent;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
-public class LucenePlugin extends AbstractPlugin {
+import org.jdmp.core.plugin.LibLinearPlugin;
+import org.jdmp.gui.dataset.actions.ClassifyLibLinearAction;
+import org.ujmp.core.interfaces.GUIObject;
 
-	private AbstractPlugin plugin = null;
+public class ClassifyLibLinearMenu extends JMenu {
+	private static final long serialVersionUID = 1561948064714109224L;
 
-	public LucenePlugin() {
-		try {
-			Class<?> c = Class.forName("org.jdmp.lucene.Plugin");
-			plugin = (AbstractPlugin) c.newInstance();
-		} catch (Exception e) {
-		}
+	public ClassifyLibLinearMenu(JComponent component, DataSetGUIObject o, GUIObject owner) {
+		super("LibLinear");
+		setMnemonic(KeyEvent.VK_L);
+		setEnabled(new LibLinearPlugin().isAvailable());
+		add(new JMenuItem(new ClassifyLibLinearAction(component, o)));
 	}
-
-	@Override
-	public Collection<String> getNeededClasses() {
-		return plugin == null ? new LinkedList<String>() : plugin.getNeededClasses();
-	}
-
-	@Override
-	public String getDescription() {
-		return plugin == null ? "n/a" : plugin.getDescription();
-	}
-
-	@Override
-	public void setDescription(String description) {
-	}
-
-	@Override
-	public Collection<Object> getDependencies() {
-		return plugin == null ? new LinkedList<Object>() : plugin.getDependencies();
-	}
-
 }

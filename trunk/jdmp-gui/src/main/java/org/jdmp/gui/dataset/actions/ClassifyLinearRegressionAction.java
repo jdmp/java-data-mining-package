@@ -21,52 +21,37 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.gui.algorithm.actions;
+package org.jdmp.gui.dataset.actions;
 
-import java.lang.reflect.Constructor;
+import java.awt.event.KeyEvent;
 
 import javax.swing.Action;
 import javax.swing.JComponent;
-import javax.swing.JOptionPane;
 
-import org.jdmp.core.algorithm.index.Index;
-import org.jdmp.core.plugin.JettyPlugin;
+import org.jdmp.core.algorithm.regression.LinearRegression;
+import org.jdmp.core.dataset.ClassificationDataSet;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.gui.actions.ObjectAction;
 
-public class JettyIndexServerAction extends ObjectAction {
-	private static final long serialVersionUID = 8017962132766218927L;
+public class ClassifyLinearRegressionAction extends ObjectAction {
+	private static final long serialVersionUID = -148317869116291577L;
 
-	public JettyIndexServerAction(JComponent c, GUIObject o) {
-		super(c, o);
-		putValue(Action.NAME, "Jetty Index Server");
-		putValue(Action.SHORT_DESCRIPTION, "Creates a web server for this index");
-		if (new JettyPlugin().isAvailable()) {
-			putValue("enabled", true);
-		} else {
-			putValue("enabled", false);
-		}
+	public ClassifyLinearRegressionAction(JComponent c, GUIObject i) {
+		super(c, i);
+		putValue(Action.NAME, "Linear Regression");
+		putValue(Action.SHORT_DESCRIPTION, "Classify a DataSet using Linear Regression");
+		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_L);
 	}
 
 	@Override
 	public Object call() {
 		try {
-			int port = 0;
-			while (port <= 0 || port > 32000) {
-				String s = JOptionPane.showInputDialog("Port", "5555");
-				try {
-					port = Integer.parseInt(s);
-				} catch (Exception e) {
-				}
-			}
-
-			Class<?> c = Class.forName("org.jdmp.jetty.index.JettyIndexServer");
-			Constructor<?> con = c.getConstructor(Index.class, Integer.TYPE);
-			return con.newInstance(getCoreObject(), port);
+			LinearRegression lr = new LinearRegression();
+			lr.train((ClassificationDataSet) getCoreObject());
+			lr.predict((ClassificationDataSet) getCoreObject());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-
 }

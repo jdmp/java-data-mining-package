@@ -21,45 +21,23 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.gui.algorithm.actions;
+package org.jdmp.gui.dataset;
 
-import java.lang.reflect.Constructor;
+import java.awt.event.KeyEvent;
 
-import javax.swing.Action;
 import javax.swing.JComponent;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
-import org.jdmp.core.algorithm.Algorithm;
-import org.jdmp.core.algorithm.index.Index;
-import org.jdmp.core.plugin.LucenePlugin;
+import org.jdmp.gui.dataset.actions.ClassifyLinearRegressionAction;
 import org.ujmp.core.interfaces.GUIObject;
-import org.ujmp.gui.actions.ObjectAction;
 
-public class CreateLuceneIndexAction extends ObjectAction {
-	private static final long serialVersionUID = -5523870732468411037L;
+public class ClassifyJDMPMenu extends JMenu {
+	private static final long serialVersionUID = 2340099070389463428L;
 
-	public CreateLuceneIndexAction(JComponent c, GUIObject o) {
-		super(c, o);
-		putValue(Action.NAME, "Create Lucene Index");
-		putValue(Action.SHORT_DESCRIPTION, "Creates a lucene index for this index");
-		if (new LucenePlugin().isAvailable()) {
-			putValue("enabled", true);
-		} else {
-			putValue("enabled", false);
-		}
+	public ClassifyJDMPMenu(JComponent component, DataSetGUIObject o, GUIObject owner) {
+		super("JDMP");
+		setMnemonic(KeyEvent.VK_J);
+		add(new JMenuItem(new ClassifyLinearRegressionAction(component, o)));
 	}
-
-	@Override
-	public Object call() {
-		try {
-			Class<?> c = Class.forName("org.jdmp.lucene.LuceneIndex");
-			Constructor<?> con = c.getConstructor(Index.class);
-			Algorithm a = (Algorithm) con.newInstance(getCoreObject());
-			a.showGUI();
-			return a;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
 }

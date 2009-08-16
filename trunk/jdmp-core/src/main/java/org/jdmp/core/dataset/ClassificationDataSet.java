@@ -33,7 +33,6 @@ import java.util.Random;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.Variable;
-import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.exceptions.MatrixException;
@@ -42,11 +41,11 @@ import org.ujmp.core.util.MathUtil;
 public class ClassificationDataSet extends RegressionDataSet {
 	private static final long serialVersionUID = 3969274321783319184L;
 
-	public static final String ACCURACY = "Accuracy";
+	public static final String ACCURACY = Variable.ACCURACY;
 
-	public static final String CONFUSION = "Confusion";
+	public static final String CONFUSION = Variable.CONFUSION;
 
-	public static final String ERRORCOUNT = "ErrorCount";
+	public static final String ERRORCOUNT = Variable.ERRORCOUNT;
 
 	public Matrix getClassDistribution() {
 		Matrix m = MatrixFactory.zeros(getClassCount(), 1);
@@ -83,9 +82,6 @@ public class ClassificationDataSet extends RegressionDataSet {
 
 	public ClassificationDataSet() {
 		super();
-		getVariables().put(ACCURACY, VariableFactory.labeledVariable("Accuracy", 10000));
-		getVariables().put(CONFUSION, VariableFactory.labeledVariable("Confusion", 1000));
-		getVariables().put(ERRORCOUNT, VariableFactory.labeledVariable("Error Count", 10000));
 	}
 
 	@Override

@@ -21,24 +21,28 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.libsvm;
+package org.jdmp.core.plugin;
 
-import junit.framework.TestCase;
+import org.ujmp.core.util.matrices.UJMPPluginsMatrix;
 
-import org.jdmp.core.algorithm.classification.Classifier;
-import org.jdmp.core.dataset.ClassificationDataSet;
-import org.jdmp.core.dataset.CrossValidation;
-import org.jdmp.core.dataset.DataSetFactory;
-import org.jdmp.libsvm.SVMClassifier.Kernel;
-import org.ujmp.core.listmatrix.ListMatrix;
+public class JDMPPluginsMatrix extends UJMPPluginsMatrix {
+	private static final long serialVersionUID = -6041671684125062733L;
 
-public class TestSVMClassifier extends TestCase {
-
-	public void testIrisClassification() throws Exception {
-		ClassificationDataSet iris = DataSetFactory.IRIS();
-		Classifier c = new SVMClassifier(Kernel.RBF);
-		ListMatrix<Double> results = CrossValidation.run(c, iris, 10, 10, 0);
-		assertEquals(0.95, results.getMeanValue(), 0.04);
+	public JDMPPluginsMatrix() {
+		super();
+		setLabel("JDMP Plugins");
+		addClass("jdmp-core");
+		addClass("jdmp-gui");
+		addClass("jdmp-complete");
+		addClass("jdmp-ehcache");
+		addClass("jdmp-jetty");
+		addClass("jdmp-jgroups");
+		addClass("jdmp-liblinear");
+		addClass("jdmp-libsvm");
+		addClass("jdmp-lucene");
+		addClass("jdmp-mallet");
+		addClass("jdmp-stanfordpos");
+		addClass("jdmp-weka");
+		refresh();
 	}
-
 }

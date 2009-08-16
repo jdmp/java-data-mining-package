@@ -79,9 +79,6 @@ public class VariableTableCellRenderer implements TableCellRenderer {
 			case VariableListTableModel.SIZECOLUMN:
 				o = "" + variable.getRowCount() + "x" + variable.getColumnCount();
 				break;
-			case VariableListTableModel.MEMORYSIZECOLUMN:
-				o = "?";
-				break;
 			case VariableListTableModel.PLOTCOLUMN:
 				return matrixPlot.getTableCellRendererComponent(table, variable.getMatrix(),
 						isSelected, hasFocus, row, column);

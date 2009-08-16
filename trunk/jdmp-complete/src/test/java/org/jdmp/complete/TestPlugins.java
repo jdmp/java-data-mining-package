@@ -25,7 +25,7 @@ package org.jdmp.complete;
 
 import junit.framework.TestCase;
 
-import org.jdmp.core.util.JDMPPluginsMatrix;
+import org.jdmp.core.plugin.JDMPPluginsMatrix;
 import org.ujmp.core.Matrix;
 
 public class TestPlugins extends TestCase {

@@ -31,6 +31,7 @@ public class AllTests extends TestSuite {
 		TestSuite suite = new TestSuite(AllTests.class.getName());
 		suite.addTestSuite(TestScript.class);
 		suite.addTestSuite(TestMLP.class);
+		suite.addTestSuite(TestLinearRegression.class);
 		return suite;
 	}
 
