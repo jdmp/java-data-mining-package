@@ -40,7 +40,6 @@ public class RegressionDataSet extends DefaultDataSet {
 	public static final String TARGET = "Target";
 
 	public RegressionDataSet() {
-		getVariables().put(RMSE, VariableFactory.labeledVariable("RMSE", 10000));
 		Matrix targetMatrix = new DataSetTargetMatrixWrapper(this);
 		Variable target = VariableFactory.labeledVariable("Target");
 		target.addMatrix(targetMatrix);

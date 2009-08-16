@@ -76,6 +76,24 @@ public interface Variable extends JDMPCoreObject, HasMatrixList {
 
 	public static final String BYTES = "Bytes";
 
+	public static final String SENSITIVITY = "Sensitivity";
+
+	public static final String SPECIFICITY = "Specificity";
+
+	public static final String PRECISION = "Precision";
+
+	public static final String RECALL = "Recall";
+
+	public static final String FMEASURE = "FMeasure";
+
+	public static final String ERRORCOUNT = "ErrorCount";
+
+	public static final String CONFUSION = "Confusion";
+
+	public static final String ACCURACY = "Accuracy";
+
+	public static final String FMEASUREMACRO = "FMeasureMacro";
+
 	public long[] getSize();
 
 	public void setSize(long... size);

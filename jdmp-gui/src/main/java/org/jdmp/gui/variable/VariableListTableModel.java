@@ -45,8 +45,6 @@ public class VariableListTableModel extends AbstractTableModel implements ListDa
 
 	public static final int MATRIXCOUNTCOLUMN = 5;
 
-	public static final int MEMORYSIZECOLUMN = 6;
-
 	private HasVariables iVariables = null;
 
 	public VariableListTableModel(HasVariables iVariables) {
@@ -59,7 +57,7 @@ public class VariableListTableModel extends AbstractTableModel implements ListDa
 	}
 
 	public int getColumnCount() {
-		return 7;
+		return 6;
 	}
 
 	@Override
@@ -77,8 +75,6 @@ public class VariableListTableModel extends AbstractTableModel implements ListDa
 			return "Plot";
 		case MATRIXCOUNTCOLUMN:
 			return "MatrixCount";
-		case MEMORYSIZECOLUMN:
-			return "MemorySize";
 		default:
 			return ("unknown");
 		}

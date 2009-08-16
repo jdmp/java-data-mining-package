@@ -21,24 +21,24 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.gui.dataset;
+package org.jdmp.core;
 
-import java.awt.event.KeyEvent;
+import junit.framework.TestCase;
 
-import javax.swing.JComponent;
-import javax.swing.JMenu;
+import org.jdmp.core.algorithm.classification.Classifier;
+import org.jdmp.core.algorithm.regression.LinearRegression;
+import org.jdmp.core.dataset.ClassificationDataSet;
+import org.jdmp.core.dataset.CrossValidation;
+import org.jdmp.core.dataset.DataSetFactory;
+import org.ujmp.core.listmatrix.ListMatrix;
 
-import org.ujmp.core.interfaces.GUIObject;
+public class TestLinearRegression extends TestCase {
 
-public class ClassifyDataSetMenu extends JMenu {
-	private static final long serialVersionUID = -3617725656170970206L;
-
-	public ClassifyDataSetMenu(JComponent component, DataSetGUIObject o, GUIObject owner) {
-		super("Classifier");
-		setMnemonic(KeyEvent.VK_C);
-		add(new ClassifyJDMPMenu(component, o, owner));
-		add(new ClassifyWekaMenu(component, o, owner));
-		add(new ClassifyLibSVMMenu(component, o, owner));
-		add(new ClassifyLibLinearMenu(component, o, owner));
+	public void testIrisClassification() throws Exception {
+		ClassificationDataSet iris = DataSetFactory.IRIS();
+		Classifier c = new LinearRegression();
+		ListMatrix<Double> results = CrossValidation.run(c, iris, 10, 10, 0);
+		assertEquals(0.82, results.getMeanValue(), 0.04);
 	}
+
 }

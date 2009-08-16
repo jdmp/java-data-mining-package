@@ -37,7 +37,7 @@ import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.exceptions.MatrixException;
 
-public class SVMClassifier extends AbstractClassifier {
+public class LibSVMClassifier extends AbstractClassifier {
 	private static final long serialVersionUID = -3809157647628200950L;
 
 	private svm_parameter param = null;
@@ -52,11 +52,11 @@ public class SVMClassifier extends AbstractClassifier {
 		LINEAR, RBF, SIGMOID, POLYNOM
 	};
 
-	public SVMClassifier() {
+	public LibSVMClassifier() {
 		this(Kernel.RBF);
 	}
 
-	public SVMClassifier(Kernel kernel) {
+	public LibSVMClassifier(Kernel kernel) {
 		super();
 		setLabel("SVM " + kernel.name());
 		this.kernel = kernel;
@@ -181,7 +181,7 @@ public class SVMClassifier extends AbstractClassifier {
 	}
 
 	public Classifier emptyCopy() {
-		return new SVMClassifier(kernel);
+		return new LibSVMClassifier(kernel);
 	}
 
 }

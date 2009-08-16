@@ -3,7 +3,7 @@ package org.jdmp.gui.util;
 import javax.swing.JComponent;
 import javax.swing.JMenuItem;
 
-import org.jdmp.core.util.JDMPPluginsMatrix;
+import org.jdmp.core.plugin.JDMPPluginsMatrix;
 import org.ujmp.gui.actions.ShowInFrameAction;
 import org.ujmp.gui.menu.UJMPToolsMenu;
 

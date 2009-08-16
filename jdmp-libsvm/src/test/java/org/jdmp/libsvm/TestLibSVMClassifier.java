@@ -21,28 +21,24 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.core.util;
+package org.jdmp.libsvm;
 
-import org.ujmp.core.util.matrices.UJMPPluginsMatrix;
+import junit.framework.TestCase;
 
-public class JDMPPluginsMatrix extends UJMPPluginsMatrix {
-	private static final long serialVersionUID = -6041671684125062733L;
+import org.jdmp.core.algorithm.classification.Classifier;
+import org.jdmp.core.dataset.ClassificationDataSet;
+import org.jdmp.core.dataset.CrossValidation;
+import org.jdmp.core.dataset.DataSetFactory;
+import org.jdmp.libsvm.LibSVMClassifier.Kernel;
+import org.ujmp.core.listmatrix.ListMatrix;
 
-	public JDMPPluginsMatrix() {
-		super();
-		setLabel("JDMP Plugins");
-		addClass("jdmp-core");
-		addClass("jdmp-gui");
-		addClass("jdmp-complete");
-		addClass("jdmp-ehcache");
-		addClass("jdmp-jetty");
-		addClass("jdmp-jgroups");
-		addClass("jdmp-liblinear");
-		addClass("jdmp-libsvm");
-		addClass("jdmp-lucene");
-		addClass("jdmp-mallet");
-		addClass("jdmp-stanfordpos");
-		addClass("jdmp-weka");
-		refresh();
+public class TestLibSVMClassifier extends TestCase {
+
+	public void testIrisClassification() throws Exception {
+		ClassificationDataSet iris = DataSetFactory.IRIS();
+		Classifier c = new LibSVMClassifier(Kernel.RBF);
+		ListMatrix<Double> results = CrossValidation.run(c, iris, 10, 10, 0);
+		assertEquals(0.95, results.getMeanValue(), 0.04);
 	}
+
 }
