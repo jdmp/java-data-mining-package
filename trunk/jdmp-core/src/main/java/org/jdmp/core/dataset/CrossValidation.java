@@ -26,6 +26,7 @@ package org.jdmp.core.dataset;
 import java.util.List;
 
 import org.jdmp.core.algorithm.classification.Classifier;
+import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.listmatrix.DefaultListMatrix;
@@ -41,11 +42,13 @@ public class CrossValidation {
 	public static ListMatrix<Double> run(Classifier algorithm, ClassificationDataSet dataSet,
 			int folds, int runs, long randomSeed) throws Exception {
 
-		ListMatrix<Double> all = new DefaultListMatrix<Double>();
+		ListMatrix<Double> allacc = new DefaultListMatrix<Double>();
+		ListMatrix<Double> allfm = new DefaultListMatrix<Double>();
 
 		for (int run = 0; run < runs; run++) {
 
 			ListMatrix<Double> acc = new DefaultListMatrix<Double>();
+			ListMatrix<Double> fm = new DefaultListMatrix<Double>();
 
 			System.out.print(run + "\t");
 
@@ -58,24 +61,32 @@ public class CrossValidation {
 				algorithm.predict(test);
 
 				acc.add(test.getAccuracy());
+				fm.add(test.getAsDouble(Variable.FMEASUREMACRO));
 				System.out.print(test.getAccuracy() + "\t");
 			}
 			System.out.println();
 
-			double mean = acc.getMeanValue();
-			all.add(mean);
+			double meanacc = acc.getMeanValue();
+			allacc.add(meanacc);
 
-			System.out.println(run + "\t" + mean);
+			double meanfm = fm.getMeanValue();
+			allfm.add(meanfm);
+
+			System.out.println(run + "\t" + meanacc);
 		}
 
-		if (all.size() > 1) {
-			Matrix std = all.std(Ret.NEW, Matrix.ROW, false);
-			System.out.println(all.getMeanValue() + "+-" + std.getEuklideanValue());
+		if (allacc.size() > 1) {
+			Matrix stdacc = allacc.std(Ret.NEW, Matrix.ROW, false);
+			System.out.println("Accuracy: " + allacc.getMeanValue() + "+-" + stdacc.doubleValue());
+			Matrix stdfm = allfm.std(Ret.NEW, Matrix.ROW, false);
+			System.out.println("F-Measure (macro): " + allfm.getMeanValue() + "+-"
+					+ stdfm.doubleValue());
 		} else {
-			System.out.println(all.getMeanValue());
+			System.out.println("Accuracy: " + allacc.getMeanValue());
+			System.out.println("F-Measure (macro): " + allfm.getMeanValue());
 		}
 
-		return all;
+		return allacc;
 	}
 
 }
