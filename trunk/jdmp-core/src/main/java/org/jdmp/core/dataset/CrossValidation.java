@@ -50,7 +50,7 @@ public class CrossValidation {
 			ListMatrix<Double> acc = new DefaultListMatrix<Double>();
 			ListMatrix<Double> fm = new DefaultListMatrix<Double>();
 
-			System.out.print(run + "\t");
+			System.out.print("F-Measure (macro) in run " + run + ":\t");
 
 			for (int fold = 0; fold < folds; fold++) {
 				List<DataSet> dss = dataSet.splitForCV(folds, fold, randomSeed + run);
@@ -62,7 +62,8 @@ public class CrossValidation {
 
 				acc.add(test.getAccuracy());
 				fm.add(test.getAsDouble(Variable.FMEASUREMACRO));
-				System.out.print(test.getAccuracy() + "\t");
+				// System.out.print(test.getAccuracy() + "\t");
+				System.out.print(test.getAsDouble(Variable.FMEASUREMACRO) + "\t");
 			}
 			System.out.println();
 
