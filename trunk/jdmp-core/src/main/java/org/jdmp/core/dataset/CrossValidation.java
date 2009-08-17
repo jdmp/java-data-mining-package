@@ -73,7 +73,7 @@ public class CrossValidation {
 			double meanfm = fm.getMeanValue();
 			allfm.add(meanfm);
 
-			System.out.println(run + "\t" + meanacc);
+			System.out.println("Average F-Measure in run " + run + ":\t" + meanfm);
 		}
 
 		if (allacc.size() > 1) {
