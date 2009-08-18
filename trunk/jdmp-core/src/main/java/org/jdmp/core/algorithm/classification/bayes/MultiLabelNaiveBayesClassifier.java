@@ -35,7 +35,6 @@ import org.jdmp.core.dataset.RegressionDataSet;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.calculation.Calculation.Ret;
-import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.util.MathUtil;
 
 public class MultiLabelNaiveBayesClassifier extends AbstractClassifier {
@@ -173,11 +172,6 @@ public class MultiLabelNaiveBayesClassifier extends AbstractClassifier {
 
 		}
 
-	}
-
-	@Override
-	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) throws Exception {
-		throw new MatrixException("sample by sample learning is not supported");
 	}
 
 	public Classifier emptyCopy() {

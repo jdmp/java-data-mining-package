@@ -69,8 +69,10 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 
 	public abstract void reset() throws Exception;
 
-	public abstract void train(Matrix input, Matrix sampleWeight, Matrix targetOutput)
-			throws Exception;
+	@Override
+	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) throws Exception {
+		throw new Exception("not supported");
+	}
 
 	public final void predict(Sample sample) throws Exception {
 		Matrix predicted = predict(sample.getMatrix(INPUT), sample.getMatrix(WEIGHT));

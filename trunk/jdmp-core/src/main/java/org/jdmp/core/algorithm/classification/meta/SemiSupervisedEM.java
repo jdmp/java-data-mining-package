@@ -108,9 +108,4 @@ public class SemiSupervisedEM extends AbstractClassifier implements SemiSupervis
 		return new SemiSupervisedEM(classifier.emptyCopy(), useRawPrediction);
 	}
 
-	@Override
-	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) throws Exception {
-		throw new Exception("not supported");
-	}
-
 }

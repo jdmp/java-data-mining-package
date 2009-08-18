@@ -32,7 +32,6 @@ import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.calculation.Calculation.Ret;
-import org.ujmp.core.exceptions.MatrixException;
 
 public class NaiveBayesClassifier extends AbstractClassifier {
 
@@ -134,11 +133,6 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 			classDists.addValue(outputVal, weight);
 		}
 
-	}
-
-	@Override
-	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) throws Exception {
-		throw new MatrixException("sample by sample learning is not supported");
 	}
 
 	public Classifier emptyCopy() {
