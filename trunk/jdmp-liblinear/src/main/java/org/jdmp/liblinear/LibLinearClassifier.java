@@ -81,7 +81,8 @@ public class LibLinearClassifier extends AbstractClassifier {
 		}
 
 		int classId = Linear.predict(model, x);
-		Matrix ret = MatrixFactory.zeros(1, model.getNrClass());
+		Matrix ret = MatrixFactory.zeros(1, Math.max(model.getNrClass(),
+				classId + 1));
 		ret.setAsDouble(1.0, 0, classId);
 		return ret;
 	}
