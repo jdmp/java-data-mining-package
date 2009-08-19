@@ -75,7 +75,7 @@ public class LibLinearClassifier extends AbstractClassifier {
 		for (int j = 0; j < columnCount; j++) {
 			double value = input.getAsDouble(0, j);
 			if (value != 0.0 && !MathUtil.isNaNOrInfinite(value)) {
-				x[count + 1] = new FeatureNode(count + 2, value);
+				x[count + 1] = new FeatureNode(j + 2, value);
 				count++;
 			}
 		}
@@ -120,7 +120,7 @@ public class LibLinearClassifier extends AbstractClassifier {
 			for (int j = 0; j < columnCount; j++) {
 				double value = input.getAsDouble(0, j);
 				if (value != 0.0 && !MathUtil.isNaNOrInfinite(value)) {
-					prob.x[i][count + 1] = new FeatureNode(count + 2, value);
+					prob.x[i][count + 1] = new FeatureNode(j + 2, value);
 					count++;
 				}
 			}
