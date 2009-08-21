@@ -30,7 +30,7 @@ public final class AArrayMatrix extends PMatrix
 
     }
 
-    @Override
+    
     public Object clone()
     {
         return new AArrayMatrix(
@@ -119,7 +119,7 @@ public final class AArrayMatrix extends PMatrix
         this._rBracket_ = node;
     }
 
-    @Override
+    
     public String toString()
     {
         return ""
@@ -128,7 +128,7 @@ public final class AArrayMatrix extends PMatrix
             + toString(this._rBracket_);
     }
 
-    @Override
+    
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
@@ -153,7 +153,7 @@ public final class AArrayMatrix extends PMatrix
         throw new RuntimeException("Not a child.");
     }
 
-    @Override
+    
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child

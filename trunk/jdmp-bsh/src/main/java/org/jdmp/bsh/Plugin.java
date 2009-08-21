@@ -42,17 +42,17 @@ public class Plugin extends AbstractPlugin {
 		neededClasses.add("bsh.Interpreter");
 	}
 
-	@Override
+	
 	public String getDescription() {
 		return "library for using BeanShell";
 	}
 
-	@Override
+	
 	public Collection<Object> getDependencies() {
 		return dependencies;
 	}
 
-	@Override
+	
 	public Collection<String> getNeededClasses() {
 		return neededClasses;
 	}

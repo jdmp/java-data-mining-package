@@ -231,7 +231,7 @@ public class EhcacheMap<K, V> implements Map<K, V>, Flushable, Closeable {
 		throw new MatrixException("not implemented");
 	}
 
-	@Override
+	
 	public void finalize() {
 		getCacheManager().removeCache(getCache().getName());
 	}

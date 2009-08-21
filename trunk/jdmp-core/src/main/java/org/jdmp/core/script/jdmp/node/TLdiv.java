@@ -19,7 +19,7 @@ public final class TLdiv extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TLdiv(getLine(), getPos());
@@ -30,7 +30,7 @@ public final class TLdiv extends Token
         ((Analysis) sw).caseTLdiv(this);
     }
 
-    @Override
+    
     public void setText(@SuppressWarnings("unused") String text)
     {
         throw new RuntimeException("Cannot change TLdiv text.");

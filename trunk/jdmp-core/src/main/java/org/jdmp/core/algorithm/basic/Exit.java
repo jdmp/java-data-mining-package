@@ -49,7 +49,7 @@ public class Exit extends AbstractAlgorithm {
 		setVariables(variables);
 	}
 
-	@Override
+	
 	public Map<String, Object> calculateObjects(Map<String, Object> input) throws MatrixException {
 		Map<String, Object> result = new HashMap<String, Object>();
 		Matrix in = MathUtil.getMatrix(input.get(SOURCE));

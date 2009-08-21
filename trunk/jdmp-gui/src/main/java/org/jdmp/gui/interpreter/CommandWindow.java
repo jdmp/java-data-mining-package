@@ -58,12 +58,12 @@ public class CommandWindow extends JPanel implements KeyListener {
 		this.module = m;
 
 		textField = new JTextPane() {
-			@Override
+			
 			public boolean getScrollableTracksViewportWidth() {
 				return false;
 			}
 
-			@Override
+			
 			public void setSize(Dimension d) {
 				if (d.width < getParent().getSize().width) {
 					d.width = getParent().getSize().width;
@@ -115,7 +115,7 @@ public class CommandWindow extends JPanel implements KeyListener {
 		return result;
 	}
 
-	@Override
+	
 	public void keyPressed(KeyEvent e) {
 		filterKeys(e);
 
@@ -147,11 +147,11 @@ public class CommandWindow extends JPanel implements KeyListener {
 		}
 	}
 
-	@Override
+	
 	public void keyReleased(KeyEvent e) {
 	}
 
-	@Override
+	
 	public void keyTyped(KeyEvent e) {
 	}
 

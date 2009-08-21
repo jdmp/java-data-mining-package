@@ -19,7 +19,7 @@ public final class TSemicolon extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TSemicolon(getLine(), getPos());
@@ -30,7 +30,7 @@ public final class TSemicolon extends Token
         ((Analysis) sw).caseTSemicolon(this);
     }
 
-    @Override
+    
     public void setText(@SuppressWarnings("unused") String text)
     {
         throw new RuntimeException("Cannot change TSemicolon text.");

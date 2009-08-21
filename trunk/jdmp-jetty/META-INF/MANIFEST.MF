@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: jdmp_jetty
+Bundle-SymbolicName: jdmp_jetty
+Bundle-Version: 1.0.0
+Export-Package: org.jdmp.jetty,
+ org.jdmp.jetty.collections,
+ org.jdmp.jetty.coreobject,
+ org.jdmp.jetty.html,
+ org.jdmp.jetty.html.elements,
+ org.jdmp.jetty.html.pages,
+ org.jdmp.jetty.html.tags,
+ org.jdmp.jetty.index

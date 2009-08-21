@@ -51,7 +51,7 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 		super();
 	}
 
-	@Override
+	
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
 		double[] logs = new double[classCount];
 		// for all classes
@@ -90,13 +90,13 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 		return probs;
 	}
 
-	@Override
+	
 	public void reset() throws Exception {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
+	
 	public void train(RegressionDataSet dataSet) throws Exception {
 		// classCount = ((ClassificationDataSet) dataSet).getClassCount();
 		classCount = 2;

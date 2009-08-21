@@ -58,13 +58,13 @@ public class SampleListTableModel extends AbstractTableModel implements ListData
 		return Math.max(1, keys.size());
 	}
 
-	@Override
+	
 	public String getColumnName(int columnIndex) {
 		String s = columnMap.get(columnIndex);
 		return s == null ? "unknown" : s;
 	}
 
-	@Override
+	
 	public Class<?> getColumnClass(int columnIndex) {
 		return Sample.class;
 	}
@@ -83,7 +83,7 @@ public class SampleListTableModel extends AbstractTableModel implements ListData
 		return s;
 	}
 
-	@Override
+	
 	public void contentsChanged(ListDataEvent e) {
 		if (e.getIndex0() < 0 || e.getIndex1() < 0) {
 			fireTableDataChanged();
@@ -97,7 +97,7 @@ public class SampleListTableModel extends AbstractTableModel implements ListData
 		}
 	}
 
-	@Override
+	
 	public void intervalAdded(ListDataEvent e) {
 		try {
 			fireTableRowsInserted(e.getIndex0(), e.getIndex1());
@@ -107,7 +107,7 @@ public class SampleListTableModel extends AbstractTableModel implements ListData
 		}
 	}
 
-	@Override
+	
 	public void intervalRemoved(ListDataEvent e) {
 		try {
 			fireTableRowsDeleted(e.getIndex0(), e.getIndex1());

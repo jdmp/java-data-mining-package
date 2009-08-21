@@ -26,7 +26,7 @@ public final class ADotTransposeLevel1 extends PLevel1
 
     }
 
-    @Override
+    
     public Object clone()
     {
         return new ADotTransposeLevel1(
@@ -89,7 +89,7 @@ public final class ADotTransposeLevel1 extends PLevel1
         this._dotTranspose_ = node;
     }
 
-    @Override
+    
     public String toString()
     {
         return ""
@@ -97,7 +97,7 @@ public final class ADotTransposeLevel1 extends PLevel1
             + toString(this._dotTranspose_);
     }
 
-    @Override
+    
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
@@ -116,7 +116,7 @@ public final class ADotTransposeLevel1 extends PLevel1
         throw new RuntimeException("Not a child.");
     }
 
-    @Override
+    
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child

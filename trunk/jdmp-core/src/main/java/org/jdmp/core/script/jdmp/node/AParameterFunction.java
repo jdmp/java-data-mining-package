@@ -34,7 +34,7 @@ public final class AParameterFunction extends PFunction
 
     }
 
-    @Override
+    
     public Object clone()
     {
         return new AParameterFunction(
@@ -149,7 +149,7 @@ public final class AParameterFunction extends PFunction
         this._rParenthese_ = node;
     }
 
-    @Override
+    
     public String toString()
     {
         return ""
@@ -159,7 +159,7 @@ public final class AParameterFunction extends PFunction
             + toString(this._rParenthese_);
     }
 
-    @Override
+    
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
@@ -190,7 +190,7 @@ public final class AParameterFunction extends PFunction
         throw new RuntimeException("Not a child.");
     }
 
-    @Override
+    
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child

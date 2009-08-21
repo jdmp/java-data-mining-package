@@ -40,12 +40,12 @@ public class DefaultMapSample extends AbstractMapSample {
 		this.map = (Map<String, Object>) map;
 	}
 
-	@Override
+	
 	public Map<String, Object> getWrappedObject() {
 		return map;
 	}
 
-	@Override
+	
 	public void setWrappedObject(Map<String, Object> object) {
 		this.map = object;
 	}

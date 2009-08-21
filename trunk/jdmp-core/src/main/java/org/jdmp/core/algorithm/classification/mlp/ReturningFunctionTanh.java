@@ -38,7 +38,7 @@ public class ReturningFunctionTanh extends AlgorithmTwoSources {
 		setDescription("target = (1-output^2) * outputdeviation");
 	}
 
-	@Override
+	
 	public Map<String, Object> calculateObjects(Map<String, Object> input) throws MatrixException {
 		Map<String, Object> result = new HashMap<String, Object>();
 

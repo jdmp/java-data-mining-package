@@ -19,7 +19,7 @@ public final class TPlus extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TPlus(getLine(), getPos());
@@ -30,7 +30,7 @@ public final class TPlus extends Token
         ((Analysis) sw).caseTPlus(this);
     }
 
-    @Override
+    
     public void setText(@SuppressWarnings("unused") String text)
     {
         throw new RuntimeException("Cannot change TPlus text.");

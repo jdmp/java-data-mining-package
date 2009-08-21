@@ -108,17 +108,17 @@ public class VariableGUIObject extends AbstractGUIObject {
 		variable.setDescription(description);
 	}
 
-	@Override
+	
 	public String toString() {
 		return variable.toString();
 	}
 
-	@Override
+	
 	public Variable getCoreObject() {
 		return variable;
 	}
 
-	@Override
+	
 	public JFrame getFrame() {
 		if (frame == null) {
 			frame = new VariableFrame(this);
@@ -126,7 +126,7 @@ public class VariableGUIObject extends AbstractGUIObject {
 		return frame;
 	}
 
-	@Override
+	
 	public JPanel getPanel() {
 		if (panel == null) {
 			panel = new VariablePanel(this);

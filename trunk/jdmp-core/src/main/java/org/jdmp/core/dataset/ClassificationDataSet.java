@@ -84,7 +84,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 		super();
 	}
 
-	@Override
+	
 	public ClassificationDataSet clone() {
 		ClassificationDataSet ds = new ClassificationDataSet();
 		for (Sample s : getSamples()) {

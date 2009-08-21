@@ -58,7 +58,7 @@ public class DataSet2InstanceList extends InstanceList {
 class EmptyPipe extends Pipe {
 	private static final long serialVersionUID = 3037084660867965364L;
 
-	@Override
+	
 	public Instance pipe(Instance carrier) {
 		return carrier;
 	}

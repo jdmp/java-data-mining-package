@@ -105,7 +105,7 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 		return getSize()[COLUMN];
 	}
 
-	@Override
+	
 	public final String toString() {
 		if (getLabel() == null) {
 			return getClass().getSimpleName();

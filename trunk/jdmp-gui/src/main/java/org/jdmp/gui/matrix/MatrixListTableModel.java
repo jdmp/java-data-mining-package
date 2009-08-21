@@ -60,7 +60,7 @@ public class MatrixListTableModel extends AbstractTableModel implements ListData
 		return 5;
 	}
 
-	@Override
+	
 	public String getColumnName(int columnIndex) {
 		switch (columnIndex) {
 		case INDEXCOLUMN:
@@ -78,7 +78,7 @@ public class MatrixListTableModel extends AbstractTableModel implements ListData
 		}
 	}
 
-	@Override
+	
 	public Class<?> getColumnClass(int columnIndex) {
 		return MatrixGUIObject.class;
 	}
@@ -87,17 +87,17 @@ public class MatrixListTableModel extends AbstractTableModel implements ListData
 		return matrixList.getElementAt(rowIndex);
 	}
 
-	@Override
+	
 	public void contentsChanged(ListDataEvent e) {
 		fireTableRowsUpdated(e.getIndex0(), e.getIndex1());
 	}
 
-	@Override
+	
 	public void intervalAdded(ListDataEvent e) {
 		fireTableRowsInserted(e.getIndex0(), e.getIndex1());
 	}
 
-	@Override
+	
 	public void intervalRemoved(ListDataEvent e) {
 		fireTableRowsDeleted(e.getIndex0(), e.getIndex1());
 	}

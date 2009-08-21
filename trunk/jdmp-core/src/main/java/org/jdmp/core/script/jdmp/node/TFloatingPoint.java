@@ -19,7 +19,7 @@ public final class TFloatingPoint extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TFloatingPoint(getText(), getLine(), getPos());

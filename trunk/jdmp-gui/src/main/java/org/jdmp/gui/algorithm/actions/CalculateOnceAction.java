@@ -47,7 +47,7 @@ public class CalculateOnceAction extends AlgorithmAction {
 		putValue(Action.SHORT_DESCRIPTION, "Executes this algorithm once");
 	}
 
-	@Override
+	
 	public Object call() {
 		try {
 			if (matrix == null) {

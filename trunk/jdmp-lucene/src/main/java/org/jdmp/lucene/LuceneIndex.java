@@ -185,7 +185,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 				new LinkedBlockingQueue<Runnable>());
 	}
 
-	@Override
+	
 	public synchronized void add(Sample sample) throws Exception {
 		if (readOnly || sample == null) {
 			return;
@@ -358,7 +358,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 		return indexSearcher;
 	}
 
-	@Override
+	
 	public synchronized void flush() throws IOException {
 		if (indexWriter != null) {
 			indexWriter.commit();
@@ -371,7 +371,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 		}
 	}
 
-	@Override
+	
 	public synchronized void close() throws IOException {
 		if (indexSearcher != null) {
 			indexSearcher.close();
@@ -382,7 +382,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 		}
 	}
 
-	@Override
+	
 	public synchronized void erase() throws IOException {
 		if (readOnly) {
 			return;
@@ -391,7 +391,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 		FileUtil.deleteRecursive(path);
 	}
 
-	@Override
+	
 	public synchronized DataSet searchSimilar(Sample sample, int start,
 			int count) throws Exception {
 		prepareReader();
@@ -424,7 +424,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 			this.index = index;
 		}
 
-		@Override
+		
 		public void add(Sample sample) {
 			try {
 				index.add(sample);
@@ -434,17 +434,17 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 			}
 		}
 
-		@Override
+		
 		public void addAll(Collection<Sample> values) {
 			throw new RuntimeException("not implemented");
 		}
 
-		@Override
+		
 		public void clear() {
 			throw new RuntimeException("not implemented");
 		}
 
-		@Override
+		
 		public Sample getElementAt(int i) {
 			try {
 				return index.getSampleAt(i);
@@ -454,27 +454,27 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 			}
 		}
 
-		@Override
+		
 		public void fireContentsChanged() {
 			fireContentsChanged(this, -1, -1);
 		}
 
-		@Override
+		
 		public int indexOf(Sample value) {
 			throw new RuntimeException("not implemented");
 		}
 
-		@Override
+		
 		public boolean isEmpty() {
 			return getSize() == 0;
 		}
 
-		@Override
+		
 		public Collection<Sample> toCollection() {
 			throw new RuntimeException("not implemented");
 		}
 
-		@Override
+		
 		public int getSize() {
 			try {
 				return index.getSize();
@@ -484,30 +484,30 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 			}
 		}
 
-		@Override
+		
 		public Iterator<Sample> iterator() {
 			throw new RuntimeException("not implemented");
 		}
 
-		@Override
+		
 		public boolean containsKey(Object key) {
 			// TODO Auto-generated method stub
 			return false;
 		}
 
-		@Override
+		
 		public boolean containsValue(Object value) {
 			// TODO Auto-generated method stub
 			return false;
 		}
 
-		@Override
+		
 		public Set<java.util.Map.Entry<String, Sample>> entrySet() {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
-		@Override
+		
 		public Sample get(Object key) {
 			try {
 				return index.getSample(StringUtil.convert(key));
@@ -517,37 +517,37 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 			}
 		}
 
-		@Override
+		
 		public Set<String> keySet() {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
-		@Override
+		
 		public Sample put(String key, Sample value) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
-		@Override
+		
 		public void putAll(Map<? extends String, ? extends Sample> m) {
 			// TODO Auto-generated method stub
 
 		}
 
-		@Override
+		
 		public Sample remove(Object key) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
-		@Override
+		
 		public int size() {
 			// TODO Auto-generated method stub
 			return 0;
 		}
 
-		@Override
+		
 		public Collection<Sample> values() {
 			// TODO Auto-generated method stub
 			return null;
@@ -581,7 +581,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 			this.query = query;
 		}
 
-		@Override
+		
 		public Object call() throws Exception {
 			for (Algorithm a : getAlgorithms()) {
 				try {
@@ -613,7 +613,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 
 	}
 
-	@Override
+	
 	public synchronized int countResults(String query) throws Exception {
 		return countResults(parseQuery(query));
 	}
@@ -679,11 +679,11 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 		return td.totalHits;
 	}
 
-	@Override
+	
 	public void setSamples(ObservableMap<Sample> samples) {
 	}
 
-	@Override
+	
 	public ObservableMap<Sample> getSamples() {
 		if (sampleMap == null) {
 			sampleMap = new LuceneSampleMap(this);

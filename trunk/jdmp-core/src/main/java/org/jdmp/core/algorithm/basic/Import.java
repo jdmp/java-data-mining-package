@@ -57,7 +57,7 @@ public class Import extends AbstractAlgorithm {
 		setVariables(variables);
 	}
 
-	@Override
+	
 	public Map<String, Object> calculateObjects(Map<String, Object> input) throws Exception {
 		FileFormat format = defaultFormat;
 

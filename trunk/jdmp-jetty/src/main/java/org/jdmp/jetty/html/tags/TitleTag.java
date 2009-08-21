@@ -26,7 +26,7 @@ package org.jdmp.jetty.html.tags;
 public class TitleTag extends AbstractHtmlTag {
 	private static final long serialVersionUID = 6891820871282356862L;
 
-	@Override
+	
 	public String getTagName() {
 		return "title";
 	}

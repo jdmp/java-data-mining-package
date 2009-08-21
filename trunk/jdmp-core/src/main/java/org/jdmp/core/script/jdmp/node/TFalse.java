@@ -19,7 +19,7 @@ public final class TFalse extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TFalse(getLine(), getPos());
@@ -30,7 +30,7 @@ public final class TFalse extends Token
         ((Analysis) sw).caseTFalse(this);
     }
 
-    @Override
+    
     public void setText(@SuppressWarnings("unused") String text)
     {
         throw new RuntimeException("Cannot change TFalse text.");

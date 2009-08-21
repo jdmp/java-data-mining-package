@@ -335,7 +335,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		return edgeLabels.get(key);
 	}
 
-	@Override
+	
 	public final String toString() {
 		if (getLabel() == null) {
 			return getClass().getSimpleName();

@@ -19,7 +19,7 @@ public final class TMatlabComment extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TMatlabComment(getText(), getLine(), getPos());

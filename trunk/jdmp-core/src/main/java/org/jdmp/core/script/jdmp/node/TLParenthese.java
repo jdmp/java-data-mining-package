@@ -19,7 +19,7 @@ public final class TLParenthese extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TLParenthese(getLine(), getPos());
@@ -30,7 +30,7 @@ public final class TLParenthese extends Token
         ((Analysis) sw).caseTLParenthese(this);
     }
 
-    @Override
+    
     public void setText(@SuppressWarnings("unused") String text)
     {
         throw new RuntimeException("Cannot change TLParenthese text.");

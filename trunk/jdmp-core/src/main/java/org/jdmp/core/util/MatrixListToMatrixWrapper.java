@@ -79,17 +79,17 @@ public class MatrixListToMatrixWrapper extends AbstractDenseObjectMatrix2D imple
 		this.matrixList = object;
 	}
 
-	@Override
+	
 	public void contentsChanged(ListDataEvent e) {
 		notifyGUIObject();
 	}
 
-	@Override
+	
 	public void intervalAdded(ListDataEvent e) {
 		notifyGUIObject();
 	}
 
-	@Override
+	
 	public void intervalRemoved(ListDataEvent e) {
 		notifyGUIObject();
 	}

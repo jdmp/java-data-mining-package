@@ -52,7 +52,7 @@ public class SparseEhcacheMatrix extends AbstractMapToSparseMatrixWrapper {
 		super(size);
 	}
 
-	@Override
+	
 	public Map<Coordinates, Object> getMap() {
 		if (values == null) {
 			try {
@@ -64,7 +64,7 @@ public class SparseEhcacheMatrix extends AbstractMapToSparseMatrixWrapper {
 		return values;
 	}
 
-	@Override
+	
 	public void setMap(Map<Coordinates, Object> map) {
 		this.values = map;
 	}

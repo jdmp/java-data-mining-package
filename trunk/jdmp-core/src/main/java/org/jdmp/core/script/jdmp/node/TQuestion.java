@@ -19,7 +19,7 @@ public final class TQuestion extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TQuestion(getLine(), getPos());
@@ -30,7 +30,7 @@ public final class TQuestion extends Token
         ((Analysis) sw).caseTQuestion(this);
     }
 
-    @Override
+    
     public void setText(@SuppressWarnings("unused") String text)
     {
         throw new RuntimeException("Cannot change TQuestion text.");

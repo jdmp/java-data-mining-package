@@ -53,13 +53,13 @@ public class MalletInputMatrix extends AbstractDenseDoubleMatrix2D implements
 	}
 
 	public double getDouble(long row, long column) {
-		return Arrays.binarySearch(featureVector.getIndices(), 0, featureVector
-				.numLocations(), (int) column) >= 0 ? 1.0 : 0.0;
+		return Arrays.binarySearch(featureVector.getIndices(), (int) column) >= 0 ? 1.0
+				: 0.0;
 	}
 
 	public double getDouble(int row, int column) {
-		return Arrays.binarySearch(featureVector.getIndices(), 0, featureVector
-				.numLocations(), column) >= 0 ? 1.0 : 0.0;
+		return Arrays.binarySearch(featureVector.getIndices(), column) >= 0 ? 1.0
+				: 0.0;
 	}
 
 	public void setDouble(double value, long row, long column) {

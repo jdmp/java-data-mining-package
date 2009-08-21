@@ -30,7 +30,7 @@ public final class AQualifiedName extends PName
 
     }
 
-    @Override
+    
     public Object clone()
     {
         return new AQualifiedName(
@@ -119,7 +119,7 @@ public final class AQualifiedName extends PName
         this._identifier_ = node;
     }
 
-    @Override
+    
     public String toString()
     {
         return ""
@@ -128,7 +128,7 @@ public final class AQualifiedName extends PName
             + toString(this._identifier_);
     }
 
-    @Override
+    
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
@@ -153,7 +153,7 @@ public final class AQualifiedName extends PName
         throw new RuntimeException("Not a child.");
     }
 
-    @Override
+    
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child

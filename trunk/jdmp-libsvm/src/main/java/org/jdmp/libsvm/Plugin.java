@@ -42,17 +42,17 @@ public class Plugin extends AbstractPlugin {
 		neededClasses.add("libsvm.Kernel");
 	}
 
-	@Override
+	
 	public String getDescription() {
 		return "library for classification using support vector machines";
 	}
 
-	@Override
+	
 	public Collection<Object> getDependencies() {
 		return dependencies;
 	}
 
-	@Override
+	
 	public Collection<String> getNeededClasses() {
 		return neededClasses;
 	}

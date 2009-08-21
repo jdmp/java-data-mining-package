@@ -45,7 +45,7 @@ public class DivideAction extends VariableAction {
 				InputEvent.ALT_DOWN_MASK));
 	}
 
-	@Override
+	
 	public Object call() throws MatrixException {
 		getVariable().getCoreObject().addMatrix(
 				getVariable().getCoreObject().getMatrix().divide(2.0));

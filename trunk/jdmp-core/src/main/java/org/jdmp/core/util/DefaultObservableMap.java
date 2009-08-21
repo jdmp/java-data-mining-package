@@ -45,7 +45,7 @@ public class DefaultObservableMap<V> extends AbstractObservableMap<V> {
 		}
 	}
 
-	@Override
+	
 	public Map<String, V> getMap() {
 		if (map == null) {
 			map = new HashMap<String, V>(2);
@@ -53,7 +53,7 @@ public class DefaultObservableMap<V> extends AbstractObservableMap<V> {
 		return map;
 	}
 
-	@Override
+	
 	public void setMap(Map<String, V> map) {
 		this.map = map;
 	}

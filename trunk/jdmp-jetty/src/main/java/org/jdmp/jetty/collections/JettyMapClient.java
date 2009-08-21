@@ -39,7 +39,7 @@ public class JettyMapClient<K, V> implements Map<K, V> {
 		client = new JettyObjectClient(url);
 	}
 
-	@Override
+	
 	public void clear() {
 		try {
 			client.execute("clear");
@@ -48,7 +48,7 @@ public class JettyMapClient<K, V> implements Map<K, V> {
 		}
 	}
 
-	@Override
+	
 	public boolean containsKey(Object key) {
 		try {
 			return (Boolean) client.execute("containsKey", key);
@@ -57,7 +57,7 @@ public class JettyMapClient<K, V> implements Map<K, V> {
 		}
 	}
 
-	@Override
+	
 	public boolean containsValue(Object value) {
 		try {
 			return (Boolean) client.execute("containsValue", value);
@@ -67,7 +67,7 @@ public class JettyMapClient<K, V> implements Map<K, V> {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
+	
 	public Set<java.util.Map.Entry<K, V>> entrySet() {
 		try {
 			return (Set<java.util.Map.Entry<K, V>>) client.execute("entrySet");
@@ -77,7 +77,7 @@ public class JettyMapClient<K, V> implements Map<K, V> {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
+	
 	public V get(Object key) {
 		try {
 			return (V) client.execute("get", key);
@@ -86,7 +86,7 @@ public class JettyMapClient<K, V> implements Map<K, V> {
 		}
 	}
 
-	@Override
+	
 	public boolean isEmpty() {
 		try {
 			return (Boolean) client.execute("isEmpty");
@@ -96,7 +96,7 @@ public class JettyMapClient<K, V> implements Map<K, V> {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
+	
 	public Set<K> keySet() {
 		try {
 			return (Set<K>) client.execute("keySet");
@@ -106,7 +106,7 @@ public class JettyMapClient<K, V> implements Map<K, V> {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
+	
 	public V put(K key, V value) {
 		try {
 			return (V) client.execute("put", key, value);
@@ -115,7 +115,7 @@ public class JettyMapClient<K, V> implements Map<K, V> {
 		}
 	}
 
-	@Override
+	
 	public void putAll(Map<? extends K, ? extends V> m) {
 		try {
 			client.execute("putAll", m);
@@ -125,7 +125,7 @@ public class JettyMapClient<K, V> implements Map<K, V> {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
+	
 	public V remove(Object key) {
 		try {
 			return (V) client.execute("remove", key);
@@ -134,7 +134,7 @@ public class JettyMapClient<K, V> implements Map<K, V> {
 		}
 	}
 
-	@Override
+	
 	public int size() {
 		try {
 			return (Integer) client.execute("size");
@@ -144,7 +144,7 @@ public class JettyMapClient<K, V> implements Map<K, V> {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
+	
 	public Collection<V> values() {
 		try {
 			return (Collection<V>) client.execute("values");

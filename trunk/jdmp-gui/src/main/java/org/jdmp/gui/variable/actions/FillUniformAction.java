@@ -46,7 +46,7 @@ public class FillUniformAction extends VariableAction {
 				InputEvent.ALT_DOWN_MASK));
 	}
 
-	@Override
+	
 	public Object call() throws MatrixException {
 		getVariable().getCoreObject().addMatrix(
 				getVariable().getCoreObject().getMatrix().rand(Ret.NEW));

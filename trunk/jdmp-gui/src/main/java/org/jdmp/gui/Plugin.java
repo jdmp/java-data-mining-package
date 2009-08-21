@@ -41,17 +41,17 @@ public class Plugin extends AbstractPlugin {
 		dependencies.add("jdmp-core");
 	}
 
-	@Override
+	
 	public String getDescription() {
 		return "visualization for data objects and algorithms";
 	}
 
-	@Override
+	
 	public Collection<Object> getDependencies() {
 		return dependencies;
 	}
 
-	@Override
+	
 	public Collection<String> getNeededClasses() {
 		return neededClasses;
 	}

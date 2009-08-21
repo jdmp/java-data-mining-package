@@ -34,7 +34,7 @@ public class DefaultSample extends AbstractSample {
 		super();
 	}
 
-	@Override
+	
 	public final DefaultSample clone() {
 		DefaultSample s = null;
 		try {

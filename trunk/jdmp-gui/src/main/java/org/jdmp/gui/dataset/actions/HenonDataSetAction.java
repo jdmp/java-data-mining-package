@@ -48,7 +48,7 @@ public class HenonDataSetAction extends DataSetAction {
 				InputEvent.ALT_DOWN_MASK));
 	}
 
-	@Override
+	
 	public Object call() throws MatrixException {
 		int sampleCount = -1;
 		while (sampleCount <= 0) {

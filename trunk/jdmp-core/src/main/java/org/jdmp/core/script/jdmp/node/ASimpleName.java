@@ -22,7 +22,7 @@ public final class ASimpleName extends PName
 
     }
 
-    @Override
+    
     public Object clone()
     {
         return new ASimpleName(
@@ -59,14 +59,14 @@ public final class ASimpleName extends PName
         this._identifier_ = node;
     }
 
-    @Override
+    
     public String toString()
     {
         return ""
             + toString(this._identifier_);
     }
 
-    @Override
+    
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
@@ -79,7 +79,7 @@ public final class ASimpleName extends PName
         throw new RuntimeException("Not a child.");
     }
 
-    @Override
+    
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child

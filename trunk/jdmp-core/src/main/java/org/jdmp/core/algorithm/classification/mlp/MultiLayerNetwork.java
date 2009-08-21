@@ -190,7 +190,7 @@ public class MultiLayerNetwork extends AbstractClassifier {
 		return networkLayers.get(0).getLearningRate();
 	}
 
-	@Override
+	
 	public void reset() throws MatrixException {
 		for (NetworkLayer networkLayer : networkLayers) {
 			networkLayer.reset();
@@ -251,7 +251,7 @@ public class MultiLayerNetwork extends AbstractClassifier {
 		return networkLayers;
 	}
 
-	@Override
+	
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
 		// transpose and add bias unit
 		// Matrix inputWithBias = Matrix.zeros(input.getColumnCount() + 1,
@@ -274,7 +274,7 @@ public class MultiLayerNetwork extends AbstractClassifier {
 		return getOutputVariable().getMatrix();
 	}
 
-	@Override
+	
 	public void train(Matrix input, Matrix sampleWeight, Matrix desiredOutput) throws Exception {
 		addDesiredOutputMatrix(desiredOutput.toRowVector());
 		if (sampleWeight == null) {
@@ -326,7 +326,7 @@ public class MultiLayerNetwork extends AbstractClassifier {
 		return mean;
 	}
 
-	@Override
+	
 	public void train(RegressionDataSet dataSet) throws Exception {
 
 		// TODO: fix!
@@ -367,7 +367,7 @@ public class MultiLayerNetwork extends AbstractClassifier {
 		dataSet.notifyGUIObject();
 	}
 
-	@Override
+	
 	public Classifier emptyCopy() throws Exception {
 		return null;
 	}

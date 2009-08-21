@@ -60,7 +60,7 @@ public class StanfordPOSTagger extends AbstractTagger {
 		tagger = new MaxentTagger(modelFile.getAbsolutePath());
 	}
 
-	@Override
+	
 	public List<Matrix> tag(String input) throws Exception {
 		List<Matrix> list = new ArrayList<Matrix>();
 
@@ -77,7 +77,7 @@ public class StanfordPOSTagger extends AbstractTagger {
 		return list;
 	}
 
-	@Override
+	
 	public List<Matrix> tag(Matrix input) throws Exception {
 		List<Matrix> list = new ArrayList<Matrix>();
 

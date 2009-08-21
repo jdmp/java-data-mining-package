@@ -19,7 +19,7 @@ public final class TDotMult extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TDotMult(getLine(), getPos());
@@ -30,7 +30,7 @@ public final class TDotMult extends Token
         ((Analysis) sw).caseTDotMult(this);
     }
 
-    @Override
+    
     public void setText(@SuppressWarnings("unused") String text)
     {
         throw new RuntimeException("Cannot change TDotMult text.");

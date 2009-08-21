@@ -19,7 +19,7 @@ public final class TLogicalOr extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TLogicalOr(getLine(), getPos());
@@ -30,7 +30,7 @@ public final class TLogicalOr extends Token
         ((Analysis) sw).caseTLogicalOr(this);
     }
 
-    @Override
+    
     public void setText(@SuppressWarnings("unused") String text)
     {
         throw new RuntimeException("Cannot change TLogicalOr text.");

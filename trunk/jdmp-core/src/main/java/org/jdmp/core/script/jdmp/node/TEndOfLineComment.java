@@ -19,7 +19,7 @@ public final class TEndOfLineComment extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TEndOfLineComment(getText(), getLine(), getPos());

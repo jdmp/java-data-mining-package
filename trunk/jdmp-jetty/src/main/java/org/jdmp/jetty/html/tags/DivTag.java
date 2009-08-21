@@ -37,7 +37,7 @@ public class DivTag extends AbstractHtmlTag {
 		add(content);
 	}
 
-	@Override
+	
 	public String getTagName() {
 		return "div";
 	}

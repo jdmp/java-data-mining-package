@@ -22,7 +22,7 @@ public final class AStatementCommand extends PCommand
 
     }
 
-    @Override
+    
     public Object clone()
     {
         return new AStatementCommand(
@@ -59,14 +59,14 @@ public final class AStatementCommand extends PCommand
         this._statement_ = node;
     }
 
-    @Override
+    
     public String toString()
     {
         return ""
             + toString(this._statement_);
     }
 
-    @Override
+    
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
@@ -79,7 +79,7 @@ public final class AStatementCommand extends PCommand
         throw new RuntimeException("Not a child.");
     }
 
-    @Override
+    
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child

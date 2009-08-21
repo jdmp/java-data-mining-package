@@ -37,7 +37,7 @@ public class SpanTag extends AbstractHtmlTag {
 		add(content);
 	}
 
-	@Override
+	
 	public String getTagName() {
 		return "span";
 	}

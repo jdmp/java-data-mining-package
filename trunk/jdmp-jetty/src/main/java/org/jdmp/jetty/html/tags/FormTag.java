@@ -31,7 +31,7 @@ public class FormTag extends AbstractHtmlTag {
 		setParameter("action", action);
 	}
 
-	@Override
+	
 	public String getTagName() {
 		return "form";
 	}

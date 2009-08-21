@@ -215,7 +215,7 @@ public class NetworkLayer implements Serializable {
 		getWeightVariable().addMatrix(w);
 	}
 
-	@Override
+	
 	public String toString() {
 		StringBuilder s = new StringBuilder();
 		if (getPreviousLayer() != null) {

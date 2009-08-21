@@ -19,7 +19,7 @@ public final class TAssign extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TAssign(getLine(), getPos());
@@ -30,7 +30,7 @@ public final class TAssign extends Token
         ((Analysis) sw).caseTAssign(this);
     }
 
-    @Override
+    
     public void setText(@SuppressWarnings("unused") String text)
     {
         throw new RuntimeException("Cannot change TAssign text.");

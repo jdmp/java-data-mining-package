@@ -50,7 +50,7 @@ public class EmphasizedText implements Html {
 		}
 	}
 
-	@Override
+	
 	public String toString() {
 		return highlightedText;
 	}

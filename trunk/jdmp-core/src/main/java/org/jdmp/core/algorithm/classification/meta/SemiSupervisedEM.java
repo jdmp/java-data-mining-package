@@ -48,12 +48,12 @@ public class SemiSupervisedEM extends AbstractClassifier implements SemiSupervis
 		this.useRawPrediction = useRawPrediction;
 	}
 
-	@Override
+	
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
 		return classifier.predict(input, sampleWeight);
 	}
 
-	@Override
+	
 	public void reset() throws Exception {
 		classifier.reset();
 	}

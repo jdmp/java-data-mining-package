@@ -30,7 +30,7 @@ public final class AArgumentListArgumentList extends PArgumentList
 
     }
 
-    @Override
+    
     public Object clone()
     {
         return new AArgumentListArgumentList(
@@ -119,7 +119,7 @@ public final class AArgumentListArgumentList extends PArgumentList
         this._expression_ = node;
     }
 
-    @Override
+    
     public String toString()
     {
         return ""
@@ -128,7 +128,7 @@ public final class AArgumentListArgumentList extends PArgumentList
             + toString(this._expression_);
     }
 
-    @Override
+    
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
@@ -153,7 +153,7 @@ public final class AArgumentListArgumentList extends PArgumentList
         throw new RuntimeException("Not a child.");
     }
 
-    @Override
+    
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child

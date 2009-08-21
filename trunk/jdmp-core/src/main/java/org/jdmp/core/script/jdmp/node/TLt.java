@@ -19,7 +19,7 @@ public final class TLt extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TLt(getLine(), getPos());
@@ -30,7 +30,7 @@ public final class TLt extends Token
         ((Analysis) sw).caseTLt(this);
     }
 
-    @Override
+    
     public void setText(@SuppressWarnings("unused") String text)
     {
         throw new RuntimeException("Cannot change TLt text.");

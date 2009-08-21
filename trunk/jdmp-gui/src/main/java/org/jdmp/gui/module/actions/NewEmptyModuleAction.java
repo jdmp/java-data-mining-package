@@ -47,7 +47,7 @@ public class NewEmptyModuleAction extends ObjectAction {
 				KeyEvent.ALT_DOWN_MASK));
 	}
 
-	@Override
+	
 	public Object call() {
 		Module m = ModuleFactory.emptyModule();
 		if (getCoreObject() instanceof HasModuleList) {

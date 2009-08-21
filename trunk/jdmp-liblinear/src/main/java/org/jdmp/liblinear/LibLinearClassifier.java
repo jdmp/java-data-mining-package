@@ -58,7 +58,7 @@ public class LibLinearClassifier extends AbstractClassifier {
 		this.param = parameter;
 	}
 
-	@Override
+	
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
 		long columnCount = input.getColumnCount();
 		int count = 0;
@@ -87,7 +87,7 @@ public class LibLinearClassifier extends AbstractClassifier {
 		return ret;
 	}
 
-	@Override
+	
 	public void train(RegressionDataSet dataSet) throws Exception {
 		createAlgorithm();
 		prob = new Problem();
@@ -128,7 +128,7 @@ public class LibLinearClassifier extends AbstractClassifier {
 		model = Linear.train(prob, param);
 	}
 
-	@Override
+	
 	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput)
 			throws Exception {
 		throw new Exception("not supported");
@@ -143,7 +143,7 @@ public class LibLinearClassifier extends AbstractClassifier {
 		prob = null;
 	}
 
-	@Override
+	
 	public void reset() throws MatrixException {
 		createAlgorithm();
 	}

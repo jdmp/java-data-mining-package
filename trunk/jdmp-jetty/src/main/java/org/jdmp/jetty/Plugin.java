@@ -46,17 +46,17 @@ public class Plugin extends AbstractPlugin {
 		neededClasses.add("javax.servlet.Servlet");
 	}
 
-	@Override
+	
 	public String getDescription() {
 		return "library for setting up a web server with Jetty";
 	}
 
-	@Override
+	
 	public Collection<Object> getDependencies() {
 		return dependencies;
 	}
 
-	@Override
+	
 	public Collection<String> getNeededClasses() {
 		return neededClasses;
 	}

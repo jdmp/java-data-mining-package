@@ -47,7 +47,7 @@ public class NewEmptyVariableAction extends ObjectAction {
 				KeyEvent.ALT_DOWN_MASK));
 	}
 
-	@Override
+	
 	public Object call() {
 		Variable v = VariableFactory.emptyVariable();
 		if (getCoreObject() instanceof HasVariableList) {

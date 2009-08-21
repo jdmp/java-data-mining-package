@@ -31,7 +31,7 @@ public class SampleMapWrapper<V> extends AbstractListModel implements Observable
 		indexToSample = new SoftHashMap<Integer, Sample>();
 	}
 
-	@Override
+	
 	public synchronized void clear() {
 		int size = map.size();
 		sampleToIndex.clear();
@@ -40,7 +40,7 @@ public class SampleMapWrapper<V> extends AbstractListModel implements Observable
 		fireIntervalRemoved(this, 0, size - 1);
 	}
 
-	@Override
+	
 	public Sample getElementAt(int index) {
 		Sample sample = indexToSample.get(index);
 		if (sample != null) {
@@ -61,7 +61,7 @@ public class SampleMapWrapper<V> extends AbstractListModel implements Observable
 		return null;
 	}
 
-	@Override
+	
 	public int indexOf(Sample value) {
 		Integer index = sampleToIndex.get(value);
 		if (index != null) {
@@ -82,50 +82,50 @@ public class SampleMapWrapper<V> extends AbstractListModel implements Observable
 		return -1;
 	}
 
-	@Override
+	
 	public boolean isEmpty() {
 		return map.isEmpty();
 	}
 
-	@Override
+	
 	public Collection<Sample> toCollection() {
 		throw new MatrixException("not implemented");
 	}
 
-	@Override
+	
 	public int getSize() {
 		return map.size();
 	}
 
-	@Override
+	
 	public Iterator<Sample> iterator() {
 		return new Iterator<Sample>() {
 
 			int index = 0;
 
-			@Override
+			
 			public boolean hasNext() {
 				return index < map.size();
 			}
 
-			@Override
+			
 			public Sample next() {
 				return getElementAt(index++);
 			}
 
-			@Override
+			
 			public void remove() {
 				throw new MatrixException("not implemented");
 			}
 		};
 	}
 
-	@Override
+	
 	public Map<? extends Object, V> getWrappedObject() {
 		return map;
 	}
 
-	@Override
+	
 	public synchronized void setWrappedObject(Map<? extends Object, V> object) {
 		int size = map.size();
 		indexToSample.clear();
@@ -134,17 +134,17 @@ public class SampleMapWrapper<V> extends AbstractListModel implements Observable
 		fireContentsChanged(this, 0, size - 1);
 	}
 
-	@Override
+	
 	public synchronized void add(Sample value) {
 		throw new MatrixException("use put to add values");
 	}
 
-	@Override
+	
 	public void addAll(Collection<Sample> values) {
 		throw new MatrixException("use put to add values");
 	}
 
-	@Override
+	
 	public String toString() {
 		StringBuilder s = new StringBuilder();
 		s.append("[ ");
@@ -158,66 +158,66 @@ public class SampleMapWrapper<V> extends AbstractListModel implements Observable
 		return s.toString();
 	}
 
-	@Override
+	
 	public void fireContentsChanged() {
 		fireContentsChanged(this, -1, -1);
 	}
 
-	@Override
+	
 	public boolean containsKey(Object key) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
+	
 	public boolean containsValue(Object value) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
+	
 	public Set<java.util.Map.Entry<String, Sample>> entrySet() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public Sample get(Object key) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public Set<String> keySet() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public Sample put(String key, Sample value) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void putAll(Map<? extends String, ? extends Sample> m) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
+	
 	public Sample remove(Object key) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public int size() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
+	
 	public Collection<Sample> values() {
 		// TODO Auto-generated method stub
 		return null;

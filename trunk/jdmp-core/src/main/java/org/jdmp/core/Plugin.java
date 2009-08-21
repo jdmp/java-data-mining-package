@@ -39,17 +39,17 @@ public class Plugin extends AbstractPlugin {
 		dependencies.add("ujmp-core");
 	}
 
-	@Override
+	
 	public String getDescription() {
 		return "core package for algorithms and data objects";
 	}
 
-	@Override
+	
 	public Collection<Object> getDependencies() {
 		return dependencies;
 	}
 
-	@Override
+	
 	public Collection<String> getNeededClasses() {
 		return neededClasses;
 	}

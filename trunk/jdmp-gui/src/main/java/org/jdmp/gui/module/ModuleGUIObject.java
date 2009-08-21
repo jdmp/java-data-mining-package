@@ -75,17 +75,17 @@ public class ModuleGUIObject extends AbstractGUIObject {
 		module.setDescription(description);
 	}
 
-	@Override
+	
 	public String toString() {
 		return module.toString();
 	}
 
-	@Override
+	
 	public Module getCoreObject() {
 		return module;
 	}
 
-	@Override
+	
 	public JFrame getFrame() {
 		if (frame == null) {
 			frame = new ModuleFrame(this);
@@ -93,7 +93,7 @@ public class ModuleGUIObject extends AbstractGUIObject {
 		return frame;
 	}
 
-	@Override
+	
 	public JPanel getPanel() {
 		if (panel == null) {
 			panel = new ModulePanel(this);

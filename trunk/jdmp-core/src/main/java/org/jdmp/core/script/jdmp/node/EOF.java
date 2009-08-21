@@ -19,7 +19,7 @@ public final class EOF extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
         return new EOF(getLine(), getPos());

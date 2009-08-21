@@ -42,18 +42,18 @@ public class ConstantClassifier extends AbstractClassifier {
 		super();
 	}
 
-	@Override
+	
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
 		return prediction;
 	}
 
-	@Override
+	
 	public void reset() throws Exception {
 		prediction = null;
 		classCount = 0;
 	}
 
-	@Override
+	
 	public void train(RegressionDataSet dataSet) throws Exception {
 		MapMatrix<Long, Integer> count = new DefaultMapMatrix<Long, Integer>();
 		for (Sample s : dataSet.getSamples()) {
@@ -80,7 +80,7 @@ public class ConstantClassifier extends AbstractClassifier {
 		prediction.setAsDouble(1.0, 0, pc);
 	}
 
-	@Override
+	
 	public Classifier emptyCopy() throws Exception {
 		return new ConstantClassifier();
 	}

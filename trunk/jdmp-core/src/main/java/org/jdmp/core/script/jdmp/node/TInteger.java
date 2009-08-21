@@ -19,7 +19,7 @@ public final class TInteger extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TInteger(getText(), getLine(), getPos());

@@ -42,17 +42,17 @@ public class Plugin extends AbstractPlugin {
 		neededClasses.add("weka.classifiers.Classifier");
 	}
 
-	@Override
+	
 	public String getDescription() {
 		return "interface to connect to Weka";
 	}
 
-	@Override
+	
 	public Collection<Object> getDependencies() {
 		return dependencies;
 	}
 
-	@Override
+	
 	public Collection<String> getNeededClasses() {
 		return neededClasses;
 	}

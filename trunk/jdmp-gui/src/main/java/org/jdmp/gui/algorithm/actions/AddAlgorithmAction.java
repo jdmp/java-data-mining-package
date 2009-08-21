@@ -45,7 +45,7 @@ public class AddAlgorithmAction extends AlgorithmListAction {
 		putValue(Action.SHORT_DESCRIPTION, "Add a new Algorithm");
 	}
 
-	@Override
+	
 	public Object call() {
 		if (algorithm == null) {
 

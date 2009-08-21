@@ -60,7 +60,7 @@ public class ModuleListTableModel extends AbstractTableModel implements ListData
 		return 6;
 	}
 
-	@Override
+	
 	public String getColumnName(int columnIndex) {
 		switch (columnIndex) {
 		case IDCOLUMN:
@@ -81,7 +81,7 @@ public class ModuleListTableModel extends AbstractTableModel implements ListData
 		}
 	}
 
-	@Override
+	
 	public Class<?> getColumnClass(int columnIndex) {
 		return Module.class;
 	}
@@ -90,17 +90,17 @@ public class ModuleListTableModel extends AbstractTableModel implements ListData
 		return iModules.getModules().getElementAt(rowIndex);
 	}
 
-	@Override
+	
 	public void contentsChanged(ListDataEvent e) {
 		fireTableRowsUpdated(e.getIndex0(), e.getIndex1());
 	}
 
-	@Override
+	
 	public void intervalAdded(ListDataEvent e) {
 		fireTableRowsInserted(e.getIndex0(), e.getIndex1());
 	}
 
-	@Override
+	
 	public void intervalRemoved(ListDataEvent e) {
 		fireTableRowsDeleted(e.getIndex0(), e.getIndex1());
 	}

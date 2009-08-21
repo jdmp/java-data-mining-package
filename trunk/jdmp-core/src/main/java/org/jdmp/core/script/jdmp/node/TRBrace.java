@@ -19,7 +19,7 @@ public final class TRBrace extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TRBrace(getLine(), getPos());
@@ -30,7 +30,7 @@ public final class TRBrace extends Token
         ((Analysis) sw).caseTRBrace(this);
     }
 
-    @Override
+    
     public void setText(@SuppressWarnings("unused") String text)
     {
         throw new RuntimeException("Cannot change TRBrace text.");

@@ -46,7 +46,7 @@ public class IndexDataSetLuceneAction extends ObjectAction {
 		putValue("Enabled", Lucene.isAvailable());
 	}
 
-	@Override
+	
 	public Object call() {
 		try {
 			Class<?> c = Class.forName("org.jdmp.lucene.LuceneIndex");

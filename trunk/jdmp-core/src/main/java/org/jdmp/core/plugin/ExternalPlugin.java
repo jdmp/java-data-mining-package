@@ -40,27 +40,27 @@ public abstract class ExternalPlugin extends AbstractPlugin {
 		}
 	}
 
-	@Override
+	
 	public final Collection<String> getNeededClasses() {
 		return plugin == null ? new LinkedList<String>() : plugin.getNeededClasses();
 	}
 
-	@Override
+	
 	public final String getDescription() {
 		return plugin == null ? "n/a" : plugin.getDescription();
 	}
 
-	@Override
+	
 	public final Collection<Object> getDependencies() {
 		return plugin == null ? new LinkedList<Object>() : plugin.getDependencies();
 	}
 
-	@Override
+	
 	public final String getStatus() {
 		return plugin == null ? "n/a" : plugin.getStatus();
 	}
 
-	@Override
+	
 	public final boolean isAvailable() {
 		return plugin == null ? false : plugin.isAvailable();
 	}

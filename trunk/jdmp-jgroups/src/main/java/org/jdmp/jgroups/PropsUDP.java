@@ -56,7 +56,7 @@ public class PropsUDP {
 
 	private final String STATETRANSFER = "pbcast.STATE_TRANSFER";
 
-	@Override
+	
 	public String toString() {
 		StringBuilder s = new StringBuilder();
 

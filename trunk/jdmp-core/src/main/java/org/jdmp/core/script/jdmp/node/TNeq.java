@@ -19,7 +19,7 @@ public final class TNeq extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TNeq(getText(), getLine(), getPos());

@@ -47,7 +47,7 @@ public abstract class AbstractMapSample extends AbstractSample implements
 		setVariables(new VariableMapWrapper());
 	}
 
-	@Override
+	
 	public final Sample clone() {
 		return SampleFactory.clone(this);
 	}
@@ -59,12 +59,12 @@ public abstract class AbstractMapSample extends AbstractSample implements
 	class VariableMapWrapper extends AbstractObservableMap<Variable> {
 		private static final long serialVersionUID = 1252960592502010150L;
 
-		@Override
+		
 		public Map<String, Variable> getMap() {
 			return variableMap;
 		}
 
-		@Override
+		
 		public void setMap(Map<String, Variable> map) {
 		}
 	}
@@ -72,68 +72,68 @@ public abstract class AbstractMapSample extends AbstractSample implements
 	class VariableMap implements Map<String, Variable>, Serializable {
 		private static final long serialVersionUID = -8553571915359063034L;
 
-		@Override
+		
 		public void clear() {
 			getWrappedObject().clear();
 		}
 
-		@Override
+		
 		public boolean containsKey(Object key) {
 			return containsKey(key);
 		}
 
-		@Override
+		
 		public boolean containsValue(Object value) {
 			throw new RuntimeException("not implemented");
 		}
 
-		@Override
+		
 		public Set<java.util.Map.Entry<String, Variable>> entrySet() {
 			throw new RuntimeException("not implemented");
 		}
 
-		@Override
+		
 		public Variable get(Object key) {
 			Variable v = new SingletonVariable(MathUtil.getMatrix(getWrappedObject().get(key)));
 			v.setLabel(StringUtil.convert(key));
 			return v;
 		}
 
-		@Override
+		
 		public boolean isEmpty() {
 			return getWrappedObject().isEmpty();
 		}
 
-		@Override
+		
 		public Set<String> keySet() {
 			return getWrappedObject().keySet();
 		}
 
-		@Override
+		
 		public Variable put(String key, Variable value) {
 			getWrappedObject().put(key, value.getMatrix());
 			return null;
 		}
 
-		@Override
+		
 		public void putAll(Map<? extends String, ? extends Variable> m) {
 			for (String key : m.keySet()) {
 				put(key, m.get(key));
 			}
 		}
 
-		@Override
+		
 		public Variable remove(Object key) {
 			getWrappedObject().remove(key);
 			return null;
 		}
 
-		@Override
+		
 		public int size() {
 			return getWrappedObject().size();
 		}
 
-		@Override
+		
 		public Collection<Variable> values() {
 			return new CollectionWrapper();
 		}
@@ -143,86 +143,86 @@ public abstract class AbstractMapSample extends AbstractSample implements
 	class CollectionWrapper implements Collection<Variable>, Serializable {
 		private static final long serialVersionUID = 5598318867114474374L;
 
-		@Override
+		
 		public boolean add(Variable e) {
 			throw new RuntimeException("not implemented");
 		}
 
-		@Override
+		
 		public boolean addAll(Collection<? extends Variable> c) {
 			throw new RuntimeException("not implemented");
 		}
 
-		@Override
+		
 		public void clear() {
 			throw new RuntimeException("not implemented");
 		}
 
-		@Override
+		
 		public boolean contains(Object o) {
 			throw new RuntimeException("not implemented");
 		}
 
-		@Override
+		
 		public boolean containsAll(Collection<?> c) {
 			throw new RuntimeException("not implemented");
 		}
 
-		@Override
+		
 		public boolean isEmpty() {
 			throw new RuntimeException("not implemented");
 		}
 
-		@Override
+		
 		public Iterator<Variable> iterator() {
 			return new Iterator<Variable>() {
 
 				Iterator<String> it = getWrappedObject().keySet().iterator();
 
-				@Override
+				
 				public boolean hasNext() {
 					return it.hasNext();
 				}
 
-				@Override
+				
 				public Variable next() {
 					Object key = it.next();
 					return variableMap.get(key);
 				}
 
-				@Override
+				
 				public void remove() {
 					throw new RuntimeException("not implemented");
 				}
 			};
 		}
 
-		@Override
+		
 		public boolean remove(Object o) {
 			throw new RuntimeException("not implemented");
 		}
 
-		@Override
+		
 		public boolean removeAll(Collection<?> c) {
 			throw new RuntimeException("not implemented");
 		}
 
-		@Override
+		
 		public boolean retainAll(Collection<?> c) {
 			throw new RuntimeException("not implemented");
 		}
 
-		@Override
+		
 		public int size() {
 			throw new RuntimeException("not implemented");
 		}
 
-		@Override
+		
 		public Object[] toArray() {
 			throw new RuntimeException("not implemented");
 		}
 
-		@Override
+		
 		public <T> T[] toArray(T[] a) {
 			throw new RuntimeException("not implemented");
 		}

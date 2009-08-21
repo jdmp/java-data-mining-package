@@ -53,7 +53,7 @@ public class NaiveBayesClassifierTest extends AbstractClassifier {
 		super();
 	}
 
-	@Override
+	
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
 		double[] logs = new double[labelCount];
 		long featureCount = input.getColumnCount();
@@ -95,13 +95,13 @@ public class NaiveBayesClassifierTest extends AbstractClassifier {
 		return probs;
 	}
 
-	@Override
+	
 	public void reset() throws Exception {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
+	
 	public void train(RegressionDataSet dataSet) throws Exception {
 		// labelCount = ((ClassificationDataSet) dataSet).getClassCount();
 		// TODO: hack!!!

@@ -40,7 +40,7 @@ public class LinkTag extends AbstractHtmlTag {
 		add(content);
 	}
 
-	@Override
+	
 	public String getTagName() {
 		return "a";
 	}

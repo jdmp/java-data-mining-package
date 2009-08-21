@@ -19,7 +19,7 @@ public final class TColon extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TColon(getLine(), getPos());
@@ -30,7 +30,7 @@ public final class TColon extends Token
         ((Analysis) sw).caseTColon(this);
     }
 
-    @Override
+    
     public void setText(@SuppressWarnings("unused") String text)
     {
         throw new RuntimeException("Cannot change TColon text.");

@@ -19,7 +19,7 @@ public final class TDocumentationComment extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TDocumentationComment(getText(), getLine(), getPos());

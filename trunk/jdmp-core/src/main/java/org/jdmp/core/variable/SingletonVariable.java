@@ -23,42 +23,42 @@ public class SingletonVariable extends AbstractVariable {
 		return v;
 	}
 
-	@Override
+	
 	public synchronized Matrix getAsMatrix() {
 		return getMatrix();
 	}
 
-	@Override
+	
 	public synchronized long[] getSize() {
 		Matrix m = getMatrix();
 		return m == null ? Coordinates.ZERO2D : m.getSize();
 	}
 
-	@Override
+	
 	public void setSize(long... size) {
 	}
 
-	@Override
+	
 	public String getLabel() {
 		return label;
 	}
 
-	@Override
+	
 	public void setLabel(String label) {
 		this.label = label;
 	}
 
-	@Override
+	
 	public String getDescription() {
 		return description;
 	}
 
-	@Override
+	
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	@Override
+	
 	public ObservableList<Matrix> getMatrixList() {
 		return matrixList;
 	}

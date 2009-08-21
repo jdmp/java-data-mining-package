@@ -19,7 +19,7 @@ public final class TComma extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TComma(getLine(), getPos());
@@ -30,7 +30,7 @@ public final class TComma extends Token
         ((Analysis) sw).caseTComma(this);
     }
 
-    @Override
+    
     public void setText(@SuppressWarnings("unused") String text)
     {
         throw new RuntimeException("Cannot change TComma text.");

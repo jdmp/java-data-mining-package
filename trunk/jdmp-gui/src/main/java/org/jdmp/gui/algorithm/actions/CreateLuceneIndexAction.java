@@ -48,7 +48,7 @@ public class CreateLuceneIndexAction extends ObjectAction {
 		}
 	}
 
-	@Override
+	
 	public Object call() {
 		try {
 			Class<?> c = Class.forName("org.jdmp.lucene.LuceneIndex");

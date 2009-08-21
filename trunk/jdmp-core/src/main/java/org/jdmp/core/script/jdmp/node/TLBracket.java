@@ -19,7 +19,7 @@ public final class TLBracket extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TLBracket(getLine(), getPos());
@@ -30,7 +30,7 @@ public final class TLBracket extends Token
         ((Analysis) sw).caseTLBracket(this);
     }
 
-    @Override
+    
     public void setText(@SuppressWarnings("unused") String text)
     {
         throw new RuntimeException("Cannot change TLBracket text.");

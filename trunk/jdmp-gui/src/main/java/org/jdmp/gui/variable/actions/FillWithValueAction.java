@@ -46,7 +46,7 @@ public class FillWithValueAction extends VariableAction {
 				InputEvent.ALT_DOWN_MASK));
 	}
 
-	@Override
+	
 	public Object call() {
 		double value = 0;
 		String s = JOptionPane.showInputDialog("Enter value:");

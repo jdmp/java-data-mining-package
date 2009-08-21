@@ -66,17 +66,17 @@ public class SampleGUIObject extends AbstractGUIObject {
 		sample.setDescription(description);
 	}
 
-	@Override
+	
 	public String toString() {
 		return sample.toString();
 	}
 
-	@Override
+	
 	public Sample getCoreObject() {
 		return sample;
 	}
 
-	@Override
+	
 	public JFrame getFrame() {
 		if (frame == null) {
 			frame = new SampleFrame(this);
@@ -84,7 +84,7 @@ public class SampleGUIObject extends AbstractGUIObject {
 		return frame;
 	}
 
-	@Override
+	
 	public JPanel getPanel() {
 		if (panel == null) {
 			panel = new SamplePanel(this);

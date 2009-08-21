@@ -41,7 +41,7 @@ public abstract class AbstractTagger extends AbstractAlgorithm implements Tagger
 		}
 	}
 
-	@Override
+	
 	public final void tag(Sample sample) throws Exception {
 		Variable v = sample.getVariables().get(Tokenizer.TOKENIZED);
 		if (v == null) {

@@ -44,17 +44,17 @@ public class Plugin extends AbstractPlugin {
 		neededClasses.add("org.apache.commons.logging.Log");
 	}
 
-	@Override
+	
 	public String getDescription() {
 		return "library for sharing data using JGroups";
 	}
 
-	@Override
+	
 	public Collection<Object> getDependencies() {
 		return dependencies;
 	}
 
-	@Override
+	
 	public Collection<String> getNeededClasses() {
 		return neededClasses;
 	}

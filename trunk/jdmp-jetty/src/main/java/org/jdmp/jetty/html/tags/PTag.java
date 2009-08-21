@@ -37,7 +37,7 @@ public class PTag extends AbstractHtmlTag {
 		add(content);
 	}
 
-	@Override
+	
 	public String getTagName() {
 		return "p";
 	}

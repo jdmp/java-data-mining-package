@@ -33,7 +33,7 @@ public class MatrixParameter extends AbstractParameter<Matrix> {
 		this.matrix = m;
 	}
 
-	@Override
+	
 	public Matrix getValue() {
 		return matrix;
 	}

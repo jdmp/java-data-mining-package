@@ -71,12 +71,12 @@ public class DataSetGUIObject extends AbstractGUIObject {
 		dataSet.setDescription(description);
 	}
 
-	@Override
+	
 	public String toString() {
 		return dataSet.toString();
 	}
 
-	@Override
+	
 	public JFrame getFrame() {
 		if (frame == null) {
 			frame = new DataSetFrame(this);
@@ -84,7 +84,7 @@ public class DataSetGUIObject extends AbstractGUIObject {
 		return frame;
 	}
 
-	@Override
+	
 	public JPanel getPanel() {
 		if (panel == null) {
 			panel = new DataSetPanel(this);

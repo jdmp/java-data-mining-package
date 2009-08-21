@@ -22,7 +22,7 @@ public final class ALevel0Level1 extends PLevel1
 
     }
 
-    @Override
+    
     public Object clone()
     {
         return new ALevel0Level1(
@@ -59,14 +59,14 @@ public final class ALevel0Level1 extends PLevel1
         this._level0_ = node;
     }
 
-    @Override
+    
     public String toString()
     {
         return ""
             + toString(this._level0_);
     }
 
-    @Override
+    
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
@@ -79,7 +79,7 @@ public final class ALevel0Level1 extends PLevel1
         throw new RuntimeException("Not a child.");
     }
 
-    @Override
+    
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child

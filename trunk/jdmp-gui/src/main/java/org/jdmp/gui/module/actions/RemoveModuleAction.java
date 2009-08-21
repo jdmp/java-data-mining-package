@@ -50,7 +50,7 @@ public class RemoveModuleAction extends ModuleListAction {
 		putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_R, 0));
 	}
 
-	@Override
+	
 	public Object call() {
 		if (module != null) {
 			getIModules().getModules().remove(module);

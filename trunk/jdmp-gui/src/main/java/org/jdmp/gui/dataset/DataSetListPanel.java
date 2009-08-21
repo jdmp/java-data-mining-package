@@ -26,7 +26,7 @@ public class DataSetListPanel extends AbstractListPanel {
 		updateTitle();
 	}
 
-	@Override
+	
 	public void updateTitle() {
 		getBorder().setTitle("DataSets (" + jTable.getRowCount() + ")");
 		repaint(1000);

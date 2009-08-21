@@ -19,7 +19,7 @@ public final class TIdentifier extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TIdentifier(getText(), getLine(), getPos());

@@ -41,7 +41,7 @@ public class ScriptAction extends ModuleAction {
 		putValue(Action.SHORT_DESCRIPTION, description);
 	}
 
-	@Override
+	
 	public Object call() {
 		try {
 			return getModule().getCommandWindow().execute(script);

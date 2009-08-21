@@ -52,22 +52,22 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 
 	private ObservableMap<Module> modules = null;
 
-	@Override
+	
 	public final String getDescription() {
 		return getAsString(Sample.DESCRIPTION);
 	}
 
-	@Override
+	
 	public final void setDescription(String description) {
 		setObject(Sample.DESCRIPTION, description);
 	}
 
-	@Override
+	
 	public final String getLabel() {
 		return getAsString(Sample.LABEL);
 	}
 
-	@Override
+	
 	public final void setLabel(String label) {
 		setObject(Sample.LABEL, label);
 	}
@@ -134,7 +134,7 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		}
 	}
 
-	@Override
+	
 	public final void setId(String id) {
 		setObject(Sample.ID, id);
 	}
@@ -200,7 +200,7 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		return MathUtil.getBigInteger(getMatrix(variableKey));
 	}
 
-	@Override
+	
 	public final String toString() {
 		if (getLabel() == null) {
 			return getClass().getSimpleName();
