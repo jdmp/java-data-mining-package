@@ -71,12 +71,12 @@ public class AlgorithmGUIObject extends AbstractGUIObject {
 		algorithm.setDescription(description);
 	}
 
-	@Override
+	
 	public String toString() {
 		return algorithm.toString();
 	}
 
-	@Override
+	
 	public JFrame getFrame() {
 		if (frame == null) {
 			frame = new AlgorithmFrame(this);
@@ -84,7 +84,7 @@ public class AlgorithmGUIObject extends AbstractGUIObject {
 		return frame;
 	}
 
-	@Override
+	
 	public JPanel getPanel() {
 		if (panel == null) {
 			panel = new AlgorithmPanel(this);

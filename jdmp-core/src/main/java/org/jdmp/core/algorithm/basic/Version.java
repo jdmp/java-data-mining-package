@@ -41,7 +41,7 @@ public class Version extends AbstractAlgorithm {
 		setDescription(DESCRIPTION);
 	}
 
-	@Override
+	
 	public Map<String, Object> calculateObjects(Map<String, Object> input) throws MatrixException {
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put(TARGET, JDMP.JDMPVERSION);

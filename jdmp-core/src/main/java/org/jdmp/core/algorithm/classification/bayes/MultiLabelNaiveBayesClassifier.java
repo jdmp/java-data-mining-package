@@ -53,7 +53,7 @@ public class MultiLabelNaiveBayesClassifier extends AbstractClassifier {
 		super();
 	}
 
-	@Override
+	
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
 		double[][] logs = new double[labelCount][classCount];
 		// for all labels
@@ -84,13 +84,13 @@ public class MultiLabelNaiveBayesClassifier extends AbstractClassifier {
 		return m;
 	}
 
-	@Override
+	
 	public void reset() throws Exception {
 		dists = null;
 		labelDists = null;
 	}
 
-	@Override
+	
 	public void train(RegressionDataSet dataSet) throws Exception {
 		labelCount = ((ClassificationDataSet) dataSet).getClassCount();
 		int featureCount = dataSet.getFeatureCount();

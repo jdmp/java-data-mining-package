@@ -64,12 +64,12 @@ public class Attribute implements Serializable, Comparable<Attribute>, HasLabel 
 		return label;
 	}
 
-	@Override
+	
 	public boolean equals(Object obj) {
 		return ("" + label).equals("" + label);
 	}
 
-	@Override
+	
 	public int hashCode() {
 		return ("" + label).hashCode();
 	}

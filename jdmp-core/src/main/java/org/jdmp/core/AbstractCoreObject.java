@@ -83,7 +83,7 @@ public abstract class AbstractCoreObject implements JDMPCoreObject {
 		return frame;
 	}
 
-	@Override
+	
 	public abstract String toString();
 
 	public final void notifyGUIObject() {

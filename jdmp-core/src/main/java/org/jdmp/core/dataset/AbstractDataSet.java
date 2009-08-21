@@ -275,7 +275,7 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		return splitByCount(shuffle, counts);
 	}
 
-	@Override
+	
 	public final String toString() {
 		if (getLabel() == null) {
 			return getClass().getSimpleName();
@@ -284,7 +284,7 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		}
 	}
 
-	@Override
+	
 	public final void setSamples(ObservableMap<Sample> samples) {
 		this.sampleMap = samples;
 	}
@@ -297,6 +297,6 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		this.dataSetList = dataSets;
 	}
 
-	@Override
+	
 	public abstract DataSet clone();
 }

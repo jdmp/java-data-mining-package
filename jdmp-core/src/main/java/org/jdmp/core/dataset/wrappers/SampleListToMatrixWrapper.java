@@ -61,12 +61,12 @@ public class SampleListToMatrixWrapper extends AbstractDenseObjectMatrix2D imple
 		samples.addListDataListener(this);
 	}
 
-	@Override
+	
 	public Object getObject(long row, long column) {
 		return getObject((int) row, (int) column);
 	}
 
-	@Override
+	
 	public Object getObject(int row, int column) {
 		createIndex();
 		Sample s = samples.getElementAt(row);
@@ -87,11 +87,11 @@ public class SampleListToMatrixWrapper extends AbstractDenseObjectMatrix2D imple
 		}
 	}
 
-	@Override
+	
 	public void setObject(Object value, long row, long column) {
 	}
 
-	@Override
+	
 	public void setObject(Object value, int row, int column) {
 	}
 
@@ -132,23 +132,23 @@ public class SampleListToMatrixWrapper extends AbstractDenseObjectMatrix2D imple
 		keys.clear();
 	}
 
-	@Override
+	
 	public long[] getSize() {
 		createIndex();
 		return new long[] { samples.getSize(), columnCount };
 	}
 
-	@Override
+	
 	public void contentsChanged(ListDataEvent e) {
 		deleteIndex();
 	}
 
-	@Override
+	
 	public void intervalAdded(ListDataEvent e) {
 		deleteIndex();
 	}
 
-	@Override
+	
 	public void intervalRemoved(ListDataEvent e) {
 	}
 

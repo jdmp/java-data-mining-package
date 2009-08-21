@@ -45,7 +45,7 @@ public class CreateMapMatrix extends AbstractAlgorithm {
 		setVariables(variables);
 	}
 
-	@Override
+	
 	public Map<String, Object> calculateObjects(Map<String, Object> input)
 			throws MatrixException {
 		Map<String, Object> result = new HashMap<String, Object>();

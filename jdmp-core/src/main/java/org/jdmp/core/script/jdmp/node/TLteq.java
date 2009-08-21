@@ -19,7 +19,7 @@ public final class TLteq extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TLteq(getLine(), getPos());
@@ -30,7 +30,7 @@ public final class TLteq extends Token
         ((Analysis) sw).caseTLteq(this);
     }
 
-    @Override
+    
     public void setText(@SuppressWarnings("unused") String text)
     {
         throw new RuntimeException("Cannot change TLteq text.");

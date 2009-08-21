@@ -80,7 +80,7 @@ public class NetworkLayerForward extends AbstractAlgorithm {
 		setTransferFunction(transferFunction);
 	}
 
-	@Override
+	
 	public Map<String, Object> calculateObjects(Map<String, Object> input) throws Exception {
 		Map<String, Object> result = new HashMap<String, Object>();
 

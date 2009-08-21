@@ -79,7 +79,7 @@ public class WeightUpdate extends AlgorithmFiveSources {
 		setMatrix(SAMPLEWEIGHT, m);
 	}
 
-	@Override
+	
 	public Map<String, Object> calculateObjects(Map<String, Object> matrices)
 			throws MatrixException {
 		Map<String, Object> result = new HashMap<String, Object>();

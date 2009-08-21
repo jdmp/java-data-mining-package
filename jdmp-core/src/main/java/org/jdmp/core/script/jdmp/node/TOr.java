@@ -19,7 +19,7 @@ public final class TOr extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TOr(getLine(), getPos());
@@ -30,7 +30,7 @@ public final class TOr extends Token
         ((Analysis) sw).caseTOr(this);
     }
 
-    @Override
+    
     public void setText(@SuppressWarnings("unused") String text)
     {
         throw new RuntimeException("Cannot change TOr text.");

@@ -39,12 +39,12 @@ public class DefaultObservableList<V> extends AbstractObservableList<V> {
 		this.list = list;
 	}
 
-	@Override
+	
 	public List<V> getList() {
 		return list;
 	}
 
-	@Override
+	
 	public void setList(List<V> list) {
 		this.list = list;
 	}

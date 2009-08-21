@@ -135,7 +135,7 @@ public class WekaClassifier extends AbstractClassifier {
 		}
 	}
 
-	@Override
+	
 	public Matrix predict(Matrix input, Matrix weight) throws Exception {
 		double[] probabilities = null;
 		Instance instance = new SampleToInstanceWrapper(input, weight, null, discrete, true);
@@ -147,18 +147,18 @@ public class WekaClassifier extends AbstractClassifier {
 		return output;
 	}
 
-	@Override
+	
 	public void train(RegressionDataSet dataSet) throws Exception {
 		instances = new DataSetToInstancesWrapper(dataSet, discrete, true);
 		wekaClassifier.buildClassifier(instances);
 	}
 
-	@Override
+	
 	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) {
 		throw new RuntimeException("this method is not supported for WEKA classifiers");
 	}
 
-	@Override
+	
 	public void reset() throws Exception {
 		createAlgorithm();
 	}

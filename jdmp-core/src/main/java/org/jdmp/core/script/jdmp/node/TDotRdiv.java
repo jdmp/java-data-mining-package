@@ -19,7 +19,7 @@ public final class TDotRdiv extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TDotRdiv(getLine(), getPos());
@@ -30,7 +30,7 @@ public final class TDotRdiv extends Token
         ((Analysis) sw).caseTDotRdiv(this);
     }
 
-    @Override
+    
     public void setText(@SuppressWarnings("unused") String text)
     {
         throw new RuntimeException("Cannot change TDotRdiv text.");

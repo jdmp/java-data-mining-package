@@ -132,7 +132,7 @@ public class VariableListTableCellRenderer extends JPanel implements TableCellRe
 		return this;
 	}
 
-	@Override
+	
 	public void paint(Graphics g) {
 		super.paint(g);
 		if (variableList == null) {

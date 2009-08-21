@@ -9,7 +9,7 @@ public abstract class Node implements Switchable, Cloneable
 {
     private Node parent;
 
-    @Override
+    
     public abstract Object clone();
 
     public Node parent()

@@ -98,7 +98,7 @@ public abstract class AbstractObservableList<V> implements ObservableList<V> {
 		return getList().toString();
 	}
 
-	@Override
+	
 	public final void fireContentsChanged() {
 		fireContentsChanged(this, -1, -1);
 	}

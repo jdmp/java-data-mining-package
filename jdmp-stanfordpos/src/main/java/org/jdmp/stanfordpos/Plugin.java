@@ -42,17 +42,17 @@ public class Plugin extends AbstractPlugin {
 		neededClasses.add("edu.stanford.nlp.tagger.maxent.MaxentTagger");
 	}
 
-	@Override
+	
 	public String getDescription() {
 		return "interface to the Stanford part-of-speech tagger";
 	}
 
-	@Override
+	
 	public Collection<Object> getDependencies() {
 		return dependencies;
 	}
 
-	@Override
+	
 	public Collection<String> getNeededClasses() {
 		return neededClasses;
 	}

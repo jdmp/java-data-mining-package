@@ -19,7 +19,7 @@ public final class TTraditionalComment extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TTraditionalComment(getText(), getLine(), getPos());

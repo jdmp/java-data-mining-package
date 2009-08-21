@@ -47,67 +47,67 @@ import org.ujmp.core.Matrix;
 
 public class DefaultHtmlFactory implements HtmlFactory {
 
-	@Override
+	
 	public Html createStyle() {
 		return new DefaultStyle();
 	}
 
-	@Override
+	
 	public Page createSamplePage(HttpServletRequest request, String path,
 			Sample sample, Object... parameters) throws ServletException,
 			IOException {
 		return new DefaultSamplePage(sample, path, request, parameters);
 	}
 
-	@Override
+	
 	public Page createIndexPage(HttpServletRequest request, String path,
 			Index index, Object... parameters) throws ServletException,
 			IOException {
 		return new DefaultIndexPage(index, path, request, parameters);
 	}
 
-	@Override
+	
 	public Page createAlgorithmPage(HttpServletRequest request, String path,
 			Algorithm algorithm, Object... parameters) throws ServletException,
 			IOException {
 		return new DefaultAlgorithmPage(request, path, algorithm, parameters);
 	}
 
-	@Override
+	
 	public Page createDataSetPage(HttpServletRequest request, String path,
 			DataSet dataSet, Object... parameters) throws ServletException,
 			IOException {
 		return new DefaultDataSetPage(request, path, dataSet, parameters);
 	}
 
-	@Override
+	
 	public Page createMatrixPage(HttpServletRequest request, String path,
 			Matrix matrix, Object... parameters) throws ServletException,
 			IOException {
 		return new DefaultMatrixPage(request, path, matrix, parameters);
 	}
 
-	@Override
+	
 	public Page createModulePage(HttpServletRequest request, String path,
 			Module module, Object... parameters) throws ServletException,
 			IOException {
 		return new DefaultModulePage(request, path, module, parameters);
 	}
 
-	@Override
+	
 	public Page createVariablePage(HttpServletRequest request, String path,
 			Variable variable, Object... parameters) throws ServletException,
 			IOException {
 		return new DefaultVariablePage(request, path, variable, parameters);
 	}
 
-	@Override
+	
 	public Html createVariablesDiv(HttpServletRequest request, String path,
 			Sample sample, String... highlightedWords) {
 		return new DefaultVariablesDiv(request, path, sample, highlightedWords);
 	}
 
-	@Override
+	
 	public Page createNotFoundPage(HttpServletRequest request, String path,
 			Object... parameters) {
 		return new DefaultNotFoundPage(request, path);

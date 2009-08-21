@@ -46,17 +46,17 @@ public class Plugin extends AbstractPlugin {
 		neededClasses.add("edu.emory.mathcs.backport.java.util.Arrays");
 	}
 
-	@Override
+	
 	public String getDescription() {
 		return "library for caching using EhCache";
 	}
 
-	@Override
+	
 	public Collection<Object> getDependencies() {
 		return dependencies;
 	}
 
-	@Override
+	
 	public Collection<String> getNeededClasses() {
 		return neededClasses;
 	}

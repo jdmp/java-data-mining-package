@@ -22,7 +22,7 @@ public final class AStringLiteral extends PLiteral
 
     }
 
-    @Override
+    
     public Object clone()
     {
         return new AStringLiteral(
@@ -59,14 +59,14 @@ public final class AStringLiteral extends PLiteral
         this._string_ = node;
     }
 
-    @Override
+    
     public String toString()
     {
         return ""
             + toString(this._string_);
     }
 
-    @Override
+    
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
@@ -79,7 +79,7 @@ public final class AStringLiteral extends PLiteral
         throw new RuntimeException("Not a child.");
     }
 
-    @Override
+    
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child

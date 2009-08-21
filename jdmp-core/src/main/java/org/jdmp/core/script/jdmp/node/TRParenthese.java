@@ -19,7 +19,7 @@ public final class TRParenthese extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TRParenthese(getLine(), getPos());
@@ -30,7 +30,7 @@ public final class TRParenthese extends Token
         ((Analysis) sw).caseTRParenthese(this);
     }
 
-    @Override
+    
     public void setText(@SuppressWarnings("unused") String text)
     {
         throw new RuntimeException("Cannot change TRParenthese text.");

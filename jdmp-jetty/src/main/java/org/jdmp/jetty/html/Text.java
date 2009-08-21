@@ -32,7 +32,7 @@ public class Text implements Html {
 		this.text = HtmlUtils.replaceSpecialChars(text);
 	}
 
-	@Override
+	
 	public String toString() {
 		return text;
 	}

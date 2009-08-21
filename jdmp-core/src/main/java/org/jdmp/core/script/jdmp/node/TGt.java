@@ -19,7 +19,7 @@ public final class TGt extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TGt(getLine(), getPos());
@@ -30,7 +30,7 @@ public final class TGt extends Token
         ((Analysis) sw).caseTGt(this);
     }
 
-    @Override
+    
     public void setText(@SuppressWarnings("unused") String text)
     {
         throw new RuntimeException("Cannot change TGt text.");

@@ -35,12 +35,12 @@ public class SingletonObservableList<V> extends AbstractObservableList<V> {
 		list = Collections.singletonList(object);
 	}
 
-	@Override
+	
 	public List<V> getList() {
 		return list;
 	}
 
-	@Override
+	
 	public void setList(List<V> list) {
 		this.list = list;
 	}

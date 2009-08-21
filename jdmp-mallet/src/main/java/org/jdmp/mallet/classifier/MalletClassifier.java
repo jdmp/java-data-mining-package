@@ -70,7 +70,7 @@ public class MalletClassifier extends AbstractClassifier {
 		reset();
 	}
 
-	@Override
+	
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
 		Instance instance = new Sample2Instance(input, null, classifier.getAlphabet(), classifier
 				.getLabelAlphabet(), classifier.getInstancePipe(), cumSum);
@@ -78,7 +78,7 @@ public class MalletClassifier extends AbstractClassifier {
 		return new Labeling2Matrix(c.getLabeling());
 	}
 
-	@Override
+	
 	public void reset() throws Exception {
 		switch (type) {
 		case NaiveBayes:
@@ -116,7 +116,7 @@ public class MalletClassifier extends AbstractClassifier {
 
 	}
 
-	@Override
+	
 	public void train(RegressionDataSet dataSet) throws Exception {
 		Matrix dataSetInput = dataSet.getInputMatrix();
 
@@ -148,7 +148,7 @@ public class MalletClassifier extends AbstractClassifier {
 		classifier = trainer.train(trainingSet);
 	}
 
-	@Override
+	
 	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) throws Exception {
 		throw new MatrixException("not implemented");
 	}

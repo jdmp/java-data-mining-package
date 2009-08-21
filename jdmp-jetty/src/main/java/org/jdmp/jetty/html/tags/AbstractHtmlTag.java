@@ -39,21 +39,21 @@ public abstract class AbstractHtmlTag implements HtmlTag {
 
 	private final Map<String, String> parameterMap = new TreeMap<String, String>();
 
-	@Override
+	
 	public void add(Html... content) {
 		for (Html h : content) {
 			contentList.add(h);
 		}
 	}
 
-	@Override
+	
 	public void add(Collection<Html> content) {
 		for (Html h : content) {
 			contentList.add(h);
 		}
 	}
 
-	@Override
+	
 	public void add(String... content) {
 		for (String h : content) {
 			contentList.add(new Text(h));
@@ -65,7 +65,7 @@ public abstract class AbstractHtmlTag implements HtmlTag {
 		contentList.clear();
 	}
 
-	@Override
+	
 	public void setParameter(String name, String value) {
 		parameterMap.put(name, value);
 	}

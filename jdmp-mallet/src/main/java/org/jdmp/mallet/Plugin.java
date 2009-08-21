@@ -43,17 +43,17 @@ public class Plugin extends AbstractPlugin {
 		neededClasses.add("cc.mallet.classify.Classifier");
 	}
 
-	@Override
+	
 	public String getDescription() {
 		return "interface to Mallet";
 	}
 
-	@Override
+	
 	public Collection<Object> getDependencies() {
 		return dependencies;
 	}
 
-	@Override
+	
 	public Collection<String> getNeededClasses() {
 		return neededClasses;
 	}

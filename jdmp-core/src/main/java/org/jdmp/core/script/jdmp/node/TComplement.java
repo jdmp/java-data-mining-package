@@ -19,7 +19,7 @@ public final class TComplement extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TComplement(getLine(), getPos());
@@ -30,7 +30,7 @@ public final class TComplement extends Token
         ((Analysis) sw).caseTComplement(this);
     }
 
-    @Override
+    
     public void setText(@SuppressWarnings("unused") String text)
     {
         throw new RuntimeException("Cannot change TComplement text.");

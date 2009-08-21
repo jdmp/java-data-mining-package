@@ -47,7 +47,7 @@ public class TiledEhcacheMatrix2D extends AbstractMapToTiledMatrix2DWrapper {
 		super(source);
 	}
 
-	@Override
+	
 	public Map<Coordinates, ObjectMatrix2D> getMap() {
 		if (values == null) {
 			try {
@@ -59,7 +59,7 @@ public class TiledEhcacheMatrix2D extends AbstractMapToTiledMatrix2DWrapper {
 		return values;
 	}
 
-	@Override
+	
 	public void setMap(Map<Coordinates, ObjectMatrix2D> map) {
 		this.values = map;
 	}

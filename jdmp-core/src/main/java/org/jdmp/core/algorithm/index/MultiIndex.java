@@ -31,16 +31,16 @@ public class MultiIndex extends AbstractIndex implements SimilaritySearcher {
 		setLabel(label);
 	}
 
-	@Override
+	
 	public void add(final Sample sample) throws Exception {
 	}
 
-	@Override
+	
 	public int getSize() {
 		return 0;
 	}
 
-	@Override
+	
 	public DataSet search(String query, int start, int count) throws Exception {
 		DataSet ds = DataSetFactory.emptyDataSet();
 		try {
@@ -60,7 +60,7 @@ public class MultiIndex extends AbstractIndex implements SimilaritySearcher {
 		return ds;
 	}
 
-	@Override
+	
 	public DataSet searchSimilar(Sample sample, int start, int count) throws Exception {
 		DataSet ds = DataSetFactory.emptyDataSet();
 		try {
@@ -98,7 +98,7 @@ public class MultiIndex extends AbstractIndex implements SimilaritySearcher {
 			this.count = count;
 		}
 
-		@Override
+		
 		public DataSet call() throws Exception {
 			return index.search(query, start, count);
 		}
@@ -122,7 +122,7 @@ public class MultiIndex extends AbstractIndex implements SimilaritySearcher {
 			this.count = count;
 		}
 
-		@Override
+		
 		public DataSet call() throws Exception {
 			return index.searchSimilar(sample, start, count);
 		}
@@ -140,13 +140,13 @@ public class MultiIndex extends AbstractIndex implements SimilaritySearcher {
 			this.id = id;
 		}
 
-		@Override
+		
 		public Sample call() throws Exception {
 			return index.getSample(id);
 		}
 	}
 
-	@Override
+	
 	public Sample getSample(String id) throws Exception {
 		List<Future<Sample>> futures = new ArrayList<Future<Sample>>();
 		for (Object key : getAlgorithms().keySet()) {
@@ -173,13 +173,13 @@ public class MultiIndex extends AbstractIndex implements SimilaritySearcher {
 		return searchSimilar(sample, 0, count);
 	}
 
-	@Override
+	
 	public ObservableMap<Sample> getSamples() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setSamples(ObservableMap<Sample> samples) {
 		// TODO Auto-generated method stub
 		

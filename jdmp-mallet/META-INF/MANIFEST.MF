@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: jdmp_mallet
+Bundle-SymbolicName: jdmp_mallet
+Bundle-Version: 1.0.0
+Export-Package: org.jdmp.mallet,
+ org.jdmp.mallet.classifier,
+ org.jdmp.mallet.dataset,
+ org.jdmp.mallet.matrix,
+ org.jdmp.mallet.sample,
+ org.jdmp.mallet.tagger

@@ -26,7 +26,7 @@ public final class AStatement extends PStatement
 
     }
 
-    @Override
+    
     public Object clone()
     {
         return new AStatement(
@@ -89,7 +89,7 @@ public final class AStatement extends PStatement
         this._semicolon_ = node;
     }
 
-    @Override
+    
     public String toString()
     {
         return ""
@@ -97,7 +97,7 @@ public final class AStatement extends PStatement
             + toString(this._semicolon_);
     }
 
-    @Override
+    
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
@@ -116,7 +116,7 @@ public final class AStatement extends PStatement
         throw new RuntimeException("Not a child.");
     }
 
-    @Override
+    
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child

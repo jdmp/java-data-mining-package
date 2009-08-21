@@ -22,7 +22,7 @@ public final class ATrueBoolean extends PBoolean
 
     }
 
-    @Override
+    
     public Object clone()
     {
         return new ATrueBoolean(
@@ -59,14 +59,14 @@ public final class ATrueBoolean extends PBoolean
         this._true_ = node;
     }
 
-    @Override
+    
     public String toString()
     {
         return ""
             + toString(this._true_);
     }
 
-    @Override
+    
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
@@ -79,7 +79,7 @@ public final class ATrueBoolean extends PBoolean
         throw new RuntimeException("Not a child.");
     }
 
-    @Override
+    
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child

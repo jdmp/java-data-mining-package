@@ -26,7 +26,7 @@ public final class AStepsize extends PStepsize
 
     }
 
-    @Override
+    
     public Object clone()
     {
         return new AStepsize(
@@ -89,7 +89,7 @@ public final class AStepsize extends PStepsize
         this._colon_ = node;
     }
 
-    @Override
+    
     public String toString()
     {
         return ""
@@ -97,7 +97,7 @@ public final class AStepsize extends PStepsize
             + toString(this._colon_);
     }
 
-    @Override
+    
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
@@ -116,7 +116,7 @@ public final class AStepsize extends PStepsize
         throw new RuntimeException("Not a child.");
     }
 
-    @Override
+    
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child

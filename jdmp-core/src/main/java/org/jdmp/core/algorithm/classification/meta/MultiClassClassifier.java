@@ -53,7 +53,7 @@ public class MultiClassClassifier extends AbstractClassifier {
 		this.twoColumns = twoColumns;
 	}
 
-	@Override
+	
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
 		double[] results = new double[classCount];
 		for (int i = 0; i < classCount; i++) {
@@ -63,12 +63,12 @@ public class MultiClassClassifier extends AbstractClassifier {
 		return MatrixFactory.linkToArray(results).transpose();
 	}
 
-	@Override
+	
 	public void reset() throws Exception {
 		singleClassClassifiers.clear();
 	}
 
-	@Override
+	
 	public void train(RegressionDataSet dataSet) throws Exception {
 		reset();
 		classCount = ((ClassificationDataSet) dataSet).getClassCount();

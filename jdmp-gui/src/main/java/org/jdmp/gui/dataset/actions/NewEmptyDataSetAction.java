@@ -47,7 +47,7 @@ public class NewEmptyDataSetAction extends ObjectAction {
 				KeyEvent.ALT_DOWN_MASK));
 	}
 
-	@Override
+	
 	public Object call() {
 		DataSet ds = DataSetFactory.emptyDataSet();
 		if (getCoreObject() instanceof HasDataSetList) {

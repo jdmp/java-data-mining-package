@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: jdmp_weka
+Bundle-SymbolicName: jdmp_weka
+Bundle-Version: 1.0.0
+Export-Package: org.jdmp.weka,
+ org.jdmp.weka.classifier,
+ org.jdmp.weka.clusterer,
+ org.jdmp.weka.wrappers

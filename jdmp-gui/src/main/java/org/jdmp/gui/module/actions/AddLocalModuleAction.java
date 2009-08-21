@@ -43,7 +43,7 @@ public class AddLocalModuleAction extends ModuleListAction {
 		putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_L, 0));
 	}
 
-	@Override
+	
 	public Object call() {
 		getIModules().getModules().add(new DefaultModule());
 		return null;

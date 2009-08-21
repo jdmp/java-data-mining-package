@@ -42,17 +42,17 @@ public class Plugin extends AbstractPlugin {
 		neededClasses.add("liblinear.Model");
 	}
 
-	@Override
+	
 	public String getDescription() {
 		return "library for classification with liblinear";
 	}
 
-	@Override
+	
 	public Collection<Object> getDependencies() {
 		return dependencies;
 	}
 
-	@Override
+	
 	public Collection<String> getNeededClasses() {
 		return neededClasses;
 	}

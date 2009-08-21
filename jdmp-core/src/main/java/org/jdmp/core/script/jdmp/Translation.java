@@ -209,7 +209,7 @@ public class Translation extends DepthFirstAdapter {
 		return m;
 	}
 
-	@Override
+	
 	public void defaultOut(Node node) {
 		System.out.println(node.getClass().getSimpleName() + ": " + node);
 	}
@@ -218,14 +218,14 @@ public class Translation extends DepthFirstAdapter {
 		return result;
 	}
 
-	@Override
+	
 	public void outAArrayAssignment(AArrayAssignment node) {
 		Exception e = new MatrixException("array assignments are not supported yet.");
 		result = new Result(e);
 		e.printStackTrace();
 	}
 
-	@Override
+	
 	public void outAIdentifierAssignment(AIdentifierAssignment node) {
 		try {
 			String id = node.getName().toString().trim();
@@ -907,7 +907,7 @@ public class Translation extends DepthFirstAdapter {
 		}
 	}
 
-	@Override
+	
 	public void outAStatement(AStatement node) {
 		try {
 			// handle already known objects

@@ -43,7 +43,7 @@ public class StanfordTokenizer extends AbstractTokenizer {
 	public StanfordTokenizer() throws Exception {
 	}
 
-	@Override
+	
 	public List<Matrix> tokenize(String input) throws Exception {
 		List<Matrix> result = new ArrayList<Matrix>();
 		StringReader sr = new StringReader(input);

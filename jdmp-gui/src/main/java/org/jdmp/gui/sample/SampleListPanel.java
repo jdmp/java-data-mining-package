@@ -74,7 +74,7 @@ public class SampleListPanel extends AbstractListPanel {
 		updateTitle();
 	}
 
-	@Override
+	
 	public void updateTitle() {
 		getBorder().setTitle("Samples (" + jTable.getRowCount() + ")");
 		repaint(1000);
@@ -90,7 +90,7 @@ class SampleCollator implements Comparator<Object> {
 		this.column = column;
 	}
 
-	@Override
+	
 	public int compare(Object source, Object target) {
 		return compare((Sample) source, (Sample) target);
 	}

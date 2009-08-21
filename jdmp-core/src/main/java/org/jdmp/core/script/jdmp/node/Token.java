@@ -39,19 +39,19 @@ public abstract class Token extends Node
         this.pos = pos;
     }
 
-    @Override
+    
     public String toString()
     {
         return this.text + " ";
     }
 
-    @Override
+    
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         throw new RuntimeException("Not a child.");
     }
 
-    @Override
+    
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         throw new RuntimeException("Not a child.");

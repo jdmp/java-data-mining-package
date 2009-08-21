@@ -40,7 +40,7 @@ public class StanfordSentenceMatrix extends AbstractDenseStringMatrix2D
 		this.sentence = sentence;
 	}
 
-	@Override
+	
 	public String getString(long row, long column) {
 		HasWord w = sentence.get((int) row);
 		if (column == 0) {
@@ -50,11 +50,11 @@ public class StanfordSentenceMatrix extends AbstractDenseStringMatrix2D
 		}
 	}
 
-	@Override
+	
 	public void setString(String value, long row, long column) {
 	}
 
-	@Override
+	
 	public long[] getSize() {
 		if (sentence.size() == 0) {
 			return new long[] { 0, 0 };
@@ -66,12 +66,12 @@ public class StanfordSentenceMatrix extends AbstractDenseStringMatrix2D
 		}
 	}
 
-	@Override
+	
 	public Sentence<? extends HasWord> getWrappedObject() {
 		return sentence;
 	}
 
-	@Override
+	
 	public void setWrappedObject(Sentence<? extends HasWord> object) {
 		this.sentence = object;
 	}

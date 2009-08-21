@@ -65,7 +65,7 @@ public class Mean extends AbstractAlgorithm {
 		setVariables(variables);
 	}
 
-	@Override
+	
 	public Map<String, Object> calculateObjects(Map<String, Object> input) throws MatrixException {
 		int dimension = defaultDimension;
 		boolean ignoreNaN = defaultIgnoreNaN;

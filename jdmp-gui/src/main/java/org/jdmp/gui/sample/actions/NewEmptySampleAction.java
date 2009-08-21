@@ -47,7 +47,7 @@ public class NewEmptySampleAction extends ObjectAction {
 				KeyEvent.ALT_DOWN_MASK));
 	}
 
-	@Override
+	
 	public Object call() {
 		Sample s = SampleFactory.emptySample();
 		if (getCoreObject() != null && getCoreObject() instanceof HasSampleList) {

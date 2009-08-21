@@ -49,7 +49,7 @@ public class ModuleListPanel extends AbstractListPanel {
 		updateTitle();
 	}
 
-	@Override
+	
 	public void updateTitle() {
 		getBorder().setTitle("Modules (" + jTable.getRowCount() + ")");
 		repaint(1000);

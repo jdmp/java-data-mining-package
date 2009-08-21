@@ -19,7 +19,7 @@ public final class TDot extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TDot(getLine(), getPos());
@@ -30,7 +30,7 @@ public final class TDot extends Token
         ((Analysis) sw).caseTDot(this);
     }
 
-    @Override
+    
     public void setText(@SuppressWarnings("unused") String text)
     {
         throw new RuntimeException("Cannot change TDot text.");

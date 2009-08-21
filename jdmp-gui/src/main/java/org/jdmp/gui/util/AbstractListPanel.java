@@ -84,7 +84,7 @@ public abstract class AbstractListPanel extends JPanel implements MouseListener,
 		jTable = new JTable(dataModel) {
 			private static final long serialVersionUID = -1349144990029853301L;
 
-			@Override
+			
 			public String getToolTipText(MouseEvent event) {
 				try {
 					int row = rowAtPoint(event.getPoint());
@@ -104,7 +104,6 @@ public abstract class AbstractListPanel extends JPanel implements MouseListener,
 		jTable.addKeyListener(this);
 		jTable.getSelectionModel().addListSelectionListener(this);
 		jTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-		jTable.setAutoCreateRowSorter(true);
 
 		int rowHeight = UIManager.getInt("Table.rowHeight");
 		if (rowHeight < 1)
@@ -122,7 +121,7 @@ public abstract class AbstractListPanel extends JPanel implements MouseListener,
 
 	}
 
-	@Override
+	
 	public TitledBorder getBorder() {
 		return (TitledBorder) super.getBorder();
 	}

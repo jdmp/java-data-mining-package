@@ -56,7 +56,7 @@ public class AlgorithmListTableModel extends AbstractTableModel implements ListD
 		return 4;
 	}
 
-	@Override
+	
 	public String getColumnName(int columnIndex) {
 		switch (columnIndex) {
 		case IDCOLUMN:
@@ -72,7 +72,7 @@ public class AlgorithmListTableModel extends AbstractTableModel implements ListD
 		}
 	}
 
-	@Override
+	
 	public Class<?> getColumnClass(int columnIndex) {
 		return Algorithm.class;
 	}
@@ -81,17 +81,17 @@ public class AlgorithmListTableModel extends AbstractTableModel implements ListD
 		return iAlgorithms.getAlgorithms().getElementAt(rowIndex);
 	}
 
-	@Override
+	
 	public void contentsChanged(ListDataEvent e) {
 		fireTableRowsUpdated(e.getIndex0(), e.getIndex1());
 	}
 
-	@Override
+	
 	public void intervalAdded(ListDataEvent e) {
 		fireTableRowsInserted(e.getIndex0(), e.getIndex1());
 	}
 
-	@Override
+	
 	public void intervalRemoved(ListDataEvent e) {
 		fireTableRowsDeleted(e.getIndex0(), e.getIndex1());
 	}

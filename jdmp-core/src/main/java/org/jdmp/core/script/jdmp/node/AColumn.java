@@ -27,7 +27,7 @@ public final class AColumn extends PColumn
 
     }
 
-    @Override
+    
     public Object clone()
     {
         return new AColumn(
@@ -85,7 +85,7 @@ public final class AColumn extends PColumn
         }
     }
 
-    @Override
+    
     public String toString()
     {
         return ""
@@ -93,7 +93,7 @@ public final class AColumn extends PColumn
             + toString(this._additionalValues_);
     }
 
-    @Override
+    
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
@@ -111,7 +111,7 @@ public final class AColumn extends PColumn
         throw new RuntimeException("Not a child.");
     }
 
-    @Override
+    
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child

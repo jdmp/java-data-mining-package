@@ -22,7 +22,7 @@ public final class AExpressionArgumentList extends PArgumentList
 
     }
 
-    @Override
+    
     public Object clone()
     {
         return new AExpressionArgumentList(
@@ -59,14 +59,14 @@ public final class AExpressionArgumentList extends PArgumentList
         this._expression_ = node;
     }
 
-    @Override
+    
     public String toString()
     {
         return ""
             + toString(this._expression_);
     }
 
-    @Override
+    
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
@@ -79,7 +79,7 @@ public final class AExpressionArgumentList extends PArgumentList
         throw new RuntimeException("Not a child.");
     }
 
-    @Override
+    
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child

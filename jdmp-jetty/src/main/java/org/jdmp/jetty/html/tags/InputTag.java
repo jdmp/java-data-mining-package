@@ -32,7 +32,7 @@ public class InputTag extends AbstractHtmlTag {
 		setParameter("value", value);
 	}
 
-	@Override
+	
 	public String getTagName() {
 		return "input";
 	}

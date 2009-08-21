@@ -66,7 +66,7 @@ public class Result {
 		this.exception = exception;
 	}
 
-	@Override
+	
 	public String toString() {
 		StringBuilder s = new StringBuilder();
 		if (label != null) {

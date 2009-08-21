@@ -30,7 +30,7 @@ public final class ADotPowerLevel1 extends PLevel1
 
     }
 
-    @Override
+    
     public Object clone()
     {
         return new ADotPowerLevel1(
@@ -119,7 +119,7 @@ public final class ADotPowerLevel1 extends PLevel1
         this._right_ = node;
     }
 
-    @Override
+    
     public String toString()
     {
         return ""
@@ -128,7 +128,7 @@ public final class ADotPowerLevel1 extends PLevel1
             + toString(this._right_);
     }
 
-    @Override
+    
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
@@ -153,7 +153,7 @@ public final class ADotPowerLevel1 extends PLevel1
         throw new RuntimeException("Not a child.");
     }
 
-    @Override
+    
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child

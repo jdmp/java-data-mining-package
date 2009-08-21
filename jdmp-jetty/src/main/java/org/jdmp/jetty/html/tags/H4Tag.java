@@ -37,7 +37,7 @@ public class H4Tag extends AbstractHtmlTag {
 		add(content);
 	}
 
-	@Override
+	
 	public String getTagName() {
 		return "h4";
 	}

@@ -19,7 +19,7 @@ public final class TEq extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TEq(getLine(), getPos());
@@ -30,7 +30,7 @@ public final class TEq extends Token
         ((Analysis) sw).caseTEq(this);
     }
 
-    @Override
+    
     public void setText(@SuppressWarnings("unused") String text)
     {
         throw new RuntimeException("Cannot change TEq text.");

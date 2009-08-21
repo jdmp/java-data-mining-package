@@ -22,7 +22,7 @@ public final class AIdentifierLevel0 extends PLevel0
 
     }
 
-    @Override
+    
     public Object clone()
     {
         return new AIdentifierLevel0(
@@ -59,14 +59,14 @@ public final class AIdentifierLevel0 extends PLevel0
         this._name_ = node;
     }
 
-    @Override
+    
     public String toString()
     {
         return ""
             + toString(this._name_);
     }
 
-    @Override
+    
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
@@ -79,7 +79,7 @@ public final class AIdentifierLevel0 extends PLevel0
         throw new RuntimeException("Not a child.");
     }
 
-    @Override
+    
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child

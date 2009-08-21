@@ -43,7 +43,7 @@ public class ClassifyLibSVMAction extends ObjectAction {
 		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_S);
 	}
 
-	@Override
+	
 	public Object call() {
 		try {
 			Classifier c = (Classifier) Class.forName("org.jdmp.libsvm.LibSVMClassifier")

@@ -50,7 +50,7 @@ public class RemoveDataSetAction extends DataSetListAction {
 		putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_R, 0));
 	}
 
-	@Override
+	
 	public Object call() {
 		if (ds != null) {
 			// ()getIDataSets().removeDataSet(ds);

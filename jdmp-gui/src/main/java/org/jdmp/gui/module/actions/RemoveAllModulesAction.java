@@ -44,7 +44,7 @@ public class RemoveAllModulesAction extends ModuleListAction {
 				InputEvent.ALT_DOWN_MASK));
 	}
 
-	@Override
+	
 	public Object call() {
 		getIModules().getModules().clear();
 		return null;

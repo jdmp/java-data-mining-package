@@ -34,7 +34,7 @@ public final class AIdentifierAssignment extends PAssignment
 
     }
 
-    @Override
+    
     public Object clone()
     {
         return new AIdentifierAssignment(
@@ -149,7 +149,7 @@ public final class AIdentifierAssignment extends PAssignment
         this._semicolon_ = node;
     }
 
-    @Override
+    
     public String toString()
     {
         return ""
@@ -159,7 +159,7 @@ public final class AIdentifierAssignment extends PAssignment
             + toString(this._semicolon_);
     }
 
-    @Override
+    
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
@@ -190,7 +190,7 @@ public final class AIdentifierAssignment extends PAssignment
         throw new RuntimeException("Not a child.");
     }
 
-    @Override
+    
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child

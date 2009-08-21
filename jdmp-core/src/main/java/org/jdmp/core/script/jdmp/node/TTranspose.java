@@ -19,7 +19,7 @@ public final class TTranspose extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TTranspose(getLine(), getPos());
@@ -30,7 +30,7 @@ public final class TTranspose extends Token
         ((Analysis) sw).caseTTranspose(this);
     }
 
-    @Override
+    
     public void setText(@SuppressWarnings("unused") String text)
     {
         throw new RuntimeException("Cannot change TTranspose text.");

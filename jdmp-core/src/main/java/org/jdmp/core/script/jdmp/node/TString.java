@@ -19,7 +19,7 @@ public final class TString extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TString(getText(), getLine(), getPos());

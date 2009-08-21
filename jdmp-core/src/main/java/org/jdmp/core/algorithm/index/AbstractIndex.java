@@ -36,19 +36,19 @@ public abstract class AbstractIndex extends AbstractAlgorithm implements Index {
 		super();
 	}
 
-	@Override
+	
 	public void add(Matrix matrix) throws Exception {
 		add(SampleFactory.createFromObject(matrix));
 	}
 
-	@Override
+	
 	public void add(DataSet dataSet) throws Exception {
 		for (Sample sample : dataSet.getSamples()) {
 			add(sample);
 		}
 	}
 
-	@Override
+	
 	public void add(Sample sample) throws Exception {
 		throw new Exception("cannot add to this index");
 	}
@@ -61,7 +61,7 @@ public abstract class AbstractIndex extends AbstractAlgorithm implements Index {
 		return search(query, 0, count);
 	}
 
-	@Override
+	
 	public int countResults(String query) throws Exception {
 		throw new Exception("not implemented");
 	}

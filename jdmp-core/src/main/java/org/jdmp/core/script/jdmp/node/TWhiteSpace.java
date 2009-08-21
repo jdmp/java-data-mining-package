@@ -19,7 +19,7 @@ public final class TWhiteSpace extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TWhiteSpace(getText(), getLine(), getPos());

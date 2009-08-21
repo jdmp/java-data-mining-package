@@ -19,7 +19,7 @@ public final class TTrue extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TTrue(getLine(), getPos());
@@ -30,7 +30,7 @@ public final class TTrue extends Token
         ((Analysis) sw).caseTTrue(this);
     }
 
-    @Override
+    
     public void setText(@SuppressWarnings("unused") String text)
     {
         throw new RuntimeException("Cannot change TTrue text.");

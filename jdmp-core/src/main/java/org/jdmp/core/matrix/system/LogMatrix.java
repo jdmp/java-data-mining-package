@@ -69,15 +69,15 @@ public class LogMatrix extends AbstractDenseObjectMatrix2D {
 			this.matrix = matrix;
 		}
 
-		@Override
+		
 		public void close() throws SecurityException {
 		}
 
-		@Override
+		
 		public void flush() {
 		}
 
-		@Override
+		
 		public void publish(LogRecord record) {
 			record.setParameters(new Object[] { Runtime.getRuntime().freeMemory(),
 					Runtime.getRuntime() });
@@ -97,7 +97,7 @@ public class LogMatrix extends AbstractDenseObjectMatrix2D {
 		return new long[] { HandlerWrapper.getInstance().getList().size(), 7 };
 	}
 
-	@Override
+	
 	public boolean isReadOnly() {
 		return true;
 	}

@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: jdmp_jgroups
+Bundle-SymbolicName: jdmp_jgroups
+Bundle-Version: 1.0.0
+Export-Package: org.jdmp.jgroups

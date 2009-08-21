@@ -19,7 +19,7 @@ public final class TDotPower extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TDotPower(getLine(), getPos());
@@ -30,7 +30,7 @@ public final class TDotPower extends Token
         ((Analysis) sw).caseTDotPower(this);
     }
 
-    @Override
+    
     public void setText(@SuppressWarnings("unused") String text)
     {
         throw new RuntimeException("Cannot change TDotPower text.");

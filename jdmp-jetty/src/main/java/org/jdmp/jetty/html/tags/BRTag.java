@@ -26,7 +26,7 @@ package org.jdmp.jetty.html.tags;
 public class BRTag extends AbstractHtmlTag {
 	private static final long serialVersionUID = 538373395558128679L;
 
-	@Override
+	
 	public String getTagName() {
 		return "br";
 	}

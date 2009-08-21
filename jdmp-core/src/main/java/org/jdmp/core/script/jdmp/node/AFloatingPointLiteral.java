@@ -22,7 +22,7 @@ public final class AFloatingPointLiteral extends PLiteral
 
     }
 
-    @Override
+    
     public Object clone()
     {
         return new AFloatingPointLiteral(
@@ -59,14 +59,14 @@ public final class AFloatingPointLiteral extends PLiteral
         this._floatingPoint_ = node;
     }
 
-    @Override
+    
     public String toString()
     {
         return ""
             + toString(this._floatingPoint_);
     }
 
-    @Override
+    
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
@@ -79,7 +79,7 @@ public final class AFloatingPointLiteral extends PLiteral
         throw new RuntimeException("Not a child.");
     }
 
-    @Override
+    
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child

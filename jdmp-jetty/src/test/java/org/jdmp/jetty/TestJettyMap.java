@@ -40,7 +40,7 @@ public class TestJettyMap extends AbstractMapTest {
 		server.start();
 	}
 
-	@Override
+	
 	public Map<String, Object> createMap() throws Exception {
 		JettyMapClient<String, Object> map = new JettyMapClient<String, Object>(
 				new URL("http://localhost:5555"));

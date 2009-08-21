@@ -23,7 +23,7 @@ public final class AScript extends PScript
 
     }
 
-    @Override
+    
     public Object clone()
     {
         return new AScript(
@@ -55,14 +55,14 @@ public final class AScript extends PScript
         }
     }
 
-    @Override
+    
     public String toString()
     {
         return ""
             + toString(this._commands_);
     }
 
-    @Override
+    
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
@@ -74,7 +74,7 @@ public final class AScript extends PScript
         throw new RuntimeException("Not a child.");
     }
 
-    @Override
+    
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child

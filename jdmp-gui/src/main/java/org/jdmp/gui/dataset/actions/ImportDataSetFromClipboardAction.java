@@ -46,7 +46,7 @@ public class ImportDataSetFromClipboardAction extends ObjectAction {
 		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_C);
 	}
 
-	@Override
+	
 	public Object call() {
 		try {
 			FileFormat fileFormat = FileFormat.values()[JOptionPane.showOptionDialog(

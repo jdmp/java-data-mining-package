@@ -19,7 +19,7 @@ public final class TAnd extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TAnd(getLine(), getPos());
@@ -30,7 +30,7 @@ public final class TAnd extends Token
         ((Analysis) sw).caseTAnd(this);
     }
 
-    @Override
+    
     public void setText(@SuppressWarnings("unused") String text)
     {
         throw new RuntimeException("Cannot change TAnd text.");

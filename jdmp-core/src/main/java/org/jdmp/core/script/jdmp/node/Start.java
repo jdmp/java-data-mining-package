@@ -23,7 +23,7 @@ public final class Start extends Node
         setEOF(_eof_);
     }
 
-    @Override
+    
     public Object clone()
     {
         return new Start(
@@ -86,7 +86,7 @@ public final class Start extends Node
         this._eof_ = node;
     }
 
-    @Override
+    
     void removeChild(Node child)
     {
         if(this._pScript_ == child)
@@ -104,7 +104,7 @@ public final class Start extends Node
         throw new RuntimeException("Not a child.");
     }
 
-    @Override
+    
     void replaceChild(Node oldChild, Node newChild)
     {
         if(this._pScript_ == oldChild)
@@ -122,7 +122,7 @@ public final class Start extends Node
         throw new RuntimeException("Not a child.");
     }
 
-    @Override
+    
     public String toString()
     {
         return "" +

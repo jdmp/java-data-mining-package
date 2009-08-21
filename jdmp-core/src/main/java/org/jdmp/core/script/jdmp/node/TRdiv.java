@@ -19,7 +19,7 @@ public final class TRdiv extends Token
         setPos(pos);
     }
 
-    @Override
+    
     public Object clone()
     {
       return new TRdiv(getLine(), getPos());
@@ -30,7 +30,7 @@ public final class TRdiv extends Token
         ((Analysis) sw).caseTRdiv(this);
     }
 
-    @Override
+    
     public void setText(@SuppressWarnings("unused") String text)
     {
         throw new RuntimeException("Cannot change TRdiv text.");

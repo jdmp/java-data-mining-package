@@ -77,7 +77,7 @@ public class MatrixListPanel extends JPanel implements MouseListener, ListSelect
 		jTable = new JTable(dataModel) {
 			private static final long serialVersionUID = -1349144990029853301L;
 
-			@Override
+			
 			public String getToolTipText(MouseEvent event) {
 				int row = rowAtPoint(event.getPoint());
 				if (row < jTable.getRowCount()) {
@@ -308,7 +308,7 @@ public class MatrixListPanel extends JPanel implements MouseListener, ListSelect
 		updateTitle();
 	}
 
-	@Override
+	
 	public TitledBorder getBorder() {
 		return (TitledBorder) super.getBorder();
 	}

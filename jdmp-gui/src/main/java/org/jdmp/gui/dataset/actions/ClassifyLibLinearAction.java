@@ -43,7 +43,7 @@ public class ClassifyLibLinearAction extends ObjectAction {
 		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_L);
 	}
 
-	@Override
+	
 	public Object call() {
 		try {
 			Classifier c = (Classifier) Class.forName("org.jdmp.liblinear.LibLinearClassifier")

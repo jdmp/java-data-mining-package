@@ -41,7 +41,7 @@ public class About extends AbstractAlgorithm {
 		setDescription(DESCRIPTION);
 	}
 
-	@Override
+	
 	public Map<String, Object> calculateObjects(Map<String, Object> input) throws MatrixException {
 		Map<String, Object> result = new HashMap<String, Object>();
 		String s = "\n";

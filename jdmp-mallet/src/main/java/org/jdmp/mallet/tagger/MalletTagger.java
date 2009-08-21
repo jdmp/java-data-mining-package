@@ -62,12 +62,12 @@ public class MalletTagger extends AbstractTagger {
 	public MalletTagger() {
 	}
 
-	@Override
+	
 	public List<Matrix> tag(String input) throws Exception {
 		return null;
 	}
 
-	@Override
+	
 	public List<Matrix> tag(Matrix input) throws Exception {
 		return null;
 	}

@@ -111,17 +111,17 @@ public class DefaultVariable extends AbstractVariable {
 
 	class VariableListDataListener implements ListDataListener {
 
-		@Override
+		
 		public void contentsChanged(ListDataEvent e) {
 			notifyGUIObject();
 		}
 
-		@Override
+		
 		public void intervalAdded(ListDataEvent e) {
 			notifyGUIObject();
 		}
 
-		@Override
+		
 		public void intervalRemoved(ListDataEvent e) {
 			notifyGUIObject();
 		}

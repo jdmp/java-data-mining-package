@@ -35,12 +35,12 @@ public class SingletonObservableMap<V> extends AbstractObservableMap<V> {
 		map = Collections.singletonMap(key, value);
 	}
 
-	@Override
+	
 	public Map<String, V> getMap() {
 		return map;
 	}
 
-	@Override
+	
 	public void setMap(Map<String, V> map) {
 		this.map = map;
 	}

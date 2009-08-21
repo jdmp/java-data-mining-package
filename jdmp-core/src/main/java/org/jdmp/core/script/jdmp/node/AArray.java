@@ -27,7 +27,7 @@ public final class AArray extends PArray
 
     }
 
-    @Override
+    
     public Object clone()
     {
         return new AArray(
@@ -85,7 +85,7 @@ public final class AArray extends PArray
         }
     }
 
-    @Override
+    
     public String toString()
     {
         return ""
@@ -93,7 +93,7 @@ public final class AArray extends PArray
             + toString(this._additionalRows_);
     }
 
-    @Override
+    
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
@@ -111,7 +111,7 @@ public final class AArray extends PArray
         throw new RuntimeException("Not a child.");
     }
 
-    @Override
+    
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
