@@ -70,14 +70,14 @@ public class TestTagger extends TestCase {
 		sa1.setObject(Sample.INPUT, s1);
 		Sample sa2 = new DefaultSample();
 		sa2.setObject(Sample.INPUT, s2);
-		ds.getSamples().add(sa1);
-		ds.getSamples().add(sa2);
+		ds.getSamples().put("s1", sa1);
+		ds.getSamples().put("s2", sa2);
 
 		tokenizer.tokenize(Sample.INPUT, ds);
 		tagger.tag(ds);
 
-		sa1 = ds.getSamples().getElementAt(0);
-		sa2 = ds.getSamples().getElementAt(1);
+		sa1 = ds.getSamples().get("s1");
+		sa2 = ds.getSamples().get("s2");
 
 		Matrix m1 = sa1.getMatrix(Tagger.TAGGED);
 		Matrix m2 = sa2.getMatrix(Tagger.TAGGED);
