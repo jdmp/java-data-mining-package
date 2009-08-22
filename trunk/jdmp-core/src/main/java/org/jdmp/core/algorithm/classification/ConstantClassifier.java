@@ -36,30 +36,27 @@ public class ConstantClassifier extends AbstractClassifier {
 
 	private Matrix prediction = null;
 
-	private long classCount = 0;
+	private long maxClassId = 0;
 
 	public ConstantClassifier() {
 		super();
 	}
 
-	
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
 		return prediction;
 	}
 
-	
 	public void reset() throws Exception {
 		prediction = null;
-		classCount = 0;
+		maxClassId = 0;
 	}
 
-	
 	public void train(RegressionDataSet dataSet) throws Exception {
 		MapMatrix<Long, Integer> count = new DefaultMapMatrix<Long, Integer>();
 		for (Sample s : dataSet.getSamples()) {
 			Matrix m = s.getMatrix(Variable.TARGET);
 			long target = m.getCoordinatesOfMaximum()[COLUMN];
-			classCount = Math.max(classCount, target);
+			maxClassId = Math.max(maxClassId, target);
 			Integer c = count.get(target);
 			if (c == null) {
 				c = 0;
@@ -76,11 +73,10 @@ public class ConstantClassifier extends AbstractClassifier {
 				pc = t;
 			}
 		}
-		prediction = MatrixFactory.dense(1, classCount);
+		prediction = MatrixFactory.dense(1, maxClassId + 1);
 		prediction.setAsDouble(1.0, 0, pc);
 	}
 
-	
 	public Classifier emptyCopy() throws Exception {
 		return new ConstantClassifier();
 	}

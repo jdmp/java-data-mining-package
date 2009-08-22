@@ -38,17 +38,14 @@ public class RandomClassifier extends AbstractClassifier {
 		super();
 	}
 
-	
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
 		return MatrixFactory.rand(1, classCount);
 	}
 
-	
 	public void reset() throws Exception {
 		classCount = 0;
 	}
 
-	
 	public void train(RegressionDataSet dataSet) throws Exception {
 		for (Sample s : dataSet.getSamples()) {
 			Matrix m = s.getMatrix(Variable.TARGET);
@@ -56,7 +53,6 @@ public class RandomClassifier extends AbstractClassifier {
 		}
 	}
 
-	
 	public Classifier emptyCopy() throws Exception {
 		return new RandomClassifier();
 	}

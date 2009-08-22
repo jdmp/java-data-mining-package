@@ -23,18 +23,22 @@
 
 package org.jdmp.core;
 
-import junit.framework.TestSuite;
+import junit.framework.TestCase;
 
-public class AllTests extends TestSuite {
+import org.jdmp.core.algorithm.classification.Classifier;
+import org.jdmp.core.algorithm.classification.RandomClassifier;
+import org.jdmp.core.dataset.ClassificationDataSet;
+import org.jdmp.core.dataset.CrossValidation;
+import org.jdmp.core.dataset.DataSetFactory;
+import org.ujmp.core.listmatrix.ListMatrix;
 
-	public static TestSuite suite() {
-		TestSuite suite = new TestSuite(AllTests.class.getName());
-		suite.addTestSuite(TestScript.class);
-		suite.addTestSuite(TestMLP.class);
-		suite.addTestSuite(TestLinearRegression.class);
-		suite.addTestSuite(TestRandomClassifier.class);
-		suite.addTestSuite(TestConstantClassifier.class);
-		return suite;
+public class TestRandomClassifier extends TestCase {
+
+	public void testIrisClassification() throws Exception {
+		ClassificationDataSet iris = DataSetFactory.IRIS();
+		Classifier c = new RandomClassifier();
+		ListMatrix<Double> results = CrossValidation.run(c, iris, 10, 10, 0);
+		assertEquals(0.33, results.getMeanValue(), 0.04);
 	}
 
 }
