@@ -28,8 +28,11 @@ import java.awt.event.KeyEvent;
 import javax.swing.JComponent;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JSeparator;
 
+import org.jdmp.gui.dataset.actions.ClassifyConstantAction;
 import org.jdmp.gui.dataset.actions.ClassifyLinearRegressionAction;
+import org.jdmp.gui.dataset.actions.ClassifyRandomAction;
 import org.ujmp.core.interfaces.GUIObject;
 
 public class ClassifyJDMPMenu extends JMenu {
@@ -39,5 +42,8 @@ public class ClassifyJDMPMenu extends JMenu {
 		super("JDMP");
 		setMnemonic(KeyEvent.VK_J);
 		add(new JMenuItem(new ClassifyLinearRegressionAction(component, o)));
+		add(new JSeparator());
+		add(new JMenuItem(new ClassifyRandomAction(component, o)));
+		add(new JMenuItem(new ClassifyConstantAction(component, o)));
 	}
 }
