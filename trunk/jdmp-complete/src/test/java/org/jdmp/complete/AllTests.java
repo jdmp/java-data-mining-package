@@ -30,7 +30,6 @@ public class AllTests extends TestSuite {
 	public static TestSuite suite() {
 		TestSuite suite = new TestSuite(AllTests.class.getName());
 		suite.addTestSuite(org.jdmp.complete.TestPlugins.class);
-		suite.addTest(org.ujmp.complete.AllTests.suite());
 		suite.addTest(org.jdmp.core.AllTests.suite());
 		suite.addTest(org.jdmp.gui.AllTests.suite());
 		suite.addTest(org.jdmp.bsh.AllTests.suite());
