@@ -53,7 +53,6 @@ public class MultiLabelNaiveBayesClassifier extends AbstractClassifier {
 		super();
 	}
 
-	
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
 		double[][] logs = new double[labelCount][classCount];
 		// for all labels
@@ -63,12 +62,12 @@ public class MultiLabelNaiveBayesClassifier extends AbstractClassifier {
 				// for all features
 				logs[labelId][classId] = Math.log(labelDists[labelId].getProbability(classId));
 				for (int featureId = 0; featureId < input.getColumnCount(); featureId++) {
-					double val = input.getAsDouble(0, featureId);
+					int val = input.getAsInt(0, featureId);
 					// logs[labelId][classId] +=
 					// Math.log(dists[featureId][labelId][classId]
 					// .getProbability((double) val));
 					logs[labelId][classId] += dists[featureId][labelId][classId]
-							.getProbability((double) val);
+							.getProbability(val);
 				}
 			}
 		}
@@ -84,13 +83,11 @@ public class MultiLabelNaiveBayesClassifier extends AbstractClassifier {
 		return m;
 	}
 
-	
 	public void reset() throws Exception {
 		dists = null;
 		labelDists = null;
 	}
 
-	
 	public void train(RegressionDataSet dataSet) throws Exception {
 		labelCount = ((ClassificationDataSet) dataSet).getClassCount();
 		int featureCount = dataSet.getFeatureCount();
@@ -160,7 +157,7 @@ public class MultiLabelNaiveBayesClassifier extends AbstractClassifier {
 						nonzeros.add((int) sampleId[ROW]);
 					}
 					for (int sampleId : nonzeros) {
-						double val = feature.getAsDouble(sampleId, 0);
+						int val = feature.getAsInt(sampleId, 0);
 						dists[featureId][labelId][classId].addValue(val, weight);
 					}
 					long diff = sampleCount - nonzeros.size();
