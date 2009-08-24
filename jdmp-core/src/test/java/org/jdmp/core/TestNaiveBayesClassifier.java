@@ -23,19 +23,28 @@
 
 package org.jdmp.core;
 
-import junit.framework.TestSuite;
+import junit.framework.TestCase;
 
-public class AllTests extends TestSuite {
+import org.jdmp.core.algorithm.classification.Classifier;
+import org.jdmp.core.algorithm.classification.bayes.NaiveBayesClassifier;
+import org.jdmp.core.dataset.ClassificationDataSet;
+import org.jdmp.core.dataset.CrossValidation;
+import org.jdmp.core.dataset.DataSetFactory;
+import org.jdmp.core.variable.Variable;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.calculation.Calculation.Ret;
+import org.ujmp.core.intmatrix.calculation.Discretize.DiscretizationMethod;
+import org.ujmp.core.listmatrix.ListMatrix;
 
-	public static TestSuite suite() {
-		TestSuite suite = new TestSuite(AllTests.class.getName());
-		suite.addTestSuite(TestScript.class);
-		suite.addTestSuite(TestNaiveBayesClassifier.class);
-		suite.addTestSuite(TestMLP.class);
-		suite.addTestSuite(TestLinearRegression.class);
-		suite.addTestSuite(TestRandomClassifier.class);
-		suite.addTestSuite(TestConstantClassifier.class);
-		return suite;
+public class TestNaiveBayesClassifier extends TestCase {
+
+	public void testIrisClassification() throws Exception {
+		ClassificationDataSet iris = DataSetFactory.IRIS();
+		iris.getMatrix(Variable.INPUT).discretize(Ret.ORIG, Matrix.ROW,
+				DiscretizationMethod.STANDARDBINNING, 3);
+		Classifier c = new NaiveBayesClassifier();
+		ListMatrix<Double> results = CrossValidation.run(c, iris, 10, 10, 0);
+		assertEquals(0.959, results.getMeanValue(), 0.04);
 	}
 
 }

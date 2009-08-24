@@ -23,39 +23,95 @@
 
 package org.jdmp.core.algorithm.classification.bayes;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.jdmp.core.algorithm.classification.AbstractClassifier;
 import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.algorithm.estimator.DensityEstimator;
 import org.jdmp.core.algorithm.estimator.DiscreteDensityEstimator;
+import org.jdmp.core.dataset.ClassificationDataSet;
+import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.sample.Sample;
+import org.jdmp.core.sample.SampleFactory;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.calculation.Calculation.Ret;
+import org.ujmp.core.util.MathUtil;
 
 public class NaiveBayesClassifier extends AbstractClassifier {
+	private static final long serialVersionUID = -4962565315819543623L;
 
+	private int classCount = 2;
+
+	private List<Classifier> classifiers = null;
+
+	@Override
+	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
+		Matrix result = MatrixFactory.dense(1, classCount);
+		for (int cc = 0; cc < classCount; cc++) {
+			Classifier classifier = classifiers.get(cc);
+			Matrix prediction = classifier.predict(input, sampleWeight);
+			result.setAsDouble(prediction.getAsDouble(0, 0), 0, cc);
+		}
+		return result;
+	}
+
+	@Override
+	public void reset() throws Exception {
+		classifiers = null;
+	}
+
+	@Override
+	public void train(RegressionDataSet dataSet) throws Exception {
+		classifiers = new LinkedList<Classifier>();
+		classCount = ((ClassificationDataSet) dataSet).getClassCount();
+		for (int cc = 0; cc < classCount; cc++) {
+			Classifier classifier = new NaiveBayesClassifier2Classes();
+			ClassificationDataSet ds2 = DataSetFactory.classificationDataSet();
+			for (Sample s1 : dataSet.getSamples()) {
+				Sample s2 = SampleFactory.emptySample();
+				Matrix i2 = MatrixFactory.dense(2, 1);
+				double c = s1.getMatrix(TARGET).getAsDouble(0, cc);
+				i2.setAsBoolean(c == 0, 0, 0);
+				i2.setAsBoolean(c == 1, 0, 0);
+				s2.setMatrix(INPUT, s1.getMatrix(INPUT));
+				Matrix weight = s1.getMatrix(WEIGHT);
+				if (weight != null) {
+					s2.setMatrix(WEIGHT, weight);
+				}
+				s2.setMatrix(TARGET, i2);
+				ds2.getSamples().add(s2);
+			}
+			classifier.train(ds2);
+			classifiers.add(classifier);
+		}
+	}
+
+	public Classifier emptyCopy() throws Exception {
+		return new NaiveBayesClassifier();
+	}
+
+}
+
+class NaiveBayesClassifier2Classes extends AbstractClassifier {
 	private static final long serialVersionUID = -6511197233753905836L;
 
 	private DensityEstimator[][] dists = null;
 
 	private DensityEstimator classDists = null;
 
-	private int classCount = 0;
+	private static final int CLASSCOUNT = 2;
 
-	// private double[][][] conditionals = null;
-
-	// private double[] classDist = null;
-
-	public NaiveBayesClassifier() {
+	public NaiveBayesClassifier2Classes() {
 		super();
 	}
 
-	
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
-		double[] logs = new double[classCount];
+		double[] logs = new double[CLASSCOUNT];
 		// for all classes
-		for (int i = 0; i < classCount; i++) {
+		for (int i = 0; i < CLASSCOUNT; i++) {
 			// for all features
 			logs[i] = Math.log(classDists.getProbability(i));
 			for (int j = 0; j < input.getColumnCount(); j++) {
@@ -63,68 +119,44 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 				logs[i] += Math.log(dists[j][i].getProbability(val));
 			}
 		}
-		double[] probs = logToProbs(logs);
+		double[] probs = MathUtil.logToProbs(logs);
 		Matrix m = MatrixFactory.zeros(1, 2);
 		m.setAsDouble(probs[0], 0, 1);
 		m.setAsDouble(probs[1], 0, 0);
 		return m;
-		// Matrix r=MatrixFactory.fromArray(probs).transpose();
 	}
 
-	/**
-	 * @todo Put in common class!
-	 * @param logs
-	 * @return
-	 */
-	public static double[] logToProbs(double[] logs) {
-		double[] probs = new double[logs.length];
-		double sum = 0.0;
-		for (int i = 0; i < probs.length; i++) {
-			probs[i] = Math.exp(logs[i]);
-
-			sum += probs[i];
-		}
-		for (int i = 0; i < probs.length; i++) {
-			probs[i] = probs[i] / sum;
-		}
-		return probs;
-	}
-
-	
 	public void reset() throws Exception {
-		// TODO Auto-generated method stub
-
+		dists = null;
+		classDists = null;
 	}
 
-	
 	public void train(RegressionDataSet dataSet) throws Exception {
-		// classCount = ((ClassificationDataSet) dataSet).getClassCount();
-		classCount = 2;
 		int featureCount = dataSet.getFeatureCount();
-
 		Matrix dataSetInput = dataSet.getInputMatrix();
-
 		Matrix max = dataSetInput.max(Ret.NEW, Matrix.ROW);
 
-		this.dists = new DensityEstimator[featureCount][classCount];
-		this.classDists = new DiscreteDensityEstimator(classCount, true);
+		this.dists = new DensityEstimator[featureCount][CLASSCOUNT];
+		this.classDists = new DiscreteDensityEstimator(CLASSCOUNT, true);
 
 		for (int i = 0; i < featureCount; i++) {
-			for (int j = 0; j < classCount; j++) {
+			for (int j = 0; j < CLASSCOUNT; j++) {
 				dists[i][j] = new DiscreteDensityEstimator((int) max.getAsDouble(0, i) + 1, true);
 			}
 		}
 
-		// go over all samples an count
-		for (int i = 0; i < dataSet.getSamples().getSize(); i++) {
-			Sample s = dataSet.getSamples().getElementAt(i);
+		// go over all samples and count
+		for (Sample s : dataSet.getSamples()) {
 			Matrix sampleInput = s.getMatrix(INPUT);
 			Matrix sampleTarget = s.getMatrix(TARGET);
+			Matrix sampleWeight = s.getMatrix(WEIGHT);
+
 			double weight = 1.0;
-			Matrix w = s.getMatrix(WEIGHT);
-			if (w != null) {
-				weight = w.doubleValue();
+
+			if (sampleWeight != null) {
+				weight = sampleWeight.doubleValue();
 			}
+
 			int outputVal = (int) sampleTarget.getAsDouble(0, 0);
 			for (int j = 0; j < sampleInput.getColumnCount(); j++) {
 				int inputVal = (int) sampleInput.getAsDouble(0, j);
@@ -132,11 +164,10 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 			}
 			classDists.addValue(outputVal, weight);
 		}
-
 	}
 
 	public Classifier emptyCopy() {
-		return new NaiveBayesClassifier();
+		return new NaiveBayesClassifier2Classes();
 	}
 
 }
