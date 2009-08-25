@@ -84,7 +84,6 @@ public class ClassificationDataSet extends RegressionDataSet {
 		super();
 	}
 
-	
 	public ClassificationDataSet clone() {
 		ClassificationDataSet ds = new ClassificationDataSet();
 		for (Sample s : getSamples()) {
@@ -94,7 +93,8 @@ public class ClassificationDataSet extends RegressionDataSet {
 	}
 
 	public int getClassCount() {
-		return (int) getSamples().getElementAt(0).getMatrix(Sample.TARGET).getColumnCount();
+		return (int) getSamples().getElementAt(0).getVariables().getMatrix(Sample.TARGET)
+				.getColumnCount();
 	}
 
 	public Variable getConfusionVariable() {

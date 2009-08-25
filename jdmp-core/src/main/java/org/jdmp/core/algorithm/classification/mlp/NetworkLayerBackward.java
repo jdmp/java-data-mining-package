@@ -118,7 +118,6 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 		System.out.println(a.calculate());
 	}
 
-	
 	public Map<String, Object> calculateObjects(Map<String, Object> input) throws Exception {
 		Map<String, Object> result = new HashMap<String, Object>();
 
@@ -145,7 +144,7 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 	}
 
 	public Matrix getOutputDeviationMatrix() {
-		return getMatrix(OUTPUTDEVIATION);
+		return getVariables().getMatrix(OUTPUTDEVIATION);
 	}
 
 	public Algorithm getReturningFunction() {
@@ -185,7 +184,7 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 	}
 
 	public Matrix getNetDeviationMatrix() {
-		return getMatrix(NETDEVIATION);
+		return getVariables().getMatrix(NETDEVIATION);
 	}
 
 	public Variable getContactDeviationVariable() {
@@ -198,7 +197,7 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 	}
 
 	public Matrix getContactDeviationMatrix() {
-		return getMatrix(CONTACTDEVIATION);
+		return getVariables().getMatrix(CONTACTDEVIATION);
 	}
 
 	public Variable getInputDeviationVariable() {
@@ -211,7 +210,7 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 	}
 
 	public Matrix getInputDeviationMatrix() {
-		return getMatrix(INPUTDEVIATION);
+		return getVariables().getMatrix(INPUTDEVIATION);
 	}
 
 	public Variable getWeightVariable() {
@@ -225,7 +224,7 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 	}
 
 	public Matrix getWeightMatrix() {
-		return getMatrix(WEIGHT);
+		return getVariables().getMatrix(WEIGHT);
 	}
 
 	public Variable getOutputVariable() {
@@ -239,7 +238,7 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 	}
 
 	public Matrix getOutputMatrix() {
-		return getMatrix(OUTPUT);
+		return getVariables().getMatrix(OUTPUT);
 	}
 
 	public void setLayer(int nr) {

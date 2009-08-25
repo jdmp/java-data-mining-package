@@ -59,7 +59,7 @@ public abstract class SampleFactory {
 
 	public static final Sample linkToMatrix(Matrix input) {
 		Sample s = new DefaultSample();
-		s.setMatrix(Sample.INPUT, input);
+		s.getVariables().setMatrix(Sample.INPUT, input);
 		s.setLabel(input.getLabel());
 		return s;
 	}
@@ -82,8 +82,8 @@ public abstract class SampleFactory {
 
 	public static final Sample classificationSample(Matrix input, Matrix target) {
 		Sample s = new DefaultSample();
-		s.setMatrix(Sample.INPUT, input);
-		s.setMatrix(Sample.TARGET, target);
+		s.getVariables().setMatrix(Sample.INPUT, input);
+		s.getVariables().setMatrix(Sample.TARGET, target);
 		return s;
 	}
 

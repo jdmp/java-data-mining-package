@@ -30,7 +30,6 @@ import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DefaultDataSet;
 import org.jdmp.core.sample.DefaultSample;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.stanfordpos.StanfordTokenizer;
 import org.ujmp.core.Matrix;
 
 public class TestTokenizer extends TestCase {
@@ -42,10 +41,10 @@ public class TestTokenizer extends TestCase {
 	public void testTokenizer() throws Exception {
 		DataSet ds = new DefaultDataSet();
 		Sample sa1 = new DefaultSample();
-		sa1.setObject(Sample.INPUT, s1);
+		sa1.getVariables().setObject(Sample.INPUT, s1);
 		sa1.setId("sample1");
 		Sample sa2 = new DefaultSample();
-		sa2.setObject(Sample.INPUT, s2);
+		sa2.getVariables().setObject(Sample.INPUT, s2);
 		sa2.setId("sample2");
 		ds.getSamples().add(sa1);
 		ds.getSamples().add(sa2);
@@ -56,8 +55,8 @@ public class TestTokenizer extends TestCase {
 		sa1 = ds.getSamples().get("sample1");
 		sa2 = ds.getSamples().get("sample2");
 
-		Matrix m1 = sa1.getMatrix(Tokenizer.TOKENIZED);
-		Matrix m2 = sa2.getMatrix(Tokenizer.TOKENIZED);
+		Matrix m1 = sa1.getVariables().getMatrix(Tokenizer.TOKENIZED);
+		Matrix m2 = sa2.getVariables().getMatrix(Tokenizer.TOKENIZED);
 
 		assertEquals(1, m1.getColumnCount());
 		assertEquals(11, m1.getRowCount());

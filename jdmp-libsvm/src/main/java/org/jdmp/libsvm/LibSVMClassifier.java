@@ -98,10 +98,9 @@ public class LibSVMClassifier extends AbstractClassifier {
 		param.weight = new double[0];
 	}
 
-	
 	public void train(RegressionDataSet dataSet) throws MatrixException {
-		int columnCount = (int) dataSet.getSamples().getElementAt(0).getMatrix(INPUT)
-				.getColumnCount();
+		int columnCount = (int) dataSet.getSamples().getElementAt(0).getVariables()
+				.getMatrix(INPUT).getColumnCount();
 
 		prob = new svm_problem();
 		prob.l = dataSet.getSamples().getSize();
@@ -111,7 +110,7 @@ public class LibSVMClassifier extends AbstractClassifier {
 
 		for (int i = 0; i < prob.l; i++) {
 			Sample p = dataSet.getSamples().getElementAt(i);
-			Matrix input = p.getMatrix(INPUT);
+			Matrix input = p.getVariables().getMatrix(INPUT);
 			prob.y[i] = p.getTargetClass();
 			for (int j = 0; j < columnCount; j++) {
 				prob.x[i][j] = new svm_node();
@@ -145,7 +144,6 @@ public class LibSVMClassifier extends AbstractClassifier {
 		}
 	}
 
-	
 	public Matrix predict(Matrix input, Matrix weight) throws MatrixException {
 		int nr_class = svm.svm_get_nr_class(model);
 		double[] prob_estimates = new double[nr_class];
@@ -170,12 +168,10 @@ public class LibSVMClassifier extends AbstractClassifier {
 		return output;
 	}
 
-	
 	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) throws Exception {
 		throw new Exception("not supported");
 	}
 
-	
 	public void reset() throws MatrixException {
 		createAlgorithm();
 	}

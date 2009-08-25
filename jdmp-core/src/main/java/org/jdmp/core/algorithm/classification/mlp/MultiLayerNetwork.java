@@ -190,7 +190,6 @@ public class MultiLayerNetwork extends AbstractClassifier {
 		return networkLayers.get(0).getLearningRate();
 	}
 
-	
 	public void reset() throws MatrixException {
 		for (NetworkLayer networkLayer : networkLayers) {
 			networkLayer.reset();
@@ -230,7 +229,7 @@ public class MultiLayerNetwork extends AbstractClassifier {
 	}
 
 	public void addDesiredOutputMatrix(Matrix m) {
-		getOutputErrorAlgorithm().setMatrix(AlgorithmTwoSources.SOURCE2, m);
+		getOutputErrorAlgorithm().getVariables().setMatrix(AlgorithmTwoSources.SOURCE2, m);
 		if (Coordinates.product(getOutputVariable().getSize()) == 0) {
 			getOutputVariable().setSize(m.getRowCount(), m.getColumnCount());
 		}
@@ -251,7 +250,6 @@ public class MultiLayerNetwork extends AbstractClassifier {
 		return networkLayers;
 	}
 
-	
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
 		// transpose and add bias unit
 		// Matrix inputWithBias = Matrix.zeros(input.getColumnCount() + 1,
@@ -274,7 +272,6 @@ public class MultiLayerNetwork extends AbstractClassifier {
 		return getOutputVariable().getMatrix();
 	}
 
-	
 	public void train(Matrix input, Matrix sampleWeight, Matrix desiredOutput) throws Exception {
 		addDesiredOutputMatrix(desiredOutput.toRowVector());
 		if (sampleWeight == null) {
@@ -326,7 +323,6 @@ public class MultiLayerNetwork extends AbstractClassifier {
 		return mean;
 	}
 
-	
 	public void train(RegressionDataSet dataSet) throws Exception {
 
 		// TODO: fix!
@@ -345,8 +341,9 @@ public class MultiLayerNetwork extends AbstractClassifier {
 		double rmse = 0;
 		for (int i = first90Percent; i < samples.size(); i++) {
 			Sample rs = samples.get(i);
-			Matrix output = predict(rs.getMatrix(INPUT), rs.getMatrix(WEIGHT));
-			rmse += output.minus(rs.getMatrix(TARGET)).getRMS();
+			Matrix output = predict(rs.getVariables().getMatrix(INPUT), rs.getVariables()
+					.getMatrix(WEIGHT));
+			rmse += output.minus(rs.getVariables().getMatrix(TARGET)).getRMS();
 			train(samples.get(i));
 		}
 		rmse /= last10Percent;
@@ -367,7 +364,6 @@ public class MultiLayerNetwork extends AbstractClassifier {
 		dataSet.notifyGUIObject();
 	}
 
-	
 	public Classifier emptyCopy() throws Exception {
 		return null;
 	}

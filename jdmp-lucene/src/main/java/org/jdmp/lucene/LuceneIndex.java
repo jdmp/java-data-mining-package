@@ -185,7 +185,6 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 				new LinkedBlockingQueue<Runnable>());
 	}
 
-	
 	public synchronized void add(Sample sample) throws Exception {
 		if (readOnly || sample == null) {
 			return;
@@ -280,7 +279,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 			mlt.setMaxWordLen(MAXWORDLENGTH);
 			String[] terms = mlt.retrieveInterestingTerms(td.scoreDocs[0].doc);
 			for (int i = 0; i < 10 && i < terms.length; i++) {
-				s.setObject(Variable.SUGGESTEDTAGS, terms[i]);
+				s.getVariables().setObject(Variable.SUGGESTEDTAGS, terms[i]);
 			}
 
 			return s;
@@ -309,17 +308,18 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 		mlt.setMaxWordLen(MAXWORDLENGTH);
 		TopDocs td = indexSearcher.search(query, count);
 		DataSet result = new DefaultDataSet();
-		result.setObject("Total", td.totalHits);
+		result.getVariables().setObject("Total", td.totalHits);
 		for (ScoreDoc sd : td.scoreDocs) {
 			int id = sd.doc;
 			Document doc = indexSearcher.doc(id);
 			Sample s = null;
 			s = (Sample) SerializationUtil.deserialize(doc
 					.getBinaryValue("RawData"));
-			s.setMatrix(Sample.SCORE, MathUtil.getMatrix(sd.score));
+			s.getVariables().setMatrix(Sample.SCORE,
+					MathUtil.getMatrix(sd.score));
 			String[] terms = mlt.retrieveInterestingTerms(id);
 			for (int i = 0; i < 10 && i < terms.length; i++) {
-				s.setObject(Variable.SUGGESTEDTAGS, terms[i]);
+				s.getVariables().setObject(Variable.SUGGESTEDTAGS, terms[i]);
 			}
 			result.getSamples().add(s);
 		}
@@ -358,7 +358,6 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 		return indexSearcher;
 	}
 
-	
 	public synchronized void flush() throws IOException {
 		if (indexWriter != null) {
 			indexWriter.commit();
@@ -371,7 +370,6 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 		}
 	}
 
-	
 	public synchronized void close() throws IOException {
 		if (indexSearcher != null) {
 			indexSearcher.close();
@@ -382,7 +380,6 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 		}
 	}
 
-	
 	public synchronized void erase() throws IOException {
 		if (readOnly) {
 			return;
@@ -391,7 +388,6 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 		FileUtil.deleteRecursive(path);
 	}
 
-	
 	public synchronized DataSet searchSimilar(Sample sample, int start,
 			int count) throws Exception {
 		prepareReader();
@@ -424,7 +420,6 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 			this.index = index;
 		}
 
-		
 		public void add(Sample sample) {
 			try {
 				index.add(sample);
@@ -434,17 +429,14 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 			}
 		}
 
-		
 		public void addAll(Collection<Sample> values) {
 			throw new RuntimeException("not implemented");
 		}
 
-		
 		public void clear() {
 			throw new RuntimeException("not implemented");
 		}
 
-		
 		public Sample getElementAt(int i) {
 			try {
 				return index.getSampleAt(i);
@@ -454,27 +446,22 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 			}
 		}
 
-		
 		public void fireContentsChanged() {
 			fireContentsChanged(this, -1, -1);
 		}
 
-		
 		public int indexOf(Sample value) {
 			throw new RuntimeException("not implemented");
 		}
 
-		
 		public boolean isEmpty() {
 			return getSize() == 0;
 		}
 
-		
 		public Collection<Sample> toCollection() {
 			throw new RuntimeException("not implemented");
 		}
 
-		
 		public int getSize() {
 			try {
 				return index.getSize();
@@ -484,30 +471,25 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 			}
 		}
 
-		
 		public Iterator<Sample> iterator() {
 			throw new RuntimeException("not implemented");
 		}
 
-		
 		public boolean containsKey(Object key) {
 			// TODO Auto-generated method stub
 			return false;
 		}
 
-		
 		public boolean containsValue(Object value) {
 			// TODO Auto-generated method stub
 			return false;
 		}
 
-		
 		public Set<java.util.Map.Entry<String, Sample>> entrySet() {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
-		
 		public Sample get(Object key) {
 			try {
 				return index.getSample(StringUtil.convert(key));
@@ -517,37 +499,31 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 			}
 		}
 
-		
 		public Set<String> keySet() {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
-		
 		public Sample put(String key, Sample value) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
-		
 		public void putAll(Map<? extends String, ? extends Sample> m) {
 			// TODO Auto-generated method stub
 
 		}
 
-		
 		public Sample remove(Object key) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
-		
 		public int size() {
 			// TODO Auto-generated method stub
 			return 0;
 		}
 
-		
 		public Collection<Sample> values() {
 			// TODO Auto-generated method stub
 			return null;
@@ -581,7 +557,6 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 			this.query = query;
 		}
 
-		
 		public Object call() throws Exception {
 			for (Algorithm a : getAlgorithms()) {
 				try {
@@ -613,7 +588,6 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 
 	}
 
-	
 	public synchronized int countResults(String query) throws Exception {
 		return countResults(parseQuery(query));
 	}
@@ -679,11 +653,9 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 		return td.totalHits;
 	}
 
-	
 	public void setSamples(ObservableMap<Sample> samples) {
 	}
 
-	
 	public ObservableMap<Sample> getSamples() {
 		if (sampleMap == null) {
 			sampleMap = new LuceneSampleMap(this);

@@ -126,19 +126,19 @@ public class MarketBasketAnalysis extends AbstractRelationMiner {
 				RelationalSample s12 = SampleFactory.relationalSample(prod1 + " => " + prod2);
 				s12.addObject(prod1);
 				s12.addObject(prod2);
-				s12.setMatrix(Sample.COUNT, MatrixFactory.linkToValue(count));
-				s12.setMatrix(Sample.PROBABILITY, MatrixFactory.linkToValue(p1));
-				s12.setObject("From", prod1);
-				s12.setObject("To", prod2);
+				s12.getVariables().setMatrix(Sample.COUNT, MatrixFactory.linkToValue(count));
+				s12.getVariables().setMatrix(Sample.PROBABILITY, MatrixFactory.linkToValue(p1));
+				s12.getVariables().setObject("From", prod1);
+				s12.getVariables().setObject("To", prod2);
 				ds.getSamples().add(s12);
 
 				RelationalSample s21 = SampleFactory.relationalSample(prod2 + " => " + prod1);
 				s21.addObject(prod1);
 				s21.addObject(prod2);
-				s21.setMatrix(Sample.COUNT, MatrixFactory.linkToValue(count));
-				s21.setMatrix(Sample.PROBABILITY, MatrixFactory.linkToValue(p2));
-				s21.setObject("From", prod2);
-				s21.setObject("To", prod1);
+				s21.getVariables().setMatrix(Sample.COUNT, MatrixFactory.linkToValue(count));
+				s21.getVariables().setMatrix(Sample.PROBABILITY, MatrixFactory.linkToValue(p2));
+				s21.getVariables().setObject("From", prod2);
+				s21.getVariables().setObject("To", prod1);
 				ds.getSamples().add(s21);
 
 			}
@@ -265,7 +265,6 @@ class CountMatrix extends AbstractDenseObjectMatrix2D {
 		return getObject((long) row, (long) column);
 	}
 
-	
 	public Object getObject(long row, long column) {
 		Object o = matrix.getAsObject(row, column);
 		if (column == 0) {
@@ -275,15 +274,12 @@ class CountMatrix extends AbstractDenseObjectMatrix2D {
 		}
 	}
 
-	
 	public void setObject(Object value, long row, long column) {
 	}
 
-	
 	public void setObject(Object value, int row, int column) {
 	}
 
-	
 	public long[] getSize() {
 		return matrix.getSize();
 	}

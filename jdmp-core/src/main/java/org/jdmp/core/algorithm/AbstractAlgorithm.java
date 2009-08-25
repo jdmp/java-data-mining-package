@@ -23,11 +23,8 @@
 
 package org.jdmp.core.algorithm;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -41,12 +38,10 @@ import org.jdmp.core.util.ObservableList;
 import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.DefaultVariables;
 import org.jdmp.core.variable.Variable;
-import org.jdmp.core.variable.VariableFactory;
 import org.jdmp.core.variable.Variables;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.util.MathUtil;
-import org.ujmp.core.util.StringUtil;
 
 public abstract class AbstractAlgorithm extends AbstractCoreObject implements Algorithm {
 	private static final long serialVersionUID = 3219035032582720106L;
@@ -81,35 +76,16 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		return variableKeys;
 	}
 
-	public final void setObject(String variableKey, Object value) {
-		if (value == null) {
-			setMatrix(variableKey, MatrixFactory.emptyMatrix());
-		} else if (value instanceof Matrix) {
-			setMatrix(variableKey, (Matrix) value);
-		} else {
-			setMatrix(variableKey, MatrixFactory.linkToValue(value));
-		}
-	}
-
-	public final String getAllAsString(String variableKey) {
-		Variable v = getVariables().get(variableKey);
-		if (v != null) {
-			return StringUtil.getAllAsString(v.getMatrixList().toCollection());
-		} else {
-			return null;
-		}
-	}
-
 	public final String getLabel() {
-		return getAsString(Algorithm.LABEL);
+		return getVariables().getAsString(Algorithm.LABEL);
 	}
 
 	public final void setLabel(String label) {
-		setObject(Algorithm.LABEL, label);
+		getVariables().setObject(Algorithm.LABEL, label);
 	}
 
 	public final String getId() {
-		String id = getAsString(Algorithm.ID);
+		String id = getVariables().getAsString(Algorithm.ID);
 		if (id == null) {
 			id = "Algorithm" + getCoreObjectId();
 			setId(id);
@@ -118,15 +94,15 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 	}
 
 	public final void setId(String id) {
-		setObject(Algorithm.ID, id);
+		getVariables().setObject(Algorithm.ID, id);
 	}
 
 	public final String getDescription() {
-		return getAsString(Algorithm.DESCRIPTION);
+		return getVariables().getAsString(Algorithm.DESCRIPTION);
 	}
 
 	public final void setDescription(String description) {
-		setObject(Algorithm.DESCRIPTION, description);
+		getVariables().setObject(Algorithm.DESCRIPTION, description);
 	}
 
 	public AbstractAlgorithm() {
@@ -162,13 +138,13 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		Map<String, Object> input = new HashMap<String, Object>();
 
 		for (String v : getInputKeys()) {
-			input.put(v, getMatrix(v));
+			input.put(v, getVariables().getMatrix(v));
 		}
 
 		Map<String, Object> output = calculateObjects(input);
 
 		for (String v : getOutputKeys()) {
-			setMatrix(v, MathUtil.getMatrix(output.get(v)));
+			getVariables().setMatrix(v, MathUtil.getMatrix(output.get(v)));
 		}
 
 		return output;
@@ -240,76 +216,6 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 
 	public final EdgeDirection getEdgeDirection(String key) {
 		return edgeDirections.get(key);
-	}
-
-	public final String getAsString(String variableKey) {
-		return StringUtil.convert(getMatrix(variableKey));
-	}
-
-	public final boolean getAsBoolean(String variableKey) {
-		return MathUtil.getBoolean(getMatrix(variableKey));
-	}
-
-	public final Object getAsObject(String variableKey) {
-		return MathUtil.getObject(getMatrix(variableKey));
-	}
-
-	public final byte getAsByte(String variableKey) {
-		return MathUtil.getByte(getMatrix(variableKey));
-	}
-
-	public final char getAsChar(String variableKey) {
-		return MathUtil.getChar(getMatrix(variableKey));
-	}
-
-	public final double getAsDouble(String variableKey) {
-		return MathUtil.getDouble(getMatrix(variableKey));
-	}
-
-	public final float getAsFloat(String variableKey) {
-		return MathUtil.getFloat(getMatrix(variableKey));
-	}
-
-	public final int getAsInt(String variableKey) {
-		return MathUtil.getInt(getMatrix(variableKey));
-	}
-
-	public final long getAsLong(String variableKey) {
-		return MathUtil.getLong(getMatrix(variableKey));
-	}
-
-	public final short getAsShort(String variableKey) {
-		return MathUtil.getShort(getMatrix(variableKey));
-	}
-
-	public final Date getAsDate(String variableKey) {
-		return MathUtil.getDate(getMatrix(variableKey));
-	}
-
-	public final BigDecimal getAsBigDecimal(String variableKey) {
-		return MathUtil.getBigDecimal(getMatrix(variableKey));
-	}
-
-	public final BigInteger getAsBigInteger(String variableKey) {
-		return MathUtil.getBigInteger(getMatrix(variableKey));
-	}
-
-	public final Matrix getMatrix(String variableKey) {
-		Variable v = getVariables().get(variableKey);
-		if (v != null) {
-			return v.getMatrix();
-		} else {
-			return null;
-		}
-	}
-
-	public final void setMatrix(String variableKey, Matrix matrix) {
-		Variable v = getVariables().get(variableKey);
-		if (v == null) {
-			v = VariableFactory.labeledVariable(variableKey.toString());
-			getVariables().put(variableKey, v);
-		}
-		v.addMatrix(matrix);
 	}
 
 	public final Variables getVariables() {

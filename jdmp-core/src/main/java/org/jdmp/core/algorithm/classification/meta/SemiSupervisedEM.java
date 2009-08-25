@@ -48,12 +48,10 @@ public class SemiSupervisedEM extends AbstractClassifier implements SemiSupervis
 		this.useRawPrediction = useRawPrediction;
 	}
 
-	
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
 		return classifier.predict(input, sampleWeight);
 	}
 
-	
 	public void reset() throws Exception {
 		classifier.reset();
 	}
@@ -70,14 +68,14 @@ public class SemiSupervisedEM extends AbstractClassifier implements SemiSupervis
 		classifier.train(labeledData);
 		classifier.predict(unlabeledData);
 		for (Sample s : unlabeledData.getSamples()) {
-			Matrix predicted = s.getMatrix(Sample.PREDICTED);
+			Matrix predicted = s.getVariables().getMatrix(Sample.PREDICTED);
 			if (useRawPrediction) {
-				s.setMatrix(Sample.TARGET, predicted);
+				s.getVariables().setMatrix(Sample.TARGET, predicted);
 			} else {
 				int max = (int) predicted.indexOfMax(Ret.NEW, Matrix.COLUMN).getAsDouble(0, 0);
 				Matrix target = MatrixFactory.zeros(1, classCount);
 				target.setAsDouble(1.0, 0, max);
-				s.setMatrix(Sample.TARGET, target);
+				s.getVariables().setMatrix(Sample.TARGET, target);
 			}
 		}
 		ClassificationDataSet completeData = new ClassificationDataSet();
@@ -90,11 +88,11 @@ public class SemiSupervisedEM extends AbstractClassifier implements SemiSupervis
 			System.out.println("Step " + (i + 1));
 			classifier.predict(unlabeledData);
 			for (Sample s : unlabeledData.getSamples()) {
-				Matrix predicted = s.getMatrix(Sample.PREDICTED);
+				Matrix predicted = s.getVariables().getMatrix(Sample.PREDICTED);
 				int max = (int) predicted.indexOfMax(Ret.NEW, Matrix.COLUMN).getAsDouble(0, 0);
 				Matrix target = MatrixFactory.zeros(1, classCount);
 				target.setAsDouble(1.0, 0, max);
-				s.setMatrix(Sample.TARGET, target);
+				s.getVariables().setMatrix(Sample.TARGET, target);
 			}
 			completeData = new ClassificationDataSet();
 			completeData.getSamples().addAll(labeledData.getSamples().toCollection());

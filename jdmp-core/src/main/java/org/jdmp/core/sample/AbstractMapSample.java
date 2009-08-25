@@ -32,7 +32,6 @@ import java.util.Set;
 import org.jdmp.core.variable.DefaultVariables;
 import org.jdmp.core.variable.SingletonVariable;
 import org.jdmp.core.variable.Variable;
-import org.ujmp.core.Matrix;
 import org.ujmp.core.interfaces.Wrapper;
 import org.ujmp.core.util.MathUtil;
 import org.ujmp.core.util.StringUtil;
@@ -49,10 +48,6 @@ public abstract class AbstractMapSample extends AbstractSample implements
 
 	public final Sample clone() {
 		return SampleFactory.clone(this);
-	}
-
-	public void setMatrix(String variableKey, Matrix matrix) {
-		getWrappedObject().put(variableKey, matrix);
 	}
 
 	class VariableMapWrapper extends DefaultVariables {
