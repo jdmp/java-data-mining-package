@@ -28,9 +28,9 @@ import java.math.BigInteger;
 import java.util.Date;
 
 import org.jdmp.core.AbstractCoreObject;
-import org.jdmp.core.util.DefaultObservableMap;
-import org.jdmp.core.util.ObservableMap;
+import org.jdmp.core.variable.DefaultVariables;
 import org.jdmp.core.variable.Variable;
+import org.jdmp.core.variable.Variables;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.exceptions.MatrixException;
@@ -40,21 +40,21 @@ import org.ujmp.core.util.StringUtil;
 public abstract class AbstractSample extends AbstractCoreObject implements Sample {
 	private static final long serialVersionUID = 1693258179407382419L;
 
-	private ObservableMap<Variable> variableMap = null;
+	private Variables variables = null;
 
 	public AbstractSample() {
 		super();
 	}
 
-	public final ObservableMap<Variable> getVariables() {
-		if (variableMap == null) {
-			variableMap = new DefaultObservableMap<Variable>();
+	public final Variables getVariables() {
+		if (variables == null) {
+			variables = new DefaultVariables();
 		}
-		return variableMap;
+		return variables;
 	}
 
-	public final void setVariables(ObservableMap<Variable> variables) {
-		this.variableMap = variables;
+	public final void setVariables(Variables variables) {
+		this.variables = variables;
 	}
 
 	public boolean isCorrect() throws MatrixException {
@@ -195,8 +195,8 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 	}
 
 	public final void clear() {
-		if (variableMap != null) {
-			variableMap.clear();
+		if (variables != null) {
+			variables.clear();
 		}
 	}
 

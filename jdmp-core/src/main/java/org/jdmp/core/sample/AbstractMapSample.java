@@ -29,7 +29,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import org.jdmp.core.util.AbstractObservableMap;
+import org.jdmp.core.variable.DefaultVariables;
 import org.jdmp.core.variable.SingletonVariable;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
@@ -47,7 +47,6 @@ public abstract class AbstractMapSample extends AbstractSample implements
 		setVariables(new VariableMapWrapper());
 	}
 
-	
 	public final Sample clone() {
 		return SampleFactory.clone(this);
 	}
@@ -56,84 +55,68 @@ public abstract class AbstractMapSample extends AbstractSample implements
 		getWrappedObject().put(variableKey, matrix);
 	}
 
-	class VariableMapWrapper extends AbstractObservableMap<Variable> {
+	class VariableMapWrapper extends DefaultVariables {
 		private static final long serialVersionUID = 1252960592502010150L;
 
-		
-		public Map<String, Variable> getMap() {
-			return variableMap;
+		public VariableMapWrapper() {
+			setMap(variableMap);
 		}
 
-		
-		public void setMap(Map<String, Variable> map) {
-		}
 	}
 
 	class VariableMap implements Map<String, Variable>, Serializable {
 		private static final long serialVersionUID = -8553571915359063034L;
 
-		
 		public void clear() {
 			getWrappedObject().clear();
 		}
 
-		
 		public boolean containsKey(Object key) {
 			return containsKey(key);
 		}
 
-		
 		public boolean containsValue(Object value) {
 			throw new RuntimeException("not implemented");
 		}
 
-		
 		public Set<java.util.Map.Entry<String, Variable>> entrySet() {
 			throw new RuntimeException("not implemented");
 		}
 
-		
 		public Variable get(Object key) {
 			Variable v = new SingletonVariable(MathUtil.getMatrix(getWrappedObject().get(key)));
 			v.setLabel(StringUtil.convert(key));
 			return v;
 		}
 
-		
 		public boolean isEmpty() {
 			return getWrappedObject().isEmpty();
 		}
 
-		
 		public Set<String> keySet() {
 			return getWrappedObject().keySet();
 		}
 
-		
 		public Variable put(String key, Variable value) {
 			getWrappedObject().put(key, value.getMatrix());
 			return null;
 		}
 
-		
 		public void putAll(Map<? extends String, ? extends Variable> m) {
 			for (String key : m.keySet()) {
 				put(key, m.get(key));
 			}
 		}
 
-		
 		public Variable remove(Object key) {
 			getWrappedObject().remove(key);
 			return null;
 		}
 
-		
 		public int size() {
 			return getWrappedObject().size();
 		}
 
-		
 		public Collection<Variable> values() {
 			return new CollectionWrapper();
 		}
@@ -143,86 +126,70 @@ public abstract class AbstractMapSample extends AbstractSample implements
 	class CollectionWrapper implements Collection<Variable>, Serializable {
 		private static final long serialVersionUID = 5598318867114474374L;
 
-		
 		public boolean add(Variable e) {
 			throw new RuntimeException("not implemented");
 		}
 
-		
 		public boolean addAll(Collection<? extends Variable> c) {
 			throw new RuntimeException("not implemented");
 		}
 
-		
 		public void clear() {
 			throw new RuntimeException("not implemented");
 		}
 
-		
 		public boolean contains(Object o) {
 			throw new RuntimeException("not implemented");
 		}
 
-		
 		public boolean containsAll(Collection<?> c) {
 			throw new RuntimeException("not implemented");
 		}
 
-		
 		public boolean isEmpty() {
 			throw new RuntimeException("not implemented");
 		}
 
-		
 		public Iterator<Variable> iterator() {
 			return new Iterator<Variable>() {
 
 				Iterator<String> it = getWrappedObject().keySet().iterator();
 
-				
 				public boolean hasNext() {
 					return it.hasNext();
 				}
 
-				
 				public Variable next() {
 					Object key = it.next();
 					return variableMap.get(key);
 				}
 
-				
 				public void remove() {
 					throw new RuntimeException("not implemented");
 				}
 			};
 		}
 
-		
 		public boolean remove(Object o) {
 			throw new RuntimeException("not implemented");
 		}
 
-		
 		public boolean removeAll(Collection<?> c) {
 			throw new RuntimeException("not implemented");
 		}
 
-		
 		public boolean retainAll(Collection<?> c) {
 			throw new RuntimeException("not implemented");
 		}
 
-		
 		public int size() {
 			throw new RuntimeException("not implemented");
 		}
 
-		
 		public Object[] toArray() {
 			throw new RuntimeException("not implemented");
 		}
 
-		
 		public <T> T[] toArray(T[] a) {
 			throw new RuntimeException("not implemented");
 		}

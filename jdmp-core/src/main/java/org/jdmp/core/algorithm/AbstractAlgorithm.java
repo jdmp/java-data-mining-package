@@ -39,8 +39,10 @@ import org.jdmp.core.util.DefaultObservableList;
 import org.jdmp.core.util.DefaultObservableMap;
 import org.jdmp.core.util.ObservableList;
 import org.jdmp.core.util.ObservableMap;
+import org.jdmp.core.variable.DefaultVariables;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
+import org.jdmp.core.variable.Variables;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.util.MathUtil;
@@ -49,7 +51,7 @@ import org.ujmp.core.util.StringUtil;
 public abstract class AbstractAlgorithm extends AbstractCoreObject implements Algorithm {
 	private static final long serialVersionUID = 3219035032582720106L;
 
-	private ObservableMap<Variable> variableMap = new DefaultObservableMap<Variable>();
+	private Variables variables = new DefaultVariables();
 
 	private ObservableMap<Algorithm> algorithmList = new DefaultObservableMap<Algorithm>();
 
@@ -71,7 +73,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 
 	public final void setVariables(Variable... variables) {
 		for (int i = 0; i < variables.length && i < getVariableKeys().size(); i++) {
-			variableMap.put(variableKeys.get(i), variables[i]);
+			this.variables.put(variableKeys.get(i), variables[i]);
 		}
 	}
 
@@ -137,7 +139,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 	}
 
 	public void setVariable(String index, Variable variable) {
-		variableMap.put(index, variable);
+		variables.put(index, variable);
 	}
 
 	public final void setAlgorithm(String index, Algorithm a) {
@@ -148,8 +150,8 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		if (algorithmList != null) {
 			algorithmList.clear();
 		}
-		if (variableMap != null) {
-			variableMap.clear();
+		if (variables != null) {
+			variables.clear();
 		}
 		if (dataSetList != null) {
 			dataSetList.clear();
@@ -310,11 +312,11 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		v.addMatrix(matrix);
 	}
 
-	public final ObservableMap<Variable> getVariables() {
-		if (variableMap == null) {
-			variableMap = new DefaultObservableMap<Variable>();
+	public final Variables getVariables() {
+		if (variables == null) {
+			variables = new DefaultVariables();
 		}
-		return variableMap;
+		return variables;
 	}
 
 	public final ObservableMap<Algorithm> getAlgorithms() {
@@ -335,7 +337,6 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		return edgeLabels.get(key);
 	}
 
-	
 	public final String toString() {
 		if (getLabel() == null) {
 			return getClass().getSimpleName();
@@ -344,8 +345,8 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		}
 	}
 
-	public final void setVariables(ObservableMap<Variable> variables) {
-		this.variableMap = variables;
+	public final void setVariables(Variables variables) {
+		this.variables = variables;
 	}
 
 	public final void setDataSets(ObservableList<DataSet> dataSets) {

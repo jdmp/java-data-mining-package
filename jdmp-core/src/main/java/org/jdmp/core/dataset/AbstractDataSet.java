@@ -37,8 +37,10 @@ import org.jdmp.core.util.DefaultObservableList;
 import org.jdmp.core.util.DefaultObservableMap;
 import org.jdmp.core.util.ObservableList;
 import org.jdmp.core.util.ObservableMap;
+import org.jdmp.core.variable.DefaultVariables;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
+import org.jdmp.core.variable.Variables;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.util.MathUtil;
@@ -49,7 +51,7 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 
 	private ObservableMap<Sample> sampleMap = null;
 
-	private ObservableMap<Variable> variableList = null;
+	private Variables variables = null;
 
 	private ObservableList<DataSet> dataSetList = null;
 
@@ -60,11 +62,11 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		return sampleMap;
 	}
 
-	public final ObservableMap<Variable> getVariables() {
-		if (variableList == null) {
-			variableList = new DefaultObservableMap<Variable>();
+	public final Variables getVariables() {
+		if (variables == null) {
+			variables = new DefaultVariables();
 		}
-		return variableList;
+		return variables;
 	}
 
 	public final ObservableList<DataSet> getDataSets() {
@@ -275,7 +277,6 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		return splitByCount(shuffle, counts);
 	}
 
-	
 	public final String toString() {
 		if (getLabel() == null) {
 			return getClass().getSimpleName();
@@ -284,19 +285,17 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		}
 	}
 
-	
 	public final void setSamples(ObservableMap<Sample> samples) {
 		this.sampleMap = samples;
 	}
 
-	public final void setVariables(ObservableMap<Variable> variables) {
-		this.variableList = variables;
+	public final void setVariables(Variables variables) {
+		this.variables = variables;
 	}
 
 	public final void setDataSets(ObservableList<DataSet> dataSets) {
 		this.dataSetList = dataSets;
 	}
 
-	
 	public abstract DataSet clone();
 }
