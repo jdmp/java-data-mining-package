@@ -33,7 +33,9 @@ import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.DefaultObservableMap;
 import org.jdmp.core.util.ObservableMap;
+import org.jdmp.core.variable.DefaultVariables;
 import org.jdmp.core.variable.Variable;
+import org.jdmp.core.variable.Variables;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.util.MathUtil;
@@ -48,26 +50,22 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 
 	private ObservableMap<DataSet> dataSets = null;
 
-	private ObservableMap<Variable> variables = null;
+	private Variables variables = null;
 
 	private ObservableMap<Module> modules = null;
 
-	
 	public final String getDescription() {
 		return getAsString(Sample.DESCRIPTION);
 	}
 
-	
 	public final void setDescription(String description) {
 		setObject(Sample.DESCRIPTION, description);
 	}
 
-	
 	public final String getLabel() {
 		return getAsString(Sample.LABEL);
 	}
 
-	
 	public final void setLabel(String label) {
 		setObject(Sample.LABEL, label);
 	}
@@ -93,9 +91,9 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		return algorithms;
 	}
 
-	public final ObservableMap<Variable> getVariables() {
+	public final Variables getVariables() {
 		if (variables == null) {
-			variables = new DefaultObservableMap<Variable>();
+			variables = new DefaultVariables();
 		}
 		return variables;
 	}
@@ -134,7 +132,6 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		}
 	}
 
-	
 	public final void setId(String id) {
 		setObject(Sample.ID, id);
 	}
@@ -200,7 +197,6 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		return MathUtil.getBigInteger(getMatrix(variableKey));
 	}
 
-	
 	public final String toString() {
 		if (getLabel() == null) {
 			return getClass().getSimpleName();
@@ -219,7 +215,7 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		}
 	}
 
-	public final void setVariables(ObservableMap<Variable> variables) {
+	public final void setVariables(Variables variables) {
 		this.variables = variables;
 	}
 

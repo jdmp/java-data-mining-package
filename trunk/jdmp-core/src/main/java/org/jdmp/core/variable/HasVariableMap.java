@@ -27,12 +27,11 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 
-import org.jdmp.core.util.ObservableMap;
 import org.ujmp.core.Matrix;
 
 public interface HasVariableMap extends HasVariables {
 
-	public ObservableMap<Variable> getVariables();
+	public Variables getVariables();
 
 	public Matrix getMatrix(String variableKey);
 
@@ -68,6 +67,6 @@ public interface HasVariableMap extends HasVariables {
 
 	public void setObject(String variableKey, Object value);
 
-	public void setVariables(ObservableMap<Variable> variables);
+	public void setVariables(Variables variables);
 
 }
