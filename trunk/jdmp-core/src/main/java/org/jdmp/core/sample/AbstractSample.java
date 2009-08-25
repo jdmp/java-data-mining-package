@@ -69,7 +69,6 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 		return (int) getMatrix(PREDICTED).getCoordinatesOfMaximum()[COLUMN];
 	}
 
-	
 	public abstract Sample clone();
 
 	public final String getId() {
@@ -81,8 +80,7 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 		return id;
 	}
 
-	
-	public final String toString() {
+	public String toString() {
 		StringBuilder s = new StringBuilder();
 		s.append(getClass().getSimpleName());
 		s.append(" [ ");
@@ -166,27 +164,22 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 		return MathUtil.getBigInteger(getMatrix(variableKey));
 	}
 
-	
 	public final void setId(String id) {
 		setObject(Sample.ID, id);
 	}
 
-	
 	public final String getDescription() {
 		return getAsString(Sample.DESCRIPTION);
 	}
 
-	
 	public final void setDescription(String description) {
 		setObject(Sample.DESCRIPTION, description);
 	}
 
-	
 	public final String getLabel() {
 		return getAsString(Sample.LABEL);
 	}
 
-	
 	public final void setLabel(String label) {
 		setObject(Sample.LABEL, label);
 	}
@@ -201,7 +194,6 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 		}
 	}
 
-	
 	public final void clear() {
 		if (variableMap != null) {
 			variableMap.clear();
