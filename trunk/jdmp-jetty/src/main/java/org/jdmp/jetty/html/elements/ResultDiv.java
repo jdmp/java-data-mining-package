@@ -38,7 +38,7 @@ public class ResultDiv extends DivTag {
 			p.add("no results found.");
 		} else {
 			p.add("Results " + (start + 1) + " - " + (start + count) + " of "
-					+ dataSet.getAsInt(Variable.TOTAL));
+					+ dataSet.getVariables().getAsInt(Variable.TOTAL));
 		}
 		add(p);
 	}

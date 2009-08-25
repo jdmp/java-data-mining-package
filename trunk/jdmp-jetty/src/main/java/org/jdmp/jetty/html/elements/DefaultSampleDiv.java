@@ -41,7 +41,7 @@ public class DefaultSampleDiv extends DivTag {
 		query = query == null ? "" : query;
 		setParameter("class", "sample");
 		String label = sample.getLabel();
-		String type = sample.getAllAsString("Type");
+		String type = sample.getVariables().getAllAsString("Type");
 		String id = sample.getId();
 		path = path + "samples/" + id + "/";
 

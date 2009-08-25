@@ -49,7 +49,7 @@ public class DataSetPredictedMatrixWrapper extends AbstractDenseDoubleMatrix2D i
 		if (p == null) {
 			return Coordinates.ZERO2D;
 		}
-		Matrix output = p.getMatrix(Sample.PREDICTED);
+		Matrix output = p.getVariables().getMatrix(Sample.PREDICTED);
 		if (output != null) {
 			return new long[] { dataSet.getSamples().getSize(), output.getValueCount() };
 		} else {
@@ -69,10 +69,10 @@ public class DataSetPredictedMatrixWrapper extends AbstractDenseDoubleMatrix2D i
 	public double getDouble(int row, int column) throws MatrixException {
 		Sample p = dataSet.getSamples().getElementAt(row);
 		if (p != null) {
-			if (p.getMatrix(Sample.PREDICTED) != null) {
-				long r = column / p.getMatrix(Sample.PREDICTED).getColumnCount();
-				long c = column % p.getMatrix(Sample.PREDICTED).getColumnCount();
-				return p.getMatrix(Sample.PREDICTED).getAsDouble(r, c);
+			if (p.getVariables().getMatrix(Sample.PREDICTED) != null) {
+				long r = column / p.getVariables().getMatrix(Sample.PREDICTED).getColumnCount();
+				long c = column % p.getVariables().getMatrix(Sample.PREDICTED).getColumnCount();
+				return p.getVariables().getMatrix(Sample.PREDICTED).getAsDouble(r, c);
 			}
 		}
 		return 0.0;
@@ -81,10 +81,10 @@ public class DataSetPredictedMatrixWrapper extends AbstractDenseDoubleMatrix2D i
 	public void setDouble(double value, int row, int column) throws MatrixException {
 		Sample p = dataSet.getSamples().getElementAt(row);
 		if (p != null) {
-			if (p.getMatrix(Sample.PREDICTED) != null) {
-				long r = column / p.getMatrix(Sample.PREDICTED).getColumnCount();
-				long c = column % p.getMatrix(Sample.PREDICTED).getColumnCount();
-				p.getMatrix(Sample.PREDICTED).setAsDouble(value, r, c);
+			if (p.getVariables().getMatrix(Sample.PREDICTED) != null) {
+				long r = column / p.getVariables().getMatrix(Sample.PREDICTED).getColumnCount();
+				long c = column % p.getVariables().getMatrix(Sample.PREDICTED).getColumnCount();
+				p.getVariables().getMatrix(Sample.PREDICTED).setAsDouble(value, r, c);
 			}
 		}
 	}

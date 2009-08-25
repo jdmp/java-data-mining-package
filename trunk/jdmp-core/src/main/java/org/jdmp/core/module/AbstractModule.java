@@ -23,10 +23,6 @@
 
 package org.jdmp.core.module;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.Date;
-
 import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.dataset.DataSet;
@@ -34,12 +30,7 @@ import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.DefaultObservableMap;
 import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.DefaultVariables;
-import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.Variables;
-import org.ujmp.core.Matrix;
-import org.ujmp.core.MatrixFactory;
-import org.ujmp.core.util.MathUtil;
-import org.ujmp.core.util.StringUtil;
 
 public abstract class AbstractModule extends AbstractCoreObject implements Module {
 	private static final long serialVersionUID = 4621466897617405575L;
@@ -55,19 +46,19 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 	private ObservableMap<Module> modules = null;
 
 	public final String getDescription() {
-		return getAsString(Sample.DESCRIPTION);
+		return getVariables().getAsString(Sample.DESCRIPTION);
 	}
 
 	public final void setDescription(String description) {
-		setObject(Sample.DESCRIPTION, description);
+		getVariables().setObject(Sample.DESCRIPTION, description);
 	}
 
 	public final String getLabel() {
-		return getAsString(Sample.LABEL);
+		return getVariables().getAsString(Sample.LABEL);
 	}
 
 	public final void setLabel(String label) {
-		setObject(Sample.LABEL, label);
+		getVariables().setObject(Sample.LABEL, label);
 	}
 
 	public final ObservableMap<Module> getModules() {
@@ -123,21 +114,12 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		}
 	}
 
-	public final String getAllAsString(String variableKey) {
-		Variable v = getVariables().get(variableKey);
-		if (v != null) {
-			return StringUtil.getAllAsString(v.getMatrixList().toCollection());
-		} else {
-			return null;
-		}
-	}
-
 	public final void setId(String id) {
-		setObject(Sample.ID, id);
+		getVariables().setObject(Sample.ID, id);
 	}
 
 	public final String getId() {
-		String id = getAsString(Sample.ID);
+		String id = getVariables().getAsString(Sample.ID);
 		if (id == null) {
 			id = "Module" + getCoreObjectId();
 			setId(id);
@@ -145,73 +127,11 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		return id;
 	}
 
-	public final String getAsString(String variableKey) {
-		return StringUtil.convert(getMatrix(variableKey));
-	}
-
-	public final boolean getAsBoolean(String variableKey) {
-		return MathUtil.getBoolean(getMatrix(variableKey));
-	}
-
-	public final byte getAsByte(String variableKey) {
-		return MathUtil.getByte(getMatrix(variableKey));
-	}
-
-	public final char getAsChar(String variableKey) {
-		return MathUtil.getChar(getMatrix(variableKey));
-	}
-
-	public final double getAsDouble(String variableKey) {
-		return MathUtil.getDouble(getMatrix(variableKey));
-	}
-
-	public final float getAsFloat(String variableKey) {
-		return MathUtil.getFloat(getMatrix(variableKey));
-	}
-
-	public final int getAsInt(String variableKey) {
-		return MathUtil.getInt(getMatrix(variableKey));
-	}
-
-	public final long getAsLong(String variableKey) {
-		return MathUtil.getLong(getMatrix(variableKey));
-	}
-
-	public final short getAsShort(String variableKey) {
-		return MathUtil.getShort(getMatrix(variableKey));
-	}
-
-	public final Date getAsDate(String variableKey) {
-		return MathUtil.getDate(getMatrix(variableKey));
-	}
-
-	public final Object getAsObject(String variableKey) {
-		return MathUtil.getObject(getMatrix(variableKey));
-	}
-
-	public final BigDecimal getAsBigDecimal(String variableKey) {
-		return MathUtil.getBigDecimal(getMatrix(variableKey));
-	}
-
-	public final BigInteger getAsBigInteger(String variableKey) {
-		return MathUtil.getBigInteger(getMatrix(variableKey));
-	}
-
 	public final String toString() {
 		if (getLabel() == null) {
 			return getClass().getSimpleName();
 		} else {
 			return getClass().getSimpleName() + " [" + getLabel() + "]";
-		}
-	}
-
-	public final void setObject(String variableKey, Object value) {
-		if (value == null) {
-			setMatrix(variableKey, MatrixFactory.emptyMatrix());
-		} else if (value instanceof Matrix) {
-			setMatrix(variableKey, (Matrix) value);
-		} else {
-			setMatrix(variableKey, MatrixFactory.linkToValue(value));
 		}
 	}
 

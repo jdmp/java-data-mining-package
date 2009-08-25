@@ -37,40 +37,40 @@ public class RelationalSample extends DefaultSample {
 
 	@SuppressWarnings("unchecked")
 	public void addObject(Object o) {
-		Matrix input = getMatrix(INPUT);
+		Matrix input = getVariables().getMatrix(INPUT);
 		if (input == null) {
 			input = new DefaultListMatrix<Object>();
-			setMatrix(INPUT, input);
+			getVariables().setMatrix(INPUT, input);
 		}
 		if (!(input instanceof Collection<?>)) {
 			input = new DefaultListMatrix<Object>(input);
-			setMatrix(INPUT, input);
+			getVariables().setMatrix(INPUT, input);
 		}
 		((Collection) input).add(o);
 	}
 
 	public void removeObject(Object o) {
-		Matrix input = getMatrix(INPUT);
+		Matrix input = getVariables().getMatrix(INPUT);
 		if (input == null) {
 			input = new DefaultListMatrix<Object>();
-			setMatrix(INPUT, input);
+			getVariables().setMatrix(INPUT, input);
 		}
 		if (!(input instanceof Collection<?>)) {
 			input = new DefaultListMatrix<Object>(input);
-			setMatrix(INPUT, input);
+			getVariables().setMatrix(INPUT, input);
 		}
 		((Collection<?>) input).remove(o);
 	}
 
 	public Collection<?> getObjects() {
-		Matrix input = getMatrix(INPUT);
+		Matrix input = getVariables().getMatrix(INPUT);
 		if (input == null) {
 			input = new DefaultListMatrix<Object>();
-			setMatrix(INPUT, input);
+			getVariables().setMatrix(INPUT, input);
 		}
 		if (!(input instanceof Collection<?>)) {
 			input = new DefaultListMatrix<Object>(input);
-			setMatrix(INPUT, input);
+			getVariables().setMatrix(INPUT, input);
 		}
 		return (Collection<?>) input;
 	}

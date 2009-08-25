@@ -59,8 +59,8 @@ public abstract class DataSetFactory {
 			Sample s = SampleFactory.emptySample();
 			Matrix in = input.subMatrix(Ret.NEW, i, 0, i, input.getColumnCount() - 1);
 			Matrix out = target.subMatrix(Ret.NEW, i, 0, i, target.getColumnCount() - 1);
-			s.setMatrix(Sample.INPUT, in);
-			s.setMatrix(Sample.TARGET, out);
+			s.getVariables().setMatrix(Sample.INPUT, in);
+			s.getVariables().setMatrix(Sample.TARGET, out);
 			ds.getSamples().add(s);
 		}
 		return ds;
@@ -102,7 +102,7 @@ public abstract class DataSetFactory {
 				if (label == null) {
 					label = "col" + c;
 				}
-				s.setObject(label, matrix.getAsObject(r, c));
+				s.getVariables().setObject(label, matrix.getAsObject(r, c));
 			}
 			ds.getSamples().add(s);
 		}
@@ -117,9 +117,9 @@ public abstract class DataSetFactory {
 			Matrix in = input.subMatrix(Ret.NEW, i, 0, i, input.getColumnCount() - 1);
 			Matrix out = target.subMatrix(Ret.NEW, i, 0, i, target.getColumnCount() - 1);
 			Matrix labelMatrix = label.subMatrix(Ret.NEW, i, 0, i, label.getColumnCount() - 1);
-			s.setMatrix(Sample.INPUT, in);
-			s.setMatrix(Sample.TARGET, out);
-			s.setMatrix(Sample.LABEL, labelMatrix);
+			s.getVariables().setMatrix(Sample.INPUT, in);
+			s.getVariables().setMatrix(Sample.TARGET, out);
+			s.getVariables().setMatrix(Sample.LABEL, labelMatrix);
 			ds.getSamples().add(s);
 		}
 		return ds;
@@ -134,8 +134,8 @@ public abstract class DataSetFactory {
 			Sample s = SampleFactory.emptySample();
 			Matrix in = input.selectRows(Ret.LINK, i);
 			Matrix out = target.selectRows(Ret.LINK, i);
-			s.setMatrix(Sample.INPUT, in);
-			s.setMatrix(Sample.TARGET, out);
+			s.getVariables().setMatrix(Sample.INPUT, in);
+			s.getVariables().setMatrix(Sample.TARGET, out);
 			ds.getSamples().add(s);
 		}
 		return ds;
@@ -151,9 +151,9 @@ public abstract class DataSetFactory {
 			Matrix in = input.selectRows(Ret.LINK, i);
 			Matrix out = target.selectRows(Ret.LINK, i);
 			Matrix labelMatrix = label.selectRows(Ret.LINK, i);
-			s.setMatrix(Sample.INPUT, in);
-			s.setMatrix(Sample.TARGET, out);
-			s.setMatrix(Sample.LABEL, labelMatrix);
+			s.getVariables().setMatrix(Sample.INPUT, in);
+			s.getVariables().setMatrix(Sample.TARGET, out);
+			s.getVariables().setMatrix(Sample.LABEL, labelMatrix);
 			ds.getSamples().add(s);
 		}
 		return ds;
@@ -193,8 +193,8 @@ public abstract class DataSetFactory {
 			}
 
 			Sample s = SampleFactory.labeledSample("Sample " + si);
-			s.setMatrix(Sample.INPUT, input);
-			s.setMatrix(Sample.TARGET, target);
+			s.getVariables().setMatrix(Sample.INPUT, input);
+			s.getVariables().setMatrix(Sample.TARGET, target);
 
 			henon.getSamples().add(s);
 		}
@@ -239,8 +239,8 @@ public abstract class DataSetFactory {
 			}
 
 			Sample s = SampleFactory.labeledSample("Sample " + si);
-			s.setMatrix(Sample.INPUT, input);
-			s.setMatrix(Sample.TARGET, target);
+			s.getVariables().setMatrix(Sample.INPUT, input);
+			s.getVariables().setMatrix(Sample.TARGET, target);
 
 			logistic.getSamples().add(s);
 		}
@@ -258,83 +258,83 @@ public abstract class DataSetFactory {
 		DefaultDataSet animals = DataSetFactory.labeledDataSet("Animals");
 
 		Sample pigeon = SampleFactory.labeledSample("Pigeon");
-		pigeon.setMatrix(Sample.INPUT, MatrixFactory.importFromString(FileFormat.CSV,
-				"1 0 0 1 0 0 0 0 1 0 0 1 0"));
+		pigeon.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.importFromString(FileFormat.CSV, "1 0 0 1 0 0 0 0 1 0 0 1 0"));
 		animals.getSamples().add(pigeon);
 
 		Sample chicken = SampleFactory.labeledSample("Chicken");
-		chicken.setMatrix(Sample.INPUT, MatrixFactory.importFromString(FileFormat.CSV,
-				"1 0 0 1 0 0 0 0 1 0 0 0 0"));
+		chicken.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.importFromString(FileFormat.CSV, "1 0 0 1 0 0 0 0 1 0 0 0 0"));
 		animals.getSamples().add(chicken);
 
 		Sample duck = SampleFactory.labeledSample("Duck");
-		duck.setMatrix(Sample.INPUT, MatrixFactory.importFromString(FileFormat.CSV,
-				"1 0 0 1 0 0 0 0 1 0 0 0 1"));
+		duck.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.importFromString(FileFormat.CSV, "1 0 0 1 0 0 0 0 1 0 0 0 1"));
 		animals.getSamples().add(duck);
 
 		Sample goose = SampleFactory.labeledSample("Goose");
-		goose.setMatrix(Sample.INPUT, MatrixFactory.importFromString(FileFormat.CSV,
-				"1 0 0 1 0 0 0 0 1 0 0 1 1"));
+		goose.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.importFromString(FileFormat.CSV, "1 0 0 1 0 0 0 0 1 0 0 1 1"));
 		animals.getSamples().add(goose);
 
 		Sample owl = SampleFactory.labeledSample("Owl");
-		owl.setMatrix(Sample.INPUT, MatrixFactory.importFromString(FileFormat.CSV,
-				"1 0 0 1 0 0 0 0 1 1 0 1 0"));
+		owl.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.importFromString(FileFormat.CSV, "1 0 0 1 0 0 0 0 1 1 0 1 0"));
 		animals.getSamples().add(owl);
 
 		Sample falcon = SampleFactory.labeledSample("Falcon");
-		falcon.setMatrix(Sample.INPUT, MatrixFactory.importFromString(FileFormat.CSV,
-				"1 0 0 1 0 0 0 0 1 1 0 1 0"));
+		falcon.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.importFromString(FileFormat.CSV, "1 0 0 1 0 0 0 0 1 1 0 1 0"));
 		animals.getSamples().add(falcon);
 
 		Sample eagle = SampleFactory.labeledSample("Eagle");
-		eagle.setMatrix(Sample.INPUT, MatrixFactory.importFromString(FileFormat.CSV,
-				"0 1 0 1 0 0 0 0 1 1 0 1 0"));
+		eagle.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.importFromString(FileFormat.CSV, "0 1 0 1 0 0 0 0 1 1 0 1 0"));
 		animals.getSamples().add(eagle);
 
 		Sample fox = SampleFactory.labeledSample("Fox");
-		fox.setMatrix(Sample.INPUT, MatrixFactory.importFromString(FileFormat.CSV,
-				"0 1 0 0 1 1 0 0 0 1 0 0 0"));
+		fox.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.importFromString(FileFormat.CSV, "0 1 0 0 1 1 0 0 0 1 0 0 0"));
 		animals.getSamples().add(fox);
 
 		Sample dog = SampleFactory.labeledSample("Dog");
-		dog.setMatrix(Sample.INPUT, MatrixFactory.importFromString(FileFormat.CSV,
-				"0 1 0 0 1 1 0 0 0 0 1 0 0"));
+		dog.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.importFromString(FileFormat.CSV, "0 1 0 0 1 1 0 0 0 0 1 0 0"));
 		animals.getSamples().add(dog);
 
 		Sample wolf = SampleFactory.labeledSample("Wolf");
-		wolf.setMatrix(Sample.INPUT, MatrixFactory.importFromString(FileFormat.CSV,
-				"0 1 0 0 1 1 0 1 0 1 1 0 0"));
+		wolf.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.importFromString(FileFormat.CSV, "0 1 0 0 1 1 0 1 0 1 1 0 0"));
 		animals.getSamples().add(wolf);
 
 		Sample cat = SampleFactory.labeledSample("Cat");
-		cat.setMatrix(Sample.INPUT, MatrixFactory.importFromString(FileFormat.CSV,
-				"1 0 0 0 1 1 0 0 0 1 0 0 0"));
+		cat.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.importFromString(FileFormat.CSV, "1 0 0 0 1 1 0 0 0 1 0 0 0"));
 		animals.getSamples().add(cat);
 
 		Sample tiger = SampleFactory.labeledSample("Tiger");
-		tiger.setMatrix(Sample.INPUT, MatrixFactory.importFromString(FileFormat.CSV,
-				"0 0 1 0 1 1 0 0 0 1 1 0 0"));
+		tiger.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.importFromString(FileFormat.CSV, "0 0 1 0 1 1 0 0 0 1 1 0 0"));
 		animals.getSamples().add(tiger);
 
 		Sample lion = SampleFactory.labeledSample("Lion");
-		lion.setMatrix(Sample.INPUT, MatrixFactory.importFromString(FileFormat.CSV,
-				"0 0 1 0 1 1 0 1 0 1 1 0 0"));
+		lion.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.importFromString(FileFormat.CSV, "0 0 1 0 1 1 0 1 0 1 1 0 0"));
 		animals.getSamples().add(lion);
 
 		Sample horse = SampleFactory.labeledSample("Horse");
-		horse.setMatrix(Sample.INPUT, MatrixFactory.importFromString(FileFormat.CSV,
-				"0 0 1 0 1 1 1 1 0 0 1 0 0"));
+		horse.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.importFromString(FileFormat.CSV, "0 0 1 0 1 1 1 1 0 0 1 0 0"));
 		animals.getSamples().add(horse);
 
 		Sample zebra = SampleFactory.labeledSample("Zebra");
-		zebra.setMatrix(Sample.INPUT, MatrixFactory.importFromString(FileFormat.CSV,
-				"0 0 1 0 1 1 1 1 0 0 1 0 0"));
+		zebra.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.importFromString(FileFormat.CSV, "0 0 1 0 1 1 1 1 0 0 1 0 0"));
 		animals.getSamples().add(zebra);
 
 		Sample cow = SampleFactory.labeledSample("Cow");
-		cow.setMatrix(Sample.INPUT, MatrixFactory.importFromString(FileFormat.CSV,
-				"0 0 1 0 1 1 1 0 0 0 0 0 0"));
+		cow.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.importFromString(FileFormat.CSV, "0 0 1 0 1 1 1 0 0 0 0 0 0"));
 		animals.getSamples().add(cow);
 
 		return animals;
@@ -350,33 +350,45 @@ public abstract class DataSetFactory {
 		ClassificationDataSet or = classificationDataSet("Linear1");
 
 		Sample x0 = SampleFactory.labeledSample("0.0=0.0");
-		x0.setMatrix(Sample.INPUT, MatrixFactory.linkToArray(new double[] { 0.0 }).transpose());
-		x0.setMatrix(Sample.TARGET, MatrixFactory.linkToArray(new double[] { 0.0 }).transpose());
+		x0.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.linkToArray(new double[] { 0.0 }).transpose());
+		x0.getVariables().setMatrix(Sample.TARGET,
+				MatrixFactory.linkToArray(new double[] { 0.0 }).transpose());
 		or.getSamples().add(x0);
 
 		Sample x1 = SampleFactory.labeledSample("0.1=0.1");
-		x1.setMatrix(Sample.INPUT, MatrixFactory.linkToArray(new double[] { 0.1 }).transpose());
-		x1.setMatrix(Sample.TARGET, MatrixFactory.linkToArray(new double[] { 0.1 }).transpose());
+		x1.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.linkToArray(new double[] { 0.1 }).transpose());
+		x1.getVariables().setMatrix(Sample.TARGET,
+				MatrixFactory.linkToArray(new double[] { 0.1 }).transpose());
 		or.getSamples().add(x1);
 
 		Sample x2 = SampleFactory.labeledSample("0.2=0.2");
-		x2.setMatrix(Sample.INPUT, MatrixFactory.linkToArray(new double[] { 0.2 }).transpose());
-		x2.setMatrix(Sample.TARGET, MatrixFactory.linkToArray(new double[] { 0.2 }).transpose());
+		x2.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.linkToArray(new double[] { 0.2 }).transpose());
+		x2.getVariables().setMatrix(Sample.TARGET,
+				MatrixFactory.linkToArray(new double[] { 0.2 }).transpose());
 		or.getSamples().add(x2);
 
 		Sample x3 = SampleFactory.labeledSample("0.3=0.3");
-		x3.setMatrix(Sample.INPUT, MatrixFactory.linkToArray(new double[] { 0.3 }).transpose());
-		x3.setMatrix(Sample.TARGET, MatrixFactory.linkToArray(new double[] { 0.3 }).transpose());
+		x3.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.linkToArray(new double[] { 0.3 }).transpose());
+		x3.getVariables().setMatrix(Sample.TARGET,
+				MatrixFactory.linkToArray(new double[] { 0.3 }).transpose());
 		or.getSamples().add(x3);
 
 		Sample x4 = SampleFactory.labeledSample("0.4=0.4");
-		x4.setMatrix(Sample.INPUT, MatrixFactory.linkToArray(new double[] { 0.4 }).transpose());
-		x4.setMatrix(Sample.TARGET, MatrixFactory.linkToArray(new double[] { 0.4 }).transpose());
+		x4.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.linkToArray(new double[] { 0.4 }).transpose());
+		x4.getVariables().setMatrix(Sample.TARGET,
+				MatrixFactory.linkToArray(new double[] { 0.4 }).transpose());
 		or.getSamples().add(x4);
 
 		Sample x5 = SampleFactory.labeledSample("0.5=0.5");
-		x5.setMatrix(Sample.INPUT, MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
-		x5.setMatrix(Sample.TARGET, MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
+		x5.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
+		x5.getVariables().setMatrix(Sample.TARGET,
+				MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
 		or.getSamples().add(x5);
 
 		return or;
@@ -386,33 +398,45 @@ public abstract class DataSetFactory {
 		ClassificationDataSet or = classificationDataSet("Linear3");
 
 		Sample x0 = SampleFactory.labeledSample("0.0=0.5");
-		x0.setMatrix(Sample.INPUT, MatrixFactory.linkToArray(new double[] { 0.0 }).transpose());
-		x0.setMatrix(Sample.TARGET, MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
+		x0.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.linkToArray(new double[] { 0.0 }).transpose());
+		x0.getVariables().setMatrix(Sample.TARGET,
+				MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
 		or.getSamples().add(x0);
 
 		Sample x1 = SampleFactory.labeledSample("0.1=0.5");
-		x1.setMatrix(Sample.INPUT, MatrixFactory.linkToArray(new double[] { 0.1 }).transpose());
-		x1.setMatrix(Sample.TARGET, MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
+		x1.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.linkToArray(new double[] { 0.1 }).transpose());
+		x1.getVariables().setMatrix(Sample.TARGET,
+				MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
 		or.getSamples().add(x1);
 
 		Sample x2 = SampleFactory.labeledSample("0.2=0.5");
-		x2.setMatrix(Sample.INPUT, MatrixFactory.linkToArray(new double[] { 0.2 }).transpose());
-		x2.setMatrix(Sample.TARGET, MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
+		x2.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.linkToArray(new double[] { 0.2 }).transpose());
+		x2.getVariables().setMatrix(Sample.TARGET,
+				MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
 		or.getSamples().add(x2);
 
 		Sample x3 = SampleFactory.labeledSample("0.3=0.5");
-		x3.setMatrix(Sample.INPUT, MatrixFactory.linkToArray(new double[] { 0.3 }).transpose());
-		x3.setMatrix(Sample.TARGET, MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
+		x3.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.linkToArray(new double[] { 0.3 }).transpose());
+		x3.getVariables().setMatrix(Sample.TARGET,
+				MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
 		or.getSamples().add(x3);
 
 		Sample x4 = SampleFactory.labeledSample("0.4=0.5");
-		x4.setMatrix(Sample.INPUT, MatrixFactory.linkToArray(new double[] { 0.4 }).transpose());
-		x4.setMatrix(Sample.TARGET, MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
+		x4.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.linkToArray(new double[] { 0.4 }).transpose());
+		x4.getVariables().setMatrix(Sample.TARGET,
+				MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
 		or.getSamples().add(x4);
 
 		Sample x5 = SampleFactory.labeledSample("0.5=0.5");
-		x5.setMatrix(Sample.INPUT, MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
-		x5.setMatrix(Sample.TARGET, MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
+		x5.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
+		x5.getVariables().setMatrix(Sample.TARGET,
+				MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
 		or.getSamples().add(x5);
 
 		return or;
@@ -422,33 +446,45 @@ public abstract class DataSetFactory {
 		ClassificationDataSet or = classificationDataSet("Linear2");
 
 		Sample x0 = SampleFactory.labeledSample("0.0=0.1");
-		x0.setMatrix(Sample.INPUT, MatrixFactory.linkToArray(new double[] { 0.0 }).transpose());
-		x0.setMatrix(Sample.TARGET, MatrixFactory.linkToArray(new double[] { 0.1 }).transpose());
+		x0.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.linkToArray(new double[] { 0.0 }).transpose());
+		x0.getVariables().setMatrix(Sample.TARGET,
+				MatrixFactory.linkToArray(new double[] { 0.1 }).transpose());
 		or.getSamples().add(x0);
 
 		Sample x1 = SampleFactory.labeledSample("0.1=0.2");
-		x1.setMatrix(Sample.INPUT, MatrixFactory.linkToArray(new double[] { 0.1 }).transpose());
-		x1.setMatrix(Sample.TARGET, MatrixFactory.linkToArray(new double[] { 0.2 }).transpose());
+		x1.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.linkToArray(new double[] { 0.1 }).transpose());
+		x1.getVariables().setMatrix(Sample.TARGET,
+				MatrixFactory.linkToArray(new double[] { 0.2 }).transpose());
 		or.getSamples().add(x1);
 
 		Sample x2 = SampleFactory.labeledSample("0.2=0.3");
-		x2.setMatrix(Sample.INPUT, MatrixFactory.linkToArray(new double[] { 0.2 }).transpose());
-		x2.setMatrix(Sample.TARGET, MatrixFactory.linkToArray(new double[] { 0.3 }).transpose());
+		x2.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.linkToArray(new double[] { 0.2 }).transpose());
+		x2.getVariables().setMatrix(Sample.TARGET,
+				MatrixFactory.linkToArray(new double[] { 0.3 }).transpose());
 		or.getSamples().add(x2);
 
 		Sample x3 = SampleFactory.labeledSample("0.3=0.4");
-		x3.setMatrix(Sample.INPUT, MatrixFactory.linkToArray(new double[] { 0.3 }).transpose());
-		x3.setMatrix(Sample.TARGET, MatrixFactory.linkToArray(new double[] { 0.4 }).transpose());
+		x3.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.linkToArray(new double[] { 0.3 }).transpose());
+		x3.getVariables().setMatrix(Sample.TARGET,
+				MatrixFactory.linkToArray(new double[] { 0.4 }).transpose());
 		or.getSamples().add(x3);
 
 		Sample x4 = SampleFactory.labeledSample("0.4=0.5");
-		x4.setMatrix(Sample.INPUT, MatrixFactory.linkToArray(new double[] { 0.4 }).transpose());
-		x4.setMatrix(Sample.TARGET, MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
+		x4.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.linkToArray(new double[] { 0.4 }).transpose());
+		x4.getVariables().setMatrix(Sample.TARGET,
+				MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
 		or.getSamples().add(x4);
 
 		Sample x5 = SampleFactory.labeledSample("0.5=0.6");
-		x5.setMatrix(Sample.INPUT, MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
-		x5.setMatrix(Sample.TARGET, MatrixFactory.linkToArray(new double[] { 0.6 }).transpose());
+		x5.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.linkToArray(new double[] { 0.5 }).transpose());
+		x5.getVariables().setMatrix(Sample.TARGET,
+				MatrixFactory.linkToArray(new double[] { 0.6 }).transpose());
 		or.getSamples().add(x5);
 
 		return or;
@@ -458,23 +494,31 @@ public abstract class DataSetFactory {
 		ClassificationDataSet or = classificationDataSet("OR-Problem");
 
 		Sample x000 = SampleFactory.labeledSample("00=01");
-		x000.setMatrix(Sample.INPUT, MatrixFactory.linkToArray(new double[] { 0, 0 }).transpose());
-		x000.setMatrix(Sample.TARGET, MatrixFactory.linkToArray(new double[] { 0, 1 }).transpose());
+		x000.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.linkToArray(new double[] { 0, 0 }).transpose());
+		x000.getVariables().setMatrix(Sample.TARGET,
+				MatrixFactory.linkToArray(new double[] { 0, 1 }).transpose());
 		or.getSamples().add(x000);
 
 		Sample x011 = SampleFactory.labeledSample("01=10");
-		x011.setMatrix(Sample.INPUT, MatrixFactory.linkToArray(new double[] { 0, 1 }).transpose());
-		x011.setMatrix(Sample.TARGET, MatrixFactory.linkToArray(new double[] { 1, 0 }).transpose());
+		x011.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.linkToArray(new double[] { 0, 1 }).transpose());
+		x011.getVariables().setMatrix(Sample.TARGET,
+				MatrixFactory.linkToArray(new double[] { 1, 0 }).transpose());
 		or.getSamples().add(x011);
 
 		Sample x101 = SampleFactory.labeledSample("10=10");
-		x101.setMatrix(Sample.INPUT, MatrixFactory.linkToArray(new double[] { 1, 0 }).transpose());
-		x101.setMatrix(Sample.TARGET, MatrixFactory.linkToArray(new double[] { 1, 0 }).transpose());
+		x101.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.linkToArray(new double[] { 1, 0 }).transpose());
+		x101.getVariables().setMatrix(Sample.TARGET,
+				MatrixFactory.linkToArray(new double[] { 1, 0 }).transpose());
 		or.getSamples().add(x101);
 
 		Sample x110 = SampleFactory.labeledSample("11=10");
-		x110.setMatrix(Sample.INPUT, MatrixFactory.linkToArray(new double[] { 1, 1 }).transpose());
-		x110.setMatrix(Sample.TARGET, MatrixFactory.linkToArray(new double[] { 1, 0 }).transpose());
+		x110.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.linkToArray(new double[] { 1, 1 }).transpose());
+		x110.getVariables().setMatrix(Sample.TARGET,
+				MatrixFactory.linkToArray(new double[] { 1, 0 }).transpose());
 		or.getSamples().add(x110);
 
 		return or;
@@ -484,23 +528,31 @@ public abstract class DataSetFactory {
 		ClassificationDataSet xor = classificationDataSet("XOR-Problem");
 
 		Sample x000 = SampleFactory.labeledSample("00=01");
-		x000.setMatrix(Sample.INPUT, MatrixFactory.linkToArray(new double[] { 0, 0 }).transpose());
-		x000.setMatrix(Sample.TARGET, MatrixFactory.linkToArray(new double[] { 0, 1 }).transpose());
+		x000.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.linkToArray(new double[] { 0, 0 }).transpose());
+		x000.getVariables().setMatrix(Sample.TARGET,
+				MatrixFactory.linkToArray(new double[] { 0, 1 }).transpose());
 		xor.getSamples().add(x000);
 
 		Sample x011 = SampleFactory.labeledSample("01=10");
-		x011.setMatrix(Sample.INPUT, MatrixFactory.linkToArray(new double[] { 0, 1 }).transpose());
-		x011.setMatrix(Sample.TARGET, MatrixFactory.linkToArray(new double[] { 1, 0 }).transpose());
+		x011.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.linkToArray(new double[] { 0, 1 }).transpose());
+		x011.getVariables().setMatrix(Sample.TARGET,
+				MatrixFactory.linkToArray(new double[] { 1, 0 }).transpose());
 		xor.getSamples().add(x011);
 
 		Sample x101 = SampleFactory.labeledSample("10=10");
-		x101.setMatrix(Sample.INPUT, MatrixFactory.linkToArray(new double[] { 1, 0 }).transpose());
-		x101.setMatrix(Sample.TARGET, MatrixFactory.linkToArray(new double[] { 1, 0 }).transpose());
+		x101.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.linkToArray(new double[] { 1, 0 }).transpose());
+		x101.getVariables().setMatrix(Sample.TARGET,
+				MatrixFactory.linkToArray(new double[] { 1, 0 }).transpose());
 		xor.getSamples().add(x101);
 
 		Sample x110 = SampleFactory.labeledSample("11=01");
-		x110.setMatrix(Sample.INPUT, MatrixFactory.linkToArray(new double[] { 1, 1 }).transpose());
-		x110.setMatrix(Sample.TARGET, MatrixFactory.linkToArray(new double[] { 0, 1 }).transpose());
+		x110.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.linkToArray(new double[] { 1, 1 }).transpose());
+		x110.getVariables().setMatrix(Sample.TARGET,
+				MatrixFactory.linkToArray(new double[] { 0, 1 }).transpose());
 		xor.getSamples().add(x110);
 
 		return xor;

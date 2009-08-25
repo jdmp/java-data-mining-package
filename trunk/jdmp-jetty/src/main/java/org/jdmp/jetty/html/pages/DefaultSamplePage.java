@@ -62,7 +62,7 @@ public class DefaultSamplePage extends Page {
 						add(new LinkTag("?q=" + l, l));
 					}
 				} else {
-					String value = sample.getAllAsString(key);
+					String value = sample.getVariables().getAllAsString(key);
 					add(new H2Tag(StringUtil.format(key)));
 					add(new Text(value));
 				}

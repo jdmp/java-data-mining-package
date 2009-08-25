@@ -215,7 +215,6 @@ public class NetworkLayer implements Serializable {
 		getWeightVariable().addMatrix(w);
 	}
 
-	
 	public String toString() {
 		StringBuilder s = new StringBuilder();
 		if (getPreviousLayer() != null) {
@@ -259,7 +258,7 @@ public class NetworkLayer implements Serializable {
 	}
 
 	public void addInputMatrix(Matrix matrix) {
-		algorithmForward.setMatrix(NetworkLayerForward.INPUT, matrix);
+		algorithmForward.getVariables().setMatrix(NetworkLayerForward.INPUT, matrix);
 	}
 
 }

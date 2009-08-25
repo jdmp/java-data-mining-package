@@ -41,7 +41,6 @@ public abstract class AbstractTagger extends AbstractAlgorithm implements Tagger
 		}
 	}
 
-	
 	public final void tag(Sample sample) throws Exception {
 		Variable v = sample.getVariables().get(Tokenizer.TOKENIZED);
 		if (v == null) {
@@ -50,7 +49,7 @@ public abstract class AbstractTagger extends AbstractAlgorithm implements Tagger
 		for (Matrix m : v.getMatrixList()) {
 			List<Matrix> list = tag(m);
 			for (Matrix n : list) {
-				sample.setMatrix(TAGGED, n);
+				sample.getVariables().setMatrix(TAGGED, n);
 			}
 		}
 	}

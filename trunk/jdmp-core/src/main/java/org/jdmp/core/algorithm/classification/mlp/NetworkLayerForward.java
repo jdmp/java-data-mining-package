@@ -80,7 +80,6 @@ public class NetworkLayerForward extends AbstractAlgorithm {
 		setTransferFunction(transferFunction);
 	}
 
-	
 	public Map<String, Object> calculateObjects(Map<String, Object> input) throws Exception {
 		Map<String, Object> result = new HashMap<String, Object>();
 
@@ -97,7 +96,7 @@ public class NetworkLayerForward extends AbstractAlgorithm {
 	}
 
 	public Matrix getInputMatrix() {
-		return getMatrix(INPUT);
+		return getVariables().getMatrix(INPUT);
 	}
 
 	public Variable getInputVariable() {
@@ -111,7 +110,7 @@ public class NetworkLayerForward extends AbstractAlgorithm {
 	}
 
 	public Matrix getWeightMatrix() {
-		return getMatrix(WEIGHT);
+		return getVariables().getMatrix(WEIGHT);
 	}
 
 	public Variable getWeightVariable() {
@@ -125,7 +124,7 @@ public class NetworkLayerForward extends AbstractAlgorithm {
 	}
 
 	public Matrix getWeightedInputMatrix() {
-		return getMatrix(WEIGHTEDINPUT);
+		return getVariables().getMatrix(WEIGHTEDINPUT);
 	}
 
 	public Variable getWeightedInputVariable() {
@@ -192,7 +191,7 @@ public class NetworkLayerForward extends AbstractAlgorithm {
 	}
 
 	public Matrix getNetInputMatrix() {
-		return getMatrix(NETINPUT);
+		return getVariables().getMatrix(NETINPUT);
 	}
 
 	public void setNetInputVariable(Variable v) {
@@ -205,7 +204,7 @@ public class NetworkLayerForward extends AbstractAlgorithm {
 	}
 
 	public Matrix getOutputMatrix() {
-		return getMatrix(OUTPUT);
+		return getVariables().getMatrix(OUTPUT);
 	}
 
 	public void setOutputVariable(Variable v) {

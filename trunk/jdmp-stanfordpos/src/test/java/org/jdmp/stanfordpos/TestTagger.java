@@ -67,9 +67,9 @@ public class TestTagger extends TestCase {
 	public void testTagger() throws Exception {
 		DataSet ds = new DefaultDataSet();
 		Sample sa1 = new DefaultSample();
-		sa1.setObject(Sample.INPUT, s1);
+		sa1.getVariables().setObject(Sample.INPUT, s1);
 		Sample sa2 = new DefaultSample();
-		sa2.setObject(Sample.INPUT, s2);
+		sa2.getVariables().setObject(Sample.INPUT, s2);
 		ds.getSamples().put("s1", sa1);
 		ds.getSamples().put("s2", sa2);
 
@@ -79,8 +79,8 @@ public class TestTagger extends TestCase {
 		sa1 = ds.getSamples().get("s1");
 		sa2 = ds.getSamples().get("s2");
 
-		Matrix m1 = sa1.getMatrix(Tagger.TAGGED);
-		Matrix m2 = sa2.getMatrix(Tagger.TAGGED);
+		Matrix m1 = sa1.getVariables().getMatrix(Tagger.TAGGED);
+		Matrix m2 = sa2.getVariables().getMatrix(Tagger.TAGGED);
 
 		assertEquals(2, m1.getColumnCount());
 		assertEquals(11, m1.getRowCount());

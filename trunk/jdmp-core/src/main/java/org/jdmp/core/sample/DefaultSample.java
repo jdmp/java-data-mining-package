@@ -24,8 +24,6 @@
 package org.jdmp.core.sample;
 
 import org.jdmp.core.variable.Variable;
-import org.jdmp.core.variable.VariableFactory;
-import org.ujmp.core.Matrix;
 
 public class DefaultSample extends AbstractSample {
 	private static final long serialVersionUID = -3649758882404748630L;
@@ -34,7 +32,6 @@ public class DefaultSample extends AbstractSample {
 		super();
 	}
 
-	
 	public final DefaultSample clone() {
 		DefaultSample s = null;
 		try {
@@ -47,15 +44,6 @@ public class DefaultSample extends AbstractSample {
 			s.getVariables().put(k, v.clone());
 		}
 		return s;
-	}
-
-	public void setMatrix(String variableKey, Matrix matrix) {
-		Variable v = getVariables().get(variableKey);
-		if (v == null) {
-			v = VariableFactory.labeledVariable(variableKey.toString());
-			getVariables().put(variableKey, v);
-		}
-		v.addMatrix(matrix);
 	}
 
 }

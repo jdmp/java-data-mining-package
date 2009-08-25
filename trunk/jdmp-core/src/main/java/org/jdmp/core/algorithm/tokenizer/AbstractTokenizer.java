@@ -40,7 +40,7 @@ public abstract class AbstractTokenizer extends AbstractAlgorithm implements Tok
 		for (Matrix m : input.getMatrixList()) {
 			List<Matrix> r = tokenize(m);
 			for (Matrix n : r) {
-				sample.setMatrix(Tokenizer.TOKENIZED, n);
+				sample.getVariables().setMatrix(Tokenizer.TOKENIZED, n);
 			}
 		}
 	}

@@ -61,9 +61,9 @@ public class CrossValidation {
 				algorithm.predict(test);
 
 				acc.add(test.getAccuracy());
-				fm.add(test.getAsDouble(Variable.FMEASUREMACRO));
+				fm.add(test.getVariables().getAsDouble(Variable.FMEASUREMACRO));
 				// System.out.print(test.getAccuracy() + "\t");
-				System.out.print(test.getAsDouble(Variable.FMEASUREMACRO) + "\t");
+				System.out.print(test.getVariables().getAsDouble(Variable.FMEASUREMACRO) + "\t");
 			}
 			System.out.println();
 

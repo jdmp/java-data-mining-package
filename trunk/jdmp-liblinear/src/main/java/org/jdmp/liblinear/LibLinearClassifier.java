@@ -58,7 +58,6 @@ public class LibLinearClassifier extends AbstractClassifier {
 		this.param = parameter;
 	}
 
-	
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
 		long columnCount = input.getColumnCount();
 		int count = 0;
@@ -87,13 +86,12 @@ public class LibLinearClassifier extends AbstractClassifier {
 		return ret;
 	}
 
-	
 	public void train(RegressionDataSet dataSet) throws Exception {
 		createAlgorithm();
 		prob = new Problem();
 		prob.l = dataSet.getSamples().getSize();
-		prob.n = (int) dataSet.getSamples().getElementAt(0).getMatrix(INPUT)
-				.getColumnCount() + 1; // +1 for bias
+		prob.n = (int) dataSet.getSamples().getElementAt(0).getVariables()
+				.getMatrix(INPUT).getColumnCount() + 1; // +1 for bias
 
 		prob.x = new FeatureNode[prob.l][];
 		prob.y = new int[prob.l];
@@ -103,7 +101,7 @@ public class LibLinearClassifier extends AbstractClassifier {
 				System.out.println("Converting sample " + i);
 			}
 			Sample p = dataSet.getSamples().getElementAt(i);
-			Matrix input = p.getMatrix(INPUT);
+			Matrix input = p.getVariables().getMatrix(INPUT);
 			prob.y[i] = p.getTargetClass();
 			long columnCount = input.getColumnCount();
 			int count = 0;
@@ -128,7 +126,6 @@ public class LibLinearClassifier extends AbstractClassifier {
 		model = Linear.train(prob, param);
 	}
 
-	
 	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput)
 			throws Exception {
 		throw new Exception("not supported");
@@ -143,7 +140,6 @@ public class LibLinearClassifier extends AbstractClassifier {
 		prob = null;
 	}
 
-	
 	public void reset() throws MatrixException {
 		createAlgorithm();
 	}

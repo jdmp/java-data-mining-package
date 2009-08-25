@@ -74,7 +74,7 @@ public class DefaultIndexPage extends Page {
 								}
 							}
 							if (!tagFound) {
-								sample.setObject("Tags", t);
+								sample.getVariables().setObject("Tags", t);
 							}
 						}
 						System.out.println("updating sample " + id

@@ -74,7 +74,6 @@ public class SampleListPanel extends AbstractListPanel {
 		updateTitle();
 	}
 
-	
 	public void updateTitle() {
 		getBorder().setTitle("Samples (" + jTable.getRowCount() + ")");
 		repaint(1000);
@@ -90,14 +89,13 @@ class SampleCollator implements Comparator<Object> {
 		this.column = column;
 	}
 
-	
 	public int compare(Object source, Object target) {
 		return compare((Sample) source, (Sample) target);
 	}
 
 	public int compare(Sample s1, Sample s2) {
-		Matrix m1 = s1.getMatrix(column);
-		Matrix m2 = s2.getMatrix(column);
+		Matrix m1 = s1.getVariables().getMatrix(column);
+		Matrix m2 = s2.getVariables().getMatrix(column);
 		if (m1 != null && m2 != null) {
 			return m1.compareTo(m2);
 		} else {
