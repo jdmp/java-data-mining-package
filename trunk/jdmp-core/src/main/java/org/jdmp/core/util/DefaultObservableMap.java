@@ -23,39 +23,23 @@
 
 package org.jdmp.core.util;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class DefaultObservableMap<V> extends AbstractObservableMap<V> {
 	private static final long serialVersionUID = -1811632376295464484L;
 
-	private Map<String, V> map = null;
-
 	public DefaultObservableMap() {
 	}
 
 	public DefaultObservableMap(Map<String, V> map) {
-		this.map = map;
+		super(map);
 	}
 
 	public DefaultObservableMap(List<V> list) {
 		for (V o : list) {
 			add(o);
 		}
-	}
-
-	
-	public Map<String, V> getMap() {
-		if (map == null) {
-			map = new HashMap<String, V>(2);
-		}
-		return map;
-	}
-
-	
-	public void setMap(Map<String, V> map) {
-		this.map = map;
 	}
 
 }

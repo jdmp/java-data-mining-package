@@ -62,6 +62,8 @@ public interface Variables extends ObservableMap<Variable> {
 
 	public Object getAsObject(String variableKey);
 
+	public Object getObject(String variableKey);
+
 	public void setMatrix(String variableKey, Matrix matrix);
 
 	public void setObject(String variableKey, Object value);
