@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.jdmp.core.variable.DefaultVariables;
+import org.jdmp.core.variable.LazyVariables;
 import org.jdmp.core.variable.SingletonVariable;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.interfaces.Wrapper;
@@ -43,7 +44,8 @@ public abstract class AbstractMapSample extends AbstractSample implements
 	private VariableMap variableMap = new VariableMap();
 
 	public AbstractMapSample() {
-		setVariables(new VariableMapWrapper());
+		// setVariables(new VariableMapWrapper());
+		setVariables(new LazyVariables());
 	}
 
 	public final Sample clone() {

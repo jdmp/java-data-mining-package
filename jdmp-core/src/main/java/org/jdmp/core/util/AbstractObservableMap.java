@@ -24,6 +24,7 @@
 package org.jdmp.core.util;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -39,9 +40,26 @@ public abstract class AbstractObservableMap<V> implements ObservableMap<V> {
 
 	private EventListenerList listenerList = null;
 
-	public abstract Map<String, V> getMap();
+	private Map<String, V> map = null;
 
-	public abstract void setMap(Map<String, V> map);
+	public AbstractObservableMap(Map<String, V> map) {
+		this();
+		setMap(map);
+	}
+
+	public AbstractObservableMap() {
+	}
+
+	public final Map<String, V> getMap() {
+		if (map == null) {
+			map = new HashMap<String, V>(2);
+		}
+		return map;
+	}
+
+	public final void setMap(Map<String, V> map) {
+		this.map = map;
+	}
 
 	public final synchronized V getElementAt(int index) {
 		Iterator<V> it = getMap().values().iterator();
@@ -106,7 +124,6 @@ public abstract class AbstractObservableMap<V> implements ObservableMap<V> {
 		return v;
 	}
 
-	
 	public final void fireContentsChanged() {
 		fireContentsChanged(this, -1, -1);
 	}
@@ -133,22 +150,18 @@ public abstract class AbstractObservableMap<V> implements ObservableMap<V> {
 		return getMap().keySet();
 	}
 
-	
 	public final boolean containsKey(Object key) {
 		return getMap().containsKey(key);
 	}
 
-	
 	public final boolean containsValue(Object value) {
 		return getMap().containsValue(value);
 	}
 
-	
 	public final Set<java.util.Map.Entry<String, V>> entrySet() {
 		return getMap().entrySet();
 	}
 
-	
 	public final void putAll(Map<? extends String, ? extends V> m) {
 		for (String k : m.keySet()) {
 			V v = m.get(k);
@@ -156,12 +169,10 @@ public abstract class AbstractObservableMap<V> implements ObservableMap<V> {
 		}
 	}
 
-	
 	public final int size() {
 		return getMap().size();
 	}
 
-	
 	public final Collection<V> values() {
 		return getMap().values();
 	}

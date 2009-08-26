@@ -24,25 +24,12 @@
 package org.jdmp.core.util;
 
 import java.util.Collections;
-import java.util.Map;
 
 public class SingletonObservableMap<V> extends AbstractObservableMap<V> {
 	private static final long serialVersionUID = 3665329356125156909L;
 
-	private Map<String, V> map = null;
-
 	public SingletonObservableMap(String key, V value) {
-		map = Collections.singletonMap(key, value);
-	}
-
-	
-	public Map<String, V> getMap() {
-		return map;
-	}
-
-	
-	public void setMap(Map<String, V> map) {
-		this.map = map;
+		super(Collections.singletonMap(key, value));
 	}
 
 }

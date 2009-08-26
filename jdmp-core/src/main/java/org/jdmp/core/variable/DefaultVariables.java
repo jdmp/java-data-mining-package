@@ -23,22 +23,12 @@
 
 package org.jdmp.core.variable;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.Date;
-
-import org.jdmp.core.util.DefaultObservableMap;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.util.MathUtil;
 import org.ujmp.core.util.StringUtil;
 
-public class DefaultVariables extends DefaultObservableMap<Variable> implements Variables {
+public class DefaultVariables extends AbstractVariables {
 	private static final long serialVersionUID = -863822584023419772L;
-
-	public final BigInteger getAsBigInteger(String variableKey) {
-		return MathUtil.getBigInteger(getMatrix(variableKey));
-	}
 
 	public final Matrix getMatrix(String variableKey) {
 		Variable v = get(variableKey);
@@ -59,19 +49,14 @@ public class DefaultVariables extends DefaultObservableMap<Variable> implements 
 	}
 
 	public final void setObject(String variableKey, Object value) {
-		if (value == null) {
-			setMatrix(variableKey, MatrixFactory.emptyMatrix());
-		} else if (value instanceof Matrix) {
-			setMatrix(variableKey, (Matrix) value);
-		} else {
-			setMatrix(variableKey, MatrixFactory.linkToValue(value));
-		}
+		setMatrix(variableKey, MathUtil.getMatrix(value));
 	}
 
-	public final String getAsString(String variableKey) {
-		return StringUtil.convert(getMatrix(variableKey));
+	@Override
+	public Object getObject(String variableKey) {
+		return MathUtil.getObject(getMatrix(variableKey));
 	}
-
+	
 	public final String getAllAsString(String variableKey) {
 		Variable v = get(variableKey);
 		if (v != null) {
@@ -79,50 +64,6 @@ public class DefaultVariables extends DefaultObservableMap<Variable> implements 
 		} else {
 			return null;
 		}
-	}
-
-	public final boolean getAsBoolean(String variableKey) {
-		return MathUtil.getBoolean(getMatrix(variableKey));
-	}
-
-	public final byte getAsByte(String variableKey) {
-		return MathUtil.getByte(getMatrix(variableKey));
-	}
-
-	public final char getAsChar(String variableKey) {
-		return MathUtil.getChar(getMatrix(variableKey));
-	}
-
-	public final double getAsDouble(String variableKey) {
-		return MathUtil.getDouble(getMatrix(variableKey));
-	}
-
-	public final float getAsFloat(String variableKey) {
-		return MathUtil.getFloat(getMatrix(variableKey));
-	}
-
-	public final int getAsInt(String variableKey) {
-		return MathUtil.getInt(getMatrix(variableKey));
-	}
-
-	public final Object getAsObject(String variableKey) {
-		return MathUtil.getObject(getMatrix(variableKey));
-	}
-
-	public final long getAsLong(String variableKey) {
-		return MathUtil.getLong(getMatrix(variableKey));
-	}
-
-	public final short getAsShort(String variableKey) {
-		return MathUtil.getShort(getMatrix(variableKey));
-	}
-
-	public final Date getAsDate(String variableKey) {
-		return MathUtil.getDate(getMatrix(variableKey));
-	}
-
-	public final BigDecimal getAsBigDecimal(String variableKey) {
-		return MathUtil.getBigDecimal(getMatrix(variableKey));
 	}
 
 }
