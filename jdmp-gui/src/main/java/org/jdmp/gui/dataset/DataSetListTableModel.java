@@ -37,12 +37,6 @@ public class DataSetListTableModel extends AbstractTableModel implements ListDat
 
 	public static final int LABELCOLUMN = 1;
 
-	public static final int DATASETCOUNTCOLUMN = 2;
-
-	public static final int SAMPLECOUNTCOLUMN = 3;
-
-	public static final int VARIABLECOLUMN = 4;
-
 	private HasDataSets iDataSets = null;
 
 	public DataSetListTableModel(HasDataSets iDataSets) {
@@ -55,28 +49,20 @@ public class DataSetListTableModel extends AbstractTableModel implements ListDat
 	}
 
 	public int getColumnCount() {
-		return 5;
+		return 2;
 	}
 
-	
 	public String getColumnName(int columnIndex) {
 		switch (columnIndex) {
 		case IDCOLUMN:
 			return "Id";
 		case LABELCOLUMN:
 			return "Label";
-		case DATASETCOUNTCOLUMN:
-			return "DataSetCount";
-		case SAMPLECOUNTCOLUMN:
-			return "SampleCount";
-		case VARIABLECOLUMN:
-			return "Variables";
 		default:
 			return "unknown";
 		}
 	}
 
-	
 	public Class<?> getColumnClass(int columnIndex) {
 		return DataSet.class;
 	}
@@ -85,17 +71,14 @@ public class DataSetListTableModel extends AbstractTableModel implements ListDat
 		return iDataSets.getDataSets().getElementAt(rowIndex);
 	}
 
-	
 	public void contentsChanged(ListDataEvent e) {
 		fireTableRowsUpdated(e.getIndex0(), e.getIndex1());
 	}
 
-	
 	public void intervalAdded(ListDataEvent e) {
 		fireTableRowsInserted(e.getIndex0(), e.getIndex1());
 	}
 
-	
 	public void intervalRemoved(ListDataEvent e) {
 		fireTableRowsDeleted(e.getIndex0(), e.getIndex1());
 	}
