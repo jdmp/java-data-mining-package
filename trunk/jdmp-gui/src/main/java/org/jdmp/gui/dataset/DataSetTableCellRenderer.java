@@ -63,15 +63,6 @@ public class DataSetTableCellRenderer implements TableCellRenderer {
 			case DataSetListTableModel.LABELCOLUMN:
 				o = dataSet.getLabel();
 				break;
-			case DataSetListTableModel.VARIABLECOLUMN:
-				return variableListTableCellRenderer.getTableCellRendererComponent(table, dataSet
-						.getVariables(), isSelected, hasFocus, row, column);
-			case DataSetListTableModel.SAMPLECOUNTCOLUMN:
-				o = "" + dataSet.getSamples().getSize();
-				break;
-			case DataSetListTableModel.DATASETCOUNTCOLUMN:
-				o = "" + dataSet.getDataSets().getSize();
-				break;
 			default:
 				o = null;
 				break;
