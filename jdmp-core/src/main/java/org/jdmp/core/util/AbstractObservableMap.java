@@ -62,11 +62,11 @@ public abstract class AbstractObservableMap<V> implements ObservableMap<V> {
 	}
 
 	public final synchronized V getElementAt(int index) {
-		Iterator<V> it = getMap().values().iterator();
+		Iterator<String> it = getMap().keySet().iterator();
 		for (int i = 0; it.hasNext() && i < index; i++) {
 			it.next();
 		}
-		return it.hasNext() ? it.next() : null;
+		return it.hasNext() ? get(it.next()) : null;
 	}
 
 	public final synchronized V get(Object key) {
@@ -88,9 +88,9 @@ public abstract class AbstractObservableMap<V> implements ObservableMap<V> {
 	}
 
 	public final synchronized int indexOf(V value) {
-		Iterator<V> it = getMap().values().iterator();
+		Iterator<String> it = getMap().keySet().iterator();
 		for (int i = 0; it.hasNext(); i++) {
-			if (it.next().equals(value)) {
+			if (get(it.next()).equals(value)) {
 				return i;
 			}
 		}
