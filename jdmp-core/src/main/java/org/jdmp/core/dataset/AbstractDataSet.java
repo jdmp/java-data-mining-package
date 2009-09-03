@@ -77,7 +77,7 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		getVariables().setObject(DataSet.DESCRIPTION, description);
 	}
 
-	public final String getLabel() {
+	public String getLabel() {
 		return getVariables().getAsString(DataSet.LABEL);
 	}
 
