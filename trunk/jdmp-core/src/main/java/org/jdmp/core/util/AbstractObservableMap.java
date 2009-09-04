@@ -23,9 +23,11 @@
 
 package org.jdmp.core.util;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -42,6 +44,8 @@ public abstract class AbstractObservableMap<V> implements ObservableMap<V> {
 
 	private Map<String, V> map = null;
 
+	private List<V> list = null;
+
 	public AbstractObservableMap(Map<String, V> map) {
 		this();
 		setMap(map);
@@ -57,16 +61,23 @@ public abstract class AbstractObservableMap<V> implements ObservableMap<V> {
 		return map;
 	}
 
+	public final List<V> getList() {
+		if (list == null) {
+			list = new ArrayList<V>(getMap().size());
+		}
+		if (list.size() != getMap().size()) {
+			list.clear();
+			list.addAll(getMap().values());
+		}
+		return list;
+	}
+
 	public final void setMap(Map<String, V> map) {
 		this.map = map;
 	}
 
 	public final synchronized V getElementAt(int index) {
-		Iterator<String> it = getMap().keySet().iterator();
-		for (int i = 0; it.hasNext() && i < index; i++) {
-			it.next();
-		}
-		return it.hasNext() ? get(it.next()) : null;
+		return getList().get(index);
 	}
 
 	public final synchronized V get(Object key) {
@@ -88,13 +99,7 @@ public abstract class AbstractObservableMap<V> implements ObservableMap<V> {
 	}
 
 	public final synchronized int indexOf(V value) {
-		Iterator<String> it = getMap().keySet().iterator();
-		for (int i = 0; it.hasNext(); i++) {
-			if (get(it.next()).equals(value)) {
-				return i;
-			}
-		}
-		return -1;
+		return getList().indexOf(value);
 	}
 
 	public final synchronized int getSize() {
@@ -105,6 +110,7 @@ public abstract class AbstractObservableMap<V> implements ObservableMap<V> {
 		if (value != null && value instanceof HasId) {
 			((HasId) value).setId(key);
 		}
+		getList().clear();
 		V v = getMap().put(key, value);
 		int index = indexOf(value);
 		if (v == null) {
@@ -118,6 +124,7 @@ public abstract class AbstractObservableMap<V> implements ObservableMap<V> {
 	public final synchronized V remove(Object key) {
 		int index = indexOf(getMap().get(key));
 		V v = getMap().remove(key);
+		getList().clear();
 		if (index >= 0) {
 			fireIntervalRemoved(this, index, index);
 		}
@@ -139,6 +146,7 @@ public abstract class AbstractObservableMap<V> implements ObservableMap<V> {
 	public final void clear() {
 		int size = getMap().size();
 		getMap().clear();
+		getList().clear();
 		fireIntervalRemoved(this, 0, size - 1);
 	}
 
