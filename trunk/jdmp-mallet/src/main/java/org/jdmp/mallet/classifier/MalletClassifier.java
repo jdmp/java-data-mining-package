@@ -70,15 +70,14 @@ public class MalletClassifier extends AbstractClassifier {
 		reset();
 	}
 
-	
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
-		Instance instance = new Sample2Instance(input, null, classifier.getAlphabet(), classifier
-				.getLabelAlphabet(), classifier.getInstancePipe(), cumSum);
+		Instance instance = new Sample2Instance(input, null, classifier
+				.getAlphabet(), classifier.getLabelAlphabet(), classifier
+				.getInstancePipe(), cumSum);
 		Classification c = classifier.classify(instance);
 		return new Labeling2Matrix(c.getLabeling());
 	}
 
-	
 	public void reset() throws Exception {
 		switch (type) {
 		case NaiveBayes:
@@ -116,7 +115,6 @@ public class MalletClassifier extends AbstractClassifier {
 
 	}
 
-	
 	public void train(RegressionDataSet dataSet) throws Exception {
 		Matrix dataSetInput = dataSet.getInputMatrix();
 
@@ -124,7 +122,7 @@ public class MalletClassifier extends AbstractClassifier {
 		cumSum = new ArrayList<Integer>((int) max.getColumnCount());
 		int sum = 0;
 		cumSum.add(sum);
-		for (int i = 0; i < max.getColumnCount(); i++) {
+		for (int i = (int) max.getColumnCount() - 1; i != -1; i--) {
 			sum += max.getAsInt(0, i) + 1;
 			cumSum.add(sum);
 		}
@@ -142,14 +140,15 @@ public class MalletClassifier extends AbstractClassifier {
 			targetAlphabet.lookupIndex("Class" + i, true);
 		}
 
-		InstanceList trainingSet = new DataSet2InstanceList((ClassificationDataSet) dataSet,
-				inputAlphabet, targetAlphabet, cumSum);
+		InstanceList trainingSet = new DataSet2InstanceList(
+				(ClassificationDataSet) dataSet, inputAlphabet, targetAlphabet,
+				cumSum);
 
 		classifier = trainer.train(trainingSet);
 	}
 
-	
-	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) throws Exception {
+	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput)
+			throws Exception {
 		throw new MatrixException("not implemented");
 	}
 
