@@ -44,7 +44,6 @@ public class Weighting extends AlgorithmTwoSources {
 		this.biasType = biasType;
 	}
 
-	
 	public Map<String, Object> calculateObjects(Map<String, Object> input) throws MatrixException {
 		Map<String, Object> result = new HashMap<String, Object>();
 
@@ -53,10 +52,11 @@ public class Weighting extends AlgorithmTwoSources {
 
 		switch (biasType) {
 		case SINGLE:
-			x = x.addRowWithOnes();
+			Matrix bias = MatrixFactory.ones(1, x.getColumnCount());
+			x = MatrixFactory.vertCat(x, bias);
 			break;
 		case MULTIPLE:
-			Matrix bias = MatrixFactory.ones(x.getSize());
+			bias = MatrixFactory.ones(x.getSize());
 			for (long[] c : x.allCoordinates()) {
 				if (MathUtil.isNaNOrInfinite(x.getAsDouble(c))) {
 					bias.setAsDouble(Double.NaN, c);
