@@ -92,10 +92,11 @@ public class WeightUpdate extends AlgorithmFiveSources {
 
 		switch (biasType) {
 		case SINGLE:
-			transposedInput = transposedInput.addColumnWithOnes();
+			Matrix bias = MatrixFactory.ones(transposedInput.getRowCount(), 1);
+			transposedInput = MatrixFactory.horCat(transposedInput, bias);
 			break;
 		case MULTIPLE:
-			Matrix bias = MatrixFactory.ones(transposedInput.getSize());
+			bias = MatrixFactory.ones(transposedInput.getSize());
 			for (long[] c : transposedInput.allCoordinates()) {
 				if (MathUtil.isNaNOrInfinite(transposedInput.getAsDouble(c))) {
 					bias.setAsDouble(Double.NaN, c);
