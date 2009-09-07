@@ -84,12 +84,17 @@ public class EhcacheMap<K, V> implements Map<K, V>, Flushable, Closeable {
 	}
 
 	public EhcacheMap(String name) throws IOException {
-		this(name, null);
+		this(name, null, true);
 	}
 
-	public EhcacheMap(String name, File path) throws IOException {
+	public EhcacheMap(boolean overFlowToDisk) throws IOException {
+		this(null, null, overFlowToDisk);
+	}
+
+	public EhcacheMap(String name, File path, boolean overFlowToDisk) throws IOException {
 		System.setProperty("net.sf.ehcache.enableShutdownHook", "true");
 		this.diskStorePath = path;
+		this.overflowToDisk = overFlowToDisk;
 		this.name = name;
 	}
 
@@ -231,7 +236,6 @@ public class EhcacheMap<K, V> implements Map<K, V>, Flushable, Closeable {
 		throw new MatrixException("not implemented");
 	}
 
-	
 	public void finalize() {
 		getCacheManager().removeCache(getCache().getName());
 	}
