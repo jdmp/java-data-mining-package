@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jdmp.core.algorithm.tagger.AbstractTagger;
+import org.jdmp.core.util.JDMPSettings;
 import org.ujmp.core.Matrix;
 
 import edu.stanford.nlp.ling.HasWord;
@@ -40,8 +41,8 @@ import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 public class StanfordPOSTagger extends AbstractTagger {
 	private static final long serialVersionUID = -2655534427624643477L;
 
-	public static final String MODELPATH = System.getProperty("user.home")
-			+ "/datasets/models/pos";
+	public static final String MODELPATH = JDMPSettings.getDataSetFolder()
+			+ "/models/pos";
 
 	public static final String DEFAULTMODEL = "left3words-wsj-0-18.tagger";
 
@@ -60,7 +61,6 @@ public class StanfordPOSTagger extends AbstractTagger {
 		tagger = new MaxentTagger(modelFile.getAbsolutePath());
 	}
 
-	
 	public List<Matrix> tag(String input) throws Exception {
 		List<Matrix> list = new ArrayList<Matrix>();
 
@@ -77,7 +77,6 @@ public class StanfordPOSTagger extends AbstractTagger {
 		return list;
 	}
 
-	
 	public List<Matrix> tag(Matrix input) throws Exception {
 		List<Matrix> list = new ArrayList<Matrix>();
 
