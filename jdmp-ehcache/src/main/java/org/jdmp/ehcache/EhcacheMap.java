@@ -77,6 +77,8 @@ public class EhcacheMap<K, V> implements Map<K, V>, Flushable, Closeable {
 
 	private transient Cache cache = null;
 
+	private static long runningId = System.currentTimeMillis();
+
 	private final BootstrapCacheLoader bootstrapCacheLoader = null;
 
 	public EhcacheMap() throws IOException {
@@ -92,6 +94,7 @@ public class EhcacheMap<K, V> implements Map<K, V>, Flushable, Closeable {
 	}
 
 	public EhcacheMap(String name, File path, boolean overFlowToDisk) throws IOException {
+		runningId++;
 		System.setProperty("net.sf.ehcache.enableShutdownHook", "true");
 		this.diskStorePath = path;
 		this.overflowToDisk = overFlowToDisk;
@@ -108,7 +111,7 @@ public class EhcacheMap<K, V> implements Map<K, V>, Flushable, Closeable {
 
 	public String getName() {
 		if (name == null) {
-			name = "ehcache" + System.nanoTime();
+			name = "ehcache" + runningId;
 		}
 		return name;
 	}
