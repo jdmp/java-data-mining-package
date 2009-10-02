@@ -93,6 +93,10 @@ public class EhcacheMap<K, V> implements Map<K, V>, Flushable, Closeable {
 		this(null, null, overFlowToDisk);
 	}
 
+	public EhcacheMap(String name, boolean overFlowToDisk) throws IOException {
+		this(name, null, overFlowToDisk);
+	}
+
 	public EhcacheMap(String name, File path, boolean overFlowToDisk) throws IOException {
 		runningId++;
 		System.setProperty("net.sf.ehcache.enableShutdownHook", "true");
