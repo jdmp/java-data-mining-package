@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2009 Holger Arndt, A. Naegele and M. Bundschus
+ * Copyright (C) 2008-2009 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -44,7 +44,7 @@ public abstract class AbstractObservableMap<V> implements ObservableMap<V> {
 
 	private Map<String, V> map = null;
 
-	private List<V> list = null;
+	private List<String> list = null;
 
 	public AbstractObservableMap(Map<String, V> map) {
 		this();
@@ -61,13 +61,13 @@ public abstract class AbstractObservableMap<V> implements ObservableMap<V> {
 		return map;
 	}
 
-	public final List<V> getList() {
+	public final List<String> getList() {
 		if (list == null) {
-			list = new ArrayList<V>(getMap().size());
+			list = new ArrayList<String>(getMap().size());
 		}
 		if (list.size() != getMap().size()) {
 			list.clear();
-			list.addAll(getMap().values());
+			list.addAll(getMap().keySet());
 		}
 		return list;
 	}
@@ -77,7 +77,7 @@ public abstract class AbstractObservableMap<V> implements ObservableMap<V> {
 	}
 
 	public final synchronized V getElementAt(int index) {
-		return getList().get(index);
+		return get(getList().get(index));
 	}
 
 	public final synchronized V get(Object key) {
