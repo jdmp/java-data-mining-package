@@ -36,6 +36,7 @@ import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.util.MathUtil;
 
 public class LibSVMClassifier extends AbstractClassifier {
 	private static final long serialVersionUID = -3809157647628200950L;
@@ -157,9 +158,9 @@ public class LibSVMClassifier extends AbstractClassifier {
 		}
 
 		svm.svm_predict_probability(model, x, prob_estimates);
-		Matrix output = MatrixFactory.zeros(1, svm.svm_get_nr_class(model));
 		int[] label = new int[svm.svm_get_nr_class(model)];
 		svm.svm_get_labels(model, label);
+		Matrix output = MatrixFactory.zeros(1, MathUtil.max(label) + 1);
 
 		for (int i = 0; i < label.length; i++) {
 			output.setAsDouble(prob_estimates[i], 0, label[i]);
