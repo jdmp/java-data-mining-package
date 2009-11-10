@@ -25,11 +25,12 @@ package org.jdmp.core;
 
 import java.util.List;
 
+import org.jdmp.core.util.ExportInterface;
 import org.ujmp.core.interfaces.CoreObject;
 import org.ujmp.core.interfaces.HasDescription;
 import org.ujmp.core.interfaces.HasId;
 
-public interface JDMPCoreObject extends CoreObject, HasDescription, HasId {
+public interface JDMPCoreObject extends CoreObject, ExportInterface, HasDescription, HasId {
 
 	public CoreObject getData(String ref);
 

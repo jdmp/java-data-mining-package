@@ -23,10 +23,6 @@
 
 package org.jdmp.core.algorithm.classification;
 
-import java.io.File;
-
-public interface ClassifierFactory {
-
-	public Classifier loadFromFile(File file) throws Exception;
+public abstract class AbstractClassifierFactory implements ClassifierFactory {
 
 }

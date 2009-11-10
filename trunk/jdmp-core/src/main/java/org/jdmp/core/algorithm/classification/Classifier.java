@@ -27,6 +27,8 @@ import org.jdmp.core.algorithm.regression.Regressor;
 
 public interface Classifier extends Regressor {
 
+	public static final ClassifierFactory Factory = new DefaultClassifierFactory();
+
 	public Classifier emptyCopy() throws Exception;
 
 }
