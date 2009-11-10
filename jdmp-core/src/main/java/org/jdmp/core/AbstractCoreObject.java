@@ -23,6 +23,9 @@
 
 package org.jdmp.core;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -38,8 +41,10 @@ import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.HasVariableMap;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.enums.FileFormat;
 import org.ujmp.core.interfaces.CoreObject;
 import org.ujmp.core.interfaces.GUIObject;
+import org.ujmp.core.util.SerializationUtil;
 
 public abstract class AbstractCoreObject implements JDMPCoreObject {
 	private static final long serialVersionUID = -4626483429334570721L;
@@ -83,7 +88,6 @@ public abstract class AbstractCoreObject implements JDMPCoreObject {
 		return frame;
 	}
 
-	
 	public abstract String toString();
 
 	public final void notifyGUIObject() {
@@ -172,5 +176,13 @@ public abstract class AbstractCoreObject implements JDMPCoreObject {
 	public List<CoreObject> listData(List<String> ref) {
 		List<CoreObject> list = new ArrayList<CoreObject>();
 		return list;
+	}
+
+	public final void exportToFile(FileFormat format, File file) throws Exception {
+		FileOutputStream fo = new FileOutputStream(file);
+		BufferedOutputStream bo = new BufferedOutputStream(fo);
+		SerializationUtil.serialize(this, bo);
+		bo.close();
+		fo.close();
 	}
 }

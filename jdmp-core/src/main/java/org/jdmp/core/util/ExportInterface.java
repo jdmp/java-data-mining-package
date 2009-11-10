@@ -21,12 +21,13 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.core.algorithm.classification;
+package org.jdmp.core.util;
 
 import java.io.File;
 
-public interface ClassifierFactory {
+import org.ujmp.core.enums.FileFormat;
 
-	public Classifier loadFromFile(File file) throws Exception;
+public interface ExportInterface {
 
+	public void exportToFile(FileFormat format, File file) throws Exception;
 }

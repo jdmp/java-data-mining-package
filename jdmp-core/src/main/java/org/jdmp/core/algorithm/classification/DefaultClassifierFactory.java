@@ -23,10 +23,21 @@
 
 package org.jdmp.core.algorithm.classification;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 
-public interface ClassifierFactory {
+import org.ujmp.core.util.SerializationUtil;
 
-	public Classifier loadFromFile(File file) throws Exception;
+public class DefaultClassifierFactory extends AbstractClassifierFactory {
+
+	public Classifier loadFromFile(File file) throws Exception {
+		FileInputStream fi = new FileInputStream(file);
+		BufferedInputStream bi = new BufferedInputStream(fi);
+		Classifier c = (Classifier) SerializationUtil.deserialize(bi);
+		bi.close();
+		fi.close();
+		return c;
+	}
 
 }
