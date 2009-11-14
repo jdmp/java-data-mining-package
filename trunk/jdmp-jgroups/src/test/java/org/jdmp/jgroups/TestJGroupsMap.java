@@ -29,10 +29,8 @@ import org.ujmp.core.collections.AbstractMapTest;
 
 public class TestJGroupsMap extends AbstractMapTest {
 
-	@SuppressWarnings("unchecked")
-	
-	public Map<String, Object> createMap() throws Exception {
-		return new JGroupsMap();
+	public Map<String, String> createMap() throws Exception {
+		return new JGroupsMap<String, String>();
 	}
 
 }
