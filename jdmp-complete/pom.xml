@@ -50,6 +50,12 @@
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-ejml</artifactId>
+			<version>${ujmp.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-gui</artifactId>
 			<version>${ujmp.version}</version>
 			<scope>compile</scope>
@@ -80,6 +86,12 @@
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-jampack</artifactId>
+			<version>${ujmp.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jdbc</artifactId>
 			<version>${ujmp.version}</version>
 			<scope>compile</scope>
@@ -87,6 +99,12 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jexcelapi</artifactId>
+			<version>${ujmp.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-jlinalg</artifactId>
 			<version>${ujmp.version}</version>
 			<scope>compile</scope>
 		</dependency>
@@ -260,7 +278,7 @@
 			<scope>compile</scope>
 		</dependency>
 
-		
+
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-bpca</artifactId>
@@ -285,6 +303,13 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-core</artifactId>
+			<version>${ujmp.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-ejml</artifactId>
 			<version>${ujmp.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
@@ -326,6 +351,13 @@
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-jampack</artifactId>
+			<version>${ujmp.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jdbc</artifactId>
 			<version>${ujmp.version}</version>
 			<type>test-jar</type>
@@ -341,6 +373,13 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jmathplot</artifactId>
+			<version>${ujmp.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-jlinalg</artifactId>
 			<version>${ujmp.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
@@ -546,12 +585,12 @@
 		<module>../jdmp-jetty</module>
 		<module>../jdmp-jgroups</module>
 		<module>../jdmp-liblinear</module>
-		<module>../jdmp-libsvm</module>		
+		<module>../jdmp-libsvm</module>
 		<module>../jdmp-lucene</module>
 		<module>../jdmp-mallet</module>
 		<module>../jdmp-stanfordpos</module>
 		<module>../jdmp-weka</module>
 	</modules>
- 
+
 
 </project>
