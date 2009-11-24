@@ -33,9 +33,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Callable;
-import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -66,6 +64,7 @@ import org.apache.lucene.search.BooleanClause.Occur;
 import org.apache.lucene.search.similar.MoreLikeThis;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
+import org.apache.lucene.util.Version;
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.algorithm.index.AbstractIndex;
 import org.jdmp.core.algorithm.index.Index;
@@ -83,6 +82,7 @@ import org.ujmp.core.interfaces.Erasable;
 import org.ujmp.core.util.MathUtil;
 import org.ujmp.core.util.SerializationUtil;
 import org.ujmp.core.util.StringUtil;
+import org.ujmp.core.util.concurrent.UJMPThreadPoolExecutor;
 import org.ujmp.core.util.io.FileUtil;
 
 public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
@@ -101,7 +101,8 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 
 	private File path = null;
 
-	private final Analyzer analyzer = new StandardAnalyzer();
+	private final Analyzer analyzer = new StandardAnalyzer(
+			Version.LUCENE_CURRENT);
 
 	private boolean readOnly = true;
 
@@ -156,7 +157,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 
 		this.path = path;
 
-		directory = FSDirectory.getDirectory(path);
+		directory = FSDirectory.open(path);
 
 		if (IndexReader.indexExists(directory)) {
 			if (!readOnly) {
@@ -181,8 +182,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 
 		setSamples(new LuceneSampleMap(this));
 
-		executor = new ThreadPoolExecutor(0, 1, 1000L, TimeUnit.MILLISECONDS,
-				new LinkedBlockingQueue<Runnable>());
+		executor = new UJMPThreadPoolExecutor("LuceneIndex", 0, 1);
 	}
 
 	public synchronized void add(Sample sample) throws Exception {
@@ -337,7 +337,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 			indexSearcher = null;
 		}
 		if (indexSearcher == null) {
-			indexSearcher = new IndexSearcher(directory);
+			indexSearcher = new IndexSearcher(directory, true);
 		}
 	}
 
