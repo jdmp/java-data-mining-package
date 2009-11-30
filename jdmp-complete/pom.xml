@@ -110,6 +110,12 @@
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-jmatharray</artifactId>
+			<version>${ujmp.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jmathplot</artifactId>
 			<version>${ujmp.version}</version>
 			<scope>compile</scope>
@@ -177,6 +183,18 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-ojalgo</artifactId>
+			<version>${ujmp.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-orbital</artifactId>
+			<version>${ujmp.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-owlpack</artifactId>
 			<version>${ujmp.version}</version>
 			<scope>compile</scope>
 		</dependency>
@@ -372,6 +390,13 @@
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-jmatharray</artifactId>
+			<version>${ujmp.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jmathplot</artifactId>
 			<version>${ujmp.version}</version>
 			<type>test-jar</type>
@@ -457,6 +482,20 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-ojalgo</artifactId>
+			<version>${ujmp.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-orbital</artifactId>
+			<version>${ujmp.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-owlpack</artifactId>
 			<version>${ujmp.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
