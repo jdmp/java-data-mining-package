@@ -12,7 +12,9 @@ public class JDMPToolsMenu extends UJMPToolsMenu {
 
 	public JDMPToolsMenu(JComponent component) {
 		super(component);
-		add(new JMenuItem(new ShowInFrameAction(component, new JDMPPluginsMatrix())), 0);
+		add(
+				new JMenuItem(new ShowInFrameAction(component, "JDMP Plugins",
+						JDMPPluginsMatrix.class)), 0);
 	}
 
 }
