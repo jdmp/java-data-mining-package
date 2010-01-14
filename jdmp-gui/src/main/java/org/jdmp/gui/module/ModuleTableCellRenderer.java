@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2009 Holger Aimport java.awt.Component;
+ * Copyright (C) 2008-2010 Holger Aimport java.awt.Component;
 
 import javax.swing.JLabel;
 import javax.swing.JTable;
