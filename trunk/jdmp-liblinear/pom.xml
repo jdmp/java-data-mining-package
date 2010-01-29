@@ -6,10 +6,6 @@
 	<packaging>jar</packaging>
 	<name>jdmp-liblinear</name>
 
-	<properties>
-		<jdmp.version>0.1.2</jdmp.version>
-	</properties>
-
 	<parent>
 		<groupId>org.jdmp</groupId>
 		<artifactId>jdmp</artifactId>
@@ -25,7 +21,7 @@
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-core</artifactId>
-			<version>${jdmp.version}</version>
+			<version>${version}</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
