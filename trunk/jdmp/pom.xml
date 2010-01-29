@@ -11,8 +11,17 @@
 	<groupId>org.jdmp</groupId>
 	<artifactId>jdmp</artifactId>
 	<version>0.1.2</version>
-	<packaging>pom</packaging>
-	<url>http://www.jdmp.org</url>
+	<packaging>jar</packaging>
+	<url>http://www.jdmp.org/</url>
+	
+	<developers>
+		<developer>
+			<id>arndt</id>
+			<name>Holger Arndt</name>
+			<email>mail@holger-arndt.com</email>
+			<url>http://www.holger-arndt.com/</url>
+		</developer>
+	</developers>
 
 	<build>
 		<resources>
@@ -50,6 +59,18 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>org.jdmp.gui.JDMP</mainClass>
+							<packageName>org.jdmp</packageName>
+						</manifest>
+						<manifestEntries>
+							<mode>development</mode>
+							<url>${pom.url}</url>
+						</manifestEntries>
+					</archive>
+				</configuration>
 				<executions>
 					<execution>
 						<goals>
@@ -57,6 +78,22 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.2-beta-4</version>
+				<configuration>
+					<descriptors>
+						<descriptor>src/assemble/complete.xml</descriptor>
+						<descriptor>src/assemble/sources.xml</descriptor>
+						<descriptor>src/assemble/with-deps.xml</descriptor>
+						<descriptor>src/assemble/deps.xml</descriptor>
+					</descriptors>
+					<archive>
+						<manifestFile>META-INF/MANIFEST.MF</manifestFile>
+					</archive>
+				</configuration>
 			</plugin>
 		</plugins>
 
@@ -392,12 +429,15 @@
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<inherited>true</inherited>
 				<configuration>
-					<outputDirectory>../jdmp/target/docs/${project.version}/${project.name}</outputDirectory>
-					<reportOutputDirectory>../jdmp/target/docs/${project.version}/${project.name}</reportOutputDirectory>
+					<outputDirectory>../jdmp/target/docs/${project.version}</outputDirectory>
+					<reportOutputDirectory>../jdmp/target/docs/${project.version}</reportOutputDirectory>
 					<linksource>true</linksource>
 					<links>
 						<link>http://java.sun.com/javase/6/docs/api/</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-core/apidocs</link>
+						<link>http://www.ujmp.org/docs/${project.version}</link>
+						<link>http://www.jdmp.org/docs/${project.version}</link>
+						
+				<!-- 	<link>http://www.ujmp.org/docs/${project.version}/ujmp-core/apidocs</link>
 						<link>http://www.ujmp.org/docs/${project.version}/ujmp-gui/apidocs</link>
 						<link>http://www.ujmp.org/docs/${project.version}/ujmp-bpca/apidocs</link>
 						<link>http://www.ujmp.org/docs/${project.version}/ujmp-colt/apidocs</link>
@@ -441,7 +481,7 @@
 						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-lucene/apidocs</link>
 						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-mallet/apidocs</link>
 						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-stanfordpos/apidocs</link>
-						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-weka/apidocs</link>
+						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-weka/apidocs</link> -->
 					</links>
 				</configuration>
 			</plugin>
