@@ -51,7 +51,7 @@ public class LibLinearClassifier extends AbstractClassifier {
 	private final double bias = 1.0;
 
 	public LibLinearClassifier() {
-		this(new Parameter(SolverType.L2LOSS_SVM_DUAL, 1, 0.1));
+		this(new Parameter(SolverType.L2R_L2LOSS_SVC_DUAL, 1, 0.1));
 	}
 
 	public LibLinearClassifier(Parameter parameter) {
