@@ -88,6 +88,7 @@
 						<descriptor>src/assemble/sources.xml</descriptor>
 						<descriptor>src/assemble/with-deps.xml</descriptor>
 						<descriptor>src/assemble/deps.xml</descriptor>
+						<descriptor>src/assemble/libs.xml</descriptor>
 					</descriptors>
 					<archive>
 						<manifestFile>META-INF/MANIFEST.MF</manifestFile>
@@ -193,8 +194,20 @@
 			</dependency>
 			<dependency>
 				<groupId>net.sf.ehcache</groupId>
-				<artifactId>ehcache</artifactId>
-				<version>1.6.1</version>
+				<artifactId>ehcache-core</artifactId>
+				<version>1.7.2</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>1.5.8</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-jdk14</artifactId>
+				<version>1.5.8</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>

@@ -185,6 +185,7 @@ public class EhcacheMap<K, V> implements Map<K, V>, Flushable, Closeable {
 	}
 
 	public void clear() {
+		getCache().removeAll();
 		getCache().flush();
 	}
 
@@ -200,7 +201,7 @@ public class EhcacheMap<K, V> implements Map<K, V>, Flushable, Closeable {
 		throw new MatrixException("not implemented");
 	}
 
-	public V get(Object key) {
+	public synchronized V get(Object key) {
 		Element e = getCache().get(key);
 		if (e != null) {
 			return (V) e.getValue();
@@ -217,7 +218,7 @@ public class EhcacheMap<K, V> implements Map<K, V>, Flushable, Closeable {
 		return new HashSet<K>(getCache().getKeys());
 	}
 
-	public V put(K key, V value) {
+	public synchronized V put(K key, V value) {
 		Element e = new Element(key, value);
 		getCache().put(e);
 		return null;
@@ -230,7 +231,7 @@ public class EhcacheMap<K, V> implements Map<K, V>, Flushable, Closeable {
 		}
 	}
 
-	public V remove(Object key) {
+	public synchronized V remove(Object key) {
 		getCache().remove(key);
 		return null;
 	}
