@@ -38,25 +38,22 @@ public class Plugin extends AbstractPlugin {
 	public Plugin() {
 		dependencies.add("ujmp-core");
 		dependencies.add("jdmp-core");
-		dependencies.add("ehcache.jar");
-		dependencies.add("commons-logging.jar");
-		dependencies.add("backport-util-concurrent.jar");
+		dependencies.add("ehcache-core.jar");
+		dependencies.add("slf4j-api.jar");
+		dependencies.add("slf4j-jdk14.jar");
 		neededClasses.add("net.sf.ehcache.Cache");
-		neededClasses.add("org.apache.commons.logging.Log");
-		neededClasses.add("edu.emory.mathcs.backport.java.util.Arrays");
+		neededClasses.add("org.slf4j.Logger");
+		neededClasses.add("org.slf4j.impl.StaticLoggerBinder");
 	}
 
-	
 	public String getDescription() {
 		return "library for caching using EhCache";
 	}
 
-	
 	public Collection<Object> getDependencies() {
 		return dependencies;
 	}
 
-	
 	public Collection<String> getNeededClasses() {
 		return neededClasses;
 	}
