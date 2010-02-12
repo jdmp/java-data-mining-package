@@ -56,7 +56,10 @@ public class PropsUDP {
 
 	private final String STATETRANSFER = "pbcast.STATE_TRANSFER";
 
-	
+	public PropsUDP() {
+		System.setProperty("java.net.preferIPv4Stack", "true");
+	}
+
 	public String toString() {
 		StringBuilder s = new StringBuilder();
 
