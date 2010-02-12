@@ -55,6 +55,10 @@ public class TestTagger extends TestCase {
 	}
 
 	public void testStringTagger() throws Exception {
+		if (tagger == null) {
+			return;
+		}
+
 		List<Matrix> list = tagger.tag(s1);
 
 		assertEquals(2, list.size());
@@ -65,6 +69,10 @@ public class TestTagger extends TestCase {
 	}
 
 	public void testTagger() throws Exception {
+		if (tagger == null) {
+			return;
+		}
+
 		DataSet ds = new DefaultDataSet();
 		Sample sa1 = new DefaultSample();
 		sa1.getVariables().setObject(Sample.INPUT, s1);
