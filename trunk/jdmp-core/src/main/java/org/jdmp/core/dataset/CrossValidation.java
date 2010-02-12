@@ -44,11 +44,15 @@ public class CrossValidation {
 
 		ListMatrix<Double> allacc = new DefaultListMatrix<Double>();
 		ListMatrix<Double> allfm = new DefaultListMatrix<Double>();
+		ListMatrix<Double> allsens = new DefaultListMatrix<Double>();
+		ListMatrix<Double> allspec = new DefaultListMatrix<Double>();
 
 		for (int run = 0; run < runs; run++) {
 
 			ListMatrix<Double> acc = new DefaultListMatrix<Double>();
 			ListMatrix<Double> fm = new DefaultListMatrix<Double>();
+			ListMatrix<Double> sens = new DefaultListMatrix<Double>();
+			ListMatrix<Double> spec = new DefaultListMatrix<Double>();
 
 			System.out.print("F-Measure (macro) in run " + run + ":\t");
 
@@ -62,6 +66,8 @@ public class CrossValidation {
 
 				acc.add(test.getAccuracy());
 				fm.add(test.getVariables().getAsDouble(Variable.FMEASUREMACRO));
+				sens.add(test.getVariables().getAsDouble(Variable.SENSITIVITY));
+				spec.add(test.getVariables().getAsDouble(Variable.SPECIFICITY));
 				// System.out.print(test.getAccuracy() + "\t");
 				System.out.print(test.getVariables().getAsDouble(Variable.FMEASUREMACRO) + "\t");
 			}
@@ -73,7 +79,16 @@ public class CrossValidation {
 			double meanfm = fm.getMeanValue();
 			allfm.add(meanfm);
 
+			double meansens = sens.getMeanValue();
+			allsens.add(meansens);
+
+			double meanspec = spec.getMeanValue();
+			allspec.add(meanspec);
+
+			System.out.println("Average Accuracy in run " + run + ":\t" + meanacc);
 			System.out.println("Average F-Measure in run " + run + ":\t" + meanfm);
+			System.out.println("Average Sensitivity in run " + run + ":\t" + meansens);
+			System.out.println("Average Specificity in run " + run + ":\t" + meanspec);
 		}
 
 		if (allacc.size() > 1) {
@@ -82,9 +97,17 @@ public class CrossValidation {
 			Matrix stdfm = allfm.std(Ret.NEW, Matrix.ROW, false);
 			System.out.println("F-Measure (macro): " + allfm.getMeanValue() + "+-"
 					+ stdfm.doubleValue());
+			Matrix stdsens = allsens.std(Ret.NEW, Matrix.ROW, false);
+			System.out.println("Sensitivity: " + allsens.getMeanValue() + "+-"
+					+ stdsens.doubleValue());
+			Matrix stdspec = allspec.std(Ret.NEW, Matrix.ROW, false);
+			System.out.println("Specificity: " + allspec.getMeanValue() + "+-"
+					+ stdspec.doubleValue());
 		} else {
 			System.out.println("Accuracy: " + allacc.getMeanValue());
 			System.out.println("F-Measure (macro): " + allfm.getMeanValue());
+			System.out.println("Sensitivity: " + allsens.getMeanValue());
+			System.out.println("Specificity: " + allspec.getMeanValue());
 		}
 
 		return allacc;
