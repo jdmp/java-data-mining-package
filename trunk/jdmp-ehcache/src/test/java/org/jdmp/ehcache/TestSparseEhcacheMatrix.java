@@ -28,14 +28,16 @@ import org.ujmp.core.implementations.AbstractMatrixTest;
 
 public class TestSparseEhcacheMatrix extends AbstractMatrixTest {
 
-	
 	public Matrix createMatrix(long... size) throws Exception {
 		return new SparseEhcacheMatrix(size);
 	}
 
-	
 	public Matrix createMatrix(Matrix source) throws Exception {
 		return new SparseEhcacheMatrix(source);
+	}
+
+	public boolean isTestLarge() {
+		return false;
 	}
 
 }
