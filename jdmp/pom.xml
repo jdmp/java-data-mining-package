@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<properties>
-		<ujmp.version>0.2.4</ujmp.version>
+		<ujmp.version>0.2.5</ujmp.version>
 	</properties>
 
 	<groupId>org.jdmp</groupId>

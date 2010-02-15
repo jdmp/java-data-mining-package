@@ -1,6 +1,12 @@
 Manifest-Version: 1.0
+Main-Class: org.jdmp.complete.JDMP
 Bundle-ManifestVersion: 2
-Bundle-Name: jdmp_complete
-Bundle-SymbolicName: jdmp_complete
-Bundle-Version: 1.0.0
+Bundle-Name: jdmp-complete
+Bundle-SymbolicName: jdmp-complete
+Bundle-Version: 0.1.2
 Export-Package: org.jdmp.complete
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Require-Bundle: jdmp;bundle-version="0.1.2",
+ jdmp-core;bundle-version="0.1.2",
+ jdmp-gui;bundle-version="0.1.2"
+
