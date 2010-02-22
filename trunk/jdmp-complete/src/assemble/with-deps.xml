@@ -26,6 +26,22 @@
 				<include>org.jdmp:jdmp-mallet</include>
 				<include>org.jdmp:jdmp-stanfordpos</include>
 				<include>org.jdmp:jdmp-weka</include>
+				
+				<include>bsh:bsh</include>
+				<include>ehcache:ehcache</include>
+				<include>backport-util-concurrent:backport-util-concurrent</include>
+				<include>jetty:jetty</include>
+				<include>jetty-util:jetty-util</include>
+				<include>servlet-api:servlet-api</include>
+				<include>jgroups:jgroups</include>
+				<include>liblinear:liblinear</include>
+				<include>libsvm:libsvm</include>
+				<include>lucene-core:lucene-core</include>
+				<include>lucene-queries:lucene-queries</include>
+				<include>mallet:mallet</include>
+				<include>mallet-deps:mallet-deps</include>
+				<include>stanford-postagger:stanford-postagger</include>
+				<include>weka:weka</include>
 
 				<include>org.ujmp:ujmp-complete</include>
 
