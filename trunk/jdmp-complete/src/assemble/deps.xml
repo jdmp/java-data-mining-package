@@ -33,6 +33,7 @@
 				<include>derby:derby</include>
 				<include>hsqldb:hsqldb</include>
 				<include>jxl:jxl</include>
+				<include>jblas:jblas</include>
 				<include>jlinalg:jlinalg</include>
 				<include>jmatharray:jmatharray</include>
 				<include>jmathplot:jmathplot</include>
