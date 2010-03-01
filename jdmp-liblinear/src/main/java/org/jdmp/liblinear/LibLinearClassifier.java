@@ -35,7 +35,6 @@ import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.util.MathUtil;
 
@@ -80,7 +79,7 @@ public class LibLinearClassifier extends AbstractClassifier {
 		}
 
 		int classId = Linear.predict(model, x);
-		Matrix ret = MatrixFactory.zeros(1, Math.max(model.getNrClass(),
+		Matrix ret = Matrix.factory.dense(1, Math.max(model.getNrClass(),
 				classId + 1));
 		ret.setAsDouble(1.0, 0, classId);
 		return ret;

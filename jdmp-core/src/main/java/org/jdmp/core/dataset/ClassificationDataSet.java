@@ -34,7 +34,6 @@ import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.util.MathUtil;
 
@@ -48,7 +47,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 	public static final String ERRORCOUNT = Variable.ERRORCOUNT;
 
 	public Matrix getClassDistribution() {
-		Matrix m = MatrixFactory.zeros(getClassCount(), 1);
+		Matrix m = Matrix.factory.dense(getClassCount(), 1);
 
 		Map<Integer, Double> map = new HashMap<Integer, Double>();
 
