@@ -29,7 +29,6 @@ import org.jdmp.core.dataset.ClassificationDataSet;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.calculation.Calculation.Ret;
 
 public class SemiSupervisedEM extends AbstractClassifier implements SemiSupervisedClassifier {
@@ -73,7 +72,7 @@ public class SemiSupervisedEM extends AbstractClassifier implements SemiSupervis
 				s.getVariables().setMatrix(Sample.TARGET, predicted);
 			} else {
 				int max = (int) predicted.indexOfMax(Ret.NEW, Matrix.COLUMN).getAsDouble(0, 0);
-				Matrix target = MatrixFactory.zeros(1, classCount);
+				Matrix target = Matrix.factory.dense(1, classCount);
 				target.setAsDouble(1.0, 0, max);
 				s.getVariables().setMatrix(Sample.TARGET, target);
 			}
@@ -90,7 +89,7 @@ public class SemiSupervisedEM extends AbstractClassifier implements SemiSupervis
 			for (Sample s : unlabeledData.getSamples()) {
 				Matrix predicted = s.getVariables().getMatrix(Sample.PREDICTED);
 				int max = (int) predicted.indexOfMax(Ret.NEW, Matrix.COLUMN).getAsDouble(0, 0);
-				Matrix target = MatrixFactory.zeros(1, classCount);
+				Matrix target = Matrix.factory.dense(1, classCount);
 				target.setAsDouble(1.0, 0, max);
 				s.getVariables().setMatrix(Sample.TARGET, target);
 			}

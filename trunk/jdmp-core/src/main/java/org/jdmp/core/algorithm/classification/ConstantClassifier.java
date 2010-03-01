@@ -27,7 +27,6 @@ import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.mapmatrix.DefaultMapMatrix;
 import org.ujmp.core.mapmatrix.MapMatrix;
 
@@ -73,7 +72,7 @@ public class ConstantClassifier extends AbstractClassifier {
 				pc = t;
 			}
 		}
-		prediction = MatrixFactory.dense(1, maxClassId + 1);
+		prediction = Matrix.factory.dense(1, maxClassId + 1);
 		prediction.setAsDouble(1.0, 0, pc);
 	}
 

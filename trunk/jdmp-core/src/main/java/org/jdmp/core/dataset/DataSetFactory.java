@@ -176,7 +176,7 @@ public abstract class DataSetFactory {
 
 			double q = 0;
 
-			Matrix input = MatrixFactory.zeros(1, inputLength);
+			Matrix input = Matrix.factory.dense(1, inputLength);
 			for (int i = 0; i < inputLength; i++) {
 				q = henon(q1, q2);
 				input.setAsDouble(q / 2, 0, i);
@@ -184,7 +184,7 @@ public abstract class DataSetFactory {
 				q1 = q;
 			}
 
-			Matrix target = MatrixFactory.zeros(1, predictionLength);
+			Matrix target = Matrix.factory.dense(1, predictionLength);
 			for (int i = 0; i < predictionLength; i++) {
 				q = henon(q1, q2);
 				target.setAsDouble(q / 2, 0, i);
@@ -226,13 +226,13 @@ public abstract class DataSetFactory {
 
 			double x = random.nextDouble();
 
-			Matrix input = MatrixFactory.zeros(1, inputLength);
+			Matrix input = Matrix.factory.dense(1, inputLength);
 			for (int i = 0; i < inputLength; i++) {
 				x = r * x * (1 - x);
 				input.setAsDouble(x, 0, i);
 			}
 
-			Matrix target = MatrixFactory.zeros(1, predictionLength);
+			Matrix target = Matrix.factory.dense(1, predictionLength);
 			for (int i = 0; i < predictionLength; i++) {
 				x = r * x * (1 - x);
 				target.setAsDouble(x, 0, i);
