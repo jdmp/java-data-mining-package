@@ -23,26 +23,16 @@
 
 package org.jdmp.complete;
 
-import junit.framework.TestSuite;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
-public class AllTests extends TestSuite {
-
-	public static TestSuite suite() {
-		TestSuite suite = new TestSuite(AllTests.class.getName());
-		suite.addTestSuite(org.jdmp.complete.TestPlugins.class);
-		suite.addTest(org.jdmp.core.AllTests.suite());
-		suite.addTest(org.jdmp.gui.AllTests.suite());
-		suite.addTest(org.jdmp.bsh.AllTests.suite());
-		suite.addTest(org.jdmp.ehcache.AllTests.suite());
-		suite.addTest(org.jdmp.jetty.AllTests.suite());
-		suite.addTest(org.jdmp.jgroups.AllTests.suite());
-		suite.addTest(org.jdmp.liblinear.AllTests.suite());
-		suite.addTest(org.jdmp.libsvm.AllTests.suite());
-		suite.addTest(org.jdmp.lucene.AllTests.suite());
-		suite.addTest(org.jdmp.mallet.AllTests.suite());
-		suite.addTest(org.jdmp.stanfordpos.AllTests.suite());
-		suite.addTest(org.jdmp.weka.AllTests.suite());
-		return suite;
-	}
-
+@RunWith(Suite.class)
+@Suite.SuiteClasses( { org.jdmp.complete.TestPlugins.class,
+		org.jdmp.core.AllTests.class, org.jdmp.gui.AllTests.class,
+		org.jdmp.bsh.AllTests.class, org.jdmp.ehcache.AllTests.class,
+		org.jdmp.jetty.AllTests.class, org.jdmp.jgroups.AllTests.class,
+		org.jdmp.liblinear.AllTests.class, org.jdmp.libsvm.AllTests.class,
+		org.jdmp.lucene.AllTests.class, org.jdmp.mallet.AllTests.class,
+		org.jdmp.stanfordpos.AllTests.class, org.jdmp.weka.AllTests.class })
+public class AllTests {
 }

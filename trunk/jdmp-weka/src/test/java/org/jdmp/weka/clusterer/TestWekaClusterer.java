@@ -23,16 +23,18 @@
 
 package org.jdmp.weka.clusterer;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
 
 import org.jdmp.core.dataset.ClassificationDataSet;
 import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.weka.clusterer.WekaClusterer.WekaClustererType;
+import org.junit.Test;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 
-public class TestWekaClusterer extends TestCase {
+public class TestWekaClusterer {
 
+	@Test
 	public void testClusteringEM() throws Exception {
 		ClassificationDataSet iris = DataSetFactory.IRIS();
 		WekaClusterer wc = new WekaClusterer(WekaClustererType.EM, false);
@@ -48,6 +50,7 @@ public class TestWekaClusterer extends TestCase {
 		assertEquals(50, result.getAsDouble(0, 2), 15);
 	}
 
+	@Test
 	public void testClusteringKMeans() throws Exception {
 		ClassificationDataSet iris = DataSetFactory.IRIS();
 		WekaClusterer wc = new WekaClusterer(WekaClustererType.SimpleKMeans, false);

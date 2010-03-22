@@ -23,19 +23,12 @@
 
 package org.jdmp.core;
 
-import junit.framework.TestSuite;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
-public class AllTests extends TestSuite {
-
-	public static TestSuite suite() {
-		TestSuite suite = new TestSuite(AllTests.class.getName());
-		suite.addTestSuite(TestScript.class);
-		suite.addTestSuite(TestNaiveBayesClassifier.class);
-		suite.addTestSuite(TestMLP.class);
-		suite.addTestSuite(TestLinearRegression.class);
-		suite.addTestSuite(TestRandomClassifier.class);
-		suite.addTestSuite(TestConstantClassifier.class);
-		return suite;
-	}
-
+@RunWith(Suite.class)
+@Suite.SuiteClasses( { TestScript.class, TestNaiveBayesClassifier.class, TestMLP.class,
+		TestLinearRegression.class, TestRandomClassifier.class, TestConstantClassifier.class,
+		TestScript.class })
+public class AllTests {
 }

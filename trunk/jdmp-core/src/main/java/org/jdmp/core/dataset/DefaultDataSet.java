@@ -49,7 +49,7 @@ public class DefaultDataSet extends AbstractDataSet {
 	}
 
 	public final void standardize(int dimension) throws MatrixException {
-		getInputVariable().getMatrix().standardize(Ret.ORIG, dimension, true);
+		getInputVariable().getMatrix().standardize(Ret.ORIG, dimension);
 	}
 
 	public final void center(int dimension) throws MatrixException {
@@ -73,7 +73,6 @@ public class DefaultDataSet extends AbstractDataSet {
 		}
 	}
 
-	
 	public DefaultDataSet clone() {
 		DefaultDataSet ds = null;
 		try {

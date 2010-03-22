@@ -23,7 +23,7 @@
 
 package org.jdmp.core;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
 
 import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.algorithm.classification.bayes.NaiveBayesClassifier;
@@ -31,13 +31,15 @@ import org.jdmp.core.dataset.ClassificationDataSet;
 import org.jdmp.core.dataset.CrossValidation;
 import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.core.variable.Variable;
+import org.junit.Test;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.intmatrix.calculation.Discretize.DiscretizationMethod;
 import org.ujmp.core.listmatrix.ListMatrix;
 
-public class TestNaiveBayesClassifier extends TestCase {
+public class TestNaiveBayesClassifier {
 
+	@Test
 	public void testIrisClassification() throws Exception {
 		ClassificationDataSet iris = DataSetFactory.IRIS();
 		iris.getMatrix(Variable.INPUT).discretize(Ret.ORIG, Matrix.ROW,
