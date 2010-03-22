@@ -29,7 +29,6 @@ import java.util.Map;
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.util.MathUtil;
 
@@ -50,11 +49,10 @@ public class Clone extends AbstractAlgorithm {
 		setVariables(variables);
 	}
 
-	
 	public Map<String, Object> calculateObjects(Map<String, Object> input) throws MatrixException {
 		Map<String, Object> result = new HashMap<String, Object>();
 		Matrix source = MathUtil.getMatrix(input.get(SOURCE));
-		Matrix target = MatrixFactory.copyFromMatrix(source);
+		Matrix target = source.clone();
 		result.put(TARGET, target);
 		return result;
 	}

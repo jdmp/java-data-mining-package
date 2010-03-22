@@ -185,4 +185,14 @@ public abstract class AbstractCoreObject implements JDMPCoreObject {
 		bo.close();
 		fo.close();
 	}
+
+	public JDMPCoreObject clone() {
+		try {
+			return (JDMPCoreObject) SerializationUtil
+					.deserialize(SerializationUtil.serialize(this));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }
