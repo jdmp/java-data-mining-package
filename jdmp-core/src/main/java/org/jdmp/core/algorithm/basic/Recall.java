@@ -54,7 +54,7 @@ public class Recall extends AbstractAlgorithm {
 
 		Matrix source = MathUtil.getMatrix(input.get(SOURCE));
 
-		Matrix target = Matrix.factory.dense(source.getRowCount(), 1);
+		Matrix target = Matrix.factory.create(source.getRowCount(), 1);
 
 		long cols = source.getColumnCount();
 		long rows = source.getRowCount();

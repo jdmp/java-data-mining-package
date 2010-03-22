@@ -23,7 +23,7 @@
 
 package org.jdmp.core;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
 
 import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.algorithm.classification.ConstantClassifier;
@@ -31,10 +31,12 @@ import org.jdmp.core.dataset.ClassificationDataSet;
 import org.jdmp.core.dataset.CrossValidation;
 import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.core.sample.Sample;
+import org.junit.Test;
 import org.ujmp.core.listmatrix.ListMatrix;
 
-public class TestConstantClassifier extends TestCase {
+public class TestConstantClassifier {
 
+	@Test
 	public void testIrisClassification() throws Exception {
 		ClassificationDataSet iris = DataSetFactory.IRIS();
 		Classifier c = new ConstantClassifier();
@@ -42,6 +44,7 @@ public class TestConstantClassifier extends TestCase {
 		assertEquals(0.21, results.getMeanValue(), 0.04);
 	}
 
+	@Test
 	public void testIrisClassification2() throws Exception {
 		ClassificationDataSet iris = DataSetFactory.IRIS();
 		String del1 = null;

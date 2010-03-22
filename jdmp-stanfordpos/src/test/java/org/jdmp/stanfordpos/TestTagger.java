@@ -23,9 +23,9 @@
 
 package org.jdmp.stanfordpos;
 
-import java.util.List;
+import static org.junit.Assert.assertEquals;
 
-import junit.framework.TestCase;
+import java.util.List;
 
 import org.jdmp.core.algorithm.tagger.Tagger;
 import org.jdmp.core.algorithm.tokenizer.Tokenizer;
@@ -33,9 +33,11 @@ import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DefaultDataSet;
 import org.jdmp.core.sample.DefaultSample;
 import org.jdmp.core.sample.Sample;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.ujmp.core.Matrix;
 
-public class TestTagger extends TestCase {
+public class TestTagger {
 
 	public static final String s1 = "The Universal Java Matrix Package is a very cool software. This is also true for the Java Data Mining Package.";
 
@@ -45,6 +47,7 @@ public class TestTagger extends TestCase {
 
 	private Tokenizer tokenizer = null;
 
+	@BeforeClass
 	public void setUp() {
 		try {
 			tokenizer = new StanfordTokenizer();
@@ -54,6 +57,7 @@ public class TestTagger extends TestCase {
 		}
 	}
 
+	@Test
 	public void testStringTagger() throws Exception {
 		if (tagger == null) {
 			return;
@@ -68,6 +72,7 @@ public class TestTagger extends TestCase {
 		assertEquals(11, list.get(1).getRowCount());
 	}
 
+	@Test
 	public void testTagger() throws Exception {
 		if (tagger == null) {
 			return;

@@ -23,14 +23,10 @@
 
 package org.jdmp.weka.classifier;
 
-import junit.framework.TestSuite;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
-public class AllTests extends TestSuite {
-
-	public static TestSuite suite() {
-		TestSuite suite = new TestSuite(AllTests.class.getName());
-		suite.addTestSuite(TestWekaClassifier.class);
-		return suite;
-	}
-
+@RunWith(Suite.class)
+@Suite.SuiteClasses( { TestWekaClassifier.class })
+public class AllTests {
 }

@@ -23,7 +23,7 @@
 
 package org.jdmp.mallet;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
 
 import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.dataset.ClassificationDataSet;
@@ -31,10 +31,12 @@ import org.jdmp.core.dataset.CrossValidation;
 import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.mallet.classifier.MalletClassifier;
 import org.jdmp.mallet.classifier.MalletClassifier.MalletClassifiers;
+import org.junit.Test;
 import org.ujmp.core.listmatrix.ListMatrix;
 
-public class TestMalletClassifier extends TestCase {
+public class TestMalletClassifier {
 
+	@Test
 	public void testMalletDecisionTree() throws Exception {
 		ClassificationDataSet iris = DataSetFactory.IRIS();
 		Classifier c = new MalletClassifier(MalletClassifiers.DecisionTree);
@@ -42,6 +44,7 @@ public class TestMalletClassifier extends TestCase {
 		assertEquals(0.934, results.getMeanValue(), 0.01);
 	}
 
+	@Test
 	public void testMalletAdaBoost() throws Exception {
 		ClassificationDataSet iris = DataSetFactory.IRIS();
 		Classifier c = new MalletClassifier(MalletClassifiers.AdaBoost);
@@ -49,6 +52,7 @@ public class TestMalletClassifier extends TestCase {
 		assertEquals(0.93, results.getMeanValue(), 0.02);
 	}
 
+	@Test
 	public void testMalletNaiveBayes() throws Exception {
 		ClassificationDataSet iris = DataSetFactory.IRIS();
 		Classifier c = new MalletClassifier(MalletClassifiers.NaiveBayes);

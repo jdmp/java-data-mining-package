@@ -160,7 +160,7 @@ public class LibSVMClassifier extends AbstractClassifier {
 		svm.svm_predict_probability(model, x, prob_estimates);
 		int[] label = new int[svm.svm_get_nr_class(model)];
 		svm.svm_get_labels(model, label);
-		Matrix output = Matrix.factory.dense(1, MathUtil.max(label) + 1);
+		Matrix output = Matrix.factory.create(1, MathUtil.max(label) + 1);
 
 		for (int i = 0; i < label.length; i++) {
 			output.setAsDouble(prob_estimates[i], 0, label[i]);

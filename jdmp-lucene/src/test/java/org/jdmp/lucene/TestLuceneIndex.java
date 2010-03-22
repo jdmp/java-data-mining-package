@@ -23,13 +23,15 @@
 
 package org.jdmp.lucene;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
 
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DataSetFactory;
+import org.junit.Test;
 
-public class TestLuceneIndex extends TestCase {
+public class TestLuceneIndex {
 
+	@Test
 	public void testExampleSearch() throws Exception {
 		DataSet ds = DataSetFactory.IRIS();
 		LuceneIndex index = new LuceneIndex();

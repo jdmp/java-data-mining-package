@@ -23,21 +23,23 @@
 
 package org.jdmp.stanfordpos;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
 
 import org.jdmp.core.algorithm.tokenizer.Tokenizer;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DefaultDataSet;
 import org.jdmp.core.sample.DefaultSample;
 import org.jdmp.core.sample.Sample;
+import org.junit.Test;
 import org.ujmp.core.Matrix;
 
-public class TestTokenizer extends TestCase {
+public class TestTokenizer {
 
 	public static final String s1 = "The Universal Java Matrix Package is a very cool software. This is also true for the Java Data Mining Package.";
 
 	public static final String s2 = "Have fun with it!";
 
+	@Test
 	public void testTokenizer() throws Exception {
 		DataSet ds = new DefaultDataSet();
 		Sample sa1 = new DefaultSample();

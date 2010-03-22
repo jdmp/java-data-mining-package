@@ -23,17 +23,19 @@
 
 package org.jdmp.core;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
 
 import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.algorithm.regression.LinearRegression;
 import org.jdmp.core.dataset.ClassificationDataSet;
 import org.jdmp.core.dataset.CrossValidation;
 import org.jdmp.core.dataset.DataSetFactory;
+import org.junit.Test;
 import org.ujmp.core.listmatrix.ListMatrix;
 
-public class TestLinearRegression extends TestCase {
+public class TestLinearRegression {
 
+	@Test
 	public void testIrisClassification() throws Exception {
 		ClassificationDataSet iris = DataSetFactory.IRIS();
 		Classifier c = new LinearRegression();

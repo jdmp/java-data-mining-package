@@ -23,17 +23,19 @@
 
 package org.jdmp.libsvm;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
 
 import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.dataset.ClassificationDataSet;
 import org.jdmp.core.dataset.CrossValidation;
 import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.libsvm.LibSVMClassifier.Kernel;
+import org.junit.Test;
 import org.ujmp.core.listmatrix.ListMatrix;
 
-public class TestLibSVMClassifier extends TestCase {
+public class TestLibSVMClassifier {
 
+	@Test
 	public void testIrisClassification() throws Exception {
 		ClassificationDataSet iris = DataSetFactory.IRIS();
 		Classifier c = new LibSVMClassifier(Kernel.RBF);

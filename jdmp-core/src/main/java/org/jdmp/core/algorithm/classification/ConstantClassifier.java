@@ -72,7 +72,7 @@ public class ConstantClassifier extends AbstractClassifier {
 				pc = t;
 			}
 		}
-		prediction = Matrix.factory.dense(1, maxClassId + 1);
+		prediction = Matrix.factory.create(1, maxClassId + 1);
 		prediction.setAsDouble(1.0, 0, pc);
 	}
 

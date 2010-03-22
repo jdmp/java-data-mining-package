@@ -23,15 +23,17 @@
 
 package org.jdmp.core;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
 
 import org.jdmp.core.algorithm.classification.mlp.MultiLayerNetwork;
 import org.jdmp.core.dataset.ClassificationDataSet;
 import org.jdmp.core.dataset.DataSetFactory;
+import org.junit.Test;
 import org.ujmp.core.Matrix;
 
-public class TestMLP extends TestCase {
+public class TestMLP {
 
+	@Test
 	public void testMLP() throws Exception {
 		ClassificationDataSet iris = DataSetFactory.IRIS();
 

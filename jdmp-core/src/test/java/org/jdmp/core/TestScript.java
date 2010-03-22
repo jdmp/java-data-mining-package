@@ -23,7 +23,7 @@
 
 package org.jdmp.core;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
 
 import org.jdmp.core.dataset.ClassificationDataSet;
 import org.jdmp.core.dataset.RegressionDataSet;
@@ -31,11 +31,13 @@ import org.jdmp.core.module.Module;
 import org.jdmp.core.module.ModuleFactory;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.script.Result;
+import org.junit.Test;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 
-public class TestScript extends TestCase {
+public class TestScript {
 
+	@Test
 	public void testPlus() throws Exception {
 		Module m = ModuleFactory.emptyModule();
 		m.execute("a=[1,2,3;4,5,6]");
@@ -51,6 +53,7 @@ public class TestScript extends TestCase {
 		assertEquals(expected, vm);
 	}
 
+	@Test
 	public void testIris() throws Exception {
 		Result r = execute("iris");
 		Object o = r.getObject();
@@ -59,6 +62,7 @@ public class TestScript extends TestCase {
 		assertEquals(150, ds.getSamples().getSize());
 	}
 
+	@Test
 	public void testHenon() throws Exception {
 		Result r = execute("henon(100,10,5)");
 		Object o = r.getObject();

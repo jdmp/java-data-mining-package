@@ -23,14 +23,10 @@
 
 package org.jdmp.liblinear;
 
-import junit.framework.TestSuite;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
-public class AllTests extends TestSuite {
-
-	public static TestSuite suite() {
-		TestSuite suite = new TestSuite(AllTests.class.getName());
-		suite.addTestSuite(TestLibLinearClassifier.class);
-		return suite;
-	}
-
+@RunWith(Suite.class)
+@Suite.SuiteClasses( { TestLibLinearClassifier.class })
+public class AllTests {
 }

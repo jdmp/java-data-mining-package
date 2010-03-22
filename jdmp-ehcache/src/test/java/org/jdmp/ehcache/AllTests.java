@@ -23,16 +23,11 @@
 
 package org.jdmp.ehcache;
 
-import junit.framework.TestSuite;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
-public class AllTests extends TestSuite {
-
-	public static TestSuite suite() {
-		TestSuite suite = new TestSuite(AllTests.class.getName());
-		suite.addTestSuite(TestEhcacheMap.class);
-		suite.addTestSuite(TestSparseEhcacheMatrix.class);
-		suite.addTestSuite(TestTiledEhcacheMatrix2D.class);
-		return suite;
-	}
-
+@RunWith(Suite.class)
+@Suite.SuiteClasses( { TestEhcacheMap.class, TestSparseEhcacheMatrix.class,
+		TestTiledEhcacheMatrix2D.class })
+public class AllTests {
 }
