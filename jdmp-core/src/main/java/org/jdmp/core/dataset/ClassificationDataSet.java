@@ -47,7 +47,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 	public static final String ERRORCOUNT = Variable.ERRORCOUNT;
 
 	public Matrix getClassDistribution() {
-		Matrix m = Matrix.factory.create(getClassCount(), 1);
+		Matrix m = Matrix.factory.zeros(getClassCount(), 1);
 
 		Map<Integer, Double> map = new HashMap<Integer, Double>();
 
