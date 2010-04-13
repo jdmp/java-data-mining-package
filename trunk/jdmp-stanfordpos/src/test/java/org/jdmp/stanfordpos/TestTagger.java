@@ -43,12 +43,12 @@ public class TestTagger {
 
 	public static final String s2 = "Have fun with it!";
 
-	private Tagger tagger = null;
+	private static Tagger tagger = null;
 
-	private Tokenizer tokenizer = null;
+	private static Tokenizer tokenizer = null;
 
 	@BeforeClass
-	public void setUp() {
+	public static void setUp() {
 		try {
 			tokenizer = new StanfordTokenizer();
 			tagger = new StanfordPOSTagger();

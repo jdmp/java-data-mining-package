@@ -61,10 +61,11 @@ public class TestPlugins {
 					&& "1.5".equals(System
 							.getProperty("java.specification.version"))) {
 				assertNotSame(name, "ok", status);
+			} else if ("ujmp-complete".equals(name)) {
+				// not needed
 			} else {
 				assertEquals(name, "ok", status);
 			}
 		}
 	}
-
 }

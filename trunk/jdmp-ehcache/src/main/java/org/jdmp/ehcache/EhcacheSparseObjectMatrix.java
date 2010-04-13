@@ -23,50 +23,31 @@
 
 package org.jdmp.ehcache;
 
+import java.io.Closeable;
+import java.io.Flushable;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OptionalDataException;
-import java.util.Map;
 
 import org.ujmp.core.Matrix;
 import org.ujmp.core.coordinates.Coordinates;
 import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.interfaces.Erasable;
 import org.ujmp.core.objectmatrix.stub.AbstractMapToSparseMatrixWrapper;
 
-public class SparseEhcacheMatrix extends AbstractMapToSparseMatrixWrapper {
+public class EhcacheSparseObjectMatrix extends AbstractMapToSparseMatrixWrapper implements
+		Flushable, Closeable, Erasable {
 	private static final long serialVersionUID = -7743149828558906127L;
 
-	private transient Map<Coordinates, Object> values = null;
-
-	public SparseEhcacheMatrix(Matrix m) throws MatrixException, IOException {
-		super(m);
+	public EhcacheSparseObjectMatrix(Matrix m) throws MatrixException, IOException {
+		super(new EhcacheMap<Coordinates, Object>(EhcacheSparseObjectMatrix.class.getSimpleName()
+				+ System.nanoTime()), m);
 	}
 
-	public SparseEhcacheMatrix(Matrix m, int maximumNumberOfEntries) throws MatrixException,
-			IOException {
-		super(m, maximumNumberOfEntries);
-	}
-
-	public SparseEhcacheMatrix(long... size) throws MatrixException, IOException {
-		super(size);
-	}
-
-	
-	public Map<Coordinates, Object> getMap() {
-		if (values == null) {
-			try {
-				values = new EhcacheMap<Coordinates, Object>("matrix" + System.nanoTime());
-			} catch (IOException e) {
-				throw new MatrixException(e);
-			}
-		}
-		return values;
-	}
-
-	
-	public void setMap(Map<Coordinates, Object> map) {
-		this.values = map;
+	public EhcacheSparseObjectMatrix(long... size) throws MatrixException, IOException {
+		super(new EhcacheMap<Coordinates, Object>(EhcacheSparseObjectMatrix.class.getSimpleName()
+				+ System.nanoTime()), size);
 	}
 
 	private void writeObject(ObjectOutputStream s) throws IOException {
@@ -88,6 +69,18 @@ public class SparseEhcacheMatrix extends AbstractMapToSparseMatrixWrapper {
 				return;
 			}
 		}
+	}
+
+	public void erase() throws IOException {
+		((Erasable) getMap()).erase();
+	}
+
+	public void flush() throws IOException {
+		((Flushable) getMap()).flush();
+	}
+
+	public void close() throws IOException {
+		((Closeable) getMap()).close();
 	}
 
 }
