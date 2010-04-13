@@ -29,7 +29,6 @@ import org.ujmp.core.collections.AbstractMapTest;
 
 public class TestEhcacheMap extends AbstractMapTest {
 
-	
 	public Map createMap() throws Exception {
 		return new EhcacheMap<String, String>();
 	}

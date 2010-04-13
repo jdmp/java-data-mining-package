@@ -29,11 +29,11 @@ import org.ujmp.core.implementations.AbstractMatrixTest;
 public class TestTiledEhcacheMatrix2D extends AbstractMatrixTest {
 
 	public Matrix createMatrix(long... size) throws Exception {
-		return new TiledEhcacheMatrix2D(size);
+		return new EhcacheTilesObjectMatrix2D(size);
 	}
 
 	public Matrix createMatrix(Matrix source) throws Exception {
-		return new TiledEhcacheMatrix2D(source);
+		return new EhcacheTilesObjectMatrix2D(source);
 	}
 
 	public boolean isTestLarge() {

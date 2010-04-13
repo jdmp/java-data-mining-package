@@ -23,45 +23,29 @@
 
 package org.jdmp.ehcache;
 
+import java.io.Closeable;
+import java.io.Flushable;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OptionalDataException;
-import java.util.Map;
 
 import org.ujmp.core.Matrix;
 import org.ujmp.core.coordinates.Coordinates;
+import org.ujmp.core.interfaces.Erasable;
 import org.ujmp.core.objectmatrix.ObjectMatrix2D;
 import org.ujmp.core.objectmatrix.stub.AbstractMapToTiledMatrix2DWrapper;
 
-public class TiledEhcacheMatrix2D extends AbstractMapToTiledMatrix2DWrapper {
+public class EhcacheTilesObjectMatrix2D extends AbstractMapToTiledMatrix2DWrapper implements
+		Erasable, Flushable, Closeable {
 	private static final long serialVersionUID = 4324063544046176423L;
 
-	private transient Map<Coordinates, ObjectMatrix2D> values = null;
-
-	public TiledEhcacheMatrix2D(long... size) {
-		super(size);
+	public EhcacheTilesObjectMatrix2D(long... size) throws IOException {
+		super(new EhcacheMap<Coordinates, ObjectMatrix2D>(), size);
 	}
 
-	public TiledEhcacheMatrix2D(Matrix source) {
-		super(source);
-	}
-
-	
-	public Map<Coordinates, ObjectMatrix2D> getMap() {
-		if (values == null) {
-			try {
-				values = new EhcacheMap<Coordinates, ObjectMatrix2D>();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		return values;
-	}
-
-	
-	public void setMap(Map<Coordinates, ObjectMatrix2D> map) {
-		this.values = map;
+	public EhcacheTilesObjectMatrix2D(Matrix source) throws IOException {
+		super(new EhcacheMap<Coordinates, ObjectMatrix2D>(), source);
 	}
 
 	private void writeObject(ObjectOutputStream s) throws IOException {
@@ -83,6 +67,18 @@ public class TiledEhcacheMatrix2D extends AbstractMapToTiledMatrix2DWrapper {
 				return;
 			}
 		}
+	}
+
+	public void erase() throws IOException {
+		((Erasable) getMap()).erase();
+	}
+
+	public void flush() throws IOException {
+		((Flushable) getMap()).flush();
+	}
+
+	public void close() throws IOException {
+		((Closeable) getMap()).close();
 	}
 
 }

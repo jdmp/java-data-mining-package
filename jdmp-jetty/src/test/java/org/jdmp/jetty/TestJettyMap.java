@@ -28,12 +28,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jdmp.jetty.collections.JettyMapClient;
+import org.junit.After;
+import org.junit.Before;
 import org.ujmp.core.collections.AbstractMapTest;
 
 public class TestJettyMap extends AbstractMapTest {
 
 	private JettyObjectServer server = null;
 
+	@Before
 	public void setUp() throws Exception {
 		Map<Object, Object> originalMap = new HashMap<Object, Object>();
 		server = new JettyObjectServer(originalMap, 5555);
@@ -46,6 +49,7 @@ public class TestJettyMap extends AbstractMapTest {
 		return map;
 	}
 
+	@After
 	public void tearDown() throws Exception {
 		server.stop();
 		server = null;

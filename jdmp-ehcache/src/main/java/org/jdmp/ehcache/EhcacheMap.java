@@ -27,9 +27,7 @@ import java.io.Closeable;
 import java.io.File;
 import java.io.Flushable;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import net.sf.ehcache.Cache;
@@ -42,9 +40,10 @@ import net.sf.ehcache.config.DiskStoreConfiguration;
 import net.sf.ehcache.event.RegisteredEventListeners;
 import net.sf.ehcache.store.MemoryStoreEvictionPolicy;
 
-import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.collections.AbstractMap;
+import org.ujmp.core.interfaces.Erasable;
 
-public class EhcacheMap<K, V> implements Map<K, V>, Flushable, Closeable {
+public class EhcacheMap<K, V> extends AbstractMap<K, V> implements Erasable, Flushable, Closeable {
 	private static final long serialVersionUID = -2405059234958626645L;
 
 	private int maxElementsInMemory = 1000;
@@ -149,13 +148,11 @@ public class EhcacheMap<K, V> implements Map<K, V>, Flushable, Closeable {
 
 	private CacheManager getCacheManager() {
 		if (manager == null) {
-
 			Configuration config = new Configuration();
-			CacheConfiguration cacheconfig = new CacheConfiguration();
+			CacheConfiguration cacheconfig = new CacheConfiguration(getName(), maxElementsInMemory);
 			cacheconfig.setDiskExpiryThreadIntervalSeconds(diskExpiryThreadIntervalSeconds);
 			cacheconfig.setDiskPersistent(diskPersistent);
 			cacheconfig.setEternal(eternal);
-			cacheconfig.setMaxElementsInMemory(maxElementsInMemory);
 			cacheconfig.setMaxElementsOnDisk(maxElementsOnDisk);
 			cacheconfig.setMemoryStoreEvictionPolicyFromObject(memoryStoreEvictionPolicy);
 			cacheconfig.setOverflowToDisk(overflowToDisk);
@@ -197,10 +194,6 @@ public class EhcacheMap<K, V> implements Map<K, V>, Flushable, Closeable {
 		return getCache().isValueInCache(value);
 	}
 
-	public Set<java.util.Map.Entry<K, V>> entrySet() {
-		throw new MatrixException("not implemented");
-	}
-
 	public synchronized V get(Object key) {
 		Element e = getCache().get(key);
 		if (e != null) {
@@ -208,10 +201,6 @@ public class EhcacheMap<K, V> implements Map<K, V>, Flushable, Closeable {
 		} else {
 			return null;
 		}
-	}
-
-	public boolean isEmpty() {
-		return getCache().getSize() == 0;
 	}
 
 	public Set<K> keySet() {
@@ -224,13 +213,6 @@ public class EhcacheMap<K, V> implements Map<K, V>, Flushable, Closeable {
 		return null;
 	}
 
-	public void putAll(Map<? extends K, ? extends V> m) {
-		for (K key : m.keySet()) {
-			V value = m.get(key);
-			put(key, value);
-		}
-	}
-
 	public synchronized V remove(Object key) {
 		getCache().remove(key);
 		return null;
@@ -240,12 +222,16 @@ public class EhcacheMap<K, V> implements Map<K, V>, Flushable, Closeable {
 		return getCache().getSize();
 	}
 
-	public Collection<V> values() {
-		throw new MatrixException("not implemented");
+	public void finalize() {
+		try {
+			erase();
+		} catch (IOException e) {
+		}
 	}
 
-	public void finalize() {
-		getCacheManager().removeCache(getCache().getName());
+	public void erase() throws IOException {
+		close();
+		getCacheManager().shutdown();
 	}
 
 	public void flush() throws IOException {
@@ -253,7 +239,6 @@ public class EhcacheMap<K, V> implements Map<K, V>, Flushable, Closeable {
 	}
 
 	public void close() throws IOException {
-		getCache().dispose();
 		getCacheManager().removeCache(getCache().getName());
 	}
 }
