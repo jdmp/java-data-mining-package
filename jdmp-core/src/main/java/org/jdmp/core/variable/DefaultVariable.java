@@ -31,9 +31,9 @@ import javax.swing.event.ListDataListener;
 import org.jdmp.core.util.DefaultObservableList;
 import org.jdmp.core.util.MatrixListToMatrixWrapper;
 import org.jdmp.core.util.ObservableList;
+import org.ujmp.core.Coordinates;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.collections.RingBufferList;
-import org.ujmp.core.coordinates.Coordinates;
 
 public class DefaultVariable extends AbstractVariable {
 	private static final long serialVersionUID = -7192491915167470355L;

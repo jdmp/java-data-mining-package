@@ -25,8 +25,8 @@ package org.jdmp.core.variable;
 
 import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.util.ObservableList;
+import org.ujmp.core.Coordinates;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.coordinates.Coordinates;
 import org.ujmp.core.util.StringUtil;
 
 public abstract class AbstractVariable extends AbstractCoreObject implements Variable {

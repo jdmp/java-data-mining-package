@@ -30,8 +30,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OptionalDataException;
 
+import org.ujmp.core.Coordinates;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.coordinates.Coordinates;
 import org.ujmp.core.interfaces.Erasable;
 import org.ujmp.core.objectmatrix.ObjectMatrix2D;
 import org.ujmp.core.objectmatrix.stub.AbstractMapToTiledMatrix2DWrapper;
@@ -62,7 +62,7 @@ public class EhcacheTiledObjectMatrix2D extends AbstractMapToTiledMatrix2DWrappe
 			try {
 				Coordinates c = (Coordinates) s.readObject();
 				Object o = s.readObject();
-				setObject(o, c.dimensions);
+				setObject(o, c.co);
 			} catch (OptionalDataException e) {
 				return;
 			}

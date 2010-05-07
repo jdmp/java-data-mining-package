@@ -26,12 +26,9 @@ package org.jdmp.ehcache;
 import java.io.Closeable;
 import java.io.Flushable;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.OptionalDataException;
 
+import org.ujmp.core.Coordinates;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.coordinates.Coordinates;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.interfaces.Erasable;
 import org.ujmp.core.objectmatrix.stub.AbstractMapToSparseMatrixWrapper;
@@ -48,27 +45,6 @@ public class EhcacheSparseObjectMatrix extends AbstractMapToSparseMatrixWrapper 
 	public EhcacheSparseObjectMatrix(long... size) throws MatrixException, IOException {
 		super(new EhcacheMap<Coordinates, Object>(EhcacheSparseObjectMatrix.class.getSimpleName()
 				+ System.nanoTime()), size);
-	}
-
-	private void writeObject(ObjectOutputStream s) throws IOException {
-		s.defaultWriteObject();
-		for (long[] c : availableCoordinates()) {
-			s.writeObject(new Coordinates(c));
-			s.writeObject(getObject(c));
-		}
-	}
-
-	private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
-		s.defaultReadObject();
-		while (true) {
-			try {
-				Coordinates c = (Coordinates) s.readObject();
-				Object o = s.readObject();
-				setObject(o, c.dimensions);
-			} catch (OptionalDataException e) {
-				return;
-			}
-		}
 	}
 
 	public void erase() throws IOException {
