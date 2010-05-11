@@ -16,7 +16,6 @@
 			<includes>
 				<include>org.jdmp:jdmp-bsh</include>
 				<include>org.jdmp:jdmp-core</include>
-				<include>org.jdmp:jdmp-ehcache</include>
 				<include>org.jdmp:jdmp-gui</include>
 				<include>org.jdmp:jdmp-jetty</include>
 				<include>org.jdmp:jdmp-jgroups</include>

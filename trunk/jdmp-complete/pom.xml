@@ -49,6 +49,13 @@
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-ehcache</artifactId>
+			<version>${ujmp.version}</version>
+			<scope>compile</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-ejml</artifactId>
 			<version>${ujmp.version}</version>
 			<scope>compile</scope>
@@ -281,13 +288,6 @@
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-bsh</artifactId>
-			<version>${version}</version>
-			<scope>compile</scope>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-ehcache</artifactId>
 			<version>${version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
@@ -391,6 +391,14 @@
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
+			<artifactId>ujmp-ehcache</artifactId>
+			<version>${ujmp.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-gui</artifactId>
 			<version>${ujmp.version}</version>
 			<type>test-jar</type>
@@ -655,14 +663,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-ehcache</artifactId>
-			<version>${version}</version>
-			<type>test-jar</type>
-			<scope>test</scope>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-jetty</artifactId>
 			<version>${version}</version>
 			<type>test-jar</type>
@@ -732,7 +732,6 @@
 		<module>../jdmp-core</module>
 		<module>../jdmp-gui</module>
 		<module>../jdmp-bsh</module>
-		<module>../jdmp-ehcache</module>
 		<module>../jdmp-jetty</module>
 		<module>../jdmp-jgroups</module>
 		<module>../jdmp-liblinear</module>
