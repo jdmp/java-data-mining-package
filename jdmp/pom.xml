@@ -193,24 +193,6 @@
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
-				<groupId>net.sf.ehcache</groupId>
-				<artifactId>ehcache-core</artifactId>
-				<version>2.0.1</version>
-				<scope>compile</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-api</artifactId>
-				<version>1.5.8</version>
-				<scope>compile</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-jdk14</artifactId>
-				<version>1.5.8</version>
-				<scope>compile</scope>
-			</dependency>
-			<dependency>
 				<groupId>jgroups</groupId>
 				<artifactId>jgroups</artifactId>
 				<version>2.8.0.GA</version>
@@ -446,6 +428,7 @@
 						<link>http://www.ujmp.org/docs/${project.version}/ujmp-bpca/apidocs</link>
 						<link>http://www.ujmp.org/docs/${project.version}/ujmp-colt/apidocs</link>
 						<link>http://www.ujmp.org/docs/${project.version}/ujmp-commonsmath/apidocs</link>
+						<link>http://www.ujmp.org/docs/${project.version}/ujmp-ehcache/apidocs</link>
 						<link>http://www.ujmp.org/docs/${project.version}/ujmp-ejml/apidocs</link>
 						<link>http://www.ujmp.org/docs/${project.version}/ujmp-hadoop/apidocs</link>
 						<link>http://www.ujmp.org/docs/${project.version}/ujmp-itext/apidocs</link>
@@ -479,7 +462,6 @@
 						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-core/apidocs</link>
 						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-gui/apidocs</link>
 						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-bsh/apidocs</link>
-						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-ehcache/apidocs</link>
 						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-jetty/apidocs</link>
 						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-jgroups/apidocs</link>
 						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-liblinear/apidocs</link>
@@ -494,13 +476,23 @@
 		</plugins>
 	</reporting>
 
-	<distributionManagement>
+	<repositories>
 		<repository>
 			<id>jdmp-repository</id>
 			<name>JDMP Repository</name>
 			<url>file:/~/.m2/repository</url>
 		</repository>
-	</distributionManagement>
+		<repository>
+			<id>ibiblio.org</id>
+			<name>ibiblio Mirror of http://repo1.maven.org/maven2/</name>
+			<url>http://mirrors.ibiblio.org/pub/mirrors/maven2</url>
+		</repository>
+		<repository>
+			<id>java-matrix</id>
+			<name>java-matrix maven repository</name>
+			<url>http://java-matrix.org/maven2</url>
+		</repository>
+	</repositories>
 
 
 </project>

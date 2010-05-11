@@ -17,7 +17,6 @@
 				<include>org.jdmp:jdmp-core</include>
 				<include>org.jdmp:jdmp-gui</include>
 				<include>org.jdmp:jdmp-complete</include>
-				<include>org.jdmp:jdmp-ehcache</include>
 				<include>org.jdmp:jdmp-jetty</include>
 				<include>org.jdmp:jdmp-jgroups</include>
 				<include>org.jdmp:jdmp-liblinear</include>
@@ -26,9 +25,8 @@
 				<include>org.jdmp:jdmp-mallet</include>
 				<include>org.jdmp:jdmp-stanfordpos</include>
 				<include>org.jdmp:jdmp-weka</include>
-				
+
 				<include>bsh:bsh</include>
-				<include>net.sf.ehcache:ehcache</include>
 				<include>backport-util-concurrent:backport-util-concurrent</include>
 				<include>org.mortbay.jetty:jetty</include>
 				<include>org.mortbay.jetty:jetty-util</include>
@@ -59,6 +57,9 @@
 				<include>org.ujmp:ujmp-commonsmath</include>
 				<include>commons-math:commons-math</include>
 
+				<include>org.ujmp:ujmp-ehcache</include>
+				<include>net.sf.ehcache:ehcache</include>
+
 				<include>org.ujmp:ujmp-ejml</include>
 				<include>ejml:ejml</include>
 
@@ -79,7 +80,7 @@
 
 				<include>org.ujmp:ujmp-jampack</include>
 				<include>jampack:jampack</include>
-				
+
 				<include>org.ujmp:ujmp-jblas</include>
 				<include>jblas:jblas</include>
 

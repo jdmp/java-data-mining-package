@@ -26,10 +26,6 @@
 			<outputDirectory></outputDirectory>
 		</fileSet>
 		<fileSet>
-			<directory>../jdmp-ehcache/src/main/java</directory>
-			<outputDirectory></outputDirectory>
-		</fileSet>
-		<fileSet>
 			<directory>../jdmp-jetty/src/main/java</directory>
 			<outputDirectory></outputDirectory>
 		</fileSet>
