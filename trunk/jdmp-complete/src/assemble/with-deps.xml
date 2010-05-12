@@ -94,8 +94,8 @@
 				<include>jxl:jxl</include>
 
 				<include>org.ujmp:ujmp-jfreechart</include>
-				<include>jfreechart:jfreechart</include>
-				<include>jcommon:jcommon</include>
+				<include>jfree:jfreechart</include>
+				<include>jfree:jcommon</include>
 
 				<include>org.ujmp:ujmp-jlinalg</include>
 				<include>jlinalg:jlinalg</include>
@@ -113,7 +113,7 @@
 				<include>jmatrices:jmatrices</include>
 
 				<include>org.ujmp:ujmp-jsci</include>
-				<include>jsci-core:jsci-core</include>
+				<include>jsci:jsci-core</include>
 
 				<include>org.ujmp:ujmp-jscience</include>
 				<include>jscience:jscience</include>
