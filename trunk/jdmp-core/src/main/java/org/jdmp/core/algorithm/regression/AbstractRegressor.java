@@ -88,7 +88,7 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 	}
 
 	public final Matrix predict(Matrix input) throws Exception {
-		return predict(input.toRowVector(), null);
+		return predict(input.toRowVector(Ret.NEW), null);
 	}
 
 	public final void train(Matrix input, Matrix targetOutput) throws Exception {

@@ -88,7 +88,7 @@ public class WeightUpdate extends AlgorithmFiveSources {
 		Matrix contactDeviation = MathUtil.getMatrix(matrices.get(CONTACTDEVIATION));
 		double sampleWeight = MathUtil.getMatrix(matrices.get(SAMPLEWEIGHT)).doubleValue();
 
-		Matrix transposedInput = MathUtil.getMatrix(matrices.get(INPUT)).toColumnVector();
+		Matrix transposedInput = MathUtil.getMatrix(matrices.get(INPUT)).toColumnVector(Ret.NEW);
 
 		switch (biasType) {
 		case SINGLE:
