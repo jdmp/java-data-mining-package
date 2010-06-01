@@ -30,6 +30,7 @@ import org.jdmp.core.algorithm.AlgorithmTwoSources;
 import org.jdmp.core.algorithm.classification.mlp.MultiLayerNetwork.BiasType;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
+import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.doublematrix.impl.ArrayDenseDoubleMatrix2D;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.util.MathUtil;
@@ -48,7 +49,7 @@ public class Weighting extends AlgorithmTwoSources {
 		Map<String, Object> result = new HashMap<String, Object>();
 
 		Matrix weight = MathUtil.getMatrix(input.get(SOURCE1));
-		Matrix x = MathUtil.getMatrix(input.get(SOURCE2)).toRowVector();
+		Matrix x = MathUtil.getMatrix(input.get(SOURCE2)).toRowVector(Ret.NEW);
 
 		switch (biasType) {
 		case SINGLE:
