@@ -10,7 +10,7 @@
 	<groupId>org.jdmp</groupId>
 	<artifactId>jdmp</artifactId>
 	<version>0.1.2</version>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 	<url>http://www.jdmp.org/</url>
 
 	<developers>
