@@ -21,7 +21,7 @@
 
 		<dependency>
 			<groupId>org.ujmp</groupId>
-			<artifactId>ujmp-bpca</artifactId>
+			<artifactId>ujmp-jbpcafill</artifactId>
 			<version>${ujmp.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
@@ -352,7 +352,7 @@
 
 		<dependency>
 			<groupId>org.ujmp</groupId>
-			<artifactId>ujmp-bpca</artifactId>
+			<artifactId>ujmp-jbpcafill</artifactId>
 			<version>${ujmp.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>

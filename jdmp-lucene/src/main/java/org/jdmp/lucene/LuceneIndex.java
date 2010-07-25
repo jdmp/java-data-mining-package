@@ -97,6 +97,10 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 
 	private final Set<String> fields = new HashSet<String>();
 
+	private final Set<String> fieldsToSkip = new HashSet<String>();
+
+	private final Set<String> fieldsToIndex = new HashSet<String>();
+
 	private Directory directory = null;
 
 	private File path = null;
@@ -134,6 +138,8 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 
 	public LuceneIndex(File path, boolean readOnly, Index... indices)
 			throws Exception {
+		// fieldsToSkip.add(Variable.CONTENT);
+		fieldsToSkip.add(Variable.BYTES);
 		this.readOnly = readOnly;
 
 		if (indices.length == 1) {
@@ -204,9 +210,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 			String key = v.getLabel();
 			if (Sample.ID.equals(key)) {
 				// skip
-			} else if (Variable.CONTENT.equals(key)) {
-				// skip
-			} else if (Variable.BYTES.equals(key)) {
+			} else if (fieldsToSkip.contains(key)) {
 				// skip
 			} else {
 				String value = "";

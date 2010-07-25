@@ -92,15 +92,15 @@ public class CrossValidation {
 		}
 
 		if (allacc.size() > 1) {
-			Matrix stdacc = allacc.std(Ret.NEW, Matrix.ROW, false);
+			Matrix stdacc = allacc.std(Ret.NEW, Matrix.ROW, false, true);
 			System.out.println("Accuracy: " + allacc.getMeanValue() + "+-" + stdacc.doubleValue());
-			Matrix stdfm = allfm.std(Ret.NEW, Matrix.ROW, false);
+			Matrix stdfm = allfm.std(Ret.NEW, Matrix.ROW, false, true);
 			System.out.println("F-Measure (macro): " + allfm.getMeanValue() + "+-"
 					+ stdfm.doubleValue());
-			Matrix stdsens = allsens.std(Ret.NEW, Matrix.ROW, false);
+			Matrix stdsens = allsens.std(Ret.NEW, Matrix.ROW, false, true);
 			System.out.println("Sensitivity: " + allsens.getMeanValue() + "+-"
 					+ stdsens.doubleValue());
-			Matrix stdspec = allspec.std(Ret.NEW, Matrix.ROW, false);
+			Matrix stdspec = allspec.std(Ret.NEW, Matrix.ROW, false, true);
 			System.out.println("Specificity: " + allspec.getMeanValue() + "+-"
 					+ stdspec.doubleValue());
 		} else {
