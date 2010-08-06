@@ -275,76 +275,76 @@
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-core</artifactId>
-			<version>${version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-gui</artifactId>
-			<version>${version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-bsh</artifactId>
-			<version>${version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-jetty</artifactId>
-			<version>${version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-jgroups</artifactId>
-			<version>${version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-liblinear</artifactId>
-			<version>${version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-libsvm</artifactId>
-			<version>${version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-lucene</artifactId>
-			<version>${version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-mallet</artifactId>
-			<version>${version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-stanfordpos</artifactId>
-			<version>${version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-weka</artifactId>
-			<version>${version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
@@ -641,14 +641,14 @@
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-core</artifactId>
-			<version>${version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-gui</artifactId>
-			<version>${version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -656,7 +656,7 @@
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-bsh</artifactId>
-			<version>${version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -664,7 +664,7 @@
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-jetty</artifactId>
-			<version>${version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -672,7 +672,7 @@
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-jgroups</artifactId>
-			<version>${version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -680,7 +680,7 @@
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-mallet</artifactId>
-			<version>${version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -688,7 +688,7 @@
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-lucene</artifactId>
-			<version>${version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -696,7 +696,7 @@
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-liblinear</artifactId>
-			<version>${version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -704,7 +704,7 @@
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-libsvm</artifactId>
-			<version>${version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -712,7 +712,7 @@
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-stanfordpos</artifactId>
-			<version>${version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -720,7 +720,7 @@
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-weka</artifactId>
-			<version>${version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
