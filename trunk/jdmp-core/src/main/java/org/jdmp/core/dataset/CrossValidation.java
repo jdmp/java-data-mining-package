@@ -46,6 +46,8 @@ public class CrossValidation {
 		ListMatrix<Double> allfm = new DefaultListMatrix<Double>();
 		ListMatrix<Double> allsens = new DefaultListMatrix<Double>();
 		ListMatrix<Double> allspec = new DefaultListMatrix<Double>();
+		ListMatrix<Double> allprec = new DefaultListMatrix<Double>();
+		ListMatrix<Double> allrec = new DefaultListMatrix<Double>();
 
 		for (int run = 0; run < runs; run++) {
 
@@ -53,6 +55,8 @@ public class CrossValidation {
 			ListMatrix<Double> fm = new DefaultListMatrix<Double>();
 			ListMatrix<Double> sens = new DefaultListMatrix<Double>();
 			ListMatrix<Double> spec = new DefaultListMatrix<Double>();
+			ListMatrix<Double> prec = new DefaultListMatrix<Double>();
+			ListMatrix<Double> rec = new DefaultListMatrix<Double>();
 
 			System.out.print("F-Measure (macro) in run " + run + ":\t");
 
@@ -68,6 +72,8 @@ public class CrossValidation {
 				fm.add(test.getVariables().getAsDouble(Variable.FMEASUREMACRO));
 				sens.add(test.getVariables().getAsDouble(Variable.SENSITIVITY));
 				spec.add(test.getVariables().getAsDouble(Variable.SPECIFICITY));
+				prec.add(test.getVariables().getAsDouble(Variable.PRECISION));
+				rec.add(test.getVariables().getAsDouble(Variable.RECALL));
 				// System.out.print(test.getAccuracy() + "\t");
 				System.out.print(test.getVariables().getAsDouble(Variable.FMEASUREMACRO) + "\t");
 			}
@@ -85,10 +91,18 @@ public class CrossValidation {
 			double meanspec = spec.getMeanValue();
 			allspec.add(meanspec);
 
+			double meanprec = prec.getMeanValue();
+			allprec.add(meanprec);
+
+			double meanrec = rec.getMeanValue();
+			allrec.add(meanrec);
+
 			System.out.println("Average Accuracy in run " + run + ":\t" + meanacc);
 			System.out.println("Average F-Measure in run " + run + ":\t" + meanfm);
 			System.out.println("Average Sensitivity in run " + run + ":\t" + meansens);
 			System.out.println("Average Specificity in run " + run + ":\t" + meanspec);
+			System.out.println("Average Precision in run " + run + ":\t" + meanprec);
+			System.out.println("Average Recall in run " + run + ":\t" + meanrec);
 		}
 
 		if (allacc.size() > 1) {
@@ -103,11 +117,18 @@ public class CrossValidation {
 			Matrix stdspec = allspec.std(Ret.NEW, Matrix.ROW, false, true);
 			System.out.println("Specificity: " + allspec.getMeanValue() + "+-"
 					+ stdspec.doubleValue());
+			Matrix stdprec = allprec.std(Ret.NEW, Matrix.ROW, false, true);
+			System.out.println("Precision: " + allprec.getMeanValue() + "+-"
+					+ stdprec.doubleValue());
+			Matrix stdrec = allrec.std(Ret.NEW, Matrix.ROW, false, true);
+			System.out.println("Recall: " + allrec.getMeanValue() + "+-" + stdrec.doubleValue());
 		} else {
 			System.out.println("Accuracy: " + allacc.getMeanValue());
 			System.out.println("F-Measure (macro): " + allfm.getMeanValue());
 			System.out.println("Sensitivity: " + allsens.getMeanValue());
 			System.out.println("Specificity: " + allspec.getMeanValue());
+			System.out.println("Precision: " + allprec.getMeanValue());
+			System.out.println("Recall: " + allrec.getMeanValue());
 		}
 
 		return allacc;
