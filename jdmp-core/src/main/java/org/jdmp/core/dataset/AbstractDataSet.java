@@ -55,6 +55,14 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		return sampleMap;
 	}
 
+	public final void setLabelObject(Object label) {
+		getVariables().setObject(Sample.LABEL, label);
+	}
+
+	public final Object getLabelObject() {
+		return getVariables().getAsObject(Sample.LABEL);
+	}
+
 	public final Variables getVariables() {
 		if (variables == null) {
 			variables = new DefaultVariables();

@@ -66,17 +66,22 @@ public class SampleGUIObject extends AbstractGUIObject {
 		sample.setDescription(description);
 	}
 
-	
+	public Object getLabelObject() {
+		return sample.getLabelObject();
+	}
+
+	public void setLabelObject(Object label) {
+		sample.setLabelObject(label);
+	}
+
 	public String toString() {
 		return sample.toString();
 	}
 
-	
 	public Sample getCoreObject() {
 		return sample;
 	}
 
-	
 	public JFrame getFrame() {
 		if (frame == null) {
 			frame = new SampleFrame(this);
@@ -84,7 +89,6 @@ public class SampleGUIObject extends AbstractGUIObject {
 		return frame;
 	}
 
-	
 	public JPanel getPanel() {
 		if (panel == null) {
 			panel = new SamplePanel(this);

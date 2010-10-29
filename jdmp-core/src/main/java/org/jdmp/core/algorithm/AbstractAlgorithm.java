@@ -32,6 +32,7 @@ import java.util.Map;
 
 import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.DefaultObservableList;
 import org.jdmp.core.util.DefaultObservableMap;
 import org.jdmp.core.util.ObservableList;
@@ -74,6 +75,14 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 
 	public final List<String> getVariableKeys() {
 		return variableKeys;
+	}
+
+	public final void setLabelObject(Object label) {
+		getVariables().setObject(Sample.LABEL, label);
+	}
+
+	public final Object getLabelObject() {
+		return getVariables().getAsObject(Sample.LABEL);
 	}
 
 	public final String getLabel() {

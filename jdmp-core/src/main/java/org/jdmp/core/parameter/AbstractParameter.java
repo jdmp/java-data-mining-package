@@ -23,6 +23,8 @@
 
 package org.jdmp.core.parameter;
 
+import org.ujmp.core.util.StringUtil;
+
 public abstract class AbstractParameter<T> implements Parameter<T> {
 
 	private String label = null;
@@ -35,6 +37,14 @@ public abstract class AbstractParameter<T> implements Parameter<T> {
 
 	public void setLabel(String label) {
 		this.label = label;
+	}
+
+	public final void setLabelObject(Object label) {
+		this.label = StringUtil.format(label);
+	}
+
+	public final Object getLabelObject() {
+		return label;
 	}
 
 	public String getDescription() {

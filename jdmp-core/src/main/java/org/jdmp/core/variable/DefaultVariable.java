@@ -34,6 +34,7 @@ import org.jdmp.core.util.ObservableList;
 import org.ujmp.core.Coordinates;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.collections.RingBufferList;
+import org.ujmp.core.util.StringUtil;
 
 public class DefaultVariable extends AbstractVariable {
 	private static final long serialVersionUID = -7192491915167470355L;
@@ -62,6 +63,14 @@ public class DefaultVariable extends AbstractVariable {
 
 	public final void setLabel(String label) {
 		this.label = label;
+	}
+
+	public final void setLabelObject(Object label) {
+		this.label = StringUtil.format(label);
+	}
+
+	public final Object getLabelObject() {
+		return label;
 	}
 
 	public DefaultVariable() {
@@ -111,17 +120,14 @@ public class DefaultVariable extends AbstractVariable {
 
 	class VariableListDataListener implements ListDataListener {
 
-		
 		public void contentsChanged(ListDataEvent e) {
 			notifyGUIObject();
 		}
 
-		
 		public void intervalAdded(ListDataEvent e) {
 			notifyGUIObject();
 		}
 
-		
 		public void intervalRemoved(ListDataEvent e) {
 			notifyGUIObject();
 		}

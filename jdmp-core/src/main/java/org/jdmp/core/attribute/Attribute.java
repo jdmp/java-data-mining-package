@@ -26,6 +26,7 @@ package org.jdmp.core.attribute;
 import java.io.Serializable;
 
 import org.ujmp.core.interfaces.HasLabel;
+import org.ujmp.core.util.StringUtil;
 
 public class Attribute implements Serializable, Comparable<Attribute>, HasLabel {
 	private static final long serialVersionUID = 4184577547748510833L;
@@ -64,12 +65,18 @@ public class Attribute implements Serializable, Comparable<Attribute>, HasLabel 
 		return label;
 	}
 
-	
+	public final void setLabelObject(Object label) {
+		this.label = StringUtil.format(label);
+	}
+
+	public final Object getLabelObject() {
+		return label;
+	}
+
 	public boolean equals(Object obj) {
 		return ("" + label).equals("" + label);
 	}
 
-	
 	public int hashCode() {
 		return ("" + label).hashCode();
 	}
