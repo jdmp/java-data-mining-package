@@ -49,6 +49,14 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		return getVariables().getAsString(Sample.DESCRIPTION);
 	}
 
+	public final void setLabelObject(Object label) {
+		getVariables().setObject(Sample.LABEL, label);
+	}
+
+	public final Object getLabelObject() {
+		return getVariables().getAsObject(Sample.LABEL);
+	}
+
 	public final void setDescription(String description) {
 		getVariables().setObject(Sample.DESCRIPTION, description);
 	}

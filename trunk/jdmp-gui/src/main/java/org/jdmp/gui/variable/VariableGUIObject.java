@@ -100,6 +100,14 @@ public class VariableGUIObject extends AbstractGUIObject {
 		variable.setLabel(label);
 	}
 
+	public Object getLabelObject() {
+		return variable.getLabelObject();
+	}
+
+	public void setLabelObject(Object label) {
+		variable.setLabelObject(label);
+	}
+
 	public String getDescription() {
 		return variable.getDescription();
 	}
@@ -108,17 +116,14 @@ public class VariableGUIObject extends AbstractGUIObject {
 		variable.setDescription(description);
 	}
 
-	
 	public String toString() {
 		return variable.toString();
 	}
 
-	
 	public Variable getCoreObject() {
 		return variable;
 	}
 
-	
 	public JFrame getFrame() {
 		if (frame == null) {
 			frame = new VariableFrame(this);
@@ -126,7 +131,6 @@ public class VariableGUIObject extends AbstractGUIObject {
 		return frame;
 	}
 
-	
 	public JPanel getPanel() {
 		if (panel == null) {
 			panel = new VariablePanel(this);

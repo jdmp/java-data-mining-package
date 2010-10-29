@@ -103,6 +103,14 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 		return getVariables().getAsString(Sample.LABEL);
 	}
 
+	public final void setLabelObject(Object label) {
+		getVariables().setObject(Sample.LABEL, label);
+	}
+
+	public final Object getLabelObject() {
+		return getVariables().getAsObject(Sample.LABEL);
+	}
+
 	public final void setLabel(String label) {
 		getVariables().setObject(Sample.LABEL, label);
 	}
