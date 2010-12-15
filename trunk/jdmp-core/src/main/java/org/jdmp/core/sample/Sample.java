@@ -26,6 +26,7 @@ package org.jdmp.core.sample;
 import org.jdmp.core.JDMPCoreObject;
 import org.jdmp.core.variable.HasVariableMap;
 import org.jdmp.core.variable.Variable;
+import org.ujmp.core.Matrix;
 import org.ujmp.core.interfaces.HasId;
 
 public interface Sample extends JDMPCoreObject, HasVariableMap, HasId {
@@ -65,5 +66,9 @@ public interface Sample extends JDMPCoreObject, HasVariableMap, HasId {
 	public int getTargetClass();
 
 	public boolean isCorrect();
+
+	public Matrix getMatrix(String variableKey);
+
+	public void setMatrix(String variableKey, Matrix matrix);
 
 }

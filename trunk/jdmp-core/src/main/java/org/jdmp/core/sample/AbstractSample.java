@@ -27,6 +27,7 @@ import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.variable.DefaultVariables;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.Variables;
+import org.ujmp.core.Matrix;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.util.StringUtil;
 
@@ -48,6 +49,14 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 
 	public final void setVariables(Variables variables) {
 		this.variables = variables;
+	}
+
+	public Matrix getMatrix(String variableKey) {
+		return getVariables().getMatrix(variableKey);
+	}
+
+	public void setMatrix(String variableKey, Matrix matrix) {
+		getVariables().setMatrix(variableKey, matrix);
 	}
 
 	public boolean isCorrect() throws MatrixException {
