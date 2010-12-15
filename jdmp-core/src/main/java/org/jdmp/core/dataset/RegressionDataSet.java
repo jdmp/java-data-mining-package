@@ -58,6 +58,15 @@ public class RegressionDataSet extends DefaultDataSet {
 		return getVariables().get(TARGET);
 	}
 
+	public final long getTargetFeatureCount() {
+		Matrix m = getTargetMatrix();
+		if (m != null) {
+			return m.getColumnCount();
+		} else {
+			return 0;
+		}
+	}
+
 	public void appendRMSEMatrix(Matrix m) {
 		getRMSEVariable().addMatrix(m);
 	}

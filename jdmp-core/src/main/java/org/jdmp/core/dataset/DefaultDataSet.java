@@ -48,6 +48,15 @@ public class DefaultDataSet extends AbstractDataSet {
 		return getVariables().get(INPUT);
 	}
 
+	public final long getInputFeatureCount() {
+		Matrix m = getInputMatrix();
+		if (m != null) {
+			return m.getColumnCount();
+		} else {
+			return 0;
+		}
+	}
+
 	public final void standardize(int dimension) throws MatrixException {
 		getInputVariable().getMatrix().standardize(Ret.ORIG, dimension);
 	}

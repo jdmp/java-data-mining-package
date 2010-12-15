@@ -91,6 +91,10 @@ public interface Algorithm extends JDMPCoreObject, HasVariableMap, HasDataSetLis
 
 	public void addVariableKey(String key);
 
+	public void setMatrix(String key, Matrix matrix);
+
+	public Matrix getMatrix(String key);
+
 	public void setVariables(Variable... variables);
 
 	public List<String> getVariableKeys();
@@ -98,5 +102,7 @@ public interface Algorithm extends JDMPCoreObject, HasVariableMap, HasDataSetLis
 	public List<String> getInputKeys();
 
 	public List<String> getOutputKeys();
+
+	public Variable getVariable(String key);
 
 }

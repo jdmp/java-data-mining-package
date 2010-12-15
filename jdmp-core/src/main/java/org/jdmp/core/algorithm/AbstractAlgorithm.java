@@ -37,6 +37,7 @@ import org.jdmp.core.util.DefaultObservableList;
 import org.jdmp.core.util.DefaultObservableMap;
 import org.jdmp.core.util.ObservableList;
 import org.jdmp.core.util.ObservableMap;
+import org.jdmp.core.variable.DefaultVariable;
 import org.jdmp.core.variable.DefaultVariables;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.Variables;
@@ -270,6 +271,23 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 
 	public final void setAlgorithms(ObservableMap<Algorithm> algorithms) {
 		this.algorithmList = algorithms;
+	}
+
+	public void setMatrix(String key, Matrix matrix) {
+		getVariable(key).addMatrix(matrix);
+	}
+
+	public Variable getVariable(String key) {
+		Variable v = getVariables().get(key);
+		if (v == null) {
+			v = new DefaultVariable();
+			getVariables().put(key, v);
+		}
+		return v;
+	}
+
+	public Matrix getMatrix(String key) {
+		return getVariable(key).getMatrix();
 	}
 
 }
