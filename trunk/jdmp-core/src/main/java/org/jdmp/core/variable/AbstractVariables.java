@@ -57,6 +57,10 @@ public abstract class AbstractVariables extends AbstractObservableMap<Variable> 
 	}
 
 	public final double getAsDouble(String variableKey) {
+		Object o = getObject(variableKey);
+		if (o instanceof Matrix) {
+			return ((Matrix) o).getMeanValue();
+		}
 		return MathUtil.getDouble(getObject(variableKey));
 	}
 
