@@ -22,6 +22,7 @@
 				<include>hadoop:hadoop-core</include>
 				<include>commons-logging:commons-logging</include>
 				<include>ejml:ejml</include>
+				<include>com.googlecode:google-api-translate-java</include>
 				<include>iText:iText</include>
 				<include>jackcess:jackcess</include>
 				<include>commons-logging:commons-logging</include>
