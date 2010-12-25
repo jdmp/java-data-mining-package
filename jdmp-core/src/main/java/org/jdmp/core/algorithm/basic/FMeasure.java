@@ -79,7 +79,7 @@ public class FMeasure extends AbstractAlgorithm {
 					}
 				}
 			}
-			target.setAsDouble(MathUtil.f1measure(tp, tn, fp, fn), k, 0);
+			target.setAsDouble(MathUtil.f1Measure(tp, fp, fn), k, 0);
 		}
 		result.put(TARGET, target);
 		return result;
