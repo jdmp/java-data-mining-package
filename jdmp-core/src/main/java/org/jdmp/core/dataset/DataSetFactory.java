@@ -558,6 +558,17 @@ public abstract class DataSetFactory {
 		return xor;
 	}
 
+	public static ClassificationDataSet ONE() {
+		ClassificationDataSet one = classificationDataSet("DataSet with one sample 1->1");
+		Sample x1 = SampleFactory.labeledSample("1=1");
+		x1.getVariables().setMatrix(Sample.INPUT,
+				MatrixFactory.linkToArray(new double[] { 1 }).transpose());
+		x1.getVariables().setMatrix(Sample.TARGET,
+				MatrixFactory.linkToArray(new double[] { 1 }).transpose());
+		one.getSamples().add(x1);
+		return one;
+	}
+
 	public static ClassificationDataSet IRIS() throws Exception {
 		ClassificationDataSet ds = (ClassificationDataSet) (new CreateIris().calculate()
 				.get(Sample.TARGET));
