@@ -81,7 +81,7 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-assembly-plugin</artifactId>				
+				<artifactId>maven-assembly-plugin</artifactId>
 				<configuration>
 					<descriptors>
 						<descriptor>src/assemble/complete.xml</descriptor>
@@ -189,7 +189,7 @@
 			<dependency>
 				<groupId>weka</groupId>
 				<artifactId>weka</artifactId>
-				<version>3.7.0</version>
+				<version>3.7.3</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
@@ -484,9 +484,14 @@
 			<url>file:/~/.m2/repository</url>
 		</repository>
 		<repository>
+			<id>netcologne.de</id>
+			<name>netcologne Mirror of http://repo1.maven.org/maven2</name>
+			<url>http://mirror.netcologne.de/maven2</url>			
+		</repository>
+		<repository>
 			<id>ibiblio.org</id>
 			<name>ibiblio Mirror of http://repo1.maven.org/maven2/</name>
-			<url>http://mirrors.ibiblio.org/pub/mirrors/maven2</url>
+			<url>http://repo1.maven.org/maven2</url>
 		</repository>
 		<repository>
 			<id>maven2-repository.dev.java.net</id>

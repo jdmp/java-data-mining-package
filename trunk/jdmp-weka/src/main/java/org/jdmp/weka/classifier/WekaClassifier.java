@@ -130,7 +130,7 @@ public class WekaClassifier extends AbstractClassifier {
 			Constructor<?> constr = c.getConstructor(new Class[] {});
 			wekaClassifier = (Classifier) constr.newInstance(new Object[] {});
 			if (options != null || options.length != 0) {
-				wekaClassifier.setOptions(options);
+				//wekaClassifier.setOptions(options);
 			}
 		}
 	}

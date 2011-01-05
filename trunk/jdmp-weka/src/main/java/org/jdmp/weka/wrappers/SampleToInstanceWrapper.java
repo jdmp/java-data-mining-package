@@ -26,9 +26,9 @@ package org.jdmp.weka.wrappers;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.exceptions.MatrixException;
 
-import weka.core.Instance;
+import weka.core.DenseInstance;
 
-public class SampleToInstanceWrapper extends Instance {
+public class SampleToInstanceWrapper extends DenseInstance {
 	private static final long serialVersionUID = 6525723600252564795L;
 
 	public SampleToInstanceWrapper(Matrix input, Matrix sampleWeight, Matrix targetOutput,
