@@ -242,14 +242,7 @@
 			<version>${ujmp.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.ujmp</groupId>
-			<artifactId>ujmp-owlpack</artifactId>
-			<version>${ujmp.version}</version>
-			<scope>compile</scope>
-			<optional>true</optional>
-		</dependency>
+		</dependency>		
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-parallelcolt</artifactId>
@@ -611,15 +604,7 @@
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.ujmp</groupId>
-			<artifactId>ujmp-owlpack</artifactId>
-			<version>${ujmp.version}</version>
-			<type>test-jar</type>
-			<scope>test</scope>
-			<optional>true</optional>
-		</dependency>
+		</dependency>		
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-parallelcolt</artifactId>
