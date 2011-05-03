@@ -23,10 +23,6 @@
 			<artifactId>mallet</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>mallet-deps</groupId>
-			<artifactId>mallet-deps</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-core</artifactId>
 			<version>${project.version}</version>
