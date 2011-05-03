@@ -38,6 +38,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
 				<configuration>
 					<source>1.5</source>
 					<target>1.5</target>
@@ -47,6 +48,7 @@
 				<inherited>true</inherited>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
+				<version>2.1.2</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -59,6 +61,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.3.1</version>
 				<configuration>
 					<archive>
 						<manifest>
@@ -82,6 +85,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.2.1</version>
 				<configuration>
 					<descriptors>
 						<descriptor>src/assemble/complete.xml</descriptor>
@@ -207,15 +211,9 @@
 			<dependency>
 				<groupId>mallet</groupId>
 				<artifactId>mallet</artifactId>
-				<version>2.0-RC3</version>
+				<version>2.0.6</version>
 				<scope>compile</scope>
-			</dependency>
-			<dependency>
-				<groupId>mallet-deps</groupId>
-				<artifactId>mallet-deps</artifactId>
-				<version>2.0-RC3</version>
-				<scope>compile</scope>
-			</dependency>
+			</dependency>			
 			<dependency>
 				<groupId>tct-core</groupId>
 				<artifactId>tct-core</artifactId>
@@ -245,13 +243,7 @@
 				<artifactId>jmathlib</artifactId>
 				<version>0.9.0</version>
 				<scope>compile</scope>
-			</dependency>
-			<dependency>
-				<groupId>jackcess</groupId>
-				<artifactId>jackcess</artifactId>
-				<version>1.1.18</version>
-				<scope>compile</scope>
-			</dependency>
+			</dependency>			
 			<dependency>
 				<groupId>jmathplot</groupId>
 				<artifactId>jmathplot</artifactId>
@@ -499,7 +491,7 @@
 			<url>http://download.java.net/maven/2/</url>
 		</repository>
 		<repository>
-			<id>repository.jboss.org/maven2</id>
+			<id>repository.jboss.org.maven2</id>
 			<name>JBoss Repository for Maven</name>
 			<url>http://repository.jboss.org/maven2/</url>
 		</repository>
