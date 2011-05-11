@@ -63,38 +63,35 @@ public class StanfordPOSTagger extends AbstractTagger {
 
 	public List<Matrix> tag(String input) throws Exception {
 		List<Matrix> list = new ArrayList<Matrix>();
-
+		
 		StringReader sr = new StringReader(input);
-		List<Sentence<? extends HasWord>> sentences = MaxentTagger
-				.tokenizeText(sr);
-
-		for (Sentence<? extends HasWord> sentence : sentences) {
-			Sentence<TaggedWord> tSentence = tagger.processSentence(sentence);
+		List<List<HasWord>> sentences = MaxentTagger.tokenizeText(sr);
+		
+		for (List<HasWord> sentence : sentences) {
+			ArrayList<TaggedWord> tSentence = tagger.tagSentence(sentence);
 			Matrix m = new StanfordSentenceMatrix(tSentence);
 			list.add(m);
 		}
-
+		
 		return list;
 	}
 
 	public List<Matrix> tag(Matrix input) throws Exception {
 		List<Matrix> list = new ArrayList<Matrix>();
-
-		Sentence<? extends HasWord> sentence = null;
+		
+		ArrayList<TaggedWord> tSentence = null;
 		if (input instanceof StanfordSentenceMatrix) {
-			sentence = ((StanfordSentenceMatrix) input).getWrappedObject();
-		} else {
+			tSentence = ((StanfordSentenceMatrix) input).getWrappedObject();
+		}else{
 			List<HasWord> words = new ArrayList<HasWord>();
 			for (long[] c : input.availableCoordinates()) {
 				String s = input.getAsString(c);
 				words.add(new Word(s));
 			}
-			sentence = new Sentence<HasWord>(words);
+			tSentence = tagger.tagSentence(words);
 		}
-		Sentence<TaggedWord> tSentence = tagger.processSentence(sentence);
 		Matrix m = new StanfordSentenceMatrix(tSentence);
 		list.add(m);
-
 		return list;
 	}
 
