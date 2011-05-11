@@ -213,7 +213,7 @@
 				<artifactId>mallet</artifactId>
 				<version>2.0.6</version>
 				<scope>compile</scope>
-			</dependency>			
+			</dependency>
 			<dependency>
 				<groupId>tct-core</groupId>
 				<artifactId>tct-core</artifactId>
@@ -243,7 +243,7 @@
 				<artifactId>jmathlib</artifactId>
 				<version>0.9.0</version>
 				<scope>compile</scope>
-			</dependency>			
+			</dependency>
 			<dependency>
 				<groupId>jmathplot</groupId>
 				<artifactId>jmathplot</artifactId>
@@ -259,37 +259,37 @@
 			<dependency>
 				<groupId>org.apache.lucene</groupId>
 				<artifactId>lucene-core</artifactId>
-				<version>2.9.0</version>
+				<version>3.1.0</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.lucene</groupId>
 				<artifactId>lucene-queries</artifactId>
-				<version>2.9.0</version>
+				<version>3.1.0</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.lucene</groupId>
 				<artifactId>lucene-spellchecker</artifactId>
-				<version>2.9.0</version>
+				<version>3.1.0</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.lucene</groupId>
 				<artifactId>lucene-highlighter</artifactId>
-				<version>2.9.0</version>
+				<version>3.1.0</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.lucene</groupId>
 				<artifactId>lucene-wordnet</artifactId>
-				<version>2.9.0</version>
+				<version>3.1.0</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.lucene</groupId>
 				<artifactId>lucene-wikipedia</artifactId>
-				<version>2.9.0</version>
+				<version>3.1.0</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
@@ -478,7 +478,7 @@
 		<repository>
 			<id>netcologne.de</id>
 			<name>netcologne Mirror of http://repo1.maven.org/maven2</name>
-			<url>http://mirror.netcologne.de/maven2</url>			
+			<url>http://mirror.netcologne.de/maven2</url>
 		</repository>
 		<repository>
 			<id>ibiblio.org</id>
