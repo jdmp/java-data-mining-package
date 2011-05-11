@@ -23,17 +23,24 @@
 
 package org.jdmp.core.algorithm.index;
 
+import java.util.Map;
+
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.HasSampleMap;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.mapmatrix.MapMatrix;
 
 public interface Index extends HasSampleMap {
 
 	public static final String INPUT = Variable.INPUT;
 
 	public static final String SCORE = Variable.SCORE;
+
+	public void add(Map<String, String> map) throws Exception;
+
+	public void add(MapMatrix<String, String> map) throws Exception;
 
 	public void add(Matrix input) throws Exception;
 

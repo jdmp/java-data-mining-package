@@ -33,7 +33,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -43,16 +42,17 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
-import org.apache.lucene.document.Field.Store;
 import org.apache.lucene.index.CorruptIndexException;
 import org.apache.lucene.index.IndexReader;
-import org.apache.lucene.index.IndexWriter;
-import org.apache.lucene.index.Term;
 import org.apache.lucene.index.IndexReader.FieldOption;
-import org.apache.lucene.index.IndexWriter.MaxFieldLength;
+import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.index.IndexWriterConfig;
+import org.apache.lucene.index.IndexWriterConfig.OpenMode;
+import org.apache.lucene.index.Term;
 import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.BooleanClause;
+import org.apache.lucene.search.BooleanClause.Occur;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
@@ -60,7 +60,6 @@ import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.search.WildcardQuery;
-import org.apache.lucene.search.BooleanClause.Occur;
 import org.apache.lucene.search.similar.MoreLikeThis;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
@@ -82,7 +81,6 @@ import org.ujmp.core.interfaces.Erasable;
 import org.ujmp.core.util.MathUtil;
 import org.ujmp.core.util.SerializationUtil;
 import org.ujmp.core.util.StringUtil;
-import org.ujmp.core.util.concurrent.UJMPThreadPoolExecutor;
 import org.ujmp.core.util.io.FileUtil;
 
 public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
@@ -92,8 +90,6 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 	private IndexWriter indexWriter = null;
 
 	private IndexSearcher indexSearcher = null;
-
-	private ThreadPoolExecutor executor = null;
 
 	private final Set<String> fields = new HashSet<String>();
 
@@ -105,8 +101,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 
 	private File path = null;
 
-	private final Analyzer analyzer = new StandardAnalyzer(
-			Version.LUCENE_CURRENT);
+	private Analyzer analyzer = null;
 
 	private boolean readOnly = true;
 
@@ -115,32 +110,42 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 	private static final int MAXWORDLENGTH = 20;
 
 	public LuceneIndex(Index index) throws Exception {
-		this(null, false, new Index[] { index });
+		this(null, false, null, new Index[] { index });
 	}
 
 	public LuceneIndex() throws Exception {
-		this(null, false, new Index[] {});
+		this(null, false, null, new Index[] {});
 	}
 
 	public LuceneIndex(DataSet dataSet) throws Exception {
-		this(null, false, new Index[] {});
+		this(null, false, null, new Index[] {});
 		setLabel(dataSet.getLabel());
 		add(dataSet);
 	}
 
 	public LuceneIndex(Index... indices) throws Exception {
-		this(null, false, indices);
+		this(null, false, null, indices);
 	}
 
 	public LuceneIndex(File path, Index... indices) throws Exception {
-		this(path, false, indices);
+		this(path, false, null, indices);
 	}
 
-	public LuceneIndex(File path, boolean readOnly, Index... indices)
-			throws Exception {
+	public LuceneIndex(String path, Index... indices) throws Exception {
+		this(new File(path), false, null, indices);
+	}
+
+	public LuceneIndex(File path, boolean readOnly, Analyzer analyzer,
+			Index... indices) throws Exception {
 		// fieldsToSkip.add(Variable.CONTENT);
 		fieldsToSkip.add(Variable.BYTES);
 		this.readOnly = readOnly;
+
+		if (analyzer != null) {
+			this.analyzer = analyzer;
+		} else {
+			this.analyzer = new StandardAnalyzer(Version.LUCENE_31);
+		}
 
 		if (indices.length == 1) {
 			getAlgorithms().put("Index0", (Algorithm) indices[0]);
@@ -170,8 +175,8 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 				if (IndexWriter.isLocked(directory)) {
 					IndexWriter.unlock(directory);
 				}
-				indexWriter = new IndexWriter(directory, analyzer,
-						MaxFieldLength.UNLIMITED);
+				indexWriter = new IndexWriter(directory, new IndexWriterConfig(
+						Version.LUCENE_31, analyzer));
 			}
 
 			prepareReader();
@@ -182,13 +187,12 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 			}
 
 		} else if (!readOnly) {
-			indexWriter = new IndexWriter(directory, analyzer, true,
-					MaxFieldLength.UNLIMITED);
+			indexWriter = new IndexWriter(directory, new IndexWriterConfig(
+					Version.LUCENE_31, analyzer).setOpenMode(OpenMode.CREATE));
 		}
 
 		setSamples(new LuceneSampleMap(this));
 
-		executor = new UJMPThreadPoolExecutor("LuceneIndex", 0, 1);
 	}
 
 	public synchronized void add(Sample sample) throws Exception {
@@ -203,7 +207,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 		Document doc = new Document();
 
 		String id = sample.getId();
-		doc.add(new Field(Sample.ID, id, Store.COMPRESS,
+		doc.add(new Field(Sample.ID, id, Field.Store.YES,
 				Field.Index.NOT_ANALYZED));
 
 		for (Variable v : sample.getVariables()) {
@@ -219,14 +223,13 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 						value += " " + m.getAsString(c);
 					}
 				}
-				doc.add(new Field(key, value.trim(), Store.COMPRESS,
+				doc.add(new Field(key, value.trim(), Field.Store.YES,
 						Field.Index.ANALYZED));
 				fields.add(key);
 			}
 		}
 
-		doc.add(new Field("RawData", SerializationUtil.serialize(sample),
-				Store.COMPRESS));
+		doc.add(new Field("RawData", SerializationUtil.serialize(sample)));
 
 		indexWriter.updateDocument(new Term(Sample.ID, id), doc);
 	}
@@ -301,10 +304,6 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 			throws Exception {
 		prepareReader();
 		System.out.println("searching for: " + query);
-
-		if (executor.getQueue().size() < 100000) {
-			executor.submit(new SearchCallable(query));
-		}
 
 		MoreLikeThis mlt = new MoreLikeThis(indexSearcher.getIndexReader());
 		mlt.setFieldNames(new String[] { Variable.LABEL, Variable.DESCRIPTION,
@@ -617,8 +616,8 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 	public Query parseQuery(String query) throws ParseException {
 		Query q = null;
 		String[] fs = new String[fields.size()];
-		MultiFieldQueryParser p = new MultiFieldQueryParser(fields.toArray(fs),
-				analyzer);
+		MultiFieldQueryParser p = new MultiFieldQueryParser(Version.LUCENE_31,
+				fields.toArray(fs), analyzer);
 		p.setDefaultOperator(MultiFieldQueryParser.AND_OPERATOR);
 		if (query == null || "".equals(query) || "*".equals(query)) {
 			BooleanQuery bq = new BooleanQuery();
@@ -665,6 +664,10 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 			sampleMap = new LuceneSampleMap(this);
 		}
 		return sampleMap;
+	}
+
+	public Analyzer getAnalyzer() {
+		return analyzer;
 	}
 
 }
