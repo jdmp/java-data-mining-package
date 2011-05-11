@@ -23,11 +23,15 @@
 
 package org.jdmp.core.algorithm.index;
 
+import java.util.Map;
+
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.sample.SampleFactory;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.mapmatrix.DefaultMapMatrix;
+import org.ujmp.core.mapmatrix.MapMatrix;
 
 public abstract class AbstractIndex extends AbstractAlgorithm implements Index {
 	private static final long serialVersionUID = 8854402303242176900L;
@@ -36,21 +40,23 @@ public abstract class AbstractIndex extends AbstractAlgorithm implements Index {
 		super();
 	}
 
-	
 	public void add(Matrix matrix) throws Exception {
 		add(SampleFactory.createFromObject(matrix));
 	}
 
-	
+	public void add(Map<String, String> map) throws Exception {
+		MapMatrix<String, String> mapMatrix = new DefaultMapMatrix<String, String>(map);
+		add((Matrix) mapMatrix);
+	}
+
+	public void add(MapMatrix<String, String> mapMatrix) throws Exception {
+		add((Matrix) mapMatrix);
+	}
+
 	public void add(DataSet dataSet) throws Exception {
 		for (Sample sample : dataSet.getSamples()) {
 			add(sample);
 		}
-	}
-
-	
-	public void add(Sample sample) throws Exception {
-		throw new Exception("cannot add to this index");
 	}
 
 	public final DataSet search(String query) throws Exception {
@@ -61,7 +67,6 @@ public abstract class AbstractIndex extends AbstractAlgorithm implements Index {
 		return search(query, 0, count);
 	}
 
-	
 	public int countResults(String query) throws Exception {
 		throw new Exception("not implemented");
 	}
