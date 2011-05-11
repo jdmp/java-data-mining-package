@@ -23,35 +23,52 @@
 
 package org.jdmp.stanfordpos;
 
+import java.util.ArrayList;
+
+import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.interfaces.Wrapper;
 import org.ujmp.core.stringmatrix.stub.AbstractDenseStringMatrix2D;
 
-import edu.stanford.nlp.ling.HasWord;
-import edu.stanford.nlp.ling.Sentence;
 import edu.stanford.nlp.ling.TaggedWord;
 
-public class StanfordSentenceMatrix extends AbstractDenseStringMatrix2D
-		implements Wrapper<Sentence<? extends HasWord>> {
+public class StanfordSentenceMatrix extends AbstractDenseStringMatrix2D implements Wrapper<ArrayList<TaggedWord>>{
 	private static final long serialVersionUID = 9175120136686956227L;
 
-	private Sentence<? extends HasWord> sentence = null;
+	private ArrayList<TaggedWord> sentence = null;
 
-	public StanfordSentenceMatrix(Sentence<? extends HasWord> sentence) {
+	public StanfordSentenceMatrix(ArrayList<TaggedWord> sentence) {
+		if (sentence == null) {
+			throw new NullPointerException("ArrayList is null");
+		}
 		this.sentence = sentence;
 	}
 
 	
 	public String getString(long row, long column) {
-		HasWord w = sentence.get((int) row);
-		if (column == 0) {
-			return w.word();
-		} else {
-			return ((TaggedWord) w).tag();
+		if ((int)row < sentence.size()) {
+			TaggedWord tw = sentence.get((int)row);
+			if (column == 0) {
+				return tw.word();
+			} else {
+				return tw.tag();
+			} 
+		}else{
+			throw new MatrixException("Attempted to access (" +  row + "," + column + "); index out of bounds because size [" + (int)getSize()[0] + "," + (int)getSize()[1] );
 		}
 	}
 
 	
 	public void setString(String value, long row, long column) {
+		if ((int)row < sentence.size()) {
+			TaggedWord tw = sentence.get((int)row);
+			if (column == 0) {
+				tw.setWord(value);
+			} else {
+				tw.setTag(value);
+			} 
+		}else{
+			throw new MatrixException("Attempted to access (" +  row + "," + column + "); index out of bounds because size [" + (int)getSize()[0] + "," + (int)getSize()[1] );
+		}
 	}
 
 	
@@ -59,20 +76,16 @@ public class StanfordSentenceMatrix extends AbstractDenseStringMatrix2D
 		if (sentence.size() == 0) {
 			return new long[] { 0, 0 };
 		}
-		if (sentence.get(0) instanceof TaggedWord) {
-			return new long[] { sentence.size(), 2 };
-		} else {
-			return new long[] { sentence.size(), 1 };
-		}
+		return new long[] { sentence.size(), 2};
 	}
 
 	
-	public Sentence<? extends HasWord> getWrappedObject() {
+	public ArrayList<TaggedWord> getWrappedObject() {
 		return sentence;
 	}
 
 	
-	public void setWrappedObject(Sentence<? extends HasWord> object) {
+	public void setWrappedObject(ArrayList<TaggedWord> object) {
 		this.sentence = object;
 	}
 }
