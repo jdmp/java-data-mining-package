@@ -24,6 +24,7 @@
 package org.jdmp.stanfordpos;
 
 import java.io.File;
+import java.io.InputStream;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +62,10 @@ public class StanfordPOSTagger extends AbstractTagger {
 		tagger = new MaxentTagger(modelFile.getAbsolutePath());
 	}
 
+	public StanfordPOSTagger(String modelFile) throws Exception {
+		tagger = new MaxentTagger(modelFile);
+	}
+	
 	public List<Matrix> tag(String input) throws Exception {
 		List<Matrix> list = new ArrayList<Matrix>();
 		
