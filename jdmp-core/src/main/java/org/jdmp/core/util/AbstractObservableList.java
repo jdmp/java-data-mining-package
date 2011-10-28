@@ -94,11 +94,10 @@ public abstract class AbstractObservableList<V> implements ObservableList<V> {
 		return getList();
 	}
 
-	public final String toString() {
+	public String toString() {
 		return getList().toString();
 	}
 
-	
 	public final void fireContentsChanged() {
 		fireContentsChanged(this, -1, -1);
 	}
