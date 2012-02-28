@@ -37,7 +37,7 @@ import org.jdmp.core.sample.FileSample;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.DefaultObservableList;
 import org.jdmp.core.util.DefaultObservableMap;
-import org.ujmp.core.collections.SoftHashMap;
+import org.ujmp.core.collections.map.SoftHashMap;
 import org.ujmp.core.enums.FileFormat;
 import org.ujmp.core.interfaces.Refreshable;
 

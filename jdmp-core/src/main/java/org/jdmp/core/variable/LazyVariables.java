@@ -38,7 +38,7 @@ import javax.swing.event.ListDataListener;
 
 import org.jdmp.core.util.ObservableMap;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.collections.LazyMap;
+import org.ujmp.core.collections.map.LazyMap;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.util.MathUtil;
 import org.ujmp.core.util.StringUtil;

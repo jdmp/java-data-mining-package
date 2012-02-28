@@ -10,7 +10,7 @@ import javax.swing.AbstractListModel;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.sample.SampleFactory;
 import org.jdmp.core.util.ObservableMap;
-import org.ujmp.core.collections.SoftHashMap;
+import org.ujmp.core.collections.map.SoftHashMap;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.interfaces.Wrapper;
 import org.ujmp.core.util.StringUtil;
