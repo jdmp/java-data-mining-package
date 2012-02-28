@@ -3,15 +3,12 @@
 	 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<properties>
-		<ujmp.version>0.2.6</ujmp.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
-
 	<groupId>org.jdmp</groupId>
 	<artifactId>jdmp</artifactId>
 	<version>0.1.2</version>
 	<packaging>pom</packaging>
+	<name>Java Data Mining Package</name>
+	<description>The Java Data Mining Package is a library for data mining and machine learning.</description>
 	<url>http://www.jdmp.org/</url>
 
 	<developers>
@@ -22,6 +19,18 @@
 			<url>http://www.holger-arndt.com/</url>
 		</developer>
 	</developers>
+
+	<licenses>
+		<license>
+			<name>GNU LESSER GENERAL PUBLIC LICENSE</name>
+			<url>http://www.gnu.org/licenses/lgpl-3.0</url>
+		</license>
+	</licenses>
+
+	<properties>
+		<ujmp.version>0.2.6</ujmp.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 
 	<build>
 		<resources>
@@ -38,7 +47,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
 				<configuration>
 					<source>1.5</source>
 					<target>1.5</target>
@@ -48,7 +56,6 @@
 				<inherited>true</inherited>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>2.1.2</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -61,7 +68,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.3.1</version>
 				<configuration>
 					<archive>
 						<manifest>
@@ -107,7 +113,7 @@
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
-				<version>4.8.2</version>
+				<version>4.10</version>
 				<scope>test</scope>
 			</dependency>
 
@@ -407,7 +413,6 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<inherited>true</inherited>
-				<version>2.7</version>
 				<configuration>
 					<outputDirectory>../jdmp-complete/target/docs/${project.version}/${project.name}</outputDirectory>
 					<reportOutputDirectory>../jdmp-complete/target/docs/${project.version}/${project.name}</reportOutputDirectory>
@@ -445,7 +450,6 @@
 						<link>http://www.ujmp.org/docs/${project.version}/ujmp-mtj/apidocs</link>
 						<link>http://www.ujmp.org/docs/${project.version}/ujmp-ojalgo/apidocs</link>
 						<link>http://www.ujmp.org/docs/${project.version}/ujmp-orbital/apidocs</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-owlpack/apidocs</link>
 						<link>http://www.ujmp.org/docs/${project.version}/ujmp-parallelcolt/apidocs</link>
 						<link>http://www.ujmp.org/docs/${project.version}/ujmp-pdfbox/apidocs</link>
 						<link>http://www.ujmp.org/docs/${project.version}/ujmp-sst/apidocs</link>
@@ -469,11 +473,6 @@
 	</reporting>
 
 	<repositories>
-		<repository>
-			<id>jdmp-repository</id>
-			<name>JDMP Repository</name>
-			<url>file:/~/.m2/repository</url>
-		</repository>
 		<repository>
 			<id>netcologne.de</id>
 			<name>netcologne Mirror of http://repo1.maven.org/maven2</name>

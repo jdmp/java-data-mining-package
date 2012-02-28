@@ -25,9 +25,9 @@ package org.jdmp.jgroups;
 
 import java.util.Map;
 
-import org.ujmp.core.collections.AbstractMapTest;
+import org.ujmp.core.collections.AbstractStringMapTest;
 
-public class TestJGroupsMap extends AbstractMapTest {
+public class TestJGroupsMap extends AbstractStringMapTest {
 
 	public Map<String, String> createMap() throws Exception {
 		return new JGroupsMap<String, String>();

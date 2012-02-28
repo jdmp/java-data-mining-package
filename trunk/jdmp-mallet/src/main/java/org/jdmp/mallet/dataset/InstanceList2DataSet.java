@@ -29,7 +29,7 @@ import java.util.Map;
 import org.jdmp.core.dataset.ClassificationDataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.mallet.sample.Instance2Sample;
-import org.ujmp.core.collections.SoftHashMap;
+import org.ujmp.core.collections.map.SoftHashMap;
 import org.ujmp.core.interfaces.Wrapper;
 
 import cc.mallet.types.FeatureVectorSequence;

@@ -30,9 +30,9 @@ import java.util.Map;
 import org.jdmp.jetty.collections.JettyMapClient;
 import org.junit.After;
 import org.junit.Before;
-import org.ujmp.core.collections.AbstractMapTest;
+import org.ujmp.core.collections.AbstractStringMapTest;
 
-public class TestJettyMap extends AbstractMapTest {
+public class TestJettyMap extends AbstractStringMapTest {
 
 	private JettyObjectServer server = null;
 
