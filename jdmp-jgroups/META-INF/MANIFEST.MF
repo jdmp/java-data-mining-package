@@ -1,6 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: jdmp_jgroups
-Bundle-SymbolicName: jdmp_jgroups
+Bundle-Name: jdmp-jgroups
+Bundle-SymbolicName: jdmp-jgroups
 Bundle-Version: 1.0.0
 Export-Package: org.jdmp.jgroups
+Bundle-RequiredExecutionEnvironment: J2SE-1.5,
+ JavaSE-1.6,
+ JavaSE-1.7

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2011 by Holger Arndt
+ * Copyright (C) 2008-2013 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -63,7 +63,6 @@ public class Export extends AbstractAlgorithm {
 		setVariables(variables);
 	}
 
-	
 	public Map<String, Object> calculateObjects(Map<String, Object> input) throws Exception {
 		FileFormat format = defaultFormat;
 		String file = null;
@@ -84,7 +83,7 @@ public class Export extends AbstractAlgorithm {
 			file = File.createTempFile("jdmp_matrix", "." + format).getAbsolutePath();
 		}
 
-		matrix.exportToFile(format, new File(file));
+		matrix.export().toFile(format, new File(file));
 		result.put(TARGET, matrix);
 		return result;
 	}

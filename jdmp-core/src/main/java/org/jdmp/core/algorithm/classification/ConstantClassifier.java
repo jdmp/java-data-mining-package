@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2011 by Holger Arndt
+ * Copyright (C) 2008-2013 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -72,7 +72,7 @@ public class ConstantClassifier extends AbstractClassifier {
 				pc = t;
 			}
 		}
-		prediction = Matrix.factory.zeros(1, maxClassId + 1);
+		prediction = Matrix.Factory.zeros(1, maxClassId + 1);
 		prediction.setAsDouble(1.0, 0, pc);
 	}
 

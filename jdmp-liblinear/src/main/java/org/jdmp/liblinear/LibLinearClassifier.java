@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2011 by Holger Arndt
+ * Copyright (C) 2008-2013 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -23,13 +23,6 @@
 
 package org.jdmp.liblinear;
 
-import liblinear.FeatureNode;
-import liblinear.Linear;
-import liblinear.Model;
-import liblinear.Parameter;
-import liblinear.Problem;
-import liblinear.SolverType;
-
 import org.jdmp.core.algorithm.classification.AbstractClassifier;
 import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.dataset.RegressionDataSet;
@@ -37,6 +30,13 @@ import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.util.MathUtil;
+
+import de.bwaldvogel.liblinear.FeatureNode;
+import de.bwaldvogel.liblinear.Linear;
+import de.bwaldvogel.liblinear.Model;
+import de.bwaldvogel.liblinear.Parameter;
+import de.bwaldvogel.liblinear.Problem;
+import de.bwaldvogel.liblinear.SolverType;
 
 public class LibLinearClassifier extends AbstractClassifier {
 	private static final long serialVersionUID = 895205125219258509L;
@@ -78,10 +78,10 @@ public class LibLinearClassifier extends AbstractClassifier {
 			}
 		}
 
-		int classId = Linear.predict(model, x);
-		Matrix ret = Matrix.factory.zeros(1, Math.max(model.getNrClass(),
-				classId + 1));
-		ret.setAsDouble(1.0, 0, classId);
+		double classId = Linear.predict(model, x);
+		Matrix ret = Matrix.Factory.zeros(1,
+				Math.max(model.getNrClass(), (int) (classId + 1)));
+		ret.setAsDouble(1.0, 0, (int) classId);
 		return ret;
 	}
 
@@ -93,7 +93,7 @@ public class LibLinearClassifier extends AbstractClassifier {
 				.getMatrix(INPUT).getColumnCount() + 1; // +1 for bias
 
 		prob.x = new FeatureNode[prob.l][];
-		prob.y = new int[prob.l];
+		prob.y = new double[prob.l];
 
 		int i = 0;
 		for (Sample p : dataSet.getSamples()) {

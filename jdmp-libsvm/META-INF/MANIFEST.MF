@@ -1,6 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: jdmp_libsvm
-Bundle-SymbolicName: jdmp_libsvm
+Bundle-Name: jdmp-libsvm
+Bundle-SymbolicName: jdmp-libsvm
 Bundle-Version: 1.0.0
 Export-Package: org.jdmp.libsvm
+Bundle-RequiredExecutionEnvironment: J2SE-1.5,
+ JavaSE-1.6,
+ JavaSE-1.7

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2011 by Holger Arndt
+ * Copyright (C) 2008-2013 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -72,7 +72,7 @@ public class SemiSupervisedEM extends AbstractClassifier implements SemiSupervis
 				s.getVariables().setMatrix(Sample.TARGET, predicted);
 			} else {
 				int max = (int) predicted.indexOfMax(Ret.NEW, Matrix.COLUMN).getAsDouble(0, 0);
-				Matrix target = Matrix.factory.zeros(1, classCount);
+				Matrix target = Matrix.Factory.zeros(1, classCount);
 				target.setAsDouble(1.0, 0, max);
 				s.getVariables().setMatrix(Sample.TARGET, target);
 			}
@@ -89,7 +89,7 @@ public class SemiSupervisedEM extends AbstractClassifier implements SemiSupervis
 			for (Sample s : unlabeledData.getSamples()) {
 				Matrix predicted = s.getVariables().getMatrix(Sample.PREDICTED);
 				int max = (int) predicted.indexOfMax(Ret.NEW, Matrix.COLUMN).getAsDouble(0, 0);
-				Matrix target = Matrix.factory.zeros(1, classCount);
+				Matrix target = Matrix.Factory.zeros(1, classCount);
 				target.setAsDouble(1.0, 0, max);
 				s.getVariables().setMatrix(Sample.TARGET, target);
 			}

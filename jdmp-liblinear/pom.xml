@@ -24,12 +24,9 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>liblinear</groupId>
+			<groupId>de.bwaldvogel</groupId>
 			<artifactId>liblinear</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>netlib-java</groupId>
-			<artifactId>netlib-java</artifactId>
+			<version>1.92</version>
 		</dependency>
 	</dependencies>
 </project>

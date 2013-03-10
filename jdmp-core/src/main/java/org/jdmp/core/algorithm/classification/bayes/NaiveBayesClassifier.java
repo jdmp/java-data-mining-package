@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2011 by Holger Arndt
+ * Copyright (C) 2008-2013 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -48,7 +48,7 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 
 	@Override
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
-		Matrix result = Matrix.factory.zeros(1, classCount);
+		Matrix result = Matrix.Factory.zeros(1, classCount);
 		for (int cc = 0; cc < classCount; cc++) {
 			Classifier classifier = classifiers.get(cc);
 			Matrix prediction = classifier.predict(input, sampleWeight);
@@ -71,7 +71,7 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 			ClassificationDataSet ds2 = DataSetFactory.classificationDataSet();
 			for (Sample s1 : dataSet.getSamples()) {
 				Sample s2 = SampleFactory.emptySample();
-				Matrix i2 = Matrix.factory.zeros(2, 1);
+				Matrix i2 = Matrix.Factory.zeros(2, 1);
 				double c = s1.getVariables().getMatrix(TARGET).getAsDouble(0, cc);
 				i2.setAsBoolean(c == 0, 0, 0);
 				i2.setAsBoolean(c == 1, 0, 0);
@@ -119,7 +119,7 @@ class NaiveBayesClassifier2Classes extends AbstractClassifier {
 			}
 		}
 		double[] probs = MathUtil.logToProbs(logs);
-		Matrix m = Matrix.factory.zeros(1, 2);
+		Matrix m = Matrix.Factory.zeros(1, 2);
 		m.setAsDouble(probs[0], 0, 1);
 		m.setAsDouble(probs[1], 0, 0);
 		return m;

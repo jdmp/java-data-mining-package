@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2011 by Holger Arndt
+ * Copyright (C) 2008-2013 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -35,7 +35,6 @@ import org.jdmp.core.algorithm.classification.mlp.MultiLayerNetwork.Transfer;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.MatrixFactory;
 
 public class NetworkLayerBackward extends AbstractAlgorithm {
 	private static final long serialVersionUID = -8051094919417324985L;
@@ -98,19 +97,19 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 		NetworkLayerBackward a = new NetworkLayerBackward(Transfer.TANH, BiasType.SINGLE);
 
 		Variable outputDeviation = VariableFactory.labeledVariable("Output Deviation");
-		Matrix d = MatrixFactory.linkToArray(new double[][] { { 1 }, { 2 }, { 3 }, { 4 }, { 5 },
+		Matrix d = Matrix.Factory.linkToArray(new double[][] { { 1 }, { 2 }, { 3 }, { 4 }, { 5 },
 				{ 6 } });
 		outputDeviation.addMatrix(d);
 		a.setOutputDeviationVariable(outputDeviation);
 
 		Variable output = VariableFactory.labeledVariable("Output");
-		Matrix o = MatrixFactory.linkToArray(new double[][] { { 5 }, { 6 }, { 7 }, { 8 }, { 9 },
+		Matrix o = Matrix.Factory.linkToArray(new double[][] { { 5 }, { 6 }, { 7 }, { 8 }, { 9 },
 				{ 10 } });
 		output.addMatrix(o);
 		a.setOutputVariable(output);
 
 		Variable weight = VariableFactory.labeledVariable("Weight");
-		Matrix w = MatrixFactory.linkToArray(new double[][] { { 0.1, 0.2, 0.3, 0.4 },
+		Matrix w = Matrix.Factory.linkToArray(new double[][] { { 0.1, 0.2, 0.3, 0.4 },
 				{ 0.1, 0.2, 0.3, 0.4 }, { 0.1, 0.2, 0.3, 0.4 }, { 0.1, 0.2, 0.3, 0.4 },
 				{ 0.1, 0.2, 0.3, 0.4 }, { 0.1, 0.2, 0.3, 0.4 } });
 		weight.addMatrix(w);

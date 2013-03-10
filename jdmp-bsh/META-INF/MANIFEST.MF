@@ -1,6 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: jdmp_bsh
-Bundle-SymbolicName: jdmp_bsh
+Bundle-Name: jdmp-bsh
+Bundle-SymbolicName: jdmp-bsh
 Bundle-Version: 1.0.0
 Export-Package: org.jdmp.bsh
+Bundle-RequiredExecutionEnvironment: J2SE-1.5,
+ JavaSE-1.6,
+ JavaSE-1.7

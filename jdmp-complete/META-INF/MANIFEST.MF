@@ -5,8 +5,9 @@ Bundle-Name: jdmp-complete
 Bundle-SymbolicName: jdmp-complete
 Bundle-Version: 0.1.2
 Export-Package: org.jdmp.complete
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: J2SE-1.5,
+ JavaSE-1.6,
+ JavaSE-1.7
 Require-Bundle: jdmp;bundle-version="0.1.2",
  jdmp-core;bundle-version="0.1.2",
  jdmp-gui;bundle-version="0.1.2"
-

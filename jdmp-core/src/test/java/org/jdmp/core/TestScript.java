@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2011 by Holger Arndt
+ * Copyright (C) 2008-2013 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -33,7 +33,6 @@ import org.jdmp.core.sample.Sample;
 import org.jdmp.core.script.Result;
 import org.junit.Test;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.MatrixFactory;
 
 public class TestScript {
 
@@ -47,7 +46,7 @@ public class TestScript {
 
 		Matrix rm = (Matrix) r.getObject();
 		Matrix vm = m.getVariables().get("c").getMatrix();
-		Matrix expected = MatrixFactory.linkToArray(new double[][] { { 5, 7, 9 }, { 5, 7, 9 } });
+		Matrix expected = Matrix.Factory.linkToArray(new double[][] { { 5, 7, 9 }, { 5, 7, 9 } });
 
 		assertEquals(expected, rm);
 		assertEquals(expected, vm);

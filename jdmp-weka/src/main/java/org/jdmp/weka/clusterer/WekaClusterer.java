@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2011 by Holger Arndt
+ * Copyright (C) 2008-2013 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -30,7 +30,7 @@ import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.weka.wrappers.DataSetToInstancesWrapper;
 import org.jdmp.weka.wrappers.SampleToInstanceWrapper;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.MatrixFactory;
+import org.ujmp.core.doublematrix.DenseDoubleMatrix2D;
 
 import weka.clusterers.Clusterer;
 import weka.clusterers.NumberOfClustersRequestable;
@@ -105,7 +105,7 @@ public class WekaClusterer extends AbstractClusterer {
 		probabilities = wekaClusterer.distributionForInstance(instance);
 		double[][] v = new double[1][];
 		v[0] = probabilities;
-		Matrix output = MatrixFactory.linkToArray(v);
+		DenseDoubleMatrix2D output = Matrix.Factory.linkToArray(v);
 		return output;
 	}
 
