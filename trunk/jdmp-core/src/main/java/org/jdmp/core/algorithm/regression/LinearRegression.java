@@ -29,7 +29,6 @@ import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.exceptions.MatrixException;
 
 /**
@@ -59,8 +58,8 @@ public class LinearRegression extends AbstractClassifier {
 	}
 
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
-		Matrix bias = MatrixFactory.ones(input.getRowCount(), 1);
-		return MatrixFactory.horCat(input, bias).mtimes(getParameterMatrix());
+		Matrix bias = Matrix.Factory.ones(input.getRowCount(), 1);
+		return Matrix.Factory.horCat(input, bias).mtimes(getParameterMatrix());
 	}
 
 	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) throws Exception {
@@ -69,8 +68,8 @@ public class LinearRegression extends AbstractClassifier {
 
 	public void train(RegressionDataSet dataSet) throws Exception {
 		Matrix input = dataSet.getInputMatrix();
-		Matrix bias = MatrixFactory.ones(input.getRowCount(), 1);
-		Matrix x = MatrixFactory.horCat(input, bias);
+		Matrix bias = Matrix.Factory.ones(input.getRowCount(), 1);
+		Matrix x = Matrix.Factory.horCat(input, bias);
 		Matrix y = dataSet.getTargetMatrix();
 		// Matrix parameters =
 		// x.transpose().mtimes(x).pinv().mtimes(x.transpose()).mtimes(y);

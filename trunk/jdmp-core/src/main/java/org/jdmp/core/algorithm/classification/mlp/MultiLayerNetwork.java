@@ -37,7 +37,6 @@ import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Coordinates;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.listmatrix.DefaultListMatrix;
@@ -276,7 +275,7 @@ public class MultiLayerNetwork extends AbstractClassifier {
 	public void train(Matrix input, Matrix sampleWeight, Matrix desiredOutput) throws Exception {
 		addDesiredOutputMatrix(desiredOutput.toRowVector(Ret.NEW));
 		if (sampleWeight == null) {
-			sampleWeight = MatrixFactory.linkToValue(1.0);
+			sampleWeight = Matrix.Factory.linkToValue(1.0);
 		}
 		setSampleWeight(sampleWeight.doubleValue());
 		predict(input, sampleWeight);

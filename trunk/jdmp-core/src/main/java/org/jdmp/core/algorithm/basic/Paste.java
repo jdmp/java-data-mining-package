@@ -28,7 +28,7 @@ import java.util.Map;
 
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.variable.Variable;
-import org.ujmp.core.MatrixFactory;
+import org.ujmp.core.Matrix;
 import org.ujmp.core.enums.FileFormat;
 import org.ujmp.core.exceptions.MatrixException;
 
@@ -42,10 +42,9 @@ public class Paste extends AbstractAlgorithm {
 		setDescription(DESCRIPTION);
 	}
 
-	
 	public Map<String, Object> calculateObjects(Map<String, Object> input) throws MatrixException {
 		Map<String, Object> result = new HashMap<String, Object>();
-		result.put(TARGET, MatrixFactory.importFromClipboard(FileFormat.CSV));
+		result.put(TARGET, Matrix.Factory.importFromClipboard(FileFormat.CSV));
 		return result;
 	}
 }

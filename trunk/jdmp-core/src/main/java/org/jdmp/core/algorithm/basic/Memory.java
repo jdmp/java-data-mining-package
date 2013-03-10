@@ -28,7 +28,7 @@ import java.util.Map;
 
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.variable.Variable;
-import org.ujmp.core.MatrixFactory;
+import org.ujmp.core.Matrix;
 import org.ujmp.core.exceptions.MatrixException;
 
 public class Memory extends AbstractAlgorithm {
@@ -45,10 +45,9 @@ public class Memory extends AbstractAlgorithm {
 		setVariables(variables);
 	}
 
-	
 	public Map<String, Object> calculateObjects(Map<String, Object> input) throws MatrixException {
 		Map<String, Object> result = new HashMap<String, Object>();
-		result.put(TARGET, MatrixFactory.memoryUsage());
+		result.put(TARGET, Matrix.Factory.memoryUsage());
 		return result;
 	}
 

@@ -36,7 +36,6 @@ import org.jdmp.core.sample.RelationalSample;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.sample.SampleFactory;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.enums.FileFormat;
 import org.ujmp.core.mapmatrix.DefaultMapMatrix;
 import org.ujmp.core.mapmatrix.MapMatrix;
@@ -77,7 +76,7 @@ public class MarketBasketAnalysis extends AbstractRelationMiner {
 	}
 
 	public static void main(String[] args) throws Exception {
-		Matrix data = MatrixFactory.linkToFile(FileFormat.CSV, new File(
+		Matrix data = Matrix.Factory.linkToFile(FileFormat.CSV, new File(
 				"/home/arndt/muenchen/totale2.txt"));
 		// data.showGUI();
 
@@ -126,8 +125,8 @@ public class MarketBasketAnalysis extends AbstractRelationMiner {
 				RelationalSample s12 = SampleFactory.relationalSample(prod1 + " => " + prod2);
 				s12.addObject(prod1);
 				s12.addObject(prod2);
-				s12.getVariables().setMatrix(Sample.COUNT, MatrixFactory.linkToValue(count));
-				s12.getVariables().setMatrix(Sample.PROBABILITY, MatrixFactory.linkToValue(p1));
+				s12.getVariables().setMatrix(Sample.COUNT, Matrix.Factory.linkToValue(count));
+				s12.getVariables().setMatrix(Sample.PROBABILITY, Matrix.Factory.linkToValue(p1));
 				s12.getVariables().setObject("From", prod1);
 				s12.getVariables().setObject("To", prod2);
 				ds.getSamples().add(s12);
@@ -135,8 +134,8 @@ public class MarketBasketAnalysis extends AbstractRelationMiner {
 				RelationalSample s21 = SampleFactory.relationalSample(prod2 + " => " + prod1);
 				s21.addObject(prod1);
 				s21.addObject(prod2);
-				s21.getVariables().setMatrix(Sample.COUNT, MatrixFactory.linkToValue(count));
-				s21.getVariables().setMatrix(Sample.PROBABILITY, MatrixFactory.linkToValue(p2));
+				s21.getVariables().setMatrix(Sample.COUNT, Matrix.Factory.linkToValue(count));
+				s21.getVariables().setMatrix(Sample.PROBABILITY, Matrix.Factory.linkToValue(p2));
 				s21.getVariables().setObject("From", prod2);
 				s21.getVariables().setObject("To", prod1);
 				ds.getSamples().add(s21);

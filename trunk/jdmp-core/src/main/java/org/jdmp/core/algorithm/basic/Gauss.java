@@ -29,7 +29,6 @@ import java.util.Map;
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.util.MathUtil;
 
@@ -54,11 +53,10 @@ public class Gauss extends AbstractAlgorithm {
 		setVariables(variables);
 	}
 
-	
 	public Map<String, Object> calculateObjects(Map<String, Object> input) throws MatrixException {
 		Map<String, Object> result = new HashMap<String, Object>();
 
-		Matrix in = MatrixFactory.copyFromMatrix(MathUtil.getMatrix(input.get(SOURCE)));
+		Matrix in = Matrix.Factory.copyFromMatrix(MathUtil.getMatrix(input.get(SOURCE)));
 		for (long[] c : in.allCoordinates()) {
 			in.setAsDouble(getProbability(in.getAsDouble(c)), c);
 		}

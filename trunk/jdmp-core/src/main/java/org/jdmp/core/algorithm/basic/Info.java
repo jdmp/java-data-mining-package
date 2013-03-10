@@ -30,7 +30,7 @@ import java.util.Map;
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.algorithm.AlgorithmMapping;
 import org.jdmp.core.variable.Variable;
-import org.ujmp.core.MatrixFactory;
+import org.ujmp.core.Matrix;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.listmatrix.DefaultListMatrix;
 import org.ujmp.core.listmatrix.ListMatrix;
@@ -45,7 +45,6 @@ public class Info extends AbstractAlgorithm {
 		setDescription(DESCRIPTION);
 	}
 
-	
 	public Map<String, Object> calculateObjects(Map<String, Object> input) throws MatrixException {
 		Map<String, Object> result = new HashMap<String, Object>();
 		ListMatrix<String> algorithms = AlgorithmMapping.list();
@@ -60,7 +59,7 @@ public class Info extends AbstractAlgorithm {
 				descriptions.add("   [this method is not available]");
 			}
 		}
-		result.put(TARGET, MatrixFactory.horCat(algorithms, descriptions));
+		result.put(TARGET, Matrix.Factory.horCat(algorithms, descriptions));
 		return result;
 	}
 }

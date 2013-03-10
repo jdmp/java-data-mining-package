@@ -31,7 +31,6 @@ import org.jdmp.core.algorithm.classification.mlp.MultiLayerNetwork.BiasType;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.util.MathUtil;
@@ -55,18 +54,18 @@ public class WeightUpdate extends AlgorithmFiveSources {
 		this.biasType = biasType;
 		setDescription("weight = weight + eta * sampleweight * inputdeviation * input");
 		Variable eta = VariableFactory.singleValue("eta", 1);
-		Matrix m = MatrixFactory.linkToValue(0.001);
+		Matrix m = Matrix.Factory.linkToValue(0.001);
 		eta.addMatrix(m);
 		setVariable(ETA, eta);
 
 		Variable sampleWeight = VariableFactory.singleValue("Sample Weight", 1);
-		Matrix s = MatrixFactory.linkToValue(1);
+		Matrix s = Matrix.Factory.linkToValue(1);
 		sampleWeight.addMatrix(s);
 		setVariable(SAMPLEWEIGHT, sampleWeight);
 	}
 
 	public void setLearningRate(double v) {
-		Matrix m = MatrixFactory.linkToValue(v);
+		Matrix m = Matrix.Factory.linkToValue(v);
 		getVariables().setMatrix(ETA, m);
 	}
 
@@ -75,7 +74,7 @@ public class WeightUpdate extends AlgorithmFiveSources {
 	}
 
 	public void setSampleWeight(double v) {
-		Matrix m = MatrixFactory.linkToValue(v);
+		Matrix m = Matrix.Factory.linkToValue(v);
 		getVariables().setMatrix(SAMPLEWEIGHT, m);
 	}
 
@@ -92,17 +91,17 @@ public class WeightUpdate extends AlgorithmFiveSources {
 
 		switch (biasType) {
 		case SINGLE:
-			Matrix bias = MatrixFactory.ones(transposedInput.getRowCount(), 1);
-			transposedInput = MatrixFactory.horCat(transposedInput, bias);
+			Matrix bias = Matrix.Factory.ones(transposedInput.getRowCount(), 1);
+			transposedInput = Matrix.Factory.horCat(transposedInput, bias);
 			break;
 		case MULTIPLE:
-			bias = MatrixFactory.ones(transposedInput.getSize());
+			bias = Matrix.Factory.ones(transposedInput.getSize());
 			for (long[] c : transposedInput.allCoordinates()) {
 				if (MathUtil.isNaNOrInfinite(transposedInput.getAsDouble(c))) {
 					bias.setAsDouble(Double.NaN, c);
 				}
 			}
-			transposedInput = MatrixFactory.horCat(transposedInput, bias);
+			transposedInput = Matrix.Factory.horCat(transposedInput, bias);
 			break;
 		case NONE:
 			break;
