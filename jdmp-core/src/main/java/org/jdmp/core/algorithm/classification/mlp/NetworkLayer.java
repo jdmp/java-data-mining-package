@@ -31,7 +31,6 @@ import org.jdmp.core.algorithm.classification.mlp.MultiLayerNetwork.Transfer;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.exceptions.MatrixException;
 
 public class NetworkLayer implements Serializable {
@@ -177,19 +176,19 @@ public class NetworkLayer implements Serializable {
 
 			switch (biasType) {
 			case SINGLE:
-				w = MatrixFactory.randn(
+				w = Matrix.Factory.randn(
 						getOutputVariable().getRowCount() * getOutputVariable().getColumnCount(),
 						getInputVariable().getRowCount() * getInputVariable().getColumnCount() + 1)
 						.times(scale);
 				break;
 			case MULTIPLE:
-				w = MatrixFactory.randn(
+				w = Matrix.Factory.randn(
 						getOutputVariable().getRowCount() * getOutputVariable().getColumnCount(),
 						getInputVariable().getRowCount() * getInputVariable().getColumnCount() * 2)
 						.times(scale);
 				break;
 			case NONE:
-				w = MatrixFactory.randn(
+				w = Matrix.Factory.randn(
 						getOutputVariable().getRowCount() * getOutputVariable().getColumnCount(),
 						getInputVariable().getRowCount() * getInputVariable().getColumnCount())
 						.times(scale);
@@ -209,7 +208,7 @@ public class NetworkLayer implements Serializable {
 
 	public void reset() throws MatrixException {
 		createVariablesIfNecessary();
-		Matrix w = MatrixFactory.randn(
+		Matrix w = Matrix.Factory.randn(
 				getOutputVariable().getRowCount() * getOutputVariable().getColumnCount(),
 				getInputVariable().getRowCount() * getInputVariable().getColumnCount()).times(0.01);
 		getWeightVariable().addMatrix(w);

@@ -25,7 +25,7 @@ package org.jdmp.core.variable;
 
 import java.lang.reflect.Constructor;
 
-import org.ujmp.core.MatrixFactory;
+import org.ujmp.core.Matrix;
 import org.ujmp.core.exceptions.MatrixException;
 
 public abstract class VariableFactory {
@@ -53,7 +53,7 @@ public abstract class VariableFactory {
 	public static final Variable singleValue(String label, double value) {
 		Variable v = new DefaultVariable(1);
 		v.setLabel(label);
-		v.addMatrix(MatrixFactory.linkToValue(value));
+		v.addMatrix(Matrix.Factory.linkToValue(value));
 		return v;
 	}
 

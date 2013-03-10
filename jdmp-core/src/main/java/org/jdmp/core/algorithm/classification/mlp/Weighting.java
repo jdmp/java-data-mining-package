@@ -29,7 +29,6 @@ import java.util.Map;
 import org.jdmp.core.algorithm.AlgorithmTwoSources;
 import org.jdmp.core.algorithm.classification.mlp.MultiLayerNetwork.BiasType;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.doublematrix.impl.ArrayDenseDoubleMatrix2D;
 import org.ujmp.core.exceptions.MatrixException;
@@ -53,17 +52,17 @@ public class Weighting extends AlgorithmTwoSources {
 
 		switch (biasType) {
 		case SINGLE:
-			Matrix bias = MatrixFactory.ones(1, x.getColumnCount());
-			x = MatrixFactory.vertCat(x, bias);
+			Matrix bias = Matrix.Factory.ones(1, x.getColumnCount());
+			x = Matrix.Factory.vertCat(x, bias);
 			break;
 		case MULTIPLE:
-			bias = MatrixFactory.ones(x.getSize());
+			bias = Matrix.Factory.ones(x.getSize());
 			for (long[] c : x.allCoordinates()) {
 				if (MathUtil.isNaNOrInfinite(x.getAsDouble(c))) {
 					bias.setAsDouble(Double.NaN, c);
 				}
 			}
-			x = MatrixFactory.horCat(x, bias);
+			x = Matrix.Factory.horCat(x, bias);
 			break;
 		case NONE:
 			break;

@@ -29,7 +29,6 @@ import java.util.Map;
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.enums.FileFormat;
 import org.ujmp.core.util.StringUtil;
 
@@ -57,7 +56,6 @@ public class Import extends AbstractAlgorithm {
 		setVariables(variables);
 	}
 
-	
 	public Map<String, Object> calculateObjects(Map<String, Object> input) throws Exception {
 		FileFormat format = defaultFormat;
 
@@ -70,7 +68,7 @@ public class Import extends AbstractAlgorithm {
 			format = FileFormat.valueOf(StringUtil.format(o2));
 		}
 
-		Matrix target = MatrixFactory.importFromFile(format, file);
+		Matrix target = Matrix.Factory.importFromFile(format, file);
 		result.put(TARGET, target);
 		return result;
 	}

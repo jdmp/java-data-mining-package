@@ -30,7 +30,6 @@ import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.weka.wrappers.DataSetToInstancesWrapper;
 import org.jdmp.weka.wrappers.SampleToInstanceWrapper;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.MatrixFactory;
 
 import weka.classifiers.Classifier;
 import weka.core.Instance;
@@ -130,12 +129,11 @@ public class WekaClassifier extends AbstractClassifier {
 			Constructor<?> constr = c.getConstructor(new Class[] {});
 			wekaClassifier = (Classifier) constr.newInstance(new Object[] {});
 			if (options != null || options.length != 0) {
-				//wekaClassifier.setOptions(options);
+				// wekaClassifier.setOptions(options);
 			}
 		}
 	}
 
-	
 	public Matrix predict(Matrix input, Matrix weight) throws Exception {
 		double[] probabilities = null;
 		Instance instance = new SampleToInstanceWrapper(input, weight, null, discrete, true);
@@ -147,18 +145,15 @@ public class WekaClassifier extends AbstractClassifier {
 		return output;
 	}
 
-	
 	public void train(RegressionDataSet dataSet) throws Exception {
 		instances = new DataSetToInstancesWrapper(dataSet, discrete, true);
 		wekaClassifier.buildClassifier(instances);
 	}
 
-	
 	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) {
 		throw new RuntimeException("this method is not supported for WEKA classifiers");
 	}
 
-	
 	public void reset() throws Exception {
 		createAlgorithm();
 	}

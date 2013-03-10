@@ -28,7 +28,7 @@ import java.util.Map;
 
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.variable.Variable;
-import org.ujmp.core.MatrixFactory;
+import org.ujmp.core.Matrix;
 import org.ujmp.core.exceptions.MatrixException;
 
 public class CreateSunSpotData extends AbstractAlgorithm {
@@ -41,10 +41,9 @@ public class CreateSunSpotData extends AbstractAlgorithm {
 		setDescription(DESCRIPTION);
 	}
 
-	
 	public Map<String, Object> calculateObjects(Map<String, Object> input) throws MatrixException {
 		Map<String, Object> result = new HashMap<String, Object>();
-		result.put(TARGET, MatrixFactory.SUNSPOTDATASET());
+		result.put(TARGET, Matrix.Factory.sunSpotDataset());
 		return result;
 	}
 

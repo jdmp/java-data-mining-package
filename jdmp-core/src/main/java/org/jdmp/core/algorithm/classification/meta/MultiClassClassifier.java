@@ -32,7 +32,6 @@ import org.jdmp.core.dataset.ClassificationDataSet;
 import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.calculation.Calculation.Ret;
 
 public class MultiClassClassifier extends AbstractClassifier {
@@ -53,7 +52,6 @@ public class MultiClassClassifier extends AbstractClassifier {
 		this.twoColumns = twoColumns;
 	}
 
-	
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
 		double[] results = new double[classCount];
 		for (int i = 0; i < classCount; i++) {
@@ -63,12 +61,10 @@ public class MultiClassClassifier extends AbstractClassifier {
 		return Matrix.Factory.linkToArray(results).transpose();
 	}
 
-	
 	public void reset() throws Exception {
 		singleClassClassifiers.clear();
 	}
 
-	
 	public void train(RegressionDataSet dataSet) throws Exception {
 		reset();
 		classCount = ((ClassificationDataSet) dataSet).getClassCount();
@@ -81,7 +77,7 @@ public class MultiClassClassifier extends AbstractClassifier {
 			Matrix target = dataSet.getTargetMatrix().selectColumns(Ret.LINK, i);
 			if (twoColumns) {
 				Matrix target2 = target.minus(1).abs(Ret.NEW);
-				target = MatrixFactory.horCat(target, target2);
+				target = Matrix.Factory.horCat(target, target2);
 			}
 			ClassificationDataSet ds = DataSetFactory.linkToMatrix(input, target);
 			c.train(ds);

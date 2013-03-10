@@ -27,7 +27,6 @@ import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.MatrixFactory;
 
 public class RandomClassifier extends AbstractClassifier {
 	private static final long serialVersionUID = -8043103888877795342L;
@@ -39,7 +38,7 @@ public class RandomClassifier extends AbstractClassifier {
 	}
 
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
-		return MatrixFactory.rand(1, classCount);
+		return Matrix.Factory.rand(1, classCount);
 	}
 
 	public void reset() throws Exception {

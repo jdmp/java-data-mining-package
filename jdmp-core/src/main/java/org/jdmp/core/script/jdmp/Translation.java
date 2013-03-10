@@ -111,7 +111,6 @@ import org.jdmp.core.script.jdmp.node.PSemicolonValue;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.objectmatrix.DenseObjectMatrix2D;
@@ -448,7 +447,7 @@ public class Translation extends DepthFirstAdapter {
 
 	private Object getObject(PLevel0 factor) throws Exception {
 		if (factor instanceof ALiteralLevel0) {
-			return MatrixFactory.linkToValue(getValue(((ALiteralLevel0) factor).getLiteral()));
+			return Matrix.Factory.linkToValue(getValue(((ALiteralLevel0) factor).getLiteral()));
 		} else if (factor instanceof AMatrixLevel0) {
 			return getMatrix(((AMatrixLevel0) factor).getMatrix());
 		} else if (factor instanceof AExpressionLevel0) {
@@ -567,9 +566,7 @@ public class Translation extends DepthFirstAdapter {
 				// try other classes
 				String methodName = qn.getIdentifier().toString().trim();
 				Class<?> c = null;
-				if ("MatrixFactory".equals(id)) {
-					c = MatrixFactory.class;
-				} else if ("VariableFactory".equals(id)) {
+				if ("VariableFactory".equals(id)) {
 					c = VariableFactory.class;
 				} else if ("SampleFactory".equals(id)) {
 					c = SampleFactory.class;
@@ -739,9 +736,9 @@ public class Translation extends DepthFirstAdapter {
 
 	private Matrix getMatrix(PMatrix matrix) throws Exception {
 		if (matrix instanceof AEmptyMatrix) {
-			return MatrixFactory.emptyMatrix();
+			return Matrix.Factory.emptyMatrix();
 		} else if (matrix instanceof AValueMatrix) {
-			return MatrixFactory.linkToValue(((AValueMatrix) matrix).getExpression());
+			return Matrix.Factory.linkToValue(((AValueMatrix) matrix).getExpression());
 		} else if (matrix instanceof ARowMatrix) {
 			return getMatrix(((ARowMatrix) matrix).getRow());
 		} else if (matrix instanceof AColumnMatrix) {

@@ -38,7 +38,6 @@ import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.util.MathUtil;
 
@@ -82,7 +81,7 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 					sample.getVariables().getMatrix(TARGET));
 			Matrix error = MathUtil.getMatrix(result.get(TARGET));
 			sample.getVariables().setMatrix(DIFFERENCE, error);
-			sample.getVariables().setMatrix(RMSE, MatrixFactory.linkToValue(error.getRMS()));
+			sample.getVariables().setMatrix(RMSE, Matrix.Factory.linkToValue(error.getRMS()));
 		}
 		sample.notifyGUIObject();
 	}
@@ -92,7 +91,7 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 	}
 
 	public final void train(Matrix input, Matrix targetOutput) throws Exception {
-		train(input, MatrixFactory.linkToValue(1.0), targetOutput);
+		train(input, Matrix.Factory.linkToValue(1.0), targetOutput);
 	}
 
 	public abstract Matrix predict(Matrix input, Matrix sampleWeight) throws Exception;
@@ -150,7 +149,7 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 			}
 		}
 
-		Matrix rmse = MatrixFactory.linkToValue(Math.sqrt(error / dataSet.getSamples().getSize()));
+		Matrix rmse = Matrix.Factory.linkToValue(Math.sqrt(error / dataSet.getSamples().getSize()));
 		rmse.setLabel("RMSE with " + getLabel());
 		dataSet.getVariables().setMatrix(Variable.RMSE, rmse);
 
@@ -158,12 +157,12 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 			confusion.setLabel("Confusion with " + getLabel());
 			dataSet.getVariables().setMatrix(Variable.CONFUSION, confusion);
 
-			Matrix accuracy = MatrixFactory.linkToValue((double) correctCount
+			Matrix accuracy = Matrix.Factory.linkToValue((double) correctCount
 					/ (double) dataSet.getSamples().getSize());
 			accuracy.setLabel("Accuracy with " + getLabel());
 			dataSet.getVariables().setMatrix(Variable.ACCURACY, accuracy);
 
-			Matrix errorMatrix = MatrixFactory.linkToValue(errorCount);
+			Matrix errorMatrix = Matrix.Factory.linkToValue(errorCount);
 			errorMatrix.setLabel("Errors with " + getLabel());
 			dataSet.getVariables().setMatrix(Variable.ERRORCOUNT, errorMatrix);
 

@@ -30,7 +30,6 @@ import java.util.Map;
 
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.enums.FileFormat;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.interfaces.HasDataMap;
@@ -72,7 +71,7 @@ public abstract class SampleFactory {
 	@SuppressWarnings("unchecked")
 	public static Sample linkToFile(FileFormat fileFormat, File file, Object... parameters)
 			throws MatrixException, IOException {
-		Matrix map = MatrixFactory.linkToFile(FileFormat.FILE, file, fileFormat);
+		Matrix map = Matrix.Factory.linkToFile(FileFormat.FILE, file, fileFormat);
 		return linkToMap((Map) map);
 	}
 

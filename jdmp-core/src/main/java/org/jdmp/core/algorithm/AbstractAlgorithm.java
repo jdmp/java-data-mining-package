@@ -42,7 +42,6 @@ import org.jdmp.core.variable.DefaultVariables;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.Variables;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.util.MathUtil;
 
 public abstract class AbstractAlgorithm extends AbstractCoreObject implements Algorithm {
@@ -193,7 +192,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 	public final Map<String, Object> calculate(double... input) throws Exception {
 		List<Matrix> inputA = new LinkedList<Matrix>();
 		for (int i = 0; i < input.length; i++) {
-			inputA.add(MatrixFactory.linkToValue(input[i]));
+			inputA.add(Matrix.Factory.linkToValue(input[i]));
 		}
 		return calculate(inputA);
 	}

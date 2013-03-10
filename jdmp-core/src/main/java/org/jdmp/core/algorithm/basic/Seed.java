@@ -28,7 +28,7 @@ import java.util.Map;
 
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.variable.Variable;
-import org.ujmp.core.MatrixFactory;
+import org.ujmp.core.Matrix;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.util.MathUtil;
 
@@ -49,14 +49,13 @@ public class Seed extends AbstractAlgorithm {
 		setVariables(variables);
 	}
 
-	
 	public Map<String, Object> calculateObjects(Map<String, Object> input) throws MatrixException {
 		Map<String, Object> result = new HashMap<String, Object>();
 		Object o = input.get(SOURCE);
 		if (o != null) {
 			MathUtil.setSeed(MathUtil.getLong(o));
 		}
-		result.put(TARGET, MatrixFactory.randomSeed());
+		result.put(TARGET, Matrix.Factory.randomSeed());
 		return result;
 	}
 

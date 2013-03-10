@@ -29,7 +29,6 @@ import java.util.Map;
 import org.jdmp.core.algorithm.AlgorithmTwoSources;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.util.MathUtil;
 
@@ -43,15 +42,14 @@ public class Ones extends AlgorithmTwoSources {
 		setDescription(DESCRIPTION);
 	}
 
-	
 	public Map<String, Object> calculateObjects(Map<String, Object> input) throws MatrixException {
 		Map<String, Object> result = new HashMap<String, Object>();
 
 		Matrix source1 = MathUtil.getMatrix(input.get(SOURCE1));
 		Matrix source2 = MathUtil.getMatrix(input.get(SOURCE2));
 
-		result.put(TARGET, MatrixFactory.ones((long) source1.doubleValue(), (long) source2
-				.doubleValue()));
+		result.put(TARGET,
+				Matrix.Factory.ones((long) source1.doubleValue(), (long) source2.doubleValue()));
 
 		return result;
 
