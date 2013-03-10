@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2011 by Holger Arndt
+ * Copyright (C) 2008-2013 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -143,7 +143,7 @@ public class WekaClassifier extends AbstractClassifier {
 		probabilities = wekaClassifier.distributionForInstance(instance);
 		double[][] v = new double[1][];
 		v[0] = probabilities;
-		Matrix output = MatrixFactory.linkToArray(v);
+		Matrix output = Matrix.Factory.linkToArray(v);
 		return output;
 	}
 

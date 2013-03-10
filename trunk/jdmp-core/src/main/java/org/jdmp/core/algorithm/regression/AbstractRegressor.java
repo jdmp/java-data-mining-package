@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2011 by Holger Arndt
+ * Copyright (C) 2008-2013 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -114,7 +114,7 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 
 		if (dataSet instanceof ClassificationDataSet) {
 			classCount = ((ClassificationDataSet) dataSet).getClassCount();
-			confusion = Matrix.factory.zeros(classCount, classCount);
+			confusion = Matrix.Factory.zeros(classCount, classCount);
 			confusion.setAxisLabel(Matrix.ROW, "expected");
 			confusion.setAxisLabel(Matrix.COLUMN, "predicted");
 		}

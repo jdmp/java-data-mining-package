@@ -28,7 +28,7 @@
 	</licenses>
 
 	<properties>
-		<ujmp.version>0.2.6</ujmp.version>
+		<ujmp.version>0.3.0</ujmp.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -113,7 +113,7 @@
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
-				<version>4.10</version>
+				<version>4.11</version>
 				<scope>test</scope>
 			</dependency>
 
@@ -420,52 +420,52 @@
 					<links>
 						<link>http://java.sun.com/javase/6/docs/api/</link>
 
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-core/apidocs</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-gui/apidocs</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-bpca/apidocs</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-colt/apidocs</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-commonsmath/apidocs</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-ehcache/apidocs</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-ejml/apidocs</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-hadoop/apidocs</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-itext/apidocs</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-jackcess/apidocs</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-jama/apidocs</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-jampack/apidocs</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-jblas/apidocs</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-jdbc/apidocs</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-jexcelapi/apidocs</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-jlinalg/apidocs</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-jmathplot/apidocs</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-jmatio/apidocs</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-jmatrices/apidocs</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-jmatharray/apidocs</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-jsci/apidocs</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-jscience/apidocs</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-jung/apidocs</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-lsimpute/apidocs</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-lucene/apidocs</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-mail/apidocs</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-mantissa/apidocs</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-mtj/apidocs</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-ojalgo/apidocs</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-orbital/apidocs</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-parallelcolt/apidocs</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-pdfbox/apidocs</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-sst/apidocs</link>
-						<link>http://www.ujmp.org/docs/${project.version}/ujmp-vecmath/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-core/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-gui/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-bpca/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-colt/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-commonsmath/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-ehcache/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-ejml/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-hadoop/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-itext/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jackcess/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jama/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jampack/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jblas/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jdbc/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jexcelapi/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jlinalg/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jmathplot/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jmatio/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jmatrices/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jmatharray/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jsci/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jscience/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jung/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-lsimpute/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-lucene/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-mail/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-mantissa/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-mtj/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-ojalgo/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-orbital/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-parallelcolt/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-pdfbox/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-sst/apidocs</link>
+						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-vecmath/apidocs</link>
 
-						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-core/apidocs</link>
-						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-gui/apidocs</link>
-						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-bsh/apidocs</link>
-						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-jetty/apidocs</link>
-						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-jgroups/apidocs</link>
-						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-liblinear/apidocs</link>
-						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-libsvm/apidocs</link>
-						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-lucene/apidocs</link>
-						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-mallet/apidocs</link>
-						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-stanfordpos/apidocs</link>
-						<link>http://www.jdmp.org/docs/${jdmp.version}/jdmp-weka/apidocs</link>
+						<link>http://www.jdmp.org/docs/${project.version}/jdmp-core/apidocs</link>
+						<link>http://www.jdmp.org/docs/${project.version}/jdmp-gui/apidocs</link>
+						<link>http://www.jdmp.org/docs/${project.version}/jdmp-bsh/apidocs</link>
+						<link>http://www.jdmp.org/docs/${project.version}/jdmp-jetty/apidocs</link>
+						<link>http://www.jdmp.org/docs/${project.version}/jdmp-jgroups/apidocs</link>
+						<link>http://www.jdmp.org/docs/${project.version}/jdmp-liblinear/apidocs</link>
+						<link>http://www.jdmp.org/docs/${project.version}/jdmp-libsvm/apidocs</link>
+						<link>http://www.jdmp.org/docs/${project.version}/jdmp-lucene/apidocs</link>
+						<link>http://www.jdmp.org/docs/${project.version}/jdmp-mallet/apidocs</link>
+						<link>http://www.jdmp.org/docs/${project.version}/jdmp-stanfordpos/apidocs</link>
+						<link>http://www.jdmp.org/docs/${project.version}/jdmp-weka/apidocs</link>
 					</links>
 				</configuration>
 			</plugin>

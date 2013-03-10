@@ -113,8 +113,8 @@ import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.MatrixFactory;
 import org.ujmp.core.calculation.Calculation.Ret;
-import org.ujmp.core.enums.ValueType;
 import org.ujmp.core.exceptions.MatrixException;
+import org.ujmp.core.objectmatrix.DenseObjectMatrix2D;
 import org.ujmp.core.util.MathUtil;
 import org.ujmp.core.util.StringUtil;
 
@@ -154,7 +154,7 @@ public class Translation extends DepthFirstAdapter {
 			aRow = (ARow) ((ASemicolonRow) semicolonRow).getRow();
 			columns = Math.max(columns, aRow.getAdditionalValues().size() + 1);
 		}
-		Matrix m = MatrixFactory.zeros(ValueType.OBJECT, rows, columns);
+		Matrix m = DenseObjectMatrix2D.Factory.zeros(rows, columns);
 
 		aRow = (ARow) aArray.getRow();
 		PExpression expr = aRow.getExpression();
@@ -186,7 +186,7 @@ public class Translation extends DepthFirstAdapter {
 	private Matrix getMatrix(PRow row) throws Exception {
 		ARow aRow = (ARow) row;
 		int columns = aRow.getAdditionalValues().size() + 1;
-		Matrix m = MatrixFactory.zeros(ValueType.OBJECT, 1, columns);
+		Matrix m = DenseObjectMatrix2D.Factory.zeros(1, columns);
 		m.setAsObject(getSingleValue(aRow.getExpression()), 0, 0);
 		int i = 1;
 		for (PCommaValue commaValue : aRow.getAdditionalValues()) {
@@ -199,7 +199,7 @@ public class Translation extends DepthFirstAdapter {
 	private Matrix getMatrix(PColumn column) throws Exception {
 		AColumn aColumn = (AColumn) column;
 		int rows = aColumn.getAdditionalValues().size() + 1;
-		Matrix m = MatrixFactory.zeros(ValueType.OBJECT, rows, 1);
+		Matrix m = DenseObjectMatrix2D.Factory.zeros(rows, 1);
 		m.setAsObject(getSingleValue(aColumn.getExpression()), 0, 0);
 		int i = 1;
 		for (PSemicolonValue semicolonValue : aColumn.getAdditionalValues()) {
@@ -209,7 +209,6 @@ public class Translation extends DepthFirstAdapter {
 		return m;
 	}
 
-	
 	public void defaultOut(Node node) {
 		System.out.println(node.getClass().getSimpleName() + ": " + node);
 	}
@@ -218,14 +217,12 @@ public class Translation extends DepthFirstAdapter {
 		return result;
 	}
 
-	
 	public void outAArrayAssignment(AArrayAssignment node) {
 		Exception e = new MatrixException("array assignments are not supported yet.");
 		result = new Result(e);
 		e.printStackTrace();
 	}
 
-	
 	public void outAIdentifierAssignment(AIdentifierAssignment node) {
 		try {
 			String id = node.getName().toString().trim();
@@ -907,7 +904,6 @@ public class Translation extends DepthFirstAdapter {
 		}
 	}
 
-	
 	public void outAStatement(AStatement node) {
 		try {
 			// handle already known objects

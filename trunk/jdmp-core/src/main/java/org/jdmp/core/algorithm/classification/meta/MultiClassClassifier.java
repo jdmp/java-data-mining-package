@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2011 by Holger Arndt
+ * Copyright (C) 2008-2013 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -60,7 +60,7 @@ public class MultiClassClassifier extends AbstractClassifier {
 			Classifier c = singleClassClassifiers.get(i);
 			results[i] = c.predict(input, sampleWeight).getAsDouble(0, 0);
 		}
-		return MatrixFactory.linkToArray(results).transpose();
+		return Matrix.Factory.linkToArray(results).transpose();
 	}
 
 	

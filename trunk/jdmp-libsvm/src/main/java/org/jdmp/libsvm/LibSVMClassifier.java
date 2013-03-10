@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2011 by Holger Arndt
+ * Copyright (C) 2008-2013 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -160,7 +160,7 @@ public class LibSVMClassifier extends AbstractClassifier {
 		svm.svm_predict_probability(model, x, prob_estimates);
 		int[] label = new int[svm.svm_get_nr_class(model)];
 		svm.svm_get_labels(model, label);
-		Matrix output = Matrix.factory.zeros(1, MathUtil.max(label) + 1);
+		Matrix output = Matrix.Factory.zeros(1, MathUtil.max(label) + 1);
 
 		for (int i = 0; i < label.length; i++) {
 			output.setAsDouble(prob_estimates[i], 0, label[i]);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2011 by Holger Arndt
+ * Copyright (C) 2008-2013 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -47,7 +47,7 @@ public class Zeros extends AlgorithmTwoSources {
 		Matrix source1 = MathUtil.getMatrix(input.get(SOURCE1));
 		Matrix source2 = MathUtil.getMatrix(input.get(SOURCE2));
 
-		result.put(TARGET, Matrix.factory.zeros((long) source1.doubleValue(), (long) source2
+		result.put(TARGET, Matrix.Factory.zeros((long) source1.doubleValue(), (long) source2
 				.doubleValue()));
 
 		return result;

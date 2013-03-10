@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2011 by Holger Arndt
+ * Copyright (C) 2008-2013 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -30,8 +30,7 @@ import java.util.List;
 import org.jdmp.core.algorithm.tokenizer.AbstractTokenizer;
 import org.jdmp.core.algorithm.tokenizer.Tokenizer;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.MatrixFactory;
-import org.ujmp.core.enums.ValueType;
+import org.ujmp.core.objectmatrix.DenseObjectMatrix2D;
 
 import edu.stanford.nlp.ling.HasWord;
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
@@ -44,22 +43,21 @@ public class StanfordTokenizer extends AbstractTokenizer {
 	public StanfordTokenizer() throws Exception {
 	}
 
-	
 	public List<Matrix> tokenize(String input) throws Exception {
 		List<Matrix> result = new ArrayList<Matrix>();
 		StringReader sr = new StringReader(input);
-		
+
 		List<List<HasWord>> sentences = MaxentTagger.tokenizeText(sr);
 		for (List<HasWord> tokSentence : sentences) {
-			Matrix m = MatrixFactory.zeros(ValueType.OBJECT, tokSentence.size(), 1);
-			
+			Matrix m = DenseObjectMatrix2D.Factory.zeros(tokSentence.size(), 1);
+
 			for (int i = 0; i < tokSentence.size(); i++) {
 				HasWord t = tokSentence.get(i);
 				m.setAsString(t.word(), i, 0);
 			}
 			result.add(m);
 		}
-		
+
 		return result;
 	}
 

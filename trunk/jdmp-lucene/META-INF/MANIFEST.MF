@@ -1,6 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: jdmp_lucene
-Bundle-SymbolicName: jdmp_lucene
+Bundle-Name: jdmp-lucene
+Bundle-SymbolicName: jdmp-lucene
 Bundle-Version: 1.0.0
 Export-Package: org.jdmp.lucene
+Bundle-RequiredExecutionEnvironment: J2SE-1.5,
+ JavaSE-1.6,
+ JavaSE-1.7
