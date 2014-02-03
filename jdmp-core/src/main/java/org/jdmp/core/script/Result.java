@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -22,8 +22,6 @@
  */
 
 package org.jdmp.core.script;
-
-import org.ujmp.core.exceptions.MatrixException;
 
 public class Result {
 
@@ -66,7 +64,6 @@ public class Result {
 		this.exception = exception;
 	}
 
-	
 	public String toString() {
 		StringBuilder s = new StringBuilder();
 		if (label != null) {
@@ -88,7 +85,7 @@ public class Result {
 	}
 
 	public String getExceptionText() {
-		if (exception instanceof MatrixException) {
+		if (exception instanceof RuntimeException) {
 			return exception.getMessage();
 		} else {
 			return exception.toString();

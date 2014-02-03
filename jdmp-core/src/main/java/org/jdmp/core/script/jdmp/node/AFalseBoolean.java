@@ -2,93 +2,72 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-import org.jdmp.core.script.jdmp.analysis.*;
+import org.jdmp.core.script.jdmp.analysis.Analysis;
 
 @SuppressWarnings("nls")
-public final class AFalseBoolean extends PBoolean
-{
-    private TFalse _false_;
+public final class AFalseBoolean extends PBoolean {
+	private TFalse _false_;
 
-    public AFalseBoolean()
-    {
-        // Constructor
-    }
+	public AFalseBoolean() {
+		// Constructor
+	}
 
-    public AFalseBoolean(
-        @SuppressWarnings("hiding") TFalse _false_)
-    {
-        // Constructor
-        setFalse(_false_);
+	public AFalseBoolean(@SuppressWarnings("hiding") TFalse _false_) {
+		// Constructor
+		setFalse(_false_);
 
-    }
+	}
 
-    
-    public Object clone()
-    {
-        return new AFalseBoolean(
-            cloneNode(this._false_));
-    }
+	public Object clone() {
+		return new AFalseBoolean(cloneNode(this._false_));
+	}
 
-    public void apply(Switch sw)
-    {
-        ((Analysis) sw).caseAFalseBoolean(this);
-    }
+	public void apply(Switch sw) {
+		((Analysis) sw).caseAFalseBoolean(this);
+	}
 
-    public TFalse getFalse()
-    {
-        return this._false_;
-    }
+	public TFalse getFalse() {
+		return this._false_;
+	}
 
-    public void setFalse(TFalse node)
-    {
-        if(this._false_ != null)
-        {
-            this._false_.parent(null);
-        }
+	public void setFalse(TFalse node) {
+		if (this._false_ != null) {
+			this._false_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._false_ = node;
-    }
+		this._false_ = node;
+	}
 
-    
-    public String toString()
-    {
-        return ""
-            + toString(this._false_);
-    }
+	public String toString() {
+		return "" + toString(this._false_);
+	}
 
-    
-    void removeChild(@SuppressWarnings("unused") Node child)
-    {
-        // Remove child
-        if(this._false_ == child)
-        {
-            this._false_ = null;
-            return;
-        }
+	void removeChild(@SuppressWarnings("unused") Node child) {
+		// Remove child
+		if (this._false_ == child) {
+			this._false_ = null;
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 
-    
-    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
-    {
-        // Replace child
-        if(this._false_ == oldChild)
-        {
-            setFalse((TFalse) newChild);
-            return;
-        }
+	void replaceChild(@SuppressWarnings("unused") Node oldChild,
+			@SuppressWarnings("unused") Node newChild) {
+		// Replace child
+		if (this._false_ == oldChild) {
+			setFalse((TFalse) newChild);
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 }

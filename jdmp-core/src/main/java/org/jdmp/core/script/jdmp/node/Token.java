@@ -3,57 +3,45 @@
 package org.jdmp.core.script.jdmp.node;
 
 @SuppressWarnings("nls")
-public abstract class Token extends Node
-{
-    private String text;
-    private int line;
-    private int pos;
+public abstract class Token extends Node {
+	private String text;
+	private int line;
+	private int pos;
 
-    public String getText()
-    {
-        return this.text;
-    }
+	public String getText() {
+		return this.text;
+	}
 
-    public void setText(@SuppressWarnings("hiding") String text)
-    {
-        this.text = text;
-    }
+	public void setText(@SuppressWarnings("hiding") String text) {
+		this.text = text;
+	}
 
-    public int getLine()
-    {
-        return this.line;
-    }
+	public int getLine() {
+		return this.line;
+	}
 
-    public void setLine(@SuppressWarnings("hiding") int line)
-    {
-        this.line = line;
-    }
+	public void setLine(@SuppressWarnings("hiding") int line) {
+		this.line = line;
+	}
 
-    public int getPos()
-    {
-        return this.pos;
-    }
+	public int getPos() {
+		return this.pos;
+	}
 
-    public void setPos(@SuppressWarnings("hiding") int pos)
-    {
-        this.pos = pos;
-    }
+	public void setPos(@SuppressWarnings("hiding") int pos) {
+		this.pos = pos;
+	}
 
-    
-    public String toString()
-    {
-        return this.text + " ";
-    }
+	public String toString() {
+		return this.text + " ";
+	}
 
-    
-    void removeChild(@SuppressWarnings("unused") Node child)
-    {
-        throw new RuntimeException("Not a child.");
-    }
+	void removeChild(@SuppressWarnings("unused") Node child) {
+		throw new RuntimeException("Not a child.");
+	}
 
-    
-    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
-    {
-        throw new RuntimeException("Not a child.");
-    }
+	void replaceChild(@SuppressWarnings("unused") Node oldChild,
+			@SuppressWarnings("unused") Node newChild) {
+		throw new RuntimeException("Not a child.");
+	}
 }

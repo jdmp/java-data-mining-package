@@ -2,274 +2,228 @@
 
 package org.jdmp.core.script.jdmp.parser;
 
-import org.jdmp.core.script.jdmp.node.*;
-import org.jdmp.core.script.jdmp.analysis.*;
+import org.jdmp.core.script.jdmp.analysis.AnalysisAdapter;
+import org.jdmp.core.script.jdmp.node.EOF;
+import org.jdmp.core.script.jdmp.node.TAnd;
+import org.jdmp.core.script.jdmp.node.TAssign;
+import org.jdmp.core.script.jdmp.node.TBitComplement;
+import org.jdmp.core.script.jdmp.node.TColon;
+import org.jdmp.core.script.jdmp.node.TComma;
+import org.jdmp.core.script.jdmp.node.TComplement;
+import org.jdmp.core.script.jdmp.node.TDot;
+import org.jdmp.core.script.jdmp.node.TDotLdiv;
+import org.jdmp.core.script.jdmp.node.TDotMult;
+import org.jdmp.core.script.jdmp.node.TDotPower;
+import org.jdmp.core.script.jdmp.node.TDotRdiv;
+import org.jdmp.core.script.jdmp.node.TDotTranspose;
+import org.jdmp.core.script.jdmp.node.TEq;
+import org.jdmp.core.script.jdmp.node.TFalse;
+import org.jdmp.core.script.jdmp.node.TFloatingPoint;
+import org.jdmp.core.script.jdmp.node.TGt;
+import org.jdmp.core.script.jdmp.node.TGteq;
+import org.jdmp.core.script.jdmp.node.TIdentifier;
+import org.jdmp.core.script.jdmp.node.TInteger;
+import org.jdmp.core.script.jdmp.node.TLBrace;
+import org.jdmp.core.script.jdmp.node.TLBracket;
+import org.jdmp.core.script.jdmp.node.TLParenthese;
+import org.jdmp.core.script.jdmp.node.TLdiv;
+import org.jdmp.core.script.jdmp.node.TLogicalAnd;
+import org.jdmp.core.script.jdmp.node.TLogicalOr;
+import org.jdmp.core.script.jdmp.node.TLt;
+import org.jdmp.core.script.jdmp.node.TLteq;
+import org.jdmp.core.script.jdmp.node.TMinus;
+import org.jdmp.core.script.jdmp.node.TMult;
+import org.jdmp.core.script.jdmp.node.TNeq;
+import org.jdmp.core.script.jdmp.node.TNull;
+import org.jdmp.core.script.jdmp.node.TOr;
+import org.jdmp.core.script.jdmp.node.TPlus;
+import org.jdmp.core.script.jdmp.node.TPower;
+import org.jdmp.core.script.jdmp.node.TQuestion;
+import org.jdmp.core.script.jdmp.node.TRBrace;
+import org.jdmp.core.script.jdmp.node.TRBracket;
+import org.jdmp.core.script.jdmp.node.TRParenthese;
+import org.jdmp.core.script.jdmp.node.TRdiv;
+import org.jdmp.core.script.jdmp.node.TSemicolon;
+import org.jdmp.core.script.jdmp.node.TString;
+import org.jdmp.core.script.jdmp.node.TTranspose;
+import org.jdmp.core.script.jdmp.node.TTrue;
 
-class TokenIndex extends AnalysisAdapter
-{
-    int index;
+class TokenIndex extends AnalysisAdapter {
+	int index;
 
-    
-    public void caseTTrue(@SuppressWarnings("unused") TTrue node)
-    {
-        this.index = 0;
-    }
+	public void caseTTrue(@SuppressWarnings("unused") TTrue node) {
+		this.index = 0;
+	}
 
-    
-    public void caseTFalse(@SuppressWarnings("unused") TFalse node)
-    {
-        this.index = 1;
-    }
+	public void caseTFalse(@SuppressWarnings("unused") TFalse node) {
+		this.index = 1;
+	}
 
-    
-    public void caseTNull(@SuppressWarnings("unused") TNull node)
-    {
-        this.index = 2;
-    }
+	public void caseTNull(@SuppressWarnings("unused") TNull node) {
+		this.index = 2;
+	}
 
-    
-    public void caseTLParenthese(@SuppressWarnings("unused") TLParenthese node)
-    {
-        this.index = 3;
-    }
+	public void caseTLParenthese(@SuppressWarnings("unused") TLParenthese node) {
+		this.index = 3;
+	}
 
-    
-    public void caseTRParenthese(@SuppressWarnings("unused") TRParenthese node)
-    {
-        this.index = 4;
-    }
+	public void caseTRParenthese(@SuppressWarnings("unused") TRParenthese node) {
+		this.index = 4;
+	}
 
-    
-    public void caseTLBrace(@SuppressWarnings("unused") TLBrace node)
-    {
-        this.index = 5;
-    }
+	public void caseTLBrace(@SuppressWarnings("unused") TLBrace node) {
+		this.index = 5;
+	}
 
-    
-    public void caseTRBrace(@SuppressWarnings("unused") TRBrace node)
-    {
-        this.index = 6;
-    }
+	public void caseTRBrace(@SuppressWarnings("unused") TRBrace node) {
+		this.index = 6;
+	}
 
-    
-    public void caseTLBracket(@SuppressWarnings("unused") TLBracket node)
-    {
-        this.index = 7;
-    }
+	public void caseTLBracket(@SuppressWarnings("unused") TLBracket node) {
+		this.index = 7;
+	}
 
-    
-    public void caseTRBracket(@SuppressWarnings("unused") TRBracket node)
-    {
-        this.index = 8;
-    }
+	public void caseTRBracket(@SuppressWarnings("unused") TRBracket node) {
+		this.index = 8;
+	}
 
-    
-    public void caseTSemicolon(@SuppressWarnings("unused") TSemicolon node)
-    {
-        this.index = 9;
-    }
+	public void caseTSemicolon(@SuppressWarnings("unused") TSemicolon node) {
+		this.index = 9;
+	}
 
-    
-    public void caseTComma(@SuppressWarnings("unused") TComma node)
-    {
-        this.index = 10;
-    }
+	public void caseTComma(@SuppressWarnings("unused") TComma node) {
+		this.index = 10;
+	}
 
-    
-    public void caseTDot(@SuppressWarnings("unused") TDot node)
-    {
-        this.index = 11;
-    }
+	public void caseTDot(@SuppressWarnings("unused") TDot node) {
+		this.index = 11;
+	}
 
-    
-    public void caseTAssign(@SuppressWarnings("unused") TAssign node)
-    {
-        this.index = 12;
-    }
+	public void caseTAssign(@SuppressWarnings("unused") TAssign node) {
+		this.index = 12;
+	}
 
-    
-    public void caseTComplement(@SuppressWarnings("unused") TComplement node)
-    {
-        this.index = 13;
-    }
+	public void caseTComplement(@SuppressWarnings("unused") TComplement node) {
+		this.index = 13;
+	}
 
-    
-    public void caseTBitComplement(@SuppressWarnings("unused") TBitComplement node)
-    {
-        this.index = 14;
-    }
+	public void caseTBitComplement(@SuppressWarnings("unused") TBitComplement node) {
+		this.index = 14;
+	}
 
-    
-    public void caseTAnd(@SuppressWarnings("unused") TAnd node)
-    {
-        this.index = 15;
-    }
+	public void caseTAnd(@SuppressWarnings("unused") TAnd node) {
+		this.index = 15;
+	}
 
-    
-    public void caseTOr(@SuppressWarnings("unused") TOr node)
-    {
-        this.index = 16;
-    }
+	public void caseTOr(@SuppressWarnings("unused") TOr node) {
+		this.index = 16;
+	}
 
-    
-    public void caseTLogicalAnd(@SuppressWarnings("unused") TLogicalAnd node)
-    {
-        this.index = 17;
-    }
+	public void caseTLogicalAnd(@SuppressWarnings("unused") TLogicalAnd node) {
+		this.index = 17;
+	}
 
-    
-    public void caseTLogicalOr(@SuppressWarnings("unused") TLogicalOr node)
-    {
-        this.index = 18;
-    }
+	public void caseTLogicalOr(@SuppressWarnings("unused") TLogicalOr node) {
+		this.index = 18;
+	}
 
-    
-    public void caseTQuestion(@SuppressWarnings("unused") TQuestion node)
-    {
-        this.index = 19;
-    }
+	public void caseTQuestion(@SuppressWarnings("unused") TQuestion node) {
+		this.index = 19;
+	}
 
-    
-    public void caseTColon(@SuppressWarnings("unused") TColon node)
-    {
-        this.index = 20;
-    }
+	public void caseTColon(@SuppressWarnings("unused") TColon node) {
+		this.index = 20;
+	}
 
-    
-    public void caseTEq(@SuppressWarnings("unused") TEq node)
-    {
-        this.index = 21;
-    }
+	public void caseTEq(@SuppressWarnings("unused") TEq node) {
+		this.index = 21;
+	}
 
-    
-    public void caseTLt(@SuppressWarnings("unused") TLt node)
-    {
-        this.index = 22;
-    }
+	public void caseTLt(@SuppressWarnings("unused") TLt node) {
+		this.index = 22;
+	}
 
-    
-    public void caseTGt(@SuppressWarnings("unused") TGt node)
-    {
-        this.index = 23;
-    }
+	public void caseTGt(@SuppressWarnings("unused") TGt node) {
+		this.index = 23;
+	}
 
-    
-    public void caseTLteq(@SuppressWarnings("unused") TLteq node)
-    {
-        this.index = 24;
-    }
+	public void caseTLteq(@SuppressWarnings("unused") TLteq node) {
+		this.index = 24;
+	}
 
-    
-    public void caseTGteq(@SuppressWarnings("unused") TGteq node)
-    {
-        this.index = 25;
-    }
+	public void caseTGteq(@SuppressWarnings("unused") TGteq node) {
+		this.index = 25;
+	}
 
-    
-    public void caseTNeq(@SuppressWarnings("unused") TNeq node)
-    {
-        this.index = 26;
-    }
+	public void caseTNeq(@SuppressWarnings("unused") TNeq node) {
+		this.index = 26;
+	}
 
-    
-    public void caseTPlus(@SuppressWarnings("unused") TPlus node)
-    {
-        this.index = 27;
-    }
+	public void caseTPlus(@SuppressWarnings("unused") TPlus node) {
+		this.index = 27;
+	}
 
-    
-    public void caseTMinus(@SuppressWarnings("unused") TMinus node)
-    {
-        this.index = 28;
-    }
+	public void caseTMinus(@SuppressWarnings("unused") TMinus node) {
+		this.index = 28;
+	}
 
-    
-    public void caseTMult(@SuppressWarnings("unused") TMult node)
-    {
-        this.index = 29;
-    }
+	public void caseTMult(@SuppressWarnings("unused") TMult node) {
+		this.index = 29;
+	}
 
-    
-    public void caseTDotMult(@SuppressWarnings("unused") TDotMult node)
-    {
-        this.index = 30;
-    }
+	public void caseTDotMult(@SuppressWarnings("unused") TDotMult node) {
+		this.index = 30;
+	}
 
-    
-    public void caseTRdiv(@SuppressWarnings("unused") TRdiv node)
-    {
-        this.index = 31;
-    }
+	public void caseTRdiv(@SuppressWarnings("unused") TRdiv node) {
+		this.index = 31;
+	}
 
-    
-    public void caseTDotRdiv(@SuppressWarnings("unused") TDotRdiv node)
-    {
-        this.index = 32;
-    }
+	public void caseTDotRdiv(@SuppressWarnings("unused") TDotRdiv node) {
+		this.index = 32;
+	}
 
-    
-    public void caseTLdiv(@SuppressWarnings("unused") TLdiv node)
-    {
-        this.index = 33;
-    }
+	public void caseTLdiv(@SuppressWarnings("unused") TLdiv node) {
+		this.index = 33;
+	}
 
-    
-    public void caseTDotLdiv(@SuppressWarnings("unused") TDotLdiv node)
-    {
-        this.index = 34;
-    }
+	public void caseTDotLdiv(@SuppressWarnings("unused") TDotLdiv node) {
+		this.index = 34;
+	}
 
-    
-    public void caseTTranspose(@SuppressWarnings("unused") TTranspose node)
-    {
-        this.index = 35;
-    }
+	public void caseTTranspose(@SuppressWarnings("unused") TTranspose node) {
+		this.index = 35;
+	}
 
-    
-    public void caseTDotTranspose(@SuppressWarnings("unused") TDotTranspose node)
-    {
-        this.index = 36;
-    }
+	public void caseTDotTranspose(@SuppressWarnings("unused") TDotTranspose node) {
+		this.index = 36;
+	}
 
-    
-    public void caseTPower(@SuppressWarnings("unused") TPower node)
-    {
-        this.index = 37;
-    }
+	public void caseTPower(@SuppressWarnings("unused") TPower node) {
+		this.index = 37;
+	}
 
-    
-    public void caseTDotPower(@SuppressWarnings("unused") TDotPower node)
-    {
-        this.index = 38;
-    }
+	public void caseTDotPower(@SuppressWarnings("unused") TDotPower node) {
+		this.index = 38;
+	}
 
-    
-    public void caseTInteger(@SuppressWarnings("unused") TInteger node)
-    {
-        this.index = 39;
-    }
+	public void caseTInteger(@SuppressWarnings("unused") TInteger node) {
+		this.index = 39;
+	}
 
-    
-    public void caseTFloatingPoint(@SuppressWarnings("unused") TFloatingPoint node)
-    {
-        this.index = 40;
-    }
+	public void caseTFloatingPoint(@SuppressWarnings("unused") TFloatingPoint node) {
+		this.index = 40;
+	}
 
-    
-    public void caseTString(@SuppressWarnings("unused") TString node)
-    {
-        this.index = 41;
-    }
+	public void caseTString(@SuppressWarnings("unused") TString node) {
+		this.index = 41;
+	}
 
-    
-    public void caseTIdentifier(@SuppressWarnings("unused") TIdentifier node)
-    {
-        this.index = 42;
-    }
+	public void caseTIdentifier(@SuppressWarnings("unused") TIdentifier node) {
+		this.index = 42;
+	}
 
-    
-    public void caseEOF(@SuppressWarnings("unused") EOF node)
-    {
-        this.index = 43;
-    }
+	public void caseEOF(@SuppressWarnings("unused") EOF node) {
+		this.index = 43;
+	}
 }

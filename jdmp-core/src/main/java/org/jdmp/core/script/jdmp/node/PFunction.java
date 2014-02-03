@@ -2,7 +2,6 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-public abstract class PFunction extends Node
-{
-    // Empty body
+public abstract class PFunction extends Node {
+	// Empty body
 }

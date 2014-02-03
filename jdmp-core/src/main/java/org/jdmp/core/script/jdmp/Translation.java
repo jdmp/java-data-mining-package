@@ -1,3 +1,26 @@
+/*
+ * Copyright (C) 2008-2014 by Holger Arndt
+ *
+ * This file is part of the Java Data Mining Package (JDMP).
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership and licensing.
+ *
+ * JDMP is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * JDMP is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with JDMP; if not, write to the
+ * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+ * Boston, MA  02110-1301  USA
+ */
+
 package org.jdmp.core.script.jdmp;
 
 import java.lang.reflect.Constructor;
@@ -112,7 +135,6 @@ import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
-import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.objectmatrix.DenseObjectMatrix2D;
 import org.ujmp.core.util.MathUtil;
 import org.ujmp.core.util.StringUtil;
@@ -217,7 +239,7 @@ public class Translation extends DepthFirstAdapter {
 	}
 
 	public void outAArrayAssignment(AArrayAssignment node) {
-		Exception e = new MatrixException("array assignments are not supported yet.");
+		Exception e = new RuntimeException("array assignments are not supported yet.");
 		result = new Result(e);
 		e.printStackTrace();
 	}
@@ -275,7 +297,7 @@ public class Translation extends DepthFirstAdapter {
 		if (expression instanceof ALevel10Expression) {
 			return getObject(((ALevel10Expression) expression).getLevel10());
 		}
-		MatrixException e = new MatrixException("Unknown expression type: "
+		RuntimeException e = new RuntimeException("Unknown expression type: "
 				+ expression.getClass().getSimpleName());
 		result = new Result(e);
 		throw e;
@@ -290,7 +312,7 @@ public class Translation extends DepthFirstAdapter {
 			Matrix right = MathUtil.getMatrix(getObject(exp.getRight()));
 			return left.or(Ret.NEW, right);
 		}
-		MatrixException e = new MatrixException("Unknown expression type: "
+		RuntimeException e = new RuntimeException("Unknown expression type: "
 				+ expression.getClass().getSimpleName());
 		result = new Result(e);
 		throw e;
@@ -305,7 +327,7 @@ public class Translation extends DepthFirstAdapter {
 			Matrix right = MathUtil.getMatrix(getObject(exp.getRight()));
 			return left.and(Ret.NEW, right);
 		}
-		MatrixException e = new MatrixException("Unknown expression type: "
+		RuntimeException e = new RuntimeException("Unknown expression type: "
 				+ expression.getClass().getSimpleName());
 		result = new Result(e);
 		throw e;
@@ -317,7 +339,7 @@ public class Translation extends DepthFirstAdapter {
 		} else if (expression instanceof AOrLevel8) {
 			// TODO
 		}
-		MatrixException e = new MatrixException("Unknown expression type: "
+		RuntimeException e = new RuntimeException("Unknown expression type: "
 				+ expression.getClass().getSimpleName());
 		result = new Result(e);
 		throw e;
@@ -329,7 +351,7 @@ public class Translation extends DepthFirstAdapter {
 		} else if (expression instanceof AAndLevel7) {
 			// TODO
 		}
-		MatrixException e = new MatrixException("Unknown expression type: "
+		RuntimeException e = new RuntimeException("Unknown expression type: "
 				+ expression.getClass().getSimpleName());
 		result = new Result(e);
 		throw e;
@@ -369,7 +391,7 @@ public class Translation extends DepthFirstAdapter {
 			Matrix right = MathUtil.getMatrix(getObject(exp.getRight()));
 			return left.le(Ret.NEW, right);
 		}
-		MatrixException e = new MatrixException("Unknown expression type: "
+		RuntimeException e = new RuntimeException("Unknown expression type: "
 				+ expression.getClass().getSimpleName());
 		result = new Result(e);
 		throw e;
@@ -381,7 +403,7 @@ public class Translation extends DepthFirstAdapter {
 		} else if (expression instanceof ARangeLevel5) {
 			// TODO
 		}
-		MatrixException e = new MatrixException("Unknown expression type: "
+		RuntimeException e = new RuntimeException("Unknown expression type: "
 				+ expression.getClass().getSimpleName());
 		result = new Result(e);
 		throw e;
@@ -405,7 +427,7 @@ public class Translation extends DepthFirstAdapter {
 			Matrix rightM = MathUtil.getMatrix(getObject(right));
 			return leftM.minus(Ret.NEW, ignoreNaN, rightM);
 		}
-		MatrixException e = new MatrixException("Unknown expression type: "
+		RuntimeException e = new RuntimeException("Unknown expression type: "
 				+ calculation.getClass().getSimpleName());
 		result = new Result(e);
 		throw e;
@@ -439,7 +461,7 @@ public class Translation extends DepthFirstAdapter {
 			Matrix right = MathUtil.getMatrix(getObject(((ADotLdivLevel3) term).getRight()));
 			// TODO
 		}
-		MatrixException e = new MatrixException("Unknown expression type: "
+		RuntimeException e = new RuntimeException("Unknown expression type: "
 				+ term.getClass().getSimpleName());
 		result = new Result(e);
 		throw e;
@@ -491,12 +513,12 @@ public class Translation extends DepthFirstAdapter {
 				return executeAlgorithm(a, null);
 			}
 
-			MatrixException e = new MatrixException("Unknown object or command: " + name);
+			RuntimeException e = new RuntimeException("Unknown object or command: " + name);
 			result = new Result(e);
 			throw e;
 
 		}
-		MatrixException e = new MatrixException("Unknown expression type: "
+		RuntimeException e = new RuntimeException("Unknown expression type: "
 				+ factor.getClass().getSimpleName());
 		result = new Result(e);
 		throw e;
@@ -516,7 +538,7 @@ public class Translation extends DepthFirstAdapter {
 		} else if (factor instanceof ABitComplementLevel2) {
 			// TODO
 		}
-		MatrixException e = new MatrixException("Unknown expression type: "
+		RuntimeException e = new RuntimeException("Unknown expression type: "
 				+ factor.getClass().getSimpleName());
 		result = new Result(e);
 		throw e;
@@ -540,7 +562,7 @@ public class Translation extends DepthFirstAdapter {
 			Matrix m = MathUtil.getMatrix(getObject(((ADotTransposeLevel1) factor).getLevel0()));
 			return m.transpose();
 		}
-		MatrixException e = new MatrixException("Unknown expression type: "
+		RuntimeException e = new RuntimeException("Unknown expression type: "
 				+ factor.getClass().getSimpleName());
 		result = new Result(e);
 		throw e;
@@ -552,7 +574,7 @@ public class Translation extends DepthFirstAdapter {
 			String id = sn.getIdentifier().toString().trim();
 			Algorithm algorithm = getAlgorithm(id);
 			if (algorithm == null) {
-				MatrixException e = new MatrixException("Unknown algorithm: " + id);
+				RuntimeException e = new RuntimeException("Unknown algorithm: " + id);
 				result = new Result(e);
 				throw e;
 			}
@@ -579,7 +601,7 @@ public class Translation extends DepthFirstAdapter {
 					return executeMethod(c, null, methodName, arguments);
 				}
 
-				MatrixException e = new MatrixException("Unknown identifier: " + id);
+				RuntimeException e = new RuntimeException("Unknown identifier: " + id);
 				result = new Result(e);
 				throw e;
 			}
@@ -587,7 +609,7 @@ public class Translation extends DepthFirstAdapter {
 					arguments);
 		}
 
-		MatrixException e = new MatrixException("Unknown function: "
+		RuntimeException e = new RuntimeException("Unknown function: "
 				+ name.getClass().getSimpleName());
 		result = new Result(e);
 		throw e;
@@ -609,7 +631,7 @@ public class Translation extends DepthFirstAdapter {
 			obj.add(getObject(expr));
 			return obj;
 		}
-		MatrixException e = new MatrixException("Unknown arguments: "
+		RuntimeException e = new RuntimeException("Unknown arguments: "
 				+ arguments.getClass().getSimpleName());
 		result = new Result(e);
 		throw e;
@@ -657,7 +679,7 @@ public class Translation extends DepthFirstAdapter {
 				return o;
 			}
 		}
-		MatrixException e = new MatrixException("Unknown method: " + name);
+		RuntimeException e = new RuntimeException("Unknown method: " + name);
 		result = new Result(e);
 		throw e;
 	}
@@ -691,7 +713,7 @@ public class Translation extends DepthFirstAdapter {
 		} else if (c == RegressionDataSet.class) {
 			return m;
 		}
-		MatrixException e = new MatrixException("cannot convert to desired object type "
+		RuntimeException e = new RuntimeException("cannot convert to desired object type "
 				+ c.getSimpleName());
 		result = new Result(e);
 		throw e;
@@ -728,7 +750,7 @@ public class Translation extends DepthFirstAdapter {
 		} else if (function instanceof AEmptyFunction) {
 			return executeFunction(((AEmptyFunction) function).getName(), null);
 		}
-		MatrixException e = new MatrixException("Unknown function type: "
+		RuntimeException e = new RuntimeException("Unknown function type: "
 				+ function.getClass().getSimpleName());
 		result = new Result(e);
 		throw e;
@@ -746,7 +768,7 @@ public class Translation extends DepthFirstAdapter {
 		} else if (matrix instanceof AArrayMatrix) {
 			return getMatrix(((AArrayMatrix) matrix).getArray());
 		}
-		MatrixException e = new MatrixException("Unknown matrix type: "
+		RuntimeException e = new RuntimeException("Unknown matrix type: "
 				+ matrix.getClass().getSimpleName());
 		result = new Result(e);
 		throw e;
@@ -783,7 +805,7 @@ public class Translation extends DepthFirstAdapter {
 			return s.substring(1, s.length() - 1);
 		}
 
-		MatrixException e = new MatrixException("Unknown literal type: "
+		RuntimeException e = new RuntimeException("Unknown literal type: "
 				+ literal.getClass().getSimpleName());
 		result = new Result(e);
 		throw e;

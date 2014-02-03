@@ -2,93 +2,72 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-import org.jdmp.core.script.jdmp.analysis.*;
+import org.jdmp.core.script.jdmp.analysis.Analysis;
 
 @SuppressWarnings("nls")
-public final class ABooleanLiteral extends PLiteral
-{
-    private PBoolean _boolean_;
+public final class ABooleanLiteral extends PLiteral {
+	private PBoolean _boolean_;
 
-    public ABooleanLiteral()
-    {
-        // Constructor
-    }
+	public ABooleanLiteral() {
+		// Constructor
+	}
 
-    public ABooleanLiteral(
-        @SuppressWarnings("hiding") PBoolean _boolean_)
-    {
-        // Constructor
-        setBoolean(_boolean_);
+	public ABooleanLiteral(@SuppressWarnings("hiding") PBoolean _boolean_) {
+		// Constructor
+		setBoolean(_boolean_);
 
-    }
+	}
 
-    
-    public Object clone()
-    {
-        return new ABooleanLiteral(
-            cloneNode(this._boolean_));
-    }
+	public Object clone() {
+		return new ABooleanLiteral(cloneNode(this._boolean_));
+	}
 
-    public void apply(Switch sw)
-    {
-        ((Analysis) sw).caseABooleanLiteral(this);
-    }
+	public void apply(Switch sw) {
+		((Analysis) sw).caseABooleanLiteral(this);
+	}
 
-    public PBoolean getBoolean()
-    {
-        return this._boolean_;
-    }
+	public PBoolean getBoolean() {
+		return this._boolean_;
+	}
 
-    public void setBoolean(PBoolean node)
-    {
-        if(this._boolean_ != null)
-        {
-            this._boolean_.parent(null);
-        }
+	public void setBoolean(PBoolean node) {
+		if (this._boolean_ != null) {
+			this._boolean_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._boolean_ = node;
-    }
+		this._boolean_ = node;
+	}
 
-    
-    public String toString()
-    {
-        return ""
-            + toString(this._boolean_);
-    }
+	public String toString() {
+		return "" + toString(this._boolean_);
+	}
 
-    
-    void removeChild(@SuppressWarnings("unused") Node child)
-    {
-        // Remove child
-        if(this._boolean_ == child)
-        {
-            this._boolean_ = null;
-            return;
-        }
+	void removeChild(@SuppressWarnings("unused") Node child) {
+		// Remove child
+		if (this._boolean_ == child) {
+			this._boolean_ = null;
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 
-    
-    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
-    {
-        // Replace child
-        if(this._boolean_ == oldChild)
-        {
-            setBoolean((PBoolean) newChild);
-            return;
-        }
+	void replaceChild(@SuppressWarnings("unused") Node oldChild,
+			@SuppressWarnings("unused") Node newChild) {
+		// Replace child
+		if (this._boolean_ == oldChild) {
+			setBoolean((PBoolean) newChild);
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 }

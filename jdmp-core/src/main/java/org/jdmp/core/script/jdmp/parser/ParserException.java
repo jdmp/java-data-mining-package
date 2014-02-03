@@ -2,21 +2,18 @@
 
 package org.jdmp.core.script.jdmp.parser;
 
-import org.jdmp.core.script.jdmp.node.*;
+import org.jdmp.core.script.jdmp.node.Token;
 
 @SuppressWarnings("serial")
-public class ParserException extends Exception
-{
-    Token token;
+public class ParserException extends Exception {
+	Token token;
 
-    public ParserException(@SuppressWarnings("hiding") Token token, String  message)
-    {
-        super(message);
-        this.token = token;
-    }
+	public ParserException(@SuppressWarnings("hiding") Token token, String message) {
+		super(message);
+		this.token = token;
+	}
 
-    public Token getToken()
-    {
-        return this.token;
-    }
+	public Token getToken() {
+		return this.token;
+	}
 }

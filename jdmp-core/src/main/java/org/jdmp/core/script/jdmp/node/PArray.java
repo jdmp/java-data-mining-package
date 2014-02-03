@@ -2,7 +2,6 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-public abstract class PArray extends Node
-{
-    // Empty body
+public abstract class PArray extends Node {
+	// Empty body
 }

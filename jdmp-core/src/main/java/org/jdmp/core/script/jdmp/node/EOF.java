@@ -2,31 +2,25 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-import org.jdmp.core.script.jdmp.analysis.*;
+import org.jdmp.core.script.jdmp.analysis.Analysis;
 
 @SuppressWarnings("nls")
-public final class EOF extends Token
-{
-    public EOF()
-    {
-        setText("");
-    }
+public final class EOF extends Token {
+	public EOF() {
+		setText("");
+	}
 
-    public EOF(int line, int pos)
-    {
-        setText("");
-        setLine(line);
-        setPos(pos);
-    }
+	public EOF(int line, int pos) {
+		setText("");
+		setLine(line);
+		setPos(pos);
+	}
 
-    
-    public Object clone()
-    {
-        return new EOF(getLine(), getPos());
-    }
+	public Object clone() {
+		return new EOF(getLine(), getPos());
+	}
 
-    public void apply(Switch sw)
-    {
-        ((Analysis) sw).caseEOF(this);
-    }
+	public void apply(Switch sw) {
+		((Analysis) sw).caseEOF(this);
+	}
 }

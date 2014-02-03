@@ -2,136 +2,106 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-import org.jdmp.core.script.jdmp.analysis.*;
+import org.jdmp.core.script.jdmp.analysis.Analysis;
 
 @SuppressWarnings("nls")
-public final class AStepsize extends PStepsize
-{
-    private PLevel4 _level4_;
-    private TColon _colon_;
+public final class AStepsize extends PStepsize {
+	private PLevel4 _level4_;
+	private TColon _colon_;
 
-    public AStepsize()
-    {
-        // Constructor
-    }
+	public AStepsize() {
+		// Constructor
+	}
 
-    public AStepsize(
-        @SuppressWarnings("hiding") PLevel4 _level4_,
-        @SuppressWarnings("hiding") TColon _colon_)
-    {
-        // Constructor
-        setLevel4(_level4_);
+	public AStepsize(@SuppressWarnings("hiding") PLevel4 _level4_,
+			@SuppressWarnings("hiding") TColon _colon_) {
+		// Constructor
+		setLevel4(_level4_);
 
-        setColon(_colon_);
+		setColon(_colon_);
 
-    }
+	}
 
-    
-    public Object clone()
-    {
-        return new AStepsize(
-            cloneNode(this._level4_),
-            cloneNode(this._colon_));
-    }
+	public Object clone() {
+		return new AStepsize(cloneNode(this._level4_), cloneNode(this._colon_));
+	}
 
-    public void apply(Switch sw)
-    {
-        ((Analysis) sw).caseAStepsize(this);
-    }
+	public void apply(Switch sw) {
+		((Analysis) sw).caseAStepsize(this);
+	}
 
-    public PLevel4 getLevel4()
-    {
-        return this._level4_;
-    }
+	public PLevel4 getLevel4() {
+		return this._level4_;
+	}
 
-    public void setLevel4(PLevel4 node)
-    {
-        if(this._level4_ != null)
-        {
-            this._level4_.parent(null);
-        }
+	public void setLevel4(PLevel4 node) {
+		if (this._level4_ != null) {
+			this._level4_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._level4_ = node;
-    }
+		this._level4_ = node;
+	}
 
-    public TColon getColon()
-    {
-        return this._colon_;
-    }
+	public TColon getColon() {
+		return this._colon_;
+	}
 
-    public void setColon(TColon node)
-    {
-        if(this._colon_ != null)
-        {
-            this._colon_.parent(null);
-        }
+	public void setColon(TColon node) {
+		if (this._colon_ != null) {
+			this._colon_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._colon_ = node;
-    }
+		this._colon_ = node;
+	}
 
-    
-    public String toString()
-    {
-        return ""
-            + toString(this._level4_)
-            + toString(this._colon_);
-    }
+	public String toString() {
+		return "" + toString(this._level4_) + toString(this._colon_);
+	}
 
-    
-    void removeChild(@SuppressWarnings("unused") Node child)
-    {
-        // Remove child
-        if(this._level4_ == child)
-        {
-            this._level4_ = null;
-            return;
-        }
+	void removeChild(@SuppressWarnings("unused") Node child) {
+		// Remove child
+		if (this._level4_ == child) {
+			this._level4_ = null;
+			return;
+		}
 
-        if(this._colon_ == child)
-        {
-            this._colon_ = null;
-            return;
-        }
+		if (this._colon_ == child) {
+			this._colon_ = null;
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 
-    
-    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
-    {
-        // Replace child
-        if(this._level4_ == oldChild)
-        {
-            setLevel4((PLevel4) newChild);
-            return;
-        }
+	void replaceChild(@SuppressWarnings("unused") Node oldChild,
+			@SuppressWarnings("unused") Node newChild) {
+		// Replace child
+		if (this._level4_ == oldChild) {
+			setLevel4((PLevel4) newChild);
+			return;
+		}
 
-        if(this._colon_ == oldChild)
-        {
-            setColon((TColon) newChild);
-            return;
-        }
+		if (this._colon_ == oldChild) {
+			setColon((TColon) newChild);
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 }

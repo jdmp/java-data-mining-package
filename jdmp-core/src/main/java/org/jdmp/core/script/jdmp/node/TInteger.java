@@ -2,31 +2,25 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-import org.jdmp.core.script.jdmp.analysis.*;
+import org.jdmp.core.script.jdmp.analysis.Analysis;
 
 @SuppressWarnings("nls")
-public final class TInteger extends Token
-{
-    public TInteger(String text)
-    {
-        setText(text);
-    }
+public final class TInteger extends Token {
+	public TInteger(String text) {
+		setText(text);
+	}
 
-    public TInteger(String text, int line, int pos)
-    {
-        setText(text);
-        setLine(line);
-        setPos(pos);
-    }
+	public TInteger(String text, int line, int pos) {
+		setText(text);
+		setLine(line);
+		setPos(pos);
+	}
 
-    
-    public Object clone()
-    {
-      return new TInteger(getText(), getLine(), getPos());
-    }
+	public Object clone() {
+		return new TInteger(getText(), getLine(), getPos());
+	}
 
-    public void apply(Switch sw)
-    {
-        ((Analysis) sw).caseTInteger(this);
-    }
+	public void apply(Switch sw) {
+		((Analysis) sw).caseTInteger(this);
+	}
 }

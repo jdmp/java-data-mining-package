@@ -2,93 +2,72 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-import org.jdmp.core.script.jdmp.analysis.*;
+import org.jdmp.core.script.jdmp.analysis.Analysis;
 
 @SuppressWarnings("nls")
-public final class AIntegerLiteral extends PLiteral
-{
-    private TInteger _integer_;
+public final class AIntegerLiteral extends PLiteral {
+	private TInteger _integer_;
 
-    public AIntegerLiteral()
-    {
-        // Constructor
-    }
+	public AIntegerLiteral() {
+		// Constructor
+	}
 
-    public AIntegerLiteral(
-        @SuppressWarnings("hiding") TInteger _integer_)
-    {
-        // Constructor
-        setInteger(_integer_);
+	public AIntegerLiteral(@SuppressWarnings("hiding") TInteger _integer_) {
+		// Constructor
+		setInteger(_integer_);
 
-    }
+	}
 
-    
-    public Object clone()
-    {
-        return new AIntegerLiteral(
-            cloneNode(this._integer_));
-    }
+	public Object clone() {
+		return new AIntegerLiteral(cloneNode(this._integer_));
+	}
 
-    public void apply(Switch sw)
-    {
-        ((Analysis) sw).caseAIntegerLiteral(this);
-    }
+	public void apply(Switch sw) {
+		((Analysis) sw).caseAIntegerLiteral(this);
+	}
 
-    public TInteger getInteger()
-    {
-        return this._integer_;
-    }
+	public TInteger getInteger() {
+		return this._integer_;
+	}
 
-    public void setInteger(TInteger node)
-    {
-        if(this._integer_ != null)
-        {
-            this._integer_.parent(null);
-        }
+	public void setInteger(TInteger node) {
+		if (this._integer_ != null) {
+			this._integer_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._integer_ = node;
-    }
+		this._integer_ = node;
+	}
 
-    
-    public String toString()
-    {
-        return ""
-            + toString(this._integer_);
-    }
+	public String toString() {
+		return "" + toString(this._integer_);
+	}
 
-    
-    void removeChild(@SuppressWarnings("unused") Node child)
-    {
-        // Remove child
-        if(this._integer_ == child)
-        {
-            this._integer_ = null;
-            return;
-        }
+	void removeChild(@SuppressWarnings("unused") Node child) {
+		// Remove child
+		if (this._integer_ == child) {
+			this._integer_ = null;
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 
-    
-    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
-    {
-        // Replace child
-        if(this._integer_ == oldChild)
-        {
-            setInteger((TInteger) newChild);
-            return;
-        }
+	void replaceChild(@SuppressWarnings("unused") Node oldChild,
+			@SuppressWarnings("unused") Node newChild) {
+		// Replace child
+		if (this._integer_ == oldChild) {
+			setInteger((TInteger) newChild);
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 }

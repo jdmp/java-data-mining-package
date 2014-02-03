@@ -2,37 +2,29 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-import org.jdmp.core.script.jdmp.analysis.*;
+import org.jdmp.core.script.jdmp.analysis.Analysis;
 
 @SuppressWarnings("nls")
-public final class TLogicalAnd extends Token
-{
-    public TLogicalAnd()
-    {
-        super.setText("&&");
-    }
+public final class TLogicalAnd extends Token {
+	public TLogicalAnd() {
+		super.setText("&&");
+	}
 
-    public TLogicalAnd(int line, int pos)
-    {
-        super.setText("&&");
-        setLine(line);
-        setPos(pos);
-    }
+	public TLogicalAnd(int line, int pos) {
+		super.setText("&&");
+		setLine(line);
+		setPos(pos);
+	}
 
-    
-    public Object clone()
-    {
-      return new TLogicalAnd(getLine(), getPos());
-    }
+	public Object clone() {
+		return new TLogicalAnd(getLine(), getPos());
+	}
 
-    public void apply(Switch sw)
-    {
-        ((Analysis) sw).caseTLogicalAnd(this);
-    }
+	public void apply(Switch sw) {
+		((Analysis) sw).caseTLogicalAnd(this);
+	}
 
-    
-    public void setText(@SuppressWarnings("unused") String text)
-    {
-        throw new RuntimeException("Cannot change TLogicalAnd text.");
-    }
+	public void setText(@SuppressWarnings("unused") String text) {
+		throw new RuntimeException("Cannot change TLogicalAnd text.");
+	}
 }

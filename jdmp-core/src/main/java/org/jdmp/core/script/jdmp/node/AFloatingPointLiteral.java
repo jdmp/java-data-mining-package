@@ -2,93 +2,72 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-import org.jdmp.core.script.jdmp.analysis.*;
+import org.jdmp.core.script.jdmp.analysis.Analysis;
 
 @SuppressWarnings("nls")
-public final class AFloatingPointLiteral extends PLiteral
-{
-    private TFloatingPoint _floatingPoint_;
+public final class AFloatingPointLiteral extends PLiteral {
+	private TFloatingPoint _floatingPoint_;
 
-    public AFloatingPointLiteral()
-    {
-        // Constructor
-    }
+	public AFloatingPointLiteral() {
+		// Constructor
+	}
 
-    public AFloatingPointLiteral(
-        @SuppressWarnings("hiding") TFloatingPoint _floatingPoint_)
-    {
-        // Constructor
-        setFloatingPoint(_floatingPoint_);
+	public AFloatingPointLiteral(@SuppressWarnings("hiding") TFloatingPoint _floatingPoint_) {
+		// Constructor
+		setFloatingPoint(_floatingPoint_);
 
-    }
+	}
 
-    
-    public Object clone()
-    {
-        return new AFloatingPointLiteral(
-            cloneNode(this._floatingPoint_));
-    }
+	public Object clone() {
+		return new AFloatingPointLiteral(cloneNode(this._floatingPoint_));
+	}
 
-    public void apply(Switch sw)
-    {
-        ((Analysis) sw).caseAFloatingPointLiteral(this);
-    }
+	public void apply(Switch sw) {
+		((Analysis) sw).caseAFloatingPointLiteral(this);
+	}
 
-    public TFloatingPoint getFloatingPoint()
-    {
-        return this._floatingPoint_;
-    }
+	public TFloatingPoint getFloatingPoint() {
+		return this._floatingPoint_;
+	}
 
-    public void setFloatingPoint(TFloatingPoint node)
-    {
-        if(this._floatingPoint_ != null)
-        {
-            this._floatingPoint_.parent(null);
-        }
+	public void setFloatingPoint(TFloatingPoint node) {
+		if (this._floatingPoint_ != null) {
+			this._floatingPoint_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._floatingPoint_ = node;
-    }
+		this._floatingPoint_ = node;
+	}
 
-    
-    public String toString()
-    {
-        return ""
-            + toString(this._floatingPoint_);
-    }
+	public String toString() {
+		return "" + toString(this._floatingPoint_);
+	}
 
-    
-    void removeChild(@SuppressWarnings("unused") Node child)
-    {
-        // Remove child
-        if(this._floatingPoint_ == child)
-        {
-            this._floatingPoint_ = null;
-            return;
-        }
+	void removeChild(@SuppressWarnings("unused") Node child) {
+		// Remove child
+		if (this._floatingPoint_ == child) {
+			this._floatingPoint_ = null;
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 
-    
-    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
-    {
-        // Replace child
-        if(this._floatingPoint_ == oldChild)
-        {
-            setFloatingPoint((TFloatingPoint) newChild);
-            return;
-        }
+	void replaceChild(@SuppressWarnings("unused") Node oldChild,
+			@SuppressWarnings("unused") Node newChild) {
+		// Replace child
+		if (this._floatingPoint_ == oldChild) {
+			setFloatingPoint((TFloatingPoint) newChild);
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 }

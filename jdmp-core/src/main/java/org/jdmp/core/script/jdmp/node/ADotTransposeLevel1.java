@@ -2,136 +2,106 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-import org.jdmp.core.script.jdmp.analysis.*;
+import org.jdmp.core.script.jdmp.analysis.Analysis;
 
 @SuppressWarnings("nls")
-public final class ADotTransposeLevel1 extends PLevel1
-{
-    private PLevel0 _level0_;
-    private TDotTranspose _dotTranspose_;
+public final class ADotTransposeLevel1 extends PLevel1 {
+	private PLevel0 _level0_;
+	private TDotTranspose _dotTranspose_;
 
-    public ADotTransposeLevel1()
-    {
-        // Constructor
-    }
+	public ADotTransposeLevel1() {
+		// Constructor
+	}
 
-    public ADotTransposeLevel1(
-        @SuppressWarnings("hiding") PLevel0 _level0_,
-        @SuppressWarnings("hiding") TDotTranspose _dotTranspose_)
-    {
-        // Constructor
-        setLevel0(_level0_);
+	public ADotTransposeLevel1(@SuppressWarnings("hiding") PLevel0 _level0_,
+			@SuppressWarnings("hiding") TDotTranspose _dotTranspose_) {
+		// Constructor
+		setLevel0(_level0_);
 
-        setDotTranspose(_dotTranspose_);
+		setDotTranspose(_dotTranspose_);
 
-    }
+	}
 
-    
-    public Object clone()
-    {
-        return new ADotTransposeLevel1(
-            cloneNode(this._level0_),
-            cloneNode(this._dotTranspose_));
-    }
+	public Object clone() {
+		return new ADotTransposeLevel1(cloneNode(this._level0_), cloneNode(this._dotTranspose_));
+	}
 
-    public void apply(Switch sw)
-    {
-        ((Analysis) sw).caseADotTransposeLevel1(this);
-    }
+	public void apply(Switch sw) {
+		((Analysis) sw).caseADotTransposeLevel1(this);
+	}
 
-    public PLevel0 getLevel0()
-    {
-        return this._level0_;
-    }
+	public PLevel0 getLevel0() {
+		return this._level0_;
+	}
 
-    public void setLevel0(PLevel0 node)
-    {
-        if(this._level0_ != null)
-        {
-            this._level0_.parent(null);
-        }
+	public void setLevel0(PLevel0 node) {
+		if (this._level0_ != null) {
+			this._level0_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._level0_ = node;
-    }
+		this._level0_ = node;
+	}
 
-    public TDotTranspose getDotTranspose()
-    {
-        return this._dotTranspose_;
-    }
+	public TDotTranspose getDotTranspose() {
+		return this._dotTranspose_;
+	}
 
-    public void setDotTranspose(TDotTranspose node)
-    {
-        if(this._dotTranspose_ != null)
-        {
-            this._dotTranspose_.parent(null);
-        }
+	public void setDotTranspose(TDotTranspose node) {
+		if (this._dotTranspose_ != null) {
+			this._dotTranspose_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._dotTranspose_ = node;
-    }
+		this._dotTranspose_ = node;
+	}
 
-    
-    public String toString()
-    {
-        return ""
-            + toString(this._level0_)
-            + toString(this._dotTranspose_);
-    }
+	public String toString() {
+		return "" + toString(this._level0_) + toString(this._dotTranspose_);
+	}
 
-    
-    void removeChild(@SuppressWarnings("unused") Node child)
-    {
-        // Remove child
-        if(this._level0_ == child)
-        {
-            this._level0_ = null;
-            return;
-        }
+	void removeChild(@SuppressWarnings("unused") Node child) {
+		// Remove child
+		if (this._level0_ == child) {
+			this._level0_ = null;
+			return;
+		}
 
-        if(this._dotTranspose_ == child)
-        {
-            this._dotTranspose_ = null;
-            return;
-        }
+		if (this._dotTranspose_ == child) {
+			this._dotTranspose_ = null;
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 
-    
-    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
-    {
-        // Replace child
-        if(this._level0_ == oldChild)
-        {
-            setLevel0((PLevel0) newChild);
-            return;
-        }
+	void replaceChild(@SuppressWarnings("unused") Node oldChild,
+			@SuppressWarnings("unused") Node newChild) {
+		// Replace child
+		if (this._level0_ == oldChild) {
+			setLevel0((PLevel0) newChild);
+			return;
+		}
 
-        if(this._dotTranspose_ == oldChild)
-        {
-            setDotTranspose((TDotTranspose) newChild);
-            return;
-        }
+		if (this._dotTranspose_ == oldChild) {
+			setDotTranspose((TDotTranspose) newChild);
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 }
