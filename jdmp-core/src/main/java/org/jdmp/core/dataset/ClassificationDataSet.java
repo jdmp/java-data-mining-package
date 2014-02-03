@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -34,7 +34,6 @@ import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.util.MathUtil;
 
 public class ClassificationDataSet extends RegressionDataSet {
@@ -104,7 +103,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 		return getVariables().get(ERRORCOUNT);
 	}
 
-	public int getErrorCount() throws MatrixException {
+	public int getErrorCount() {
 		return (int) getErrorCountVariable().getMatrix().doubleValue();
 	}
 
@@ -124,11 +123,11 @@ public class ClassificationDataSet extends RegressionDataSet {
 		getErrorCountVariable().addMatrix(m);
 	}
 
-	public double getAccuracy() throws MatrixException {
+	public double getAccuracy() {
 		return getAccuracyVariable().getMatrix().doubleValue();
 	}
 
-	public double getMaxAccuracy() throws MatrixException {
+	public double getMaxAccuracy() {
 		return getAccuracyVariable().getAsMatrix().getMaxValue();
 	}
 

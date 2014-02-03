@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -29,7 +29,6 @@ import java.util.Map;
 import org.jdmp.core.algorithm.AlgorithmNoSource;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.exceptions.MatrixException;
 
 public class Systemtime extends AlgorithmNoSource {
 	private static final long serialVersionUID = 8746352489100162306L;
@@ -41,7 +40,7 @@ public class Systemtime extends AlgorithmNoSource {
 		setDescription(DESCRIPTION);
 	}
 
-	public Map<String, Object> calculateObjects(Map<String, Object> input) throws MatrixException {
+	public Map<String, Object> calculateObjects(Map<String, Object> input) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		Matrix target = Matrix.Factory.systemTime();
 		result.put(TARGET, target);

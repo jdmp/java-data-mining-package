@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -85,7 +85,6 @@ public class DirDataSet extends AbstractDataSet implements Refreshable {
 		setDataSets(new DefaultObservableList<DataSet>(new DirectoryList()));
 	}
 
-	
 	public DataSet clone() {
 		throw new RuntimeException("not implemented");
 	}
@@ -95,7 +94,6 @@ public class DirDataSet extends AbstractDataSet implements Refreshable {
 
 		private Map<Integer, DataSet> map = new SoftHashMap<Integer, DataSet>();
 
-		
 		public DataSet get(int index) {
 			DataSet ds = map.get(index);
 			if (ds == null) {
@@ -105,7 +103,6 @@ public class DirDataSet extends AbstractDataSet implements Refreshable {
 			return ds;
 		}
 
-		
 		public int size() {
 			return dirs.size();
 		}
@@ -128,17 +125,14 @@ public class DirDataSet extends AbstractDataSet implements Refreshable {
 			}
 		}
 
-		
 		public Sample get(Object key) {
 			return map.get(key);
 		}
 
-		
 		public int size() {
 			return map.size();
 		}
 
-		
 		public Set<java.util.Map.Entry<String, Sample>> entrySet() {
 			return map.entrySet();
 		}

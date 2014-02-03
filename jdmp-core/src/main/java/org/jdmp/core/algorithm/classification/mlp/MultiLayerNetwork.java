@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -38,7 +38,6 @@ import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Coordinates;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
-import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.listmatrix.DefaultListMatrix;
 
 public class MultiLayerNetwork extends AbstractClassifier {
@@ -190,7 +189,7 @@ public class MultiLayerNetwork extends AbstractClassifier {
 		return networkLayers.get(0).getLearningRate();
 	}
 
-	public void reset() throws MatrixException {
+	public void reset() {
 		for (NetworkLayer networkLayer : networkLayers) {
 			networkLayer.reset();
 		}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -30,7 +30,6 @@ import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.enums.FileFormat;
-import org.ujmp.core.exceptions.MatrixException;
 
 public class Paste extends AbstractAlgorithm {
 	private static final long serialVersionUID = 4898079567399449172L;
@@ -42,7 +41,7 @@ public class Paste extends AbstractAlgorithm {
 		setDescription(DESCRIPTION);
 	}
 
-	public Map<String, Object> calculateObjects(Map<String, Object> input) throws MatrixException {
+	public Map<String, Object> calculateObjects(Map<String, Object> input) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put(TARGET, Matrix.Factory.importFromClipboard(FileFormat.CSV));
 		return result;

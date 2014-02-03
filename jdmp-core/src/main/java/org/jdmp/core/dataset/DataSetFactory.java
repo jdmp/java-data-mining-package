@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -34,9 +34,8 @@ import org.jdmp.core.sample.Sample;
 import org.jdmp.core.sample.SampleFactory;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
-import org.ujmp.core.enums.DB;
+import org.ujmp.core.enums.DBType;
 import org.ujmp.core.enums.FileFormat;
-import org.ujmp.core.exceptions.MatrixException;
 
 public abstract class DataSetFactory {
 
@@ -51,8 +50,7 @@ public abstract class DataSetFactory {
 		return new DefaultDataSet();
 	}
 
-	public static ClassificationDataSet importFromMatrix(Matrix input, Matrix target)
-			throws MatrixException {
+	public static ClassificationDataSet importFromMatrix(Matrix input, Matrix target) {
 		ClassificationDataSet ds = new ClassificationDataSet();
 		for (int i = 0; i < input.getRowCount(); i++) {
 			Sample s = SampleFactory.emptySample();
@@ -66,7 +64,7 @@ public abstract class DataSetFactory {
 	}
 
 	public static DataSet importFromFile(FileFormat format, File file, Object... parameters)
-			throws MatrixException, IOException {
+			throws IOException {
 		switch (format) {
 		default:
 			Matrix m = Matrix.Factory.importFromFile(format, file, parameters);
@@ -75,7 +73,7 @@ public abstract class DataSetFactory {
 	}
 
 	public static DataSet linkToFile(FileFormat format, File file, Object... parameters)
-			throws MatrixException, IOException {
+			throws IOException {
 		switch (format) {
 		default:
 			Matrix m = Matrix.Factory.linkToFile(format, file, parameters);
@@ -83,12 +81,12 @@ public abstract class DataSetFactory {
 		}
 	}
 
-	public static DataSet linkToMatrix(Matrix matrix) throws MatrixException {
+	public static DataSet linkToMatrix(Matrix matrix) {
 		// TODO: this should be improved
 		return importFromMatrix(matrix);
 	}
 
-	public static DataSet importFromMatrix(Matrix matrix) throws MatrixException {
+	public static DataSet importFromMatrix(Matrix matrix) {
 		DataSet ds = emptyDataSet();
 		ds.setLabel(matrix.getLabel());
 		for (int r = 0; r < matrix.getRowCount(); r++) {
@@ -108,8 +106,7 @@ public abstract class DataSetFactory {
 		return ds;
 	}
 
-	public static ClassificationDataSet importFromMatrix(Matrix input, Matrix target, Matrix label)
-			throws MatrixException {
+	public static ClassificationDataSet importFromMatrix(Matrix input, Matrix target, Matrix label) {
 		ClassificationDataSet ds = new ClassificationDataSet();
 		for (int i = 0; i < input.getRowCount(); i++) {
 			Sample s = SampleFactory.emptySample();
@@ -124,8 +121,7 @@ public abstract class DataSetFactory {
 		return ds;
 	}
 
-	public static ClassificationDataSet linkToMatrix(Matrix input, Matrix target)
-			throws MatrixException {
+	public static ClassificationDataSet linkToMatrix(Matrix input, Matrix target) {
 		ClassificationDataSet ds = new ClassificationDataSet();
 		ds.getInputVariable().addMatrix(input);
 		ds.getTargetVariable().addMatrix(target);
@@ -140,8 +136,7 @@ public abstract class DataSetFactory {
 		return ds;
 	}
 
-	public static ClassificationDataSet linkToMatrix(Matrix input, Matrix target, Matrix label)
-			throws MatrixException {
+	public static ClassificationDataSet linkToMatrix(Matrix input, Matrix target, Matrix label) {
 		ClassificationDataSet ds = new ClassificationDataSet();
 		ds.getInputVariable().addMatrix(input);
 		ds.getTargetVariable().addMatrix(target);
@@ -253,87 +248,87 @@ public abstract class DataSetFactory {
 		return ds;
 	}
 
-	public static DefaultDataSet ANIMALS() throws MatrixException {
+	public static DefaultDataSet ANIMALS() {
 		DefaultDataSet animals = DataSetFactory.labeledDataSet("Animals");
 
 		Sample pigeon = SampleFactory.labeledSample("Pigeon");
 		pigeon.getVariables().setMatrix(Sample.INPUT,
-				Matrix.Factory.importFromString(FileFormat.CSV, "1 0 0 1 0 0 0 0 1 0 0 1 0"));
+				Matrix.Factory.importFromString(FileFormat.CSV, "1 0 0 1 0 0 0 0 1 0 0 1 0", " "));
 		animals.getSamples().add(pigeon);
 
 		Sample chicken = SampleFactory.labeledSample("Chicken");
 		chicken.getVariables().setMatrix(Sample.INPUT,
-				Matrix.Factory.importFromString(FileFormat.CSV, "1 0 0 1 0 0 0 0 1 0 0 0 0"));
+				Matrix.Factory.importFromString(FileFormat.CSV, "1 0 0 1 0 0 0 0 1 0 0 0 0", " "));
 		animals.getSamples().add(chicken);
 
 		Sample duck = SampleFactory.labeledSample("Duck");
 		duck.getVariables().setMatrix(Sample.INPUT,
-				Matrix.Factory.importFromString(FileFormat.CSV, "1 0 0 1 0 0 0 0 1 0 0 0 1"));
+				Matrix.Factory.importFromString(FileFormat.CSV, "1 0 0 1 0 0 0 0 1 0 0 0 1", " "));
 		animals.getSamples().add(duck);
 
 		Sample goose = SampleFactory.labeledSample("Goose");
 		goose.getVariables().setMatrix(Sample.INPUT,
-				Matrix.Factory.importFromString(FileFormat.CSV, "1 0 0 1 0 0 0 0 1 0 0 1 1"));
+				Matrix.Factory.importFromString(FileFormat.CSV, "1 0 0 1 0 0 0 0 1 0 0 1 1", " "));
 		animals.getSamples().add(goose);
 
 		Sample owl = SampleFactory.labeledSample("Owl");
 		owl.getVariables().setMatrix(Sample.INPUT,
-				Matrix.Factory.importFromString(FileFormat.CSV, "1 0 0 1 0 0 0 0 1 1 0 1 0"));
+				Matrix.Factory.importFromString(FileFormat.CSV, "1 0 0 1 0 0 0 0 1 1 0 1 0", " "));
 		animals.getSamples().add(owl);
 
 		Sample falcon = SampleFactory.labeledSample("Falcon");
 		falcon.getVariables().setMatrix(Sample.INPUT,
-				Matrix.Factory.importFromString(FileFormat.CSV, "1 0 0 1 0 0 0 0 1 1 0 1 0"));
+				Matrix.Factory.importFromString(FileFormat.CSV, "1 0 0 1 0 0 0 0 1 1 0 1 0", " "));
 		animals.getSamples().add(falcon);
 
 		Sample eagle = SampleFactory.labeledSample("Eagle");
 		eagle.getVariables().setMatrix(Sample.INPUT,
-				Matrix.Factory.importFromString(FileFormat.CSV, "0 1 0 1 0 0 0 0 1 1 0 1 0"));
+				Matrix.Factory.importFromString(FileFormat.CSV, "0 1 0 1 0 0 0 0 1 1 0 1 0", " "));
 		animals.getSamples().add(eagle);
 
 		Sample fox = SampleFactory.labeledSample("Fox");
 		fox.getVariables().setMatrix(Sample.INPUT,
-				Matrix.Factory.importFromString(FileFormat.CSV, "0 1 0 0 1 1 0 0 0 1 0 0 0"));
+				Matrix.Factory.importFromString(FileFormat.CSV, "0 1 0 0 1 1 0 0 0 1 0 0 0", " "));
 		animals.getSamples().add(fox);
 
 		Sample dog = SampleFactory.labeledSample("Dog");
 		dog.getVariables().setMatrix(Sample.INPUT,
-				Matrix.Factory.importFromString(FileFormat.CSV, "0 1 0 0 1 1 0 0 0 0 1 0 0"));
+				Matrix.Factory.importFromString(FileFormat.CSV, "0 1 0 0 1 1 0 0 0 0 1 0 0", " "));
 		animals.getSamples().add(dog);
 
 		Sample wolf = SampleFactory.labeledSample("Wolf");
 		wolf.getVariables().setMatrix(Sample.INPUT,
-				Matrix.Factory.importFromString(FileFormat.CSV, "0 1 0 0 1 1 0 1 0 1 1 0 0"));
+				Matrix.Factory.importFromString(FileFormat.CSV, "0 1 0 0 1 1 0 1 0 1 1 0 0", " "));
 		animals.getSamples().add(wolf);
 
 		Sample cat = SampleFactory.labeledSample("Cat");
 		cat.getVariables().setMatrix(Sample.INPUT,
-				Matrix.Factory.importFromString(FileFormat.CSV, "1 0 0 0 1 1 0 0 0 1 0 0 0"));
+				Matrix.Factory.importFromString(FileFormat.CSV, "1 0 0 0 1 1 0 0 0 1 0 0 0", " "));
 		animals.getSamples().add(cat);
 
 		Sample tiger = SampleFactory.labeledSample("Tiger");
 		tiger.getVariables().setMatrix(Sample.INPUT,
-				Matrix.Factory.importFromString(FileFormat.CSV, "0 0 1 0 1 1 0 0 0 1 1 0 0"));
+				Matrix.Factory.importFromString(FileFormat.CSV, "0 0 1 0 1 1 0 0 0 1 1 0 0", " "));
 		animals.getSamples().add(tiger);
 
 		Sample lion = SampleFactory.labeledSample("Lion");
 		lion.getVariables().setMatrix(Sample.INPUT,
-				Matrix.Factory.importFromString(FileFormat.CSV, "0 0 1 0 1 1 0 1 0 1 1 0 0"));
+				Matrix.Factory.importFromString(FileFormat.CSV, "0 0 1 0 1 1 0 1 0 1 1 0 0", " "));
 		animals.getSamples().add(lion);
 
 		Sample horse = SampleFactory.labeledSample("Horse");
 		horse.getVariables().setMatrix(Sample.INPUT,
-				Matrix.Factory.importFromString(FileFormat.CSV, "0 0 1 0 1 1 1 1 0 0 1 0 0"));
+				Matrix.Factory.importFromString(FileFormat.CSV, "0 0 1 0 1 1 1 1 0 0 1 0 0", " "));
 		animals.getSamples().add(horse);
 
 		Sample zebra = SampleFactory.labeledSample("Zebra");
 		zebra.getVariables().setMatrix(Sample.INPUT,
-				Matrix.Factory.importFromString(FileFormat.CSV, "0 0 1 0 1 1 1 1 0 0 1 0 0"));
+				Matrix.Factory.importFromString(FileFormat.CSV, "0 0 1 0 1 1 1 1 0 0 1 0 0", " "));
 		animals.getSamples().add(zebra);
 
 		Sample cow = SampleFactory.labeledSample("Cow");
 		cow.getVariables().setMatrix(Sample.INPUT,
-				Matrix.Factory.importFromString(FileFormat.CSV, "0 0 1 0 1 1 1 0 0 0 0 0 0"));
+				Matrix.Factory.importFromString(FileFormat.CSV, "0 0 1 0 1 1 1 0 0 0 0 0 0", " "));
 		animals.getSamples().add(cow);
 
 		return animals;
@@ -585,13 +580,12 @@ public abstract class DataSetFactory {
 		return ds;
 	}
 
-	public static DataSet linkToDir(File dir, Object... parameters) throws MatrixException,
-			IOException {
+	public static DataSet linkToDir(File dir, Object... parameters) throws IOException {
 		return new DirDataSet(dir, parameters);
 	}
 
 	public static DataSet linkToDir(FileFormat fileFormat, File dir, Object... parameters)
-			throws MatrixException, IOException {
+			throws IOException {
 		return new DirDataSet(fileFormat, dir, parameters);
 	}
 
@@ -612,7 +606,7 @@ public abstract class DataSetFactory {
 		}
 	}
 
-	public static DataSet importFromJDBC(DB type, String host, int port, String database,
+	public static DataSet importFromJDBC(DBType type, String host, int port, String database,
 			String sqlStatement, String username, String password) {
 		Matrix m = Matrix.Factory.importFromJDBC(type, host, port, database, sqlStatement,
 				username, password);
@@ -625,7 +619,7 @@ public abstract class DataSetFactory {
 		return importFromMatrix(m);
 	}
 
-	public static DataSet linkToJDBC(DB type, String host, int port, String database,
+	public static DataSet linkToJDBC(DBType type, String host, int port, String database,
 			String sqlStatement, String username, String password) {
 		Matrix m = Matrix.Factory.linkToJDBC(type, host, port, database, sqlStatement, username,
 				password);

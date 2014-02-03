@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -69,15 +69,12 @@ public class LogMatrix extends AbstractDenseObjectMatrix2D {
 			this.matrix = matrix;
 		}
 
-		
 		public void close() throws SecurityException {
 		}
 
-		
 		public void flush() {
 		}
 
-		
 		public void publish(LogRecord record) {
 			record.setParameters(new Object[] { Runtime.getRuntime().freeMemory(),
 					Runtime.getRuntime() });
@@ -97,7 +94,6 @@ public class LogMatrix extends AbstractDenseObjectMatrix2D {
 		return new long[] { HandlerWrapper.getInstance().getList().size(), 7 };
 	}
 
-	
 	public boolean isReadOnly() {
 		return true;
 	}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -32,7 +32,6 @@ import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
-import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.util.MathUtil;
 
 public class WeightUpdate extends AlgorithmFiveSources {
@@ -78,8 +77,7 @@ public class WeightUpdate extends AlgorithmFiveSources {
 		getVariables().setMatrix(SAMPLEWEIGHT, m);
 	}
 
-	public Map<String, Object> calculateObjects(Map<String, Object> matrices)
-			throws MatrixException {
+	public Map<String, Object> calculateObjects(Map<String, Object> matrices) {
 		Map<String, Object> result = new HashMap<String, Object>();
 
 		Matrix weight = MathUtil.getMatrix(matrices.get(WEIGHT));
