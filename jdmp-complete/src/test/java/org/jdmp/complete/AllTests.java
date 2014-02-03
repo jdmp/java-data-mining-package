@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -27,12 +27,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses( { org.jdmp.complete.TestPlugins.class,
-		org.jdmp.core.AllTests.class, org.jdmp.gui.AllTests.class,
-		org.jdmp.bsh.AllTests.class, org.jdmp.jetty.AllTests.class,
-		org.jdmp.jgroups.AllTests.class, org.jdmp.liblinear.AllTests.class,
-		org.jdmp.libsvm.AllTests.class, org.jdmp.lucene.AllTests.class,
-		org.jdmp.mallet.AllTests.class, org.jdmp.stanfordpos.AllTests.class,
-		org.jdmp.weka.AllTests.class })
+@Suite.SuiteClasses({ org.jdmp.complete.TestPlugins.class, org.jdmp.core.AllTests.class, org.jdmp.gui.AllTests.class, org.jdmp.bsh.AllTests.class,
+		org.jdmp.jetty.AllTests.class, org.jdmp.jgroups.AllTests.class, org.jdmp.liblinear.AllTests.class, org.jdmp.libsvm.AllTests.class,
+		org.jdmp.lucene.AllTests.class, org.jdmp.mallet.AllTests.class, org.jdmp.stanfordpos.AllTests.class, org.jdmp.weka.AllTests.class })
 public class AllTests {
 }
