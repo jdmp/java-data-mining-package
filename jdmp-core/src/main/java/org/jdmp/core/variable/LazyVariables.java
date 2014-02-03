@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -39,7 +39,6 @@ import javax.swing.event.ListDataListener;
 import org.jdmp.core.util.ObservableMap;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.collections.map.LazyMap;
-import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.util.MathUtil;
 import org.ujmp.core.util.StringUtil;
 
@@ -75,11 +74,11 @@ public class LazyVariables implements ObservableMap<Variable>, Variables {
 	}
 
 	public void add(Variable object) {
-		throw new MatrixException("not implemented");
+		throw new RuntimeException("not implemented");
 	}
 
 	public void addAll(Collection<Variable> objects) {
-		throw new MatrixException("not implemented");
+		throw new RuntimeException("not implemented");
 	}
 
 	public void clear() {
@@ -99,7 +98,7 @@ public class LazyVariables implements ObservableMap<Variable>, Variables {
 	}
 
 	public int indexOf(Variable value) {
-		throw new MatrixException("not implemented");
+		throw new RuntimeException("not implemented");
 	}
 
 	public boolean isEmpty() {
@@ -107,7 +106,7 @@ public class LazyVariables implements ObservableMap<Variable>, Variables {
 	}
 
 	public Collection<Variable> toCollection() {
-		throw new MatrixException("not implemented");
+		throw new RuntimeException("not implemented");
 	}
 
 	public int getSize() {
@@ -129,7 +128,7 @@ public class LazyVariables implements ObservableMap<Variable>, Variables {
 			}
 
 			public void remove() {
-				throw new MatrixException("not implemented");
+				throw new RuntimeException("not implemented");
 			}
 		};
 	}
@@ -139,11 +138,11 @@ public class LazyVariables implements ObservableMap<Variable>, Variables {
 	}
 
 	public boolean containsValue(Object value) {
-		throw new MatrixException("not implemented");
+		throw new RuntimeException("not implemented");
 	}
 
 	public Set<java.util.Map.Entry<String, Variable>> entrySet() {
-		throw new MatrixException("not implemented");
+		throw new RuntimeException("not implemented");
 	}
 
 	public Variable get(Object key) {
@@ -166,7 +165,7 @@ public class LazyVariables implements ObservableMap<Variable>, Variables {
 	}
 
 	public void putAll(Map<? extends String, ? extends Variable> m) {
-		throw new MatrixException("not implemented");
+		throw new RuntimeException("not implemented");
 	}
 
 	public Variable remove(Object key) {
@@ -179,7 +178,7 @@ public class LazyVariables implements ObservableMap<Variable>, Variables {
 	}
 
 	public Collection<Variable> values() {
-		throw new MatrixException("not implemented");
+		throw new RuntimeException("not implemented");
 	}
 
 	public final BigInteger getAsBigInteger(String variableKey) {
