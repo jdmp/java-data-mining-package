@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -26,9 +26,9 @@ package org.jdmp.gui.variable.actions;
 import javax.swing.JComponent;
 
 import org.jdmp.gui.variable.VariableGUIObject;
-import org.ujmp.gui.actions.ObjectAction;
+import org.ujmp.gui.actions.AbstractObjectAction;
 
-public abstract class VariableAction extends ObjectAction {
+public abstract class VariableAction extends AbstractObjectAction {
 
 	public VariableAction(JComponent c, VariableGUIObject v) {
 		super(c, v);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -26,9 +26,9 @@ package org.jdmp.gui.algorithm.actions;
 import javax.swing.JComponent;
 
 import org.jdmp.gui.algorithm.AlgorithmGUIObject;
-import org.ujmp.gui.actions.ObjectAction;
+import org.ujmp.gui.actions.AbstractObjectAction;
 
-public abstract class AlgorithmAction extends ObjectAction {
+public abstract class AlgorithmAction extends AbstractObjectAction {
 	private static final long serialVersionUID = 3336571862451658110L;
 
 	public AlgorithmAction(JComponent c, AlgorithmGUIObject a) {

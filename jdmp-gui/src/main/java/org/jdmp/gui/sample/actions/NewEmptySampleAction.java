@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -33,9 +33,9 @@ import org.jdmp.core.sample.HasSampleList;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.sample.SampleFactory;
 import org.ujmp.core.interfaces.GUIObject;
-import org.ujmp.gui.actions.ObjectAction;
+import org.ujmp.gui.actions.AbstractObjectAction;
 
-public class NewEmptySampleAction extends ObjectAction {
+public class NewEmptySampleAction extends AbstractObjectAction {
 	private static final long serialVersionUID = 3370112393848013976L;
 
 	public NewEmptySampleAction(JComponent c, GUIObject p) {
@@ -43,11 +43,10 @@ public class NewEmptySampleAction extends ObjectAction {
 		putValue(Action.NAME, "Empty Sample");
 		putValue(Action.SHORT_DESCRIPTION, "Create a new empty Sample");
 		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_S);
-		putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_S,
-				KeyEvent.ALT_DOWN_MASK));
+		putValue(Action.ACCELERATOR_KEY,
+				KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.ALT_DOWN_MASK));
 	}
 
-	
 	public Object call() {
 		Sample s = SampleFactory.emptySample();
 		if (getCoreObject() != null && getCoreObject() instanceof HasSampleList) {

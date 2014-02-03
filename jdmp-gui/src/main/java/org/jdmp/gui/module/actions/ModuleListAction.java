@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -27,9 +27,9 @@ import javax.swing.JComponent;
 
 import org.jdmp.core.module.HasModuleList;
 import org.ujmp.core.interfaces.GUIObject;
-import org.ujmp.gui.actions.ObjectAction;
+import org.ujmp.gui.actions.AbstractObjectAction;
 
-public abstract class ModuleListAction extends ObjectAction {
+public abstract class ModuleListAction extends AbstractObjectAction {
 
 	public ModuleListAction(JComponent c, HasModuleList iModules) {
 		super(c, (GUIObject) iModules);

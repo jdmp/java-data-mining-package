@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -49,7 +49,6 @@ import javax.swing.event.TableModelListener;
 
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.interfaces.HasToolTip;
 import org.ujmp.gui.MatrixGUIObject;
 import org.ujmp.gui.frame.MatrixFrame;
@@ -77,7 +76,6 @@ public class MatrixListPanel extends JPanel implements MouseListener, ListSelect
 		jTable = new JTable(dataModel) {
 			private static final long serialVersionUID = -1349144990029853301L;
 
-			
 			public String getToolTipText(MouseEvent event) {
 				int row = rowAtPoint(event.getPoint());
 				if (row < jTable.getRowCount()) {
@@ -158,14 +156,14 @@ public class MatrixListPanel extends JPanel implements MouseListener, ListSelect
 		}
 	}
 
-	public void mouseClickedOnObject(MouseEvent e) throws MatrixException {
+	public void mouseClickedOnObject(MouseEvent e) {
 		switch (e.getButton()) {
 		case MouseEvent.BUTTON1:
 			if (e.getClickCount() == 2) {
 				int row = jTable.rowAtPoint(e.getPoint());
 				jTable.setRowSelectionInterval(row, row);
-				MatrixGUIObject m = (MatrixGUIObject) ((Matrix) dataModel.getValueAt(jTable
-						.getSelectedRow(), 0)).getGUIObject();
+				MatrixGUIObject m = (MatrixGUIObject) ((Matrix) dataModel.getValueAt(
+						jTable.getSelectedRow(), 0)).getGUIObject();
 				MatrixFrame mf = new MatrixFrame(m);
 				mf.setVisible(true);
 			}
@@ -175,8 +173,8 @@ public class MatrixListPanel extends JPanel implements MouseListener, ListSelect
 		case MouseEvent.BUTTON3:
 			int row = jTable.rowAtPoint(e.getPoint());
 			jTable.setRowSelectionInterval(row, row);
-			MatrixGUIObject m = (MatrixGUIObject) ((Matrix) dataModel.getValueAt(jTable
-					.getSelectedRow(), 0));
+			MatrixGUIObject m = (MatrixGUIObject) ((Matrix) dataModel.getValueAt(
+					jTable.getSelectedRow(), 0));
 			JPopupMenu popup = new JPopupMenu();
 
 			if (variable instanceof Variable) {
@@ -308,7 +306,6 @@ public class MatrixListPanel extends JPanel implements MouseListener, ListSelect
 		updateTitle();
 	}
 
-	
 	public TitledBorder getBorder() {
 		return (TitledBorder) super.getBorder();
 	}

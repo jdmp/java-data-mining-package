@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -84,7 +84,6 @@ public abstract class AbstractListPanel extends JPanel implements MouseListener,
 		jTable = new JTable(dataModel) {
 			private static final long serialVersionUID = -1349144990029853301L;
 
-			
 			public String getToolTipText(MouseEvent event) {
 				try {
 					int row = rowAtPoint(event.getPoint());
@@ -121,7 +120,6 @@ public abstract class AbstractListPanel extends JPanel implements MouseListener,
 
 	}
 
-	
 	public TitledBorder getBorder() {
 		return (TitledBorder) super.getBorder();
 	}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -26,9 +26,9 @@ package org.jdmp.gui.dataset.actions;
 import javax.swing.JComponent;
 
 import org.jdmp.gui.dataset.DataSetGUIObject;
-import org.ujmp.gui.actions.ObjectAction;
+import org.ujmp.gui.actions.AbstractObjectAction;
 
-public abstract class DataSetAction extends ObjectAction {
+public abstract class DataSetAction extends AbstractObjectAction {
 	private static final long serialVersionUID = 1132725138991245451L;
 
 	public DataSetAction(JComponent c, DataSetGUIObject ds) {

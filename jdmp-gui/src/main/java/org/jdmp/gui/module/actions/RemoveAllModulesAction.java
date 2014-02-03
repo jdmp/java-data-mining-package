@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -40,11 +40,10 @@ public class RemoveAllModulesAction extends ModuleListAction {
 		putValue(Action.NAME, "Delete all Modules");
 		putValue(Action.SHORT_DESCRIPTION, "Delete all Modules contained in this objects");
 		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_D);
-		putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_C,
-				InputEvent.ALT_DOWN_MASK));
+		putValue(Action.ACCELERATOR_KEY,
+				KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.ALT_DOWN_MASK));
 	}
 
-	
 	public Object call() {
 		getIModules().getModules().clear();
 		return null;

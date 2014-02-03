@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -62,7 +62,7 @@ public class DataSetGUIObject extends AbstractGUIObject {
 	public void setLabel(String label) {
 		dataSet.setLabel(label);
 	}
-	
+
 	public Object getLabelObject() {
 		return dataSet.getLabelObject();
 	}
@@ -79,12 +79,10 @@ public class DataSetGUIObject extends AbstractGUIObject {
 		dataSet.setDescription(description);
 	}
 
-	
 	public String toString() {
 		return dataSet.toString();
 	}
 
-	
 	public JFrame getFrame() {
 		if (frame == null) {
 			frame = new DataSetFrame(this);
@@ -92,7 +90,6 @@ public class DataSetGUIObject extends AbstractGUIObject {
 		return frame;
 	}
 
-	
 	public JPanel getPanel() {
 		if (panel == null) {
 			panel = new DataSetPanel(this);

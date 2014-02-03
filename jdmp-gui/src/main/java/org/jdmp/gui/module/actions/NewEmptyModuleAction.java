@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -33,9 +33,9 @@ import org.jdmp.core.module.HasModuleList;
 import org.jdmp.core.module.Module;
 import org.jdmp.core.module.ModuleFactory;
 import org.ujmp.core.interfaces.GUIObject;
-import org.ujmp.gui.actions.ObjectAction;
+import org.ujmp.gui.actions.AbstractObjectAction;
 
-public class NewEmptyModuleAction extends ObjectAction {
+public class NewEmptyModuleAction extends AbstractObjectAction {
 	private static final long serialVersionUID = -7138267828869404341L;
 
 	public NewEmptyModuleAction(JComponent c, GUIObject o) {
@@ -43,11 +43,10 @@ public class NewEmptyModuleAction extends ObjectAction {
 		putValue(Action.NAME, "Empty Module");
 		putValue(Action.SHORT_DESCRIPTION, "Create a new Module");
 		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_M);
-		putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_M,
-				KeyEvent.ALT_DOWN_MASK));
+		putValue(Action.ACCELERATOR_KEY,
+				KeyStroke.getKeyStroke(KeyEvent.VK_M, KeyEvent.ALT_DOWN_MASK));
 	}
 
-	
 	public Object call() {
 		Module m = ModuleFactory.emptyModule();
 		if (getCoreObject() instanceof HasModuleList) {

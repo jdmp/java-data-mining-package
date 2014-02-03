@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -33,9 +33,9 @@ import org.jdmp.core.variable.HasVariableList;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.interfaces.GUIObject;
-import org.ujmp.gui.actions.ObjectAction;
+import org.ujmp.gui.actions.AbstractObjectAction;
 
-public class NewEmptyVariableAction extends ObjectAction {
+public class NewEmptyVariableAction extends AbstractObjectAction {
 	private static final long serialVersionUID = 153544541533260702L;
 
 	public NewEmptyVariableAction(JComponent c, GUIObject i) {
@@ -43,11 +43,10 @@ public class NewEmptyVariableAction extends ObjectAction {
 		putValue(Action.NAME, "Empty Variable");
 		putValue(Action.SHORT_DESCRIPTION, "Create a new empty Variable");
 		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_V);
-		putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_V,
-				KeyEvent.ALT_DOWN_MASK));
+		putValue(Action.ACCELERATOR_KEY,
+				KeyStroke.getKeyStroke(KeyEvent.VK_V, KeyEvent.ALT_DOWN_MASK));
 	}
 
-	
 	public Object call() {
 		Variable v = VariableFactory.emptyVariable();
 		if (getCoreObject() instanceof HasVariableList) {

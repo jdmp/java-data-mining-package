@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -34,7 +34,6 @@ import javax.swing.KeyStroke;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.gui.dataset.DataSetGUIObject;
-import org.ujmp.core.exceptions.MatrixException;
 
 public class HenonDataSetAction extends DataSetAction {
 	private static final long serialVersionUID = 3110361907469109630L;
@@ -44,12 +43,11 @@ public class HenonDataSetAction extends DataSetAction {
 		putValue(Action.NAME, "Henon DataSet");
 		putValue(Action.SHORT_DESCRIPTION, "Creates a demo DataSet with using a Henon map");
 		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_H);
-		putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_H,
-				InputEvent.ALT_DOWN_MASK));
+		putValue(Action.ACCELERATOR_KEY,
+				KeyStroke.getKeyStroke(KeyEvent.VK_H, InputEvent.ALT_DOWN_MASK));
 	}
 
-	
-	public Object call() throws MatrixException {
+	public Object call() {
 		int sampleCount = -1;
 		while (sampleCount <= 0) {
 			String s = JOptionPane.showInputDialog(getComponent(),

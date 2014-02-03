@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -57,22 +57,18 @@ public class IndexPanel extends JPanel implements KeyListener, ActionListener {
 		add(button);
 	}
 
-	
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			actionPerformed(null);
 		}
 	}
 
-	
 	public void keyReleased(KeyEvent e) {
 	}
 
-	
 	public void keyTyped(KeyEvent e) {
 	}
 
-	
 	public void actionPerformed(ActionEvent e) {
 		String s = query.getText();
 		if (s != null) {

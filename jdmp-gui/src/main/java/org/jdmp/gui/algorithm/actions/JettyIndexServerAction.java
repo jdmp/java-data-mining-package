@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -32,9 +32,9 @@ import javax.swing.JOptionPane;
 import org.jdmp.core.algorithm.index.Index;
 import org.jdmp.core.plugin.JettyPlugin;
 import org.ujmp.core.interfaces.GUIObject;
-import org.ujmp.gui.actions.ObjectAction;
+import org.ujmp.gui.actions.AbstractObjectAction;
 
-public class JettyIndexServerAction extends ObjectAction {
+public class JettyIndexServerAction extends AbstractObjectAction {
 	private static final long serialVersionUID = 8017962132766218927L;
 
 	public JettyIndexServerAction(JComponent c, GUIObject o) {
@@ -48,7 +48,6 @@ public class JettyIndexServerAction extends ObjectAction {
 		}
 	}
 
-	
 	public Object call() {
 		try {
 			int port = 0;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -31,9 +31,9 @@ import javax.swing.JComponent;
 import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.dataset.ClassificationDataSet;
 import org.ujmp.core.interfaces.GUIObject;
-import org.ujmp.gui.actions.ObjectAction;
+import org.ujmp.gui.actions.AbstractObjectAction;
 
-public class ClassifyLibLinearAction extends ObjectAction {
+public class ClassifyLibLinearAction extends AbstractObjectAction {
 	private static final long serialVersionUID = 8012930523004767966L;
 
 	public ClassifyLibLinearAction(JComponent c, GUIObject i) {
@@ -43,7 +43,6 @@ public class ClassifyLibLinearAction extends ObjectAction {
 		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_L);
 	}
 
-	
 	public Object call() {
 		try {
 			Classifier c = (Classifier) Class.forName("org.jdmp.liblinear.LibLinearClassifier")

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -32,9 +32,9 @@ import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.algorithm.index.Index;
 import org.jdmp.core.plugin.LucenePlugin;
 import org.ujmp.core.interfaces.GUIObject;
-import org.ujmp.gui.actions.ObjectAction;
+import org.ujmp.gui.actions.AbstractObjectAction;
 
-public class CreateLuceneIndexAction extends ObjectAction {
+public class CreateLuceneIndexAction extends AbstractObjectAction {
 	private static final long serialVersionUID = -5523870732468411037L;
 
 	public CreateLuceneIndexAction(JComponent c, GUIObject o) {
@@ -48,7 +48,6 @@ public class CreateLuceneIndexAction extends ObjectAction {
 		}
 	}
 
-	
 	public Object call() {
 		try {
 			Class<?> c = Class.forName("org.jdmp.lucene.LuceneIndex");

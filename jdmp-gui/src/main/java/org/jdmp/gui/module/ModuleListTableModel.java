@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -60,7 +60,6 @@ public class ModuleListTableModel extends AbstractTableModel implements ListData
 		return 6;
 	}
 
-	
 	public String getColumnName(int columnIndex) {
 		switch (columnIndex) {
 		case IDCOLUMN:
@@ -81,7 +80,6 @@ public class ModuleListTableModel extends AbstractTableModel implements ListData
 		}
 	}
 
-	
 	public Class<?> getColumnClass(int columnIndex) {
 		return Module.class;
 	}
@@ -90,17 +88,14 @@ public class ModuleListTableModel extends AbstractTableModel implements ListData
 		return iModules.getModules().getElementAt(rowIndex);
 	}
 
-	
 	public void contentsChanged(ListDataEvent e) {
 		fireTableRowsUpdated(e.getIndex0(), e.getIndex1());
 	}
 
-	
 	public void intervalAdded(ListDataEvent e) {
 		fireTableRowsInserted(e.getIndex0(), e.getIndex1());
 	}
 
-	
 	public void intervalRemoved(ListDataEvent e) {
 		fireTableRowsDeleted(e.getIndex0(), e.getIndex1());
 	}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -42,7 +42,6 @@ public class AppendMatrixAction extends ModuleAction {
 		putValue(Action.SHORT_DESCRIPTION, "Sets the Matrix to a specified value");
 	}
 
-	
 	public Object call() {
 		// if (getModule() != null) {
 		// getModule().appendMatrixForVariableReference(reference, matrix);

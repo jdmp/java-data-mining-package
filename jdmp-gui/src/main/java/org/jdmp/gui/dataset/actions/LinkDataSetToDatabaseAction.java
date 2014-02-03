@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -32,11 +32,11 @@ import javax.swing.JOptionPane;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.core.dataset.HasDataSetList;
-import org.ujmp.core.enums.DB;
+import org.ujmp.core.enums.DBType;
 import org.ujmp.core.interfaces.GUIObject;
-import org.ujmp.gui.actions.ObjectAction;
+import org.ujmp.gui.actions.AbstractObjectAction;
 
-public class LinkDataSetToDatabaseAction extends ObjectAction {
+public class LinkDataSetToDatabaseAction extends AbstractObjectAction {
 	private static final long serialVersionUID = 43057699462223292L;
 
 	public LinkDataSetToDatabaseAction(JComponent c, GUIObject m) {
@@ -46,12 +46,11 @@ public class LinkDataSetToDatabaseAction extends ObjectAction {
 		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_D);
 	}
 
-	
 	public Object call() {
 		try {
-			DB type = DB.values()[JOptionPane.showOptionDialog(getComponent(),
+			DBType type = DBType.values()[JOptionPane.showOptionDialog(getComponent(),
 					"Select database type", "Link DataSet", JOptionPane.OK_OPTION,
-					JOptionPane.QUESTION_MESSAGE, null, DB.values(), DB.MySQL)];
+					JOptionPane.QUESTION_MESSAGE, null, DBType.values(), DBType.MySQL)];
 
 			String host = null;
 			while (host == null) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -33,7 +33,6 @@ import javax.swing.KeyStroke;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.gui.dataset.DataSetGUIObject;
-import org.ujmp.core.exceptions.MatrixException;
 
 public class AnimalDataSetAction extends DataSetAction {
 	private static final long serialVersionUID = 6821548758392591613L;
@@ -43,12 +42,11 @@ public class AnimalDataSetAction extends DataSetAction {
 		putValue(Action.NAME, "Animal DataSet");
 		putValue(Action.SHORT_DESCRIPTION, "Creates a demo DataSet with animals");
 		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_A);
-		putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_A,
-				InputEvent.ALT_DOWN_MASK));
+		putValue(Action.ACCELERATOR_KEY,
+				KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.ALT_DOWN_MASK));
 	}
 
-	
-	public Object call() throws MatrixException {
+	public Object call() {
 		DataSet animals = DataSetFactory.ANIMALS();
 		animals.showGUI();
 		return animals;
