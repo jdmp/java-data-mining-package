@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -26,7 +26,6 @@ package org.jdmp.core.variable;
 import java.lang.reflect.Constructor;
 
 import org.ujmp.core.Matrix;
-import org.ujmp.core.exceptions.MatrixException;
 
 public abstract class VariableFactory {
 
@@ -46,7 +45,7 @@ public abstract class VariableFactory {
 			Constructor<?> con = c.getConstructor(String.class);
 			return (Variable) con.newInstance(label);
 		} catch (Exception e) {
-			throw new MatrixException(e);
+			throw new RuntimeException(e);
 		}
 	}
 
