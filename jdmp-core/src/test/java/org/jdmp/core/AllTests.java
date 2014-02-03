@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -27,7 +27,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses( { TestScript.class, TestNaiveBayesClassifier.class, TestMLP.class,
+@Suite.SuiteClasses({ TestScript.class, TestNaiveBayesClassifier.class, TestMLP.class,
 		TestLinearRegression.class, TestRandomClassifier.class, TestConstantClassifier.class,
 		TestScript.class })
 public class AllTests {
