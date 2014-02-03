@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -36,9 +36,9 @@ import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.core.dataset.HasDataSetList;
 import org.ujmp.core.enums.FileFormat;
 import org.ujmp.core.interfaces.GUIObject;
-import org.ujmp.gui.actions.ObjectAction;
+import org.ujmp.gui.actions.AbstractObjectAction;
 
-public class ImportDataSetFromFileAction extends ObjectAction {
+public class ImportDataSetFromFileAction extends AbstractObjectAction {
 	private static final long serialVersionUID = -4729154102502117008L;
 
 	public ImportDataSetFromFileAction(JComponent c, GUIObject m) {
@@ -48,7 +48,6 @@ public class ImportDataSetFromFileAction extends ObjectAction {
 		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_F);
 	}
 
-	
 	public Object call() {
 		try {
 			File file = null;

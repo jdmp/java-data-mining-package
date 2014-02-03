@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -23,13 +23,12 @@
 
 package org.jdmp.gui.variable;
 
-import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.gui.frame.AbstractFrame;
 
 public class VariableFrame extends AbstractFrame {
 	private static final long serialVersionUID = -7217906612334653535L;
 
-	public VariableFrame(VariableGUIObject v) throws MatrixException {
+	public VariableFrame(VariableGUIObject v) {
 		super(v, new VariablePanel(v));
 		setJMenuBar(new VariableMenuBar(null, v));
 	}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -34,7 +34,6 @@ import javax.swing.tree.TreeModel;
 
 import org.jdmp.gui.matrix.MatrixListPanel;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.util.GnuPlot;
 import org.ujmp.core.util.Matlab;
 import org.ujmp.core.util.Octave;
@@ -43,10 +42,9 @@ import org.ujmp.gui.MatrixGUIObject;
 import org.ujmp.gui.panels.AbstractPanel;
 import org.ujmp.gui.panels.BufferedPanel;
 import org.ujmp.gui.panels.GnuPlotPanel;
-import org.ujmp.gui.panels.GraphPanel;
 import org.ujmp.gui.panels.MatlabPanel;
 import org.ujmp.gui.panels.MatrixEditorPanel;
-import org.ujmp.gui.panels.MatrixPaintPanel;
+import org.ujmp.gui.panels.MatrixHeatmapPanel;
 import org.ujmp.gui.panels.MatrixTreePanel;
 import org.ujmp.gui.panels.OctavePanel;
 import org.ujmp.gui.panels.RPanel;
@@ -55,7 +53,7 @@ import org.ujmp.gui.plot.MatrixPlot;
 public class VariablePanel extends AbstractPanel {
 	private static final long serialVersionUID = -4809155917354071285L;
 
-	public VariablePanel(VariableGUIObject v) throws MatrixException {
+	public VariablePanel(VariableGUIObject v) {
 		super(v);
 
 		MatrixGUIObject m = (MatrixGUIObject) v.getCoreObject().getAsMatrix().getGUIObject();
@@ -67,7 +65,7 @@ public class VariablePanel extends AbstractPanel {
 		JTabbedPane tabbedPane = new JTabbedPane();
 		tabbedPane.setMinimumSize(new Dimension(10, 10));
 
-		tabbedPane.add("2D Visualization", new MatrixPaintPanel(m, false));
+		tabbedPane.add("2D Visualization", new MatrixHeatmapPanel(m, false));
 
 		if (false) {
 			try {
@@ -83,7 +81,8 @@ public class VariablePanel extends AbstractPanel {
 
 		try {
 			Class.forName("org.ujmp.jung.MatrixGraphPanel");
-			tabbedPane.add("Graph", new GraphPanel(m.getMatrix()));
+			// tabbedPane.add("Graph", new
+			// JungVisualizationViewer(m.getMatrix()));
 		} catch (Throwable e) {
 		}
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -40,7 +40,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.TableCellRenderer;
 
 import org.jdmp.core.variable.Variable;
-import org.ujmp.gui.renderer.MatrixRenderer;
+import org.ujmp.gui.renderer.MatrixHeatmapRenderer;
 import org.ujmp.gui.util.UIDefaults;
 
 public class VariableListTableCellRenderer extends JPanel implements TableCellRenderer {
@@ -54,7 +54,7 @@ public class VariableListTableCellRenderer extends JPanel implements TableCellRe
 
 	private List variableList = null;
 
-	private final MatrixRenderer matrixRenderer = new MatrixRenderer();
+	private final MatrixHeatmapRenderer matrixRenderer = new MatrixHeatmapRenderer();
 
 	private static int PADDINGX = UIManager.getInt("Table.paddingX");
 
@@ -132,7 +132,6 @@ public class VariableListTableCellRenderer extends JPanel implements TableCellRe
 		return this;
 	}
 
-	
 	public void paint(Graphics g) {
 		super.paint(g);
 		if (variableList == null) {
@@ -164,8 +163,8 @@ public class VariableListTableCellRenderer extends JPanel implements TableCellRe
 		for (Object o : variableList) {
 			if (o != null && o instanceof Variable) {
 				Variable v = (Variable) o;
-				MatrixRenderer.paintMatrix(g, v.getMatrix(), componentWidth, height + PADDINGY
-						+ PADDINGY);
+				MatrixHeatmapRenderer.paintMatrix(g, v.getMatrix(), componentWidth, height
+						+ PADDINGY + PADDINGY);
 				g.translate(componentWidth, 0);
 			}
 		}

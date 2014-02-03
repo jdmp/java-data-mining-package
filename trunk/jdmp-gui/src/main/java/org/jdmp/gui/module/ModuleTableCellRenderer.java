@@ -1,14 +1,11 @@
 /*
- * Copyright (C) 2008-2010 Holger Aimport java.awt.Component;
-
-import javax.swing.JLabel;
-import javax.swing.JTable;
-import javax.swing.UIManager;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableCellRenderer;
-
-import org.jdmp.core.module.Module;
-ree software; you can redistribute it and/or modify
+ * Copyright (C) 2008-2014 by Holger Arndt
+ *
+ * This file is part of the Java Data Mining Package (JDMP).
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership and licensing.
+ *
+ * JDMP is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
  * published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.

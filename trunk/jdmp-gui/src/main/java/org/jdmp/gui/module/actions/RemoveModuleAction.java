@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -50,7 +50,6 @@ public class RemoveModuleAction extends ModuleListAction {
 		putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_R, 0));
 	}
 
-	
 	public Object call() {
 		if (module != null) {
 			getIModules().getModules().remove(module);

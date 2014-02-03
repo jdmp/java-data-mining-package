@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -33,9 +33,9 @@ import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.core.dataset.HasDataSetList;
 import org.ujmp.core.interfaces.GUIObject;
-import org.ujmp.gui.actions.ObjectAction;
+import org.ujmp.gui.actions.AbstractObjectAction;
 
-public class NewEmptyDataSetAction extends ObjectAction {
+public class NewEmptyDataSetAction extends AbstractObjectAction {
 	private static final long serialVersionUID = 8692069148375302589L;
 
 	public NewEmptyDataSetAction(JComponent c, GUIObject i) {
@@ -43,11 +43,10 @@ public class NewEmptyDataSetAction extends ObjectAction {
 		putValue(Action.NAME, "Empty DataSet");
 		putValue(Action.SHORT_DESCRIPTION, "Create a new empty DataSet");
 		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_D);
-		putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_D,
-				KeyEvent.ALT_DOWN_MASK));
+		putValue(Action.ACCELERATOR_KEY,
+				KeyStroke.getKeyStroke(KeyEvent.VK_D, KeyEvent.ALT_DOWN_MASK));
 	}
 
-	
 	public Object call() {
 		DataSet ds = DataSetFactory.emptyDataSet();
 		if (getCoreObject() instanceof HasDataSetList) {

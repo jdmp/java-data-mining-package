@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -58,13 +58,11 @@ public class SampleListTableModel extends AbstractTableModel implements ListData
 		return Math.max(1, keys.size());
 	}
 
-	
 	public String getColumnName(int columnIndex) {
 		String s = columnMap.get(columnIndex);
 		return s == null ? "unknown" : s;
 	}
 
-	
 	public Class<?> getColumnClass(int columnIndex) {
 		return Sample.class;
 	}
@@ -83,7 +81,6 @@ public class SampleListTableModel extends AbstractTableModel implements ListData
 		return s;
 	}
 
-	
 	public void contentsChanged(ListDataEvent e) {
 		if (e.getIndex0() < 0 || e.getIndex1() < 0) {
 			fireTableDataChanged();
@@ -97,7 +94,6 @@ public class SampleListTableModel extends AbstractTableModel implements ListData
 		}
 	}
 
-	
 	public void intervalAdded(ListDataEvent e) {
 		try {
 			fireTableRowsInserted(e.getIndex0(), e.getIndex1());
@@ -107,7 +103,6 @@ public class SampleListTableModel extends AbstractTableModel implements ListData
 		}
 	}
 
-	
 	public void intervalRemoved(ListDataEvent e) {
 		try {
 			fireTableRowsDeleted(e.getIndex0(), e.getIndex1());

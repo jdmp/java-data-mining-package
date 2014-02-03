@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -32,9 +32,9 @@ import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.algorithm.classification.RandomClassifier;
 import org.jdmp.core.dataset.ClassificationDataSet;
 import org.ujmp.core.interfaces.GUIObject;
-import org.ujmp.gui.actions.ObjectAction;
+import org.ujmp.gui.actions.AbstractObjectAction;
 
-public class ClassifyRandomAction extends ObjectAction {
+public class ClassifyRandomAction extends AbstractObjectAction {
 	private static final long serialVersionUID = 9045433278361398635L;
 
 	public ClassifyRandomAction(JComponent c, GUIObject i) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -42,11 +42,10 @@ public class FillWithValueAction extends VariableAction {
 		putValue(Action.NAME, "Fill With Value...");
 		putValue(Action.SHORT_DESCRIPTION, "Fills all values with specified value");
 		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_V);
-		putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_V,
-				InputEvent.ALT_DOWN_MASK));
+		putValue(Action.ACCELERATOR_KEY,
+				KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.ALT_DOWN_MASK));
 	}
 
-	
 	public Object call() {
 		double value = 0;
 		String s = JOptionPane.showInputDialog("Enter value:");

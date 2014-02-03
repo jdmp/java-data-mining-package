@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -31,7 +31,6 @@ import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
 import org.jdmp.gui.variable.VariableGUIObject;
-import org.ujmp.core.exceptions.MatrixException;
 
 public class DivideAction extends VariableAction {
 	private static final long serialVersionUID = -3064208499759728589L;
@@ -41,12 +40,11 @@ public class DivideAction extends VariableAction {
 		putValue(Action.NAME, "Divide...");
 		putValue(Action.SHORT_DESCRIPTION, "Divide all values in this variable");
 		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_D);
-		putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_D,
-				InputEvent.ALT_DOWN_MASK));
+		putValue(Action.ACCELERATOR_KEY,
+				KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.ALT_DOWN_MASK));
 	}
 
-	
-	public Object call() throws MatrixException {
+	public Object call() {
 		getVariable().getCoreObject().addMatrix(
 				getVariable().getCoreObject().getMatrix().divide(2.0));
 		return null;
