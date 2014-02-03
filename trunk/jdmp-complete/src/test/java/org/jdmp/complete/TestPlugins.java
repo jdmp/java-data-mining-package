@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -41,25 +41,15 @@ public class TestPlugins {
 
 			// SST, JDBC, PDFBox, jexcelapi and Hadoop require Java 1.6, they
 			// cannot be tested with 1.5
-			if ("ujmp-sst".equals(name)
-					&& "1.5".equals(System
-							.getProperty("java.specification.version"))) {
+			if ("ujmp-sst".equals(name) && "1.5".equals(System.getProperty("java.specification.version"))) {
 				assertNotSame(name, "ok", status);
-			} else if ("ujmp-hadoop".equals(name)
-					&& "1.5".equals(System
-							.getProperty("java.specification.version"))) {
+			} else if ("ujmp-hadoop".equals(name) && "1.5".equals(System.getProperty("java.specification.version"))) {
 				assertNotSame(name, "ok", status);
-			} else if ("ujmp-jdbc".equals(name)
-					&& "1.5".equals(System
-							.getProperty("java.specification.version"))) {
+			} else if ("ujmp-jdbc".equals(name) && "1.5".equals(System.getProperty("java.specification.version"))) {
 				assertNotSame(name, "ok", status);
-			} else if ("ujmp-jexcelapi".equals(name)
-					&& "1.5".equals(System
-							.getProperty("java.specification.version"))) {
+			} else if ("ujmp-jexcelapi".equals(name) && "1.5".equals(System.getProperty("java.specification.version"))) {
 				assertNotSame(name, "ok", status);
-			} else if ("ujmp-pdfbox".equals(name)
-					&& "1.5".equals(System
-							.getProperty("java.specification.version"))) {
+			} else if ("ujmp-pdfbox".equals(name) && "1.5".equals(System.getProperty("java.specification.version"))) {
 				assertNotSame(name, "ok", status);
 			} else if ("ujmp-complete".equals(name)) {
 				// not needed
