@@ -2,37 +2,29 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-import org.jdmp.core.script.jdmp.analysis.*;
+import org.jdmp.core.script.jdmp.analysis.Analysis;
 
 @SuppressWarnings("nls")
-public final class TRBracket extends Token
-{
-    public TRBracket()
-    {
-        super.setText("]");
-    }
+public final class TRBracket extends Token {
+	public TRBracket() {
+		super.setText("]");
+	}
 
-    public TRBracket(int line, int pos)
-    {
-        super.setText("]");
-        setLine(line);
-        setPos(pos);
-    }
+	public TRBracket(int line, int pos) {
+		super.setText("]");
+		setLine(line);
+		setPos(pos);
+	}
 
-    
-    public Object clone()
-    {
-      return new TRBracket(getLine(), getPos());
-    }
+	public Object clone() {
+		return new TRBracket(getLine(), getPos());
+	}
 
-    public void apply(Switch sw)
-    {
-        ((Analysis) sw).caseTRBracket(this);
-    }
+	public void apply(Switch sw) {
+		((Analysis) sw).caseTRBracket(this);
+	}
 
-    
-    public void setText(@SuppressWarnings("unused") String text)
-    {
-        throw new RuntimeException("Cannot change TRBracket text.");
-    }
+	public void setText(@SuppressWarnings("unused") String text) {
+		throw new RuntimeException("Cannot change TRBracket text.");
+	}
 }

@@ -2,37 +2,29 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-import org.jdmp.core.script.jdmp.analysis.*;
+import org.jdmp.core.script.jdmp.analysis.Analysis;
 
 @SuppressWarnings("nls")
-public final class TTrue extends Token
-{
-    public TTrue()
-    {
-        super.setText("true");
-    }
+public final class TTrue extends Token {
+	public TTrue() {
+		super.setText("true");
+	}
 
-    public TTrue(int line, int pos)
-    {
-        super.setText("true");
-        setLine(line);
-        setPos(pos);
-    }
+	public TTrue(int line, int pos) {
+		super.setText("true");
+		setLine(line);
+		setPos(pos);
+	}
 
-    
-    public Object clone()
-    {
-      return new TTrue(getLine(), getPos());
-    }
+	public Object clone() {
+		return new TTrue(getLine(), getPos());
+	}
 
-    public void apply(Switch sw)
-    {
-        ((Analysis) sw).caseTTrue(this);
-    }
+	public void apply(Switch sw) {
+		((Analysis) sw).caseTTrue(this);
+	}
 
-    
-    public void setText(@SuppressWarnings("unused") String text)
-    {
-        throw new RuntimeException("Cannot change TTrue text.");
-    }
+	public void setText(@SuppressWarnings("unused") String text) {
+		throw new RuntimeException("Cannot change TTrue text.");
+	}
 }

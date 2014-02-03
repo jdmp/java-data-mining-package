@@ -2,179 +2,140 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-import org.jdmp.core.script.jdmp.analysis.*;
+import org.jdmp.core.script.jdmp.analysis.Analysis;
 
 @SuppressWarnings("nls")
-public final class APlusLevel4 extends PLevel4
-{
-    private PLevel4 _left_;
-    private TPlus _plus_;
-    private PLevel3 _right_;
+public final class APlusLevel4 extends PLevel4 {
+	private PLevel4 _left_;
+	private TPlus _plus_;
+	private PLevel3 _right_;
 
-    public APlusLevel4()
-    {
-        // Constructor
-    }
+	public APlusLevel4() {
+		// Constructor
+	}
 
-    public APlusLevel4(
-        @SuppressWarnings("hiding") PLevel4 _left_,
-        @SuppressWarnings("hiding") TPlus _plus_,
-        @SuppressWarnings("hiding") PLevel3 _right_)
-    {
-        // Constructor
-        setLeft(_left_);
+	public APlusLevel4(@SuppressWarnings("hiding") PLevel4 _left_,
+			@SuppressWarnings("hiding") TPlus _plus_, @SuppressWarnings("hiding") PLevel3 _right_) {
+		// Constructor
+		setLeft(_left_);
 
-        setPlus(_plus_);
+		setPlus(_plus_);
 
-        setRight(_right_);
+		setRight(_right_);
 
-    }
+	}
 
-    
-    public Object clone()
-    {
-        return new APlusLevel4(
-            cloneNode(this._left_),
-            cloneNode(this._plus_),
-            cloneNode(this._right_));
-    }
+	public Object clone() {
+		return new APlusLevel4(cloneNode(this._left_), cloneNode(this._plus_),
+				cloneNode(this._right_));
+	}
 
-    public void apply(Switch sw)
-    {
-        ((Analysis) sw).caseAPlusLevel4(this);
-    }
+	public void apply(Switch sw) {
+		((Analysis) sw).caseAPlusLevel4(this);
+	}
 
-    public PLevel4 getLeft()
-    {
-        return this._left_;
-    }
+	public PLevel4 getLeft() {
+		return this._left_;
+	}
 
-    public void setLeft(PLevel4 node)
-    {
-        if(this._left_ != null)
-        {
-            this._left_.parent(null);
-        }
+	public void setLeft(PLevel4 node) {
+		if (this._left_ != null) {
+			this._left_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._left_ = node;
-    }
+		this._left_ = node;
+	}
 
-    public TPlus getPlus()
-    {
-        return this._plus_;
-    }
+	public TPlus getPlus() {
+		return this._plus_;
+	}
 
-    public void setPlus(TPlus node)
-    {
-        if(this._plus_ != null)
-        {
-            this._plus_.parent(null);
-        }
+	public void setPlus(TPlus node) {
+		if (this._plus_ != null) {
+			this._plus_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._plus_ = node;
-    }
+		this._plus_ = node;
+	}
 
-    public PLevel3 getRight()
-    {
-        return this._right_;
-    }
+	public PLevel3 getRight() {
+		return this._right_;
+	}
 
-    public void setRight(PLevel3 node)
-    {
-        if(this._right_ != null)
-        {
-            this._right_.parent(null);
-        }
+	public void setRight(PLevel3 node) {
+		if (this._right_ != null) {
+			this._right_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._right_ = node;
-    }
+		this._right_ = node;
+	}
 
-    
-    public String toString()
-    {
-        return ""
-            + toString(this._left_)
-            + toString(this._plus_)
-            + toString(this._right_);
-    }
+	public String toString() {
+		return "" + toString(this._left_) + toString(this._plus_) + toString(this._right_);
+	}
 
-    
-    void removeChild(@SuppressWarnings("unused") Node child)
-    {
-        // Remove child
-        if(this._left_ == child)
-        {
-            this._left_ = null;
-            return;
-        }
+	void removeChild(@SuppressWarnings("unused") Node child) {
+		// Remove child
+		if (this._left_ == child) {
+			this._left_ = null;
+			return;
+		}
 
-        if(this._plus_ == child)
-        {
-            this._plus_ = null;
-            return;
-        }
+		if (this._plus_ == child) {
+			this._plus_ = null;
+			return;
+		}
 
-        if(this._right_ == child)
-        {
-            this._right_ = null;
-            return;
-        }
+		if (this._right_ == child) {
+			this._right_ = null;
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 
-    
-    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
-    {
-        // Replace child
-        if(this._left_ == oldChild)
-        {
-            setLeft((PLevel4) newChild);
-            return;
-        }
+	void replaceChild(@SuppressWarnings("unused") Node oldChild,
+			@SuppressWarnings("unused") Node newChild) {
+		// Replace child
+		if (this._left_ == oldChild) {
+			setLeft((PLevel4) newChild);
+			return;
+		}
 
-        if(this._plus_ == oldChild)
-        {
-            setPlus((TPlus) newChild);
-            return;
-        }
+		if (this._plus_ == oldChild) {
+			setPlus((TPlus) newChild);
+			return;
+		}
 
-        if(this._right_ == oldChild)
-        {
-            setRight((PLevel3) newChild);
-            return;
-        }
+		if (this._right_ == oldChild) {
+			setRight((PLevel3) newChild);
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 }

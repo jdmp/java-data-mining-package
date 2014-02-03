@@ -2,37 +2,29 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-import org.jdmp.core.script.jdmp.analysis.*;
+import org.jdmp.core.script.jdmp.analysis.Analysis;
 
 @SuppressWarnings("nls")
-public final class TAnd extends Token
-{
-    public TAnd()
-    {
-        super.setText("&");
-    }
+public final class TAnd extends Token {
+	public TAnd() {
+		super.setText("&");
+	}
 
-    public TAnd(int line, int pos)
-    {
-        super.setText("&");
-        setLine(line);
-        setPos(pos);
-    }
+	public TAnd(int line, int pos) {
+		super.setText("&");
+		setLine(line);
+		setPos(pos);
+	}
 
-    
-    public Object clone()
-    {
-      return new TAnd(getLine(), getPos());
-    }
+	public Object clone() {
+		return new TAnd(getLine(), getPos());
+	}
 
-    public void apply(Switch sw)
-    {
-        ((Analysis) sw).caseTAnd(this);
-    }
+	public void apply(Switch sw) {
+		((Analysis) sw).caseTAnd(this);
+	}
 
-    
-    public void setText(@SuppressWarnings("unused") String text)
-    {
-        throw new RuntimeException("Cannot change TAnd text.");
-    }
+	public void setText(@SuppressWarnings("unused") String text) {
+		throw new RuntimeException("Cannot change TAnd text.");
+	}
 }

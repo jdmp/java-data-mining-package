@@ -2,179 +2,141 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-import org.jdmp.core.script.jdmp.analysis.*;
+import org.jdmp.core.script.jdmp.analysis.Analysis;
 
 @SuppressWarnings("nls")
-public final class AArrayMatrix extends PMatrix
-{
-    private TLBracket _lBracket_;
-    private PArray _array_;
-    private TRBracket _rBracket_;
+public final class AArrayMatrix extends PMatrix {
+	private TLBracket _lBracket_;
+	private PArray _array_;
+	private TRBracket _rBracket_;
 
-    public AArrayMatrix()
-    {
-        // Constructor
-    }
+	public AArrayMatrix() {
+		// Constructor
+	}
 
-    public AArrayMatrix(
-        @SuppressWarnings("hiding") TLBracket _lBracket_,
-        @SuppressWarnings("hiding") PArray _array_,
-        @SuppressWarnings("hiding") TRBracket _rBracket_)
-    {
-        // Constructor
-        setLBracket(_lBracket_);
+	public AArrayMatrix(@SuppressWarnings("hiding") TLBracket _lBracket_,
+			@SuppressWarnings("hiding") PArray _array_,
+			@SuppressWarnings("hiding") TRBracket _rBracket_) {
+		// Constructor
+		setLBracket(_lBracket_);
 
-        setArray(_array_);
+		setArray(_array_);
 
-        setRBracket(_rBracket_);
+		setRBracket(_rBracket_);
 
-    }
+	}
 
-    
-    public Object clone()
-    {
-        return new AArrayMatrix(
-            cloneNode(this._lBracket_),
-            cloneNode(this._array_),
-            cloneNode(this._rBracket_));
-    }
+	public Object clone() {
+		return new AArrayMatrix(cloneNode(this._lBracket_), cloneNode(this._array_),
+				cloneNode(this._rBracket_));
+	}
 
-    public void apply(Switch sw)
-    {
-        ((Analysis) sw).caseAArrayMatrix(this);
-    }
+	public void apply(Switch sw) {
+		((Analysis) sw).caseAArrayMatrix(this);
+	}
 
-    public TLBracket getLBracket()
-    {
-        return this._lBracket_;
-    }
+	public TLBracket getLBracket() {
+		return this._lBracket_;
+	}
 
-    public void setLBracket(TLBracket node)
-    {
-        if(this._lBracket_ != null)
-        {
-            this._lBracket_.parent(null);
-        }
+	public void setLBracket(TLBracket node) {
+		if (this._lBracket_ != null) {
+			this._lBracket_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._lBracket_ = node;
-    }
+		this._lBracket_ = node;
+	}
 
-    public PArray getArray()
-    {
-        return this._array_;
-    }
+	public PArray getArray() {
+		return this._array_;
+	}
 
-    public void setArray(PArray node)
-    {
-        if(this._array_ != null)
-        {
-            this._array_.parent(null);
-        }
+	public void setArray(PArray node) {
+		if (this._array_ != null) {
+			this._array_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._array_ = node;
-    }
+		this._array_ = node;
+	}
 
-    public TRBracket getRBracket()
-    {
-        return this._rBracket_;
-    }
+	public TRBracket getRBracket() {
+		return this._rBracket_;
+	}
 
-    public void setRBracket(TRBracket node)
-    {
-        if(this._rBracket_ != null)
-        {
-            this._rBracket_.parent(null);
-        }
+	public void setRBracket(TRBracket node) {
+		if (this._rBracket_ != null) {
+			this._rBracket_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._rBracket_ = node;
-    }
+		this._rBracket_ = node;
+	}
 
-    
-    public String toString()
-    {
-        return ""
-            + toString(this._lBracket_)
-            + toString(this._array_)
-            + toString(this._rBracket_);
-    }
+	public String toString() {
+		return "" + toString(this._lBracket_) + toString(this._array_) + toString(this._rBracket_);
+	}
 
-    
-    void removeChild(@SuppressWarnings("unused") Node child)
-    {
-        // Remove child
-        if(this._lBracket_ == child)
-        {
-            this._lBracket_ = null;
-            return;
-        }
+	void removeChild(@SuppressWarnings("unused") Node child) {
+		// Remove child
+		if (this._lBracket_ == child) {
+			this._lBracket_ = null;
+			return;
+		}
 
-        if(this._array_ == child)
-        {
-            this._array_ = null;
-            return;
-        }
+		if (this._array_ == child) {
+			this._array_ = null;
+			return;
+		}
 
-        if(this._rBracket_ == child)
-        {
-            this._rBracket_ = null;
-            return;
-        }
+		if (this._rBracket_ == child) {
+			this._rBracket_ = null;
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 
-    
-    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
-    {
-        // Replace child
-        if(this._lBracket_ == oldChild)
-        {
-            setLBracket((TLBracket) newChild);
-            return;
-        }
+	void replaceChild(@SuppressWarnings("unused") Node oldChild,
+			@SuppressWarnings("unused") Node newChild) {
+		// Replace child
+		if (this._lBracket_ == oldChild) {
+			setLBracket((TLBracket) newChild);
+			return;
+		}
 
-        if(this._array_ == oldChild)
-        {
-            setArray((PArray) newChild);
-            return;
-        }
+		if (this._array_ == oldChild) {
+			setArray((PArray) newChild);
+			return;
+		}
 
-        if(this._rBracket_ == oldChild)
-        {
-            setRBracket((TRBracket) newChild);
-            return;
-        }
+		if (this._rBracket_ == oldChild) {
+			setRBracket((TRBracket) newChild);
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 }

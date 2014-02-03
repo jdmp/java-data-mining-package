@@ -2,37 +2,29 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-import org.jdmp.core.script.jdmp.analysis.*;
+import org.jdmp.core.script.jdmp.analysis.Analysis;
 
 @SuppressWarnings("nls")
-public final class TGt extends Token
-{
-    public TGt()
-    {
-        super.setText(">");
-    }
+public final class TGt extends Token {
+	public TGt() {
+		super.setText(">");
+	}
 
-    public TGt(int line, int pos)
-    {
-        super.setText(">");
-        setLine(line);
-        setPos(pos);
-    }
+	public TGt(int line, int pos) {
+		super.setText(">");
+		setLine(line);
+		setPos(pos);
+	}
 
-    
-    public Object clone()
-    {
-      return new TGt(getLine(), getPos());
-    }
+	public Object clone() {
+		return new TGt(getLine(), getPos());
+	}
 
-    public void apply(Switch sw)
-    {
-        ((Analysis) sw).caseTGt(this);
-    }
+	public void apply(Switch sw) {
+		((Analysis) sw).caseTGt(this);
+	}
 
-    
-    public void setText(@SuppressWarnings("unused") String text)
-    {
-        throw new RuntimeException("Cannot change TGt text.");
-    }
+	public void setText(@SuppressWarnings("unused") String text) {
+		throw new RuntimeException("Cannot change TGt text.");
+	}
 }

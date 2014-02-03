@@ -2,93 +2,72 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-import org.jdmp.core.script.jdmp.analysis.*;
+import org.jdmp.core.script.jdmp.analysis.Analysis;
 
 @SuppressWarnings("nls")
-public final class ALevel8Level9 extends PLevel9
-{
-    private PLevel8 _level8_;
+public final class ALevel8Level9 extends PLevel9 {
+	private PLevel8 _level8_;
 
-    public ALevel8Level9()
-    {
-        // Constructor
-    }
+	public ALevel8Level9() {
+		// Constructor
+	}
 
-    public ALevel8Level9(
-        @SuppressWarnings("hiding") PLevel8 _level8_)
-    {
-        // Constructor
-        setLevel8(_level8_);
+	public ALevel8Level9(@SuppressWarnings("hiding") PLevel8 _level8_) {
+		// Constructor
+		setLevel8(_level8_);
 
-    }
+	}
 
-    
-    public Object clone()
-    {
-        return new ALevel8Level9(
-            cloneNode(this._level8_));
-    }
+	public Object clone() {
+		return new ALevel8Level9(cloneNode(this._level8_));
+	}
 
-    public void apply(Switch sw)
-    {
-        ((Analysis) sw).caseALevel8Level9(this);
-    }
+	public void apply(Switch sw) {
+		((Analysis) sw).caseALevel8Level9(this);
+	}
 
-    public PLevel8 getLevel8()
-    {
-        return this._level8_;
-    }
+	public PLevel8 getLevel8() {
+		return this._level8_;
+	}
 
-    public void setLevel8(PLevel8 node)
-    {
-        if(this._level8_ != null)
-        {
-            this._level8_.parent(null);
-        }
+	public void setLevel8(PLevel8 node) {
+		if (this._level8_ != null) {
+			this._level8_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._level8_ = node;
-    }
+		this._level8_ = node;
+	}
 
-    
-    public String toString()
-    {
-        return ""
-            + toString(this._level8_);
-    }
+	public String toString() {
+		return "" + toString(this._level8_);
+	}
 
-    
-    void removeChild(@SuppressWarnings("unused") Node child)
-    {
-        // Remove child
-        if(this._level8_ == child)
-        {
-            this._level8_ = null;
-            return;
-        }
+	void removeChild(@SuppressWarnings("unused") Node child) {
+		// Remove child
+		if (this._level8_ == child) {
+			this._level8_ = null;
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 
-    
-    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
-    {
-        // Replace child
-        if(this._level8_ == oldChild)
-        {
-            setLevel8((PLevel8) newChild);
-            return;
-        }
+	void replaceChild(@SuppressWarnings("unused") Node oldChild,
+			@SuppressWarnings("unused") Node newChild) {
+		// Replace child
+		if (this._level8_ == oldChild) {
+			setLevel8((PLevel8) newChild);
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 }

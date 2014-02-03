@@ -2,31 +2,25 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-import org.jdmp.core.script.jdmp.analysis.*;
+import org.jdmp.core.script.jdmp.analysis.Analysis;
 
 @SuppressWarnings("nls")
-public final class TEndOfLineComment extends Token
-{
-    public TEndOfLineComment(String text)
-    {
-        setText(text);
-    }
+public final class TEndOfLineComment extends Token {
+	public TEndOfLineComment(String text) {
+		setText(text);
+	}
 
-    public TEndOfLineComment(String text, int line, int pos)
-    {
-        setText(text);
-        setLine(line);
-        setPos(pos);
-    }
+	public TEndOfLineComment(String text, int line, int pos) {
+		setText(text);
+		setLine(line);
+		setPos(pos);
+	}
 
-    
-    public Object clone()
-    {
-      return new TEndOfLineComment(getText(), getLine(), getPos());
-    }
+	public Object clone() {
+		return new TEndOfLineComment(getText(), getLine(), getPos());
+	}
 
-    public void apply(Switch sw)
-    {
-        ((Analysis) sw).caseTEndOfLineComment(this);
-    }
+	public void apply(Switch sw) {
+		((Analysis) sw).caseTEndOfLineComment(this);
+	}
 }

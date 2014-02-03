@@ -2,179 +2,141 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-import org.jdmp.core.script.jdmp.analysis.*;
+import org.jdmp.core.script.jdmp.analysis.Analysis;
 
 @SuppressWarnings("nls")
-public final class ADotLdivLevel3 extends PLevel3
-{
-    private PLevel3 _left_;
-    private TDotLdiv _dotLdiv_;
-    private PLevel2 _right_;
+public final class ADotLdivLevel3 extends PLevel3 {
+	private PLevel3 _left_;
+	private TDotLdiv _dotLdiv_;
+	private PLevel2 _right_;
 
-    public ADotLdivLevel3()
-    {
-        // Constructor
-    }
+	public ADotLdivLevel3() {
+		// Constructor
+	}
 
-    public ADotLdivLevel3(
-        @SuppressWarnings("hiding") PLevel3 _left_,
-        @SuppressWarnings("hiding") TDotLdiv _dotLdiv_,
-        @SuppressWarnings("hiding") PLevel2 _right_)
-    {
-        // Constructor
-        setLeft(_left_);
+	public ADotLdivLevel3(@SuppressWarnings("hiding") PLevel3 _left_,
+			@SuppressWarnings("hiding") TDotLdiv _dotLdiv_,
+			@SuppressWarnings("hiding") PLevel2 _right_) {
+		// Constructor
+		setLeft(_left_);
 
-        setDotLdiv(_dotLdiv_);
+		setDotLdiv(_dotLdiv_);
 
-        setRight(_right_);
+		setRight(_right_);
 
-    }
+	}
 
-    
-    public Object clone()
-    {
-        return new ADotLdivLevel3(
-            cloneNode(this._left_),
-            cloneNode(this._dotLdiv_),
-            cloneNode(this._right_));
-    }
+	public Object clone() {
+		return new ADotLdivLevel3(cloneNode(this._left_), cloneNode(this._dotLdiv_),
+				cloneNode(this._right_));
+	}
 
-    public void apply(Switch sw)
-    {
-        ((Analysis) sw).caseADotLdivLevel3(this);
-    }
+	public void apply(Switch sw) {
+		((Analysis) sw).caseADotLdivLevel3(this);
+	}
 
-    public PLevel3 getLeft()
-    {
-        return this._left_;
-    }
+	public PLevel3 getLeft() {
+		return this._left_;
+	}
 
-    public void setLeft(PLevel3 node)
-    {
-        if(this._left_ != null)
-        {
-            this._left_.parent(null);
-        }
+	public void setLeft(PLevel3 node) {
+		if (this._left_ != null) {
+			this._left_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._left_ = node;
-    }
+		this._left_ = node;
+	}
 
-    public TDotLdiv getDotLdiv()
-    {
-        return this._dotLdiv_;
-    }
+	public TDotLdiv getDotLdiv() {
+		return this._dotLdiv_;
+	}
 
-    public void setDotLdiv(TDotLdiv node)
-    {
-        if(this._dotLdiv_ != null)
-        {
-            this._dotLdiv_.parent(null);
-        }
+	public void setDotLdiv(TDotLdiv node) {
+		if (this._dotLdiv_ != null) {
+			this._dotLdiv_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._dotLdiv_ = node;
-    }
+		this._dotLdiv_ = node;
+	}
 
-    public PLevel2 getRight()
-    {
-        return this._right_;
-    }
+	public PLevel2 getRight() {
+		return this._right_;
+	}
 
-    public void setRight(PLevel2 node)
-    {
-        if(this._right_ != null)
-        {
-            this._right_.parent(null);
-        }
+	public void setRight(PLevel2 node) {
+		if (this._right_ != null) {
+			this._right_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._right_ = node;
-    }
+		this._right_ = node;
+	}
 
-    
-    public String toString()
-    {
-        return ""
-            + toString(this._left_)
-            + toString(this._dotLdiv_)
-            + toString(this._right_);
-    }
+	public String toString() {
+		return "" + toString(this._left_) + toString(this._dotLdiv_) + toString(this._right_);
+	}
 
-    
-    void removeChild(@SuppressWarnings("unused") Node child)
-    {
-        // Remove child
-        if(this._left_ == child)
-        {
-            this._left_ = null;
-            return;
-        }
+	void removeChild(@SuppressWarnings("unused") Node child) {
+		// Remove child
+		if (this._left_ == child) {
+			this._left_ = null;
+			return;
+		}
 
-        if(this._dotLdiv_ == child)
-        {
-            this._dotLdiv_ = null;
-            return;
-        }
+		if (this._dotLdiv_ == child) {
+			this._dotLdiv_ = null;
+			return;
+		}
 
-        if(this._right_ == child)
-        {
-            this._right_ = null;
-            return;
-        }
+		if (this._right_ == child) {
+			this._right_ = null;
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 
-    
-    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
-    {
-        // Replace child
-        if(this._left_ == oldChild)
-        {
-            setLeft((PLevel3) newChild);
-            return;
-        }
+	void replaceChild(@SuppressWarnings("unused") Node oldChild,
+			@SuppressWarnings("unused") Node newChild) {
+		// Replace child
+		if (this._left_ == oldChild) {
+			setLeft((PLevel3) newChild);
+			return;
+		}
 
-        if(this._dotLdiv_ == oldChild)
-        {
-            setDotLdiv((TDotLdiv) newChild);
-            return;
-        }
+		if (this._dotLdiv_ == oldChild) {
+			setDotLdiv((TDotLdiv) newChild);
+			return;
+		}
 
-        if(this._right_ == oldChild)
-        {
-            setRight((PLevel2) newChild);
-            return;
-        }
+		if (this._right_ == oldChild) {
+			setRight((PLevel2) newChild);
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 }

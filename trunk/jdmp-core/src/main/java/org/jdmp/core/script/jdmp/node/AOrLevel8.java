@@ -2,179 +2,139 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-import org.jdmp.core.script.jdmp.analysis.*;
+import org.jdmp.core.script.jdmp.analysis.Analysis;
 
 @SuppressWarnings("nls")
-public final class AOrLevel8 extends PLevel8
-{
-    private PLevel8 _left_;
-    private TOr _or_;
-    private PLevel7 _right_;
+public final class AOrLevel8 extends PLevel8 {
+	private PLevel8 _left_;
+	private TOr _or_;
+	private PLevel7 _right_;
 
-    public AOrLevel8()
-    {
-        // Constructor
-    }
+	public AOrLevel8() {
+		// Constructor
+	}
 
-    public AOrLevel8(
-        @SuppressWarnings("hiding") PLevel8 _left_,
-        @SuppressWarnings("hiding") TOr _or_,
-        @SuppressWarnings("hiding") PLevel7 _right_)
-    {
-        // Constructor
-        setLeft(_left_);
+	public AOrLevel8(@SuppressWarnings("hiding") PLevel8 _left_,
+			@SuppressWarnings("hiding") TOr _or_, @SuppressWarnings("hiding") PLevel7 _right_) {
+		// Constructor
+		setLeft(_left_);
 
-        setOr(_or_);
+		setOr(_or_);
 
-        setRight(_right_);
+		setRight(_right_);
 
-    }
+	}
 
-    
-    public Object clone()
-    {
-        return new AOrLevel8(
-            cloneNode(this._left_),
-            cloneNode(this._or_),
-            cloneNode(this._right_));
-    }
+	public Object clone() {
+		return new AOrLevel8(cloneNode(this._left_), cloneNode(this._or_), cloneNode(this._right_));
+	}
 
-    public void apply(Switch sw)
-    {
-        ((Analysis) sw).caseAOrLevel8(this);
-    }
+	public void apply(Switch sw) {
+		((Analysis) sw).caseAOrLevel8(this);
+	}
 
-    public PLevel8 getLeft()
-    {
-        return this._left_;
-    }
+	public PLevel8 getLeft() {
+		return this._left_;
+	}
 
-    public void setLeft(PLevel8 node)
-    {
-        if(this._left_ != null)
-        {
-            this._left_.parent(null);
-        }
+	public void setLeft(PLevel8 node) {
+		if (this._left_ != null) {
+			this._left_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._left_ = node;
-    }
+		this._left_ = node;
+	}
 
-    public TOr getOr()
-    {
-        return this._or_;
-    }
+	public TOr getOr() {
+		return this._or_;
+	}
 
-    public void setOr(TOr node)
-    {
-        if(this._or_ != null)
-        {
-            this._or_.parent(null);
-        }
+	public void setOr(TOr node) {
+		if (this._or_ != null) {
+			this._or_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._or_ = node;
-    }
+		this._or_ = node;
+	}
 
-    public PLevel7 getRight()
-    {
-        return this._right_;
-    }
+	public PLevel7 getRight() {
+		return this._right_;
+	}
 
-    public void setRight(PLevel7 node)
-    {
-        if(this._right_ != null)
-        {
-            this._right_.parent(null);
-        }
+	public void setRight(PLevel7 node) {
+		if (this._right_ != null) {
+			this._right_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._right_ = node;
-    }
+		this._right_ = node;
+	}
 
-    
-    public String toString()
-    {
-        return ""
-            + toString(this._left_)
-            + toString(this._or_)
-            + toString(this._right_);
-    }
+	public String toString() {
+		return "" + toString(this._left_) + toString(this._or_) + toString(this._right_);
+	}
 
-    
-    void removeChild(@SuppressWarnings("unused") Node child)
-    {
-        // Remove child
-        if(this._left_ == child)
-        {
-            this._left_ = null;
-            return;
-        }
+	void removeChild(@SuppressWarnings("unused") Node child) {
+		// Remove child
+		if (this._left_ == child) {
+			this._left_ = null;
+			return;
+		}
 
-        if(this._or_ == child)
-        {
-            this._or_ = null;
-            return;
-        }
+		if (this._or_ == child) {
+			this._or_ = null;
+			return;
+		}
 
-        if(this._right_ == child)
-        {
-            this._right_ = null;
-            return;
-        }
+		if (this._right_ == child) {
+			this._right_ = null;
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 
-    
-    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
-    {
-        // Replace child
-        if(this._left_ == oldChild)
-        {
-            setLeft((PLevel8) newChild);
-            return;
-        }
+	void replaceChild(@SuppressWarnings("unused") Node oldChild,
+			@SuppressWarnings("unused") Node newChild) {
+		// Replace child
+		if (this._left_ == oldChild) {
+			setLeft((PLevel8) newChild);
+			return;
+		}
 
-        if(this._or_ == oldChild)
-        {
-            setOr((TOr) newChild);
-            return;
-        }
+		if (this._or_ == oldChild) {
+			setOr((TOr) newChild);
+			return;
+		}
 
-        if(this._right_ == oldChild)
-        {
-            setRight((PLevel7) newChild);
-            return;
-        }
+		if (this._right_ == oldChild) {
+			setRight((PLevel7) newChild);
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 }

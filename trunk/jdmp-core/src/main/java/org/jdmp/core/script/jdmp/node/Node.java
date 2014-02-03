@@ -2,76 +2,66 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 @SuppressWarnings("nls")
-public abstract class Node implements Switchable, Cloneable
-{
-    private Node parent;
+public abstract class Node implements Switchable, Cloneable {
+	private Node parent;
 
-    
-    public abstract Object clone();
+	public abstract Object clone();
 
-    public Node parent()
-    {
-        return this.parent;
-    }
+	public Node parent() {
+		return this.parent;
+	}
 
-    void parent(@SuppressWarnings("hiding") Node parent)
-    {
-        this.parent = parent;
-    }
+	void parent(@SuppressWarnings("hiding") Node parent) {
+		this.parent = parent;
+	}
 
-    abstract void removeChild(Node child);
-    abstract void replaceChild(Node oldChild, Node newChild);
+	abstract void removeChild(Node child);
 
-    public void replaceBy(Node node)
-    {
-        this.parent.replaceChild(this, node);
-    }
+	abstract void replaceChild(Node oldChild, Node newChild);
 
-    protected String toString(Node node)
-    {
-        if(node != null)
-        {
-            return node.toString();
-        }
+	public void replaceBy(Node node) {
+		this.parent.replaceChild(this, node);
+	}
 
-        return "";
-    }
+	protected String toString(Node node) {
+		if (node != null) {
+			return node.toString();
+		}
 
-    protected String toString(List list)
-    {
-        StringBuffer s = new StringBuffer();
+		return "";
+	}
 
-        for(Iterator i = list.iterator(); i.hasNext();)
-        {
-            s.append(i.next());
-        }
+	protected String toString(List list) {
+		StringBuffer s = new StringBuffer();
 
-        return s.toString();
-    }
+		for (Iterator i = list.iterator(); i.hasNext();) {
+			s.append(i.next());
+		}
 
-    @SuppressWarnings("unchecked")
-    protected <T extends Node> T cloneNode(T node)
-    {
-        if(node != null)
-        {
-            return (T) node.clone();
-        }
+		return s.toString();
+	}
 
-        return null;
-    }
+	@SuppressWarnings("unchecked")
+	protected <T extends Node> T cloneNode(T node) {
+		if (node != null) {
+			return (T) node.clone();
+		}
 
-    protected <T> List<T> cloneList(List<T> list)
-    {
-        List<T> clone = new LinkedList<T>();
+		return null;
+	}
 
-        for(T n : list)
-        {
-            clone.add(n);
-        }
+	protected <T> List<T> cloneList(List<T> list) {
+		List<T> clone = new LinkedList<T>();
 
-        return clone;
-    }
+		for (T n : list) {
+			clone.add(n);
+		}
+
+		return clone;
+	}
 }

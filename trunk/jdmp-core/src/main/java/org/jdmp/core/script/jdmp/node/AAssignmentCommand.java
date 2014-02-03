@@ -2,93 +2,72 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-import org.jdmp.core.script.jdmp.analysis.*;
+import org.jdmp.core.script.jdmp.analysis.Analysis;
 
 @SuppressWarnings("nls")
-public final class AAssignmentCommand extends PCommand
-{
-    private PAssignment _assignment_;
+public final class AAssignmentCommand extends PCommand {
+	private PAssignment _assignment_;
 
-    public AAssignmentCommand()
-    {
-        // Constructor
-    }
+	public AAssignmentCommand() {
+		// Constructor
+	}
 
-    public AAssignmentCommand(
-        @SuppressWarnings("hiding") PAssignment _assignment_)
-    {
-        // Constructor
-        setAssignment(_assignment_);
+	public AAssignmentCommand(@SuppressWarnings("hiding") PAssignment _assignment_) {
+		// Constructor
+		setAssignment(_assignment_);
 
-    }
+	}
 
-    
-    public Object clone()
-    {
-        return new AAssignmentCommand(
-            cloneNode(this._assignment_));
-    }
+	public Object clone() {
+		return new AAssignmentCommand(cloneNode(this._assignment_));
+	}
 
-    public void apply(Switch sw)
-    {
-        ((Analysis) sw).caseAAssignmentCommand(this);
-    }
+	public void apply(Switch sw) {
+		((Analysis) sw).caseAAssignmentCommand(this);
+	}
 
-    public PAssignment getAssignment()
-    {
-        return this._assignment_;
-    }
+	public PAssignment getAssignment() {
+		return this._assignment_;
+	}
 
-    public void setAssignment(PAssignment node)
-    {
-        if(this._assignment_ != null)
-        {
-            this._assignment_.parent(null);
-        }
+	public void setAssignment(PAssignment node) {
+		if (this._assignment_ != null) {
+			this._assignment_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._assignment_ = node;
-    }
+		this._assignment_ = node;
+	}
 
-    
-    public String toString()
-    {
-        return ""
-            + toString(this._assignment_);
-    }
+	public String toString() {
+		return "" + toString(this._assignment_);
+	}
 
-    
-    void removeChild(@SuppressWarnings("unused") Node child)
-    {
-        // Remove child
-        if(this._assignment_ == child)
-        {
-            this._assignment_ = null;
-            return;
-        }
+	void removeChild(@SuppressWarnings("unused") Node child) {
+		// Remove child
+		if (this._assignment_ == child) {
+			this._assignment_ = null;
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 
-    
-    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
-    {
-        // Replace child
-        if(this._assignment_ == oldChild)
-        {
-            setAssignment((PAssignment) newChild);
-            return;
-        }
+	void replaceChild(@SuppressWarnings("unused") Node oldChild,
+			@SuppressWarnings("unused") Node newChild) {
+		// Replace child
+		if (this._assignment_ == oldChild) {
+			setAssignment((PAssignment) newChild);
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 }

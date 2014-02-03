@@ -2,179 +2,140 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-import org.jdmp.core.script.jdmp.analysis.*;
+import org.jdmp.core.script.jdmp.analysis.Analysis;
 
 @SuppressWarnings("nls")
-public final class ALteqLevel6 extends PLevel6
-{
-    private PLevel6 _left_;
-    private TLteq _lteq_;
-    private PLevel5 _right_;
+public final class ALteqLevel6 extends PLevel6 {
+	private PLevel6 _left_;
+	private TLteq _lteq_;
+	private PLevel5 _right_;
 
-    public ALteqLevel6()
-    {
-        // Constructor
-    }
+	public ALteqLevel6() {
+		// Constructor
+	}
 
-    public ALteqLevel6(
-        @SuppressWarnings("hiding") PLevel6 _left_,
-        @SuppressWarnings("hiding") TLteq _lteq_,
-        @SuppressWarnings("hiding") PLevel5 _right_)
-    {
-        // Constructor
-        setLeft(_left_);
+	public ALteqLevel6(@SuppressWarnings("hiding") PLevel6 _left_,
+			@SuppressWarnings("hiding") TLteq _lteq_, @SuppressWarnings("hiding") PLevel5 _right_) {
+		// Constructor
+		setLeft(_left_);
 
-        setLteq(_lteq_);
+		setLteq(_lteq_);
 
-        setRight(_right_);
+		setRight(_right_);
 
-    }
+	}
 
-    
-    public Object clone()
-    {
-        return new ALteqLevel6(
-            cloneNode(this._left_),
-            cloneNode(this._lteq_),
-            cloneNode(this._right_));
-    }
+	public Object clone() {
+		return new ALteqLevel6(cloneNode(this._left_), cloneNode(this._lteq_),
+				cloneNode(this._right_));
+	}
 
-    public void apply(Switch sw)
-    {
-        ((Analysis) sw).caseALteqLevel6(this);
-    }
+	public void apply(Switch sw) {
+		((Analysis) sw).caseALteqLevel6(this);
+	}
 
-    public PLevel6 getLeft()
-    {
-        return this._left_;
-    }
+	public PLevel6 getLeft() {
+		return this._left_;
+	}
 
-    public void setLeft(PLevel6 node)
-    {
-        if(this._left_ != null)
-        {
-            this._left_.parent(null);
-        }
+	public void setLeft(PLevel6 node) {
+		if (this._left_ != null) {
+			this._left_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._left_ = node;
-    }
+		this._left_ = node;
+	}
 
-    public TLteq getLteq()
-    {
-        return this._lteq_;
-    }
+	public TLteq getLteq() {
+		return this._lteq_;
+	}
 
-    public void setLteq(TLteq node)
-    {
-        if(this._lteq_ != null)
-        {
-            this._lteq_.parent(null);
-        }
+	public void setLteq(TLteq node) {
+		if (this._lteq_ != null) {
+			this._lteq_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._lteq_ = node;
-    }
+		this._lteq_ = node;
+	}
 
-    public PLevel5 getRight()
-    {
-        return this._right_;
-    }
+	public PLevel5 getRight() {
+		return this._right_;
+	}
 
-    public void setRight(PLevel5 node)
-    {
-        if(this._right_ != null)
-        {
-            this._right_.parent(null);
-        }
+	public void setRight(PLevel5 node) {
+		if (this._right_ != null) {
+			this._right_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._right_ = node;
-    }
+		this._right_ = node;
+	}
 
-    
-    public String toString()
-    {
-        return ""
-            + toString(this._left_)
-            + toString(this._lteq_)
-            + toString(this._right_);
-    }
+	public String toString() {
+		return "" + toString(this._left_) + toString(this._lteq_) + toString(this._right_);
+	}
 
-    
-    void removeChild(@SuppressWarnings("unused") Node child)
-    {
-        // Remove child
-        if(this._left_ == child)
-        {
-            this._left_ = null;
-            return;
-        }
+	void removeChild(@SuppressWarnings("unused") Node child) {
+		// Remove child
+		if (this._left_ == child) {
+			this._left_ = null;
+			return;
+		}
 
-        if(this._lteq_ == child)
-        {
-            this._lteq_ = null;
-            return;
-        }
+		if (this._lteq_ == child) {
+			this._lteq_ = null;
+			return;
+		}
 
-        if(this._right_ == child)
-        {
-            this._right_ = null;
-            return;
-        }
+		if (this._right_ == child) {
+			this._right_ = null;
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 
-    
-    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
-    {
-        // Replace child
-        if(this._left_ == oldChild)
-        {
-            setLeft((PLevel6) newChild);
-            return;
-        }
+	void replaceChild(@SuppressWarnings("unused") Node oldChild,
+			@SuppressWarnings("unused") Node newChild) {
+		// Replace child
+		if (this._left_ == oldChild) {
+			setLeft((PLevel6) newChild);
+			return;
+		}
 
-        if(this._lteq_ == oldChild)
-        {
-            setLteq((TLteq) newChild);
-            return;
-        }
+		if (this._lteq_ == oldChild) {
+			setLteq((TLteq) newChild);
+			return;
+		}
 
-        if(this._right_ == oldChild)
-        {
-            setRight((PLevel5) newChild);
-            return;
-        }
+		if (this._right_ == oldChild) {
+			setRight((PLevel5) newChild);
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 }

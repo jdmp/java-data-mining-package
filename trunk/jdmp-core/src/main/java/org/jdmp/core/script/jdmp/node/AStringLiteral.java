@@ -2,93 +2,72 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-import org.jdmp.core.script.jdmp.analysis.*;
+import org.jdmp.core.script.jdmp.analysis.Analysis;
 
 @SuppressWarnings("nls")
-public final class AStringLiteral extends PLiteral
-{
-    private TString _string_;
+public final class AStringLiteral extends PLiteral {
+	private TString _string_;
 
-    public AStringLiteral()
-    {
-        // Constructor
-    }
+	public AStringLiteral() {
+		// Constructor
+	}
 
-    public AStringLiteral(
-        @SuppressWarnings("hiding") TString _string_)
-    {
-        // Constructor
-        setString(_string_);
+	public AStringLiteral(@SuppressWarnings("hiding") TString _string_) {
+		// Constructor
+		setString(_string_);
 
-    }
+	}
 
-    
-    public Object clone()
-    {
-        return new AStringLiteral(
-            cloneNode(this._string_));
-    }
+	public Object clone() {
+		return new AStringLiteral(cloneNode(this._string_));
+	}
 
-    public void apply(Switch sw)
-    {
-        ((Analysis) sw).caseAStringLiteral(this);
-    }
+	public void apply(Switch sw) {
+		((Analysis) sw).caseAStringLiteral(this);
+	}
 
-    public TString getString()
-    {
-        return this._string_;
-    }
+	public TString getString() {
+		return this._string_;
+	}
 
-    public void setString(TString node)
-    {
-        if(this._string_ != null)
-        {
-            this._string_.parent(null);
-        }
+	public void setString(TString node) {
+		if (this._string_ != null) {
+			this._string_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._string_ = node;
-    }
+		this._string_ = node;
+	}
 
-    
-    public String toString()
-    {
-        return ""
-            + toString(this._string_);
-    }
+	public String toString() {
+		return "" + toString(this._string_);
+	}
 
-    
-    void removeChild(@SuppressWarnings("unused") Node child)
-    {
-        // Remove child
-        if(this._string_ == child)
-        {
-            this._string_ = null;
-            return;
-        }
+	void removeChild(@SuppressWarnings("unused") Node child) {
+		// Remove child
+		if (this._string_ == child) {
+			this._string_ = null;
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 
-    
-    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
-    {
-        // Replace child
-        if(this._string_ == oldChild)
-        {
-            setString((TString) newChild);
-            return;
-        }
+	void replaceChild(@SuppressWarnings("unused") Node oldChild,
+			@SuppressWarnings("unused") Node newChild) {
+		// Replace child
+		if (this._string_ == oldChild) {
+			setString((TString) newChild);
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 }

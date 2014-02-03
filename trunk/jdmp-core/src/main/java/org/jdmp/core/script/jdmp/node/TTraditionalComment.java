@@ -2,31 +2,25 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-import org.jdmp.core.script.jdmp.analysis.*;
+import org.jdmp.core.script.jdmp.analysis.Analysis;
 
 @SuppressWarnings("nls")
-public final class TTraditionalComment extends Token
-{
-    public TTraditionalComment(String text)
-    {
-        setText(text);
-    }
+public final class TTraditionalComment extends Token {
+	public TTraditionalComment(String text) {
+		setText(text);
+	}
 
-    public TTraditionalComment(String text, int line, int pos)
-    {
-        setText(text);
-        setLine(line);
-        setPos(pos);
-    }
+	public TTraditionalComment(String text, int line, int pos) {
+		setText(text);
+		setLine(line);
+		setPos(pos);
+	}
 
-    
-    public Object clone()
-    {
-      return new TTraditionalComment(getText(), getLine(), getPos());
-    }
+	public Object clone() {
+		return new TTraditionalComment(getText(), getLine(), getPos());
+	}
 
-    public void apply(Switch sw)
-    {
-        ((Analysis) sw).caseTTraditionalComment(this);
-    }
+	public void apply(Switch sw) {
+		((Analysis) sw).caseTTraditionalComment(this);
+	}
 }

@@ -2,93 +2,72 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-import org.jdmp.core.script.jdmp.analysis.*;
+import org.jdmp.core.script.jdmp.analysis.Analysis;
 
 @SuppressWarnings("nls")
-public final class ALiteralLevel0 extends PLevel0
-{
-    private PLiteral _literal_;
+public final class ALiteralLevel0 extends PLevel0 {
+	private PLiteral _literal_;
 
-    public ALiteralLevel0()
-    {
-        // Constructor
-    }
+	public ALiteralLevel0() {
+		// Constructor
+	}
 
-    public ALiteralLevel0(
-        @SuppressWarnings("hiding") PLiteral _literal_)
-    {
-        // Constructor
-        setLiteral(_literal_);
+	public ALiteralLevel0(@SuppressWarnings("hiding") PLiteral _literal_) {
+		// Constructor
+		setLiteral(_literal_);
 
-    }
+	}
 
-    
-    public Object clone()
-    {
-        return new ALiteralLevel0(
-            cloneNode(this._literal_));
-    }
+	public Object clone() {
+		return new ALiteralLevel0(cloneNode(this._literal_));
+	}
 
-    public void apply(Switch sw)
-    {
-        ((Analysis) sw).caseALiteralLevel0(this);
-    }
+	public void apply(Switch sw) {
+		((Analysis) sw).caseALiteralLevel0(this);
+	}
 
-    public PLiteral getLiteral()
-    {
-        return this._literal_;
-    }
+	public PLiteral getLiteral() {
+		return this._literal_;
+	}
 
-    public void setLiteral(PLiteral node)
-    {
-        if(this._literal_ != null)
-        {
-            this._literal_.parent(null);
-        }
+	public void setLiteral(PLiteral node) {
+		if (this._literal_ != null) {
+			this._literal_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._literal_ = node;
-    }
+		this._literal_ = node;
+	}
 
-    
-    public String toString()
-    {
-        return ""
-            + toString(this._literal_);
-    }
+	public String toString() {
+		return "" + toString(this._literal_);
+	}
 
-    
-    void removeChild(@SuppressWarnings("unused") Node child)
-    {
-        // Remove child
-        if(this._literal_ == child)
-        {
-            this._literal_ = null;
-            return;
-        }
+	void removeChild(@SuppressWarnings("unused") Node child) {
+		// Remove child
+		if (this._literal_ == child) {
+			this._literal_ = null;
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 
-    
-    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
-    {
-        // Replace child
-        if(this._literal_ == oldChild)
-        {
-            setLiteral((PLiteral) newChild);
-            return;
-        }
+	void replaceChild(@SuppressWarnings("unused") Node oldChild,
+			@SuppressWarnings("unused") Node newChild) {
+		// Replace child
+		if (this._literal_ == oldChild) {
+			setLiteral((PLiteral) newChild);
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 }

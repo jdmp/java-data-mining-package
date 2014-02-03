@@ -2,7 +2,6 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-public abstract class PExpression extends Node
-{
-    // Empty body
+public abstract class PExpression extends Node {
+	// Empty body
 }

@@ -2,37 +2,29 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-import org.jdmp.core.script.jdmp.analysis.*;
+import org.jdmp.core.script.jdmp.analysis.Analysis;
 
 @SuppressWarnings("nls")
-public final class TColon extends Token
-{
-    public TColon()
-    {
-        super.setText(":");
-    }
+public final class TColon extends Token {
+	public TColon() {
+		super.setText(":");
+	}
 
-    public TColon(int line, int pos)
-    {
-        super.setText(":");
-        setLine(line);
-        setPos(pos);
-    }
+	public TColon(int line, int pos) {
+		super.setText(":");
+		setLine(line);
+		setPos(pos);
+	}
 
-    
-    public Object clone()
-    {
-      return new TColon(getLine(), getPos());
-    }
+	public Object clone() {
+		return new TColon(getLine(), getPos());
+	}
 
-    public void apply(Switch sw)
-    {
-        ((Analysis) sw).caseTColon(this);
-    }
+	public void apply(Switch sw) {
+		((Analysis) sw).caseTColon(this);
+	}
 
-    
-    public void setText(@SuppressWarnings("unused") String text)
-    {
-        throw new RuntimeException("Cannot change TColon text.");
-    }
+	public void setText(@SuppressWarnings("unused") String text) {
+		throw new RuntimeException("Cannot change TColon text.");
+	}
 }

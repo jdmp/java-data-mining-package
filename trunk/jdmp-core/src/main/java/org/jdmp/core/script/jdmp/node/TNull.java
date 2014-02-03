@@ -2,37 +2,29 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-import org.jdmp.core.script.jdmp.analysis.*;
+import org.jdmp.core.script.jdmp.analysis.Analysis;
 
 @SuppressWarnings("nls")
-public final class TNull extends Token
-{
-    public TNull()
-    {
-        super.setText("null");
-    }
+public final class TNull extends Token {
+	public TNull() {
+		super.setText("null");
+	}
 
-    public TNull(int line, int pos)
-    {
-        super.setText("null");
-        setLine(line);
-        setPos(pos);
-    }
+	public TNull(int line, int pos) {
+		super.setText("null");
+		setLine(line);
+		setPos(pos);
+	}
 
-    
-    public Object clone()
-    {
-      return new TNull(getLine(), getPos());
-    }
+	public Object clone() {
+		return new TNull(getLine(), getPos());
+	}
 
-    public void apply(Switch sw)
-    {
-        ((Analysis) sw).caseTNull(this);
-    }
+	public void apply(Switch sw) {
+		((Analysis) sw).caseTNull(this);
+	}
 
-    
-    public void setText(@SuppressWarnings("unused") String text)
-    {
-        throw new RuntimeException("Cannot change TNull text.");
-    }
+	public void setText(@SuppressWarnings("unused") String text) {
+		throw new RuntimeException("Cannot change TNull text.");
+	}
 }

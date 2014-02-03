@@ -2,136 +2,106 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-import org.jdmp.core.script.jdmp.analysis.*;
+import org.jdmp.core.script.jdmp.analysis.Analysis;
 
 @SuppressWarnings("nls")
-public final class AStatement extends PStatement
-{
-    private PExpression _expression_;
-    private TSemicolon _semicolon_;
+public final class AStatement extends PStatement {
+	private PExpression _expression_;
+	private TSemicolon _semicolon_;
 
-    public AStatement()
-    {
-        // Constructor
-    }
+	public AStatement() {
+		// Constructor
+	}
 
-    public AStatement(
-        @SuppressWarnings("hiding") PExpression _expression_,
-        @SuppressWarnings("hiding") TSemicolon _semicolon_)
-    {
-        // Constructor
-        setExpression(_expression_);
+	public AStatement(@SuppressWarnings("hiding") PExpression _expression_,
+			@SuppressWarnings("hiding") TSemicolon _semicolon_) {
+		// Constructor
+		setExpression(_expression_);
 
-        setSemicolon(_semicolon_);
+		setSemicolon(_semicolon_);
 
-    }
+	}
 
-    
-    public Object clone()
-    {
-        return new AStatement(
-            cloneNode(this._expression_),
-            cloneNode(this._semicolon_));
-    }
+	public Object clone() {
+		return new AStatement(cloneNode(this._expression_), cloneNode(this._semicolon_));
+	}
 
-    public void apply(Switch sw)
-    {
-        ((Analysis) sw).caseAStatement(this);
-    }
+	public void apply(Switch sw) {
+		((Analysis) sw).caseAStatement(this);
+	}
 
-    public PExpression getExpression()
-    {
-        return this._expression_;
-    }
+	public PExpression getExpression() {
+		return this._expression_;
+	}
 
-    public void setExpression(PExpression node)
-    {
-        if(this._expression_ != null)
-        {
-            this._expression_.parent(null);
-        }
+	public void setExpression(PExpression node) {
+		if (this._expression_ != null) {
+			this._expression_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._expression_ = node;
-    }
+		this._expression_ = node;
+	}
 
-    public TSemicolon getSemicolon()
-    {
-        return this._semicolon_;
-    }
+	public TSemicolon getSemicolon() {
+		return this._semicolon_;
+	}
 
-    public void setSemicolon(TSemicolon node)
-    {
-        if(this._semicolon_ != null)
-        {
-            this._semicolon_.parent(null);
-        }
+	public void setSemicolon(TSemicolon node) {
+		if (this._semicolon_ != null) {
+			this._semicolon_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._semicolon_ = node;
-    }
+		this._semicolon_ = node;
+	}
 
-    
-    public String toString()
-    {
-        return ""
-            + toString(this._expression_)
-            + toString(this._semicolon_);
-    }
+	public String toString() {
+		return "" + toString(this._expression_) + toString(this._semicolon_);
+	}
 
-    
-    void removeChild(@SuppressWarnings("unused") Node child)
-    {
-        // Remove child
-        if(this._expression_ == child)
-        {
-            this._expression_ = null;
-            return;
-        }
+	void removeChild(@SuppressWarnings("unused") Node child) {
+		// Remove child
+		if (this._expression_ == child) {
+			this._expression_ = null;
+			return;
+		}
 
-        if(this._semicolon_ == child)
-        {
-            this._semicolon_ = null;
-            return;
-        }
+		if (this._semicolon_ == child) {
+			this._semicolon_ = null;
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 
-    
-    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
-    {
-        // Replace child
-        if(this._expression_ == oldChild)
-        {
-            setExpression((PExpression) newChild);
-            return;
-        }
+	void replaceChild(@SuppressWarnings("unused") Node oldChild,
+			@SuppressWarnings("unused") Node newChild) {
+		// Replace child
+		if (this._expression_ == oldChild) {
+			setExpression((PExpression) newChild);
+			return;
+		}
 
-        if(this._semicolon_ == oldChild)
-        {
-            setSemicolon((TSemicolon) newChild);
-            return;
-        }
+		if (this._semicolon_ == oldChild) {
+			setSemicolon((TSemicolon) newChild);
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 }

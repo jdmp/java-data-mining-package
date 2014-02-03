@@ -2,7 +2,6 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-public abstract class PScript extends Node
-{
-    // Empty body
+public abstract class PScript extends Node {
+	// Empty body
 }

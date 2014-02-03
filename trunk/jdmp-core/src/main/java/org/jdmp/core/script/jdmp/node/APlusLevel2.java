@@ -2,136 +2,106 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-import org.jdmp.core.script.jdmp.analysis.*;
+import org.jdmp.core.script.jdmp.analysis.Analysis;
 
 @SuppressWarnings("nls")
-public final class APlusLevel2 extends PLevel2
-{
-    private TPlus _plus_;
-    private PLevel1 _level1_;
+public final class APlusLevel2 extends PLevel2 {
+	private TPlus _plus_;
+	private PLevel1 _level1_;
 
-    public APlusLevel2()
-    {
-        // Constructor
-    }
+	public APlusLevel2() {
+		// Constructor
+	}
 
-    public APlusLevel2(
-        @SuppressWarnings("hiding") TPlus _plus_,
-        @SuppressWarnings("hiding") PLevel1 _level1_)
-    {
-        // Constructor
-        setPlus(_plus_);
+	public APlusLevel2(@SuppressWarnings("hiding") TPlus _plus_,
+			@SuppressWarnings("hiding") PLevel1 _level1_) {
+		// Constructor
+		setPlus(_plus_);
 
-        setLevel1(_level1_);
+		setLevel1(_level1_);
 
-    }
+	}
 
-    
-    public Object clone()
-    {
-        return new APlusLevel2(
-            cloneNode(this._plus_),
-            cloneNode(this._level1_));
-    }
+	public Object clone() {
+		return new APlusLevel2(cloneNode(this._plus_), cloneNode(this._level1_));
+	}
 
-    public void apply(Switch sw)
-    {
-        ((Analysis) sw).caseAPlusLevel2(this);
-    }
+	public void apply(Switch sw) {
+		((Analysis) sw).caseAPlusLevel2(this);
+	}
 
-    public TPlus getPlus()
-    {
-        return this._plus_;
-    }
+	public TPlus getPlus() {
+		return this._plus_;
+	}
 
-    public void setPlus(TPlus node)
-    {
-        if(this._plus_ != null)
-        {
-            this._plus_.parent(null);
-        }
+	public void setPlus(TPlus node) {
+		if (this._plus_ != null) {
+			this._plus_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._plus_ = node;
-    }
+		this._plus_ = node;
+	}
 
-    public PLevel1 getLevel1()
-    {
-        return this._level1_;
-    }
+	public PLevel1 getLevel1() {
+		return this._level1_;
+	}
 
-    public void setLevel1(PLevel1 node)
-    {
-        if(this._level1_ != null)
-        {
-            this._level1_.parent(null);
-        }
+	public void setLevel1(PLevel1 node) {
+		if (this._level1_ != null) {
+			this._level1_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._level1_ = node;
-    }
+		this._level1_ = node;
+	}
 
-    
-    public String toString()
-    {
-        return ""
-            + toString(this._plus_)
-            + toString(this._level1_);
-    }
+	public String toString() {
+		return "" + toString(this._plus_) + toString(this._level1_);
+	}
 
-    
-    void removeChild(@SuppressWarnings("unused") Node child)
-    {
-        // Remove child
-        if(this._plus_ == child)
-        {
-            this._plus_ = null;
-            return;
-        }
+	void removeChild(@SuppressWarnings("unused") Node child) {
+		// Remove child
+		if (this._plus_ == child) {
+			this._plus_ = null;
+			return;
+		}
 
-        if(this._level1_ == child)
-        {
-            this._level1_ = null;
-            return;
-        }
+		if (this._level1_ == child) {
+			this._level1_ = null;
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 
-    
-    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
-    {
-        // Replace child
-        if(this._plus_ == oldChild)
-        {
-            setPlus((TPlus) newChild);
-            return;
-        }
+	void replaceChild(@SuppressWarnings("unused") Node oldChild,
+			@SuppressWarnings("unused") Node newChild) {
+		// Replace child
+		if (this._plus_ == oldChild) {
+			setPlus((TPlus) newChild);
+			return;
+		}
 
-        if(this._level1_ == oldChild)
-        {
-            setLevel1((PLevel1) newChild);
-            return;
-        }
+		if (this._level1_ == oldChild) {
+			setLevel1((PLevel1) newChild);
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 }

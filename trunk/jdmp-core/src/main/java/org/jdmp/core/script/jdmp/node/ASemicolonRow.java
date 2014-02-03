@@ -2,136 +2,106 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-import org.jdmp.core.script.jdmp.analysis.*;
+import org.jdmp.core.script.jdmp.analysis.Analysis;
 
 @SuppressWarnings("nls")
-public final class ASemicolonRow extends PSemicolonRow
-{
-    private TSemicolon _semicolon_;
-    private PRow _row_;
+public final class ASemicolonRow extends PSemicolonRow {
+	private TSemicolon _semicolon_;
+	private PRow _row_;
 
-    public ASemicolonRow()
-    {
-        // Constructor
-    }
+	public ASemicolonRow() {
+		// Constructor
+	}
 
-    public ASemicolonRow(
-        @SuppressWarnings("hiding") TSemicolon _semicolon_,
-        @SuppressWarnings("hiding") PRow _row_)
-    {
-        // Constructor
-        setSemicolon(_semicolon_);
+	public ASemicolonRow(@SuppressWarnings("hiding") TSemicolon _semicolon_,
+			@SuppressWarnings("hiding") PRow _row_) {
+		// Constructor
+		setSemicolon(_semicolon_);
 
-        setRow(_row_);
+		setRow(_row_);
 
-    }
+	}
 
-    
-    public Object clone()
-    {
-        return new ASemicolonRow(
-            cloneNode(this._semicolon_),
-            cloneNode(this._row_));
-    }
+	public Object clone() {
+		return new ASemicolonRow(cloneNode(this._semicolon_), cloneNode(this._row_));
+	}
 
-    public void apply(Switch sw)
-    {
-        ((Analysis) sw).caseASemicolonRow(this);
-    }
+	public void apply(Switch sw) {
+		((Analysis) sw).caseASemicolonRow(this);
+	}
 
-    public TSemicolon getSemicolon()
-    {
-        return this._semicolon_;
-    }
+	public TSemicolon getSemicolon() {
+		return this._semicolon_;
+	}
 
-    public void setSemicolon(TSemicolon node)
-    {
-        if(this._semicolon_ != null)
-        {
-            this._semicolon_.parent(null);
-        }
+	public void setSemicolon(TSemicolon node) {
+		if (this._semicolon_ != null) {
+			this._semicolon_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._semicolon_ = node;
-    }
+		this._semicolon_ = node;
+	}
 
-    public PRow getRow()
-    {
-        return this._row_;
-    }
+	public PRow getRow() {
+		return this._row_;
+	}
 
-    public void setRow(PRow node)
-    {
-        if(this._row_ != null)
-        {
-            this._row_.parent(null);
-        }
+	public void setRow(PRow node) {
+		if (this._row_ != null) {
+			this._row_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._row_ = node;
-    }
+		this._row_ = node;
+	}
 
-    
-    public String toString()
-    {
-        return ""
-            + toString(this._semicolon_)
-            + toString(this._row_);
-    }
+	public String toString() {
+		return "" + toString(this._semicolon_) + toString(this._row_);
+	}
 
-    
-    void removeChild(@SuppressWarnings("unused") Node child)
-    {
-        // Remove child
-        if(this._semicolon_ == child)
-        {
-            this._semicolon_ = null;
-            return;
-        }
+	void removeChild(@SuppressWarnings("unused") Node child) {
+		// Remove child
+		if (this._semicolon_ == child) {
+			this._semicolon_ = null;
+			return;
+		}
 
-        if(this._row_ == child)
-        {
-            this._row_ = null;
-            return;
-        }
+		if (this._row_ == child) {
+			this._row_ = null;
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 
-    
-    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
-    {
-        // Replace child
-        if(this._semicolon_ == oldChild)
-        {
-            setSemicolon((TSemicolon) newChild);
-            return;
-        }
+	void replaceChild(@SuppressWarnings("unused") Node oldChild,
+			@SuppressWarnings("unused") Node newChild) {
+		// Replace child
+		if (this._semicolon_ == oldChild) {
+			setSemicolon((TSemicolon) newChild);
+			return;
+		}
 
-        if(this._row_ == oldChild)
-        {
-            setRow((PRow) newChild);
-            return;
-        }
+		if (this._row_ == oldChild) {
+			setRow((PRow) newChild);
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 }

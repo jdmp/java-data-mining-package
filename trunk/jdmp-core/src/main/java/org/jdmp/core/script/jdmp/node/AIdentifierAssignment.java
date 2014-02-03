@@ -2,222 +2,176 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-import org.jdmp.core.script.jdmp.analysis.*;
+import org.jdmp.core.script.jdmp.analysis.Analysis;
 
 @SuppressWarnings("nls")
-public final class AIdentifierAssignment extends PAssignment
-{
-    private PName _name_;
-    private TAssign _assign_;
-    private PExpression _expression_;
-    private TSemicolon _semicolon_;
+public final class AIdentifierAssignment extends PAssignment {
+	private PName _name_;
+	private TAssign _assign_;
+	private PExpression _expression_;
+	private TSemicolon _semicolon_;
 
-    public AIdentifierAssignment()
-    {
-        // Constructor
-    }
+	public AIdentifierAssignment() {
+		// Constructor
+	}
 
-    public AIdentifierAssignment(
-        @SuppressWarnings("hiding") PName _name_,
-        @SuppressWarnings("hiding") TAssign _assign_,
-        @SuppressWarnings("hiding") PExpression _expression_,
-        @SuppressWarnings("hiding") TSemicolon _semicolon_)
-    {
-        // Constructor
-        setName(_name_);
+	public AIdentifierAssignment(@SuppressWarnings("hiding") PName _name_,
+			@SuppressWarnings("hiding") TAssign _assign_,
+			@SuppressWarnings("hiding") PExpression _expression_,
+			@SuppressWarnings("hiding") TSemicolon _semicolon_) {
+		// Constructor
+		setName(_name_);
 
-        setAssign(_assign_);
+		setAssign(_assign_);
 
-        setExpression(_expression_);
+		setExpression(_expression_);
 
-        setSemicolon(_semicolon_);
+		setSemicolon(_semicolon_);
 
-    }
+	}
 
-    
-    public Object clone()
-    {
-        return new AIdentifierAssignment(
-            cloneNode(this._name_),
-            cloneNode(this._assign_),
-            cloneNode(this._expression_),
-            cloneNode(this._semicolon_));
-    }
+	public Object clone() {
+		return new AIdentifierAssignment(cloneNode(this._name_), cloneNode(this._assign_),
+				cloneNode(this._expression_), cloneNode(this._semicolon_));
+	}
 
-    public void apply(Switch sw)
-    {
-        ((Analysis) sw).caseAIdentifierAssignment(this);
-    }
+	public void apply(Switch sw) {
+		((Analysis) sw).caseAIdentifierAssignment(this);
+	}
 
-    public PName getName()
-    {
-        return this._name_;
-    }
+	public PName getName() {
+		return this._name_;
+	}
 
-    public void setName(PName node)
-    {
-        if(this._name_ != null)
-        {
-            this._name_.parent(null);
-        }
+	public void setName(PName node) {
+		if (this._name_ != null) {
+			this._name_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._name_ = node;
-    }
+		this._name_ = node;
+	}
 
-    public TAssign getAssign()
-    {
-        return this._assign_;
-    }
+	public TAssign getAssign() {
+		return this._assign_;
+	}
 
-    public void setAssign(TAssign node)
-    {
-        if(this._assign_ != null)
-        {
-            this._assign_.parent(null);
-        }
+	public void setAssign(TAssign node) {
+		if (this._assign_ != null) {
+			this._assign_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._assign_ = node;
-    }
+		this._assign_ = node;
+	}
 
-    public PExpression getExpression()
-    {
-        return this._expression_;
-    }
+	public PExpression getExpression() {
+		return this._expression_;
+	}
 
-    public void setExpression(PExpression node)
-    {
-        if(this._expression_ != null)
-        {
-            this._expression_.parent(null);
-        }
+	public void setExpression(PExpression node) {
+		if (this._expression_ != null) {
+			this._expression_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._expression_ = node;
-    }
+		this._expression_ = node;
+	}
 
-    public TSemicolon getSemicolon()
-    {
-        return this._semicolon_;
-    }
+	public TSemicolon getSemicolon() {
+		return this._semicolon_;
+	}
 
-    public void setSemicolon(TSemicolon node)
-    {
-        if(this._semicolon_ != null)
-        {
-            this._semicolon_.parent(null);
-        }
+	public void setSemicolon(TSemicolon node) {
+		if (this._semicolon_ != null) {
+			this._semicolon_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._semicolon_ = node;
-    }
+		this._semicolon_ = node;
+	}
 
-    
-    public String toString()
-    {
-        return ""
-            + toString(this._name_)
-            + toString(this._assign_)
-            + toString(this._expression_)
-            + toString(this._semicolon_);
-    }
+	public String toString() {
+		return "" + toString(this._name_) + toString(this._assign_) + toString(this._expression_)
+				+ toString(this._semicolon_);
+	}
 
-    
-    void removeChild(@SuppressWarnings("unused") Node child)
-    {
-        // Remove child
-        if(this._name_ == child)
-        {
-            this._name_ = null;
-            return;
-        }
+	void removeChild(@SuppressWarnings("unused") Node child) {
+		// Remove child
+		if (this._name_ == child) {
+			this._name_ = null;
+			return;
+		}
 
-        if(this._assign_ == child)
-        {
-            this._assign_ = null;
-            return;
-        }
+		if (this._assign_ == child) {
+			this._assign_ = null;
+			return;
+		}
 
-        if(this._expression_ == child)
-        {
-            this._expression_ = null;
-            return;
-        }
+		if (this._expression_ == child) {
+			this._expression_ = null;
+			return;
+		}
 
-        if(this._semicolon_ == child)
-        {
-            this._semicolon_ = null;
-            return;
-        }
+		if (this._semicolon_ == child) {
+			this._semicolon_ = null;
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 
-    
-    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
-    {
-        // Replace child
-        if(this._name_ == oldChild)
-        {
-            setName((PName) newChild);
-            return;
-        }
+	void replaceChild(@SuppressWarnings("unused") Node oldChild,
+			@SuppressWarnings("unused") Node newChild) {
+		// Replace child
+		if (this._name_ == oldChild) {
+			setName((PName) newChild);
+			return;
+		}
 
-        if(this._assign_ == oldChild)
-        {
-            setAssign((TAssign) newChild);
-            return;
-        }
+		if (this._assign_ == oldChild) {
+			setAssign((TAssign) newChild);
+			return;
+		}
 
-        if(this._expression_ == oldChild)
-        {
-            setExpression((PExpression) newChild);
-            return;
-        }
+		if (this._expression_ == oldChild) {
+			setExpression((PExpression) newChild);
+			return;
+		}
 
-        if(this._semicolon_ == oldChild)
-        {
-            setSemicolon((TSemicolon) newChild);
-            return;
-        }
+		if (this._semicolon_ == oldChild) {
+			setSemicolon((TSemicolon) newChild);
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 }

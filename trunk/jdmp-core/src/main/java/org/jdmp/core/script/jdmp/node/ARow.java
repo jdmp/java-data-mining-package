@@ -2,143 +2,115 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-import java.util.*;
-import org.jdmp.core.script.jdmp.analysis.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
+
+import org.jdmp.core.script.jdmp.analysis.Analysis;
 
 @SuppressWarnings("nls")
-public final class ARow extends PRow
-{
-    private PExpression _expression_;
-    private final LinkedList<PCommaValue> _additionalValues_ = new LinkedList<PCommaValue>();
+public final class ARow extends PRow {
+	private PExpression _expression_;
+	private final LinkedList<PCommaValue> _additionalValues_ = new LinkedList<PCommaValue>();
 
-    public ARow()
-    {
-        // Constructor
-    }
+	public ARow() {
+		// Constructor
+	}
 
-    public ARow(
-        @SuppressWarnings("hiding") PExpression _expression_,
-        @SuppressWarnings("hiding") List<PCommaValue> _additionalValues_)
-    {
-        // Constructor
-        setExpression(_expression_);
+	public ARow(@SuppressWarnings("hiding") PExpression _expression_,
+			@SuppressWarnings("hiding") List<PCommaValue> _additionalValues_) {
+		// Constructor
+		setExpression(_expression_);
 
-        setAdditionalValues(_additionalValues_);
+		setAdditionalValues(_additionalValues_);
 
-    }
+	}
 
-    
-    public Object clone()
-    {
-        return new ARow(
-            cloneNode(this._expression_),
-            cloneList(this._additionalValues_));
-    }
+	public Object clone() {
+		return new ARow(cloneNode(this._expression_), cloneList(this._additionalValues_));
+	}
 
-    public void apply(Switch sw)
-    {
-        ((Analysis) sw).caseARow(this);
-    }
+	public void apply(Switch sw) {
+		((Analysis) sw).caseARow(this);
+	}
 
-    public PExpression getExpression()
-    {
-        return this._expression_;
-    }
+	public PExpression getExpression() {
+		return this._expression_;
+	}
 
-    public void setExpression(PExpression node)
-    {
-        if(this._expression_ != null)
-        {
-            this._expression_.parent(null);
-        }
+	public void setExpression(PExpression node) {
+		if (this._expression_ != null) {
+			this._expression_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._expression_ = node;
-    }
+		this._expression_ = node;
+	}
 
-    public LinkedList<PCommaValue> getAdditionalValues()
-    {
-        return this._additionalValues_;
-    }
+	public LinkedList<PCommaValue> getAdditionalValues() {
+		return this._additionalValues_;
+	}
 
-    public void setAdditionalValues(List<PCommaValue> list)
-    {
-        this._additionalValues_.clear();
-        this._additionalValues_.addAll(list);
-        for(PCommaValue e : list)
-        {
-            if(e.parent() != null)
-            {
-                e.parent().removeChild(e);
-            }
+	public void setAdditionalValues(List<PCommaValue> list) {
+		this._additionalValues_.clear();
+		this._additionalValues_.addAll(list);
+		for (PCommaValue e : list) {
+			if (e.parent() != null) {
+				e.parent().removeChild(e);
+			}
 
-            e.parent(this);
-        }
-    }
+			e.parent(this);
+		}
+	}
 
-    
-    public String toString()
-    {
-        return ""
-            + toString(this._expression_)
-            + toString(this._additionalValues_);
-    }
+	public String toString() {
+		return "" + toString(this._expression_) + toString(this._additionalValues_);
+	}
 
-    
-    void removeChild(@SuppressWarnings("unused") Node child)
-    {
-        // Remove child
-        if(this._expression_ == child)
-        {
-            this._expression_ = null;
-            return;
-        }
+	void removeChild(@SuppressWarnings("unused") Node child) {
+		// Remove child
+		if (this._expression_ == child) {
+			this._expression_ = null;
+			return;
+		}
 
-        if(this._additionalValues_.remove(child))
-        {
-            return;
-        }
+		if (this._additionalValues_.remove(child)) {
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 
-    
-    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
-    {
-        // Replace child
-        if(this._expression_ == oldChild)
-        {
-            setExpression((PExpression) newChild);
-            return;
-        }
+	void replaceChild(@SuppressWarnings("unused") Node oldChild,
+			@SuppressWarnings("unused") Node newChild) {
+		// Replace child
+		if (this._expression_ == oldChild) {
+			setExpression((PExpression) newChild);
+			return;
+		}
 
-        for(ListIterator<PCommaValue> i = this._additionalValues_.listIterator(); i.hasNext();)
-        {
-            if(i.next() == oldChild)
-            {
-                if(newChild != null)
-                {
-                    i.set((PCommaValue) newChild);
-                    newChild.parent(this);
-                    oldChild.parent(null);
-                    return;
-                }
+		for (ListIterator<PCommaValue> i = this._additionalValues_.listIterator(); i.hasNext();) {
+			if (i.next() == oldChild) {
+				if (newChild != null) {
+					i.set((PCommaValue) newChild);
+					newChild.parent(this);
+					oldChild.parent(null);
+					return;
+				}
 
-                i.remove();
-                oldChild.parent(null);
-                return;
-            }
-        }
+				i.remove();
+				oldChild.parent(null);
+				return;
+			}
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 }

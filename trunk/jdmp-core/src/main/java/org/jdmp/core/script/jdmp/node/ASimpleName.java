@@ -2,93 +2,72 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-import org.jdmp.core.script.jdmp.analysis.*;
+import org.jdmp.core.script.jdmp.analysis.Analysis;
 
 @SuppressWarnings("nls")
-public final class ASimpleName extends PName
-{
-    private TIdentifier _identifier_;
+public final class ASimpleName extends PName {
+	private TIdentifier _identifier_;
 
-    public ASimpleName()
-    {
-        // Constructor
-    }
+	public ASimpleName() {
+		// Constructor
+	}
 
-    public ASimpleName(
-        @SuppressWarnings("hiding") TIdentifier _identifier_)
-    {
-        // Constructor
-        setIdentifier(_identifier_);
+	public ASimpleName(@SuppressWarnings("hiding") TIdentifier _identifier_) {
+		// Constructor
+		setIdentifier(_identifier_);
 
-    }
+	}
 
-    
-    public Object clone()
-    {
-        return new ASimpleName(
-            cloneNode(this._identifier_));
-    }
+	public Object clone() {
+		return new ASimpleName(cloneNode(this._identifier_));
+	}
 
-    public void apply(Switch sw)
-    {
-        ((Analysis) sw).caseASimpleName(this);
-    }
+	public void apply(Switch sw) {
+		((Analysis) sw).caseASimpleName(this);
+	}
 
-    public TIdentifier getIdentifier()
-    {
-        return this._identifier_;
-    }
+	public TIdentifier getIdentifier() {
+		return this._identifier_;
+	}
 
-    public void setIdentifier(TIdentifier node)
-    {
-        if(this._identifier_ != null)
-        {
-            this._identifier_.parent(null);
-        }
+	public void setIdentifier(TIdentifier node) {
+		if (this._identifier_ != null) {
+			this._identifier_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._identifier_ = node;
-    }
+		this._identifier_ = node;
+	}
 
-    
-    public String toString()
-    {
-        return ""
-            + toString(this._identifier_);
-    }
+	public String toString() {
+		return "" + toString(this._identifier_);
+	}
 
-    
-    void removeChild(@SuppressWarnings("unused") Node child)
-    {
-        // Remove child
-        if(this._identifier_ == child)
-        {
-            this._identifier_ = null;
-            return;
-        }
+	void removeChild(@SuppressWarnings("unused") Node child) {
+		// Remove child
+		if (this._identifier_ == child) {
+			this._identifier_ = null;
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 
-    
-    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
-    {
-        // Replace child
-        if(this._identifier_ == oldChild)
-        {
-            setIdentifier((TIdentifier) newChild);
-            return;
-        }
+	void replaceChild(@SuppressWarnings("unused") Node oldChild,
+			@SuppressWarnings("unused") Node newChild) {
+		// Replace child
+		if (this._identifier_ == oldChild) {
+			setIdentifier((TIdentifier) newChild);
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 }

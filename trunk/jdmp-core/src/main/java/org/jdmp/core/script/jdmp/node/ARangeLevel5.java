@@ -2,222 +2,176 @@
 
 package org.jdmp.core.script.jdmp.node;
 
-import org.jdmp.core.script.jdmp.analysis.*;
+import org.jdmp.core.script.jdmp.analysis.Analysis;
 
 @SuppressWarnings("nls")
-public final class ARangeLevel5 extends PLevel5
-{
-    private PLevel4 _min_;
-    private TColon _colon_;
-    private PStepsize _stepsize_;
-    private PLevel4 _max_;
+public final class ARangeLevel5 extends PLevel5 {
+	private PLevel4 _min_;
+	private TColon _colon_;
+	private PStepsize _stepsize_;
+	private PLevel4 _max_;
 
-    public ARangeLevel5()
-    {
-        // Constructor
-    }
+	public ARangeLevel5() {
+		// Constructor
+	}
 
-    public ARangeLevel5(
-        @SuppressWarnings("hiding") PLevel4 _min_,
-        @SuppressWarnings("hiding") TColon _colon_,
-        @SuppressWarnings("hiding") PStepsize _stepsize_,
-        @SuppressWarnings("hiding") PLevel4 _max_)
-    {
-        // Constructor
-        setMin(_min_);
+	public ARangeLevel5(@SuppressWarnings("hiding") PLevel4 _min_,
+			@SuppressWarnings("hiding") TColon _colon_,
+			@SuppressWarnings("hiding") PStepsize _stepsize_,
+			@SuppressWarnings("hiding") PLevel4 _max_) {
+		// Constructor
+		setMin(_min_);
 
-        setColon(_colon_);
+		setColon(_colon_);
 
-        setStepsize(_stepsize_);
+		setStepsize(_stepsize_);
 
-        setMax(_max_);
+		setMax(_max_);
 
-    }
+	}
 
-    
-    public Object clone()
-    {
-        return new ARangeLevel5(
-            cloneNode(this._min_),
-            cloneNode(this._colon_),
-            cloneNode(this._stepsize_),
-            cloneNode(this._max_));
-    }
+	public Object clone() {
+		return new ARangeLevel5(cloneNode(this._min_), cloneNode(this._colon_),
+				cloneNode(this._stepsize_), cloneNode(this._max_));
+	}
 
-    public void apply(Switch sw)
-    {
-        ((Analysis) sw).caseARangeLevel5(this);
-    }
+	public void apply(Switch sw) {
+		((Analysis) sw).caseARangeLevel5(this);
+	}
 
-    public PLevel4 getMin()
-    {
-        return this._min_;
-    }
+	public PLevel4 getMin() {
+		return this._min_;
+	}
 
-    public void setMin(PLevel4 node)
-    {
-        if(this._min_ != null)
-        {
-            this._min_.parent(null);
-        }
+	public void setMin(PLevel4 node) {
+		if (this._min_ != null) {
+			this._min_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._min_ = node;
-    }
+		this._min_ = node;
+	}
 
-    public TColon getColon()
-    {
-        return this._colon_;
-    }
+	public TColon getColon() {
+		return this._colon_;
+	}
 
-    public void setColon(TColon node)
-    {
-        if(this._colon_ != null)
-        {
-            this._colon_.parent(null);
-        }
+	public void setColon(TColon node) {
+		if (this._colon_ != null) {
+			this._colon_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._colon_ = node;
-    }
+		this._colon_ = node;
+	}
 
-    public PStepsize getStepsize()
-    {
-        return this._stepsize_;
-    }
+	public PStepsize getStepsize() {
+		return this._stepsize_;
+	}
 
-    public void setStepsize(PStepsize node)
-    {
-        if(this._stepsize_ != null)
-        {
-            this._stepsize_.parent(null);
-        }
+	public void setStepsize(PStepsize node) {
+		if (this._stepsize_ != null) {
+			this._stepsize_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._stepsize_ = node;
-    }
+		this._stepsize_ = node;
+	}
 
-    public PLevel4 getMax()
-    {
-        return this._max_;
-    }
+	public PLevel4 getMax() {
+		return this._max_;
+	}
 
-    public void setMax(PLevel4 node)
-    {
-        if(this._max_ != null)
-        {
-            this._max_.parent(null);
-        }
+	public void setMax(PLevel4 node) {
+		if (this._max_ != null) {
+			this._max_.parent(null);
+		}
 
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
+		if (node != null) {
+			if (node.parent() != null) {
+				node.parent().removeChild(node);
+			}
 
-            node.parent(this);
-        }
+			node.parent(this);
+		}
 
-        this._max_ = node;
-    }
+		this._max_ = node;
+	}
 
-    
-    public String toString()
-    {
-        return ""
-            + toString(this._min_)
-            + toString(this._colon_)
-            + toString(this._stepsize_)
-            + toString(this._max_);
-    }
+	public String toString() {
+		return "" + toString(this._min_) + toString(this._colon_) + toString(this._stepsize_)
+				+ toString(this._max_);
+	}
 
-    
-    void removeChild(@SuppressWarnings("unused") Node child)
-    {
-        // Remove child
-        if(this._min_ == child)
-        {
-            this._min_ = null;
-            return;
-        }
+	void removeChild(@SuppressWarnings("unused") Node child) {
+		// Remove child
+		if (this._min_ == child) {
+			this._min_ = null;
+			return;
+		}
 
-        if(this._colon_ == child)
-        {
-            this._colon_ = null;
-            return;
-        }
+		if (this._colon_ == child) {
+			this._colon_ = null;
+			return;
+		}
 
-        if(this._stepsize_ == child)
-        {
-            this._stepsize_ = null;
-            return;
-        }
+		if (this._stepsize_ == child) {
+			this._stepsize_ = null;
+			return;
+		}
 
-        if(this._max_ == child)
-        {
-            this._max_ = null;
-            return;
-        }
+		if (this._max_ == child) {
+			this._max_ = null;
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 
-    
-    void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
-    {
-        // Replace child
-        if(this._min_ == oldChild)
-        {
-            setMin((PLevel4) newChild);
-            return;
-        }
+	void replaceChild(@SuppressWarnings("unused") Node oldChild,
+			@SuppressWarnings("unused") Node newChild) {
+		// Replace child
+		if (this._min_ == oldChild) {
+			setMin((PLevel4) newChild);
+			return;
+		}
 
-        if(this._colon_ == oldChild)
-        {
-            setColon((TColon) newChild);
-            return;
-        }
+		if (this._colon_ == oldChild) {
+			setColon((TColon) newChild);
+			return;
+		}
 
-        if(this._stepsize_ == oldChild)
-        {
-            setStepsize((PStepsize) newChild);
-            return;
-        }
+		if (this._stepsize_ == oldChild) {
+			setStepsize((PStepsize) newChild);
+			return;
+		}
 
-        if(this._max_ == oldChild)
-        {
-            setMax((PLevel4) newChild);
-            return;
-        }
+		if (this._max_ == oldChild) {
+			setMax((PLevel4) newChild);
+			return;
+		}
 
-        throw new RuntimeException("Not a child.");
-    }
+		throw new RuntimeException("Not a child.");
+	}
 }
