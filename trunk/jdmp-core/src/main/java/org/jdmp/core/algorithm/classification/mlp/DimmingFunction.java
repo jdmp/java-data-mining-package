@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -30,7 +30,6 @@ import org.jdmp.core.algorithm.AlgorithmTwoSources;
 import org.jdmp.core.algorithm.classification.mlp.MultiLayerNetwork.BiasType;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
-import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.util.MathUtil;
 
 public class DimmingFunction extends AlgorithmTwoSources {
@@ -43,8 +42,7 @@ public class DimmingFunction extends AlgorithmTwoSources {
 		this.biasType = biasType;
 	}
 
-	
-	public Map<String, Object> calculateObjects(Map<String, Object> input) throws MatrixException {
+	public Map<String, Object> calculateObjects(Map<String, Object> input) {
 		Map<String, Object> result = new HashMap<String, Object>();
 
 		Matrix weight = MathUtil.getMatrix(input.get(SOURCE1));

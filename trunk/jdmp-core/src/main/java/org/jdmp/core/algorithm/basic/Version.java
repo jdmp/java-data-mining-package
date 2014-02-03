@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -29,7 +29,6 @@ import java.util.Map;
 import org.jdmp.core.JDMP;
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.variable.Variable;
-import org.ujmp.core.exceptions.MatrixException;
 
 public class Version extends AbstractAlgorithm {
 	private static final long serialVersionUID = -5926495980259773197L;
@@ -41,8 +40,7 @@ public class Version extends AbstractAlgorithm {
 		setDescription(DESCRIPTION);
 	}
 
-	
-	public Map<String, Object> calculateObjects(Map<String, Object> input) throws MatrixException {
+	public Map<String, Object> calculateObjects(Map<String, Object> input) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put(TARGET, JDMP.JDMPVERSION);
 		return result;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -29,7 +29,6 @@ import java.util.Map;
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.enums.FileFormat;
 import org.ujmp.core.util.MathUtil;
 
 public class Copy extends AbstractAlgorithm {
@@ -53,7 +52,7 @@ public class Copy extends AbstractAlgorithm {
 		Map<String, Object> result = new HashMap<String, Object>();
 		Matrix in = MathUtil.getMatrix(input.get(SOURCE));
 		if (in != null) {
-			in.export().toClipboard(FileFormat.CSV);
+			in.export().toClipboard().asCSV();
 			result.put(TARGET, in);
 		}
 		return result;

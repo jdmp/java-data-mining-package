@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -28,7 +28,6 @@ import java.util.Map;
 
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.variable.Variable;
-import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.listmatrix.DefaultListMatrix;
 
 public class CreateListMatrix extends AbstractAlgorithm {
@@ -45,8 +44,7 @@ public class CreateListMatrix extends AbstractAlgorithm {
 		setVariables(variables);
 	}
 
-	
-	public Map<String, Object> calculateObjects(Map<String, Object> input) throws MatrixException {
+	public Map<String, Object> calculateObjects(Map<String, Object> input) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put(TARGET, new DefaultListMatrix<Object>());
 		return result;

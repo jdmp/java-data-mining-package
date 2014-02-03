@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -28,7 +28,6 @@ import org.jdmp.core.variable.DefaultVariables;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.Variables;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.util.StringUtil;
 
 public abstract class AbstractSample extends AbstractCoreObject implements Sample {
@@ -59,15 +58,15 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 		getVariables().setMatrix(variableKey, matrix);
 	}
 
-	public boolean isCorrect() throws MatrixException {
+	public boolean isCorrect() {
 		return getTargetClass() == getRecognizedClass();
 	}
 
-	public int getTargetClass() throws MatrixException {
+	public int getTargetClass() {
 		return (int) getVariables().getMatrix(TARGET).getCoordinatesOfMaximum()[COLUMN];
 	}
 
-	public int getRecognizedClass() throws MatrixException {
+	public int getRecognizedClass() {
 		return (int) getVariables().getMatrix(PREDICTED).getCoordinatesOfMaximum()[COLUMN];
 	}
 

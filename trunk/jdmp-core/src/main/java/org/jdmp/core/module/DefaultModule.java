@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -35,7 +35,6 @@ public class DefaultModule extends AbstractModule {
 
 	private Interpreter interpreter = null;
 
-	
 	public Matrix getMatrix(String variableKey) {
 		Variable v = getVariables().get(variableKey);
 		if (v == null) {
@@ -45,7 +44,6 @@ public class DefaultModule extends AbstractModule {
 		}
 	}
 
-	
 	public void setMatrix(String variableKey, Matrix matrix) {
 		Variable v = getVariables().get(variableKey);
 		if (v == null) {
@@ -62,7 +60,6 @@ public class DefaultModule extends AbstractModule {
 		return interpreter;
 	}
 
-	
 	public Result execute(String script) throws Exception {
 		Result result = getInterpreter().execute(script);
 		notifyGUIObject();

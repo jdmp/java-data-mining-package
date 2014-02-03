@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -31,7 +31,6 @@ import org.jdmp.core.algorithm.classification.mlp.MultiLayerNetwork.Transfer;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.exceptions.MatrixException;
 
 public class NetworkLayer implements Serializable {
 	private static final long serialVersionUID = 3933537008613985003L;
@@ -163,7 +162,7 @@ public class NetworkLayer implements Serializable {
 		return algorithmForward.getWeightVariable();
 	}
 
-	public void createVariablesIfNecessary() throws MatrixException {
+	public void createVariablesIfNecessary() {
 		if (getWeightVariable() == null) {
 			Variable weight = VariableFactory.labeledVariable("Weight");
 			Matrix w = null;
@@ -206,7 +205,7 @@ public class NetworkLayer implements Serializable {
 		return algorithmForward.getLabel();
 	}
 
-	public void reset() throws MatrixException {
+	public void reset() {
 		createVariablesIfNecessary();
 		Matrix w = Matrix.Factory.randn(
 				getOutputVariable().getRowCount() * getOutputVariable().getColumnCount(),

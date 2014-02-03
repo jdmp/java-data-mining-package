@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -30,7 +30,6 @@ import java.util.Map;
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.enums.FileFormat;
 import org.ujmp.core.util.MathUtil;
 import org.ujmp.core.util.StringUtil;
 
@@ -38,8 +37,6 @@ public class Export extends AbstractAlgorithm {
 	private static final long serialVersionUID = 2371128340113896073L;
 
 	public static final String DESCRIPTION = "export a matrix to a file";
-
-	private FileFormat defaultFormat = FileFormat.CSV;
 
 	public static final String FILE = "Filename";
 
@@ -64,26 +61,20 @@ public class Export extends AbstractAlgorithm {
 	}
 
 	public Map<String, Object> calculateObjects(Map<String, Object> input) throws Exception {
-		FileFormat format = defaultFormat;
 		String file = null;
 
 		Map<String, Object> result = new HashMap<String, Object>();
 
 		Matrix matrix = MathUtil.getMatrix(input.get(SOURCE));
 
-		Object o2 = input.get(FORMAT);
-		if (o2 != null) {
-			format = FileFormat.valueOf(StringUtil.format(o2));
-		}
-
 		Object o1 = input.get(FILE);
 		if (o1 != null) {
 			file = StringUtil.format(o1);
 		} else {
-			file = File.createTempFile("jdmp_matrix", "." + format).getAbsolutePath();
+			file = File.createTempFile("jdmp_matrix", ".CSV").getAbsolutePath();
 		}
 
-		matrix.export().toFile(format, new File(file));
+		matrix.export().toFile(new File(file)).asCSV();
 		result.put(TARGET, matrix);
 		return result;
 	}

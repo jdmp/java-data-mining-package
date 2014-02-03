@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -28,7 +28,6 @@ import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Coordinates;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.doublematrix.stub.AbstractDenseDoubleMatrix2D;
-import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.interfaces.Wrapper;
 
 public class DataSetPredictedMatrixWrapper extends AbstractDenseDoubleMatrix2D implements
@@ -58,15 +57,15 @@ public class DataSetPredictedMatrixWrapper extends AbstractDenseDoubleMatrix2D i
 
 	}
 
-	public double getDouble(long row, long column) throws MatrixException {
+	public double getDouble(long row, long column) {
 		return getDouble((int) row, (int) column);
 	}
 
-	public void setDouble(double value, long row, long column) throws MatrixException {
+	public void setDouble(double value, long row, long column) {
 		setDouble(value, (int) row, (int) column);
 	}
 
-	public double getDouble(int row, int column) throws MatrixException {
+	public double getDouble(int row, int column) {
 		Sample p = dataSet.getSamples().getElementAt(row);
 		if (p != null) {
 			if (p.getVariables().getMatrix(Sample.PREDICTED) != null) {
@@ -78,7 +77,7 @@ public class DataSetPredictedMatrixWrapper extends AbstractDenseDoubleMatrix2D i
 		return 0.0;
 	}
 
-	public void setDouble(double value, int row, int column) throws MatrixException {
+	public void setDouble(double value, int row, int column) {
 		Sample p = dataSet.getSamples().getElementAt(row);
 		if (p != null) {
 			if (p.getVariables().getMatrix(Sample.PREDICTED) != null) {

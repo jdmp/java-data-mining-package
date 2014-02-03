@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -28,7 +28,6 @@ import org.jdmp.core.dataset.wrappers.DataSetTargetMatrixWrapper;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.exceptions.MatrixException;
 
 public class RegressionDataSet extends DefaultDataSet {
 	private static final long serialVersionUID = -3243395577983195632L;
@@ -116,7 +115,7 @@ public class RegressionDataSet extends DefaultDataSet {
 		return getPredictedVariable().getMatrix();
 	}
 
-	public double getRMSE() throws MatrixException {
+	public double getRMSE() {
 		Matrix m = getRMSEMatrix();
 		if (m == null) {
 			return Double.NaN;

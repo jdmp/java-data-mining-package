@@ -1,3 +1,26 @@
+/*
+ * Copyright (C) 2008-2014 by Holger Arndt
+ *
+ * This file is part of the Java Data Mining Package (JDMP).
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership and licensing.
+ *
+ * JDMP is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * JDMP is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with JDMP; if not, write to the
+ * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+ * Boston, MA  02110-1301  USA
+ */
+
 package org.jdmp.core.algorithm.index;
 
 import java.util.ArrayList;
@@ -31,16 +54,13 @@ public class MultiIndex extends AbstractIndex implements SimilaritySearcher {
 		setLabel(label);
 	}
 
-	
 	public void add(final Sample sample) throws Exception {
 	}
 
-	
 	public int getSize() {
 		return 0;
 	}
 
-	
 	public DataSet search(String query, int start, int count) throws Exception {
 		DataSet ds = DataSetFactory.emptyDataSet();
 		try {
@@ -60,7 +80,6 @@ public class MultiIndex extends AbstractIndex implements SimilaritySearcher {
 		return ds;
 	}
 
-	
 	public DataSet searchSimilar(Sample sample, int start, int count) throws Exception {
 		DataSet ds = DataSetFactory.emptyDataSet();
 		try {
@@ -98,7 +117,6 @@ public class MultiIndex extends AbstractIndex implements SimilaritySearcher {
 			this.count = count;
 		}
 
-		
 		public DataSet call() throws Exception {
 			return index.search(query, start, count);
 		}
@@ -122,7 +140,6 @@ public class MultiIndex extends AbstractIndex implements SimilaritySearcher {
 			this.count = count;
 		}
 
-		
 		public DataSet call() throws Exception {
 			return index.searchSimilar(sample, start, count);
 		}
@@ -140,13 +157,11 @@ public class MultiIndex extends AbstractIndex implements SimilaritySearcher {
 			this.id = id;
 		}
 
-		
 		public Sample call() throws Exception {
 			return index.getSample(id);
 		}
 	}
 
-	
 	public Sample getSample(String id) throws Exception {
 		List<Future<Sample>> futures = new ArrayList<Future<Sample>>();
 		for (Object key : getAlgorithms().keySet()) {
@@ -173,15 +188,13 @@ public class MultiIndex extends AbstractIndex implements SimilaritySearcher {
 		return searchSimilar(sample, 0, count);
 	}
 
-	
 	public ObservableMap<Sample> getSamples() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	
 	public void setSamples(ObservableMap<Sample> samples) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

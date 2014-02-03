@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -43,12 +43,10 @@ public class FileSample extends AbstractMapSample {
 		this.fileMatrix = new FileMatrix(fileFormat, file, parameters);
 	}
 
-	
 	public Map<String, Object> getWrappedObject() {
 		return fileMatrix;
 	}
 
-	
 	public void setWrappedObject(Map<String, Object> object) {
 	}
 

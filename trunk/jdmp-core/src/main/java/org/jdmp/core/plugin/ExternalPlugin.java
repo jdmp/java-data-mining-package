@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -40,27 +40,22 @@ public abstract class ExternalPlugin extends AbstractPlugin {
 		}
 	}
 
-	
 	public final Collection<String> getNeededClasses() {
 		return plugin == null ? new LinkedList<String>() : plugin.getNeededClasses();
 	}
 
-	
 	public final String getDescription() {
 		return plugin == null ? "n/a" : plugin.getDescription();
 	}
 
-	
 	public final Collection<Object> getDependencies() {
 		return plugin == null ? new LinkedList<Object>() : plugin.getDependencies();
 	}
 
-	
 	public final String getStatus() {
 		return plugin == null ? "n/a" : plugin.getStatus();
 	}
 
-	
 	public final boolean isAvailable() {
 		return plugin == null ? false : plugin.isAvailable();
 	}

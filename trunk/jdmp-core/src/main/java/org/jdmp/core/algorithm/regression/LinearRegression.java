@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -29,7 +29,6 @@ import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.exceptions.MatrixException;
 
 /**
  * AlgorithmLinearRegression extends AlgorithmClassifier and not
@@ -81,7 +80,7 @@ public class LinearRegression extends AbstractClassifier {
 		getVariables().setMatrix(PARAMETERS, parameters);
 	}
 
-	public void reset() throws MatrixException {
+	public void reset() {
 		getParameterVariable().clear();
 	}
 
