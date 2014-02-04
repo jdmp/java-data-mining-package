@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -31,8 +31,7 @@ import org.jdmp.jetty.html.tags.BRTag;
 public class HtmlUtils {
 
 	public static final String replaceSpecialChars(String s) {
-		return s == null ? "" : s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
-				.replace("\"", "&quot;").replace("'", "&#39;");
+		return s == null ? "" : s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;").replace("'", "&#39;");
 	}
 
 	public static List<Html> format(String string) {

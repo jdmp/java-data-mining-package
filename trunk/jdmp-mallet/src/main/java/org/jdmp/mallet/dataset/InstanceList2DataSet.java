@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -36,8 +36,7 @@ import cc.mallet.types.FeatureVectorSequence;
 import cc.mallet.types.Instance;
 import cc.mallet.types.InstanceList;
 
-public class InstanceList2DataSet extends ClassificationDataSet implements
-		Wrapper<InstanceList> {
+public class InstanceList2DataSet extends ClassificationDataSet implements Wrapper<InstanceList> {
 	private static final long serialVersionUID = -4306499108417523670L;
 
 	private InstanceList instanceList = null;

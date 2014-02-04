@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -28,8 +28,7 @@ import org.ujmp.core.interfaces.Wrapper;
 
 import cc.mallet.types.LabelSequence;
 
-public class MalletOutputMatrix extends AbstractDenseDoubleMatrix2D implements
-		Wrapper<LabelSequence> {
+public class MalletOutputMatrix extends AbstractDenseDoubleMatrix2D implements Wrapper<LabelSequence> {
 	private static final long serialVersionUID = -3588963392576526020L;
 
 	private LabelSequence labelSequence = null;

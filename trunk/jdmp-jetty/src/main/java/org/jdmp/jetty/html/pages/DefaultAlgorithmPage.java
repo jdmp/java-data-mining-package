@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -32,8 +32,7 @@ import org.jdmp.jetty.html.tags.H1Tag;
 public class DefaultAlgorithmPage extends Page {
 	private static final long serialVersionUID = 6065270482807667894L;
 
-	public DefaultAlgorithmPage(HttpServletRequest request,
-			String path, Algorithm algorithm, Object... parameters) {
+	public DefaultAlgorithmPage(HttpServletRequest request, String path, Algorithm algorithm, Object... parameters) {
 		super();
 		if (algorithm == null) {
 			setTitle("JDMP Search: not found");

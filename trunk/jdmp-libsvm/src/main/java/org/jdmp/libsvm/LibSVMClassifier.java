@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -34,7 +34,6 @@ import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.util.MathUtil;
 
 public class LibSVMClassifier extends AbstractClassifier {
@@ -98,9 +97,9 @@ public class LibSVMClassifier extends AbstractClassifier {
 		param.weight = new double[0];
 	}
 
-	public void train(RegressionDataSet dataSet) throws MatrixException {
-		int columnCount = (int) dataSet.getSamples().iterator().next().getVariables().getMatrix(
-				INPUT).getColumnCount();
+	public void train(RegressionDataSet dataSet) {
+		int columnCount = (int) dataSet.getSamples().iterator().next().getVariables()
+				.getMatrix(INPUT).getColumnCount();
 
 		prob = new svm_problem();
 		prob.l = dataSet.getSamples().getSize();
@@ -145,7 +144,7 @@ public class LibSVMClassifier extends AbstractClassifier {
 		}
 	}
 
-	public Matrix predict(Matrix input, Matrix weight) throws MatrixException {
+	public Matrix predict(Matrix input, Matrix weight) {
 		int nr_class = svm.svm_get_nr_class(model);
 		double[] prob_estimates = new double[nr_class];
 
@@ -173,7 +172,7 @@ public class LibSVMClassifier extends AbstractClassifier {
 		throw new Exception("not supported");
 	}
 
-	public void reset() throws MatrixException {
+	public void reset() {
 		createAlgorithm();
 	}
 

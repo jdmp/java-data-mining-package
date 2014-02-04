@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -37,8 +37,7 @@ public class URLDiv extends DivTag {
 
 		String url = sample.getVariables().getAsString(Sample.URL);
 		if (url != null && url.length() > 0) {
-			LinkTag link = new LinkTag(url, new EmphasizedText(url,
-					highlightedWords));
+			LinkTag link = new LinkTag(url, new EmphasizedText(url, highlightedWords));
 			link.setParameter("class", "url");
 			link.setParameter("title", "go to " + url);
 			SpanTag urlTag = new SpanTag(link);

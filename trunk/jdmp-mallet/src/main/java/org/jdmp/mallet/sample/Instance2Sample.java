@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -47,19 +47,16 @@ public class Instance2Sample extends DefaultSample implements Wrapper<Instance> 
 		Object data = instance.getData();
 		if (data instanceof FeatureVectorSequence) {
 			FeatureVectorSequence fvs = (FeatureVectorSequence) data;
-			getVariables().setMatrix(INPUT,
-					new MalletInputMatrix(fvs.getFeatureVector(index)));
+			getVariables().setMatrix(INPUT, new MalletInputMatrix(fvs.getFeatureVector(index)));
 		}
 		LabelSequence labelSequence = (LabelSequence) instance.getTarget();
-		getVariables().setMatrix(Sample.TARGET,
-				new MalletOutputMatrix(labelSequence, index));
+		getVariables().setMatrix(Sample.TARGET, new MalletOutputMatrix(labelSequence, index));
 
 		if (data instanceof FeatureVectorSequence) {
 			FeatureVectorSequence fvs = (FeatureVectorSequence) data;
 			FeatureVector fv = fvs.getFeatureVector(index);
 			for (int i = fv.numLocations() - 1; i != -1; i--) {
-				String word = (String) fv.getAlphabet().lookupObject(
-						fv.getIndices()[i]);
+				String word = (String) fv.getAlphabet().lookupObject(fv.getIndices()[i]);
 				if (word.startsWith("W=")) {
 					if (!word.matches(".*[0-9]$")) {
 						setLabel(word.substring(2));

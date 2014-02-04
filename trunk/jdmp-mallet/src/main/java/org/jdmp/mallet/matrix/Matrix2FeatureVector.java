@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -26,7 +26,6 @@ package org.jdmp.mallet.matrix;
 import java.util.List;
 
 import org.ujmp.core.Matrix;
-import org.ujmp.core.exceptions.MatrixException;
 
 import cc.mallet.types.Alphabet;
 import cc.mallet.types.FeatureVector;
@@ -77,7 +76,7 @@ public class Matrix2FeatureVector extends FeatureVector {
 				}
 			}
 		} else {
-			throw new MatrixException("cannot convert Matrix to Vector");
+			throw new RuntimeException("cannot convert Matrix to Vector");
 		}
 	}
 }

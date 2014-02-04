@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -41,8 +41,7 @@ import org.ujmp.core.util.StringUtil;
 public class DefaultSamplePage extends Page {
 	private static final long serialVersionUID = -3370405362982723837L;
 
-	public DefaultSamplePage(Sample sample, String path,
-			HttpServletRequest request, Object... parameters) {
+	public DefaultSamplePage(Sample sample, String path, HttpServletRequest request, Object... parameters) {
 		super();
 		if (sample == null) {
 			setTitle("JDMP Search: not found");
@@ -69,8 +68,7 @@ public class DefaultSamplePage extends Page {
 			}
 
 			try {
-				if (parameters != null && parameters.length > 0
-						&& parameters[0] instanceof SimilaritySearcher) {
+				if (parameters != null && parameters.length > 0 && parameters[0] instanceof SimilaritySearcher) {
 					SimilaritySearcher index = (SimilaritySearcher) parameters[0];
 					DataSet ds = index.searchSimilar(sample, 0, 10);
 					if (ds != null && !ds.getSamples().isEmpty()) {

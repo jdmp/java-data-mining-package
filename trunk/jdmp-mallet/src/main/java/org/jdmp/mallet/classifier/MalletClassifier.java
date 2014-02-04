@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -35,7 +35,6 @@ import org.jdmp.mallet.matrix.Labeling2Matrix;
 import org.jdmp.mallet.sample.Sample2Instance;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
-import org.ujmp.core.exceptions.MatrixException;
 
 import cc.mallet.classify.AdaBoostM2Trainer;
 import cc.mallet.classify.AdaBoostTrainer;
@@ -71,9 +70,8 @@ public class MalletClassifier extends AbstractClassifier {
 	}
 
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
-		Instance instance = new Sample2Instance(input, null, classifier
-				.getAlphabet(), classifier.getLabelAlphabet(), classifier
-				.getInstancePipe(), cumSum);
+		Instance instance = new Sample2Instance(input, null, classifier.getAlphabet(), classifier.getLabelAlphabet(), classifier.getInstancePipe(),
+				cumSum);
 		Classification c = classifier.classify(instance);
 		return new Labeling2Matrix(c.getLabeling());
 	}
@@ -110,7 +108,7 @@ public class MalletClassifier extends AbstractClassifier {
 			this.classifier = null;
 			break;
 		default:
-			throw new MatrixException("not implemented");
+			throw new RuntimeException("not implemented");
 		}
 
 	}
@@ -140,16 +138,13 @@ public class MalletClassifier extends AbstractClassifier {
 			targetAlphabet.lookupIndex("Class" + i, true);
 		}
 
-		InstanceList trainingSet = new DataSet2InstanceList(
-				(ClassificationDataSet) dataSet, inputAlphabet, targetAlphabet,
-				cumSum);
+		InstanceList trainingSet = new DataSet2InstanceList((ClassificationDataSet) dataSet, inputAlphabet, targetAlphabet, cumSum);
 
 		classifier = trainer.train(trainingSet);
 	}
 
-	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput)
-			throws Exception {
-		throw new MatrixException("not implemented");
+	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) throws Exception {
+		throw new RuntimeException("not implemented");
 	}
 
 	public Classifier emptyCopy() throws Exception {

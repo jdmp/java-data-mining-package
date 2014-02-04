@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -45,15 +45,11 @@ public class JettyObjectServlet extends HttpServlet {
 		this.object = o;
 	}
 
-	
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 
-	
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		InputStream is = request.getInputStream();
 
@@ -82,16 +78,14 @@ public class JettyObjectServlet extends HttpServlet {
 
 			Method method = null;
 			for (Method m : object.getClass().getMethods()) {
-				if (m.getParameterTypes().length == parameters.length
-						&& m.getName().equals(methodName)) {
+				if (m.getParameterTypes().length == parameters.length && m.getName().equals(methodName)) {
 					method = m;
 					break;
 				}
 			}
 
 			if (method == null) {
-				throw new RuntimeException("method not found: " + methodName
-						+ Arrays.asList(parameters));
+				throw new RuntimeException("method not found: " + methodName + Arrays.asList(parameters));
 			}
 
 			result = method.invoke(object, parameters);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -24,7 +24,6 @@
 package org.jdmp.mallet.matrix;
 
 import org.ujmp.core.doublematrix.stub.AbstractSparseDoubleMatrix2D;
-import org.ujmp.core.exceptions.MatrixException;
 
 import cc.mallet.types.Labeling;
 
@@ -46,11 +45,11 @@ public class Labeling2Matrix extends AbstractSparseDoubleMatrix2D {
 	}
 
 	public void setDouble(double value, long row, long column) {
-		throw new MatrixException("not allowed");
+		throw new RuntimeException("not allowed");
 	}
 
 	public void setDouble(double value, int row, int column) {
-		throw new MatrixException("not allowed");
+		throw new RuntimeException("not allowed");
 	}
 
 	public boolean contains(long... coordinates) {

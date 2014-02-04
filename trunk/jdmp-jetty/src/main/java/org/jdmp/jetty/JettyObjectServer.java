@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -52,9 +52,7 @@ public class JettyObjectServer {
 		server.setHandler(contexts);
 
 		Context root = new Context(contexts, "/", Context.SESSIONS);
-		root
-				.addServlet(new ServletHolder(new JettyObjectServlet(object)),
-						"/*");
+		root.addServlet(new ServletHolder(new JettyObjectServlet(object)), "/*");
 
 		server.start();
 	}

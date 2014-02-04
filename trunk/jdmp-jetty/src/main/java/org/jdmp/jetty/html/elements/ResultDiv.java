@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -37,8 +37,7 @@ public class ResultDiv extends DivTag {
 		if (dataSet == null || dataSet.getSamples().isEmpty()) {
 			p.add("no results found.");
 		} else {
-			p.add("Results " + (start + 1) + " - " + (start + count) + " of "
-					+ dataSet.getVariables().getAsInt(Variable.TOTAL));
+			p.add("Results " + (start + 1) + " - " + (start + count) + " of " + dataSet.getVariables().getAsInt(Variable.TOTAL));
 		}
 		add(p);
 	}

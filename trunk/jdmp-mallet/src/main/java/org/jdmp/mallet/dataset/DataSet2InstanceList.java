@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -37,8 +37,7 @@ import cc.mallet.types.LabelAlphabet;
 public class DataSet2InstanceList extends InstanceList {
 	private static final long serialVersionUID = -6205824050882100522L;
 
-	public DataSet2InstanceList(ClassificationDataSet dataSet, LabelAlphabet inputAlphabet,
-			LabelAlphabet targetAlphabet, List<Integer> cumSum) {
+	public DataSet2InstanceList(ClassificationDataSet dataSet, LabelAlphabet inputAlphabet, LabelAlphabet targetAlphabet, List<Integer> cumSum) {
 		super(new EmptyPipe());
 
 		getPipe().setDataAlphabet(inputAlphabet);
@@ -58,7 +57,6 @@ public class DataSet2InstanceList extends InstanceList {
 class EmptyPipe extends Pipe {
 	private static final long serialVersionUID = 3037084660867965364L;
 
-	
 	public Instance pipe(Instance carrier) {
 		return carrier;
 	}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -24,7 +24,6 @@
 package org.jdmp.stanfordpos;
 
 import java.io.File;
-import java.io.InputStream;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +33,6 @@ import org.jdmp.core.util.JDMPSettings;
 import org.ujmp.core.Matrix;
 
 import edu.stanford.nlp.ling.HasWord;
-import edu.stanford.nlp.ling.Sentence;
 import edu.stanford.nlp.ling.TaggedWord;
 import edu.stanford.nlp.ling.Word;
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
@@ -42,8 +40,7 @@ import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 public class StanfordPOSTagger extends AbstractTagger {
 	private static final long serialVersionUID = -2655534427624643477L;
 
-	public static final String MODELPATH = JDMPSettings.getDataSetFolder()
-			+ "/models/pos";
+	public static final String MODELPATH = JDMPSettings.getDataSetFolder() + "/models/pos";
 
 	public static final String DEFAULTMODEL = "left3words-wsj-0-18.tagger";
 
@@ -65,29 +62,29 @@ public class StanfordPOSTagger extends AbstractTagger {
 	public StanfordPOSTagger(String modelFile) throws Exception {
 		tagger = new MaxentTagger(modelFile);
 	}
-	
+
 	public List<Matrix> tag(String input) throws Exception {
 		List<Matrix> list = new ArrayList<Matrix>();
-		
+
 		StringReader sr = new StringReader(input);
 		List<List<HasWord>> sentences = MaxentTagger.tokenizeText(sr);
-		
+
 		for (List<HasWord> sentence : sentences) {
 			ArrayList<TaggedWord> tSentence = tagger.tagSentence(sentence);
 			Matrix m = new StanfordSentenceMatrix(tSentence);
 			list.add(m);
 		}
-		
+
 		return list;
 	}
 
 	public List<Matrix> tag(Matrix input) throws Exception {
 		List<Matrix> list = new ArrayList<Matrix>();
-		
+
 		ArrayList<TaggedWord> tSentence = null;
 		if (input instanceof StanfordSentenceMatrix) {
 			tSentence = ((StanfordSentenceMatrix) input).getWrappedObject();
-		}else{
+		} else {
 			List<HasWord> words = new ArrayList<HasWord>();
 			for (long[] c : input.availableCoordinates()) {
 				String s = input.getAsString(c);
