@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -32,8 +32,7 @@ import org.ujmp.core.Matrix;
 public class DefaultMatrixPage extends Page {
 	private static final long serialVersionUID = -1585763405757847068L;
 
-	public DefaultMatrixPage(HttpServletRequest request, String path,
-			Matrix matrix, Object... parameters) {
+	public DefaultMatrixPage(HttpServletRequest request, String path, Matrix matrix, Object... parameters) {
 		super();
 		if (matrix == null) {
 			setTitle("JDMP Search: not found");

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -44,8 +44,7 @@ public class TestJettyMap extends AbstractStringMapTest {
 	}
 
 	public Map<String, String> createMap() throws Exception {
-		JettyMapClient<String, String> map = new JettyMapClient<String, String>(
-				new URL("http://localhost:5555"));
+		JettyMapClient<String, String> map = new JettyMapClient<String, String>(new URL("http://localhost:5555"));
 		return map;
 	}
 

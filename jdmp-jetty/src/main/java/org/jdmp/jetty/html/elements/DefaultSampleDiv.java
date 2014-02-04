@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -36,8 +36,7 @@ import org.jdmp.jetty.index.JettyIndexServlet;
 public class DefaultSampleDiv extends DivTag {
 	private static final long serialVersionUID = 6587788027413384557L;
 
-	public DefaultSampleDiv(HttpServletRequest request, String path, int i,
-			Sample sample, String query, String... highlightedWords) {
+	public DefaultSampleDiv(HttpServletRequest request, String path, int i, Sample sample, String query, String... highlightedWords) {
 		query = query == null ? "" : query;
 		setParameter("class", "sample");
 		String label = sample.getLabel();
@@ -50,8 +49,7 @@ public class DefaultSampleDiv extends DivTag {
 		DivTag title = new DivTag();
 		title.setParameter("class", "title");
 
-		SpanTag labelTag = new SpanTag(new LinkTag(path, new EmphasizedText(
-				label, highlightedWords)));
+		SpanTag labelTag = new SpanTag(new LinkTag(path, new EmphasizedText(label, highlightedWords)));
 		labelTag.setParameter("class", "label");
 		title.add(labelTag);
 
@@ -63,8 +61,7 @@ public class DefaultSampleDiv extends DivTag {
 		p.add(title);
 
 		p.add(new DescriptionDiv(sample.getDescription(), highlightedWords));
-		p.add(JettyIndexServlet.factory.createVariablesDiv(request, path,
-				sample, highlightedWords));
+		p.add(JettyIndexServlet.factory.createVariablesDiv(request, path, sample, highlightedWords));
 		p.add(new URLDiv(sample, highlightedWords));
 		add(p);
 	}

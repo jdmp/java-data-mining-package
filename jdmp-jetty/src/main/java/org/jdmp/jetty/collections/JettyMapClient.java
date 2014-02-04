@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -29,7 +29,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.jdmp.jetty.JettyObjectClient;
-import org.ujmp.core.exceptions.MatrixException;
 
 public class JettyMapClient<K, V> implements Map<K, V> {
 
@@ -39,117 +38,105 @@ public class JettyMapClient<K, V> implements Map<K, V> {
 		client = new JettyObjectClient(url);
 	}
 
-	
 	public void clear() {
 		try {
 			client.execute("clear");
 		} catch (Exception e) {
-			throw new MatrixException(e);
+			throw new RuntimeException(e);
 		}
 	}
 
-	
 	public boolean containsKey(Object key) {
 		try {
 			return (Boolean) client.execute("containsKey", key);
 		} catch (Exception e) {
-			throw new MatrixException(e);
+			throw new RuntimeException(e);
 		}
 	}
 
-	
 	public boolean containsValue(Object value) {
 		try {
 			return (Boolean) client.execute("containsValue", value);
 		} catch (Exception e) {
-			throw new MatrixException(e);
+			throw new RuntimeException(e);
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	
 	public Set<java.util.Map.Entry<K, V>> entrySet() {
 		try {
 			return (Set<java.util.Map.Entry<K, V>>) client.execute("entrySet");
 		} catch (Exception e) {
-			throw new MatrixException(e);
+			throw new RuntimeException(e);
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	
 	public V get(Object key) {
 		try {
 			return (V) client.execute("get", key);
 		} catch (Exception e) {
-			throw new MatrixException(e);
+			throw new RuntimeException(e);
 		}
 	}
 
-	
 	public boolean isEmpty() {
 		try {
 			return (Boolean) client.execute("isEmpty");
 		} catch (Exception e) {
-			throw new MatrixException(e);
+			throw new RuntimeException(e);
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	
 	public Set<K> keySet() {
 		try {
 			return (Set<K>) client.execute("keySet");
 		} catch (Exception e) {
-			throw new MatrixException(e);
+			throw new RuntimeException(e);
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	
 	public V put(K key, V value) {
 		try {
 			return (V) client.execute("put", key, value);
 		} catch (Exception e) {
-			throw new MatrixException(e);
+			throw new RuntimeException(e);
 		}
 	}
 
-	
 	public void putAll(Map<? extends K, ? extends V> m) {
 		try {
 			client.execute("putAll", m);
 		} catch (Exception e) {
-			throw new MatrixException(e);
+			throw new RuntimeException(e);
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	
 	public V remove(Object key) {
 		try {
 			return (V) client.execute("remove", key);
 		} catch (Exception e) {
-			throw new MatrixException(e);
+			throw new RuntimeException(e);
 		}
 	}
 
-	
 	public int size() {
 		try {
 			return (Integer) client.execute("size");
 		} catch (Exception e) {
-			throw new MatrixException(e);
+			throw new RuntimeException(e);
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	
 	public Collection<V> values() {
 		try {
 			return (Collection<V>) client.execute("values");
 		} catch (Exception e) {
-			throw new MatrixException(e);
+			throw new RuntimeException(e);
 		}
 	}
 

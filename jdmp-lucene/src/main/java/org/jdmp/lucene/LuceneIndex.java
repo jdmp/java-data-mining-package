@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -83,8 +83,7 @@ import org.ujmp.core.util.SerializationUtil;
 import org.ujmp.core.util.StringUtil;
 import org.ujmp.core.util.io.FileUtil;
 
-public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
-		Erasable, HasSampleMap, SimilaritySearcher {
+public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, Erasable, HasSampleMap, SimilaritySearcher {
 	private static final long serialVersionUID = -8483996550983833243L;
 
 	private IndexWriter indexWriter = null;
@@ -135,8 +134,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 		this(new File(path), false, null, indices);
 	}
 
-	public LuceneIndex(File path, boolean readOnly, Analyzer analyzer,
-			Index... indices) throws Exception {
+	public LuceneIndex(File path, boolean readOnly, Analyzer analyzer, Index... indices) throws Exception {
 		// fieldsToSkip.add(Variable.CONTENT);
 		fieldsToSkip.add(Variable.BYTES);
 		this.readOnly = readOnly;
@@ -175,20 +173,17 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 				if (IndexWriter.isLocked(directory)) {
 					IndexWriter.unlock(directory);
 				}
-				indexWriter = new IndexWriter(directory, new IndexWriterConfig(
-						Version.LUCENE_31, analyzer));
+				indexWriter = new IndexWriter(directory, new IndexWriterConfig(Version.LUCENE_31, analyzer));
 			}
 
 			prepareReader();
-			Collection<?> c = indexSearcher.getIndexReader().getFieldNames(
-					FieldOption.ALL);
+			Collection<?> c = indexSearcher.getIndexReader().getFieldNames(FieldOption.ALL);
 			for (Object o : c) {
 				fields.add((String) o);
 			}
 
 		} else if (!readOnly) {
-			indexWriter = new IndexWriter(directory, new IndexWriterConfig(
-					Version.LUCENE_31, analyzer).setOpenMode(OpenMode.CREATE));
+			indexWriter = new IndexWriter(directory, new IndexWriterConfig(Version.LUCENE_31, analyzer).setOpenMode(OpenMode.CREATE));
 		}
 
 		setSamples(new LuceneSampleMap(this));
@@ -207,8 +202,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 		Document doc = new Document();
 
 		String id = sample.getId();
-		doc.add(new Field(Sample.ID, id, Field.Store.YES,
-				Field.Index.NOT_ANALYZED));
+		doc.add(new Field(Sample.ID, id, Field.Store.YES, Field.Index.NOT_ANALYZED));
 
 		for (Variable v : sample.getVariables()) {
 			String key = v.getLabel();
@@ -223,8 +217,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 						value += " " + m.getAsString(c);
 					}
 				}
-				doc.add(new Field(key, value.trim(), Field.Store.YES,
-						Field.Index.ANALYZED));
+				doc.add(new Field(key, value.trim(), Field.Store.YES, Field.Index.ANALYZED));
 				fields.add(key);
 			}
 		}
@@ -238,8 +231,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 		return searchSimilar(sample, 0, 100);
 	}
 
-	public final DataSet searchSimilar(Sample sample, int count)
-			throws Exception {
+	public final DataSet searchSimilar(Sample sample, int count) throws Exception {
 		return searchSimilar(sample, 0, count);
 	}
 
@@ -264,8 +256,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 			return null;
 		} else {
 			Document doc = indexSearcher.doc(index);
-			Sample s = (Sample) SerializationUtil.deserialize(doc
-					.getBinaryValue("rawdata"));
+			Sample s = (Sample) SerializationUtil.deserialize(doc.getBinaryValue("rawdata"));
 			return s;
 		}
 	}
@@ -277,12 +268,10 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 		TopDocs td = indexSearcher.search(tq, 1);
 		if (td.totalHits > 0) {
 			Document doc = indexSearcher.doc(td.scoreDocs[0].doc);
-			Sample s = (Sample) SerializationUtil.deserialize(doc
-					.getBinaryValue("RawData"));
+			Sample s = (Sample) SerializationUtil.deserialize(doc.getBinaryValue("RawData"));
 
 			MoreLikeThis mlt = new MoreLikeThis(indexSearcher.getIndexReader());
-			mlt.setFieldNames(new String[] { Variable.LABEL,
-					Variable.DESCRIPTION, Variable.TAGS });
+			mlt.setFieldNames(new String[] { Variable.LABEL, Variable.DESCRIPTION, Variable.TAGS });
 			mlt.setMaxWordLen(MAXWORDLENGTH);
 			String[] terms = mlt.retrieveInterestingTerms(td.scoreDocs[0].doc);
 			for (int i = 0; i < 10 && i < terms.length; i++) {
@@ -295,19 +284,16 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 		}
 	}
 
-	public synchronized DataSet search(String query, int start, int count)
-			throws Exception {
+	public synchronized DataSet search(String query, int start, int count) throws Exception {
 		return search(parseQuery(query), start, count);
 	}
 
-	public synchronized DataSet search(Query query, int start, int count)
-			throws Exception {
+	public synchronized DataSet search(Query query, int start, int count) throws Exception {
 		prepareReader();
 		System.out.println("searching for: " + query);
 
 		MoreLikeThis mlt = new MoreLikeThis(indexSearcher.getIndexReader());
-		mlt.setFieldNames(new String[] { Variable.LABEL, Variable.DESCRIPTION,
-				Variable.TAGS });
+		mlt.setFieldNames(new String[] { Variable.LABEL, Variable.DESCRIPTION, Variable.TAGS });
 		mlt.setMaxWordLen(MAXWORDLENGTH);
 		TopDocs td = indexSearcher.search(query, count);
 		DataSet result = new DefaultDataSet();
@@ -316,10 +302,8 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 			int id = sd.doc;
 			Document doc = indexSearcher.doc(id);
 			Sample s = null;
-			s = (Sample) SerializationUtil.deserialize(doc
-					.getBinaryValue("RawData"));
-			s.getVariables().setMatrix(Sample.SCORE,
-					MathUtil.getMatrix(sd.score));
+			s = (Sample) SerializationUtil.deserialize(doc.getBinaryValue("RawData"));
+			s.getVariables().setMatrix(Sample.SCORE, MathUtil.getMatrix(sd.score));
 			String[] terms = mlt.retrieveInterestingTerms(id);
 			for (int i = 0; i < 10 && i < terms.length; i++) {
 				s.getVariables().setObject(Variable.SUGGESTEDTAGS, terms[i]);
@@ -329,13 +313,11 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 		return result;
 	}
 
-	protected synchronized void prepareReader() throws CorruptIndexException,
-			IOException {
+	protected synchronized void prepareReader() throws CorruptIndexException, IOException {
 		if (indexWriter != null) {
 			indexWriter.commit();
 		}
-		if (indexSearcher != null
-				&& !indexSearcher.getIndexReader().isCurrent()) {
+		if (indexSearcher != null && !indexSearcher.getIndexReader().isCurrent()) {
 			indexSearcher.close();
 			indexSearcher = null;
 		}
@@ -355,8 +337,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 		}
 	}
 
-	public IndexSearcher getIndexSearcher() throws CorruptIndexException,
-			IOException {
+	public IndexSearcher getIndexSearcher() throws CorruptIndexException, IOException {
 		prepareReader();
 		return indexSearcher;
 	}
@@ -391,8 +372,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 		FileUtil.deleteRecursive(path);
 	}
 
-	public synchronized DataSet searchSimilar(Sample sample, int start,
-			int count) throws Exception {
+	public synchronized DataSet searchSimilar(Sample sample, int start, int count) throws Exception {
 		prepareReader();
 		Term term = new Term(Sample.ID, sample.getId());
 		TermQuery tq = new TermQuery(term);
@@ -402,8 +382,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 			return ds;
 		}
 		MoreLikeThis mlt = new MoreLikeThis(indexSearcher.getIndexReader());
-		mlt.setFieldNames(new String[] { Variable.LABEL, Variable.DESCRIPTION,
-				Variable.TAGS });
+		mlt.setFieldNames(new String[] { Variable.LABEL, Variable.DESCRIPTION, Variable.TAGS });
 		mlt.setMaxWordLen(MAXWORDLENGTH);
 		Query query = mlt.like(td.scoreDocs[0].doc);
 		BooleanQuery bq = new BooleanQuery();
@@ -413,8 +392,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 		return search(bq, start, count);
 	}
 
-	class LuceneSampleMap extends AbstractListModel implements
-			ObservableMap<Sample> {
+	class LuceneSampleMap extends AbstractListModel implements ObservableMap<Sample> {
 		private static final long serialVersionUID = -7189321183317113764L;
 
 		private LuceneIndex index = null;
@@ -564,17 +542,14 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 			for (Algorithm a : getAlgorithms()) {
 				try {
 					if (a instanceof Index) {
-						System.out.println("searching for " + query + " in "
-								+ a);
+						System.out.println("searching for " + query + " in " + a);
 						DataSet ds = ((Index) a).search(query);
 						if (ds != null) {
 							for (Sample sample : ds.getSamples()) {
 								Sample oldSample = getSample(sample.getId());
 								if (oldSample != null) {
-									Variable tags = oldSample.getVariables()
-											.get("Tags");
-									if (tags != null
-											&& !tags.getMatrixList().isEmpty()) {
+									Variable tags = oldSample.getVariables().get("Tags");
+									if (tags != null && !tags.getMatrixList().isEmpty()) {
 										sample.getVariables().put("Tags", tags);
 									}
 								}
@@ -616,8 +591,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 	public Query parseQuery(String query) throws ParseException {
 		Query q = null;
 		String[] fs = new String[fields.size()];
-		MultiFieldQueryParser p = new MultiFieldQueryParser(Version.LUCENE_31,
-				fields.toArray(fs), analyzer);
+		MultiFieldQueryParser p = new MultiFieldQueryParser(Version.LUCENE_31, fields.toArray(fs), analyzer);
 		p.setDefaultOperator(MultiFieldQueryParser.AND_OPERATOR);
 		if (query == null || "".equals(query) || "*".equals(query)) {
 			BooleanQuery bq = new BooleanQuery();
@@ -639,8 +613,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable,
 			q = bq;
 		} else {
 			for (String field : fields) {
-				Pattern pat = Pattern.compile(field + ":",
-						Pattern.CASE_INSENSITIVE);
+				Pattern pat = Pattern.compile(field + ":", Pattern.CASE_INSENSITIVE);
 				Matcher mat = pat.matcher(query);
 				query = mat.replaceAll(field + ":");
 			}

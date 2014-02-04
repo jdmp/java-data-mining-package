@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -28,7 +28,6 @@ import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.util.MathUtil;
 
 import de.bwaldvogel.liblinear.FeatureNode;
@@ -79,8 +78,7 @@ public class LibLinearClassifier extends AbstractClassifier {
 		}
 
 		double classId = Linear.predict(model, x);
-		Matrix ret = Matrix.Factory.zeros(1,
-				Math.max(model.getNrClass(), (int) (classId + 1)));
+		Matrix ret = Matrix.Factory.zeros(1, Math.max(model.getNrClass(), (int) (classId + 1)));
 		ret.setAsDouble(1.0, 0, (int) classId);
 		return ret;
 	}
@@ -89,8 +87,9 @@ public class LibLinearClassifier extends AbstractClassifier {
 		createAlgorithm();
 		prob = new Problem();
 		prob.l = dataSet.getSamples().getSize();
-		prob.n = (int) dataSet.getSamples().iterator().next().getVariables()
-				.getMatrix(INPUT).getColumnCount() + 1; // +1 for bias
+		prob.n = (int) dataSet.getSamples().iterator().next().getVariables().getMatrix(INPUT).getColumnCount() + 1; // +1
+																													// for
+																													// bias
 
 		prob.x = new FeatureNode[prob.l][];
 		prob.y = new double[prob.l];
@@ -126,8 +125,7 @@ public class LibLinearClassifier extends AbstractClassifier {
 		model = Linear.train(prob, param);
 	}
 
-	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput)
-			throws Exception {
+	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) throws Exception {
 		throw new Exception("not supported");
 	}
 
@@ -140,7 +138,7 @@ public class LibLinearClassifier extends AbstractClassifier {
 		prob = null;
 	}
 
-	public void reset() throws MatrixException {
+	public void reset() {
 		createAlgorithm();
 	}
 

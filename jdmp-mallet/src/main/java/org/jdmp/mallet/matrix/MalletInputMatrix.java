@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -30,8 +30,7 @@ import org.ujmp.core.interfaces.Wrapper;
 
 import cc.mallet.types.FeatureVector;
 
-public class MalletInputMatrix extends AbstractDenseDoubleMatrix2D implements
-		Wrapper<FeatureVector> {
+public class MalletInputMatrix extends AbstractDenseDoubleMatrix2D implements Wrapper<FeatureVector> {
 	private static final long serialVersionUID = -6470168950903884715L;
 
 	private FeatureVector featureVector = null;
@@ -53,13 +52,11 @@ public class MalletInputMatrix extends AbstractDenseDoubleMatrix2D implements
 	}
 
 	public double getDouble(long row, long column) {
-		return Arrays.binarySearch(featureVector.getIndices(), (int) column) >= 0 ? 1.0
-				: 0.0;
+		return Arrays.binarySearch(featureVector.getIndices(), (int) column) >= 0 ? 1.0 : 0.0;
 	}
 
 	public double getDouble(int row, int column) {
-		return Arrays.binarySearch(featureVector.getIndices(), column) >= 0 ? 1.0
-				: 0.0;
+		return Arrays.binarySearch(featureVector.getIndices(), column) >= 0 ? 1.0 : 0.0;
 	}
 
 	public void setDouble(double value, long row, long column) {

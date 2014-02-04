@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -39,21 +39,18 @@ public abstract class AbstractHtmlTag implements HtmlTag {
 
 	private final Map<String, String> parameterMap = new TreeMap<String, String>();
 
-	
 	public void add(Html... content) {
 		for (Html h : content) {
 			contentList.add(h);
 		}
 	}
 
-	
 	public void add(Collection<Html> content) {
 		for (Html h : content) {
 			contentList.add(h);
 		}
 	}
 
-	
 	public void add(String... content) {
 		for (String h : content) {
 			contentList.add(new Text(h));
@@ -65,7 +62,6 @@ public abstract class AbstractHtmlTag implements HtmlTag {
 		contentList.clear();
 	}
 
-	
 	public void setParameter(String name, String value) {
 		parameterMap.put(name, value);
 	}

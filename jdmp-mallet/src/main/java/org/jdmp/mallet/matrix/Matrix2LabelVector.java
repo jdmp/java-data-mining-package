@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -24,7 +24,6 @@
 package org.jdmp.mallet.matrix;
 
 import org.ujmp.core.Matrix;
-import org.ujmp.core.exceptions.MatrixException;
 
 import cc.mallet.types.LabelAlphabet;
 import cc.mallet.types.LabelVector;
@@ -70,7 +69,7 @@ public class Matrix2LabelVector extends LabelVector {
 			indices = new int[] { 0, 1 };
 			values = new double[] { m.getAsDouble(0, 0), 1 - m.getAsDouble(0, 0) };
 		} else {
-			throw new MatrixException("cannot convert Matrix to Vector");
+			throw new RuntimeException("cannot convert Matrix to Vector");
 		}
 	}
 }

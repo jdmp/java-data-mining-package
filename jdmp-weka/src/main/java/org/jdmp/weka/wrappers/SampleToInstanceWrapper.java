@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -24,7 +24,6 @@
 package org.jdmp.weka.wrappers;
 
 import org.ujmp.core.Matrix;
-import org.ujmp.core.exceptions.MatrixException;
 
 import weka.core.DenseInstance;
 
@@ -32,7 +31,7 @@ public class SampleToInstanceWrapper extends DenseInstance {
 	private static final long serialVersionUID = 6525723600252564795L;
 
 	public SampleToInstanceWrapper(Matrix input, Matrix sampleWeight, Matrix targetOutput,
-			boolean discrete, boolean includeTarget) throws MatrixException {
+			boolean discrete, boolean includeTarget) {
 		super((int) input.getColumnCount() + 1);
 		if (sampleWeight != null) {
 			setWeight(sampleWeight.doubleValue());

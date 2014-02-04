@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -49,8 +49,7 @@ import cc.mallet.util.CommandOption;
 public class MalletTagger extends AbstractTagger {
 	private static final long serialVersionUID = 4905729231422289232L;
 
-	private static final CommandOption.String defaultOption = new CommandOption.String(
-			SimpleTagger.class, "default-label", "STRING", true, "O",
+	private static final CommandOption.String defaultOption = new CommandOption.String(SimpleTagger.class, "default-label", "STRING", true, "O",
 			"Label for initial context and uninteresting tokens", null);
 
 	private CRF crf = null;
@@ -62,12 +61,10 @@ public class MalletTagger extends AbstractTagger {
 	public MalletTagger() {
 	}
 
-	
 	public List<Matrix> tag(String input) throws Exception {
 		return null;
 	}
 
-	
 	public List<Matrix> tag(Matrix input) throws Exception {
 		return null;
 	}
@@ -111,8 +108,7 @@ public class MalletTagger extends AbstractTagger {
 			crf = new CRF(getPipes(), null);
 			crf.addFullyConnectedStatesForLabels();
 			crf.setWeightsDimensionAsIn(trainingData, false);
-			CRFOptimizableByLabelLikelihood optLabel = new CRFOptimizableByLabelLikelihood(
-					crf, trainingData);
+			CRFOptimizableByLabelLikelihood optLabel = new CRFOptimizableByLabelLikelihood(crf, trainingData);
 			Optimizable.ByGradientValue[] opts = new Optimizable.ByGradientValue[] { optLabel };
 			crfTrainer = new CRFTrainerByValueGradients(crf, opts);
 			crfTrainer.setMaxResets(0);

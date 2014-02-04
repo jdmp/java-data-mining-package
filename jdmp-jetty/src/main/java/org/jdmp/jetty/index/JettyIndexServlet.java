@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -70,15 +70,11 @@ public class JettyIndexServlet extends HttpServlet {
 		this.index = index;
 	}
 
-	
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 
-	
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 
 			String ref = request.getPathInfo();
@@ -94,22 +90,17 @@ public class JettyIndexServlet extends HttpServlet {
 			String path = "./";
 			Page page = null;
 			if (co instanceof Sample) {
-				page = factory.createSamplePage(request, path, (Sample) co,
-						index);
+				page = factory.createSamplePage(request, path, (Sample) co, index);
 			} else if (co instanceof Variable) {
-				page = factory.createVariablePage(request, path, (Variable) co,
-						index);
+				page = factory.createVariablePage(request, path, (Variable) co, index);
 			} else if (co instanceof DataSet) {
-				page = factory.createDataSetPage(request, path, (DataSet) co,
-						index);
+				page = factory.createDataSetPage(request, path, (DataSet) co, index);
 			} else if (co instanceof Module) {
-				page = factory.createModulePage(request, path, (Module) co,
-						index);
+				page = factory.createModulePage(request, path, (Module) co, index);
 			} else if (co instanceof Index) {
 				page = factory.createIndexPage(request, path, (Index) co);
 			} else if (co instanceof Algorithm) {
-				page = factory.createAlgorithmPage(request, path,
-						(Algorithm) co);
+				page = factory.createAlgorithmPage(request, path, (Algorithm) co);
 			} else {
 				page = factory.createNotFoundPage(request, path);
 			}

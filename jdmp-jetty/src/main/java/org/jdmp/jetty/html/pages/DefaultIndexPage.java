@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -44,8 +44,7 @@ public class DefaultIndexPage extends Page {
 
 	public static final int DEFAULTCOUNT = 25;
 
-	public DefaultIndexPage(Index index, String path,
-			HttpServletRequest request, Object... parameters) {
+	public DefaultIndexPage(Index index, String path, HttpServletRequest request, Object... parameters) {
 		try {
 
 			int maxid = 100;
@@ -66,9 +65,7 @@ public class DefaultIndexPage extends Page {
 							boolean tagFound = false;
 							if (tags != null) {
 								for (Matrix m : tags.getMatrixList()) {
-									if (m != null
-											&& m.stringValue()
-													.equalsIgnoreCase(t)) {
+									if (m != null && m.stringValue().equalsIgnoreCase(t)) {
 										tagFound = true;
 									}
 								}
@@ -77,8 +74,7 @@ public class DefaultIndexPage extends Page {
 								sample.getVariables().setObject("Tags", t);
 							}
 						}
-						System.out.println("updating sample " + id
-								+ " with new tag: " + tag);
+						System.out.println("updating sample " + id + " with new tag: " + tag);
 						index.add(sample);
 					}
 				}
@@ -90,8 +86,7 @@ public class DefaultIndexPage extends Page {
 
 			searchform.add(new SearchDiv(index, request));
 			if (index instanceof SpellChecker) {
-				searchform
-						.add(new SuggestionsDiv((SpellChecker) index, request));
+				searchform.add(new SuggestionsDiv((SpellChecker) index, request));
 			}
 
 			int start = 0;

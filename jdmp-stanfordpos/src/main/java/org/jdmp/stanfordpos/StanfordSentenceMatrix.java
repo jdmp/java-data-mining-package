@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -25,13 +25,12 @@ package org.jdmp.stanfordpos;
 
 import java.util.ArrayList;
 
-import org.ujmp.core.exceptions.MatrixException;
 import org.ujmp.core.interfaces.Wrapper;
 import org.ujmp.core.stringmatrix.stub.AbstractDenseStringMatrix2D;
 
 import edu.stanford.nlp.ling.TaggedWord;
 
-public class StanfordSentenceMatrix extends AbstractDenseStringMatrix2D implements Wrapper<ArrayList<TaggedWord>>{
+public class StanfordSentenceMatrix extends AbstractDenseStringMatrix2D implements Wrapper<ArrayList<TaggedWord>> {
 	private static final long serialVersionUID = 9175120136686956227L;
 
 	private ArrayList<TaggedWord> sentence = null;
@@ -43,48 +42,45 @@ public class StanfordSentenceMatrix extends AbstractDenseStringMatrix2D implemen
 		this.sentence = sentence;
 	}
 
-	
 	public String getString(long row, long column) {
-		if ((int)row < sentence.size()) {
-			TaggedWord tw = sentence.get((int)row);
+		if ((int) row < sentence.size()) {
+			TaggedWord tw = sentence.get((int) row);
 			if (column == 0) {
 				return tw.word();
 			} else {
 				return tw.tag();
-			} 
-		}else{
-			throw new MatrixException("Attempted to access (" +  row + "," + column + "); index out of bounds because size [" + (int)getSize()[0] + "," + (int)getSize()[1] );
+			}
+		} else {
+			throw new RuntimeException("Attempted to access (" + row + "," + column + "); index out of bounds because size [" + (int) getSize()[0]
+					+ "," + (int) getSize()[1]);
 		}
 	}
 
-	
 	public void setString(String value, long row, long column) {
-		if ((int)row < sentence.size()) {
-			TaggedWord tw = sentence.get((int)row);
+		if ((int) row < sentence.size()) {
+			TaggedWord tw = sentence.get((int) row);
 			if (column == 0) {
 				tw.setWord(value);
 			} else {
 				tw.setTag(value);
-			} 
-		}else{
-			throw new MatrixException("Attempted to access (" +  row + "," + column + "); index out of bounds because size [" + (int)getSize()[0] + "," + (int)getSize()[1] );
+			}
+		} else {
+			throw new RuntimeException("Attempted to access (" + row + "," + column + "); index out of bounds because size [" + (int) getSize()[0]
+					+ "," + (int) getSize()[1]);
 		}
 	}
 
-	
 	public long[] getSize() {
 		if (sentence.size() == 0) {
 			return new long[] { 0, 0 };
 		}
-		return new long[] { sentence.size(), 2};
+		return new long[] { sentence.size(), 2 };
 	}
 
-	
 	public ArrayList<TaggedWord> getWrappedObject() {
 		return sentence;
 	}
 
-	
 	public void setWrappedObject(ArrayList<TaggedWord> object) {
 		this.sentence = object;
 	}

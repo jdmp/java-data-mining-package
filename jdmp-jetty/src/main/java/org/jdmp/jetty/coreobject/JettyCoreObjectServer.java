@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -62,20 +62,15 @@ public class JettyCoreObjectServer {
 		io.addServlet(new ServletHolder(new JettyObjectServlet(object)), "/*");
 
 		if (object instanceof Module) {
-			Context console = new Context(contexts, "/console",
-					Context.SESSIONS);
-			console.addServlet(new ServletHolder(new JettyConsoleServlet(
-					(Module) object)), "/*");
+			Context console = new Context(contexts, "/console", Context.SESSIONS);
+			console.addServlet(new ServletHolder(new JettyConsoleServlet((Module) object)), "/*");
 		}
 
 		if (object instanceof HasVariables) {
 			Context list = new Context(contexts, "/variables", Context.SESSIONS);
-			list.addServlet(new ServletHolder(new JettyCoreObjectListServlet(
-					((HasVariables) object).getVariables())), "/*");
-			Context listio = new Context(contexts, "/io/variables",
-					Context.SESSIONS);
-			listio.addServlet(new ServletHolder(new JettyObjectServlet(
-					((HasVariables) object).getVariables())), "/*");
+			list.addServlet(new ServletHolder(new JettyCoreObjectListServlet(((HasVariables) object).getVariables())), "/*");
+			Context listio = new Context(contexts, "/io/variables", Context.SESSIONS);
+			listio.addServlet(new ServletHolder(new JettyObjectServlet(((HasVariables) object).getVariables())), "/*");
 		}
 
 		server.start();

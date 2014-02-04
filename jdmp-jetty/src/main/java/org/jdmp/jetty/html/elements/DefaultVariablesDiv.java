@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -44,15 +44,12 @@ import org.ujmp.core.util.StringUtil;
 public class DefaultVariablesDiv extends DivTag {
 	private static final long serialVersionUID = -3857330921351894952L;
 
-	public DefaultVariablesDiv(HttpServletRequest request, String path,
-			HasVariableMap variables, String... highlightedWords) {
-		this(request, path, variables, new HashSet<String>(Arrays
-				.asList(new String[] { Variable.LABEL, Variable.DESCRIPTION,
-						Variable.CONTENT })), highlightedWords);
+	public DefaultVariablesDiv(HttpServletRequest request, String path, HasVariableMap variables, String... highlightedWords) {
+		this(request, path, variables, new HashSet<String>(Arrays.asList(new String[] { Variable.LABEL, Variable.DESCRIPTION, Variable.CONTENT })),
+				highlightedWords);
 	}
 
-	public DefaultVariablesDiv(HttpServletRequest request, String path,
-			HasVariableMap variables, Set<String> skippedVariables,
+	public DefaultVariablesDiv(HttpServletRequest request, String path, HasVariableMap variables, Set<String> skippedVariables,
 			String... highlightedWords) {
 		try {
 			setParameter("class", "fields");
@@ -70,9 +67,7 @@ public class DefaultVariablesDiv extends DivTag {
 				DivTag field = new DivTag();
 				field.setParameter("class", "variable");
 
-				LinkTag varlink = new LinkTag(
-						path + "variables/" + var.getId(), StringUtil
-								.format(key));
+				LinkTag varlink = new LinkTag(path + "variables/" + var.getId(), StringUtil.format(key));
 				SpanTag keyTag = new SpanTag(new BTag(varlink, new Text(":")));
 				keyTag.setParameter("class", "key");
 				field.add(keyTag);
@@ -82,17 +77,10 @@ public class DefaultVariablesDiv extends DivTag {
 						if (matrix != null) {
 							for (long[] c : matrix.availableCoordinates()) {
 								String value = matrix.getAsString(c);
-								EmphasizedText text = new EmphasizedText(
-										StringUtil.format(value),
-										highlightedWords);
-								String qstring = new String(query + " +" + key
-										+ ":" + value).trim();
-								LinkTag link = new LinkTag(path + "?q="
-										+ URLEncoder.encode(qstring, "utf-8"),
-										text);
-								link.setParameter("title",
-										"search for results containing '"
-												+ value + "' in " + key);
+								EmphasizedText text = new EmphasizedText(StringUtil.format(value), highlightedWords);
+								String qstring = new String(query + " +" + key + ":" + value).trim();
+								LinkTag link = new LinkTag(path + "?q=" + URLEncoder.encode(qstring, "utf-8"), text);
+								link.setParameter("title", "search for results containing '" + value + "' in " + key);
 								SpanTag valueTag = new SpanTag(link);
 								valueTag.setParameter("class", "value");
 								field.add(valueTag);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by Holger Arndt
+ * Copyright (C) 2008-2014 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -44,12 +44,9 @@ public class SearchDiv extends DivTag {
 
 			String query = request.getParameter("q");
 
-			H1Tag h1 = new H1Tag("JDMP Search ["
-					+ ((HasLabel) index).getLabel() + "]");
+			H1Tag h1 = new H1Tag("JDMP Search [" + ((HasLabel) index).getLabel() + "]");
 			LinkTag h1Link = new LinkTag("http://www.jdmp.org", h1);
-			h1Link
-					.setParameter("title",
-							"this search engine is powered by the Java Data Mining Package");
+			h1Link.setParameter("title", "this search engine is powered by the Java Data Mining Package");
 			add(h1Link);
 
 			PTag p = new PTag();
