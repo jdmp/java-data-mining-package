@@ -18,7 +18,7 @@
 			<artifactId>junit</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>libsvm</groupId>
+			<groupId>tw.edu.ntu.csie</groupId>
 			<artifactId>libsvm</artifactId>
 		</dependency>
 		<dependency>
