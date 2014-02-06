@@ -97,13 +97,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
-			<artifactId>ujmp-jampack</artifactId>
-			<version>${ujmp.version}</version>
-			<scope>compile</scope>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jblas</artifactId>
 			<version>${ujmp.version}</version>
 			<scope>compile</scope>
@@ -217,13 +210,6 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-ojalgo</artifactId>
-			<version>${ujmp.version}</version>
-			<scope>compile</scope>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.ujmp</groupId>
-			<artifactId>ujmp-orbital</artifactId>
 			<version>${ujmp.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
@@ -424,14 +410,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
-			<artifactId>ujmp-jampack</artifactId>
-			<version>${ujmp.version}</version>
-			<type>test-jar</type>
-			<scope>test</scope>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jblas</artifactId>
 			<version>${ujmp.version}</version>
 			<type>test-jar</type>
@@ -561,14 +539,6 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-ojalgo</artifactId>
-			<version>${ujmp.version}</version>
-			<type>test-jar</type>
-			<scope>test</scope>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.ujmp</groupId>
-			<artifactId>ujmp-orbital</artifactId>
 			<version>${ujmp.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
