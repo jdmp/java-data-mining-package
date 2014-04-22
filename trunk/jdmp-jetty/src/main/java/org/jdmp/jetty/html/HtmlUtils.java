@@ -31,7 +31,8 @@ import org.jdmp.jetty.html.tags.BRTag;
 public class HtmlUtils {
 
 	public static final String replaceSpecialChars(String s) {
-		return s == null ? "" : s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;").replace("'", "&#39;");
+		return s == null ? "" : s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+				.replace("\"", "&quot;").replace("'", "&#39;");
 	}
 
 	public static List<Html> format(String string) {

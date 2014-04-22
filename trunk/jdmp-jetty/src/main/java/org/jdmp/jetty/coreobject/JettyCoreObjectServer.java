@@ -68,7 +68,8 @@ public class JettyCoreObjectServer {
 
 		if (object instanceof HasVariables) {
 			Context list = new Context(contexts, "/variables", Context.SESSIONS);
-			list.addServlet(new ServletHolder(new JettyCoreObjectListServlet(((HasVariables) object).getVariables())), "/*");
+			list.addServlet(new ServletHolder(new JettyCoreObjectListServlet(((HasVariables) object).getVariables())),
+					"/*");
 			Context listio = new Context(contexts, "/io/variables", Context.SESSIONS);
 			listio.addServlet(new ServletHolder(new JettyObjectServlet(((HasVariables) object).getVariables())), "/*");
 		}

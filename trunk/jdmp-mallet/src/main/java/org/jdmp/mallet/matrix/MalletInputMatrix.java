@@ -25,6 +25,8 @@ package org.jdmp.mallet.matrix;
 
 import java.util.Arrays;
 
+import org.ujmp.core.doublematrix.DenseDoubleMatrix2D;
+import org.ujmp.core.doublematrix.factory.DenseDoubleMatrix2DFactory;
 import org.ujmp.core.doublematrix.stub.AbstractDenseDoubleMatrix2D;
 import org.ujmp.core.interfaces.Wrapper;
 
@@ -36,6 +38,7 @@ public class MalletInputMatrix extends AbstractDenseDoubleMatrix2D implements Wr
 	private FeatureVector featureVector = null;
 
 	public MalletInputMatrix(FeatureVector fv) {
+		super(1, fv.getAlphabet().size());
 		this.featureVector = fv;
 	}
 
@@ -63,6 +66,11 @@ public class MalletInputMatrix extends AbstractDenseDoubleMatrix2D implements Wr
 	}
 
 	public void setDouble(double value, int row, int column) {
+	}
+
+	public DenseDoubleMatrix2DFactory<? extends DenseDoubleMatrix2D> getFactory() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

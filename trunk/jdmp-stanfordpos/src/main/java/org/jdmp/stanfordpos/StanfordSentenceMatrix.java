@@ -25,7 +25,9 @@ package org.jdmp.stanfordpos;
 
 import java.util.ArrayList;
 
+import org.ujmp.core.DenseMatrix2D;
 import org.ujmp.core.interfaces.Wrapper;
+import org.ujmp.core.matrix.factory.DenseMatrix2DFactory;
 import org.ujmp.core.stringmatrix.stub.AbstractDenseStringMatrix2D;
 
 import edu.stanford.nlp.ling.TaggedWord;
@@ -36,9 +38,7 @@ public class StanfordSentenceMatrix extends AbstractDenseStringMatrix2D implemen
 	private ArrayList<TaggedWord> sentence = null;
 
 	public StanfordSentenceMatrix(ArrayList<TaggedWord> sentence) {
-		if (sentence == null) {
-			throw new NullPointerException("ArrayList is null");
-		}
+		super(sentence.size(), 2);
 		this.sentence = sentence;
 	}
 
@@ -51,8 +51,8 @@ public class StanfordSentenceMatrix extends AbstractDenseStringMatrix2D implemen
 				return tw.tag();
 			}
 		} else {
-			throw new RuntimeException("Attempted to access (" + row + "," + column + "); index out of bounds because size [" + (int) getSize()[0]
-					+ "," + (int) getSize()[1]);
+			throw new RuntimeException("Attempted to access (" + row + "," + column
+					+ "); index out of bounds because size [" + (int) getSize()[0] + "," + (int) getSize()[1]);
 		}
 	}
 
@@ -65,8 +65,8 @@ public class StanfordSentenceMatrix extends AbstractDenseStringMatrix2D implemen
 				tw.setTag(value);
 			}
 		} else {
-			throw new RuntimeException("Attempted to access (" + row + "," + column + "); index out of bounds because size [" + (int) getSize()[0]
-					+ "," + (int) getSize()[1]);
+			throw new RuntimeException("Attempted to access (" + row + "," + column
+					+ "); index out of bounds because size [" + (int) getSize()[0] + "," + (int) getSize()[1]);
 		}
 	}
 
@@ -83,5 +83,10 @@ public class StanfordSentenceMatrix extends AbstractDenseStringMatrix2D implemen
 
 	public void setWrappedObject(ArrayList<TaggedWord> object) {
 		this.sentence = object;
+	}
+
+	public DenseMatrix2DFactory<? extends DenseMatrix2D> getFactory() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

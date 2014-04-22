@@ -49,8 +49,8 @@ import cc.mallet.util.CommandOption;
 public class MalletTagger extends AbstractTagger {
 	private static final long serialVersionUID = 4905729231422289232L;
 
-	private static final CommandOption.String defaultOption = new CommandOption.String(SimpleTagger.class, "default-label", "STRING", true, "O",
-			"Label for initial context and uninteresting tokens", null);
+	private static final CommandOption.String defaultOption = new CommandOption.String(SimpleTagger.class,
+			"default-label", "STRING", true, "O", "Label for initial context and uninteresting tokens", null);
 
 	private CRF crf = null;
 

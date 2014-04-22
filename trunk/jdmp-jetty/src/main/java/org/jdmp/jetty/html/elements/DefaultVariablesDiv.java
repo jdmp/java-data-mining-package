@@ -44,13 +44,14 @@ import org.ujmp.core.util.StringUtil;
 public class DefaultVariablesDiv extends DivTag {
 	private static final long serialVersionUID = -3857330921351894952L;
 
-	public DefaultVariablesDiv(HttpServletRequest request, String path, HasVariableMap variables, String... highlightedWords) {
-		this(request, path, variables, new HashSet<String>(Arrays.asList(new String[] { Variable.LABEL, Variable.DESCRIPTION, Variable.CONTENT })),
-				highlightedWords);
+	public DefaultVariablesDiv(HttpServletRequest request, String path, HasVariableMap variables,
+			String... highlightedWords) {
+		this(request, path, variables, new HashSet<String>(Arrays.asList(new String[] { Variable.LABEL,
+				Variable.DESCRIPTION, Variable.CONTENT })), highlightedWords);
 	}
 
-	public DefaultVariablesDiv(HttpServletRequest request, String path, HasVariableMap variables, Set<String> skippedVariables,
-			String... highlightedWords) {
+	public DefaultVariablesDiv(HttpServletRequest request, String path, HasVariableMap variables,
+			Set<String> skippedVariables, String... highlightedWords) {
 		try {
 			setParameter("class", "fields");
 

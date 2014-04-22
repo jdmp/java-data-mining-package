@@ -27,6 +27,8 @@ import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Coordinates;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.doublematrix.DenseDoubleMatrix2D;
+import org.ujmp.core.doublematrix.factory.DenseDoubleMatrix2DFactory;
 import org.ujmp.core.doublematrix.stub.AbstractDenseDoubleMatrix2D;
 import org.ujmp.core.interfaces.Wrapper;
 
@@ -37,6 +39,7 @@ public class DataSetPredictedMatrixWrapper extends AbstractDenseDoubleMatrix2D i
 	private RegressionDataSet dataSet = null;
 
 	public DataSetPredictedMatrixWrapper(RegressionDataSet ds) {
+		super(0, 0);
 		this.dataSet = ds;
 	}
 
@@ -94,6 +97,10 @@ public class DataSetPredictedMatrixWrapper extends AbstractDenseDoubleMatrix2D i
 
 	public void setWrappedObject(RegressionDataSet object) {
 		this.dataSet = object;
+	}
+
+	public DenseDoubleMatrix2DFactory<? extends DenseDoubleMatrix2D> getFactory() {
+		throw new RuntimeException("not implemented");
 	}
 
 }

@@ -38,15 +38,16 @@ import cc.mallet.types.LabelAlphabet;
 public class Sample2Instance extends Instance {
 	private static final long serialVersionUID = -9050176506592908630L;
 
-	public Sample2Instance(Sample sample, Alphabet inputAlphabet, LabelAlphabet targetAlphabet, Pipe pipe, List<Integer> cumSum) {
-		this(sample.getVariables().getMatrix(Sample.INPUT), sample.getVariables().getMatrix(Sample.TARGET), inputAlphabet, targetAlphabet, pipe,
-				cumSum);
+	public Sample2Instance(Sample sample, Alphabet inputAlphabet, LabelAlphabet targetAlphabet, Pipe pipe,
+			List<Integer> cumSum) {
+		this(sample.getVariables().getMatrix(Sample.INPUT), sample.getVariables().getMatrix(Sample.TARGET),
+				inputAlphabet, targetAlphabet, pipe, cumSum);
 		setName(sample.getLabel());
 		setSource(sample);
 	}
 
-	public Sample2Instance(Matrix inputMatrix, Matrix targetMatrix, Alphabet inputAlphabet, LabelAlphabet targetAlphabet, Pipe pipe,
-			List<Integer> cumSum) {
+	public Sample2Instance(Matrix inputMatrix, Matrix targetMatrix, Alphabet inputAlphabet,
+			LabelAlphabet targetAlphabet, Pipe pipe, List<Integer> cumSum) {
 		super(null, null, null, null);
 		Matrix2FeatureVector input = new Matrix2FeatureVector(inputMatrix, inputAlphabet, cumSum);
 		setData(input);

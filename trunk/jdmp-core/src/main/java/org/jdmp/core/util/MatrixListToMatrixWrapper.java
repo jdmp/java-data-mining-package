@@ -29,6 +29,8 @@ import javax.swing.event.ListDataListener;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.interfaces.Wrapper;
+import org.ujmp.core.objectmatrix.DenseObjectMatrix2D;
+import org.ujmp.core.objectmatrix.factory.DenseObjectMatrix2DFactory;
 import org.ujmp.core.objectmatrix.stub.AbstractDenseObjectMatrix2D;
 
 public class MatrixListToMatrixWrapper extends AbstractDenseObjectMatrix2D implements
@@ -38,6 +40,7 @@ public class MatrixListToMatrixWrapper extends AbstractDenseObjectMatrix2D imple
 	private ObservableList<Matrix> matrixList = null;
 
 	public MatrixListToMatrixWrapper(Variable variable) {
+		super(0, 0);
 		this.matrixList = variable.getMatrixList();
 		matrixList.addListDataListener(this);
 	}
@@ -111,6 +114,11 @@ public class MatrixListToMatrixWrapper extends AbstractDenseObjectMatrix2D imple
 
 	public void intervalRemoved(ListDataEvent e) {
 		notifyGUIObject();
+	}
+
+	public DenseObjectMatrix2DFactory<? extends DenseObjectMatrix2D> getFactory() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
