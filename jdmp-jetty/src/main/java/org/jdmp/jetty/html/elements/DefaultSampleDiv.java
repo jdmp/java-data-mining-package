@@ -36,7 +36,8 @@ import org.jdmp.jetty.index.JettyIndexServlet;
 public class DefaultSampleDiv extends DivTag {
 	private static final long serialVersionUID = 6587788027413384557L;
 
-	public DefaultSampleDiv(HttpServletRequest request, String path, int i, Sample sample, String query, String... highlightedWords) {
+	public DefaultSampleDiv(HttpServletRequest request, String path, int i, Sample sample, String query,
+			String... highlightedWords) {
 		query = query == null ? "" : query;
 		setParameter("class", "sample");
 		String label = sample.getLabel();

@@ -42,15 +42,19 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
-import org.apache.lucene.index.CorruptIndexException;
-import org.apache.lucene.index.IndexReader;
-import org.apache.lucene.index.IndexReader.FieldOption;
+import org.apache.lucene.document.StringField;
+import org.apache.lucene.index.AtomicReader;
+import org.apache.lucene.index.AtomicReaderContext;
+import org.apache.lucene.index.DirectoryReader;
+import org.apache.lucene.index.FieldInfo;
+import org.apache.lucene.index.FieldInfos;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.IndexWriterConfig.OpenMode;
 import org.apache.lucene.index.Term;
-import org.apache.lucene.queryParser.MultiFieldQueryParser;
-import org.apache.lucene.queryParser.ParseException;
+import org.apache.lucene.queries.mlt.MoreLikeThis;
+import org.apache.lucene.queryparser.classic.MultiFieldQueryParser;
+import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanClause.Occur;
 import org.apache.lucene.search.BooleanQuery;
@@ -60,7 +64,6 @@ import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.search.WildcardQuery;
-import org.apache.lucene.search.similar.MoreLikeThis;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
@@ -83,7 +86,8 @@ import org.ujmp.core.util.SerializationUtil;
 import org.ujmp.core.util.StringUtil;
 import org.ujmp.core.util.io.FileUtil;
 
-public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, Erasable, HasSampleMap, SimilaritySearcher {
+public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, Erasable, HasSampleMap,
+		SimilaritySearcher {
 	private static final long serialVersionUID = -8483996550983833243L;
 
 	private IndexWriter indexWriter = null;
@@ -142,7 +146,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 		if (analyzer != null) {
 			this.analyzer = analyzer;
 		} else {
-			this.analyzer = new StandardAnalyzer(Version.LUCENE_31);
+			this.analyzer = new StandardAnalyzer(Version.LUCENE_47);
 		}
 
 		if (indices.length == 1) {
@@ -167,23 +171,25 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 		this.path = path;
 
 		directory = FSDirectory.open(path);
-
-		if (IndexReader.indexExists(directory)) {
+		if (DirectoryReader.indexExists(directory)) {
 			if (!readOnly) {
 				if (IndexWriter.isLocked(directory)) {
 					IndexWriter.unlock(directory);
 				}
-				indexWriter = new IndexWriter(directory, new IndexWriterConfig(Version.LUCENE_31, analyzer));
+				indexWriter = new IndexWriter(directory, new IndexWriterConfig(Version.LUCENE_47, analyzer));
 			}
 
-			prepareReader();
-			Collection<?> c = indexSearcher.getIndexReader().getFieldNames(FieldOption.ALL);
-			for (Object o : c) {
-				fields.add((String) o);
+			for (AtomicReaderContext rc : getIndexSearcher().getIndexReader().leaves()) {
+				AtomicReader ar = rc.reader();
+				FieldInfos fis = ar.getFieldInfos();
+				for (FieldInfo fi : fis) {
+					fields.add(fi.name);
+				}
 			}
 
 		} else if (!readOnly) {
-			indexWriter = new IndexWriter(directory, new IndexWriterConfig(Version.LUCENE_31, analyzer).setOpenMode(OpenMode.CREATE));
+			indexWriter = new IndexWriter(directory,
+					new IndexWriterConfig(Version.LUCENE_47, analyzer).setOpenMode(OpenMode.CREATE));
 		}
 
 		setSamples(new LuceneSampleMap(this));
@@ -198,11 +204,10 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 		// score must not be saved
 		sample.getVariables().remove("Score");
 
-		prepareWriter();
 		Document doc = new Document();
 
 		String id = sample.getId();
-		doc.add(new Field(Sample.ID, id, Field.Store.YES, Field.Index.NOT_ANALYZED));
+		doc.add(new StringField(Sample.ID, id, Field.Store.YES));
 
 		for (Variable v : sample.getVariables()) {
 			String key = v.getLabel();
@@ -224,7 +229,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 
 		doc.add(new Field("RawData", SerializationUtil.serialize(sample)));
 
-		indexWriter.updateDocument(new Term(Sample.ID, id), doc);
+		getIndexWriter().updateDocument(new Term(Sample.ID, id), doc);
 	}
 
 	public final DataSet searchSimilar(Sample sample) throws Exception {
@@ -241,8 +246,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 				indexWriter.commit();
 				return indexWriter.numDocs();
 			} else {
-				prepareReader();
-				return indexSearcher.getIndexReader().numDeletedDocs();
+				return getIndexSearcher().getIndexReader().numDeletedDocs();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -251,24 +255,18 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 	}
 
 	public synchronized Sample getSampleAt(int index) throws Exception {
-		prepareReader();
-		if (indexSearcher.getIndexReader().isDeleted(index)) {
-			return null;
-		} else {
-			Document doc = indexSearcher.doc(index);
-			Sample s = (Sample) SerializationUtil.deserialize(doc.getBinaryValue("rawdata"));
-			return s;
-		}
+		Document doc = getIndexSearcher().doc(index);
+		Sample s = (Sample) SerializationUtil.deserialize(doc.getBinaryValue("rawdata").bytes);
+		return s;
 	}
 
 	public synchronized Sample getSample(String id) throws Exception {
-		prepareReader();
 		Term term = new Term(Sample.ID, id);
 		TermQuery tq = new TermQuery(term);
-		TopDocs td = indexSearcher.search(tq, 1);
+		TopDocs td = getIndexSearcher().search(tq, 1);
 		if (td.totalHits > 0) {
 			Document doc = indexSearcher.doc(td.scoreDocs[0].doc);
-			Sample s = (Sample) SerializationUtil.deserialize(doc.getBinaryValue("RawData"));
+			Sample s = (Sample) SerializationUtil.deserialize(doc.getBinaryValue("RawData").bytes);
 
 			MoreLikeThis mlt = new MoreLikeThis(indexSearcher.getIndexReader());
 			mlt.setFieldNames(new String[] { Variable.LABEL, Variable.DESCRIPTION, Variable.TAGS });
@@ -289,10 +287,9 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 	}
 
 	public synchronized DataSet search(Query query, int start, int count) throws Exception {
-		prepareReader();
 		System.out.println("searching for: " + query);
 
-		MoreLikeThis mlt = new MoreLikeThis(indexSearcher.getIndexReader());
+		MoreLikeThis mlt = new MoreLikeThis(getIndexSearcher().getIndexReader());
 		mlt.setFieldNames(new String[] { Variable.LABEL, Variable.DESCRIPTION, Variable.TAGS });
 		mlt.setMaxWordLen(MAXWORDLENGTH);
 		TopDocs td = indexSearcher.search(query, count);
@@ -302,7 +299,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 			int id = sd.doc;
 			Document doc = indexSearcher.doc(id);
 			Sample s = null;
-			s = (Sample) SerializationUtil.deserialize(doc.getBinaryValue("RawData"));
+			s = (Sample) SerializationUtil.deserialize(doc.getBinaryValue("RawData").bytes);
 			s.getVariables().setMatrix(Sample.SCORE, MathUtil.getMatrix(sd.score));
 			String[] terms = mlt.retrieveInterestingTerms(id);
 			for (int i = 0; i < 10 && i < terms.length; i++) {
@@ -313,16 +310,31 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 		return result;
 	}
 
-	protected synchronized void prepareReader() throws CorruptIndexException, IOException {
-		if (indexWriter != null) {
-			indexWriter.commit();
-		}
-		if (indexSearcher != null && !indexSearcher.getIndexReader().isCurrent()) {
-			indexSearcher.close();
-			indexSearcher = null;
-		}
-		if (indexSearcher == null) {
-			indexSearcher = new IndexSearcher(directory, true);
+	private synchronized IndexWriter getIndexWriter() {
+		try {
+			if (!readOnly && indexSearcher != null) {
+				indexSearcher.getIndexReader().close();
+				indexSearcher = null;
+			}
+			if (indexWriter == null) {
+				if (DirectoryReader.indexExists(getDirectory())) {
+					if (!readOnly) {
+						if (IndexWriter.isLocked(getDirectory())) {
+							IndexWriter.unlock(getDirectory());
+						}
+						indexWriter = new IndexWriter(getDirectory(), new IndexWriterConfig(Version.LUCENE_47,
+								getAnalyzer()));
+					}
+				} else {
+					if (!readOnly) {
+						indexWriter = new IndexWriter(getDirectory(), new IndexWriterConfig(Version.LUCENE_47,
+								getAnalyzer()));
+					}
+				}
+			}
+			return indexWriter;
+		} catch (Exception e) {
+			throw new RuntimeException("could not prepare writher", e);
 		}
 	}
 
@@ -330,53 +342,58 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 		return directory;
 	}
 
-	private synchronized void prepareWriter() throws IOException {
-		if (indexSearcher != null) {
-			indexSearcher.close();
-			indexSearcher = null;
-		}
-	}
+	private synchronized IndexSearcher getIndexSearcher() {
+		try {
+			if (!DirectoryReader.indexExists(getDirectory())) {
+				getIndexWriter();
+			}
 
-	public IndexSearcher getIndexSearcher() throws CorruptIndexException, IOException {
-		prepareReader();
-		return indexSearcher;
+			if (indexSearcher == null) {
+				indexSearcher = new IndexSearcher(DirectoryReader.open(getIndexWriter(), true));
+			}
+			return indexSearcher;
+		} catch (Exception e) {
+			throw new RuntimeException("could not prepare reader", e);
+		}
 	}
 
 	public synchronized void flush() throws IOException {
-		if (indexWriter != null) {
-			indexWriter.commit();
-		}
-	}
-
-	public synchronized void optimize() throws IOException {
-		if (indexWriter != null) {
-			indexWriter.optimize();
-		}
+		IndexWriter iw = getIndexWriter();
+		iw.commit();
+		iw.close(true);
+		indexWriter = null;
 	}
 
 	public synchronized void close() throws IOException {
+		if (indexWriter != null) {
+			indexWriter.close(true);
+		}
 		if (indexSearcher != null) {
-			indexSearcher.close();
-			indexSearcher = null;
+			indexSearcher.getIndexReader().close();
 		}
 		if (indexWriter != null) {
-			indexWriter.close();
+			indexWriter.close(true);
+			indexWriter = null;
+		}
+		if (indexSearcher != null) {
+			indexSearcher.getIndexReader().close();
+			indexSearcher = null;
+		}
+		if (directory != null) {
+			directory.close();
 		}
 	}
 
 	public synchronized void erase() throws IOException {
-		if (readOnly) {
-			return;
-		}
+		clear();
 		close();
 		FileUtil.deleteRecursive(path);
 	}
 
 	public synchronized DataSet searchSimilar(Sample sample, int start, int count) throws Exception {
-		prepareReader();
 		Term term = new Term(Sample.ID, sample.getId());
 		TermQuery tq = new TermQuery(term);
-		TopDocs td = indexSearcher.search(tq, count);
+		TopDocs td = getIndexSearcher().search(tq, count);
 		if (td == null || td.totalHits == 0) {
 			DataSet ds = DataSetFactory.emptyDataSet();
 			return ds;
@@ -591,7 +608,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 	public Query parseQuery(String query) throws ParseException {
 		Query q = null;
 		String[] fs = new String[fields.size()];
-		MultiFieldQueryParser p = new MultiFieldQueryParser(Version.LUCENE_31, fields.toArray(fs), analyzer);
+		MultiFieldQueryParser p = new MultiFieldQueryParser(Version.LUCENE_47, fields.toArray(fs), analyzer);
 		p.setDefaultOperator(MultiFieldQueryParser.AND_OPERATOR);
 		if (query == null || "".equals(query) || "*".equals(query)) {
 			BooleanQuery bq = new BooleanQuery();
@@ -623,9 +640,8 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 	}
 
 	public synchronized int countResults(Query query) throws Exception {
-		prepareReader();
 		System.out.println("searching for: " + query);
-		TopDocs td = indexSearcher.search(query, 1);
+		TopDocs td = getIndexSearcher().search(query, 1);
 		return td.totalHits;
 	}
 

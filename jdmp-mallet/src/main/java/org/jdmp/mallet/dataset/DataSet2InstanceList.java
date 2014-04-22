@@ -37,7 +37,8 @@ import cc.mallet.types.LabelAlphabet;
 public class DataSet2InstanceList extends InstanceList {
 	private static final long serialVersionUID = -6205824050882100522L;
 
-	public DataSet2InstanceList(ClassificationDataSet dataSet, LabelAlphabet inputAlphabet, LabelAlphabet targetAlphabet, List<Integer> cumSum) {
+	public DataSet2InstanceList(ClassificationDataSet dataSet, LabelAlphabet inputAlphabet,
+			LabelAlphabet targetAlphabet, List<Integer> cumSum) {
 		super(new EmptyPipe());
 
 		getPipe().setDataAlphabet(inputAlphabet);

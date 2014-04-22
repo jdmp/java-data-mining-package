@@ -51,34 +51,38 @@ public class DefaultHtmlFactory implements HtmlFactory {
 		return new DefaultStyle();
 	}
 
-	public Page createSamplePage(HttpServletRequest request, String path, Sample sample, Object... parameters) throws ServletException, IOException {
+	public Page createSamplePage(HttpServletRequest request, String path, Sample sample, Object... parameters)
+			throws ServletException, IOException {
 		return new DefaultSamplePage(sample, path, request, parameters);
 	}
 
-	public Page createIndexPage(HttpServletRequest request, String path, Index index, Object... parameters) throws ServletException, IOException {
+	public Page createIndexPage(HttpServletRequest request, String path, Index index, Object... parameters)
+			throws ServletException, IOException {
 		return new DefaultIndexPage(index, path, request, parameters);
 	}
 
-	public Page createAlgorithmPage(HttpServletRequest request, String path, Algorithm algorithm, Object... parameters) throws ServletException,
-			IOException {
+	public Page createAlgorithmPage(HttpServletRequest request, String path, Algorithm algorithm, Object... parameters)
+			throws ServletException, IOException {
 		return new DefaultAlgorithmPage(request, path, algorithm, parameters);
 	}
 
-	public Page createDataSetPage(HttpServletRequest request, String path, DataSet dataSet, Object... parameters) throws ServletException,
-			IOException {
+	public Page createDataSetPage(HttpServletRequest request, String path, DataSet dataSet, Object... parameters)
+			throws ServletException, IOException {
 		return new DefaultDataSetPage(request, path, dataSet, parameters);
 	}
 
-	public Page createMatrixPage(HttpServletRequest request, String path, Matrix matrix, Object... parameters) throws ServletException, IOException {
+	public Page createMatrixPage(HttpServletRequest request, String path, Matrix matrix, Object... parameters)
+			throws ServletException, IOException {
 		return new DefaultMatrixPage(request, path, matrix, parameters);
 	}
 
-	public Page createModulePage(HttpServletRequest request, String path, Module module, Object... parameters) throws ServletException, IOException {
+	public Page createModulePage(HttpServletRequest request, String path, Module module, Object... parameters)
+			throws ServletException, IOException {
 		return new DefaultModulePage(request, path, module, parameters);
 	}
 
-	public Page createVariablePage(HttpServletRequest request, String path, Variable variable, Object... parameters) throws ServletException,
-			IOException {
+	public Page createVariablePage(HttpServletRequest request, String path, Variable variable, Object... parameters)
+			throws ServletException, IOException {
 		return new DefaultVariablePage(request, path, variable, parameters);
 	}
 

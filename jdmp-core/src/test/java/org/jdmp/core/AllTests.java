@@ -30,5 +30,5 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({ TestScript.class, TestNaiveBayesClassifier.class, TestMLP.class,
 		TestLinearRegression.class, TestRandomClassifier.class, TestConstantClassifier.class,
 		TestScript.class })
-public class AllTests {
+public abstract class AllTests {
 }

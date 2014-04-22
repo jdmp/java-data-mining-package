@@ -46,7 +46,7 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>				
+				<artifactId>maven-compiler-plugin</artifactId>
 			</plugin>
 			<plugin>
 				<inherited>true</inherited>
@@ -151,43 +151,13 @@
 			<dependency>
 				<groupId>org.apache.lucene</groupId>
 				<artifactId>lucene-core</artifactId>
-				<version>3.5.0</version>
+				<version>4.7.0</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.lucene</groupId>
 				<artifactId>lucene-queries</artifactId>
-				<version>3.5.0</version>
-				<scope>compile</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.lucene</groupId>
-				<artifactId>lucene-spellchecker</artifactId>
-				<version>3.5.0</version>
-				<scope>compile</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.lucene</groupId>
-				<artifactId>lucene-highlighter</artifactId>
-				<version>3.5.0</version>
-				<scope>compile</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.lucene</groupId>
-				<artifactId>lucene-wordnet</artifactId>
-				<version>3.5.0</version>
-				<scope>compile</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.lucene</groupId>
-				<artifactId>lucene-wikipedia</artifactId>
-				<version>3.5.0</version>
-				<scope>compile</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.lucene</groupId>
-				<artifactId>lucene-analyzers</artifactId>
-				<version>3.5.0</version>
+				<version>4.7.0</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
@@ -271,7 +241,8 @@
 		<repository>
 			<id>java-matrix</id>
 			<name>java-matrix maven repository</name>
-			<url>http://java-matrix.org/maven2</url>
+			<url>http://java-matrix.org/maven2/</url>
 		</repository>
 	</repositories>
+
 </project>

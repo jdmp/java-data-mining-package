@@ -23,6 +23,8 @@
 
 package org.jdmp.mallet.matrix;
 
+import org.ujmp.core.doublematrix.SparseDoubleMatrix2D;
+import org.ujmp.core.doublematrix.factory.SparseDoubleMatrix2DFactory;
 import org.ujmp.core.doublematrix.stub.AbstractSparseDoubleMatrix2D;
 
 import cc.mallet.types.Labeling;
@@ -33,6 +35,7 @@ public class Labeling2Matrix extends AbstractSparseDoubleMatrix2D {
 	private Labeling labeling = null;
 
 	public Labeling2Matrix(Labeling labeling) {
+		super(1, labeling.getLabelAlphabet().size());
 		this.labeling = labeling;
 	}
 
@@ -58,6 +61,11 @@ public class Labeling2Matrix extends AbstractSparseDoubleMatrix2D {
 
 	public long[] getSize() {
 		return new long[] { 1, labeling.getLabelAlphabet().size() };
+	}
+
+	public SparseDoubleMatrix2DFactory<? extends SparseDoubleMatrix2D> getFactory() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

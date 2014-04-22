@@ -70,8 +70,8 @@ public class MalletClassifier extends AbstractClassifier {
 	}
 
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
-		Instance instance = new Sample2Instance(input, null, classifier.getAlphabet(), classifier.getLabelAlphabet(), classifier.getInstancePipe(),
-				cumSum);
+		Instance instance = new Sample2Instance(input, null, classifier.getAlphabet(), classifier.getLabelAlphabet(),
+				classifier.getInstancePipe(), cumSum);
 		Classification c = classifier.classify(instance);
 		return new Labeling2Matrix(c.getLabeling());
 	}
@@ -138,7 +138,8 @@ public class MalletClassifier extends AbstractClassifier {
 			targetAlphabet.lookupIndex("Class" + i, true);
 		}
 
-		InstanceList trainingSet = new DataSet2InstanceList((ClassificationDataSet) dataSet, inputAlphabet, targetAlphabet, cumSum);
+		InstanceList trainingSet = new DataSet2InstanceList((ClassificationDataSet) dataSet, inputAlphabet,
+				targetAlphabet, cumSum);
 
 		classifier = trainer.train(trainingSet);
 	}
