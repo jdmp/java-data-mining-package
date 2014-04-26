@@ -65,16 +65,16 @@ public class WeightUpdate extends AlgorithmFiveSources {
 
 	public void setLearningRate(double v) {
 		Matrix m = Matrix.Factory.linkToValue(v);
-		getVariables().setMatrix(ETA, m);
+		getVariableMap().setMatrix(ETA, m);
 	}
 
 	public double getLearningRate() {
-		return getVariables().getMatrix(ETA).doubleValue();
+		return getVariableMap().getMatrix(ETA).doubleValue();
 	}
 
 	public void setSampleWeight(double v) {
 		Matrix m = Matrix.Factory.linkToValue(v);
-		getVariables().setMatrix(SAMPLEWEIGHT, m);
+		getVariableMap().setMatrix(SAMPLEWEIGHT, m);
 	}
 
 	public Map<String, Object> calculateObjects(Map<String, Object> matrices) {

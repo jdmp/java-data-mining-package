@@ -40,16 +40,16 @@ public class DataSetToInstancesWrapper extends Instances {
 	public DataSetToInstancesWrapper(RegressionDataSet dataSet, boolean discrete,
 			boolean includeTarget) {
 		super(dataSet.getLabel(), new DataSetToAttributeInfoWrapper(dataSet, discrete), dataSet
-				.getSamples().getSize());
+				.getSampleMap().getSize());
 
 		if (includeTarget) {
 			setClassIndex(dataSet.getFeatureCount());
 		}
 
-		for (Sample s : dataSet.getSamples()) {
-			Matrix input = s.getVariables().getMatrix(INPUT);
-			Matrix weight = s.getVariables().getMatrix(WEIGHT);
-			Matrix target = s.getVariables().getMatrix(TARGET);
+		for (Sample s : dataSet.getSampleMap()) {
+			Matrix input = s.getVariableMap().getMatrix(INPUT);
+			Matrix weight = s.getVariableMap().getMatrix(WEIGHT);
+			Matrix target = s.getVariableMap().getMatrix(TARGET);
 			add(new SampleToInstanceWrapper(input, weight, target, discrete, includeTarget));
 		}
 

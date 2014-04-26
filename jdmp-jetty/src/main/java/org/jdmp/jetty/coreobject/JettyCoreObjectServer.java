@@ -69,9 +69,9 @@ public class JettyCoreObjectServer {
 		if (object instanceof HasVariableMap) {
 			Context list = new Context(contexts, "/variables", Context.SESSIONS);
 			list.addServlet(
-					new ServletHolder(new JettyCoreObjectListServlet(((HasVariableMap) object).getVariables())), "/*");
+					new ServletHolder(new JettyCoreObjectListServlet(((HasVariableMap) object).getVariableMap())), "/*");
 			Context listio = new Context(contexts, "/io/variables", Context.SESSIONS);
-			listio.addServlet(new ServletHolder(new JettyObjectServlet(((HasVariableMap) object).getVariables())), "/*");
+			listio.addServlet(new ServletHolder(new JettyObjectServlet(((HasVariableMap) object).getVariableMap())), "/*");
 		}
 
 		server.start();

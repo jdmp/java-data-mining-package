@@ -57,7 +57,7 @@ public abstract class SampleFactory {
 
 	public static final Sample linkToMatrix(Matrix input) {
 		Sample s = new DefaultSample();
-		s.getVariables().setMatrix(Sample.INPUT, input);
+		s.getVariableMap().setMatrix(Sample.INPUT, input);
 		s.setLabel(input.getLabel());
 		return s;
 	}
@@ -80,8 +80,8 @@ public abstract class SampleFactory {
 
 	public static final Sample classificationSample(Matrix input, Matrix target) {
 		Sample s = new DefaultSample();
-		s.getVariables().setMatrix(Sample.INPUT, input);
-		s.getVariables().setMatrix(Sample.TARGET, target);
+		s.getVariableMap().setMatrix(Sample.INPUT, input);
+		s.getVariableMap().setMatrix(Sample.TARGET, target);
 		return s;
 	}
 
@@ -107,10 +107,10 @@ public abstract class SampleFactory {
 		Sample ret = SampleFactory.emptySample();
 		ret.setLabel(s.getLabel());
 		ret.setDescription(s.getDescription());
-		for (String k : s.getVariables().keySet()) {
-			Variable v = s.getVariables().get(k);
+		for (String k : s.getVariableMap().keySet()) {
+			Variable v = s.getVariableMap().get(k);
 			if (v != null) {
-				ret.getVariables().put(k, v.clone());
+				ret.getVariableMap().put(k, v.clone());
 			}
 		}
 		return ret;

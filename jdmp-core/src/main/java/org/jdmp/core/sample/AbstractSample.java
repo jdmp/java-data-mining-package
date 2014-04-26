@@ -24,38 +24,31 @@
 package org.jdmp.core.sample;
 
 import org.jdmp.core.AbstractCoreObject;
-import org.jdmp.core.variable.DefaultVariables;
+import org.jdmp.core.variable.DefaultVariableMap;
 import org.jdmp.core.variable.Variable;
-import org.jdmp.core.variable.Variables;
+import org.jdmp.core.variable.VariableMap;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.util.StringUtil;
 
 public abstract class AbstractSample extends AbstractCoreObject implements Sample {
 	private static final long serialVersionUID = 1693258179407382419L;
 
-	private Variables variables = null;
+	private final VariableMap variables = new DefaultVariableMap();
 
 	public AbstractSample() {
 		super();
 	}
 
-	public final Variables getVariables() {
-		if (variables == null) {
-			variables = new DefaultVariables();
-		}
+	public final VariableMap getVariableMap() {
 		return variables;
 	}
 
-	public final void setVariables(Variables variables) {
-		this.variables = variables;
-	}
-
 	public Matrix getMatrix(String variableKey) {
-		return getVariables().getMatrix(variableKey);
+		return getVariableMap().getMatrix(variableKey);
 	}
 
 	public void setMatrix(String variableKey, Matrix matrix) {
-		getVariables().setMatrix(variableKey, matrix);
+		getVariableMap().setMatrix(variableKey, matrix);
 	}
 
 	public boolean isCorrect() {
@@ -63,17 +56,17 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 	}
 
 	public int getTargetClass() {
-		return (int) getVariables().getMatrix(TARGET).getCoordinatesOfMaximum()[COLUMN];
+		return (int) getVariableMap().getMatrix(TARGET).getCoordinatesOfMaximum()[COLUMN];
 	}
 
 	public int getRecognizedClass() {
-		return (int) getVariables().getMatrix(PREDICTED).getCoordinatesOfMaximum()[COLUMN];
+		return (int) getVariableMap().getMatrix(PREDICTED).getCoordinatesOfMaximum()[COLUMN];
 	}
 
 	public abstract Sample clone();
 
 	public final String getId() {
-		String id = getVariables().getAsString(Sample.ID);
+		String id = getVariableMap().getAsString(Sample.ID);
 		if (id == null) {
 			id = "Sample" + getCoreObjectId();
 			setId(id);
@@ -85,8 +78,8 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 		StringBuilder s = new StringBuilder();
 		s.append(getClass().getSimpleName());
 		s.append(" [ ");
-		for (Object key : getVariables().keySet()) {
-			Variable v = getVariables().get(key);
+		for (Object key : getVariableMap().keySet()) {
+			Variable v = getVariableMap().get(key);
 			s.append(key + "=");
 			s.append(StringUtil.format(v.getLatestMatrix()));
 			s.append(" ");
@@ -96,31 +89,31 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 	}
 
 	public final void setId(String id) {
-		getVariables().setObject(Sample.ID, id);
+		getVariableMap().setObject(Sample.ID, id);
 	}
 
 	public final String getDescription() {
-		return getVariables().getAsString(Sample.DESCRIPTION);
+		return getVariableMap().getAsString(Sample.DESCRIPTION);
 	}
 
 	public final void setDescription(String description) {
-		getVariables().setObject(Sample.DESCRIPTION, description);
+		getVariableMap().setObject(Sample.DESCRIPTION, description);
 	}
 
 	public final String getLabel() {
-		return getVariables().getAsString(Sample.LABEL);
+		return getVariableMap().getAsString(Sample.LABEL);
 	}
 
 	public final void setLabelObject(Object label) {
-		getVariables().setObject(Sample.LABEL, label);
+		getVariableMap().setObject(Sample.LABEL, label);
 	}
 
 	public final Object getLabelObject() {
-		return getVariables().getAsObject(Sample.LABEL);
+		return getVariableMap().getAsObject(Sample.LABEL);
 	}
 
 	public final void setLabel(String label) {
-		getVariables().setObject(Sample.LABEL, label);
+		getVariableMap().setObject(Sample.LABEL, label);
 	}
 
 	public final void clear() {

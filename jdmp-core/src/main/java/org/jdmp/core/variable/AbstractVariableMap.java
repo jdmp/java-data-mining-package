@@ -32,8 +32,8 @@ import org.ujmp.core.Matrix;
 import org.ujmp.core.util.MathUtil;
 import org.ujmp.core.util.StringUtil;
 
-public abstract class AbstractVariables extends AbstractObservableMap<Variable> implements
-		Variables {
+public abstract class AbstractVariableMap extends AbstractObservableMap<Variable> implements
+		VariableMap {
 	private static final long serialVersionUID = 5598126665100040507L;
 
 	public final BigInteger getAsBigInteger(String variableKey) {

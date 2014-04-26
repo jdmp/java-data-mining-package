@@ -45,7 +45,7 @@ public class MultiIndex extends AbstractIndex implements SimilaritySearcher {
 	public MultiIndex(Index... indices) {
 		String label = "";
 		for (int i = 0; i < indices.length; i++) {
-			getAlgorithms().put("Index" + i, (Algorithm) indices[i]);
+			getAlgorithmMap().put("Index" + i, (Algorithm) indices[i]);
 			label += ((Algorithm) indices[i]).getLabel();
 			if (i < indices.length - 1) {
 				label += ", ";
@@ -65,14 +65,14 @@ public class MultiIndex extends AbstractIndex implements SimilaritySearcher {
 		DataSet ds = DataSetFactory.emptyDataSet();
 		try {
 			List<Future<DataSet>> futures = new ArrayList<Future<DataSet>>();
-			for (Object key : getAlgorithms().keySet()) {
-				Algorithm a = getAlgorithms().get(key);
+			for (Object key : getAlgorithmMap().keySet()) {
+				Algorithm a = getAlgorithmMap().get(key);
 				if (a instanceof Index) {
 					futures.add(executors.submit(new SearchFuture((Index) a, query, start, count)));
 				}
 			}
 			for (Future<DataSet> f : futures) {
-				ds.getSamples().addAll(f.get().getSamples().values());
+				ds.getSampleMap().addAll(f.get().getSampleMap().values());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -84,15 +84,15 @@ public class MultiIndex extends AbstractIndex implements SimilaritySearcher {
 		DataSet ds = DataSetFactory.emptyDataSet();
 		try {
 			List<Future<DataSet>> futures = new ArrayList<Future<DataSet>>();
-			for (Object key : getAlgorithms().keySet()) {
-				Algorithm a = getAlgorithms().get(key);
+			for (Object key : getAlgorithmMap().keySet()) {
+				Algorithm a = getAlgorithmMap().get(key);
 				if (a instanceof SimilaritySearcher) {
 					futures.add(executors.submit(new SearchSimilarFuture((SimilaritySearcher) a,
 							sample, start, count)));
 				}
 			}
 			for (Future<DataSet> f : futures) {
-				ds.getSamples().addAll(f.get().getSamples().values());
+				ds.getSampleMap().addAll(f.get().getSampleMap().values());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -164,8 +164,8 @@ public class MultiIndex extends AbstractIndex implements SimilaritySearcher {
 
 	public Sample getSample(String id) throws Exception {
 		List<Future<Sample>> futures = new ArrayList<Future<Sample>>();
-		for (Object key : getAlgorithms().keySet()) {
-			Algorithm a = getAlgorithms().get(key);
+		for (Object key : getAlgorithmMap().keySet()) {
+			Algorithm a = getAlgorithmMap().get(key);
 			if (a instanceof Index) {
 				futures.add(executors.submit(new GetFuture((Index) a, id)));
 			}
@@ -188,7 +188,7 @@ public class MultiIndex extends AbstractIndex implements SimilaritySearcher {
 		return searchSimilar(sample, 0, count);
 	}
 
-	public ObservableMap<Sample> getSamples() {
+	public ObservableMap<Sample> getSampleMap() {
 		// TODO Auto-generated method stub
 		return null;
 	}

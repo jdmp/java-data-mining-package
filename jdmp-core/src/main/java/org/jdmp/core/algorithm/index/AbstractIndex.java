@@ -54,7 +54,7 @@ public abstract class AbstractIndex extends AbstractAlgorithm implements Index {
 	}
 
 	public void add(DataSet dataSet) throws Exception {
-		for (Sample sample : dataSet.getSamples()) {
+		for (Sample sample : dataSet.getSampleMap()) {
 			add(sample);
 		}
 	}

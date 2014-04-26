@@ -45,11 +45,11 @@ public class AlgorithmListTableModel extends AbstractTableModel implements ListD
 
 	public AlgorithmListTableModel(HasAlgorithmMap iAlgorithms) {
 		this.iAlgorithms = iAlgorithms;
-		iAlgorithms.getAlgorithms().addListDataListener(this);
+		iAlgorithms.getAlgorithmMap().addListDataListener(this);
 	}
 
 	public int getRowCount() {
-		return iAlgorithms.getAlgorithms().getSize();
+		return iAlgorithms.getAlgorithmMap().getSize();
 	}
 
 	public int getColumnCount() {
@@ -76,7 +76,7 @@ public class AlgorithmListTableModel extends AbstractTableModel implements ListD
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		return iAlgorithms.getAlgorithms().getElementAt(rowIndex);
+		return iAlgorithms.getAlgorithmMap().getElementAt(rowIndex);
 	}
 
 	public void contentsChanged(ListDataEvent e) {

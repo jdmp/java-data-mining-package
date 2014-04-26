@@ -33,30 +33,23 @@ import java.util.Map;
 import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.util.DefaultObservableList;
 import org.jdmp.core.util.DefaultObservableMap;
-import org.jdmp.core.util.ObservableList;
 import org.jdmp.core.util.ObservableMap;
-import org.jdmp.core.variable.DefaultVariable;
-import org.jdmp.core.variable.DefaultVariables;
+import org.jdmp.core.variable.DefaultVariableMap;
 import org.jdmp.core.variable.Variable;
-import org.jdmp.core.variable.Variables;
+import org.jdmp.core.variable.VariableMap;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.util.MathUtil;
 
 public abstract class AbstractAlgorithm extends AbstractCoreObject implements Algorithm {
 	private static final long serialVersionUID = 3219035032582720106L;
 
-	private Variables variables = new DefaultVariables();
-
-	private ObservableMap<Algorithm> algorithmList = new DefaultObservableMap<Algorithm>();
-
-	private ObservableList<DataSet> dataSetList = new DefaultObservableList<DataSet>();
+	private final VariableMap variableMap = new DefaultVariableMap();
+	private final ObservableMap<Algorithm> algorithmMap = new DefaultObservableMap<Algorithm>();
+	private final ObservableMap<DataSet> dataSetMap = new DefaultObservableMap<DataSet>();
 
 	private final Map<String, String> edgeLabels = new HashMap<String, String>(2);
-
 	private final Map<String, EdgeDirection> edgeDirections = new HashMap<String, EdgeDirection>(2);
-
 	private final List<String> variableKeys = new ArrayList<String>(2);
 
 	public final void setEdgeLabel(String key, String edgeLabel) {
@@ -69,7 +62,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 
 	public final void setVariables(Variable... variables) {
 		for (int i = 0; i < variables.length && i < getVariableKeys().size(); i++) {
-			this.variables.put(variableKeys.get(i), variables[i]);
+			this.variableMap.put(variableKeys.get(i), variables[i]);
 		}
 	}
 
@@ -78,23 +71,23 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 	}
 
 	public final void setLabelObject(Object label) {
-		getVariables().setObject(Sample.LABEL, label);
+		getVariableMap().setObject(Sample.LABEL, label);
 	}
 
 	public final Object getLabelObject() {
-		return getVariables().getAsObject(Sample.LABEL);
+		return getVariableMap().getAsObject(Sample.LABEL);
 	}
 
 	public final String getLabel() {
-		return getVariables().getAsString(Algorithm.LABEL);
+		return getVariableMap().getAsString(Algorithm.LABEL);
 	}
 
 	public final void setLabel(String label) {
-		getVariables().setObject(Algorithm.LABEL, label);
+		getVariableMap().setObject(Algorithm.LABEL, label);
 	}
 
 	public final String getId() {
-		String id = getVariables().getAsString(Algorithm.ID);
+		String id = getVariableMap().getAsString(Algorithm.ID);
 		if (id == null) {
 			id = "Algorithm" + getCoreObjectId();
 			setId(id);
@@ -103,15 +96,15 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 	}
 
 	public final void setId(String id) {
-		getVariables().setObject(Algorithm.ID, id);
+		getVariableMap().setObject(Algorithm.ID, id);
 	}
 
 	public final String getDescription() {
-		return getVariables().getAsString(Algorithm.DESCRIPTION);
+		return getVariableMap().getAsString(Algorithm.DESCRIPTION);
 	}
 
 	public final void setDescription(String description) {
-		getVariables().setObject(Algorithm.DESCRIPTION, description);
+		getVariableMap().setObject(Algorithm.DESCRIPTION, description);
 	}
 
 	public AbstractAlgorithm() {
@@ -124,22 +117,22 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 	}
 
 	public void setVariable(String index, Variable variable) {
-		variables.put(index, variable);
+		variableMap.put(index, variable);
 	}
 
 	public final void setAlgorithm(String index, Algorithm a) {
-		algorithmList.put(index, a);
+		algorithmMap.put(index, a);
 	}
 
 	public final void clear() {
-		if (algorithmList != null) {
-			algorithmList.clear();
+		if (algorithmMap != null) {
+			algorithmMap.clear();
 		}
-		if (variables != null) {
-			variables.clear();
+		if (variableMap != null) {
+			variableMap.clear();
 		}
-		if (dataSetList != null) {
-			dataSetList.clear();
+		if (dataSetMap != null) {
+			dataSetMap.clear();
 		}
 	}
 
@@ -147,13 +140,13 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		Map<String, Object> input = new HashMap<String, Object>();
 
 		for (String v : getInputKeys()) {
-			input.put(v, getVariables().getMatrix(v));
+			input.put(v, getVariableMap().getMatrix(v));
 		}
 
 		Map<String, Object> output = calculateObjects(input);
 
 		for (String v : getOutputKeys()) {
-			getVariables().setMatrix(v, MathUtil.getMatrix(output.get(v)));
+			getVariableMap().setMatrix(v, MathUtil.getMatrix(output.get(v)));
 		}
 
 		return output;
@@ -227,25 +220,16 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		return edgeDirections.get(key);
 	}
 
-	public final Variables getVariables() {
-		if (variables == null) {
-			variables = new DefaultVariables();
-		}
-		return variables;
+	public final VariableMap getVariableMap() {
+		return variableMap;
 	}
 
-	public final ObservableMap<Algorithm> getAlgorithms() {
-		if (algorithmList == null) {
-			algorithmList = new DefaultObservableMap<Algorithm>();
-		}
-		return algorithmList;
+	public final ObservableMap<Algorithm> getAlgorithmMap() {
+		return algorithmMap;
 	}
 
-	public final ObservableList<DataSet> getDataSets() {
-		if (dataSetList == null) {
-			dataSetList = new DefaultObservableList<DataSet>();
-		}
-		return dataSetList;
+	public final ObservableMap<DataSet> getDataSetMap() {
+		return dataSetMap;
 	}
 
 	public final String getEdgeLabel(String key) {
@@ -258,35 +242,6 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		} else {
 			return getClass().getSimpleName() + " [" + getLabel() + "]";
 		}
-	}
-
-	public final void setVariables(Variables variables) {
-		this.variables = variables;
-	}
-
-	public final void setDataSets(ObservableList<DataSet> dataSets) {
-		this.dataSetList = dataSets;
-	}
-
-	public final void setAlgorithms(ObservableMap<Algorithm> algorithms) {
-		this.algorithmList = algorithms;
-	}
-
-	public void setMatrix(String key, Matrix matrix) {
-		getVariable(key).addInnerMatrix(matrix);
-	}
-
-	public Variable getVariable(String key) {
-		Variable v = getVariables().get(key);
-		if (v == null) {
-			v = new DefaultVariable();
-			getVariables().put(key, v);
-		}
-		return v;
-	}
-
-	public Matrix getMatrix(String key) {
-		return getVariable(key).getLatestMatrix();
 	}
 
 }

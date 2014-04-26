@@ -80,20 +80,20 @@ public class TestTagger {
 
 		DataSet ds = new DefaultDataSet();
 		Sample sa1 = new DefaultSample();
-		sa1.getVariables().setObject(Sample.INPUT, s1);
+		sa1.getVariableMap().setObject(Sample.INPUT, s1);
 		Sample sa2 = new DefaultSample();
-		sa2.getVariables().setObject(Sample.INPUT, s2);
-		ds.getSamples().put("s1", sa1);
-		ds.getSamples().put("s2", sa2);
+		sa2.getVariableMap().setObject(Sample.INPUT, s2);
+		ds.getSampleMap().put("s1", sa1);
+		ds.getSampleMap().put("s2", sa2);
 
 		tokenizer.tokenize(Sample.INPUT, ds);
 		tagger.tag(ds);
 
-		sa1 = ds.getSamples().get("s1");
-		sa2 = ds.getSamples().get("s2");
+		sa1 = ds.getSampleMap().get("s1");
+		sa2 = ds.getSampleMap().get("s2");
 
-		Matrix m1 = sa1.getVariables().getMatrix(Tagger.TAGGED);
-		Matrix m2 = sa2.getVariables().getMatrix(Tagger.TAGGED);
+		Matrix m1 = sa1.getVariableMap().getMatrix(Tagger.TAGGED);
+		Matrix m2 = sa2.getVariableMap().getMatrix(Tagger.TAGGED);
 
 		assertEquals(2, m1.getColumnCount());
 		assertEquals(11, m1.getRowCount());

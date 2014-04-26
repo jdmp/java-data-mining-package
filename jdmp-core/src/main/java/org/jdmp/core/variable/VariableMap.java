@@ -30,7 +30,7 @@ import java.util.Date;
 import org.jdmp.core.util.ObservableMap;
 import org.ujmp.core.Matrix;
 
-public interface Variables extends ObservableMap<Variable> {
+public interface VariableMap extends ObservableMap<Variable> {
 
 	public String getAllAsString(String variableKey);
 

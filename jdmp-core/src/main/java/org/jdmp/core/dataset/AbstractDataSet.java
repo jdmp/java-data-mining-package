@@ -32,67 +32,54 @@ import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.DefaultObservableMap;
 import org.jdmp.core.util.ObservableMap;
-import org.jdmp.core.variable.DefaultVariables;
-import org.jdmp.core.variable.Variable;
-import org.jdmp.core.variable.Variables;
-import org.ujmp.core.Matrix;
+import org.jdmp.core.variable.DefaultVariableMap;
+import org.jdmp.core.variable.VariableMap;
 
 public abstract class AbstractDataSet extends AbstractCoreObject implements DataSet {
 	private static final long serialVersionUID = -4168834188998259018L;
 
-	private ObservableMap<Sample> sampleMap = null;
+	private final VariableMap variableMap = new DefaultVariableMap();
+	private final ObservableMap<Sample> sampleMap = new DefaultObservableMap<Sample>();
+	private final ObservableMap<DataSet> dataSetMap = new DefaultObservableMap<DataSet>();
 
-	private Variables variables = null;
-
-	private ObservableMap<DataSet> dataSetList = null;
-
-	public final ObservableMap<Sample> getSamples() {
-		if (sampleMap == null) {
-			sampleMap = new DefaultObservableMap<Sample>();
-		}
+	public final ObservableMap<Sample> getSampleMap() {
 		return sampleMap;
 	}
 
 	public final void setLabelObject(Object label) {
-		getVariables().setObject(Sample.LABEL, label);
+		getVariableMap().setObject(Sample.LABEL, label);
 	}
 
 	public final Object getLabelObject() {
-		return getVariables().getAsObject(Sample.LABEL);
+		return getVariableMap().getAsObject(Sample.LABEL);
 	}
 
-	public final Variables getVariables() {
-		if (variables == null) {
-			variables = new DefaultVariables();
-		}
-		return variables;
+	public final VariableMap getVariableMap() {
+		return variableMap;
 	}
 
-	public final ObservableMap<DataSet> getDataSets() {
-		if (dataSetList == null) {
-			dataSetList = new DefaultObservableMap<DataSet>();
-		}
-		return dataSetList;
+	public final ObservableMap<DataSet> getDataSetMap() {
+		return dataSetMap;
 	}
 
 	public final String getDescription() {
-		return getVariables().getAsString(DataSet.DESCRIPTION);
+		return getVariableMap().getAsString(DataSet.DESCRIPTION);
 	}
 
 	public final void setDescription(String description) {
-		getVariables().setObject(DataSet.DESCRIPTION, description);
+		getVariableMap().setObject(DataSet.DESCRIPTION, description);
 	}
 
 	public String getLabel() {
-		return getVariables().getAsString(DataSet.LABEL);
+		return getVariableMap().getAsString(DataSet.LABEL);
 	}
 
 	public final void setLabel(String label) {
-		getVariables().setObject(DataSet.LABEL, label);
+		getVariableMap().setObject(DataSet.LABEL, label);
 	}
 
 	public final String getId() {
-		String id = getVariables().getAsString(DataSet.ID);
+		String id = getVariableMap().getAsString(DataSet.ID);
 		if (id == null) {
 			id = "DataSet" + getCoreObjectId();
 			setId(id);
@@ -101,33 +88,24 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 	}
 
 	public final void setId(String id) {
-		getVariables().setObject(DataSet.ID, id);
+		getVariableMap().setObject(DataSet.ID, id);
 	}
 
 	public AbstractDataSet() {
 		super();
 	}
 
-	public final Matrix getMatrix(String variableKey) {
-		Variable v = getVariables().get(variableKey);
-		if (v != null) {
-			return v.getLatestMatrix();
-		} else {
-			return null;
-		}
-	}
-
 	public final void clear() {
-		getSamples().clear();
-		getVariables().clear();
-		getDataSets().clear();
+		getSampleMap().clear();
+		getVariableMap().clear();
+		getDataSetMap().clear();
 	}
 
 	public final List<DataSet> splitByCount(boolean shuffle, int... count) {
 		List<DataSet> dataSets = new ArrayList<DataSet>();
 
-		List<Integer> ids = new ArrayList<Integer>(getSamples().getSize());
-		for (int i = getSamples().getSize() - 1; i != -1; i--) {
+		List<Integer> ids = new ArrayList<Integer>(getSampleMap().getSize());
+		for (int i = getSampleMap().getSize() - 1; i != -1; i--) {
 			ids.add(i);
 		}
 
@@ -138,13 +116,13 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		for (int i = 0; i < count.length; i++) {
 			DataSet ds = DataSetFactory.classificationDataSet("DataSet" + i);
 			for (int c = 0; c < count[i]; c++) {
-				ds.getSamples().add(getSamples().getElementAt(ids.remove(0)).clone());
+				ds.getSampleMap().add(getSampleMap().getElementAt(ids.remove(0)).clone());
 			}
 			dataSets.add(ds);
 		}
 		DataSet ds = DataSetFactory.classificationDataSet("DataSet" + count.length);
 		while (ids.size() != 0) {
-			ds.getSamples().add(getSamples().getElementAt(ids.remove(0)).clone());
+			ds.getSampleMap().add(getSampleMap().getElementAt(ids.remove(0)).clone());
 		}
 		dataSets.add(ds);
 
@@ -154,7 +132,7 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 	public final List<DataSet> splitForCV(int numberOfCVSets, int idOfCVSet, long randomSeed) {
 		List<DataSet> returnDataSets = new ArrayList<DataSet>();
 		List<List<Sample>> tempSampleLists = new ArrayList<List<Sample>>();
-		List<Sample> allSamples = new ArrayList<Sample>(getSamples().values());
+		List<Sample> allSamples = new ArrayList<Sample>(getSampleMap().values());
 		Collections.shuffle(allSamples, new Random(randomSeed));
 
 		for (int set = 0; set < numberOfCVSets; set++) {
@@ -172,12 +150,12 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 
 		DataSet testSet = DataSetFactory.classificationDataSet("TestSet" + randomSeed + "-"
 				+ idOfCVSet);
-		testSet.getSamples().addAll(tempSampleLists.get(idOfCVSet));
+		testSet.getSampleMap().addAll(tempSampleLists.get(idOfCVSet));
 		DataSet trainingSet = DataSetFactory.classificationDataSet("TrainingSet" + randomSeed + "-"
 				+ idOfCVSet);
 		for (int i = 0; i < numberOfCVSets; i++) {
 			if (i != idOfCVSet) {
-				trainingSet.getSamples().addAll(tempSampleLists.get(i));
+				trainingSet.getSampleMap().addAll(tempSampleLists.get(i));
 			}
 		}
 
@@ -189,7 +167,7 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 
 	public final List<DataSet> splitByPercent(boolean shuffle, double... percent) {
 		int[] counts = new int[percent.length];
-		int sampleCount = getSamples().getSize();
+		int sampleCount = getSampleMap().getSize();
 		for (int i = 0; i < percent.length; i++) {
 			counts[i] = (int) Math.round(percent[i] * sampleCount);
 		}
@@ -202,18 +180,6 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		} else {
 			return getClass().getSimpleName() + " [" + getLabel() + "]";
 		}
-	}
-
-	public final void setSamples(ObservableMap<Sample> samples) {
-		this.sampleMap = samples;
-	}
-
-	public final void setVariables(Variables variables) {
-		this.variables = variables;
-	}
-
-	public final void setDataSets(ObservableMap<DataSet> dataSets) {
-		this.dataSetList = dataSets;
 	}
 
 	public abstract DataSet clone();

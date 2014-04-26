@@ -40,11 +40,11 @@ public class DefaultDataSet extends AbstractDataSet {
 		Matrix inputMatrix = new DataSetInputMatrixWrapper(this);
 		Variable input = VariableFactory.labeledVariable("Input");
 		input.addInnerMatrix(inputMatrix);
-		getVariables().put(INPUT, input);
+		getVariableMap().put(INPUT, input);
 	}
 
 	public final Variable getInputVariable() {
-		return getVariables().get(INPUT);
+		return getVariableMap().get(INPUT);
 	}
 
 	public final long getInputFeatureCount() {
@@ -88,8 +88,8 @@ public class DefaultDataSet extends AbstractDataSet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		for (Sample s : getSamples()) {
-			ds.getSamples().add(s.clone());
+		for (Sample s : getSampleMap()) {
+			ds.getSampleMap().add(s.clone());
 		}
 		return ds;
 	}

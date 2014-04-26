@@ -29,7 +29,7 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
-import org.jdmp.core.module.HasModuleList;
+import org.jdmp.core.module.HasModuleMap;
 import org.jdmp.core.module.Module;
 import org.jdmp.core.module.ModuleFactory;
 import org.ujmp.core.interfaces.GUIObject;
@@ -49,9 +49,9 @@ public class NewEmptyModuleAction extends AbstractObjectAction {
 
 	public Object call() {
 		Module m = ModuleFactory.emptyModule();
-		if (getCoreObject() instanceof HasModuleList) {
+		if (getCoreObject() instanceof HasModuleMap) {
 			try {
-				((HasModuleList) getCoreObject()).getModules().add(m);
+				((HasModuleMap) getCoreObject()).getModuleMap().add(m);
 			} catch (Exception e) {
 				m.showGUI();
 			}

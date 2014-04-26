@@ -27,8 +27,6 @@ import org.jdmp.core.util.ObservableMap;
 
 public interface HasAlgorithmMap {
 
-	public ObservableMap<Algorithm> getAlgorithms();
-
-	public void setAlgorithms(ObservableMap<Algorithm> algorithms);
+	public ObservableMap<Algorithm> getAlgorithmMap();
 
 }

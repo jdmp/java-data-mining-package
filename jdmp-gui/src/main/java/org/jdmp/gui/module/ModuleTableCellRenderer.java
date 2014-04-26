@@ -63,16 +63,16 @@ public class ModuleTableCellRenderer implements TableCellRenderer {
 				o = module.getLabel();
 				break;
 			case ModuleListTableModel.DATASETCOUNTCOLUMN:
-				o = module.getDataSets().getSize();
+				o = module.getDataSetMap().getSize();
 				break;
 			case ModuleListTableModel.VARIABLECOUNTCOLUMN:
-				o = module.getVariables().getSize();
+				o = module.getVariableMap().getSize();
 				break;
 			case ModuleListTableModel.MODULECOUNTCOLUMN:
 				o = null;
 				break;
 			case ModuleListTableModel.ALGORITHMCOUNTCOLUMN:
-				o = module.getAlgorithms().getSize();
+				o = module.getAlgorithmMap().getSize();
 				break;
 			default:
 				o = null;

@@ -37,7 +37,7 @@ public class TestLuceneIndex {
 		LuceneIndex index = new LuceneIndex();
 		index.add(ds);
 		DataSet result = index.search("setosa");
-		assertEquals(50, result.getSamples().getSize());
+		assertEquals(50, result.getSampleMap().getSize());
 	}
 
 }

@@ -36,20 +36,20 @@ public abstract class AbstractTagger extends AbstractAlgorithm implements Tagger
 	private static final long serialVersionUID = 3955297154098236478L;
 
 	public final void tag(DataSet dataSet) throws Exception {
-		for (Sample sample : dataSet.getSamples()) {
+		for (Sample sample : dataSet.getSampleMap()) {
 			tag(sample);
 		}
 	}
 
 	public final void tag(Sample sample) throws Exception {
-		Variable v = sample.getVariables().get(Tokenizer.TOKENIZED);
+		Variable v = sample.getVariableMap().get(Tokenizer.TOKENIZED);
 		if (v == null) {
 			throw new RuntimeException("text must be tokenized first");
 		}
 		for (Matrix m : v.getMatrixList()) {
 			List<Matrix> list = tag(m);
 			for (Matrix n : list) {
-				sample.getVariables().setMatrix(TAGGED, n);
+				sample.getVariableMap().setMatrix(TAGGED, n);
 			}
 		}
 	}

@@ -32,7 +32,7 @@ import javax.swing.JFileChooser;
 
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DataSetFactory;
-import org.jdmp.core.dataset.HasDataSetList;
+import org.jdmp.core.dataset.HasDataSetMap;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.gui.actions.AbstractObjectAction;
 
@@ -62,9 +62,9 @@ public class LinkDataSetToDirAction extends AbstractObjectAction {
 			}
 
 			DataSet ds = DataSetFactory.linkToDir(file);
-			if (getCoreObject() instanceof HasDataSetList) {
+			if (getCoreObject() instanceof HasDataSetMap) {
 				try {
-					((HasDataSetList) getCoreObject()).getDataSets().add(ds);
+					((HasDataSetMap) getCoreObject()).getDataSetMap().add(ds);
 				} catch (Exception e) {
 					ds.showGUI();
 				}

@@ -29,78 +29,59 @@ import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.DefaultObservableMap;
 import org.jdmp.core.util.ObservableMap;
-import org.jdmp.core.variable.DefaultVariables;
-import org.jdmp.core.variable.Variables;
+import org.jdmp.core.variable.DefaultVariableMap;
+import org.jdmp.core.variable.VariableMap;
 
 public abstract class AbstractModule extends AbstractCoreObject implements Module {
 	private static final long serialVersionUID = 4621466897617405575L;
 
-	private ObservableMap<Algorithm> algorithms = null;
-
-	private ObservableMap<Sample> samples = null;
-
-	private ObservableMap<DataSet> dataSets = null;
-
-	private Variables variables = null;
-
-	private ObservableMap<Module> modules = null;
+	private final VariableMap variables = new DefaultVariableMap();
+	private final ObservableMap<Algorithm> algorithms = new DefaultObservableMap<Algorithm>();
+	private final ObservableMap<Sample> samples = new DefaultObservableMap<Sample>();
+	private final ObservableMap<DataSet> dataSets = new DefaultObservableMap<DataSet>();
+	private final ObservableMap<Module> modules = new DefaultObservableMap<Module>();
 
 	public final String getDescription() {
-		return getVariables().getAsString(Sample.DESCRIPTION);
+		return getVariableMap().getAsString(Sample.DESCRIPTION);
 	}
 
 	public final void setLabelObject(Object label) {
-		getVariables().setObject(Sample.LABEL, label);
+		getVariableMap().setObject(Sample.LABEL, label);
 	}
 
 	public final Object getLabelObject() {
-		return getVariables().getAsObject(Sample.LABEL);
+		return getVariableMap().getAsObject(Sample.LABEL);
 	}
 
 	public final void setDescription(String description) {
-		getVariables().setObject(Sample.DESCRIPTION, description);
+		getVariableMap().setObject(Sample.DESCRIPTION, description);
 	}
 
 	public final String getLabel() {
-		return getVariables().getAsString(Sample.LABEL);
+		return getVariableMap().getAsString(Sample.LABEL);
 	}
 
 	public final void setLabel(String label) {
-		getVariables().setObject(Sample.LABEL, label);
+		getVariableMap().setObject(Sample.LABEL, label);
 	}
 
-	public final ObservableMap<Module> getModules() {
-		if (modules == null) {
-			modules = new DefaultObservableMap<Module>();
-		}
+	public final ObservableMap<Module> getModuleMap() {
 		return modules;
 	}
 
-	public final ObservableMap<DataSet> getDataSets() {
-		if (dataSets == null) {
-			dataSets = new DefaultObservableMap<DataSet>();
-		}
+	public final ObservableMap<DataSet> getDataSetMap() {
 		return dataSets;
 	}
 
-	public final ObservableMap<Algorithm> getAlgorithms() {
-		if (algorithms == null) {
-			algorithms = new DefaultObservableMap<Algorithm>();
-		}
+	public final ObservableMap<Algorithm> getAlgorithmMap() {
 		return algorithms;
 	}
 
-	public final Variables getVariables() {
-		if (variables == null) {
-			variables = new DefaultVariables();
-		}
+	public final VariableMap getVariableMap() {
 		return variables;
 	}
 
-	public final ObservableMap<Sample> getSamples() {
-		if (samples == null) {
-			samples = new DefaultObservableMap<Sample>();
-		}
+	public final ObservableMap<Sample> getSampleMap() {
 		return samples;
 	}
 
@@ -123,11 +104,11 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 	}
 
 	public final void setId(String id) {
-		getVariables().setObject(Sample.ID, id);
+		getVariableMap().setObject(Sample.ID, id);
 	}
 
 	public final String getId() {
-		String id = getVariables().getAsString(Sample.ID);
+		String id = getVariableMap().getAsString(Sample.ID);
 		if (id == null) {
 			id = "Module" + getCoreObjectId();
 			setId(id);
@@ -141,26 +122,6 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		} else {
 			return getClass().getSimpleName() + " [" + getLabel() + "]";
 		}
-	}
-
-	public final void setVariables(Variables variables) {
-		this.variables = variables;
-	}
-
-	public final void setModules(ObservableMap<Module> modules) {
-		this.modules = modules;
-	}
-
-	public final void setAlgorithms(ObservableMap<Algorithm> algorithms) {
-		this.algorithms = algorithms;
-	}
-
-	public final void setDataSets(ObservableMap<DataSet> dataSets) {
-		this.dataSets = dataSets;
-	}
-
-	public final void setSamples(ObservableMap<Sample> samples) {
-		this.samples = samples;
 	}
 
 }

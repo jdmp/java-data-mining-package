@@ -44,16 +44,16 @@ public class DataSetPredictedMatrixWrapper extends AbstractDenseDoubleMatrix2D i
 	}
 
 	public long[] getSize() {
-		if (dataSet.getSamples().isEmpty()) {
+		if (dataSet.getSampleMap().isEmpty()) {
 			return Coordinates.ZERO2D;
 		}
-		Sample p = dataSet.getSamples().getElementAt(0);
+		Sample p = dataSet.getSampleMap().getElementAt(0);
 		if (p == null) {
 			return Coordinates.ZERO2D;
 		}
-		Matrix output = p.getVariables().getMatrix(Sample.PREDICTED);
+		Matrix output = p.getVariableMap().getMatrix(Sample.PREDICTED);
 		if (output != null) {
-			return new long[] { dataSet.getSamples().getSize(), output.getValueCount() };
+			return new long[] { dataSet.getSampleMap().getSize(), output.getValueCount() };
 		} else {
 			return Coordinates.ZERO2D;
 		}
@@ -69,24 +69,24 @@ public class DataSetPredictedMatrixWrapper extends AbstractDenseDoubleMatrix2D i
 	}
 
 	public double getDouble(int row, int column) {
-		Sample p = dataSet.getSamples().getElementAt(row);
+		Sample p = dataSet.getSampleMap().getElementAt(row);
 		if (p != null) {
-			if (p.getVariables().getMatrix(Sample.PREDICTED) != null) {
-				long r = column / p.getVariables().getMatrix(Sample.PREDICTED).getColumnCount();
-				long c = column % p.getVariables().getMatrix(Sample.PREDICTED).getColumnCount();
-				return p.getVariables().getMatrix(Sample.PREDICTED).getAsDouble(r, c);
+			if (p.getVariableMap().getMatrix(Sample.PREDICTED) != null) {
+				long r = column / p.getVariableMap().getMatrix(Sample.PREDICTED).getColumnCount();
+				long c = column % p.getVariableMap().getMatrix(Sample.PREDICTED).getColumnCount();
+				return p.getVariableMap().getMatrix(Sample.PREDICTED).getAsDouble(r, c);
 			}
 		}
 		return 0.0;
 	}
 
 	public void setDouble(double value, int row, int column) {
-		Sample p = dataSet.getSamples().getElementAt(row);
+		Sample p = dataSet.getSampleMap().getElementAt(row);
 		if (p != null) {
-			if (p.getVariables().getMatrix(Sample.PREDICTED) != null) {
-				long r = column / p.getVariables().getMatrix(Sample.PREDICTED).getColumnCount();
-				long c = column % p.getVariables().getMatrix(Sample.PREDICTED).getColumnCount();
-				p.getVariables().getMatrix(Sample.PREDICTED).setAsDouble(value, r, c);
+			if (p.getVariableMap().getMatrix(Sample.PREDICTED) != null) {
+				long r = column / p.getVariableMap().getMatrix(Sample.PREDICTED).getColumnCount();
+				long c = column % p.getVariableMap().getMatrix(Sample.PREDICTED).getColumnCount();
+				p.getVariableMap().getMatrix(Sample.PREDICTED).setAsDouble(value, r, c);
 			}
 		}
 	}

@@ -27,7 +27,7 @@ import org.ujmp.core.Matrix;
 import org.ujmp.core.util.MathUtil;
 import org.ujmp.core.util.StringUtil;
 
-public class DefaultVariables extends AbstractVariables {
+public class DefaultVariableMap extends AbstractVariableMap {
 	private static final long serialVersionUID = -863822584023419772L;
 
 	public final Matrix getMatrix(String variableKey) {

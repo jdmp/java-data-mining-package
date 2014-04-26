@@ -42,19 +42,19 @@ public class RegressionDataSet extends DefaultDataSet {
 		Matrix targetMatrix = new DataSetTargetMatrixWrapper(this);
 		Variable target = VariableFactory.labeledVariable("Target");
 		target.addInnerMatrix(targetMatrix);
-		getVariables().put(TARGET, target);
+		getVariableMap().put(TARGET, target);
 		Matrix predictedMatrix = new DataSetPredictedMatrixWrapper(this);
 		Variable predicted = VariableFactory.labeledVariable("Predicted");
 		predicted.addInnerMatrix(predictedMatrix);
-		getVariables().put(PREDICTED, predicted);
+		getVariableMap().put(PREDICTED, predicted);
 	}
 
 	public Variable getRMSEVariable() {
-		return getVariables().get(RMSE);
+		return getVariableMap().get(RMSE);
 	}
 
 	public Variable getTargetVariable() {
-		return getVariables().get(TARGET);
+		return getVariableMap().get(TARGET);
 	}
 
 	public final long getTargetFeatureCount() {
@@ -108,7 +108,7 @@ public class RegressionDataSet extends DefaultDataSet {
 	}
 
 	public Variable getPredictedVariable() {
-		return getVariables().get(PREDICTED);
+		return getVariableMap().get(PREDICTED);
 	}
 
 	public Matrix getPredictedMatrix() {

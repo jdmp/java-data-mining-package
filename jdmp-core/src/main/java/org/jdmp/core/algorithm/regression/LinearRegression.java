@@ -49,7 +49,7 @@ public class LinearRegression extends AbstractClassifier {
 	}
 
 	public Variable getParameterVariable() {
-		return getVariables().get(PARAMETERS);
+		return getVariableMap().get(PARAMETERS);
 	}
 
 	public Matrix getParameterMatrix() {
@@ -77,7 +77,7 @@ public class LinearRegression extends AbstractClassifier {
 	}
 
 	public void setParameterMatrix(Matrix parameters) {
-		getVariables().setMatrix(PARAMETERS, parameters);
+		getVariableMap().setMatrix(PARAMETERS, parameters);
 	}
 
 	public void reset() {

@@ -42,8 +42,8 @@ public class TestNaiveBayesClassifier {
 	@Test
 	public void testIrisClassification() throws Exception {
 		ClassificationDataSet iris = DataSetFactory.IRIS();
-		iris.getMatrix(Variable.INPUT).discretize(Ret.ORIG, Matrix.ROW,
-				DiscretizationMethod.STANDARDBINNING, 3);
+		iris.getVariableMap().getMatrix(Variable.INPUT)
+				.discretize(Ret.ORIG, Matrix.ROW, DiscretizationMethod.STANDARDBINNING, 3);
 		Classifier c = new NaiveBayesClassifier();
 		ListMatrix<Double> results = CrossValidation.run(c, iris, 10, 10, 0);
 		assertEquals(0.959, results.getMeanValue(), 0.04);

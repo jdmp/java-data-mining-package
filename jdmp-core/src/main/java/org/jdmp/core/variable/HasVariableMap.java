@@ -25,8 +25,6 @@ package org.jdmp.core.variable;
 
 public interface HasVariableMap {
 
-	public Variables getVariables();
-
-	public void setVariables(Variables variables);
+	public VariableMap getVariableMap();
 
 }

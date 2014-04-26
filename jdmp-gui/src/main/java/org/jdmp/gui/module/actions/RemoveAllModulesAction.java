@@ -30,12 +30,12 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
-import org.jdmp.core.module.HasModuleList;
+import org.jdmp.core.module.HasModuleMap;
 
 public class RemoveAllModulesAction extends ModuleListAction {
 	private static final long serialVersionUID = -6736676532381101792L;
 
-	public RemoveAllModulesAction(JComponent c, HasModuleList i) {
+	public RemoveAllModulesAction(JComponent c, HasModuleMap i) {
 		super(c, i);
 		putValue(Action.NAME, "Delete all Modules");
 		putValue(Action.SHORT_DESCRIPTION, "Delete all Modules contained in this objects");
@@ -45,7 +45,7 @@ public class RemoveAllModulesAction extends ModuleListAction {
 	}
 
 	public Object call() {
-		getIModules().getModules().clear();
+		getIModules().getModuleMap().clear();
 		return null;
 	}
 
