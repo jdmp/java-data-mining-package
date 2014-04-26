@@ -146,7 +146,8 @@ public class LazyVariables implements ObservableMap<Variable>, VariableMap {
 	}
 
 	public Variable get(Object key) {
-		Variable v = new SingletonVariable(MathUtil.getMatrix(map.get(key)));
+		Variable v = new DefaultVariable();
+		v.add(MathUtil.getMatrix(map.get(key)));
 		v.setLabel(StringUtil.convert(key));
 		v.setId(StringUtil.convert(key));
 		return v;

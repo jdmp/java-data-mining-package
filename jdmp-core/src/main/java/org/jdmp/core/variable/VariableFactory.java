@@ -23,8 +23,6 @@
 
 package org.jdmp.core.variable;
 
-import java.lang.reflect.Constructor;
-
 import org.ujmp.core.Matrix;
 
 public abstract class VariableFactory {
@@ -39,26 +37,10 @@ public abstract class VariableFactory {
 		return new DefaultVariable();
 	}
 
-	public static final Variable sharedInstance(String label) {
-		try {
-			Class<?> c = Class.forName("org.jdmp.jgroups.ReplicatedVariable");
-			Constructor<?> con = c.getConstructor(String.class);
-			return (Variable) con.newInstance(label);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
 	public static final Variable singleValue(String label, double value) {
 		Variable v = new DefaultVariable(1);
 		v.setLabel(label);
 		v.addInnerMatrix(Matrix.Factory.linkToValue(value));
-		return v;
-	}
-
-	public static final Variable labeledVariable(String label, int memorySize) {
-		Variable v = new DefaultVariable(memorySize);
-		v.setLabel(label);
 		return v;
 	}
 
