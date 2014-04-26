@@ -23,7 +23,6 @@
 
 package org.jdmp.jetty.coreobject;
 
-import org.jdmp.core.JDMPCoreObject;
 import org.jdmp.core.module.Module;
 import org.jdmp.core.variable.HasVariables;
 import org.jdmp.jetty.JettyObjectServlet;
@@ -31,16 +30,17 @@ import org.mortbay.jetty.Server;
 import org.mortbay.jetty.handler.ContextHandlerCollection;
 import org.mortbay.jetty.servlet.Context;
 import org.mortbay.jetty.servlet.ServletHolder;
+import org.ujmp.core.interfaces.CoreObject;
 
 public class JettyCoreObjectServer {
 
 	private Server server = null;
 
-	private JDMPCoreObject object = null;
+	private CoreObject object = null;
 
 	private int port = 8888;
 
-	public JettyCoreObjectServer(JDMPCoreObject o, int port) {
+	public JettyCoreObjectServer(CoreObject o, int port) {
 		this.object = o;
 		this.port = port;
 	}

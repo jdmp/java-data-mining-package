@@ -25,11 +25,11 @@ package org.jdmp.gui.sample;
 
 import java.util.Comparator;
 
-import org.jdmp.core.JDMPCoreObject;
 import org.jdmp.core.sample.HasSamples;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.gui.util.AbstractListPanel;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.interfaces.CoreObject;
 import org.ujmp.core.interfaces.GUIObject;
 
 public class SampleListPanel extends AbstractListPanel {
@@ -37,8 +37,8 @@ public class SampleListPanel extends AbstractListPanel {
 
 	public SampleListPanel(HasSamples iSamples) {
 		super();
-		if (iSamples instanceof JDMPCoreObject) {
-			this.object = ((JDMPCoreObject) iSamples).getGUIObject();
+		if (iSamples instanceof CoreObject) {
+			this.object = ((CoreObject) iSamples).getGUIObject();
 		} else {
 			this.object = (GUIObject) iSamples;
 		}

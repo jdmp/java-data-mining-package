@@ -23,10 +23,10 @@
 
 package org.jdmp.gui.dataset;
 
-import org.jdmp.core.JDMPCoreObject;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.HasDataSets;
 import org.jdmp.gui.util.AbstractListPanel;
+import org.ujmp.core.interfaces.CoreObject;
 import org.ujmp.core.interfaces.GUIObject;
 
 public class DataSetListPanel extends AbstractListPanel {
@@ -34,8 +34,8 @@ public class DataSetListPanel extends AbstractListPanel {
 
 	public DataSetListPanel(HasDataSets iDataSets) {
 		super();
-		if (iDataSets instanceof JDMPCoreObject) {
-			this.object = ((JDMPCoreObject) iDataSets).getGUIObject();
+		if (iDataSets instanceof CoreObject) {
+			this.object = ((CoreObject) iDataSets).getGUIObject();
 		} else {
 			this.object = (GUIObject) iDataSets;
 		}

@@ -23,30 +23,21 @@
 
 package org.jdmp.core;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 import javax.swing.JFrame;
 
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.module.Module;
-import org.jdmp.core.sample.HasSampleMap;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.variable.HasVariableMap;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.enums.FileFormat;
 import org.ujmp.core.interfaces.CoreObject;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.core.util.SerializationUtil;
 
-public abstract class AbstractCoreObject implements JDMPCoreObject {
+public abstract class AbstractCoreObject implements CoreObject {
 	private static final long serialVersionUID = -4626483429334570721L;
 
 	public static final int X = Matrix.X;
@@ -126,70 +117,9 @@ public abstract class AbstractCoreObject implements JDMPCoreObject {
 		return guiObject;
 	}
 
-	public CoreObject getData(String ref) {
-		List<String> strings = new LinkedList<String>();
-		String[] split = ref.split("/");
-		for (String s : split) {
-			if (s != null && s.length() > 0) {
-				strings.add(s);
-			}
-		}
-		return getData(strings);
-	}
-
-	public CoreObject getData(List<String> ref) {
+	public CoreObject clone() {
 		try {
-			if (ref == null || ref.isEmpty()) {
-				return this;
-			}
-			String current = ref.remove(0);
-			if (current.equals("variables")) {
-				String id = ref.remove(0);
-				JDMPCoreObject co = ((HasVariableMap) this).getVariables().get(id);
-				return co.getData(ref);
-			} else if (current.equals("samples")) {
-				String id = ref.remove(0);
-				JDMPCoreObject co = ((HasSampleMap) this).getSamples().get(id);
-				return co.getData(ref);
-			} else {
-				return null;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-
-	public void setData(CoreObject data, String ref) {
-
-	}
-
-	public void setData(CoreObject data, List<String> ref) {
-
-	}
-
-	public List<CoreObject> listData(String ref) {
-		List<CoreObject> list = new ArrayList<CoreObject>();
-		return list;
-	}
-
-	public List<CoreObject> listData(List<String> ref) {
-		List<CoreObject> list = new ArrayList<CoreObject>();
-		return list;
-	}
-
-	public final void exportToFile(FileFormat format, File file) throws Exception {
-		FileOutputStream fo = new FileOutputStream(file);
-		BufferedOutputStream bo = new BufferedOutputStream(fo);
-		SerializationUtil.serialize(this, bo);
-		bo.close();
-		fo.close();
-	}
-
-	public JDMPCoreObject clone() {
-		try {
-			return (JDMPCoreObject) SerializationUtil
-					.deserialize(SerializationUtil.serialize(this));
+			return (CoreObject) SerializationUtil.deserialize(SerializationUtil.serialize(this));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

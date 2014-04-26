@@ -48,7 +48,6 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
-import org.jdmp.core.JDMPCoreObject;
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.gui.algorithm.AlgorithmGUIObject;
@@ -58,6 +57,7 @@ import org.jdmp.gui.sample.SampleGUIObject;
 import org.jdmp.gui.sample.actions.SampleActions;
 import org.jdmp.gui.variable.VariableGUIObject;
 import org.jdmp.gui.variable.actions.VariableActions;
+import org.ujmp.core.interfaces.CoreObject;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.core.interfaces.HasToolTip;
 import org.ujmp.gui.util.FrameManager;
@@ -174,8 +174,8 @@ public abstract class AbstractListPanel extends JPanel implements MouseListener,
 		int selectedRow = jTable.getSelectedRow();
 		if (selectedRow >= 0) {
 			Object o = dataModel.getValueAt(selectedRow, 0);
-			if (o instanceof JDMPCoreObject) {
-				otemp = ((JDMPCoreObject) o).getGUIObject();
+			if (o instanceof CoreObject) {
+				otemp = ((CoreObject) o).getGUIObject();
 			} else {
 				otemp = (GUIObject) o;
 			}
@@ -196,8 +196,8 @@ public abstract class AbstractListPanel extends JPanel implements MouseListener,
 			jTable.setRowSelectionInterval(row, row);
 			selectedRow = jTable.getSelectedRow();
 			Object obj = dataModel.getValueAt(selectedRow, 0);
-			if (obj instanceof JDMPCoreObject) {
-				otemp = ((JDMPCoreObject) obj).getGUIObject();
+			if (obj instanceof CoreObject) {
+				otemp = ((CoreObject) obj).getGUIObject();
 			} else {
 				otemp = (GUIObject) obj;
 			}
