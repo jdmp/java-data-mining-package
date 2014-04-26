@@ -63,19 +63,7 @@ public interface Variable extends CoreObject, ListMatrix<Matrix> {
 
 	public ObservableList<Matrix> getMatrixList();
 
-	public long[] getInnerSize();
-
-	public void setInnerSize(long... size);
-
 	public Matrix getAsListMatrix();
-
-	public void addInnerMatrix(Matrix m);
-
-	public int getInnerMatrixCount();
-
-	public long getInnerRowCount();
-
-	public long getInnerColumnCount();
 
 	public Variable clone();
 

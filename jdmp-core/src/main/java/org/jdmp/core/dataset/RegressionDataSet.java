@@ -41,11 +41,11 @@ public class RegressionDataSet extends DefaultDataSet {
 	public RegressionDataSet() {
 		Matrix targetMatrix = new DataSetTargetMatrixWrapper(this);
 		Variable target = VariableFactory.labeledVariable("Target");
-		target.addInnerMatrix(targetMatrix);
+		target.add(targetMatrix);
 		getVariableMap().put(TARGET, target);
 		Matrix predictedMatrix = new DataSetPredictedMatrixWrapper(this);
 		Variable predicted = VariableFactory.labeledVariable("Predicted");
-		predicted.addInnerMatrix(predictedMatrix);
+		predicted.add(predictedMatrix);
 		getVariableMap().put(PREDICTED, predicted);
 	}
 
@@ -67,7 +67,7 @@ public class RegressionDataSet extends DefaultDataSet {
 	}
 
 	public void appendRMSEMatrix(Matrix m) {
-		getRMSEVariable().addInnerMatrix(m);
+		getRMSEVariable().add(m);
 	}
 
 	public Matrix getTargetMatrix() {
@@ -88,13 +88,13 @@ public class RegressionDataSet extends DefaultDataSet {
 
 	public int getEarlyStoppingIndex(int numberOfSteps) {
 		Variable v = getRMSEVariable();
-		if (v.getInnerMatrixCount() <= numberOfSteps) {
+		if (v.size() <= numberOfSteps) {
 			return -1;
 		}
 
 		double minRMSE = Double.MAX_VALUE;
 		int position = -1;
-		for (int i = 0; i < v.getInnerMatrixCount(); i++) {
+		for (int i = 0; i < v.size(); i++) {
 			double e = v.get(i).getEuklideanValue();
 			if (e < minRMSE) {
 				minRMSE = e;

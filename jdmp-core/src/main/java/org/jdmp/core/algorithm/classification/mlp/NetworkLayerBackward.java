@@ -99,20 +99,20 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 		Variable outputDeviation = VariableFactory.labeledVariable("Output Deviation");
 		Matrix d = Matrix.Factory.linkToArray(new double[][] { { 1 }, { 2 }, { 3 }, { 4 }, { 5 },
 				{ 6 } });
-		outputDeviation.addInnerMatrix(d);
+		outputDeviation.add(d);
 		a.setOutputDeviationVariable(outputDeviation);
 
 		Variable output = VariableFactory.labeledVariable("Output");
 		Matrix o = Matrix.Factory.linkToArray(new double[][] { { 5 }, { 6 }, { 7 }, { 8 }, { 9 },
 				{ 10 } });
-		output.addInnerMatrix(o);
+		output.add(o);
 		a.setOutputVariable(output);
 
 		Variable weight = VariableFactory.labeledVariable("Weight");
 		Matrix w = Matrix.Factory.linkToArray(new double[][] { { 0.1, 0.2, 0.3, 0.4 },
 				{ 0.1, 0.2, 0.3, 0.4 }, { 0.1, 0.2, 0.3, 0.4 }, { 0.1, 0.2, 0.3, 0.4 },
 				{ 0.1, 0.2, 0.3, 0.4 }, { 0.1, 0.2, 0.3, 0.4 } });
-		weight.addInnerMatrix(w);
+		weight.add(w);
 		a.setWeightVariable(weight);
 		System.out.println(a.calculate());
 	}

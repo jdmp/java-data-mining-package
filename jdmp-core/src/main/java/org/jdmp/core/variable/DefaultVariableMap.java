@@ -45,7 +45,7 @@ public class DefaultVariableMap extends AbstractVariableMap {
 			v = VariableFactory.labeledVariable(variableKey.toString());
 			put(variableKey, v);
 		}
-		v.addInnerMatrix(matrix);
+		v.add(matrix);
 	}
 
 	public final void setObject(String variableKey, Object value) {

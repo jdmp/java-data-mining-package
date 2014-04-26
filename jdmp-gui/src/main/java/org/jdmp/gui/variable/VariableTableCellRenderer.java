@@ -31,6 +31,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
 import org.jdmp.core.variable.Variable;
+import org.ujmp.core.Matrix;
 import org.ujmp.gui.plot.MatrixPlot;
 import org.ujmp.gui.renderer.MatrixHeatmapRenderer;
 
@@ -74,10 +75,15 @@ public class VariableTableCellRenderer implements TableCellRenderer {
 				o = variable.getLabel();
 				break;
 			case VariableListTableModel.MATRIXCOUNTCOLUMN:
-				o = variable.getInnerMatrixCount();
+				o = variable.size();
 				break;
 			case VariableListTableModel.SIZECOLUMN:
-				o = "" + variable.getInnerRowCount() + "x" + variable.getInnerColumnCount();
+				Matrix m = variable.getLast();
+				if (m != null) {
+					o = "" + m.getRowCount() + "x" + m.getColumnCount();
+				} else {
+					o = "0x0";
+				}
 				break;
 			case VariableListTableModel.PLOTCOLUMN:
 				return matrixPlot.getTableCellRendererComponent(table, variable.getLast(),

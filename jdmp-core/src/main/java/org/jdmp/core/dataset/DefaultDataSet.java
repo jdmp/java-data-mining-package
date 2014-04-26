@@ -39,7 +39,7 @@ public class DefaultDataSet extends AbstractDataSet {
 		super();
 		Matrix inputMatrix = new DataSetInputMatrixWrapper(this);
 		Variable input = VariableFactory.labeledVariable("Input");
-		input.addInnerMatrix(inputMatrix);
+		input.add(inputMatrix);
 		getVariableMap().put(INPUT, input);
 	}
 

@@ -46,8 +46,7 @@ public class FillUniformAction extends VariableAction {
 	}
 
 	public Object call() {
-		getVariable().getCoreObject().addInnerMatrix(
-				getVariable().getCoreObject().getLast().rand(Ret.NEW));
+		getVariable().getCoreObject().add(getVariable().getCoreObject().getLast().rand(Ret.NEW));
 		return null;
 	}
 

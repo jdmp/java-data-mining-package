@@ -25,7 +25,6 @@ package org.jdmp.core.variable;
 
 import java.lang.reflect.Constructor;
 
-import org.ujmp.core.Coordinates;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.core.listmatrix.DefaultListMatrix;
@@ -36,34 +35,6 @@ public abstract class AbstractVariable extends DefaultListMatrix<Matrix> impleme
 	protected AbstractVariable() {
 		super();
 		setId("Variable" + getCoreObjectId());
-	}
-
-	public final int getInnerMatrixCount() {
-		if (getMatrixList() == null) {
-			return 0;
-		} else {
-			return getMatrixList().getSize();
-		}
-	}
-
-	public final void addInnerMatrix(Matrix m) {
-		if (m == null) {
-			throw new RuntimeException("tried to add null Matrix");
-		}
-
-		if (getInnerSize() == null) {
-			setInnerSize(Coordinates.copyOf(m.getSize()));
-		}
-
-		getMatrixList().add(m);
-	}
-
-	public final long getInnerRowCount() {
-		return getInnerSize()[ROW];
-	}
-
-	public final long getInnerColumnCount() {
-		return getInnerSize()[COLUMN];
 	}
 
 	public final GUIObject getGUIObject() {
