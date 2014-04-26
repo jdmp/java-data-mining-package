@@ -46,8 +46,8 @@ public class FillGaussianAction extends VariableAction {
 	}
 
 	public Object call() {
-		getVariable().getCoreObject().addMatrix(
-				getVariable().getCoreObject().getMatrix().randn(Ret.NEW));
+		getVariable().getCoreObject().addInnerMatrix(
+				getVariable().getCoreObject().getLatestMatrix().randn(Ret.NEW));
 		return null;
 	}
 

@@ -56,7 +56,7 @@ public class VariablePanel extends AbstractPanel {
 	public VariablePanel(VariableGUIObject v) {
 		super(v);
 
-		MatrixGUIObject m = (MatrixGUIObject) v.getCoreObject().getAsMatrix().getGUIObject();
+		MatrixGUIObject m = (MatrixGUIObject) v.getCoreObject().getAsListMatrix().getGUIObject();
 
 		JSplitPane splitPane1 = new JSplitPane();
 		JSplitPane splitPane2 = new JSplitPane(JSplitPane.VERTICAL_SPLIT);

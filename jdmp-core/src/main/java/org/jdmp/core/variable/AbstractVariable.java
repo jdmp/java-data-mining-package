@@ -23,34 +23,24 @@
 
 package org.jdmp.core.variable;
 
-import org.jdmp.core.AbstractCoreObject;
+import java.lang.reflect.Constructor;
+
 import org.jdmp.core.util.ObservableList;
 import org.ujmp.core.Coordinates;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.interfaces.GUIObject;
+import org.ujmp.core.listmatrix.DefaultListMatrix;
 import org.ujmp.core.util.StringUtil;
 
-public abstract class AbstractVariable extends AbstractCoreObject implements Variable {
+public abstract class AbstractVariable extends DefaultListMatrix<Matrix> implements Variable {
 	private static final long serialVersionUID = -3393106211967497877L;
-
-	private String id = null;
 
 	protected AbstractVariable() {
 		super();
+		setId("Variable" + getCoreObjectId());
 	}
 
-	public final void setId(String id) {
-		this.id = id;
-	}
-
-	public final String getId() {
-		if (id == null) {
-			id = "Variable" + getCoreObjectId();
-			setId(id);
-		}
-		return id;
-	}
-
-	public final int getMatrixCount() {
+	public final int getInnerMatrixCount() {
 		if (getMatrixList() == null) {
 			return 0;
 		} else {
@@ -58,7 +48,7 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 		}
 	}
 
-	public final Matrix getMatrix() {
+	public final Matrix getLatestMatrix() {
 		ObservableList<Matrix> list = getMatrixList();
 		if (list == null || list.isEmpty()) {
 			return null;
@@ -68,10 +58,10 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 	}
 
 	public final String getAsString() {
-		return StringUtil.convert(getMatrix());
+		return StringUtil.convert(getLatestMatrix());
 	}
 
-	public final Matrix getMatrix(int index) {
+	public final Matrix getInnerMatrix(int index) {
 		if (getMatrixList() == null) {
 			return null;
 		} else {
@@ -79,30 +69,38 @@ public abstract class AbstractVariable extends AbstractCoreObject implements Var
 		}
 	}
 
-	public final void addMatrix(Matrix m) {
+	public final void addInnerMatrix(Matrix m) {
 		if (m == null) {
 			throw new RuntimeException("tried to add null Matrix");
 		}
 
-		if (getSize() == null) {
-			setSize(Coordinates.copyOf(m.getSize()));
+		if (getInnerSize() == null) {
+			setInnerSize(Coordinates.copyOf(m.getSize()));
 		}
 
 		getMatrixList().add(m);
 	}
 
-	public final void clear() {
-		if (getMatrixList() != null) {
-			getMatrixList().clear();
+	public final long getInnerRowCount() {
+		return getInnerSize()[ROW];
+	}
+
+	public final long getInnerColumnCount() {
+		return getInnerSize()[COLUMN];
+	}
+
+	public final GUIObject getGUIObject() {
+		if (guiObject == null) {
+			try {
+				Constructor<?> con = null;
+				Class<?> c = Class.forName("org.jdmp.gui.variable.VariableGUIObject");
+				con = c.getConstructor(new Class<?>[] { Variable.class });
+				guiObject = (GUIObject) con.newInstance(new Object[] { this });
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-	}
-
-	public final long getRowCount() {
-		return getSize()[ROW];
-	}
-
-	public final long getColumnCount() {
-		return getSize()[COLUMN];
+		return guiObject;
 	}
 
 	public final String toString() {

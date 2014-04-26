@@ -123,8 +123,8 @@ public abstract class DataSetFactory {
 
 	public static ClassificationDataSet linkToMatrix(Matrix input, Matrix target) {
 		ClassificationDataSet ds = new ClassificationDataSet();
-		ds.getInputVariable().addMatrix(input);
-		ds.getTargetVariable().addMatrix(target);
+		ds.getInputVariable().addInnerMatrix(input);
+		ds.getTargetVariable().addInnerMatrix(target);
 		for (int i = 0; i < input.getRowCount(); i++) {
 			Sample s = SampleFactory.emptySample();
 			Matrix in = input.selectRows(Ret.LINK, i);
@@ -138,8 +138,8 @@ public abstract class DataSetFactory {
 
 	public static ClassificationDataSet linkToMatrix(Matrix input, Matrix target, Matrix label) {
 		ClassificationDataSet ds = new ClassificationDataSet();
-		ds.getInputVariable().addMatrix(input);
-		ds.getTargetVariable().addMatrix(target);
+		ds.getInputVariable().addInnerMatrix(input);
+		ds.getTargetVariable().addInnerMatrix(target);
 		for (int i = 0; i < input.getRowCount(); i++) {
 			Sample s = SampleFactory.emptySample();
 			Matrix in = input.selectRows(Ret.LINK, i);

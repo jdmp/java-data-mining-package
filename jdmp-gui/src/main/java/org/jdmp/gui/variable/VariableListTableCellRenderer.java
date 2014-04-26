@@ -123,7 +123,7 @@ public class VariableListTableCellRenderer extends JPanel implements TableCellRe
 				if (o instanceof Variable) {
 					Variable v = (Variable) o;
 
-					this.add(matrixRenderer.getTableCellRendererComponent(table, v.getMatrix(),
+					this.add(matrixRenderer.getTableCellRendererComponent(table, v.getLatestMatrix(),
 							isSelected, hasFocus, row, column));
 				}
 			}
@@ -163,7 +163,7 @@ public class VariableListTableCellRenderer extends JPanel implements TableCellRe
 		for (Object o : variableList) {
 			if (o != null && o instanceof Variable) {
 				Variable v = (Variable) o;
-				MatrixHeatmapRenderer.paintMatrix(g, v.getMatrix(), componentWidth, height
+				MatrixHeatmapRenderer.paintMatrix(g, v.getLatestMatrix(), componentWidth, height
 						+ PADDINGY + PADDINGY);
 				g.translate(componentWidth, 0);
 			}

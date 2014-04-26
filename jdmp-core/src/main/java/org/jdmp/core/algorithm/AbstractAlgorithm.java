@@ -273,7 +273,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 	}
 
 	public void setMatrix(String key, Matrix matrix) {
-		getVariable(key).addMatrix(matrix);
+		getVariable(key).addInnerMatrix(matrix);
 	}
 
 	public Variable getVariable(String key) {
@@ -286,7 +286,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 	}
 
 	public Matrix getMatrix(String key) {
-		return getVariable(key).getMatrix();
+		return getVariable(key).getLatestMatrix();
 	}
 
 }

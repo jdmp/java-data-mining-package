@@ -39,7 +39,7 @@ public class DefaultDataSet extends AbstractDataSet {
 		super();
 		Matrix inputMatrix = new DataSetInputMatrixWrapper(this);
 		Variable input = VariableFactory.labeledVariable("Input");
-		input.addMatrix(inputMatrix);
+		input.addInnerMatrix(inputMatrix);
 		getVariables().put(INPUT, input);
 	}
 
@@ -57,23 +57,23 @@ public class DefaultDataSet extends AbstractDataSet {
 	}
 
 	public final void standardize(int dimension) {
-		getInputVariable().getMatrix().standardize(Ret.ORIG, dimension);
+		getInputVariable().getLatestMatrix().standardize(Ret.ORIG, dimension);
 	}
 
 	public final void center(int dimension) {
-		getInputVariable().getMatrix().center(Ret.ORIG, dimension, true);
+		getInputVariable().getLatestMatrix().center(Ret.ORIG, dimension, true);
 	}
 
 	public void addMissingValues(int dimension, double percentMissing) {
-		getInputVariable().getMatrix().addMissing(Ret.ORIG, dimension, percentMissing);
+		getInputVariable().getLatestMatrix().addMissing(Ret.ORIG, dimension, percentMissing);
 	}
 
 	public Matrix getInputMatrix() {
-		return getInputVariable().getMatrix();
+		return getInputVariable().getLatestMatrix();
 	}
 
 	public int getFeatureCount() {
-		Matrix m = getInputVariable().getMatrix();
+		Matrix m = getInputVariable().getLatestMatrix();
 		if (m == null) {
 			return 0;
 		} else {

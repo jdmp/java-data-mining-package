@@ -40,7 +40,7 @@ public class DefaultModule extends AbstractModule {
 		if (v == null) {
 			return null;
 		} else {
-			return v.getMatrix();
+			return v.getLatestMatrix();
 		}
 	}
 
@@ -50,7 +50,7 @@ public class DefaultModule extends AbstractModule {
 			v = VariableFactory.labeledVariable(StringUtil.format(variableKey));
 			getVariables().put(variableKey, v);
 		}
-		v.addMatrix(matrix);
+		v.addInnerMatrix(matrix);
 	}
 
 	public Interpreter getInterpreter() {

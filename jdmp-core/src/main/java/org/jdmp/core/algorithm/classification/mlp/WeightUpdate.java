@@ -54,12 +54,12 @@ public class WeightUpdate extends AlgorithmFiveSources {
 		setDescription("weight = weight + eta * sampleweight * inputdeviation * input");
 		Variable eta = VariableFactory.singleValue("eta", 1);
 		Matrix m = Matrix.Factory.linkToValue(0.001);
-		eta.addMatrix(m);
+		eta.addInnerMatrix(m);
 		setVariable(ETA, eta);
 
 		Variable sampleWeight = VariableFactory.singleValue("Sample Weight", 1);
 		Matrix s = Matrix.Factory.linkToValue(1);
-		sampleWeight.addMatrix(s);
+		sampleWeight.addInnerMatrix(s);
 		setVariable(SAMPLEWEIGHT, sampleWeight);
 	}
 

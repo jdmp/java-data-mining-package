@@ -33,7 +33,7 @@ public class DefaultVariables extends AbstractVariables {
 	public final Matrix getMatrix(String variableKey) {
 		Variable v = get(variableKey);
 		if (v != null) {
-			return v.getMatrix();
+			return v.getLatestMatrix();
 		} else {
 			return null;
 		}
@@ -45,7 +45,7 @@ public class DefaultVariables extends AbstractVariables {
 			v = VariableFactory.labeledVariable(variableKey.toString());
 			put(variableKey, v);
 		}
-		v.addMatrix(matrix);
+		v.addInnerMatrix(matrix);
 	}
 
 	public final void setObject(String variableKey, Object value) {

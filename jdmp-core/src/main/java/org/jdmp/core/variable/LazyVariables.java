@@ -158,7 +158,7 @@ public class LazyVariables implements ObservableMap<Variable>, Variables {
 
 	public Variable put(String key, Variable value) {
 		if (value != null) {
-			Matrix m = value.getMatrix();
+			Matrix m = value.getLatestMatrix();
 			map.put(key, m);
 		}
 		return null;

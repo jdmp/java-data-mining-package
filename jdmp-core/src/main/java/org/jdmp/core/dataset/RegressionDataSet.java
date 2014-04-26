@@ -41,11 +41,11 @@ public class RegressionDataSet extends DefaultDataSet {
 	public RegressionDataSet() {
 		Matrix targetMatrix = new DataSetTargetMatrixWrapper(this);
 		Variable target = VariableFactory.labeledVariable("Target");
-		target.addMatrix(targetMatrix);
+		target.addInnerMatrix(targetMatrix);
 		getVariables().put(TARGET, target);
 		Matrix predictedMatrix = new DataSetPredictedMatrixWrapper(this);
 		Variable predicted = VariableFactory.labeledVariable("Predicted");
-		predicted.addMatrix(predictedMatrix);
+		predicted.addInnerMatrix(predictedMatrix);
 		getVariables().put(PREDICTED, predicted);
 	}
 
@@ -67,17 +67,17 @@ public class RegressionDataSet extends DefaultDataSet {
 	}
 
 	public void appendRMSEMatrix(Matrix m) {
-		getRMSEVariable().addMatrix(m);
+		getRMSEVariable().addInnerMatrix(m);
 	}
 
 	public Matrix getTargetMatrix() {
-		return getTargetVariable().getMatrix();
+		return getTargetVariable().getLatestMatrix();
 	}
 
 	public double getEarlyStoppingRMSE(int numberOfSteps) {
 		int index = getEarlyStoppingIndex(numberOfSteps);
 		if (index >= 0) {
-			return getRMSEVariable().getMatrix(index).getEuklideanValue();
+			return getRMSEVariable().getInnerMatrix(index).getEuklideanValue();
 		}
 		return -1;
 	}
@@ -88,14 +88,14 @@ public class RegressionDataSet extends DefaultDataSet {
 
 	public int getEarlyStoppingIndex(int numberOfSteps) {
 		Variable v = getRMSEVariable();
-		if (v.getMatrixCount() <= numberOfSteps) {
+		if (v.getInnerMatrixCount() <= numberOfSteps) {
 			return -1;
 		}
 
 		double minRMSE = Double.MAX_VALUE;
 		int position = -1;
-		for (int i = 0; i < v.getMatrixCount(); i++) {
-			double e = v.getMatrix(i).getEuklideanValue();
+		for (int i = 0; i < v.getInnerMatrixCount(); i++) {
+			double e = v.getInnerMatrix(i).getEuklideanValue();
 			if (e < minRMSE) {
 				minRMSE = e;
 				position = i;
@@ -112,7 +112,7 @@ public class RegressionDataSet extends DefaultDataSet {
 	}
 
 	public Matrix getPredictedMatrix() {
-		return getPredictedVariable().getMatrix();
+		return getPredictedVariable().getLatestMatrix();
 	}
 
 	public double getRMSE() {
@@ -125,7 +125,7 @@ public class RegressionDataSet extends DefaultDataSet {
 	}
 
 	public Matrix getRMSEMatrix() {
-		return getRMSEVariable().getMatrix();
+		return getRMSEVariable().getLatestMatrix();
 	}
 
 }
