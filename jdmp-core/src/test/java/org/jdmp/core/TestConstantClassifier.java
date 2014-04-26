@@ -49,14 +49,14 @@ public class TestConstantClassifier {
 		ClassificationDataSet iris = DataSetFactory.IRIS();
 		String del1 = null;
 		String del2 = null;
-		for (Sample s : iris.getSamples()) {
+		for (Sample s : iris.getSamples().values()) {
 			int c = s.getTargetClass();
 			if (c == 0) {
 				del1 = s.getId();
 				break;
 			}
 		}
-		for (Sample s : iris.getSamples()) {
+		for (Sample s : iris.getSamples().values()) {
 			int c = s.getTargetClass();
 			if (c == 1) {
 				del2 = s.getId();

@@ -24,7 +24,7 @@
 package org.jdmp.gui.dataset;
 
 import org.jdmp.core.dataset.DataSet;
-import org.jdmp.core.dataset.HasDataSets;
+import org.jdmp.core.dataset.HasDataSetMap;
 import org.jdmp.gui.util.AbstractListPanel;
 import org.ujmp.core.interfaces.CoreObject;
 import org.ujmp.core.interfaces.GUIObject;
@@ -32,7 +32,7 @@ import org.ujmp.core.interfaces.GUIObject;
 public class DataSetListPanel extends AbstractListPanel {
 	private static final long serialVersionUID = -3012562710674803164L;
 
-	public DataSetListPanel(HasDataSets iDataSets) {
+	public DataSetListPanel(HasDataSetMap iDataSets) {
 		super();
 		if (iDataSets instanceof CoreObject) {
 			this.object = ((CoreObject) iDataSets).getGUIObject();

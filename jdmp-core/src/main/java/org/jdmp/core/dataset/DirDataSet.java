@@ -35,7 +35,6 @@ import java.util.Set;
 
 import org.jdmp.core.sample.FileSample;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.util.DefaultObservableList;
 import org.jdmp.core.util.DefaultObservableMap;
 import org.ujmp.core.collections.map.SoftHashMap;
 import org.ujmp.core.enums.FileFormat;
@@ -82,7 +81,7 @@ public class DirDataSet extends AbstractDataSet implements Refreshable {
 			}
 		}
 		setSamples(new DefaultObservableMap<Sample>(new FileMap()));
-		setDataSets(new DefaultObservableList<DataSet>(new DirectoryList()));
+		setDataSets(new DefaultObservableMap<DataSet>(new DirectoryList()));
 	}
 
 	public DataSet clone() {

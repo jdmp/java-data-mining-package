@@ -25,7 +25,7 @@ package org.jdmp.core.dataset;
 
 import org.jdmp.core.util.ObservableMap;
 
-public interface HasDataSetMap extends HasDataSets {
+public interface HasDataSetMap {
 
 	public ObservableMap<DataSet> getDataSets();
 

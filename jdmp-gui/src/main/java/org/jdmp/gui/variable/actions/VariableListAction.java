@@ -25,18 +25,18 @@ package org.jdmp.gui.variable.actions;
 
 import javax.swing.JComponent;
 
-import org.jdmp.core.variable.HasVariables;
+import org.jdmp.core.variable.HasVariableMap;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.gui.actions.AbstractObjectAction;
 
 public abstract class VariableListAction extends AbstractObjectAction {
 
-	public VariableListAction(JComponent c, HasVariables iVariables) {
+	public VariableListAction(JComponent c, HasVariableMap iVariables) {
 		super(c, (GUIObject) iVariables);
 	}
 
-	public HasVariables getIVariables() {
-		return (HasVariables) getGUIObject();
+	public HasVariableMap getIVariables() {
+		return (HasVariableMap) getGUIObject();
 	}
 
 }

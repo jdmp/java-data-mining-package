@@ -29,7 +29,7 @@ import org.jdmp.core.sample.HasSampleMap;
 import org.jdmp.core.variable.HasVariableMap;
 import org.ujmp.core.interfaces.CoreObject;
 
-public interface DataSet extends CoreObject, HasVariableMap, HasSampleMap, HasDataSetList {
+public interface DataSet extends CoreObject, HasVariableMap, HasSampleMap, HasDataSetMap {
 
 	public List<DataSet> splitByCount(boolean shuffle, int... count);
 

@@ -84,7 +84,7 @@ public abstract class AbstractObservableMap<V> implements ObservableMap<V> {
 		return getMap().get(key);
 	}
 
-	public void addAll(Collection<V> objects) {
+	public void addAll(Collection<? extends V> objects) {
 		for (V v : objects) {
 			add(v);
 		}

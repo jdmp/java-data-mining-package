@@ -426,7 +426,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 			}
 		}
 
-		public void addAll(Collection<Sample> values) {
+		public void addAll(Collection<? extends Sample> values) {
 			throw new RuntimeException("not implemented");
 		}
 

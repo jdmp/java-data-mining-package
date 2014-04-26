@@ -31,7 +31,10 @@ import javax.swing.event.EventListenerList;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 
-public abstract class AbstractObservableList<V> implements ObservableList<V> {
+import org.ujmp.core.collections.list.AbstractList;
+
+public abstract class AbstractObservableList<V> extends AbstractList<V> implements
+		ObservableList<V> {
 	private static final long serialVersionUID = -6099014976896834236L;
 
 	private EventListenerList listenerList = null;
@@ -58,22 +61,24 @@ public abstract class AbstractObservableList<V> implements ObservableList<V> {
 		return getList().size();
 	}
 
-	public final synchronized int indexOf(V value) {
+	public final synchronized int indexOf(Object value) {
 		return getList().indexOf(value);
 	}
 
-	public final synchronized void add(V value) {
-		getList().add(value);
+	public final synchronized boolean add(V value) {
+		boolean result = getList().add(value);
 		fireIntervalAdded(this, getList().size() - 1, getList().size() - 1);
+		return result;
 	}
 
-	public final void addAll(Collection<V> values) {
+	public final boolean addAll(Collection<? extends V> values) {
 		for (V v : values) {
 			add(v);
 		}
+		return true;
 	}
 
-	public final synchronized boolean remove(V value) {
+	public final synchronized boolean remove(Object value) {
 		int index = getList().indexOf(value);
 		boolean b = getList().remove(value);
 		if (index >= 0) {

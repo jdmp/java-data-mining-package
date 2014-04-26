@@ -28,7 +28,7 @@ import javax.swing.event.ListDataListener;
 import javax.swing.table.AbstractTableModel;
 
 import org.jdmp.core.algorithm.Algorithm;
-import org.jdmp.core.algorithm.HasAlgorithms;
+import org.jdmp.core.algorithm.HasAlgorithmMap;
 
 public class AlgorithmListTableModel extends AbstractTableModel implements ListDataListener {
 	private static final long serialVersionUID = -3779798282436020436L;
@@ -41,9 +41,9 @@ public class AlgorithmListTableModel extends AbstractTableModel implements ListD
 
 	public static final int ALGORITHMLISTCOLUMN = 3;
 
-	private HasAlgorithms iAlgorithms = null;
+	private HasAlgorithmMap iAlgorithms = null;
 
-	public AlgorithmListTableModel(HasAlgorithms iAlgorithms) {
+	public AlgorithmListTableModel(HasAlgorithmMap iAlgorithms) {
 		this.iAlgorithms = iAlgorithms;
 		iAlgorithms.getAlgorithms().addListDataListener(this);
 	}

@@ -28,12 +28,12 @@ import java.util.ArrayList;
 import javax.swing.JComponent;
 import javax.swing.JMenuItem;
 
-import org.jdmp.core.algorithm.HasAlgorithms;
+import org.jdmp.core.algorithm.HasAlgorithmMap;
 
 public class AlgorithmListActions extends ArrayList<JComponent> {
 	private static final long serialVersionUID = -6581043219923491806L;
 
-	public AlgorithmListActions(JComponent c, HasAlgorithms a) {
+	public AlgorithmListActions(JComponent c, HasAlgorithmMap a) {
 		this.add(new JMenuItem(new AddAlgorithmAction(c, a)));
 	}
 }

@@ -31,12 +31,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.jdmp.core.algorithm.HasAlgorithms;
-import org.jdmp.core.dataset.HasDataSets;
-import org.jdmp.core.module.HasModules;
+import org.jdmp.core.algorithm.HasAlgorithmMap;
+import org.jdmp.core.dataset.HasDataSetMap;
+import org.jdmp.core.module.HasModuleMap;
 import org.jdmp.core.module.Module;
-import org.jdmp.core.sample.HasSamples;
-import org.jdmp.core.variable.HasVariables;
+import org.jdmp.core.sample.HasSampleMap;
+import org.jdmp.core.variable.HasVariableMap;
 import org.jdmp.jetty.html.Page;
 import org.jdmp.jetty.html.tags.BRTag;
 import org.jdmp.jetty.html.tags.H1Tag;
@@ -81,23 +81,23 @@ public class JettyCoreObjectServlet extends HttpServlet {
 			page.add(new LinkTag("/console", "Console"));
 			page.add(new BRTag());
 		}
-		if (object instanceof HasModules) {
+		if (object instanceof HasModuleMap) {
 			page.add(new LinkTag("/modules", "Modules"));
 			page.add(new BRTag());
 		}
-		if (object instanceof HasVariables) {
+		if (object instanceof HasVariableMap) {
 			page.add(new LinkTag("/variables", "Variables"));
 			page.add(new BRTag());
 		}
-		if (object instanceof HasAlgorithms) {
+		if (object instanceof HasAlgorithmMap) {
 			page.add(new LinkTag("/algorithms", "Algorithms"));
 			page.add(new BRTag());
 		}
-		if (object instanceof HasDataSets) {
+		if (object instanceof HasDataSetMap) {
 			page.add(new LinkTag("/datasets", "DataSets"));
 			page.add(new BRTag());
 		}
-		if (object instanceof HasSamples) {
+		if (object instanceof HasSampleMap) {
 			page.add(new LinkTag("/samples", "Samples"));
 			page.add(new BRTag());
 		}

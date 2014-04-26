@@ -30,10 +30,10 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
-import org.jdmp.core.algorithm.HasAlgorithms;
+import org.jdmp.core.algorithm.HasAlgorithmMap;
 import org.jdmp.core.algorithm.index.Index;
-import org.jdmp.core.dataset.HasDataSets;
-import org.jdmp.core.variable.HasVariables;
+import org.jdmp.core.dataset.HasDataSetMap;
+import org.jdmp.core.variable.HasVariableMap;
 import org.jdmp.gui.dataset.DataSetListPanel;
 import org.jdmp.gui.variable.VariableListPanel;
 import org.ujmp.gui.panels.AbstractPanel;
@@ -59,9 +59,9 @@ public class AlgorithmPanel extends AbstractPanel {
 		} else {
 			rightPanel.setLayout(new GridLayout(3, 1));
 		}
-		rightPanel.add(new DataSetListPanel((HasDataSets) a.getCoreObject()));
-		rightPanel.add(new VariableListPanel((HasVariables) a.getCoreObject()));
-		rightPanel.add(new AlgorithmListPanel((HasAlgorithms) a.getCoreObject()));
+		rightPanel.add(new DataSetListPanel((HasDataSetMap) a.getCoreObject()));
+		rightPanel.add(new VariableListPanel((HasVariableMap) a.getCoreObject()));
+		rightPanel.add(new AlgorithmListPanel((HasAlgorithmMap) a.getCoreObject()));
 
 		splitPane.setLeftComponent(leftPanel);
 		splitPane.setRightComponent(rightPanel);

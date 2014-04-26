@@ -28,7 +28,7 @@ import javax.swing.event.ListDataListener;
 import javax.swing.table.AbstractTableModel;
 
 import org.jdmp.core.dataset.DataSet;
-import org.jdmp.core.dataset.HasDataSets;
+import org.jdmp.core.dataset.HasDataSetMap;
 
 public class DataSetListTableModel extends AbstractTableModel implements ListDataListener {
 	private static final long serialVersionUID = 8897049622154020275L;
@@ -37,9 +37,9 @@ public class DataSetListTableModel extends AbstractTableModel implements ListDat
 
 	public static final int LABELCOLUMN = 1;
 
-	private HasDataSets iDataSets = null;
+	private HasDataSetMap iDataSets = null;
 
-	public DataSetListTableModel(HasDataSets iDataSets) {
+	public DataSetListTableModel(HasDataSetMap iDataSets) {
 		this.iDataSets = iDataSets;
 		iDataSets.getDataSets().addListDataListener(this);
 	}

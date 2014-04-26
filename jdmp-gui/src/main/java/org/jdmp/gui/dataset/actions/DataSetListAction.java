@@ -25,19 +25,19 @@ package org.jdmp.gui.dataset.actions;
 
 import javax.swing.JComponent;
 
-import org.jdmp.core.dataset.HasDataSets;
+import org.jdmp.core.dataset.HasDataSetMap;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.gui.actions.AbstractObjectAction;
 
 public abstract class DataSetListAction extends AbstractObjectAction {
 	private static final long serialVersionUID = -1934258866331553465L;
 
-	public DataSetListAction(JComponent c, HasDataSets iDataSets) {
+	public DataSetListAction(JComponent c, HasDataSetMap iDataSets) {
 		super(c, (GUIObject) iDataSets);
 	}
 
-	public HasDataSets getIDataSets() {
-		return (HasDataSets) getGUIObject();
+	public HasDataSetMap getIDataSets() {
+		return (HasDataSetMap) getGUIObject();
 	}
 
 }

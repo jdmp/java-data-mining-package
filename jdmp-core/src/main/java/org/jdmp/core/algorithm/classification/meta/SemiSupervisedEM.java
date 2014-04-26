@@ -78,8 +78,8 @@ public class SemiSupervisedEM extends AbstractClassifier implements SemiSupervis
 			}
 		}
 		ClassificationDataSet completeData = new ClassificationDataSet();
-		completeData.getSamples().addAll(labeledData.getSamples().toCollection());
-		completeData.getSamples().addAll(unlabeledData.getSamples().toCollection());
+		completeData.getSamples().addAll(labeledData.getSamples().values());
+		completeData.getSamples().addAll(unlabeledData.getSamples().values());
 		classifier.reset();
 		classifier.train(completeData);
 
@@ -94,8 +94,8 @@ public class SemiSupervisedEM extends AbstractClassifier implements SemiSupervis
 				s.getVariables().setMatrix(Sample.TARGET, target);
 			}
 			completeData = new ClassificationDataSet();
-			completeData.getSamples().addAll(labeledData.getSamples().toCollection());
-			completeData.getSamples().addAll(unlabeledData.getSamples().toCollection());
+			completeData.getSamples().addAll(labeledData.getSamples().values());
+			completeData.getSamples().addAll(unlabeledData.getSamples().values());
 			classifier.reset();
 			classifier.train(completeData);
 		}

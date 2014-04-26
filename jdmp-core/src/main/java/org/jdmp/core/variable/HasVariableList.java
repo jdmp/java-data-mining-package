@@ -25,7 +25,7 @@ package org.jdmp.core.variable;
 
 import org.jdmp.core.util.DefaultObservableList;
 
-public interface HasVariableList extends HasVariables {
+public interface HasVariableList {
 
 	public DefaultObservableList<Variable> getVariables();
 
