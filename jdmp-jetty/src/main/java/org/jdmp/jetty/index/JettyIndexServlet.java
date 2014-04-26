@@ -31,7 +31,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.jdmp.core.JDMPCoreObject;
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.algorithm.index.Index;
 import org.jdmp.core.dataset.DataSet;
@@ -84,7 +83,8 @@ public class JettyIndexServlet extends HttpServlet {
 			response.setCharacterEncoding("UTF-8");
 			response.setStatus(HttpServletResponse.SC_OK);
 
-			CoreObject co = ((JDMPCoreObject) index).getData(ref);
+			CoreObject co = null;
+			// co=((JDMPCoreObject) index).getData(ref);
 
 			response.setContentType("text/html");
 			PrintWriter out = response.getWriter();

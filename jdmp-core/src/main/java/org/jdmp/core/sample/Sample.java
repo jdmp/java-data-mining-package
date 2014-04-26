@@ -23,40 +23,23 @@
 
 package org.jdmp.core.sample;
 
-import org.jdmp.core.JDMPCoreObject;
 import org.jdmp.core.variable.HasVariableMap;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.interfaces.HasId;
+import org.ujmp.core.interfaces.CoreObject;
 
-public interface Sample extends JDMPCoreObject, HasVariableMap, HasId {
+public interface Sample extends CoreObject, HasVariableMap {
 
 	public static final String INPUT = Variable.INPUT;
-
 	public static final String PROBABILITY = Variable.PROBABILITY;
-
 	public static final String COUNT = Variable.COUNT;
-
-	public static final String ID = Variable.ID;
-
-	public static final String LABEL = Variable.LABEL;
-
 	public static final String SCORE = Variable.SCORE;
-
-	public static final String DESCRIPTION = Variable.DESCRIPTION;
-
 	public static final String WEIGHT = Variable.WEIGHT;
-
 	public static final String TARGET = Variable.TARGET;
-
 	public static final String PREDICTED = Variable.PREDICTED;
-
 	public static final String RMSE = Variable.RMSE;
-
 	public static final String DIFFERENCE = Variable.DIFFERENCE;
-
 	public static final String URL = Variable.URL;
-
 	public static final String TAGS = Variable.TAGS;
 
 	public Sample clone();

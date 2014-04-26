@@ -25,10 +25,9 @@ package org.jdmp.core.algorithm.regression;
 
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.util.ExportInterface;
 import org.ujmp.core.Matrix;
 
-public interface Regressor extends ExportInterface {
+public interface Regressor {
 
 	public void train(RegressionDataSet dataSet) throws Exception;
 

@@ -26,13 +26,13 @@ package org.jdmp.core.algorithm;
 import java.util.List;
 import java.util.Map;
 
-import org.jdmp.core.JDMPCoreObject;
 import org.jdmp.core.dataset.HasDataSetList;
 import org.jdmp.core.variable.HasVariableMap;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.interfaces.CoreObject;
 
-public interface Algorithm extends JDMPCoreObject, HasVariableMap, HasDataSetList, HasAlgorithmMap {
+public interface Algorithm extends CoreObject, HasVariableMap, HasDataSetList, HasAlgorithmMap {
 	public static final Class<?>[] ALGORITHMARRAY = new Class<?>[] { new Algorithm[] {}.getClass() };
 
 	public enum EdgeDirection {

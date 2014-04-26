@@ -23,10 +23,10 @@
 
 package org.jdmp.gui.variable;
 
-import org.jdmp.core.JDMPCoreObject;
 import org.jdmp.core.variable.HasVariables;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.gui.util.AbstractListPanel;
+import org.ujmp.core.interfaces.CoreObject;
 import org.ujmp.core.interfaces.GUIObject;
 
 public class VariableListPanel extends AbstractListPanel {
@@ -34,8 +34,8 @@ public class VariableListPanel extends AbstractListPanel {
 
 	public VariableListPanel(HasVariables iVariables) {
 		super();
-		if (iVariables instanceof JDMPCoreObject) {
-			this.object = ((JDMPCoreObject) iVariables).getGUIObject();
+		if (iVariables instanceof CoreObject) {
+			this.object = ((CoreObject) iVariables).getGUIObject();
 		} else {
 			this.object = (GUIObject) iVariables;
 		}

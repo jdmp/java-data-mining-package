@@ -31,18 +31,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.jdmp.core.JDMPCoreObject;
 import org.jdmp.core.util.CoreObjectList;
 import org.jdmp.jetty.html.Page;
 import org.jdmp.jetty.html.tags.BRTag;
 import org.jdmp.jetty.html.tags.H1Tag;
+import org.ujmp.core.interfaces.CoreObject;
 
 public class JettyCoreObjectListServlet extends HttpServlet {
 	private static final long serialVersionUID = -4311396653640425480L;
 
-	private CoreObjectList<? extends JDMPCoreObject> list = null;
+	private CoreObjectList<? extends CoreObject> list = null;
 
-	public JettyCoreObjectListServlet(CoreObjectList<? extends JDMPCoreObject> list) {
+	public JettyCoreObjectListServlet(CoreObjectList<? extends CoreObject> list) {
 		this.list = list;
 	}
 
@@ -63,7 +63,7 @@ public class JettyCoreObjectListServlet extends HttpServlet {
 		Page page = new Page("Object List");
 		page.add(new H1Tag("Object List"));
 
-		for (JDMPCoreObject o : list) {
+		for (CoreObject o : list) {
 			page.add(o.toString());
 			page.add(new BRTag());
 		}
