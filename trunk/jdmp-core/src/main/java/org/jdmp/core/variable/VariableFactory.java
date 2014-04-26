@@ -40,7 +40,7 @@ public abstract class VariableFactory {
 	public static final Variable singleValue(String label, double value) {
 		Variable v = new DefaultVariable();
 		v.setLabel(label);
-		v.addInnerMatrix(Matrix.Factory.linkToValue(value));
+		v.add(Matrix.Factory.linkToValue(value));
 		return v;
 	}
 

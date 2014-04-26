@@ -112,15 +112,15 @@ public class ClassificationDataSet extends RegressionDataSet {
 	}
 
 	public void appendConfusionMatrix(Matrix m) {
-		getConfusionVariable().addInnerMatrix(m);
+		getConfusionVariable().add(m);
 	}
 
 	public void appendAccuracyMatrix(Matrix m) {
-		getAccuracyVariable().addInnerMatrix(m);
+		getAccuracyVariable().add(m);
 	}
 
 	public void appendErrorCountMatrix(Matrix m) {
-		getErrorCountVariable().addInnerMatrix(m);
+		getErrorCountVariable().add(m);
 	}
 
 	public double getAccuracy() {

@@ -64,10 +64,10 @@ public class NetworkLayer implements Serializable {
 			BiasType biasType, int neuronCount) {
 		this(aggregationFunction, transferFunction, biasType);
 		Variable outputDeviation = VariableFactory.labeledVariable("Output Deviation");
-		outputDeviation.setInnerSize(neuronCount, 1);
+		outputDeviation.add(Matrix.Factory.zeros(neuronCount, 1));
 		setOutputDeviationVariable(outputDeviation);
 		Variable output = VariableFactory.labeledVariable("Output");
-		output.setInnerSize(neuronCount, 1);
+		output.add(Matrix.Factory.zeros(neuronCount, 1));
 		setOutputVariable(output);
 	}
 
@@ -169,32 +169,35 @@ public class NetworkLayer implements Serializable {
 
 			double scale = 1;
 			if (aggregation == Aggregation.SUM) {
-				scale = 1.0 / getInputVariable().getInnerRowCount()
-						/ getInputVariable().getInnerColumnCount();
+				scale = 1.0 / getInputVariable().getLast().getRowCount()
+						/ getInputVariable().getLast().getColumnCount();
 			}
 
 			switch (biasType) {
 			case SINGLE:
 				w = Matrix.Factory.randn(
-						getOutputVariable().getInnerRowCount() * getOutputVariable().getInnerColumnCount(),
-						getInputVariable().getInnerRowCount() * getInputVariable().getInnerColumnCount() + 1)
-						.times(scale);
+						getOutputVariable().getLast().getRowCount()
+								* getOutputVariable().getLast().getColumnCount(),
+						getInputVariable().getLast().getRowCount()
+								* getInputVariable().getLast().getColumnCount() + 1).times(scale);
 				break;
 			case MULTIPLE:
 				w = Matrix.Factory.randn(
-						getOutputVariable().getInnerRowCount() * getOutputVariable().getInnerColumnCount(),
-						getInputVariable().getInnerRowCount() * getInputVariable().getInnerColumnCount() * 2)
-						.times(scale);
+						getOutputVariable().getLast().getRowCount()
+								* getOutputVariable().getLast().getColumnCount(),
+						getInputVariable().getLast().getRowCount()
+								* getInputVariable().getLast().getColumnCount() * 2).times(scale);
 				break;
 			case NONE:
 				w = Matrix.Factory.randn(
-						getOutputVariable().getInnerRowCount() * getOutputVariable().getInnerColumnCount(),
-						getInputVariable().getInnerRowCount() * getInputVariable().getInnerColumnCount())
-						.times(scale);
+						getOutputVariable().getLast().getRowCount()
+								* getOutputVariable().getLast().getColumnCount(),
+						getInputVariable().getLast().getRowCount()
+								* getInputVariable().getLast().getColumnCount()).times(scale);
 				break;
 			}
 
-			weight.addInnerMatrix(w);
+			weight.add(w);
 			setWeightVariable(weight);
 			// System.out.println("weight " + getLabel() + ": " +
 			// weight.getColumnCount() + "->" + weight.getRowCount());
@@ -208,9 +211,11 @@ public class NetworkLayer implements Serializable {
 	public void reset() {
 		createVariablesIfNecessary();
 		Matrix w = Matrix.Factory.randn(
-				getOutputVariable().getInnerRowCount() * getOutputVariable().getInnerColumnCount(),
-				getInputVariable().getInnerRowCount() * getInputVariable().getInnerColumnCount()).times(0.01);
-		getWeightVariable().addInnerMatrix(w);
+				getOutputVariable().getLast().getRowCount()
+						* getOutputVariable().getLast().getColumnCount(),
+				getInputVariable().getLast().getRowCount()
+						* getInputVariable().getLast().getColumnCount()).times(0.01);
+		getWeightVariable().add(w);
 	}
 
 	public String toString() {
@@ -226,7 +231,7 @@ public class NetworkLayer implements Serializable {
 	}
 
 	public int getNeuronCount() {
-		return (int) getOutputDeviationVariable().getInnerRowCount();
+		return (int) getOutputDeviationVariable().getLast().getRowCount();
 	}
 
 	public void setInputVariable(Variable v) {

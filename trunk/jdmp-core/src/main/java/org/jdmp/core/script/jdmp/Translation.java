@@ -282,7 +282,7 @@ public class Translation extends DepthFirstAdapter {
 				Matrix m = MathUtil.getMatrix(o);
 				if (m != null) {
 					Variable v = getVariable(node.getName());
-					v.addInnerMatrix(m);
+					v.add(m);
 					result = new Result(v.getLabel(), m);
 					System.out.println(result.toString());
 				}
@@ -963,7 +963,7 @@ public class Translation extends DepthFirstAdapter {
 				v = VariableFactory.labeledVariable(ANS);
 				module.getVariableMap().put(ANS, v);
 			}
-			v.addInnerMatrix(MathUtil.getMatrix(o));
+			v.add(MathUtil.getMatrix(o));
 
 			result = new Result(ANS, o);
 			System.out.println(result);

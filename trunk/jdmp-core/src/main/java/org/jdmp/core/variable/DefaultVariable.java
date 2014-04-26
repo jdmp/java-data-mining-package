@@ -29,7 +29,6 @@ import javax.swing.event.ListDataListener;
 import org.jdmp.core.util.DefaultObservableList;
 import org.jdmp.core.util.MatrixListToMatrixWrapper;
 import org.jdmp.core.util.ObservableList;
-import org.ujmp.core.Coordinates;
 import org.ujmp.core.Matrix;
 
 public class DefaultVariable extends AbstractVariable {
@@ -37,28 +36,12 @@ public class DefaultVariable extends AbstractVariable {
 
 	private transient Matrix matrixListMatrix = null;
 
-	private long[] size = Coordinates.ZERO2D;
-
 	private final ObservableList<Matrix> matrixList;
 
 	public DefaultVariable() {
 		super();
 		matrixList = new DefaultObservableList<Matrix>(this);
 		matrixList.addListDataListener(new VariableListDataListener());
-	}
-
-	public final long[] getInnerSize() {
-		if (Coordinates.product(size) == 0) {
-			Matrix m = getLast();
-			if (m != null) {
-				setInnerSize(Coordinates.copyOf(m.getSize()));
-			}
-		}
-		return size;
-	}
-
-	public final void setInnerSize(long... size) {
-		this.size = Coordinates.copyOf(size);
 	}
 
 	public Matrix getAsListMatrix() {

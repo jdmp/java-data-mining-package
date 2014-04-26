@@ -45,8 +45,7 @@ public class DivideAction extends VariableAction {
 	}
 
 	public Object call() {
-		getVariable().getCoreObject().addInnerMatrix(
-				getVariable().getCoreObject().getLast().divide(2.0));
+		getVariable().getCoreObject().add(getVariable().getCoreObject().getLast().divide(2.0));
 		return null;
 	}
 
