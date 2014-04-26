@@ -28,7 +28,7 @@ import java.util.Collection;
 
 import javax.swing.ListModel;
 
-public interface ObservableList<V> extends Serializable, ListModel, Iterable<V> {
+public interface ObservableList<V> extends Serializable, ListModel<V>, Iterable<V> {
 
 	public void add(V value);
 
@@ -43,7 +43,5 @@ public interface ObservableList<V> extends Serializable, ListModel, Iterable<V> 
 	public void clear();
 
 	public Collection<V> toCollection();
-
-	public void fireContentsChanged();
 
 }

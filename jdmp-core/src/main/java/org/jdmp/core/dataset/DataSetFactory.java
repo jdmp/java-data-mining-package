@@ -26,7 +26,6 @@ package org.jdmp.core.dataset;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Map;
 import java.util.Random;
 
 import org.jdmp.core.algorithm.basic.CreateIris;
@@ -38,13 +37,6 @@ import org.ujmp.core.enums.DBType;
 import org.ujmp.core.enums.FileFormat;
 
 public abstract class DataSetFactory {
-
-	public static DataSet linkToMap(Map<? extends Object, ? extends Object> dataMap) {
-		SampleMapWrapper list = new SampleMapWrapper(dataMap);
-		DataSet ds = emptyDataSet();
-		ds.setSamples(list);
-		return ds;
-	}
 
 	public static DataSet emptyDataSet() {
 		return new DefaultDataSet();

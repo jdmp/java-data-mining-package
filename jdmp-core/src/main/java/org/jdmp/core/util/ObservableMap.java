@@ -23,14 +23,7 @@
 
 package org.jdmp.core.util;
 
-import java.util.Collection;
 import java.util.Map;
 
-import javax.swing.ListModel;
-
 public interface ObservableMap<V> extends ObservableList<V>, Map<String, V> {
-
-	public void addAll(Collection<V> objects);
-
-	public void add(V object);
 }
