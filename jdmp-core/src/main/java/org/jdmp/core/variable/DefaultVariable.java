@@ -31,7 +31,6 @@ import org.jdmp.core.util.MatrixListToMatrixWrapper;
 import org.jdmp.core.util.ObservableList;
 import org.ujmp.core.Coordinates;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.collections.RingBufferList;
 
 public class DefaultVariable extends AbstractVariable {
 	private static final long serialVersionUID = -7192491915167470355L;
@@ -40,7 +39,7 @@ public class DefaultVariable extends AbstractVariable {
 
 	private long[] size = Coordinates.ZERO2D;
 
-	private ObservableList<Matrix> matrixList = null;
+	private final ObservableList<Matrix> matrixList;
 
 	public DefaultVariable() {
 		super();
@@ -48,15 +47,9 @@ public class DefaultVariable extends AbstractVariable {
 		matrixList.addListDataListener(new VariableListDataListener());
 	}
 
-	public DefaultVariable(int memorySize) {
-		super();
-		matrixList = new DefaultObservableList<Matrix>(new RingBufferList<Matrix>(memorySize));
-		matrixList.addListDataListener(new VariableListDataListener());
-	}
-
 	public final long[] getInnerSize() {
 		if (Coordinates.product(size) == 0) {
-			Matrix m = getLatestMatrix();
+			Matrix m = getLast();
 			if (m != null) {
 				setInnerSize(Coordinates.copyOf(m.getSize()));
 			}

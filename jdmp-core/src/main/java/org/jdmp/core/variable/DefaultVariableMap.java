@@ -33,7 +33,7 @@ public class DefaultVariableMap extends AbstractVariableMap {
 	public final Matrix getMatrix(String variableKey) {
 		Variable v = get(variableKey);
 		if (v != null) {
-			return v.getLatestMatrix();
+			return v.getLast();
 		} else {
 			return null;
 		}

@@ -95,7 +95,7 @@ public abstract class AbstractMapSample extends AbstractSample implements
 		}
 
 		public Variable put(String key, Variable value) {
-			getWrappedObject().put(key, value.getLatestMatrix());
+			getWrappedObject().put(key, value.getLast());
 			return null;
 		}
 

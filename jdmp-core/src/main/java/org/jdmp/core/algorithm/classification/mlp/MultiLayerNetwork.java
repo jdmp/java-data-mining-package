@@ -106,7 +106,8 @@ public class MultiLayerNetwork extends AbstractClassifier {
 							biasDefault, hiddenNeurons[i]);
 				}
 				getAlgorithmMap().put("hidden" + i + "-forward", hiddenLayer.getAlgorithmForward());
-				getAlgorithmMap().put("hidden" + i + "-backward", hiddenLayer.getAlgorithmBackward());
+				getAlgorithmMap().put("hidden" + i + "-backward",
+						hiddenLayer.getAlgorithmBackward());
 				getAlgorithmMap().put("hidden" + i + "-update",
 						hiddenLayer.getAlgorithmWeightUpdate());
 				hiddenLayer.setLayer(i);
@@ -270,7 +271,7 @@ public class MultiLayerNetwork extends AbstractClassifier {
 	}
 
 	public Matrix getOutputMatrix() {
-		return getOutputVariable().getLatestMatrix();
+		return getOutputVariable().getLast();
 	}
 
 	public void train(Matrix input, Matrix sampleWeight, Matrix desiredOutput) throws Exception {

@@ -80,10 +80,10 @@ public class VariableTableCellRenderer implements TableCellRenderer {
 				o = "" + variable.getInnerRowCount() + "x" + variable.getInnerColumnCount();
 				break;
 			case VariableListTableModel.PLOTCOLUMN:
-				return matrixPlot.getTableCellRendererComponent(table, variable.getLatestMatrix(),
+				return matrixPlot.getTableCellRendererComponent(table, variable.getLast(),
 						isSelected, hasFocus, row, column);
 			case VariableListTableModel.MATRIXCOLUMN:
-				return matrixRenderer.getTableCellRendererComponent(table, variable.getLatestMatrix(),
+				return matrixRenderer.getTableCellRendererComponent(table, variable.getLast(),
 						isSelected, hasFocus, row, column);
 			default:
 				o = null;
