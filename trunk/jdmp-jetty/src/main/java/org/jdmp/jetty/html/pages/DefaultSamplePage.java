@@ -50,18 +50,18 @@ public class DefaultSamplePage extends Page {
 			setTitle("JDMP Search: " + sample.getLabel());
 			add(new H1Tag(sample.getLabel()));
 
-			for (String key : sample.getVariables().keySet()) {
+			for (String key : sample.getVariableMap().keySet()) {
 				if (Sample.LABEL.equals(key)) {
 					continue;
 				} else if (Variable.LINKS.equals(key)) {
-					Variable links = sample.getVariables().get(Variable.LINKS);
+					Variable links = sample.getVariableMap().get(Variable.LINKS);
 					add(new H2Tag(StringUtil.format(key)));
 					for (Matrix m : links.getMatrixList()) {
 						String l = m.stringValue();
 						add(new LinkTag("?q=" + l, l));
 					}
 				} else {
-					String value = sample.getVariables().getAllAsString(key);
+					String value = sample.getVariableMap().getAllAsString(key);
 					add(new H2Tag(StringUtil.format(key)));
 					add(new Text(value));
 				}
@@ -71,7 +71,7 @@ public class DefaultSamplePage extends Page {
 				if (parameters != null && parameters.length > 0 && parameters[0] instanceof SimilaritySearcher) {
 					SimilaritySearcher index = (SimilaritySearcher) parameters[0];
 					DataSet ds = index.searchSimilar(sample, 0, 10);
-					if (ds != null && !ds.getSamples().isEmpty()) {
+					if (ds != null && !ds.getSampleMap().isEmpty()) {
 						add(new H2Tag("Similar Results"));
 						add(new DefaultDataSetDiv(ds, path, request));
 					}

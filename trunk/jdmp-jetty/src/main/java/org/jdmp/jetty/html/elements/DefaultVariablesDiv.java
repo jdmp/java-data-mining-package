@@ -58,12 +58,12 @@ public class DefaultVariablesDiv extends DivTag {
 			String query = request.getParameter("q");
 			query = query == null ? "" : query;
 
-			for (Object key : variables.getVariables().keySet()) {
+			for (Object key : variables.getVariableMap().keySet()) {
 				if (skippedVariables.contains(key)) {
 					continue;
 				}
 
-				Variable var = variables.getVariables().get(key);
+				Variable var = variables.getVariableMap().get(key);
 
 				DivTag field = new DivTag();
 				field.setParameter("class", "variable");

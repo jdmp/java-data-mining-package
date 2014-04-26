@@ -61,12 +61,12 @@ public class MarketBasketAnalysis extends AbstractRelationMiner {
 		Matrix product2Count = new CountMatrix(product2ToIds);
 		product2Count.setLabel("Product 2 Count");
 
-		for (int r = 0; r < dataSet.getSamples().getSize(); r++) {
+		for (int r = 0; r < dataSet.getSampleMap().getSize(); r++) {
 
 			if (r % 1000 == 0) {
-				System.out.println(r + " of " + dataSet.getSamples().getSize());
+				System.out.println(r + " of " + dataSet.getSampleMap().getSize());
 			}
-			RelationalSample s = (RelationalSample) dataSet.getSamples().getElementAt(r);
+			RelationalSample s = (RelationalSample) dataSet.getSampleMap().getElementAt(r);
 			Collection<?> products = s.getObjects();
 			if (products.size() != 0) {
 				addProduct1Count(products, r);
@@ -94,7 +94,7 @@ public class MarketBasketAnalysis extends AbstractRelationMiner {
 			Collection<?> products = getProductsInLine(data, r);
 			if (products.size() != 0) {
 				RelationalSample s = SampleFactory.relationalSample(products);
-				orig.getSamples().add(s);
+				orig.getSampleMap().add(s);
 			}
 		}
 
@@ -127,20 +127,20 @@ public class MarketBasketAnalysis extends AbstractRelationMiner {
 				RelationalSample s12 = SampleFactory.relationalSample(prod1 + " => " + prod2);
 				s12.addObject(prod1);
 				s12.addObject(prod2);
-				s12.getVariables().setMatrix(Sample.COUNT, Matrix.Factory.linkToValue(count));
-				s12.getVariables().setMatrix(Sample.PROBABILITY, Matrix.Factory.linkToValue(p1));
-				s12.getVariables().setObject("From", prod1);
-				s12.getVariables().setObject("To", prod2);
-				ds.getSamples().add(s12);
+				s12.getVariableMap().setMatrix(Sample.COUNT, Matrix.Factory.linkToValue(count));
+				s12.getVariableMap().setMatrix(Sample.PROBABILITY, Matrix.Factory.linkToValue(p1));
+				s12.getVariableMap().setObject("From", prod1);
+				s12.getVariableMap().setObject("To", prod2);
+				ds.getSampleMap().add(s12);
 
 				RelationalSample s21 = SampleFactory.relationalSample(prod2 + " => " + prod1);
 				s21.addObject(prod1);
 				s21.addObject(prod2);
-				s21.getVariables().setMatrix(Sample.COUNT, Matrix.Factory.linkToValue(count));
-				s21.getVariables().setMatrix(Sample.PROBABILITY, Matrix.Factory.linkToValue(p2));
-				s21.getVariables().setObject("From", prod2);
-				s21.getVariables().setObject("To", prod1);
-				ds.getSamples().add(s21);
+				s21.getVariableMap().setMatrix(Sample.COUNT, Matrix.Factory.linkToValue(count));
+				s21.getVariableMap().setMatrix(Sample.PROBABILITY, Matrix.Factory.linkToValue(p2));
+				s21.getVariableMap().setObject("From", prod2);
+				s21.getVariableMap().setObject("To", prod1);
+				ds.getSampleMap().add(s21);
 
 			}
 		}

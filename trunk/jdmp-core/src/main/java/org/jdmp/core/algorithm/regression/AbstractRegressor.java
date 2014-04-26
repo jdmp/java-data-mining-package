@@ -73,15 +73,15 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 	}
 
 	public final void predict(Sample sample) throws Exception {
-		Matrix predicted = predict(sample.getVariables().getMatrix(INPUT), sample.getVariables()
+		Matrix predicted = predict(sample.getVariableMap().getMatrix(INPUT), sample.getVariableMap()
 				.getMatrix(WEIGHT));
-		sample.getVariables().setMatrix(PREDICTED, predicted);
+		sample.getVariableMap().setMatrix(PREDICTED, predicted);
 		if (evaluate) {
 			Map<String, Object> result = getOutputErrorAlgorithm().calculate(predicted,
-					sample.getVariables().getMatrix(TARGET));
+					sample.getVariableMap().getMatrix(TARGET));
 			Matrix error = MathUtil.getMatrix(result.get(TARGET));
-			sample.getVariables().setMatrix(DIFFERENCE, error);
-			sample.getVariables().setMatrix(RMSE, Matrix.Factory.linkToValue(error.getRMS()));
+			sample.getVariableMap().setMatrix(DIFFERENCE, error);
+			sample.getVariableMap().setMatrix(RMSE, Matrix.Factory.linkToValue(error.getRMS()));
 		}
 		sample.notifyGUIObject();
 	}
@@ -97,9 +97,9 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 	public abstract Matrix predict(Matrix input, Matrix sampleWeight) throws Exception;
 
 	public final void train(Sample sample) throws Exception {
-		Matrix input = sample.getVariables().getMatrix(INPUT);
-		Matrix weight = sample.getVariables().getMatrix(WEIGHT);
-		Matrix target = sample.getVariables().getMatrix(TARGET);
+		Matrix input = sample.getVariableMap().getMatrix(INPUT);
+		Matrix weight = sample.getVariableMap().getMatrix(WEIGHT);
+		Matrix target = sample.getVariableMap().getMatrix(TARGET);
 		train(input, weight, target);
 	}
 
@@ -118,12 +118,12 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 			confusion.setAxisLabel(Matrix.COLUMN, "predicted");
 		}
 
-		for (Sample sample : dataSet.getSamples()) {
+		for (Sample sample : dataSet.getSampleMap()) {
 
 			predict(sample);
 
 			if (evaluate) {
-				double rmse = sample.getVariables().getMatrix(RMSE).getEuklideanValue();
+				double rmse = sample.getVariableMap().getMatrix(RMSE).getEuklideanValue();
 				error += Math.pow(rmse, 2.0);
 
 				int recognized = sample.getRecognizedClass();
@@ -149,47 +149,47 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 			}
 		}
 
-		Matrix rmse = Matrix.Factory.linkToValue(Math.sqrt(error / dataSet.getSamples().getSize()));
+		Matrix rmse = Matrix.Factory.linkToValue(Math.sqrt(error / dataSet.getSampleMap().getSize()));
 		rmse.setLabel("RMSE with " + getLabel());
-		dataSet.getVariables().setMatrix(Variable.RMSE, rmse);
+		dataSet.getVariableMap().setMatrix(Variable.RMSE, rmse);
 
 		if ((dataSet instanceof ClassificationDataSet)) {
 			confusion.setLabel("Confusion with " + getLabel());
-			dataSet.getVariables().setMatrix(Variable.CONFUSION, confusion);
+			dataSet.getVariableMap().setMatrix(Variable.CONFUSION, confusion);
 
 			Matrix accuracy = Matrix.Factory.linkToValue((double) correctCount
-					/ (double) dataSet.getSamples().getSize());
+					/ (double) dataSet.getSampleMap().getSize());
 			accuracy.setLabel("Accuracy with " + getLabel());
-			dataSet.getVariables().setMatrix(Variable.ACCURACY, accuracy);
+			dataSet.getVariableMap().setMatrix(Variable.ACCURACY, accuracy);
 
 			Matrix errorMatrix = Matrix.Factory.linkToValue(errorCount);
 			errorMatrix.setLabel("Errors with " + getLabel());
-			dataSet.getVariables().setMatrix(Variable.ERRORCOUNT, errorMatrix);
+			dataSet.getVariableMap().setMatrix(Variable.ERRORCOUNT, errorMatrix);
 
 			Matrix sensitivity = (Matrix) new Sensitivity().calculate(confusion).get(TARGET);
-			dataSet.getVariables().setMatrix(Variable.SENSITIVITY, sensitivity);
+			dataSet.getVariableMap().setMatrix(Variable.SENSITIVITY, sensitivity);
 
 			Matrix specificity = (Matrix) new Specificity().calculate(confusion).get(TARGET);
-			dataSet.getVariables().setMatrix(Variable.SPECIFICITY, specificity);
+			dataSet.getVariableMap().setMatrix(Variable.SPECIFICITY, specificity);
 
 			Matrix precision = (Matrix) new Precision().calculate(confusion).get(TARGET);
-			dataSet.getVariables().setMatrix(Variable.PRECISION, precision);
+			dataSet.getVariableMap().setMatrix(Variable.PRECISION, precision);
 
 			Matrix recall = (Matrix) new Recall().calculate(confusion).get(TARGET);
-			dataSet.getVariables().setMatrix(Variable.RECALL, recall);
+			dataSet.getVariableMap().setMatrix(Variable.RECALL, recall);
 
 			Matrix fmeasure = (Matrix) new FMeasure().calculate(confusion).get(TARGET);
-			dataSet.getVariables().setMatrix(Variable.FMEASURE, fmeasure);
+			dataSet.getVariableMap().setMatrix(Variable.FMEASURE, fmeasure);
 
 			Matrix fmeasureMacro = fmeasure.mean(Ret.NEW, Matrix.ALL, false);
-			dataSet.getVariables().setMatrix(Variable.FMEASUREMACRO, fmeasureMacro);
+			dataSet.getVariableMap().setMatrix(Variable.FMEASUREMACRO, fmeasureMacro);
 		}
 
 		dataSet.notifyGUIObject();
 	}
 
 	public Algorithm getOutputErrorAlgorithm() {
-		return getAlgorithms().get(OUTPUTERRORALGORITHM);
+		return getAlgorithmMap().get(OUTPUTERRORALGORITHM);
 	}
 
 	public void setOutputErrorAlgorithm(Algorithm a) {

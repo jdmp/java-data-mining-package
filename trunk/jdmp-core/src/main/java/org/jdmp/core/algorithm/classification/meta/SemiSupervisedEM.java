@@ -66,36 +66,36 @@ public class SemiSupervisedEM extends AbstractClassifier implements SemiSupervis
 		classifier.reset();
 		classifier.train(labeledData);
 		classifier.predict(unlabeledData);
-		for (Sample s : unlabeledData.getSamples()) {
-			Matrix predicted = s.getVariables().getMatrix(Sample.PREDICTED);
+		for (Sample s : unlabeledData.getSampleMap()) {
+			Matrix predicted = s.getVariableMap().getMatrix(Sample.PREDICTED);
 			if (useRawPrediction) {
-				s.getVariables().setMatrix(Sample.TARGET, predicted);
+				s.getVariableMap().setMatrix(Sample.TARGET, predicted);
 			} else {
 				int max = (int) predicted.indexOfMax(Ret.NEW, Matrix.COLUMN).getAsDouble(0, 0);
 				Matrix target = Matrix.Factory.zeros(1, classCount);
 				target.setAsDouble(1.0, 0, max);
-				s.getVariables().setMatrix(Sample.TARGET, target);
+				s.getVariableMap().setMatrix(Sample.TARGET, target);
 			}
 		}
 		ClassificationDataSet completeData = new ClassificationDataSet();
-		completeData.getSamples().addAll(labeledData.getSamples().values());
-		completeData.getSamples().addAll(unlabeledData.getSamples().values());
+		completeData.getSampleMap().addAll(labeledData.getSampleMap().values());
+		completeData.getSampleMap().addAll(unlabeledData.getSampleMap().values());
 		classifier.reset();
 		classifier.train(completeData);
 
 		for (int i = 0; i < iterations; i++) {
 			System.out.println("Step " + (i + 1));
 			classifier.predict(unlabeledData);
-			for (Sample s : unlabeledData.getSamples()) {
-				Matrix predicted = s.getVariables().getMatrix(Sample.PREDICTED);
+			for (Sample s : unlabeledData.getSampleMap()) {
+				Matrix predicted = s.getVariableMap().getMatrix(Sample.PREDICTED);
 				int max = (int) predicted.indexOfMax(Ret.NEW, Matrix.COLUMN).getAsDouble(0, 0);
 				Matrix target = Matrix.Factory.zeros(1, classCount);
 				target.setAsDouble(1.0, 0, max);
-				s.getVariables().setMatrix(Sample.TARGET, target);
+				s.getVariableMap().setMatrix(Sample.TARGET, target);
 			}
 			completeData = new ClassificationDataSet();
-			completeData.getSamples().addAll(labeledData.getSamples().values());
-			completeData.getSamples().addAll(unlabeledData.getSamples().values());
+			completeData.getSampleMap().addAll(labeledData.getSampleMap().values());
+			completeData.getSampleMap().addAll(unlabeledData.getSampleMap().values());
 			classifier.reset();
 			classifier.train(completeData);
 		}

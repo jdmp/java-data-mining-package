@@ -29,7 +29,7 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
-import org.jdmp.core.module.HasModuleList;
+import org.jdmp.core.module.HasModuleMap;
 import org.jdmp.core.module.Module;
 
 public class RemoveModuleAction extends ModuleListAction {
@@ -37,12 +37,12 @@ public class RemoveModuleAction extends ModuleListAction {
 
 	private Module module = null;
 
-	public RemoveModuleAction(JComponent c, HasModuleList i, Module m) {
+	public RemoveModuleAction(JComponent c, HasModuleMap i, Module m) {
 		this(c, i);
 		this.module = m;
 	}
 
-	public RemoveModuleAction(JComponent c, HasModuleList i) {
+	public RemoveModuleAction(JComponent c, HasModuleMap i) {
 		super(c, i);
 		putValue(Action.NAME, "Remove Module...");
 		putValue(Action.SHORT_DESCRIPTION, "Remove a Module");
@@ -52,7 +52,7 @@ public class RemoveModuleAction extends ModuleListAction {
 
 	public Object call() {
 		if (module != null) {
-			getIModules().getModules().remove(module);
+			getIModules().getModuleMap().remove(module);
 			return module;
 		}
 		return null;

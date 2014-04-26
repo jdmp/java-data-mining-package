@@ -42,7 +42,7 @@ import org.ujmp.core.collections.map.LazyMap;
 import org.ujmp.core.util.MathUtil;
 import org.ujmp.core.util.StringUtil;
 
-public class LazyVariables implements ObservableMap<Variable>, Variables {
+public class LazyVariables implements ObservableMap<Variable>, VariableMap {
 	private static final long serialVersionUID = -6124194623868561891L;
 
 	private EventListenerList listenerList = null;

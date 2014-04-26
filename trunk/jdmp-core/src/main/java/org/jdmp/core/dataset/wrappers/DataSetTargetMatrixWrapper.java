@@ -44,18 +44,18 @@ public class DataSetTargetMatrixWrapper extends AbstractDenseDoubleMatrix2D impl
 	}
 
 	public long[] getSize() {
-		if (dataSet.getSamples().isEmpty()) {
+		if (dataSet.getSampleMap().isEmpty()) {
 			return Coordinates.ZERO2D;
 		}
-		Sample p = dataSet.getSamples().getElementAt(0);
+		Sample p = dataSet.getSampleMap().getElementAt(0);
 		if (p == null) {
 			return Coordinates.ZERO2D;
 		}
-		Matrix m = p.getVariables().getMatrix(Sample.TARGET);
+		Matrix m = p.getVariableMap().getMatrix(Sample.TARGET);
 		if (m == null) {
 			return Coordinates.ZERO2D;
 		}
-		return new long[] { dataSet.getSamples().getSize(), m.getColumnCount() };
+		return new long[] { dataSet.getSampleMap().getSize(), m.getColumnCount() };
 	}
 
 	public double getDouble(long row, long column) {
@@ -67,18 +67,18 @@ public class DataSetTargetMatrixWrapper extends AbstractDenseDoubleMatrix2D impl
 	}
 
 	public double getDouble(int row, int column) {
-		Sample p = dataSet.getSamples().getElementAt(row);
+		Sample p = dataSet.getSampleMap().getElementAt(row);
 		if (p != null) {
-			return p.getVariables().getMatrix(Sample.TARGET).getAsDouble(0, column);
+			return p.getVariableMap().getMatrix(Sample.TARGET).getAsDouble(0, column);
 		} else {
 			return 0.0;
 		}
 	}
 
 	public void setDouble(double value, int row, int column) {
-		Sample p = dataSet.getSamples().getElementAt(row);
+		Sample p = dataSet.getSampleMap().getElementAt(row);
 		if (p != null) {
-			p.getVariables().getMatrix(Sample.TARGET).setAsDouble(value, 0, column);
+			p.getVariableMap().getMatrix(Sample.TARGET).setAsDouble(value, 0, column);
 		}
 	}
 

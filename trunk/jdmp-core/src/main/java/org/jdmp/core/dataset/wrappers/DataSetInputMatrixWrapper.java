@@ -42,22 +42,22 @@ public class DataSetInputMatrixWrapper extends AbstractDenseDoubleMatrix2D imple
 	private DefaultDataSet dataSet = null;
 
 	public DataSetInputMatrixWrapper(DefaultDataSet ds) {
-		super(ds.getSamples().getSize(), 1);
+		super(ds.getSampleMap().getSize(), 1);
 		this.dataSet = ds;
 	}
 
 	public long[] getSize() {
 		try {
-			if (dataSet.getSamples().isEmpty()) {
+			if (dataSet.getSampleMap().isEmpty()) {
 				return Coordinates.ZERO2D;
 			}
-			Sample p = dataSet.getSamples().getElementAt(0);
+			Sample p = dataSet.getSampleMap().getElementAt(0);
 			if (p == null) {
 				return Coordinates.ZERO2D;
 			}
-			Matrix input = p.getVariables().getMatrix(INPUT);
+			Matrix input = p.getVariableMap().getMatrix(INPUT);
 			if (input != null) {
-				return new long[] { dataSet.getSamples().getSize(), input.getValueCount() };
+				return new long[] { dataSet.getSampleMap().getSize(), input.getValueCount() };
 			} else {
 				return Coordinates.ZERO2D;
 			}
@@ -78,9 +78,9 @@ public class DataSetInputMatrixWrapper extends AbstractDenseDoubleMatrix2D imple
 
 	public double getDouble(int row, int column) {
 		try {
-			Sample p = dataSet.getSamples().getElementAt(row);
+			Sample p = dataSet.getSampleMap().getElementAt(row);
 			if (p != null) {
-				Matrix m = p.getVariables().getMatrix(INPUT);
+				Matrix m = p.getVariableMap().getMatrix(INPUT);
 				if (m != null && Coordinates.product(m.getSize()) != 0) {
 					long r = column / m.getColumnCount();
 					long c = column % m.getColumnCount();
@@ -95,12 +95,12 @@ public class DataSetInputMatrixWrapper extends AbstractDenseDoubleMatrix2D imple
 	}
 
 	public void setDouble(double value, int row, int column) {
-		Sample p = dataSet.getSamples().getElementAt(row);
+		Sample p = dataSet.getSampleMap().getElementAt(row);
 		if (p != null) {
-			if (p.getVariables().getMatrix(INPUT) != null) {
-				long r = column / p.getVariables().getMatrix(INPUT).getColumnCount();
-				long c = column % p.getVariables().getMatrix(INPUT).getColumnCount();
-				p.getVariables().getMatrix(INPUT).setAsDouble(value, r, c);
+			if (p.getVariableMap().getMatrix(INPUT) != null) {
+				long r = column / p.getVariableMap().getMatrix(INPUT).getColumnCount();
+				long c = column % p.getVariableMap().getMatrix(INPUT).getColumnCount();
+				p.getVariableMap().getMatrix(INPUT).setAsDouble(value, r, c);
 			}
 		}
 	}

@@ -27,6 +27,6 @@ import org.jdmp.core.util.ObservableMap;
 
 public interface HasModuleMap {
 
-	public ObservableMap<Module> getModules();
+	public ObservableMap<Module> getModuleMap();
 
 }

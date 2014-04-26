@@ -133,7 +133,7 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 	}
 
 	public Variable getOutputDeviationVariable() {
-		Variable v = getVariables().get(OUTPUTDEVIATION);
+		Variable v = getVariableMap().get(OUTPUTDEVIATION);
 		return v;
 	}
 
@@ -143,11 +143,11 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 	}
 
 	public Matrix getOutputDeviationMatrix() {
-		return getVariables().getMatrix(OUTPUTDEVIATION);
+		return getVariableMap().getMatrix(OUTPUTDEVIATION);
 	}
 
 	public Algorithm getReturningFunction() {
-		Algorithm a = getAlgorithms().get(RETURNINGFUNCTION);
+		Algorithm a = getAlgorithmMap().get(RETURNINGFUNCTION);
 		return a;
 	}
 
@@ -156,7 +156,7 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 	}
 
 	public Algorithm getSplittingFunction() {
-		Algorithm a = getAlgorithms().get(SPLITTINGFUNCTION);
+		Algorithm a = getAlgorithmMap().get(SPLITTINGFUNCTION);
 		return a;
 	}
 
@@ -165,7 +165,7 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 	}
 
 	public Algorithm getDimmingFunction() {
-		Algorithm a = getAlgorithms().get(DIMMINGFUNCTION);
+		Algorithm a = getAlgorithmMap().get(DIMMINGFUNCTION);
 		return a;
 	}
 
@@ -174,7 +174,7 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 	}
 
 	public Variable getNetDeviationVariable() {
-		Variable v = getVariables().get(NETDEVIATION);
+		Variable v = getVariableMap().get(NETDEVIATION);
 		return v;
 	}
 
@@ -183,11 +183,11 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 	}
 
 	public Matrix getNetDeviationMatrix() {
-		return getVariables().getMatrix(NETDEVIATION);
+		return getVariableMap().getMatrix(NETDEVIATION);
 	}
 
 	public Variable getContactDeviationVariable() {
-		Variable v = getVariables().get(CONTACTDEVIATION);
+		Variable v = getVariableMap().get(CONTACTDEVIATION);
 		return v;
 	}
 
@@ -196,11 +196,11 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 	}
 
 	public Matrix getContactDeviationMatrix() {
-		return getVariables().getMatrix(CONTACTDEVIATION);
+		return getVariableMap().getMatrix(CONTACTDEVIATION);
 	}
 
 	public Variable getInputDeviationVariable() {
-		Variable v = getVariables().get(INPUTDEVIATION);
+		Variable v = getVariableMap().get(INPUTDEVIATION);
 		return v;
 	}
 
@@ -209,11 +209,11 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 	}
 
 	public Matrix getInputDeviationMatrix() {
-		return getVariables().getMatrix(INPUTDEVIATION);
+		return getVariableMap().getMatrix(INPUTDEVIATION);
 	}
 
 	public Variable getWeightVariable() {
-		Variable v = getVariables().get(WEIGHT);
+		Variable v = getVariableMap().get(WEIGHT);
 		return v;
 	}
 
@@ -223,11 +223,11 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 	}
 
 	public Matrix getWeightMatrix() {
-		return getVariables().getMatrix(WEIGHT);
+		return getVariableMap().getMatrix(WEIGHT);
 	}
 
 	public Variable getOutputVariable() {
-		Variable v = getVariables().get(OUTPUT);
+		Variable v = getVariableMap().get(OUTPUT);
 		return v;
 	}
 
@@ -237,7 +237,7 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 	}
 
 	public Matrix getOutputMatrix() {
-		return getVariables().getMatrix(OUTPUT);
+		return getVariableMap().getMatrix(OUTPUT);
 	}
 
 	public void setLayer(int nr) {

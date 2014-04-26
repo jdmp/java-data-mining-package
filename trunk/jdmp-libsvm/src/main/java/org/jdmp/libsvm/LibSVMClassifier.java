@@ -98,18 +98,18 @@ public class LibSVMClassifier extends AbstractClassifier {
 	}
 
 	public void train(RegressionDataSet dataSet) {
-		int columnCount = (int) dataSet.getSamples().iterator().next().getVariables()
+		int columnCount = (int) dataSet.getSampleMap().iterator().next().getVariableMap()
 				.getMatrix(INPUT).getColumnCount();
 
 		prob = new svm_problem();
-		prob.l = dataSet.getSamples().getSize();
+		prob.l = dataSet.getSampleMap().getSize();
 
 		prob.x = new svm_node[prob.l][columnCount];
 		prob.y = new double[prob.l];
 
 		int i = 0;
-		for (Sample p : dataSet.getSamples()) {
-			Matrix input = p.getVariables().getMatrix(INPUT);
+		for (Sample p : dataSet.getSampleMap()) {
+			Matrix input = p.getVariableMap().getMatrix(INPUT);
 			prob.y[i] = p.getTargetClass();
 			for (int j = 0; j < columnCount; j++) {
 				prob.x[i][j] = new svm_node();

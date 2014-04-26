@@ -80,8 +80,8 @@ public class DirDataSet extends AbstractDataSet implements Refreshable {
 				}
 			}
 		}
-		setSamples(new DefaultObservableMap<Sample>(new FileMap()));
-		setDataSets(new DefaultObservableMap<DataSet>(new DirectoryList()));
+		//setSamples(new DefaultObservableMap<Sample>(new FileMap()));
+		//setDataSets(new DefaultObservableMap<DataSet>(new DirectoryList()));
 	}
 
 	public DataSet clone() {

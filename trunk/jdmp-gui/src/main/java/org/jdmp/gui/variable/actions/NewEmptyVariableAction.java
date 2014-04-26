@@ -29,7 +29,7 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
-import org.jdmp.core.variable.HasVariableList;
+import org.jdmp.core.variable.HasVariableMap;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.interfaces.GUIObject;
@@ -49,9 +49,9 @@ public class NewEmptyVariableAction extends AbstractObjectAction {
 
 	public Object call() {
 		Variable v = VariableFactory.emptyVariable();
-		if (getCoreObject() instanceof HasVariableList) {
+		if (getCoreObject() instanceof HasVariableMap) {
 			try {
-				((HasVariableList) getCoreObject()).getVariables().add(v);
+				((HasVariableMap) getCoreObject()).getVariableMap().add(v);
 			} catch (Exception e) {
 				v.showGUI();
 			}

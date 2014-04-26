@@ -64,9 +64,9 @@ public class DefaultDataSetDiv extends DivTag {
 
 		PTag p = new PTag();
 
-		if (dataSet != null && !dataSet.getSamples().isEmpty()) {
+		if (dataSet != null && !dataSet.getSampleMap().isEmpty()) {
 			int maxid = 0;
-			for (Sample s : dataSet.getSamples()) {
+			for (Sample s : dataSet.getSampleMap()) {
 				if (s != null) {
 					p.add(new DefaultSampleDiv(request, path, maxid++, s, query, highlightedWords));
 				}

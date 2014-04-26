@@ -25,17 +25,17 @@ package org.jdmp.gui.sample.actions;
 
 import javax.swing.JComponent;
 
-import org.jdmp.core.sample.HasSampleList;
+import org.jdmp.core.sample.HasSampleMap;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.gui.actions.AbstractObjectAction;
 
 public abstract class SampleListAction extends AbstractObjectAction {
 
-	public SampleListAction(JComponent c, HasSampleList p) {
+	public SampleListAction(JComponent c, HasSampleMap p) {
 		super(c, (GUIObject) p);
 	}
 
-	public HasSampleList getISamples() {
-		return (HasSampleList) getGUIObject();
+	public HasSampleMap getISamples() {
+		return (HasSampleMap) getGUIObject();
 	}
 }

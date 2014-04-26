@@ -49,14 +49,14 @@ public class TestConstantClassifier {
 		ClassificationDataSet iris = DataSetFactory.IRIS();
 		String del1 = null;
 		String del2 = null;
-		for (Sample s : iris.getSamples().values()) {
+		for (Sample s : iris.getSampleMap().values()) {
 			int c = s.getTargetClass();
 			if (c == 0) {
 				del1 = s.getId();
 				break;
 			}
 		}
-		for (Sample s : iris.getSamples().values()) {
+		for (Sample s : iris.getSampleMap().values()) {
 			int c = s.getTargetClass();
 			if (c == 1) {
 				del2 = s.getId();
@@ -64,8 +64,8 @@ public class TestConstantClassifier {
 			}
 		}
 
-		iris.getSamples().remove(del1);
-		iris.getSamples().remove(del2);
+		iris.getSampleMap().remove(del1);
+		iris.getSampleMap().remove(del2);
 
 		Classifier c = new ConstantClassifier();
 		ListMatrix<Double> results = CrossValidation.run(c, iris, 10, 10, 0);

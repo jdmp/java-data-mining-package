@@ -73,7 +73,7 @@ public class SampleTableCellRenderer implements TableCellRenderer {
 		if (sample != null) {
 
 			Object key = columnMap.get(column);
-			ObservableMap<Variable> variables = sample.getVariables();
+			ObservableMap<Variable> variables = sample.getVariableMap();
 			Variable v = variables.get(key);
 			if (v == null) {
 				o = "";

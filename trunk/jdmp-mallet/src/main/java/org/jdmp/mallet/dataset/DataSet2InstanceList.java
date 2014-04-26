@@ -45,7 +45,7 @@ public class DataSet2InstanceList extends InstanceList {
 		getPipe().setTargetAlphabet(targetAlphabet);
 
 		int i = 0;
-		for (Sample s : dataSet.getSamples()) {
+		for (Sample s : dataSet.getSampleMap()) {
 			if (++i % 1000 == 0) {
 				System.out.println("Converting Sample " + i);
 			}

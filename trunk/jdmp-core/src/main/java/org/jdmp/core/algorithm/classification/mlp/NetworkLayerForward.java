@@ -96,11 +96,11 @@ public class NetworkLayerForward extends AbstractAlgorithm {
 	}
 
 	public Matrix getInputMatrix() {
-		return getVariables().getMatrix(INPUT);
+		return getVariableMap().getMatrix(INPUT);
 	}
 
 	public Variable getInputVariable() {
-		Variable v = getVariables().get(INPUT);
+		Variable v = getVariableMap().get(INPUT);
 		return v;
 	}
 
@@ -110,11 +110,11 @@ public class NetworkLayerForward extends AbstractAlgorithm {
 	}
 
 	public Matrix getWeightMatrix() {
-		return getVariables().getMatrix(WEIGHT);
+		return getVariableMap().getMatrix(WEIGHT);
 	}
 
 	public Variable getWeightVariable() {
-		Variable v = getVariables().get(WEIGHT);
+		Variable v = getVariableMap().get(WEIGHT);
 		return v;
 	}
 
@@ -124,11 +124,11 @@ public class NetworkLayerForward extends AbstractAlgorithm {
 	}
 
 	public Matrix getWeightedInputMatrix() {
-		return getVariables().getMatrix(WEIGHTEDINPUT);
+		return getVariableMap().getMatrix(WEIGHTEDINPUT);
 	}
 
 	public Variable getWeightedInputVariable() {
-		Variable v = getVariables().get(WEIGHTEDINPUT);
+		Variable v = getVariableMap().get(WEIGHTEDINPUT);
 		return v;
 	}
 
@@ -171,27 +171,27 @@ public class NetworkLayerForward extends AbstractAlgorithm {
 	}
 
 	public Algorithm getWeightingFunction() {
-		Algorithm a = getAlgorithms().get(WEIGHTINGFUNCTION);
+		Algorithm a = getAlgorithmMap().get(WEIGHTINGFUNCTION);
 		return a;
 	}
 
 	public Algorithm getAggregationFunction() {
-		Algorithm a = getAlgorithms().get(AGGREGATIONFUNCTION);
+		Algorithm a = getAlgorithmMap().get(AGGREGATIONFUNCTION);
 		return a;
 	}
 
 	public Algorithm getTransferFunction() {
-		Algorithm a = getAlgorithms().get(TRANSFERFUNCTION);
+		Algorithm a = getAlgorithmMap().get(TRANSFERFUNCTION);
 		return a;
 	}
 
 	public Variable getNetInputVariable() {
-		Variable v = getVariables().get(NETINPUT);
+		Variable v = getVariableMap().get(NETINPUT);
 		return v;
 	}
 
 	public Matrix getNetInputMatrix() {
-		return getVariables().getMatrix(NETINPUT);
+		return getVariableMap().getMatrix(NETINPUT);
 	}
 
 	public void setNetInputVariable(Variable v) {
@@ -199,17 +199,17 @@ public class NetworkLayerForward extends AbstractAlgorithm {
 	}
 
 	public Variable getOutputVariable() {
-		Variable v = getVariables().get(OUTPUT);
+		Variable v = getVariableMap().get(OUTPUT);
 		return v;
 	}
 
 	public Matrix getOutputMatrix() {
-		return getVariables().getMatrix(OUTPUT);
+		return getVariableMap().getMatrix(OUTPUT);
 	}
 
 	public void setOutputVariable(Variable v) {
 		setVariable(OUTPUT, v);
-		getAlgorithms().get(TRANSFERFUNCTION).setVariable(TARGET, v);
+		getAlgorithmMap().get(TRANSFERFUNCTION).setVariable(TARGET, v);
 	}
 
 	// public static void main(String[] args) throws Exception {

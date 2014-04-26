@@ -150,11 +150,11 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 		}
 
 		if (indices.length == 1) {
-			getAlgorithms().put("Index0", (Algorithm) indices[0]);
+			getAlgorithmMap().put("Index0", (Algorithm) indices[0]);
 			setLabel(((Algorithm) indices[0]).getLabel());
 		} else if (indices.length > 1) {
 			MultiIndex multiIndex = new MultiIndex(indices);
-			getAlgorithms().put("Index0", multiIndex);
+			getAlgorithmMap().put("Index0", multiIndex);
 			setLabel(multiIndex.getLabel());
 		}
 
@@ -202,14 +202,14 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 		}
 
 		// score must not be saved
-		sample.getVariables().remove("Score");
+		sample.getVariableMap().remove("Score");
 
 		Document doc = new Document();
 
 		String id = sample.getId();
 		doc.add(new StringField(Sample.ID, id, Field.Store.YES));
 
-		for (Variable v : sample.getVariables()) {
+		for (Variable v : sample.getVariableMap()) {
 			String key = v.getLabel();
 			if (Sample.ID.equals(key)) {
 				// skip
@@ -273,7 +273,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 			mlt.setMaxWordLen(MAXWORDLENGTH);
 			String[] terms = mlt.retrieveInterestingTerms(td.scoreDocs[0].doc);
 			for (int i = 0; i < 10 && i < terms.length; i++) {
-				s.getVariables().setObject(Variable.SUGGESTEDTAGS, terms[i]);
+				s.getVariableMap().setObject(Variable.SUGGESTEDTAGS, terms[i]);
 			}
 
 			return s;
@@ -294,18 +294,18 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 		mlt.setMaxWordLen(MAXWORDLENGTH);
 		TopDocs td = indexSearcher.search(query, count);
 		DataSet result = new DefaultDataSet();
-		result.getVariables().setObject("Total", td.totalHits);
+		result.getVariableMap().setObject("Total", td.totalHits);
 		for (ScoreDoc sd : td.scoreDocs) {
 			int id = sd.doc;
 			Document doc = indexSearcher.doc(id);
 			Sample s = null;
 			s = (Sample) SerializationUtil.deserialize(doc.getBinaryValue("RawData").bytes);
-			s.getVariables().setMatrix(Sample.SCORE, MathUtil.getMatrix(sd.score));
+			s.getVariableMap().setMatrix(Sample.SCORE, MathUtil.getMatrix(sd.score));
 			String[] terms = mlt.retrieveInterestingTerms(id);
 			for (int i = 0; i < 10 && i < terms.length; i++) {
-				s.getVariables().setObject(Variable.SUGGESTEDTAGS, terms[i]);
+				s.getVariableMap().setObject(Variable.SUGGESTEDTAGS, terms[i]);
 			}
-			result.getSamples().add(s);
+			result.getSampleMap().add(s);
 		}
 		return result;
 	}
@@ -555,18 +555,18 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 		}
 
 		public Object call() throws Exception {
-			for (Algorithm a : getAlgorithms()) {
+			for (Algorithm a : getAlgorithmMap()) {
 				try {
 					if (a instanceof Index) {
 						System.out.println("searching for " + query + " in " + a);
 						DataSet ds = ((Index) a).search(query);
 						if (ds != null) {
-							for (Sample sample : ds.getSamples()) {
+							for (Sample sample : ds.getSampleMap()) {
 								Sample oldSample = getSample(sample.getId());
 								if (oldSample != null) {
-									Variable tags = oldSample.getVariables().get("Tags");
+									Variable tags = oldSample.getVariableMap().get("Tags");
 									if (tags != null && !tags.getMatrixList().isEmpty()) {
-										sample.getVariables().put("Tags", tags);
+										sample.getVariableMap().put("Tags", tags);
 									}
 								}
 								add(sample);
@@ -647,7 +647,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 	public void setSamples(ObservableMap<Sample> samples) {
 	}
 
-	public ObservableMap<Sample> getSamples() {
+	public ObservableMap<Sample> getSampleMap() {
 		if (sampleMap == null) {
 			sampleMap = new LuceneSampleMap(this);
 		}

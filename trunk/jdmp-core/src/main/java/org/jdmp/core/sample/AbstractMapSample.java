@@ -29,8 +29,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import org.jdmp.core.variable.DefaultVariables;
-import org.jdmp.core.variable.LazyVariables;
+import org.jdmp.core.variable.DefaultVariableMap;
 import org.jdmp.core.variable.SingletonVariable;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.interfaces.Wrapper;
@@ -41,18 +40,18 @@ public abstract class AbstractMapSample extends AbstractSample implements
 		Wrapper<Map<String, Object>> {
 	private static final long serialVersionUID = -8219872482909787192L;
 
-	private VariableMap variableMap = new VariableMap();
+	private final VariableMap variableMap = new VariableMap();
 
 	public AbstractMapSample() {
 		// setVariables(new VariableMapWrapper());
-		setVariables(new LazyVariables());
+		// setVariables(new LazyVariables());
 	}
 
 	public final Sample clone() {
 		return SampleFactory.clone(this);
 	}
 
-	class VariableMapWrapper extends DefaultVariables {
+	class VariableMapWrapper extends DefaultVariableMap {
 		private static final long serialVersionUID = 1252960592502010150L;
 
 		public VariableMapWrapper() {

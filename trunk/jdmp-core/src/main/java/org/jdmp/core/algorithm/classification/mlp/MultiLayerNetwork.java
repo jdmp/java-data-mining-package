@@ -105,9 +105,9 @@ public class MultiLayerNetwork extends AbstractClassifier {
 					hiddenLayer = new NetworkLayer(aggregationDefault, transferDefault,
 							biasDefault, hiddenNeurons[i]);
 				}
-				getAlgorithms().put("hidden" + i + "-forward", hiddenLayer.getAlgorithmForward());
-				getAlgorithms().put("hidden" + i + "-backward", hiddenLayer.getAlgorithmBackward());
-				getAlgorithms().put("hidden" + i + "-update",
+				getAlgorithmMap().put("hidden" + i + "-forward", hiddenLayer.getAlgorithmForward());
+				getAlgorithmMap().put("hidden" + i + "-backward", hiddenLayer.getAlgorithmBackward());
+				getAlgorithmMap().put("hidden" + i + "-update",
 						hiddenLayer.getAlgorithmWeightUpdate());
 				hiddenLayer.setLayer(i);
 				networkLayers.add(hiddenLayer);
@@ -120,9 +120,9 @@ public class MultiLayerNetwork extends AbstractClassifier {
 		}
 
 		NetworkLayer outputLayer = new NetworkLayer(aggregationOutput, transferOutput, biasOutput);
-		getAlgorithms().put("output" + "-forward", outputLayer.getAlgorithmForward());
-		getAlgorithms().put("output" + "-backward", outputLayer.getAlgorithmBackward());
-		getAlgorithms().put("output" + "-update", outputLayer.getAlgorithmWeightUpdate());
+		getAlgorithmMap().put("output" + "-forward", outputLayer.getAlgorithmForward());
+		getAlgorithmMap().put("output" + "-backward", outputLayer.getAlgorithmBackward());
+		getAlgorithmMap().put("output" + "-update", outputLayer.getAlgorithmWeightUpdate());
 		outputLayer.setLayer(hiddenNeurons.length);
 		networkLayers.add(outputLayer);
 		if (previousLayer != null) {
@@ -230,7 +230,7 @@ public class MultiLayerNetwork extends AbstractClassifier {
 	}
 
 	public void addDesiredOutputMatrix(Matrix m) {
-		getOutputErrorAlgorithm().getVariables().setMatrix(AlgorithmTwoSources.SOURCE2, m);
+		getOutputErrorAlgorithm().getVariableMap().setMatrix(AlgorithmTwoSources.SOURCE2, m);
 		if (Coordinates.product(getOutputVariable().getInnerSize()) == 0) {
 			getOutputVariable().setInnerSize(m.getRowCount(), m.getColumnCount());
 		}
@@ -328,7 +328,7 @@ public class MultiLayerNetwork extends AbstractClassifier {
 
 		// TODO: fix!
 
-		List<Sample> samples = new ArrayList<Sample>(dataSet.getSamples().values());
+		List<Sample> samples = new ArrayList<Sample>(dataSet.getSampleMap().values());
 		Collections.shuffle(samples);
 
 		int last10Percent = (int) Math.ceil((samples.size() * 0.1));
@@ -342,9 +342,9 @@ public class MultiLayerNetwork extends AbstractClassifier {
 		double rmse = 0;
 		for (int i = first90Percent; i < samples.size(); i++) {
 			Sample rs = samples.get(i);
-			Matrix output = predict(rs.getVariables().getMatrix(INPUT), rs.getVariables()
+			Matrix output = predict(rs.getVariableMap().getMatrix(INPUT), rs.getVariableMap()
 					.getMatrix(WEIGHT));
-			rmse += output.minus(rs.getVariables().getMatrix(TARGET)).getRMS();
+			rmse += output.minus(rs.getVariableMap().getMatrix(TARGET)).getRMS();
 			train(samples.get(i));
 		}
 		rmse /= last10Percent;
@@ -357,7 +357,7 @@ public class MultiLayerNetwork extends AbstractClassifier {
 	}
 
 	public void trainOnce(RegressionDataSet dataSet) throws Exception {
-		List<Sample> samples = new ArrayList<Sample>(dataSet.getSamples().values());
+		List<Sample> samples = new ArrayList<Sample>(dataSet.getSampleMap().values());
 		Collections.shuffle(samples);
 		for (Sample s : samples) {
 			train(s);

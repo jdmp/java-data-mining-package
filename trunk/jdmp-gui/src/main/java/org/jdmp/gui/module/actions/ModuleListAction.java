@@ -25,18 +25,18 @@ package org.jdmp.gui.module.actions;
 
 import javax.swing.JComponent;
 
-import org.jdmp.core.module.HasModuleList;
+import org.jdmp.core.module.HasModuleMap;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.gui.actions.AbstractObjectAction;
 
 public abstract class ModuleListAction extends AbstractObjectAction {
 
-	public ModuleListAction(JComponent c, HasModuleList iModules) {
+	public ModuleListAction(JComponent c, HasModuleMap iModules) {
 		super(c, (GUIObject) iModules);
 	}
 
-	public HasModuleList getIModules() {
-		return (HasModuleList) getGUIObject();
+	public HasModuleMap getIModules() {
+		return (HasModuleMap) getGUIObject();
 	}
 
 }

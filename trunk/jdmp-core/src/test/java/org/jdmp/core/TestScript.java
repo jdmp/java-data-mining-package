@@ -45,7 +45,7 @@ public class TestScript {
 		m.execute("c=a+b");
 
 		Matrix rm = (Matrix) r.getObject();
-		Matrix vm = m.getVariables().get("c").getLatestMatrix();
+		Matrix vm = m.getVariableMap().get("c").getLatestMatrix();
 		Matrix expected = Matrix.Factory.linkToArray(new double[][] { { 5, 7, 9 }, { 5, 7, 9 } });
 
 		assertEquals(expected, rm);
@@ -58,7 +58,7 @@ public class TestScript {
 		Object o = r.getObject();
 		assertEquals(ClassificationDataSet.class, o.getClass());
 		ClassificationDataSet ds = (ClassificationDataSet) o;
-		assertEquals(150, ds.getSamples().getSize());
+		assertEquals(150, ds.getSampleMap().getSize());
 	}
 
 	@Test
@@ -67,10 +67,10 @@ public class TestScript {
 		Object o = r.getObject();
 		assertEquals(RegressionDataSet.class, o.getClass());
 		RegressionDataSet ds = (RegressionDataSet) o;
-		assertEquals(100, ds.getSamples().getSize());
-		Sample s = ds.getSamples().getElementAt(0);
-		long input = s.getVariables().get(Sample.INPUT).getInnerColumnCount();
-		long target = s.getVariables().get(Sample.TARGET).getInnerColumnCount();
+		assertEquals(100, ds.getSampleMap().getSize());
+		Sample s = ds.getSampleMap().getElementAt(0);
+		long input = s.getVariableMap().get(Sample.INPUT).getInnerColumnCount();
+		long target = s.getVariableMap().get(Sample.TARGET).getInnerColumnCount();
 		assertEquals(10, input);
 		assertEquals(5, target);
 	}

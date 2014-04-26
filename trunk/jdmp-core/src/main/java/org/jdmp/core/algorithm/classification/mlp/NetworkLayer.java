@@ -256,7 +256,7 @@ public class NetworkLayer implements Serializable {
 	}
 
 	public void addInputMatrix(Matrix matrix) {
-		algorithmForward.getVariables().setMatrix(NetworkLayerForward.INPUT, matrix);
+		algorithmForward.getVariableMap().setMatrix(NetworkLayerForward.INPUT, matrix);
 	}
 
 }

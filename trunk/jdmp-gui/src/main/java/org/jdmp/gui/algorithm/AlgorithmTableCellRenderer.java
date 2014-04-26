@@ -66,9 +66,9 @@ public class AlgorithmTableCellRenderer implements TableCellRenderer {
 				break;
 			case AlgorithmListTableModel.VARIABLECOLUMN:
 				return variableListTableCellRenderer.getTableCellRendererComponent(table,
-						algorithm.getVariables(), isSelected, hasFocus, row, column);
+						algorithm.getVariableMap(), isSelected, hasFocus, row, column);
 			case AlgorithmListTableModel.ALGORITHMLISTCOLUMN:
-				o = algorithm.getAlgorithms();
+				o = algorithm.getAlgorithmMap();
 				break;
 			default:
 				o = null;

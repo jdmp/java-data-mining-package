@@ -86,8 +86,8 @@ public class LibLinearClassifier extends AbstractClassifier {
 	public void train(RegressionDataSet dataSet) throws Exception {
 		createAlgorithm();
 		prob = new Problem();
-		prob.l = dataSet.getSamples().getSize();
-		prob.n = (int) dataSet.getSamples().iterator().next().getVariables().getMatrix(INPUT).getColumnCount() + 1; // +1
+		prob.l = dataSet.getSampleMap().getSize();
+		prob.n = (int) dataSet.getSampleMap().iterator().next().getVariableMap().getMatrix(INPUT).getColumnCount() + 1; // +1
 																													// for
 																													// bias
 
@@ -95,11 +95,11 @@ public class LibLinearClassifier extends AbstractClassifier {
 		prob.y = new double[prob.l];
 
 		int i = 0;
-		for (Sample p : dataSet.getSamples()) {
+		for (Sample p : dataSet.getSampleMap()) {
 			if (i % 10 == 0) {
 				System.out.println("Converting sample " + i);
 			}
-			Matrix input = p.getVariables().getMatrix(INPUT);
+			Matrix input = p.getVariableMap().getMatrix(INPUT);
 			prob.y[i] = p.getTargetClass();
 			long columnCount = input.getColumnCount();
 			int count = 0;

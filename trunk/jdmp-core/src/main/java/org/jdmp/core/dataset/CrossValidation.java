@@ -69,13 +69,13 @@ public class CrossValidation {
 				algorithm.predict(test);
 
 				acc.add(test.getAccuracy());
-				fm.add(test.getVariables().getAsDouble(Variable.FMEASUREMACRO));
-				sens.add(test.getVariables().getAsDouble(Variable.SENSITIVITY));
-				spec.add(test.getVariables().getAsDouble(Variable.SPECIFICITY));
-				prec.add(test.getVariables().getAsDouble(Variable.PRECISION));
-				rec.add(test.getVariables().getAsDouble(Variable.RECALL));
+				fm.add(test.getVariableMap().getAsDouble(Variable.FMEASUREMACRO));
+				sens.add(test.getVariableMap().getAsDouble(Variable.SENSITIVITY));
+				spec.add(test.getVariableMap().getAsDouble(Variable.SPECIFICITY));
+				prec.add(test.getVariableMap().getAsDouble(Variable.PRECISION));
+				rec.add(test.getVariableMap().getAsDouble(Variable.RECALL));
 				// System.out.print(test.getAccuracy() + "\t");
-				System.out.print(test.getVariables().getAsDouble(Variable.FMEASUREMACRO) + "\t");
+				System.out.print(test.getVariableMap().getAsDouble(Variable.FMEASUREMACRO) + "\t");
 			}
 			System.out.println();
 

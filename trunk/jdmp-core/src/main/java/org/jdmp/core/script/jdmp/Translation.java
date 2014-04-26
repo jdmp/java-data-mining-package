@@ -155,10 +155,10 @@ public class Translation extends DepthFirstAdapter {
 
 	private Variable getVariable(PName identifier) {
 		String label = identifier.toString().trim();
-		Variable v = module.getVariables().get(label);
+		Variable v = module.getVariableMap().get(label);
 		if (v == null) {
 			v = VariableFactory.labeledVariable(label);
-			module.getVariables().put(label, v);
+			module.getVariableMap().put(label, v);
 		}
 		return v;
 	}
@@ -251,31 +251,31 @@ public class Translation extends DepthFirstAdapter {
 			if (o instanceof Module) {
 				Module m = (Module) o;
 				if (!ANS.equals(id)) {
-					module.getModules().put(id, m);
+					module.getModuleMap().put(id, m);
 				}
 				result = new Result(id, m);
 			} else if (o instanceof DataSet) {
 				DataSet ds = (DataSet) o;
 				if (!ANS.equals(id)) {
-					module.getDataSets().put(id, ds);
+					module.getDataSetMap().put(id, ds);
 				}
 				result = new Result(id, ds);
 			} else if (o instanceof Sample) {
 				Sample s = (Sample) o;
 				if (!ANS.equals(id)) {
-					module.getSamples().put(id, s);
+					module.getSampleMap().put(id, s);
 				}
 				result = new Result(id, s);
 			} else if (o instanceof Variable) {
 				Variable v = (Variable) o;
 				if (!ANS.equals(id)) {
-					module.getVariables().put(id, v);
+					module.getVariableMap().put(id, v);
 				}
 				result = new Result(id, v);
 			} else if (o instanceof Algorithm) {
 				Algorithm a = (Algorithm) o;
 				if (!ANS.equals(id)) {
-					module.getAlgorithms().put(id, a);
+					module.getAlgorithmMap().put(id, a);
 				}
 				result = new Result(id, a);
 			} else {
@@ -479,31 +479,31 @@ public class Translation extends DepthFirstAdapter {
 		} else if (factor instanceof AIdentifierLevel0) {
 			String name = ((AIdentifierLevel0) factor).getName().toString().trim();
 
-			if (ANS.equals(name) && module.getVariables().get(ANS) == null) {
-				module.getVariables().put(ANS, VariableFactory.labeledVariable(ANS));
+			if (ANS.equals(name) && module.getVariableMap().get(ANS) == null) {
+				module.getVariableMap().put(ANS, VariableFactory.labeledVariable(ANS));
 			}
 
-			Variable v = module.getVariables().get(name);
+			Variable v = module.getVariableMap().get(name);
 			if (v != null) {
 				return v.getLatestMatrix();
 			}
 
-			DataSet ds = module.getDataSets().get(name);
+			DataSet ds = module.getDataSetMap().get(name);
 			if (ds != null) {
 				return ds;
 			}
 
-			Module m = module.getModules().get(name);
+			Module m = module.getModuleMap().get(name);
 			if (m != null) {
 				return m;
 			}
 
-			Sample s = module.getSamples().get(name);
+			Sample s = module.getSampleMap().get(name);
 			if (s != null) {
 				return s;
 			}
 
-			Algorithm a = module.getAlgorithms().get(name);
+			Algorithm a = module.getAlgorithmMap().get(name);
 			if (a != null) {
 				return a;
 			}
@@ -720,23 +720,23 @@ public class Translation extends DepthFirstAdapter {
 	}
 
 	private Object getObject(String name) {
-		Object o = module.getVariables().get(name);
+		Object o = module.getVariableMap().get(name);
 		if (o != null) {
 			return ((Variable) o).getLatestMatrix();
 		}
-		o = module.getDataSets().get(name);
+		o = module.getDataSetMap().get(name);
 		if (o != null) {
 			return o;
 		}
-		o = module.getAlgorithms().get(name);
+		o = module.getAlgorithmMap().get(name);
 		if (o != null) {
 			return o;
 		}
-		o = module.getSamples().get(name);
+		o = module.getSampleMap().get(name);
 		if (o != null) {
 			return o;
 		}
-		o = module.getModules().get(name);
+		o = module.getModuleMap().get(name);
 		if (o != null) {
 			return o;
 		}
@@ -928,27 +928,27 @@ public class Translation extends DepthFirstAdapter {
 			// handle already known objects
 			String id = getLiteral(node.getExpression());
 			if (id != null) {
-				Variable v = module.getVariables().get(id);
+				Variable v = module.getVariableMap().get(id);
 				if (v != null) {
 					result = new Result(id, v.getLatestMatrix());
 					return;
 				}
-				DataSet ds = module.getDataSets().get(id);
+				DataSet ds = module.getDataSetMap().get(id);
 				if (ds != null) {
 					result = new Result(id, ds);
 					return;
 				}
-				Algorithm a = module.getAlgorithms().get(id);
+				Algorithm a = module.getAlgorithmMap().get(id);
 				if (a != null) {
 					result = new Result(id, a);
 					return;
 				}
-				Sample s = module.getSamples().get(id);
+				Sample s = module.getSampleMap().get(id);
 				if (s != null) {
 					result = new Result(id, s);
 					return;
 				}
-				Module m = module.getModules().get(id);
+				Module m = module.getModuleMap().get(id);
 				if (m != null) {
 					result = new Result(id, m);
 					return;
@@ -958,10 +958,10 @@ public class Translation extends DepthFirstAdapter {
 			// handle unknown objects or algorithms
 			Object o = getObject(node.getExpression());
 
-			Variable v = module.getVariables().get(ANS);
+			Variable v = module.getVariableMap().get(ANS);
 			if (v == null) {
 				v = VariableFactory.labeledVariable(ANS);
-				module.getVariables().put(ANS, v);
+				module.getVariableMap().put(ANS, v);
 			}
 			v.addInnerMatrix(MathUtil.getMatrix(o));
 
