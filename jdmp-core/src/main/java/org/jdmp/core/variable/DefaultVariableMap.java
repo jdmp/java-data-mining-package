@@ -60,7 +60,7 @@ public class DefaultVariableMap extends AbstractVariableMap {
 	public final String getAllAsString(String variableKey) {
 		Variable v = get(variableKey);
 		if (v != null) {
-			return StringUtil.getAllAsString(v.getMatrixList());
+			return StringUtil.getAllAsString(v);
 		} else {
 			return null;
 		}

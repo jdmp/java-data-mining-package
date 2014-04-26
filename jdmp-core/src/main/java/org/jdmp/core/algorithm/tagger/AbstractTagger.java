@@ -46,7 +46,7 @@ public abstract class AbstractTagger extends AbstractAlgorithm implements Tagger
 		if (v == null) {
 			throw new RuntimeException("text must be tokenized first");
 		}
-		for (Matrix m : v.getMatrixList()) {
+		for (Matrix m : v) {
 			List<Matrix> list = tag(m);
 			for (Matrix n : list) {
 				sample.getVariableMap().setMatrix(TAGGED, n);

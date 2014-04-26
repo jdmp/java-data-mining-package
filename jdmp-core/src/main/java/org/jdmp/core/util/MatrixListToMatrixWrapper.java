@@ -23,32 +23,26 @@
 
 package org.jdmp.core.util;
 
-import javax.swing.event.ListDataEvent;
-import javax.swing.event.ListDataListener;
-
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.interfaces.Wrapper;
 import org.ujmp.core.objectmatrix.DenseObjectMatrix2D;
 import org.ujmp.core.objectmatrix.factory.DenseObjectMatrix2DFactory;
 import org.ujmp.core.objectmatrix.stub.AbstractDenseObjectMatrix2D;
 
-public class MatrixListToMatrixWrapper extends AbstractDenseObjectMatrix2D implements
-		Wrapper<ObservableList<Matrix>>, ListDataListener {
+public class MatrixListToMatrixWrapper extends AbstractDenseObjectMatrix2D {
 	private static final long serialVersionUID = 3023715319099124633L;
 
-	private ObservableList<Matrix> matrixList = null;
+	private final Variable variable;
 
 	public MatrixListToMatrixWrapper(Variable variable) {
 		super(0, 0);
-		this.matrixList = variable.getMatrixList();
-		matrixList.addListDataListener(this);
+		this.variable = variable;
 	}
 
 	public long[] getSize() {
 		long cols = 0;
 		long rows = 0;
-		for (Matrix m : matrixList) {
+		for (Matrix m : variable) {
 			cols = Math.max(m.getColumnCount(), cols);
 			rows += m.getRowCount();
 		}
@@ -62,7 +56,7 @@ public class MatrixListToMatrixWrapper extends AbstractDenseObjectMatrix2D imple
 
 	public Object getObject(long row, long column) {
 		long rows = 0;
-		for (Matrix m : matrixList) {
+		for (Matrix m : variable) {
 			rows += m.getRowCount();
 			if (rows > row) {
 				long r = row - rows + m.getRowCount();
@@ -82,7 +76,7 @@ public class MatrixListToMatrixWrapper extends AbstractDenseObjectMatrix2D imple
 
 	public void setObject(Object value, long row, long column) {
 		long rows = 0;
-		for (Matrix m : matrixList) {
+		for (Matrix m : variable) {
 			rows += m.getRowCount();
 			if (rows > row) {
 				long r = row - rows + m.getRowCount();
@@ -94,26 +88,6 @@ public class MatrixListToMatrixWrapper extends AbstractDenseObjectMatrix2D imple
 				}
 			}
 		}
-	}
-
-	public ObservableList<Matrix> getWrappedObject() {
-		return matrixList;
-	}
-
-	public void setWrappedObject(ObservableList<Matrix> object) {
-		this.matrixList = object;
-	}
-
-	public void contentsChanged(ListDataEvent e) {
-		notifyGUIObject();
-	}
-
-	public void intervalAdded(ListDataEvent e) {
-		notifyGUIObject();
-	}
-
-	public void intervalRemoved(ListDataEvent e) {
-		notifyGUIObject();
 	}
 
 	public DenseObjectMatrix2DFactory<? extends DenseObjectMatrix2D> getFactory() {

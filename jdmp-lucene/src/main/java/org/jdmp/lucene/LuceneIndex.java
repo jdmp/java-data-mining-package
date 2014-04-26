@@ -217,7 +217,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 				// skip
 			} else {
 				String value = "";
-				for (Matrix m : v.getMatrixList()) {
+				for (Matrix m : v) {
 					for (long[] c : m.availableCoordinates()) {
 						value += " " + m.getAsString(c);
 					}
@@ -565,7 +565,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 								Sample oldSample = getSample(sample.getId());
 								if (oldSample != null) {
 									Variable tags = oldSample.getVariableMap().get("Tags");
-									if (tags != null && !tags.getMatrixList().isEmpty()) {
+									if (tags != null && !tags.isEmpty()) {
 										sample.getVariableMap().put("Tags", tags);
 									}
 								}

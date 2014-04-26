@@ -32,7 +32,7 @@ import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.util.ObservableList;
+import org.jdmp.core.util.ObservableMap;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.objectmatrix.DenseObjectMatrix2D;
 import org.ujmp.core.objectmatrix.factory.DenseObjectMatrix2DFactory;
@@ -43,7 +43,7 @@ public class SampleListToMatrixWrapper extends AbstractDenseObjectMatrix2D imple
 		ListDataListener {
 	private static final long serialVersionUID = -6691992117924601112L;
 
-	private ObservableList<Sample> samples = null;
+	private ObservableMap<Sample> samples = null;
 
 	private int columnCount = 0;
 
@@ -53,11 +53,11 @@ public class SampleListToMatrixWrapper extends AbstractDenseObjectMatrix2D imple
 
 	private Map<Integer, String> columnMap = new HashMap<Integer, String>();
 
-	public SampleListToMatrixWrapper(ObservableList<Sample> samples) {
+	public SampleListToMatrixWrapper(ObservableMap<Sample> samples) {
 		this(samples, new String[0]);
 	}
 
-	public SampleListToMatrixWrapper(ObservableList<Sample> samples, String... keysToShow) {
+	public SampleListToMatrixWrapper(ObservableMap<Sample> samples, String... keysToShow) {
 		super(0, 0);
 		this.samples = samples;
 		this.keysToShow = keysToShow;
