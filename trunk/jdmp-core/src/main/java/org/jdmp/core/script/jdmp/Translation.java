@@ -282,7 +282,7 @@ public class Translation extends DepthFirstAdapter {
 				Matrix m = MathUtil.getMatrix(o);
 				if (m != null) {
 					Variable v = getVariable(node.getName());
-					v.addMatrix(m);
+					v.addInnerMatrix(m);
 					result = new Result(v.getLabel(), m);
 					System.out.println(result.toString());
 				}
@@ -485,7 +485,7 @@ public class Translation extends DepthFirstAdapter {
 
 			Variable v = module.getVariables().get(name);
 			if (v != null) {
-				return v.getMatrix();
+				return v.getLatestMatrix();
 			}
 
 			DataSet ds = module.getDataSets().get(name);
@@ -722,7 +722,7 @@ public class Translation extends DepthFirstAdapter {
 	private Object getObject(String name) {
 		Object o = module.getVariables().get(name);
 		if (o != null) {
-			return ((Variable) o).getMatrix();
+			return ((Variable) o).getLatestMatrix();
 		}
 		o = module.getDataSets().get(name);
 		if (o != null) {
@@ -930,7 +930,7 @@ public class Translation extends DepthFirstAdapter {
 			if (id != null) {
 				Variable v = module.getVariables().get(id);
 				if (v != null) {
-					result = new Result(id, v.getMatrix());
+					result = new Result(id, v.getLatestMatrix());
 					return;
 				}
 				DataSet ds = module.getDataSets().get(id);
@@ -963,7 +963,7 @@ public class Translation extends DepthFirstAdapter {
 				v = VariableFactory.labeledVariable(ANS);
 				module.getVariables().put(ANS, v);
 			}
-			v.addMatrix(MathUtil.getMatrix(o));
+			v.addInnerMatrix(MathUtil.getMatrix(o));
 
 			result = new Result(ANS, o);
 			System.out.println(result);

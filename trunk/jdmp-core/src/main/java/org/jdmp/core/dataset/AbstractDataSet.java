@@ -113,7 +113,7 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 	public final Matrix getMatrix(String variableKey) {
 		Variable v = getVariables().get(variableKey);
 		if (v != null) {
-			return v.getMatrix();
+			return v.getLatestMatrix();
 		} else {
 			return null;
 		}

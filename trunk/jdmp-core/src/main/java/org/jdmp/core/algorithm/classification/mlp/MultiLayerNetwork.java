@@ -213,8 +213,8 @@ public class MultiLayerNetwork extends AbstractClassifier {
 
 	public void setDesiredOutputVariable(Variable v) {
 		getOutputErrorAlgorithm().setVariable(AlgorithmTwoSources.SOURCE2, v);
-		getOutputLayer().getOutputVariable().setSize(v.getRowCount(), v.getColumnCount());
-		getOutputLayer().getOutputDeviationVariable().setSize(v.getRowCount(), v.getColumnCount());
+		getOutputLayer().getOutputVariable().setInnerSize(v.getInnerRowCount(), v.getInnerColumnCount());
+		getOutputLayer().getOutputDeviationVariable().setInnerSize(v.getInnerRowCount(), v.getInnerColumnCount());
 	}
 
 	public void addInputMatrix(Matrix m) {
@@ -229,11 +229,11 @@ public class MultiLayerNetwork extends AbstractClassifier {
 
 	public void addDesiredOutputMatrix(Matrix m) {
 		getOutputErrorAlgorithm().getVariables().setMatrix(AlgorithmTwoSources.SOURCE2, m);
-		if (Coordinates.product(getOutputVariable().getSize()) == 0) {
-			getOutputVariable().setSize(m.getRowCount(), m.getColumnCount());
+		if (Coordinates.product(getOutputVariable().getInnerSize()) == 0) {
+			getOutputVariable().setInnerSize(m.getRowCount(), m.getColumnCount());
 		}
-		if (Coordinates.product(getOutputDeviationVariable().getSize()) == 0) {
-			getOutputDeviationVariable().setSize(m.getRowCount(), m.getColumnCount());
+		if (Coordinates.product(getOutputDeviationVariable().getInnerSize()) == 0) {
+			getOutputDeviationVariable().setInnerSize(m.getRowCount(), m.getColumnCount());
 		}
 	}
 
@@ -268,7 +268,7 @@ public class MultiLayerNetwork extends AbstractClassifier {
 	}
 
 	public Matrix getOutputMatrix() {
-		return getOutputVariable().getMatrix();
+		return getOutputVariable().getLatestMatrix();
 	}
 
 	public void train(Matrix input, Matrix sampleWeight, Matrix desiredOutput) throws Exception {

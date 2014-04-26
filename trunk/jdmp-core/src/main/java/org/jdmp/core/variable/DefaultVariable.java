@@ -34,7 +34,6 @@ import org.jdmp.core.util.ObservableList;
 import org.ujmp.core.Coordinates;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.collections.RingBufferList;
-import org.ujmp.core.util.StringUtil;
 
 public class DefaultVariable extends AbstractVariable {
 	private static final long serialVersionUID = -7192491915167470355L;
@@ -44,34 +43,6 @@ public class DefaultVariable extends AbstractVariable {
 	private long[] size = Coordinates.ZERO2D;
 
 	private ObservableList<Matrix> matrixList = null;
-
-	private String label = null;
-
-	private String description = null;
-
-	public final String getDescription() {
-		return description;
-	}
-
-	public final void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getLabel() {
-		return label;
-	}
-
-	public final void setLabel(String label) {
-		this.label = label;
-	}
-
-	public final void setLabelObject(Object label) {
-		this.label = StringUtil.format(label);
-	}
-
-	public final Object getLabelObject() {
-		return label;
-	}
 
 	public DefaultVariable() {
 		super();
@@ -85,21 +56,21 @@ public class DefaultVariable extends AbstractVariable {
 		matrixList.addListDataListener(new VariableListDataListener());
 	}
 
-	public final long[] getSize() {
+	public final long[] getInnerSize() {
 		if (Coordinates.product(size) == 0) {
-			Matrix m = getMatrix();
+			Matrix m = getLatestMatrix();
 			if (m != null) {
-				setSize(Coordinates.copyOf(m.getSize()));
+				setInnerSize(Coordinates.copyOf(m.getSize()));
 			}
 		}
 		return size;
 	}
 
-	public final void setSize(long... size) {
+	public final void setInnerSize(long... size) {
 		this.size = Coordinates.copyOf(size);
 	}
 
-	public Matrix getAsMatrix() {
+	public Matrix getAsListMatrix() {
 		if (matrixListMatrix == null) {
 			matrixListMatrix = new MatrixListToMatrixWrapper(this);
 		}

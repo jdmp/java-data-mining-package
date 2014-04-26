@@ -78,7 +78,7 @@ public class SampleTableCellRenderer implements TableCellRenderer {
 			if (v == null) {
 				o = "";
 			} else {
-				return matrixRenderer.getTableCellRendererComponent(table, v.getMatrix(),
+				return matrixRenderer.getTableCellRendererComponent(table, v.getLatestMatrix(),
 						isSelected, hasFocus, row, column);
 			}
 

@@ -53,7 +53,7 @@ public class LinearRegression extends AbstractClassifier {
 	}
 
 	public Matrix getParameterMatrix() {
-		return getParameterVariable().getMatrix();
+		return getParameterVariable().getLatestMatrix();
 	}
 
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {

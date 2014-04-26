@@ -26,8 +26,9 @@ package org.jdmp.core.variable;
 import org.jdmp.core.matrix.HasMatrixList;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.interfaces.CoreObject;
+import org.ujmp.core.listmatrix.ListMatrix;
 
-public interface Variable extends CoreObject, HasMatrixList {
+public interface Variable extends CoreObject, ListMatrix<Matrix>, HasMatrixList {
 	public static final Class<?>[] VARIABLEARRAY = new Class<?>[] { new Variable[] {}.getClass() };
 
 	public static final String TAGS = "Tags";
@@ -60,25 +61,23 @@ public interface Variable extends CoreObject, HasMatrixList {
 	public static final String ACCURACY = "Accuracy";
 	public static final String FMEASUREMACRO = "FMeasureMacro";
 
-	public long[] getSize();
+	public long[] getInnerSize();
 
-	public void setSize(long... size);
+	public void setInnerSize(long... size);
 
-	public Matrix getAsMatrix();
+	public Matrix getAsListMatrix();
 
-	public void addMatrix(Matrix m);
+	public void addInnerMatrix(Matrix m);
 
-	public int getMatrixCount();
+	public int getInnerMatrixCount();
 
-	public Matrix getMatrix();
+	public Matrix getLatestMatrix();
 
-	public String getAsString();
+	public Matrix getInnerMatrix(int index);
 
-	public Matrix getMatrix(int index);
+	public long getInnerRowCount();
 
-	public long getRowCount();
-
-	public long getColumnCount();
+	public long getInnerColumnCount();
 
 	public Variable clone();
 

@@ -88,7 +88,7 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 		for (Object key : getVariables().keySet()) {
 			Variable v = getVariables().get(key);
 			s.append(key + "=");
-			s.append(StringUtil.format(v.getMatrix()));
+			s.append(StringUtil.format(v.getLatestMatrix()));
 			s.append(" ");
 		}
 		s.append("]");

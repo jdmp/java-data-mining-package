@@ -73,7 +73,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 	public double getEarlyStoppingErrorCount(int numberOfSteps) {
 		int index = getEarlyStoppingIndex(numberOfSteps);
 		if (index >= 0) {
-			return getErrorCountVariable().getMatrix(index).doubleValue();
+			return getErrorCountVariable().getInnerMatrix(index).doubleValue();
 		}
 		return -1;
 	}
@@ -104,7 +104,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 	}
 
 	public int getErrorCount() {
-		return (int) getErrorCountVariable().getMatrix().doubleValue();
+		return (int) getErrorCountVariable().getLatestMatrix().doubleValue();
 	}
 
 	public Variable getAccuracyVariable() {
@@ -112,23 +112,23 @@ public class ClassificationDataSet extends RegressionDataSet {
 	}
 
 	public void appendConfusionMatrix(Matrix m) {
-		getConfusionVariable().addMatrix(m);
+		getConfusionVariable().addInnerMatrix(m);
 	}
 
 	public void appendAccuracyMatrix(Matrix m) {
-		getAccuracyVariable().addMatrix(m);
+		getAccuracyVariable().addInnerMatrix(m);
 	}
 
 	public void appendErrorCountMatrix(Matrix m) {
-		getErrorCountVariable().addMatrix(m);
+		getErrorCountVariable().addInnerMatrix(m);
 	}
 
 	public double getAccuracy() {
-		return getAccuracyVariable().getMatrix().doubleValue();
+		return getAccuracyVariable().getLatestMatrix().doubleValue();
 	}
 
 	public double getMaxAccuracy() {
-		return getAccuracyVariable().getAsMatrix().getMaxValue();
+		return getAccuracyVariable().getAsListMatrix().getMaxValue();
 	}
 
 	public List<ClassificationDataSet> splitByClass() {
@@ -235,7 +235,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 	public double getEarlyStoppingAccuracy(int numberOfSteps) {
 		int index = getEarlyStoppingIndex(numberOfSteps);
 		if (index >= 0) {
-			return getAccuracyVariable().getMatrix(index).doubleValue();
+			return getAccuracyVariable().getInnerMatrix(index).doubleValue();
 		}
 		return -1;
 	}

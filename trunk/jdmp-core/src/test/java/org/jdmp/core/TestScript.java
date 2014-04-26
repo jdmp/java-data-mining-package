@@ -45,7 +45,7 @@ public class TestScript {
 		m.execute("c=a+b");
 
 		Matrix rm = (Matrix) r.getObject();
-		Matrix vm = m.getVariables().get("c").getMatrix();
+		Matrix vm = m.getVariables().get("c").getLatestMatrix();
 		Matrix expected = Matrix.Factory.linkToArray(new double[][] { { 5, 7, 9 }, { 5, 7, 9 } });
 
 		assertEquals(expected, rm);
@@ -69,8 +69,8 @@ public class TestScript {
 		RegressionDataSet ds = (RegressionDataSet) o;
 		assertEquals(100, ds.getSamples().getSize());
 		Sample s = ds.getSamples().getElementAt(0);
-		long input = s.getVariables().get(Sample.INPUT).getColumnCount();
-		long target = s.getVariables().get(Sample.TARGET).getColumnCount();
+		long input = s.getVariables().get(Sample.INPUT).getInnerColumnCount();
+		long target = s.getVariables().get(Sample.TARGET).getInnerColumnCount();
 		assertEquals(10, input);
 		assertEquals(5, target);
 	}

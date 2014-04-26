@@ -52,7 +52,7 @@ public abstract class VariableFactory {
 	public static final Variable singleValue(String label, double value) {
 		Variable v = new DefaultVariable(1);
 		v.setLabel(label);
-		v.addMatrix(Matrix.Factory.linkToValue(value));
+		v.addInnerMatrix(Matrix.Factory.linkToValue(value));
 		return v;
 	}
 
