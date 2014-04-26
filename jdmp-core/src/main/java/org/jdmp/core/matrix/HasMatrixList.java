@@ -26,7 +26,7 @@ package org.jdmp.core.matrix;
 import org.jdmp.core.util.ObservableList;
 import org.ujmp.core.Matrix;
 
-public interface HasMatrixList extends HasMatrices {
+public interface HasMatrixList {
 
 	public ObservableList<Matrix> getMatrixList();
 

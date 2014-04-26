@@ -23,10 +23,10 @@
 
 package org.jdmp.core.module;
 
-import org.jdmp.core.util.CoreObjectList;
+import org.jdmp.core.util.ObservableList;
 
 public interface HasModules {
 
-	public CoreObjectList<Module> getModules();
+	public ObservableList<Module> getModules();
 
 }

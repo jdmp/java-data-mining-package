@@ -28,7 +28,7 @@ import java.util.Map;
 
 import javax.swing.ListModel;
 
-public interface ObservableMap<V> extends CoreObjectList<V>, ListModel, Map<String, V> {
+public interface ObservableMap<V> extends ObservableList<V>, Map<String, V> {
 
 	public void addAll(Collection<V> objects);
 
