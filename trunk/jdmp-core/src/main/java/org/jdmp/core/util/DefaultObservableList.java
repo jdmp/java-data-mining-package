@@ -23,16 +23,150 @@
 
 package org.jdmp.core.util;
 
-import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
-public class DefaultObservableList<V> extends AbstractObservableList<V> {
-	private static final long serialVersionUID = -2636828198788691727L;
+import javax.swing.event.EventListenerList;
+import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
 
-	private List<V> list = null;
+import org.ujmp.core.collections.list.AbstractList;
 
-	public DefaultObservableList() {
-		this(new ArrayList<V>(2));
+public class DefaultObservableList<V> extends AbstractList<V> implements ObservableList<V> {
+	private static final long serialVersionUID = -6099014976896834236L;
+
+	private final List<V> list;
+
+	private EventListenerList listenerList = null;
+
+	public final synchronized V getElementAt(int index) {
+		if (index >= 0 && index < getList().size()) {
+			return getList().get(index);
+		} else {
+			return null;
+		}
+	}
+
+	public final synchronized void clear() {
+		int size = getList().size();
+		getList().clear();
+		fireIntervalRemoved(this, 0, size - 1);
+	}
+
+	public final synchronized int getSize() {
+		return getList().size();
+	}
+
+	public final synchronized int indexOf(Object value) {
+		return getList().indexOf(value);
+	}
+
+	public final synchronized boolean add(V value) {
+		boolean result = getList().add(value);
+		fireIntervalAdded(this, getList().size() - 1, getList().size() - 1);
+		return result;
+	}
+
+	public final boolean addAll(Collection<? extends V> values) {
+		for (V v : values) {
+			add(v);
+		}
+		return true;
+	}
+
+	public final synchronized boolean remove(Object value) {
+		int index = getList().indexOf(value);
+		boolean b = getList().remove(value);
+		if (index >= 0) {
+			fireIntervalRemoved(this, index, index);
+		}
+		return b;
+	}
+
+	public final synchronized Iterator<V> iterator() {
+		return getList().iterator();
+	}
+
+	public final boolean isEmpty() {
+		return getList().isEmpty();
+	}
+
+	public final Collection<V> toCollection() {
+		return getList();
+	}
+
+	public String toString() {
+		return getList().toString();
+	}
+
+	public final void fireContentsChanged() {
+		fireContentsChanged(this, -1, -1);
+	}
+
+	public void addListDataListener(ListDataListener l) {
+		if (listenerList == null) {
+			listenerList = new EventListenerList();
+		}
+		listenerList.add(ListDataListener.class, l);
+	}
+
+	public void removeListDataListener(ListDataListener l) {
+		if (listenerList == null) {
+			return;
+		}
+		listenerList.remove(ListDataListener.class, l);
+	}
+
+	protected void fireContentsChanged(Object source, int index0, int index1) {
+		if (listenerList == null) {
+			return;
+		}
+		Object[] listeners = listenerList.getListenerList();
+		ListDataEvent e = null;
+
+		for (int i = listeners.length - 2; i >= 0; i -= 2) {
+			if (listeners[i] == ListDataListener.class) {
+				if (e == null) {
+					e = new ListDataEvent(source, ListDataEvent.CONTENTS_CHANGED, index0, index1);
+				}
+				((ListDataListener) listeners[i + 1]).contentsChanged(e);
+			}
+		}
+	}
+
+	protected void fireIntervalAdded(Object source, int index0, int index1) {
+		if (listenerList == null) {
+			return;
+		}
+		Object[] listeners = listenerList.getListenerList();
+		ListDataEvent e = null;
+
+		for (int i = listeners.length - 2; i >= 0; i -= 2) {
+			if (listeners[i] == ListDataListener.class) {
+				if (e == null) {
+					e = new ListDataEvent(source, ListDataEvent.INTERVAL_ADDED, index0, index1);
+				}
+				((ListDataListener) listeners[i + 1]).intervalAdded(e);
+			}
+		}
+	}
+
+	protected void fireIntervalRemoved(Object source, int index0, int index1) {
+		if (listenerList == null) {
+			return;
+		}
+		Object[] listeners = listenerList.getListenerList();
+		ListDataEvent e = null;
+
+		for (int i = listeners.length - 2; i >= 0; i -= 2) {
+			if (listeners[i] == ListDataListener.class) {
+				if (e == null) {
+					e = new ListDataEvent(source, ListDataEvent.INTERVAL_REMOVED, index0, index1);
+				}
+				((ListDataListener) listeners[i + 1]).intervalRemoved(e);
+			}
+		}
 	}
 
 	public DefaultObservableList(List<V> list) {
@@ -41,10 +175,6 @@ public class DefaultObservableList<V> extends AbstractObservableList<V> {
 
 	public List<V> getList() {
 		return list;
-	}
-
-	public void setList(List<V> list) {
-		this.list = list;
 	}
 
 	@Override

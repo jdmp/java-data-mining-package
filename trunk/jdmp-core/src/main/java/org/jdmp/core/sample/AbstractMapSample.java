@@ -29,8 +29,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import org.jdmp.core.variable.DefaultVariable;
 import org.jdmp.core.variable.DefaultVariableMap;
-import org.jdmp.core.variable.SingletonVariable;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.interfaces.Wrapper;
 import org.ujmp.core.util.MathUtil;
@@ -80,7 +80,8 @@ public abstract class AbstractMapSample extends AbstractSample implements
 		}
 
 		public Variable get(Object key) {
-			Variable v = new SingletonVariable(MathUtil.getMatrix(getWrappedObject().get(key)));
+			Variable v = new DefaultVariable();
+			v.add(MathUtil.getMatrix(getWrappedObject().get(key)));
 			v.setLabel(StringUtil.convert(key));
 			return v;
 		}
