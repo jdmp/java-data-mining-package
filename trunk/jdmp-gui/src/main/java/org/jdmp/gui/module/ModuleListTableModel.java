@@ -27,7 +27,7 @@ import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 import javax.swing.table.AbstractTableModel;
 
-import org.jdmp.core.module.HasModules;
+import org.jdmp.core.module.HasModuleMap;
 import org.jdmp.core.module.Module;
 
 public class ModuleListTableModel extends AbstractTableModel implements ListDataListener {
@@ -45,9 +45,9 @@ public class ModuleListTableModel extends AbstractTableModel implements ListData
 
 	public static final int DATASETCOUNTCOLUMN = 5;
 
-	private HasModules iModules = null;
+	private HasModuleMap iModules = null;
 
-	public ModuleListTableModel(HasModules iModules) {
+	public ModuleListTableModel(HasModuleMap iModules) {
 		this.iModules = iModules;
 		iModules.getModules().addListDataListener(this);
 	}

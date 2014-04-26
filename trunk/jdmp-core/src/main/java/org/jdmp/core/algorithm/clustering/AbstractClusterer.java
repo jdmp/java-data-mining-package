@@ -36,7 +36,7 @@ public abstract class AbstractClusterer extends AbstractAlgorithm implements Clu
 	}
 
 	public void predict(RegressionDataSet dataSet) throws Exception {
-		for (Sample sample : dataSet.getSamples()) {
+		for (Sample sample : dataSet.getSamples().values()) {
 			predict(sample);
 		}
 	}

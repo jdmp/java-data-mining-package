@@ -25,19 +25,19 @@ package org.jdmp.gui.algorithm.actions;
 
 import javax.swing.JComponent;
 
-import org.jdmp.core.algorithm.HasAlgorithms;
+import org.jdmp.core.algorithm.HasAlgorithmMap;
 import org.ujmp.core.interfaces.CoreObject;
 import org.ujmp.gui.actions.AbstractObjectAction;
 
 public abstract class AlgorithmListAction extends AbstractObjectAction {
 	private static final long serialVersionUID = 4964145257911669819L;
 
-	public AlgorithmListAction(JComponent c, HasAlgorithms iAlgorithms) {
+	public AlgorithmListAction(JComponent c, HasAlgorithmMap iAlgorithms) {
 		super(c, ((CoreObject) iAlgorithms).getGUIObject());
 	}
 
-	public HasAlgorithms getIAlgorithms() {
-		return (HasAlgorithms) getGUIObject();
+	public HasAlgorithmMap getIAlgorithms() {
+		return (HasAlgorithmMap) getGUIObject();
 	}
 
 }

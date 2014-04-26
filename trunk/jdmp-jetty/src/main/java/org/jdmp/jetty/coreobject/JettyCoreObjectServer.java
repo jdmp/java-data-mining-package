@@ -24,7 +24,7 @@
 package org.jdmp.jetty.coreobject;
 
 import org.jdmp.core.module.Module;
-import org.jdmp.core.variable.HasVariables;
+import org.jdmp.core.variable.HasVariableMap;
 import org.jdmp.jetty.JettyObjectServlet;
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.handler.ContextHandlerCollection;
@@ -66,12 +66,12 @@ public class JettyCoreObjectServer {
 			console.addServlet(new ServletHolder(new JettyConsoleServlet((Module) object)), "/*");
 		}
 
-		if (object instanceof HasVariables) {
+		if (object instanceof HasVariableMap) {
 			Context list = new Context(contexts, "/variables", Context.SESSIONS);
-			list.addServlet(new ServletHolder(new JettyCoreObjectListServlet(((HasVariables) object).getVariables())),
-					"/*");
+			list.addServlet(
+					new ServletHolder(new JettyCoreObjectListServlet(((HasVariableMap) object).getVariables())), "/*");
 			Context listio = new Context(contexts, "/io/variables", Context.SESSIONS);
-			listio.addServlet(new ServletHolder(new JettyObjectServlet(((HasVariables) object).getVariables())), "/*");
+			listio.addServlet(new ServletHolder(new JettyObjectServlet(((HasVariableMap) object).getVariables())), "/*");
 		}
 
 		server.start();

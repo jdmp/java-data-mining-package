@@ -24,24 +24,10 @@
 package org.jdmp.core.util;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 import javax.swing.ListModel;
 
-public interface ObservableList<V> extends Serializable, ListModel<V>, Iterable<V> {
-
-	public void add(V value);
-
-	public void addAll(Collection<V> values);
-
-	public int indexOf(V value);
-
-	public V getElementAt(int index);
-
-	public boolean isEmpty();
-
-	public void clear();
-
-	public Collection<V> toCollection();
+public interface ObservableList<V> extends Serializable, ListModel<V>, List<V> {
 
 }

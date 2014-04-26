@@ -25,7 +25,7 @@ package org.jdmp.core.sample;
 
 import org.jdmp.core.util.ObservableMap;
 
-public interface HasSampleMap extends HasSamples {
+public interface HasSampleMap {
 
 	public ObservableMap<Sample> getSamples();
 

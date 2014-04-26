@@ -25,7 +25,7 @@ package org.jdmp.gui.sample;
 
 import java.util.Comparator;
 
-import org.jdmp.core.sample.HasSamples;
+import org.jdmp.core.sample.HasSampleMap;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.gui.util.AbstractListPanel;
 import org.ujmp.core.Matrix;
@@ -35,7 +35,7 @@ import org.ujmp.core.interfaces.GUIObject;
 public class SampleListPanel extends AbstractListPanel {
 	private static final long serialVersionUID = -5498996013925285012L;
 
-	public SampleListPanel(HasSamples iSamples) {
+	public SampleListPanel(HasSampleMap iSamples) {
 		super();
 		if (iSamples instanceof CoreObject) {
 			this.object = ((CoreObject) iSamples).getGUIObject();

@@ -24,14 +24,14 @@
 package org.jdmp.gui.algorithm;
 
 import org.jdmp.core.algorithm.Algorithm;
-import org.jdmp.core.algorithm.HasAlgorithms;
+import org.jdmp.core.algorithm.HasAlgorithmMap;
 import org.jdmp.gui.util.AbstractListPanel;
 import org.ujmp.core.interfaces.CoreObject;
 
 public class AlgorithmListPanel extends AbstractListPanel {
 	private static final long serialVersionUID = -8393859163650154815L;
 
-	public AlgorithmListPanel(HasAlgorithms iAlgorithms) {
+	public AlgorithmListPanel(HasAlgorithmMap iAlgorithms) {
 		super();
 		this.object = ((CoreObject) iAlgorithms).getGUIObject();
 

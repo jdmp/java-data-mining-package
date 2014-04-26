@@ -23,7 +23,7 @@
 
 package org.jdmp.core.variable;
 
-public interface HasVariableMap extends HasVariables {
+public interface HasVariableMap {
 
 	public Variables getVariables();
 

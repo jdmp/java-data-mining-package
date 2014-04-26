@@ -213,8 +213,10 @@ public class MultiLayerNetwork extends AbstractClassifier {
 
 	public void setDesiredOutputVariable(Variable v) {
 		getOutputErrorAlgorithm().setVariable(AlgorithmTwoSources.SOURCE2, v);
-		getOutputLayer().getOutputVariable().setInnerSize(v.getInnerRowCount(), v.getInnerColumnCount());
-		getOutputLayer().getOutputDeviationVariable().setInnerSize(v.getInnerRowCount(), v.getInnerColumnCount());
+		getOutputLayer().getOutputVariable().setInnerSize(v.getInnerRowCount(),
+				v.getInnerColumnCount());
+		getOutputLayer().getOutputDeviationVariable().setInnerSize(v.getInnerRowCount(),
+				v.getInnerColumnCount());
 	}
 
 	public void addInputMatrix(Matrix m) {
@@ -326,7 +328,7 @@ public class MultiLayerNetwork extends AbstractClassifier {
 
 		// TODO: fix!
 
-		List<Sample> samples = new ArrayList<Sample>(dataSet.getSamples().toCollection());
+		List<Sample> samples = new ArrayList<Sample>(dataSet.getSamples().values());
 		Collections.shuffle(samples);
 
 		int last10Percent = (int) Math.ceil((samples.size() * 0.1));
@@ -355,7 +357,7 @@ public class MultiLayerNetwork extends AbstractClassifier {
 	}
 
 	public void trainOnce(RegressionDataSet dataSet) throws Exception {
-		List<Sample> samples = new ArrayList<Sample>(dataSet.getSamples().toCollection());
+		List<Sample> samples = new ArrayList<Sample>(dataSet.getSamples().values());
 		Collections.shuffle(samples);
 		for (Sample s : samples) {
 			train(s);

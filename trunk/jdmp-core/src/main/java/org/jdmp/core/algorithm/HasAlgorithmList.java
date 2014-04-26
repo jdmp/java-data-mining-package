@@ -25,7 +25,7 @@ package org.jdmp.core.algorithm;
 
 import org.jdmp.core.util.DefaultObservableList;
 
-public interface HasAlgorithmList extends HasAlgorithms {
+public interface HasAlgorithmList {
 
 	public DefaultObservableList<Algorithm> getAlgorithms();
 

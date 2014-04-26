@@ -23,7 +23,15 @@
 
 package org.jdmp.core.util;
 
+import java.io.Serializable;
+import java.util.Collection;
 import java.util.Map;
 
-public interface ObservableMap<V> extends ObservableList<V>, Map<String, V> {
+import javax.swing.ListModel;
+
+public interface ObservableMap<V> extends Serializable, Map<String, V>, ListModel<V>, Iterable<V> {
+
+	public void add(V object);
+
+	public void addAll(Collection<? extends V> list);
 }

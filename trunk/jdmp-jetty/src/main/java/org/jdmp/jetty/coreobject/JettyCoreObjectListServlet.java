@@ -31,7 +31,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.jdmp.core.util.ObservableList;
+import org.jdmp.core.util.ObservableMap;
 import org.jdmp.jetty.html.Page;
 import org.jdmp.jetty.html.tags.BRTag;
 import org.jdmp.jetty.html.tags.H1Tag;
@@ -40,9 +40,9 @@ import org.ujmp.core.interfaces.CoreObject;
 public class JettyCoreObjectListServlet extends HttpServlet {
 	private static final long serialVersionUID = -4311396653640425480L;
 
-	private ObservableList<? extends CoreObject> list = null;
+	private ObservableMap<? extends CoreObject> list = null;
 
-	public JettyCoreObjectListServlet(ObservableList<? extends CoreObject> list) {
+	public JettyCoreObjectListServlet(ObservableMap<? extends CoreObject> list) {
 		this.list = list;
 	}
 

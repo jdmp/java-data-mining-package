@@ -72,7 +72,7 @@ public class MultiIndex extends AbstractIndex implements SimilaritySearcher {
 				}
 			}
 			for (Future<DataSet> f : futures) {
-				ds.getSamples().addAll(f.get().getSamples().toCollection());
+				ds.getSamples().addAll(f.get().getSamples().values());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -92,7 +92,7 @@ public class MultiIndex extends AbstractIndex implements SimilaritySearcher {
 				}
 			}
 			for (Future<DataSet> f : futures) {
-				ds.getSamples().addAll(f.get().getSamples().toCollection());
+				ds.getSamples().addAll(f.get().getSamples().values());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

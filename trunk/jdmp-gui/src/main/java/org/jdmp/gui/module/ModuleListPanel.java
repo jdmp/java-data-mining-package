@@ -23,7 +23,7 @@
 
 package org.jdmp.gui.module;
 
-import org.jdmp.core.module.HasModules;
+import org.jdmp.core.module.HasModuleMap;
 import org.jdmp.core.module.Module;
 import org.jdmp.gui.util.AbstractListPanel;
 import org.ujmp.core.interfaces.CoreObject;
@@ -32,7 +32,7 @@ import org.ujmp.core.interfaces.GUIObject;
 public class ModuleListPanel extends AbstractListPanel {
 	private static final long serialVersionUID = -4213201884857411875L;
 
-	public ModuleListPanel(HasModules iModules) {
+	public ModuleListPanel(HasModuleMap iModules) {
 		super();
 		if (iModules instanceof CoreObject) {
 			this.object = ((CoreObject) iModules).getGUIObject();

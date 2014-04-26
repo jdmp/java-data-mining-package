@@ -27,19 +27,19 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 
 import org.jdmp.core.algorithm.Algorithm;
-import org.jdmp.core.algorithm.HasAlgorithms;
+import org.jdmp.core.algorithm.HasAlgorithmMap;
 
 public class AddAlgorithmAction extends AlgorithmListAction {
 	private static final long serialVersionUID = 5647028718703205997L;
 
 	private Algorithm algorithm = null;
 
-	public AddAlgorithmAction(JComponent c, HasAlgorithms i, Algorithm a) {
+	public AddAlgorithmAction(JComponent c, HasAlgorithmMap i, Algorithm a) {
 		this(c, a);
 		algorithm = a;
 	}
 
-	public AddAlgorithmAction(JComponent c, HasAlgorithms i) {
+	public AddAlgorithmAction(JComponent c, HasAlgorithmMap i) {
 		super(c, i);
 		putValue(Action.NAME, "Add Algorithm...");
 		putValue(Action.SHORT_DESCRIPTION, "Add a new Algorithm");

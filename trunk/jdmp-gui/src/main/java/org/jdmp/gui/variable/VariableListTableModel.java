@@ -27,7 +27,7 @@ import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 import javax.swing.table.AbstractTableModel;
 
-import org.jdmp.core.variable.HasVariables;
+import org.jdmp.core.variable.HasVariableMap;
 import org.jdmp.core.variable.Variable;
 
 public class VariableListTableModel extends AbstractTableModel implements ListDataListener {
@@ -45,9 +45,9 @@ public class VariableListTableModel extends AbstractTableModel implements ListDa
 
 	public static final int MATRIXCOUNTCOLUMN = 5;
 
-	private HasVariables iVariables = null;
+	private HasVariableMap iVariables = null;
 
-	public VariableListTableModel(HasVariables iVariables) {
+	public VariableListTableModel(HasVariableMap iVariables) {
 		this.iVariables = iVariables;
 		iVariables.getVariables().addListDataListener(this);
 	}

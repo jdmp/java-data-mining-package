@@ -47,4 +47,29 @@ public class DefaultObservableList<V> extends AbstractObservableList<V> {
 		this.list = list;
 	}
 
+	@Override
+	public V get(int index) {
+		return list.get(index);
+	}
+
+	@Override
+	public void add(int index, V element) {
+		list.add(index, element);
+	}
+
+	@Override
+	public V remove(int index) {
+		return list.remove(index);
+	}
+
+	@Override
+	public V set(int index, V element) {
+		return list.set(index, element);
+	}
+
+	@Override
+	public int size() {
+		return list.size();
+	}
+
 }

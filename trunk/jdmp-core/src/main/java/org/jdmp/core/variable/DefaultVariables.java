@@ -60,7 +60,7 @@ public class DefaultVariables extends AbstractVariables {
 	public final String getAllAsString(String variableKey) {
 		Variable v = get(variableKey);
 		if (v != null) {
-			return StringUtil.getAllAsString(v.getMatrixList().toCollection());
+			return StringUtil.getAllAsString(v.getMatrixList());
 		} else {
 			return null;
 		}

@@ -30,19 +30,19 @@ import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
 import org.jdmp.core.dataset.DataSet;
-import org.jdmp.core.dataset.HasDataSets;
+import org.jdmp.core.dataset.HasDataSetMap;
 
 public class RemoveDataSetAction extends DataSetListAction {
 	private static final long serialVersionUID = -8847037312292718929L;
 
 	private DataSet ds = null;
 
-	public RemoveDataSetAction(JComponent c, HasDataSets i, DataSet ds) {
+	public RemoveDataSetAction(JComponent c, HasDataSetMap i, DataSet ds) {
 		this(c, i);
 		this.ds = ds;
 	}
 
-	public RemoveDataSetAction(JComponent c, HasDataSets i) {
+	public RemoveDataSetAction(JComponent c, HasDataSetMap i) {
 		super(c, i);
 		putValue(Action.NAME, "Remove DataSet...");
 		putValue(Action.SHORT_DESCRIPTION, "Remove a DataSet");

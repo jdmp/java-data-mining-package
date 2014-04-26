@@ -30,9 +30,7 @@ import java.util.Random;
 
 import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.util.DefaultObservableList;
 import org.jdmp.core.util.DefaultObservableMap;
-import org.jdmp.core.util.ObservableList;
 import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.DefaultVariables;
 import org.jdmp.core.variable.Variable;
@@ -46,7 +44,7 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 
 	private Variables variables = null;
 
-	private ObservableList<DataSet> dataSetList = null;
+	private ObservableMap<DataSet> dataSetList = null;
 
 	public final ObservableMap<Sample> getSamples() {
 		if (sampleMap == null) {
@@ -70,9 +68,9 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		return variables;
 	}
 
-	public final ObservableList<DataSet> getDataSets() {
+	public final ObservableMap<DataSet> getDataSets() {
 		if (dataSetList == null) {
-			dataSetList = new DefaultObservableList<DataSet>();
+			dataSetList = new DefaultObservableMap<DataSet>();
 		}
 		return dataSetList;
 	}
@@ -156,7 +154,7 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 	public final List<DataSet> splitForCV(int numberOfCVSets, int idOfCVSet, long randomSeed) {
 		List<DataSet> returnDataSets = new ArrayList<DataSet>();
 		List<List<Sample>> tempSampleLists = new ArrayList<List<Sample>>();
-		List<Sample> allSamples = new ArrayList<Sample>(getSamples().toCollection());
+		List<Sample> allSamples = new ArrayList<Sample>(getSamples().values());
 		Collections.shuffle(allSamples, new Random(randomSeed));
 
 		for (int set = 0; set < numberOfCVSets; set++) {
@@ -214,7 +212,7 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		this.variables = variables;
 	}
 
-	public final void setDataSets(ObservableList<DataSet> dataSets) {
+	public final void setDataSets(ObservableMap<DataSet> dataSets) {
 		this.dataSetList = dataSets;
 	}
 

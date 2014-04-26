@@ -77,7 +77,7 @@ public class LazyVariables implements ObservableMap<Variable>, Variables {
 		throw new RuntimeException("not implemented");
 	}
 
-	public void addAll(Collection<Variable> objects) {
+	public void addAll(Collection<? extends Variable> objects) {
 		throw new RuntimeException("not implemented");
 	}
 

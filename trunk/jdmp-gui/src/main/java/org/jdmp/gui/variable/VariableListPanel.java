@@ -23,7 +23,7 @@
 
 package org.jdmp.gui.variable;
 
-import org.jdmp.core.variable.HasVariables;
+import org.jdmp.core.variable.HasVariableMap;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.gui.util.AbstractListPanel;
 import org.ujmp.core.interfaces.CoreObject;
@@ -32,7 +32,7 @@ import org.ujmp.core.interfaces.GUIObject;
 public class VariableListPanel extends AbstractListPanel {
 	private static final long serialVersionUID = -1241880733454399837L;
 
-	public VariableListPanel(HasVariables iVariables) {
+	public VariableListPanel(HasVariableMap iVariables) {
 		super();
 		if (iVariables instanceof CoreObject) {
 			this.object = ((CoreObject) iVariables).getGUIObject();
