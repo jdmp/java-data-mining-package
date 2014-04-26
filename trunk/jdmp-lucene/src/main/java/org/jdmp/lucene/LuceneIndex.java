@@ -409,7 +409,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 		return search(bq, start, count);
 	}
 
-	class LuceneSampleMap extends AbstractListModel implements ObservableMap<Sample> {
+	class LuceneSampleMap extends AbstractListModel<Sample> implements ObservableMap<Sample> {
 		private static final long serialVersionUID = -7189321183317113764L;
 
 		private LuceneIndex index = null;
@@ -421,7 +421,6 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 		public void add(Sample sample) {
 			try {
 				index.add(sample);
-				fireContentsChanged();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

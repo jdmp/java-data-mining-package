@@ -23,12 +23,12 @@
 
 package org.jdmp.core.variable;
 
-import org.jdmp.core.matrix.HasMatrixList;
+import org.jdmp.core.util.ObservableList;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.interfaces.CoreObject;
 import org.ujmp.core.listmatrix.ListMatrix;
 
-public interface Variable extends CoreObject, ListMatrix<Matrix>, HasMatrixList {
+public interface Variable extends CoreObject, ListMatrix<Matrix> {
 	public static final Class<?>[] VARIABLEARRAY = new Class<?>[] { new Variable[] {}.getClass() };
 
 	public static final String TAGS = "Tags";
@@ -60,6 +60,8 @@ public interface Variable extends CoreObject, ListMatrix<Matrix>, HasMatrixList 
 	public static final String CONFUSION = "Confusion";
 	public static final String ACCURACY = "Accuracy";
 	public static final String FMEASUREMACRO = "FMeasureMacro";
+
+	public ObservableList<Matrix> getMatrixList();
 
 	public long[] getInnerSize();
 
