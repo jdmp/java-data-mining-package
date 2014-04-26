@@ -23,9 +23,9 @@
 
 package org.jdmp.core.dataset;
 
-import org.jdmp.core.util.CoreObjectList;
+import org.jdmp.core.util.ObservableList;
 
 public interface HasDataSets {
 
-	public CoreObjectList<DataSet> getDataSets();
+	public ObservableList<DataSet> getDataSets();
 }

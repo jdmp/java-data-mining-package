@@ -23,10 +23,10 @@
 
 package org.jdmp.core.sample;
 
-import org.jdmp.core.util.CoreObjectList;
+import org.jdmp.core.util.ObservableList;
 
 public interface HasSamples {
 
-	public CoreObjectList<Sample> getSamples();
+	public ObservableList<Sample> getSamples();
 
 }
