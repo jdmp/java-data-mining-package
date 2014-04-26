@@ -37,7 +37,7 @@ public abstract class AbstractTokenizer extends AbstractAlgorithm implements Tok
 
 	public final void tokenize(Object variableKey, Sample sample) throws Exception {
 		Variable input = sample.getVariableMap().get(variableKey);
-		for (Matrix m : input.getMatrixList()) {
+		for (Matrix m : input) {
 			List<Matrix> r = tokenize(m);
 			for (Matrix n : r) {
 				sample.getVariableMap().setMatrix(Tokenizer.TOKENIZED, n);

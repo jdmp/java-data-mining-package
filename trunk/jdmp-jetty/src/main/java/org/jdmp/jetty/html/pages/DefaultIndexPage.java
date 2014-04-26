@@ -64,7 +64,7 @@ public class DefaultIndexPage extends Page {
 						for (String t : splitTags) {
 							boolean tagFound = false;
 							if (tags != null) {
-								for (Matrix m : tags.getMatrixList()) {
+								for (Matrix m : tags) {
 									if (m != null && m.stringValue().equalsIgnoreCase(t)) {
 										tagFound = true;
 									}

@@ -74,7 +74,7 @@ public class DefaultVariablesDiv extends DivTag {
 				field.add(keyTag);
 
 				if (var != null) {
-					for (Matrix matrix : var.getMatrixList()) {
+					for (Matrix matrix : var) {
 						if (matrix != null) {
 							for (long[] c : matrix.availableCoordinates()) {
 								String value = matrix.getAsString(c);

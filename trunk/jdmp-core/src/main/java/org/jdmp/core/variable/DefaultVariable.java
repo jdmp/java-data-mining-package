@@ -23,12 +23,7 @@
 
 package org.jdmp.core.variable;
 
-import javax.swing.event.ListDataEvent;
-import javax.swing.event.ListDataListener;
-
-import org.jdmp.core.util.DefaultObservableList;
 import org.jdmp.core.util.MatrixListToMatrixWrapper;
-import org.jdmp.core.util.ObservableList;
 import org.ujmp.core.Matrix;
 
 public class DefaultVariable extends AbstractVariable {
@@ -36,12 +31,8 @@ public class DefaultVariable extends AbstractVariable {
 
 	private transient Matrix matrixListMatrix = null;
 
-	private final ObservableList<Matrix> matrixList;
-
 	public DefaultVariable() {
 		super();
-		matrixList = new DefaultObservableList<Matrix>(this);
-		matrixList.addListDataListener(new VariableListDataListener());
 	}
 
 	public Matrix getAsListMatrix() {
@@ -51,32 +42,11 @@ public class DefaultVariable extends AbstractVariable {
 		return matrixListMatrix;
 	}
 
-	public ObservableList<Matrix> getMatrixList() {
-		return matrixList;
-	}
-
 	public Variable clone() {
 		Variable v = VariableFactory.labeledVariable(getLabel());
-		for (Matrix m : getMatrixList()) {
-			v.getMatrixList().add(m.clone());
+		for (Matrix m : this) {
+			v.add(m.clone());
 		}
 		return v;
 	}
-
-	class VariableListDataListener implements ListDataListener {
-
-		public void contentsChanged(ListDataEvent e) {
-			notifyGUIObject();
-		}
-
-		public void intervalAdded(ListDataEvent e) {
-			notifyGUIObject();
-		}
-
-		public void intervalRemoved(ListDataEvent e) {
-			notifyGUIObject();
-		}
-
-	}
-
 }
