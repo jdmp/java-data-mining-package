@@ -485,7 +485,7 @@ public class Translation extends DepthFirstAdapter {
 
 			Variable v = module.getVariableMap().get(name);
 			if (v != null) {
-				return v.getLatestMatrix();
+				return v.getLast();
 			}
 
 			DataSet ds = module.getDataSetMap().get(name);
@@ -722,7 +722,7 @@ public class Translation extends DepthFirstAdapter {
 	private Object getObject(String name) {
 		Object o = module.getVariableMap().get(name);
 		if (o != null) {
-			return ((Variable) o).getLatestMatrix();
+			return ((Variable) o).getLast();
 		}
 		o = module.getDataSetMap().get(name);
 		if (o != null) {
@@ -930,7 +930,7 @@ public class Translation extends DepthFirstAdapter {
 			if (id != null) {
 				Variable v = module.getVariableMap().get(id);
 				if (v != null) {
-					result = new Result(id, v.getLatestMatrix());
+					result = new Result(id, v.getLast());
 					return;
 				}
 				DataSet ds = module.getDataSetMap().get(id);

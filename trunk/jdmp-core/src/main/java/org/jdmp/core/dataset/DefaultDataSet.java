@@ -57,23 +57,23 @@ public class DefaultDataSet extends AbstractDataSet {
 	}
 
 	public final void standardize(int dimension) {
-		getInputVariable().getLatestMatrix().standardize(Ret.ORIG, dimension);
+		getInputVariable().getLast().standardize(Ret.ORIG, dimension);
 	}
 
 	public final void center(int dimension) {
-		getInputVariable().getLatestMatrix().center(Ret.ORIG, dimension, true);
+		getInputVariable().getLast().center(Ret.ORIG, dimension, true);
 	}
 
 	public void addMissingValues(int dimension, double percentMissing) {
-		getInputVariable().getLatestMatrix().addMissing(Ret.ORIG, dimension, percentMissing);
+		getInputVariable().getLast().addMissing(Ret.ORIG, dimension, percentMissing);
 	}
 
 	public Matrix getInputMatrix() {
-		return getInputVariable().getLatestMatrix();
+		return getInputVariable().getLast();
 	}
 
 	public int getFeatureCount() {
-		Matrix m = getInputVariable().getLatestMatrix();
+		Matrix m = getInputVariable().getLast();
 		if (m == null) {
 			return 0;
 		} else {

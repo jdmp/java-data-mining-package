@@ -71,13 +71,13 @@ public class RegressionDataSet extends DefaultDataSet {
 	}
 
 	public Matrix getTargetMatrix() {
-		return getTargetVariable().getLatestMatrix();
+		return getTargetVariable().getLast();
 	}
 
 	public double getEarlyStoppingRMSE(int numberOfSteps) {
 		int index = getEarlyStoppingIndex(numberOfSteps);
 		if (index >= 0) {
-			return getRMSEVariable().getInnerMatrix(index).getEuklideanValue();
+			return getRMSEVariable().get(index).getEuklideanValue();
 		}
 		return -1;
 	}
@@ -95,7 +95,7 @@ public class RegressionDataSet extends DefaultDataSet {
 		double minRMSE = Double.MAX_VALUE;
 		int position = -1;
 		for (int i = 0; i < v.getInnerMatrixCount(); i++) {
-			double e = v.getInnerMatrix(i).getEuklideanValue();
+			double e = v.get(i).getEuklideanValue();
 			if (e < minRMSE) {
 				minRMSE = e;
 				position = i;
@@ -112,7 +112,7 @@ public class RegressionDataSet extends DefaultDataSet {
 	}
 
 	public Matrix getPredictedMatrix() {
-		return getPredictedVariable().getLatestMatrix();
+		return getPredictedVariable().getLast();
 	}
 
 	public double getRMSE() {
@@ -125,7 +125,7 @@ public class RegressionDataSet extends DefaultDataSet {
 	}
 
 	public Matrix getRMSEMatrix() {
-		return getRMSEVariable().getLatestMatrix();
+		return getRMSEVariable().getLast();
 	}
 
 }

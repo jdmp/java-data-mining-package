@@ -73,10 +73,6 @@ public interface Variable extends CoreObject, ListMatrix<Matrix> {
 
 	public int getInnerMatrixCount();
 
-	public Matrix getLatestMatrix();
-
-	public Matrix getInnerMatrix(int index);
-
 	public long getInnerRowCount();
 
 	public long getInnerColumnCount();

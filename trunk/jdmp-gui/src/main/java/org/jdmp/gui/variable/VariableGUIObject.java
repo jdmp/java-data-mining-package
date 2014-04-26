@@ -69,7 +69,7 @@ public class VariableGUIObject extends AbstractGUIObject {
 				}
 
 				public Object getValueAt(int row, int col) {
-					return getCoreObject().getLatestMatrix();
+					return getCoreObject().getLast();
 				}
 			};
 			JTable table = new JTable(dataModel);
@@ -81,7 +81,7 @@ public class VariableGUIObject extends AbstractGUIObject {
 
 			Class<?> cl = Class.forName("org.jdmp.gui.matrix.MatrixRenderer");
 			DefaultTableCellRenderer mr = (DefaultTableCellRenderer) cl.newInstance();
-			Component c = mr.getTableCellRendererComponent(table, getCoreObject().getLatestMatrix(),
+			Component c = mr.getTableCellRendererComponent(table, getCoreObject().getLast(),
 					false, false, 0, 0);
 			BufferedImage bi = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 			c.paint(bi.getGraphics());

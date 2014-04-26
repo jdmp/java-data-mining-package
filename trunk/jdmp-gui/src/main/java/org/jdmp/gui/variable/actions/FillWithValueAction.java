@@ -52,7 +52,7 @@ public class FillWithValueAction extends VariableAction {
 		try {
 			value = Double.parseDouble(s);
 			getVariable().getCoreObject().addInnerMatrix(
-					getVariable().getCoreObject().getLatestMatrix().fill(Ret.NEW, value));
+					getVariable().getCoreObject().getLast().fill(Ret.NEW, value));
 		} catch (Exception ex) {
 		}
 		return null;

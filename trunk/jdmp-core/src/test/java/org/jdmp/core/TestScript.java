@@ -45,7 +45,7 @@ public class TestScript {
 		m.execute("c=a+b");
 
 		Matrix rm = (Matrix) r.getObject();
-		Matrix vm = m.getVariableMap().get("c").getLatestMatrix();
+		Matrix vm = m.getVariableMap().get("c").getLast();
 		Matrix expected = Matrix.Factory.linkToArray(new double[][] { { 5, 7, 9 }, { 5, 7, 9 } });
 
 		assertEquals(expected, rm);

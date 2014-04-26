@@ -25,12 +25,10 @@ package org.jdmp.core.variable;
 
 import java.lang.reflect.Constructor;
 
-import org.jdmp.core.util.ObservableList;
 import org.ujmp.core.Coordinates;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.core.listmatrix.DefaultListMatrix;
-import org.ujmp.core.util.StringUtil;
 
 public abstract class AbstractVariable extends DefaultListMatrix<Matrix> implements Variable {
 	private static final long serialVersionUID = -3393106211967497877L;
@@ -45,27 +43,6 @@ public abstract class AbstractVariable extends DefaultListMatrix<Matrix> impleme
 			return 0;
 		} else {
 			return getMatrixList().getSize();
-		}
-	}
-
-	public final Matrix getLatestMatrix() {
-		ObservableList<Matrix> list = getMatrixList();
-		if (list == null || list.isEmpty()) {
-			return null;
-		} else {
-			return list.getElementAt(list.getSize() - 1);
-		}
-	}
-
-	public final String getAsString() {
-		return StringUtil.convert(getLatestMatrix());
-	}
-
-	public final Matrix getInnerMatrix(int index) {
-		if (getMatrixList() == null) {
-			return null;
-		} else {
-			return getMatrixList().getElementAt(index);
 		}
 	}
 
