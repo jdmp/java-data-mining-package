@@ -45,10 +45,6 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		return getVariableMap().getAsString(Sample.DESCRIPTION);
 	}
 
-	public final void setLabelObject(Object label) {
-		getVariableMap().setObject(Sample.LABEL, label);
-	}
-
 	public final Object getLabelObject() {
 		return getVariableMap().getAsObject(Sample.LABEL);
 	}
@@ -61,7 +57,7 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		return getVariableMap().getAsString(Sample.LABEL);
 	}
 
-	public final void setLabel(String label) {
+	public final void setLabel(Object label) {
 		getVariableMap().setObject(Sample.LABEL, label);
 	}
 

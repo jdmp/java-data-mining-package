@@ -31,7 +31,7 @@ import org.jdmp.core.variable.HasVariableMap;
 import org.ujmp.core.interfaces.CoreObject;
 import org.ujmp.core.mapmatrix.MapMatrix;
 
-public interface DataSet extends CoreObject, HasVariableMap, HasSampleMap, HasDataSetMap,
+public interface DataSet extends CoreObject, HasVariableMap, HasSampleMap,
 		MapMatrix<String, Sample> {
 
 	public List<DataSet> splitByCount(boolean shuffle, int... count);

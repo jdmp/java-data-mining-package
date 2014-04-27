@@ -27,20 +27,16 @@ import org.ujmp.core.util.StringUtil;
 
 public abstract class AbstractParameter<T> implements Parameter<T> {
 
-	private String label = null;
+	private Object label = null;
 
 	private String description = null;
 
 	public String getLabel() {
-		return label;
+		return StringUtil.getString(label);
 	}
 
-	public void setLabel(String label) {
+	public void setLabel(Object label) {
 		this.label = label;
-	}
-
-	public final void setLabelObject(Object label) {
-		this.label = StringUtil.format(label);
 	}
 
 	public final Object getLabelObject() {
