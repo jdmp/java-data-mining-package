@@ -81,8 +81,8 @@ public class VariableGUIObject extends AbstractGUIObject {
 
 			Class<?> cl = Class.forName("org.jdmp.gui.matrix.MatrixRenderer");
 			DefaultTableCellRenderer mr = (DefaultTableCellRenderer) cl.newInstance();
-			Component c = mr.getTableCellRendererComponent(table, getCoreObject().getLast(),
-					false, false, 0, 0);
+			Component c = mr.getTableCellRendererComponent(table, getCoreObject().getLast(), false,
+					false, 0, 0);
 			BufferedImage bi = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 			c.paint(bi.getGraphics());
 			return new ImageIcon(bi);
@@ -96,16 +96,12 @@ public class VariableGUIObject extends AbstractGUIObject {
 		return variable.getLabel();
 	}
 
-	public void setLabel(String label) {
+	public void setLabel(Object label) {
 		variable.setLabel(label);
 	}
 
 	public Object getLabelObject() {
 		return variable.getLabelObject();
-	}
-
-	public void setLabelObject(Object label) {
-		variable.setLabelObject(label);
 	}
 
 	public String getDescription() {

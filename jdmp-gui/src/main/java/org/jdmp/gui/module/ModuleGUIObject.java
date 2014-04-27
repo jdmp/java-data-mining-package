@@ -63,16 +63,12 @@ public class ModuleGUIObject extends AbstractGUIObject {
 		return module.getLabel();
 	}
 
-	public void setLabel(String label) {
+	public void setLabel(Object label) {
 		module.setLabel(label);
 	}
 
 	public Object getLabelObject() {
 		return module.getLabelObject();
-	}
-
-	public void setLabelObject(Object label) {
-		module.setLabelObject(label);
 	}
 
 	public String getDescription() {

@@ -54,7 +54,7 @@ public class SampleGUIObject extends AbstractGUIObject {
 		return sample.getLabel();
 	}
 
-	public void setLabel(String label) {
+	public void setLabel(Object label) {
 		sample.setLabel(label);
 	}
 
@@ -68,10 +68,6 @@ public class SampleGUIObject extends AbstractGUIObject {
 
 	public Object getLabelObject() {
 		return sample.getLabelObject();
-	}
-
-	public void setLabelObject(Object label) {
-		sample.setLabelObject(label);
 	}
 
 	public String toString() {

@@ -42,7 +42,6 @@ public abstract class AbstractDataSet extends DefaultMapMatrix<String, Sample> i
 
 	private final VariableMap variableMap = new DefaultVariableMap();
 	private final ObservableMap<Sample> sampleMap = new DefaultObservableMap<Sample>();
-	private final ObservableMap<DataSet> dataSetMap = new DefaultObservableMap<DataSet>();
 
 	public AbstractDataSet() {
 		super();
@@ -57,14 +56,9 @@ public abstract class AbstractDataSet extends DefaultMapMatrix<String, Sample> i
 		return variableMap;
 	}
 
-	public final ObservableMap<DataSet> getDataSetMap() {
-		return dataSetMap;
-	}
-
 	public final void clear() {
 		getSampleMap().clear();
 		getVariableMap().clear();
-		getDataSetMap().clear();
 	}
 
 	public final List<DataSet> splitByCount(boolean shuffle, int... count) {

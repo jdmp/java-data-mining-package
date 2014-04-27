@@ -24,9 +24,7 @@
 package org.jdmp.gui.dataset;
 
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 
-import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
 import org.jdmp.gui.sample.SampleListPanel;
@@ -38,20 +36,10 @@ public class DataSetPanel extends AbstractPanel {
 
 	private final JSplitPane splitPane = new JSplitPane();
 
-	private final JPanel leftPanel = new JPanel();
-
-	private final JPanel rightPanel = new JPanel();
-
 	public DataSetPanel(DataSetGUIObject ds) {
 		super(ds);
-
-		rightPanel.setLayout(new GridLayout(3, 1));
-		rightPanel.add(new VariableListPanel(ds.getCoreObject()));
-		rightPanel.add(new DataSetListPanel(ds.getCoreObject()));
-		rightPanel.add(new SampleListPanel(ds.getCoreObject()));
-
-		splitPane.setLeftComponent(leftPanel);
-		splitPane.setRightComponent(rightPanel);
+		splitPane.setLeftComponent(new VariableListPanel(ds.getCoreObject()));
+		splitPane.setRightComponent(new SampleListPanel(ds.getCoreObject()));
 		add(splitPane, BorderLayout.CENTER);
 	}
 

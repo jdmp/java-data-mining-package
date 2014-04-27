@@ -70,10 +70,6 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		return variableKeys;
 	}
 
-	public final void setLabelObject(Object label) {
-		getVariableMap().setObject(Sample.LABEL, label);
-	}
-
 	public final Object getLabelObject() {
 		return getVariableMap().getAsObject(Sample.LABEL);
 	}
@@ -82,7 +78,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		return getVariableMap().getAsString(Algorithm.LABEL);
 	}
 
-	public final void setLabel(String label) {
+	public final void setLabel(Object label) {
 		getVariableMap().setObject(Algorithm.LABEL, label);
 	}
 

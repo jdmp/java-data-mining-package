@@ -59,16 +59,12 @@ public class DataSetGUIObject extends AbstractGUIObject {
 		return dataSet.getLabel();
 	}
 
-	public void setLabel(String label) {
+	public void setLabel(Object label) {
 		dataSet.setLabel(label);
 	}
 
 	public Object getLabelObject() {
 		return dataSet.getLabelObject();
-	}
-
-	public void setLabelObject(Object label) {
-		dataSet.setLabelObject(label);
 	}
 
 	public String getDescription() {

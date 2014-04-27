@@ -31,7 +31,7 @@ import org.ujmp.core.util.StringUtil;
 public class Attribute implements Serializable, Comparable<Attribute>, HasLabel {
 	private static final long serialVersionUID = 4184577547748510833L;
 
-	private String label = null;
+	private Object label = null;
 
 	private boolean discrete = false;
 
@@ -54,19 +54,15 @@ public class Attribute implements Serializable, Comparable<Attribute>, HasLabel 
 	}
 
 	public String getLabel() {
-		return label;
+		return StringUtil.getString(label);
 	}
 
-	public void setLabel(String label) {
+	public void setLabel(Object label) {
 		this.label = label;
 	}
 
 	public String toString() {
-		return label;
-	}
-
-	public final void setLabelObject(Object label) {
-		this.label = StringUtil.format(label);
+		return String.valueOf(label);
 	}
 
 	public final Object getLabelObject() {
