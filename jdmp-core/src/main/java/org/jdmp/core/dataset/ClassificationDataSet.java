@@ -91,8 +91,7 @@ public class ClassificationDataSet extends RegressionDataSet {
 	}
 
 	public int getClassCount() {
-		return (int) getSampleMap().getElementAt(0).getVariableMap().getMatrix(Sample.TARGET)
-				.getColumnCount();
+		return (int) getSampleMap().getElementAt(0).getMatrix(Sample.TARGET).getColumnCount();
 	}
 
 	public Variable getConfusionVariable() {

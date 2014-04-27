@@ -23,32 +23,30 @@
 
 package org.jdmp.core.sample;
 
-import org.jdmp.core.AbstractCoreObject;
+import java.lang.reflect.Constructor;
+
 import org.jdmp.core.variable.DefaultVariableMap;
 import org.jdmp.core.variable.Variable;
+import org.jdmp.core.variable.VariableFactory;
 import org.jdmp.core.variable.VariableMap;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.interfaces.GUIObject;
+import org.ujmp.core.mapmatrix.DefaultMapMatrix;
+import org.ujmp.core.util.MathUtil;
 import org.ujmp.core.util.StringUtil;
 
-public abstract class AbstractSample extends AbstractCoreObject implements Sample {
+public abstract class AbstractSample extends DefaultMapMatrix<String, Variable> implements Sample {
 	private static final long serialVersionUID = 1693258179407382419L;
 
-	private final VariableMap variables = new DefaultVariableMap();
+	private final VariableMap variables = new DefaultVariableMap(this);
 
 	public AbstractSample() {
 		super();
+		setId("Sample" + getCoreObjectId());
 	}
 
-	public final VariableMap getVariableMap() {
+	public final VariableMap getVariableMap2() {
 		return variables;
-	}
-
-	public Matrix getMatrix(String variableKey) {
-		return getVariableMap().getMatrix(variableKey);
-	}
-
-	public void setMatrix(String variableKey, Matrix matrix) {
-		getVariableMap().setMatrix(variableKey, matrix);
 	}
 
 	public boolean isCorrect() {
@@ -56,30 +54,21 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 	}
 
 	public int getTargetClass() {
-		return (int) getVariableMap().getMatrix(TARGET).getCoordinatesOfMaximum()[COLUMN];
+		return (int) get(TARGET).getLast().getCoordinatesOfMaximum()[COLUMN];
 	}
 
 	public int getRecognizedClass() {
-		return (int) getVariableMap().getMatrix(PREDICTED).getCoordinatesOfMaximum()[COLUMN];
+		return (int) get(PREDICTED).getLast().getCoordinatesOfMaximum()[COLUMN];
 	}
 
 	public abstract Sample clone();
-
-	public final String getId() {
-		String id = getVariableMap().getAsString(Sample.ID);
-		if (id == null) {
-			id = "Sample" + getCoreObjectId();
-			setId(id);
-		}
-		return id;
-	}
 
 	public String toString() {
 		StringBuilder s = new StringBuilder();
 		s.append(getClass().getSimpleName());
 		s.append(" [ ");
-		for (Object key : getVariableMap().keySet()) {
-			Variable v = getVariableMap().get(key);
+		for (Object key : keySet()) {
+			Variable v = get(key);
 			s.append(key + "=");
 			s.append(StringUtil.format(v.getLast()));
 			s.append(" ");
@@ -88,37 +77,64 @@ public abstract class AbstractSample extends AbstractCoreObject implements Sampl
 		return s.toString();
 	}
 
-	public final void setId(String id) {
-		getVariableMap().setObject(Sample.ID, id);
+	public final GUIObject getGUIObject() {
+		if (guiObject == null) {
+			try {
+				Constructor<?> con = null;
+				Class<?> c = Class.forName("org.jdmp.gui.sample.SampleGUIObject");
+				con = c.getConstructor(new Class<?>[] { Sample.class });
+				guiObject = (GUIObject) con.newInstance(new Object[] { this });
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return guiObject;
 	}
 
-	public final String getDescription() {
-		return getVariableMap().getAsString(Sample.DESCRIPTION);
+	public void setObject(String id, Object object) {
+		Variable variable = get(id);
+		if (variable == null) {
+			variable = VariableFactory.labeledVariable(id);
+			put(id, variable);
+		}
+		Matrix matrix = Matrix.Factory.linkToValue(object);
+		variable.add(matrix);
 	}
 
-	public final void setDescription(String description) {
-		getVariableMap().setObject(Sample.DESCRIPTION, description);
+	public void setMatrix(String id, Matrix matrix) {
+		Variable variable = get(id);
+		if (variable == null) {
+			variable = VariableFactory.labeledVariable(id);
+			put(id, variable);
+		}
+		variable.add(matrix);
 	}
 
-	public final String getLabel() {
-		return getVariableMap().getAsString(Sample.LABEL);
+	public final String getAllAsString(String variableKey) {
+		Variable v = get(variableKey);
+		if (v != null) {
+			return StringUtil.getAllAsString(v);
+		} else {
+			return null;
+		}
 	}
 
-	public final void setLabelObject(Object label) {
-		getVariableMap().setObject(Sample.LABEL, label);
+	public final String getAsString(String variableKey) {
+		return StringUtil.convert(getObject(variableKey));
 	}
 
-	public final Object getLabelObject() {
-		return getVariableMap().getAsObject(Sample.LABEL);
+	public Object getObject(String variableKey) {
+		return MathUtil.getObject(getMatrix(variableKey));
 	}
 
-	public final void setLabel(String label) {
-		getVariableMap().setObject(Sample.LABEL, label);
-	}
-
-	public final void clear() {
-		if (variables != null) {
-			variables.clear();
+	public Matrix getMatrix(String id) {
+		Variable variable = get(id);
+		if (variable == null) {
+			return null;
+		} else if (variable.isEmpty()) {
+			return null;
+		} else {
+			return variable.getLast();
 		}
 	}
 

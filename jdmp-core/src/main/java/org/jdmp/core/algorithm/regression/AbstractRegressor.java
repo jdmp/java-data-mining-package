@@ -73,15 +73,14 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 	}
 
 	public final void predict(Sample sample) throws Exception {
-		Matrix predicted = predict(sample.getVariableMap().getMatrix(INPUT), sample.getVariableMap()
-				.getMatrix(WEIGHT));
-		sample.getVariableMap().setMatrix(PREDICTED, predicted);
+		Matrix predicted = predict(sample.getMatrix(INPUT), sample.getMatrix(WEIGHT));
+		sample.setMatrix(PREDICTED, predicted);
 		if (evaluate) {
 			Map<String, Object> result = getOutputErrorAlgorithm().calculate(predicted,
-					sample.getVariableMap().getMatrix(TARGET));
+					sample.getMatrix(TARGET));
 			Matrix error = MathUtil.getMatrix(result.get(TARGET));
-			sample.getVariableMap().setMatrix(DIFFERENCE, error);
-			sample.getVariableMap().setMatrix(RMSE, Matrix.Factory.linkToValue(error.getRMS()));
+			sample.setMatrix(DIFFERENCE, error);
+			sample.setMatrix(RMSE, Matrix.Factory.linkToValue(error.getRMS()));
 		}
 		sample.notifyGUIObject();
 	}
@@ -97,9 +96,9 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 	public abstract Matrix predict(Matrix input, Matrix sampleWeight) throws Exception;
 
 	public final void train(Sample sample) throws Exception {
-		Matrix input = sample.getVariableMap().getMatrix(INPUT);
-		Matrix weight = sample.getVariableMap().getMatrix(WEIGHT);
-		Matrix target = sample.getVariableMap().getMatrix(TARGET);
+		Matrix input = sample.getMatrix(INPUT);
+		Matrix weight = sample.getMatrix(WEIGHT);
+		Matrix target = sample.getMatrix(TARGET);
 		train(input, weight, target);
 	}
 
@@ -123,7 +122,7 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 			predict(sample);
 
 			if (evaluate) {
-				double rmse = sample.getVariableMap().getMatrix(RMSE).getEuklideanValue();
+				double rmse = sample.getMatrix(RMSE).getEuklideanValue();
 				error += Math.pow(rmse, 2.0);
 
 				int recognized = sample.getRecognizedClass();
@@ -149,7 +148,8 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 			}
 		}
 
-		Matrix rmse = Matrix.Factory.linkToValue(Math.sqrt(error / dataSet.getSampleMap().getSize()));
+		Matrix rmse = Matrix.Factory.linkToValue(Math
+				.sqrt(error / dataSet.getSampleMap().getSize()));
 		rmse.setLabel("RMSE with " + getLabel());
 		dataSet.getVariableMap().setMatrix(Variable.RMSE, rmse);
 

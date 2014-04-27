@@ -26,6 +26,7 @@ package org.jdmp.core.variable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.Map;
 
 import org.jdmp.core.util.AbstractObservableMap;
 import org.ujmp.core.Matrix;
@@ -35,6 +36,14 @@ import org.ujmp.core.util.StringUtil;
 public abstract class AbstractVariableMap extends AbstractObservableMap<Variable> implements
 		VariableMap {
 	private static final long serialVersionUID = 5598126665100040507L;
+
+	public AbstractVariableMap() {
+		super();
+	}
+
+	public AbstractVariableMap(Map<String, Variable> map) {
+		super(map);
+	}
 
 	public final BigInteger getAsBigInteger(String variableKey) {
 		return MathUtil.getBigInteger(getObject(variableKey));

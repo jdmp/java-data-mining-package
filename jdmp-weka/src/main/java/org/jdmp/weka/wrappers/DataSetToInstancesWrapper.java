@@ -47,9 +47,9 @@ public class DataSetToInstancesWrapper extends Instances {
 		}
 
 		for (Sample s : dataSet.getSampleMap()) {
-			Matrix input = s.getVariableMap().getMatrix(INPUT);
-			Matrix weight = s.getVariableMap().getMatrix(WEIGHT);
-			Matrix target = s.getVariableMap().getMatrix(TARGET);
+			Matrix input = s.getMatrix(INPUT);
+			Matrix weight = s.getMatrix(WEIGHT);
+			Matrix target = s.getMatrix(TARGET);
 			add(new SampleToInstanceWrapper(input, weight, target, discrete, includeTarget));
 		}
 

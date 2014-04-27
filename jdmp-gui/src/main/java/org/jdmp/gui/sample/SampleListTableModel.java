@@ -72,7 +72,7 @@ public class SampleListTableModel extends AbstractTableModel implements ListData
 		if (s == null) {
 			return null;
 		}
-		for (Variable v : s.getVariableMap()) {
+		for (Variable v : s.values()) {
 			if (keys.add(v.getLabel())) {
 				columnMap.put(columnMap.size(), v.getLabel());
 				fireTableStructureChanged();

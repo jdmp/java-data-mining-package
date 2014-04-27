@@ -23,31 +23,12 @@
 
 package org.jdmp.core.sample;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.Collection;
-import java.util.Map;
 
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.enums.FileFormat;
-import org.ujmp.core.interfaces.HasDataMap;
-import org.ujmp.core.util.MathUtil;
 
 public abstract class SampleFactory {
-
-	@SuppressWarnings("unchecked")
-	public static final Sample createFromObject(Object o) {
-		if (o instanceof Map) {
-			return linkToMap((Map) o);
-		} else if (o instanceof HasDataMap) {
-			return linkToMap(((HasDataMap) o).getDataMap());
-		} else if (o instanceof Matrix) {
-			return linkToMatrix((Matrix) o);
-		} else {
-			return linkToMatrix(MathUtil.getMatrix(o));
-		}
-	}
 
 	public static final Sample labeledSample(String label) {
 		Sample s = new DefaultSample();
@@ -57,31 +38,15 @@ public abstract class SampleFactory {
 
 	public static final Sample linkToMatrix(Matrix input) {
 		Sample s = new DefaultSample();
-		s.getVariableMap().setMatrix(Sample.INPUT, input);
+		s.setMatrix(Sample.INPUT, input);
 		s.setLabel(input.getLabel());
 		return s;
 	}
 
-	public static final Sample linkToMap(Map<? extends String, ? extends Object> map) {
-		Sample s = new DefaultMapSample(map);
-		return s;
-	}
-
-	@SuppressWarnings("unchecked")
-	public static Sample linkToFile(FileFormat fileFormat, File file, Object... parameters)
-			throws IOException {
-		Matrix map = Matrix.Factory.linkToFile(FileFormat.FILE, file, fileFormat);
-		return linkToMap((Map) map);
-	}
-
-	public static Sample linkToFile(File file) throws IOException {
-		return linkToFile(FileFormat.guess(file), file);
-	}
-
 	public static final Sample classificationSample(Matrix input, Matrix target) {
 		Sample s = new DefaultSample();
-		s.getVariableMap().setMatrix(Sample.INPUT, input);
-		s.getVariableMap().setMatrix(Sample.TARGET, target);
+		s.setMatrix(Sample.INPUT, input);
+		s.setMatrix(Sample.TARGET, target);
 		return s;
 	}
 
@@ -107,10 +72,10 @@ public abstract class SampleFactory {
 		Sample ret = SampleFactory.emptySample();
 		ret.setLabel(s.getLabel());
 		ret.setDescription(s.getDescription());
-		for (String k : s.getVariableMap().keySet()) {
-			Variable v = s.getVariableMap().get(k);
+		for (String k : s.keySet()) {
+			Variable v = s.get(k);
 			if (v != null) {
-				ret.getVariableMap().put(k, v.clone());
+				ret.put(k, v.clone());
 			}
 		}
 		return ret;

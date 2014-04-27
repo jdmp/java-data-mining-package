@@ -69,8 +69,8 @@ public class TestScript {
 		RegressionDataSet ds = (RegressionDataSet) o;
 		assertEquals(100, ds.getSampleMap().getSize());
 		Sample s = ds.getSampleMap().getElementAt(0);
-		long input = s.getVariableMap().get(Sample.INPUT).getLast().getColumnCount();
-		long target = s.getVariableMap().get(Sample.TARGET).getLast().getColumnCount();
+		long input = s.get(Sample.INPUT).getLast().getColumnCount();
+		long target = s.get(Sample.TARGET).getLast().getColumnCount();
 		assertEquals(10, input);
 		assertEquals(5, target);
 	}

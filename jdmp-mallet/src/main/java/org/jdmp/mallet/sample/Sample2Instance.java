@@ -40,8 +40,8 @@ public class Sample2Instance extends Instance {
 
 	public Sample2Instance(Sample sample, Alphabet inputAlphabet, LabelAlphabet targetAlphabet, Pipe pipe,
 			List<Integer> cumSum) {
-		this(sample.getVariableMap().getMatrix(Sample.INPUT), sample.getVariableMap().getMatrix(Sample.TARGET),
-				inputAlphabet, targetAlphabet, pipe, cumSum);
+		this(sample.getMatrix(Sample.INPUT), sample.getMatrix(Sample.TARGET), inputAlphabet, targetAlphabet, pipe,
+				cumSum);
 		setName(sample.getLabel());
 		setSource(sample);
 	}

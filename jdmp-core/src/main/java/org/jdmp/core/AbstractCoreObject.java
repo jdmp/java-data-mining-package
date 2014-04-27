@@ -52,7 +52,7 @@ public abstract class AbstractCoreObject implements CoreObject {
 
 	public static final int ALL = Matrix.ALL;
 
-	private transient GUIObject guiObject = null;
+	protected transient GUIObject guiObject = null;
 
 	private static long runningId = 0;
 
@@ -87,7 +87,7 @@ public abstract class AbstractCoreObject implements CoreObject {
 		}
 	}
 
-	public final GUIObject getGUIObject() {
+	public GUIObject getGUIObject() {
 		if (guiObject == null) {
 			try {
 				Constructor<?> con = null;

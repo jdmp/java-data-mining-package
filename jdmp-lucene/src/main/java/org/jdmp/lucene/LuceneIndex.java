@@ -202,14 +202,14 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 		}
 
 		// score must not be saved
-		sample.getVariableMap().remove("Score");
+		sample.remove("Score");
 
 		Document doc = new Document();
 
 		String id = sample.getId();
 		doc.add(new StringField(Sample.ID, id, Field.Store.YES));
 
-		for (Variable v : sample.getVariableMap()) {
+		for (Variable v : sample.values()) {
 			String key = v.getLabel();
 			if (Sample.ID.equals(key)) {
 				// skip
@@ -273,7 +273,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 			mlt.setMaxWordLen(MAXWORDLENGTH);
 			String[] terms = mlt.retrieveInterestingTerms(td.scoreDocs[0].doc);
 			for (int i = 0; i < 10 && i < terms.length; i++) {
-				s.getVariableMap().setObject(Variable.SUGGESTEDTAGS, terms[i]);
+				s.setObject(Variable.SUGGESTEDTAGS, terms[i]);
 			}
 
 			return s;
@@ -300,10 +300,10 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 			Document doc = indexSearcher.doc(id);
 			Sample s = null;
 			s = (Sample) SerializationUtil.deserialize(doc.getBinaryValue("RawData").bytes);
-			s.getVariableMap().setMatrix(Sample.SCORE, MathUtil.getMatrix(sd.score));
+			s.setMatrix(Sample.SCORE, MathUtil.getMatrix(sd.score));
 			String[] terms = mlt.retrieveInterestingTerms(id);
 			for (int i = 0; i < 10 && i < terms.length; i++) {
-				s.getVariableMap().setObject(Variable.SUGGESTEDTAGS, terms[i]);
+				s.setObject(Variable.SUGGESTEDTAGS, terms[i]);
 			}
 			result.getSampleMap().add(s);
 		}
@@ -564,9 +564,9 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 							for (Sample sample : ds.getSampleMap()) {
 								Sample oldSample = getSample(sample.getId());
 								if (oldSample != null) {
-									Variable tags = oldSample.getVariableMap().get("Tags");
+									Variable tags = oldSample.get("Tags");
 									if (tags != null && !tags.isEmpty()) {
-										sample.getVariableMap().put("Tags", tags);
+										sample.put("Tags", tags);
 									}
 								}
 								add(sample);

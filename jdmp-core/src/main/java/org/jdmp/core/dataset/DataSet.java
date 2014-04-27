@@ -26,10 +26,13 @@ package org.jdmp.core.dataset;
 import java.util.List;
 
 import org.jdmp.core.sample.HasSampleMap;
+import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.HasVariableMap;
 import org.ujmp.core.interfaces.CoreObject;
+import org.ujmp.core.mapmatrix.MapMatrix;
 
-public interface DataSet extends CoreObject, HasVariableMap, HasSampleMap, HasDataSetMap {
+public interface DataSet extends CoreObject, HasVariableMap, HasSampleMap, HasDataSetMap,
+		MapMatrix<String, Sample> {
 
 	public List<DataSet> splitByCount(boolean shuffle, int... count);
 

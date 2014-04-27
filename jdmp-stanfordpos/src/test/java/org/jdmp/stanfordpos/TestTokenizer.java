@@ -43,10 +43,10 @@ public class TestTokenizer {
 	public void testTokenizer() throws Exception {
 		DataSet ds = new DefaultDataSet();
 		Sample sa1 = new DefaultSample();
-		sa1.getVariableMap().setObject(Sample.INPUT, s1);
+		sa1.setObject(Sample.INPUT, s1);
 		sa1.setId("sample1");
 		Sample sa2 = new DefaultSample();
-		sa2.getVariableMap().setObject(Sample.INPUT, s2);
+		sa2.setObject(Sample.INPUT, s2);
 		sa2.setId("sample2");
 		ds.getSampleMap().add(sa1);
 		ds.getSampleMap().add(sa2);
@@ -57,8 +57,8 @@ public class TestTokenizer {
 		sa1 = ds.getSampleMap().get("sample1");
 		sa2 = ds.getSampleMap().get("sample2");
 
-		Matrix m1 = sa1.getVariableMap().getMatrix(Tokenizer.TOKENIZED);
-		Matrix m2 = sa2.getVariableMap().getMatrix(Tokenizer.TOKENIZED);
+		Matrix m1 = sa1.getMatrix(Tokenizer.TOKENIZED);
+		Matrix m2 = sa2.getMatrix(Tokenizer.TOKENIZED);
 
 		assertEquals(1, m1.getColumnCount());
 		assertEquals(11, m1.getRowCount());

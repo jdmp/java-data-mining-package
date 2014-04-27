@@ -50,18 +50,18 @@ public class DefaultSamplePage extends Page {
 			setTitle("JDMP Search: " + sample.getLabel());
 			add(new H1Tag(sample.getLabel()));
 
-			for (String key : sample.getVariableMap().keySet()) {
+			for (String key : sample.keySet()) {
 				if (Sample.LABEL.equals(key)) {
 					continue;
 				} else if (Variable.LINKS.equals(key)) {
-					Variable links = sample.getVariableMap().get(Variable.LINKS);
+					Variable links = sample.get(Variable.LINKS);
 					add(new H2Tag(StringUtil.format(key)));
 					for (Matrix m : links) {
 						String l = m.stringValue();
 						add(new LinkTag("?q=" + l, l));
 					}
 				} else {
-					String value = sample.getVariableMap().getAllAsString(key);
+					String value = sample.getAllAsString(key);
 					add(new H2Tag(StringUtil.format(key)));
 					add(new Text(value));
 				}

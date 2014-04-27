@@ -60,7 +60,7 @@ public class DefaultIndexPage extends Page {
 					String id = request.getParameter("id" + i);
 					Sample sample = index.getSample(id);
 					if (sample != null) {
-						Variable tags = sample.getVariableMap().get(Sample.TAGS);
+						Variable tags = sample.get(Sample.TAGS);
 						for (String t : splitTags) {
 							boolean tagFound = false;
 							if (tags != null) {
@@ -71,7 +71,7 @@ public class DefaultIndexPage extends Page {
 								}
 							}
 							if (!tagFound) {
-								sample.getVariableMap().setObject("Tags", t);
+								sample.setObject("Tags", t);
 							}
 						}
 						System.out.println("updating sample " + id + " with new tag: " + tag);

@@ -94,8 +94,8 @@ class SampleCollator implements Comparator<Object> {
 	}
 
 	public int compare(Sample s1, Sample s2) {
-		Matrix m1 = s1.getVariableMap().getMatrix(column);
-		Matrix m2 = s2.getVariableMap().getMatrix(column);
+		Matrix m1 = s1.getMatrix(column);
+		Matrix m2 = s2.getMatrix(column);
 		if (m1 != null && m2 != null) {
 			return m1.compareTo(m2);
 		} else {

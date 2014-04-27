@@ -35,29 +35,27 @@ import javax.swing.event.EventListenerList;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 
+import org.ujmp.core.interfaces.CoreObject;
 import org.ujmp.core.interfaces.HasId;
 
-public abstract class AbstractObservableMap<V> implements ObservableMap<V> {
+public abstract class AbstractObservableMap<V extends CoreObject> implements ObservableMap<V> {
 	private static final long serialVersionUID = 1138872662801106054L;
 
 	private EventListenerList listenerList = null;
 
-	private Map<String, V> map = null;
+	private final Map<String, V> map;
 
 	private List<String> list = null;
 
 	public AbstractObservableMap(Map<String, V> map) {
-		this();
-		setMap(map);
+		this.map = map;
 	}
 
 	public AbstractObservableMap() {
+		map = new HashMap<String, V>(2);
 	}
 
 	public final Map<String, V> getMap() {
-		if (map == null) {
-			map = new HashMap<String, V>(2);
-		}
 		return map;
 	}
 
@@ -70,10 +68,6 @@ public abstract class AbstractObservableMap<V> implements ObservableMap<V> {
 			list.addAll(getMap().keySet());
 		}
 		return list;
-	}
-
-	public final void setMap(Map<String, V> map) {
-		this.map = map;
 	}
 
 	public final synchronized V getElementAt(int index) {

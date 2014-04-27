@@ -23,12 +23,12 @@
 
 package org.jdmp.core.sample;
 
-import org.jdmp.core.variable.HasVariableMap;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.interfaces.CoreObject;
+import org.ujmp.core.mapmatrix.MapMatrix;
 
-public interface Sample extends CoreObject, HasVariableMap {
+public interface Sample extends CoreObject, MapMatrix<String, Variable> {
 
 	public static final String INPUT = Variable.INPUT;
 	public static final String PROBABILITY = Variable.PROBABILITY;
@@ -50,8 +50,15 @@ public interface Sample extends CoreObject, HasVariableMap {
 
 	public boolean isCorrect();
 
-	public Matrix getMatrix(String variableKey);
+	public void setObject(String id, Object object);
 
-	public void setMatrix(String variableKey, Matrix matrix);
+	public void setMatrix(String id, Matrix matrix);
 
+	public Matrix getMatrix(String id);
+
+	public String getAllAsString(String variableKey);
+
+	public String getAsString(String variableKey);
+
+	public Object getObject(String variableKey);
 }
