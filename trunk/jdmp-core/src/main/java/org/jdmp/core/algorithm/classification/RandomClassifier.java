@@ -47,7 +47,7 @@ public class RandomClassifier extends AbstractClassifier {
 
 	public void train(RegressionDataSet dataSet) throws Exception {
 		for (Sample s : dataSet.getSampleMap()) {
-			Matrix m = s.getVariableMap().getMatrix(Variable.TARGET);
+			Matrix m = s.getMatrix(Variable.TARGET);
 			classCount = (int) Math.max(classCount, m.getColumnCount());
 		}
 	}

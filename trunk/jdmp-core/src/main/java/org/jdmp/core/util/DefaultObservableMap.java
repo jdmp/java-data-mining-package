@@ -26,7 +26,9 @@ package org.jdmp.core.util;
 import java.util.List;
 import java.util.Map;
 
-public class DefaultObservableMap<V> extends AbstractObservableMap<V> {
+import org.ujmp.core.interfaces.CoreObject;
+
+public class DefaultObservableMap<V extends CoreObject> extends AbstractObservableMap<V> {
 	private static final long serialVersionUID = -1811632376295464484L;
 
 	public DefaultObservableMap() {

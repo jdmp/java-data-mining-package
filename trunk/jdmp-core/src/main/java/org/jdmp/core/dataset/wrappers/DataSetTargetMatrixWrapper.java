@@ -51,7 +51,7 @@ public class DataSetTargetMatrixWrapper extends AbstractDenseDoubleMatrix2D impl
 		if (p == null) {
 			return Coordinates.ZERO2D;
 		}
-		Matrix m = p.getVariableMap().getMatrix(Sample.TARGET);
+		Matrix m = p.getMatrix(Sample.TARGET);
 		if (m == null) {
 			return Coordinates.ZERO2D;
 		}
@@ -69,7 +69,7 @@ public class DataSetTargetMatrixWrapper extends AbstractDenseDoubleMatrix2D impl
 	public double getDouble(int row, int column) {
 		Sample p = dataSet.getSampleMap().getElementAt(row);
 		if (p != null) {
-			return p.getVariableMap().getMatrix(Sample.TARGET).getAsDouble(0, column);
+			return p.getMatrix(Sample.TARGET).getAsDouble(0, column);
 		} else {
 			return 0.0;
 		}
@@ -78,7 +78,7 @@ public class DataSetTargetMatrixWrapper extends AbstractDenseDoubleMatrix2D impl
 	public void setDouble(double value, int row, int column) {
 		Sample p = dataSet.getSampleMap().getElementAt(row);
 		if (p != null) {
-			p.getVariableMap().getMatrix(Sample.TARGET).setAsDouble(value, 0, column);
+			p.getMatrix(Sample.TARGET).setAsDouble(value, 0, column);
 		}
 	}
 

@@ -23,6 +23,7 @@
 
 package org.jdmp.gui.variable;
 
+import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.HasVariableMap;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.gui.util.AbstractListPanel;
@@ -41,6 +42,18 @@ public class VariableListPanel extends AbstractListPanel {
 		}
 
 		dataModel = new VariableListTableModel(iVariables);
+		dataModel.addTableModelListener(this);
+		jTable.setDefaultRenderer(Variable.class, new VariableTableCellRenderer());
+
+		jTable.setModel(dataModel);
+
+		updateTitle();
+	}
+
+	public VariableListPanel(Sample sample) {
+		super();
+		this.object = sample.getGUIObject();
+		dataModel = new VariableListTableModel(sample);
 		dataModel.addTableModelListener(this);
 		jTable.setDefaultRenderer(Variable.class, new VariableTableCellRenderer());
 

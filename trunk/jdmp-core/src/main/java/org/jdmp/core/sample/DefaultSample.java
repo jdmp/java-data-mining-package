@@ -39,9 +39,9 @@ public class DefaultSample extends AbstractSample {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		for (String k : getVariableMap().keySet()) {
-			Variable v = getVariableMap().get(k);
-			s.getVariableMap().put(k, v.clone());
+		for (String k : keySet()) {
+			Variable v = get(k);
+			s.put(k, v.clone());
 		}
 		return s;
 	}

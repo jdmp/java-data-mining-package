@@ -80,9 +80,9 @@ public class TestTagger {
 
 		DataSet ds = new DefaultDataSet();
 		Sample sa1 = new DefaultSample();
-		sa1.getVariableMap().setObject(Sample.INPUT, s1);
+		sa1.setObject(Sample.INPUT, s1);
 		Sample sa2 = new DefaultSample();
-		sa2.getVariableMap().setObject(Sample.INPUT, s2);
+		sa2.setObject(Sample.INPUT, s2);
 		ds.getSampleMap().put("s1", sa1);
 		ds.getSampleMap().put("s2", sa2);
 
@@ -92,8 +92,8 @@ public class TestTagger {
 		sa1 = ds.getSampleMap().get("s1");
 		sa2 = ds.getSampleMap().get("s2");
 
-		Matrix m1 = sa1.getVariableMap().getMatrix(Tagger.TAGGED);
-		Matrix m2 = sa2.getVariableMap().getMatrix(Tagger.TAGGED);
+		Matrix m1 = sa1.getMatrix(Tagger.TAGGED);
+		Matrix m2 = sa2.getMatrix(Tagger.TAGGED);
 
 		assertEquals(2, m1.getColumnCount());
 		assertEquals(11, m1.getRowCount());

@@ -36,11 +36,11 @@ public abstract class AbstractTokenizer extends AbstractAlgorithm implements Tok
 	private static final long serialVersionUID = 3272730075460502945L;
 
 	public final void tokenize(Object variableKey, Sample sample) throws Exception {
-		Variable input = sample.getVariableMap().get(variableKey);
+		Variable input = sample.get(variableKey);
 		for (Matrix m : input) {
 			List<Matrix> r = tokenize(m);
 			for (Matrix n : r) {
-				sample.getVariableMap().setMatrix(Tokenizer.TOKENIZED, n);
+				sample.setMatrix(Tokenizer.TOKENIZED, n);
 			}
 		}
 	}

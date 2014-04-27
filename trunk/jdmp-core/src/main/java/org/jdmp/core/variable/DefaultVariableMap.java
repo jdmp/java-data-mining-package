@@ -24,11 +24,20 @@
 package org.jdmp.core.variable;
 
 import org.ujmp.core.Matrix;
+import org.ujmp.core.mapmatrix.MapMatrix;
 import org.ujmp.core.util.MathUtil;
 import org.ujmp.core.util.StringUtil;
 
 public class DefaultVariableMap extends AbstractVariableMap {
 	private static final long serialVersionUID = -863822584023419772L;
+
+	public DefaultVariableMap() {
+		super();
+	}
+
+	public DefaultVariableMap(MapMatrix<String, Variable> map) {
+		super(map);
+	}
 
 	public final Matrix getMatrix(String variableKey) {
 		Variable v = get(variableKey);

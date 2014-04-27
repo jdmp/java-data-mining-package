@@ -25,7 +25,9 @@ package org.jdmp.core.util;
 
 import java.util.Collections;
 
-public class SingletonObservableMap<V> extends AbstractObservableMap<V> {
+import org.ujmp.core.interfaces.CoreObject;
+
+public class SingletonObservableMap<V extends CoreObject> extends AbstractObservableMap<V> {
 	private static final long serialVersionUID = 3665329356125156909L;
 
 	public SingletonObservableMap(String key, V value) {

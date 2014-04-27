@@ -75,7 +75,7 @@ public class SampleListToMatrixWrapper extends AbstractDenseObjectMatrix2D imple
 		if (key == null) {
 			return null;
 		} else {
-			Matrix m = s.getVariableMap().getMatrix(key);
+			Matrix m = s.getMatrix(key);
 			if (m == null) {
 				return m;
 			} else {
@@ -102,7 +102,7 @@ public class SampleListToMatrixWrapper extends AbstractDenseObjectMatrix2D imple
 		if (keysToShow == null || keysToShow.length == 0) {
 			for (Sample s : samples) {
 				if (s != null) {
-					keys.addAll(s.getVariableMap().keySet());
+					keys.addAll(s.keySet());
 				}
 			}
 			int i = 0;

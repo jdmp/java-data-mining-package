@@ -41,7 +41,7 @@ public abstract class AbstractIndex extends AbstractAlgorithm implements Index {
 	}
 
 	public void add(Matrix matrix) throws Exception {
-		add(SampleFactory.createFromObject(matrix));
+		//add(SampleFactory.createFromObject(matrix));
 	}
 
 	public void add(Map<String, String> map) throws Exception {

@@ -27,6 +27,7 @@ import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 import javax.swing.table.AbstractTableModel;
 
+import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.HasVariableMap;
 import org.jdmp.core.variable.Variable;
 
@@ -34,26 +35,26 @@ public class VariableListTableModel extends AbstractTableModel implements ListDa
 	private static final long serialVersionUID = -1032855724069297926L;
 
 	public static final int IDCOLUMN = 0;
-
 	public static final int LABELCOLUMN = 1;
-
 	public static final int SIZECOLUMN = 2;
-
 	public static final int MATRIXCOLUMN = 3;
-
 	public static final int PLOTCOLUMN = 4;
-
 	public static final int MATRIXCOUNTCOLUMN = 5;
 
 	private HasVariableMap iVariables = null;
+	private Sample sample = null;
 
 	public VariableListTableModel(HasVariableMap iVariables) {
 		this.iVariables = iVariables;
 		iVariables.getVariableMap().addListDataListener(this);
 	}
 
+	public VariableListTableModel(Sample sample) {
+		this.sample = sample;
+	}
+
 	public int getRowCount() {
-		return iVariables.getVariableMap().getSize();
+		return sample == null ? iVariables.getVariableMap().getSize() : sample.size();
 	}
 
 	public int getColumnCount() {
@@ -84,7 +85,8 @@ public class VariableListTableModel extends AbstractTableModel implements ListDa
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		return iVariables.getVariableMap().getElementAt(rowIndex);
+		return sample == null ? iVariables.getVariableMap().getElementAt(rowIndex) : sample
+				.getAsObject(rowIndex, 1);
 	}
 
 	public void contentsChanged(ListDataEvent e) {

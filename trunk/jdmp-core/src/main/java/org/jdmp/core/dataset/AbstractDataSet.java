@@ -23,35 +23,34 @@
 
 package org.jdmp.core.dataset;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.DefaultObservableMap;
 import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.DefaultVariableMap;
 import org.jdmp.core.variable.VariableMap;
+import org.ujmp.core.interfaces.GUIObject;
+import org.ujmp.core.mapmatrix.DefaultMapMatrix;
 
-public abstract class AbstractDataSet extends AbstractCoreObject implements DataSet {
+public abstract class AbstractDataSet extends DefaultMapMatrix<String, Sample> implements DataSet {
 	private static final long serialVersionUID = -4168834188998259018L;
 
 	private final VariableMap variableMap = new DefaultVariableMap();
 	private final ObservableMap<Sample> sampleMap = new DefaultObservableMap<Sample>();
 	private final ObservableMap<DataSet> dataSetMap = new DefaultObservableMap<DataSet>();
 
+	public AbstractDataSet() {
+		super();
+		setId("DataSet" + getCoreObjectId());
+	}
+
 	public final ObservableMap<Sample> getSampleMap() {
 		return sampleMap;
-	}
-
-	public final void setLabelObject(Object label) {
-		getVariableMap().setObject(Sample.LABEL, label);
-	}
-
-	public final Object getLabelObject() {
-		return getVariableMap().getAsObject(Sample.LABEL);
 	}
 
 	public final VariableMap getVariableMap() {
@@ -60,39 +59,6 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 
 	public final ObservableMap<DataSet> getDataSetMap() {
 		return dataSetMap;
-	}
-
-	public final String getDescription() {
-		return getVariableMap().getAsString(DataSet.DESCRIPTION);
-	}
-
-	public final void setDescription(String description) {
-		getVariableMap().setObject(DataSet.DESCRIPTION, description);
-	}
-
-	public String getLabel() {
-		return getVariableMap().getAsString(DataSet.LABEL);
-	}
-
-	public final void setLabel(String label) {
-		getVariableMap().setObject(DataSet.LABEL, label);
-	}
-
-	public final String getId() {
-		String id = getVariableMap().getAsString(DataSet.ID);
-		if (id == null) {
-			id = "DataSet" + getCoreObjectId();
-			setId(id);
-		}
-		return id;
-	}
-
-	public final void setId(String id) {
-		getVariableMap().setObject(DataSet.ID, id);
-	}
-
-	public AbstractDataSet() {
-		super();
 	}
 
 	public final void clear() {
@@ -180,6 +146,20 @@ public abstract class AbstractDataSet extends AbstractCoreObject implements Data
 		} else {
 			return getClass().getSimpleName() + " [" + getLabel() + "]";
 		}
+	}
+
+	public GUIObject getGUIObject() {
+		if (guiObject == null) {
+			try {
+				Constructor<?> con = null;
+				Class<?> c = Class.forName("org.jdmp.gui.dataset.DataSetGUIObject");
+				con = c.getConstructor(new Class<?>[] { DataSet.class });
+				guiObject = (GUIObject) con.newInstance(new Object[] { this });
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return guiObject;
 	}
 
 	public abstract DataSet clone();

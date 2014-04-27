@@ -87,9 +87,9 @@ public class LibLinearClassifier extends AbstractClassifier {
 		createAlgorithm();
 		prob = new Problem();
 		prob.l = dataSet.getSampleMap().getSize();
-		prob.n = (int) dataSet.getSampleMap().iterator().next().getVariableMap().getMatrix(INPUT).getColumnCount() + 1; // +1
-																													// for
-																													// bias
+		prob.n = (int) dataSet.getSampleMap().iterator().next().getMatrix(INPUT).getColumnCount() + 1; // +1
+																										// for
+																										// bias
 
 		prob.x = new FeatureNode[prob.l][];
 		prob.y = new double[prob.l];
@@ -99,7 +99,7 @@ public class LibLinearClassifier extends AbstractClassifier {
 			if (i % 10 == 0) {
 				System.out.println("Converting sample " + i);
 			}
-			Matrix input = p.getVariableMap().getMatrix(INPUT);
+			Matrix input = p.getMatrix(INPUT);
 			prob.y[i] = p.getTargetClass();
 			long columnCount = input.getColumnCount();
 			int count = 0;

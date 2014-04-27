@@ -35,7 +35,7 @@ public class URLDiv extends DivTag {
 	public URLDiv(Sample sample, String... highlightedWords) {
 		setParameter("class", "url");
 
-		String url = sample.getVariableMap().getAsString(Sample.URL);
+		String url = sample.getAsString(Sample.URL);
 		if (url != null && url.length() > 0) {
 			LinkTag link = new LinkTag(url, new EmphasizedText(url, highlightedWords));
 			link.setParameter("class", "url");

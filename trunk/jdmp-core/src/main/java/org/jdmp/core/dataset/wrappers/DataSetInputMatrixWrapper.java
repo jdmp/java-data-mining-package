@@ -55,7 +55,7 @@ public class DataSetInputMatrixWrapper extends AbstractDenseDoubleMatrix2D imple
 			if (p == null) {
 				return Coordinates.ZERO2D;
 			}
-			Matrix input = p.getVariableMap().getMatrix(INPUT);
+			Matrix input = p.getMatrix(INPUT);
 			if (input != null) {
 				return new long[] { dataSet.getSampleMap().getSize(), input.getValueCount() };
 			} else {
@@ -80,7 +80,7 @@ public class DataSetInputMatrixWrapper extends AbstractDenseDoubleMatrix2D imple
 		try {
 			Sample p = dataSet.getSampleMap().getElementAt(row);
 			if (p != null) {
-				Matrix m = p.getVariableMap().getMatrix(INPUT);
+				Matrix m = p.getMatrix(INPUT);
 				if (m != null && Coordinates.product(m.getSize()) != 0) {
 					long r = column / m.getColumnCount();
 					long c = column % m.getColumnCount();
@@ -97,10 +97,10 @@ public class DataSetInputMatrixWrapper extends AbstractDenseDoubleMatrix2D imple
 	public void setDouble(double value, int row, int column) {
 		Sample p = dataSet.getSampleMap().getElementAt(row);
 		if (p != null) {
-			if (p.getVariableMap().getMatrix(INPUT) != null) {
-				long r = column / p.getVariableMap().getMatrix(INPUT).getColumnCount();
-				long c = column % p.getVariableMap().getMatrix(INPUT).getColumnCount();
-				p.getVariableMap().getMatrix(INPUT).setAsDouble(value, r, c);
+			if (p.getMatrix(INPUT) != null) {
+				long r = column / p.getMatrix(INPUT).getColumnCount();
+				long c = column % p.getMatrix(INPUT).getColumnCount();
+				p.getMatrix(INPUT).setAsDouble(value, r, c);
 			}
 		}
 	}

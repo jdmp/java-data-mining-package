@@ -72,15 +72,15 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 			for (Sample s1 : dataSet.getSampleMap()) {
 				Sample s2 = SampleFactory.emptySample();
 				Matrix i2 = Matrix.Factory.zeros(2, 1);
-				double c = s1.getVariableMap().getMatrix(TARGET).getAsDouble(0, cc);
+				double c = s1.getMatrix(TARGET).getAsDouble(0, cc);
 				i2.setAsBoolean(c == 0, 0, 0);
 				i2.setAsBoolean(c == 1, 0, 0);
-				s2.getVariableMap().setMatrix(INPUT, s1.getVariableMap().getMatrix(INPUT));
-				Matrix weight = s1.getVariableMap().getMatrix(WEIGHT);
+				s2.setMatrix(INPUT, s1.getMatrix(INPUT));
+				Matrix weight = s1.getMatrix(WEIGHT);
 				if (weight != null) {
-					s2.getVariableMap().setMatrix(WEIGHT, weight);
+					s2.setMatrix(WEIGHT, weight);
 				}
-				s2.getVariableMap().setMatrix(TARGET, i2);
+				s2.setMatrix(TARGET, i2);
 				ds2.getSampleMap().add(s2);
 			}
 			classifier.train(ds2);
@@ -146,9 +146,9 @@ class NaiveBayesClassifier2Classes extends AbstractClassifier {
 
 		// go over all samples and count
 		for (Sample s : dataSet.getSampleMap()) {
-			Matrix sampleInput = s.getVariableMap().getMatrix(INPUT);
-			Matrix sampleTarget = s.getVariableMap().getMatrix(TARGET);
-			Matrix sampleWeight = s.getVariableMap().getMatrix(WEIGHT);
+			Matrix sampleInput = s.getMatrix(INPUT);
+			Matrix sampleTarget = s.getMatrix(TARGET);
+			Matrix sampleWeight = s.getMatrix(WEIGHT);
 
 			double weight = 1.0;
 
