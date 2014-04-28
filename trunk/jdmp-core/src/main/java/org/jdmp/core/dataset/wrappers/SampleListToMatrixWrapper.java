@@ -123,8 +123,8 @@ public class SampleListToMatrixWrapper extends AbstractDenseObjectMatrix2D imple
 	}
 
 	private synchronized void deleteIndex() {
-		if (getAnnotation() != null) {
-			getAnnotation().clear();
+		if (getMetaData() != null) {
+			getMetaData().clear();
 		}
 		columnCount = 0;
 		columnMap.clear();

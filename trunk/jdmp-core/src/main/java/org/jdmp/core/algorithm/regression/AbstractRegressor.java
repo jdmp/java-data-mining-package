@@ -113,8 +113,8 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 		if (dataSet instanceof ClassificationDataSet) {
 			classCount = ((ClassificationDataSet) dataSet).getClassCount();
 			confusion = Matrix.Factory.zeros(classCount, classCount);
-			confusion.setAxisLabel(Matrix.ROW, "expected");
-			confusion.setAxisLabel(Matrix.COLUMN, "predicted");
+			confusion.setDimensionLabel(Matrix.ROW, "expected");
+			confusion.setDimensionLabel(Matrix.COLUMN, "predicted");
 		}
 
 		for (Sample sample : dataSet.getSampleMap()) {
