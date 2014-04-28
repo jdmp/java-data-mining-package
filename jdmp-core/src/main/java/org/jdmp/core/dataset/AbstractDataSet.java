@@ -56,7 +56,7 @@ public abstract class AbstractDataSet extends DefaultMapMatrix<String, Sample> i
 		return variableMap;
 	}
 
-	public final void clear() {
+	protected final void clearMap() {
 		getSampleMap().clear();
 		getVariableMap().clear();
 	}

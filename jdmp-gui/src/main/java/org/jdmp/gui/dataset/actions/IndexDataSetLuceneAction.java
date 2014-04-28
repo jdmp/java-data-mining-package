@@ -32,7 +32,6 @@ import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.algorithm.index.Index;
 import org.jdmp.core.dataset.DataSet;
 import org.ujmp.core.interfaces.GUIObject;
-import org.ujmp.core.util.Lucene;
 import org.ujmp.gui.actions.AbstractObjectAction;
 
 public class IndexDataSetLuceneAction extends AbstractObjectAction {
@@ -43,7 +42,6 @@ public class IndexDataSetLuceneAction extends AbstractObjectAction {
 		putValue(Action.NAME, "Lucene");
 		putValue(Action.SHORT_DESCRIPTION, "Index a DataSet using Lucene");
 		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_L);
-		putValue("Enabled", Lucene.isAvailable());
 	}
 
 	public Object call() {
