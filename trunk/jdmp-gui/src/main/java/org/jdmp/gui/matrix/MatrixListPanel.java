@@ -50,7 +50,8 @@ import javax.swing.event.TableModelListener;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.interfaces.HasToolTip;
-import org.ujmp.gui.MatrixGUIObject;
+import org.ujmp.gui.AbstractMatrixGUIObject;
+import org.ujmp.gui.DefaultMatrixGUIObject;
 import org.ujmp.gui.frame.MatrixFrame;
 
 public class MatrixListPanel extends JPanel implements MouseListener, ListSelectionListener,
@@ -105,7 +106,7 @@ public class MatrixListPanel extends JPanel implements MouseListener, ListSelect
 
 		jTable.getColumnModel().getColumn(0).setMinWidth(45);
 		jTable.getColumnModel().getColumn(0).setPreferredWidth(45);
-		jTable.setDefaultRenderer(MatrixGUIObject.class, new MatrixTableCellRenderer());
+		jTable.setDefaultRenderer(DefaultMatrixGUIObject.class, new MatrixTableCellRenderer());
 
 		this.add(jTable.getTableHeader(), new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
 				GridBagConstraints.EAST, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
@@ -162,7 +163,7 @@ public class MatrixListPanel extends JPanel implements MouseListener, ListSelect
 			if (e.getClickCount() == 2) {
 				int row = jTable.rowAtPoint(e.getPoint());
 				jTable.setRowSelectionInterval(row, row);
-				MatrixGUIObject m = (MatrixGUIObject) ((Matrix) dataModel.getValueAt(
+				AbstractMatrixGUIObject m = (AbstractMatrixGUIObject) ((Matrix) dataModel.getValueAt(
 						jTable.getSelectedRow(), 0)).getGUIObject();
 				MatrixFrame mf = new MatrixFrame(m);
 				mf.setVisible(true);
@@ -173,7 +174,7 @@ public class MatrixListPanel extends JPanel implements MouseListener, ListSelect
 		case MouseEvent.BUTTON3:
 			int row = jTable.rowAtPoint(e.getPoint());
 			jTable.setRowSelectionInterval(row, row);
-			MatrixGUIObject m = (MatrixGUIObject) ((Matrix) dataModel.getValueAt(
+			AbstractMatrixGUIObject m = (AbstractMatrixGUIObject) ((Matrix) dataModel.getValueAt(
 					jTable.getSelectedRow(), 0));
 			JPopupMenu popup = new JPopupMenu();
 
@@ -208,10 +209,10 @@ public class MatrixListPanel extends JPanel implements MouseListener, ListSelect
 
 	public void keyTyped(KeyEvent e) {
 		try {
-			MatrixGUIObject m = null;
+			AbstractMatrixGUIObject m = null;
 			int row = jTable.getSelectedRow();
 			if (row >= 0 && row < dataModel.getRowCount()) {
-				m = (MatrixGUIObject) dataModel.getValueAt(row, 0);
+				m = (AbstractMatrixGUIObject) dataModel.getValueAt(row, 0);
 			}
 
 			if (e.getKeyChar() == 127) {
@@ -288,12 +289,12 @@ public class MatrixListPanel extends JPanel implements MouseListener, ListSelect
 		listenerList.add(ListSelectionListener.class, l);
 	}
 
-	public MatrixGUIObject getSelectedMatrix() {
+	public AbstractMatrixGUIObject getSelectedMatrix() {
 		ListSelectionModel lsm = jTable.getSelectionModel();
 		if (lsm.isSelectionEmpty() || lsm.getValueIsAdjusting())
 			return null;
 		int selectedRow = lsm.getMinSelectionIndex();
-		return (MatrixGUIObject) jTable.getModel().getValueAt(selectedRow,
+		return (AbstractMatrixGUIObject) jTable.getModel().getValueAt(selectedRow,
 				MatrixListTableModel.MATRIXCOLUMN);
 	}
 
