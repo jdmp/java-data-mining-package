@@ -42,10 +42,6 @@ public class RelationalSample extends DefaultSample {
 			input = new DefaultListMatrix<Object>();
 			setMatrix(INPUT, input);
 		}
-		if (!(input instanceof Collection<?>)) {
-			input = new DefaultListMatrix<Object>(input);
-			setMatrix(INPUT, input);
-		}
 		((Collection) input).add(o);
 	}
 
@@ -55,10 +51,6 @@ public class RelationalSample extends DefaultSample {
 			input = new DefaultListMatrix<Object>();
 			setMatrix(INPUT, input);
 		}
-		if (!(input instanceof Collection<?>)) {
-			input = new DefaultListMatrix<Object>(input);
-			setMatrix(INPUT, input);
-		}
 		((Collection<?>) input).remove(o);
 	}
 
@@ -66,10 +58,6 @@ public class RelationalSample extends DefaultSample {
 		Matrix input = getMatrix(INPUT);
 		if (input == null) {
 			input = new DefaultListMatrix<Object>();
-			setMatrix(INPUT, input);
-		}
-		if (!(input instanceof Collection<?>)) {
-			input = new DefaultListMatrix<Object>(input);
 			setMatrix(INPUT, input);
 		}
 		return (Collection<?>) input;

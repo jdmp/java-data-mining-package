@@ -24,6 +24,7 @@
 package org.jdmp.core.algorithm.basic;
 
 import java.net.URLClassLoader;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,7 +51,7 @@ public class ClassPath extends AbstractAlgorithm {
 		Map<String, Object> result = new HashMap<String, Object>();
 
 		URLClassLoader sysloader = (URLClassLoader) ClassLoader.getSystemClassLoader();
-		ListMatrix<Object> m = new DefaultListMatrix<Object>((Object[]) sysloader.getURLs());
+		ListMatrix<Object> m = new DefaultListMatrix(Arrays.asList(sysloader.getURLs()));
 
 		result.put(TARGET, m);
 		return result;
