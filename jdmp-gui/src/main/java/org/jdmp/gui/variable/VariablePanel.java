@@ -38,7 +38,7 @@ import org.ujmp.core.util.GnuPlot;
 import org.ujmp.core.util.Matlab;
 import org.ujmp.core.util.Octave;
 import org.ujmp.core.util.R;
-import org.ujmp.gui.MatrixGUIObject;
+import org.ujmp.gui.AbstractMatrixGUIObject;
 import org.ujmp.gui.panels.AbstractPanel;
 import org.ujmp.gui.panels.BufferedPanel;
 import org.ujmp.gui.panels.GnuPlotPanel;
@@ -56,7 +56,7 @@ public class VariablePanel extends AbstractPanel {
 	public VariablePanel(VariableGUIObject v) {
 		super(v);
 
-		MatrixGUIObject m = (MatrixGUIObject) v.getCoreObject().getAsListMatrix().getGUIObject();
+		AbstractMatrixGUIObject m = (AbstractMatrixGUIObject) v.getCoreObject().getAsListMatrix().getGUIObject();
 
 		JSplitPane splitPane1 = new JSplitPane();
 		JSplitPane splitPane2 = new JSplitPane(JSplitPane.VERTICAL_SPLIT);

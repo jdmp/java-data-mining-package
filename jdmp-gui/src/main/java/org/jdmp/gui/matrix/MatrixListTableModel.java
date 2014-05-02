@@ -28,7 +28,7 @@ import javax.swing.event.ListDataListener;
 import javax.swing.table.AbstractTableModel;
 
 import org.jdmp.core.variable.Variable;
-import org.ujmp.gui.MatrixGUIObject;
+import org.ujmp.gui.DefaultMatrixGUIObject;
 
 public class MatrixListTableModel extends AbstractTableModel implements ListDataListener {
 	private static final long serialVersionUID = 1820859033991171760L;
@@ -71,7 +71,7 @@ public class MatrixListTableModel extends AbstractTableModel implements ListData
 	}
 
 	public Class<?> getColumnClass(int columnIndex) {
-		return MatrixGUIObject.class;
+		return DefaultMatrixGUIObject.class;
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
