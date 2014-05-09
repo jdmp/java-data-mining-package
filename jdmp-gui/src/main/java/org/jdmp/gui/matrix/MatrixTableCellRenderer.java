@@ -34,7 +34,7 @@ import javax.swing.table.TableCellRenderer;
 
 import org.ujmp.core.Matrix;
 import org.ujmp.core.util.StringUtil;
-import org.ujmp.gui.AbstractMatrixGUIObject;
+import org.ujmp.gui.MatrixGUIObject;
 import org.ujmp.gui.plot.MatrixPlot;
 import org.ujmp.gui.renderer.MatrixHeatmapRenderer;
 
@@ -49,7 +49,7 @@ public class MatrixTableCellRenderer implements TableCellRenderer {
 
 	private final MatrixPlot matrixPlot = new MatrixPlot();
 
-	private AbstractMatrixGUIObject matrix = null;
+	private MatrixGUIObject matrix = null;
 
 	private Object o = null;
 
@@ -69,7 +69,7 @@ public class MatrixTableCellRenderer implements TableCellRenderer {
 		l = null;
 
 		if (value instanceof Matrix) {
-			matrix = (AbstractMatrixGUIObject) ((Matrix) value).getGUIObject();
+			matrix = (MatrixGUIObject) ((Matrix) value).getGUIObject();
 		} else {
 			matrix = null;
 		}
