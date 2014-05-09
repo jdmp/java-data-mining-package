@@ -40,6 +40,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.TableCellRenderer;
 
 import org.jdmp.core.variable.Variable;
+import org.ujmp.gui.MatrixGUIObject;
 import org.ujmp.gui.renderer.MatrixHeatmapRenderer;
 import org.ujmp.gui.util.UIDefaults;
 
@@ -163,8 +164,8 @@ public class VariableListTableCellRenderer extends JPanel implements TableCellRe
 		for (Object o : variableList) {
 			if (o != null && o instanceof Variable) {
 				Variable v = (Variable) o;
-				MatrixHeatmapRenderer.paintMatrix(g, v.getLast(), componentWidth, height
-						+ PADDINGY + PADDINGY);
+				MatrixHeatmapRenderer.paintMatrix(g, (MatrixGUIObject) v.getLast().getGUIObject(),
+						componentWidth, height + PADDINGY + PADDINGY);
 				g.translate(componentWidth, 0);
 			}
 		}
