@@ -23,7 +23,8 @@
 
 package org.jdmp.gui.sample;
 
-import javax.swing.Icon;
+import java.awt.Image;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -46,7 +47,7 @@ public class SampleGUIObject extends AbstractGUIObject {
 	public void clear() {
 	}
 
-	public Icon getIcon() {
+	public Image getIcon() {
 		return null;
 	}
 

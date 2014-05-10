@@ -23,7 +23,8 @@
 
 package org.jdmp.gui.dataset;
 
-import javax.swing.Icon;
+import java.awt.Image;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -51,7 +52,7 @@ public class DataSetGUIObject extends AbstractGUIObject {
 		dataSet.clear();
 	}
 
-	public Icon getIcon() {
+	public Image getIcon() {
 		return null;
 	}
 

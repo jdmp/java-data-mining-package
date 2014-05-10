@@ -24,10 +24,9 @@
 package org.jdmp.gui.variable;
 
 import java.awt.Component;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -55,7 +54,7 @@ public class VariableGUIObject extends AbstractGUIObject {
 		variable.clear();
 	}
 
-	public final Icon getIcon() {
+	public final Image getIcon() {
 		try {
 			TableModel dataModel = new AbstractTableModel() {
 				private static final long serialVersionUID = 5562866897873790623L;
@@ -85,10 +84,10 @@ public class VariableGUIObject extends AbstractGUIObject {
 					false, 0, 0);
 			BufferedImage bi = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 			c.paint(bi.getGraphics());
-			return new ImageIcon(bi);
+			return bi;
 
 		} catch (Exception e) {
-			return new ImageIcon("resources/icons/rebuild.png");
+			return null;
 		}
 	}
 

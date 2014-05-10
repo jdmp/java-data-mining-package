@@ -39,20 +39,15 @@ import org.ujmp.gui.plot.MatrixPlot;
 import org.ujmp.gui.renderer.MatrixHeatmapRenderer;
 
 public class MatrixTableCellRenderer implements TableCellRenderer {
-	private static final long serialVersionUID = 4107015466785369684L;
-
 	protected static Border noFocusBorder = new EmptyBorder(1, 1, 1, 1);
 
 	private final DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
-
 	private final MatrixHeatmapRenderer matrixRenderer = new MatrixHeatmapRenderer();
 
 	private final MatrixPlot matrixPlot = new MatrixPlot();
-
 	private MatrixGUIObject matrix = null;
 
 	private Object o = null;
-
 	private JLabel l = null;
 
 	public MatrixTableCellRenderer() {
