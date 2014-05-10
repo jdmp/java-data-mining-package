@@ -23,7 +23,8 @@
 
 package org.jdmp.gui.algorithm;
 
-import javax.swing.Icon;
+import java.awt.Image;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -51,7 +52,7 @@ public class AlgorithmGUIObject extends AbstractGUIObject {
 		return algorithm;
 	}
 
-	public Icon getIcon() {
+	public Image getIcon() {
 		return null;
 	}
 

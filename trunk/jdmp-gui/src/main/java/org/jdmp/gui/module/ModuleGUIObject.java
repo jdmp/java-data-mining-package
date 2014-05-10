@@ -23,7 +23,8 @@
 
 package org.jdmp.gui.module;
 
-import javax.swing.Icon;
+import java.awt.Image;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -55,7 +56,7 @@ public class ModuleGUIObject extends AbstractGUIObject {
 		module.clear();
 	}
 
-	public Icon getIcon() {
+	public Image getIcon() {
 		return null;
 	}
 
