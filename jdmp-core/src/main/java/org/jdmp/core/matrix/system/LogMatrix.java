@@ -83,7 +83,7 @@ public class LogMatrix extends AbstractDenseObjectMatrix2D {
 					Runtime.getRuntime() });
 			list.add(record);
 			if (matrix != null) {
-				matrix.notifyGUIObject();
+				matrix.fireValueChanged();
 			}
 		}
 

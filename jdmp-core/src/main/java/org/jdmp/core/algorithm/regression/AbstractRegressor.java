@@ -82,7 +82,7 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 			sample.setMatrix(DIFFERENCE, error);
 			sample.setMatrix(RMSE, Matrix.Factory.linkToValue(error.getRMS()));
 		}
-		sample.notifyGUIObject();
+		sample.fireValueChanged();
 	}
 
 	public final Matrix predict(Matrix input) throws Exception {
@@ -185,7 +185,7 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 			dataSet.getVariableMap().setMatrix(Variable.FMEASUREMACRO, fmeasureMacro);
 		}
 
-		dataSet.notifyGUIObject();
+		dataSet.fireValueChanged();
 	}
 
 	public Algorithm getOutputErrorAlgorithm() {

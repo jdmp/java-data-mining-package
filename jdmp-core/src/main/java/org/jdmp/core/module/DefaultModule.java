@@ -40,7 +40,7 @@ public class DefaultModule extends AbstractModule {
 
 	public Result execute(String script) throws Exception {
 		Result result = getInterpreter().execute(script);
-		notifyGUIObject();
+		fireValueChanged();
 		return result;
 	}
 }
