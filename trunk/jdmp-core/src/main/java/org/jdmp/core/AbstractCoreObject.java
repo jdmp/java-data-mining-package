@@ -81,7 +81,7 @@ public abstract class AbstractCoreObject implements CoreObject {
 
 	public abstract String toString();
 
-	public final void notifyGUIObject() {
+	public final void fireValueChanged() {
 		if (guiObject != null) {
 			guiObject.fireValueChanged();
 		}

@@ -360,7 +360,7 @@ public class MultiLayerNetwork extends AbstractClassifier {
 		for (Sample s : samples) {
 			train(s);
 		}
-		dataSet.notifyGUIObject();
+		dataSet.fireValueChanged();
 	}
 
 	public Classifier emptyCopy() throws Exception {
