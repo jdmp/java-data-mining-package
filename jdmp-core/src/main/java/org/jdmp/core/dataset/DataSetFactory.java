@@ -34,7 +34,7 @@ import org.jdmp.core.sample.SampleFactory;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.enums.DBType;
-import org.ujmp.core.enums.FileFormat;
+import org.ujmp.core.filematrix.FileFormat;
 
 public abstract class DataSetFactory {
 
