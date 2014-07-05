@@ -23,12 +23,17 @@
 
 package org.jdmp.core.algorithm.regression;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jdmp.core.algorithm.classification.AbstractClassifier;
 import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.dataset.RegressionDataSet;
+import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.calculation.Calculation.Ret;
 
 /**
  * AlgorithmLinearRegression extends AlgorithmClassifier and not
@@ -57,6 +62,7 @@ public class LinearRegression extends AbstractClassifier {
 	}
 
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
+		input = input.toColumnVector(Ret.NEW);
 		Matrix bias = Matrix.Factory.ones(input.getRowCount(), 1);
 		return Matrix.Factory.horCat(input, bias).mtimes(getParameterMatrix());
 	}
@@ -66,12 +72,17 @@ public class LinearRegression extends AbstractClassifier {
 	}
 
 	public void train(RegressionDataSet dataSet) throws Exception {
-		Matrix input = dataSet.getInputMatrix();
+		List<Matrix> inputs = new ArrayList<Matrix>();
+		List<Matrix> targets = new ArrayList<Matrix>();
+		for (Sample s : dataSet.getSampleMap().values()) {
+			inputs.add(s.getMatrix(Sample.INPUT).toColumnVector(Ret.NEW));
+			targets.add(s.getMatrix(Sample.TARGET).toColumnVector(Ret.NEW));
+		}
+
+		Matrix input = Matrix.Factory.vertCat(inputs);
 		Matrix bias = Matrix.Factory.ones(input.getRowCount(), 1);
 		Matrix x = Matrix.Factory.horCat(input, bias);
-		Matrix y = dataSet.getTargetMatrix();
-		// Matrix parameters =
-		// x.transpose().mtimes(x).pinv().mtimes(x.transpose()).mtimes(y);
+		Matrix y = Matrix.Factory.vertCat(targets);
 		Matrix parameters = x.pinv().mtimes(y);
 		setParameterMatrix(parameters);
 	}

@@ -26,7 +26,10 @@ package org.jdmp.core.dataset;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.BitSet;
 import java.util.Random;
+
+import javax.swing.text.TabableView;
 
 import org.jdmp.core.algorithm.basic.CreateIris;
 import org.jdmp.core.sample.Sample;
@@ -35,6 +38,7 @@ import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.enums.DBType;
 import org.ujmp.core.filematrix.FileFormat;
+import org.ujmp.core.util.MathUtil;
 
 public abstract class DataSetFactory {
 
@@ -329,6 +333,29 @@ public abstract class DataSetFactory {
 	public static final DefaultDataSet labeledDataSet(String label) {
 		DefaultDataSet ds = new DefaultDataSet();
 		ds.setLabel(label);
+		return ds;
+	}
+
+	public static ClassificationDataSet CountActive(int number) {
+		ClassificationDataSet ds = classificationDataSet("Count " + number);
+		double possibilites = Math.pow(2, number);
+		for (int i = 0; i < possibilites; i++) {
+			BitSet bits = BitSet.valueOf(new long[] { i });
+			Sample sample = SampleFactory.labeledSample("" + i);
+			Matrix input = Matrix.Factory.zeros(1, number);
+			Matrix target = Matrix.Factory.zeros(1, number + 1);
+			int count = 0;
+			for (int j = 0; j < number; j++) {
+				if (bits.get(j)) {
+					input.setAsDouble(1, 0, j);
+					count++;
+				}
+			}
+			target.setAsDouble(1, 0, count);
+			sample.setMatrix(Sample.INPUT, input);
+			sample.setMatrix(Sample.TARGET, target);
+			ds.getSampleMap().add(sample);
+		}
 		return ds;
 	}
 

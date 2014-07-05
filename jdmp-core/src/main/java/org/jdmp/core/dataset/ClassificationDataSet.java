@@ -34,6 +34,7 @@ import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.util.MathUtil;
 
 public class ClassificationDataSet extends RegressionDataSet {
@@ -91,7 +92,8 @@ public class ClassificationDataSet extends RegressionDataSet {
 	}
 
 	public int getClassCount() {
-		return (int) getSampleMap().getElementAt(0).getMatrix(Sample.TARGET).getColumnCount();
+		return (int) getSampleMap().getElementAt(0).getMatrix(Sample.TARGET).toRowVector(Ret.NEW)
+				.getRowCount();
 	}
 
 	public Variable getConfusionVariable() {

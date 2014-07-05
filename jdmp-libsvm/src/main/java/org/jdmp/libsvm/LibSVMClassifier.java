@@ -34,6 +34,7 @@ import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.util.MathUtil;
 
 public class LibSVMClassifier extends AbstractClassifier {
@@ -98,29 +99,29 @@ public class LibSVMClassifier extends AbstractClassifier {
 	}
 
 	public void train(RegressionDataSet dataSet) {
-		int columnCount = (int) dataSet.getSampleMap().iterator().next().getMatrix(INPUT)
-				.getColumnCount();
+		int rowCount = (int) dataSet.getSampleMap().iterator().next().getMatrix(INPUT)
+				.toRowVector(Ret.NEW).getRowCount();
 
 		prob = new svm_problem();
 		prob.l = dataSet.getSampleMap().getSize();
 
-		prob.x = new svm_node[prob.l][columnCount];
+		prob.x = new svm_node[prob.l][rowCount];
 		prob.y = new double[prob.l];
 
 		int i = 0;
 		for (Sample p : dataSet.getSampleMap()) {
-			Matrix input = p.getMatrix(INPUT);
+			Matrix input = p.getMatrix(INPUT).toRowVector(Ret.NEW);
 			prob.y[i] = p.getTargetClass();
-			for (int j = 0; j < columnCount; j++) {
+			for (int j = 0; j < rowCount; j++) {
 				prob.x[i][j] = new svm_node();
 				prob.x[i][j].index = j + 1;
-				prob.x[i][j].value = input.getAsDouble(0, j);
+				prob.x[i][j].value = input.getAsDouble(j, 0);
 			}
 			i++;
 		}
 
 		if (param.gamma == 0)
-			param.gamma = 1.0 / columnCount;
+			param.gamma = 1.0 / rowCount;
 
 		if (param.kernel_type == svm_parameter.PRECOMPUTED)
 			for (i = 0; i < prob.l; i++) {
@@ -129,7 +130,7 @@ public class LibSVMClassifier extends AbstractClassifier {
 							.print("Wrong kernel matrix: first column must be 0:sample_serial_number\n");
 					System.exit(1);
 				}
-				if ((int) prob.x[i][0].value <= 0 || (int) prob.x[i][0].value > columnCount) {
+				if ((int) prob.x[i][0].value <= 0 || (int) prob.x[i][0].value > rowCount) {
 					System.err.print("Wrong input format: sample_serial_number out of range\n");
 					System.exit(1);
 				}
@@ -145,15 +146,16 @@ public class LibSVMClassifier extends AbstractClassifier {
 	}
 
 	public Matrix predict(Matrix input, Matrix weight) {
+		input = input.toRowVector(Ret.NEW);
 		int nr_class = svm.svm_get_nr_class(model);
 		double[] prob_estimates = new double[nr_class];
 
-		int m = (int) input.getColumnCount();
+		int m = (int) input.getRowCount();
 		svm_node[] x = new svm_node[m];
 		for (int j = 0; j < m; j++) {
 			x[j] = new svm_node();
 			x[j].index = j + 1;
-			x[j].value = input.getAsDouble(0, j);
+			x[j].value = input.getAsDouble(j, 0);
 		}
 
 		svm.svm_predict_probability(model, x, prob_estimates);
