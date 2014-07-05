@@ -31,6 +31,8 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -78,6 +80,18 @@ public abstract class AbstractListPanel extends JPanel implements MouseListener,
 
 	public AbstractListPanel() {
 		this.setLayout(new GridBagLayout());
+
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+
+			@Override
+			public void run() {
+				if (isShowing()) {
+					// hack to update rendered content from matrices
+					repaint(1000);
+				}
+			}
+		}, 300, 300);
 
 		setBorder(BorderFactory.createTitledBorder("Object List"));
 

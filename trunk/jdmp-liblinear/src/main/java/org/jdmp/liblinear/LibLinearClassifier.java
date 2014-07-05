@@ -28,6 +28,7 @@ import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.util.MathUtil;
 
 import de.bwaldvogel.liblinear.FeatureNode;
@@ -57,10 +58,11 @@ public class LibLinearClassifier extends AbstractClassifier {
 	}
 
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
-		long columnCount = input.getColumnCount();
+		input = input.toRowVector(Ret.NEW);
+		long rowCount = input.getRowCount();
 		int count = 0;
-		for (int j = 0; j < columnCount; j++) {
-			double value = input.getAsDouble(0, j);
+		for (int j = 0; j < rowCount; j++) {
+			double value = input.getAsDouble(j, 0);
 			if (value != 0.0 && !MathUtil.isNaNOrInfinite(value)) {
 				count++;
 			}
@@ -69,8 +71,8 @@ public class LibLinearClassifier extends AbstractClassifier {
 		FeatureNode[] x = new FeatureNode[count + 1];
 		x[0] = new FeatureNode(1, bias);
 		count = 0;
-		for (int j = 0; j < columnCount; j++) {
-			double value = input.getAsDouble(0, j);
+		for (int j = 0; j < rowCount; j++) {
+			double value = input.getAsDouble(j, 0);
 			if (value != 0.0 && !MathUtil.isNaNOrInfinite(value)) {
 				x[count + 1] = new FeatureNode(j + 2, value);
 				count++;
@@ -78,8 +80,8 @@ public class LibLinearClassifier extends AbstractClassifier {
 		}
 
 		double classId = Linear.predict(model, x);
-		Matrix ret = Matrix.Factory.zeros(1, Math.max(model.getNrClass(), (int) (classId + 1)));
-		ret.setAsDouble(1.0, 0, (int) classId);
+		Matrix ret = Matrix.Factory.zeros(Math.max(model.getNrClass(), (int) (classId + 1)), 1);
+		ret.setAsDouble(1.0, (int) classId, 0);
 		return ret;
 	}
 
@@ -87,24 +89,27 @@ public class LibLinearClassifier extends AbstractClassifier {
 		createAlgorithm();
 		prob = new Problem();
 		prob.l = dataSet.getSampleMap().getSize();
-		prob.n = (int) dataSet.getSampleMap().iterator().next().getMatrix(INPUT).getColumnCount() + 1; // +1
-																										// for
-																										// bias
+		// +1 for bias
+		prob.n = (int) dataSet.getSampleMap().iterator().next().getMatrix(INPUT).toRowVector(Ret.NEW).getRowCount() + 1;
 
 		prob.x = new FeatureNode[prob.l][];
 		prob.y = new double[prob.l];
 
+		long time = System.currentTimeMillis();
+
 		int i = 0;
 		for (Sample p : dataSet.getSampleMap()) {
-			if (i % 10 == 0) {
-				System.out.println("Converting sample " + i);
+			if (System.currentTimeMillis() - time > 5000) {
+				time = System.currentTimeMillis();
+				System.out.println("Converting samples: "
+						+ Math.round(((double) i / dataSet.getSampleMap().size() * 100)) + "% done");
 			}
-			Matrix input = p.getMatrix(INPUT);
+			Matrix input = p.getMatrix(INPUT).toRowVector(Ret.NEW);
 			prob.y[i] = p.getTargetClass();
-			long columnCount = input.getColumnCount();
+			long rowCount = input.getRowCount();
 			int count = 0;
-			for (int j = 0; j < columnCount; j++) {
-				double value = input.getAsDouble(0, j);
+			for (int j = 0; j < rowCount; j++) {
+				double value = input.getAsDouble(j, 0);
 				if (value != 0.0 && !MathUtil.isNaNOrInfinite(value)) {
 					count++;
 				}
@@ -113,8 +118,8 @@ public class LibLinearClassifier extends AbstractClassifier {
 			prob.x[i] = new FeatureNode[count + 1];
 			prob.x[i][0] = new FeatureNode(1, bias);
 			count = 0;
-			for (int j = 0; j < columnCount; j++) {
-				double value = input.getAsDouble(0, j);
+			for (int j = 0; j < rowCount; j++) {
+				double value = input.getAsDouble(j, 0);
 				if (value != 0.0 && !MathUtil.isNaNOrInfinite(value)) {
 					prob.x[i][count + 1] = new FeatureNode(j + 2, value);
 					count++;

@@ -24,6 +24,7 @@
 package org.jdmp.weka.wrappers;
 
 import org.ujmp.core.Matrix;
+import org.ujmp.core.calculation.Calculation.Ret;
 
 import weka.core.DenseInstance;
 
@@ -32,24 +33,22 @@ public class SampleToInstanceWrapper extends DenseInstance {
 
 	public SampleToInstanceWrapper(Matrix input, Matrix sampleWeight, Matrix targetOutput,
 			boolean discrete, boolean includeTarget) {
-		super((int) input.getColumnCount() + 1);
+		super((int) input.toRowVector(Ret.NEW).getRowCount() + 1);
 		if (sampleWeight != null) {
 			setWeight(sampleWeight.doubleValue());
 		} else {
 			setWeight(1.0);
 		}
-		if (input != null) {
-			for (int i = 0; i < input.getColumnCount(); i++) {
-				if (discrete) {
-					setValue(i, (int) input.getAsDouble(0, i));
-				} else {
-					setValue(i, input.getAsDouble(0, i));
-				}
+		for (int i = 0; i < input.getRowCount(); i++) {
+			if (discrete) {
+				setValue(i, (int) input.getAsDouble(i, 0));
+			} else {
+				setValue(i, input.getAsDouble(i, 0));
 			}
 		}
 		if (includeTarget && targetOutput != null) {
-			long[] c = targetOutput.getCoordinatesOfMaximum();
-			setValue((int) input.getColumnCount(), c[Matrix.COLUMN]);
+			long[] c = targetOutput.toRowVector(Ret.NEW).getCoordinatesOfMaximum();
+			setValue((int) input.getRowCount(), c[Matrix.ROW]);
 		}
 	}
 

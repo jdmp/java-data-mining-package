@@ -39,7 +39,7 @@ public class Plugin extends AbstractPlugin {
 		dependencies.add("ujmp-core");
 		dependencies.add("jdmp-core");
 		dependencies.add("liblinear.jar");
-		neededClasses.add("liblinear.Model");
+		neededClasses.add("de.bwaldvogel.liblinear.Model");
 	}
 
 	public String getDescription() {

@@ -30,6 +30,7 @@ import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
 import org.jdmp.core.variable.VariableMap;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.core.mapmatrix.DefaultMapMatrix;
 import org.ujmp.core.util.MathUtil;
@@ -54,14 +55,18 @@ public abstract class AbstractSample extends DefaultMapMatrix<String, Variable> 
 	}
 
 	public int getTargetClass() {
-		return (int) get(TARGET).getLast().getCoordinatesOfMaximum()[COLUMN];
+		return (int) get(TARGET).getLast().toRowVector(Ret.NEW).getCoordinatesOfMaximum()[ROW];
 	}
 
 	public int getRecognizedClass() {
-		return (int) get(PREDICTED).getLast().getCoordinatesOfMaximum()[COLUMN];
+		return (int) get(PREDICTED).getLast().toRowVector(Ret.NEW).getCoordinatesOfMaximum()[ROW];
 	}
 
 	public abstract Sample clone();
+
+	public void setLabel(Object label) {
+		setMatrix(Sample.LABEL, Matrix.Factory.linkToValue(label));
+	}
 
 	public String toString() {
 		StringBuilder s = new StringBuilder();

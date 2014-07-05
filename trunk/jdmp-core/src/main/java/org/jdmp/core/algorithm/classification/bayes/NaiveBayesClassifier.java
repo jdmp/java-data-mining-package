@@ -48,6 +48,7 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 
 	@Override
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
+		input = input.toColumnVector(Ret.NEW);
 		Matrix result = Matrix.Factory.zeros(1, classCount);
 		for (int cc = 0; cc < classCount; cc++) {
 			Classifier classifier = classifiers.get(cc);
@@ -72,10 +73,12 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 			for (Sample s1 : dataSet.getSampleMap()) {
 				Sample s2 = SampleFactory.emptySample();
 				Matrix i2 = Matrix.Factory.zeros(2, 1);
-				double c = s1.getMatrix(TARGET).getAsDouble(0, cc);
+				Matrix target = s1.getMatrix(TARGET).toColumnVector(Ret.NEW);
+				double c = target.getAsDouble(0, cc);
 				i2.setAsBoolean(c == 0, 0, 0);
 				i2.setAsBoolean(c == 1, 0, 0);
-				s2.setMatrix(INPUT, s1.getMatrix(INPUT));
+				Matrix input = s1.getMatrix(INPUT).toColumnVector(Ret.NEW);
+				s2.setMatrix(INPUT, input);
 				Matrix weight = s1.getMatrix(WEIGHT);
 				if (weight != null) {
 					s2.setMatrix(WEIGHT, weight);
@@ -108,13 +111,14 @@ class NaiveBayesClassifier2Classes extends AbstractClassifier {
 	}
 
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
+		input = input.toRowVector(Ret.NEW);
 		double[] logs = new double[CLASSCOUNT];
 		// for all classes
 		for (int i = 0; i < CLASSCOUNT; i++) {
 			// for all features
 			logs[i] = Math.log(classDists.getProbability(i));
 			for (int j = 0; j < input.getColumnCount(); j++) {
-				int val = (int) input.getAsDouble(0, j);
+				int val = (int) input.getAsDouble(j, 0);
 				logs[i] += Math.log(dists[j][i].getProbability(val));
 			}
 		}

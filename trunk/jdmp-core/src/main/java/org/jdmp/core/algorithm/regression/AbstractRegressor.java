@@ -23,8 +23,6 @@
 
 package org.jdmp.core.algorithm.regression;
 
-import java.util.Map;
-
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.algorithm.basic.FMeasure;
@@ -39,7 +37,6 @@ import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
-import org.ujmp.core.util.MathUtil;
 
 public abstract class AbstractRegressor extends AbstractAlgorithm implements Regressor {
 	private static final long serialVersionUID = 4674447558395794134L;
@@ -53,6 +50,8 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 	public int mode = TRAIN;
 
 	private boolean evaluate = true;
+
+	private int iteration = 0;
 
 	public AbstractRegressor() {
 		super();
@@ -73,12 +72,12 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 	}
 
 	public final void predict(Sample sample) throws Exception {
-		Matrix predicted = predict(sample.getMatrix(INPUT), sample.getMatrix(WEIGHT));
+		Matrix predicted = predict(sample.getMatrix(INPUT), sample.getMatrix(WEIGHT)).toRowVector(
+				Ret.NEW);
 		sample.setMatrix(PREDICTED, predicted);
 		if (evaluate) {
-			Map<String, Object> result = getOutputErrorAlgorithm().calculate(predicted,
-					sample.getMatrix(TARGET));
-			Matrix error = MathUtil.getMatrix(result.get(TARGET));
+			Matrix target = sample.getMatrix(TARGET).toRowVector(Ret.NEW);
+			Matrix error = target.minus(predicted);
 			sample.setMatrix(DIFFERENCE, error);
 			sample.setMatrix(RMSE, Matrix.Factory.linkToValue(error.getRMS()));
 		}
@@ -103,7 +102,6 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 	}
 
 	public void predict(RegressionDataSet dataSet) throws Exception {
-
 		Matrix confusion = null;
 		double error = 0.0;
 		int correctCount = 0;
@@ -153,6 +151,35 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 		rmse.setLabel("RMSE with " + getLabel());
 		dataSet.getVariableMap().setMatrix(Variable.RMSE, rmse);
 
+		double maxRMSE = 0.0;
+		double minRMSE = 1e100;
+		double sumRMSE = 0;
+		for (Sample s : dataSet.getSampleMap()) {
+			Matrix m = s.getMatrix("RMSE");
+			if (m != null) {
+				double sampleRMSE = m.doubleValue();
+				sumRMSE += sampleRMSE;
+				if (sampleRMSE > maxRMSE) {
+					maxRMSE = sampleRMSE;
+				}
+				if (sampleRMSE < minRMSE) {
+					minRMSE = sampleRMSE;
+				}
+			}
+		}
+
+		// calculate sample weight
+		// if (maxRMSE > 0 && maxRMSE != minRMSE) {
+		// for (Sample s : dataSet.getSampleMap()) {
+		// Matrix m = s.getMatrix("RMSE");
+		// if (m != null) {
+		// double sampleWeight = (m.doubleValue() / (sumRMSE));
+		// s.setMatrix("SampleWeight",
+		// Matrix.Factory.linkToValue(sampleWeight));
+		// }
+		// }
+		// }
+
 		if ((dataSet instanceof ClassificationDataSet)) {
 			confusion.setLabel("Confusion with " + getLabel());
 			dataSet.getVariableMap().setMatrix(Variable.CONFUSION, confusion);
@@ -183,6 +210,11 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 
 			Matrix fmeasureMacro = fmeasure.mean(Ret.NEW, Matrix.ALL, false);
 			dataSet.getVariableMap().setMatrix(Variable.FMEASUREMACRO, fmeasureMacro);
+
+			iteration++;
+			System.out.println("Iteration: " + iteration + ", RMSE: " + rmse.doubleValue()
+					+ ", errors: " + errorCount);
+
 		}
 
 		dataSet.fireValueChanged();

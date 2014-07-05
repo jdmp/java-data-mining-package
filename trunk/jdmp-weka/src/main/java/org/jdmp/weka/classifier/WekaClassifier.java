@@ -39,7 +39,7 @@ public class WekaClassifier extends AbstractClassifier {
 	private static final long serialVersionUID = 29290678735702499L;
 
 	public enum WekaClassifierType {
-		AODE, BayesNet, ComplementNaiveBayes, HNB, NaiveBayes, NaiveBayesMultinomial, NaiveBayesMultinomialUpdateable, NaiveBayesSimple, NaiveBayesUpdateable, WAODE, GaussianProcesses, IsotonicRegression, LeastMedSq, LinearRegression, Logistic, MultilayerPerceptron, PaceRegression, PLSClassifier, RBFNetwork, SimpleLinearRegression, SimpleLogistic, SMO, SMOreg, SVMreg, VotedPerceptron, Winnow, IB1, IBk, KStar, LBR, LWL, AdaBoostM1, AdditiveRegression, AttributeSelectedClassifier, Bagging, ClassificationViaRegression, CostSensitiveClassifier, CVParameterSelection, Dagging, Decorate, END, EnsembleSelection, FilteredClassifier, Grading, GridSearch, LogitBoost, MetaCost, MultiBoostAB, MultiClassClassifier, MultiScheme, OrdinalClassClassifier, RacedIncrementalLogitBoost, RandomCommittee, RandomSubSpace, RegressionByDiscretization, Stacking, StackingC, ThresholdSelector, Vote, CitationKNN, MDD, MIBoost, MIDD, MIEMDD, MILR, MINND, MIOptimalBall, MISMO, MISVM, MIWrapper, SimpleMI, TLD, TLDSimple, FLR, HyperPipes, MinMaxExtension, OLM, OSDL, SerializedClassifier, VFI, ConjunctiveRule, DecisionTable, JRip, M5Rules, NNge, OneR, PART, Prism, Ridor, ZeroR, ADTree, BFTree, DecisionStump, Id3, J48, LMT, M5P, NBTree, RandomForest, RandomTree, REPTree, SimpleCart
+		BayesNet, NaiveBayes, NaiveBayesMultinomial, NaiveBayesMultinomialUpdateable, NaiveBayesUpdateable, LinearRegression, Logistic, MultilayerPerceptron, SGD, SimpleLinearRegression, SimpleLogistic, SMO, SMOreg, VotedPerceptron, IBk, KStar, LWL, AdaBoostM1, AdditiveRegression, AttributeSelectedClassifier, Bagging, ClassificationViaRegression, CostSensitiveClassifier, CVParameterSelection, FilteredClassifier, LogitBoost, MultiClassClassifier, MultiScheme, RandomCommittee, RandomSubSpace, RegressionByDiscretization, Stacking, Vote, DecisionTable, JRip, M5Rules, OneR, PART, Rule, ZeroR, DecisionStump, HoeffdingTree, J48, LMT, M5P, RandomForest, RandomTree, REPTree, GaussianProcesses
 	};
 
 	private Classifier wekaClassifier = null;
@@ -78,6 +78,12 @@ public class WekaClassifier extends AbstractClassifier {
 		if (c == null) {
 			try {
 				c = Class.forName("weka.classifiers.bayes." + classifierName.name());
+			} catch (ClassNotFoundException e) {
+			}
+		}
+		if (c == null) {
+			try {
+				c = Class.forName("weka.classifiers.pmml.consumer." + classifierName.name());
 			} catch (ClassNotFoundException e) {
 			}
 		}
