@@ -31,7 +31,6 @@ import org.jdmp.weka.wrappers.DataSetToInstancesWrapper;
 import org.jdmp.weka.wrappers.SampleToInstanceWrapper;
 import org.ujmp.core.Matrix;
 
-import weka.classifiers.Classifier;
 import weka.core.Instance;
 import weka.core.Instances;
 
@@ -42,23 +41,23 @@ public class WekaClassifier extends AbstractClassifier {
 		BayesNet, NaiveBayes, NaiveBayesMultinomial, NaiveBayesMultinomialUpdateable, NaiveBayesUpdateable, LinearRegression, Logistic, MultilayerPerceptron, SGD, SimpleLinearRegression, SimpleLogistic, SMO, SMOreg, VotedPerceptron, IBk, KStar, LWL, AdaBoostM1, AdditiveRegression, AttributeSelectedClassifier, Bagging, ClassificationViaRegression, CostSensitiveClassifier, CVParameterSelection, FilteredClassifier, LogitBoost, MultiClassClassifier, MultiScheme, RandomCommittee, RandomSubSpace, RegressionByDiscretization, Stacking, Vote, DecisionTable, JRip, M5Rules, OneR, PART, Rule, ZeroR, DecisionStump, HoeffdingTree, J48, LMT, M5P, RandomForest, RandomTree, REPTree, GaussianProcesses
 	};
 
-	private Classifier wekaClassifier = null;
+	private weka.classifiers.AbstractClassifier wekaClassifier = null;
 
 	private Instances instances = null;
 
 	private WekaClassifierType classifierName = null;
 
-	private String[] options = null;
-
 	private boolean discrete = false;
 
-	public WekaClassifier(WekaClassifierType classifierName, boolean discrete, String... options)
-			throws Exception {
+	public WekaClassifier(WekaClassifierType classifierName, boolean discrete) throws Exception {
 		setLabel("Weka-" + classifierName);
 		this.classifierName = classifierName;
-		this.options = options;
 		this.discrete = discrete;
 		createAlgorithm();
+	}
+
+	public void setOptions(String... options) throws Exception {
+		wekaClassifier.setOptions(options);
 	}
 
 	public void createAlgorithm() throws Exception {
@@ -133,10 +132,8 @@ public class WekaClassifier extends AbstractClassifier {
 			throw new ClassNotFoundException("class not found: " + classifierName);
 		} else {
 			Constructor<?> constr = c.getConstructor(new Class[] {});
-			wekaClassifier = (Classifier) constr.newInstance(new Object[] {});
-			if (options != null || options.length != 0) {
-				// wekaClassifier.setOptions(options);
-			}
+			wekaClassifier = (weka.classifiers.AbstractClassifier) constr
+					.newInstance(new Object[] {});
 		}
 	}
 

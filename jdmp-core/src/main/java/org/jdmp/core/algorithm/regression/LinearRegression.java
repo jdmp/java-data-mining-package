@@ -83,7 +83,14 @@ public class LinearRegression extends AbstractClassifier {
 		Matrix bias = Matrix.Factory.ones(input.getRowCount(), 1);
 		Matrix x = Matrix.Factory.horCat(input, bias);
 		Matrix y = Matrix.Factory.vertCat(targets);
-		Matrix parameters = x.pinv().mtimes(y);
+
+		// this depends on the number of samples and is therefore slower for
+		// large data sets:
+		// Matrix parameters = x.pinv().mtimes(y);
+
+		// this depends on the number of features only:
+		Matrix parameters = x.transpose().mtimes(x).pinv().mtimes(x.transpose()).mtimes(y);
+
 		setParameterMatrix(parameters);
 	}
 
