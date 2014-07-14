@@ -23,6 +23,7 @@
 
 package org.jdmp.core.algorithm.classification.bayes;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -46,14 +47,18 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 
 	private List<Classifier> classifiers = null;
 
+	public static NaiveBayesClassifier2Classes NaiveBayes2() {
+		return new NaiveBayesClassifier2Classes();
+	}
+
 	@Override
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
 		input = input.toColumnVector(Ret.NEW);
-		Matrix result = Matrix.Factory.zeros(1, classCount);
+		Matrix result = Matrix.Factory.zeros(classCount, 1);
 		for (int cc = 0; cc < classCount; cc++) {
 			Classifier classifier = classifiers.get(cc);
 			Matrix prediction = classifier.predict(input, sampleWeight);
-			result.setAsDouble(prediction.getAsDouble(0, 0), 0, cc);
+			result.setAsDouble(prediction.getAsDouble(0, 0), cc, 0);
 		}
 		return result;
 	}
@@ -72,10 +77,10 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 			ClassificationDataSet ds2 = DataSetFactory.classificationDataSet();
 			for (Sample s1 : dataSet.getSampleMap()) {
 				Sample s2 = SampleFactory.emptySample();
-				Matrix i2 = Matrix.Factory.zeros(2, 1);
+				Matrix i2 = Matrix.Factory.zeros(1, 2);
 				Matrix target = s1.getMatrix(TARGET).toColumnVector(Ret.NEW);
 				double c = target.getAsDouble(0, cc);
-				i2.setAsBoolean(c == 0, 0, 0);
+				i2.setAsBoolean(c == 0, 0, 1);
 				i2.setAsBoolean(c == 1, 0, 0);
 				Matrix input = s1.getMatrix(INPUT).toColumnVector(Ret.NEW);
 				s2.setMatrix(INPUT, input);
@@ -94,7 +99,6 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 	public Classifier emptyCopy() throws Exception {
 		return new NaiveBayesClassifier();
 	}
-
 }
 
 class NaiveBayesClassifier2Classes extends AbstractClassifier {
@@ -136,7 +140,12 @@ class NaiveBayesClassifier2Classes extends AbstractClassifier {
 
 	public void train(RegressionDataSet dataSet) throws Exception {
 		int featureCount = dataSet.getFeatureCount();
-		Matrix dataSetInput = dataSet.getInputMatrix();
+		List<Matrix> inputs = new ArrayList<Matrix>();
+		for (Sample s : dataSet.getSampleMap().values()) {
+			inputs.add(s.getMatrix(INPUT).toColumnVector(Ret.NEW));
+		}
+		Matrix dataSetInput = Matrix.Factory.vertCat(inputs);
+
 		Matrix max = dataSetInput.max(Ret.NEW, Matrix.ROW);
 
 		this.dists = new DensityEstimator[featureCount][CLASSCOUNT];
@@ -150,8 +159,8 @@ class NaiveBayesClassifier2Classes extends AbstractClassifier {
 
 		// go over all samples and count
 		for (Sample s : dataSet.getSampleMap()) {
-			Matrix sampleInput = s.getMatrix(INPUT);
-			Matrix sampleTarget = s.getMatrix(TARGET);
+			Matrix sampleInput = s.getMatrix(INPUT).toColumnVector(Ret.NEW);
+			Matrix sampleTarget = s.getMatrix(TARGET).toColumnVector(Ret.NEW);
 			Matrix sampleWeight = s.getMatrix(WEIGHT);
 
 			double weight = 1.0;

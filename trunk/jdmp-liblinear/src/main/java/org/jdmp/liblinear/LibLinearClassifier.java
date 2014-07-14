@@ -79,10 +79,22 @@ public class LibLinearClassifier extends AbstractClassifier {
 			}
 		}
 
-		double classId = Linear.predict(model, x);
-		Matrix ret = Matrix.Factory.zeros(Math.max(model.getNrClass(), (int) (classId + 1)), 1);
-		ret.setAsDouble(1.0, (int) classId, 0);
-		return ret;
+		Matrix result = null;
+		if (model.isProbabilityModel()) {
+			double[] probabilities = new double[model.getNrClass()];
+			Linear.predictProbability(model, x, probabilities);
+			result = Matrix.Factory.zeros(model.getNrClass(), 1);
+			for (int i = 0; i < probabilities.length; i++) {
+				int label = model.getLabels()[i];
+				result.setAsDouble(probabilities[i], label, 0);
+			}
+		} else {
+			double classId = Linear.predict(model, x);
+			result = Matrix.Factory.zeros(Math.max(model.getNrClass(), (int) (classId + 1)), 1);
+			result.setAsDouble(1.0, (int) classId, 0);
+		}
+
+		return result;
 	}
 
 	public void train(RegressionDataSet dataSet) throws Exception {

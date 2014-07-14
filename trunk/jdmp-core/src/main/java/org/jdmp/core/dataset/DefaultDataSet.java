@@ -73,12 +73,8 @@ public class DefaultDataSet extends AbstractDataSet {
 	}
 
 	public int getFeatureCount() {
-		Matrix m = getInputVariable().getLast();
-		if (m == null) {
-			return 0;
-		} else {
-			return (int) m.getColumnCount();
-		}
+		return (int) getSampleMap().values().iterator().next().getMatrix(INPUT)
+				.toRowVector(Ret.NEW).getRowCount();
 	}
 
 	public DefaultDataSet clone() {
