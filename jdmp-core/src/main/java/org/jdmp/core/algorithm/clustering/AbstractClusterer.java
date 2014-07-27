@@ -24,7 +24,7 @@
 package org.jdmp.core.algorithm.clustering;
 
 import org.jdmp.core.algorithm.AbstractAlgorithm;
-import org.jdmp.core.dataset.RegressionDataSet;
+import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 
@@ -35,7 +35,7 @@ public abstract class AbstractClusterer extends AbstractAlgorithm implements Clu
 		super();
 	}
 
-	public void predict(RegressionDataSet dataSet) throws Exception {
+	public void predict(DataSet dataSet) throws Exception {
 		for (Sample sample : dataSet.getSampleMap().values()) {
 			predict(sample);
 		}

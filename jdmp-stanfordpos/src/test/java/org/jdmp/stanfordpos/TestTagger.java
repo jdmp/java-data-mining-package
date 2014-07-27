@@ -36,6 +36,8 @@ import org.jdmp.core.sample.Sample;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.listmatrix.ListMatrix;
+import org.ujmp.core.mapmatrix.MapMatrix;
 
 public class TestTagger {
 
@@ -63,7 +65,7 @@ public class TestTagger {
 			return;
 		}
 
-		List<Matrix> list = tagger.tag(s1);
+		List<ListMatrix<MapMatrix<String, Object>>> list = tagger.tag(s1);
 
 		assertEquals(2, list.size());
 		assertEquals(2, list.get(0).getColumnCount());

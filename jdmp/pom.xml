@@ -169,10 +169,15 @@
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
-				<groupId>stanford</groupId>
-				<artifactId>stanford-postagger</artifactId>
-				<version>2011-04-20</version>
-				<scope>compile</scope>
+				<groupId>edu.stanford.nlp</groupId>
+				<artifactId>stanford-corenlp</artifactId>
+				<version>3.4</version>
+			</dependency>
+			<dependency>
+				<groupId>edu.stanford.nlp</groupId>
+				<artifactId>stanford-corenlp</artifactId>
+				<classifier>models</classifier>
+				<version>3.4</version>
 			</dependency>
 			<dependency>
 				<groupId>org.mortbay.jetty</groupId>

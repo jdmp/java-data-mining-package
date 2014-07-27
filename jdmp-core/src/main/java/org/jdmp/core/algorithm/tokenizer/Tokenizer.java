@@ -23,19 +23,18 @@
 
 package org.jdmp.core.algorithm.tokenizer;
 
-import java.util.List;
-
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.listmatrix.ListMatrix;
 
 public interface Tokenizer {
 
 	public static final String TOKENIZED = "Tokenized";
 
-	public List<Matrix> tokenize(String input) throws Exception;
+	public ListMatrix<ListMatrix<String>> tokenize(String input) throws Exception;
 
-	public List<Matrix> tokenize(Matrix input) throws Exception;
+	public ListMatrix<ListMatrix<String>> tokenize(Matrix input) throws Exception;
 
 	public void tokenize(Object variableKey, Sample sample) throws Exception;
 

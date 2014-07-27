@@ -23,19 +23,19 @@
 
 package org.jdmp.core.algorithm.tagger;
 
-import java.util.List;
-
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.listmatrix.ListMatrix;
+import org.ujmp.core.mapmatrix.MapMatrix;
 
 public interface Tagger {
 
 	public static final String TAGGED = "Tagged";
 
-	public List<Matrix> tag(String input) throws Exception;
+	public ListMatrix<ListMatrix<MapMatrix<String, Object>>> tag(String input) throws Exception;
 
-	public List<Matrix> tag(Matrix input) throws Exception;
+	public ListMatrix<ListMatrix<MapMatrix<String, Object>>> tag(Matrix input) throws Exception;
 
 	public void tag(Sample sample) throws Exception;
 

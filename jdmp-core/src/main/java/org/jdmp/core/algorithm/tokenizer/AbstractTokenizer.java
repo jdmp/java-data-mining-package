@@ -23,14 +23,13 @@
 
 package org.jdmp.core.algorithm.tokenizer;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.listmatrix.DefaultListMatrix;
+import org.ujmp.core.listmatrix.ListMatrix;
 
 public abstract class AbstractTokenizer extends AbstractAlgorithm implements Tokenizer {
 	private static final long serialVersionUID = 3272730075460502945L;
@@ -38,7 +37,7 @@ public abstract class AbstractTokenizer extends AbstractAlgorithm implements Tok
 	public final void tokenize(Object variableKey, Sample sample) throws Exception {
 		Variable input = sample.get(variableKey);
 		for (Matrix m : input) {
-			List<Matrix> r = tokenize(m);
+			ListMatrix<ListMatrix<String>> r = tokenize(m);
 			for (Matrix n : r) {
 				sample.setMatrix(Tokenizer.TOKENIZED, n);
 			}
@@ -51,8 +50,8 @@ public abstract class AbstractTokenizer extends AbstractAlgorithm implements Tok
 		}
 	}
 
-	public final List<Matrix> tokenize(Matrix input) throws Exception {
-		List<Matrix> result = new ArrayList<Matrix>();
+	public final ListMatrix<ListMatrix<String>> tokenize(Matrix input) throws Exception {
+		ListMatrix<ListMatrix<String>> result = new DefaultListMatrix<ListMatrix<String>>();
 		for (long[] c : input.availableCoordinates()) {
 			String s = input.getAsString(c);
 			result.addAll(tokenize(s));

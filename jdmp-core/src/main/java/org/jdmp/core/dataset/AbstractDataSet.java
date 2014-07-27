@@ -33,7 +33,9 @@ import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.DefaultObservableMap;
 import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.DefaultVariableMap;
+import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableMap;
+import org.ujmp.core.Matrix;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.core.mapmatrix.DefaultMapMatrix;
 
@@ -54,6 +56,14 @@ public abstract class AbstractDataSet extends DefaultMapMatrix<String, Sample> i
 
 	public final VariableMap getVariableMap() {
 		return variableMap;
+	}
+
+	public Matrix getInputMatrix() {
+		return getInputVariable().getLast();
+	}
+
+	public final Variable getInputVariable() {
+		return getVariableMap().get(INPUT);
 	}
 
 	protected final void clearMap() {

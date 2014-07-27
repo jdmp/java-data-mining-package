@@ -23,14 +23,14 @@
 
 package org.jdmp.core.algorithm.tagger;
 
-import java.util.List;
-
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.algorithm.tokenizer.Tokenizer;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.listmatrix.ListMatrix;
+import org.ujmp.core.mapmatrix.MapMatrix;
 
 public abstract class AbstractTagger extends AbstractAlgorithm implements Tagger {
 	private static final long serialVersionUID = 3955297154098236478L;
@@ -47,7 +47,7 @@ public abstract class AbstractTagger extends AbstractAlgorithm implements Tagger
 			throw new RuntimeException("text must be tokenized first");
 		}
 		for (Matrix m : v) {
-			List<Matrix> list = tag(m);
+			ListMatrix<ListMatrix<MapMatrix<String, Object>>> list = tag(m);
 			for (Matrix n : list) {
 				sample.setMatrix(TAGGED, n);
 			}

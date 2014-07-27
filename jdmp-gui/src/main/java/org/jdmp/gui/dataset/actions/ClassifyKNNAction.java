@@ -21,33 +21,38 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.gui.dataset;
+package org.jdmp.gui.dataset.actions;
 
 import java.awt.event.KeyEvent;
 
+import javax.swing.Action;
 import javax.swing.JComponent;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JSeparator;
 
-import org.jdmp.gui.dataset.actions.ClassifyConstantAction;
-import org.jdmp.gui.dataset.actions.ClassifyKNNAction;
-import org.jdmp.gui.dataset.actions.ClassifyLinearRegressionAction;
-import org.jdmp.gui.dataset.actions.ClassifyNaiveBayesAction;
-import org.jdmp.gui.dataset.actions.ClassifyRandomAction;
+import org.jdmp.core.algorithm.classification.Classifier;
+import org.jdmp.core.algorithm.classification.KNNClassifier;
+import org.jdmp.core.dataset.ClassificationDataSet;
 import org.ujmp.core.interfaces.GUIObject;
+import org.ujmp.gui.actions.AbstractObjectAction;
+import org.ujmp.gui.util.GUIUtil;
 
-public class ClassifyJDMPMenu extends JMenu {
-	private static final long serialVersionUID = 2340099070389463428L;
+public class ClassifyKNNAction extends AbstractObjectAction {
+	private static final long serialVersionUID = -7115297714190937691L;
 
-	public ClassifyJDMPMenu(JComponent component, DataSetGUIObject o, GUIObject owner) {
-		super("JDMP");
-		setMnemonic(KeyEvent.VK_J);
-		add(new JMenuItem(new ClassifyLinearRegressionAction(component, o)));
-		add(new JMenuItem(new ClassifyNaiveBayesAction(component, o)));
-		add(new JMenuItem(new ClassifyKNNAction(component, o)));
-		add(new JSeparator());
-		add(new JMenuItem(new ClassifyRandomAction(component, o)));
-		add(new JMenuItem(new ClassifyConstantAction(component, o)));
+	public ClassifyKNNAction(JComponent c, GUIObject i) {
+		super(c, i);
+		putValue(Action.NAME, "KNN");
+		putValue(Action.SHORT_DESCRIPTION, "Classify a DataSet using k nearest neigbors");
+		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_K);
+	}
+
+	public Object call() {
+		try {
+			Classifier c = new KNNClassifier(GUIUtil.getInt("number of neighbors", 1, 100));
+			c.train((ClassificationDataSet) getCoreObject());
+			c.predict((ClassificationDataSet) getCoreObject());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

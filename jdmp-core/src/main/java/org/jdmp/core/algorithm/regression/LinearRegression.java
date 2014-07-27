@@ -44,8 +44,18 @@ public class LinearRegression extends AbstractClassifier {
 
 	public static final String PARAMETERS = "Parameters";
 
+	private Matrix projectionMatrix = null;
+
+	private final int projectionDimensions;
+
 	public LinearRegression() {
+		this(0);
+	}
+
+	public LinearRegression(int projectionDimensions) {
 		super();
+		// use random projection
+		this.projectionDimensions = projectionDimensions;
 		setParameterVariable(VariableFactory.labeledVariable("Regression Parameters"));
 	}
 
@@ -64,7 +74,12 @@ public class LinearRegression extends AbstractClassifier {
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
 		input = input.toColumnVector(Ret.NEW);
 		Matrix bias = Matrix.Factory.ones(input.getRowCount(), 1);
-		return Matrix.Factory.horCat(input, bias).mtimes(getParameterMatrix());
+		Matrix data = Matrix.Factory.horCat(input, bias);
+		if (projectionMatrix != null) {
+			data = data.mtimes(projectionMatrix);
+		}
+		Matrix result = data.mtimes(getParameterMatrix());
+		return result;
 	}
 
 	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) throws Exception {
@@ -82,6 +97,12 @@ public class LinearRegression extends AbstractClassifier {
 		Matrix input = Matrix.Factory.vertCat(inputs);
 		Matrix bias = Matrix.Factory.ones(input.getRowCount(), 1);
 		Matrix x = Matrix.Factory.horCat(input, bias);
+
+		if (projectionDimensions > 0) {
+			projectionMatrix = Matrix.Factory.rand(x.getColumnCount(), projectionDimensions);
+			x = x.mtimes(projectionMatrix);
+		}
+
 		Matrix y = Matrix.Factory.vertCat(targets);
 
 		// this depends on the number of samples and is therefore slower for
