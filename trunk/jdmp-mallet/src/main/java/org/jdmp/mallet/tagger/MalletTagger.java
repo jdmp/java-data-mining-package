@@ -28,6 +28,8 @@ import java.util.List;
 
 import org.jdmp.core.algorithm.tagger.AbstractTagger;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.listmatrix.ListMatrix;
+import org.ujmp.core.mapmatrix.MapMatrix;
 
 import cc.mallet.fst.CRF;
 import cc.mallet.fst.CRFOptimizableByLabelLikelihood;
@@ -61,11 +63,11 @@ public class MalletTagger extends AbstractTagger {
 	public MalletTagger() {
 	}
 
-	public List<Matrix> tag(String input) throws Exception {
+	public ListMatrix<ListMatrix<MapMatrix<String, Object>>> tag(String input) throws Exception {
 		return null;
 	}
 
-	public List<Matrix> tag(Matrix input) throws Exception {
+	public ListMatrix<ListMatrix<MapMatrix<String, Object>>> tag(Matrix input) throws Exception {
 		return null;
 	}
 

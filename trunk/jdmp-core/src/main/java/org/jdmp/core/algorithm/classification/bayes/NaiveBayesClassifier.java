@@ -31,6 +31,7 @@ import org.jdmp.core.algorithm.classification.AbstractClassifier;
 import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.algorithm.estimator.DensityEstimator;
 import org.jdmp.core.algorithm.estimator.DiscreteDensityEstimator;
+import org.jdmp.core.algorithm.estimator.GaussianDensityEstimator;
 import org.jdmp.core.dataset.ClassificationDataSet;
 import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.core.dataset.RegressionDataSet;
@@ -54,11 +55,11 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 	@Override
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
 		input = input.toColumnVector(Ret.NEW);
-		Matrix result = Matrix.Factory.zeros(classCount, 1);
+		Matrix result = Matrix.Factory.zeros(1, classCount);
 		for (int cc = 0; cc < classCount; cc++) {
 			Classifier classifier = classifiers.get(cc);
 			Matrix prediction = classifier.predict(input, sampleWeight);
-			result.setAsDouble(prediction.getAsDouble(0, 0), cc, 0);
+			result.setAsDouble(prediction.getAsDouble(0, 0), 0, cc);
 		}
 		return result;
 	}
@@ -110,20 +111,23 @@ class NaiveBayesClassifier2Classes extends AbstractClassifier {
 
 	private static final int CLASSCOUNT = 2;
 
+	private boolean discrete = false;
+
 	public NaiveBayesClassifier2Classes() {
 		super();
 	}
 
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
-		input = input.toRowVector(Ret.NEW);
+		input = input.toColumnVector(Ret.NEW);
 		double[] logs = new double[CLASSCOUNT];
 		// for all classes
 		for (int i = 0; i < CLASSCOUNT; i++) {
 			// for all features
 			logs[i] = Math.log(classDists.getProbability(i));
 			for (int j = 0; j < input.getColumnCount(); j++) {
-				int val = (int) input.getAsDouble(j, 0);
-				logs[i] += Math.log(dists[j][i].getProbability(val));
+				double value = input.getAsDouble(0, j);
+				double probability = dists[j][i].getProbability(value);
+				logs[i] += Math.log(probability);
 			}
 		}
 		double[] probs = MathUtil.logToProbs(logs);
@@ -149,11 +153,19 @@ class NaiveBayesClassifier2Classes extends AbstractClassifier {
 		Matrix max = dataSetInput.max(Ret.NEW, Matrix.ROW);
 
 		this.dists = new DensityEstimator[featureCount][CLASSCOUNT];
-		this.classDists = new DiscreteDensityEstimator(CLASSCOUNT, true);
+		if (discrete) {
+			this.classDists = new DiscreteDensityEstimator(CLASSCOUNT);
+		} else {
+			this.classDists = new GaussianDensityEstimator();
+		}
 
 		for (int i = 0; i < featureCount; i++) {
 			for (int j = 0; j < CLASSCOUNT; j++) {
-				dists[i][j] = new DiscreteDensityEstimator((int) max.getAsDouble(0, i) + 1, true);
+				if (discrete) {
+					dists[i][j] = new DiscreteDensityEstimator(max.getAsInt(0, i) + 1);
+				} else {
+					dists[i][j] = new GaussianDensityEstimator();
+				}
 			}
 		}
 
@@ -169,12 +181,12 @@ class NaiveBayesClassifier2Classes extends AbstractClassifier {
 				weight = sampleWeight.doubleValue();
 			}
 
-			int outputVal = (int) sampleTarget.getAsDouble(0, 0);
+			int outputClass = sampleTarget.getAsInt(0, 0);
 			for (int j = 0; j < sampleInput.getColumnCount(); j++) {
-				int inputVal = (int) sampleInput.getAsDouble(0, j);
-				dists[j][outputVal].addValue(inputVal, weight);
+				double inputValue = sampleInput.getAsDouble(0, j);
+				dists[j][outputClass].addValue(inputValue, weight);
 			}
-			classDists.addValue(outputVal, weight);
+			classDists.addValue(outputClass, weight);
 		}
 	}
 

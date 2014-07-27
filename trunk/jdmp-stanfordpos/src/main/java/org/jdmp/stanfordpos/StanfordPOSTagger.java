@@ -30,6 +30,9 @@ import java.util.List;
 
 import org.jdmp.core.algorithm.tagger.AbstractTagger;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.listmatrix.DefaultListMatrix;
+import org.ujmp.core.listmatrix.ListMatrix;
+import org.ujmp.core.mapmatrix.MapMatrix;
 
 import edu.stanford.nlp.ling.HasWord;
 import edu.stanford.nlp.ling.TaggedWord;
@@ -39,9 +42,9 @@ import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 public class StanfordPOSTagger extends AbstractTagger {
 	private static final long serialVersionUID = -2655534427624643477L;
 
-	public static final String MODELPATH = System.getProperty("java.io.tempdir") + "/models/pos";
+	public static final String MODELPATH = "C:/TEMP/";
 
-	public static final String DEFAULTMODEL = "left3words-wsj-0-18.tagger";
+	public static final String DEFAULTMODEL = "german-fast.tagger";
 
 	private MaxentTagger tagger = null;
 
@@ -62,25 +65,26 @@ public class StanfordPOSTagger extends AbstractTagger {
 		tagger = new MaxentTagger(modelFile);
 	}
 
-	public List<Matrix> tag(String input) throws Exception {
-		List<Matrix> list = new ArrayList<Matrix>();
+	public ListMatrix<ListMatrix<MapMatrix<String, Object>>> tag(String input) throws Exception {
+		ListMatrix<ListMatrix<MapMatrix<String, Object>>> list = new DefaultListMatrix<ListMatrix<MapMatrix<String, Object>>>();
 
 		StringReader sr = new StringReader(input);
 		List<List<HasWord>> sentences = MaxentTagger.tokenizeText(sr);
 
 		for (List<HasWord> sentence : sentences) {
-			ArrayList<TaggedWord> tSentence = tagger.tagSentence(sentence);
+			List<TaggedWord> tSentence = tagger.tagSentence(sentence);
+			System.out.println(tSentence);
 			Matrix m = new StanfordSentenceMatrix(tSentence);
-			list.add(m);
+			// list.add(m);
 		}
 
 		return list;
 	}
 
-	public List<Matrix> tag(Matrix input) throws Exception {
-		List<Matrix> list = new ArrayList<Matrix>();
+	public ListMatrix<ListMatrix<MapMatrix<String, Object>>> tag(Matrix input) throws Exception {
+		ListMatrix<ListMatrix<MapMatrix<String, Object>>> list = new DefaultListMatrix<ListMatrix<MapMatrix<String, Object>>>();
 
-		ArrayList<TaggedWord> tSentence = null;
+		List<TaggedWord> tSentence = null;
 		if (input instanceof StanfordSentenceMatrix) {
 			tSentence = ((StanfordSentenceMatrix) input).getWrappedObject();
 		} else {
@@ -92,7 +96,7 @@ public class StanfordPOSTagger extends AbstractTagger {
 			tSentence = tagger.tagSentence(words);
 		}
 		Matrix m = new StanfordSentenceMatrix(tSentence);
-		list.add(m);
+		// list.add(m);
 		return list;
 	}
 

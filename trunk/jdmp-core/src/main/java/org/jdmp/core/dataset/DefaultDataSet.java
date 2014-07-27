@@ -33,7 +33,7 @@ import org.ujmp.core.calculation.Calculation.Ret;
 public class DefaultDataSet extends AbstractDataSet {
 	private static final long serialVersionUID = -2887879051530049677L;
 
-	public static final String INPUT = "Input";
+	
 
 	public DefaultDataSet() {
 		super();
@@ -41,10 +41,6 @@ public class DefaultDataSet extends AbstractDataSet {
 		Variable input = VariableFactory.labeledVariable("Input");
 		input.add(inputMatrix);
 		getVariableMap().put(INPUT, input);
-	}
-
-	public final Variable getInputVariable() {
-		return getVariableMap().get(INPUT);
 	}
 
 	public final long getInputFeatureCount() {
@@ -66,10 +62,6 @@ public class DefaultDataSet extends AbstractDataSet {
 
 	public void addMissingValues(int dimension, double percentMissing) {
 		getInputVariable().getLast().addMissing(Ret.ORIG, dimension, percentMissing);
-	}
-
-	public Matrix getInputMatrix() {
-		return getInputVariable().getLast();
 	}
 
 	public int getFeatureCount() {

@@ -29,8 +29,6 @@ import java.net.URL;
 import java.util.BitSet;
 import java.util.Random;
 
-import javax.swing.text.TabableView;
-
 import org.jdmp.core.algorithm.basic.CreateIris;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.sample.SampleFactory;
@@ -38,7 +36,6 @@ import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.enums.DBType;
 import org.ujmp.core.filematrix.FileFormat;
-import org.ujmp.core.util.MathUtil;
 
 public abstract class DataSetFactory {
 
@@ -249,82 +246,98 @@ public abstract class DataSetFactory {
 
 		Sample pigeon = SampleFactory.labeledSample("Pigeon");
 		pigeon.setMatrix(Sample.INPUT,
-				Matrix.Factory.importFromString(FileFormat.CSV, "1 0 0 1 0 0 0 0 1 0 0 1 0", " "));
+				Matrix.Factory.linkToArray(new double[] { 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0 })
+						.transpose());
 		animals.getSampleMap().add(pigeon);
 
 		Sample chicken = SampleFactory.labeledSample("Chicken");
 		chicken.setMatrix(Sample.INPUT,
-				Matrix.Factory.importFromString(FileFormat.CSV, "1 0 0 1 0 0 0 0 1 0 0 0 0", " "));
+				Matrix.Factory.linkToArray(new double[] { 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0 })
+						.transpose());
 		animals.getSampleMap().add(chicken);
 
 		Sample duck = SampleFactory.labeledSample("Duck");
 		duck.setMatrix(Sample.INPUT,
-				Matrix.Factory.importFromString(FileFormat.CSV, "1 0 0 1 0 0 0 0 1 0 0 0 1", " "));
+				Matrix.Factory.linkToArray(new double[] { 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1 })
+						.transpose());
 		animals.getSampleMap().add(duck);
 
 		Sample goose = SampleFactory.labeledSample("Goose");
 		goose.setMatrix(Sample.INPUT,
-				Matrix.Factory.importFromString(FileFormat.CSV, "1 0 0 1 0 0 0 0 1 0 0 1 1", " "));
+				Matrix.Factory.linkToArray(new double[] { 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1 })
+						.transpose());
 		animals.getSampleMap().add(goose);
 
 		Sample owl = SampleFactory.labeledSample("Owl");
 		owl.setMatrix(Sample.INPUT,
-				Matrix.Factory.importFromString(FileFormat.CSV, "1 0 0 1 0 0 0 0 1 1 0 1 0", " "));
+				Matrix.Factory.linkToArray(new double[] { 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0 })
+						.transpose());
 		animals.getSampleMap().add(owl);
 
 		Sample falcon = SampleFactory.labeledSample("Falcon");
 		falcon.setMatrix(Sample.INPUT,
-				Matrix.Factory.importFromString(FileFormat.CSV, "1 0 0 1 0 0 0 0 1 1 0 1 0", " "));
+				Matrix.Factory.linkToArray(new double[] { 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0 })
+						.transpose());
 		animals.getSampleMap().add(falcon);
 
 		Sample eagle = SampleFactory.labeledSample("Eagle");
 		eagle.setMatrix(Sample.INPUT,
-				Matrix.Factory.importFromString(FileFormat.CSV, "0 1 0 1 0 0 0 0 1 1 0 1 0", " "));
+				Matrix.Factory.linkToArray(new double[] { 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0 })
+						.transpose());
 		animals.getSampleMap().add(eagle);
 
 		Sample fox = SampleFactory.labeledSample("Fox");
 		fox.setMatrix(Sample.INPUT,
-				Matrix.Factory.importFromString(FileFormat.CSV, "0 1 0 0 1 1 0 0 0 1 0 0 0", " "));
+				Matrix.Factory.linkToArray(new double[] { 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0 })
+						.transpose());
 		animals.getSampleMap().add(fox);
 
 		Sample dog = SampleFactory.labeledSample("Dog");
 		dog.setMatrix(Sample.INPUT,
-				Matrix.Factory.importFromString(FileFormat.CSV, "0 1 0 0 1 1 0 0 0 0 1 0 0", " "));
+				Matrix.Factory.linkToArray(new double[] { 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0 })
+						.transpose());
 		animals.getSampleMap().add(dog);
 
 		Sample wolf = SampleFactory.labeledSample("Wolf");
 		wolf.setMatrix(Sample.INPUT,
-				Matrix.Factory.importFromString(FileFormat.CSV, "0 1 0 0 1 1 0 1 0 1 1 0 0", " "));
+				Matrix.Factory.linkToArray(new double[] { 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0 })
+						.transpose());
 		animals.getSampleMap().add(wolf);
 
 		Sample cat = SampleFactory.labeledSample("Cat");
 		cat.setMatrix(Sample.INPUT,
-				Matrix.Factory.importFromString(FileFormat.CSV, "1 0 0 0 1 1 0 0 0 1 0 0 0", " "));
+				Matrix.Factory.linkToArray(new double[] { 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0 })
+						.transpose());
 		animals.getSampleMap().add(cat);
 
 		Sample tiger = SampleFactory.labeledSample("Tiger");
 		tiger.setMatrix(Sample.INPUT,
-				Matrix.Factory.importFromString(FileFormat.CSV, "0 0 1 0 1 1 0 0 0 1 1 0 0", " "));
+				Matrix.Factory.linkToArray(new double[] { 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0 })
+						.transpose());
 		animals.getSampleMap().add(tiger);
 
 		Sample lion = SampleFactory.labeledSample("Lion");
 		lion.setMatrix(Sample.INPUT,
-				Matrix.Factory.importFromString(FileFormat.CSV, "0 0 1 0 1 1 0 1 0 1 1 0 0", " "));
+				Matrix.Factory.linkToArray(new double[] { 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0 })
+						.transpose());
 		animals.getSampleMap().add(lion);
 
 		Sample horse = SampleFactory.labeledSample("Horse");
 		horse.setMatrix(Sample.INPUT,
-				Matrix.Factory.importFromString(FileFormat.CSV, "0 0 1 0 1 1 1 1 0 0 1 0 0", " "));
+				Matrix.Factory.linkToArray(new double[] { 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0 })
+						.transpose());
 		animals.getSampleMap().add(horse);
 
 		Sample zebra = SampleFactory.labeledSample("Zebra");
 		zebra.setMatrix(Sample.INPUT,
-				Matrix.Factory.importFromString(FileFormat.CSV, "0 0 1 0 1 1 1 1 0 0 1 0 0", " "));
+				Matrix.Factory.linkToArray(new double[] { 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0 })
+						.transpose());
 		animals.getSampleMap().add(zebra);
 
 		Sample cow = SampleFactory.labeledSample("Cow");
 		cow.setMatrix(Sample.INPUT,
-				Matrix.Factory.importFromString(FileFormat.CSV, "0 0 1 0 1 1 1 0 0 0 0 0 0", " "));
+				Matrix.Factory.linkToArray(new double[] { 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0 })
+						.transpose());
 		animals.getSampleMap().add(cow);
 
 		return animals;

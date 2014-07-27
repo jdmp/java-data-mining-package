@@ -27,7 +27,9 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.JComponent;
 import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
+import org.jdmp.gui.dataset.actions.ClusterSOM;
 import org.ujmp.core.interfaces.GUIObject;
 
 public class ClusterDataSetMenu extends JMenu {
@@ -36,5 +38,6 @@ public class ClusterDataSetMenu extends JMenu {
 	public ClusterDataSetMenu(JComponent component, DataSetGUIObject o, GUIObject owner) {
 		super("Clustering");
 		setMnemonic(KeyEvent.VK_C);
+		add(new JMenuItem(new ClusterSOM(component, o)));
 	}
 }

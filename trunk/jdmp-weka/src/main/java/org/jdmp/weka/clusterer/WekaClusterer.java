@@ -26,7 +26,7 @@ package org.jdmp.weka.clusterer;
 import java.lang.reflect.Constructor;
 
 import org.jdmp.core.algorithm.clustering.AbstractClusterer;
-import org.jdmp.core.dataset.RegressionDataSet;
+import org.jdmp.core.dataset.DataSet;
 import org.jdmp.weka.wrappers.DataSetToInstancesWrapper;
 import org.jdmp.weka.wrappers.SampleToInstanceWrapper;
 import org.ujmp.core.Matrix;
@@ -93,7 +93,7 @@ public class WekaClusterer extends AbstractClusterer {
 		createAlgorithm();
 	}
 
-	public void train(RegressionDataSet dataSet) throws Exception {
+	public void train(DataSet dataSet) throws Exception {
 		instances = new DataSetToInstancesWrapper(dataSet, discrete, false);
 		wekaClusterer.buildClusterer(instances);
 	}

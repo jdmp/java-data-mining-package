@@ -21,33 +21,39 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.gui.dataset;
+package org.jdmp.gui.dataset.actions;
 
 import java.awt.event.KeyEvent;
 
+import javax.swing.Action;
 import javax.swing.JComponent;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JSeparator;
 
-import org.jdmp.gui.dataset.actions.ClassifyConstantAction;
-import org.jdmp.gui.dataset.actions.ClassifyKNNAction;
-import org.jdmp.gui.dataset.actions.ClassifyLinearRegressionAction;
-import org.jdmp.gui.dataset.actions.ClassifyNaiveBayesAction;
-import org.jdmp.gui.dataset.actions.ClassifyRandomAction;
+import org.jdmp.core.algorithm.clustering.Clusterer;
+import org.jdmp.core.algorithm.clustering.SelfOrganizingMap;
+import org.jdmp.core.dataset.DataSet;
 import org.ujmp.core.interfaces.GUIObject;
+import org.ujmp.gui.actions.AbstractObjectAction;
+import org.ujmp.gui.util.GUIUtil;
 
-public class ClassifyJDMPMenu extends JMenu {
-	private static final long serialVersionUID = 2340099070389463428L;
+public class ClusterSOM extends AbstractObjectAction {
+	private static final long serialVersionUID = -5877704478610043843L;
 
-	public ClassifyJDMPMenu(JComponent component, DataSetGUIObject o, GUIObject owner) {
-		super("JDMP");
-		setMnemonic(KeyEvent.VK_J);
-		add(new JMenuItem(new ClassifyLinearRegressionAction(component, o)));
-		add(new JMenuItem(new ClassifyNaiveBayesAction(component, o)));
-		add(new JMenuItem(new ClassifyKNNAction(component, o)));
-		add(new JSeparator());
-		add(new JMenuItem(new ClassifyRandomAction(component, o)));
-		add(new JMenuItem(new ClassifyConstantAction(component, o)));
+	public ClusterSOM(JComponent c, GUIObject i) {
+		super(c, i);
+		putValue(Action.NAME, "SOM");
+		putValue(Action.SHORT_DESCRIPTION, "Cluster a DataSet using a Self-Organizing Map");
+		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_S);
+	}
+
+	public Object call() {
+		try {
+			Clusterer c = new SelfOrganizingMap(GUIUtil.getInt("number of rows", 1, 100),
+					GUIUtil.getInt("number of columns", 1, 100));
+			c.train((DataSet) getCoreObject());
+			c.predict((DataSet) getCoreObject());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

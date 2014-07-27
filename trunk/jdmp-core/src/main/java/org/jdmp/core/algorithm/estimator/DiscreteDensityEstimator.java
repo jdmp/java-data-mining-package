@@ -23,47 +23,54 @@
 
 package org.jdmp.core.algorithm.estimator;
 
-public class DiscreteDensityEstimator implements DensityEstimator {
+import java.util.Arrays;
 
-	private double[] counts;
+public class DiscreteDensityEstimator extends AbstractDensityEstimator {
 
+	private final double[] counts;
 	private double sumOfCounts;
 
-	public DiscreteDensityEstimator(int nmbVals, boolean laplace) {
-		counts = new double[nmbVals];
-		sumOfCounts = 0;
-		if (laplace) {
-			for (int i = 0; i < nmbVals; i++) {
-				counts[i] = 1;
-			}
-			sumOfCounts = (double) nmbVals;
-		}
+	public DiscreteDensityEstimator(final int numberOfBins) {
+		this(numberOfBins, 1.0);
 	}
 
-	public DiscreteDensityEstimator(int nmbVals, double correction) {
-		counts = new double[nmbVals];
-		sumOfCounts = 0;
-		for (int i = 0; i < nmbVals; i++) {
-			counts[i] = correction;
-		}
-		sumOfCounts = (double) nmbVals;
+	public DiscreteDensityEstimator(final int numberOfBins, final boolean useLaplaceCorrection) {
+		this(numberOfBins, useLaplaceCorrection ? 1.0 : 0.0);
 	}
 
-	public void addValue(int val, double weight) {
-		counts[val] += weight;
+	public DiscreteDensityEstimator(final int numberOfBins, final double correctionFactor) {
+		counts = new double[numberOfBins];
+		// avoid zero probabilities with pseudo counts
+		sumOfCounts = numberOfBins * correctionFactor;
+		Arrays.fill(counts, correctionFactor);
+	}
+
+	public void addValue(final double value, final double weight) {
+		counts[(int) value] += weight;
 		sumOfCounts += weight;
 	}
 
-	public void addValue(int val) {
-		counts[val]++;
+	public void addValue(final double value) {
+		counts[(int) value]++;
 		sumOfCounts++;
 	}
 
-	public double getProbability(int val) {
-		if (sumOfCounts == 0) {
-			return 0;
+	public double getProbability(final double value) {
+		if (sumOfCounts == 0.0) {
+			return 0.0;
+		} else {
+			return counts[(int) value] / sumOfCounts;
 		}
-		return counts[val] / sumOfCounts;
+	}
+
+	public void removeValue(final double value, final double weight) {
+		counts[(int) value] -= weight;
+		sumOfCounts -= weight;
+	}
+
+	public void removeValue(final double value) {
+		counts[(int) value]--;
+		sumOfCounts--;
 	}
 
 }

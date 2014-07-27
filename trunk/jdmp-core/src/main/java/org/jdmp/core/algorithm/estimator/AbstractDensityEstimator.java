@@ -21,34 +21,8 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.core.dataset;
+package org.jdmp.core.algorithm.estimator;
 
-import java.util.List;
+public abstract class AbstractDensityEstimator implements DensityEstimator {
 
-import org.jdmp.core.sample.HasSampleMap;
-import org.jdmp.core.sample.Sample;
-import org.jdmp.core.variable.HasVariableMap;
-import org.jdmp.core.variable.Variable;
-import org.ujmp.core.Matrix;
-import org.ujmp.core.interfaces.CoreObject;
-import org.ujmp.core.mapmatrix.MapMatrix;
-
-public interface DataSet extends CoreObject, HasVariableMap, HasSampleMap,
-		MapMatrix<String, Sample> {
-
-	public static final String INPUT = "Input";
-
-	public List<DataSet> splitByCount(boolean shuffle, int... count);
-
-	public List<DataSet> splitForCV(int numberOfCVSets, int idOfCVSet, long randomSeed);
-
-	public List<DataSet> splitByPercent(boolean shuffle, double... percent);
-
-	public Matrix getInputMatrix();
-
-	public Variable getInputVariable();
-
-	public DataSet clone();
-
-	public int getFeatureCount();
 }

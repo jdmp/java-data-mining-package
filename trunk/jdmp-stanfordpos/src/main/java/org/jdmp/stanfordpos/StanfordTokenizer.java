@@ -24,13 +24,11 @@
 package org.jdmp.stanfordpos;
 
 import java.io.StringReader;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.jdmp.core.algorithm.tokenizer.AbstractTokenizer;
-import org.jdmp.core.algorithm.tokenizer.Tokenizer;
-import org.ujmp.core.Matrix;
-import org.ujmp.core.objectmatrix.DenseObjectMatrix2D;
+import org.ujmp.core.listmatrix.DefaultListMatrix;
+import org.ujmp.core.listmatrix.ListMatrix;
 
 import edu.stanford.nlp.ling.HasWord;
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
@@ -43,28 +41,22 @@ public class StanfordTokenizer extends AbstractTokenizer {
 	public StanfordTokenizer() throws Exception {
 	}
 
-	public List<Matrix> tokenize(String input) throws Exception {
-		List<Matrix> result = new ArrayList<Matrix>();
+	public ListMatrix<ListMatrix<String>> tokenize(String input) throws Exception {
+		ListMatrix<ListMatrix<String>> result = new DefaultListMatrix<ListMatrix<String>>();
 		StringReader sr = new StringReader(input);
 
 		List<List<HasWord>> sentences = MaxentTagger.tokenizeText(sr);
 		for (List<HasWord> tokSentence : sentences) {
-			Matrix m = DenseObjectMatrix2D.Factory.zeros(tokSentence.size(), 1);
+			ListMatrix<String> m = new DefaultListMatrix<String>();
 
 			for (int i = 0; i < tokSentence.size(); i++) {
 				HasWord t = tokSentence.get(i);
-				m.setAsString(t.word(), i, 0);
+				m.add(t.word());
 			}
 			result.add(m);
 		}
 
 		return result;
-	}
-
-	public static void main(String[] args) throws Exception {
-		String s = "But now and then, the state’s Western heritage comes storming through the saloon doors to remind one and all just what this place was like not so long ago.";
-		Tokenizer t = new StanfordTokenizer();
-		System.out.println(t.tokenize(s));
 	}
 
 	public static StanfordTokenizer getInstance() {

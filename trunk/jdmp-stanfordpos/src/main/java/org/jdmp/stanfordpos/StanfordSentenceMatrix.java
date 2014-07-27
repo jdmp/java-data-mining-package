@@ -24,6 +24,7 @@
 package org.jdmp.stanfordpos;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.ujmp.core.DenseMatrix2D;
 import org.ujmp.core.interfaces.Wrapper;
@@ -32,12 +33,12 @@ import org.ujmp.core.stringmatrix.stub.AbstractDenseStringMatrix2D;
 
 import edu.stanford.nlp.ling.TaggedWord;
 
-public class StanfordSentenceMatrix extends AbstractDenseStringMatrix2D implements Wrapper<ArrayList<TaggedWord>> {
+public class StanfordSentenceMatrix extends AbstractDenseStringMatrix2D implements Wrapper<List<TaggedWord>> {
 	private static final long serialVersionUID = 9175120136686956227L;
 
-	private ArrayList<TaggedWord> sentence = null;
+	private List<TaggedWord> sentence = null;
 
-	public StanfordSentenceMatrix(ArrayList<TaggedWord> sentence) {
+	public StanfordSentenceMatrix(List<TaggedWord> sentence) {
 		super(sentence.size(), 2);
 		this.sentence = sentence;
 	}
@@ -77,7 +78,7 @@ public class StanfordSentenceMatrix extends AbstractDenseStringMatrix2D implemen
 		return new long[] { sentence.size(), 2 };
 	}
 
-	public ArrayList<TaggedWord> getWrappedObject() {
+	public List<TaggedWord> getWrappedObject() {
 		return sentence;
 	}
 
