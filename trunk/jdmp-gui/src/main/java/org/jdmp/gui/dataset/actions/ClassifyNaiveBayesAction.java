@@ -30,7 +30,7 @@ import javax.swing.JComponent;
 
 import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.algorithm.classification.bayes.NaiveBayesClassifier;
-import org.jdmp.core.dataset.ClassificationDataSet;
+import org.jdmp.core.dataset.DataSet;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.gui.actions.AbstractObjectAction;
 
@@ -47,8 +47,8 @@ public class ClassifyNaiveBayesAction extends AbstractObjectAction {
 	public Object call() {
 		try {
 			Classifier lr = new NaiveBayesClassifier();
-			lr.train((ClassificationDataSet) getCoreObject());
-			lr.predict((ClassificationDataSet) getCoreObject());
+			lr.train((DataSet) getCoreObject());
+			lr.predict((DataSet) getCoreObject());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

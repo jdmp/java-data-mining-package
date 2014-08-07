@@ -33,7 +33,6 @@ import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.algorithm.AlgorithmMapping;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DataSetFactory;
-import org.jdmp.core.dataset.RegressionDataSet;
 import org.jdmp.core.module.Module;
 import org.jdmp.core.module.ModuleFactory;
 import org.jdmp.core.sample.Sample;
@@ -710,7 +709,7 @@ public class Translation extends DepthFirstAdapter {
 			return MathUtil.getBoolean(m);
 		} else if (c == String.class) {
 			return StringUtil.convert(m);
-		} else if (c == RegressionDataSet.class) {
+		} else if (c == DataSet.class) {
 			return m;
 		}
 		RuntimeException e = new RuntimeException("cannot convert to desired object type "

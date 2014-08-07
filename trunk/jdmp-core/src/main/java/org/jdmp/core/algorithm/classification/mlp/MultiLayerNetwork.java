@@ -30,12 +30,10 @@ import java.util.List;
 import org.jdmp.core.algorithm.AlgorithmTwoSources;
 import org.jdmp.core.algorithm.classification.AbstractClassifier;
 import org.jdmp.core.algorithm.classification.Classifier;
-import org.jdmp.core.dataset.ClassificationDataSet;
-import org.jdmp.core.dataset.RegressionDataSet;
+import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
-import org.ujmp.core.Coordinates;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.listmatrix.DefaultListMatrix;
@@ -291,14 +289,14 @@ public class MultiLayerNetwork extends AbstractClassifier {
 
 	}
 
-	public int determineOptimalTrainingDuration(ClassificationDataSet dataSet, int numberOfSteps)
+	public int determineOptimalTrainingDuration(DataSet dataSet, int numberOfSteps)
 			throws Exception {
 		long seed = System.currentTimeMillis();
 		DefaultListMatrix<Double> duration = new DefaultListMatrix<Double>();
 		for (int r = 0; r < 10; r++) {
-			List<ClassificationDataSet> dss = dataSet.splitForStratifiedCV(10, r, seed);
-			ClassificationDataSet train = dss.get(0);
-			ClassificationDataSet test = dss.get(1);
+			List<DataSet> dss = dataSet.splitForStratifiedCV(10, r, seed);
+			DataSet train = dss.get(0);
+			DataSet test = dss.get(1);
 			MultiLayerNetwork a = new MultiLayerNetwork(aggregationInput, transferInput, biasInput,
 					aggregationDefault, transferDefault, biasDefault, aggregationOutput,
 					transferOutput, biasOutput, neuronCount);
@@ -323,7 +321,7 @@ public class MultiLayerNetwork extends AbstractClassifier {
 		return mean;
 	}
 
-	public void train(RegressionDataSet dataSet) throws Exception {
+	public void train(DataSet dataSet) throws Exception {
 
 		// TODO: fix!
 
@@ -354,7 +352,7 @@ public class MultiLayerNetwork extends AbstractClassifier {
 		}
 	}
 
-	public void trainOnce(RegressionDataSet dataSet) throws Exception {
+	public void trainOnce(DataSet dataSet) throws Exception {
 		List<Sample> samples = new ArrayList<Sample>(dataSet.getSampleMap().values());
 		Collections.shuffle(samples);
 		for (Sample s : samples) {

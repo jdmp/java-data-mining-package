@@ -31,7 +31,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.jdmp.core.dataset.RelationalDataSet;
+import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.DefaultDataSet;
 import org.jdmp.core.sample.RelationalSample;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.sample.SampleFactory;
@@ -51,7 +52,7 @@ public class MarketBasketAnalysis extends AbstractRelationMiner {
 
 	private int minSupport = 10;
 
-	public RelationalDataSet calculate(RelationalDataSet dataSet) throws Exception {
+	public DataSet calculate(DataSet dataSet) throws Exception {
 		product1ToIds.setLabel("Product 1 Ids");
 		product2ToIds.setLabel("Product 2 Ids");
 
@@ -82,7 +83,7 @@ public class MarketBasketAnalysis extends AbstractRelationMiner {
 				"/home/arndt/muenchen/totale2.txt"));
 		// data.showGUI();
 
-		RelationalDataSet orig = new RelationalDataSet();
+		DataSet orig = new DefaultDataSet();
 
 		// for (int r = 0; r < 10000; r++) {
 		for (int r = 0; r < data.getRowCount(); r++) {
@@ -100,12 +101,12 @@ public class MarketBasketAnalysis extends AbstractRelationMiner {
 
 		MarketBasketAnalysis mba = new MarketBasketAnalysis();
 		orig.showGUI();
-		RelationalDataSet ds = mba.calculate(orig);
+		DataSet ds = mba.calculate(orig);
 		ds.showGUI();
 	}
 
-	private RelationalDataSet calculateP(int minSupport) throws Exception {
-		RelationalDataSet ds = new RelationalDataSet();
+	private DataSet calculateP(int minSupport) throws Exception {
+		DataSet ds = new DefaultDataSet();
 
 		for (Object o : product2ToIds.keySet()) {
 			Set<String> set = (Set<String>) (o);

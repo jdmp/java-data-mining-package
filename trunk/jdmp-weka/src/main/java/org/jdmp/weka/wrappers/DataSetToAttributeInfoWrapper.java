@@ -23,7 +23,6 @@
 
 package org.jdmp.weka.wrappers;
 
-import org.jdmp.core.dataset.ClassificationDataSet;
 import org.jdmp.core.dataset.DataSet;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
@@ -65,7 +64,7 @@ public class DataSetToAttributeInfoWrapper extends FastVector {
 		}
 
 		FastVector classes = new FastVector();
-		for (int i = 0; i < ((ClassificationDataSet) dataSet).getClassCount(); i++) {
+		for (int i = 0; i < dataSet.getClassCount(); i++) {
 			classes.addElement("Class " + i);
 		}
 		weka.core.Attribute a = new weka.core.Attribute("class", classes);

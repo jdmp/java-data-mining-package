@@ -24,9 +24,9 @@
 package org.jdmp.core;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import org.jdmp.core.dataset.ClassificationDataSet;
-import org.jdmp.core.dataset.RegressionDataSet;
+import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.module.Module;
 import org.jdmp.core.module.ModuleFactory;
 import org.jdmp.core.sample.Sample;
@@ -56,8 +56,8 @@ public class TestScript {
 	public void testIris() throws Exception {
 		Result r = execute("iris");
 		Object o = r.getObject();
-		assertEquals(ClassificationDataSet.class, o.getClass());
-		ClassificationDataSet ds = (ClassificationDataSet) o;
+		assertTrue(o instanceof DataSet);
+		DataSet ds = (DataSet) o;
 		assertEquals(150, ds.getSampleMap().getSize());
 	}
 
@@ -65,12 +65,12 @@ public class TestScript {
 	public void testHenon() throws Exception {
 		Result r = execute("henon(100,10,5)");
 		Object o = r.getObject();
-		assertEquals(RegressionDataSet.class, o.getClass());
-		RegressionDataSet ds = (RegressionDataSet) o;
+		assertTrue(o instanceof DataSet);
+		DataSet ds = (DataSet) o;
 		assertEquals(100, ds.getSampleMap().getSize());
 		Sample s = ds.getSampleMap().getElementAt(0);
-		long input = s.get(Sample.INPUT).getLast().getColumnCount();
-		long target = s.get(Sample.TARGET).getLast().getColumnCount();
+		long input = s.getMatrix(Sample.INPUT).getColumnCount();
+		long target = s.getMatrix(Sample.TARGET).getColumnCount();
 		assertEquals(10, input);
 		assertEquals(5, target);
 	}

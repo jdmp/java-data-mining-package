@@ -209,21 +209,24 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 		String id = sample.getId();
 		doc.add(new StringField(Sample.ID, id, Field.Store.YES));
 
-		for (Variable v : sample.values()) {
-			String key = v.getLabel();
-			if (Sample.ID.equals(key)) {
-				// skip
-			} else if (fieldsToSkip.contains(key)) {
-				// skip
-			} else {
-				String value = "";
-				for (Matrix m : v) {
-					for (long[] c : m.availableCoordinates()) {
-						value += " " + m.getAsString(c);
+		for (Matrix mv : sample.values()) {
+			if (mv instanceof Variable) {
+				Variable v = (Variable) mv;
+				String key = v.getLabel();
+				if (Sample.ID.equals(key)) {
+					// skip
+				} else if (fieldsToSkip.contains(key)) {
+					// skip
+				} else {
+					String value = "";
+					for (Matrix m : v) {
+						for (long[] c : m.availableCoordinates()) {
+							value += " " + m.getAsString(c);
+						}
 					}
+					doc.add(new Field(key, value.trim(), Field.Store.YES, Field.Index.ANALYZED));
+					fields.add(key);
 				}
-				doc.add(new Field(key, value.trim(), Field.Store.YES, Field.Index.ANALYZED));
-				fields.add(key);
 			}
 		}
 
@@ -564,9 +567,12 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 							for (Sample sample : ds.getSampleMap()) {
 								Sample oldSample = getSample(sample.getId());
 								if (oldSample != null) {
-									Variable tags = oldSample.get("Tags");
-									if (tags != null && !tags.isEmpty()) {
-										sample.put("Tags", tags);
+									Matrix tagsm = oldSample.get("Tags");
+									if (tagsm instanceof Variable) {
+										Variable tags = (Variable) tagsm;
+										if (tags != null && !tags.isEmpty()) {
+											sample.put("Tags", tags);
+										}
 									}
 								}
 								add(sample);

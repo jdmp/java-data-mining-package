@@ -28,8 +28,7 @@ import java.util.List;
 
 import org.jdmp.core.algorithm.classification.AbstractClassifier;
 import org.jdmp.core.algorithm.classification.Classifier;
-import org.jdmp.core.dataset.ClassificationDataSet;
-import org.jdmp.core.dataset.RegressionDataSet;
+import org.jdmp.core.dataset.DataSet;
 import org.jdmp.mallet.dataset.DataSet2InstanceList;
 import org.jdmp.mallet.matrix.Labeling2Matrix;
 import org.jdmp.mallet.sample.Sample2Instance;
@@ -113,7 +112,7 @@ public class MalletClassifier extends AbstractClassifier {
 
 	}
 
-	public void train(RegressionDataSet dataSet) throws Exception {
+	public void train(DataSet dataSet) throws Exception {
 		Matrix dataSetInput = dataSet.getInputMatrix();
 
 		Matrix max = dataSetInput.max(Ret.NEW, Matrix.ROW);
@@ -138,8 +137,7 @@ public class MalletClassifier extends AbstractClassifier {
 			targetAlphabet.lookupIndex("Class" + i, true);
 		}
 
-		InstanceList trainingSet = new DataSet2InstanceList((ClassificationDataSet) dataSet, inputAlphabet,
-				targetAlphabet, cumSum);
+		InstanceList trainingSet = new DataSet2InstanceList(dataSet, inputAlphabet, targetAlphabet, cumSum);
 
 		classifier = trainer.train(trainingSet);
 	}

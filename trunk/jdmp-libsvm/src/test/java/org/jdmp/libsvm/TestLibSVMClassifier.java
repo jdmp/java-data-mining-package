@@ -26,8 +26,8 @@ package org.jdmp.libsvm;
 import static org.junit.Assert.assertEquals;
 
 import org.jdmp.core.algorithm.classification.Classifier;
-import org.jdmp.core.dataset.ClassificationDataSet;
 import org.jdmp.core.dataset.CrossValidation;
+import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.libsvm.LibSVMClassifier.Kernel;
 import org.junit.Test;
@@ -37,7 +37,7 @@ public class TestLibSVMClassifier {
 
 	@Test
 	public void testIrisClassification() throws Exception {
-		ClassificationDataSet iris = DataSetFactory.IRIS();
+		DataSet iris = DataSetFactory.IRIS();
 		Classifier c = new LibSVMClassifier(Kernel.RBF);
 		ListMatrix<Double> results = CrossValidation.run(c, iris, 10, 10, 0);
 		assertEquals(0.95, results.getMeanValue(), 0.04);

@@ -60,18 +60,21 @@ public class DefaultIndexPage extends Page {
 					String id = request.getParameter("id" + i);
 					Sample sample = index.getSample(id);
 					if (sample != null) {
-						Variable tags = sample.get(Sample.TAGS);
-						for (String t : splitTags) {
-							boolean tagFound = false;
-							if (tags != null) {
-								for (Matrix m : tags) {
-									if (m != null && m.stringValue().equalsIgnoreCase(t)) {
-										tagFound = true;
+						Matrix tagsm = sample.get(Sample.TAGS);
+						if (tagsm instanceof Variable) {
+							Variable tags = (Variable) tagsm;
+							for (String t : splitTags) {
+								boolean tagFound = false;
+								if (tags != null) {
+									for (Matrix m : tags) {
+										if (m != null && m.stringValue().equalsIgnoreCase(t)) {
+											tagFound = true;
+										}
 									}
 								}
-							}
-							if (!tagFound) {
-								sample.setObject("Tags", t);
+								if (!tagFound) {
+									sample.setObject("Tags", t);
+								}
 							}
 						}
 						System.out.println("updating sample " + id + " with new tag: " + tag);

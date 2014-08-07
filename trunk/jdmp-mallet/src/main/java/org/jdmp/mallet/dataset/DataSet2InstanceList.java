@@ -25,7 +25,7 @@ package org.jdmp.mallet.dataset;
 
 import java.util.List;
 
-import org.jdmp.core.dataset.ClassificationDataSet;
+import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.mallet.sample.Sample2Instance;
 
@@ -37,8 +37,8 @@ import cc.mallet.types.LabelAlphabet;
 public class DataSet2InstanceList extends InstanceList {
 	private static final long serialVersionUID = -6205824050882100522L;
 
-	public DataSet2InstanceList(ClassificationDataSet dataSet, LabelAlphabet inputAlphabet,
-			LabelAlphabet targetAlphabet, List<Integer> cumSum) {
+	public DataSet2InstanceList(DataSet dataSet, LabelAlphabet inputAlphabet, LabelAlphabet targetAlphabet,
+			List<Integer> cumSum) {
 		super(new EmptyPipe());
 
 		getPipe().setDataAlphabet(inputAlphabet);

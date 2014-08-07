@@ -36,7 +36,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.variable.Variable;
+import org.ujmp.core.Matrix;
 import org.ujmp.gui.renderer.MatrixHeatmapRenderer;
 
 public class SampleTableCellRenderer implements TableCellRenderer {
@@ -70,12 +70,12 @@ public class SampleTableCellRenderer implements TableCellRenderer {
 		}
 
 		if (sample != null) {
-			Object key = columnMap.get(column);
-			Variable v = sample.get(key);
-			if (v == null) {
+			String key = columnMap.get(column);
+			Matrix mv = sample.getMatrix(key);
+			if (mv == null) {
 				o = "";
 			} else {
-				return matrixRenderer.getTableCellRendererComponent(table, v.getLast(), isSelected,
+				return matrixRenderer.getTableCellRendererComponent(table, mv, isSelected,
 						hasFocus, row, column);
 			}
 

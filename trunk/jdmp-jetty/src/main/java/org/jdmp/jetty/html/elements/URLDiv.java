@@ -28,6 +28,7 @@ import org.jdmp.jetty.html.EmphasizedText;
 import org.jdmp.jetty.html.tags.DivTag;
 import org.jdmp.jetty.html.tags.LinkTag;
 import org.jdmp.jetty.html.tags.SpanTag;
+import org.ujmp.core.util.StringUtil;
 
 public class URLDiv extends DivTag {
 	private static final long serialVersionUID = 6835814533701702954L;
@@ -35,7 +36,7 @@ public class URLDiv extends DivTag {
 	public URLDiv(Sample sample, String... highlightedWords) {
 		setParameter("class", "url");
 
-		String url = sample.getAsString(Sample.URL);
+		String url = StringUtil.convert(sample.getMatrix(Sample.URL));
 		if (url != null && url.length() > 0) {
 			LinkTag link = new LinkTag(url, new EmphasizedText(url, highlightedWords));
 			link.setParameter("class", "url");

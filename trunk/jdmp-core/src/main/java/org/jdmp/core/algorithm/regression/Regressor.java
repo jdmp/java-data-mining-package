@@ -23,13 +23,13 @@
 
 package org.jdmp.core.algorithm.regression;
 
-import org.jdmp.core.dataset.RegressionDataSet;
+import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 
 public interface Regressor {
 
-	public void train(RegressionDataSet dataSet) throws Exception;
+	public void train(DataSet dataSet) throws Exception;
 
 	public void reset() throws Exception;
 
@@ -45,7 +45,7 @@ public interface Regressor {
 
 	public void train(Sample sample) throws Exception;
 
-	public void predict(RegressionDataSet dataSet) throws Exception;
+	public void predict(DataSet dataSet) throws Exception;
 
 	public Regressor emptyCopy() throws Exception;
 

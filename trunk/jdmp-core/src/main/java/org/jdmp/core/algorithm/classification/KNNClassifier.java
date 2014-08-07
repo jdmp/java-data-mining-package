@@ -23,7 +23,7 @@
 
 package org.jdmp.core.algorithm.classification;
 
-import org.jdmp.core.dataset.RegressionDataSet;
+import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 
@@ -36,14 +36,14 @@ public class KNNClassifier extends AbstractClassifier {
 		this.k = k;
 	}
 
-	private RegressionDataSet dataSet = null;
+	private DataSet dataSet = null;
 
 	public Classifier emptyCopy() throws Exception {
 		return new KNNClassifier(k);
 	}
 
 	@Override
-	public void train(RegressionDataSet dataSet) throws Exception {
+	public void train(DataSet dataSet) throws Exception {
 		this.dataSet = dataSet;
 	}
 

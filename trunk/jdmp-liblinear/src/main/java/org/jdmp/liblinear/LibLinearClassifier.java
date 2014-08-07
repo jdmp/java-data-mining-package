@@ -25,7 +25,7 @@ package org.jdmp.liblinear;
 
 import org.jdmp.core.algorithm.classification.AbstractClassifier;
 import org.jdmp.core.algorithm.classification.Classifier;
-import org.jdmp.core.dataset.RegressionDataSet;
+import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
@@ -97,7 +97,7 @@ public class LibLinearClassifier extends AbstractClassifier {
 		return result;
 	}
 
-	public void train(RegressionDataSet dataSet) throws Exception {
+	public void train(DataSet dataSet) throws Exception {
 		createAlgorithm();
 		prob = new Problem();
 		prob.l = dataSet.getSampleMap().getSize();

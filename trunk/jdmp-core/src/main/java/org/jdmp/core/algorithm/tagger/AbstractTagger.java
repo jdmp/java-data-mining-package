@@ -42,7 +42,11 @@ public abstract class AbstractTagger extends AbstractAlgorithm implements Tagger
 	}
 
 	public final void tag(Sample sample) throws Exception {
-		Variable v = sample.get(Tokenizer.TOKENIZED);
+		Matrix mv = sample.get(Tokenizer.TOKENIZED);
+		Variable v = null;
+		if (mv instanceof Variable) {
+			v = (Variable) mv;
+		}
 		if (v == null) {
 			throw new RuntimeException("text must be tokenized first");
 		}

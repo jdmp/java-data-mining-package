@@ -25,8 +25,8 @@ package org.jdmp.core.algorithm.classification.meta;
 
 import org.jdmp.core.algorithm.classification.AbstractClassifier;
 import org.jdmp.core.algorithm.classification.Classifier;
-import org.jdmp.core.dataset.ClassificationDataSet;
-import org.jdmp.core.dataset.RegressionDataSet;
+import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.DefaultDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
@@ -55,13 +55,12 @@ public class SemiSupervisedEM extends AbstractClassifier implements SemiSupervis
 		classifier.reset();
 	}
 
-	public void train(RegressionDataSet dataSet) throws Exception {
+	public void train(DataSet dataSet) throws Exception {
 		throw new Exception("use train(labeledData,unlabeledData)");
 	}
 
-	public void train(RegressionDataSet labeledData, RegressionDataSet unlabeledData)
-			throws Exception {
-		int classCount = ((ClassificationDataSet) labeledData).getClassCount();
+	public void train(DataSet labeledData, DataSet unlabeledData) throws Exception {
+		int classCount = labeledData.getClassCount();
 		System.out.println("Step 0");
 		classifier.reset();
 		classifier.train(labeledData);
@@ -77,7 +76,7 @@ public class SemiSupervisedEM extends AbstractClassifier implements SemiSupervis
 				s.setMatrix(Sample.TARGET, target);
 			}
 		}
-		ClassificationDataSet completeData = new ClassificationDataSet();
+		DataSet completeData = new DefaultDataSet();
 		completeData.getSampleMap().addAll(labeledData.getSampleMap().values());
 		completeData.getSampleMap().addAll(unlabeledData.getSampleMap().values());
 		classifier.reset();
@@ -93,7 +92,7 @@ public class SemiSupervisedEM extends AbstractClassifier implements SemiSupervis
 				target.setAsDouble(1.0, 0, max);
 				s.setMatrix(Sample.TARGET, target);
 			}
-			completeData = new ClassificationDataSet();
+			completeData = new DefaultDataSet();
 			completeData.getSampleMap().addAll(labeledData.getSampleMap().values());
 			completeData.getSampleMap().addAll(unlabeledData.getSampleMap().values());
 			classifier.reset();

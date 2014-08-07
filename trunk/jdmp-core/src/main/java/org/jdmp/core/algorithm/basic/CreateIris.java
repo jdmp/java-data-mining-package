@@ -51,7 +51,7 @@ public class CreateIris extends AbstractAlgorithm {
 	public Map<String, Object> calculateObjects(Map<String, Object> input) {
 		Map<String, Object> result = new HashMap<String, Object>();
 
-		DataSet iris = DataSetFactory.classificationDataSet();
+		DataSet iris = DataSetFactory.emptyDataSet();
 		iris.setLabel("Iris flower data set");
 		iris.getVariableMap().setObject(Sample.URL, "http://archive.ics.uci.edu/ml/datasets/Iris");
 		iris.setDescription("Fisher's Iris data set is a multivariate data set introduced by Sir Ronald Aylmer Fisher (1936) as an example of discriminant analysis.");

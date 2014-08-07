@@ -54,14 +54,17 @@ public class DefaultSamplePage extends Page {
 				if (Sample.LABEL.equals(key)) {
 					continue;
 				} else if (Variable.LINKS.equals(key)) {
-					Variable links = sample.get(Variable.LINKS);
-					add(new H2Tag(StringUtil.format(key)));
-					for (Matrix m : links) {
-						String l = m.stringValue();
-						add(new LinkTag("?q=" + l, l));
+					Matrix linksm = sample.get(Variable.LINKS);
+					if (linksm instanceof Variable) {
+						Variable links = (Variable) linksm;
+						add(new H2Tag(StringUtil.format(key)));
+						for (Matrix m : links) {
+							String l = m.stringValue();
+							add(new LinkTag("?q=" + l, l));
+						}
 					}
 				} else {
-					String value = sample.getAllAsString(key);
+					String value = StringUtil.convert(sample.getMatrix(key));
 					add(new H2Tag(StringUtil.format(key)));
 					add(new Text(value));
 				}

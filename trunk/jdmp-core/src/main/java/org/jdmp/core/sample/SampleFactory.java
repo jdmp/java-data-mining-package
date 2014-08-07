@@ -25,7 +25,6 @@ package org.jdmp.core.sample;
 
 import java.util.Collection;
 
-import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 
 public abstract class SampleFactory {
@@ -73,7 +72,7 @@ public abstract class SampleFactory {
 		ret.setLabel(s.getLabel());
 		ret.setDescription(s.getDescription());
 		for (String k : s.keySet()) {
-			Variable v = s.get(k);
+			Matrix v = s.get(k);
 			if (v != null) {
 				ret.put(k, v.clone());
 			}

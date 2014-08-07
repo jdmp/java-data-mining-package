@@ -25,29 +25,20 @@ package org.jdmp.core.sample;
 
 import java.lang.reflect.Constructor;
 
-import org.jdmp.core.variable.DefaultVariableMap;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
-import org.jdmp.core.variable.VariableMap;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.interfaces.GUIObject;
-import org.ujmp.core.mapmatrix.DefaultMapMatrix;
-import org.ujmp.core.util.MathUtil;
+import org.ujmp.core.mapmatrix.AbstractMapMatrix;
 import org.ujmp.core.util.StringUtil;
 
-public abstract class AbstractSample extends DefaultMapMatrix<String, Variable> implements Sample {
+public abstract class AbstractSample extends AbstractMapMatrix<String, Matrix> implements Sample {
 	private static final long serialVersionUID = 1693258179407382419L;
-
-	private final VariableMap variables = new DefaultVariableMap(this);
 
 	public AbstractSample() {
 		super();
 		setId("Sample" + getCoreObjectId());
-	}
-
-	public final VariableMap getVariableMap2() {
-		return variables;
 	}
 
 	public boolean isCorrect() {
@@ -55,11 +46,11 @@ public abstract class AbstractSample extends DefaultMapMatrix<String, Variable> 
 	}
 
 	public int getTargetClass() {
-		return (int) get(TARGET).getLast().toRowVector(Ret.NEW).getCoordinatesOfMaximum()[ROW];
+		return (int) getMatrix(TARGET).toRowVector(Ret.NEW).getCoordinatesOfMaximum()[ROW];
 	}
 
 	public int getRecognizedClass() {
-		return (int) get(PREDICTED).getLast().toRowVector(Ret.NEW).getCoordinatesOfMaximum()[ROW];
+		return (int) getMatrix(PREDICTED).toRowVector(Ret.NEW).getCoordinatesOfMaximum()[ROW];
 	}
 
 	public abstract Sample clone();
@@ -72,10 +63,10 @@ public abstract class AbstractSample extends DefaultMapMatrix<String, Variable> 
 		StringBuilder s = new StringBuilder();
 		s.append(getClass().getSimpleName());
 		s.append(" [ ");
-		for (Object key : keySet()) {
-			Variable v = get(key);
+		for (String key : keySet()) {
+			Matrix v = getMatrix(key);
 			s.append(key + "=");
-			s.append(StringUtil.format(v.getLast()));
+			s.append(StringUtil.format(v));
 			s.append(" ");
 		}
 		s.append("]");
@@ -97,49 +88,37 @@ public abstract class AbstractSample extends DefaultMapMatrix<String, Variable> 
 	}
 
 	public void setObject(String id, Object object) {
-		Variable variable = get(id);
-		if (variable == null) {
-			variable = VariableFactory.labeledVariable(id);
-			put(id, variable);
+		Matrix m = get(id);
+		if (m instanceof Variable) {
+			Variable variable = (Variable) m;
+			Matrix matrix = Matrix.Factory.linkToValue(object);
+			variable.add(matrix);
+		} else {
+			put(id, Matrix.Factory.linkToValue(object));
 		}
-		Matrix matrix = Matrix.Factory.linkToValue(object);
-		variable.add(matrix);
 	}
 
 	public void setMatrix(String id, Matrix matrix) {
-		Variable variable = get(id);
-		if (variable == null) {
-			variable = VariableFactory.labeledVariable(id);
-			put(id, variable);
-		}
-		variable.add(matrix);
-	}
-
-	public final String getAllAsString(String variableKey) {
-		Variable v = get(variableKey);
-		if (v != null) {
-			return StringUtil.getAllAsString(v);
+		Matrix m = get(id);
+		if (m instanceof Variable) {
+			Variable variable = (Variable) m;
+			variable.add(matrix);
 		} else {
-			return null;
+			put(id, matrix);
 		}
-	}
-
-	public final String getAsString(String variableKey) {
-		return StringUtil.convert(getObject(variableKey));
-	}
-
-	public Object getObject(String variableKey) {
-		return MathUtil.getObject(getMatrix(variableKey));
 	}
 
 	public Matrix getMatrix(String id) {
-		Variable variable = get(id);
-		if (variable == null) {
-			return null;
-		} else if (variable.isEmpty()) {
-			return null;
+		Matrix m = get(id);
+		if (m instanceof Variable) {
+			Variable variable = (Variable) m;
+			if (variable.isEmpty()) {
+				return null;
+			} else {
+				return variable.getLast();
+			}
 		} else {
-			return variable.getLast();
+			return m;
 		}
 	}
 
