@@ -23,7 +23,8 @@
 
 package org.jdmp.core.dataset.wrappers;
 
-import org.jdmp.core.dataset.RegressionDataSet;
+import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.DefaultDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Coordinates;
 import org.ujmp.core.Matrix;
@@ -33,12 +34,12 @@ import org.ujmp.core.doublematrix.stub.AbstractDenseDoubleMatrix2D;
 import org.ujmp.core.interfaces.Wrapper;
 
 public class DataSetPredictedMatrixWrapper extends AbstractDenseDoubleMatrix2D implements
-		Wrapper<RegressionDataSet> {
+		Wrapper<DataSet> {
 	private static final long serialVersionUID = 5197402551973462998L;
 
-	private RegressionDataSet dataSet = null;
+	private DataSet dataSet = null;
 
-	public DataSetPredictedMatrixWrapper(RegressionDataSet ds) {
+	public DataSetPredictedMatrixWrapper(DefaultDataSet ds) {
 		super(0, 0);
 		this.dataSet = ds;
 	}
@@ -91,11 +92,11 @@ public class DataSetPredictedMatrixWrapper extends AbstractDenseDoubleMatrix2D i
 		}
 	}
 
-	public RegressionDataSet getWrappedObject() {
+	public DataSet getWrappedObject() {
 		return dataSet;
 	}
 
-	public void setWrappedObject(RegressionDataSet object) {
+	public void setWrappedObject(DataSet object) {
 		this.dataSet = object;
 	}
 

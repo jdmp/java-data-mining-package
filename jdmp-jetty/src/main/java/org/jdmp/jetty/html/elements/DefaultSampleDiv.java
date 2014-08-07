@@ -32,6 +32,7 @@ import org.jdmp.jetty.html.tags.LinkTag;
 import org.jdmp.jetty.html.tags.PTag;
 import org.jdmp.jetty.html.tags.SpanTag;
 import org.jdmp.jetty.index.JettyIndexServlet;
+import org.ujmp.core.util.StringUtil;
 
 public class DefaultSampleDiv extends DivTag {
 	private static final long serialVersionUID = 6587788027413384557L;
@@ -41,7 +42,7 @@ public class DefaultSampleDiv extends DivTag {
 		query = query == null ? "" : query;
 		setParameter("class", "sample");
 		String label = sample.getLabel();
-		String type = sample.getAllAsString("Type");
+		String type = StringUtil.convert(sample.getMatrix("Type"));
 		String id = sample.getId();
 		path = path + "samples/" + id + "/";
 

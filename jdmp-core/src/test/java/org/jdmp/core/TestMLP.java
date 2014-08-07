@@ -26,7 +26,7 @@ package org.jdmp.core;
 import static org.junit.Assert.assertEquals;
 
 import org.jdmp.core.algorithm.classification.mlp.MultiLayerNetwork;
-import org.jdmp.core.dataset.ClassificationDataSet;
+import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DataSetFactory;
 import org.junit.Test;
 import org.ujmp.core.Matrix;
@@ -35,7 +35,7 @@ public class TestMLP {
 
 	@Test
 	public void testMLP() throws Exception {
-		ClassificationDataSet iris = DataSetFactory.IRIS();
+		DataSet iris = DataSetFactory.IRIS();
 
 		iris.standardize(Matrix.ROW);
 		MultiLayerNetwork mlp = new MultiLayerNetwork(10);

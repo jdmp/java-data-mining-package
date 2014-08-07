@@ -23,7 +23,7 @@
 
 package org.jdmp.core.algorithm.classification;
 
-import org.jdmp.core.dataset.RegressionDataSet;
+import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
@@ -50,7 +50,7 @@ public class ConstantClassifier extends AbstractClassifier {
 		maxClassId = 0;
 	}
 
-	public void train(RegressionDataSet dataSet) throws Exception {
+	public void train(DataSet dataSet) throws Exception {
 		MapMatrix<Long, Integer> count = new DefaultMapMatrix<Long, Integer>();
 		for (Sample s : dataSet.getSampleMap()) {
 			Matrix m = s.getMatrix(Variable.TARGET);

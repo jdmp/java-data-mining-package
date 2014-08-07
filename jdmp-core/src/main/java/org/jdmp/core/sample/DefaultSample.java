@@ -23,27 +23,52 @@
 
 package org.jdmp.core.sample;
 
-import org.jdmp.core.variable.Variable;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+import org.ujmp.core.Matrix;
 
 public class DefaultSample extends AbstractSample {
 	private static final long serialVersionUID = -3649758882404748630L;
 
+	private final Map<String, Matrix> map;
+
 	public DefaultSample() {
 		super();
+		this.map = new HashMap<String, Matrix>();
 	}
 
 	public final DefaultSample clone() {
-		DefaultSample s = null;
-		try {
-			s = this.getClass().newInstance();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		DefaultSample s = new DefaultSample();
 		for (String k : keySet()) {
-			Variable v = get(k);
+			Matrix v = get(k);
 			s.put(k, v.clone());
 		}
 		return s;
+	}
+
+	public Matrix get(Object key) {
+		return map.get(key);
+	}
+
+	public Set<String> keySet() {
+		return map.keySet();
+	}
+
+	@Override
+	protected void clearMap() {
+		map.clear();
+	}
+
+	@Override
+	protected Matrix removeFromMap(Object key) {
+		return map.remove(key);
+	}
+
+	@Override
+	protected Matrix putIntoMap(String key, Matrix value) {
+		return map.put(key, value);
 	}
 
 }

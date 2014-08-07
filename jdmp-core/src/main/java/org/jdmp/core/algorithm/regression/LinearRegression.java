@@ -28,7 +28,7 @@ import java.util.List;
 
 import org.jdmp.core.algorithm.classification.AbstractClassifier;
 import org.jdmp.core.algorithm.classification.Classifier;
-import org.jdmp.core.dataset.RegressionDataSet;
+import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableFactory;
@@ -86,7 +86,7 @@ public class LinearRegression extends AbstractClassifier {
 		throw (new Exception("pattern-by-pattern learning not supported"));
 	}
 
-	public void train(RegressionDataSet dataSet) throws Exception {
+	public void train(DataSet dataSet) throws Exception {
 		List<Matrix> inputs = new ArrayList<Matrix>();
 		List<Matrix> targets = new ArrayList<Matrix>();
 		for (Sample s : dataSet.getSampleMap().values()) {

@@ -110,34 +110,38 @@ public class DefaultVariablesDiv extends DivTag {
 				// continue;
 				// }
 
-				Variable var = sample.get(key);
+				Matrix varm = sample.get(key);
+				if (varm instanceof Variable) {
+					Variable var = (Variable) varm;
 
-				DivTag field = new DivTag();
-				field.setParameter("class", "variable");
+					DivTag field = new DivTag();
+					field.setParameter("class", "variable");
 
-				LinkTag varlink = new LinkTag(path + "variables/" + var.getId(), StringUtil.format(key));
-				SpanTag keyTag = new SpanTag(new BTag(varlink, new Text(":")));
-				keyTag.setParameter("class", "key");
-				field.add(keyTag);
+					LinkTag varlink = new LinkTag(path + "variables/" + var.getId(), StringUtil.format(key));
+					SpanTag keyTag = new SpanTag(new BTag(varlink, new Text(":")));
+					keyTag.setParameter("class", "key");
+					field.add(keyTag);
 
-				if (var != null) {
-					for (Matrix matrix : var) {
-						if (matrix != null) {
-							for (long[] c : matrix.availableCoordinates()) {
-								String value = matrix.getAsString(c);
-								EmphasizedText text = new EmphasizedText(StringUtil.format(value), highlightedWords);
-								String qstring = new String(query + " +" + key + ":" + value).trim();
-								LinkTag link = new LinkTag(path + "?q=" + URLEncoder.encode(qstring, "utf-8"), text);
-								link.setParameter("title", "search for results containing '" + value + "' in " + key);
-								SpanTag valueTag = new SpanTag(link);
-								valueTag.setParameter("class", "value");
-								field.add(valueTag);
+					if (var != null) {
+						for (Matrix matrix : var) {
+							if (matrix != null) {
+								for (long[] c : matrix.availableCoordinates()) {
+									String value = matrix.getAsString(c);
+									EmphasizedText text = new EmphasizedText(StringUtil.format(value), highlightedWords);
+									String qstring = new String(query + " +" + key + ":" + value).trim();
+									LinkTag link = new LinkTag(path + "?q=" + URLEncoder.encode(qstring, "utf-8"), text);
+									link.setParameter("title", "search for results containing '" + value + "' in "
+											+ key);
+									SpanTag valueTag = new SpanTag(link);
+									valueTag.setParameter("class", "value");
+									field.add(valueTag);
+								}
 							}
 						}
 					}
-				}
 
-				add(field);
+					add(field);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -25,7 +25,7 @@ package org.jdmp.weka.clusterer;
 
 import static org.junit.Assert.assertEquals;
 
-import org.jdmp.core.dataset.ClassificationDataSet;
+import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.weka.clusterer.WekaClusterer.WekaClustererType;
 import org.junit.Test;
@@ -36,7 +36,7 @@ public class TestWekaClusterer {
 
 	@Test
 	public void testClusteringEM() throws Exception {
-		ClassificationDataSet iris = DataSetFactory.IRIS();
+		DataSet iris = DataSetFactory.IRIS();
 		WekaClusterer wc = new WekaClusterer(WekaClustererType.EM, false);
 		wc.setNumberOfClusters(3);
 		wc.train(iris);
@@ -52,7 +52,7 @@ public class TestWekaClusterer {
 
 	@Test
 	public void testClusteringKMeans() throws Exception {
-		ClassificationDataSet iris = DataSetFactory.IRIS();
+		DataSet iris = DataSetFactory.IRIS();
 		WekaClusterer wc = new WekaClusterer(WekaClustererType.SimpleKMeans, false);
 		wc.setNumberOfClusters(3);
 		wc.train(iris);

@@ -30,7 +30,7 @@ import javax.swing.JComponent;
 
 import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.algorithm.classification.KNNClassifier;
-import org.jdmp.core.dataset.ClassificationDataSet;
+import org.jdmp.core.dataset.DataSet;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.gui.actions.AbstractObjectAction;
 import org.ujmp.gui.util.GUIUtil;
@@ -48,8 +48,8 @@ public class ClassifyKNNAction extends AbstractObjectAction {
 	public Object call() {
 		try {
 			Classifier c = new KNNClassifier(GUIUtil.getInt("number of neighbors", 1, 100));
-			c.train((ClassificationDataSet) getCoreObject());
-			c.predict((ClassificationDataSet) getCoreObject());
+			c.train((DataSet) getCoreObject());
+			c.predict((DataSet) getCoreObject());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

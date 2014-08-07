@@ -28,9 +28,8 @@ import java.util.List;
 
 import org.jdmp.core.algorithm.classification.AbstractClassifier;
 import org.jdmp.core.algorithm.classification.Classifier;
-import org.jdmp.core.dataset.ClassificationDataSet;
+import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DataSetFactory;
-import org.jdmp.core.dataset.RegressionDataSet;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 
@@ -65,9 +64,9 @@ public class MultiClassClassifier extends AbstractClassifier {
 		singleClassClassifiers.clear();
 	}
 
-	public void train(RegressionDataSet dataSet) throws Exception {
+	public void train(DataSet dataSet) throws Exception {
 		reset();
-		classCount = ((ClassificationDataSet) dataSet).getClassCount();
+		classCount = dataSet.getClassCount();
 
 		for (int i = 0; i < classCount; i++) {
 			System.out.println("Training class " + i);
@@ -79,7 +78,7 @@ public class MultiClassClassifier extends AbstractClassifier {
 				Matrix target2 = target.minus(1).abs(Ret.NEW);
 				target = Matrix.Factory.horCat(target, target2);
 			}
-			ClassificationDataSet ds = DataSetFactory.linkToMatrix(input, target);
+			DataSet ds = DataSetFactory.linkToMatrix(input, target);
 			c.train(ds);
 		}
 

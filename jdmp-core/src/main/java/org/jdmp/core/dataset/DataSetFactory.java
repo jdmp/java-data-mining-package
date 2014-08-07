@@ -43,8 +43,8 @@ public abstract class DataSetFactory {
 		return new DefaultDataSet();
 	}
 
-	public static ClassificationDataSet importFromMatrix(Matrix input, Matrix target) {
-		ClassificationDataSet ds = new ClassificationDataSet();
+	public static DataSet importFromMatrix(Matrix input, Matrix target) {
+		DataSet ds = new DefaultDataSet();
 		for (int i = 0; i < input.getRowCount(); i++) {
 			Sample s = SampleFactory.emptySample();
 			Matrix in = input.subMatrix(Ret.NEW, i, 0, i, input.getColumnCount() - 1);
@@ -99,8 +99,8 @@ public abstract class DataSetFactory {
 		return ds;
 	}
 
-	public static ClassificationDataSet importFromMatrix(Matrix input, Matrix target, Matrix label) {
-		ClassificationDataSet ds = new ClassificationDataSet();
+	public static DataSet importFromMatrix(Matrix input, Matrix target, Matrix label) {
+		DataSet ds = new DefaultDataSet();
 		for (int i = 0; i < input.getRowCount(); i++) {
 			Sample s = SampleFactory.emptySample();
 			Matrix in = input.subMatrix(Ret.NEW, i, 0, i, input.getColumnCount() - 1);
@@ -114,8 +114,8 @@ public abstract class DataSetFactory {
 		return ds;
 	}
 
-	public static ClassificationDataSet linkToMatrix(Matrix input, Matrix target) {
-		ClassificationDataSet ds = new ClassificationDataSet();
+	public static DataSet linkToMatrix(Matrix input, Matrix target) {
+		DataSet ds = new DefaultDataSet();
 		ds.getInputVariable().add(input);
 		ds.getTargetVariable().add(target);
 		for (int i = 0; i < input.getRowCount(); i++) {
@@ -129,8 +129,8 @@ public abstract class DataSetFactory {
 		return ds;
 	}
 
-	public static ClassificationDataSet linkToMatrix(Matrix input, Matrix target, Matrix label) {
-		ClassificationDataSet ds = new ClassificationDataSet();
+	public static DataSet linkToMatrix(Matrix input, Matrix target, Matrix label) {
+		DataSet ds = new DefaultDataSet();
 		ds.getInputVariable().add(input);
 		ds.getTargetVariable().add(target);
 		for (int i = 0; i < input.getRowCount(); i++) {
@@ -146,8 +146,8 @@ public abstract class DataSetFactory {
 		return ds;
 	}
 
-	public static RegressionDataSet HenonMap(int sampleCount, int inputLength, int predictionLength) {
-		RegressionDataSet henon = DataSetFactory.regressionDataSet("Henon Map");
+	public static DataSet HenonMap(int sampleCount, int inputLength, int predictionLength) {
+		DataSet henon = DataSetFactory.labeledDataSet("Henon Map");
 
 		Random random = new Random();
 
@@ -202,9 +202,8 @@ public abstract class DataSetFactory {
 		return q;
 	}
 
-	public static RegressionDataSet LogisticMap(int sampleCount, int inputLength,
-			int predictionLength) {
-		RegressionDataSet logistic = DataSetFactory.regressionDataSet("Logistic Map");
+	public static DataSet LogisticMap(int sampleCount, int inputLength, int predictionLength) {
+		DataSet logistic = DataSetFactory.labeledDataSet("Logistic Map");
 
 		double r = 3.82;
 		Random random = new Random();
@@ -233,12 +232,6 @@ public abstract class DataSetFactory {
 		}
 
 		return logistic;
-	}
-
-	public static final RegressionDataSet regressionDataSet(String label) {
-		RegressionDataSet ds = new RegressionDataSet();
-		ds.setLabel(label);
-		return ds;
 	}
 
 	public static DefaultDataSet ANIMALS() {
@@ -349,8 +342,8 @@ public abstract class DataSetFactory {
 		return ds;
 	}
 
-	public static ClassificationDataSet CountActive(int number) {
-		ClassificationDataSet ds = classificationDataSet("Count " + number);
+	public static DataSet CountActive(int number) {
+		DataSet ds = labeledDataSet("Count " + number);
 		double possibilites = Math.pow(2, number);
 		for (int i = 0; i < possibilites; i++) {
 			BitSet bits = BitSet.valueOf(new long[] { i });
@@ -372,8 +365,8 @@ public abstract class DataSetFactory {
 		return ds;
 	}
 
-	public static ClassificationDataSet Linear1() {
-		ClassificationDataSet or = classificationDataSet("Linear1");
+	public static DataSet Linear1() {
+		DataSet or = labeledDataSet("Linear1");
 
 		Sample x0 = SampleFactory.labeledSample("0.0=0.0");
 		x0.setMatrix(Sample.INPUT, Matrix.Factory.linkToArray(new double[] { 0.0 }).transpose());
@@ -408,8 +401,8 @@ public abstract class DataSetFactory {
 		return or;
 	}
 
-	public static ClassificationDataSet Linear3() {
-		ClassificationDataSet or = classificationDataSet("Linear3");
+	public static DataSet Linear3() {
+		DataSet or = labeledDataSet("Linear3");
 
 		Sample x0 = SampleFactory.labeledSample("0.0=0.5");
 		x0.setMatrix(Sample.INPUT, Matrix.Factory.linkToArray(new double[] { 0.0 }).transpose());
@@ -444,8 +437,8 @@ public abstract class DataSetFactory {
 		return or;
 	}
 
-	public static ClassificationDataSet Linear2() {
-		ClassificationDataSet or = classificationDataSet("Linear2");
+	public static DataSet Linear2() {
+		DataSet or = labeledDataSet("Linear2");
 
 		Sample x0 = SampleFactory.labeledSample("0.0=0.1");
 		x0.setMatrix(Sample.INPUT, Matrix.Factory.linkToArray(new double[] { 0.0 }).transpose());
@@ -480,8 +473,8 @@ public abstract class DataSetFactory {
 		return or;
 	}
 
-	public static ClassificationDataSet OR() {
-		ClassificationDataSet or = classificationDataSet("OR-Problem");
+	public static DataSet OR() {
+		DataSet or = labeledDataSet("OR-Problem");
 
 		Sample x000 = SampleFactory.labeledSample("00=01");
 		x000.setMatrix(Sample.INPUT, Matrix.Factory.linkToArray(new double[] { 0, 0 }).transpose());
@@ -506,8 +499,8 @@ public abstract class DataSetFactory {
 		return or;
 	}
 
-	public static ClassificationDataSet XOR() {
-		ClassificationDataSet xor = classificationDataSet("XOR-Problem");
+	public static DataSet XOR() {
+		DataSet xor = labeledDataSet("XOR-Problem");
 
 		Sample x000 = SampleFactory.labeledSample("00=01");
 		x000.setMatrix(Sample.INPUT, Matrix.Factory.linkToArray(new double[] { 0, 0 }).transpose());
@@ -532,8 +525,8 @@ public abstract class DataSetFactory {
 		return xor;
 	}
 
-	public static ClassificationDataSet ONE() {
-		ClassificationDataSet one = classificationDataSet("DataSet with one sample 1->1");
+	public static DataSet ONE() {
+		DataSet one = labeledDataSet("DataSet with one sample 1->1");
 		Sample x1 = SampleFactory.labeledSample("1=1");
 		x1.setMatrix(Sample.INPUT, Matrix.Factory.linkToArray(new double[] { 1 }).transpose());
 		x1.setMatrix(Sample.TARGET, Matrix.Factory.linkToArray(new double[] { 1 }).transpose());
@@ -541,20 +534,8 @@ public abstract class DataSetFactory {
 		return one;
 	}
 
-	public static ClassificationDataSet IRIS() throws Exception {
-		ClassificationDataSet ds = (ClassificationDataSet) (new CreateIris().calculate()
-				.get(Sample.TARGET));
-		return ds;
-	}
-
-	public static final ClassificationDataSet classificationDataSet(String label) {
-		ClassificationDataSet ds = new ClassificationDataSet();
-		ds.setLabel(label);
-		return ds;
-	}
-
-	public static final ClassificationDataSet classificationDataSet() {
-		ClassificationDataSet ds = new ClassificationDataSet();
+	public static DataSet IRIS() throws Exception {
+		DataSet ds = (DataSet) (new CreateIris().calculate().get(Sample.TARGET));
 		return ds;
 	}
 

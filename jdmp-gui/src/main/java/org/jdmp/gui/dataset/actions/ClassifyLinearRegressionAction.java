@@ -29,7 +29,7 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 
 import org.jdmp.core.algorithm.regression.LinearRegression;
-import org.jdmp.core.dataset.ClassificationDataSet;
+import org.jdmp.core.dataset.DataSet;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.gui.actions.AbstractObjectAction;
 
@@ -46,8 +46,8 @@ public class ClassifyLinearRegressionAction extends AbstractObjectAction {
 	public Object call() {
 		try {
 			LinearRegression lr = new LinearRegression();
-			lr.train((ClassificationDataSet) getCoreObject());
-			lr.predict((ClassificationDataSet) getCoreObject());
+			lr.train((DataSet) getCoreObject());
+			lr.predict((DataSet) getCoreObject());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

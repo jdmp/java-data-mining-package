@@ -27,8 +27,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.algorithm.classification.ConstantClassifier;
-import org.jdmp.core.dataset.ClassificationDataSet;
 import org.jdmp.core.dataset.CrossValidation;
+import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.core.sample.Sample;
 import org.junit.Test;
@@ -38,7 +38,7 @@ public class TestConstantClassifier {
 
 	@Test
 	public void testIrisClassification() throws Exception {
-		ClassificationDataSet iris = DataSetFactory.IRIS();
+		DataSet iris = DataSetFactory.IRIS();
 		Classifier c = new ConstantClassifier();
 		ListMatrix<Double> results = CrossValidation.run(c, iris, 10, 10, 0);
 		assertEquals(0.21, results.getMeanValue(), 0.04);
@@ -46,7 +46,7 @@ public class TestConstantClassifier {
 
 	@Test
 	public void testIrisClassification2() throws Exception {
-		ClassificationDataSet iris = DataSetFactory.IRIS();
+		DataSet iris = DataSetFactory.IRIS();
 		String del1 = null;
 		String del2 = null;
 		for (Sample s : iris.getSampleMap().values()) {

@@ -84,13 +84,13 @@ public abstract class AbstractDataSet extends DefaultMapMatrix<String, Sample> i
 		}
 
 		for (int i = 0; i < count.length; i++) {
-			DataSet ds = DataSetFactory.classificationDataSet("DataSet" + i);
+			DataSet ds = DataSetFactory.labeledDataSet("DataSet" + i);
 			for (int c = 0; c < count[i]; c++) {
 				ds.getSampleMap().add(getSampleMap().getElementAt(ids.remove(0)).clone());
 			}
 			dataSets.add(ds);
 		}
-		DataSet ds = DataSetFactory.classificationDataSet("DataSet" + count.length);
+		DataSet ds = DataSetFactory.labeledDataSet("DataSet" + count.length);
 		while (ids.size() != 0) {
 			ds.getSampleMap().add(getSampleMap().getElementAt(ids.remove(0)).clone());
 		}
@@ -118,10 +118,9 @@ public abstract class AbstractDataSet extends DefaultMapMatrix<String, Sample> i
 			}
 		}
 
-		DataSet testSet = DataSetFactory.classificationDataSet("TestSet" + randomSeed + "-"
-				+ idOfCVSet);
+		DataSet testSet = DataSetFactory.labeledDataSet("TestSet" + randomSeed + "-" + idOfCVSet);
 		testSet.getSampleMap().addAll(tempSampleLists.get(idOfCVSet));
-		DataSet trainingSet = DataSetFactory.classificationDataSet("TrainingSet" + randomSeed + "-"
+		DataSet trainingSet = DataSetFactory.labeledDataSet("TrainingSet" + randomSeed + "-"
 				+ idOfCVSet);
 		for (int i = 0; i < numberOfCVSets; i++) {
 			if (i != idOfCVSet) {

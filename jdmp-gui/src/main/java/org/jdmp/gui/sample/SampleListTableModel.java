@@ -34,7 +34,6 @@ import javax.swing.table.AbstractTableModel;
 
 import org.jdmp.core.sample.HasSampleMap;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.variable.Variable;
 
 public class SampleListTableModel extends AbstractTableModel implements ListDataListener {
 	private static final long serialVersionUID = -5468178300746964431L;
@@ -72,9 +71,9 @@ public class SampleListTableModel extends AbstractTableModel implements ListData
 		if (s == null) {
 			return null;
 		}
-		for (Variable v : s.values()) {
-			if (keys.add(v.getLabel())) {
-				columnMap.put(columnMap.size(), v.getLabel());
+		for (String key : s.keySet()) {
+			if (keys.add(key)) {
+				columnMap.put(columnMap.size(), key);
 				fireTableStructureChanged();
 			}
 		}

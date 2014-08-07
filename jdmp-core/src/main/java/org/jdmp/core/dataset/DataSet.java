@@ -38,6 +38,18 @@ public interface DataSet extends CoreObject, HasVariableMap, HasSampleMap,
 
 	public static final String INPUT = "Input";
 
+	public static final String RMSE = "RMSE";
+
+	public static final String PREDICTED = "Predicted";
+
+	public static final String TARGET = "Target";
+
+	public static final String ACCURACY = Variable.ACCURACY;
+
+	public static final String CONFUSION = Variable.CONFUSION;
+
+	public static final String ERRORCOUNT = Variable.ERRORCOUNT;
+
 	public List<DataSet> splitByCount(boolean shuffle, int... count);
 
 	public List<DataSet> splitForCV(int numberOfCVSets, int idOfCVSet, long randomSeed);
@@ -46,9 +58,30 @@ public interface DataSet extends CoreObject, HasVariableMap, HasSampleMap,
 
 	public Matrix getInputMatrix();
 
+	public Matrix getPredictedMatrix();
+
 	public Variable getInputVariable();
+
+	public Variable getTargetVariable();
 
 	public DataSet clone();
 
 	public int getFeatureCount();
+
+	public int getClassCount();
+
+	public Matrix getTargetMatrix();
+
+	public double getAccuracy();
+
+	public int getEarlyStoppingIndex(int numberOfSteps);
+
+	public boolean isEarlyStoppingReached(int numberOfSteps);
+
+	public List<DataSet> splitForStratifiedCV(int i, int r, long seed);
+
+	public void standardize(int dimension);
+
+	public boolean isDiscrete();
+
 }

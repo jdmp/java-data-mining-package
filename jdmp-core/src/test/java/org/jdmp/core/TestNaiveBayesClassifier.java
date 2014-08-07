@@ -27,8 +27,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.algorithm.classification.bayes.NaiveBayesClassifier;
-import org.jdmp.core.dataset.ClassificationDataSet;
 import org.jdmp.core.dataset.CrossValidation;
+import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.core.variable.Variable;
 import org.junit.Test;
@@ -40,10 +40,18 @@ import org.ujmp.core.listmatrix.ListMatrix;
 public class TestNaiveBayesClassifier {
 
 	@Test
-	public void testIrisClassification() throws Exception {
-		ClassificationDataSet iris = DataSetFactory.IRIS();
+	public void testIrisClassificationDiscrete() throws Exception {
+		DataSet iris = DataSetFactory.IRIS();
 		iris.getVariableMap().getMatrix(Variable.INPUT)
 				.discretize(Ret.ORIG, Matrix.ROW, DiscretizationMethod.STANDARDBINNING, 3);
+		Classifier c = new NaiveBayesClassifier();
+		ListMatrix<Double> results = CrossValidation.run(c, iris, 10, 10, 0);
+		assertEquals(0.959, results.getMeanValue(), 0.04);
+	}
+
+	@Test
+	public void testIrisClassification() throws Exception {
+		DataSet iris = DataSetFactory.IRIS();
 		Classifier c = new NaiveBayesClassifier();
 		ListMatrix<Double> results = CrossValidation.run(c, iris, 10, 10, 0);
 		assertEquals(0.959, results.getMeanValue(), 0.04);

@@ -30,7 +30,7 @@ import javax.swing.JComponent;
 
 import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.algorithm.classification.ConstantClassifier;
-import org.jdmp.core.dataset.ClassificationDataSet;
+import org.jdmp.core.dataset.DataSet;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.gui.actions.AbstractObjectAction;
 
@@ -48,8 +48,8 @@ public class ClassifyConstantAction extends AbstractObjectAction {
 	public Object call() {
 		try {
 			Classifier lr = new ConstantClassifier();
-			lr.train((ClassificationDataSet) getCoreObject());
-			lr.predict((ClassificationDataSet) getCoreObject());
+			lr.train((DataSet) getCoreObject());
+			lr.predict((DataSet) getCoreObject());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

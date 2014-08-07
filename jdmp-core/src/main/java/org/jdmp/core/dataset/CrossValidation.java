@@ -34,13 +34,12 @@ import org.ujmp.core.listmatrix.ListMatrix;
 
 public class CrossValidation {
 
-	public static ListMatrix<Double> run(Classifier algorithm, ClassificationDataSet dataSet)
-			throws Exception {
+	public static ListMatrix<Double> run(Classifier algorithm, DataSet dataSet) throws Exception {
 		return run(algorithm, dataSet, 10, 10, System.currentTimeMillis());
 	}
 
-	public static ListMatrix<Double> run(Classifier algorithm, ClassificationDataSet dataSet,
-			int folds, int runs, long randomSeed) throws Exception {
+	public static ListMatrix<Double> run(Classifier algorithm, DataSet dataSet, int folds,
+			int runs, long randomSeed) throws Exception {
 
 		ListMatrix<Double> allacc = new DefaultListMatrix<Double>();
 		ListMatrix<Double> allfm = new DefaultListMatrix<Double>();
@@ -62,8 +61,8 @@ public class CrossValidation {
 
 			for (int fold = 0; fold < folds; fold++) {
 				List<DataSet> dss = dataSet.splitForCV(folds, fold, randomSeed + run);
-				ClassificationDataSet train = (ClassificationDataSet) dss.get(0);
-				ClassificationDataSet test = (ClassificationDataSet) dss.get(1);
+				DataSet train = dss.get(0);
+				DataSet test = dss.get(1);
 				algorithm.reset();
 				algorithm.train(train);
 				algorithm.predict(test);

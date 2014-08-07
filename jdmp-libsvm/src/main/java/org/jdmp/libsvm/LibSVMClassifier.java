@@ -31,7 +31,7 @@ import libsvm.svm_problem;
 
 import org.jdmp.core.algorithm.classification.AbstractClassifier;
 import org.jdmp.core.algorithm.classification.Classifier;
-import org.jdmp.core.dataset.RegressionDataSet;
+import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
@@ -98,7 +98,7 @@ public class LibSVMClassifier extends AbstractClassifier {
 		param.weight = new double[0];
 	}
 
-	public void train(RegressionDataSet dataSet) {
+	public void train(DataSet dataSet) {
 		int rowCount = (int) dataSet.getSampleMap().iterator().next().getMatrix(INPUT)
 				.toRowVector(Ret.NEW).getRowCount();
 
