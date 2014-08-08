@@ -28,5 +28,5 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ TestTokenizer.class, TestTagger.class })
-public abstract class AllTests {
+public class AllTests {
 }
