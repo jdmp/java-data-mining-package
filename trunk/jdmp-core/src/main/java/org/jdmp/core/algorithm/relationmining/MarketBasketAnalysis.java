@@ -40,8 +40,6 @@ import org.ujmp.core.Matrix;
 import org.ujmp.core.filematrix.FileFormat;
 import org.ujmp.core.mapmatrix.DefaultMapMatrix;
 import org.ujmp.core.mapmatrix.MapMatrix;
-import org.ujmp.core.objectmatrix.DenseObjectMatrix2D;
-import org.ujmp.core.objectmatrix.factory.DenseObjectMatrix2DFactory;
 import org.ujmp.core.objectmatrix.stub.AbstractDenseObjectMatrix2D;
 
 public class MarketBasketAnalysis extends AbstractRelationMiner {
@@ -285,10 +283,6 @@ class CountMatrix extends AbstractDenseObjectMatrix2D {
 
 	public long[] getSize() {
 		return matrix.getSize();
-	}
-
-	public DenseObjectMatrix2DFactory<? extends DenseObjectMatrix2D> getFactory() {
-		throw new RuntimeException("not implemented");
 	}
 
 }

@@ -28,8 +28,6 @@ import java.util.List;
 import java.util.logging.LogRecord;
 
 import org.ujmp.core.Matrix;
-import org.ujmp.core.objectmatrix.DenseObjectMatrix2D;
-import org.ujmp.core.objectmatrix.factory.DenseObjectMatrix2DFactory;
 import org.ujmp.core.objectmatrix.stub.AbstractDenseObjectMatrix2D;
 
 public class LogMatrix extends AbstractDenseObjectMatrix2D {
@@ -130,11 +128,6 @@ public class LogMatrix extends AbstractDenseObjectMatrix2D {
 	}
 
 	public void setObject(Object o, int row, int column) {
-	}
-
-	public DenseObjectMatrix2DFactory<? extends DenseObjectMatrix2D> getFactory() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

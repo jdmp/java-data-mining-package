@@ -25,8 +25,6 @@ package org.jdmp.core.util;
 
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.objectmatrix.DenseObjectMatrix2D;
-import org.ujmp.core.objectmatrix.factory.DenseObjectMatrix2DFactory;
 import org.ujmp.core.objectmatrix.stub.AbstractDenseObjectMatrix2D;
 
 public class MatrixListToMatrixWrapper extends AbstractDenseObjectMatrix2D {
@@ -88,11 +86,6 @@ public class MatrixListToMatrixWrapper extends AbstractDenseObjectMatrix2D {
 				}
 			}
 		}
-	}
-
-	public DenseObjectMatrix2DFactory<? extends DenseObjectMatrix2D> getFactory() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

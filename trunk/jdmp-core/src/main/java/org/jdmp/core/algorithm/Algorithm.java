@@ -48,6 +48,8 @@ public interface Algorithm extends CoreObject, HasVariableMap, HasDataSetMap, Ha
 	public static final String WEIGHT = Variable.WEIGHT;
 	public static final String DIFFERENCE = Variable.DIFFERENCE;
 	public static final String PREDICTED = Variable.PREDICTED;
+	public static final String COMPRESSED = Variable.COMPRESSED;
+	public static final String DECOMPRESSED = Variable.DECOMPRESSED;
 
 	public void setVariable(String key, Variable variable);
 

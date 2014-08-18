@@ -34,8 +34,6 @@ import javax.swing.event.ListDataListener;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.ObservableMap;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.objectmatrix.DenseObjectMatrix2D;
-import org.ujmp.core.objectmatrix.factory.DenseObjectMatrix2DFactory;
 import org.ujmp.core.objectmatrix.stub.AbstractDenseObjectMatrix2D;
 import org.ujmp.core.util.StringUtil;
 
@@ -145,10 +143,6 @@ public class SampleListToMatrixWrapper extends AbstractDenseObjectMatrix2D imple
 	}
 
 	public void intervalRemoved(ListDataEvent e) {
-	}
-
-	public DenseObjectMatrix2DFactory<? extends DenseObjectMatrix2D> getFactory() {
-		throw new RuntimeException("not implemented");
 	}
 
 }
