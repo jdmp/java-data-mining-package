@@ -26,9 +26,7 @@ package org.jdmp.stanfordpos;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ujmp.core.DenseMatrix2D;
 import org.ujmp.core.interfaces.Wrapper;
-import org.ujmp.core.matrix.factory.DenseMatrix2DFactory;
 import org.ujmp.core.stringmatrix.stub.AbstractDenseStringMatrix2D;
 
 import edu.stanford.nlp.ling.TaggedWord;
@@ -86,8 +84,4 @@ public class StanfordSentenceMatrix extends AbstractDenseStringMatrix2D implemen
 		this.sentence = object;
 	}
 
-	public DenseMatrix2DFactory<? extends DenseMatrix2D> getFactory() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
