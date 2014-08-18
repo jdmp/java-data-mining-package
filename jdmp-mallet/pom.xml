@@ -18,7 +18,7 @@
 			<artifactId>junit</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>mallet</groupId>
+			<groupId>cc.mallet</groupId>
 			<artifactId>mallet</artifactId>
 		</dependency>
 		<dependency>

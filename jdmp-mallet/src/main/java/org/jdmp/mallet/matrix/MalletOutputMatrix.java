@@ -23,8 +23,6 @@
 
 package org.jdmp.mallet.matrix;
 
-import org.ujmp.core.doublematrix.DenseDoubleMatrix2D;
-import org.ujmp.core.doublematrix.factory.DenseDoubleMatrix2DFactory;
 import org.ujmp.core.doublematrix.stub.AbstractDenseDoubleMatrix2D;
 import org.ujmp.core.interfaces.Wrapper;
 
@@ -67,11 +65,6 @@ public class MalletOutputMatrix extends AbstractDenseDoubleMatrix2D implements W
 	}
 
 	public void setDouble(double value, int row, int column) {
-	}
-
-	public DenseDoubleMatrix2DFactory<? extends DenseDoubleMatrix2D> getFactory() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
