@@ -43,7 +43,7 @@ public class JDMP extends Applet {
 
 	public static final String AUTHOR = "Holger Arndt";
 
-	public static final String COPYRIGHT = "2008-2010";
+	public static final String COPYRIGHT = "2008-2014";
 
 	protected static final PrintStream out = System.out;
 

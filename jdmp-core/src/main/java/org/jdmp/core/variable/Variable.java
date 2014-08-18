@@ -59,6 +59,8 @@ public interface Variable extends CoreObject, ListMatrix<Matrix> {
 	public static final String CONFUSION = "Confusion";
 	public static final String ACCURACY = "Accuracy";
 	public static final String FMEASUREMACRO = "FMeasureMacro";
+	public static final String COMPRESSED = "Compressed";
+	public static final String DECOMPRESSED = "Decompressed";
 
 	public Matrix getAsListMatrix();
 

@@ -36,8 +36,9 @@ public class DataSetMenu extends JMenu {
 	public DataSetMenu(JComponent component, DataSetGUIObject o, GUIObject owner) {
 		super("DataSet");
 		setMnemonic(KeyEvent.VK_D);
-		add(new ClusterDataSetMenu(component, o, owner));
 		add(new ClassifyDataSetMenu(component, o, owner));
+		add(new ClusterDataSetMenu(component, o, owner));
+		add(new CompressDataSetMenu(component, o, owner));
 		add(new IndexDataSetMenu(component, o, owner));
 	}
 }
