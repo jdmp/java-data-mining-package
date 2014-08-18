@@ -27,38 +27,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jdmp.core.algorithm.tagger.AbstractTagger;
+import org.jdmp.mallet.sample.TextInstance;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.listmatrix.ListMatrix;
 import org.ujmp.core.mapmatrix.MapMatrix;
+import org.ujmp.core.text.TextBlock;
+import org.ujmp.core.text.TextSentence;
 
 import cc.mallet.fst.CRF;
 import cc.mallet.fst.CRFOptimizableByLabelLikelihood;
 import cc.mallet.fst.CRFTrainerByValueGradients;
-import cc.mallet.fst.SimpleTagger;
 import cc.mallet.optimize.Optimizable;
 import cc.mallet.pipe.Pipe;
 import cc.mallet.pipe.SerialPipes;
 import cc.mallet.pipe.TokenSequence2FeatureVectorSequence;
+import cc.mallet.pipe.tsf.OffsetConjunctions;
 import cc.mallet.pipe.tsf.TokenText;
 import cc.mallet.pipe.tsf.TokenTextCharNGrams;
 import cc.mallet.pipe.tsf.TokenTextCharPrefix;
 import cc.mallet.pipe.tsf.TokenTextCharSuffix;
 import cc.mallet.types.Alphabet;
+import cc.mallet.types.FeatureVectorSequence;
 import cc.mallet.types.Instance;
 import cc.mallet.types.InstanceList;
-import cc.mallet.util.CommandOption;
+import cc.mallet.types.Sequence;
 
 public class MalletTagger extends AbstractTagger {
 	private static final long serialVersionUID = 4905729231422289232L;
-
-	private static final CommandOption.String defaultOption = new CommandOption.String(SimpleTagger.class,
-			"default-label", "STRING", true, "O", "Label for initial context and uninteresting tokens", null);
 
 	private CRF crf = null;
 
 	private CRFTrainerByValueGradients crfTrainer = null;
 
 	private SerialPipes serialPipes = null;
+	private final Alphabet dataAlphabet = new Alphabet();
+	private final Alphabet targetAlphabet = new Alphabet();
 
 	public MalletTagger() {
 	}
@@ -74,37 +77,36 @@ public class MalletTagger extends AbstractTagger {
 	private SerialPipes getPipes() {
 		if (serialPipes == null) {
 			List<Pipe> pipes = new ArrayList<Pipe>();
-			pipes.add(new Matrix2TokenSequencePipe());
 			pipes.add(new TokenText());
-			pipes.add(new TokenTextCharPrefix());
-			pipes.add(new TokenTextCharSuffix());
-			pipes.add(new TokenTextCharNGrams());
-			pipes.add(new TokenSequence2FeatureVectorSequence());
+			pipes.add(new TokenTextCharPrefix("PREFIX=", 2));
+			pipes.add(new TokenTextCharPrefix("PREFIX=", 3));
+			pipes.add(new TokenTextCharSuffix("SUFFIX=", 2));
+			pipes.add(new TokenTextCharSuffix("SUFFIX=", 3));
+			pipes.add(new TokenTextCharNGrams("NGRAM=", new int[] { 2, 3 }));
+			pipes.add(new OffsetConjunctions(new int[][] { { -1 }, { 1 } }));
+			pipes.add(new TokenSequence2FeatureVectorSequence(targetAlphabet));
 			serialPipes = new SerialPipes(pipes);
-			serialPipes.getTargetAlphabet().lookupIndex(defaultOption.value);
+			serialPipes.setDataAlphabet(dataAlphabet);
+			serialPipes.setTargetAlphabet(targetAlphabet);
 			serialPipes.setTargetProcessing(true);
 		}
 		return serialPipes;
 	}
 
-	public void train(List<String> sentences) throws Exception {
-		for (String s : sentences) {
-			// train(s);
-		}
-	}
-
-	public Alphabet getLabelAlphabet() {
-		return getPipes().getTargetAlphabet();
+	public Alphabet getTargetAlphabet() {
+		return targetAlphabet;
 	}
 
 	public Alphabet getDataAlphabet() {
-		return getPipes().getDataAlphabet();
+		return dataAlphabet;
 	}
 
-	public void train(Matrix matrix) throws Exception {
-		Instance matrixInstance = new Instance(matrix, null, null, null);
+	public void train(TextBlock textBlock) throws Exception {
 		InstanceList trainingData = new InstanceList(getPipes());
-		trainingData.addThruPipe(matrixInstance);
+		for (TextSentence textSentence : textBlock) {
+			Instance textInstance = new TextInstance(textSentence, getTargetAlphabet());
+			trainingData.addThruPipe(textInstance);
+		}
 
 		if (crf == null) {
 			crf = new CRF(getPipes(), null);
@@ -119,10 +121,19 @@ public class MalletTagger extends AbstractTagger {
 		crfTrainer.train(trainingData, Integer.MAX_VALUE);
 	}
 
-	public void test(Matrix matrix) throws Exception {
-		Instance matrixInstance = new Instance(matrix, null, null, null);
-		Instance i = crf.label(matrixInstance);
-		System.out.println(i);
+	public void predict(TextBlock textBlock) throws Exception {
+		getPipes().setTargetProcessing(false);
+		InstanceList testData = new InstanceList(getPipes());
+		for (TextSentence textSentence : textBlock) {
+			Instance textInstance = new TextInstance(textSentence, getTargetAlphabet());
+			testData.addThruPipe(textInstance);
+		}
+		for (Instance instance : testData) {
+			FeatureVectorSequence sequence = (FeatureVectorSequence) instance.getData();
+			Sequence<?> labelSequence = crf.transduce(sequence);
+			System.out.println(labelSequence);
+		}
+		return;
 	}
 
 }
