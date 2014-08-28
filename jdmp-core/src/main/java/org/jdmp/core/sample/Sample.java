@@ -56,4 +56,6 @@ public interface Sample extends CoreObject, MapMatrix<String, Matrix> {
 
 	public Matrix getMatrix(String id);
 
+	public Object getObject(String id);
+
 }

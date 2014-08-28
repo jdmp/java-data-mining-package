@@ -366,7 +366,7 @@ public class DefaultDataSet extends AbstractDataSet {
 		DataSet ds = DataSetFactory.labeledDataSet("Bootstrap of " + getLabel());
 		ObservableMap<Sample> sampleList = getSampleMap();
 		for (int i = 0; i < numberOfSamples; i++) {
-			int rand = MathUtil.nextInteger(0, sampleList.getSize() - 1);
+			int rand = MathUtil.nextInteger(0, sampleList.getSize());
 			ds.getSampleMap().add(sampleList.getElementAt(rand).clone());
 		}
 		return ds;

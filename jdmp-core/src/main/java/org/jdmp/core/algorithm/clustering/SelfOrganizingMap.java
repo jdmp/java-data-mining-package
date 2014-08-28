@@ -123,12 +123,9 @@ public class SelfOrganizingMap extends AbstractClusterer {
 	}
 
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
-
 		return null;
 	}
 
-	public void setNumberOfClusters(int numberOfClusters) throws Exception {
 
-	}
 
 }
