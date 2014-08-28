@@ -39,6 +39,4 @@ public interface Clusterer {
 
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception;
 
-	public void setNumberOfClusters(int numberOfClusters) throws Exception;
-
 }

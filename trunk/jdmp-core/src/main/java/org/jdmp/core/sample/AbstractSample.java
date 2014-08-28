@@ -98,6 +98,17 @@ public abstract class AbstractSample extends AbstractMapMatrix<String, Matrix> i
 		}
 	}
 
+	public Object getObject(String id) {
+		Matrix m = get(id);
+		if (m == null) {
+			return null;
+		} else if (m.isScalar()) {
+			return m.getAsObject(0, 0);
+		} else {
+			return m;
+		}
+	}
+
 	public void setMatrix(String id, Matrix matrix) {
 		Matrix m = get(id);
 		if (m instanceof Variable) {
