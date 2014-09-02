@@ -45,8 +45,7 @@ public class PCAAction extends AbstractObjectAction {
 	public Object call() {
 		try {
 			DataSet ds = (DataSet) getCoreObject();
-			Compressor c = new PCA(
-					GUIUtil.getInt("number of dimensions", 1, ds.getDimensionCount()));
+			Compressor c = new PCA(GUIUtil.getInt("number of dimensions", 1, ds.getFeatureCount()));
 			c.train(ds);
 			c.compress(ds);
 			c.decompress(ds);

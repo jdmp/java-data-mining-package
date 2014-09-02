@@ -44,8 +44,6 @@ public class LinearRegression extends AbstractClassifier {
 
 	public static final String PARAMETERS = "Parameters";
 
-	private Matrix projectionMatrix = null;
-
 	private final int projectionDimensions;
 
 	public LinearRegression() {
@@ -75,9 +73,6 @@ public class LinearRegression extends AbstractClassifier {
 		input = input.toColumnVector(Ret.NEW);
 		Matrix bias = Matrix.Factory.ones(input.getRowCount(), 1);
 		Matrix data = Matrix.Factory.horCat(input, bias);
-		if (projectionMatrix != null) {
-			data = data.mtimes(projectionMatrix);
-		}
 		Matrix result = data.mtimes(getParameterMatrix());
 		return result;
 	}
@@ -98,11 +93,6 @@ public class LinearRegression extends AbstractClassifier {
 		Matrix bias = Matrix.Factory.ones(input.getRowCount(), 1);
 		Matrix x = Matrix.Factory.horCat(input, bias);
 
-		if (projectionDimensions > 0) {
-			projectionMatrix = Matrix.Factory.rand(x.getColumnCount(), projectionDimensions);
-			x = x.mtimes(projectionMatrix);
-		}
-
 		Matrix y = Matrix.Factory.vertCat(targets);
 
 		// this depends on the number of samples and is therefore slower for
@@ -110,7 +100,13 @@ public class LinearRegression extends AbstractClassifier {
 		// Matrix parameters = x.pinv().mtimes(y);
 
 		// this depends on the number of features only:
-		Matrix parameters = x.transpose().mtimes(x).pinv().mtimes(x.transpose()).mtimes(y);
+		Matrix parameters = null;
+		if (projectionDimensions < 1) {
+			parameters = x.transpose().mtimes(x).pinv().mtimes(x.transpose()).mtimes(y);
+		} else {
+			parameters = x.transpose().mtimes(x).pinv(projectionDimensions).mtimes(x.transpose())
+					.mtimes(y);
+		}
 
 		setParameterMatrix(parameters);
 	}
