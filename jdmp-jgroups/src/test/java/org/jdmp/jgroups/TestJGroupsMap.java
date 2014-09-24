@@ -33,4 +33,21 @@ public class TestJGroupsMap extends AbstractStringMapTest {
 		return new JGroupsMap<String, String>();
 	}
 
+	public void testTwoMaps() throws Exception {
+		JGroupsMap<String, String> map1 = new JGroupsMap<String, String>("map");
+		JGroupsMap<String, String> map2 = new JGroupsMap<String, String>("map");
+
+		map1.put("test1", "test1");
+
+		for (int i = 0; i < 10000; i++) {
+			System.out.println((i * 100) + ": " + map2.get("test1"));
+			Thread.sleep(1000);
+		}
+
+	}
+
+	public static void main(String[] args) throws Exception {
+		new TestJGroupsMap().testTwoMaps();
+	}
+
 }

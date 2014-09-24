@@ -8,8 +8,14 @@
 	<version>0.1.2</version>
 	<packaging>pom</packaging>
 	<name>Java Data Mining Package</name>
-	<description>The Java Data Mining Package is a library for data mining and machine learning.</description>
 	<url>http://www.jdmp.org/</url>
+	<description>The Java Data Mining Package is a library for data mining and machine learning.</description>
+
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
 
 	<developers>
 		<developer>
@@ -17,8 +23,16 @@
 			<name>Holger Arndt</name>
 			<email>mail@holger-arndt.com</email>
 			<url>http://www.holger-arndt.com/</url>
+			<roles>
+				<role>administrator</role>
+			</roles>
 		</developer>
 	</developers>
+
+	<organization>
+		<name>arndt.ai</name>
+		<url>http://arndt.ai</url>
+	</organization>
 
 	<licenses>
 		<license>
@@ -26,6 +40,13 @@
 			<url>http://www.gnu.org/licenses/lgpl-3.0</url>
 		</license>
 	</licenses>
+
+	<scm>
+		<url>https://svn.code.sf.net/p/jdmp/code</url>
+		<connection>scm:svn:https://svn.code.sf.net/p/jdmp/code/trunk/</connection>
+		<developerConnection>scm:svn:https://svn.code.sf.net/p/jdmp/code/trunk/</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
 
 	<properties>
 		<ujmp.version>0.3.0</ujmp.version>
@@ -139,9 +160,9 @@
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
-				<groupId>jgroups</groupId>
+				<groupId>org.jgroups</groupId>
 				<artifactId>jgroups</artifactId>
-				<version>2.9.0.GA</version>
+				<version>3.5.0.Final</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
@@ -186,69 +207,6 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
-	<reporting>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<inherited>true</inherited>
-				<configuration>
-					<outputDirectory>../jdmp-complete/target/docs/${project.version}/${project.name}</outputDirectory>
-					<reportOutputDirectory>../jdmp-complete/target/docs/${project.version}/${project.name}</reportOutputDirectory>
-					<linksource>true</linksource>
-					<links>
-						<link>http://java.sun.com/javase/6/docs/api/</link>
-
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-core/apidocs</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-gui/apidocs</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-bpca/apidocs</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-colt/apidocs</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-commonsmath/apidocs</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-ehcache/apidocs</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-ejml/apidocs</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-hadoop/apidocs</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-itext/apidocs</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jackcess/apidocs</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jama/apidocs</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jblas/apidocs</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jdbc/apidocs</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jexcelapi/apidocs</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jlinalg/apidocs</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jmathplot/apidocs</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jmatio/apidocs</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jmatrices/apidocs</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jmatharray/apidocs</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jsci/apidocs</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jscience/apidocs</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-jung/apidocs</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-lsimpute/apidocs</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-lucene/apidocs</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-mail/apidocs</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-mantissa/apidocs</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-mtj/apidocs</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-ojalgo/apidocs</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-parallelcolt/apidocs</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-pdfbox/apidocs</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-sst/apidocs</link>
-						<link>http://www.ujmp.org/docs/${ujmp.version}/ujmp-vecmath/apidocs</link>
-
-						<link>http://www.jdmp.org/docs/${project.version}/jdmp-core/apidocs</link>
-						<link>http://www.jdmp.org/docs/${project.version}/jdmp-gui/apidocs</link>
-						<link>http://www.jdmp.org/docs/${project.version}/jdmp-bsh/apidocs</link>
-						<link>http://www.jdmp.org/docs/${project.version}/jdmp-jetty/apidocs</link>
-						<link>http://www.jdmp.org/docs/${project.version}/jdmp-jgroups/apidocs</link>
-						<link>http://www.jdmp.org/docs/${project.version}/jdmp-liblinear/apidocs</link>
-						<link>http://www.jdmp.org/docs/${project.version}/jdmp-libsvm/apidocs</link>
-						<link>http://www.jdmp.org/docs/${project.version}/jdmp-lucene/apidocs</link>
-						<link>http://www.jdmp.org/docs/${project.version}/jdmp-mallet/apidocs</link>
-						<link>http://www.jdmp.org/docs/${project.version}/jdmp-stanfordpos/apidocs</link>
-						<link>http://www.jdmp.org/docs/${project.version}/jdmp-weka/apidocs</link>
-					</links>
-				</configuration>
-			</plugin>
-		</plugins>
-	</reporting>
 
 	<repositories>
 		<repository>

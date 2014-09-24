@@ -78,19 +78,33 @@ public class VariableTableCellRenderer implements TableCellRenderer {
 				o = variable.size();
 				break;
 			case VariableListTableModel.SIZECOLUMN:
-				Matrix m = variable.getLast();
-				if (m != null) {
-					o = "" + m.getRowCount() + "x" + m.getColumnCount();
+				if (!variable.isEmpty()) {
+					Matrix m = variable.getLast();
+					if (m != null) {
+						o = "" + m.getRowCount() + "x" + m.getColumnCount();
+					} else {
+						o = "0x0";
+					}
 				} else {
 					o = "0x0";
 				}
 				break;
 			case VariableListTableModel.PLOTCOLUMN:
-				return matrixPlot.getTableCellRendererComponent(table, variable.getLast(),
-						isSelected, hasFocus, row, column);
+				if (!variable.isEmpty()) {
+					return matrixPlot.getTableCellRendererComponent(table, variable.getLast(),
+							isSelected, hasFocus, row, column);
+				} else {
+					return matrixPlot.getTableCellRendererComponent(table, null, isSelected,
+							hasFocus, row, column);
+				}
 			case VariableListTableModel.MATRIXCOLUMN:
-				return matrixRenderer.getTableCellRendererComponent(table, variable.getLast(),
-						isSelected, hasFocus, row, column);
+				if (!variable.isEmpty()) {
+					return matrixRenderer.getTableCellRendererComponent(table, variable.getLast(),
+							isSelected, hasFocus, row, column);
+				} else {
+					return matrixRenderer.getTableCellRendererComponent(table, null, isSelected,
+							hasFocus, row, column);
+				}
 			default:
 				o = null;
 				break;
