@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: jdmp-jetty
-Bundle-SymbolicName: jdmp-jetty
-Bundle-Version: 1.0.0
-Export-Package: org.jdmp.jetty
-Bundle-RequiredExecutionEnvironment: J2SE-1.5,
- JavaSE-1.6,
- JavaSE-1.7
