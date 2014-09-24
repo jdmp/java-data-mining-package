@@ -27,6 +27,8 @@ import org.ujmp.core.util.MathUtil;
 
 public class GaussianDensityEstimator extends AbstractDensityEstimator {
 
+	private static final double MINPROBABILITY = 1e12;
+
 	private double count = 0.0;
 	private double runningMean = 0.0;
 	private double runningSum = 0.0;
@@ -65,7 +67,11 @@ public class GaussianDensityEstimator extends AbstractDensityEstimator {
 	}
 
 	public double getVariance() {
-		return count > 1 ? runningSum / (count - 1) : 1.0;
+		if (count == 0 || runningSum == 0) {
+			return 1.0;
+		} else {
+			return runningSum / (count - 1);
+		}
 	}
 
 	public double getSigma() {
@@ -113,7 +119,15 @@ public class GaussianDensityEstimator extends AbstractDensityEstimator {
 	}
 
 	public double getProbability(final double value) {
-		return MathUtil.gauss(runningMean, getSigma(), value);
+		double probability = MathUtil.gauss(runningMean, getSigma(), value);
+		return probability == 0.0 ? MINPROBABILITY : probability;
 	}
 
+	public double getMu() {
+		return runningMean;
+	}
+
+	public String toString() {
+		return "mu:" + getMu() + ",sigma:" + getSigma();
+	}
 }

@@ -23,7 +23,7 @@
 
 package org.jdmp.core.algorithm.classification.bayes;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.jdmp.core.algorithm.classification.AbstractClassifier;
@@ -35,6 +35,7 @@ import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
+import org.ujmp.core.collections.list.FastArrayList;
 import org.ujmp.core.util.MathUtil;
 
 public class NaiveBayesClassifier extends AbstractClassifier {
@@ -60,10 +61,22 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 			for (int j = 0; j < input.getColumnCount(); j++) {
 				double value = input.getAsDouble(0, j);
 				double probability = dists[j][i].getProbability(value);
+				if (MathUtil.isNaNOrInfinite(Math.log(probability)) || probability == 0) {
+					System.out.println();
+				}
 				logs[i] += Math.log(probability);
+			}
+			if (MathUtil.isNaNOrInfinite(logs[i]) || logs[i] == 0) {
+				System.out.println();
 			}
 		}
 		double[] probs = MathUtil.logToProbs(logs);
+
+		for (int i = 0; i < probs.length; i++) {
+			if (MathUtil.isNaNOrInfinite(probs[i])) {
+				System.out.println();
+			}
+		}
 
 		Matrix m = Matrix.Factory.linkToArray(probs).transpose();
 		return m;
@@ -80,7 +93,7 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 		int featureCount = dataSet.getFeatureCount();
 		boolean discrete = dataSet.isDiscrete();
 		classCount = dataSet.getClassCount();
-		List<Matrix> inputs = new ArrayList<Matrix>();
+		List<Matrix> inputs = new FastArrayList<Matrix>();
 		for (Sample s : dataSet.getSampleMap().values()) {
 			inputs.add(s.getMatrix(INPUT).toColumnVector(Ret.NEW));
 		}
@@ -89,11 +102,7 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 		Matrix max = dataSetInput.max(Ret.NEW, Matrix.ROW);
 
 		this.dists = new DensityEstimator[featureCount][classCount];
-		if (discrete) {
-			this.classDists = new DiscreteDensityEstimator(classCount);
-		} else {
-			this.classDists = new GaussianDensityEstimator();
-		}
+		this.classDists = new DiscreteDensityEstimator(classCount);
 
 		for (int i = 0; i < featureCount; i++) {
 			for (int j = 0; j < classCount; j++) {
