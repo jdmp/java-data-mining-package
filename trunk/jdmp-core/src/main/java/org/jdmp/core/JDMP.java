@@ -37,7 +37,7 @@ import org.ujmp.core.util.io.IntelligentFileReader;
 public class JDMP extends Applet {
 	private static final long serialVersionUID = -6039550773857594839L;
 
-	public static final String JDMPVERSION = "0.1.2";
+	public static final String JDMPVERSION = UJMP.UJMPVERSION;
 
 	public static final String UJMPVERSION = UJMP.UJMPVERSION;
 
