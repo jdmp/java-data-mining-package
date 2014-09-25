@@ -36,8 +36,6 @@
 				<include>jxl:jxl</include>
 				<include>jblas:jblas</include>
 				<include>jlinalg:jlinalg</include>
-				<include>jmatharray:jmatharray</include>
-				<include>jmathplot:jmathplot</include>
 				<include>jmatio:jmatio</include>
 				<include>jmatrices:jmatrices</include>
 				<include>jsci:jsci-core</include>
@@ -66,7 +64,6 @@
 				<include>pdfbox:pdfbox</include>
 				<include>bcprov:bcprov</include>
 				<include>FontBox:FontBox</include>
-				<include>sst:sst</include>
 				<include>vecmath:vecmath</include>
 				<include>net.sf.ehcache:ehcache</include>
 				<include>jfree:jfreechart</include>
