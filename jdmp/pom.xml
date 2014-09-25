@@ -5,10 +5,10 @@
 
 	<groupId>org.jdmp</groupId>
 	<artifactId>jdmp</artifactId>
-	<version>0.1.2</version>
+	<version>0.3.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Java Data Mining Package</name>
-	<url>http://www.jdmp.org/</url>
+	<url>http://jdmp.org/</url>
 	<description>The Java Data Mining Package is a library for data mining and machine learning.</description>
 
 	<parent>
@@ -22,7 +22,7 @@
 			<id>arndt</id>
 			<name>Holger Arndt</name>
 			<email>mail@holger-arndt.com</email>
-			<url>http://www.holger-arndt.com/</url>
+			<url>http://holger-arndt.com/</url>
 			<roles>
 				<role>administrator</role>
 			</roles>
@@ -31,7 +31,7 @@
 
 	<organization>
 		<name>arndt.ai</name>
-		<url>http://arndt.ai</url>
+		<url>http://arndt.ai/</url>
 	</organization>
 
 	<licenses>
@@ -49,9 +49,21 @@
 	</scm>
 
 	<properties>
-		<ujmp.version>0.3.0</ujmp.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
+
 
 	<build>
 		<resources>
@@ -65,6 +77,7 @@
 			</resource>
 		</resources>
 		<plugins>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
@@ -77,6 +90,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
 				<configuration>
 					<source>1.5</source>
 					<target>1.5</target>
@@ -87,6 +101,7 @@
 				<inherited>true</inherited>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
+				<version>2.3</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -96,9 +111,52 @@
 					</execution>
 				</executions>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9.1</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.5</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+					<useReleaseProfile>false</useReleaseProfile>
+					<releaseProfiles>release</releaseProfiles>
+					<goals>deploy</goals>
+				</configuration>
+			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.5</version>
 				<configuration>
 					<archive>
 						<manifest>
@@ -119,6 +177,7 @@
 					</execution>
 				</executions>
 			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
@@ -131,10 +190,13 @@
 						<descriptor>src/assemble/libs.xml</descriptor>
 					</descriptors>
 					<archive>
-						<manifestFile>META-INF/MANIFEST.MF</manifestFile>
+						<manifest>
+							<mainClass>org.jdmp.gui.JDMP</mainClass>
+						</manifest>
 					</archive>
 				</configuration>
 			</plugin>
+
 		</plugins>
 
 	</build>

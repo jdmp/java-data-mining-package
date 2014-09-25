@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>org.jdmp</groupId>
 		<artifactId>jdmp</artifactId>
-		<version>0.1.2</version>
+		<version>0.3.0-SNAPSHOT</version>
 		<relativePath>../jdmp</relativePath>
 	</parent>
 
@@ -21,224 +21,224 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jbpcafill</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-colt</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-commonsmath</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-core</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-ehcache</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-ejml</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-gui</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-hadoop</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-itext</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jackcess</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jama</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jblas</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jdbc</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jfreechart</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jlinalg</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jmatharray</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jmathplot</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jmatio</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jmatrices</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jsci</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jscience</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jung</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-lsimpute</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-lucene</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-mail</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-mantissa</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-mtj</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-ojalgo</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-parallelcolt</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-pdfbox</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-sst</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-vecmath</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
@@ -324,7 +324,7 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jbpcafill</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -332,7 +332,7 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-colt</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -340,7 +340,7 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-commonsmath</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -348,14 +348,14 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-core</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-ejml</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -363,7 +363,7 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-ehcache</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -371,7 +371,7 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-gui</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -379,7 +379,7 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-hadoop</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -387,7 +387,7 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-itext</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -395,7 +395,7 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jackcess</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -403,7 +403,7 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jama</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -411,7 +411,7 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jblas</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -419,7 +419,7 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jdbc</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -427,7 +427,7 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jfreechart</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -435,7 +435,7 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jmatharray</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -443,7 +443,7 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jmathplot</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -451,7 +451,7 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jlinalg</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -459,7 +459,7 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jmatio</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -467,7 +467,7 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jmatrices</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -475,7 +475,7 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jsci</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -483,7 +483,7 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jscience</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -491,7 +491,7 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-jung</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -499,7 +499,7 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-lsimpute</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -507,7 +507,7 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-lucene</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -515,7 +515,7 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-mail</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -523,7 +523,7 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-mantissa</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -531,7 +531,7 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-mtj</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -539,7 +539,7 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-ojalgo</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -547,7 +547,7 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-parallelcolt</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -555,7 +555,7 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-pdfbox</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -563,7 +563,7 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-sst</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
@@ -571,7 +571,7 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-vecmath</artifactId>
-			<version>${ujmp.version}</version>
+			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 			<optional>true</optional>
