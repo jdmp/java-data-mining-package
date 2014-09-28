@@ -27,12 +27,10 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.Action;
 import javax.swing.JComponent;
-import javax.swing.JOptionPane;
 
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DataSetFactory;
 import org.jdmp.core.dataset.HasDataSetMap;
-import org.ujmp.core.filematrix.FileFormat;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.gui.actions.AbstractObjectAction;
 
@@ -48,11 +46,7 @@ public class ImportDataSetFromClipboardAction extends AbstractObjectAction {
 
 	public Object call() {
 		try {
-			FileFormat fileFormat = FileFormat.values()[JOptionPane.showOptionDialog(
-					getComponent(), "Select format", "Import DataSet", JOptionPane.OK_OPTION,
-					JOptionPane.QUESTION_MESSAGE, null, FileFormat.values(), FileFormat.CSV)];
-
-			DataSet ds = DataSetFactory.importFromClipboard(fileFormat);
+			DataSet ds = DataSetFactory.importFromClipboard();
 
 			if (getCoreObject() instanceof HasDataSetMap) {
 				try {

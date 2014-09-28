@@ -74,7 +74,7 @@ public class Export extends AbstractAlgorithm {
 			file = File.createTempFile("jdmp_matrix", ".CSV").getAbsolutePath();
 		}
 
-		matrix.export().toFile(new File(file)).asCSV();
+		matrix.exportTo().file(new File(file)).asCSV();
 		result.put(TARGET, matrix);
 		return result;
 	}

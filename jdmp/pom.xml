@@ -52,17 +52,39 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
-
-	<distributionManagement>
-		<snapshotRepository>
+	<profiles>
+		<profile>
 			<id>ossrh</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-		</snapshotRepository>
-		<repository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-		</repository>
-	</distributionManagement>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<distributionManagement>
+				<snapshotRepository>
+					<id>ossrh</id>
+					<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+				</snapshotRepository>
+				<repository>
+					<id>ossrh</id>
+					<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+				</repository>
+			</distributionManagement>
+		</profile>
+		<profile>
+			<id>sourceforge</id>
+			<distributionManagement>
+				<snapshotRepository>
+					<id>sourceforge</id>
+					<name>SourceForge</name>
+					<url>sftp://holger-arndt,jdmp@frs.sourceforge.net:/home/frs/project/j/jd/jdmp/snapshots</url>
+				</snapshotRepository>
+				<repository>
+					<id>sourceforge</id>
+					<name>SourceForge</name>
+					<url>sftp://holger-arndt,jdmp@frs.sourceforge.net:/home/frs/project/j/jd/jdmp/releases</url>
+				</repository>
+			</distributionManagement>
+		</profile>
+	</profiles>
 
 	<modules>
 		<module>../jdmp-core</module>

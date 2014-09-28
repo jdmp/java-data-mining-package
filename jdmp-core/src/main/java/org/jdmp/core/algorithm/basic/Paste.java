@@ -23,13 +23,13 @@
 
 package org.jdmp.core.algorithm.basic;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.filematrix.FileFormat;
 
 public class Paste extends AbstractAlgorithm {
 	private static final long serialVersionUID = 4898079567399449172L;
@@ -43,7 +43,11 @@ public class Paste extends AbstractAlgorithm {
 
 	public Map<String, Object> calculateObjects(Map<String, Object> input) {
 		Map<String, Object> result = new HashMap<String, Object>();
-		result.put(TARGET, Matrix.Factory.importFromClipboard(FileFormat.CSV));
+		try {
+			result.put(TARGET, Matrix.Factory.importFrom().clipboard().asCSV());
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 		return result;
 	}
 }
