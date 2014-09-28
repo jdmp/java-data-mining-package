@@ -52,7 +52,7 @@ public class Copy extends AbstractAlgorithm {
 		Map<String, Object> result = new HashMap<String, Object>();
 		Matrix in = MathUtil.getMatrix(input.get(SOURCE));
 		if (in != null) {
-			in.export().toClipboard().asCSV();
+			in.exportTo().clipboard().asCSV();
 			result.put(TARGET, in);
 		}
 		return result;

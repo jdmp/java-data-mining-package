@@ -548,12 +548,9 @@ public abstract class DataSetFactory {
 		}
 	}
 
-	public static DataSet importFromClipboard(FileFormat fileFormat, Object... parameters) {
-		switch (fileFormat) {
-		default:
-			Matrix m = Matrix.Factory.importFromClipboard(fileFormat, parameters);
-			return importFromMatrix(m);
-		}
+	public static DataSet importFromClipboard() throws IOException {
+		Matrix m = Matrix.Factory.importFrom().clipboard().asCSV();
+		return importFromMatrix(m);
 	}
 
 	public static DataSet importFromJDBC(DBType type, String host, int port, String database,
