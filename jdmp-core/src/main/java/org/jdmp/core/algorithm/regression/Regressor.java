@@ -29,24 +29,32 @@ import org.ujmp.core.Matrix;
 
 public interface Regressor {
 
-	public void train(DataSet dataSet) throws Exception;
+	public void train(DataSet dataSet);
 
-	public void reset() throws Exception;
+	public void reset();
 
-	public void train(Matrix input, Matrix sampleWeight, Matrix target) throws Exception;
+	public void train(Matrix input, Matrix sampleWeight, Matrix target);
 
-	public void predict(Sample sample) throws Exception;
+	public void predict(Sample sample);
 
-	public Matrix predict(Matrix input) throws Exception;
+	public Matrix predict(Matrix input);
 
-	public void train(Matrix input, Matrix target) throws Exception;
+	public void train(Matrix input, Matrix target);
 
-	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception;
+	public Matrix predict(Matrix input, Matrix sampleWeight);
 
-	public void train(Sample sample) throws Exception;
+	public void train(Sample sample);
 
-	public void predict(DataSet dataSet) throws Exception;
+	public void predict(DataSet dataSet);
 
-	public Regressor emptyCopy() throws Exception;
+	public Regressor emptyCopy();
+
+	public String getInputLabel();
+
+	public String getTargetLabel();
+
+	public int getClassCount(DataSet dataSet);
+
+	public int getFeatureCount(DataSet dataSet);
 
 }

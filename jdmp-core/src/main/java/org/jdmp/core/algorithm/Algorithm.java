@@ -55,19 +55,19 @@ public interface Algorithm extends CoreObject, HasVariableMap, HasDataSetMap, Ha
 
 	public void setAlgorithm(String key, Algorithm a);
 
-	public Map<String, Object> calculate() throws Exception;
+	public Map<String, Object> calculate();
 
-	public Map<String, Object> calculate(Matrix... input) throws Exception;
+	public Map<String, Object> calculate(Matrix... input);
 
-	public Map<String, Object> calculateObjects(Object... input) throws Exception;
+	public Map<String, Object> calculateObjects(Object... input);
 
-	public Map<String, Object> calculate(double... input) throws Exception;
+	public Map<String, Object> calculate(double... input);
 
-	public Map<String, Object> calculate(List<Matrix> matrices) throws Exception;
+	public Map<String, Object> calculate(List<Matrix> matrices);
 
-	public Map<String, Object> calculateObjects(List<Object> matrices) throws Exception;
+	public Map<String, Object> calculateObjects(List<Object> matrices);
 
-	public Map<String, Object> calculateObjects(Map<String, Object> objects) throws Exception;
+	public Map<String, Object> calculateObjects(Map<String, Object> objects);
 
 	public EdgeDirection getEdgeDirection(String key);
 

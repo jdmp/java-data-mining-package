@@ -31,8 +31,33 @@ import org.ujmp.core.Matrix;
 public abstract class AbstractClusterer extends AbstractAlgorithm implements Clusterer {
 	private static final long serialVersionUID = -8045773409890719666L;
 
+	private String inputLabel;
+	private String weightLabel;
+
 	public AbstractClusterer() {
+		this(INPUT, WEIGHT);
+	}
+
+	public AbstractClusterer(String inputLabel, String weightLabel) {
 		super();
+		this.inputLabel = inputLabel;
+		this.weightLabel = weightLabel;
+	}
+
+	public String getInputLabel() {
+		return inputLabel;
+	}
+
+	public void setInputLabel(String inputLabel) {
+		this.inputLabel = inputLabel;
+	}
+
+	public String getWeightLabel() {
+		return weightLabel;
+	}
+
+	public void setWeightLabel(String weightLabel) {
+		this.weightLabel = weightLabel;
 	}
 
 	public void predict(DataSet dataSet) throws Exception {
@@ -42,7 +67,8 @@ public abstract class AbstractClusterer extends AbstractAlgorithm implements Clu
 	}
 
 	public final void predict(Sample sample) throws Exception {
-		Matrix output = predict(sample.getMatrix(INPUT), sample.getMatrix(WEIGHT));
+		Matrix output = predict(sample.getMatrix(getInputLabel()),
+				sample.getMatrix(getWeightLabel()));
 		sample.setMatrix(PREDICTED, output);
 		// List<Matrix> error = getOutputErrorAlgorithm().calculate(output,
 		// sample.getTargetMatrix());

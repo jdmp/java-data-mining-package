@@ -37,22 +37,22 @@ public class RandomClassifier extends AbstractClassifier {
 		super();
 	}
 
-	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
+	public Matrix predict(Matrix input, Matrix sampleWeight) {
 		return Matrix.Factory.rand(1, classCount);
 	}
 
-	public void reset() throws Exception {
+	public void reset() {
 		classCount = 0;
 	}
 
-	public void train(DataSet dataSet) throws Exception {
+	public void train(DataSet dataSet) {
 		for (Sample s : dataSet.getSampleMap()) {
 			Matrix m = s.getMatrix(Variable.TARGET);
 			classCount = (int) Math.max(classCount, m.getColumnCount());
 		}
 	}
 
-	public Classifier emptyCopy() throws Exception {
+	public Classifier emptyCopy() {
 		return new RandomClassifier();
 	}
 

@@ -66,10 +66,6 @@ public interface DataSet extends CoreObject, HasVariableMap, HasSampleMap,
 
 	public DataSet clone();
 
-	public int getFeatureCount();
-
-	public int getClassCount();
-
 	public Matrix getTargetMatrix();
 
 	public double getAccuracy();
@@ -83,5 +79,9 @@ public interface DataSet extends CoreObject, HasVariableMap, HasSampleMap,
 	public void standardize(int dimension);
 
 	public boolean isDiscrete();
+
+	public int getFeatureCount();
+
+	public int getClassCount();
 
 }

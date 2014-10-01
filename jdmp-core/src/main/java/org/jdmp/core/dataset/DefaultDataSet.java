@@ -116,11 +116,6 @@ public class DefaultDataSet extends AbstractDataSet {
 		getInputVariable().getLast().addMissing(Ret.ORIG, dimension, percentMissing);
 	}
 
-	public int getFeatureCount() {
-		return (int) getSampleMap().values().iterator().next().getMatrix(INPUT)
-				.toRowVector(Ret.NEW).getRowCount();
-	}
-
 	public DefaultDataSet clone() {
 		DefaultDataSet ds = null;
 		try {
@@ -382,6 +377,10 @@ public class DefaultDataSet extends AbstractDataSet {
 			}
 		}
 		return true;
+	}
+
+	public int getFeatureCount() {
+		return (int) getSampleMap().getElementAt(0).getMatrix(INPUT).getValueCount();
 	}
 
 }

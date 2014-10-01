@@ -50,7 +50,7 @@ public class LinearRegressionGradientDescent extends AbstractClassifier {
 
 	private double minImprovement = 1e-6;
 
-	//private double weightDecay = eta / 10.0;
+	// private double weightDecay = eta / 10.0;
 	private double weightDecay = 0.0;
 
 	public LinearRegressionGradientDescent() {
@@ -83,7 +83,7 @@ public class LinearRegressionGradientDescent extends AbstractClassifier {
 		return getGradientVariable().getLast();
 	}
 
-	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
+	public Matrix predict(Matrix input, Matrix sampleWeight) {
 		input = input.toColumnVector(Ret.NEW);
 		Matrix bias = Matrix.Factory.ones(input.getRowCount(), 1);
 		Matrix data = Matrix.Factory.horCat(bias, input);
@@ -91,19 +91,21 @@ public class LinearRegressionGradientDescent extends AbstractClassifier {
 		return result.transpose();
 	}
 
-	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) throws Exception {
-		throw (new Exception("pattern-by-pattern learning not supported"));
+	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) {
+		throw new RuntimeException("pattern-by-pattern learning not supported");
 	}
 
-	public void train(DataSet dataSet) throws Exception {
+	public void train(DataSet dataSet) {
 
 		// todo: normalize data
 
 		double lastRmse = Double.MAX_VALUE;
 		double averageImprovement = Double.NaN;
 
-		Matrix parameters = Matrix.Factory.randn(dataSet.getFeatureCount() + 1,
-				dataSet.getClassCount()).divide(dataSet.getFeatureCount() + 1);
+		int featureCount = getFeatureCount(dataSet);
+		int classCount = getClassCount(dataSet);
+		Matrix parameters = Matrix.Factory.randn(featureCount + 1, classCount).divide(
+				featureCount + 1);
 
 		List<Matrix> inputs = new FastArrayList<Matrix>();
 		List<Matrix> targets = new FastArrayList<Matrix>();

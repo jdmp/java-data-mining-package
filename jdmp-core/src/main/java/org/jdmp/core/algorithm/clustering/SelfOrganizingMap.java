@@ -77,7 +77,7 @@ public class SelfOrganizingMap extends AbstractClusterer {
 			Collections.shuffle(samples);
 
 			for (Sample s : samples) {
-				Matrix input = s.getMatrix(INPUT);
+				Matrix input = s.getMatrix(getInputLabel());
 
 				// find best match
 				double bestDistance = Double.MAX_VALUE;
@@ -125,7 +125,5 @@ public class SelfOrganizingMap extends AbstractClusterer {
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
 		return null;
 	}
-
-
 
 }

@@ -56,20 +56,24 @@ public class Import extends AbstractAlgorithm {
 		setVariables(variables);
 	}
 
-	public Map<String, Object> calculateObjects(Map<String, Object> input) throws Exception {
-		FileFormat format = defaultFormat;
+	public Map<String, Object> calculateObjects(Map<String, Object> input) {
+		try {
+			FileFormat format = defaultFormat;
 
-		Map<String, Object> result = new HashMap<String, Object>();
+			Map<String, Object> result = new HashMap<String, Object>();
 
-		String file = StringUtil.format(input.get(SOURCE));
+			String file = StringUtil.format(input.get(SOURCE));
 
-		Object o2 = input.get(FORMAT);
-		if (o2 != null) {
-			format = FileFormat.valueOf(StringUtil.format(o2));
+			Object o2 = input.get(FORMAT);
+			if (o2 != null) {
+				format = FileFormat.valueOf(StringUtil.format(o2));
+			}
+
+			Matrix target = Matrix.Factory.importFrom().file(file).asDenseCSV();
+			result.put(TARGET, target);
+			return result;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
 		}
-
-		Matrix target = Matrix.Factory.importFromFile(format, file);
-		result.put(TARGET, target);
-		return result;
 	}
 }

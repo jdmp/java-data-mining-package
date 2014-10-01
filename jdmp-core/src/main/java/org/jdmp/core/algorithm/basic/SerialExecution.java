@@ -39,7 +39,7 @@ public class SerialExecution extends AbstractAlgorithm {
 		setDescription(DESCRIPTION);
 	}
 
-	public Map<String, Object> calculateObjects(Map<String, Object> input) throws Exception {
+	public Map<String, Object> calculateObjects(Map<String, Object> input) {
 		Map<String, Object> result = new HashMap<String, Object>();
 
 		for (Algorithm a : getAlgorithmMap().values()) {

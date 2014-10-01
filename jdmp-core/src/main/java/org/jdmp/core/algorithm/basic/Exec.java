@@ -47,14 +47,18 @@ public class Exec extends AbstractAlgorithm {
 		setVariables(variables);
 	}
 
-	public Map<String, Object> calculateObjects(Map<String, Object> input) throws Exception {
-		Map<String, Object> result = new HashMap<String, Object>();
-		String command = StringUtil.convert(input.get(SOURCE));
-		Process p = Runtime.getRuntime().exec(command);
+	public Map<String, Object> calculateObjects(Map<String, Object> input) {
+		try {
+			Map<String, Object> result = new HashMap<String, Object>();
+			String command = StringUtil.convert(input.get(SOURCE));
+			Process p = Runtime.getRuntime().exec(command);
 
-		int ret = p.waitFor();
+			int ret = p.waitFor();
 
-		result.put(TARGET, ret);
-		return result;
+			result.put(TARGET, ret);
+			return result;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

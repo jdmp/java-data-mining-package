@@ -26,7 +26,6 @@ package org.jdmp.core.sample;
 import java.lang.reflect.Constructor;
 
 import org.jdmp.core.variable.Variable;
-import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.interfaces.GUIObject;

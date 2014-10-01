@@ -41,16 +41,16 @@ public class ConstantClassifier extends AbstractClassifier {
 		super();
 	}
 
-	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
+	public Matrix predict(Matrix input, Matrix sampleWeight) {
 		return prediction;
 	}
 
-	public void reset() throws Exception {
+	public void reset() {
 		prediction = null;
 		maxClassId = 0;
 	}
 
-	public void train(DataSet dataSet) throws Exception {
+	public void train(DataSet dataSet) {
 		MapMatrix<Long, Integer> count = new DefaultMapMatrix<Long, Integer>();
 		for (Sample s : dataSet.getSampleMap()) {
 			Matrix m = s.getMatrix(Variable.TARGET);
@@ -76,7 +76,7 @@ public class ConstantClassifier extends AbstractClassifier {
 		prediction.setAsDouble(1.0, 0, pc);
 	}
 
-	public Classifier emptyCopy() throws Exception {
+	public Classifier emptyCopy() {
 		return new ConstantClassifier();
 	}
 

@@ -144,17 +144,17 @@ public class NetworkLayer implements Serializable {
 		algorithmWeightUpdate.setWeightVariable(weight);
 	}
 
-	public void calculateForward() throws Exception {
+	public void calculateForward() {
 		createVariablesIfNecessary();
 		algorithmForward.calculate();
 	}
 
-	public void calculateBackward() throws Exception {
+	public void calculateBackward() {
 		createVariablesIfNecessary();
 		algorithmBackward.calculate();
 	}
 
-	public void calculateWeightUpdate() throws Exception {
+	public void calculateWeightUpdate() {
 		algorithmWeightUpdate.calculate();
 	}
 

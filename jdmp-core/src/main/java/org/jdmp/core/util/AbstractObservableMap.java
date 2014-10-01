@@ -23,7 +23,6 @@
 
 package org.jdmp.core.util;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -35,6 +34,7 @@ import javax.swing.event.EventListenerList;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 
+import org.ujmp.core.collections.list.FastArrayList;
 import org.ujmp.core.interfaces.CoreObject;
 import org.ujmp.core.interfaces.HasId;
 
@@ -61,7 +61,7 @@ public abstract class AbstractObservableMap<V extends CoreObject> implements Obs
 
 	public final List<String> getList() {
 		if (list == null) {
-			list = new ArrayList<String>(getMap().size());
+			list = new FastArrayList<String>(getMap().size());
 		}
 		if (list.size() != getMap().size()) {
 			list.clear();
@@ -101,17 +101,17 @@ public abstract class AbstractObservableMap<V extends CoreObject> implements Obs
 	}
 
 	public final synchronized V put(String key, V value) {
-		if (value != null && value instanceof HasId) {
-			((HasId) value).setId(key);
-		}
-		getList().clear();
+//		if (value != null && value instanceof HasId) {
+//			((HasId) value).setId(key);
+//		}
+		//getList().clear();
 		V v = getMap().put(key, value);
-		int index = indexOf(value);
-		if (v == null) {
-			fireIntervalAdded(this, index, index);
-		} else {
-			fireContentsChanged(this, index, index);
-		}
+		// int index = indexOf(value);
+		// if (v == null) {
+		// fireIntervalAdded(this, index, index);
+		// } else {
+		// fireContentsChanged(this, index, index);
+		// }
 		return v;
 	}
 

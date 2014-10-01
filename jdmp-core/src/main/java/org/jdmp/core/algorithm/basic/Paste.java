@@ -44,7 +44,7 @@ public class Paste extends AbstractAlgorithm {
 	public Map<String, Object> calculateObjects(Map<String, Object> input) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
-			result.put(TARGET, Matrix.Factory.importFrom().clipboard().asCSV());
+			result.put(TARGET, Matrix.Factory.importFrom().clipboard().asDenseCSV());
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

@@ -23,7 +23,6 @@
 
 package org.jdmp.core.algorithm.relationmining;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -37,7 +36,6 @@ import org.jdmp.core.sample.RelationalSample;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.sample.SampleFactory;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.filematrix.FileFormat;
 import org.ujmp.core.mapmatrix.DefaultMapMatrix;
 import org.ujmp.core.mapmatrix.MapMatrix;
 import org.ujmp.core.objectmatrix.stub.AbstractDenseObjectMatrix2D;
@@ -77,8 +75,7 @@ public class MarketBasketAnalysis extends AbstractRelationMiner {
 	}
 
 	public static void main(String[] args) throws Exception {
-		Matrix data = Matrix.Factory.linkToFile(FileFormat.CSV, new File(
-				"/home/arndt/muenchen/totale2.txt"));
+		Matrix data = Matrix.Factory.linkTo().file("/home/arndt/muenchen/totale2.txt").asDenseCSV();
 		// data.showGUI();
 
 		DataSet orig = new DefaultDataSet();

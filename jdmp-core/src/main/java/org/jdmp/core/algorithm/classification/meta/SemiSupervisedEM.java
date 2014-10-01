@@ -47,20 +47,20 @@ public class SemiSupervisedEM extends AbstractClassifier implements SemiSupervis
 		this.useRawPrediction = useRawPrediction;
 	}
 
-	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
+	public Matrix predict(Matrix input, Matrix sampleWeight) {
 		return classifier.predict(input, sampleWeight);
 	}
 
-	public void reset() throws Exception {
+	public void reset() {
 		classifier.reset();
 	}
 
-	public void train(DataSet dataSet) throws Exception {
-		throw new Exception("use train(labeledData,unlabeledData)");
+	public void train(DataSet dataSet) {
+		throw new RuntimeException("use train(labeledData,unlabeledData)");
 	}
 
 	public void train(DataSet labeledData, DataSet unlabeledData) throws Exception {
-		int classCount = labeledData.getClassCount();
+		int classCount = getClassCount(labeledData);
 		System.out.println("Step 0");
 		classifier.reset();
 		classifier.train(labeledData);
@@ -100,7 +100,7 @@ public class SemiSupervisedEM extends AbstractClassifier implements SemiSupervis
 		}
 	}
 
-	public Classifier emptyCopy() throws Exception {
+	public Classifier emptyCopy() {
 		return new SemiSupervisedEM(classifier.emptyCopy(), useRawPrediction);
 	}
 

@@ -60,22 +60,26 @@ public class Export extends AbstractAlgorithm {
 		setVariables(variables);
 	}
 
-	public Map<String, Object> calculateObjects(Map<String, Object> input) throws Exception {
-		String file = null;
+	public Map<String, Object> calculateObjects(Map<String, Object> input) {
+		try {
+			String file = null;
 
-		Map<String, Object> result = new HashMap<String, Object>();
+			Map<String, Object> result = new HashMap<String, Object>();
 
-		Matrix matrix = MathUtil.getMatrix(input.get(SOURCE));
+			Matrix matrix = MathUtil.getMatrix(input.get(SOURCE));
 
-		Object o1 = input.get(FILE);
-		if (o1 != null) {
-			file = StringUtil.format(o1);
-		} else {
-			file = File.createTempFile("jdmp_matrix", ".CSV").getAbsolutePath();
+			Object o1 = input.get(FILE);
+			if (o1 != null) {
+				file = StringUtil.format(o1);
+			} else {
+				file = File.createTempFile("jdmp_matrix", ".CSV").getAbsolutePath();
+			}
+
+			matrix.exportTo().file(new File(file)).asDenseCSV();
+			result.put(TARGET, matrix);
+			return result;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
 		}
-
-		matrix.exportTo().file(new File(file)).asCSV();
-		result.put(TARGET, matrix);
-		return result;
 	}
 }
