@@ -43,7 +43,7 @@ public class Repeat extends AbstractAlgorithm {
 		setDescription(DESCRIPTION);
 	}
 
-	public Map<String, Object> calculateObjects(Map<String, Object> input) throws Exception {
+	public Map<String, Object> calculateObjects(Map<String, Object> input) {
 		Map<String, Object> result = new HashMap<String, Object>();
 
 		for (int i = 0; i < repeatCount; i++) {

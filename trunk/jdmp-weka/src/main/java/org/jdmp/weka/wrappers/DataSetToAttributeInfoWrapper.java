@@ -64,7 +64,8 @@ public class DataSetToAttributeInfoWrapper extends FastVector {
 		}
 
 		FastVector classes = new FastVector();
-		for (int i = 0; i < dataSet.getClassCount(); i++) {
+		int classCount = dataSet.getClassCount();
+		for (int i = 0; i < classCount; i++) {
 			classes.addElement("Class " + i);
 		}
 		weka.core.Attribute a = new weka.core.Attribute("class", classes);

@@ -38,29 +38,26 @@ public class KNNClassifier extends AbstractClassifier {
 
 	private DataSet dataSet = null;
 
-	public Classifier emptyCopy() throws Exception {
+	public Classifier emptyCopy() {
 		return new KNNClassifier(k);
 	}
 
-	@Override
-	public void train(DataSet dataSet) throws Exception {
+	public void train(DataSet dataSet) {
 		this.dataSet = dataSet;
 	}
 
-	@Override
-	public void reset() throws Exception {
+	public void reset() {
 		this.dataSet = null;
 	}
 
-	@Override
-	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
+	public Matrix predict(Matrix input, Matrix sampleWeight) {
 		Matrix bestMatrix = null;
 		double bestDistance = Double.MAX_VALUE;
 		for (Sample s : dataSet.getSampleMap().values()) {
-			Matrix reference = s.getMatrix(INPUT);
+			Matrix reference = s.getMatrix(getInputLabel());
 			double distance = input.euklideanDistanceTo(reference, true);
 			if (distance < bestDistance) {
-				bestMatrix = s.getMatrix(TARGET);
+				bestMatrix = s.getMatrix(getTargetLabel());
 				bestDistance = distance;
 			}
 		}

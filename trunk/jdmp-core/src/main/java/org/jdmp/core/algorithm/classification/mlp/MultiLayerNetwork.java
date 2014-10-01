@@ -248,7 +248,7 @@ public class MultiLayerNetwork extends AbstractClassifier {
 		return networkLayers;
 	}
 
-	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
+	public Matrix predict(Matrix input, Matrix sampleWeight) {
 		// transpose and add bias unit
 		// Matrix inputWithBias = Matrix.zeros(input.getColumnCount() + 1,
 		// input.getRowCount());
@@ -270,7 +270,7 @@ public class MultiLayerNetwork extends AbstractClassifier {
 		return getOutputVariable().getLast();
 	}
 
-	public void train(Matrix input, Matrix sampleWeight, Matrix desiredOutput) throws Exception {
+	public void train(Matrix input, Matrix sampleWeight, Matrix desiredOutput) {
 		addDesiredOutputMatrix(desiredOutput.toRowVector(Ret.NEW));
 		if (sampleWeight == null) {
 			sampleWeight = Matrix.Factory.linkToValue(1.0);
@@ -321,7 +321,7 @@ public class MultiLayerNetwork extends AbstractClassifier {
 		return mean;
 	}
 
-	public void train(DataSet dataSet) throws Exception {
+	public void train(DataSet dataSet) {
 
 		// TODO: fix!
 
@@ -339,8 +339,8 @@ public class MultiLayerNetwork extends AbstractClassifier {
 		double rmse = 0;
 		for (int i = first90Percent; i < samples.size(); i++) {
 			Sample rs = samples.get(i);
-			Matrix output = predict(rs.getMatrix(INPUT), rs.getMatrix(WEIGHT));
-			rmse += output.minus(rs.getMatrix(TARGET)).getRMS();
+			Matrix output = predict(rs.getMatrix(getInputLabel()), rs.getMatrix(WEIGHT));
+			rmse += output.minus(rs.getMatrix(getTargetLabel())).getRMS();
 			train(samples.get(i));
 		}
 		rmse /= last10Percent;
@@ -361,7 +361,7 @@ public class MultiLayerNetwork extends AbstractClassifier {
 		dataSet.fireValueChanged();
 	}
 
-	public Classifier emptyCopy() throws Exception {
+	public Classifier emptyCopy() {
 		return null;
 	}
 

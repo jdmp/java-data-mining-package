@@ -23,7 +23,6 @@
 
 package org.jdmp.core.algorithm.classification.bayes;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.jdmp.core.algorithm.classification.AbstractClassifier;
@@ -45,61 +44,66 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 
 	private DensityEstimator classDists = null;
 
-	private int classCount = 2;
+	private int classCount = -1;
 
 	public NaiveBayesClassifier() {
 	}
 
-	@Override
-	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
+	public NaiveBayesClassifier(String inputLabel) {
+		super(inputLabel);
+	}
+
+	public Matrix predict(Matrix input, Matrix sampleWeight) {
 		input = input.toColumnVector(Ret.NEW);
-		double[] logs = new double[classCount];
-		// for all classes
+		final double[] probs = new double[classCount];
+		final double[] logs = new double[classCount];
+
 		for (int i = 0; i < classCount; i++) {
-			// for all features
-			logs[i] = Math.log(classDists.getProbability(i));
-			for (int j = 0; j < input.getColumnCount(); j++) {
+			logs[i] += Math.log(classDists.getProbability(i));
+		}
+
+		// for all features
+		for (int j = 0; j < input.getColumnCount(); j++) {
+			// for all classes
+			double probSum = 0;
+			for (int i = 0; i < classCount; i++) {
 				double value = input.getAsDouble(0, j);
 				double probability = dists[j][i].getProbability(value);
-				if (MathUtil.isNaNOrInfinite(Math.log(probability)) || probability == 0) {
-					System.out.println();
-				}
-				logs[i] += Math.log(probability);
+				probs[i] = probability;
+				probSum += probability;
 			}
-			if (MathUtil.isNaNOrInfinite(logs[i]) || logs[i] == 0) {
-				System.out.println();
-			}
-		}
-		double[] probs = MathUtil.logToProbs(logs);
-
-		for (int i = 0; i < probs.length; i++) {
-			if (MathUtil.isNaNOrInfinite(probs[i])) {
-				System.out.println();
+			for (int i = 0; i < classCount; i++) {
+				logs[i] += Math.log(probs[i] / probSum);
 			}
 		}
 
-		Matrix m = Matrix.Factory.linkToArray(probs).transpose();
+		final double[] finalProbs = MathUtil.logToProbs(logs);
+		Matrix m = Matrix.Factory.linkToArray(finalProbs).transpose();
 		return m;
 	}
 
-	@Override
-	public void reset() throws Exception {
+	public void reset() {
 		dists = null;
 		classDists = null;
 	}
 
-	@Override
-	public void train(DataSet dataSet) throws Exception {
-		int featureCount = dataSet.getFeatureCount();
+	public void train(DataSet dataSet) {
+		System.out.println("training started");
+		int featureCount = (int) dataSet.getSampleMap().getElementAt(0).getMatrix(getInputLabel())
+				.getValueCount();
 		boolean discrete = dataSet.isDiscrete();
-		classCount = dataSet.getClassCount();
-		List<Matrix> inputs = new FastArrayList<Matrix>();
-		for (Sample s : dataSet.getSampleMap().values()) {
-			inputs.add(s.getMatrix(INPUT).toColumnVector(Ret.NEW));
-		}
-		Matrix dataSetInput = Matrix.Factory.vertCat(inputs);
+		classCount = getClassCount(dataSet);
 
-		Matrix max = dataSetInput.max(Ret.NEW, Matrix.ROW);
+		// todo: improve
+		Matrix max = null;
+		if (discrete) {
+			List<Matrix> inputs = new FastArrayList<Matrix>();
+			for (Sample s : dataSet.getSampleMap().values()) {
+				inputs.add(s.getMatrix(getInputLabel()).toColumnVector(Ret.NEW));
+			}
+			Matrix dataSetInput = Matrix.Factory.vertCat(inputs);
+			max = dataSetInput.max(Ret.NEW, Matrix.ROW);
+		}
 
 		this.dists = new DensityEstimator[featureCount][classCount];
 		this.classDists = new DiscreteDensityEstimator(classCount);
@@ -114,10 +118,12 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 			}
 		}
 
+		System.out.println("density estimators created");
+
 		// go over all samples and count
 		for (Sample s : dataSet.getSampleMap()) {
-			Matrix sampleInput = s.getMatrix(INPUT).toColumnVector(Ret.NEW);
-			Matrix sampleWeight = s.getMatrix(WEIGHT);
+			Matrix sampleInput = s.getMatrix(getInputLabel()).toColumnVector(Ret.NEW);
+			Matrix sampleWeight = s.getMatrix(getWeightLabel());
 
 			double weight = 1.0;
 
@@ -132,9 +138,11 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 			}
 			classDists.addValue(outputClass, weight);
 		}
+
+		System.out.println("training finished");
 	}
 
-	public Classifier emptyCopy() throws Exception {
+	public Classifier emptyCopy() {
 		return new NaiveBayesClassifier();
 	}
 }

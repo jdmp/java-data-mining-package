@@ -57,7 +57,7 @@ public class LibLinearClassifier extends AbstractClassifier {
 		this.param = parameter;
 	}
 
-	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
+	public Matrix predict(Matrix input, Matrix sampleWeight) {
 		input = input.toRowVector(Ret.NEW);
 		long rowCount = input.getRowCount();
 		int count = 0;
@@ -97,12 +97,12 @@ public class LibLinearClassifier extends AbstractClassifier {
 		return result;
 	}
 
-	public void train(DataSet dataSet) throws Exception {
+	public void train(DataSet dataSet) {
 		createAlgorithm();
 		prob = new Problem();
 		prob.l = dataSet.getSampleMap().getSize();
 		// +1 for bias
-		prob.n = (int) dataSet.getSampleMap().iterator().next().getMatrix(INPUT).toRowVector(Ret.NEW).getRowCount() + 1;
+		prob.n = getFeatureCount(dataSet) + 1;
 
 		prob.x = new FeatureNode[prob.l][];
 		prob.y = new double[prob.l];
@@ -110,14 +110,15 @@ public class LibLinearClassifier extends AbstractClassifier {
 		long time = System.currentTimeMillis();
 
 		int i = 0;
-		for (Sample p : dataSet.getSampleMap()) {
+		for (Sample s : dataSet.getSampleMap()) {
 			if (System.currentTimeMillis() - time > 5000) {
 				time = System.currentTimeMillis();
 				System.out.println("Converting samples: "
 						+ Math.round(((double) i / dataSet.getSampleMap().size() * 100)) + "% done");
 			}
-			Matrix input = p.getMatrix(INPUT).toRowVector(Ret.NEW);
-			prob.y[i] = p.getTargetClass();
+			Matrix input = s.getMatrix(getInputLabel()).toRowVector(Ret.NEW);
+			int targetClass = (int) s.getMatrix(getTargetLabel()).toRowVector(Ret.NEW).getCoordinatesOfMaximum()[ROW];
+			prob.y[i] = targetClass;
 			long rowCount = input.getRowCount();
 			int count = 0;
 			for (int j = 0; j < rowCount; j++) {
@@ -142,11 +143,11 @@ public class LibLinearClassifier extends AbstractClassifier {
 		model = Linear.train(prob, param);
 	}
 
-	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) throws Exception {
-		throw new Exception("not supported");
+	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) {
+		throw new RuntimeException("not supported");
 	}
 
-	public Classifier emptyCopy() throws Exception {
+	public Classifier emptyCopy() {
 		return new LibLinearClassifier();
 	}
 

@@ -47,8 +47,8 @@ public abstract class DataSetFactory {
 		DataSet ds = new DefaultDataSet();
 		for (int i = 0; i < input.getRowCount(); i++) {
 			Sample s = SampleFactory.emptySample();
-			Matrix in = input.subMatrix(Ret.NEW, i, 0, i, input.getColumnCount() - 1);
-			Matrix out = target.subMatrix(Ret.NEW, i, 0, i, target.getColumnCount() - 1);
+			Matrix in = input.selectRows(Ret.NEW, i);
+			Matrix out = target.selectRows(Ret.NEW, i);
 			s.setMatrix(Sample.INPUT, in);
 			s.setMatrix(Sample.TARGET, out);
 			ds.getSampleMap().add(s);
@@ -60,7 +60,7 @@ public abstract class DataSetFactory {
 			throws IOException {
 		switch (format) {
 		default:
-			Matrix m = Matrix.Factory.importFromFile(format, file, parameters);
+			Matrix m = Matrix.Factory.importFrom().file(file).asDenseCSV();
 			return importFromMatrix(m);
 		}
 	}
@@ -69,7 +69,7 @@ public abstract class DataSetFactory {
 			throws IOException {
 		switch (format) {
 		default:
-			Matrix m = Matrix.Factory.linkToFile(format, file, parameters);
+			Matrix m = Matrix.Factory.linkTo().file(file).asDenseCSV();
 			return linkToMatrix(m);
 		}
 	}
@@ -116,8 +116,6 @@ public abstract class DataSetFactory {
 
 	public static DataSet linkToMatrix(Matrix input, Matrix target) {
 		DataSet ds = new DefaultDataSet();
-		ds.getInputVariable().add(input);
-		ds.getTargetVariable().add(target);
 		for (int i = 0; i < input.getRowCount(); i++) {
 			Sample s = SampleFactory.emptySample();
 			Matrix in = input.selectRows(Ret.LINK, i);
@@ -543,13 +541,13 @@ public abstract class DataSetFactory {
 			throws Exception {
 		switch (fileFormat) {
 		default:
-			Matrix m = Matrix.Factory.importFromURL(fileFormat, url, parameters);
+			Matrix m = Matrix.Factory.importFrom().url(url).asDenseCSV();
 			return importFromMatrix(m);
 		}
 	}
 
 	public static DataSet importFromClipboard() throws IOException {
-		Matrix m = Matrix.Factory.importFrom().clipboard().asCSV();
+		Matrix m = Matrix.Factory.importFrom().clipboard().asDenseCSV();
 		return importFromMatrix(m);
 	}
 

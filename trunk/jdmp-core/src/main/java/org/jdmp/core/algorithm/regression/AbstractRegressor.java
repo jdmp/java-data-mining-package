@@ -36,6 +36,7 @@ import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
+import org.ujmp.core.util.concurrent.PFor;
 
 public abstract class AbstractRegressor extends AbstractAlgorithm implements Regressor {
 	private static final long serialVersionUID = 4674447558395794134L;
@@ -52,9 +53,28 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 
 	private int iteration = 0;
 
-	public AbstractRegressor() {
+	private String inputLabel;
+	private String targetLabel;
+	private String weightLabel;
+
+	public AbstractRegressor(String inputLabel, String targetLabel, String weightLabel) {
 		super();
+		this.inputLabel = inputLabel;
+		this.targetLabel = targetLabel;
+		this.weightLabel = weightLabel;
 		setAlgorithm(OUTPUTERRORALGORITHM, new Minus());
+	}
+
+	public AbstractRegressor(String inputLabel, String targetLabel) {
+		this(inputLabel, targetLabel, WEIGHT);
+	}
+
+	public AbstractRegressor(String inputLabel) {
+		this(inputLabel, TARGET);
+	}
+
+	public AbstractRegressor() {
+		this(INPUT);
 	}
 
 	public AbstractRegressor(boolean evaluate) {
@@ -62,19 +82,51 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 		this.evaluate = evaluate;
 	}
 
-	public abstract void train(DataSet dataSet) throws Exception;
-
-	public abstract void reset() throws Exception;
-
-	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) throws Exception {
-		throw new Exception("not supported");
+	public int getClassCount(DataSet dataSet) {
+		return (int) dataSet.getSampleMap().getElementAt(0).getMatrix(getTargetLabel())
+				.toRowVector(Ret.NEW).getRowCount();
 	}
 
-	public final void predict(Sample sample) throws Exception {
-		Matrix predicted = predict(sample.getMatrix(INPUT), sample.getMatrix(WEIGHT));
+	public int getFeatureCount(DataSet dataSet) {
+		return (int) dataSet.getSampleMap().values().iterator().next().getMatrix(getInputLabel())
+				.toRowVector(Ret.NEW).getRowCount();
+	}
+
+	public String getInputLabel() {
+		return inputLabel;
+	}
+
+	public String getWeightLabel() {
+		return weightLabel;
+	}
+
+	public void setWeightLabel(String weightLabel) {
+		this.weightLabel = weightLabel;
+	}
+
+	public void setInputLabel(String inputLabel) {
+		this.inputLabel = inputLabel;
+	}
+
+	public String getTargetLabel() {
+		return targetLabel;
+	}
+
+	public void setTargetLabel(String targetLabel) {
+		this.targetLabel = targetLabel;
+	}
+
+	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) {
+		throw new RuntimeException("not supported");
+	}
+
+	public final void predict(Sample sample) {
+		Matrix predicted = predict(sample.getMatrix(getInputLabel()),
+				sample.getMatrix(getWeightLabel()));
+		predicted = predicted.toColumnVector(Ret.NEW);
 		sample.setMatrix(PREDICTED, predicted);
 		if (evaluate) {
-			Matrix target = sample.getMatrix(TARGET).toRowVector(Ret.NEW);
+			Matrix target = sample.getMatrix(getTargetLabel()).toColumnVector(Ret.NEW);
 			Matrix error = target.minus(predicted);
 			sample.setMatrix(DIFFERENCE, error);
 			sample.setMatrix(RMSE, Matrix.Factory.linkToValue(error.getRMS()));
@@ -82,38 +134,45 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 		sample.fireValueChanged();
 	}
 
-	public final Matrix predict(Matrix input) throws Exception {
+	public final Matrix predict(Matrix input) {
 		return predict(input.toRowVector(Ret.NEW), null);
 	}
 
-	public final void train(Matrix input, Matrix targetOutput) throws Exception {
+	public final void train(Matrix input, Matrix targetOutput) {
 		train(input, Matrix.Factory.linkToValue(1.0), targetOutput);
 	}
 
-	public abstract Matrix predict(Matrix input, Matrix sampleWeight) throws Exception;
-
-	public final void train(Sample sample) throws Exception {
-		Matrix input = sample.getMatrix(INPUT);
-		Matrix weight = sample.getMatrix(WEIGHT);
-		Matrix target = sample.getMatrix(TARGET);
+	public final void train(Sample sample) {
+		Matrix input = sample.getMatrix(getInputLabel());
+		Matrix weight = sample.getMatrix(getWeightLabel());
+		Matrix target = sample.getMatrix(getTargetLabel());
 		train(input, weight, target);
 	}
 
-	public void predict(DataSet dataSet) throws Exception {
-		Matrix confusion = null;
+	public void predict(final DataSet dataSet) {
+		final Matrix confusion;
 		double error = 0.0;
 		int correctCount = 0;
 		int errorCount = 0;
-		int classCount = 0;
+		final int classCount;
 
-		classCount = dataSet.getClassCount();
+		classCount = getClassCount(dataSet);
 		confusion = Matrix.Factory.zeros(classCount, classCount);
 		confusion.setDimensionLabel(Matrix.ROW, "expected");
 		confusion.setDimensionLabel(Matrix.COLUMN, "predicted");
 
+		new PFor(0, dataSet.getSampleMap().size() - 1) {
+
+			@Override
+			public void step(int i) {
+				Sample sample = dataSet.getSampleMap().getElementAt(i);
+				predict(sample);
+			}
+		};
+
 		for (Sample sample : dataSet.getSampleMap()) {
 
-			predict(sample);
+			// predict(sample);
 
 			if (evaluate) {
 				double rmse = sample.getMatrix(RMSE).getEuklideanValue();
@@ -188,19 +247,19 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 		errorMatrix.setLabel("Errors with " + getLabel());
 		dataSet.getVariableMap().setMatrix(Variable.ERRORCOUNT, errorMatrix);
 
-		Matrix sensitivity = (Matrix) new Sensitivity().calculate(confusion).get(TARGET);
+		Matrix sensitivity = (Matrix) new Sensitivity().calculate(confusion).get(getTargetLabel());
 		dataSet.getVariableMap().setMatrix(Variable.SENSITIVITY, sensitivity);
 
-		Matrix specificity = (Matrix) new Specificity().calculate(confusion).get(TARGET);
+		Matrix specificity = (Matrix) new Specificity().calculate(confusion).get(getTargetLabel());
 		dataSet.getVariableMap().setMatrix(Variable.SPECIFICITY, specificity);
 
-		Matrix precision = (Matrix) new Precision().calculate(confusion).get(TARGET);
+		Matrix precision = (Matrix) new Precision().calculate(confusion).get(getTargetLabel());
 		dataSet.getVariableMap().setMatrix(Variable.PRECISION, precision);
 
-		Matrix recall = (Matrix) new Recall().calculate(confusion).get(TARGET);
+		Matrix recall = (Matrix) new Recall().calculate(confusion).get(getTargetLabel());
 		dataSet.getVariableMap().setMatrix(Variable.RECALL, recall);
 
-		Matrix fmeasure = (Matrix) new FMeasure().calculate(confusion).get(TARGET);
+		Matrix fmeasure = (Matrix) new FMeasure().calculate(confusion).get(getTargetLabel());
 		dataSet.getVariableMap().setMatrix(Variable.FMEASURE, fmeasure);
 
 		Matrix fmeasureMacro = fmeasure.mean(Ret.NEW, Matrix.ALL, false);
@@ -208,7 +267,7 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 
 		iteration++;
 		System.out.println("Iteration: " + iteration + ", RMSE: " + rmse.doubleValue()
-				+ ", errors: " + errorCount);
+				+ ", errors: " + errorCount + ", accuracy: " + accuracy.doubleValue());
 
 		dataSet.fireValueChanged();
 	}

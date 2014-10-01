@@ -32,4 +32,15 @@ public abstract class AbstractClassifier extends AbstractRegressor implements Cl
 		super();
 	}
 
+	public AbstractClassifier(String inputLabel, String targetLabel, String weightLabel) {
+		super(inputLabel, targetLabel, weightLabel);
+	}
+
+	public AbstractClassifier(String inputLabel, String targetLabel) {
+		super(inputLabel, targetLabel);
+	}
+
+	public AbstractClassifier(String inputLabel) {
+		super(inputLabel);
+	}
 }

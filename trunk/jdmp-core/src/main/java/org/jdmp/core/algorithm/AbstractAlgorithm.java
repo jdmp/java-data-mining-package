@@ -132,7 +132,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		}
 	}
 
-	public final Map<String, Object> calculate() throws Exception {
+	public final Map<String, Object> calculate() {
 		Map<String, Object> input = new HashMap<String, Object>();
 
 		for (String v : getInputKeys()) {
@@ -170,15 +170,15 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		return outputKeys;
 	}
 
-	public final Map<String, Object> calculate(Matrix... input) throws Exception {
+	public final Map<String, Object> calculate(Matrix... input) {
 		return calculate(Arrays.asList(input));
 	}
 
-	public final Map<String, Object> calculateObjects(Object... input) throws Exception {
+	public final Map<String, Object> calculateObjects(Object... input) {
 		return calculateObjects(Arrays.asList(input));
 	}
 
-	public final Map<String, Object> calculate(double... input) throws Exception {
+	public final Map<String, Object> calculate(double... input) {
 		List<Matrix> inputA = new LinkedList<Matrix>();
 		for (int i = 0; i < input.length; i++) {
 			inputA.add(Matrix.Factory.linkToValue(input[i]));
@@ -186,7 +186,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		return calculate(inputA);
 	}
 
-	public final Map<String, Object> calculate(List<Matrix> matrices) throws Exception {
+	public final Map<String, Object> calculate(List<Matrix> matrices) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<String> keys = getInputKeys();
 		for (int i = 0; i < matrices.size(); i++) {
@@ -196,7 +196,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 		return calculateObjects(map);
 	}
 
-	public final Map<String, Object> calculateObjects(List<Object> matrices) throws Exception {
+	public final Map<String, Object> calculateObjects(List<Object> matrices) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<String> keys = getInputKeys();
 		for (int i = 0; i < matrices.size(); i++) {
@@ -207,7 +207,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 	}
 
 	// this is not the best way
-	public Map<String, Object> calculateObjects(Map<String, Object> objects) throws Exception {
+	public Map<String, Object> calculateObjects(Map<String, Object> objects) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		return result;
 	}

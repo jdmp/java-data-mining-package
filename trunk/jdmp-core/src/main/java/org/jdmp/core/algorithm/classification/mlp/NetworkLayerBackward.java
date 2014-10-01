@@ -117,7 +117,7 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 		System.out.println(a.calculate());
 	}
 
-	public Map<String, Object> calculateObjects(Map<String, Object> input) throws Exception {
+	public Map<String, Object> calculateObjects(Map<String, Object> input) {
 		Map<String, Object> result = new HashMap<String, Object>();
 
 		Algorithm returningFunction = getReturningFunction();

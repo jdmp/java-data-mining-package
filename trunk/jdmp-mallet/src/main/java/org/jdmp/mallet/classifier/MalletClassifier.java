@@ -61,21 +61,21 @@ public class MalletClassifier extends AbstractClassifier {
 
 	private cc.mallet.classify.Classifier classifier = null;
 
-	public MalletClassifier(MalletClassifiers classifier) throws Exception {
+	public MalletClassifier(MalletClassifiers classifier) {
 		super();
 		setLabel("Mallet Classifier " + classifier.name());
 		this.type = classifier;
 		reset();
 	}
 
-	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
+	public Matrix predict(Matrix input, Matrix sampleWeight) {
 		Instance instance = new Sample2Instance(input, null, classifier.getAlphabet(), classifier.getLabelAlphabet(),
 				classifier.getInstancePipe(), cumSum);
 		Classification c = classifier.classify(instance);
 		return new Labeling2Matrix(c.getLabeling());
 	}
 
-	public void reset() throws Exception {
+	public void reset() {
 		switch (type) {
 		case NaiveBayes:
 			this.trainer = new NaiveBayesTrainer();
@@ -112,7 +112,7 @@ public class MalletClassifier extends AbstractClassifier {
 
 	}
 
-	public void train(DataSet dataSet) throws Exception {
+	public void train(DataSet dataSet) {
 		Matrix dataSetInput = dataSet.getInputMatrix();
 
 		Matrix max = dataSetInput.max(Ret.NEW, Matrix.ROW);
@@ -125,7 +125,8 @@ public class MalletClassifier extends AbstractClassifier {
 		}
 
 		LabelAlphabet inputAlphabet = new LabelAlphabet();
-		for (int i = 0; i < dataSet.getFeatureCount(); i++) {
+		int featureCount = getFeatureCount(dataSet);
+		for (int i = 0; i < featureCount; i++) {
 			// iterate from 1 to max (inclusive!)
 			for (int fv = 1; fv < max.getAsDouble(0, i) + 1; fv++) {
 				inputAlphabet.lookupIndex("Feature" + i + "=" + fv, true);
@@ -142,11 +143,11 @@ public class MalletClassifier extends AbstractClassifier {
 		classifier = trainer.train(trainingSet);
 	}
 
-	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) throws Exception {
+	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) {
 		throw new RuntimeException("not implemented");
 	}
 
-	public Classifier emptyCopy() throws Exception {
+	public Classifier emptyCopy() {
 		return new MalletClassifier(type);
 	}
 

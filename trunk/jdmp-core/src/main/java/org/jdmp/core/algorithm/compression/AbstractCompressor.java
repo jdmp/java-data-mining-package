@@ -31,8 +31,23 @@ import org.ujmp.core.Matrix;
 public abstract class AbstractCompressor extends AbstractAlgorithm implements Compressor {
 	private static final long serialVersionUID = 870196284002196140L;
 
-	public AbstractCompressor() {
+	private String inputLabel;
+
+	public AbstractCompressor(String inputLabel) {
 		super();
+		this.inputLabel = inputLabel;
+	}
+
+	public AbstractCompressor() {
+		this(INPUT);
+	}
+
+	public String getInputLabel() {
+		return inputLabel;
+	}
+
+	public void setInputLabel(String inputLabel) {
+		this.inputLabel = inputLabel;
 	}
 
 	public void compress(DataSet dataSet) throws Exception {
@@ -42,7 +57,7 @@ public abstract class AbstractCompressor extends AbstractAlgorithm implements Co
 	}
 
 	public final void compress(Sample sample) throws Exception {
-		Matrix output = compress(sample.getMatrix(INPUT));
+		Matrix output = compress(sample.getMatrix(getInputLabel()));
 		sample.setMatrix(COMPRESSED, output);
 	}
 

@@ -99,29 +99,37 @@ public class LibSVMClassifier extends AbstractClassifier {
 	}
 
 	public void train(DataSet dataSet) {
-		int rowCount = (int) dataSet.getSampleMap().iterator().next().getMatrix(INPUT)
-				.toRowVector(Ret.NEW).getRowCount();
+		int featureCount = getFeatureCount(dataSet);
+
+		System.out.println("training started");
 
 		prob = new svm_problem();
 		prob.l = dataSet.getSampleMap().getSize();
 
-		prob.x = new svm_node[prob.l][rowCount];
+		prob.x = new svm_node[prob.l][featureCount + 1];
 		prob.y = new double[prob.l];
 
 		int i = 0;
-		for (Sample p : dataSet.getSampleMap()) {
-			Matrix input = p.getMatrix(INPUT).toRowVector(Ret.NEW);
-			prob.y[i] = p.getTargetClass();
-			for (int j = 0; j < rowCount; j++) {
-				prob.x[i][j] = new svm_node();
-				prob.x[i][j].index = j + 1;
-				prob.x[i][j].value = input.getAsDouble(j, 0);
+		for (Sample s : dataSet.getSampleMap()) {
+			Matrix input = s.getMatrix(getInputLabel()).toColumnVector(Ret.NEW);
+			int targetClass = (int) s.getMatrix(getTargetLabel()).toRowVector(Ret.NEW)
+					.getCoordinatesOfMaximum()[ROW];
+			prob.y[i] = targetClass;
+			prob.x[i][0] = new svm_node();
+			prob.x[i][0].index = 0;
+			prob.x[i][0].value = 1;
+			for (int j = 0; j < featureCount; j++) {
+				prob.x[i][j + 1] = new svm_node();
+				prob.x[i][j + 1].index = j + 1;
+				prob.x[i][j + 1].value = input.getAsDouble(0, j);
 			}
 			i++;
 		}
 
+		System.out.println("dataset converted");
+
 		if (param.gamma == 0)
-			param.gamma = 1.0 / rowCount;
+			param.gamma = 1.0 / featureCount;
 
 		if (param.kernel_type == svm_parameter.PRECOMPUTED)
 			for (i = 0; i < prob.l; i++) {
@@ -130,7 +138,7 @@ public class LibSVMClassifier extends AbstractClassifier {
 							.print("Wrong kernel matrix: first column must be 0:sample_serial_number\n");
 					System.exit(1);
 				}
-				if ((int) prob.x[i][0].value <= 0 || (int) prob.x[i][0].value > rowCount) {
+				if ((int) prob.x[i][0].value <= 0 || (int) prob.x[i][0].value > featureCount) {
 					System.err.print("Wrong input format: sample_serial_number out of range\n");
 					System.exit(1);
 				}
@@ -138,11 +146,15 @@ public class LibSVMClassifier extends AbstractClassifier {
 
 		String error_msg = svm.svm_check_parameter(prob, param);
 
+		System.out.println("training svm");
+
 		if (error_msg != null) {
 			System.err.print("Error: " + error_msg + "\n");
 		} else {
 			model = svm.svm_train(prob, param);
 		}
+
+		System.out.println("training finished");
 	}
 
 	public Matrix predict(Matrix input, Matrix weight) {
@@ -151,11 +163,14 @@ public class LibSVMClassifier extends AbstractClassifier {
 		double[] prob_estimates = new double[nr_class];
 
 		int m = (int) input.getRowCount();
-		svm_node[] x = new svm_node[m];
+		svm_node[] x = new svm_node[m + 1];
+		x[0] = new svm_node();
+		x[0].index = 0;
+		x[0].value = 1;
 		for (int j = 0; j < m; j++) {
-			x[j] = new svm_node();
-			x[j].index = j + 1;
-			x[j].value = input.getAsDouble(j, 0);
+			x[j + 1] = new svm_node();
+			x[j + 1].index = j + 1;
+			x[j + 1].value = input.getAsDouble(j, 0);
 		}
 
 		svm.svm_predict_probability(model, x, prob_estimates);
@@ -170,8 +185,8 @@ public class LibSVMClassifier extends AbstractClassifier {
 		return output;
 	}
 
-	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) throws Exception {
-		throw new Exception("not supported");
+	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) {
+		throw new RuntimeException("not supported");
 	}
 
 	public void reset() {

@@ -23,9 +23,6 @@
 
 package org.jdmp.core.algorithm.regression;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.jdmp.core.algorithm.classification.AbstractClassifier;
 import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.dataset.DataSet;
@@ -69,31 +66,43 @@ public class LinearRegression extends AbstractClassifier {
 		return getParameterVariable().getLast();
 	}
 
-	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
+	public Matrix predict(Matrix input, Matrix sampleWeight) {
 		input = input.toColumnVector(Ret.NEW);
-		Matrix bias = Matrix.Factory.ones(input.getRowCount(), 1);
-		Matrix data = Matrix.Factory.horCat(input, bias);
-		Matrix result = data.mtimes(getParameterMatrix());
+		Matrix x = Matrix.Factory.zeros(1, input.getColumnCount() + 1);
+		x.setAsDouble(1, 0, 0);
+		for (int c = 0; c < input.getColumnCount(); c++) {
+			x.setAsDouble(input.getAsDouble(0, c), 0, c + 1);
+		}
+		Matrix result = x.mtimes(getParameterMatrix());
 		return result;
 	}
 
-	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) throws Exception {
-		throw (new Exception("pattern-by-pattern learning not supported"));
+	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) {
+		throw new RuntimeException("pattern-by-pattern learning not supported");
 	}
 
-	public void train(DataSet dataSet) throws Exception {
-		List<Matrix> inputs = new ArrayList<Matrix>();
-		List<Matrix> targets = new ArrayList<Matrix>();
+	public void train(DataSet dataSet) {
+		System.out.println("training started");
+
+		Matrix x = Matrix.Factory
+				.zeros(dataSet.getSampleMap().size(), getFeatureCount(dataSet) + 1);
+		Matrix y = Matrix.Factory.zeros(dataSet.getSampleMap().size(), getClassCount(dataSet));
+
+		int i = 0;
 		for (Sample s : dataSet.getSampleMap().values()) {
-			inputs.add(s.getMatrix(Sample.INPUT).toColumnVector(Ret.NEW));
-			targets.add(s.getMatrix(Sample.TARGET).toColumnVector(Ret.NEW));
+			x.setAsDouble(1, i, 0);
+			Matrix input = s.getMatrix(getInputLabel()).toColumnVector(Ret.NEW);
+			for (int c = 0; c < input.getColumnCount(); c++) {
+				x.setAsDouble(input.getAsDouble(0, c), i, c + 1);
+			}
+			Matrix target = s.getMatrix(getTargetLabel()).toColumnVector(Ret.NEW);
+			for (int c = 0; c < target.getColumnCount(); c++) {
+				y.setAsDouble(target.getAsDouble(0, c), i, c);
+			}
+			i++;
 		}
 
-		Matrix input = Matrix.Factory.vertCat(inputs);
-		Matrix bias = Matrix.Factory.ones(input.getRowCount(), 1);
-		Matrix x = Matrix.Factory.horCat(input, bias);
-
-		Matrix y = Matrix.Factory.vertCat(targets);
+		System.out.println("data loaded");
 
 		// this depends on the number of samples and is therefore slower for
 		// large data sets:
@@ -101,12 +110,15 @@ public class LinearRegression extends AbstractClassifier {
 
 		// this depends on the number of features only:
 		Matrix parameters = null;
+		final Matrix xtranspose = x.transpose();
 		if (projectionDimensions < 1) {
-			parameters = x.transpose().mtimes(x).pinv().mtimes(x.transpose()).mtimes(y);
+			parameters = xtranspose.mtimes(x).pinv().mtimes(xtranspose).mtimes(y);
 		} else {
-			parameters = x.transpose().mtimes(x).pinv(projectionDimensions).mtimes(x.transpose())
+			parameters = xtranspose.mtimes(x).pinv(projectionDimensions).mtimes(xtranspose)
 					.mtimes(y);
 		}
+
+		System.out.println("training finished");
 
 		setParameterMatrix(parameters);
 	}

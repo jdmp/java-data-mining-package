@@ -24,6 +24,7 @@
 package org.jdmp.weka.classifier;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 import org.jdmp.core.algorithm.classification.AbstractClassifier;
 import org.jdmp.core.dataset.DataSet;
@@ -49,18 +50,24 @@ public class WekaClassifier extends AbstractClassifier {
 
 	private boolean discrete = false;
 
-	public WekaClassifier(WekaClassifierType classifierName, boolean discrete) throws Exception {
+	public WekaClassifier(WekaClassifierType classifierName, boolean discrete) {
 		setLabel("Weka-" + classifierName);
 		this.classifierName = classifierName;
 		this.discrete = discrete;
-		createAlgorithm();
+		try {
+			createAlgorithm();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	public void setOptions(String... options) throws Exception {
 		wekaClassifier.setOptions(options);
 	}
 
-	public void createAlgorithm() throws Exception {
+	public void createAlgorithm() throws ClassNotFoundException, NoSuchMethodException,
+			SecurityException, InstantiationException, IllegalAccessException,
+			IllegalArgumentException, InvocationTargetException {
 		Class<?> c = null;
 		if (c == null) {
 			try {
@@ -137,31 +144,43 @@ public class WekaClassifier extends AbstractClassifier {
 		}
 	}
 
-	public Matrix predict(Matrix input, Matrix weight) throws Exception {
-		double[] probabilities = null;
-		Instance instance = new SampleToInstanceWrapper(input, weight, null, discrete, true);
-		instance.setDataset(instances);
-		probabilities = wekaClassifier.distributionForInstance(instance);
-		double[][] v = new double[1][];
-		v[0] = probabilities;
-		Matrix output = Matrix.Factory.linkToArray(v);
-		return output;
+	public Matrix predict(Matrix input, Matrix weight) {
+		try {
+			double[] probabilities = null;
+			Instance instance = new SampleToInstanceWrapper(input, weight, null, discrete, true);
+			instance.setDataset(instances);
+			probabilities = wekaClassifier.distributionForInstance(instance);
+			double[][] v = new double[1][];
+			v[0] = probabilities;
+			Matrix output = Matrix.Factory.linkToArray(v);
+			return output;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
-	public void train(DataSet dataSet) throws Exception {
-		instances = new DataSetToInstancesWrapper(dataSet, discrete, true);
-		wekaClassifier.buildClassifier(instances);
+	public void train(DataSet dataSet) {
+		try {
+			instances = new DataSetToInstancesWrapper(dataSet, discrete, true);
+			wekaClassifier.buildClassifier(instances);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) {
 		throw new RuntimeException("this method is not supported for WEKA classifiers");
 	}
 
-	public void reset() throws Exception {
-		createAlgorithm();
+	public void reset() {
+		try {
+			createAlgorithm();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
-	public org.jdmp.core.algorithm.classification.Classifier emptyCopy() throws Exception {
+	public org.jdmp.core.algorithm.classification.Classifier emptyCopy() {
 		return new WekaClassifier(classifierName, discrete);
 	}
 
