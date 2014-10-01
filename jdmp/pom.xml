@@ -156,6 +156,7 @@
 					<failOnError>false</failOnError>
 					<noindex>true</noindex>
 					<notree>true</notree>
+					<skip>true</skip>
 					<additionalJOptions>
 						<additionalJOption>-J-Xss512M</additionalJOption>
 						<additionalJOption>-J-XX:MaxPermSize=512M</additionalJOption>
