@@ -28,7 +28,7 @@ import java.util.LinkedList;
 
 import org.ujmp.core.util.AbstractPlugin;
 
-public abstract class ExternalPlugin extends AbstractPlugin {
+public abstract class ExternalPlugin {
 
 	private AbstractPlugin plugin = null;
 
@@ -48,8 +48,8 @@ public abstract class ExternalPlugin extends AbstractPlugin {
 		return plugin == null ? "n/a" : plugin.getDescription();
 	}
 
-	public final Collection<Object> getDependencies() {
-		return plugin == null ? new LinkedList<Object>() : plugin.getDependencies();
+	public final Collection<String> getDependencies() {
+		return plugin == null ? new LinkedList<String>() : plugin.getDependencies();
 	}
 
 	public final String getStatus() {

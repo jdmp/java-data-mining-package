@@ -23,35 +23,16 @@
 
 package org.jdmp.liblinear;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 import org.ujmp.core.util.AbstractPlugin;
 
 public class Plugin extends AbstractPlugin {
 
-	private final List<Object> dependencies = new ArrayList<Object>();
-
-	private final List<String> neededClasses = new ArrayList<String>();
-
 	public Plugin() {
+		super("library for classification with liblinear");
 		dependencies.add("ujmp-core");
 		dependencies.add("jdmp-core");
 		dependencies.add("liblinear.jar");
 		neededClasses.add("de.bwaldvogel.liblinear.Model");
-	}
-
-	public String getDescription() {
-		return "library for classification with liblinear";
-	}
-
-	public Collection<Object> getDependencies() {
-		return dependencies;
-	}
-
-	public Collection<String> getNeededClasses() {
-		return neededClasses;
 	}
 
 }

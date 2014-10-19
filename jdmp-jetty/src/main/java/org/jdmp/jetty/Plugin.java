@@ -23,19 +23,12 @@
 
 package org.jdmp.jetty;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 import org.ujmp.core.util.AbstractPlugin;
 
 public class Plugin extends AbstractPlugin {
 
-	private final List<Object> dependencies = new ArrayList<Object>();
-
-	private final List<String> neededClasses = new ArrayList<String>();
-
 	public Plugin() {
+		super("library for setting up a web server with Jetty");
 		dependencies.add("ujmp-core");
 		dependencies.add("jdmp-core");
 		dependencies.add("jetty.jar");
@@ -44,18 +37,6 @@ public class Plugin extends AbstractPlugin {
 		neededClasses.add("org.mortbay.jetty.Server");
 		neededClasses.add("org.mortbay.component.Container");
 		neededClasses.add("javax.servlet.Servlet");
-	}
-
-	public String getDescription() {
-		return "library for setting up a web server with Jetty";
-	}
-
-	public Collection<Object> getDependencies() {
-		return dependencies;
-	}
-
-	public Collection<String> getNeededClasses() {
-		return neededClasses;
 	}
 
 }
