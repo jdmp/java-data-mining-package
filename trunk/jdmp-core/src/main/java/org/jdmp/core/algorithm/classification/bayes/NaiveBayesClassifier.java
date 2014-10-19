@@ -91,7 +91,7 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 		System.out.println("training started");
 		int featureCount = (int) dataSet.getSampleMap().getElementAt(0).getMatrix(getInputLabel())
 				.getValueCount();
-		boolean discrete = dataSet.isDiscrete();
+		boolean discrete = isDiscrete(dataSet);
 		classCount = getClassCount(dataSet);
 
 		// todo: improve
@@ -122,7 +122,7 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 
 		// go over all samples and count
 		for (Sample s : dataSet.getSampleMap()) {
-			Matrix sampleInput = s.getMatrix(getInputLabel()).toColumnVector(Ret.NEW);
+			Matrix sampleInput = s.getMatrix(getInputLabel()).toColumnVector(Ret.LINK);
 			Matrix sampleWeight = s.getMatrix(getWeightLabel());
 
 			double weight = 1.0;
@@ -143,6 +143,9 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 	}
 
 	public Classifier emptyCopy() {
-		return new NaiveBayesClassifier();
+		NaiveBayesClassifier nb = new NaiveBayesClassifier();
+		nb.setInputLabel(getInputLabel());
+		nb.setTargetLabel(getTargetLabel());
+		return nb;
 	}
 }

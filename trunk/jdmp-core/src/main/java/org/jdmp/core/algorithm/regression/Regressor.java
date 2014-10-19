@@ -57,4 +57,6 @@ public interface Regressor {
 
 	public int getFeatureCount(DataSet dataSet);
 
+	public boolean isDiscrete(DataSet dataSet);
+
 }

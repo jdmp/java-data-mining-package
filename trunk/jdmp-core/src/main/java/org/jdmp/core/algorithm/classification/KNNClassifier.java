@@ -23,11 +23,19 @@
 
 package org.jdmp.core.algorithm.classification;
 
+import java.util.Collections;
+import java.util.List;
+
+import org.jdmp.core.algorithm.regression.AbstractRegressor;
+import org.jdmp.core.algorithm.regression.Regressor;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.calculation.Calculation.Ret;
+import org.ujmp.core.collections.list.FastArrayList;
+import org.ujmp.core.util.Sortable;
 
-public class KNNClassifier extends AbstractClassifier {
+public class KNNClassifier extends AbstractRegressor {
 	private static final long serialVersionUID = 5971192321313837066L;
 
 	private final int k;
@@ -38,7 +46,7 @@ public class KNNClassifier extends AbstractClassifier {
 
 	private DataSet dataSet = null;
 
-	public Classifier emptyCopy() {
+	public Regressor emptyCopy() {
 		return new KNNClassifier(k);
 	}
 
@@ -51,17 +59,27 @@ public class KNNClassifier extends AbstractClassifier {
 	}
 
 	public Matrix predict(Matrix input, Matrix sampleWeight) {
-		Matrix bestMatrix = null;
-		double bestDistance = Double.MAX_VALUE;
-		for (Sample s : dataSet.getSampleMap().values()) {
+		List<Sortable<Double, Matrix>> bestResults = new FastArrayList<Sortable<Double, Matrix>>();
+		for (Sample s : dataSet.getSampleMap()) {
 			Matrix reference = s.getMatrix(getInputLabel());
 			double distance = input.euklideanDistanceTo(reference, true);
-			if (distance < bestDistance) {
-				bestMatrix = s.getMatrix(getTargetLabel());
-				bestDistance = distance;
+			if (bestResults.size() < k) {
+				bestResults.add(new Sortable<Double, Matrix>(distance, s
+						.getMatrix(getTargetLabel())));
+				Collections.sort(bestResults);
+			} else if (distance < bestResults.get(k - 1).getComparable()) {
+				bestResults.remove(k - 1);
+				bestResults.add(new Sortable<Double, Matrix>(distance, s
+						.getMatrix(getTargetLabel())));
+				Collections.sort(bestResults);
 			}
 		}
-		return bestMatrix;
+		List<Matrix> results = new FastArrayList<Matrix>();
+		for (Sortable<Double, Matrix> s : bestResults) {
+			results.add(s.getObject().toColumnVector(Ret.LINK));
+		}
+		Matrix resultMatrix = Matrix.Factory.vertCat(results);
+		Matrix mean = resultMatrix.mean(Ret.NEW, Matrix.ROW, true);
+		return mean;
 	}
-
 }

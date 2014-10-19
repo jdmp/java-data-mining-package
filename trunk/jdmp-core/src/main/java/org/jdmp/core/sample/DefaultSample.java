@@ -23,9 +23,9 @@
 
 package org.jdmp.core.sample;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import org.ujmp.core.Matrix;
 
@@ -36,7 +36,7 @@ public class DefaultSample extends AbstractSample {
 
 	public DefaultSample() {
 		super();
-		this.map = new HashMap<String, Matrix>();
+		this.map = new TreeMap<String, Matrix>();
 	}
 
 	public final DefaultSample clone() {

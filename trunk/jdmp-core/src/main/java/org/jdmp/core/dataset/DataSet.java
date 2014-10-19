@@ -84,4 +84,8 @@ public interface DataSet extends CoreObject, HasVariableMap, HasSampleMap,
 
 	public int getClassCount();
 
+	public DataSet bootstrap();
+
+	public DataSet bootstrap(int count);
+
 }

@@ -40,16 +40,27 @@ import org.ujmp.core.util.MathUtil;
 public class LibSVMClassifier extends AbstractClassifier {
 	private static final long serialVersionUID = -3809157647628200950L;
 
-	private svm_parameter param = null;
+	private final svm_parameter param = new svm_parameter();
 
-	private svm_problem prob = null; // set by read_problem
+	private svm_problem prob = null;
 
 	private svm_model model = null;
 
-	private Kernel kernel = null;
+	private final SVMType svmType;
+
+	private final Kernel kernel;
+
+	private double cost = 1.0;
+
+	private int featureCount = 0;
+	private int targetCount = 0;
 
 	public enum Kernel {
 		LINEAR, RBF, SIGMOID, POLYNOM
+	};
+
+	public enum SVMType {
+		C_SVC, NU_SVC, ONE_CLASS, EPSILON_SVR, NU_SVR;
 	};
 
 	public LibSVMClassifier() {
@@ -57,16 +68,40 @@ public class LibSVMClassifier extends AbstractClassifier {
 	}
 
 	public LibSVMClassifier(Kernel kernel) {
+		this(SVMType.C_SVC, Kernel.RBF);
+	}
+
+	public LibSVMClassifier(SVMType svmType, Kernel kernel) {
 		super();
 		setLabel("SVM " + kernel.name());
+		this.svmType = svmType;
 		this.kernel = kernel;
 		createAlgorithm();
 	}
 
-	private void createAlgorithm() {
-		param = new svm_parameter();
+	public void setCost(double cost) {
+		this.cost = cost;
+		param.C = cost;
+	}
 
-		param.svm_type = svm_parameter.C_SVC;
+	private void createAlgorithm() {
+		switch (svmType) {
+		case C_SVC:
+			param.svm_type = svm_parameter.C_SVC;
+			break;
+		case NU_SVC:
+			param.svm_type = svm_parameter.NU_SVC;
+			break;
+		case ONE_CLASS:
+			param.svm_type = svm_parameter.ONE_CLASS;
+			break;
+		case EPSILON_SVR:
+			param.svm_type = svm_parameter.EPSILON_SVR;
+			break;
+		case NU_SVR:
+			param.svm_type = svm_parameter.NU_SVR;
+			break;
+		}
 
 		switch (kernel) {
 		case LINEAR:
@@ -87,19 +122,20 @@ public class LibSVMClassifier extends AbstractClassifier {
 		param.gamma = 0; // 1/k
 		param.coef0 = 0;
 		param.nu = 0.5;
-		param.cache_size = 100;
-		param.C = 1;
+		param.cache_size = 1000;
+		param.C = cost;
 		param.eps = 1e-3;
 		param.p = 0.1;
 		param.shrinking = 1;
-		param.probability = 1;
+		param.probability = 0;
 		param.nr_weight = 0;
 		param.weight_label = new int[0];
 		param.weight = new double[0];
 	}
 
 	public void train(DataSet dataSet) {
-		int featureCount = getFeatureCount(dataSet);
+		featureCount = getFeatureCount(dataSet);
+		targetCount = getClassCount(dataSet);
 
 		System.out.println("training started");
 
@@ -112,9 +148,13 @@ public class LibSVMClassifier extends AbstractClassifier {
 		int i = 0;
 		for (Sample s : dataSet.getSampleMap()) {
 			Matrix input = s.getMatrix(getInputLabel()).toColumnVector(Ret.NEW);
-			int targetClass = (int) s.getMatrix(getTargetLabel()).toRowVector(Ret.NEW)
-					.getCoordinatesOfMaximum()[ROW];
-			prob.y[i] = targetClass;
+			if (svmType == SVMType.EPSILON_SVR || svmType == SVMType.NU_SVR) {
+				prob.y[i] = s.getMatrix(getTargetLabel()).toRowVector(Ret.NEW).getAsDouble(0, 0);
+			} else {
+				int targetClass = (int) s.getMatrix(getTargetLabel()).toRowVector(Ret.NEW)
+						.getCoordinatesOfMaximum()[ROW];
+				prob.y[i] = targetClass;
+			}
 			prob.x[i][0] = new svm_node();
 			prob.x[i][0].index = 0;
 			prob.x[i][0].value = 1;
@@ -128,8 +168,9 @@ public class LibSVMClassifier extends AbstractClassifier {
 
 		System.out.println("dataset converted");
 
-		if (param.gamma == 0)
+		if (param.gamma == 0) {
 			param.gamma = 1.0 / featureCount;
+		}
 
 		if (param.kernel_type == svm_parameter.PRECOMPUTED)
 			for (i = 0; i < prob.l; i++) {
@@ -159,30 +200,52 @@ public class LibSVMClassifier extends AbstractClassifier {
 
 	public Matrix predict(Matrix input, Matrix weight) {
 		input = input.toRowVector(Ret.NEW);
-		int nr_class = svm.svm_get_nr_class(model);
-		double[] prob_estimates = new double[nr_class];
 
-		int m = (int) input.getRowCount();
-		svm_node[] x = new svm_node[m + 1];
-		x[0] = new svm_node();
-		x[0].index = 0;
-		x[0].value = 1;
-		for (int j = 0; j < m; j++) {
-			x[j + 1] = new svm_node();
-			x[j + 1].index = j + 1;
-			x[j + 1].value = input.getAsDouble(j, 0);
+		if (svmType == SVMType.EPSILON_SVR || svmType == SVMType.NU_SVR) {
+
+			int nr_class = svm.svm_get_nr_class(model);
+			double[] prediction = new double[nr_class];
+
+			int m = (int) input.getRowCount();
+			svm_node[] x = new svm_node[m + 1];
+			x[0] = new svm_node();
+			x[0].index = 0;
+			x[0].value = 1;
+			for (int j = 0; j < m; j++) {
+				x[j + 1] = new svm_node();
+				x[j + 1].index = j + 1;
+				x[j + 1].value = input.getAsDouble(j, 0);
+			}
+
+			svm.svm_predict_values(model, x, prediction);
+			Matrix output = Matrix.Factory.linkToValue(prediction[0]);
+			return output;
+		} else {
+			int nr_class = svm.svm_get_nr_class(model);
+			double[] prediction = new double[nr_class];
+
+			int m = (int) input.getRowCount();
+			svm_node[] x = new svm_node[m + 1];
+			x[0] = new svm_node();
+			x[0].index = 0;
+			x[0].value = 1;
+			for (int j = 0; j < m; j++) {
+				x[j + 1] = new svm_node();
+				x[j + 1].index = j + 1;
+				x[j + 1].value = input.getAsDouble(j, 0);
+			}
+
+			svm.svm_predict_probability(model, x, prediction);
+			int[] label = new int[svm.svm_get_nr_class(model)];
+			svm.svm_get_labels(model, label);
+			Matrix output = Matrix.Factory.zeros(1, MathUtil.max(label) + 1);
+
+			for (int i = 0; i < label.length; i++) {
+				output.setAsDouble(prediction[i], 0, label[i]);
+			}
+
+			return output;
 		}
-
-		svm.svm_predict_probability(model, x, prob_estimates);
-		int[] label = new int[svm.svm_get_nr_class(model)];
-		svm.svm_get_labels(model, label);
-		Matrix output = Matrix.Factory.zeros(1, MathUtil.max(label) + 1);
-
-		for (int i = 0; i < label.length; i++) {
-			output.setAsDouble(prob_estimates[i], 0, label[i]);
-		}
-
-		return output;
 	}
 
 	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) {
@@ -190,11 +253,18 @@ public class LibSVMClassifier extends AbstractClassifier {
 	}
 
 	public void reset() {
-		createAlgorithm();
+		prob = null;
+		model = null;
 	}
 
 	public Classifier emptyCopy() {
-		return new LibSVMClassifier(kernel);
+		LibSVMClassifier svm = new LibSVMClassifier(svmType, kernel);
+		svm.setCost(cost);
+		return svm;
+	}
+
+	public double getCost() {
+		return cost;
 	}
 
 }

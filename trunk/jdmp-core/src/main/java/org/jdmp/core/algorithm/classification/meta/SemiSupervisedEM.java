@@ -23,48 +23,46 @@
 
 package org.jdmp.core.algorithm.classification.meta;
 
-import org.jdmp.core.algorithm.classification.AbstractClassifier;
-import org.jdmp.core.algorithm.classification.Classifier;
+import org.jdmp.core.algorithm.regression.AbstractRegressor;
+import org.jdmp.core.algorithm.regression.Regressor;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DefaultDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 
-public class SemiSupervisedEM extends AbstractClassifier implements SemiSupervisedClassifier {
+public class SemiSupervisedEM extends AbstractRegressor {
 	private static final long serialVersionUID = 7362798845466035645L;
 
-	private int iterations = 10;
+	private final int iterations;
+	private final Regressor algorithm;
+	private final DataSet unlabeledData;
+	private final boolean useRawPrediction;
 
-	private Classifier classifier = null;
-
-	private boolean useRawPrediction = false;
-
-	public SemiSupervisedEM(Classifier singleClassClassifier, boolean useRawPrediction) {
+	public SemiSupervisedEM(Regressor algorithm, DataSet unlabeledData, int iterations,
+			boolean useRawPrediction) {
 		super();
-		setLabel("SemiSupervisedEM [" + singleClassClassifier.toString() + "]");
-		this.classifier = singleClassClassifier;
+		setLabel("SemiSupervisedEM [" + algorithm.toString() + "]");
+		this.algorithm = algorithm;
+		this.unlabeledData = unlabeledData;
 		this.useRawPrediction = useRawPrediction;
+		this.iterations = iterations;
 	}
 
 	public Matrix predict(Matrix input, Matrix sampleWeight) {
-		return classifier.predict(input, sampleWeight);
+		return algorithm.predict(input, sampleWeight);
 	}
 
 	public void reset() {
-		classifier.reset();
+		algorithm.reset();
 	}
 
-	public void train(DataSet dataSet) {
-		throw new RuntimeException("use train(labeledData,unlabeledData)");
-	}
-
-	public void train(DataSet labeledData, DataSet unlabeledData) throws Exception {
+	public void train(DataSet labeledData) {
 		int classCount = getClassCount(labeledData);
 		System.out.println("Step 0");
-		classifier.reset();
-		classifier.train(labeledData);
-		classifier.predict(unlabeledData);
+		algorithm.reset();
+		algorithm.train(labeledData);
+		algorithm.predict(unlabeledData);
 		for (Sample s : unlabeledData.getSampleMap()) {
 			Matrix predicted = s.getMatrix(Sample.PREDICTED);
 			if (useRawPrediction) {
@@ -76,32 +74,32 @@ public class SemiSupervisedEM extends AbstractClassifier implements SemiSupervis
 				s.setMatrix(Sample.TARGET, target);
 			}
 		}
-		DataSet completeData = new DefaultDataSet();
-		completeData.getSampleMap().addAll(labeledData.getSampleMap().values());
-		completeData.getSampleMap().addAll(unlabeledData.getSampleMap().values());
-		classifier.reset();
-		classifier.train(completeData);
 
 		for (int i = 0; i < iterations; i++) {
 			System.out.println("Step " + (i + 1));
-			classifier.predict(unlabeledData);
-			for (Sample s : unlabeledData.getSampleMap()) {
-				Matrix predicted = s.getMatrix(Sample.PREDICTED);
-				int max = (int) predicted.indexOfMax(Ret.NEW, Matrix.COLUMN).getAsDouble(0, 0);
-				Matrix target = Matrix.Factory.zeros(1, classCount);
-				target.setAsDouble(1.0, 0, max);
-				s.setMatrix(Sample.TARGET, target);
-			}
-			completeData = new DefaultDataSet();
+			DataSet completeData = new DefaultDataSet();
 			completeData.getSampleMap().addAll(labeledData.getSampleMap().values());
 			completeData.getSampleMap().addAll(unlabeledData.getSampleMap().values());
-			classifier.reset();
-			classifier.train(completeData);
+			algorithm.reset();
+			algorithm.train(completeData);
+			algorithm.predict(unlabeledData);
+			for (Sample s : unlabeledData.getSampleMap()) {
+				Matrix predicted = s.getMatrix(Sample.PREDICTED);
+				if (useRawPrediction) {
+					s.setMatrix(Sample.TARGET, predicted);
+				} else {
+					int max = (int) predicted.indexOfMax(Ret.NEW, Matrix.COLUMN).getAsDouble(0, 0);
+					Matrix target = Matrix.Factory.zeros(1, classCount);
+					target.setAsDouble(1.0, 0, max);
+					s.setMatrix(Sample.TARGET, target);
+				}
+			}
 		}
 	}
 
-	public Classifier emptyCopy() {
-		return new SemiSupervisedEM(classifier.emptyCopy(), useRawPrediction);
+	public Regressor emptyCopy() {
+		return new SemiSupervisedEM(algorithm.emptyCopy(), unlabeledData, iterations,
+				useRawPrediction);
 	}
 
 }

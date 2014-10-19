@@ -148,7 +148,10 @@ public class LibLinearClassifier extends AbstractClassifier {
 	}
 
 	public Classifier emptyCopy() {
-		return new LibLinearClassifier();
+		LibLinearClassifier ll = new LibLinearClassifier(param);
+		ll.setInputLabel(getInputLabel());
+		ll.setTargetLabel(getTargetLabel());
+		return ll;
 	}
 
 	private void createAlgorithm() {
