@@ -25,30 +25,35 @@ package org.jdmp.core;
 
 import static org.junit.Assert.assertEquals;
 
+import org.jdmp.core.algorithm.classification.meta.Bagging;
+import org.jdmp.core.algorithm.classification.meta.FeatureSelector;
+import org.jdmp.core.algorithm.classification.meta.FeatureSelector.SelectionType;
 import org.jdmp.core.algorithm.regression.LinearRegression;
-import org.jdmp.core.algorithm.regression.Regressor;
-import org.jdmp.core.dataset.CrossValidation;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DataSetFactory;
 import org.junit.Test;
-import org.ujmp.core.listmatrix.ListMatrix;
 
-public class TestLinearRegression {
+public class TestBagging {
 
 	@Test
 	public void testIrisClassification1() throws Exception {
-		DataSet iris = DataSetFactory.IRIS();
-		Regressor c = new LinearRegression();
-		ListMatrix<Double> results = CrossValidation.run(c, iris, 10, 10, 0);
-		assertEquals(0.82, results.getMeanValue(), 0.01);
+		DataSet ds = DataSetFactory.IRIS();
+		LinearRegression lr = new LinearRegression();
+		FeatureSelector r = new FeatureSelector(SelectionType.Random, lr, 3);
+		Bagging b = new Bagging(r, 100);
+		b.train(ds);
+		b.predict(ds);
+		assertEquals(0.86, ds.getAccuracy(), 0.02);
 	}
 
 	@Test
 	public void testIrisClassification2() throws Exception {
-		DataSet iris = DataSetFactory.IRIS();
-		Regressor c = new LinearRegression(3);
-		ListMatrix<Double> results = CrossValidation.run(c, iris, 10, 10, 0);
-		assertEquals(0.80, results.getMeanValue(), 0.01);
+		DataSet ds = DataSetFactory.IRIS();
+		LinearRegression lr = new LinearRegression();
+		Bagging b = new Bagging(lr, 100);
+		b.train(ds);
+		b.predict(ds);
+		assertEquals(0.86, ds.getAccuracy(), 0.02);
 	}
 
 }

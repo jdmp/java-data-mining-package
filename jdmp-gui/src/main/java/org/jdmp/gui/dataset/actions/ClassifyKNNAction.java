@@ -28,8 +28,8 @@ import java.awt.event.KeyEvent;
 import javax.swing.Action;
 import javax.swing.JComponent;
 
-import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.algorithm.classification.KNNClassifier;
+import org.jdmp.core.algorithm.regression.Regressor;
 import org.jdmp.core.dataset.DataSet;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.gui.actions.AbstractObjectAction;
@@ -47,7 +47,7 @@ public class ClassifyKNNAction extends AbstractObjectAction {
 
 	public Object call() {
 		try {
-			Classifier c = new KNNClassifier(GUIUtil.getInt("number of neighbors", 1, 100));
+			Regressor c = new KNNClassifier(GUIUtil.getInt("number of neighbors", 1, 100));
 			c.train((DataSet) getCoreObject());
 			c.predict((DataSet) getCoreObject());
 		} catch (Exception e) {

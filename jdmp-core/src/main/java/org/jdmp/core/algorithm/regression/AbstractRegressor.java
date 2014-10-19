@@ -36,6 +36,7 @@ import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
+import org.ujmp.core.util.MathUtil;
 import org.ujmp.core.util.concurrent.PFor;
 
 public abstract class AbstractRegressor extends AbstractAlgorithm implements Regressor {
@@ -87,6 +88,18 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 				.toRowVector(Ret.NEW).getRowCount();
 	}
 
+	public boolean isDiscrete(DataSet dataSet) {
+		for (Sample s : dataSet.getSampleMap().values()) {
+			Matrix input = s.getMatrix(getInputLabel());
+			for (long[] c : input.availableCoordinates()) {
+				if (!MathUtil.isDiscrete(input.getAsDouble(c))) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
 	public int getFeatureCount(DataSet dataSet) {
 		return (int) dataSet.getSampleMap().values().iterator().next().getMatrix(getInputLabel())
 				.toRowVector(Ret.NEW).getRowCount();
@@ -125,12 +138,14 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 				sample.getMatrix(getWeightLabel()));
 		predicted = predicted.toColumnVector(Ret.NEW);
 		sample.setMatrix(PREDICTED, predicted);
-		if (evaluate) {
+
+		if (sample.getMatrix(getTargetLabel()) != null) {
 			Matrix target = sample.getMatrix(getTargetLabel()).toColumnVector(Ret.NEW);
 			Matrix error = target.minus(predicted);
 			sample.setMatrix(DIFFERENCE, error);
 			sample.setMatrix(RMSE, Matrix.Factory.linkToValue(error.getRMS()));
 		}
+
 		sample.fireValueChanged();
 	}
 
@@ -150,16 +165,6 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 	}
 
 	public void predict(final DataSet dataSet) {
-		final Matrix confusion;
-		double error = 0.0;
-		int correctCount = 0;
-		int errorCount = 0;
-		final int classCount;
-
-		classCount = getClassCount(dataSet);
-		confusion = Matrix.Factory.zeros(classCount, classCount);
-		confusion.setDimensionLabel(Matrix.ROW, "expected");
-		confusion.setDimensionLabel(Matrix.COLUMN, "predicted");
 
 		new PFor(0, dataSet.getSampleMap().size() - 1) {
 
@@ -170,11 +175,20 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 			}
 		};
 
-		for (Sample sample : dataSet.getSampleMap()) {
+		if (dataSet.getSampleMap().getElementAt(0).getMatrix(getTargetLabel()) != null) {
+			final Matrix confusion;
+			double error = 0.0;
+			int correctCount = 0;
+			int errorCount = 0;
+			final int classCount;
 
-			// predict(sample);
+			classCount = getClassCount(dataSet);
+			confusion = Matrix.Factory.zeros(classCount, classCount);
+			confusion.setDimensionLabel(Matrix.ROW, "expected");
+			confusion.setDimensionLabel(Matrix.COLUMN, "predicted");
 
-			if (evaluate) {
+			for (Sample sample : dataSet.getSampleMap()) {
+
 				double rmse = sample.getMatrix(RMSE).getEuklideanValue();
 				error += Math.pow(rmse, 2.0);
 
@@ -199,75 +213,78 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 				// ((RegressionSample) sample).setWeight(weight);
 
 			}
-		}
 
-		Matrix rmse = Matrix.Factory.linkToValue(Math
-				.sqrt(error / dataSet.getSampleMap().getSize()));
-		rmse.setLabel("RMSE with " + getLabel());
-		dataSet.getVariableMap().setMatrix(Variable.RMSE, rmse);
+			Matrix rmse = Matrix.Factory.linkToValue(Math.sqrt(error
+					/ dataSet.getSampleMap().getSize()));
+			rmse.setLabel("RMSE with " + getLabel());
+			dataSet.getVariableMap().setMatrix(Variable.RMSE, rmse);
 
-		double maxRMSE = 0.0;
-		double minRMSE = 1e100;
-		double sumRMSE = 0;
-		for (Sample s : dataSet.getSampleMap()) {
-			Matrix m = s.getMatrix("RMSE");
-			if (m != null) {
-				double sampleRMSE = m.doubleValue();
-				sumRMSE += sampleRMSE;
-				if (sampleRMSE > maxRMSE) {
-					maxRMSE = sampleRMSE;
-				}
-				if (sampleRMSE < minRMSE) {
-					minRMSE = sampleRMSE;
+			double maxRMSE = 0.0;
+			double minRMSE = 1e100;
+			double sumRMSE = 0;
+			for (Sample s : dataSet.getSampleMap()) {
+				Matrix m = s.getMatrix("RMSE");
+				if (m != null) {
+					double sampleRMSE = m.doubleValue();
+					sumRMSE += sampleRMSE;
+					if (sampleRMSE > maxRMSE) {
+						maxRMSE = sampleRMSE;
+					}
+					if (sampleRMSE < minRMSE) {
+						minRMSE = sampleRMSE;
+					}
 				}
 			}
+
+			// calculate sample weight
+			// if (maxRMSE > 0 && maxRMSE != minRMSE) {
+			// for (Sample s : dataSet.getSampleMap()) {
+			// Matrix m = s.getMatrix("RMSE");
+			// if (m != null) {
+			// double sampleWeight = (m.doubleValue() / (sumRMSE));
+			// s.setMatrix("SampleWeight",
+			// Matrix.Factory.linkToValue(sampleWeight));
+			// }
+			// }
+			// }
+
+			confusion.setLabel("Confusion with " + getLabel());
+			dataSet.getVariableMap().setMatrix(Variable.CONFUSION, confusion);
+
+			Matrix accuracy = Matrix.Factory.linkToValue((double) correctCount
+					/ (double) dataSet.getSampleMap().getSize());
+			accuracy.setLabel("Accuracy with " + getLabel());
+			dataSet.getVariableMap().setMatrix(Variable.ACCURACY, accuracy);
+
+			Matrix errorMatrix = Matrix.Factory.linkToValue(errorCount);
+			errorMatrix.setLabel("Errors with " + getLabel());
+			dataSet.getVariableMap().setMatrix(Variable.ERRORCOUNT, errorMatrix);
+
+			Matrix sensitivity = (Matrix) new Sensitivity().calculate(confusion).get(
+					getTargetLabel());
+			dataSet.getVariableMap().setMatrix(Variable.SENSITIVITY, sensitivity);
+
+			Matrix specificity = (Matrix) new Specificity().calculate(confusion).get(
+					getTargetLabel());
+			dataSet.getVariableMap().setMatrix(Variable.SPECIFICITY, specificity);
+
+			Matrix precision = (Matrix) new Precision().calculate(confusion).get(getTargetLabel());
+			dataSet.getVariableMap().setMatrix(Variable.PRECISION, precision);
+
+			Matrix recall = (Matrix) new Recall().calculate(confusion).get(getTargetLabel());
+			dataSet.getVariableMap().setMatrix(Variable.RECALL, recall);
+
+			Matrix fmeasure = (Matrix) new FMeasure().calculate(confusion).get(getTargetLabel());
+			dataSet.getVariableMap().setMatrix(Variable.FMEASURE, fmeasure);
+
+			Matrix fmeasureMacro = fmeasure.mean(Ret.NEW, Matrix.ALL, false);
+			dataSet.getVariableMap().setMatrix(Variable.FMEASUREMACRO, fmeasureMacro);
+
+			iteration++;
+			System.out.println("Iteration: " + iteration + ", RMSE: " + rmse.doubleValue()
+					+ ", errors: " + errorCount + ", accuracy: " + accuracy.doubleValue());
+
 		}
-
-		// calculate sample weight
-		// if (maxRMSE > 0 && maxRMSE != minRMSE) {
-		// for (Sample s : dataSet.getSampleMap()) {
-		// Matrix m = s.getMatrix("RMSE");
-		// if (m != null) {
-		// double sampleWeight = (m.doubleValue() / (sumRMSE));
-		// s.setMatrix("SampleWeight",
-		// Matrix.Factory.linkToValue(sampleWeight));
-		// }
-		// }
-		// }
-
-		confusion.setLabel("Confusion with " + getLabel());
-		dataSet.getVariableMap().setMatrix(Variable.CONFUSION, confusion);
-
-		Matrix accuracy = Matrix.Factory.linkToValue((double) correctCount
-				/ (double) dataSet.getSampleMap().getSize());
-		accuracy.setLabel("Accuracy with " + getLabel());
-		dataSet.getVariableMap().setMatrix(Variable.ACCURACY, accuracy);
-
-		Matrix errorMatrix = Matrix.Factory.linkToValue(errorCount);
-		errorMatrix.setLabel("Errors with " + getLabel());
-		dataSet.getVariableMap().setMatrix(Variable.ERRORCOUNT, errorMatrix);
-
-		Matrix sensitivity = (Matrix) new Sensitivity().calculate(confusion).get(getTargetLabel());
-		dataSet.getVariableMap().setMatrix(Variable.SENSITIVITY, sensitivity);
-
-		Matrix specificity = (Matrix) new Specificity().calculate(confusion).get(getTargetLabel());
-		dataSet.getVariableMap().setMatrix(Variable.SPECIFICITY, specificity);
-
-		Matrix precision = (Matrix) new Precision().calculate(confusion).get(getTargetLabel());
-		dataSet.getVariableMap().setMatrix(Variable.PRECISION, precision);
-
-		Matrix recall = (Matrix) new Recall().calculate(confusion).get(getTargetLabel());
-		dataSet.getVariableMap().setMatrix(Variable.RECALL, recall);
-
-		Matrix fmeasure = (Matrix) new FMeasure().calculate(confusion).get(getTargetLabel());
-		dataSet.getVariableMap().setMatrix(Variable.FMEASURE, fmeasure);
-
-		Matrix fmeasureMacro = fmeasure.mean(Ret.NEW, Matrix.ALL, false);
-		dataSet.getVariableMap().setMatrix(Variable.FMEASUREMACRO, fmeasureMacro);
-
-		iteration++;
-		System.out.println("Iteration: " + iteration + ", RMSE: " + rmse.doubleValue()
-				+ ", errors: " + errorCount + ", accuracy: " + accuracy.doubleValue());
 
 		dataSet.fireValueChanged();
 	}

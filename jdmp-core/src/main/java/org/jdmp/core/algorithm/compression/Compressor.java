@@ -29,20 +29,20 @@ import org.ujmp.core.Matrix;
 
 public interface Compressor {
 
-	public void reset() throws Exception;
+	public void reset();
 
-	public void train(DataSet dataSet) throws Exception;
+	public void train(DataSet dataSet);
 
-	public void compress(Sample sample) throws Exception;
+	public void compress(Sample sample);
 
-	public void compress(DataSet dataSet) throws Exception;
+	public void compress(DataSet dataSet);
 
-	public Matrix compress(Matrix input) throws Exception;
+	public Matrix compress(Matrix input);
 
-	public void decompress(Sample sample) throws Exception;
+	public void decompress(Sample sample);
 
-	public void decompress(DataSet dataSet) throws Exception;
+	public void decompress(DataSet dataSet);
 
-	public Matrix decompress(Matrix input) throws Exception;
+	public Matrix decompress(Matrix input);
 
 }

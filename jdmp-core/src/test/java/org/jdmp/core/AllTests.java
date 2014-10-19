@@ -29,6 +29,6 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ TestScript.class, TestNaiveBayesClassifier.class, TestMLP.class,
 		TestLinearRegression.class, TestRandomClassifier.class, TestConstantClassifier.class,
-		TestScript.class })
+		TestScript.class, TestBagging.class })
 public class AllTests {
 }

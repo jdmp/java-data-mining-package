@@ -70,13 +70,31 @@ public abstract class DataSetFactory {
 		switch (format) {
 		default:
 			Matrix m = Matrix.Factory.linkTo().file(file).asDenseCSV();
-			return linkToMatrix(m);
+			return linkToInput(m);
 		}
 	}
 
-	public static DataSet linkToMatrix(Matrix matrix) {
-		// TODO: this should be improved
-		return importFromMatrix(matrix);
+	public static DataSet linkToInput(Matrix input) {
+		DataSet ds = new DefaultDataSet();
+		for (int i = 0; i < input.getRowCount(); i++) {
+			Sample s = SampleFactory.emptySample();
+			Matrix in = input.selectRows(Ret.LINK, i);
+			s.setMatrix(Sample.INPUT, in);
+			ds.getSampleMap().add(s);
+		}
+		return ds;
+	}
+
+	public static DataSet linkToInputAndLabels(Matrix input, Matrix labels) {
+		DataSet ds = new DefaultDataSet();
+		for (int i = 0; i < input.getRowCount(); i++) {
+			Sample s = SampleFactory.emptySample();
+			Matrix in = input.selectRows(Ret.LINK, i);
+			s.setMatrix(Sample.INPUT, in);
+			s.setLabel(labels.getAsString(i, 0));
+			ds.getSampleMap().add(s);
+		}
+		return ds;
 	}
 
 	public static DataSet importFromMatrix(Matrix matrix) {
@@ -129,16 +147,13 @@ public abstract class DataSetFactory {
 
 	public static DataSet linkToMatrix(Matrix input, Matrix target, Matrix label) {
 		DataSet ds = new DefaultDataSet();
-		ds.getInputVariable().add(input);
-		ds.getTargetVariable().add(target);
 		for (int i = 0; i < input.getRowCount(); i++) {
 			Sample s = SampleFactory.emptySample();
 			Matrix in = input.selectRows(Ret.LINK, i);
 			Matrix out = target.selectRows(Ret.LINK, i);
-			Matrix labelMatrix = label.selectRows(Ret.LINK, i);
 			s.setMatrix(Sample.INPUT, in);
 			s.setMatrix(Sample.TARGET, out);
-			s.setMatrix(Sample.LABEL, labelMatrix);
+			s.setLabel(label.getAsString(i, 0));
 			ds.getSampleMap().add(s);
 		}
 		return ds;
@@ -568,13 +583,13 @@ public abstract class DataSetFactory {
 			String sqlStatement, String username, String password) {
 		Matrix m = Matrix.Factory.linkToJDBC(type, host, port, database, sqlStatement, username,
 				password);
-		return linkToMatrix(m);
+		return linkToInput(m);
 	}
 
 	public static DataSet linkToJDBC(String url, String sqlStatement, String username,
 			String password) {
 		Matrix m = Matrix.Factory.linkToJDBC(url, sqlStatement, username, password);
-		return linkToMatrix(m);
+		return linkToInput(m);
 	}
 
 }

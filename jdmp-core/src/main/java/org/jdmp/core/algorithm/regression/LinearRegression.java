@@ -23,8 +23,6 @@
 
 package org.jdmp.core.algorithm.regression;
 
-import org.jdmp.core.algorithm.classification.AbstractClassifier;
-import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
@@ -36,21 +34,23 @@ import org.ujmp.core.calculation.Calculation.Ret;
  * AlgorithmLinearRegression extends AlgorithmClassifier and not
  * AlgorithmRegression because also classification is possible using regression
  */
-public class LinearRegression extends AbstractClassifier {
+public class LinearRegression extends AbstractRegressor {
 	private static final long serialVersionUID = 3483912497269476834L;
 
 	public static final String PARAMETERS = "Parameters";
 
-	private final int projectionDimensions;
+	private Matrix mean = null;
+	private Matrix std = null;
+
+	private final int numberOfPrincipalComponents;
 
 	public LinearRegression() {
 		this(0);
 	}
 
-	public LinearRegression(int projectionDimensions) {
+	public LinearRegression(int numberOfPrincipalComponents) {
 		super();
-		// use random projection
-		this.projectionDimensions = projectionDimensions;
+		this.numberOfPrincipalComponents = numberOfPrincipalComponents;
 		setParameterVariable(VariableFactory.labeledVariable("Regression Parameters"));
 	}
 
@@ -68,11 +68,15 @@ public class LinearRegression extends AbstractClassifier {
 
 	public Matrix predict(Matrix input, Matrix sampleWeight) {
 		input = input.toColumnVector(Ret.NEW);
+
 		Matrix x = Matrix.Factory.zeros(1, input.getColumnCount() + 1);
-		x.setAsDouble(1, 0, 0);
 		for (int c = 0; c < input.getColumnCount(); c++) {
 			x.setAsDouble(input.getAsDouble(0, c), 0, c + 1);
 		}
+
+		x = x.minus(mean).divide(std);
+		x.setAsDouble(1, 0, 0);
+
 		Matrix result = x.mtimes(getParameterMatrix());
 		return result;
 	}
@@ -84,38 +88,65 @@ public class LinearRegression extends AbstractClassifier {
 	public void train(DataSet dataSet) {
 		System.out.println("training started");
 
-		Matrix x = Matrix.Factory
-				.zeros(dataSet.getSampleMap().size(), getFeatureCount(dataSet) + 1);
-		Matrix y = Matrix.Factory.zeros(dataSet.getSampleMap().size(), getClassCount(dataSet));
+		final int featureCount = getFeatureCount(dataSet);
+		final int classCount = getClassCount(dataSet);
+		final int sampleCount = dataSet.getSampleMap().size();
+
+		Matrix x = Matrix.Factory.zeros(dataSet.getSampleMap().size(), featureCount + 1);
+		Matrix y = Matrix.Factory.zeros(dataSet.getSampleMap().size(), classCount);
 
 		int i = 0;
 		for (Sample s : dataSet.getSampleMap().values()) {
-			x.setAsDouble(1, i, 0);
-			Matrix input = s.getMatrix(getInputLabel()).toColumnVector(Ret.NEW);
+			Matrix input = s.getMatrix(getInputLabel()).toColumnVector(Ret.LINK);
 			for (int c = 0; c < input.getColumnCount(); c++) {
 				x.setAsDouble(input.getAsDouble(0, c), i, c + 1);
 			}
-			Matrix target = s.getMatrix(getTargetLabel()).toColumnVector(Ret.NEW);
+			Matrix target = s.getMatrix(getTargetLabel()).toColumnVector(Ret.LINK);
 			for (int c = 0; c < target.getColumnCount(); c++) {
 				y.setAsDouble(target.getAsDouble(0, c), i, c);
 			}
 			i++;
 		}
 
+		mean = x.mean(Ret.NEW, ROW, true);
+
+		for (int r = 0; r < x.getRowCount(); r++) {
+			for (int c = 0; c < x.getColumnCount(); c++) {
+				x.setAsDouble(x.getAsDouble(r, c) - mean.getAsDouble(0, c), r, c);
+			}
+		}
+
+		std = x.std(Ret.NEW, ROW, true, true);
+
+		for (int r = 0; r < x.getRowCount(); r++) {
+			for (int c = 0; c < x.getColumnCount(); c++) {
+				x.setAsDouble(x.getAsDouble(r, c) / std.getAsDouble(0, c), r, c);
+			}
+		}
+
+		for (int r = 0; r < x.getRowCount(); r++) {
+			x.setAsDouble(1, r, 0);
+		}
+
 		System.out.println("data loaded");
 
-		// this depends on the number of samples and is therefore slower for
-		// large data sets:
-		// Matrix parameters = x.pinv().mtimes(y);
+		Matrix parameters;
 
-		// this depends on the number of features only:
-		Matrix parameters = null;
-		final Matrix xtranspose = x.transpose();
-		if (projectionDimensions < 1) {
-			parameters = xtranspose.mtimes(x).pinv().mtimes(xtranspose).mtimes(y);
+		if (numberOfPrincipalComponents > 0) {
+			if (sampleCount < featureCount) {
+				final Matrix xt = x.transpose();
+				parameters = x.pinv(numberOfPrincipalComponents).mtimes(y);
+			} else {
+				final Matrix xt = x.transpose();
+				parameters = xt.mtimes(x).pinv(numberOfPrincipalComponents).mtimes(xt).mtimes(y);
+			}
 		} else {
-			parameters = xtranspose.mtimes(x).pinv(projectionDimensions).mtimes(xtranspose)
-					.mtimes(y);
+			if (sampleCount < featureCount) {
+				parameters = x.pinv().mtimes(y);
+			} else {
+				final Matrix xt = x.transpose();
+				parameters = xt.mtimes(x).pinv().mtimes(xt).mtimes(y);
+			}
 		}
 
 		System.out.println("training finished");
@@ -131,8 +162,11 @@ public class LinearRegression extends AbstractClassifier {
 		getParameterVariable().clear();
 	}
 
-	public Classifier emptyCopy() {
-		return new LinearRegression();
+	public Regressor emptyCopy() {
+		LinearRegression lr = new LinearRegression(numberOfPrincipalComponents);
+		lr.setInputLabel(getInputLabel());
+		lr.setTargetLabel(getTargetLabel());
+		return lr;
 	}
 
 }

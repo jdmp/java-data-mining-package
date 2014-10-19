@@ -24,11 +24,11 @@
 package org.jdmp.core.util;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import javax.swing.event.EventListenerList;
 import javax.swing.event.ListDataEvent;
@@ -52,7 +52,7 @@ public abstract class AbstractObservableMap<V extends CoreObject> implements Obs
 	}
 
 	public AbstractObservableMap() {
-		map = new HashMap<String, V>(2);
+		map = new TreeMap<String, V>();
 	}
 
 	public final Map<String, V> getMap() {
@@ -101,10 +101,10 @@ public abstract class AbstractObservableMap<V extends CoreObject> implements Obs
 	}
 
 	public final synchronized V put(String key, V value) {
-//		if (value != null && value instanceof HasId) {
-//			((HasId) value).setId(key);
-//		}
-		//getList().clear();
+		// if (value != null && value instanceof HasId) {
+		// ((HasId) value).setId(key);
+		// }
+		// getList().clear();
 		V v = getMap().put(key, value);
 		// int index = indexOf(value);
 		// if (v == null) {

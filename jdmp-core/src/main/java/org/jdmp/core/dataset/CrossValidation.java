@@ -26,6 +26,7 @@ package org.jdmp.core.dataset;
 import java.util.List;
 
 import org.jdmp.core.algorithm.classification.Classifier;
+import org.jdmp.core.algorithm.regression.Regressor;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
@@ -38,8 +39,8 @@ public class CrossValidation {
 		return run(algorithm, dataSet, 10, 10, System.currentTimeMillis());
 	}
 
-	public static ListMatrix<Double> run(Classifier algorithm, DataSet dataSet, int folds,
-			int runs, long randomSeed) throws Exception {
+	public static ListMatrix<Double> run(Regressor algorithm, DataSet dataSet, int folds, int runs,
+			long randomSeed) throws Exception {
 
 		ListMatrix<Double> allacc = new DefaultListMatrix<Double>();
 		ListMatrix<Double> allfm = new DefaultListMatrix<Double>();
@@ -47,6 +48,7 @@ public class CrossValidation {
 		ListMatrix<Double> allspec = new DefaultListMatrix<Double>();
 		ListMatrix<Double> allprec = new DefaultListMatrix<Double>();
 		ListMatrix<Double> allrec = new DefaultListMatrix<Double>();
+		ListMatrix<Double> allrmse = new DefaultListMatrix<Double>();
 
 		for (int run = 0; run < runs; run++) {
 
@@ -56,6 +58,7 @@ public class CrossValidation {
 			ListMatrix<Double> spec = new DefaultListMatrix<Double>();
 			ListMatrix<Double> prec = new DefaultListMatrix<Double>();
 			ListMatrix<Double> rec = new DefaultListMatrix<Double>();
+			ListMatrix<Double> rmse = new DefaultListMatrix<Double>();
 
 			System.out.print("F-Measure (macro) in run " + run + ":\t");
 
@@ -65,6 +68,7 @@ public class CrossValidation {
 				DataSet test = dss.get(1);
 				algorithm.reset();
 				algorithm.train(train);
+				algorithm.predict(train);
 				algorithm.predict(test);
 
 				acc.add(test.getAccuracy());
@@ -73,6 +77,7 @@ public class CrossValidation {
 				spec.add(test.getVariableMap().getAsDouble(Variable.SPECIFICITY));
 				prec.add(test.getVariableMap().getAsDouble(Variable.PRECISION));
 				rec.add(test.getVariableMap().getAsDouble(Variable.RECALL));
+				rmse.add(test.getVariableMap().getAsDouble(Variable.RMSE));
 				// System.out.print(test.getAccuracy() + "\t");
 				System.out.print(test.getVariableMap().getAsDouble(Variable.FMEASUREMACRO) + "\t");
 			}
@@ -96,12 +101,16 @@ public class CrossValidation {
 			double meanrec = rec.getMeanValue();
 			allrec.add(meanrec);
 
+			double meanrmse = rmse.getMeanValue();
+			allrmse.add(meanrmse);
+
 			System.out.println("Average Accuracy in run " + run + ":\t" + meanacc);
 			System.out.println("Average F-Measure in run " + run + ":\t" + meanfm);
 			System.out.println("Average Sensitivity in run " + run + ":\t" + meansens);
 			System.out.println("Average Specificity in run " + run + ":\t" + meanspec);
 			System.out.println("Average Precision in run " + run + ":\t" + meanprec);
 			System.out.println("Average Recall in run " + run + ":\t" + meanrec);
+			System.out.println("Average RMSE in run " + run + ":\t" + meanrmse);
 		}
 
 		if (allacc.size() > 1) {
@@ -121,6 +130,8 @@ public class CrossValidation {
 					+ stdprec.doubleValue());
 			Matrix stdrec = allrec.std(Ret.NEW, Matrix.ROW, false, true);
 			System.out.println("Recall: " + allrec.getMeanValue() + "+-" + stdrec.doubleValue());
+			Matrix stdrmse = allrmse.std(Ret.NEW, Matrix.ROW, false, true);
+			System.out.println("RMSE: " + allrmse.getMeanValue() + "+-" + stdrmse.doubleValue());
 		} else {
 			System.out.println("Accuracy: " + allacc.getMeanValue());
 			System.out.println("F-Measure (macro): " + allfm.getMeanValue());
@@ -128,6 +139,7 @@ public class CrossValidation {
 			System.out.println("Specificity: " + allspec.getMeanValue());
 			System.out.println("Precision: " + allprec.getMeanValue());
 			System.out.println("Recall: " + allrec.getMeanValue());
+			System.out.println("RMSE: " + allrmse.getMeanValue());
 		}
 
 		return allacc;

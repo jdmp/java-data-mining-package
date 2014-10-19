@@ -27,6 +27,8 @@ import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.calculation.Calculation.Ret;
+import org.ujmp.core.util.concurrent.PFor;
 
 public abstract class AbstractCompressor extends AbstractAlgorithm implements Compressor {
 	private static final long serialVersionUID = 870196284002196140L;
@@ -46,28 +48,38 @@ public abstract class AbstractCompressor extends AbstractAlgorithm implements Co
 		return inputLabel;
 	}
 
+	public int getFeatureCount(DataSet dataSet) {
+		return (int) dataSet.getSampleMap().values().iterator().next().getMatrix(getInputLabel())
+				.toRowVector(Ret.NEW).getRowCount();
+	}
+
 	public void setInputLabel(String inputLabel) {
 		this.inputLabel = inputLabel;
 	}
 
-	public void compress(DataSet dataSet) throws Exception {
-		for (Sample sample : dataSet.getSampleMap()) {
-			compress(sample);
-		}
+	public void compress(final DataSet dataSet) {
+		new PFor(0, dataSet.getSampleMap().size() - 1) {
+
+			@Override
+			public void step(int i) {
+				Sample sample = dataSet.getSampleMap().getElementAt(i);
+				compress(sample);
+			}
+		};
 	}
 
-	public final void compress(Sample sample) throws Exception {
+	public final void compress(Sample sample) {
 		Matrix output = compress(sample.getMatrix(getInputLabel()));
 		sample.setMatrix(COMPRESSED, output);
 	}
 
-	public void decompress(DataSet dataSet) throws Exception {
+	public void decompress(DataSet dataSet) {
 		for (Sample sample : dataSet.getSampleMap()) {
 			compress(sample);
 		}
 	}
 
-	public final void decompress(Sample sample) throws Exception {
+	public final void decompress(Sample sample) {
 		Matrix output = decompress(sample.getMatrix(COMPRESSED));
 		sample.setMatrix(DECOMPRESSED, output);
 	}

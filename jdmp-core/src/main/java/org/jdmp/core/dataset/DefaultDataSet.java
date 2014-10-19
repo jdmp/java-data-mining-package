@@ -30,13 +30,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import org.jdmp.core.dataset.wrappers.DataSetInputMatrixWrapper;
-import org.jdmp.core.dataset.wrappers.DataSetPredictedMatrixWrapper;
-import org.jdmp.core.dataset.wrappers.DataSetTargetMatrixWrapper;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.Variable;
-import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.util.MathUtil;
@@ -46,20 +42,6 @@ public class DefaultDataSet extends AbstractDataSet {
 
 	public DefaultDataSet() {
 		super();
-		Matrix inputMatrix = new DataSetInputMatrixWrapper(this);
-		Variable input = VariableFactory.labeledVariable(INPUT);
-		input.add(inputMatrix);
-		getVariableMap().put(INPUT, input);
-
-		Matrix targetMatrix = new DataSetTargetMatrixWrapper(this);
-		Variable target = VariableFactory.labeledVariable("Target");
-		target.add(targetMatrix);
-		getVariableMap().put(TARGET, target);
-		Matrix predictedMatrix = new DataSetPredictedMatrixWrapper(this);
-		Variable predicted = VariableFactory.labeledVariable("Predicted");
-		predicted.add(predictedMatrix);
-		getVariableMap().put(PREDICTED, predicted);
-
 	}
 
 	public Matrix getClassDistribution() {
@@ -381,6 +363,10 @@ public class DefaultDataSet extends AbstractDataSet {
 
 	public int getFeatureCount() {
 		return (int) getSampleMap().getElementAt(0).getMatrix(INPUT).getValueCount();
+	}
+
+	public DataSet bootstrap() {
+		return bootstrap(getSampleMap().size());
 	}
 
 }
