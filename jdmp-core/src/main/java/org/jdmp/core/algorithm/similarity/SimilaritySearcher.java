@@ -23,15 +23,15 @@
 
 package org.jdmp.core.algorithm.similarity;
 
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 
 public interface SimilaritySearcher {
 
-	public DataSet searchSimilar(Sample sample, int start, int count) throws Exception;
+	public ListDataSet searchSimilar(Sample sample, int start, int count) throws Exception;
 
-	public DataSet searchSimilar(Sample sample) throws Exception;
+	public ListDataSet searchSimilar(Sample sample) throws Exception;
 
-	public DataSet searchSimilar(Sample sample, int count) throws Exception;
+	public ListDataSet searchSimilar(Sample sample, int count) throws Exception;
 
 }

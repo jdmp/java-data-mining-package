@@ -30,8 +30,7 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
-import org.jdmp.core.dataset.DataSet;
-import org.jdmp.core.dataset.DataSetFactory;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.dataset.HasDataSetMap;
 import org.ujmp.core.filematrix.FileFormat;
 import org.ujmp.core.interfaces.GUIObject;
@@ -58,7 +57,7 @@ public class ImportDataSetFromURLAction extends AbstractObjectAction {
 					getComponent(), "Select format", "Import DataSet", JOptionPane.OK_OPTION,
 					JOptionPane.QUESTION_MESSAGE, null, FileFormat.values(), FileFormat.CSV)];
 
-			DataSet ds = DataSetFactory.importFromURL(fileFormat, url);
+			ListDataSet ds = ListDataSet.Factory.importFromURL(fileFormat, url);
 
 			if (getCoreObject() instanceof HasDataSetMap) {
 				try {

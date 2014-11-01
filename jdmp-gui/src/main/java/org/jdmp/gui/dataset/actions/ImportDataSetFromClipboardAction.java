@@ -28,8 +28,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.Action;
 import javax.swing.JComponent;
 
-import org.jdmp.core.dataset.DataSet;
-import org.jdmp.core.dataset.DataSetFactory;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.dataset.HasDataSetMap;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.gui.actions.AbstractObjectAction;
@@ -46,7 +45,7 @@ public class ImportDataSetFromClipboardAction extends AbstractObjectAction {
 
 	public Object call() {
 		try {
-			DataSet ds = DataSetFactory.importFromClipboard();
+			ListDataSet ds = ListDataSet.Factory.importFromClipboard();
 
 			if (getCoreObject() instanceof HasDataSetMap) {
 				try {

@@ -27,6 +27,6 @@ import org.jdmp.core.util.ObservableMap;
 
 public interface HasDataSetMap {
 
-	public ObservableMap<DataSet> getDataSetMap();
+	public ObservableMap<ListDataSet> getDataSetMap();
 
 }

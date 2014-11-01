@@ -30,7 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.algorithm.index.Index;
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.module.Module;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
@@ -66,7 +66,7 @@ public class DefaultHtmlFactory implements HtmlFactory {
 		return new DefaultAlgorithmPage(request, path, algorithm, parameters);
 	}
 
-	public Page createDataSetPage(HttpServletRequest request, String path, DataSet dataSet, Object... parameters)
+	public Page createDataSetPage(HttpServletRequest request, String path, ListDataSet dataSet, Object... parameters)
 			throws ServletException, IOException {
 		return new DefaultDataSetPage(request, path, dataSet, parameters);
 	}

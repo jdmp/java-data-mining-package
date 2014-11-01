@@ -30,8 +30,8 @@ import java.util.Set;
 
 import org.jdmp.core.algorithm.regression.AbstractRegressor;
 import org.jdmp.core.algorithm.regression.Regressor;
-import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DefaultDataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.DefaultSample;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
@@ -58,7 +58,7 @@ public class FeatureSelector extends AbstractRegressor {
 		this.selectedFeatureCount = featureCount;
 	}
 
-	private void selectFeatures(DataSet dataSet) {
+	private void selectFeatures(ListDataSet dataSet) {
 		if (selectionType == SelectionType.Random) {
 			selectedFeatures.addAll(MathUtil.sequenceListInt(0, getFeatureCount(dataSet) - 1));
 			while (selectedFeatures.size() > selectedFeatureCount) {
@@ -101,13 +101,13 @@ public class FeatureSelector extends AbstractRegressor {
 		System.out.println(selectedFeatures);
 	}
 
-	private Matrix createCompleteMatrix(DataSet dataSet) {
-		final int sampleCount = dataSet.getSampleMap().size();
+	private Matrix createCompleteMatrix(ListDataSet dataSet) {
+		final int sampleCount = dataSet.size();
 		final int featureCount = getFeatureCount(dataSet);
 		final int targetCount = getClassCount(dataSet);
 		Matrix m = Matrix.Factory.zeros(sampleCount, featureCount + targetCount);
 		for (int r = 0; r < sampleCount; r++) {
-			Sample s = dataSet.getSampleMap().getElementAt(r);
+			Sample s = dataSet.get(r);
 			Matrix input = s.getMatrix(getInputLabel()).toColumnVector(Ret.NEW);
 			Matrix target = s.getMatrix(getTargetLabel()).toColumnVector(Ret.NEW);
 			for (int c = 0; c < featureCount; c++) {
@@ -120,12 +120,12 @@ public class FeatureSelector extends AbstractRegressor {
 		return m;
 	}
 
-	public void train(DataSet dataSet) {
+	public void trainAll(ListDataSet dataSet) {
 		selectFeatures(dataSet);
 
-		DataSet newDataSet = new DefaultDataSet();
+		ListDataSet newDataSet = new DefaultDataSet();
 
-		for (Sample s1 : dataSet.getSampleMap()) {
+		for (Sample s1 : dataSet) {
 			Sample s2 = new DefaultSample();
 			Matrix input1 = s1.getMatrix(getInputLabel()).toColumnVector(Ret.NEW);
 			Matrix input2 = Matrix.Factory.zeros(1, selectedFeatures.size());
@@ -134,10 +134,10 @@ public class FeatureSelector extends AbstractRegressor {
 			}
 			s2.setMatrix(getInputLabel(), input2);
 			s2.setMatrix(getTargetLabel(), s1.getMatrix(getTargetLabel()));
-			newDataSet.getSampleMap().add(s2);
+			newDataSet.add(s2);
 		}
 
-		learningAlgorithm.train(newDataSet);
+		learningAlgorithm.trainAll(newDataSet);
 	}
 
 	public void reset() {
@@ -145,13 +145,13 @@ public class FeatureSelector extends AbstractRegressor {
 		selectedFeatures.clear();
 	}
 
-	public Matrix predict(Matrix input, Matrix sampleWeight) {
+	public Matrix predictOne(Matrix input) {
 		input = input.toColumnVector(Ret.NEW);
 		Matrix input2 = Matrix.Factory.zeros(1, selectedFeatures.size());
 		for (int i = 0; i < selectedFeatures.size(); i++) {
 			input2.setAsDouble(input.getAsDouble(0, selectedFeatures.get(i)), 0, i);
 		}
-		return learningAlgorithm.predict(input2, sampleWeight);
+		return learningAlgorithm.predictOne(input2);
 	}
 
 	public Regressor emptyCopy() {

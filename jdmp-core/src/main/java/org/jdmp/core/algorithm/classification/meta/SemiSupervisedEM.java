@@ -25,8 +25,8 @@ package org.jdmp.core.algorithm.classification.meta;
 
 import org.jdmp.core.algorithm.regression.AbstractRegressor;
 import org.jdmp.core.algorithm.regression.Regressor;
-import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DefaultDataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
@@ -36,10 +36,10 @@ public class SemiSupervisedEM extends AbstractRegressor {
 
 	private final int iterations;
 	private final Regressor algorithm;
-	private final DataSet unlabeledData;
+	private final ListDataSet unlabeledData;
 	private final boolean useRawPrediction;
 
-	public SemiSupervisedEM(Regressor algorithm, DataSet unlabeledData, int iterations,
+	public SemiSupervisedEM(Regressor algorithm, ListDataSet unlabeledData, int iterations,
 			boolean useRawPrediction) {
 		super();
 		setLabel("SemiSupervisedEM [" + algorithm.toString() + "]");
@@ -49,21 +49,21 @@ public class SemiSupervisedEM extends AbstractRegressor {
 		this.iterations = iterations;
 	}
 
-	public Matrix predict(Matrix input, Matrix sampleWeight) {
-		return algorithm.predict(input, sampleWeight);
+	public Matrix predictOne(Matrix input) {
+		return algorithm.predictOne(input);
 	}
 
 	public void reset() {
 		algorithm.reset();
 	}
 
-	public void train(DataSet labeledData) {
+	public void trainAll(ListDataSet labeledData) {
 		int classCount = getClassCount(labeledData);
 		System.out.println("Step 0");
 		algorithm.reset();
-		algorithm.train(labeledData);
-		algorithm.predict(unlabeledData);
-		for (Sample s : unlabeledData.getSampleMap()) {
+		algorithm.trainAll(labeledData);
+		algorithm.predictAll(unlabeledData);
+		for (Sample s : unlabeledData) {
 			Matrix predicted = s.getMatrix(Sample.PREDICTED);
 			if (useRawPrediction) {
 				s.setMatrix(Sample.TARGET, predicted);
@@ -77,13 +77,13 @@ public class SemiSupervisedEM extends AbstractRegressor {
 
 		for (int i = 0; i < iterations; i++) {
 			System.out.println("Step " + (i + 1));
-			DataSet completeData = new DefaultDataSet();
-			completeData.getSampleMap().addAll(labeledData.getSampleMap().values());
-			completeData.getSampleMap().addAll(unlabeledData.getSampleMap().values());
+			ListDataSet completeData = new DefaultDataSet();
+			completeData.addAll(labeledData);
+			completeData.addAll(unlabeledData);
 			algorithm.reset();
-			algorithm.train(completeData);
-			algorithm.predict(unlabeledData);
-			for (Sample s : unlabeledData.getSampleMap()) {
+			algorithm.trainAll(completeData);
+			algorithm.predictAll(unlabeledData);
+			for (Sample s : unlabeledData) {
 				Matrix predicted = s.getMatrix(Sample.PREDICTED);
 				if (useRawPrediction) {
 					s.setMatrix(Sample.TARGET, predicted);

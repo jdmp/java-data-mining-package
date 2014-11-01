@@ -26,7 +26,7 @@ package org.jdmp.jetty.html.pages;
 import javax.servlet.http.HttpServletRequest;
 
 import org.jdmp.core.algorithm.similarity.SimilaritySearcher;
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.jetty.html.Page;
@@ -73,8 +73,8 @@ public class DefaultSamplePage extends Page {
 			try {
 				if (parameters != null && parameters.length > 0 && parameters[0] instanceof SimilaritySearcher) {
 					SimilaritySearcher index = (SimilaritySearcher) parameters[0];
-					DataSet ds = index.searchSimilar(sample, 0, 10);
-					if (ds != null && !ds.getSampleMap().isEmpty()) {
+					ListDataSet ds = index.searchSimilar(sample, 0, 10);
+					if (ds != null && !ds.isEmpty()) {
 						add(new H2Tag("Similar Results"));
 						add(new DefaultDataSetDiv(ds, path, request));
 					}

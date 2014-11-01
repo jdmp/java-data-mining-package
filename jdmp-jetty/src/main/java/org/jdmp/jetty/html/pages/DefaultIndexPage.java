@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.jdmp.core.algorithm.index.Index;
 import org.jdmp.core.algorithm.spellchecker.SpellChecker;
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.jetty.html.Page;
@@ -106,7 +106,7 @@ public class DefaultIndexPage extends Page {
 
 			String query = request.getParameter("q");
 			if (query != null) {
-				DataSet result = null;
+				ListDataSet result = null;
 				try {
 					result = index.search(query, start, count);
 				} catch (Exception e) {

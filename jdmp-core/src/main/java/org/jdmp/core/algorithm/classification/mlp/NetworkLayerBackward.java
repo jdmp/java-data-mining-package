@@ -33,7 +33,6 @@ import org.jdmp.core.algorithm.basic.Clone;
 import org.jdmp.core.algorithm.classification.mlp.MultiLayerNetwork.BiasType;
 import org.jdmp.core.algorithm.classification.mlp.MultiLayerNetwork.Transfer;
 import org.jdmp.core.variable.Variable;
-import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
 
 public class NetworkLayerBackward extends AbstractAlgorithm {
@@ -59,9 +58,9 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 
 	public NetworkLayerBackward(Transfer transferFunction, BiasType biasType) {
 		setDescription("One layer of a multi-layer network, backward path");
-		setVariable(NETDEVIATION, VariableFactory.labeledVariable("Net Deviation"));
-		setVariable(CONTACTDEVIATION, VariableFactory.labeledVariable("Contact Deviation"));
-		setVariable(INPUTDEVIATION, VariableFactory.labeledVariable("Input Deviation"));
+		setVariable(NETDEVIATION, Variable.Factory.labeledVariable("Net Deviation"));
+		setVariable(CONTACTDEVIATION, Variable.Factory.labeledVariable("Contact Deviation"));
+		setVariable(INPUTDEVIATION, Variable.Factory.labeledVariable("Input Deviation"));
 
 		AlgorithmTwoSources ar = null;
 		switch (transferFunction) {
@@ -96,19 +95,19 @@ public class NetworkLayerBackward extends AbstractAlgorithm {
 	public static void main(String[] args) throws Exception {
 		NetworkLayerBackward a = new NetworkLayerBackward(Transfer.TANH, BiasType.SINGLE);
 
-		Variable outputDeviation = VariableFactory.labeledVariable("Output Deviation");
+		Variable outputDeviation = Variable.Factory.labeledVariable("Output Deviation");
 		Matrix d = Matrix.Factory.linkToArray(new double[][] { { 1 }, { 2 }, { 3 }, { 4 }, { 5 },
 				{ 6 } });
 		outputDeviation.add(d);
 		a.setOutputDeviationVariable(outputDeviation);
 
-		Variable output = VariableFactory.labeledVariable("Output");
+		Variable output = Variable.Factory.labeledVariable("Output");
 		Matrix o = Matrix.Factory.linkToArray(new double[][] { { 5 }, { 6 }, { 7 }, { 8 }, { 9 },
 				{ 10 } });
 		output.add(o);
 		a.setOutputVariable(output);
 
-		Variable weight = VariableFactory.labeledVariable("Weight");
+		Variable weight = Variable.Factory.labeledVariable("Weight");
 		Matrix w = Matrix.Factory.linkToArray(new double[][] { { 0.1, 0.2, 0.3, 0.4 },
 				{ 0.1, 0.2, 0.3, 0.4 }, { 0.1, 0.2, 0.3, 0.4 }, { 0.1, 0.2, 0.3, 0.4 },
 				{ 0.1, 0.2, 0.3, 0.4 }, { 0.1, 0.2, 0.3, 0.4 } });

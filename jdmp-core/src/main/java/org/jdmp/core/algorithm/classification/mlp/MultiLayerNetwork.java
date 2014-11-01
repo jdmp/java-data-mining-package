@@ -30,10 +30,9 @@ import java.util.List;
 import org.jdmp.core.algorithm.AlgorithmTwoSources;
 import org.jdmp.core.algorithm.classification.AbstractClassifier;
 import org.jdmp.core.algorithm.classification.Classifier;
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
-import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.listmatrix.DefaultListMatrix;
@@ -129,16 +128,16 @@ public class MultiLayerNetwork extends AbstractClassifier {
 			outputLayer.setPreviousLayer(previousLayer);
 		}
 
-		Variable output = VariableFactory.labeledVariable("Output");
+		Variable output = Variable.Factory.labeledVariable("Output");
 		setOutputVariable(output);
 
-		Variable outputDeviation = VariableFactory.labeledVariable("Output Deviation");
+		Variable outputDeviation = Variable.Factory.labeledVariable("Output Deviation");
 		setOutputDeviationVariable(outputDeviation);
 
-		Variable input = VariableFactory.labeledVariable("Input");
+		Variable input = Variable.Factory.labeledVariable("Input");
 		setInputVariable(input);
 
-		Variable desiredOutput = VariableFactory.labeledVariable("Desired Output");
+		Variable desiredOutput = Variable.Factory.labeledVariable("Desired Output");
 		setDesiredOutputVariable(desiredOutput);
 	}
 
@@ -248,7 +247,7 @@ public class MultiLayerNetwork extends AbstractClassifier {
 		return networkLayers;
 	}
 
-	public Matrix predict(Matrix input, Matrix sampleWeight) {
+	public Matrix predictOne(Matrix input) {
 		// transpose and add bias unit
 		// Matrix inputWithBias = Matrix.zeros(input.getColumnCount() + 1,
 		// input.getRowCount());
@@ -270,13 +269,13 @@ public class MultiLayerNetwork extends AbstractClassifier {
 		return getOutputVariable().getLast();
 	}
 
-	public void train(Matrix input, Matrix sampleWeight, Matrix desiredOutput) {
+	public void trainOne(Matrix input, Matrix sampleWeight, Matrix desiredOutput) {
 		addDesiredOutputMatrix(desiredOutput.toRowVector(Ret.NEW));
 		if (sampleWeight == null) {
 			sampleWeight = Matrix.Factory.linkToValue(1.0);
 		}
 		setSampleWeight(sampleWeight.doubleValue());
-		predict(input, sampleWeight);
+		predictOne(input);
 		getOutputErrorAlgorithm().calculate();
 
 		for (int i = networkLayers.size() - 1; i != -1; i--) {
@@ -289,21 +288,21 @@ public class MultiLayerNetwork extends AbstractClassifier {
 
 	}
 
-	public int determineOptimalTrainingDuration(DataSet dataSet, int numberOfSteps)
+	public int determineOptimalTrainingDuration(ListDataSet dataSet, int numberOfSteps)
 			throws Exception {
 		long seed = System.currentTimeMillis();
 		DefaultListMatrix<Double> duration = new DefaultListMatrix<Double>();
 		for (int r = 0; r < 10; r++) {
-			List<DataSet> dss = dataSet.splitForStratifiedCV(10, r, seed);
-			DataSet train = dss.get(0);
-			DataSet test = dss.get(1);
+			List<ListDataSet> dss = dataSet.splitForStratifiedCV(10, r, seed);
+			ListDataSet train = dss.get(0);
+			ListDataSet test = dss.get(1);
 			MultiLayerNetwork a = new MultiLayerNetwork(aggregationInput, transferInput, biasInput,
 					aggregationDefault, transferDefault, biasDefault, aggregationOutput,
 					transferOutput, biasOutput, neuronCount);
 			a.setLearningRate(getLearningRate());
 			for (int i = 0; i < 10000; i++) {
-				a.train(train);
-				a.predict(test);
+				a.trainAll(train);
+				a.predictAll(test);
 				// System.out.println(i+": "+test.getRMSE());
 				if (test.isEarlyStoppingReached(numberOfSteps)) {
 					double d = test.getEarlyStoppingIndex(numberOfSteps);
@@ -321,42 +320,42 @@ public class MultiLayerNetwork extends AbstractClassifier {
 		return mean;
 	}
 
-	public void train(DataSet dataSet) {
+	public void trainAll(ListDataSet dataSet) {
 
 		// TODO: fix!
 
-		List<Sample> samples = new ArrayList<Sample>(dataSet.getSampleMap().values());
+		List<Sample> samples = new ArrayList<Sample>(dataSet);
 		Collections.shuffle(samples);
 
 		int last10Percent = (int) Math.ceil((samples.size() * 0.1));
 		int first90Percent = samples.size() - last10Percent;
 
 		for (int i = 0; i < first90Percent; i++) {
-			train(samples.get(i));
+			trainOne(samples.get(i));
 		}
 
 		// Crossvalidation
 		double rmse = 0;
 		for (int i = first90Percent; i < samples.size(); i++) {
 			Sample rs = samples.get(i);
-			Matrix output = predict(rs.getMatrix(getInputLabel()), rs.getMatrix(WEIGHT));
+			Matrix output = predictOne(rs.getMatrix(getInputLabel()));
 			rmse += output.minus(rs.getMatrix(getTargetLabel())).getRMS();
-			train(samples.get(i));
+			trainOne(samples.get(i));
 		}
 		rmse /= last10Percent;
 
 		System.out.println("RMSE on " + last10Percent + " Samples: " + rmse);
 
 		for (int i = first90Percent; i < samples.size(); i++) {
-			train(samples.get(i));
+			trainOne(samples.get(i));
 		}
 	}
 
-	public void trainOnce(DataSet dataSet) throws Exception {
-		List<Sample> samples = new ArrayList<Sample>(dataSet.getSampleMap().values());
+	public void trainOnce(ListDataSet dataSet) throws Exception {
+		List<Sample> samples = new ArrayList<Sample>(dataSet);
 		Collections.shuffle(samples);
 		for (Sample s : samples) {
-			train(s);
+			trainOne(s);
 		}
 		dataSet.fireValueChanged();
 	}

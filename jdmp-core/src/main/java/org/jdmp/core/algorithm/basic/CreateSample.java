@@ -27,7 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jdmp.core.algorithm.AbstractAlgorithm;
-import org.jdmp.core.sample.SampleFactory;
+import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.util.MathUtil;
@@ -64,11 +64,11 @@ public class CreateSample extends AbstractAlgorithm {
 		org.jdmp.core.sample.Sample s = null;
 
 		if (in == null && target == null) {
-			s = SampleFactory.emptySample();
+			s = Sample.Factory.emptySample();
 		} else if (in != null && target == null) {
-			s = SampleFactory.linkToMatrix(in);
+			s = Sample.Factory.linkToMatrix(in);
 		} else if (in != null && target != null) {
-			s = SampleFactory.classificationSample(in, target);
+			s = Sample.Factory.classificationSample(in, target);
 		}
 
 		result.put(RESULT, s);

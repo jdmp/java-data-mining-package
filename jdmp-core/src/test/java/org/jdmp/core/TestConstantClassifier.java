@@ -28,8 +28,7 @@ import static org.junit.Assert.assertEquals;
 import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.algorithm.classification.ConstantClassifier;
 import org.jdmp.core.dataset.CrossValidation;
-import org.jdmp.core.dataset.DataSet;
-import org.jdmp.core.dataset.DataSetFactory;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.junit.Test;
 import org.ujmp.core.listmatrix.ListMatrix;
@@ -38,7 +37,7 @@ public class TestConstantClassifier {
 
 	@Test
 	public void testIrisClassification() throws Exception {
-		DataSet iris = DataSetFactory.IRIS();
+		ListDataSet iris = ListDataSet.Factory.IRIS();
 		Classifier c = new ConstantClassifier();
 		ListMatrix<Double> results = CrossValidation.run(c, iris, 10, 10, 0);
 		assertEquals(0.21, results.getMeanValue(), 0.04);
@@ -46,17 +45,17 @@ public class TestConstantClassifier {
 
 	@Test
 	public void testIrisClassification2() throws Exception {
-		DataSet iris = DataSetFactory.IRIS();
+		ListDataSet iris = ListDataSet.Factory.IRIS();
 		String del1 = null;
 		String del2 = null;
-		for (Sample s : iris.getSampleMap().values()) {
+		for (Sample s : iris) {
 			int c = s.getTargetClass();
 			if (c == 0) {
 				del1 = s.getId();
 				break;
 			}
 		}
-		for (Sample s : iris.getSampleMap().values()) {
+		for (Sample s : iris) {
 			int c = s.getTargetClass();
 			if (c == 1) {
 				del2 = s.getId();
@@ -64,8 +63,8 @@ public class TestConstantClassifier {
 			}
 		}
 
-		iris.getSampleMap().remove(del1);
-		iris.getSampleMap().remove(del2);
+		iris.remove(del1);
+		iris.remove(del2);
 
 		Classifier c = new ConstantClassifier();
 		ListMatrix<Double> results = CrossValidation.run(c, iris, 10, 10, 0);

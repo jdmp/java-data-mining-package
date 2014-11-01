@@ -24,7 +24,7 @@
 package org.jdmp.core.algorithm.compression;
 
 import org.jdmp.core.algorithm.AbstractAlgorithm;
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
@@ -48,21 +48,21 @@ public abstract class AbstractCompressor extends AbstractAlgorithm implements Co
 		return inputLabel;
 	}
 
-	public int getFeatureCount(DataSet dataSet) {
-		return (int) dataSet.getSampleMap().values().iterator().next().getMatrix(getInputLabel())
-				.toRowVector(Ret.NEW).getRowCount();
+	public int getFeatureCount(ListDataSet dataSet) {
+		return (int) dataSet.iterator().next().getMatrix(getInputLabel()).toRowVector(Ret.NEW)
+				.getRowCount();
 	}
 
 	public void setInputLabel(String inputLabel) {
 		this.inputLabel = inputLabel;
 	}
 
-	public void compress(final DataSet dataSet) {
-		new PFor(0, dataSet.getSampleMap().size() - 1) {
+	public void compress(final ListDataSet dataSet) {
+		new PFor(0, dataSet.size() - 1) {
 
 			@Override
 			public void step(int i) {
-				Sample sample = dataSet.getSampleMap().getElementAt(i);
+				Sample sample = dataSet.get(i);
 				compress(sample);
 			}
 		};
@@ -73,8 +73,8 @@ public abstract class AbstractCompressor extends AbstractAlgorithm implements Co
 		sample.setMatrix(COMPRESSED, output);
 	}
 
-	public void decompress(DataSet dataSet) {
-		for (Sample sample : dataSet.getSampleMap()) {
+	public void decompress(ListDataSet dataSet) {
+		for (Sample sample : dataSet) {
 			compress(sample);
 		}
 	}

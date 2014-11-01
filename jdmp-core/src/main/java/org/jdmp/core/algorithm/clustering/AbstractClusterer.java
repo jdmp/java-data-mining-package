@@ -24,7 +24,7 @@
 package org.jdmp.core.algorithm.clustering;
 
 import org.jdmp.core.algorithm.AbstractAlgorithm;
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 
@@ -60,8 +60,8 @@ public abstract class AbstractClusterer extends AbstractAlgorithm implements Clu
 		this.weightLabel = weightLabel;
 	}
 
-	public void predict(DataSet dataSet) throws Exception {
-		for (Sample sample : dataSet.getSampleMap()) {
+	public void predict(ListDataSet dataSet) throws Exception {
+		for (Sample sample : dataSet) {
 			predict(sample);
 		}
 	}

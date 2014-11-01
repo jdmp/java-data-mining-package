@@ -26,7 +26,7 @@ package org.jdmp.core.algorithm.clustering;
 import java.util.Collections;
 import java.util.List;
 
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.collections.list.FastArrayList;
@@ -64,9 +64,9 @@ public class SelfOrganizingMap extends AbstractClusterer {
 		this.weightVectors = new Matrix[rows][cols];
 	}
 
-	public void train(DataSet dataSet) throws Exception {
+	public void train(ListDataSet dataSet) throws Exception {
 
-		List<Sample> samples = new FastArrayList<Sample>(dataSet.getSampleMap().values());
+		List<Sample> samples = new FastArrayList<Sample>(dataSet);
 		for (int t = 0; t < tMax; t++) {
 
 			double epsilon = epsilonStart * Math.pow(epsilonEnd / epsilonStart, (double) t / tMax);

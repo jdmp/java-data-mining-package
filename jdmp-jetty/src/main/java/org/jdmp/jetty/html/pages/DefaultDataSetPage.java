@@ -25,14 +25,14 @@ package org.jdmp.jetty.html.pages;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.jetty.html.Page;
 import org.jdmp.jetty.html.tags.H1Tag;
 
 public class DefaultDataSetPage extends Page {
 	private static final long serialVersionUID = -2173854958860246122L;
 
-	public DefaultDataSetPage(HttpServletRequest request, String path, DataSet dataSet, Object... parameters) {
+	public DefaultDataSetPage(HttpServletRequest request, String path, ListDataSet dataSet, Object... parameters) {
 		super();
 		if (dataSet == null) {
 			setTitle("JDMP Search: not found");

@@ -23,7 +23,7 @@
 
 package org.jdmp.core.algorithm.tagger;
 
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.listmatrix.ListMatrix;
@@ -39,6 +39,6 @@ public interface Tagger {
 
 	public void tag(Sample sample) throws Exception;
 
-	public void tag(DataSet dataSet) throws Exception;
+	public void tag(ListDataSet dataSet) throws Exception;
 
 }

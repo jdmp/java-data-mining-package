@@ -31,8 +31,7 @@ import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 
-import org.jdmp.core.dataset.DataSet;
-import org.jdmp.core.dataset.DataSetFactory;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.dataset.HasDataSetMap;
 import org.ujmp.core.filematrix.FileFormat;
 import org.ujmp.core.interfaces.GUIObject;
@@ -77,7 +76,7 @@ public class LinkDataSetToFileAction extends AbstractObjectAction {
 			if (file == null)
 				return null;
 
-			DataSet ds = DataSetFactory.linkToFile(fileFormat, file);
+			ListDataSet ds = ListDataSet.Factory.linkToFile(fileFormat, file);
 			if (getCoreObject() instanceof HasDataSetMap) {
 				try {
 					((HasDataSetMap) getCoreObject()).getDataSetMap().add(ds);

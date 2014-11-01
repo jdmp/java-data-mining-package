@@ -29,30 +29,29 @@ import org.jdmp.core.algorithm.classification.meta.Bagging;
 import org.jdmp.core.algorithm.classification.meta.FeatureSelector;
 import org.jdmp.core.algorithm.classification.meta.FeatureSelector.SelectionType;
 import org.jdmp.core.algorithm.regression.LinearRegression;
-import org.jdmp.core.dataset.DataSet;
-import org.jdmp.core.dataset.DataSetFactory;
+import org.jdmp.core.dataset.ListDataSet;
 import org.junit.Test;
 
 public class TestBagging {
 
 	@Test
 	public void testIrisClassification1() throws Exception {
-		DataSet ds = DataSetFactory.IRIS();
+		ListDataSet ds = ListDataSet.Factory.IRIS();
 		LinearRegression lr = new LinearRegression();
 		FeatureSelector r = new FeatureSelector(SelectionType.Random, lr, 3);
 		Bagging b = new Bagging(r, 100);
-		b.train(ds);
-		b.predict(ds);
+		b.trainAll(ds);
+		b.predictAll(ds);
 		assertEquals(0.86, ds.getAccuracy(), 0.02);
 	}
 
 	@Test
 	public void testIrisClassification2() throws Exception {
-		DataSet ds = DataSetFactory.IRIS();
+		ListDataSet ds = ListDataSet.Factory.IRIS();
 		LinearRegression lr = new LinearRegression();
 		Bagging b = new Bagging(lr, 100);
-		b.train(ds);
-		b.predict(ds);
+		b.trainAll(ds);
+		b.predictAll(ds);
 		assertEquals(0.86, ds.getAccuracy(), 0.02);
 	}
 

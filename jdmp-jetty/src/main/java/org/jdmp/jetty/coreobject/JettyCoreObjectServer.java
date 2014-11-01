@@ -23,13 +23,9 @@
 
 package org.jdmp.jetty.coreobject;
 
-import org.jdmp.core.module.Module;
-import org.jdmp.core.variable.HasVariableMap;
-import org.jdmp.jetty.JettyObjectServlet;
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.handler.ContextHandlerCollection;
-import org.mortbay.jetty.servlet.Context;
-import org.mortbay.jetty.servlet.ServletHolder;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.ContextHandler;
+import org.eclipse.jetty.server.handler.ContextHandlerCollection;
 import org.ujmp.core.interfaces.CoreObject;
 
 public class JettyCoreObjectServer {
@@ -55,25 +51,11 @@ public class JettyCoreObjectServer {
 		ContextHandlerCollection contexts = new ContextHandlerCollection();
 		server.setHandler(contexts);
 
-		Context root = new Context(contexts, "/", Context.SESSIONS);
-		root.addServlet(new ServletHolder(new JettyCoreObjectServlet(object)), "/*");
-
-		Context io = new Context(contexts, "/io", Context.SESSIONS);
-		io.addServlet(new ServletHolder(new JettyObjectServlet(object)), "/*");
-
-		if (object instanceof Module) {
-			Context console = new Context(contexts, "/console", Context.SESSIONS);
-			console.addServlet(new ServletHolder(new JettyConsoleServlet((Module) object)), "/*");
-		}
-
-		if (object instanceof HasVariableMap) {
-			Context list = new Context(contexts, "/variables", Context.SESSIONS);
-			list.addServlet(
-					new ServletHolder(new JettyCoreObjectListServlet(((HasVariableMap) object).getVariableMap())), "/*");
-			Context listio = new Context(contexts, "/io/variables", Context.SESSIONS);
-			listio.addServlet(new ServletHolder(new JettyObjectServlet(((HasVariableMap) object).getVariableMap())), "/*");
-		}
-
+		ContextHandler context = new ContextHandler();
+		context.setContextPath("/");
+		context.setResourceBase(".");
+		context.setClassLoader(Thread.currentThread().getContextClassLoader());
+		server.setHandler(context);
 		server.start();
 	}
 

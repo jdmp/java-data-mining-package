@@ -23,25 +23,11 @@
 
 package org.jdmp.core.variable;
 
-import org.ujmp.core.Matrix;
+public interface VariableFactory {
 
-public abstract class VariableFactory {
+	public Variable labeledVariable(String label);
 
-	public static final Variable labeledVariable(String label) {
-		Variable v = new DefaultVariable();
-		v.setLabel(label);
-		return v;
-	}
+	public Variable emptyVariable();
 
-	public static final Variable emptyVariable() {
-		return new DefaultVariable();
-	}
-
-	public static final Variable singleValue(String label, double value) {
-		Variable v = new DefaultVariable();
-		v.setLabel(label);
-		v.add(Matrix.Factory.linkToValue(value));
-		return v;
-	}
-
+	public Variable singleValue(String label, double value);
 }

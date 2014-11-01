@@ -28,7 +28,7 @@ import java.util.List;
 
 import org.jdmp.core.algorithm.regression.AbstractRegressor;
 import org.jdmp.core.algorithm.regression.Regressor;
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
@@ -44,13 +44,13 @@ public class KNNClassifier extends AbstractRegressor {
 		this.k = k;
 	}
 
-	private DataSet dataSet = null;
+	private ListDataSet dataSet = null;
 
 	public Regressor emptyCopy() {
 		return new KNNClassifier(k);
 	}
 
-	public void train(DataSet dataSet) {
+	public void trainAll(ListDataSet dataSet) {
 		this.dataSet = dataSet;
 	}
 
@@ -58,9 +58,9 @@ public class KNNClassifier extends AbstractRegressor {
 		this.dataSet = null;
 	}
 
-	public Matrix predict(Matrix input, Matrix sampleWeight) {
+	public Matrix predictOne(Matrix input) {
 		List<Sortable<Double, Matrix>> bestResults = new FastArrayList<Sortable<Double, Matrix>>();
-		for (Sample s : dataSet.getSampleMap()) {
+		for (Sample s : dataSet) {
 			Matrix reference = s.getMatrix(getInputLabel());
 			double distance = input.euklideanDistanceTo(reference, true);
 			if (bestResults.size() < k) {

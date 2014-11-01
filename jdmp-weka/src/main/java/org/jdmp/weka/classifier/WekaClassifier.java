@@ -27,7 +27,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 import org.jdmp.core.algorithm.classification.AbstractClassifier;
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.weka.wrappers.DataSetToInstancesWrapper;
 import org.jdmp.weka.wrappers.SampleToInstanceWrapper;
 import org.ujmp.core.Matrix;
@@ -144,10 +144,10 @@ public class WekaClassifier extends AbstractClassifier {
 		}
 	}
 
-	public Matrix predict(Matrix input, Matrix weight) {
+	public Matrix predictOne(Matrix input) {
 		try {
 			double[] probabilities = null;
-			Instance instance = new SampleToInstanceWrapper(input, weight, null, discrete, true);
+			Instance instance = new SampleToInstanceWrapper(input, null, null, discrete, true);
 			instance.setDataset(instances);
 			probabilities = wekaClassifier.distributionForInstance(instance);
 			double[][] v = new double[1][];
@@ -159,17 +159,13 @@ public class WekaClassifier extends AbstractClassifier {
 		}
 	}
 
-	public void train(DataSet dataSet) {
+	public void trainAll(ListDataSet dataSet) {
 		try {
 			instances = new DataSetToInstancesWrapper(dataSet, discrete, true);
 			wekaClassifier.buildClassifier(instances);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-	}
-
-	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) {
-		throw new RuntimeException("this method is not supported for WEKA classifiers");
 	}
 
 	public void reset() {

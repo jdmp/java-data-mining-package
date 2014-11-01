@@ -28,7 +28,7 @@ import java.util.List;
 
 import org.jdmp.core.algorithm.regression.AbstractRegressor;
 import org.jdmp.core.algorithm.regression.Regressor;
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.collections.list.FastArrayList;
@@ -61,15 +61,15 @@ public class Bagging extends AbstractRegressor {
 		this.learningAlgorithms = Arrays.asList(learningAlgorithms);
 	}
 
-	public void train(DataSet dataSet) {
+	public void trainAll(ListDataSet dataSet) {
 		for (Regressor learningAlgorithm : learningAlgorithms) {
-			DataSet bootstrap;
+			ListDataSet bootstrap;
 			if (bootstrapSize > 0) {
 				bootstrap = dataSet.bootstrap(bootstrapSize);
 			} else {
 				bootstrap = dataSet.bootstrap();
 			}
-			learningAlgorithm.train(bootstrap);
+			learningAlgorithm.trainAll(bootstrap);
 		}
 	}
 
@@ -79,10 +79,10 @@ public class Bagging extends AbstractRegressor {
 		}
 	}
 
-	public Matrix predict(Matrix input, Matrix sampleWeight) {
+	public Matrix predictOne(Matrix input) {
 		List<Matrix> results = new FastArrayList<Matrix>();
 		for (Regressor learningAlgorithm : learningAlgorithms) {
-			Matrix result = learningAlgorithm.predict(input, sampleWeight);
+			Matrix result = learningAlgorithm.predictOne(input);
 			results.add(result);
 		}
 		Matrix all = Matrix.Factory.vertCat(results);

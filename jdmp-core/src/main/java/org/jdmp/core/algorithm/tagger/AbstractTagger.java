@@ -25,7 +25,7 @@ package org.jdmp.core.algorithm.tagger;
 
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.algorithm.tokenizer.Tokenizer;
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
@@ -35,8 +35,8 @@ import org.ujmp.core.mapmatrix.MapMatrix;
 public abstract class AbstractTagger extends AbstractAlgorithm implements Tagger {
 	private static final long serialVersionUID = 3955297154098236478L;
 
-	public final void tag(DataSet dataSet) throws Exception {
-		for (Sample sample : dataSet.getSampleMap()) {
+	public final void tag(ListDataSet dataSet) throws Exception {
+		for (Sample sample : dataSet) {
 			tag(sample);
 		}
 	}

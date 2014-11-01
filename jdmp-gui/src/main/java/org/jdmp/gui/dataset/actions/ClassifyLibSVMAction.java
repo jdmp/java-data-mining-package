@@ -29,7 +29,7 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 
 import org.jdmp.core.algorithm.classification.Classifier;
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.gui.actions.AbstractObjectAction;
 
@@ -47,8 +47,8 @@ public class ClassifyLibSVMAction extends AbstractObjectAction {
 		try {
 			Classifier c = (Classifier) Class.forName("org.jdmp.libsvm.LibSVMClassifier")
 					.newInstance();
-			c.train((DataSet) getCoreObject());
-			c.predict((DataSet) getCoreObject());
+			c.trainAll((ListDataSet) getCoreObject());
+			c.predictAll((ListDataSet) getCoreObject());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

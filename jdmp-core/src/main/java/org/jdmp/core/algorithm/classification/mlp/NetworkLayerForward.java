@@ -39,7 +39,6 @@ import org.jdmp.core.algorithm.classification.mlp.MultiLayerNetwork.Aggregation;
 import org.jdmp.core.algorithm.classification.mlp.MultiLayerNetwork.BiasType;
 import org.jdmp.core.algorithm.classification.mlp.MultiLayerNetwork.Transfer;
 import org.jdmp.core.variable.Variable;
-import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
 
 public class NetworkLayerForward extends AbstractAlgorithm {
@@ -69,8 +68,8 @@ public class NetworkLayerForward extends AbstractAlgorithm {
 			BiasType biasType) {
 		setDescription("One layer of a multi-layer network, forward path");
 
-		setVariable(WEIGHTEDINPUT, VariableFactory.labeledVariable("Weighted Input"));
-		setVariable(NETINPUT, VariableFactory.labeledVariable("Net Input"));
+		setVariable(WEIGHTEDINPUT, Variable.Factory.labeledVariable("Weighted Input"));
+		setVariable(NETINPUT, Variable.Factory.labeledVariable("Net Input"));
 
 		Weighting aw = new Weighting(biasType);
 		aw.setVariable(Weighting.TARGET, getWeightedInputVariable());

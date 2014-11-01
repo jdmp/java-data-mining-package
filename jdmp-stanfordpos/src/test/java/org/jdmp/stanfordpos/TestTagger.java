@@ -29,8 +29,8 @@ import java.util.List;
 
 import org.jdmp.core.algorithm.tagger.Tagger;
 import org.jdmp.core.algorithm.tokenizer.Tokenizer;
-import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DefaultDataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.DefaultSample;
 import org.jdmp.core.sample.Sample;
 import org.junit.BeforeClass;
@@ -80,19 +80,19 @@ public class TestTagger {
 			return;
 		}
 
-		DataSet ds = new DefaultDataSet();
+		ListDataSet ds = new DefaultDataSet();
 		Sample sa1 = new DefaultSample();
 		sa1.setObject(Sample.INPUT, s1);
 		Sample sa2 = new DefaultSample();
 		sa2.setObject(Sample.INPUT, s2);
-		ds.getSampleMap().put("s1", sa1);
-		ds.getSampleMap().put("s2", sa2);
+		ds.add(sa1);
+		ds.add(sa2);
 
 		tokenizer.tokenize(Sample.INPUT, ds);
 		tagger.tag(ds);
 
-		sa1 = ds.getSampleMap().get("s1");
-		sa2 = ds.getSampleMap().get("s2");
+		sa1 = ds.get(0);
+		sa2 = ds.get(1);
 
 		Matrix m1 = sa1.getMatrix(Tagger.TAGGED);
 		Matrix m2 = sa2.getMatrix(Tagger.TAGGED);

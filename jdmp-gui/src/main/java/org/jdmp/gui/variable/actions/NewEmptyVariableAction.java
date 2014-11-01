@@ -31,7 +31,6 @@ import javax.swing.KeyStroke;
 
 import org.jdmp.core.variable.HasVariableMap;
 import org.jdmp.core.variable.Variable;
-import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.gui.actions.AbstractObjectAction;
 
@@ -48,7 +47,7 @@ public class NewEmptyVariableAction extends AbstractObjectAction {
 	}
 
 	public Object call() {
-		Variable v = VariableFactory.emptyVariable();
+		Variable v = Variable.Factory.emptyVariable();
 		if (getCoreObject() instanceof HasVariableMap) {
 			try {
 				((HasVariableMap) getCoreObject()).getVariableMap().add(v);

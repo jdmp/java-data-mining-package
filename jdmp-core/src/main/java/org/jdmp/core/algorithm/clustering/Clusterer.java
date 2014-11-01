@@ -23,7 +23,7 @@
 
 package org.jdmp.core.algorithm.clustering;
 
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 
@@ -31,11 +31,11 @@ public interface Clusterer {
 
 	public void reset() throws Exception;
 
-	public void train(DataSet dataSet) throws Exception;
+	public void train(ListDataSet dataSet) throws Exception;
 
 	public void predict(Sample sample) throws Exception;
 
-	public void predict(DataSet dataSet) throws Exception;
+	public void predict(ListDataSet dataSet) throws Exception;
 
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception;
 

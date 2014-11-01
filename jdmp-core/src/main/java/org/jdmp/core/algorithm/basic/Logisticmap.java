@@ -27,7 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jdmp.core.algorithm.AbstractAlgorithm;
-import org.jdmp.core.dataset.DataSetFactory;
+import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.util.MathUtil;
 
@@ -67,7 +67,7 @@ public class Logisticmap extends AbstractAlgorithm {
 		int targetLength = MathUtil.getInt(input.get(TARGETLENGTH));
 		targetLength = targetLength == 0 ? 5 : targetLength;
 
-		result.put(TARGET, DataSetFactory.LogisticMap(sampleCount, inputLength, targetLength));
+		result.put(TARGET, DataSet.Factory.LogisticMap(sampleCount, inputLength, targetLength));
 		return result;
 	}
 }

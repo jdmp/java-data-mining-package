@@ -30,28 +30,23 @@ import java.util.List;
 import java.util.Random;
 
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.util.DefaultObservableMap;
-import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.DefaultVariableMap;
 import org.jdmp.core.variable.Variable;
 import org.jdmp.core.variable.VariableMap;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.collections.list.FastArrayList;
 import org.ujmp.core.interfaces.GUIObject;
-import org.ujmp.core.mapmatrix.DefaultMapMatrix;
+import org.ujmp.core.listmatrix.DefaultListMatrix;
+import org.ujmp.core.util.MathUtil;
 
-public abstract class AbstractDataSet extends DefaultMapMatrix<String, Sample> implements DataSet {
+public abstract class AbstractDataSet extends DefaultListMatrix<Sample> implements ListDataSet {
 	private static final long serialVersionUID = -4168834188998259018L;
 
 	private final VariableMap variableMap = new DefaultVariableMap();
-	private final ObservableMap<Sample> sampleMap = new DefaultObservableMap<Sample>();
 
 	public AbstractDataSet() {
 		super();
 		setId("DataSet" + getCoreObjectId());
-	}
-
-	public final ObservableMap<Sample> getSampleMap() {
-		return sampleMap;
 	}
 
 	public final VariableMap getVariableMap() {
@@ -67,42 +62,37 @@ public abstract class AbstractDataSet extends DefaultMapMatrix<String, Sample> i
 	}
 
 	protected final void clearMap() {
-		getSampleMap().clear();
+		clear();
 		getVariableMap().clear();
 	}
 
-	public final List<DataSet> splitByCount(boolean shuffle, int... count) {
-		List<DataSet> dataSets = new ArrayList<DataSet>();
-
-		List<Integer> ids = new ArrayList<Integer>(getSampleMap().getSize());
-		for (int i = getSampleMap().getSize() - 1; i != -1; i--) {
-			ids.add(i);
-		}
-
-		if (shuffle) {
-			Collections.shuffle(ids);
-		}
+	public final List<ListDataSet> splitByCount(boolean shuffle, int... count) {
+		List<ListDataSet> dataSets = new ArrayList<ListDataSet>();
+		List<Sample> all = new FastArrayList<Sample>();
+		all.addAll(this);
 
 		for (int i = 0; i < count.length; i++) {
-			DataSet ds = DataSetFactory.labeledDataSet("DataSet" + i);
+			ListDataSet ds = DataSet.Factory.labeledDataSet("DataSet" + i);
 			for (int c = 0; c < count[i]; c++) {
-				ds.getSampleMap().add(getSampleMap().getElementAt(ids.remove(0)).clone());
+				if (shuffle) {
+					ds.add(all.remove(MathUtil.nextInteger(all.size())));
+				} else {
+					ds.add(all.remove(0));
+				}
 			}
 			dataSets.add(ds);
 		}
-		DataSet ds = DataSetFactory.labeledDataSet("DataSet" + count.length);
-		while (ids.size() != 0) {
-			ds.getSampleMap().add(getSampleMap().getElementAt(ids.remove(0)).clone());
-		}
+		ListDataSet ds = DataSet.Factory.labeledDataSet("DataSet" + count.length);
+		ds.addAll(all);
 		dataSets.add(ds);
 
 		return dataSets;
 	}
 
-	public final List<DataSet> splitForCV(int numberOfCVSets, int idOfCVSet, long randomSeed) {
-		List<DataSet> returnDataSets = new ArrayList<DataSet>();
+	public final List<ListDataSet> splitForCV(int numberOfCVSets, int idOfCVSet, long randomSeed) {
+		List<ListDataSet> returnDataSets = new ArrayList<ListDataSet>();
 		List<List<Sample>> tempSampleLists = new ArrayList<List<Sample>>();
-		List<Sample> allSamples = new ArrayList<Sample>(getSampleMap().values());
+		List<Sample> allSamples = new ArrayList<Sample>(this);
 		Collections.shuffle(allSamples, new Random(randomSeed));
 
 		for (int set = 0; set < numberOfCVSets; set++) {
@@ -118,13 +108,14 @@ public abstract class AbstractDataSet extends DefaultMapMatrix<String, Sample> i
 			}
 		}
 
-		DataSet testSet = DataSetFactory.labeledDataSet("TestSet" + randomSeed + "-" + idOfCVSet);
-		testSet.getSampleMap().addAll(tempSampleLists.get(idOfCVSet));
-		DataSet trainingSet = DataSetFactory.labeledDataSet("TrainingSet" + randomSeed + "-"
+		ListDataSet testSet = DataSet.Factory.labeledDataSet("TestSet" + randomSeed + "-"
+				+ idOfCVSet);
+		testSet.addAll(tempSampleLists.get(idOfCVSet));
+		ListDataSet trainingSet = DataSet.Factory.labeledDataSet("TrainingSet" + randomSeed + "-"
 				+ idOfCVSet);
 		for (int i = 0; i < numberOfCVSets; i++) {
 			if (i != idOfCVSet) {
-				trainingSet.getSampleMap().addAll(tempSampleLists.get(i));
+				trainingSet.addAll(tempSampleLists.get(i));
 			}
 		}
 
@@ -134,9 +125,9 @@ public abstract class AbstractDataSet extends DefaultMapMatrix<String, Sample> i
 		return returnDataSets;
 	}
 
-	public final List<DataSet> splitByPercent(boolean shuffle, double... percent) {
+	public final List<ListDataSet> splitByPercent(boolean shuffle, double... percent) {
 		int[] counts = new int[percent.length];
-		int sampleCount = getSampleMap().getSize();
+		int sampleCount = size();
 		for (int i = 0; i < percent.length; i++) {
 			counts[i] = (int) Math.round(percent[i] * sampleCount);
 		}
@@ -156,7 +147,7 @@ public abstract class AbstractDataSet extends DefaultMapMatrix<String, Sample> i
 			try {
 				Constructor<?> con = null;
 				Class<?> c = Class.forName("org.jdmp.gui.dataset.DataSetGUIObject");
-				con = c.getConstructor(new Class<?>[] { DataSet.class });
+				con = c.getConstructor(new Class<?>[] { ListDataSet.class });
 				guiObject = (GUIObject) con.newInstance(new Object[] { this });
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -165,5 +156,5 @@ public abstract class AbstractDataSet extends DefaultMapMatrix<String, Sample> i
 		return guiObject;
 	}
 
-	public abstract DataSet clone();
+	public abstract ListDataSet clone();
 }

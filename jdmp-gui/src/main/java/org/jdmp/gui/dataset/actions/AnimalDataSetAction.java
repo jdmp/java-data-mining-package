@@ -30,8 +30,7 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
-import org.jdmp.core.dataset.DataSet;
-import org.jdmp.core.dataset.DataSetFactory;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.gui.dataset.DataSetGUIObject;
 
 public class AnimalDataSetAction extends DataSetAction {
@@ -47,7 +46,7 @@ public class AnimalDataSetAction extends DataSetAction {
 	}
 
 	public Object call() {
-		DataSet animals = DataSetFactory.ANIMALS();
+		ListDataSet animals = ListDataSet.Factory.ANIMALS();
 		animals.showGUI();
 		return animals;
 	}

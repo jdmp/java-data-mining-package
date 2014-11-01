@@ -30,7 +30,7 @@ import javax.swing.JComponent;
 
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.algorithm.index.Index;
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.gui.actions.AbstractObjectAction;
 
@@ -49,7 +49,7 @@ public class IndexDataSetLuceneAction extends AbstractObjectAction {
 			Class<?> c = Class.forName("org.jdmp.lucene.LuceneIndex");
 			Index i = (Index) c.newInstance();
 			((Algorithm) i).showGUI();
-			i.add((DataSet) getCoreObject());
+			i.add((ListDataSet) getCoreObject());
 			return i;
 		} catch (Exception e) {
 			e.printStackTrace();

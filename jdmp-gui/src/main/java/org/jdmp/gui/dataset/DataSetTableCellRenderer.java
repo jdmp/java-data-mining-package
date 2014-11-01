@@ -30,7 +30,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.gui.variable.VariableListTableCellRenderer;
 
 public class DataSetTableCellRenderer implements TableCellRenderer {
@@ -39,7 +39,7 @@ public class DataSetTableCellRenderer implements TableCellRenderer {
 
 	private final VariableListTableCellRenderer variableListTableCellRenderer = new VariableListTableCellRenderer();
 
-	private DataSet dataSet = null;
+	private ListDataSet dataSet = null;
 
 	private Object o = null;
 
@@ -50,8 +50,8 @@ public class DataSetTableCellRenderer implements TableCellRenderer {
 
 		c = null;
 
-		if (value instanceof DataSet)
-			dataSet = (DataSet) value;
+		if (value instanceof ListDataSet)
+			dataSet = (ListDataSet) value;
 		else
 			dataSet = null;
 

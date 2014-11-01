@@ -23,6 +23,58 @@
 
 package org.jdmp.core.algorithm.estimator;
 
+import org.ujmp.core.util.MathUtil;
+
 public abstract class AbstractDensityEstimator implements DensityEstimator {
+
+	public static final double MINPROBABILITY = 1e-15;
+
+	public final void removeValue(Object value) {
+		removeValue(value, 1.0);
+	}
+
+	public final void addValue(final double value) {
+		addValue(value, 1.0);
+	}
+
+	public final void addValue(final Object value) {
+		addValue(value, 1.0);
+	}
+
+	public final void removeValue(final double value) {
+		removeValue(value, 1.0);
+	}
+
+	public void addValue(Object value, double weight) {
+		addValue(MathUtil.getDouble(value), weight);
+	}
+
+	public void removeValue(Object value, double weight) {
+		removeValue(MathUtil.getDouble(value), weight);
+	}
+
+	public double getProbability(Object value) {
+		return getProbability(MathUtil.getDouble(value));
+	}
+
+	public final void addValue(boolean value, double weight) {
+		addValue(value ? 1.0 : 0.0, weight);
+	}
+
+	public final void addValue(boolean value) {
+		addValue(value ? 1.0 : 0.0, 1.0);
+	}
+
+	public final void removeValue(boolean value, double weight) {
+		removeValue(value ? 1.0 : 0.0, weight);
+	}
+
+	public final void removeValue(boolean value) {
+		removeValue(value ? 1.0 : 0.0, 1.0);
+	}
+
+	public final double getProbability(boolean value) {
+		return getProbability(value ? 1.0 : 0.0);
+	}
 
 }

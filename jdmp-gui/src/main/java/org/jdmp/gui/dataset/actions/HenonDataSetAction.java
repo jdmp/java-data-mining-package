@@ -31,8 +31,7 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
-import org.jdmp.core.dataset.DataSet;
-import org.jdmp.core.dataset.DataSetFactory;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.gui.dataset.DataSetGUIObject;
 
 public class HenonDataSetAction extends DataSetAction {
@@ -69,7 +68,7 @@ public class HenonDataSetAction extends DataSetAction {
 					JOptionPane.QUESTION_MESSAGE);
 			predictionLength = Integer.parseInt(s);
 		}
-		DataSet henon = DataSetFactory.HenonMap(sampleCount, inputLength, predictionLength);
+		ListDataSet henon = ListDataSet.Factory.HenonMap(sampleCount, inputLength, predictionLength);
 		henon.showGUI();
 		return henon;
 	}

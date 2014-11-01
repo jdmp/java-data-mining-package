@@ -23,29 +23,27 @@
 
 package org.jdmp.core.algorithm.regression;
 
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 
 public interface Regressor {
 
-	public void train(DataSet dataSet);
+	public void trainAll(ListDataSet dataSet);
 
 	public void reset();
 
-	public void train(Matrix input, Matrix sampleWeight, Matrix target);
+	public void trainOne(Matrix input, Matrix sampleWeight, Matrix target);
 
-	public void predict(Sample sample);
+	public void predictOne(Sample sample);
 
-	public Matrix predict(Matrix input);
+	public Matrix predictOne(Matrix input);
 
-	public void train(Matrix input, Matrix target);
+	public void trainOne(Matrix input, Matrix target);
 
-	public Matrix predict(Matrix input, Matrix sampleWeight);
+	public void trainOne(Sample sample);
 
-	public void train(Sample sample);
-
-	public void predict(DataSet dataSet);
+	public void predictAll(ListDataSet dataSet);
 
 	public Regressor emptyCopy();
 
@@ -53,10 +51,10 @@ public interface Regressor {
 
 	public String getTargetLabel();
 
-	public int getClassCount(DataSet dataSet);
+	public int getClassCount(ListDataSet dataSet);
 
-	public int getFeatureCount(DataSet dataSet);
+	public int getFeatureCount(ListDataSet dataSet);
 
-	public boolean isDiscrete(DataSet dataSet);
+	public boolean isDiscrete(ListDataSet dataSet);
 
 }

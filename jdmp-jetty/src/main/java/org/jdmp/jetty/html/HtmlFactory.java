@@ -30,7 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.algorithm.index.Index;
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.module.Module;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
@@ -53,7 +53,7 @@ public interface HtmlFactory {
 	public Page createVariablePage(HttpServletRequest request, String path, Variable variable, Object... parameters)
 			throws ServletException, IOException;
 
-	public Page createDataSetPage(HttpServletRequest request, String path, DataSet dataSet, Object... parameters)
+	public Page createDataSetPage(HttpServletRequest request, String path, ListDataSet dataSet, Object... parameters)
 			throws ServletException, IOException;
 
 	public Page createMatrixPage(HttpServletRequest request, String path, Matrix matrix, Object... parameters)
