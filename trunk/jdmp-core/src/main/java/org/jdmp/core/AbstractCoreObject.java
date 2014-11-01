@@ -28,7 +28,7 @@ import java.lang.reflect.Constructor;
 import javax.swing.JFrame;
 
 import org.jdmp.core.algorithm.Algorithm;
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.module.Module;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
@@ -100,9 +100,9 @@ public abstract class AbstractCoreObject implements CoreObject {
 				} else if (this instanceof Sample) {
 					Class<?> c = Class.forName("org.jdmp.gui.sample.SampleGUIObject");
 					con = c.getConstructor(new Class<?>[] { Sample.class });
-				} else if (this instanceof DataSet) {
+				} else if (this instanceof ListDataSet) {
 					Class<?> c = Class.forName("org.jdmp.gui.dataset.DataSetGUIObject");
-					con = c.getConstructor(new Class<?>[] { DataSet.class });
+					con = c.getConstructor(new Class<?>[] { ListDataSet.class });
 				} else if (this instanceof Algorithm) {
 					Class<?> c = Class.forName("org.jdmp.gui.algorithm.AlgorithmGUIObject");
 					con = c.getConstructor(new Class<?>[] { Algorithm.class });

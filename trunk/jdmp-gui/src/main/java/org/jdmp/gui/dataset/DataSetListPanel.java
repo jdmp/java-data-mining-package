@@ -23,7 +23,7 @@
 
 package org.jdmp.gui.dataset;
 
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.dataset.HasDataSetMap;
 import org.jdmp.gui.util.AbstractListPanel;
 import org.ujmp.core.interfaces.CoreObject;
@@ -42,7 +42,7 @@ public class DataSetListPanel extends AbstractListPanel {
 
 		dataModel = new DataSetListTableModel(iDataSets);
 		dataModel.addTableModelListener(this);
-		jTable.setDefaultRenderer(DataSet.class, new DataSetTableCellRenderer());
+		jTable.setDefaultRenderer(ListDataSet.class, new DataSetTableCellRenderer());
 
 		jTable.setModel(dataModel);
 

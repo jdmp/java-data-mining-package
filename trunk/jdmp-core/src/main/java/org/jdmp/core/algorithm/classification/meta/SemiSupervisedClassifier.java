@@ -24,7 +24,7 @@
 package org.jdmp.core.algorithm.classification.meta;
 
 import org.jdmp.core.algorithm.classification.Classifier;
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.ujmp.core.Matrix;
 
 public interface SemiSupervisedClassifier {
@@ -33,9 +33,9 @@ public interface SemiSupervisedClassifier {
 
 	public void reset() throws Exception;
 
-	public void train(DataSet labeledData, DataSet unlabeledData) throws Exception;
+	public void train(ListDataSet labeledData, ListDataSet unlabeledData) throws Exception;
 
-	public void predict(DataSet dataSet) throws Exception;
+	public void predict(ListDataSet dataSet) throws Exception;
 
 	public Classifier emptyCopy() throws Exception;
 }

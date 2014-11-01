@@ -23,7 +23,7 @@
 
 package org.jdmp.weka.wrappers;
 
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
@@ -37,16 +37,15 @@ public class DataSetToInstancesWrapper extends Instances {
 	public static final String WEIGHT = Variable.WEIGHT;
 	public static final String TARGET = Variable.TARGET;
 
-	public DataSetToInstancesWrapper(DataSet dataSet, boolean discrete,
-			boolean includeTarget) {
+	public DataSetToInstancesWrapper(ListDataSet dataSet, boolean discrete, boolean includeTarget) {
 		super(dataSet.getLabel(), new DataSetToAttributeInfoWrapper(dataSet, discrete), dataSet
-				.getSampleMap().getSize());
+				.size());
 
 		if (includeTarget) {
 			setClassIndex(dataSet.getFeatureCount());
 		}
 
-		for (Sample s : dataSet.getSampleMap()) {
+		for (Sample s : dataSet) {
 			Matrix input = s.getMatrix(INPUT);
 			Matrix weight = s.getMatrix(WEIGHT);
 			Matrix target = s.getMatrix(TARGET);

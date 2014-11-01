@@ -23,7 +23,7 @@
 
 package org.jdmp.core.algorithm.compression;
 
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 
@@ -31,17 +31,17 @@ public interface Compressor {
 
 	public void reset();
 
-	public void train(DataSet dataSet);
+	public void train(ListDataSet dataSet);
 
 	public void compress(Sample sample);
 
-	public void compress(DataSet dataSet);
+	public void compress(ListDataSet dataSet);
 
 	public Matrix compress(Matrix input);
 
 	public void decompress(Sample sample);
 
-	public void decompress(DataSet dataSet);
+	public void decompress(ListDataSet dataSet);
 
 	public Matrix decompress(Matrix input);
 

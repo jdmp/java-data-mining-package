@@ -23,7 +23,7 @@
 
 package org.jdmp.core.algorithm.classification;
 
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
@@ -41,7 +41,7 @@ public class ConstantClassifier extends AbstractClassifier {
 		super();
 	}
 
-	public Matrix predict(Matrix input, Matrix sampleWeight) {
+	public Matrix predictOne(Matrix input) {
 		return prediction;
 	}
 
@@ -50,9 +50,9 @@ public class ConstantClassifier extends AbstractClassifier {
 		maxClassId = 0;
 	}
 
-	public void train(DataSet dataSet) {
+	public void trainAll(ListDataSet dataSet) {
 		MapMatrix<Long, Integer> count = new DefaultMapMatrix<Long, Integer>();
-		for (Sample s : dataSet.getSampleMap()) {
+		for (Sample s : dataSet) {
 			Matrix m = s.getMatrix(Variable.TARGET);
 			long target = m.getCoordinatesOfMaximum()[COLUMN];
 			maxClassId = Math.max(maxClassId, target);

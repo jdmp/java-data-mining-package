@@ -30,11 +30,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DefaultDataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.RelationalSample;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.sample.SampleFactory;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.mapmatrix.DefaultMapMatrix;
 import org.ujmp.core.mapmatrix.MapMatrix;
@@ -48,7 +47,7 @@ public class MarketBasketAnalysis extends AbstractRelationMiner {
 
 	private int minSupport = 10;
 
-	public DataSet calculate(DataSet dataSet) throws Exception {
+	public ListDataSet calculate(ListDataSet dataSet) throws Exception {
 		product1ToIds.setLabel("Product 1 Ids");
 		product2ToIds.setLabel("Product 2 Ids");
 
@@ -58,12 +57,12 @@ public class MarketBasketAnalysis extends AbstractRelationMiner {
 		Matrix product2Count = new CountMatrix(product2ToIds);
 		product2Count.setLabel("Product 2 Count");
 
-		for (int r = 0; r < dataSet.getSampleMap().getSize(); r++) {
+		for (int r = 0; r < dataSet.size(); r++) {
 
 			if (r % 1000 == 0) {
-				System.out.println(r + " of " + dataSet.getSampleMap().getSize());
+				System.out.println(r + " of " + dataSet.size());
 			}
-			RelationalSample s = (RelationalSample) dataSet.getSampleMap().getElementAt(r);
+			RelationalSample s = (RelationalSample) dataSet.get(r);
 			Collection<?> products = s.getObjects();
 			if (products.size() != 0) {
 				addProduct1Count(products, r);
@@ -78,7 +77,7 @@ public class MarketBasketAnalysis extends AbstractRelationMiner {
 		Matrix data = Matrix.Factory.linkTo().file("/home/arndt/muenchen/totale2.txt").asDenseCSV();
 		// data.showGUI();
 
-		DataSet orig = new DefaultDataSet();
+		ListDataSet orig = new DefaultDataSet();
 
 		// for (int r = 0; r < 10000; r++) {
 		for (int r = 0; r < data.getRowCount(); r++) {
@@ -89,19 +88,19 @@ public class MarketBasketAnalysis extends AbstractRelationMiner {
 
 			Collection<?> products = getProductsInLine(data, r);
 			if (products.size() != 0) {
-				RelationalSample s = SampleFactory.relationalSample(products);
-				orig.getSampleMap().add(s);
+				RelationalSample s = Sample.Factory.relationalSample(products);
+				orig.add(s);
 			}
 		}
 
 		MarketBasketAnalysis mba = new MarketBasketAnalysis();
 		orig.showGUI();
-		DataSet ds = mba.calculate(orig);
+		ListDataSet ds = mba.calculate(orig);
 		ds.showGUI();
 	}
 
-	private DataSet calculateP(int minSupport) throws Exception {
-		DataSet ds = new DefaultDataSet();
+	private ListDataSet calculateP(int minSupport) throws Exception {
+		ListDataSet ds = new DefaultDataSet();
 
 		for (Object o : product2ToIds.keySet()) {
 			Set<String> set = (Set<String>) (o);
@@ -120,23 +119,23 @@ public class MarketBasketAnalysis extends AbstractRelationMiner {
 				System.out.println(prod1 + " => " + prod2 + ": " + p1);
 				System.out.println(prod2 + " => " + prod1 + ": " + p2);
 
-				RelationalSample s12 = SampleFactory.relationalSample(prod1 + " => " + prod2);
+				RelationalSample s12 = Sample.Factory.relationalSample(prod1 + " => " + prod2);
 				s12.addObject(prod1);
 				s12.addObject(prod2);
 				s12.setMatrix(Sample.COUNT, Matrix.Factory.linkToValue(count));
 				s12.setMatrix(Sample.PROBABILITY, Matrix.Factory.linkToValue(p1));
 				s12.setObject("From", prod1);
 				s12.setObject("To", prod2);
-				ds.getSampleMap().add(s12);
+				ds.add(s12);
 
-				RelationalSample s21 = SampleFactory.relationalSample(prod2 + " => " + prod1);
+				RelationalSample s21 = Sample.Factory.relationalSample(prod2 + " => " + prod1);
 				s21.addObject(prod1);
 				s21.addObject(prod2);
 				s21.setMatrix(Sample.COUNT, Matrix.Factory.linkToValue(count));
 				s21.setMatrix(Sample.PROBABILITY, Matrix.Factory.linkToValue(p2));
 				s21.setObject("From", prod2);
 				s21.setObject("To", prod1);
-				ds.getSampleMap().add(s21);
+				ds.add(s21);
 
 			}
 		}

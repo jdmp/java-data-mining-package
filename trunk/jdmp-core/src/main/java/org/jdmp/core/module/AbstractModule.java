@@ -25,7 +25,7 @@ package org.jdmp.core.module;
 
 import org.jdmp.core.AbstractCoreObject;
 import org.jdmp.core.algorithm.Algorithm;
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.DefaultObservableMap;
 import org.jdmp.core.util.ObservableMap;
@@ -38,7 +38,7 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 	private final VariableMap variables = new DefaultVariableMap();
 	private final ObservableMap<Algorithm> algorithms = new DefaultObservableMap<Algorithm>();
 	private final ObservableMap<Sample> samples = new DefaultObservableMap<Sample>();
-	private final ObservableMap<DataSet> dataSets = new DefaultObservableMap<DataSet>();
+	private final ObservableMap<ListDataSet> dataSets = new DefaultObservableMap<ListDataSet>();
 	private final ObservableMap<Module> modules = new DefaultObservableMap<Module>();
 
 	public final String getDescription() {
@@ -65,7 +65,7 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 		return modules;
 	}
 
-	public final ObservableMap<DataSet> getDataSetMap() {
+	public final ObservableMap<ListDataSet> getDataSetMap() {
 		return dataSets;
 	}
 

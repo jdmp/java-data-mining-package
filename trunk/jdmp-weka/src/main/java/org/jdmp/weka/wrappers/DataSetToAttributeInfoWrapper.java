@@ -23,7 +23,7 @@
 
 package org.jdmp.weka.wrappers;
 
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 
@@ -32,7 +32,7 @@ import weka.core.FastVector;
 public class DataSetToAttributeInfoWrapper extends FastVector {
 	private static final long serialVersionUID = -5668139225494255695L;
 
-	public DataSetToAttributeInfoWrapper(DataSet dataSet, boolean discrete) {
+	public DataSetToAttributeInfoWrapper(ListDataSet dataSet, boolean discrete) {
 		super();
 
 		// for (Attribute f : dataSet.getAttributes()) {

@@ -29,7 +29,6 @@ import org.jdmp.core.algorithm.classification.mlp.MultiLayerNetwork.Aggregation;
 import org.jdmp.core.algorithm.classification.mlp.MultiLayerNetwork.BiasType;
 import org.jdmp.core.algorithm.classification.mlp.MultiLayerNetwork.Transfer;
 import org.jdmp.core.variable.Variable;
-import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
 
 public class NetworkLayer implements Serializable {
@@ -63,10 +62,10 @@ public class NetworkLayer implements Serializable {
 	public NetworkLayer(Aggregation aggregationFunction, Transfer transferFunction,
 			BiasType biasType, int neuronCount) {
 		this(aggregationFunction, transferFunction, biasType);
-		Variable outputDeviation = VariableFactory.labeledVariable("Output Deviation");
+		Variable outputDeviation = Variable.Factory.labeledVariable("Output Deviation");
 		outputDeviation.add(Matrix.Factory.zeros(neuronCount, 1));
 		setOutputDeviationVariable(outputDeviation);
-		Variable output = VariableFactory.labeledVariable("Output");
+		Variable output = Variable.Factory.labeledVariable("Output");
 		output.add(Matrix.Factory.zeros(neuronCount, 1));
 		setOutputVariable(output);
 	}
@@ -164,7 +163,7 @@ public class NetworkLayer implements Serializable {
 
 	public void createVariablesIfNecessary() {
 		if (getWeightVariable() == null) {
-			Variable weight = VariableFactory.labeledVariable("Weight");
+			Variable weight = Variable.Factory.labeledVariable("Weight");
 			Matrix w = null;
 
 			double scale = 1;
@@ -172,6 +171,7 @@ public class NetworkLayer implements Serializable {
 				scale = 1.0 / getInputVariable().getLast().getRowCount()
 						/ getInputVariable().getLast().getColumnCount();
 			}
+			scale = 0.0001;
 
 			switch (biasType) {
 			case SINGLE:
@@ -214,7 +214,7 @@ public class NetworkLayer implements Serializable {
 				getOutputVariable().getLast().getRowCount()
 						* getOutputVariable().getLast().getColumnCount(),
 				getInputVariable().getLast().getRowCount()
-						* getInputVariable().getLast().getColumnCount()).times(0.01);
+						* getInputVariable().getLast().getColumnCount()).times(0.0001);
 		getWeightVariable().add(w);
 	}
 

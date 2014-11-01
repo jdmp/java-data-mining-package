@@ -26,25 +26,22 @@ package org.jdmp.core;
 import static org.junit.Assert.assertEquals;
 
 import org.jdmp.core.algorithm.classification.mlp.MultiLayerNetwork;
-import org.jdmp.core.dataset.DataSet;
-import org.jdmp.core.dataset.DataSetFactory;
+import org.jdmp.core.dataset.ListDataSet;
 import org.junit.Test;
-import org.ujmp.core.Matrix;
 
 public class TestMLP {
 
 	@Test
 	public void testMLP() throws Exception {
-		DataSet iris = DataSetFactory.IRIS();
+		ListDataSet iris = ListDataSet.Factory.IRIS();
 
-		iris.standardize(Matrix.ROW);
 		MultiLayerNetwork mlp = new MultiLayerNetwork(10);
-		mlp.setLearningRate(0.01);
+		mlp.setLearningRate(0.05);
 
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 300; i++) {
 			mlp.trainOnce(iris);
 		}
-		mlp.predict(iris);
+		mlp.predictAll(iris);
 
 		assertEquals(0.95, iris.getAccuracy(), 0.05);
 	}

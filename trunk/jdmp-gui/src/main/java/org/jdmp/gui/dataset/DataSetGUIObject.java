@@ -28,23 +28,23 @@ import java.awt.Image;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.ujmp.gui.AbstractGUIObject;
 
 public class DataSetGUIObject extends AbstractGUIObject {
 	private static final long serialVersionUID = -329942434062359920L;
 
-	private DataSet dataSet = null;
+	private ListDataSet dataSet = null;
 
 	private transient JFrame frame = null;
 
 	private transient JPanel panel = null;
 
-	public DataSet getCoreObject() {
+	public ListDataSet getCoreObject() {
 		return dataSet;
 	}
 
-	public DataSetGUIObject(DataSet d) {
+	public DataSetGUIObject(ListDataSet d) {
 		this.dataSet = d;
 	}
 

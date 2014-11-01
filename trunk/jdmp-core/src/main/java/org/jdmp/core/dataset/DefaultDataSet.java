@@ -31,7 +31,6 @@ import java.util.Map;
 import java.util.Random;
 
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.util.ObservableMap;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
@@ -49,7 +48,7 @@ public class DefaultDataSet extends AbstractDataSet {
 
 		Map<Integer, Double> map = new HashMap<Integer, Double>();
 
-		for (Sample s : getSampleMap()) {
+		for (Sample s : this) {
 			int c = s.getTargetClass();
 			Double d = map.get(c);
 			if (d == null) {
@@ -64,7 +63,7 @@ public class DefaultDataSet extends AbstractDataSet {
 			if (d == null) {
 				d = 0.0;
 			}
-			m.setAsDouble(d / getSampleMap().getSize(), i, 0);
+			m.setAsDouble(d / size(), i, 0);
 		}
 		return m;
 	}
@@ -77,27 +76,6 @@ public class DefaultDataSet extends AbstractDataSet {
 		return -1;
 	}
 
-	public final long getInputFeatureCount() {
-		Matrix m = getInputMatrix();
-		if (m != null) {
-			return m.getColumnCount();
-		} else {
-			return 0;
-		}
-	}
-
-	public final void standardize(int dimension) {
-		getInputVariable().getLast().standardize(Ret.ORIG, dimension);
-	}
-
-	public final void center(int dimension) {
-		getInputVariable().getLast().center(Ret.ORIG, dimension, true);
-	}
-
-	public void addMissingValues(int dimension, double percentMissing) {
-		getInputVariable().getLast().addMissing(Ret.ORIG, dimension, percentMissing);
-	}
-
 	public DefaultDataSet clone() {
 		DefaultDataSet ds = null;
 		try {
@@ -105,8 +83,8 @@ public class DefaultDataSet extends AbstractDataSet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		for (Sample s : getSampleMap()) {
-			ds.getSampleMap().add(s.clone());
+		for (Sample s : this) {
+			ds.add(s.clone());
 		}
 		return ds;
 	}
@@ -191,8 +169,7 @@ public class DefaultDataSet extends AbstractDataSet {
 	}
 
 	public int getClassCount() {
-		return (int) getSampleMap().getElementAt(0).getMatrix(Sample.TARGET).toRowVector(Ret.NEW)
-				.getRowCount();
+		return (int) get(0).getMatrix(Sample.TARGET).toRowVector(Ret.NEW).getRowCount();
 	}
 
 	public Variable getConfusionVariable() {
@@ -231,14 +208,14 @@ public class DefaultDataSet extends AbstractDataSet {
 		return getAccuracyVariable().getAsListMatrix().getMaxValue();
 	}
 
-	public List<DataSet> splitByClass() {
-		List<DataSet> returnDataSets = new ArrayList<DataSet>();
+	public List<ListDataSet> splitByClass() {
+		List<ListDataSet> returnDataSets = new ArrayList<ListDataSet>();
 
 		for (int i = 0; i < getClassCount(); i++) {
-			DataSet ds = DataSetFactory.labeledDataSet("Class " + i);
-			for (Sample s : getSampleMap()) {
+			ListDataSet ds = DataSet.Factory.labeledDataSet("Class " + i);
+			for (Sample s : this) {
 				if (s.getTargetClass() == i) {
-					ds.getSampleMap().add(s.clone());
+					ds.add(s.clone());
 				}
 			}
 			returnDataSets.add(ds);
@@ -247,8 +224,8 @@ public class DefaultDataSet extends AbstractDataSet {
 		return returnDataSets;
 	}
 
-	public List<DataSet> splitForStratifiedCV(int numberOfCVSets, int idOfCVSet, long randomSeed) {
-		List<DataSet> returnDataSets = new ArrayList<DataSet>();
+	public List<ListDataSet> splitForStratifiedCV(int numberOfCVSets, int idOfCVSet, long randomSeed) {
+		List<ListDataSet> returnDataSets = new ArrayList<ListDataSet>();
 		Random rand = new Random(randomSeed);
 		int classCount = getClassCount();
 
@@ -259,7 +236,7 @@ public class DefaultDataSet extends AbstractDataSet {
 		}
 
 		// add samples to lists according to class
-		for (Sample s : getSampleMap()) {
+		for (Sample s : this) {
 			int targetClass = s.getTargetClass();
 			sortedSamples.get(targetClass).add(s);
 		}
@@ -286,7 +263,7 @@ public class DefaultDataSet extends AbstractDataSet {
 
 				List<Sample> to = cvSets.get(toPointer);
 
-				while (to.size() < (double) getSampleMap().getSize() / numberOfCVSets
+				while (to.size() < (double) size() / numberOfCVSets
 						&& fromPointer < sortedSamples.size()) {
 					List<Sample> from = sortedSamples.get(fromPointer);
 
@@ -305,15 +282,15 @@ public class DefaultDataSet extends AbstractDataSet {
 		}
 
 		// create the data sets
-		DataSet train = DataSetFactory.labeledDataSet("TrainingSet " + idOfCVSet + "/"
+		ListDataSet train = DataSet.Factory.labeledDataSet("TrainingSet " + idOfCVSet + "/"
 				+ numberOfCVSets + "(" + randomSeed + ")");
-		DataSet test = DataSetFactory.labeledDataSet("TestSet " + idOfCVSet + "/" + numberOfCVSets
-				+ "(" + randomSeed + ")");
+		ListDataSet test = DataSet.Factory.labeledDataSet("TestSet " + idOfCVSet + "/"
+				+ numberOfCVSets + "(" + randomSeed + ")");
 
-		test.getSampleMap().addAll(cvSets.remove(idOfCVSet));
+		test.addAll(cvSets.remove(idOfCVSet));
 
 		for (List<Sample> list : cvSets) {
-			train.getSampleMap().addAll(list);
+			train.addAll(list);
 		}
 
 		returnDataSets.add(train);
@@ -339,18 +316,17 @@ public class DefaultDataSet extends AbstractDataSet {
 		return -1;
 	}
 
-	public DataSet bootstrap(int numberOfSamples) {
-		DataSet ds = DataSetFactory.labeledDataSet("Bootstrap of " + getLabel());
-		ObservableMap<Sample> sampleList = getSampleMap();
+	public ListDataSet bootstrap(int numberOfSamples) {
+		ListDataSet ds = DataSet.Factory.labeledDataSet("Bootstrap of " + getLabel());
 		for (int i = 0; i < numberOfSamples; i++) {
-			int rand = MathUtil.nextInteger(0, sampleList.getSize());
-			ds.getSampleMap().add(sampleList.getElementAt(rand).clone());
+			int rand = MathUtil.nextInteger(0, size());
+			ds.add(get(rand));
 		}
 		return ds;
 	}
 
 	public boolean isDiscrete() {
-		for (Sample s : getSampleMap().values()) {
+		for (Sample s : this) {
 			Matrix input = s.getMatrix(INPUT);
 			for (long[] c : input.availableCoordinates()) {
 				if (!MathUtil.isDiscrete(input.getAsDouble(c))) {
@@ -362,11 +338,11 @@ public class DefaultDataSet extends AbstractDataSet {
 	}
 
 	public int getFeatureCount() {
-		return (int) getSampleMap().getElementAt(0).getMatrix(INPUT).getValueCount();
+		return (int) get(0).getMatrix(INPUT).getValueCount();
 	}
 
-	public DataSet bootstrap() {
-		return bootstrap(getSampleMap().size());
+	public ListDataSet bootstrap() {
+		return bootstrap(size());
 	}
 
 }

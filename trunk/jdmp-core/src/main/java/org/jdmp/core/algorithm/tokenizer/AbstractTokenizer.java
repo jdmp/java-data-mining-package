@@ -24,7 +24,7 @@
 package org.jdmp.core.algorithm.tokenizer;
 
 import org.jdmp.core.algorithm.AbstractAlgorithm;
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
@@ -47,8 +47,8 @@ public abstract class AbstractTokenizer extends AbstractAlgorithm implements Tok
 		}
 	}
 
-	public final void tokenize(Object variableKey, DataSet dataSet) throws Exception {
-		for (Sample sample : dataSet.getSampleMap()) {
+	public final void tokenize(Object variableKey, ListDataSet dataSet) throws Exception {
+		for (Sample sample : dataSet) {
 			tokenize(variableKey, sample);
 		}
 	}

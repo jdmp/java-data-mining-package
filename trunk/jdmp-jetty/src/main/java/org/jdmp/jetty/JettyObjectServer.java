@@ -23,10 +23,8 @@
 
 package org.jdmp.jetty;
 
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.handler.ContextHandlerCollection;
-import org.mortbay.jetty.servlet.Context;
-import org.mortbay.jetty.servlet.ServletHolder;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.ContextHandler;
 
 public class JettyObjectServer {
 
@@ -48,12 +46,12 @@ public class JettyObjectServer {
 	public void start() throws Exception {
 		server = new Server(port);
 
-		ContextHandlerCollection contexts = new ContextHandlerCollection();
-		server.setHandler(contexts);
-
-		Context root = new Context(contexts, "/", Context.SESSIONS);
-		root.addServlet(new ServletHolder(new JettyObjectServlet(object)), "/*");
-
+		ContextHandler context = new ContextHandler();
+		context.setContextPath("/");
+		context.setResourceBase(".");
+		context.setClassLoader(Thread.currentThread().getContextClassLoader());
+		context.setHandler(new JettyObjectHandler(object));
+		server.setHandler(context);
 		server.start();
 	}
 

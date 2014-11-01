@@ -32,8 +32,7 @@ import java.util.concurrent.Future;
 
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.algorithm.similarity.SimilaritySearcher;
-import org.jdmp.core.dataset.DataSet;
-import org.jdmp.core.dataset.DataSetFactory;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.ObservableMap;
 
@@ -61,18 +60,18 @@ public class MultiIndex extends AbstractIndex implements SimilaritySearcher {
 		return 0;
 	}
 
-	public DataSet search(String query, int start, int count) throws Exception {
-		DataSet ds = DataSetFactory.emptyDataSet();
+	public ListDataSet search(String query, int start, int count) throws Exception {
+		ListDataSet ds = ListDataSet.Factory.emptyDataSet();
 		try {
-			List<Future<DataSet>> futures = new ArrayList<Future<DataSet>>();
+			List<Future<ListDataSet>> futures = new ArrayList<Future<ListDataSet>>();
 			for (Object key : getAlgorithmMap().keySet()) {
 				Algorithm a = getAlgorithmMap().get(key);
 				if (a instanceof Index) {
 					futures.add(executors.submit(new SearchFuture((Index) a, query, start, count)));
 				}
 			}
-			for (Future<DataSet> f : futures) {
-				ds.getSampleMap().addAll(f.get().getSampleMap().values());
+			for (Future<ListDataSet> f : futures) {
+				ds.addAll(f.get());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -80,10 +79,10 @@ public class MultiIndex extends AbstractIndex implements SimilaritySearcher {
 		return ds;
 	}
 
-	public DataSet searchSimilar(Sample sample, int start, int count) throws Exception {
-		DataSet ds = DataSetFactory.emptyDataSet();
+	public ListDataSet searchSimilar(Sample sample, int start, int count) throws Exception {
+		ListDataSet ds = ListDataSet.Factory.emptyDataSet();
 		try {
-			List<Future<DataSet>> futures = new ArrayList<Future<DataSet>>();
+			List<Future<ListDataSet>> futures = new ArrayList<Future<ListDataSet>>();
 			for (Object key : getAlgorithmMap().keySet()) {
 				Algorithm a = getAlgorithmMap().get(key);
 				if (a instanceof SimilaritySearcher) {
@@ -91,8 +90,8 @@ public class MultiIndex extends AbstractIndex implements SimilaritySearcher {
 							sample, start, count)));
 				}
 			}
-			for (Future<DataSet> f : futures) {
-				ds.getSampleMap().addAll(f.get().getSampleMap().values());
+			for (Future<ListDataSet> f : futures) {
+				ds.addAll(f.get());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -100,7 +99,7 @@ public class MultiIndex extends AbstractIndex implements SimilaritySearcher {
 		return ds;
 	}
 
-	class SearchFuture implements Callable<DataSet> {
+	class SearchFuture implements Callable<ListDataSet> {
 
 		private Index index = null;
 
@@ -117,13 +116,13 @@ public class MultiIndex extends AbstractIndex implements SimilaritySearcher {
 			this.count = count;
 		}
 
-		public DataSet call() throws Exception {
+		public ListDataSet call() throws Exception {
 			return index.search(query, start, count);
 		}
 
 	}
 
-	class SearchSimilarFuture implements Callable<DataSet> {
+	class SearchSimilarFuture implements Callable<ListDataSet> {
 
 		private SimilaritySearcher index = null;
 
@@ -140,7 +139,7 @@ public class MultiIndex extends AbstractIndex implements SimilaritySearcher {
 			this.count = count;
 		}
 
-		public DataSet call() throws Exception {
+		public ListDataSet call() throws Exception {
 			return index.searchSimilar(sample, start, count);
 		}
 
@@ -180,11 +179,11 @@ public class MultiIndex extends AbstractIndex implements SimilaritySearcher {
 		return sample;
 	}
 
-	public final DataSet searchSimilar(Sample sample) throws Exception {
+	public final ListDataSet searchSimilar(Sample sample) throws Exception {
 		return searchSimilar(sample, 0, 100);
 	}
 
-	public final DataSet searchSimilar(Sample sample, int count) throws Exception {
+	public final ListDataSet searchSimilar(Sample sample, int count) throws Exception {
 		return searchSimilar(sample, 0, count);
 	}
 

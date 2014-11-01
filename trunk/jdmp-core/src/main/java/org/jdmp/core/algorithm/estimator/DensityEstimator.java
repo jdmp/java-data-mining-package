@@ -25,14 +25,34 @@ package org.jdmp.core.algorithm.estimator;
 
 public interface DensityEstimator {
 
+	public void addValue(Object value, double weight);
+
+	public void addValue(Object value);
+
 	public void addValue(double value, double weight);
 
 	public void addValue(double value);
+
+	public void addValue(boolean value, double weight);
+
+	public void addValue(boolean value);
 
 	public void removeValue(double value, double weight);
 
 	public void removeValue(double value);
 
+	public void removeValue(boolean value, double weight);
+
+	public void removeValue(boolean value);
+
+	public void removeValue(Object value, double weight);
+
+	public void removeValue(Object value);
+
 	public double getProbability(double value);
+
+	public double getProbability(boolean value);
+
+	public double getProbability(Object value);
 
 }

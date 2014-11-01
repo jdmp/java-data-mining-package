@@ -27,7 +27,7 @@ import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 import javax.swing.table.AbstractTableModel;
 
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.dataset.HasDataSetMap;
 
 public class DataSetListTableModel extends AbstractTableModel implements ListDataListener {
@@ -64,7 +64,7 @@ public class DataSetListTableModel extends AbstractTableModel implements ListDat
 	}
 
 	public Class<?> getColumnClass(int columnIndex) {
-		return DataSet.class;
+		return ListDataSet.class;
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {

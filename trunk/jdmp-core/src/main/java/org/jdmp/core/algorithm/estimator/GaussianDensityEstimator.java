@@ -27,8 +27,6 @@ import org.ujmp.core.util.MathUtil;
 
 public class GaussianDensityEstimator extends AbstractDensityEstimator {
 
-	private static final double MINPROBABILITY = 1e-12;
-
 	private double count = 0.0;
 	private double runningMean = 0.0;
 	private double runningSum = 0.0;
@@ -36,34 +34,6 @@ public class GaussianDensityEstimator extends AbstractDensityEstimator {
 	private boolean isSigmaUpToDate = false;
 
 	public GaussianDensityEstimator() {
-	}
-
-	public void removeValue(final double x) {
-		isSigmaUpToDate = false;
-		if (count == 0) {
-			throw new RuntimeException("density estimator is already empty");
-		} else if (count == 1) {
-			count = 0;
-			runningMean = 0.0;
-			runningSum = 0.0;
-		} else {
-			final double oldMean = (count * runningMean - x) / (count - 1);
-			runningSum -= (x - runningMean) * (x - oldMean);
-			runningMean = oldMean;
-			count--;
-		}
-	}
-
-	public void addValue(final double x) {
-		isSigmaUpToDate = false;
-		count++;
-		if (count == 1) {
-			runningMean = x;
-		} else {
-			final double newMean = runningMean + (x - runningMean) / count;
-			runningSum += (x - runningMean) * (x - newMean);
-			runningMean = newMean;
-		}
 	}
 
 	public double getVariance() {

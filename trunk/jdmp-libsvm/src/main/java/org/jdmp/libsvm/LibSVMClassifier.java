@@ -31,7 +31,7 @@ import libsvm.svm_problem;
 
 import org.jdmp.core.algorithm.classification.AbstractClassifier;
 import org.jdmp.core.algorithm.classification.Classifier;
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
@@ -133,20 +133,20 @@ public class LibSVMClassifier extends AbstractClassifier {
 		param.weight = new double[0];
 	}
 
-	public void train(DataSet dataSet) {
+	public void trainAll(ListDataSet dataSet) {
 		featureCount = getFeatureCount(dataSet);
 		targetCount = getClassCount(dataSet);
 
 		System.out.println("training started");
 
 		prob = new svm_problem();
-		prob.l = dataSet.getSampleMap().getSize();
+		prob.l = dataSet.size();
 
 		prob.x = new svm_node[prob.l][featureCount + 1];
 		prob.y = new double[prob.l];
 
 		int i = 0;
-		for (Sample s : dataSet.getSampleMap()) {
+		for (Sample s : dataSet) {
 			Matrix input = s.getMatrix(getInputLabel()).toColumnVector(Ret.NEW);
 			if (svmType == SVMType.EPSILON_SVR || svmType == SVMType.NU_SVR) {
 				prob.y[i] = s.getMatrix(getTargetLabel()).toRowVector(Ret.NEW).getAsDouble(0, 0);
@@ -198,7 +198,7 @@ public class LibSVMClassifier extends AbstractClassifier {
 		System.out.println("training finished");
 	}
 
-	public Matrix predict(Matrix input, Matrix weight) {
+	public Matrix predictOne(Matrix input) {
 		input = input.toRowVector(Ret.NEW);
 
 		if (svmType == SVMType.EPSILON_SVR || svmType == SVMType.NU_SVR) {
@@ -246,10 +246,6 @@ public class LibSVMClassifier extends AbstractClassifier {
 
 			return output;
 		}
-	}
-
-	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) {
-		throw new RuntimeException("not supported");
 	}
 
 	public void reset() {

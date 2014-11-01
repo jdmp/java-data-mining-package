@@ -35,11 +35,11 @@ import org.ujmp.core.listmatrix.ListMatrix;
 
 public class CrossValidation {
 
-	public static ListMatrix<Double> run(Classifier algorithm, DataSet dataSet) throws Exception {
+	public static ListMatrix<Double> run(Classifier algorithm, ListDataSet dataSet) throws Exception {
 		return run(algorithm, dataSet, 10, 10, System.currentTimeMillis());
 	}
 
-	public static ListMatrix<Double> run(Regressor algorithm, DataSet dataSet, int folds, int runs,
+	public static ListMatrix<Double> run(Regressor algorithm, ListDataSet dataSet, int folds, int runs,
 			long randomSeed) throws Exception {
 
 		ListMatrix<Double> allacc = new DefaultListMatrix<Double>();
@@ -63,13 +63,13 @@ public class CrossValidation {
 			System.out.print("F-Measure (macro) in run " + run + ":\t");
 
 			for (int fold = 0; fold < folds; fold++) {
-				List<DataSet> dss = dataSet.splitForCV(folds, fold, randomSeed + run);
-				DataSet train = dss.get(0);
-				DataSet test = dss.get(1);
+				List<ListDataSet> dss = dataSet.splitForCV(folds, fold, randomSeed + run);
+				ListDataSet train = dss.get(0);
+				ListDataSet test = dss.get(1);
 				algorithm.reset();
-				algorithm.train(train);
-				algorithm.predict(train);
-				algorithm.predict(test);
+				algorithm.trainAll(train);
+				algorithm.predictAll(train);
+				algorithm.predictAll(test);
 
 				acc.add(test.getAccuracy());
 				fm.add(test.getVariableMap().getAsDouble(Variable.FMEASUREMACRO));

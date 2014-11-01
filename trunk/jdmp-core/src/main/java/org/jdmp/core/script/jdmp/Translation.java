@@ -31,11 +31,10 @@ import java.util.Map;
 
 import org.jdmp.core.algorithm.Algorithm;
 import org.jdmp.core.algorithm.AlgorithmMapping;
-import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.DataSetFactory;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.module.Module;
 import org.jdmp.core.module.ModuleFactory;
-import org.jdmp.core.sample.Sample;
 import org.jdmp.core.sample.SampleFactory;
 import org.jdmp.core.script.Result;
 import org.jdmp.core.script.jdmp.analysis.DepthFirstAdapter;
@@ -156,7 +155,7 @@ public class Translation extends DepthFirstAdapter {
 		String label = identifier.toString().trim();
 		Variable v = module.getVariableMap().get(label);
 		if (v == null) {
-			v = VariableFactory.labeledVariable(label);
+			v = Variable.Factory.labeledVariable(label);
 			module.getVariableMap().put(label, v);
 		}
 		return v;
@@ -253,18 +252,12 @@ public class Translation extends DepthFirstAdapter {
 					module.getModuleMap().put(id, m);
 				}
 				result = new Result(id, m);
-			} else if (o instanceof DataSet) {
-				DataSet ds = (DataSet) o;
+			} else if (o instanceof ListDataSet) {
+				ListDataSet ds = (ListDataSet) o;
 				if (!ANS.equals(id)) {
 					module.getDataSetMap().put(id, ds);
 				}
 				result = new Result(id, ds);
-			} else if (o instanceof Sample) {
-				Sample s = (Sample) o;
-				if (!ANS.equals(id)) {
-					module.getSampleMap().put(id, s);
-				}
-				result = new Result(id, s);
 			} else if (o instanceof Variable) {
 				Variable v = (Variable) o;
 				if (!ANS.equals(id)) {
@@ -479,7 +472,7 @@ public class Translation extends DepthFirstAdapter {
 			String name = ((AIdentifierLevel0) factor).getName().toString().trim();
 
 			if (ANS.equals(name) && module.getVariableMap().get(ANS) == null) {
-				module.getVariableMap().put(ANS, VariableFactory.labeledVariable(ANS));
+				module.getVariableMap().put(ANS, Variable.Factory.labeledVariable(ANS));
 			}
 
 			Variable v = module.getVariableMap().get(name);
@@ -487,7 +480,7 @@ public class Translation extends DepthFirstAdapter {
 				return v.getLast();
 			}
 
-			DataSet ds = module.getDataSetMap().get(name);
+			ListDataSet ds = module.getDataSetMap().get(name);
 			if (ds != null) {
 				return ds;
 			}
@@ -495,11 +488,6 @@ public class Translation extends DepthFirstAdapter {
 			Module m = module.getModuleMap().get(name);
 			if (m != null) {
 				return m;
-			}
-
-			Sample s = module.getSampleMap().get(name);
-			if (s != null) {
-				return s;
 			}
 
 			Algorithm a = module.getAlgorithmMap().get(name);
@@ -709,7 +697,7 @@ public class Translation extends DepthFirstAdapter {
 			return MathUtil.getBoolean(m);
 		} else if (c == String.class) {
 			return StringUtil.convert(m);
-		} else if (c == DataSet.class) {
+		} else if (c == ListDataSet.class) {
 			return m;
 		}
 		RuntimeException e = new RuntimeException("cannot convert to desired object type "
@@ -728,10 +716,6 @@ public class Translation extends DepthFirstAdapter {
 			return o;
 		}
 		o = module.getAlgorithmMap().get(name);
-		if (o != null) {
-			return o;
-		}
-		o = module.getSampleMap().get(name);
 		if (o != null) {
 			return o;
 		}
@@ -932,7 +916,7 @@ public class Translation extends DepthFirstAdapter {
 					result = new Result(id, v.getLast());
 					return;
 				}
-				DataSet ds = module.getDataSetMap().get(id);
+				ListDataSet ds = module.getDataSetMap().get(id);
 				if (ds != null) {
 					result = new Result(id, ds);
 					return;
@@ -940,11 +924,6 @@ public class Translation extends DepthFirstAdapter {
 				Algorithm a = module.getAlgorithmMap().get(id);
 				if (a != null) {
 					result = new Result(id, a);
-					return;
-				}
-				Sample s = module.getSampleMap().get(id);
-				if (s != null) {
-					result = new Result(id, s);
 					return;
 				}
 				Module m = module.getModuleMap().get(id);
@@ -959,7 +938,7 @@ public class Translation extends DepthFirstAdapter {
 
 			Variable v = module.getVariableMap().get(ANS);
 			if (v == null) {
-				v = VariableFactory.labeledVariable(ANS);
+				v = Variable.Factory.labeledVariable(ANS);
 				module.getVariableMap().put(ANS, v);
 			}
 			v.add(MathUtil.getMatrix(o));

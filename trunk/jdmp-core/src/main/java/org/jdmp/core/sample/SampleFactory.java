@@ -27,57 +27,19 @@ import java.util.Collection;
 
 import org.ujmp.core.Matrix;
 
-public abstract class SampleFactory {
+public interface SampleFactory {
 
-	public static final Sample labeledSample(String label) {
-		Sample s = new DefaultSample();
-		s.setLabel(label);
-		return s;
-	}
+	public Sample labeledSample(String label);
 
-	public static final Sample linkToMatrix(Matrix input) {
-		Sample s = new DefaultSample();
-		s.setMatrix(Sample.INPUT, input);
-		s.setLabel(input.getLabel());
-		return s;
-	}
+	public Sample linkToMatrix(Matrix input);
 
-	public static final Sample classificationSample(Matrix input, Matrix target) {
-		Sample s = new DefaultSample();
-		s.setMatrix(Sample.INPUT, input);
-		s.setMatrix(Sample.TARGET, target);
-		return s;
-	}
+	public Sample classificationSample(Matrix input, Matrix target);
 
-	public static final Sample emptySample() {
-		return new DefaultSample();
-	}
+	public Sample emptySample();
 
-	public static final RelationalSample relationalSample(Collection<?> items) {
-		RelationalSample s = new RelationalSample();
-		for (Object o : items) {
-			s.addObject(o);
-		}
-		return s;
-	}
+	public RelationalSample relationalSample(Collection<?> items);
 
-	public static final RelationalSample relationalSample(String label) {
-		RelationalSample s = new RelationalSample();
-		s.setLabel(label);
-		return s;
-	}
+	public RelationalSample relationalSample(String label);
 
-	public static Sample clone(Sample s) {
-		Sample ret = SampleFactory.emptySample();
-		ret.setLabel(s.getLabel());
-		ret.setDescription(s.getDescription());
-		for (String k : s.keySet()) {
-			Matrix v = s.get(k);
-			if (v != null) {
-				ret.put(k, v.clone());
-			}
-		}
-		return ret;
-	}
-
+	public Sample clone(Sample s);
 }

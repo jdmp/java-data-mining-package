@@ -29,7 +29,7 @@ import java.util.List;
 import org.jdmp.core.algorithm.classification.AbstractClassifier;
 import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.dataset.DataSet;
-import org.jdmp.core.dataset.DataSetFactory;
+import org.jdmp.core.dataset.ListDataSet;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 
@@ -51,11 +51,11 @@ public class MultiClassClassifier extends AbstractClassifier {
 		this.twoColumns = twoColumns;
 	}
 
-	public Matrix predict(Matrix input, Matrix sampleWeight) {
+	public Matrix predictOne(Matrix input) {
 		double[] results = new double[classCount];
 		for (int i = 0; i < classCount; i++) {
 			Classifier c = singleClassClassifiers.get(i);
-			results[i] = c.predict(input, sampleWeight).getAsDouble(0, 0);
+			results[i] = c.predictOne(input).getAsDouble(0, 0);
 		}
 		return Matrix.Factory.linkToArray(results).transpose();
 	}
@@ -64,7 +64,7 @@ public class MultiClassClassifier extends AbstractClassifier {
 		singleClassClassifiers.clear();
 	}
 
-	public void train(DataSet dataSet) {
+	public void trainAll(ListDataSet dataSet) {
 		reset();
 		classCount = getClassCount(dataSet);
 
@@ -78,8 +78,8 @@ public class MultiClassClassifier extends AbstractClassifier {
 				Matrix target2 = target.minus(1).abs(Ret.NEW);
 				target = Matrix.Factory.horCat(target, target2);
 			}
-			DataSet ds = DataSetFactory.linkToMatrix(input, target);
-			c.train(ds);
+			ListDataSet ds = DataSet.Factory.linkToInputAndTarget(input, target);
+			c.trainAll(ds);
 		}
 
 	}

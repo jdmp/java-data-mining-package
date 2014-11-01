@@ -30,7 +30,7 @@ import javax.swing.JComponent;
 
 import org.jdmp.core.algorithm.clustering.Clusterer;
 import org.jdmp.core.algorithm.clustering.SelfOrganizingMap;
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.gui.actions.AbstractObjectAction;
 import org.ujmp.gui.util.GUIUtil;
@@ -49,8 +49,8 @@ public class ClusterSOM extends AbstractObjectAction {
 		try {
 			Clusterer c = new SelfOrganizingMap(GUIUtil.getInt("number of rows", 1, 100),
 					GUIUtil.getInt("number of columns", 1, 100));
-			c.train((DataSet) getCoreObject());
-			c.predict((DataSet) getCoreObject());
+			c.train((ListDataSet) getCoreObject());
+			c.predict((ListDataSet) getCoreObject());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

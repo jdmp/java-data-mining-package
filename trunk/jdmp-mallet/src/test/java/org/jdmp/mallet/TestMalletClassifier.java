@@ -27,8 +27,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.dataset.CrossValidation;
-import org.jdmp.core.dataset.DataSet;
-import org.jdmp.core.dataset.DataSetFactory;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.mallet.classifier.MalletClassifier;
 import org.jdmp.mallet.classifier.MalletClassifier.MalletClassifiers;
 import org.junit.Test;
@@ -38,7 +37,7 @@ public class TestMalletClassifier {
 
 	@Test
 	public void testMalletDecisionTree() throws Exception {
-		DataSet iris = DataSetFactory.IRIS();
+		ListDataSet iris = ListDataSet.Factory.IRIS();
 		Classifier c = new MalletClassifier(MalletClassifiers.DecisionTree);
 		ListMatrix<Double> results = CrossValidation.run(c, iris, 10, 10, 0);
 		assertEquals(0.934, results.getMeanValue(), 0.01);
@@ -46,7 +45,7 @@ public class TestMalletClassifier {
 
 	@Test
 	public void testMalletAdaBoost() throws Exception {
-		DataSet iris = DataSetFactory.IRIS();
+		ListDataSet iris = ListDataSet.Factory.IRIS();
 		Classifier c = new MalletClassifier(MalletClassifiers.AdaBoost);
 		ListMatrix<Double> results = CrossValidation.run(c, iris, 10, 10, 0);
 		assertEquals(0.93, results.getMeanValue(), 0.02);
@@ -54,7 +53,7 @@ public class TestMalletClassifier {
 
 	@Test
 	public void testMalletNaiveBayes() throws Exception {
-		DataSet iris = DataSetFactory.IRIS();
+		ListDataSet iris = ListDataSet.Factory.IRIS();
 		Classifier c = new MalletClassifier(MalletClassifiers.NaiveBayes);
 		ListMatrix<Double> results = CrossValidation.run(c, iris, 10, 10, 0);
 		assertEquals(0.9273, results.getMeanValue(), 0.01);

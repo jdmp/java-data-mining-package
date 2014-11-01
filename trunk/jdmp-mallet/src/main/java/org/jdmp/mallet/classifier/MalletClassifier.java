@@ -28,7 +28,7 @@ import java.util.List;
 
 import org.jdmp.core.algorithm.classification.AbstractClassifier;
 import org.jdmp.core.algorithm.classification.Classifier;
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.mallet.dataset.DataSet2InstanceList;
 import org.jdmp.mallet.matrix.Labeling2Matrix;
 import org.jdmp.mallet.sample.Sample2Instance;
@@ -68,7 +68,7 @@ public class MalletClassifier extends AbstractClassifier {
 		reset();
 	}
 
-	public Matrix predict(Matrix input, Matrix sampleWeight) {
+	public Matrix predictOne(Matrix input) {
 		Instance instance = new Sample2Instance(input, null, classifier.getAlphabet(), classifier.getLabelAlphabet(),
 				classifier.getInstancePipe(), cumSum);
 		Classification c = classifier.classify(instance);
@@ -112,7 +112,7 @@ public class MalletClassifier extends AbstractClassifier {
 
 	}
 
-	public void train(DataSet dataSet) {
+	public void trainAll(ListDataSet dataSet) {
 		Matrix dataSetInput = dataSet.getInputMatrix();
 
 		Matrix max = dataSetInput.max(Ret.NEW, Matrix.ROW);
@@ -141,10 +141,6 @@ public class MalletClassifier extends AbstractClassifier {
 		InstanceList trainingSet = new DataSet2InstanceList(dataSet, inputAlphabet, targetAlphabet, cumSum);
 
 		classifier = trainer.train(trainingSet);
-	}
-
-	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) {
-		throw new RuntimeException("not implemented");
 	}
 
 	public Classifier emptyCopy() {

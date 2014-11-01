@@ -25,14 +25,13 @@ package org.jdmp.core.algorithm.index;
 
 import java.util.Map;
 
-import org.jdmp.core.dataset.DataSet;
-import org.jdmp.core.sample.HasSampleMap;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.mapmatrix.MapMatrix;
 
-public interface Index extends HasSampleMap {
+public interface Index {
 
 	public static final String INPUT = Variable.INPUT;
 
@@ -46,13 +45,13 @@ public interface Index extends HasSampleMap {
 
 	public void add(Sample sample) throws Exception;
 
-	public void add(DataSet dataSet) throws Exception;
+	public void add(ListDataSet dataSet) throws Exception;
 
-	public DataSet search(String query, int start, int count) throws Exception;
+	public ListDataSet search(String query, int start, int count) throws Exception;
 
-	public DataSet search(String query) throws Exception;
+	public ListDataSet search(String query) throws Exception;
 
-	public DataSet search(String query, int count) throws Exception;
+	public ListDataSet search(String query, int count) throws Exception;
 
 	public int getSize() throws Exception;
 

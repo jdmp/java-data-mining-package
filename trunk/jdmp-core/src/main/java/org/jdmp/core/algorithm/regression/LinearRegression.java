@@ -23,10 +23,9 @@
 
 package org.jdmp.core.algorithm.regression;
 
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
-import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 
@@ -51,7 +50,7 @@ public class LinearRegression extends AbstractRegressor {
 	public LinearRegression(int numberOfPrincipalComponents) {
 		super();
 		this.numberOfPrincipalComponents = numberOfPrincipalComponents;
-		setParameterVariable(VariableFactory.labeledVariable("Regression Parameters"));
+		setParameterVariable(Variable.Factory.labeledVariable("Regression Parameters"));
 	}
 
 	public void setParameterVariable(Variable variable) {
@@ -66,7 +65,7 @@ public class LinearRegression extends AbstractRegressor {
 		return getParameterVariable().getLast();
 	}
 
-	public Matrix predict(Matrix input, Matrix sampleWeight) {
+	public Matrix predictOne(Matrix input) {
 		input = input.toColumnVector(Ret.NEW);
 
 		Matrix x = Matrix.Factory.zeros(1, input.getColumnCount() + 1);
@@ -81,22 +80,18 @@ public class LinearRegression extends AbstractRegressor {
 		return result;
 	}
 
-	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) {
-		throw new RuntimeException("pattern-by-pattern learning not supported");
-	}
-
-	public void train(DataSet dataSet) {
+	public void trainAll(ListDataSet dataSet) {
 		System.out.println("training started");
 
 		final int featureCount = getFeatureCount(dataSet);
 		final int classCount = getClassCount(dataSet);
-		final int sampleCount = dataSet.getSampleMap().size();
+		final int sampleCount = dataSet.size();
 
-		Matrix x = Matrix.Factory.zeros(dataSet.getSampleMap().size(), featureCount + 1);
-		Matrix y = Matrix.Factory.zeros(dataSet.getSampleMap().size(), classCount);
+		Matrix x = Matrix.Factory.zeros(dataSet.size(), featureCount + 1);
+		Matrix y = Matrix.Factory.zeros(dataSet.size(), classCount);
 
 		int i = 0;
-		for (Sample s : dataSet.getSampleMap().values()) {
+		for (Sample s : dataSet) {
 			Matrix input = s.getMatrix(getInputLabel()).toColumnVector(Ret.LINK);
 			for (int c = 0; c < input.getColumnCount(); c++) {
 				x.setAsDouble(input.getAsDouble(0, c), i, c + 1);

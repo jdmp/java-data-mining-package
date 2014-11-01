@@ -30,7 +30,7 @@ import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.algorithm.estimator.DensityEstimator;
 import org.jdmp.core.algorithm.estimator.DiscreteDensityEstimator;
 import org.jdmp.core.algorithm.estimator.GaussianDensityEstimator;
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
@@ -53,7 +53,7 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 		super(inputLabel);
 	}
 
-	public Matrix predict(Matrix input, Matrix sampleWeight) {
+	public Matrix predictOne(Matrix input) {
 		input = input.toColumnVector(Ret.NEW);
 		final double[] probs = new double[classCount];
 		final double[] logs = new double[classCount];
@@ -87,10 +87,9 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 		classDists = null;
 	}
 
-	public void train(DataSet dataSet) {
+	public void trainAll(ListDataSet dataSet) {
 		System.out.println("training started");
-		int featureCount = (int) dataSet.getSampleMap().getElementAt(0).getMatrix(getInputLabel())
-				.getValueCount();
+		int featureCount = (int) dataSet.get(0).getMatrix(getInputLabel()).getValueCount();
 		boolean discrete = isDiscrete(dataSet);
 		classCount = getClassCount(dataSet);
 
@@ -98,7 +97,7 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 		Matrix max = null;
 		if (discrete) {
 			List<Matrix> inputs = new FastArrayList<Matrix>();
-			for (Sample s : dataSet.getSampleMap().values()) {
+			for (Sample s : dataSet) {
 				inputs.add(s.getMatrix(getInputLabel()).toColumnVector(Ret.NEW));
 			}
 			Matrix dataSetInput = Matrix.Factory.vertCat(inputs);
@@ -121,7 +120,7 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 		System.out.println("density estimators created");
 
 		// go over all samples and count
-		for (Sample s : dataSet.getSampleMap()) {
+		for (Sample s : dataSet) {
 			Matrix sampleInput = s.getMatrix(getInputLabel()).toColumnVector(Ret.LINK);
 			Matrix sampleWeight = s.getMatrix(getWeightLabel());
 

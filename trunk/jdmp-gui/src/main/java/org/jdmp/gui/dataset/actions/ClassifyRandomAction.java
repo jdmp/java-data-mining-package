@@ -30,7 +30,7 @@ import javax.swing.JComponent;
 
 import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.algorithm.classification.RandomClassifier;
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.gui.actions.AbstractObjectAction;
 
@@ -48,8 +48,8 @@ public class ClassifyRandomAction extends AbstractObjectAction {
 	public Object call() {
 		try {
 			Classifier lr = new RandomClassifier();
-			lr.train((DataSet) getCoreObject());
-			lr.predict((DataSet) getCoreObject());
+			lr.trainAll((ListDataSet) getCoreObject());
+			lr.predictAll((ListDataSet) getCoreObject());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

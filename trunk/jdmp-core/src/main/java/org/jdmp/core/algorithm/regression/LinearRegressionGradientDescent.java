@@ -27,10 +27,9 @@ import java.util.List;
 
 import org.jdmp.core.algorithm.classification.AbstractClassifier;
 import org.jdmp.core.algorithm.classification.Classifier;
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
-import org.jdmp.core.variable.VariableFactory;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.collections.list.FastArrayList;
@@ -55,8 +54,8 @@ public class LinearRegressionGradientDescent extends AbstractClassifier {
 
 	public LinearRegressionGradientDescent() {
 		super();
-		setParameterVariable(VariableFactory.labeledVariable("Regression Parameters"));
-		setParameterVariable(VariableFactory.labeledVariable("Gradient"));
+		setParameterVariable(Variable.Factory.labeledVariable("Regression Parameters"));
+		setParameterVariable(Variable.Factory.labeledVariable("Gradient"));
 	}
 
 	public void setParameterVariable(Variable variable) {
@@ -83,7 +82,7 @@ public class LinearRegressionGradientDescent extends AbstractClassifier {
 		return getGradientVariable().getLast();
 	}
 
-	public Matrix predict(Matrix input, Matrix sampleWeight) {
+	public Matrix predictOne(Matrix input) {
 		input = input.toColumnVector(Ret.NEW);
 		Matrix bias = Matrix.Factory.ones(input.getRowCount(), 1);
 		Matrix data = Matrix.Factory.horCat(bias, input);
@@ -91,11 +90,7 @@ public class LinearRegressionGradientDescent extends AbstractClassifier {
 		return result.transpose();
 	}
 
-	public void train(Matrix input, Matrix sampleWeight, Matrix targetOutput) {
-		throw new RuntimeException("pattern-by-pattern learning not supported");
-	}
-
-	public void train(DataSet dataSet) {
+	public void trainAll(ListDataSet dataSet) {
 
 		// todo: normalize data
 
@@ -110,14 +105,14 @@ public class LinearRegressionGradientDescent extends AbstractClassifier {
 		List<Matrix> inputs = new FastArrayList<Matrix>();
 		List<Matrix> targets = new FastArrayList<Matrix>();
 
-		for (int e = 0; e < ((double) dataSet.getSampleMap().size() / batchSize) * epochs; e++) {
+		for (int e = 0; e < ((double) dataSet.size() / batchSize) * epochs; e++) {
 
 			inputs.clear();
 			targets.clear();
 
 			for (int i = 0; i < batchSize; i++) {
-				int randomIndex = MathUtil.nextInteger(dataSet.getSampleMap().size());
-				Sample s = dataSet.getSampleMap().getElementAt(randomIndex);
+				int randomIndex = MathUtil.nextInteger(dataSet.size());
+				Sample s = dataSet.get(randomIndex);
 				inputs.add(s.getMatrix(Sample.INPUT).toColumnVector(Ret.NEW));
 				targets.add(s.getMatrix(Sample.TARGET).toColumnVector(Ret.NEW));
 			}

@@ -26,9 +26,8 @@ package org.jdmp.core.algorithm.index;
 import java.util.Map;
 
 import org.jdmp.core.algorithm.AbstractAlgorithm;
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.sample.SampleFactory;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.mapmatrix.DefaultMapMatrix;
 import org.ujmp.core.mapmatrix.MapMatrix;
@@ -41,7 +40,7 @@ public abstract class AbstractIndex extends AbstractAlgorithm implements Index {
 	}
 
 	public void add(Matrix matrix) throws Exception {
-		//add(SampleFactory.createFromObject(matrix));
+		// add(SampleFactory.createFromObject(matrix));
 	}
 
 	public void add(Map<String, String> map) throws Exception {
@@ -53,17 +52,17 @@ public abstract class AbstractIndex extends AbstractAlgorithm implements Index {
 		add((Matrix) mapMatrix);
 	}
 
-	public void add(DataSet dataSet) throws Exception {
-		for (Sample sample : dataSet.getSampleMap()) {
+	public void add(ListDataSet dataSet) throws Exception {
+		for (Sample sample : dataSet) {
 			add(sample);
 		}
 	}
 
-	public final DataSet search(String query) throws Exception {
+	public final ListDataSet search(String query) throws Exception {
 		return search(query, 0, 100);
 	}
 
-	public final DataSet search(String query, int count) throws Exception {
+	public final ListDataSet search(String query, int count) throws Exception {
 		return search(query, 0, count);
 	}
 

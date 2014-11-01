@@ -29,8 +29,7 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
-import org.jdmp.core.dataset.DataSet;
-import org.jdmp.core.dataset.DataSetFactory;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.dataset.HasDataSetMap;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.gui.actions.AbstractObjectAction;
@@ -48,7 +47,7 @@ public class NewEmptyDataSetAction extends AbstractObjectAction {
 	}
 
 	public Object call() {
-		DataSet ds = DataSetFactory.emptyDataSet();
+		ListDataSet ds = ListDataSet.Factory.emptyDataSet();
 		if (getCoreObject() instanceof HasDataSetMap) {
 			try {
 				((HasDataSetMap) getCoreObject()).getDataSetMap().add(ds);

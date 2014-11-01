@@ -32,7 +32,7 @@ import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 import javax.swing.table.AbstractTableModel;
 
-import org.jdmp.core.sample.HasSampleMap;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 
 public class SampleListTableModel extends AbstractTableModel implements ListDataListener {
@@ -42,15 +42,14 @@ public class SampleListTableModel extends AbstractTableModel implements ListData
 
 	private Map<Integer, String> columnMap = new HashMap<Integer, String>();
 
-	private HasSampleMap iSamples = null;
+	private ListDataSet iSamples = null;
 
-	public SampleListTableModel(HasSampleMap iSamples) {
+	public SampleListTableModel(ListDataSet iSamples) {
 		this.iSamples = iSamples;
-		iSamples.getSampleMap().addListDataListener(this);
 	}
 
 	public int getRowCount() {
-		return iSamples.getSampleMap().getSize();
+		return iSamples.size();
 	}
 
 	public int getColumnCount() {
@@ -67,7 +66,7 @@ public class SampleListTableModel extends AbstractTableModel implements ListData
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		Sample s = iSamples.getSampleMap().getElementAt(rowIndex);
+		Sample s = iSamples.get(rowIndex);
 		if (s == null) {
 			return null;
 		}

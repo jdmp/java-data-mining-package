@@ -28,8 +28,7 @@ import static org.junit.Assert.assertEquals;
 import org.jdmp.core.algorithm.regression.LinearRegression;
 import org.jdmp.core.algorithm.regression.Regressor;
 import org.jdmp.core.dataset.CrossValidation;
-import org.jdmp.core.dataset.DataSet;
-import org.jdmp.core.dataset.DataSetFactory;
+import org.jdmp.core.dataset.ListDataSet;
 import org.junit.Test;
 import org.ujmp.core.listmatrix.ListMatrix;
 
@@ -37,7 +36,7 @@ public class TestLinearRegression {
 
 	@Test
 	public void testIrisClassification1() throws Exception {
-		DataSet iris = DataSetFactory.IRIS();
+		ListDataSet iris = ListDataSet.Factory.IRIS();
 		Regressor c = new LinearRegression();
 		ListMatrix<Double> results = CrossValidation.run(c, iris, 10, 10, 0);
 		assertEquals(0.82, results.getMeanValue(), 0.01);
@@ -45,7 +44,7 @@ public class TestLinearRegression {
 
 	@Test
 	public void testIrisClassification2() throws Exception {
-		DataSet iris = DataSetFactory.IRIS();
+		ListDataSet iris = ListDataSet.Factory.IRIS();
 		Regressor c = new LinearRegression(3);
 		ListMatrix<Double> results = CrossValidation.run(c, iris, 10, 10, 0);
 		assertEquals(0.80, results.getMeanValue(), 0.01);

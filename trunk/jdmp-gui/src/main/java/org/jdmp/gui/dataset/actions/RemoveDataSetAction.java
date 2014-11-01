@@ -29,15 +29,15 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.dataset.HasDataSetMap;
 
 public class RemoveDataSetAction extends DataSetListAction {
 	private static final long serialVersionUID = -8847037312292718929L;
 
-	private DataSet ds = null;
+	private ListDataSet ds = null;
 
-	public RemoveDataSetAction(JComponent c, HasDataSetMap i, DataSet ds) {
+	public RemoveDataSetAction(JComponent c, HasDataSetMap i, ListDataSet ds) {
 		this(c, i);
 		this.ds = ds;
 	}

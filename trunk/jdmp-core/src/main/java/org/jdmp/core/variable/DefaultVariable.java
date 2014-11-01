@@ -43,7 +43,7 @@ public class DefaultVariable extends AbstractVariable {
 	}
 
 	public Variable clone() {
-		Variable v = VariableFactory.labeledVariable(getLabel());
+		Variable v = Variable.Factory.labeledVariable(getLabel());
 		for (Matrix m : this) {
 			v.add(m.clone());
 		}

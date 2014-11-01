@@ -42,6 +42,8 @@ public interface Sample extends CoreObject, MapMatrix<String, Matrix> {
 	public static final String URL = Variable.URL;
 	public static final String TAGS = Variable.TAGS;
 
+	public static final SampleFactory Factory = new DefaultSampleFactory();
+
 	public Sample clone();
 
 	public int getRecognizedClass();

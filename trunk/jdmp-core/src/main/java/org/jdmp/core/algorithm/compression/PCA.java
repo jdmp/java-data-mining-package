@@ -23,7 +23,7 @@
 
 package org.jdmp.core.algorithm.compression;
 
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
@@ -50,13 +50,13 @@ public class PCA extends AbstractCompressor {
 		u = null;
 	}
 
-	public void train(DataSet dataSet) {
+	public void train(ListDataSet dataSet) {
 		System.out.println("training started");
 
-		Matrix x = Matrix.Factory.zeros(dataSet.getSampleMap().size(), getFeatureCount(dataSet));
+		Matrix x = Matrix.Factory.zeros(dataSet.size(), getFeatureCount(dataSet));
 
 		int i = 0;
-		for (Sample s : dataSet.getSampleMap().values()) {
+		for (Sample s : dataSet) {
 			Matrix input = s.getMatrix(getInputLabel()).toColumnVector(Ret.LINK);
 			for (int c = 0; c < input.getColumnCount(); c++) {
 				x.setAsDouble(input.getAsDouble(0, c), i, c);

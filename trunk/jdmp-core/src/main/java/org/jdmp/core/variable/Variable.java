@@ -62,6 +62,8 @@ public interface Variable extends CoreObject, ListMatrix<Matrix> {
 	public static final String COMPRESSED = "Compressed";
 	public static final String DECOMPRESSED = "Decompressed";
 
+	public static final VariableFactory Factory = new DefaultVariableFactory();
+
 	public Matrix getAsListMatrix();
 
 	public Variable clone();

@@ -32,26 +32,22 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class JettyObjectServlet extends HttpServlet {
-	private static final long serialVersionUID = -3704890184419166703L;
+import org.eclipse.jetty.server.Request;
+import org.eclipse.jetty.server.handler.AbstractHandler;
 
-	private Object object = null;
+public class JettyObjectHandler extends AbstractHandler {
 
-	public JettyObjectServlet(Object o) {
+	private final Object object;
+
+	public JettyObjectHandler(Object o) {
 		this.object = o;
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-			IOException {
-
+	public void handle(String target, Request baseRequest, HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
 		InputStream is = request.getInputStream();
 
 		String methodName = null;

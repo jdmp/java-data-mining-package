@@ -33,9 +33,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.jdmp.core.algorithm.HasAlgorithmMap;
 import org.jdmp.core.dataset.HasDataSetMap;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.module.HasModuleMap;
 import org.jdmp.core.module.Module;
-import org.jdmp.core.sample.HasSampleMap;
 import org.jdmp.core.variable.HasVariableMap;
 import org.jdmp.jetty.html.Page;
 import org.jdmp.jetty.html.tags.BRTag;
@@ -97,7 +97,7 @@ public class JettyCoreObjectServlet extends HttpServlet {
 			page.add(new LinkTag("/datasets", "DataSets"));
 			page.add(new BRTag());
 		}
-		if (object instanceof HasSampleMap) {
+		if (object instanceof ListDataSet) {
 			page.add(new LinkTag("/samples", "Samples"));
 			page.add(new BRTag());
 		}

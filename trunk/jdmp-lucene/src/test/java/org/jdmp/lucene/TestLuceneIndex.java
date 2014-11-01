@@ -25,19 +25,18 @@ package org.jdmp.lucene;
 
 import static org.junit.Assert.assertEquals;
 
-import org.jdmp.core.dataset.DataSet;
-import org.jdmp.core.dataset.DataSetFactory;
+import org.jdmp.core.dataset.ListDataSet;
 import org.junit.Test;
 
 public class TestLuceneIndex {
 
 	@Test
 	public void testExampleSearch() throws Exception {
-		DataSet ds = DataSetFactory.IRIS();
+		ListDataSet ds = ListDataSet.Factory.IRIS();
 		LuceneIndex index = new LuceneIndex();
 		index.add(ds);
-		DataSet result = index.search("setosa");
-		assertEquals(50, result.getSampleMap().getSize());
+		ListDataSet result = index.search("setosa");
+		assertEquals(50, result.size());
 	}
 
 }

@@ -23,7 +23,7 @@
 
 package org.jdmp.core.algorithm.classification;
 
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
@@ -37,7 +37,7 @@ public class RandomClassifier extends AbstractClassifier {
 		super();
 	}
 
-	public Matrix predict(Matrix input, Matrix sampleWeight) {
+	public Matrix predictOne(Matrix input) {
 		return Matrix.Factory.rand(1, classCount);
 	}
 
@@ -45,8 +45,8 @@ public class RandomClassifier extends AbstractClassifier {
 		classCount = 0;
 	}
 
-	public void train(DataSet dataSet) {
-		for (Sample s : dataSet.getSampleMap()) {
+	public void trainAll(ListDataSet dataSet) {
+		for (Sample s : dataSet) {
 			Matrix m = s.getMatrix(Variable.TARGET);
 			classCount = (int) Math.max(classCount, m.getColumnCount());
 		}

@@ -29,8 +29,7 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
-import org.jdmp.core.dataset.DataSet;
-import org.jdmp.core.dataset.DataSetFactory;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.dataset.HasDataSetMap;
 import org.ujmp.core.enums.DBType;
 import org.ujmp.core.interfaces.GUIObject;
@@ -76,7 +75,7 @@ public class ImportDataSetFromDatabaseAction extends AbstractObjectAction {
 			String password = null;
 			password = JOptionPane.showInputDialog("Enter password:", null);
 
-			DataSet ds = DataSetFactory.importFromJDBC(type, host, port, database, sql, username,
+			ListDataSet ds = ListDataSet.Factory.importFromJDBC(type, host, port, database, sql, username,
 					password);
 			if (getCoreObject() instanceof HasDataSetMap) {
 				try {

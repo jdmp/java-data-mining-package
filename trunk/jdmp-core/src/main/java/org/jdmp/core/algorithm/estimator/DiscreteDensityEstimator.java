@@ -50,27 +50,18 @@ public class DiscreteDensityEstimator extends AbstractDensityEstimator {
 		sumOfCounts += weight;
 	}
 
-	public void addValue(final double value) {
-		counts[(int) value]++;
-		sumOfCounts++;
-	}
-
 	public double getProbability(final double value) {
 		if (sumOfCounts == 0.0) {
-			return 0.0;
+			return MINPROBABILITY;
 		} else {
-			return counts[(int) value] / sumOfCounts;
+			double probability = counts[(int) value] / sumOfCounts;
+			return probability < MINPROBABILITY ? MINPROBABILITY : probability;
 		}
 	}
 
 	public void removeValue(final double value, final double weight) {
 		counts[(int) value] -= weight;
 		sumOfCounts -= weight;
-	}
-
-	public void removeValue(final double value) {
-		counts[(int) value]--;
-		sumOfCounts--;
 	}
 
 }

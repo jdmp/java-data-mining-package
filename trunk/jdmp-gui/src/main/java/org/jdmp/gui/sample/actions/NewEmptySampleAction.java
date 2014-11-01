@@ -29,9 +29,8 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
-import org.jdmp.core.sample.HasSampleMap;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.sample.SampleFactory;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.gui.actions.AbstractObjectAction;
 
@@ -48,10 +47,10 @@ public class NewEmptySampleAction extends AbstractObjectAction {
 	}
 
 	public Object call() {
-		Sample s = SampleFactory.emptySample();
-		if (getCoreObject() != null && getCoreObject() instanceof HasSampleMap) {
+		Sample s = Sample.Factory.emptySample();
+		if (getCoreObject() != null && getCoreObject() instanceof ListDataSet) {
 			try {
-				((HasSampleMap) getCoreObject()).getSampleMap().add(s);
+				((ListDataSet) getCoreObject()).add(s);
 			} catch (Exception e) {
 				s.showGUI();
 			}

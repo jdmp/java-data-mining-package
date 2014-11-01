@@ -23,7 +23,7 @@
 
 package org.jdmp.core.algorithm.tokenizer;
 
-import org.jdmp.core.dataset.DataSet;
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.listmatrix.ListMatrix;
@@ -38,6 +38,6 @@ public interface Tokenizer {
 
 	public void tokenize(Object variableKey, Sample sample) throws Exception;
 
-	public void tokenize(Object variableKey, DataSet dataSet) throws Exception;
+	public void tokenize(Object variableKey, ListDataSet dataSet) throws Exception;
 
 }

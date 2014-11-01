@@ -25,16 +25,12 @@ package org.jdmp.core.dataset;
 
 import java.util.List;
 
-import org.jdmp.core.sample.HasSampleMap;
-import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.HasVariableMap;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.interfaces.CoreObject;
-import org.ujmp.core.mapmatrix.MapMatrix;
 
-public interface DataSet extends CoreObject, HasVariableMap, HasSampleMap,
-		MapMatrix<String, Sample> {
+public interface DataSet extends CoreObject, HasVariableMap {
 
 	public static final String INPUT = "Input";
 
@@ -50,11 +46,13 @@ public interface DataSet extends CoreObject, HasVariableMap, HasSampleMap,
 
 	public static final String ERRORCOUNT = Variable.ERRORCOUNT;
 
-	public List<DataSet> splitByCount(boolean shuffle, int... count);
+	public static final DataSetFactory Factory = new DefaultDataSetFactory();
 
-	public List<DataSet> splitForCV(int numberOfCVSets, int idOfCVSet, long randomSeed);
+	public List<ListDataSet> splitByCount(boolean shuffle, int... count);
 
-	public List<DataSet> splitByPercent(boolean shuffle, double... percent);
+	public List<ListDataSet> splitForCV(int numberOfCVSets, int idOfCVSet, long randomSeed);
+
+	public List<ListDataSet> splitByPercent(boolean shuffle, double... percent);
 
 	public Matrix getInputMatrix();
 
@@ -64,7 +62,7 @@ public interface DataSet extends CoreObject, HasVariableMap, HasSampleMap,
 
 	public Variable getTargetVariable();
 
-	public DataSet clone();
+	public ListDataSet clone();
 
 	public Matrix getTargetMatrix();
 
@@ -74,9 +72,7 @@ public interface DataSet extends CoreObject, HasVariableMap, HasSampleMap,
 
 	public boolean isEarlyStoppingReached(int numberOfSteps);
 
-	public List<DataSet> splitForStratifiedCV(int i, int r, long seed);
-
-	public void standardize(int dimension);
+	public List<ListDataSet> splitForStratifiedCV(int i, int r, long seed);
 
 	public boolean isDiscrete();
 
@@ -84,8 +80,8 @@ public interface DataSet extends CoreObject, HasVariableMap, HasSampleMap,
 
 	public int getClassCount();
 
-	public DataSet bootstrap();
+	public ListDataSet bootstrap();
 
-	public DataSet bootstrap(int count);
+	public ListDataSet bootstrap(int count);
 
 }

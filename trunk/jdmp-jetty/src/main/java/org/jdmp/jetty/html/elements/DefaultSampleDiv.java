@@ -31,7 +31,7 @@ import org.jdmp.jetty.html.tags.DivTag;
 import org.jdmp.jetty.html.tags.LinkTag;
 import org.jdmp.jetty.html.tags.PTag;
 import org.jdmp.jetty.html.tags.SpanTag;
-import org.jdmp.jetty.index.JettyIndexServlet;
+import org.jdmp.jetty.index.JettyIndexHandler;
 import org.ujmp.core.util.StringUtil;
 
 public class DefaultSampleDiv extends DivTag {
@@ -63,7 +63,7 @@ public class DefaultSampleDiv extends DivTag {
 		p.add(title);
 
 		p.add(new DescriptionDiv(sample.getDescription(), highlightedWords));
-		p.add(JettyIndexServlet.factory.createVariablesDiv(request, path, sample, highlightedWords));
+		p.add(JettyIndexHandler.factory.createVariablesDiv(request, path, sample, highlightedWords));
 		p.add(new URLDiv(sample, highlightedWords));
 		add(p);
 	}
