@@ -28,8 +28,9 @@ import java.awt.BorderLayout;
 import javax.swing.JSplitPane;
 
 import org.jdmp.gui.sample.SampleListPanel;
-import org.jdmp.gui.variable.VariableListPanel;
+import org.ujmp.gui.MatrixGUIObject;
 import org.ujmp.gui.panels.AbstractPanel;
+import org.ujmp.gui.panels.MatrixEditorPanel;
 
 public class DataSetPanel extends AbstractPanel {
 	private static final long serialVersionUID = -742923218356821961L;
@@ -38,7 +39,8 @@ public class DataSetPanel extends AbstractPanel {
 
 	public DataSetPanel(DataSetGUIObject ds) {
 		super(ds);
-		splitPane.setLeftComponent(new VariableListPanel(ds.getCoreObject()));
+		splitPane.setLeftComponent(new MatrixEditorPanel("Meta Data", (MatrixGUIObject) ds
+				.getMetaData().getGUIObject()));
 		splitPane.setRightComponent(new SampleListPanel(ds.getCoreObject()));
 		add(splitPane, BorderLayout.CENTER);
 	}

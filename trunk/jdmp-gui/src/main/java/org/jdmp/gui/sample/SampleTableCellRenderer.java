@@ -64,7 +64,6 @@ public class SampleTableCellRenderer implements TableCellRenderer {
 
 		if (value instanceof Sample) {
 			sample = (Sample) value;
-
 		} else {
 			sample = null;
 		}

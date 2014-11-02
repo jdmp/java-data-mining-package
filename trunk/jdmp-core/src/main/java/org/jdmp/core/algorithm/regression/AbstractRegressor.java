@@ -203,7 +203,7 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 
 			Matrix rmse = Matrix.Factory.linkToValue(Math.sqrt(error / dataSet.size()));
 			rmse.setLabel("RMSE with " + getLabel());
-			dataSet.getVariableMap().setMatrix(Variable.RMSE, rmse);
+			dataSet.setMatrix(Variable.RMSE, rmse);
 
 			double maxRMSE = 0.0;
 			double minRMSE = 1e100;
@@ -235,36 +235,36 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 			// }
 
 			confusion.setLabel("Confusion with " + getLabel());
-			dataSet.getVariableMap().setMatrix(Variable.CONFUSION, confusion);
+			dataSet.setMatrix(Variable.CONFUSION, confusion);
 
 			Matrix accuracy = Matrix.Factory.linkToValue((double) correctCount
 					/ (double) dataSet.size());
 			accuracy.setLabel("Accuracy with " + getLabel());
-			dataSet.getVariableMap().setMatrix(Variable.ACCURACY, accuracy);
+			dataSet.setMatrix(Variable.ACCURACY, accuracy);
 
 			Matrix errorMatrix = Matrix.Factory.linkToValue(errorCount);
 			errorMatrix.setLabel("Errors with " + getLabel());
-			dataSet.getVariableMap().setMatrix(Variable.ERRORCOUNT, errorMatrix);
+			dataSet.setMatrix(Variable.ERRORCOUNT, errorMatrix);
 
 			Matrix sensitivity = (Matrix) new Sensitivity().calculate(confusion).get(
 					getTargetLabel());
-			dataSet.getVariableMap().setMatrix(Variable.SENSITIVITY, sensitivity);
+			dataSet.setMatrix(Variable.SENSITIVITY, sensitivity);
 
 			Matrix specificity = (Matrix) new Specificity().calculate(confusion).get(
 					getTargetLabel());
-			dataSet.getVariableMap().setMatrix(Variable.SPECIFICITY, specificity);
+			dataSet.setMatrix(Variable.SPECIFICITY, specificity);
 
 			Matrix precision = (Matrix) new Precision().calculate(confusion).get(getTargetLabel());
-			dataSet.getVariableMap().setMatrix(Variable.PRECISION, precision);
+			dataSet.setMatrix(Variable.PRECISION, precision);
 
 			Matrix recall = (Matrix) new Recall().calculate(confusion).get(getTargetLabel());
-			dataSet.getVariableMap().setMatrix(Variable.RECALL, recall);
+			dataSet.setMatrix(Variable.RECALL, recall);
 
 			Matrix fmeasure = (Matrix) new FMeasure().calculate(confusion).get(getTargetLabel());
-			dataSet.getVariableMap().setMatrix(Variable.FMEASURE, fmeasure);
+			dataSet.setMatrix(Variable.FMEASURE, fmeasure);
 
 			Matrix fmeasureMacro = fmeasure.mean(Ret.NEW, Matrix.ALL, false);
-			dataSet.getVariableMap().setMatrix(Variable.FMEASUREMACRO, fmeasureMacro);
+			dataSet.setMatrix(Variable.FMEASUREMACRO, fmeasureMacro);
 
 			iteration++;
 			System.out.println("Iteration: " + iteration + ", RMSE: " + rmse.doubleValue()

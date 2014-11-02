@@ -24,13 +24,13 @@
 package org.jdmp.core.dataset;
 
 import java.util.List;
+import java.util.Set;
 
-import org.jdmp.core.variable.HasVariableMap;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.interfaces.CoreObject;
 
-public interface DataSet extends CoreObject, HasVariableMap {
+public interface DataSet extends CoreObject {
 
 	public static final String INPUT = "Input";
 
@@ -58,19 +58,11 @@ public interface DataSet extends CoreObject, HasVariableMap {
 
 	public Matrix getPredictedMatrix();
 
-	public Variable getInputVariable();
-
-	public Variable getTargetVariable();
-
 	public ListDataSet clone();
 
 	public Matrix getTargetMatrix();
 
 	public double getAccuracy();
-
-	public int getEarlyStoppingIndex(int numberOfSteps);
-
-	public boolean isEarlyStoppingReached(int numberOfSteps);
 
 	public List<ListDataSet> splitForStratifiedCV(int i, int r, long seed);
 
@@ -83,5 +75,17 @@ public interface DataSet extends CoreObject, HasVariableMap {
 	public ListDataSet bootstrap();
 
 	public ListDataSet bootstrap(int count);
+
+	public Matrix getMatrix(Object key);
+
+	public Set<String> keySet();
+
+	public int size();
+
+	public boolean isEmpty();
+
+	public void setMatrix(String key, Matrix matrix);
+	
+	public double getAsDouble(String key);
 
 }

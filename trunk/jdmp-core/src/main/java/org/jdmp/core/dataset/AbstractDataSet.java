@@ -28,11 +28,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.variable.DefaultVariableMap;
-import org.jdmp.core.variable.Variable;
-import org.jdmp.core.variable.VariableMap;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.collections.list.FastArrayList;
 import org.ujmp.core.interfaces.GUIObject;
@@ -42,28 +40,17 @@ import org.ujmp.core.util.MathUtil;
 public abstract class AbstractDataSet extends DefaultListMatrix<Sample> implements ListDataSet {
 	private static final long serialVersionUID = -4168834188998259018L;
 
-	private final VariableMap variableMap = new DefaultVariableMap();
-
 	public AbstractDataSet() {
 		super();
 		setId("DataSet" + getCoreObjectId());
 	}
 
-	public final VariableMap getVariableMap() {
-		return variableMap;
-	}
-
 	public Matrix getInputMatrix() {
-		return getInputVariable().getLast();
-	}
-
-	public final Variable getInputVariable() {
-		return getVariableMap().get(INPUT);
+		return getMatrix(INPUT);
 	}
 
 	protected final void clearMap() {
 		clear();
-		getVariableMap().clear();
 	}
 
 	public final List<ListDataSet> splitByCount(boolean shuffle, int... count) {
@@ -157,4 +144,21 @@ public abstract class AbstractDataSet extends DefaultListMatrix<Sample> implemen
 	}
 
 	public abstract ListDataSet clone();
+
+	public final Matrix getMatrix(Object key) {
+		return getMetaDataMatrix(key);
+	}
+
+	public final Set<String> keySet() {
+		return getMetaData().keySet();
+	}
+
+	public final void setMatrix(String key, Matrix matrix) {
+		setMetaData(key, matrix);
+	}
+
+	public final double getAsDouble(String key) {
+		return getMetaDataDouble(key);
+	}
+
 }

@@ -53,18 +53,14 @@ public class GaussianDensityEstimator extends AbstractDensityEstimator {
 	}
 
 	public void addValue(final double x, final double weight) {
-		if (weight == 1) {
-			addValue(x);
+		isSigmaUpToDate = false;
+		count += weight;
+		if (Math.abs(count - weight) < MathUtil.EPSILON) {
+			runningMean = x;
 		} else {
-			isSigmaUpToDate = false;
-			count += weight;
-			if (Math.abs(count - weight) < MathUtil.EPSILON) {
-				runningMean = x;
-			} else {
-				final double newMean = runningMean + (weight * x - runningMean) / count;
-				runningSum += (weight * x - runningMean) * (weight * x - newMean);
-				runningMean = newMean;
-			}
+			final double newMean = runningMean + (weight * x - runningMean) / count;
+			runningSum += (weight * x - runningMean) * (weight * x - newMean);
+			runningMean = newMean;
 		}
 	}
 

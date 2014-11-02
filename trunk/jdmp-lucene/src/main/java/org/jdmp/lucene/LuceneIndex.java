@@ -297,7 +297,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 		mlt.setMaxWordLen(MAXWORDLENGTH);
 		TopDocs td = indexSearcher.search(query, count);
 		ListDataSet result = new DefaultDataSet();
-		result.getVariableMap().setObject("Total", td.totalHits);
+		result.setMetaData("Total", td.totalHits);
 		for (ScoreDoc sd : td.scoreDocs) {
 			int id = sd.doc;
 			Document doc = indexSearcher.doc(id);
