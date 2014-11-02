@@ -53,9 +53,9 @@ public interface DataSetFactory {
 
 	public ListDataSet LogisticMap(int sampleCount, int inputLength, int predictionLength);
 
-	public DefaultDataSet ANIMALS();
+	public AbstractDataSet ANIMALS();
 
-	public DefaultDataSet labeledDataSet(String label);
+	public AbstractDataSet labeledDataSet(String label);
 
 	public ListDataSet CountActive(int number);
 

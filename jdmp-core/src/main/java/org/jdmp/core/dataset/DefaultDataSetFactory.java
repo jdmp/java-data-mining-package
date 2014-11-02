@@ -61,52 +61,26 @@ public class DefaultDataSetFactory extends AbstractDataSetFactory {
 	}
 
 	public ListDataSet linkToInput(Matrix input) {
-		ListDataSet ds = new DefaultDataSet();
-		for (int i = 0; i < input.getRowCount(); i++) {
-			Sample s = Sample.Factory.emptySample();
-			Matrix in = input.selectRows(Ret.LINK, i);
-			s.setMatrix(Sample.INPUT, in);
-			ds.add(s);
-		}
+		ListDataSet ds = new MatrixDataSet(input);
 		return ds;
 	}
 
 	public ListDataSet linkToInputAndLabels(Matrix input, Matrix labels) {
-		ListDataSet ds = new DefaultDataSet();
-		for (int i = 0; i < input.getRowCount(); i++) {
-			Sample s = Sample.Factory.emptySample();
-			Matrix in = input.selectRows(Ret.LINK, i);
-			s.setMatrix(Sample.INPUT, in);
-			s.setLabel(labels.getAsString(i, 0));
-			ds.add(s);
-		}
+		ListDataSet ds = new MatrixDataSet(input);
+		ds.setMatrix("Labels", labels);
 		return ds;
 	}
 
 	public ListDataSet linkToInputAndTarget(Matrix input, Matrix target) {
-		ListDataSet ds = new DefaultDataSet();
-		for (int i = 0; i < input.getRowCount(); i++) {
-			Sample s = Sample.Factory.emptySample();
-			Matrix in = input.selectRows(Ret.LINK, i);
-			Matrix out = target.selectRows(Ret.LINK, i);
-			s.setMatrix(Sample.INPUT, in);
-			s.setMatrix(Sample.TARGET, out);
-			ds.add(s);
-		}
+		ListDataSet ds = new MatrixDataSet(input);
+		ds.setMatrix(DataSet.TARGET, target);
 		return ds;
 	}
 
-	public ListDataSet linkToInputTargetAndLabel(Matrix input, Matrix target, Matrix label) {
-		ListDataSet ds = new DefaultDataSet();
-		for (int i = 0; i < input.getRowCount(); i++) {
-			Sample s = Sample.Factory.emptySample();
-			Matrix in = input.selectRows(Ret.LINK, i);
-			Matrix out = target.selectRows(Ret.LINK, i);
-			s.setMatrix(Sample.INPUT, in);
-			s.setMatrix(Sample.TARGET, out);
-			s.setLabel(label.getAsString(i, 0));
-			ds.add(s);
-		}
+	public ListDataSet linkToInputTargetAndLabel(Matrix input, Matrix target, Matrix labels) {
+		ListDataSet ds = new MatrixDataSet(input);
+		ds.setMatrix("Labels", labels);
+		ds.setMatrix(DataSet.TARGET, target);
 		return ds;
 	}
 
@@ -198,8 +172,8 @@ public class DefaultDataSetFactory extends AbstractDataSetFactory {
 		return logistic;
 	}
 
-	public DefaultDataSet ANIMALS() {
-		DefaultDataSet animals = ListDataSet.Factory.labeledDataSet("Animals");
+	public AbstractDataSet ANIMALS() {
+		AbstractDataSet animals = ListDataSet.Factory.labeledDataSet("Animals");
 
 		Sample pigeon = Sample.Factory.labeledSample("Pigeon");
 		pigeon.setMatrix(Sample.INPUT,
@@ -300,8 +274,8 @@ public class DefaultDataSetFactory extends AbstractDataSetFactory {
 		return animals;
 	}
 
-	public final DefaultDataSet labeledDataSet(String label) {
-		DefaultDataSet ds = new DefaultDataSet();
+	public final AbstractDataSet labeledDataSet(String label) {
+		AbstractDataSet ds = new DefaultDataSet();
 		ds.setLabel(label);
 		return ds;
 	}

@@ -29,7 +29,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import org.jdmp.core.dataset.ListDataSet;
+import org.ujmp.core.mapmatrix.MapMatrix;
 import org.ujmp.gui.AbstractGUIObject;
+import org.ujmp.gui.panels.AbstractPanel;
 
 public class DataSetGUIObject extends AbstractGUIObject {
 	private static final long serialVersionUID = -329942434062359920L;
@@ -92,6 +94,10 @@ public class DataSetGUIObject extends AbstractGUIObject {
 			panel = new DataSetPanel(this);
 		}
 		return panel;
+	}
+
+	public MapMatrix<String, Object> getMetaData() {
+		return dataSet.getMetaData();
 	}
 
 }

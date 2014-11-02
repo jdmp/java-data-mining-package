@@ -119,7 +119,7 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 
 		System.out.println("density estimators created");
 
-		// go over all samples and count
+		int count = 0;
 		for (Sample s : dataSet) {
 			Matrix sampleInput = s.getMatrix(getInputLabel()).toColumnVector(Ret.LINK);
 			Matrix sampleWeight = s.getMatrix(getWeightLabel());
@@ -136,6 +136,11 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 				dists[i][outputClass].addValue(inputValue, weight);
 			}
 			classDists.addValue(outputClass, weight);
+
+			count++;
+			if (count % 10000 == 0) {
+				System.out.println(count);
+			}
 		}
 
 		System.out.println("training finished");

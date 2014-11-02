@@ -31,7 +31,6 @@ import java.util.Map;
 import java.util.Random;
 
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.util.MathUtil;
@@ -68,16 +67,8 @@ public class DefaultDataSet extends AbstractDataSet {
 		return m;
 	}
 
-	public double getEarlyStoppingErrorCount(int numberOfSteps) {
-		int index = getEarlyStoppingIndex(numberOfSteps);
-		if (index >= 0) {
-			return getErrorCountVariable().get(index).doubleValue();
-		}
-		return -1;
-	}
-
-	public DefaultDataSet clone() {
-		DefaultDataSet ds = null;
+	public AbstractDataSet clone() {
+		AbstractDataSet ds = null;
 		try {
 			ds = this.getClass().newInstance();
 		} catch (Exception e) {
@@ -87,14 +78,6 @@ public class DefaultDataSet extends AbstractDataSet {
 			ds.add(s.clone());
 		}
 		return ds;
-	}
-
-	public Variable getRMSEVariable() {
-		return getVariableMap().get(RMSE);
-	}
-
-	public Variable getTargetVariable() {
-		return getVariableMap().get(TARGET);
 	}
 
 	public final long getTargetFeatureCount() {
@@ -107,52 +90,15 @@ public class DefaultDataSet extends AbstractDataSet {
 	}
 
 	public void appendRMSEMatrix(Matrix m) {
-		getRMSEVariable().add(m);
+		setMatrix(RMSE, m);
 	}
 
 	public Matrix getTargetMatrix() {
-		return getTargetVariable().getLast();
-	}
-
-	public double getEarlyStoppingRMSE(int numberOfSteps) {
-		int index = getEarlyStoppingIndex(numberOfSteps);
-		if (index >= 0) {
-			return getRMSEVariable().get(index).getEuklideanValue();
-		}
-		return -1;
-	}
-
-	public boolean isEarlyStoppingReached(int numberOfSteps) {
-		return getEarlyStoppingIndex(numberOfSteps) >= 0;
-	}
-
-	public int getEarlyStoppingIndex(int numberOfSteps) {
-		Variable v = getRMSEVariable();
-		if (v.size() <= numberOfSteps) {
-			return -1;
-		}
-
-		double minRMSE = Double.MAX_VALUE;
-		int position = -1;
-		for (int i = 0; i < v.size(); i++) {
-			double e = v.get(i).getEuklideanValue();
-			if (e < minRMSE) {
-				minRMSE = e;
-				position = i;
-			}
-			if (i == position + numberOfSteps) {
-				return position;
-			}
-		}
-		return -1;
-	}
-
-	public Variable getPredictedVariable() {
-		return getVariableMap().get(PREDICTED);
+		return getMatrix(TARGET);
 	}
 
 	public Matrix getPredictedMatrix() {
-		return getPredictedVariable().getLast();
+		return getMatrix(PREDICTED);
 	}
 
 	public double getRMSE() {
@@ -165,47 +111,31 @@ public class DefaultDataSet extends AbstractDataSet {
 	}
 
 	public Matrix getRMSEMatrix() {
-		return getRMSEVariable().getLast();
+		return getMatrix(RMSE);
 	}
 
 	public int getClassCount() {
 		return (int) get(0).getMatrix(Sample.TARGET).toRowVector(Ret.NEW).getRowCount();
 	}
 
-	public Variable getConfusionVariable() {
-		return getVariableMap().get(CONFUSION);
-	}
-
-	public Variable getErrorCountVariable() {
-		return getVariableMap().get(ERRORCOUNT);
-	}
-
 	public int getErrorCount() {
-		return (int) getErrorCountVariable().getLast().doubleValue();
-	}
-
-	public Variable getAccuracyVariable() {
-		return getVariableMap().get(ACCURACY);
+		return (int) getMetaDataDouble(ERRORCOUNT);
 	}
 
 	public void appendConfusionMatrix(Matrix m) {
-		getConfusionVariable().add(m);
+		setMatrix(CONFUSION, m);
 	}
 
 	public void appendAccuracyMatrix(Matrix m) {
-		getAccuracyVariable().add(m);
+		setMatrix(ACCURACY, m);
 	}
 
 	public void appendErrorCountMatrix(Matrix m) {
-		getErrorCountVariable().add(m);
+		setMatrix(ERRORCOUNT, m);
 	}
 
 	public double getAccuracy() {
-		return getAccuracyVariable().getLast().doubleValue();
-	}
-
-	public double getMaxAccuracy() {
-		return getAccuracyVariable().getAsListMatrix().getMaxValue();
+		return getMetaDataDouble(ACCURACY);
 	}
 
 	public List<ListDataSet> splitByClass() {
@@ -306,14 +236,6 @@ public class DefaultDataSet extends AbstractDataSet {
 			}
 		}
 		return true;
-	}
-
-	public double getEarlyStoppingAccuracy(int numberOfSteps) {
-		int index = getEarlyStoppingIndex(numberOfSteps);
-		if (index >= 0) {
-			return getAccuracyVariable().get(index).doubleValue();
-		}
-		return -1;
 	}
 
 	public ListDataSet bootstrap(int numberOfSamples) {

@@ -304,12 +304,12 @@ public class MultiLayerNetwork extends AbstractClassifier {
 				a.trainAll(train);
 				a.predictAll(test);
 				// System.out.println(i+": "+test.getRMSE());
-				if (test.isEarlyStoppingReached(numberOfSteps)) {
-					double d = test.getEarlyStoppingIndex(numberOfSteps);
-					duration.add(d);
+				//if (test.isEarlyStoppingReached(numberOfSteps)) {
+				//	double d = test.getEarlyStoppingIndex(numberOfSteps);
+				//	duration.add(d);
 					// System.out.println("CV"+r+": "+d);
-					break;
-				}
+				//	break;
+				//}
 			}
 		}
 		int mean = (int) (duration.getMeanValue() * 0.9);
