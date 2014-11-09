@@ -28,7 +28,7 @@ import org.ujmp.core.Matrix;
 import org.ujmp.core.interfaces.CoreObject;
 import org.ujmp.core.mapmatrix.MapMatrix;
 
-public interface Sample extends CoreObject, MapMatrix<String, Matrix> {
+public interface Sample extends CoreObject, MapMatrix<String, Object> {
 
 	public static final String INPUT = Variable.INPUT;
 	public static final String PROBABILITY = Variable.PROBABILITY;
@@ -52,12 +52,26 @@ public interface Sample extends CoreObject, MapMatrix<String, Matrix> {
 
 	public boolean isCorrect();
 
-	public void setObject(String id, Object object);
+	public Matrix getAsMatrix(String id);
 
-	public void setMatrix(String id, Matrix matrix);
+	public Object getAsObject(String id);
 
-	public Matrix getMatrix(String id);
+	public String getAsString(String id);
 
-	public Object getObject(String id);
+	public double getAsDouble(String id);
+
+	public int getAsInt(String id);
+
+	public long getAsLong(String id);
+
+	public short getAsShort(String id);
+
+	public float getAsFloat(String id);
+
+	public byte getAsByte(String id);
+
+	public char getAsChar(String id);
+
+	public double getWeight();
 
 }

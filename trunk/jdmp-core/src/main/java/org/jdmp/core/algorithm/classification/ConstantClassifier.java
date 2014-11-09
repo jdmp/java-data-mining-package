@@ -53,7 +53,7 @@ public class ConstantClassifier extends AbstractClassifier {
 	public void trainAll(ListDataSet dataSet) {
 		MapMatrix<Long, Integer> count = new DefaultMapMatrix<Long, Integer>();
 		for (Sample s : dataSet) {
-			Matrix m = s.getMatrix(Variable.TARGET);
+			Matrix m = s.getAsMatrix(Variable.TARGET);
 			long target = m.getCoordinatesOfMaximum()[COLUMN];
 			maxClassId = Math.max(maxClassId, target);
 			Integer c = count.get(target);

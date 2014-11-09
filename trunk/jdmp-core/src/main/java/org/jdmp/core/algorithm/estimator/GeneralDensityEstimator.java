@@ -32,15 +32,15 @@ public class GeneralDensityEstimator extends AbstractDensityEstimator {
 	private double sumOfCounts;
 
 	public GeneralDensityEstimator() {
-		counts = new HashMap<Object, Double>();
+		counts = new HashMap<Object, Double>(2);
 	}
 
 	public void addValue(final Object value, final double weight) {
 		Double count = counts.get(value);
 		if (count == null) {
-			count = weight;
-			counts.put(value, count);
+			count = 0.0;
 		}
+		counts.put(value, count + weight);
 		sumOfCounts += weight;
 	}
 
@@ -57,7 +57,7 @@ public class GeneralDensityEstimator extends AbstractDensityEstimator {
 			return MINPROBABILITY;
 		} else {
 			Double count = counts.get(value);
-			if (count == 0) {
+			if (count == null || count == 0.0) {
 				return MINPROBABILITY;
 			} else {
 				double probability = count / sumOfCounts;
@@ -71,12 +71,21 @@ public class GeneralDensityEstimator extends AbstractDensityEstimator {
 		if (count != null) {
 			count -= weight;
 			counts.put(value, count);
+			sumOfCounts -= weight;
 		}
-		sumOfCounts -= weight;
 	}
 
 	public void removeValue(double value, double weight) {
 		removeValue(Double.valueOf(value), weight);
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("GeneralDensityEstimator");
+		for (Object key : counts.keySet()) {
+			sb.append(" " + key + ":" + counts.get(key));
+		}
+		return sb.toString();
 	}
 
 }

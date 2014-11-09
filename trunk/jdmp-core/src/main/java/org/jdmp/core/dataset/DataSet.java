@@ -72,6 +72,8 @@ public interface DataSet extends CoreObject {
 
 	public int getClassCount();
 
+	public int getErrorCount();
+
 	public ListDataSet bootstrap();
 
 	public ListDataSet bootstrap(int count);
@@ -85,7 +87,7 @@ public interface DataSet extends CoreObject {
 	public boolean isEmpty();
 
 	public void setMatrix(String key, Matrix matrix);
-	
+
 	public double getAsDouble(String key);
 
 }

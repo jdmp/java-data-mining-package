@@ -34,7 +34,6 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
@@ -68,8 +67,6 @@ public abstract class AbstractListPanel extends JPanel implements MouseListener,
 		ListSelectionListener, TableModelListener {
 	private static final long serialVersionUID = -8449938064172061258L;
 
-	protected static final Logger logger = Logger.getLogger(AbstractListPanel.class.getName());
-
 	protected JTable jTable = null;
 
 	protected GUIObject object = null;
@@ -81,7 +78,7 @@ public abstract class AbstractListPanel extends JPanel implements MouseListener,
 	public AbstractListPanel() {
 		this.setLayout(new GridBagLayout());
 
-		Timer timer = new Timer();
+		Timer timer = new Timer("AbstractListPanel");
 		timer.schedule(new TimerTask() {
 
 			@Override
@@ -325,7 +322,7 @@ public abstract class AbstractListPanel extends JPanel implements MouseListener,
 				}
 			}
 		} catch (Exception ex) {
-			logger.log(Level.WARNING, "error processing key event", e);
+			ex.printStackTrace();
 		}
 	}
 

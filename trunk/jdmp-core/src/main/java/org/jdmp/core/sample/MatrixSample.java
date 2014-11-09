@@ -51,6 +51,8 @@ public class MatrixSample extends AbstractSample {
 			Matrix all = dataSet.getMatrix(key);
 			if (all == null) {
 				return null;
+			} else if (all.getRowCount() < dataSet.size()) {
+				return null;
 			} else {
 				m = all.selectRows(Ret.LINK, index);
 				map.put(String.valueOf(key), m);
@@ -79,12 +81,19 @@ public class MatrixSample extends AbstractSample {
 	}
 
 	@Override
-	protected Matrix putIntoMap(String key, Matrix value) {
-		Matrix m = getMetaDataMatrix(key);
-		if (m == null) {
-			m = Matrix.Factory.zeros(dataSet.size(), value.getColumnCount());
+	protected Matrix putIntoMap(String key, Object value) {
+		Matrix mv;
+		if (value instanceof Matrix) {
+			mv = (Matrix) value;
+		} else {
+			mv = Matrix.Factory.linkToValue(value);
 		}
-		m.setContent(Ret.ORIG, value, index, 0);
+		Matrix m = dataSet.getMatrix(key);
+		if (m == null || m.isEmpty()) {
+			m = Matrix.Factory.zeros(dataSet.size(), mv.getColumnCount());
+			dataSet.setMatrix(key, m);
+		}
+		m.setContent(Ret.ORIG, mv, index, 0);
 		return null;
 	}
 

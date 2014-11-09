@@ -105,12 +105,12 @@ public class DefaultVariablesDiv extends DivTag {
 			String query = request.getParameter("q");
 			query = query == null ? "" : query;
 
-			for (Object key : sample.keySet()) {
+			for (String key : sample.keySet()) {
 				// if (skippedVariables.contains(key)) {
 				// continue;
 				// }
 
-				Matrix varm = sample.get(key);
+				Matrix varm = sample.getAsMatrix(key);
 				if (varm instanceof Variable) {
 					Variable var = (Variable) varm;
 

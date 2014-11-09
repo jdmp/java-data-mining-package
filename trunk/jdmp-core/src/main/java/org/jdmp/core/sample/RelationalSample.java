@@ -37,28 +37,28 @@ public class RelationalSample extends DefaultSample {
 
 	@SuppressWarnings("unchecked")
 	public void addObject(Object o) {
-		Matrix input = getMatrix(INPUT);
+		Matrix input = getAsMatrix(INPUT);
 		if (input == null) {
 			input = new DefaultListMatrix<Object>();
-			setMatrix(INPUT, input);
+			put(INPUT, input);
 		}
 		((Collection) input).add(o);
 	}
 
 	public void removeObject(Object o) {
-		Matrix input = getMatrix(INPUT);
+		Matrix input = getAsMatrix(INPUT);
 		if (input == null) {
 			input = new DefaultListMatrix<Object>();
-			setMatrix(INPUT, input);
+			put(INPUT, input);
 		}
 		((Collection<?>) input).remove(o);
 	}
 
 	public Collection<?> getObjects() {
-		Matrix input = getMatrix(INPUT);
+		Matrix input = getAsMatrix(INPUT);
 		if (input == null) {
 			input = new DefaultListMatrix<Object>();
-			setMatrix(INPUT, input);
+			put(INPUT, input);
 		}
 		return (Collection<?>) input;
 	}

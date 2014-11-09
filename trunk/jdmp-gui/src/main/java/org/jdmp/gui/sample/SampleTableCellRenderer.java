@@ -27,21 +27,22 @@ import java.awt.Color;
 import java.awt.Component;
 import java.util.Map;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JTable;
-import javax.swing.UIManager;
 import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.gui.renderer.MatrixHeatmapRenderer;
+import org.ujmp.gui.util.ColorUtil;
 
 public class SampleTableCellRenderer implements TableCellRenderer {
 
-	private static final Border DEFAULT_NO_FOCUS_BORDER = new EmptyBorder(1, 1, 1, 1);
+	private static final Border borderSelected = BorderFactory.createLineBorder(Color.blue, 1);
+	private static final Border borderNotSelected = BorderFactory.createLineBorder(Color.white, 1);
 
 	private final DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
 
@@ -70,12 +71,14 @@ public class SampleTableCellRenderer implements TableCellRenderer {
 
 		if (sample != null) {
 			String key = columnMap.get(column);
-			Matrix mv = sample.getMatrix(key);
+			Object mv = sample.get(key);
 			if (mv == null) {
 				o = "";
-			} else {
+			} else if (mv instanceof Matrix) {
 				return matrixRenderer.getTableCellRendererComponent(table, mv, isSelected,
 						hasFocus, row, column);
+			} else {
+				o = String.valueOf(mv);
 			}
 
 			c = (JLabel) renderer.getTableCellRendererComponent(table, o, isSelected, hasFocus,
@@ -84,36 +87,20 @@ public class SampleTableCellRenderer implements TableCellRenderer {
 			c.setIcon(null);
 			c.setHorizontalAlignment(JLabel.CENTER);
 
-		} else {
-
-			c = (JLabel) renderer.getTableCellRendererComponent(table, o, isSelected, hasFocus,
-					row, column);
-
-			if (hasFocus) {
-				Border border = null;
-				if (isSelected) {
-					border = UIManager.getBorder("Table.focusSelectedCellHighlightBorder");
-				}
-				if (border == null) {
-					border = UIManager.getBorder("Table.focusCellHighlightBorder");
-				}
-				c.setBorder(border);
-
-				if (!isSelected && table.isCellEditable(row, column)) {
-					Color col;
-					col = UIManager.getColor("Table.focusCellForeground");
-					if (col != null) {
-						c.setForeground(col);
-					}
-					col = UIManager.getColor("Table.focusCellBackground");
-					if (col != null) {
-						c.setBackground(col);
-					}
-				}
+			if (mv == null) {
+				c.setBackground(Color.BLACK);
+			} else if (mv instanceof Matrix) {
+				c.setBackground(Color.WHITE);
 			} else {
-				c.setBorder(DEFAULT_NO_FOCUS_BORDER);
+				c.setBackground(ColorUtil.fromObject(mv));
 			}
 
+		}
+
+		if (isSelected) {
+			c.setBorder(borderSelected);
+		} else {
+			c.setBorder(borderNotSelected);
 		}
 
 		return c;

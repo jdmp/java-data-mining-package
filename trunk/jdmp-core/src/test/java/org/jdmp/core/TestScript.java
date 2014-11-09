@@ -69,8 +69,8 @@ public class TestScript {
 		ListDataSet ds = (ListDataSet) o;
 		assertEquals(100, ds.size());
 		Sample s = ds.get(0);
-		long input = s.getMatrix(Sample.INPUT).getColumnCount();
-		long target = s.getMatrix(Sample.TARGET).getColumnCount();
+		long input = s.getAsMatrix(Sample.INPUT).getColumnCount();
+		long target = s.getAsMatrix(Sample.TARGET).getColumnCount();
 		assertEquals(10, input);
 		assertEquals(5, target);
 	}

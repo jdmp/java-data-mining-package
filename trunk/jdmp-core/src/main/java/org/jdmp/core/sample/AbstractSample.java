@@ -25,14 +25,14 @@ package org.jdmp.core.sample;
 
 import java.lang.reflect.Constructor;
 
-import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.core.mapmatrix.AbstractMapMatrix;
+import org.ujmp.core.util.MathUtil;
 import org.ujmp.core.util.StringUtil;
 
-public abstract class AbstractSample extends AbstractMapMatrix<String, Matrix> implements Sample {
+public abstract class AbstractSample extends AbstractMapMatrix<String, Object> implements Sample {
 	private static final long serialVersionUID = 1693258179407382419L;
 
 	public AbstractSample() {
@@ -45,17 +45,17 @@ public abstract class AbstractSample extends AbstractMapMatrix<String, Matrix> i
 	}
 
 	public int getTargetClass() {
-		return (int) getMatrix(TARGET).toRowVector(Ret.NEW).getCoordinatesOfMaximum()[ROW];
+		return (int) getAsMatrix(TARGET).toRowVector(Ret.NEW).getCoordinatesOfMaximum()[ROW];
 	}
 
 	public int getRecognizedClass() {
-		return (int) getMatrix(PREDICTED).toRowVector(Ret.NEW).getCoordinatesOfMaximum()[ROW];
+		return (int) getAsMatrix(PREDICTED).toRowVector(Ret.NEW).getCoordinatesOfMaximum()[ROW];
 	}
 
 	public abstract Sample clone();
 
 	public void setLabel(Object label) {
-		setMatrix(Sample.LABEL, Matrix.Factory.linkToValue(label));
+		put(Sample.LABEL, label);
 	}
 
 	public String toString() {
@@ -63,7 +63,7 @@ public abstract class AbstractSample extends AbstractMapMatrix<String, Matrix> i
 		s.append(getClass().getSimpleName());
 		s.append(" [ ");
 		for (String key : keySet()) {
-			Matrix v = getMatrix(key);
+			Matrix v = getAsMatrix(key);
 			s.append(key + "=");
 			s.append(StringUtil.format(v));
 			s.append(" ");
@@ -86,50 +86,49 @@ public abstract class AbstractSample extends AbstractMapMatrix<String, Matrix> i
 		return guiObject;
 	}
 
-	public void setObject(String id, Object object) {
-		Matrix m = get(id);
-		if (m instanceof Variable) {
-			Variable variable = (Variable) m;
-			Matrix matrix = Matrix.Factory.linkToValue(object);
-			variable.add(matrix);
-		} else {
-			put(id, Matrix.Factory.linkToValue(object));
-		}
+	public final Object getAsObject(String id) {
+		return get(id);
 	}
 
-	public Object getObject(String id) {
-		Matrix m = get(id);
-		if (m == null) {
-			return null;
-		} else if (m.isScalar()) {
-			return m.getAsObject(0, 0);
-		} else {
-			return m;
-		}
+	public final Matrix getAsMatrix(String id) {
+		return MathUtil.getMatrix(get(id));
 	}
 
-	public void setMatrix(String id, Matrix matrix) {
-		Matrix m = get(id);
-		if (m instanceof Variable) {
-			Variable variable = (Variable) m;
-			variable.add(matrix);
-		} else {
-			put(id, matrix);
-		}
+	public final double getAsDouble(String id) {
+		return MathUtil.getDouble(get(id));
 	}
 
-	public Matrix getMatrix(String id) {
-		Matrix m = get(id);
-		if (m instanceof Variable) {
-			Variable variable = (Variable) m;
-			if (variable.isEmpty()) {
-				return null;
-			} else {
-				return variable.getLast();
-			}
-		} else {
-			return m;
-		}
+	public final String getAsString(String id) {
+		return StringUtil.getString(get(id));
+	}
+
+	public final int getAsInt(String id) {
+		return MathUtil.getInt(get(id));
+	}
+
+	public final long getAsLong(String id) {
+		return MathUtil.getLong(get(id));
+	}
+
+	public final short getAsShort(String id) {
+		return MathUtil.getShort(get(id));
+	}
+
+	public final float getAsFloat(String id) {
+		return MathUtil.getFloat(get(id));
+	}
+
+	public final byte getAsByte(String id) {
+		return MathUtil.getByte(get(id));
+	}
+
+	public final char getAsChar(String id) {
+		return MathUtil.getChar(get(id));
+	}
+
+	public final double getWeight() {
+		double weight = getAsDouble(WEIGHT);
+		return weight == 0 ? 1 : weight;
 	}
 
 }

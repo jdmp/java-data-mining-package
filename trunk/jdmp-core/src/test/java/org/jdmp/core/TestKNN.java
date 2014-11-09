@@ -21,39 +21,24 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.core.algorithm.classification;
+package org.jdmp.core;
 
+import static org.junit.Assert.assertEquals;
+
+import org.jdmp.core.algorithm.classification.KNNClassifier;
+import org.jdmp.core.dataset.CrossValidation;
 import org.jdmp.core.dataset.ListDataSet;
-import org.jdmp.core.sample.Sample;
-import org.jdmp.core.variable.Variable;
-import org.ujmp.core.Matrix;
+import org.junit.Test;
+import org.ujmp.core.listmatrix.ListMatrix;
 
-public class RandomClassifier extends AbstractClassifier {
-	private static final long serialVersionUID = -8043103888877795342L;
+public class TestKNN {
 
-	private int classCount = 0;
-
-	public RandomClassifier() {
-		super();
-	}
-
-	public Matrix predictOne(Matrix input) {
-		return Matrix.Factory.rand(1, classCount);
-	}
-
-	public void reset() {
-		classCount = 0;
-	}
-
-	public void trainAll(ListDataSet dataSet) {
-		for (Sample s : dataSet) {
-			Matrix m = s.getAsMatrix(Variable.TARGET);
-			classCount = (int) Math.max(classCount, m.getColumnCount());
-		}
-	}
-
-	public Classifier emptyCopy() {
-		return new RandomClassifier();
+	@Test
+	public void testIrisClassification() throws Exception {
+		ListDataSet iris = ListDataSet.Factory.IRIS();
+		KNNClassifier c = new KNNClassifier(5);
+		ListMatrix<Double> results = CrossValidation.run(c, iris, 10, 10, 0);
+		assertEquals(0.96, results.getMeanValue(), 0.01);
 	}
 
 }

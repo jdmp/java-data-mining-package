@@ -73,7 +73,7 @@ import org.jdmp.core.algorithm.index.AbstractIndex;
 import org.jdmp.core.algorithm.index.Index;
 import org.jdmp.core.algorithm.index.MultiIndex;
 import org.jdmp.core.algorithm.similarity.SimilaritySearcher;
-import org.jdmp.core.dataset.DefaultDataSet;
+import org.jdmp.core.dataset.DefaultListDataSet;
 import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.util.ObservableMap;
@@ -209,7 +209,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 		String id = sample.getId();
 		doc.add(new StringField(Sample.ID, id, Field.Store.YES));
 
-		for (Matrix mv : sample.values()) {
+		for (Object mv : sample.values()) {
 			if (mv instanceof Variable) {
 				Variable v = (Variable) mv;
 				String key = v.getLabel();
@@ -276,7 +276,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 			mlt.setMaxWordLen(MAXWORDLENGTH);
 			String[] terms = mlt.retrieveInterestingTerms(td.scoreDocs[0].doc);
 			for (int i = 0; i < 10 && i < terms.length; i++) {
-				s.setObject(Variable.SUGGESTEDTAGS, terms[i]);
+				s.put(Variable.SUGGESTEDTAGS, terms[i]);
 			}
 
 			return s;
@@ -296,17 +296,17 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 		mlt.setFieldNames(new String[] { Variable.LABEL, Variable.DESCRIPTION, Variable.TAGS });
 		mlt.setMaxWordLen(MAXWORDLENGTH);
 		TopDocs td = indexSearcher.search(query, count);
-		ListDataSet result = new DefaultDataSet();
+		ListDataSet result = new DefaultListDataSet();
 		result.setMetaData("Total", td.totalHits);
 		for (ScoreDoc sd : td.scoreDocs) {
 			int id = sd.doc;
 			Document doc = indexSearcher.doc(id);
 			Sample s = null;
 			s = (Sample) SerializationUtil.deserialize(doc.getBinaryValue("RawData").bytes);
-			s.setMatrix(Sample.SCORE, MathUtil.getMatrix(sd.score));
+			s.put(Sample.SCORE, MathUtil.getMatrix(sd.score));
 			String[] terms = mlt.retrieveInterestingTerms(id);
 			for (int i = 0; i < 10 && i < terms.length; i++) {
-				s.setObject(Variable.SUGGESTEDTAGS, terms[i]);
+				s.put(Variable.SUGGESTEDTAGS, terms[i]);
 			}
 			result.add(s);
 		}
@@ -567,7 +567,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 							for (Sample sample : ds) {
 								Sample oldSample = getSample(sample.getId());
 								if (oldSample != null) {
-									Matrix tagsm = oldSample.get("Tags");
+									Matrix tagsm = oldSample.getAsMatrix("Tags");
 									if (tagsm instanceof Variable) {
 										Variable tags = (Variable) tagsm;
 										if (tags != null && !tags.isEmpty()) {

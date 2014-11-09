@@ -27,28 +27,26 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-import org.ujmp.core.Matrix;
-
 public class DefaultSample extends AbstractSample {
 	private static final long serialVersionUID = -3649758882404748630L;
 
-	private final Map<String, Matrix> map;
+	private final Map<String, Object> map;
 
 	public DefaultSample() {
 		super();
-		this.map = new TreeMap<String, Matrix>();
+		this.map = new TreeMap<String, Object>();
 	}
 
-	public final DefaultSample clone() {
-		DefaultSample s = new DefaultSample();
+	public final AbstractSample clone() {
+		AbstractSample s = new DefaultSample();
 		for (String k : keySet()) {
-			Matrix v = get(k);
-			s.put(k, v.clone());
+			Object v = get(k);
+			s.put(k, v);
 		}
 		return s;
 	}
 
-	public Matrix get(Object key) {
+	public Object get(Object key) {
 		return map.get(key);
 	}
 
@@ -62,12 +60,12 @@ public class DefaultSample extends AbstractSample {
 	}
 
 	@Override
-	protected Matrix removeFromMap(Object key) {
+	protected Object removeFromMap(Object key) {
 		return map.remove(key);
 	}
 
 	@Override
-	protected Matrix putIntoMap(String key, Matrix value) {
+	protected Object putIntoMap(String key, Object value) {
 		return map.put(key, value);
 	}
 

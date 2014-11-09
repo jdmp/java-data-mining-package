@@ -47,10 +47,10 @@ public class Instance2Sample extends DefaultSample implements Wrapper<Instance> 
 		Object data = instance.getData();
 		if (data instanceof FeatureVectorSequence) {
 			FeatureVectorSequence fvs = (FeatureVectorSequence) data;
-			setMatrix(INPUT, new MalletInputMatrix(fvs.getFeatureVector(index)));
+			put(INPUT, new MalletInputMatrix(fvs.getFeatureVector(index)));
 		}
 		LabelSequence labelSequence = (LabelSequence) instance.getTarget();
-		setMatrix(Sample.TARGET, new MalletOutputMatrix(labelSequence, index));
+		put(Sample.TARGET, new MalletOutputMatrix(labelSequence, index));
 
 		if (data instanceof FeatureVectorSequence) {
 			FeatureVectorSequence fvs = (FeatureVectorSequence) data;

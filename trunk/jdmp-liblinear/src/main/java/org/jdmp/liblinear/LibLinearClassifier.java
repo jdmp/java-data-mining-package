@@ -74,7 +74,7 @@ public class LibLinearClassifier extends AbstractClassifier {
 		for (int j = 0; j < columnCount; j++) {
 			double value = input.getAsDouble(0, j);
 			if (value != 0.0 && !MathUtil.isNaNOrInfinite(value)) {
-				x[count] = features.get(j, value);
+				x[count] = features.get(j + 1, value);
 				count++;
 			}
 		}
@@ -105,8 +105,8 @@ public class LibLinearClassifier extends AbstractClassifier {
 				time = System.currentTimeMillis();
 				System.out.println("Converting samples: " + Math.round(((double) i / dataSet.size() * 100)) + "% done");
 			}
-			Matrix input = s.getMatrix(getInputLabel()).toColumnVector(Ret.LINK);
-			int targetClass = (int) s.getMatrix(getTargetLabel()).toColumnVector(Ret.LINK).getCoordinatesOfMaximum()[COLUMN];
+			Matrix input = s.getAsMatrix(getInputLabel()).toColumnVector(Ret.LINK);
+			int targetClass = (int) s.getAsMatrix(getTargetLabel()).toColumnVector(Ret.LINK).getCoordinatesOfMaximum()[COLUMN];
 			prob.y[i] = targetClass;
 			long columnCount = input.getColumnCount();
 			int count = 0;
@@ -121,7 +121,7 @@ public class LibLinearClassifier extends AbstractClassifier {
 			for (int j = 0; j < columnCount; j++) {
 				double value = input.getAsDouble(0, j);
 				if (value != 0.0 && !MathUtil.isNaNOrInfinite(value)) {
-					prob.x[i][count] = features.get(j, value);
+					prob.x[i][count] = features.get(j + 1, value);
 					count++;
 				}
 			}

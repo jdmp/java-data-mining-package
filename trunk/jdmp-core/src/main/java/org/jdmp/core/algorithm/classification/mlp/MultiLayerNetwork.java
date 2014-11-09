@@ -338,8 +338,8 @@ public class MultiLayerNetwork extends AbstractClassifier {
 		double rmse = 0;
 		for (int i = first90Percent; i < samples.size(); i++) {
 			Sample rs = samples.get(i);
-			Matrix output = predictOne(rs.getMatrix(getInputLabel()));
-			rmse += output.minus(rs.getMatrix(getTargetLabel())).getRMS();
+			Matrix output = predictOne(rs.getAsMatrix(getInputLabel()));
+			rmse += output.minus(rs.getAsMatrix(getTargetLabel())).getRMS();
 			trainOne(samples.get(i));
 		}
 		rmse /= last10Percent;

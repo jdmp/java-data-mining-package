@@ -147,11 +147,11 @@ public class LibSVMClassifier extends AbstractClassifier {
 
 		int i = 0;
 		for (Sample s : dataSet) {
-			Matrix input = s.getMatrix(getInputLabel()).toColumnVector(Ret.NEW);
+			Matrix input = s.getAsMatrix(getInputLabel()).toColumnVector(Ret.NEW);
 			if (svmType == SVMType.EPSILON_SVR || svmType == SVMType.NU_SVR) {
-				prob.y[i] = s.getMatrix(getTargetLabel()).toRowVector(Ret.NEW).getAsDouble(0, 0);
+				prob.y[i] = s.getAsMatrix(getTargetLabel()).toRowVector(Ret.NEW).getAsDouble(0, 0);
 			} else {
-				int targetClass = (int) s.getMatrix(getTargetLabel()).toRowVector(Ret.NEW)
+				int targetClass = (int) s.getAsMatrix(getTargetLabel()).toRowVector(Ret.NEW)
 						.getCoordinatesOfMaximum()[ROW];
 				prob.y[i] = targetClass;
 			}

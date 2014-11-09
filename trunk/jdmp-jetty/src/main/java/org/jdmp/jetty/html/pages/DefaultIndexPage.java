@@ -60,7 +60,7 @@ public class DefaultIndexPage extends Page {
 					String id = request.getParameter("id" + i);
 					Sample sample = index.getSample(id);
 					if (sample != null) {
-						Matrix tagsm = sample.get(Sample.TAGS);
+						Matrix tagsm = sample.getAsMatrix(Sample.TAGS);
 						if (tagsm instanceof Variable) {
 							Variable tags = (Variable) tagsm;
 							for (String t : splitTags) {
@@ -73,7 +73,7 @@ public class DefaultIndexPage extends Page {
 									}
 								}
 								if (!tagFound) {
-									sample.setObject("Tags", t);
+									sample.put("Tags", t);
 								}
 							}
 						}

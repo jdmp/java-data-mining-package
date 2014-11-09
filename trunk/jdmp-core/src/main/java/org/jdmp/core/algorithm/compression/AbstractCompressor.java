@@ -49,7 +49,7 @@ public abstract class AbstractCompressor extends AbstractAlgorithm implements Co
 	}
 
 	public int getFeatureCount(ListDataSet dataSet) {
-		return (int) dataSet.iterator().next().getMatrix(getInputLabel()).toRowVector(Ret.NEW)
+		return (int) dataSet.iterator().next().getAsMatrix(getInputLabel()).toRowVector(Ret.NEW)
 				.getRowCount();
 	}
 
@@ -69,8 +69,8 @@ public abstract class AbstractCompressor extends AbstractAlgorithm implements Co
 	}
 
 	public final void compress(Sample sample) {
-		Matrix output = compress(sample.getMatrix(getInputLabel()));
-		sample.setMatrix(COMPRESSED, output);
+		Matrix output = compress(sample.getAsMatrix(getInputLabel()));
+		sample.put(COMPRESSED, output);
 	}
 
 	public void decompress(ListDataSet dataSet) {
@@ -80,8 +80,8 @@ public abstract class AbstractCompressor extends AbstractAlgorithm implements Co
 	}
 
 	public final void decompress(Sample sample) {
-		Matrix output = decompress(sample.getMatrix(COMPRESSED));
-		sample.setMatrix(DECOMPRESSED, output);
+		Matrix output = decompress(sample.getAsMatrix(COMPRESSED));
+		sample.put(DECOMPRESSED, output);
 	}
 
 }

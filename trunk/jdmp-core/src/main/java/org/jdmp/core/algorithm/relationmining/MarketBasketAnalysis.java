@@ -30,7 +30,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.jdmp.core.dataset.DefaultDataSet;
+import org.jdmp.core.dataset.DefaultListDataSet;
 import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.RelationalSample;
 import org.jdmp.core.sample.Sample;
@@ -77,7 +77,7 @@ public class MarketBasketAnalysis extends AbstractRelationMiner {
 		Matrix data = Matrix.Factory.linkTo().file("/home/arndt/muenchen/totale2.txt").asDenseCSV();
 		// data.showGUI();
 
-		ListDataSet orig = new DefaultDataSet();
+		ListDataSet orig = new DefaultListDataSet();
 
 		// for (int r = 0; r < 10000; r++) {
 		for (int r = 0; r < data.getRowCount(); r++) {
@@ -100,7 +100,7 @@ public class MarketBasketAnalysis extends AbstractRelationMiner {
 	}
 
 	private ListDataSet calculateP(int minSupport) throws Exception {
-		ListDataSet ds = new DefaultDataSet();
+		ListDataSet ds = new DefaultListDataSet();
 
 		for (Object o : product2ToIds.keySet()) {
 			Set<String> set = (Set<String>) (o);
@@ -122,19 +122,19 @@ public class MarketBasketAnalysis extends AbstractRelationMiner {
 				RelationalSample s12 = Sample.Factory.relationalSample(prod1 + " => " + prod2);
 				s12.addObject(prod1);
 				s12.addObject(prod2);
-				s12.setMatrix(Sample.COUNT, Matrix.Factory.linkToValue(count));
-				s12.setMatrix(Sample.PROBABILITY, Matrix.Factory.linkToValue(p1));
-				s12.setObject("From", prod1);
-				s12.setObject("To", prod2);
+				s12.put(Sample.COUNT, Matrix.Factory.linkToValue(count));
+				s12.put(Sample.PROBABILITY, Matrix.Factory.linkToValue(p1));
+				s12.put("From", prod1);
+				s12.put("To", prod2);
 				ds.add(s12);
 
 				RelationalSample s21 = Sample.Factory.relationalSample(prod2 + " => " + prod1);
 				s21.addObject(prod1);
 				s21.addObject(prod2);
-				s21.setMatrix(Sample.COUNT, Matrix.Factory.linkToValue(count));
-				s21.setMatrix(Sample.PROBABILITY, Matrix.Factory.linkToValue(p2));
-				s21.setObject("From", prod2);
-				s21.setObject("To", prod1);
+				s21.put(Sample.COUNT, Matrix.Factory.linkToValue(count));
+				s21.put(Sample.PROBABILITY, Matrix.Factory.linkToValue(p2));
+				s21.put("From", prod2);
+				s21.put("To", prod1);
 				ds.add(s21);
 
 			}

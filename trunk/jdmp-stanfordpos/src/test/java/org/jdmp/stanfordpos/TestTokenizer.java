@@ -26,7 +26,7 @@ package org.jdmp.stanfordpos;
 import static org.junit.Assert.assertEquals;
 
 import org.jdmp.core.algorithm.tokenizer.Tokenizer;
-import org.jdmp.core.dataset.DefaultDataSet;
+import org.jdmp.core.dataset.DefaultListDataSet;
 import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.DefaultSample;
 import org.jdmp.core.sample.Sample;
@@ -41,12 +41,12 @@ public class TestTokenizer {
 
 	@Test
 	public void testTokenizer() throws Exception {
-		ListDataSet ds = new DefaultDataSet();
+		ListDataSet ds = new DefaultListDataSet();
 		Sample sa1 = new DefaultSample();
-		sa1.setObject(Sample.INPUT, s1);
+		sa1.put(Sample.INPUT, s1);
 		sa1.setId("sample1");
 		Sample sa2 = new DefaultSample();
-		sa2.setObject(Sample.INPUT, s2);
+		sa2.put(Sample.INPUT, s2);
 		sa2.setId("sample2");
 		ds.add(sa1);
 		ds.add(sa2);
@@ -57,8 +57,8 @@ public class TestTokenizer {
 		sa1 = ds.get(0);
 		sa2 = ds.get(1);
 
-		Matrix m1 = sa1.getMatrix(Tokenizer.TOKENIZED);
-		Matrix m2 = sa2.getMatrix(Tokenizer.TOKENIZED);
+		Matrix m1 = sa1.getAsMatrix(Tokenizer.TOKENIZED);
+		Matrix m2 = sa2.getAsMatrix(Tokenizer.TOKENIZED);
 
 		assertEquals(1, m1.getColumnCount());
 		assertEquals(11, m1.getRowCount());
