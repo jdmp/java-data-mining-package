@@ -40,7 +40,7 @@ public class Sample2Instance extends Instance {
 
 	public Sample2Instance(Sample sample, Alphabet inputAlphabet, LabelAlphabet targetAlphabet, Pipe pipe,
 			List<Integer> cumSum) {
-		this(sample.getMatrix(Sample.INPUT), sample.getMatrix(Sample.TARGET), inputAlphabet, targetAlphabet, pipe,
+		this(sample.getAsMatrix(Sample.INPUT), sample.getAsMatrix(Sample.TARGET), inputAlphabet, targetAlphabet, pipe,
 				cumSum);
 		setName(sample.getLabel());
 		setSource(sample);

@@ -42,7 +42,7 @@ public abstract class AbstractTagger extends AbstractAlgorithm implements Tagger
 	}
 
 	public final void tag(Sample sample) throws Exception {
-		Matrix mv = sample.get(Tokenizer.TOKENIZED);
+		Matrix mv = sample.getAsMatrix(Tokenizer.TOKENIZED);
 		Variable v = null;
 		if (mv instanceof Variable) {
 			v = (Variable) mv;
@@ -53,7 +53,7 @@ public abstract class AbstractTagger extends AbstractAlgorithm implements Tagger
 		for (Matrix m : v) {
 			ListMatrix<ListMatrix<MapMatrix<String, Object>>> list = tag(m);
 			for (Matrix n : list) {
-				sample.setMatrix(TAGGED, n);
+				sample.put(TAGGED, n);
 			}
 		}
 	}

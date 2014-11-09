@@ -57,7 +57,7 @@ public class PCA extends AbstractCompressor {
 
 		int i = 0;
 		for (Sample s : dataSet) {
-			Matrix input = s.getMatrix(getInputLabel()).toColumnVector(Ret.LINK);
+			Matrix input = s.getAsMatrix(getInputLabel()).toColumnVector(Ret.LINK);
 			for (int c = 0; c < input.getColumnCount(); c++) {
 				x.setAsDouble(input.getAsDouble(0, c), i, c);
 			}

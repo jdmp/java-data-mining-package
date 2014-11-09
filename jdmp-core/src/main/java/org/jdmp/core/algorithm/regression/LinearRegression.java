@@ -92,11 +92,11 @@ public class LinearRegression extends AbstractRegressor {
 
 		int i = 0;
 		for (Sample s : dataSet) {
-			Matrix input = s.getMatrix(getInputLabel()).toColumnVector(Ret.LINK);
+			Matrix input = s.getAsMatrix(getInputLabel()).toColumnVector(Ret.LINK);
 			for (int c = 0; c < input.getColumnCount(); c++) {
 				x.setAsDouble(input.getAsDouble(0, c), i, c + 1);
 			}
-			Matrix target = s.getMatrix(getTargetLabel()).toColumnVector(Ret.LINK);
+			Matrix target = s.getAsMatrix(getTargetLabel()).toColumnVector(Ret.LINK);
 			for (int c = 0; c < target.getColumnCount(); c++) {
 				y.setAsDouble(target.getAsDouble(0, c), i, c);
 			}

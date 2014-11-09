@@ -61,16 +61,16 @@ public class KNNClassifier extends AbstractRegressor {
 	public Matrix predictOne(Matrix input) {
 		List<Sortable<Double, Matrix>> bestResults = new FastArrayList<Sortable<Double, Matrix>>();
 		for (Sample s : dataSet) {
-			Matrix reference = s.getMatrix(getInputLabel());
+			Matrix reference = s.getAsMatrix(getInputLabel());
 			double distance = input.euklideanDistanceTo(reference, true);
 			if (bestResults.size() < k) {
 				bestResults.add(new Sortable<Double, Matrix>(distance, s
-						.getMatrix(getTargetLabel())));
+						.getAsMatrix(getTargetLabel())));
 				Collections.sort(bestResults);
 			} else if (distance < bestResults.get(k - 1).getComparable()) {
 				bestResults.remove(k - 1);
 				bestResults.add(new Sortable<Double, Matrix>(distance, s
-						.getMatrix(getTargetLabel())));
+						.getAsMatrix(getTargetLabel())));
 				Collections.sort(bestResults);
 			}
 		}

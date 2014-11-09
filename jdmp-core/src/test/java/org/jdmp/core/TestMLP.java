@@ -45,5 +45,4 @@ public class TestMLP {
 
 		assertEquals(0.95, iris.getAccuracy(), 0.05);
 	}
-
 }

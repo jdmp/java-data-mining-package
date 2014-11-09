@@ -77,12 +77,13 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 	}
 
 	public int getClassCount(ListDataSet dataSet) {
-		return (int) dataSet.get(0).getMatrix(getTargetLabel()).toRowVector(Ret.NEW).getRowCount();
+		return (int) dataSet.get(0).getAsMatrix(getTargetLabel()).toRowVector(Ret.NEW)
+				.getRowCount();
 	}
 
 	public boolean isDiscrete(ListDataSet dataSet) {
 		for (Sample s : dataSet) {
-			Matrix input = s.getMatrix(getInputLabel());
+			Matrix input = s.getAsMatrix(getInputLabel());
 			for (long[] c : input.availableCoordinates()) {
 				if (!MathUtil.isDiscrete(input.getAsDouble(c))) {
 					return false;
@@ -93,7 +94,7 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 	}
 
 	public int getFeatureCount(ListDataSet dataSet) {
-		return (int) dataSet.iterator().next().getMatrix(getInputLabel()).toRowVector(Ret.NEW)
+		return (int) dataSet.iterator().next().getAsMatrix(getInputLabel()).toRowVector(Ret.NEW)
 				.getRowCount();
 	}
 
@@ -126,15 +127,15 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 	}
 
 	public final void predictOne(Sample sample) {
-		Matrix predicted = predictOne(sample.getMatrix(getInputLabel()));
-		predicted = predicted.toColumnVector(Ret.NEW);
-		sample.setMatrix(PREDICTED, predicted);
+		Matrix predicted = predictOne(sample.getAsMatrix(getInputLabel()));
+		predicted = predicted.toColumnVector(Ret.LINK);
+		sample.put(PREDICTED, predicted);
 
-		if (sample.getMatrix(getTargetLabel()) != null) {
-			Matrix target = sample.getMatrix(getTargetLabel()).toColumnVector(Ret.NEW);
+		if (sample.getAsMatrix(getTargetLabel()) != null) {
+			Matrix target = sample.getAsMatrix(getTargetLabel()).toColumnVector(Ret.LINK);
 			Matrix error = target.minus(predicted);
-			sample.setMatrix(DIFFERENCE, error);
-			sample.setMatrix(RMSE, Matrix.Factory.linkToValue(error.getRMS()));
+			sample.put(DIFFERENCE, error);
+			sample.put(RMSE, Matrix.Factory.linkToValue(error.getRMS()));
 		}
 
 		sample.fireValueChanged();
@@ -145,9 +146,9 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 	}
 
 	public final void trainOne(Sample sample) {
-		Matrix input = sample.getMatrix(getInputLabel());
-		Matrix weight = sample.getMatrix(getWeightLabel());
-		Matrix target = sample.getMatrix(getTargetLabel());
+		Matrix input = sample.getAsMatrix(getInputLabel());
+		Matrix weight = sample.getAsMatrix(getWeightLabel());
+		Matrix target = sample.getAsMatrix(getTargetLabel());
 		trainOne(input, weight, target);
 	}
 
@@ -162,7 +163,7 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 			}
 		};
 
-		if (dataSet.get(0).getMatrix(getTargetLabel()) != null) {
+		if (dataSet.get(0).getAsMatrix(getTargetLabel()) != null) {
 			final Matrix confusion;
 			double error = 0.0;
 			int correctCount = 0;
@@ -176,7 +177,7 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 
 			for (Sample sample : dataSet) {
 
-				double rmse = sample.getMatrix(RMSE).getEuklideanValue();
+				double rmse = sample.getAsMatrix(RMSE).getEuklideanValue();
 				error += Math.pow(rmse, 2.0);
 
 				int recognized = sample.getRecognizedClass();
@@ -209,7 +210,7 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 			double minRMSE = 1e100;
 			double sumRMSE = 0;
 			for (Sample s : dataSet) {
-				Matrix m = s.getMatrix("RMSE");
+				Matrix m = s.getAsMatrix("RMSE");
 				if (m != null) {
 					double sampleRMSE = m.doubleValue();
 					sumRMSE += sampleRMSE;

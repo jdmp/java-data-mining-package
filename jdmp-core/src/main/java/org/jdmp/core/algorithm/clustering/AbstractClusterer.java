@@ -67,9 +67,9 @@ public abstract class AbstractClusterer extends AbstractAlgorithm implements Clu
 	}
 
 	public final void predict(Sample sample) throws Exception {
-		Matrix output = predict(sample.getMatrix(getInputLabel()),
-				sample.getMatrix(getWeightLabel()));
-		sample.setMatrix(PREDICTED, output);
+		Matrix output = predict(sample.getAsMatrix(getInputLabel()),
+				sample.getAsMatrix(getWeightLabel()));
+		sample.put(PREDICTED, output);
 		// List<Matrix> error = getOutputErrorAlgorithm().calculate(output,
 		// sample.getTargetMatrix());
 		// sample.setOutputErrorMatrix(error.get(0));

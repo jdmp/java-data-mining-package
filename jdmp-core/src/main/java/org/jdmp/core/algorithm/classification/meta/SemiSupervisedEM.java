@@ -25,7 +25,7 @@ package org.jdmp.core.algorithm.classification.meta;
 
 import org.jdmp.core.algorithm.regression.AbstractRegressor;
 import org.jdmp.core.algorithm.regression.Regressor;
-import org.jdmp.core.dataset.DefaultDataSet;
+import org.jdmp.core.dataset.DefaultListDataSet;
 import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
@@ -64,34 +64,34 @@ public class SemiSupervisedEM extends AbstractRegressor {
 		algorithm.trainAll(labeledData);
 		algorithm.predictAll(unlabeledData);
 		for (Sample s : unlabeledData) {
-			Matrix predicted = s.getMatrix(Sample.PREDICTED);
+			Matrix predicted = s.getAsMatrix(Sample.PREDICTED);
 			if (useRawPrediction) {
-				s.setMatrix(Sample.TARGET, predicted);
+				s.put(Sample.TARGET, predicted);
 			} else {
 				int max = (int) predicted.indexOfMax(Ret.NEW, Matrix.COLUMN).getAsDouble(0, 0);
 				Matrix target = Matrix.Factory.zeros(1, classCount);
 				target.setAsDouble(1.0, 0, max);
-				s.setMatrix(Sample.TARGET, target);
+				s.put(Sample.TARGET, target);
 			}
 		}
 
 		for (int i = 0; i < iterations; i++) {
 			System.out.println("Step " + (i + 1));
-			ListDataSet completeData = new DefaultDataSet();
+			ListDataSet completeData = new DefaultListDataSet();
 			completeData.addAll(labeledData);
 			completeData.addAll(unlabeledData);
 			algorithm.reset();
 			algorithm.trainAll(completeData);
 			algorithm.predictAll(unlabeledData);
 			for (Sample s : unlabeledData) {
-				Matrix predicted = s.getMatrix(Sample.PREDICTED);
+				Matrix predicted = s.getAsMatrix(Sample.PREDICTED);
 				if (useRawPrediction) {
-					s.setMatrix(Sample.TARGET, predicted);
+					s.put(Sample.TARGET, predicted);
 				} else {
 					int max = (int) predicted.indexOfMax(Ret.NEW, Matrix.COLUMN).getAsDouble(0, 0);
 					Matrix target = Matrix.Factory.zeros(1, classCount);
 					target.setAsDouble(1.0, 0, max);
-					s.setMatrix(Sample.TARGET, target);
+					s.put(Sample.TARGET, target);
 				}
 			}
 		}

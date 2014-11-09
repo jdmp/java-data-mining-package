@@ -23,18 +23,15 @@
 
 package org.jdmp.core.algorithm.classification.bayes;
 
-import java.util.List;
-
 import org.jdmp.core.algorithm.classification.AbstractClassifier;
 import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.algorithm.estimator.DensityEstimator;
-import org.jdmp.core.algorithm.estimator.DiscreteDensityEstimator;
 import org.jdmp.core.algorithm.estimator.GaussianDensityEstimator;
+import org.jdmp.core.algorithm.estimator.GeneralDensityEstimator;
 import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
-import org.ujmp.core.collections.list.FastArrayList;
 import org.ujmp.core.util.MathUtil;
 
 public class NaiveBayesClassifier extends AbstractClassifier {
@@ -42,7 +39,7 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 
 	private DensityEstimator[][] dists = null;
 
-	private DensityEstimator classDists = null;
+	private DensityEstimator[] classDists = null;
 
 	private int classCount = -1;
 
@@ -54,12 +51,12 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 	}
 
 	public Matrix predictOne(Matrix input) {
-		input = input.toColumnVector(Ret.NEW);
+		input = input.toColumnVector(Ret.LINK);
 		final double[] probs = new double[classCount];
 		final double[] logs = new double[classCount];
 
-		for (int i = 0; i < classCount; i++) {
-			logs[i] += Math.log(classDists.getProbability(i));
+		for (int j = 0; j < classCount; j++) {
+			logs[j] += Math.log(classDists[j].getProbability(1.0));
 		}
 
 		// for all features
@@ -89,28 +86,18 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 
 	public void trainAll(ListDataSet dataSet) {
 		System.out.println("training started");
-		int featureCount = (int) dataSet.get(0).getMatrix(getInputLabel()).getValueCount();
+		int featureCount = (int) dataSet.get(0).getAsMatrix(getInputLabel()).getValueCount();
 		boolean discrete = isDiscrete(dataSet);
 		classCount = getClassCount(dataSet);
 
-		// todo: improve
-		Matrix max = null;
-		if (discrete) {
-			List<Matrix> inputs = new FastArrayList<Matrix>();
-			for (Sample s : dataSet) {
-				inputs.add(s.getMatrix(getInputLabel()).toColumnVector(Ret.NEW));
-			}
-			Matrix dataSetInput = Matrix.Factory.vertCat(inputs);
-			max = dataSetInput.max(Ret.NEW, Matrix.ROW);
-		}
-
 		this.dists = new DensityEstimator[featureCount][classCount];
-		this.classDists = new DiscreteDensityEstimator(classCount);
+		this.classDists = new DensityEstimator[classCount];
 
-		for (int i = 0; i < featureCount; i++) {
-			for (int j = 0; j < classCount; j++) {
+		for (int j = 0; j < classCount; j++) {
+			classDists[j] = new GeneralDensityEstimator();
+			for (int i = 0; i < featureCount; i++) {
 				if (discrete) {
-					dists[i][j] = new DiscreteDensityEstimator(max.getAsInt(0, i) + 1);
+					dists[i][j] = new GeneralDensityEstimator();
 				} else {
 					dists[i][j] = new GaussianDensityEstimator();
 				}
@@ -121,21 +108,23 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 
 		int count = 0;
 		for (Sample s : dataSet) {
-			Matrix sampleInput = s.getMatrix(getInputLabel()).toColumnVector(Ret.LINK);
-			Matrix sampleWeight = s.getMatrix(getWeightLabel());
 
-			double weight = 1.0;
+			final Matrix sampleInput = s.getAsMatrix(getInputLabel()).toColumnVector(Ret.LINK);
+			final Matrix sampleTarget = s.getAsMatrix(getTargetLabel()).toColumnVector(Ret.LINK);
+			final double weight = s.getWeight();
 
-			if (sampleWeight != null) {
-				weight = sampleWeight.doubleValue();
+			for (int j = 0; j < classCount; j++) {
+				double classValue = sampleTarget.getAsDouble(0, j);
+				if (classValue == 0.0) {
+					classDists[j].addValue(0.0, weight);
+				} else {
+					classDists[j].addValue(1.0, weight);
+					for (int i = 0; i < sampleInput.getColumnCount(); i++) {
+						double inputValue = sampleInput.getAsDouble(0, i);
+						dists[i][j].addValue(inputValue, weight);
+					}
+				}
 			}
-
-			int outputClass = s.getTargetClass();
-			for (int i = 0; i < sampleInput.getColumnCount(); i++) {
-				double inputValue = sampleInput.getAsDouble(0, i);
-				dists[i][outputClass].addValue(inputValue, weight);
-			}
-			classDists.addValue(outputClass, weight);
 
 			count++;
 			if (count % 10000 == 0) {

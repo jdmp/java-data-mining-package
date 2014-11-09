@@ -36,8 +36,8 @@ public interface Tokenizer {
 
 	public ListMatrix<ListMatrix<String>> tokenize(Matrix input) throws Exception;
 
-	public void tokenize(Object variableKey, Sample sample) throws Exception;
+	public void tokenize(String variableKey, Sample sample) throws Exception;
 
-	public void tokenize(Object variableKey, ListDataSet dataSet) throws Exception;
+	public void tokenize(String variableKey, ListDataSet dataSet) throws Exception;
 
 }

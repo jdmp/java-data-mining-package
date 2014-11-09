@@ -48,11 +48,11 @@ public class MultivariateGaussianDensityEstimator extends AbstractRegressor {
 
 		int i = 0;
 		for (Sample s : dataSet) {
-			Matrix input = s.getMatrix(getInputLabel()).toColumnVector(Ret.LINK);
+			Matrix input = s.getAsMatrix(getInputLabel()).toColumnVector(Ret.LINK);
 			for (int c = 0; c < featureCount; c++) {
 				x.setAsDouble(input.getAsDouble(0, c), i, c);
 			}
-			Matrix target = s.getMatrix(getTargetLabel()).toColumnVector(Ret.LINK);
+			Matrix target = s.getAsMatrix(getTargetLabel()).toColumnVector(Ret.LINK);
 			for (int c = 0; c < classCount; c++) {
 				x.setAsDouble(target.getAsDouble(0, c), i, c + featureCount);
 			}

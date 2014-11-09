@@ -34,20 +34,20 @@ import org.ujmp.core.listmatrix.ListMatrix;
 public abstract class AbstractTokenizer extends AbstractAlgorithm implements Tokenizer {
 	private static final long serialVersionUID = 3272730075460502945L;
 
-	public final void tokenize(Object variableKey, Sample sample) throws Exception {
-		Matrix mv = sample.get(variableKey);
+	public final void tokenize(String variableKey, Sample sample) throws Exception {
+		Matrix mv = sample.getAsMatrix(variableKey);
 		if (mv instanceof Variable) {
 			Variable input = (Variable) mv;
 			for (Matrix m : input) {
 				ListMatrix<ListMatrix<String>> r = tokenize(m);
 				for (Matrix n : r) {
-					sample.setMatrix(Tokenizer.TOKENIZED, n);
+					sample.put(Tokenizer.TOKENIZED, n);
 				}
 			}
 		}
 	}
 
-	public final void tokenize(Object variableKey, ListDataSet dataSet) throws Exception {
+	public final void tokenize(String variableKey, ListDataSet dataSet) throws Exception {
 		for (Sample sample : dataSet) {
 			tokenize(variableKey, sample);
 		}

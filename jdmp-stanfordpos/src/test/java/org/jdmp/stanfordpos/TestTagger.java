@@ -29,7 +29,7 @@ import java.util.List;
 
 import org.jdmp.core.algorithm.tagger.Tagger;
 import org.jdmp.core.algorithm.tokenizer.Tokenizer;
-import org.jdmp.core.dataset.DefaultDataSet;
+import org.jdmp.core.dataset.DefaultListDataSet;
 import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.DefaultSample;
 import org.jdmp.core.sample.Sample;
@@ -80,11 +80,11 @@ public class TestTagger {
 			return;
 		}
 
-		ListDataSet ds = new DefaultDataSet();
+		ListDataSet ds = new DefaultListDataSet();
 		Sample sa1 = new DefaultSample();
-		sa1.setObject(Sample.INPUT, s1);
+		sa1.put(Sample.INPUT, s1);
 		Sample sa2 = new DefaultSample();
-		sa2.setObject(Sample.INPUT, s2);
+		sa2.put(Sample.INPUT, s2);
 		ds.add(sa1);
 		ds.add(sa2);
 
@@ -94,8 +94,8 @@ public class TestTagger {
 		sa1 = ds.get(0);
 		sa2 = ds.get(1);
 
-		Matrix m1 = sa1.getMatrix(Tagger.TAGGED);
-		Matrix m2 = sa2.getMatrix(Tagger.TAGGED);
+		Matrix m1 = sa1.getAsMatrix(Tagger.TAGGED);
+		Matrix m2 = sa2.getAsMatrix(Tagger.TAGGED);
 
 		assertEquals(2, m1.getColumnCount());
 		assertEquals(11, m1.getRowCount());

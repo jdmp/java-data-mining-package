@@ -37,15 +37,15 @@ public class DefaultSampleFactory extends AbstractSampleFactory {
 
 	public final Sample linkToMatrix(Matrix input) {
 		Sample s = new DefaultSample();
-		s.setMatrix(Sample.INPUT, input);
+		s.put(Sample.INPUT, input);
 		s.setLabel(input.getLabel());
 		return s;
 	}
 
 	public final Sample classificationSample(Matrix input, Matrix target) {
 		Sample s = new DefaultSample();
-		s.setMatrix(Sample.INPUT, input);
-		s.setMatrix(Sample.TARGET, target);
+		s.put(Sample.INPUT, input);
+		s.put(Sample.TARGET, target);
 		return s;
 	}
 
@@ -72,7 +72,7 @@ public class DefaultSampleFactory extends AbstractSampleFactory {
 		ret.setLabel(s.getLabel());
 		ret.setDescription(s.getDescription());
 		for (String k : s.keySet()) {
-			Matrix v = s.get(k);
+			Matrix v = s.getAsMatrix(k);
 			if (v != null) {
 				ret.put(k, v.clone());
 			}

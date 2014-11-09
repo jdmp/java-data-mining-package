@@ -113,8 +113,8 @@ public class LinearRegressionGradientDescent extends AbstractClassifier {
 			for (int i = 0; i < batchSize; i++) {
 				int randomIndex = MathUtil.nextInteger(dataSet.size());
 				Sample s = dataSet.get(randomIndex);
-				inputs.add(s.getMatrix(Sample.INPUT).toColumnVector(Ret.NEW));
-				targets.add(s.getMatrix(Sample.TARGET).toColumnVector(Ret.NEW));
+				inputs.add(s.getAsMatrix(Sample.INPUT).toColumnVector(Ret.NEW));
+				targets.add(s.getAsMatrix(Sample.TARGET).toColumnVector(Ret.NEW));
 			}
 
 			Matrix input = Matrix.Factory.vertCat(inputs);
