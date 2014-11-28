@@ -53,12 +53,20 @@ public class Labeling2Matrix extends AbstractSparseDoubleMatrix2D {
 		throw new RuntimeException("not allowed");
 	}
 
-	public boolean contains(long... coordinates) {
+	public boolean containsCoordinates(long... coordinates) {
 		return labeling.valueAtLocation((int) coordinates[COLUMN]) != 0;
 	}
 
 	public long[] getSize() {
 		return new long[] { 1, labeling.getLabelAlphabet().size() };
+	}
+
+	public Iterable<long[]> availableCoordinates() {
+		throw new RuntimeException("not implemented");
+	}
+
+	public final void clear() {
+		throw new RuntimeException("matrix cannot be modified");
 	}
 
 }
