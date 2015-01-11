@@ -230,6 +230,12 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-examples</artifactId>
+			<version>${project.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-gui</artifactId>
 			<version>${project.version}</version>
 			<scope>compile</scope>
@@ -534,6 +540,13 @@
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-core</artifactId>
+			<version>${project.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jdmp</groupId>
+			<artifactId>jdmp-examples</artifactId>
 			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
