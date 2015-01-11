@@ -69,4 +69,8 @@ public class DefaultSample extends AbstractSample {
 		return map.put(key, value);
 	}
 
+	public int size() {
+		return map.size();
+	}
+
 }
