@@ -97,4 +97,8 @@ public class MatrixSample extends AbstractSample {
 		return null;
 	}
 
+	public int size() {
+		return dataSet.size();
+	}
+
 }
