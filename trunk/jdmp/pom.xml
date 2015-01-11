@@ -55,6 +55,7 @@
 		<module>../jdmp-bsh</module>
 		<module>../jdmp-complete</module>
 		<module>../jdmp-core</module>
+		<module>../jdmp-examples</module>
 		<module>../jdmp-gui</module>
 		<module>../jdmp-jetty</module>
 		<module>../jdmp-jgroups</module>
