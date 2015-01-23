@@ -36,8 +36,8 @@ import javax.swing.table.TableCellRenderer;
 
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.util.ColorUtil;
 import org.ujmp.gui.renderer.MatrixHeatmapRenderer;
-import org.ujmp.gui.util.ColorUtil;
 
 public class SampleTableCellRenderer implements TableCellRenderer {
 
