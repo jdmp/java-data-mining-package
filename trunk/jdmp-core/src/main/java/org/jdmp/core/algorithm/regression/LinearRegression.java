@@ -129,7 +129,7 @@ public class LinearRegression extends AbstractRegressor {
 
 		if (numberOfPrincipalComponents > 0) {
 			if (sampleCount < featureCount) {
-				final Matrix xt = x.transpose();
+				//final Matrix xt = x.transpose();
 				parameters = x.pinv(numberOfPrincipalComponents).mtimes(y);
 			} else {
 				final Matrix xt = x.transpose();
