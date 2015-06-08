@@ -39,6 +39,7 @@ public class DataSetMenu extends JMenu {
 		add(new ClassifyDataSetMenu(component, o, owner));
 		add(new ClusterDataSetMenu(component, o, owner));
 		add(new CompressDataSetMenu(component, o, owner));
+		add(new HashDataSetMenu(component, o, owner));
 		add(new IndexDataSetMenu(component, o, owner));
 	}
 }

@@ -33,6 +33,7 @@ import javax.swing.JSeparator;
 import org.jdmp.gui.dataset.actions.ClassifyConstantAction;
 import org.jdmp.gui.dataset.actions.ClassifyKNNAction;
 import org.jdmp.gui.dataset.actions.ClassifyLinearRegressionAction;
+import org.jdmp.gui.dataset.actions.ClassifyMultivariateGaussian;
 import org.jdmp.gui.dataset.actions.ClassifyNaiveBayesAction;
 import org.jdmp.gui.dataset.actions.ClassifyRandomAction;
 import org.ujmp.core.interfaces.GUIObject;
@@ -46,6 +47,7 @@ public class ClassifyJDMPMenu extends JMenu {
 		add(new JMenuItem(new ClassifyLinearRegressionAction(component, o)));
 		add(new JMenuItem(new ClassifyNaiveBayesAction(component, o)));
 		add(new JMenuItem(new ClassifyKNNAction(component, o)));
+		add(new JMenuItem(new ClassifyMultivariateGaussian(component, o)));
 		add(new JSeparator());
 		add(new JMenuItem(new ClassifyRandomAction(component, o)));
 		add(new JMenuItem(new ClassifyConstantAction(component, o)));

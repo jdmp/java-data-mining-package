@@ -115,7 +115,12 @@ public class LinearRegression extends AbstractRegressor {
 
 		for (int r = 0; r < x.getRowCount(); r++) {
 			for (int c = 0; c < x.getColumnCount(); c++) {
-				x.setAsDouble(x.getAsDouble(r, c) / std.getAsDouble(0, c), r, c);
+				double s = std.getAsDouble(0, c);
+				if (s == 0) {
+					x.setAsDouble(x.getAsDouble(r, c), r, c);
+				} else {
+					x.setAsDouble(x.getAsDouble(r, c) / s, r, c);
+				}
 			}
 		}
 
@@ -127,9 +132,10 @@ public class LinearRegression extends AbstractRegressor {
 
 		Matrix parameters;
 
-		if (numberOfPrincipalComponents > 0) {
+		if (numberOfPrincipalComponents > 0
+				&& numberOfPrincipalComponents < Math.min(x.getRowCount(), x.getColumnCount() - 1)) {
 			if (sampleCount < featureCount) {
-				//final Matrix xt = x.transpose();
+				// final Matrix xt = x.transpose();
 				parameters = x.pinv(numberOfPrincipalComponents).mtimes(y);
 			} else {
 				final Matrix xt = x.transpose();

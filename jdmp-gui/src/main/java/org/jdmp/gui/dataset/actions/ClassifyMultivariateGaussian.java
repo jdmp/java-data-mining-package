@@ -23,22 +23,31 @@
 
 package org.jdmp.gui.dataset.actions;
 
+import javax.swing.Action;
 import javax.swing.JComponent;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 
-import org.jdmp.gui.dataset.DataSetGUIObject;
+import org.jdmp.core.algorithm.estimator.MultivariateGaussianDensityEstimator;
+import org.jdmp.core.dataset.ListDataSet;
+import org.ujmp.core.interfaces.GUIObject;
+import org.ujmp.gui.actions.AbstractObjectAction;
 
-public class DataSetExamplesMenu extends JMenu {
-	private static final long serialVersionUID = 4125290536630857445L;
+public class ClassifyMultivariateGaussian extends AbstractObjectAction {
+	private static final long serialVersionUID = -6205482003185384101L;
 
-	public DataSetExamplesMenu(JComponent component, DataSetGUIObject ds) {
-		super("DataSet");
-		add(new JMenuItem(new IrisDataSetAction(component, ds)));
-		add(new JMenuItem(new HenonDataSetAction(component, ds)));
-		add(new JMenuItem(new AnimalDataSetAction(component, ds)));
-		add(new JMenuItem(new MNISTTrainAction(component, ds)));
-		add(new JMenuItem(new MNISTTestAction(component, ds)));
+	public ClassifyMultivariateGaussian(JComponent c, GUIObject i) {
+		super(c, i);
+		putValue(Action.NAME, "Multivariate Gaussian");
+		putValue(Action.SHORT_DESCRIPTION, "Classify a DataSet using Multivariate Gaussians");
 	}
 
+	public Object call() {
+		try {
+			MultivariateGaussianDensityEstimator lr = new MultivariateGaussianDensityEstimator();
+			lr.trainAll((ListDataSet) getCoreObject());
+			lr.predictAll((ListDataSet) getCoreObject());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

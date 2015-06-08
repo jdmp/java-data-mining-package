@@ -21,24 +21,27 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.gui.dataset.actions;
+package org.jdmp.gui.dataset;
+
+import java.awt.event.KeyEvent;
 
 import javax.swing.JComponent;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-import org.jdmp.gui.dataset.DataSetGUIObject;
+import org.jdmp.gui.dataset.actions.HashRandomProjectionAction;
+import org.jdmp.gui.dataset.actions.LocalitySensiveHashingAction;
+import org.jdmp.gui.dataset.actions.MinHashingAction;
+import org.ujmp.core.interfaces.GUIObject;
 
-public class DataSetExamplesMenu extends JMenu {
-	private static final long serialVersionUID = 4125290536630857445L;
+public class HashDataSetMenu extends JMenu {
+	private static final long serialVersionUID = 9200175637024890702L;
 
-	public DataSetExamplesMenu(JComponent component, DataSetGUIObject ds) {
-		super("DataSet");
-		add(new JMenuItem(new IrisDataSetAction(component, ds)));
-		add(new JMenuItem(new HenonDataSetAction(component, ds)));
-		add(new JMenuItem(new AnimalDataSetAction(component, ds)));
-		add(new JMenuItem(new MNISTTrainAction(component, ds)));
-		add(new JMenuItem(new MNISTTestAction(component, ds)));
+	public HashDataSetMenu(JComponent component, DataSetGUIObject o, GUIObject owner) {
+		super("Hashing");
+		setMnemonic(KeyEvent.VK_H);
+		add(new JMenuItem(new HashRandomProjectionAction(component, o)));
+		add(new JMenuItem(new LocalitySensiveHashingAction(component, o)));
+		add(new JMenuItem(new MinHashingAction(component, o)));
 	}
-
 }

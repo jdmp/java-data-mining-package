@@ -23,22 +23,30 @@
 
 package org.jdmp.gui.dataset.actions;
 
+import javax.swing.Action;
 import javax.swing.JComponent;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 
+import org.jdmp.core.dataset.DataSet;
 import org.jdmp.gui.dataset.DataSetGUIObject;
 
-public class DataSetExamplesMenu extends JMenu {
-	private static final long serialVersionUID = 4125290536630857445L;
+public class MNISTTrainAction extends DataSetAction {
+	private static final long serialVersionUID = 3129361741996005728L;
 
-	public DataSetExamplesMenu(JComponent component, DataSetGUIObject ds) {
-		super("DataSet");
-		add(new JMenuItem(new IrisDataSetAction(component, ds)));
-		add(new JMenuItem(new HenonDataSetAction(component, ds)));
-		add(new JMenuItem(new AnimalDataSetAction(component, ds)));
-		add(new JMenuItem(new MNISTTrainAction(component, ds)));
-		add(new JMenuItem(new MNISTTestAction(component, ds)));
+	public MNISTTrainAction(JComponent c, DataSetGUIObject ds) {
+		super(c, ds);
+		putValue(Action.NAME, "MNIST Training DataSet");
+		putValue(Action.SHORT_DESCRIPTION, "Loads the MNIST training dataset of handwritten digits");
+	}
+
+	public Object call() {
+		try {
+			DataSet ds = DataSet.Factory.MNISTTrain();
+			ds.showGUI();
+			return ds;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }

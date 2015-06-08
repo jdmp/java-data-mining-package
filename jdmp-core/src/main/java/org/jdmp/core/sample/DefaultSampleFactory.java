@@ -49,6 +49,19 @@ public class DefaultSampleFactory extends AbstractSampleFactory {
 		return s;
 	}
 
+	public final Sample classificationSample(Matrix input, int classId, int classCount) {
+		Sample s = new DefaultSample();
+		s.put(Sample.INPUT, input);
+		Matrix target = Matrix.Factory.zeros(1, classCount);
+		target.setAsDouble(1, 0, classId);
+		s.put(Sample.TARGET, target);
+		return s;
+	}
+
+	public final Sample classificationSample(Matrix input, boolean target) {
+		return classificationSample(input, target ? 1 : 0, 2);
+	}
+
 	public final Sample emptySample() {
 		return new DefaultSample();
 	}

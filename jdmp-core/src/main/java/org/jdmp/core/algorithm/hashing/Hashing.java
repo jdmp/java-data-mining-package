@@ -21,24 +21,21 @@
  * Boston, MA  02110-1301  USA
  */
 
-package org.jdmp.gui.dataset.actions;
+package org.jdmp.core.algorithm.hashing;
 
-import javax.swing.JComponent;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
+import org.jdmp.core.dataset.ListDataSet;
+import org.jdmp.core.sample.Sample;
+import org.ujmp.core.Matrix;
 
-import org.jdmp.gui.dataset.DataSetGUIObject;
+public interface Hashing {
 
-public class DataSetExamplesMenu extends JMenu {
-	private static final long serialVersionUID = 4125290536630857445L;
+	public void reset();
 
-	public DataSetExamplesMenu(JComponent component, DataSetGUIObject ds) {
-		super("DataSet");
-		add(new JMenuItem(new IrisDataSetAction(component, ds)));
-		add(new JMenuItem(new HenonDataSetAction(component, ds)));
-		add(new JMenuItem(new AnimalDataSetAction(component, ds)));
-		add(new JMenuItem(new MNISTTrainAction(component, ds)));
-		add(new JMenuItem(new MNISTTestAction(component, ds)));
-	}
+	public void train(ListDataSet dataSet);
 
+	public void hash(Sample sample);
+
+	public void hash(ListDataSet dataSet);
+
+	public Matrix hash(Matrix input);
 }

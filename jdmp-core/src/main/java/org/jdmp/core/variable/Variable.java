@@ -61,6 +61,9 @@ public interface Variable extends CoreObject, ListMatrix<Matrix> {
 	public static final String FMEASUREMACRO = "FMeasureMacro";
 	public static final String COMPRESSED = "Compressed";
 	public static final String DECOMPRESSED = "Decompressed";
+	public static final String HASH = "Hash";
+	public static final String TARGETCLASS = "TargetClass";
+	public static final String TARGETLABEL = "TargetLabel";
 
 	public static final VariableFactory Factory = new DefaultVariableFactory();
 

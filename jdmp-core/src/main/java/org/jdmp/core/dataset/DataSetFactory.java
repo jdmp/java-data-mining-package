@@ -73,6 +73,10 @@ public interface DataSetFactory {
 
 	public ListDataSet IRIS();
 
+	public ListDataSet MNISTTrain() throws IOException;
+
+	public ListDataSet MNISTTest() throws IOException;
+
 	public ListDataSet importFromURL(FileFormat fileFormat, URL url, Object... parameters)
 			throws Exception;
 
@@ -81,7 +85,8 @@ public interface DataSetFactory {
 	public ListDataSet importFromJDBC(DBType type, String host, int port, String database,
 			String sqlStatement, String username, String password);
 
-	public ListDataSet importFromJDBC(String url, String sqlStatement, String username, String password);
+	public ListDataSet importFromJDBC(String url, String sqlStatement, String username,
+			String password);
 
 	public ListDataSet linkToJDBC(DBType type, String host, int port, String database,
 			String sqlStatement, String username, String password);
