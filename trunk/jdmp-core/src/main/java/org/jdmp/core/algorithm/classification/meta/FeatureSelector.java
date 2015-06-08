@@ -60,7 +60,7 @@ public class FeatureSelector extends AbstractRegressor {
 
 	private void selectFeatures(ListDataSet dataSet) {
 		if (selectionType == SelectionType.Random) {
-			selectedFeatures.addAll(MathUtil.sequenceListInt(0, getFeatureCount(dataSet) - 1));
+			selectedFeatures.addAll(MathUtil.sequenceListInt(0, getFeatureCount(dataSet)));
 			while (selectedFeatures.size() > selectedFeatureCount) {
 				selectedFeatures.remove(MathUtil.nextInteger(selectedFeatures.size()));
 			}

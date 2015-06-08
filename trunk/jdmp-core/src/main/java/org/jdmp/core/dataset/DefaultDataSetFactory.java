@@ -24,16 +24,21 @@
 package org.jdmp.core.dataset;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.BitSet;
 import java.util.Random;
+import java.util.zip.GZIPInputStream;
 
 import org.jdmp.core.algorithm.basic.CreateIris;
 import org.jdmp.core.sample.Sample;
+import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.enums.DBType;
 import org.ujmp.core.filematrix.FileFormat;
+import org.ujmp.core.util.UJMPSettings;
+import org.ujmp.core.util.io.HttpUtil;
 
 public class DefaultDataSetFactory extends AbstractDataSetFactory {
 
@@ -473,6 +478,107 @@ public class DefaultDataSetFactory extends AbstractDataSetFactory {
 
 	public ListDataSet IRIS() {
 		ListDataSet ds = (ListDataSet) (new CreateIris().calculate().get(Sample.TARGET));
+		return ds;
+	}
+
+	public ListDataSet MNISTTrain() throws IOException {
+		ListDataSet ds = DataSet.Factory.emptyDataSet();
+
+		File file1 = new File(UJMPSettings.getInstance().getTempDir()
+				+ "/train-images-idx3-ubyte.gz");
+		if (!file1.exists()) {
+			String url1 = "http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz";
+			HttpUtil.download(url1, file1);
+		}
+
+		File file2 = new File(UJMPSettings.getInstance().getTempDir()
+				+ "/train-labels-idx1-ubyte.gz");
+		if (!file2.exists()) {
+			String url2 = "http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz";
+			HttpUtil.download(url2, file2);
+		}
+
+		FileInputStream fis1 = new FileInputStream(file1);
+		GZIPInputStream gis1 = new GZIPInputStream(fis1);
+
+		FileInputStream fis2 = new FileInputStream(file2);
+		GZIPInputStream gis2 = new GZIPInputStream(fis2);
+
+		gis1.skip(16);
+		gis2.skip(8);
+
+		for (int i = 0; i < 60000; i++) {
+			Matrix input = Matrix.Factory.zeros(28, 28);
+			for (int row = 0; row < 28; row++) {
+				for (int col = 0; col < 28; col++) {
+					input.setAsDouble(gis1.read(), row, col);
+				}
+			}
+			int targetClass = gis2.read();
+			Sample s = Sample.Factory.classificationSample(input, targetClass, 10);
+			s.put(Variable.TARGETLABEL, String.valueOf(targetClass));
+			ds.add(s);
+		}
+
+		gis1.close();
+		fis1.close();
+
+		gis2.close();
+		fis2.close();
+
+		return ds;
+	}
+
+	public ListDataSet MNISTTest() throws IOException {
+		ListDataSet ds = DataSet.Factory.emptyDataSet();
+
+		File file1 = new File(UJMPSettings.getInstance().getTempDir()
+				+ "/t10k-images-idx3-ubyte.gz");
+		if (!file1.exists()) {
+			String url1 = "http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz";
+			HttpUtil.download(url1, file1);
+		}
+
+		File file2 = new File(UJMPSettings.getInstance().getTempDir()
+				+ "/t10k-labels-idx1-ubyte.gz");
+		if (!file2.exists()) {
+			String url2 = "http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz";
+			HttpUtil.download(url2, file2);
+		}
+
+		FileInputStream fis1 = new FileInputStream(file1);
+		GZIPInputStream gis1 = new GZIPInputStream(fis1);
+
+		FileInputStream fis2 = new FileInputStream(file2);
+		GZIPInputStream gis2 = new GZIPInputStream(fis2);
+
+		for (int i = 0; i < 16; i++) {
+			gis1.read();
+		}
+
+		for (int i = 0; i < 8; i++) {
+			gis2.read();
+		}
+
+		for (int i = 0; i < 10000; i++) {
+			Matrix input = Matrix.Factory.zeros(28, 28);
+			for (int row = 0; row < 28; row++) {
+				for (int col = 0; col < 28; col++) {
+					input.setAsInt(gis1.read(), row, col);
+				}
+			}
+			int targetClass = gis2.read();
+			Sample s = Sample.Factory.classificationSample(input, targetClass, 10);
+			s.put(Variable.TARGETLABEL, String.valueOf(targetClass));
+			ds.add(s);
+		}
+
+		gis1.close();
+		fis1.close();
+
+		gis2.close();
+		fis2.close();
+
 		return ds;
 	}
 

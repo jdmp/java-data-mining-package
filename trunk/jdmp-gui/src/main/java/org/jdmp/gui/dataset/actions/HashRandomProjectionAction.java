@@ -23,22 +23,34 @@
 
 package org.jdmp.gui.dataset.actions;
 
+import javax.swing.Action;
 import javax.swing.JComponent;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 
-import org.jdmp.gui.dataset.DataSetGUIObject;
+import org.jdmp.core.algorithm.hashing.Hashing;
+import org.jdmp.core.algorithm.hashing.HashRandomProjection;
+import org.jdmp.core.dataset.ListDataSet;
+import org.ujmp.core.interfaces.GUIObject;
+import org.ujmp.gui.actions.AbstractObjectAction;
+import org.ujmp.gui.util.GUIUtil;
 
-public class DataSetExamplesMenu extends JMenu {
-	private static final long serialVersionUID = 4125290536630857445L;
+public class HashRandomProjectionAction extends AbstractObjectAction {
+	private static final long serialVersionUID = 9045433278361398635L;
 
-	public DataSetExamplesMenu(JComponent component, DataSetGUIObject ds) {
-		super("DataSet");
-		add(new JMenuItem(new IrisDataSetAction(component, ds)));
-		add(new JMenuItem(new HenonDataSetAction(component, ds)));
-		add(new JMenuItem(new AnimalDataSetAction(component, ds)));
-		add(new JMenuItem(new MNISTTrainAction(component, ds)));
-		add(new JMenuItem(new MNISTTestAction(component, ds)));
+	public HashRandomProjectionAction(JComponent c, GUIObject i) {
+		super(c, i);
+		putValue(Action.NAME, "Random Projection");
+		putValue(Action.SHORT_DESCRIPTION,
+				"Hash a DataSet to binary vectors using random projections");
 	}
 
+	public Object call() {
+		try {
+			Hashing h = new HashRandomProjection(GUIUtil.getInt("Number of bits", 1, 65536));
+			h.train((ListDataSet) getCoreObject());
+			h.hash((ListDataSet) getCoreObject());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

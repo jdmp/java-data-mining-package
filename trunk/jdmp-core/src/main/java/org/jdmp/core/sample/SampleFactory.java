@@ -35,6 +35,10 @@ public interface SampleFactory {
 
 	public Sample classificationSample(Matrix input, Matrix target);
 
+	public Sample classificationSample(Matrix input, boolean target);
+
+	public Sample classificationSample(Matrix input, int classId, int classCount);
+
 	public Sample emptySample();
 
 	public RelationalSample relationalSample(Collection<?> items);
