@@ -23,14 +23,14 @@
 
 package org.jdmp.core.algorithm.estimator;
 
-import org.jdmp.core.algorithm.regression.AbstractRegressor;
-import org.jdmp.core.algorithm.regression.Regressor;
+import org.jdmp.core.algorithm.classification.AbstractClassifier;
+import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 
-public class MultivariateGaussianDensityEstimator extends AbstractRegressor {
+public class MultivariateGaussianDensityEstimator extends AbstractClassifier {
 	private static final long serialVersionUID = -8923432381344117225L;
 
 	private Matrix covarianceMatrix = null;
@@ -110,7 +110,7 @@ public class MultivariateGaussianDensityEstimator extends AbstractRegressor {
 		return result;
 	}
 
-	public Regressor emptyCopy() {
+	public Classifier emptyCopy() {
 		MultivariateGaussianDensityEstimator mvgd = new MultivariateGaussianDensityEstimator();
 		mvgd.setInputLabel(getInputLabel());
 		mvgd.setTargetLabel(getTargetLabel());
