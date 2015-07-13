@@ -241,19 +241,6 @@
 				<version>2.4.1</version>
 				<configuration>
 					<outputDirectory>${basedir}/target/classes</outputDirectory>
-					<includeEmptyDirs>true</includeEmptyDirs>
-					<resources>
-						<resource>
-							<directory>${basedir}/src/main/resources</directory>
-							<filtering>false</filtering>
-						</resource>
-					</resources>
-					<manifestEntries>
-						<SCM-Revision>${buildNumber}</SCM-Revision>
-						<Project-Version>${project.version}</Project-Version>
-						<Build-Date>${maven.build.timestamp}</Build-Date>
-						<Project-Name>${project.artifactId}-${project.version}</Project-Name>
-					</manifestEntries>
 					<descriptors>
 						<descriptor>src/assemble/complete.xml</descriptor>
 						<descriptor>src/assemble/sources.xml</descriptor>
@@ -265,6 +252,11 @@
 						<manifest>
 							<mainClass>org.jdmp.gui.JDMP</mainClass>
 						</manifest>
+						<manifestEntries>
+							<Project-Version>${project.version}</Project-Version>
+							<Build-Date>${maven.build.timestamp}</Build-Date>
+							<Project-Name>${project.artifactId}-${project.version}</Project-Name>
+						</manifestEntries>
 					</archive>
 				</configuration>
 			</plugin>
