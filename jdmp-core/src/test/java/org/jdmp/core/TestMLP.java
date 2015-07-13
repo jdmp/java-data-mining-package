@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2014 by Holger Arndt
+ * Copyright (C) 2008-2015 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -28,12 +28,15 @@ import static org.junit.Assert.assertEquals;
 import org.jdmp.core.algorithm.classification.mlp.MultiLayerNetwork;
 import org.jdmp.core.dataset.ListDataSet;
 import org.junit.Test;
+import org.ujmp.core.Matrix;
+import org.ujmp.core.calculation.Calculation.Ret;
 
 public class TestMLP {
 
 	@Test
 	public void testMLP() throws Exception {
 		ListDataSet iris = ListDataSet.Factory.IRIS();
+		iris.getInputMatrix().standardize(Ret.ORIG, Matrix.ROW);
 
 		MultiLayerNetwork mlp = new MultiLayerNetwork(10);
 		mlp.setLearningRate(0.05);
@@ -43,6 +46,6 @@ public class TestMLP {
 		}
 		mlp.predictAll(iris);
 
-		assertEquals(0.95, iris.getAccuracy(), 0.05);
+		assertEquals(0.90, iris.getAccuracy(), 0.15);
 	}
 }

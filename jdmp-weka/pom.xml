@@ -20,7 +20,10 @@
 		<dependency>
 			<groupId>nz.ac.waikato.cms.weka</groupId>
 			<artifactId>weka-dev</artifactId>
+			<version>3.7.11</version>
+			<scope>compile</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-core</artifactId>

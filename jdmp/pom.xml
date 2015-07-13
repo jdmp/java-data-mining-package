@@ -7,7 +7,7 @@
 	<version>0.3.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Java Data Mining Package</name>
-	<url>http://jdmp.org/</url>
+	<url>https://jdmp.org/</url>
 	<description>The Java Data Mining Package is a library for data mining and machine learning.</description>
 
 	<parent>
@@ -21,7 +21,7 @@
 			<id>arndt</id>
 			<name>Holger Arndt</name>
 			<email>mail@holger-arndt.com</email>
-			<url>http://holger-arndt.com/</url>
+			<url>https://holger-arndt.com/</url>
 			<roles>
 				<role>administrator</role>
 			</roles>
@@ -29,8 +29,8 @@
 	</developers>
 
 	<organization>
-		<name>arndt.ai</name>
-		<url>http://arndt.ai/</url>
+		<name>Java Data Mining Package</name>
+		<url>https://jdmp.org/</url>
 	</organization>
 
 	<licenses>
@@ -163,6 +163,15 @@
 						<additionalJOption>-J-XX:MaxPermSize=512M</additionalJOption>
 					</additionalJOptions>
 					<maxmemory>1G</maxmemory>
+					<header><![CDATA[
+						<script async
+							src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+						<ins class="adsbygoogle" style="display:inline-block;width:320px;height:50px"
+							data-ad-client="ca-pub-1238159289842092" data-ad-slot="8359296562"></ins>
+						<script>
+							(adsbygoogle = window.adsbygoogle || []).push({});
+						</script>
+					]]></header>
 				</configuration>
 				<executions>
 					<execution>
@@ -297,76 +306,11 @@
 
 	<dependencyManagement>
 		<dependencies>
-
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
 				<version>4.11</version>
 				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.beanshell</groupId>
-				<artifactId>bsh</artifactId>
-				<version>2.0b4</version>
-				<scope>compile</scope>
-			</dependency>
-			<dependency>
-				<groupId>tw.edu.ntu.csie</groupId>
-				<artifactId>libsvm</artifactId>
-				<version>3.17</version>
-				<scope>compile</scope>
-			</dependency>
-			<dependency>
-				<groupId>nz.ac.waikato.cms.weka</groupId>
-				<artifactId>weka-dev</artifactId>
-				<version>3.7.11</version>
-				<scope>compile</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.jgroups</groupId>
-				<artifactId>jgroups</artifactId>
-				<version>3.5.1.Final</version>
-				<scope>compile</scope>
-			</dependency>
-			<dependency>
-				<groupId>mulan</groupId>
-				<artifactId>mulan</artifactId>
-				<version>0.2</version>
-				<scope>compile</scope>
-			</dependency>
-			<dependency>
-				<groupId>cc.mallet</groupId>
-				<artifactId>mallet</artifactId>
-				<version>2.0.7</version>
-				<scope>compile</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.lucene</groupId>
-				<artifactId>lucene-core</artifactId>
-				<version>4.10.1</version>
-				<scope>compile</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.lucene</groupId>
-				<artifactId>lucene-queries</artifactId>
-				<version>4.10.1</version>
-				<scope>compile</scope>
-			</dependency>
-			<dependency>
-				<groupId>edu.stanford.nlp</groupId>
-				<artifactId>stanford-corenlp</artifactId>
-				<version>3.4.1</version>
-			</dependency>
-			<dependency>
-				<groupId>edu.stanford.nlp</groupId>
-				<artifactId>stanford-corenlp</artifactId>
-				<classifier>models</classifier>
-				<version>3.4.1</version>
-			</dependency>
-			<dependency>
-				<groupId>org.eclipse.jetty</groupId>
-				<artifactId>jetty-server</artifactId>
-				<version>9.2.6.v20141205</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

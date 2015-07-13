@@ -20,7 +20,10 @@
 		<dependency>
 			<groupId>org.jgroups</groupId>
 			<artifactId>jgroups</artifactId>
+			<version>3.5.1.Final</version>
+			<scope>compile</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-core</artifactId>

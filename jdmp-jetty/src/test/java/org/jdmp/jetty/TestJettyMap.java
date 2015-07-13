@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2014 by Holger Arndt
+ * Copyright (C) 2008-2015 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -24,8 +24,8 @@
 package org.jdmp.jetty;
 
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.jdmp.jetty.collections.JettyMapClient;
 import org.junit.After;
@@ -38,7 +38,7 @@ public class TestJettyMap extends AbstractStringMapTest {
 
 	@Before
 	public void setUp() throws Exception {
-		Map<Object, Object> originalMap = new HashMap<Object, Object>();
+		Map<Object, Object> originalMap = new TreeMap<Object, Object>();
 		server = new JettyObjectServer(originalMap, 5555);
 		server.start();
 	}
