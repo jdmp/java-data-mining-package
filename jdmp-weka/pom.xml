@@ -4,6 +4,7 @@
 	<artifactId>jdmp-weka</artifactId>
 	<packaging>jar</packaging>
 	<name>jdmp-weka</name>
+	<url>https://jdmp.org/jdmp-weka/</url>
 
 	<parent>
 		<groupId>org.jdmp</groupId>

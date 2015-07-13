@@ -4,6 +4,7 @@
 	<artifactId>jdmp-complete</artifactId>
 	<packaging>pom</packaging>
 	<name>jdmp-complete</name>
+	<url>https://jdmp.org/jdmp-complete/</url>
 
 	<parent>
 		<groupId>org.jdmp</groupId>

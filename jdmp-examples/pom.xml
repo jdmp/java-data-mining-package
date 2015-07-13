@@ -4,6 +4,7 @@
 	<artifactId>jdmp-examples</artifactId>
 	<packaging>jar</packaging>
 	<name>jdmp-examples</name>
+	<url>https://jdmp.org/jdmp-examples/</url>
 
 	<parent>
 		<groupId>org.jdmp</groupId>

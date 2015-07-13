@@ -4,6 +4,7 @@
 	<artifactId>jdmp-bsh</artifactId>
 	<packaging>jar</packaging>
 	<name>jdmp-bsh</name>
+	<url>https://jdmp.org/jdmp-bsh/</url>
 
 	<parent>
 		<groupId>org.jdmp</groupId>

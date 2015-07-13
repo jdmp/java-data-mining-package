@@ -4,6 +4,7 @@
 	<artifactId>jdmp-mallet</artifactId>
 	<packaging>jar</packaging>
 	<name>jdmp-mallet</name>
+	<url>https://jdmp.org/jdmp-mallet/</url>
 
 	<parent>
 		<groupId>org.jdmp</groupId>

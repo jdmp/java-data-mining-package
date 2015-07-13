@@ -4,6 +4,7 @@
 	<artifactId>jdmp-core</artifactId>
 	<packaging>jar</packaging>
 	<name>jdmp-core</name>
+	<url>https://jdmp.org/jdmp-core/</url>
 
 	<parent>
 		<groupId>org.jdmp</groupId>

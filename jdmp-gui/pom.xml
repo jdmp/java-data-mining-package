@@ -4,6 +4,7 @@
 	<artifactId>jdmp-gui</artifactId>
 	<packaging>jar</packaging>
 	<name>jdmp-gui</name>
+	<url>https://jdmp.org/jdmp-gui/</url>
 
 	<parent>
 		<groupId>org.jdmp</groupId>

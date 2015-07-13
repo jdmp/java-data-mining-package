@@ -4,6 +4,7 @@
 	<artifactId>jdmp-liblinear</artifactId>
 	<packaging>jar</packaging>
 	<name>jdmp-liblinear</name>
+	<url>https://jdmp.org/jdmp-liblinear/</url>
 
 	<parent>
 		<groupId>org.jdmp</groupId>

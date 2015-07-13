@@ -4,6 +4,7 @@
 	<artifactId>jdmp-jgroups</artifactId>
 	<packaging>jar</packaging>
 	<name>jdmp-jgroups</name>
+	<url>https://jdmp.org/jdmp-jgroups/</url>
 
 	<parent>
 		<groupId>org.jdmp</groupId>

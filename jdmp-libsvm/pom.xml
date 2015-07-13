@@ -4,6 +4,7 @@
 	<artifactId>jdmp-libsvm</artifactId>
 	<packaging>jar</packaging>
 	<name>jdmp-libsvm</name>
+	<url>https://jdmp.org/jdmp-libsvm/</url>
 
 	<parent>
 		<groupId>org.jdmp</groupId>
