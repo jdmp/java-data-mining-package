@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2014 by Holger Arndt
+ * Copyright (C) 2008-2015 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -49,7 +49,16 @@ public abstract class AbstractListDataSet extends AbstractListMatrix<Sample> imp
 	}
 
 	public final Matrix getInputMatrix() {
-		return getMatrix(INPUT);
+		Matrix input = getMatrix(INPUT);
+		if (input == null) {
+			List<Matrix> matrices = new FastArrayList<Matrix>();
+			for (Sample s : this) {
+				matrices.add(s.getAsMatrix(INPUT));
+			}
+			input = Matrix.Factory.vertCat(Ret.LINK, matrices);
+			getMetaData().put(INPUT, input);
+		}
+		return input;
 	}
 
 	public final List<ListDataSet> splitByCount(boolean shuffle, int... count) {
