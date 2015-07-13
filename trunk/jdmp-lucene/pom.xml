@@ -4,6 +4,7 @@
 	<artifactId>jdmp-lucene</artifactId>
 	<packaging>jar</packaging>
 	<name>jdmp-lucene</name>
+	<url>https://jdmp.org/jdmp-lucene/</url>
 
 	<parent>
 		<groupId>org.jdmp</groupId>

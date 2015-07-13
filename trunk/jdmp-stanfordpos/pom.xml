@@ -4,6 +4,7 @@
 	<artifactId>jdmp-stanfordpos</artifactId>
 	<packaging>jar</packaging>
 	<name>jdmp-stanfordpos</name>
+	<url>https://jdmp.org/jdmp-stanfordpos/</url>
 
 	<parent>
 		<groupId>org.jdmp</groupId>
