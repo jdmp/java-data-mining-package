@@ -4,7 +4,8 @@
 	<artifactId>jdmp-bsh</artifactId>
 	<packaging>jar</packaging>
 	<name>jdmp-bsh</name>
-	<url>https://jdmp.org/jdmp-bsh/</url>
+	<url>https://jdmp.org/0.3.0/jdmp-bsh/</url>
+	<description>Plugin to incorporate BeanShell</description>
 
 	<parent>
 		<groupId>org.jdmp</groupId>
@@ -12,6 +13,10 @@
 		<version>0.3.0-SNAPSHOT</version>
 		<relativePath>../jdmp</relativePath>
 	</parent>
+
+	<properties>
+		<rootdir>${project.parent.basedir}</rootdir>
+	</properties>
 
 	<dependencies>
 		<dependency>

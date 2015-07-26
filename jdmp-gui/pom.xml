@@ -4,7 +4,8 @@
 	<artifactId>jdmp-gui</artifactId>
 	<packaging>jar</packaging>
 	<name>jdmp-gui</name>
-	<url>https://jdmp.org/jdmp-gui/</url>
+	<url>https://jdmp.org/0.3.0/jdmp-gui/</url>
+	<description>Plugin to enable visualization and graphics</description>
 
 	<parent>
 		<groupId>org.jdmp</groupId>
@@ -12,6 +13,10 @@
 		<version>0.3.0-SNAPSHOT</version>
 		<relativePath>../jdmp</relativePath>
 	</parent>
+
+	<properties>
+		<rootdir>${project.parent.basedir}</rootdir>
+	</properties>
 
 	<dependencies>
 		<dependency>

@@ -31,10 +31,12 @@ public class JDMPPluginsMatrix extends UJMPPluginsMatrix {
 	public JDMPPluginsMatrix() {
 		super();
 		setLabel("JDMP Plugins");
+		addClass("jdmp-bsh");
+		addClass("jdmp-complete");
 		addClass("jdmp-core");
+		addClass("jdmp-examples");
 		addClass("jdmp-gui");
 		addClass("jdmp-jetty");
-		addClass("jdmp-jgroups");
 		addClass("jdmp-liblinear");
 		addClass("jdmp-libsvm");
 		addClass("jdmp-lucene");

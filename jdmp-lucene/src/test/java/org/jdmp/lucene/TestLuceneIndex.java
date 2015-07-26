@@ -37,6 +37,7 @@ public class TestLuceneIndex {
 		index.add(ds);
 		ListDataSet result = index.search("setosa");
 		assertEquals(50, result.size());
+		index.close();
 	}
 
 }

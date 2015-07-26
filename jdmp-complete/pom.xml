@@ -2,9 +2,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>jdmp-complete</artifactId>
-	<packaging>pom</packaging>
+	<packaging>jar</packaging>
 	<name>jdmp-complete</name>
-	<url>https://jdmp.org/jdmp-complete/</url>
+	<url>https://jdmp.org/0.3.0/jdmp-complete/</url>
+	<description>Collection of all available JDMP modules in one meta package</description>
 
 	<parent>
 		<groupId>org.jdmp</groupId>
@@ -12,6 +13,10 @@
 		<version>0.3.0-SNAPSHOT</version>
 		<relativePath>../jdmp</relativePath>
 	</parent>
+
+	<properties>
+		<rootdir>${project.parent.basedir}</rootdir>
+	</properties>
 
 	<dependencies>
 		<dependency>
@@ -259,13 +264,6 @@
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-jetty</artifactId>
-			<version>${project.version}</version>
-			<scope>compile</scope>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-jgroups</artifactId>
 			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
@@ -586,14 +584,6 @@
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-jetty</artifactId>
-			<version>${project.version}</version>
-			<type>test-jar</type>
-			<scope>test</scope>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-jgroups</artifactId>
 			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>

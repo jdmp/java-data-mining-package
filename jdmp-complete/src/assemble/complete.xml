@@ -20,7 +20,6 @@
 				<include>org.jdmp:jdmp-examples</include>
 				<include>org.jdmp:jdmp-gui</include>
 				<include>org.jdmp:jdmp-jetty</include>
-				<include>org.jdmp:jdmp-jgroups</include>
 				<include>org.jdmp:jdmp-liblinear</include>
 				<include>org.jdmp:jdmp-libsvm</include>
 				<include>org.jdmp:jdmp-lucene</include>

@@ -28,7 +28,7 @@ import org.ujmp.core.util.AbstractPlugin;
 public class Plugin extends AbstractPlugin {
 
 	public Plugin() {
-		super("library for indexing data sets");
+		super("Plugin to enable text indexing using Apache Lucene");
 		dependencies.add("ujmp-core");
 		dependencies.add("jdmp-core");
 		dependencies.add("lucene.jar");

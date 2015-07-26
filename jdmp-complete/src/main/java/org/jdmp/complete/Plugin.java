@@ -28,7 +28,7 @@ import org.ujmp.core.util.AbstractPlugin;
 public class Plugin extends AbstractPlugin {
 
 	public Plugin() {
-		super("collection of all packages for JDMP");
+		super("Collection of all available JDMP modules in one meta package");
 		dependencies.add("all");
 	}
 

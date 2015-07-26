@@ -4,7 +4,8 @@
 	<artifactId>jdmp-weka</artifactId>
 	<packaging>jar</packaging>
 	<name>jdmp-weka</name>
-	<url>https://jdmp.org/jdmp-weka/</url>
+	<url>https://jdmp.org/0.3.0/jdmp-weka/</url>
+	<description>Plugin to incorporate classification and clustering algorithms from Weka</description>
 
 	<parent>
 		<groupId>org.jdmp</groupId>
@@ -12,6 +13,10 @@
 		<version>0.3.0-SNAPSHOT</version>
 		<relativePath>../jdmp</relativePath>
 	</parent>
+
+	<properties>
+		<rootdir>${project.parent.basedir}</rootdir>
+	</properties>
 
 	<dependencies>
 		<dependency>

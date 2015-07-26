@@ -28,7 +28,7 @@ import org.ujmp.core.util.AbstractPlugin;
 public class Plugin extends AbstractPlugin {
 
 	public Plugin() {
-		super("library for classification using support vector machines");
+		super("Plugin to incorporate classification algorithms from libsvm");
 		dependencies.add("ujmp-core");
 		dependencies.add("jdmp-core");
 		dependencies.add("libsvm.jar");

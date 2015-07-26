@@ -34,10 +34,6 @@
 			<outputDirectory></outputDirectory>
 		</fileSet>
 		<fileSet>
-			<directory>../jdmp-jgroups/src/main/java</directory>
-			<outputDirectory></outputDirectory>
-		</fileSet>
-		<fileSet>
 			<directory>../jdmp-liblinear/src/main/java</directory>
 			<outputDirectory></outputDirectory>
 		</fileSet>

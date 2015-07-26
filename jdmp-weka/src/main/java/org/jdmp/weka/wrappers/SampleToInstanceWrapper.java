@@ -33,7 +33,8 @@ public class SampleToInstanceWrapper extends DenseInstance {
 
 	public SampleToInstanceWrapper(Matrix input, Matrix sampleWeight, Matrix targetOutput,
 			boolean discrete, boolean includeTarget) {
-		super((int) input.toRowVector(Ret.NEW).getRowCount() + 1);
+		super((int) input.toRowVector(Ret.LINK).getRowCount() + 1);
+		input = input.toRowVector(Ret.LINK);
 		if (sampleWeight != null) {
 			setWeight(sampleWeight.doubleValue());
 		} else {

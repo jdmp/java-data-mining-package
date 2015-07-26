@@ -61,6 +61,32 @@ public abstract class AbstractListDataSet extends AbstractListMatrix<Sample> imp
 		return input;
 	}
 
+	public final Matrix getPredictedMatrix() {
+		Matrix predicted = getMatrix(PREDICTED);
+		if (predicted == null) {
+			List<Matrix> matrices = new FastArrayList<Matrix>();
+			for (Sample s : this) {
+				matrices.add(s.getAsMatrix(PREDICTED));
+			}
+			predicted = Matrix.Factory.vertCat(Ret.LINK, matrices);
+			getMetaData().put(PREDICTED, predicted);
+		}
+		return predicted;
+	}
+
+	public final Matrix getTargetMatrix() {
+		Matrix target = getMatrix(TARGET);
+		if (target == null) {
+			List<Matrix> matrices = new FastArrayList<Matrix>();
+			for (Sample s : this) {
+				matrices.add(s.getAsMatrix(TARGET));
+			}
+			target = Matrix.Factory.vertCat(Ret.LINK, matrices);
+			getMetaData().put(TARGET, target);
+		}
+		return target;
+	}
+
 	public final List<ListDataSet> splitByCount(boolean shuffle, int... count) {
 		List<ListDataSet> dataSets = new ArrayList<ListDataSet>();
 		List<Sample> all = new FastArrayList<Sample>();
@@ -225,14 +251,6 @@ public abstract class AbstractListDataSet extends AbstractListMatrix<Sample> imp
 
 	public final void appendRMSEMatrix(Matrix m) {
 		setMatrix(RMSE, m);
-	}
-
-	public final Matrix getTargetMatrix() {
-		return getMatrix(TARGET);
-	}
-
-	public final Matrix getPredictedMatrix() {
-		return getMatrix(PREDICTED);
 	}
 
 	public final double getRMSE() {

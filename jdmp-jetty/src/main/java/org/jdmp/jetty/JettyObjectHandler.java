@@ -28,8 +28,11 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -86,6 +89,13 @@ public class JettyObjectHandler extends AbstractHandler {
 			}
 
 			result = method.invoke(object, parameters);
+			
+			// fix not serializable inner set
+			if (!(result instanceof Serializable)) {
+				if (result instanceof Set) {
+					result = new TreeSet((Set) result);
+				}
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();

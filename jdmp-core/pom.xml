@@ -4,7 +4,8 @@
 	<artifactId>jdmp-core</artifactId>
 	<packaging>jar</packaging>
 	<name>jdmp-core</name>
-	<url>https://jdmp.org/jdmp-core/</url>
+	<url>https://jdmp.org/0.3.0/jdmp-core/</url>
+	<description>Main package of JDMP containing machine learning algorithms and functions</description>
 
 	<parent>
 		<groupId>org.jdmp</groupId>
@@ -12,6 +13,10 @@
 		<version>0.3.0-SNAPSHOT</version>
 		<relativePath>../jdmp</relativePath>
 	</parent>
+
+	<properties>
+		<rootdir>${project.parent.basedir}</rootdir>
+	</properties>
 
 	<dependencies>
 		<dependency>
