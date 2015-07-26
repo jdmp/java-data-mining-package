@@ -4,7 +4,8 @@
 	<artifactId>jdmp-libsvm</artifactId>
 	<packaging>jar</packaging>
 	<name>jdmp-libsvm</name>
-	<url>https://jdmp.org/jdmp-libsvm/</url>
+	<url>https://jdmp.org/0.3.0/jdmp-libsvm/</url>
+	<description>Plugin to incorporate classification algorithms from libsvm</description>
 
 	<parent>
 		<groupId>org.jdmp</groupId>
@@ -12,6 +13,10 @@
 		<version>0.3.0-SNAPSHOT</version>
 		<relativePath>../jdmp</relativePath>
 	</parent>
+
+	<properties>
+		<rootdir>${project.parent.basedir}</rootdir>
+	</properties>
 
 	<dependencies>
 		<dependency>

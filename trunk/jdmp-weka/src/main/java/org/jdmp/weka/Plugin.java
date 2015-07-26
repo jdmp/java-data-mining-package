@@ -28,7 +28,7 @@ import org.ujmp.core.util.AbstractPlugin;
 public class Plugin extends AbstractPlugin {
 
 	public Plugin() {
-		super("interface to connect to Weka");
+		super("Plugin to incorporate classification and clustering algorithms from Weka");
 		dependencies.add("ujmp-core");
 		dependencies.add("jdmp-core");
 		dependencies.add("weka.jar");

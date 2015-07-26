@@ -4,7 +4,8 @@
 	<artifactId>jdmp-jetty</artifactId>
 	<packaging>jar</packaging>
 	<name>jdmp-jetty</name>
-	<url>https://jdmp.org/jdmp-jetty/</url>
+	<url>https://jdmp.org/0.3.0/jdmp-jetty/</url>
+	<description>Plugin to incorporate Jetty web server</description>
 
 	<parent>
 		<groupId>org.jdmp</groupId>
@@ -12,6 +13,10 @@
 		<version>0.3.0-SNAPSHOT</version>
 		<relativePath>../jdmp</relativePath>
 	</parent>
+
+	<properties>
+		<rootdir>${project.parent.basedir}</rootdir>
+	</properties>
 
 	<dependencies>
 		<dependency>

@@ -28,7 +28,7 @@ import org.ujmp.core.util.AbstractPlugin;
 public class Plugin extends AbstractPlugin {
 
 	public Plugin() {
-		super("core package for algorithms and data objects");
+		super("Main package of JDMP containing machine learning algorithms and functions");
 		dependencies.add("ujmp-core");
 	}
 

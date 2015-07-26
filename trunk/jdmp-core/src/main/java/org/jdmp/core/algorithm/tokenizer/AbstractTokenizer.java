@@ -26,7 +26,6 @@ package org.jdmp.core.algorithm.tokenizer;
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
-import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.listmatrix.DefaultListMatrix;
 import org.ujmp.core.listmatrix.ListMatrix;
@@ -36,14 +35,9 @@ public abstract class AbstractTokenizer extends AbstractAlgorithm implements Tok
 
 	public final void tokenize(String variableKey, Sample sample) throws Exception {
 		Matrix mv = sample.getAsMatrix(variableKey);
-		if (mv instanceof Variable) {
-			Variable input = (Variable) mv;
-			for (Matrix m : input) {
-				ListMatrix<ListMatrix<String>> r = tokenize(m);
-				for (Matrix n : r) {
-					sample.put(Tokenizer.TOKENIZED, n);
-				}
-			}
+		ListMatrix<ListMatrix<String>> r = tokenize(mv);
+		for (Matrix n : r) {
+			sample.put(Tokenizer.TOKENIZED, n);
 		}
 	}
 

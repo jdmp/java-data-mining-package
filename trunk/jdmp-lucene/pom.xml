@@ -4,7 +4,8 @@
 	<artifactId>jdmp-lucene</artifactId>
 	<packaging>jar</packaging>
 	<name>jdmp-lucene</name>
-	<url>https://jdmp.org/jdmp-lucene/</url>
+	<url>https://jdmp.org/0.3.0/jdmp-lucene/</url>
+	<description>Plugin to enable text indexing using Apache Lucene</description>
 
 	<parent>
 		<groupId>org.jdmp</groupId>
@@ -13,22 +14,14 @@
 		<relativePath>../jdmp</relativePath>
 	</parent>
 
+	<properties>
+		<rootdir>${project.parent.basedir}</rootdir>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-core</artifactId>
-			<version>4.10.1</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-queries</artifactId>
-			<version>4.10.1</version>
-			<scope>compile</scope>
 		</dependency>
 
 		<dependency>

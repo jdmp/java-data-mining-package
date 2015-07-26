@@ -110,7 +110,7 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 
 	private static final int MAXWORDLENGTH = 20;
 
-	private static final Version LUCENEVERSION = Version.LUCENE_4_10_1;
+	private static final Version LUCENEVERSION = Version.LUCENE_47;
 
 	public LuceneIndex(Index index) throws Exception {
 		this(null, false, null, new Index[] { index });
@@ -209,24 +209,15 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 		String id = sample.getId();
 		doc.add(new StringField(Sample.ID, id, Field.Store.YES));
 
-		for (Object mv : sample.values()) {
-			if (mv instanceof Variable) {
-				Variable v = (Variable) mv;
-				String key = v.getLabel();
-				if (Sample.ID.equals(key)) {
-					// skip
-				} else if (fieldsToSkip.contains(key)) {
-					// skip
-				} else {
-					String value = "";
-					for (Matrix m : v) {
-						for (long[] c : m.availableCoordinates()) {
-							value += " " + m.getAsString(c);
-						}
-					}
-					doc.add(new StringField(key, value.trim(), Field.Store.YES));
-					fields.add(key);
-				}
+		for (String key : sample.keySet()) {
+			if (Sample.ID.equals(key)) {
+				// skip
+			} else if (fieldsToSkip.contains(key)) {
+				// skip
+			} else {
+				String value = sample.getAsString(key);
+				doc.add(new StringField(key, value, Field.Store.YES));
+				fields.add(key);
 			}
 		}
 
@@ -291,6 +282,8 @@ public class LuceneIndex extends AbstractIndex implements Flushable, Closeable, 
 
 	public synchronized ListDataSet search(Query query, int start, int count) throws Exception {
 		System.out.println("searching for: " + query);
+
+		TopDocs top = getIndexSearcher().search(query, 100);
 
 		MoreLikeThis mlt = new MoreLikeThis(getIndexSearcher().getIndexReader());
 		mlt.setFieldNames(new String[] { Variable.LABEL, Variable.DESCRIPTION, Variable.TAGS });

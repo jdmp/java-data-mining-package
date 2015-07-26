@@ -4,7 +4,8 @@
 	<artifactId>jdmp-examples</artifactId>
 	<packaging>jar</packaging>
 	<name>jdmp-examples</name>
-	<url>https://jdmp.org/jdmp-examples/</url>
+	<url>https://jdmp.org/0.3.0/jdmp-examples/</url>
+	<description>Some simple examples how to use the Java Data Mining Package</description>
 
 	<parent>
 		<groupId>org.jdmp</groupId>
@@ -12,6 +13,10 @@
 		<version>0.3.0-SNAPSHOT</version>
 		<relativePath>../jdmp</relativePath>
 	</parent>
+
+	<properties>
+		<rootdir>${project.parent.basedir}</rootdir>
+	</properties>
 
 	<dependencies>
 		<dependency>
