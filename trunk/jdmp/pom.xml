@@ -10,11 +10,11 @@
 	<url>https://jdmp.org/</url>
 	<description>The Java Data Mining Package is a library for data mining and machine learning.</description>
 
-	<parent>
-		<groupId>org.sonatype.oss</groupId>
-		<artifactId>oss-parent</artifactId>
-		<version>7</version>
-	</parent>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<rootdir>${basedir}</rootdir>
+		<skipTests>true</skipTests>
+	</properties>
 
 	<developers>
 		<developer>
@@ -23,7 +23,7 @@
 			<email>mail@holger-arndt.com</email>
 			<url>https://holger-arndt.com/</url>
 			<roles>
-				<role>administrator</role>
+				<role>Project Manager</role>
 			</roles>
 		</developer>
 	</developers>
@@ -47,10 +47,6 @@
 		<tag>HEAD</tag>
 	</scm>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
-
 	<modules>
 		<module>../jdmp-bsh</module>
 		<module>../jdmp-complete</module>
@@ -58,7 +54,6 @@
 		<module>../jdmp-examples</module>
 		<module>../jdmp-gui</module>
 		<module>../jdmp-jetty</module>
-		<module>../jdmp-jgroups</module>
 		<module>../jdmp-liblinear</module>
 		<module>../jdmp-libsvm</module>
 		<module>../jdmp-lucene</module>
@@ -69,10 +64,22 @@
 
 	<profiles>
 		<profile>
-			<id>ossrh</id>
+			<id>jdmp</id>
+			<properties>
+				<skipJavadoc>true</skipJavadoc>
+			</properties>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
+			<distributionManagement>
+				<site>
+					<id>jdmp.org</id>
+					<url>scp://jdmp.org/var/www/jdmp.org/0.3.0/jdmp/</url>
+				</site>
+			</distributionManagement>
+		</profile>
+		<profile>
+			<id>ossrh</id>
 			<distributionManagement>
 				<snapshotRepository>
 					<id>ossrh</id>
@@ -83,6 +90,140 @@
 					<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 				</repository>
 			</distributionManagement>
+			<build>
+				<plugins>
+					<!-- create javadoc -->
+					<plugin>
+						<inherited>true</inherited>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>2.10.3</version>
+						<configuration>
+
+							<!-- better skip if possible, takes over 30min -->
+							<skip>${skipJavadoc}</skip>
+
+							<!-- collect all files in one directory, seems to take longer -->
+							<!-- Creating fake javadoc directory to prevent repeated invocations 
+								when enabled -->
+							<!-- <outputDirectory>${rootdir}/target/apidocs/${project.name}</outputDirectory> 
+								<reportOutputDirectory>${rootdir}/target/apidocs/${project.name}</reportOutputDirectory> -->
+
+							<!-- include source code in javadoc, seems to take longer if enabled -->
+							<linksource>false</linksource>
+
+							<!-- helps to speed things up -->
+							<maxmemory>2g</maxmemory>
+
+							<!-- set this to true to fix the OutOfMemoryException in Java 8 for 
+								Windows -->
+							<noindex>false</noindex>
+
+							<!-- it takes very long when set to false -->
+							<notree>false</notree>
+
+							<!-- not sure what this does -->
+							<failOnError>false</failOnError>
+
+							<!-- other possible settings, don't seem to be necessary -->
+							<!-- <notree>true</notree> -->
+							<!-- <additionalJOptions> -->
+							<!-- <additionalJOption>-J-Xss512M</additionalJOption> -->
+							<!-- <additionalJOption>-J-XX:MaxPermSize=512M</additionalJOption> -->
+							<!-- </additionalJOptions> -->
+
+							<header><![CDATA[
+						<script async
+							src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+						<ins class="adsbygoogle" style="display:inline-block;width:320px;height:50px"
+							data-ad-client="ca-pub-1238159289842092" data-ad-slot="8359296562"></ins>
+						<script>
+							(adsbygoogle = window.adsbygoogle || []).push({});
+						</script>
+					]]></header>
+
+							<footer><![CDATA[
+						<script type="text/javascript">
+                           var _paq = _paq || [];
+                           _paq.push(["trackPageView"]);
+                           _paq.push(["enableLinkTracking"]);
+                           (function () {
+                             var u = (("https:" == document.location.protocol) ? "https" : "http") + "://jdmp.org/tracking/";
+                             _paq.push(["setTrackerUrl", u + "piwik.php"]);
+                             _paq.push(["setSiteId", "3"]);
+                             var d = document, g = d.createElement("script"), s = d.getElementsByTagName("script")[0];
+                             g.type = "text/javascript";
+                             g.defer = true;
+                             g.async = true;
+                             g.src = u + "piwik.js";
+                             s.parentNode.insertBefore(g, s);
+                           })();
+                         </script>
+                         <noscript>
+                           <img src="//jdmp.org/tracking/piwik.php?idsite=3&amp;rec=1" style="border:0" alt=""/>
+                         </noscript>
+					]]></footer>
+
+
+							<links>
+								<link>https://jdmp.org/${project.version}/jdmp-bsh/apidocs</link>
+								<link>https://jdmp.org/${project.version}/jdmp-complete/apidocs</link>
+								<link>https://jdmp.org/${project.version}/jdmp-core/apidocs</link>
+								<link>https://jdmp.org/${project.version}/jdmp-examples/apidocs</link>
+								<link>https://jdmp.org/${project.version}/jdmp-gui/apidocs</link>
+								<link>https://jdmp.org/${project.version}/jdmp-jetty/apidocs</link>
+								<link>https://jdmp.org/${project.version}/jdmp-liblinear/apidocs</link>
+								<link>https://jdmp.org/${project.version}/jdmp-libsvm/apidocs</link>
+								<link>https://jdmp.org/${project.version}/jdmp-lucene/apidocs</link>
+								<link>https://jdmp.org/${project.version}/jdmp-mallet/apidocs</link>
+								<link>https://jdmp.org/${project.version}/jdmp-stanfordpos/apidocs</link>
+								<link>https://jdmp.org/${project.version}/jdmp-weka/apidocs</link>
+
+								<link>https://ujmp.org/${project.version}/ujmp-colt/apidocs</link>
+								<link>https://ujmp.org/${project.version}/ujmp-commonsmath/apidocs</link>
+								<link>https://ujmp.org/${project.version}/ujmp-complete/apidocs</link>
+								<link>https://ujmp.org/${project.version}/ujmp-core/apidocs</link>
+								<link>https://ujmp.org/${project.version}/ujmp-ehcache/apidocs</link>
+								<link>https://ujmp.org/${project.version}/ujmp-ejml/apidocs</link>
+								<link>https://ujmp.org/${project.version}/ujmp-elasticsearch/apidocs</link>
+								<link>https://ujmp.org/${project.version}/ujmp-examples/apidocs</link>
+								<link>https://ujmp.org/${project.version}/ujmp-gui/apidocs</link>
+								<link>https://ujmp.org/${project.version}/ujmp-hadoop/apidocs</link>
+								<link>https://ujmp.org/${project.version}/ujmp-itext/apidocs</link>
+								<link>https://ujmp.org/${project.version}/ujmp-jackcess/apidocs</link>
+								<link>https://ujmp.org/${project.version}/ujmp-jama/apidocs</link>
+								<link>https://ujmp.org/${project.version}/ujmp-jblas/apidocs</link>
+								<link>https://ujmp.org/${project.version}/ujmp-jdbc/apidocs</link>
+								<link>https://ujmp.org/${project.version}/ujmp-jetty/apidocs</link>
+								<link>https://ujmp.org/${project.version}/ujmp-jfreechart/apidocs</link>
+								<link>https://ujmp.org/${project.version}/ujmp-jmatio/apidocs</link>
+								<link>https://ujmp.org/${project.version}/ujmp-jsch/apidocs</link>
+								<link>https://ujmp.org/${project.version}/ujmp-jsci/apidocs</link>
+								<link>https://ujmp.org/${project.version}/ujmp-jscience/apidocs</link>
+								<link>https://ujmp.org/${project.version}/ujmp-jung/apidocs</link>
+								<link>https://ujmp.org/${project.version}/ujmp-la4j/apidocs</link>
+								<link>https://ujmp.org/${project.version}/ujmp-lucene/apidocs</link>
+								<link>https://ujmp.org/${project.version}/ujmp-mail/apidocs</link>
+								<link>https://ujmp.org/${project.version}/ujmp-mtj/apidocs</link>
+								<link>https://ujmp.org/${project.version}/ujmp-ojalgo/apidocs</link>
+								<link>https://ujmp.org/${project.version}/ujmp-parallelcolt/apidocs</link>
+								<link>https://ujmp.org/${project.version}/ujmp-pdfbox/apidocs</link>
+								<link>https://ujmp.org/${project.version}/ujmp-poi/apidocs</link>
+								<link>https://ujmp.org/${project.version}/ujmp-vecmath/apidocs</link>
+							</links>
+
+						</configuration>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 		<profile>
 			<id>sourceforge</id>
@@ -102,6 +243,8 @@
 	</profiles>
 
 	<build>
+
+		<!-- copy license files to META-INF -->
 		<resources>
 			<resource>
 				<targetPath>META-INF</targetPath>
@@ -115,30 +258,60 @@
 
 		<plugins>
 
+			<!-- be able to skip tests -->
 			<plugin>
+				<inherited>true</inherited>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.4.2</version>
+				<version>2.18.1</version>
 				<configuration>
-					<skipTests>true</skipTests>
+					<skipTests>${skipTests}</skipTests>
 				</configuration>
 			</plugin>
 
+			<!-- set compile level -->
 			<plugin>
+				<inherited>true</inherited>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
+				<version>3.3</version>
 				<configuration>
 					<source>1.5</source>
 					<target>1.5</target>
 				</configuration>
 			</plugin>
 
+			<!-- needed for creating project site -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.4</version>
+				<configuration>
+					<templateFile>${rootdir}/default-site.vm</templateFile>
+				</configuration>
+				<dependencies>
+					<!-- for scp protocol -->
+					<dependency>
+						<groupId>org.apache.maven.wagon</groupId>
+						<artifactId>wagon-ssh</artifactId>
+						<version>2.0</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
+			<!-- needed for site plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>2.8</version>
+			</plugin>
+
+			<!-- create sources jar files -->
 			<plugin>
 				<inherited>true</inherited>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>2.3</version>
+				<version>2.4</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -149,44 +322,11 @@
 				</executions>
 			</plugin>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.9.1</version>
-				<configuration>
-					<failOnError>false</failOnError>
-					<noindex>true</noindex>
-					<notree>true</notree>
-					<skip>true</skip>
-					<additionalJOptions>
-						<additionalJOption>-J-Xss512M</additionalJOption>
-						<additionalJOption>-J-XX:MaxPermSize=512M</additionalJOption>
-					</additionalJOptions>
-					<maxmemory>1G</maxmemory>
-					<header><![CDATA[
-						<script async
-							src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-						<ins class="adsbygoogle" style="display:inline-block;width:320px;height:50px"
-							data-ad-client="ca-pub-1238159289842092" data-ad-slot="8359296562"></ins>
-						<script>
-							(adsbygoogle = window.adsbygoogle || []).push({});
-						</script>
-					]]></header>
-				</configuration>
-				<executions>
-					<execution>
-						<id>attach-javadocs</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
+			<!-- sign jar files -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-gpg-plugin</artifactId>
-				<version>1.5</version>
+				<version>1.6</version>
 				<executions>
 					<execution>
 						<id>sign-artifacts</id>
@@ -198,10 +338,11 @@
 				</executions>
 			</plugin>
 
+			<!-- release to maven central -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
-				<version>2.5</version>
+				<version>2.5.2</version>
 				<configuration>
 					<autoVersionSubmodules>true</autoVersionSubmodules>
 					<useReleaseProfile>false</useReleaseProfile>
@@ -210,22 +351,28 @@
 				</configuration>
 			</plugin>
 
+			<!-- create jar files -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.5</version>
+				<version>2.6</version>
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>org.jdmp.gui.JDMP</mainClass>
-							<packageName>org.jdmp</packageName>
+							<!-- set main class -->
+							<mainClass>org.jdmp.core.JDMP</mainClass>
+
+							<!-- lists the dependency jar files in the class path -->
+							<addClasspath>true</addClasspath>
 						</manifest>
 						<manifestEntries>
-							<mode>development</mode>
-							<url>${project.url}</url>
+							<!-- add link to manifest -->
+							<url>https://jdmp.org/</url>
 						</manifestEntries>
 					</archive>
 				</configuration>
+
+				<!-- needed to create test-jar -->
 				<executions>
 					<execution>
 						<goals>
@@ -233,14 +380,16 @@
 						</goals>
 					</execution>
 				</executions>
+
 			</plugin>
 
+			<!-- assemble all files into single jar -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.4.1</version>
+				<version>2.5.5</version>
 				<configuration>
-					<outputDirectory>${basedir}/target/classes</outputDirectory>
+					<outputDirectory>${rootdir}/target</outputDirectory>
 					<descriptors>
 						<descriptor>src/assemble/complete.xml</descriptor>
 						<descriptor>src/assemble/sources.xml</descriptor>
@@ -251,11 +400,10 @@
 					<archive>
 						<manifest>
 							<mainClass>org.jdmp.gui.JDMP</mainClass>
+							<addClasspath>true</addClasspath>
 						</manifest>
 						<manifestEntries>
-							<Project-Version>${project.version}</Project-Version>
-							<Build-Date>${maven.build.timestamp}</Build-Date>
-							<Project-Name>${project.artifactId}-${project.version}</Project-Name>
+							<url>https://jdmp.org/</url>
 						</manifestEntries>
 					</archive>
 				</configuration>
@@ -263,34 +411,6 @@
 
 		</plugins>
 
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>org.apache.maven.plugins</groupId>
-										<artifactId>maven-enforcer-plugin</artifactId>
-										<versionRange>[1.0.0,)</versionRange>
-										<goals>
-											<goal>enforce</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore />
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 
 	</build>
 
