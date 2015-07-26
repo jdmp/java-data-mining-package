@@ -1,5 +1,5 @@
 # Java Data Mining Package
-A Java library for machine learning and data analytics
+> A Java library for machine learning and data analytics
 
 The Java Data Mining Package (JDMP) is an open source Java library for data analysis and machine learning. 
 It facilitates the access to data sources and machine learning algorithms (e.g. clustering, regression, 
