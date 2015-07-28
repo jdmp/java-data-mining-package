@@ -40,12 +40,16 @@
 		</license>
 	</licenses>
 
-	<scm>
-		<url>https://svn.code.sf.net/p/jdmp/code</url>
-		<connection>scm:svn:https://svn.code.sf.net/p/jdmp/code/trunk/</connection>
-		<developerConnection>scm:svn:https://svn.code.sf.net/p/jdmp/code/trunk/</developerConnection>
-		<tag>HEAD</tag>
-	</scm>
+    <scm>
+        <url>https://github.com/jdmp/java-data-mining-package</url>
+        <connection>scm:git:git://github.com/jdmp/java-data-mining-package.git</connection>
+        <developerConnection>scm:git:git@github.com:jdmp/java-data-mining-package.git</developerConnection>
+    </scm>
+
+    <issueManagement>
+        <url>https://github.com/jdmp/java-data-mining-package/issues</url>
+        <system>GitHub Issues</system>
+    </issueManagement>
 
 	<modules>
 		<module>../jdmp-bsh</module>
