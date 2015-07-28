@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/jdmp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jdmp-bsh" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jdmp-complete" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jdmp-core" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jdmp-examples" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jdmp-gui" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jdmp-jetty" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jdmp-liblinear" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jdmp-libsvm" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jdmp-lucene" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jdmp-mallet" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jdmp-stanfordpos" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jdmp-weka" charset="UTF-8" />
+  </component>
+</project>

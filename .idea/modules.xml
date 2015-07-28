@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Java-Data-Mining-Package.iml" filepath="$PROJECT_DIR$/.idea/Java-Data-Mining-Package.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jdmp/jdmp.iml" filepath="$PROJECT_DIR$/jdmp/jdmp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jdmp-bsh/jdmp-bsh.iml" filepath="$PROJECT_DIR$/jdmp-bsh/jdmp-bsh.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jdmp-complete/jdmp-complete.iml" filepath="$PROJECT_DIR$/jdmp-complete/jdmp-complete.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jdmp-core/jdmp-core.iml" filepath="$PROJECT_DIR$/jdmp-core/jdmp-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jdmp-examples/jdmp-examples.iml" filepath="$PROJECT_DIR$/jdmp-examples/jdmp-examples.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jdmp-gui/jdmp-gui.iml" filepath="$PROJECT_DIR$/jdmp-gui/jdmp-gui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jdmp-jetty/jdmp-jetty.iml" filepath="$PROJECT_DIR$/jdmp-jetty/jdmp-jetty.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jdmp-liblinear/jdmp-liblinear.iml" filepath="$PROJECT_DIR$/jdmp-liblinear/jdmp-liblinear.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jdmp-libsvm/jdmp-libsvm.iml" filepath="$PROJECT_DIR$/jdmp-libsvm/jdmp-libsvm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jdmp-lucene/jdmp-lucene.iml" filepath="$PROJECT_DIR$/jdmp-lucene/jdmp-lucene.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jdmp-mallet/jdmp-mallet.iml" filepath="$PROJECT_DIR$/jdmp-mallet/jdmp-mallet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jdmp-stanfordpos/jdmp-stanfordpos.iml" filepath="$PROJECT_DIR$/jdmp-stanfordpos/jdmp-stanfordpos.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jdmp-weka/jdmp-weka.iml" filepath="$PROJECT_DIR$/jdmp-weka/jdmp-weka.iml" />
+    </modules>
+  </component>
+</project>

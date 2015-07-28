@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <resourceExtensions />
+    <wildcardResourcePatterns>
+      <entry name="!?*.java" />
+      <entry name="!?*.form" />
+      <entry name="!?*.class" />
+      <entry name="!?*.groovy" />
+      <entry name="!?*.scala" />
+      <entry name="!?*.flex" />
+      <entry name="!?*.kt" />
+      <entry name="!?*.clj" />
+      <entry name="!?*.aj" />
+    </wildcardResourcePatterns>
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="false">
+        <processorPath useClasspath="true" />
+      </profile>
+      <profile default="false" name="Annotation profile for jdmp-complete" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="jdmp-complete" />
+      </profile>
+      <profile default="false" name="Annotation profile for jdmp-examples" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="jdmp-examples" />
+      </profile>
+      <profile default="false" name="Annotation profile for jdmp-bsh" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="jdmp-bsh" />
+      </profile>
+      <profile default="false" name="Annotation profile for jdmp-libsvm" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="jdmp-libsvm" />
+      </profile>
+      <profile default="false" name="Annotation profile for jdmp-weka" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="jdmp-weka" />
+      </profile>
+      <profile default="false" name="Annotation profile for jdmp-core" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="jdmp-core" />
+      </profile>
+      <profile default="false" name="Annotation profile for jdmp-jetty" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="jdmp-jetty" />
+      </profile>
+      <profile default="false" name="Annotation profile for jdmp-mallet" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="jdmp-mallet" />
+      </profile>
+      <profile default="false" name="Annotation profile for jdmp-stanfordpos" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="jdmp-stanfordpos" />
+      </profile>
+      <profile default="false" name="Annotation profile for jdmp-liblinear" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="jdmp-liblinear" />
+      </profile>
+      <profile default="false" name="Annotation profile for jdmp-lucene" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="jdmp-lucene" />
+      </profile>
+      <profile default="false" name="Annotation profile for jdmp-gui" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="jdmp-gui" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="1.5">
+      <module name="jdmp" target="1.5" />
+      <module name="jdmp-bsh" target="1.5" />
+      <module name="jdmp-complete" target="1.5" />
+      <module name="jdmp-core" target="1.5" />
+      <module name="jdmp-examples" target="1.5" />
+      <module name="jdmp-gui" target="1.5" />
+      <module name="jdmp-jetty" target="1.5" />
+      <module name="jdmp-liblinear" target="1.5" />
+      <module name="jdmp-libsvm" target="1.5" />
+      <module name="jdmp-lucene" target="1.5" />
+      <module name="jdmp-mallet" target="1.5" />
+      <module name="jdmp-stanfordpos" target="1.5" />
+      <module name="jdmp-weka" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

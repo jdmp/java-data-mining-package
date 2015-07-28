@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.ujmp:ujmp-ehcache:test-jar:tests:0.3.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/ujmp/ujmp-ehcache/0.3.0-SNAPSHOT/ujmp-ehcache-0.3.0-SNAPSHOT-tests.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/ujmp/ujmp-ehcache/0.3.0-SNAPSHOT/ujmp-ehcache-0.3.0-SNAPSHOT-test-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/ujmp/ujmp-ehcache/0.3.0-SNAPSHOT/ujmp-ehcache-0.3.0-SNAPSHOT-test-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
