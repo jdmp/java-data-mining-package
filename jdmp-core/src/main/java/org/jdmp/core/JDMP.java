@@ -43,7 +43,7 @@ public class JDMP extends Applet {
 
 	public static final String AUTHOR = "Holger Arndt";
 
-	public static final String COPYRIGHT = "2008-2014";
+	public static final String COPYRIGHT = "2008-2015";
 
 	protected static final PrintStream out = System.out;
 
@@ -120,7 +120,7 @@ public class JDMP extends Applet {
 		out.println(" * GNU Lesser General Public License for more details.");
 		out.println(" *");
 		out.println(" * If you would like to find out more, please take a look at the");
-		out.println(" * homepage of JDMP at http://www.jdmp.org/");
+		out.println(" * homepage of JDMP at https://jdmp.org/");
 		out.println(" */");
 		out.println();
 

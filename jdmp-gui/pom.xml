@@ -26,7 +26,7 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-gui</artifactId>
-			<version>${project.version}</version>
+			<version>0.3.0</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -39,7 +39,7 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-gui</artifactId>
-			<version>${project.version}</version>
+			<version>0.3.0</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
