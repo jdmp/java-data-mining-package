@@ -17,14 +17,14 @@
 			<includes>
 				<include>org.jdmp:jdmp-bsh</include>
 				<include>org.jdmp:jdmp-core</include>
-				<include>org.jdmp:jdmp-examples</include>
-				<include>org.jdmp:jdmp-gui</include>
-				<include>org.jdmp:jdmp-jetty</include>
-				<include>org.jdmp:jdmp-liblinear</include>
-				<include>org.jdmp:jdmp-libsvm</include>
-				<include>org.jdmp:jdmp-lucene</include>
-				<include>org.jdmp:jdmp-mallet</include>
-				<include>org.jdmp:jdmp-stanfordpos</include>
+                <include>org.jdmp:jdmp-corenlp</include>
+                <include>org.jdmp:jdmp-examples</include>
+                <include>org.jdmp:jdmp-gui</include>
+                <include>org.jdmp:jdmp-jetty</include>
+                <include>org.jdmp:jdmp-liblinear</include>
+                <include>org.jdmp:jdmp-libsvm</include>
+                <include>org.jdmp:jdmp-lucene</include>
+                <include>org.jdmp:jdmp-mallet</include>
 				<include>org.jdmp:jdmp-weka</include>
 			</includes>
 		</dependencySet>

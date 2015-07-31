@@ -55,14 +55,14 @@
 		<module>../jdmp-bsh</module>
 		<module>../jdmp-complete</module>
 		<module>../jdmp-core</module>
-		<module>../jdmp-examples</module>
-		<module>../jdmp-gui</module>
-		<module>../jdmp-jetty</module>
-		<module>../jdmp-liblinear</module>
-		<module>../jdmp-libsvm</module>
-		<module>../jdmp-lucene</module>
-		<module>../jdmp-mallet</module>
-		<module>../jdmp-stanfordpos</module>
+        <module>../jdmp-corenlp</module>
+        <module>../jdmp-examples</module>
+        <module>../jdmp-gui</module>
+        <module>../jdmp-jetty</module>
+        <module>../jdmp-liblinear</module>
+        <module>../jdmp-libsvm</module>
+        <module>../jdmp-lucene</module>
+        <module>../jdmp-mallet</module>
 		<module>../jdmp-weka</module>
 	</modules>
 
@@ -173,14 +173,14 @@
 								<link>https://jdmp.org/${project.version}/jdmp-bsh/apidocs</link>
 								<link>https://jdmp.org/${project.version}/jdmp-complete/apidocs</link>
 								<link>https://jdmp.org/${project.version}/jdmp-core/apidocs</link>
-								<link>https://jdmp.org/${project.version}/jdmp-examples/apidocs</link>
-								<link>https://jdmp.org/${project.version}/jdmp-gui/apidocs</link>
-								<link>https://jdmp.org/${project.version}/jdmp-jetty/apidocs</link>
-								<link>https://jdmp.org/${project.version}/jdmp-liblinear/apidocs</link>
-								<link>https://jdmp.org/${project.version}/jdmp-libsvm/apidocs</link>
-								<link>https://jdmp.org/${project.version}/jdmp-lucene/apidocs</link>
-								<link>https://jdmp.org/${project.version}/jdmp-mallet/apidocs</link>
-								<link>https://jdmp.org/${project.version}/jdmp-stanfordpos/apidocs</link>
+                                <link>https://jdmp.org/${project.version}/jdmp-corenlp/apidocs</link>
+                                <link>https://jdmp.org/${project.version}/jdmp-examples/apidocs</link>
+                                <link>https://jdmp.org/${project.version}/jdmp-gui/apidocs</link>
+                                <link>https://jdmp.org/${project.version}/jdmp-jetty/apidocs</link>
+                                <link>https://jdmp.org/${project.version}/jdmp-liblinear/apidocs</link>
+                                <link>https://jdmp.org/${project.version}/jdmp-libsvm/apidocs</link>
+                                <link>https://jdmp.org/${project.version}/jdmp-lucene/apidocs</link>
+                                <link>https://jdmp.org/${project.version}/jdmp-mallet/apidocs</link>
 								<link>https://jdmp.org/${project.version}/jdmp-weka/apidocs</link>
 
 								<link>https://ujmp.org/${project.version}/ujmp-colt/apidocs</link>
@@ -228,21 +228,6 @@
 					</plugin>
 				</plugins>
 			</build>
-		</profile>
-		<profile>
-			<id>sourceforge</id>
-			<distributionManagement>
-				<snapshotRepository>
-					<id>sourceforge</id>
-					<name>SourceForge</name>
-					<url>sftp://holger-arndt,jdmp@frs.sourceforge.net:/home/frs/project/j/jd/jdmp/snapshots</url>
-				</snapshotRepository>
-				<repository>
-					<id>sourceforge</id>
-					<name>SourceForge</name>
-					<url>sftp://holger-arndt,jdmp@frs.sourceforge.net:/home/frs/project/j/jd/jdmp/releases</url>
-				</repository>
-			</distributionManagement>
 		</profile>
 	</profiles>
 

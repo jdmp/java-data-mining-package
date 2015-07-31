@@ -25,81 +25,44 @@ package org.jdmp.stanfordpos;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.List;
-
-import org.jdmp.core.algorithm.tagger.Tagger;
 import org.jdmp.core.algorithm.tokenizer.Tokenizer;
 import org.jdmp.core.dataset.DefaultListDataSet;
 import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.DefaultSample;
 import org.jdmp.core.sample.Sample;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.ujmp.core.Matrix;
-import org.ujmp.core.listmatrix.ListMatrix;
-import org.ujmp.core.mapmatrix.MapMatrix;
 
-public class TestTagger {
+public class TestStandordTokenizer {
 
 	public static final String s1 = "The Universal Java Matrix Package is a very cool software. This is also true for the Java Data Mining Package.";
 
 	public static final String s2 = "Have fun with it!";
 
-	private static Tagger tagger = null;
-
-	private static Tokenizer tokenizer = null;
-
-	@BeforeClass
-	public static void setUp() {
-		try {
-			tokenizer = new StanfordTokenizer();
-			tagger = new StanfordPOSTagger();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 	@Test
-	public void testStringTagger() throws Exception {
-		if (tagger == null) {
-			return;
-		}
-
-		List<ListMatrix<MapMatrix<String, Object>>> list = tagger.tag(s1);
-
-		assertEquals(2, list.size());
-		assertEquals(2, list.get(0).getColumnCount());
-		assertEquals(11, list.get(0).getRowCount());
-		assertEquals(2, list.get(1).getColumnCount());
-		assertEquals(11, list.get(1).getRowCount());
-	}
-
-	@Test
-	public void testTagger() throws Exception {
-		if (tagger == null) {
-			return;
-		}
-
+	public void testTokenizer() throws Exception {
 		ListDataSet ds = new DefaultListDataSet();
 		Sample sa1 = new DefaultSample();
 		sa1.put(Sample.INPUT, s1);
+		sa1.setId("sample1");
 		Sample sa2 = new DefaultSample();
 		sa2.put(Sample.INPUT, s2);
+		sa2.setId("sample2");
 		ds.add(sa1);
 		ds.add(sa2);
 
-		tokenizer.tokenize(Sample.INPUT, ds);
-		tagger.tag(ds);
+		Tokenizer t = new StanfordTokenizer();
+		t.tokenize(Sample.INPUT, ds);
 
 		sa1 = ds.get(0);
 		sa2 = ds.get(1);
 
-		Matrix m1 = sa1.getAsMatrix(Tagger.TAGGED);
-		Matrix m2 = sa2.getAsMatrix(Tagger.TAGGED);
+		Matrix m1 = sa1.getAsMatrix(Tokenizer.TOKENIZED);
+		Matrix m2 = sa2.getAsMatrix(Tokenizer.TOKENIZED);
 
-		assertEquals(2, m1.getColumnCount());
+		assertEquals(1, m1.getColumnCount());
 		assertEquals(11, m1.getRowCount());
-		assertEquals(2, m2.getColumnCount());
+		assertEquals(1, m2.getColumnCount());
 		assertEquals(5, m2.getRowCount());
 	}
 }

@@ -107,6 +107,7 @@
       <module name="jdmp-bsh" target="1.5" />
       <module name="jdmp-complete" target="1.5" />
       <module name="jdmp-core" target="1.5" />
+      <module name="jdmp-corenlp" target="1.5" />
       <module name="jdmp-examples" target="1.5" />
       <module name="jdmp-gui" target="1.5" />
       <module name="jdmp-jetty" target="1.5" />

@@ -27,6 +27,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ TestTokenizer.class, TestTagger.class })
+@Suite.SuiteClasses({ TestStandordTokenizer.class, TestStanfordTagger.class })
 public class AllTests {
 }

@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>jdmp-stanfordpos</artifactId>
+	<artifactId>jdmp-corenlp</artifactId>
 	<packaging>jar</packaging>
-	<name>jdmp-stanfordpos</name>
-	<url>https://jdmp.org/0.3.0/jdmp-stanfordpos/</url>
-	<description>Plugin to incorporate part-of-speech tagging from Stanford POS</description>
+	<name>jdmp-corenlp</name>
+	<url>https://jdmp.org/0.3.0/jdmp-corenlp/</url>
+	<description>Plugin to incorporate algorithms from Stanford CoreNLP</description>
 
 	<parent>
 		<groupId>org.jdmp</groupId>
@@ -26,14 +26,20 @@
 		<dependency>
 			<groupId>edu.stanford.nlp</groupId>
 			<artifactId>stanford-corenlp</artifactId>
-			<version>3.4.1</version>
+			<version>3.5.2</version>
 		</dependency>
 		<dependency>
 			<groupId>edu.stanford.nlp</groupId>
 			<artifactId>stanford-corenlp</artifactId>
 			<classifier>models</classifier>
-			<version>3.4.1</version>
+			<version>3.5.2</version>
 		</dependency>
+        <dependency>
+            <groupId>edu.stanford.nlp</groupId>
+            <artifactId>stanford-corenlp</artifactId>
+            <classifier>models-german</classifier>
+            <version>3.5.2</version>
+        </dependency>
 
 		<dependency>
 			<groupId>org.jdmp</groupId>

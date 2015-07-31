@@ -235,32 +235,39 @@
 			<optional>true</optional>
 		</dependency>
 
+        <dependency>
+            <groupId>org.jdmp</groupId>
+            <artifactId>jdmp-bsh</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+            <optional>true</optional>
+        </dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-core</artifactId>
 			<version>${project.version}</version>
 			<scope>compile</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-examples</artifactId>
-			<version>${project.version}</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-gui</artifactId>
-			<version>${project.version}</version>
-			<scope>compile</scope>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-bsh</artifactId>
-			<version>${project.version}</version>
-			<scope>compile</scope>
-			<optional>true</optional>
-		</dependency>
+        <dependency>
+            <groupId>org.jdmp</groupId>
+            <artifactId>jdmp-corenlp</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.jdmp</groupId>
+            <artifactId>jdmp-examples</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jdmp</groupId>
+            <artifactId>jdmp-gui</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+            <optional>true</optional>
+        </dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-jetty</artifactId>
@@ -292,13 +299,6 @@
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-mallet</artifactId>
-			<version>${project.version}</version>
-			<scope>compile</scope>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-stanfordpos</artifactId>
 			<version>${project.version}</version>
 			<scope>compile</scope>
 			<optional>true</optional>
@@ -551,6 +551,14 @@
 			<optional>true</optional>
 		</dependency>
 
+        <dependency>
+            <groupId>org.jdmp</groupId>
+            <artifactId>jdmp-bsh</artifactId>
+            <version>${project.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+            <optional>true</optional>
+        </dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-core</artifactId>
@@ -558,6 +566,14 @@
 			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
+        <dependency>
+            <groupId>org.jdmp</groupId>
+            <artifactId>jdmp-corenlp</artifactId>
+            <version>${project.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+            <optional>true</optional>
+        </dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-examples</artifactId>
@@ -575,23 +591,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-bsh</artifactId>
-			<version>${project.version}</version>
-			<type>test-jar</type>
-			<scope>test</scope>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-jetty</artifactId>
-			<version>${project.version}</version>
-			<type>test-jar</type>
-			<scope>test</scope>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-mallet</artifactId>
 			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
@@ -621,14 +621,14 @@
 			<scope>test</scope>
 			<optional>true</optional>
 		</dependency>
-		<dependency>
-			<groupId>org.jdmp</groupId>
-			<artifactId>jdmp-stanfordpos</artifactId>
-			<version>${project.version}</version>
-			<type>test-jar</type>
-			<scope>test</scope>
-			<optional>true</optional>
-		</dependency>
+        <dependency>
+            <groupId>org.jdmp</groupId>
+            <artifactId>jdmp-mallet</artifactId>
+            <version>${project.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+            <optional>true</optional>
+        </dependency>
 		<dependency>
 			<groupId>org.jdmp</groupId>
 			<artifactId>jdmp-weka</artifactId>

@@ -28,10 +28,10 @@ import org.ujmp.core.util.AbstractPlugin;
 public class Plugin extends AbstractPlugin {
 
 	public Plugin() {
-		super("Plugin to incorporate part-of-speech tagging from Stanford POS");
+		super("Plugin to incorporate algorithms from Stanford CoreNLP");
 		dependencies.add("ujmp-core");
 		dependencies.add("jdmp-core");
-		dependencies.add("stanford-postagger.jar");
+		dependencies.add("stanford-corenlp.jar");
 		neededClasses.add("edu.stanford.nlp.tagger.maxent.MaxentTagger");
 	}
 
