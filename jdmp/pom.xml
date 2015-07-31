@@ -4,7 +4,7 @@
 
 	<groupId>org.jdmp</groupId>
 	<artifactId>jdmp</artifactId>
-	<version>0.3.0-SNAPSHOT</version>
+	<version>0.3.0</version>
 	<packaging>pom</packaging>
 	<name>Java Data Mining Package</name>
 	<url>https://jdmp.org/</url>
@@ -104,37 +104,32 @@
 						<version>2.10.3</version>
 						<configuration>
 
-							<!-- better skip if possible, takes over 30min -->
-							<skip>${skipJavadoc}</skip>
+                            <!-- collect all files in one directory, seems to take longer -->
+                            <!-- Creating fake javadoc directory to prevent repeated invocations when enabled -->
+                            <!-- <outputDirectory>${rootdir}/target/apidocs/${project.name}</outputDirectory>
+                            <reportOutputDirectory>${rootdir}/target/apidocs/${project.name}</reportOutputDirectory> -->
 
-							<!-- collect all files in one directory, seems to take longer -->
-							<!-- Creating fake javadoc directory to prevent repeated invocations 
-								when enabled -->
-							<!-- <outputDirectory>${rootdir}/target/apidocs/${project.name}</outputDirectory> 
-								<reportOutputDirectory>${rootdir}/target/apidocs/${project.name}</reportOutputDirectory> -->
+                            <!-- include source code in javadoc, seems to take longer if enabled -->
+                            <linksource>false</linksource>
 
-							<!-- include source code in javadoc, seems to take longer if enabled -->
-							<linksource>false</linksource>
+                            <!-- helps to speed things up -->
+                            <maxmemory>2g</maxmemory>
 
-							<!-- helps to speed things up -->
-							<maxmemory>2g</maxmemory>
+                            <!-- set this to true to fix the OutOfMemoryException in Java 8 for Windows -->
+                            <noindex>false</noindex>
 
-							<!-- set this to true to fix the OutOfMemoryException in Java 8 for 
-								Windows -->
-							<noindex>false</noindex>
+                            <!-- it takes very long when set to false -->
+                            <notree>false</notree>
 
-							<!-- it takes very long when set to false -->
-							<notree>false</notree>
+                            <!-- not sure what this does -->
+                            <failOnError>false</failOnError>
 
-							<!-- not sure what this does -->
-							<failOnError>false</failOnError>
-
-							<!-- other possible settings, don't seem to be necessary -->
-							<!-- <notree>true</notree> -->
-							<!-- <additionalJOptions> -->
-							<!-- <additionalJOption>-J-Xss512M</additionalJOption> -->
-							<!-- <additionalJOption>-J-XX:MaxPermSize=512M</additionalJOption> -->
-							<!-- </additionalJOptions> -->
+                            <!-- other possible settings, don't seem to be necessary -->
+                            <!-- <notree>true</notree> -->
+                            <!-- <additionalJOptions> -->
+                            <!--   <additionalJOption>-J-Xss512M</additionalJOption> -->
+                            <!--   <additionalJOption>-J-XX:MaxPermSize=512M</additionalJOption> -->
+                            <!-- </additionalJOptions> -->
 
 							<header><![CDATA[
 						<script async
