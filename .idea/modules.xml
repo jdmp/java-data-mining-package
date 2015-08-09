@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Java-Data-Mining-Package.iml" filepath="$PROJECT_DIR$/.idea/Java-Data-Mining-Package.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/java-data-mining-package.iml" filepath="$PROJECT_DIR$/.idea/java-data-mining-package.iml" />
       <module fileurl="file://$PROJECT_DIR$/jdmp/jdmp.iml" filepath="$PROJECT_DIR$/jdmp/jdmp.iml" />
       <module fileurl="file://$PROJECT_DIR$/jdmp-bsh/jdmp-bsh.iml" filepath="$PROJECT_DIR$/jdmp-bsh/jdmp-bsh.iml" />
       <module fileurl="file://$PROJECT_DIR$/jdmp-complete/jdmp-complete.iml" filepath="$PROJECT_DIR$/jdmp-complete/jdmp-complete.iml" />
