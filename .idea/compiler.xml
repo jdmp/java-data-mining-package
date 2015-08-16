@@ -99,19 +99,19 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.5">
-      <module name="jdmp" target="1.5" />
-      <module name="jdmp-bsh" target="1.5" />
-      <module name="jdmp-complete" target="1.5" />
-      <module name="jdmp-core" target="1.5" />
-      <module name="jdmp-corenlp" target="1.5" />
-      <module name="jdmp-examples" target="1.5" />
-      <module name="jdmp-gui" target="1.5" />
-      <module name="jdmp-jetty" target="1.5" />
-      <module name="jdmp-liblinear" target="1.5" />
-      <module name="jdmp-libsvm" target="1.5" />
-      <module name="jdmp-lucene" target="1.5" />
-      <module name="jdmp-mallet" target="1.5" />
-      <module name="jdmp-weka" target="1.5" />
+      <module name="jdmp" target="1.7" />
+      <module name="jdmp-bsh" target="1.7" />
+      <module name="jdmp-complete" target="1.7" />
+      <module name="jdmp-core" target="1.7" />
+      <module name="jdmp-corenlp" target="1.7" />
+      <module name="jdmp-examples" target="1.7" />
+      <module name="jdmp-gui" target="1.7" />
+      <module name="jdmp-jetty" target="1.7" />
+      <module name="jdmp-liblinear" target="1.7" />
+      <module name="jdmp-libsvm" target="1.7" />
+      <module name="jdmp-lucene" target="1.7" />
+      <module name="jdmp-mallet" target="1.7" />
+      <module name="jdmp-weka" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
