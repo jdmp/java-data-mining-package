@@ -51,3 +51,4 @@ System.out.println("accuracy: " + accurary);
 ## License
 
 The Java Data Mining Package is licensed under the [GNU Lesser General Public License v3.0](http://www.gnu.org/licenses/lgpl-3.0.en.html).
+
