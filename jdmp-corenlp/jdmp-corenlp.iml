@@ -25,8 +25,7 @@
     <orderEntry type="library" name="Maven: edu.stanford.nlp:stanford-corenlp:models:3.5.2" level="project" />
     <orderEntry type="library" name="Maven: edu.stanford.nlp:stanford-corenlp:models-german:3.5.2" level="project" />
     <orderEntry type="module" module-name="jdmp-core" />
-    <orderEntry type="library" name="Maven: org.ujmp:ujmp-core:0.3.0" level="project" />
-    <orderEntry type="library" name="Maven: org.json:json:20141113" level="project" />
+    <orderEntry type="library" name="Maven: org.ujmp:ujmp-core:0.3.1-SNAPSHOT" level="project" />
     <orderEntry type="module" module-name="jdmp-core" scope="TEST" production-on-test="" />
   </component>
 </module>

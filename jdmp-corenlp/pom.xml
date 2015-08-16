@@ -4,13 +4,13 @@
 	<artifactId>jdmp-corenlp</artifactId>
 	<packaging>jar</packaging>
 	<name>jdmp-corenlp</name>
-	<url>https://jdmp.org/0.3.0/jdmp-corenlp/</url>
+	<url>https://jdmp.org/0.3.1-SNAPSHOT/jdmp-corenlp/</url>
 	<description>Plugin to incorporate algorithms from Stanford CoreNLP</description>
 
 	<parent>
 		<groupId>org.jdmp</groupId>
 		<artifactId>jdmp</artifactId>
-		<version>0.3.0</version>
+		<version>0.3.1-SNAPSHOT</version>
 		<relativePath>../jdmp</relativePath>
 	</parent>
 

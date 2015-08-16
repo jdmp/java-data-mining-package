@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.ujmp:ujmp-commonsmath:test-jar:tests:0.3.1-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/ujmp/ujmp-commonsmath/0.3.1-SNAPSHOT/ujmp-commonsmath-0.3.1-SNAPSHOT-tests.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/ujmp/ujmp-commonsmath/0.3.1-SNAPSHOT/ujmp-commonsmath-0.3.1-SNAPSHOT-test-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/ujmp/ujmp-commonsmath/0.3.1-SNAPSHOT/ujmp-commonsmath-0.3.1-SNAPSHOT-test-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
