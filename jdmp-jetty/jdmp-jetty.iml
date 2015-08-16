@@ -19,6 +19,7 @@
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-io:9.2.6.v20141205" level="project" />
     <orderEntry type="module" module-name="jdmp-core" />
     <orderEntry type="library" name="Maven: org.ujmp:ujmp-core:0.3.1-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: org.json:json:20141113" level="project" />
     <orderEntry type="library" name="Maven: org.ujmp:ujmp-jetty:0.3.1-SNAPSHOT" level="project" />
     <orderEntry type="module" module-name="jdmp-core" scope="TEST" production-on-test="" />
     <orderEntry type="library" scope="TEST" name="Maven: org.ujmp:ujmp-core:test-jar:tests:0.3.1-SNAPSHOT" level="project" />
