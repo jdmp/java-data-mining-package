@@ -35,7 +35,7 @@ public class JDMP extends org.jdmp.core.JDMP {
 	public void init() {
 		try {
 			main(new String[] {});
-		} catch (Exception e) {
+		} catch (Exception ignored) {
 		}
 	}
 }
