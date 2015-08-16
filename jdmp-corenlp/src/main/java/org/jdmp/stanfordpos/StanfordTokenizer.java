@@ -49,8 +49,7 @@ public class StanfordTokenizer extends AbstractTokenizer {
 		for (List<HasWord> tokSentence : sentences) {
 			ListMatrix<String> m = new DefaultListMatrix<String>();
 
-			for (int i = 0; i < tokSentence.size(); i++) {
-				HasWord t = tokSentence.get(i);
+			for (HasWord t : tokSentence) {
 				m.add(t.word());
 			}
 			result.add(m);

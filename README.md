@@ -39,7 +39,7 @@ classifier.trainAll(dataSet);
 classifier.predictAll(dataSet);
 
 // get the results
-double accurary = dataSet.getAccuracy();
+double accuracy = dataSet.getAccuracy();
 
 System.out.println("accuracy: " + accurary);
 ```

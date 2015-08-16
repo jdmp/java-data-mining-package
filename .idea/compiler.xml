@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
+    <option name="DEFAULT_COMPILER" value="Javac" />
     <resourceExtensions />
     <wildcardResourcePatterns>
       <entry name="!?*.java" />
@@ -22,56 +23,48 @@
         <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="jdmp-complete" />
       </profile>
       <profile default="false" name="Annotation profile for jdmp-examples" enabled="true">
         <sourceOutputDir name="target\generated-sources\annotations" />
         <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="jdmp-examples" />
       </profile>
       <profile default="false" name="Annotation profile for jdmp-bsh" enabled="true">
         <sourceOutputDir name="target\generated-sources\annotations" />
         <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="jdmp-bsh" />
       </profile>
       <profile default="false" name="Annotation profile for jdmp-libsvm" enabled="true">
         <sourceOutputDir name="target\generated-sources\annotations" />
         <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="jdmp-libsvm" />
       </profile>
       <profile default="false" name="Annotation profile for jdmp-weka" enabled="true">
         <sourceOutputDir name="target\generated-sources\annotations" />
         <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="jdmp-weka" />
       </profile>
       <profile default="false" name="Annotation profile for jdmp-core" enabled="true">
         <sourceOutputDir name="target\generated-sources\annotations" />
         <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="jdmp-core" />
       </profile>
       <profile default="false" name="Annotation profile for jdmp-jetty" enabled="true">
         <sourceOutputDir name="target\generated-sources\annotations" />
         <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="jdmp-jetty" />
       </profile>
       <profile default="false" name="Annotation profile for jdmp-mallet" enabled="true">
         <sourceOutputDir name="target\generated-sources\annotations" />
         <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="jdmp-mallet" />
       </profile>
       <profile default="false" name="Annotation profile for jdmp-stanfordpos" enabled="true">
         <sourceOutputDir name="target\generated-sources\annotations" />
@@ -85,28 +78,24 @@
         <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="jdmp-liblinear" />
       </profile>
       <profile default="false" name="Annotation profile for jdmp-lucene" enabled="true">
         <sourceOutputDir name="target\generated-sources\annotations" />
         <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="jdmp-lucene" />
       </profile>
       <profile default="false" name="Annotation profile for jdmp-gui" enabled="true">
         <sourceOutputDir name="target\generated-sources\annotations" />
         <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="jdmp-gui" />
       </profile>
       <profile default="false" name="Annotation profile for jdmp-corenlp" enabled="true">
         <sourceOutputDir name="target\generated-sources\annotations" />
         <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="jdmp-corenlp" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.5">
@@ -122,7 +111,6 @@
       <module name="jdmp-libsvm" target="1.5" />
       <module name="jdmp-lucene" target="1.5" />
       <module name="jdmp-mallet" target="1.5" />
-      <module name="jdmp-stanfordpos" target="1.5" />
       <module name="jdmp-weka" target="1.5" />
     </bytecodeTargetLevel>
   </component>

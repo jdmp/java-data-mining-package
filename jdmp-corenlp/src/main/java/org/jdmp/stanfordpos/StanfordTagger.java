@@ -23,17 +23,17 @@
 
 package org.jdmp.stanfordpos;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-
 import edu.stanford.nlp.dcoref.CorefChain;
 import edu.stanford.nlp.dcoref.CorefCoreAnnotations;
-import edu.stanford.nlp.ling.*;
+import edu.stanford.nlp.ie.crf.CRFClassifier;
+import edu.stanford.nlp.ling.CoreAnnotations;
+import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
+import edu.stanford.nlp.process.WordShapeClassifier;
 import edu.stanford.nlp.semgraph.SemanticGraph;
 import edu.stanford.nlp.semgraph.SemanticGraphCoreAnnotations;
+import edu.stanford.nlp.sequences.SeqClassifierFlags;
 import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.trees.TreeCoreAnnotations;
 import edu.stanford.nlp.util.CoreMap;
@@ -44,17 +44,29 @@ import org.ujmp.core.listmatrix.ListMatrix;
 import org.ujmp.core.mapmatrix.DefaultMapMatrix;
 import org.ujmp.core.mapmatrix.MapMatrix;
 
+import java.io.*;
+import java.util.*;
+
 public class StanfordTagger extends AbstractTagger {
     private static final long serialVersionUID = -2655534427624643477L;
 
-    private final StanfordCoreNLP stanfordCoreNLP;
+    private StanfordCoreNLP stanfordCoreNLP;
 
-    private static StanfordTagger instance = null;
+    private CRFClassifier<CoreLabel> crf;
 
     public StanfordTagger() throws Exception {
-        Properties props = new Properties();
-        props.setProperty("annotators", "tokenize, ssplit, pos, lemma, ner, parse, dcoref");
-        stanfordCoreNLP = new StanfordCoreNLP(props);
+        //   Properties props = new Properties();
+        //   props.setProperty("annotators", "tokenize, ssplit, pos, lemma, ner, parse, dcoref");
+        //   stanfordCoreNLP = new StanfordCoreNLP(props);
+    }
+
+    public StanfordTagger(File file) throws Exception {
+        crf = new CRFClassifier<CoreLabel>(new SeqClassifierFlags());
+        crf.loadClassifierNoExceptions(file);
+    }
+
+    public StanfordTagger(String filename) throws Exception {
+        this(new File(filename));
     }
 
 
@@ -100,15 +112,134 @@ public class StanfordTagger extends AbstractTagger {
         return null;
     }
 
-    public static StanfordTagger getInstance() {
-        if (instance == null) {
-            try {
-                instance = new StanfordTagger();
-            } catch (Exception e) {
-                e.printStackTrace();
+
+    public void train(ListMatrix<ListMatrix<MapMatrix<String, String>>> listMatrix) throws Exception {
+        List<List<CoreLabel>> sentenceList = new ArrayList<List<CoreLabel>>();
+        for (ListMatrix<MapMatrix<String, String>> innerList : listMatrix) {
+            List<CoreLabel> tokenList = new ArrayList<CoreLabel>();
+            sentenceList.add(tokenList);
+            for (MapMatrix<String, String> mapMatrix : innerList) {
+                CoreLabel l = new CoreLabel();
+                l.set(CoreAnnotations.TextAnnotation.class, mapMatrix.getAsString("Token"));
+                l.set(CoreAnnotations.AnswerAnnotation.class, mapMatrix.getAsString("Class"));
+                tokenList.add(l);
             }
         }
-        return instance;
+
+        SeqClassifierFlags flags = new SeqClassifierFlags();
+        flags.maxLeft = 3;
+        flags.useClassFeature = true;
+        flags.useWord = true;
+        flags.maxNGramLeng = 6;
+        flags.usePrev = true;
+        flags.useNext = true;
+        flags.useDisjunctive = true;
+        flags.useSequences = true;
+        flags.usePrevSequences = true;
+        flags.useTypeSeqs = true;
+        flags.useTypeSeqs2 = true;
+        flags.useTypeySequences = true;
+        flags.wordShape = WordShapeClassifier.WORDSHAPECHRIS2;
+
+        flags.useNGrams = true;
+        crf = new CRFClassifier<CoreLabel>(flags);
+        crf.train(sentenceList, null);
     }
+
+
+    public CoreLabelListMatrix tagCRF(ListMatrix<MapMatrix<String, String>> text) throws Exception {
+        List<CoreLabel> list = new ArrayList<CoreLabel>();
+        for (MapMatrix<String, String> m : text) {
+            CoreLabel l = new CoreLabel();
+            l.set(CoreAnnotations.TextAnnotation.class, m.getAsString("Token"));
+            list.add(l);
+        }
+        List<CoreLabel> result = crf.classify(list);
+        return new CoreLabelListMatrix(result);
+    }
+
+    public CoreLabelListListMatrix tagCRF(String text) throws Exception {
+        List<List<CoreLabel>> result = crf.classify(text);
+        return new CoreLabelListListMatrix(result);
+    }
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String text = "";
+
+        ListMatrix<ListMatrix<String>> originalText = StanfordTokenizer.getInstance().tokenize(text);
+        ListMatrix<ListMatrix<MapMatrix<String, String>>> trainingText = new DefaultListMatrix<ListMatrix<MapMatrix<String, String>>>();
+
+        StanfordTagger tagger = null;
+
+        for (ListMatrix<String> sentence : originalText) {
+
+            ListMatrix<MapMatrix<String, String>> tokenSequence = new DefaultListMatrix<MapMatrix<String, String>>();
+
+            for (String word : sentence) {
+                MapMatrix<String, String> token = new DefaultMapMatrix<String, String>();
+                token.put("Token", word);
+                tokenSequence.add(token);
+            }
+
+            if (tagger != null) {
+                tokenSequence = tagger.tagCRF(tokenSequence);
+            }
+
+
+            trainingText.add(tokenSequence);
+            for (MapMatrix<String, String> token : tokenSequence) {
+                token.put("Class", "O");
+            }
+
+            for (int i = 0; i < tokenSequence.size(); i++) {
+                MapMatrix<String, String> token = tokenSequence.get(i);
+                String word = token.getAsString("Token");
+                String c = token.getAsString("Class");
+                String a = token.getAsString("Answer");
+                System.out.println(i + ": " + word + " (" + c + ") " + a);
+            }
+
+            System.out.print("Enter number: ");
+
+            String input = null;
+            while (!"".equals(input)) {
+                input = br.readLine();
+                if (!"".equals(input)) {
+                    int number = Integer.parseInt(input);
+                    if (number < sentence.size()) {
+                        System.out.print("Enter tag: ");
+                        input = br.readLine();
+                        MapMatrix<String, String> token = tokenSequence.get(number);
+                        token.put("Class", input);
+                        for (int i = 0; i < tokenSequence.size(); i++) {
+                            token = tokenSequence.get(i);
+                            String word = token.getAsString("Token");
+                            String c = token.getAsString("Class");
+                            String a = token.getAsString("Answer");
+                            System.out.println(i + ": " + word + " (" + c + ") " + a);
+                        }
+                    }
+                }
+            }
+
+
+            tagger = new StanfordTagger();
+            tagger.train(trainingText);
+            CoreLabelListMatrix tmpTokenSequence = tagger.tagCRF(tokenSequence);
+
+            for (int i = 0; i < tmpTokenSequence.size(); i++) {
+                MapMatrix<String, String> token = tmpTokenSequence.get(i);
+                String word = token.getAsString("Token");
+                String c = token.getAsString("Class");
+                String a = token.getAsString("Answer");
+                System.out.println(i + ": " + word + " (" + c + ") " + a);
+            }
+
+            System.out.println("---------------------------------------");
+
+        }
+    }
+
 
 }
