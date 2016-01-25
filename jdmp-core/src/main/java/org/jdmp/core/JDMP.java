@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2015 by Holger Arndt
+ * Copyright (C) 2008-2016 by Holger Arndt
  *
  * This file is part of the Java Data Mining Package (JDMP).
  * See the NOTICE file distributed with this work for additional
@@ -43,7 +43,7 @@ public class JDMP extends Applet {
 
 	public static final String AUTHOR = "Holger Arndt";
 
-	public static final String COPYRIGHT = "2008-2015";
+	public static final String COPYRIGHT = "2008-2016";
 
 	protected static final PrintStream out = System.out;
 
@@ -107,7 +107,7 @@ public class JDMP extends Applet {
 	public static void run() throws Exception {
 		out.println("/*");
 		out.println(" * Welcome to the Java Data Mining Package (JDMP) v" + JDMPVERSION);
-		out.println(" * Copyright (C) 2008-2015 by Holger Arndt");
+		out.println(" * Copyright (C) 2008-2016 by Holger Arndt");
 		out.println(" *");
 		out.println(" * JDMP is free software; you can redistribute it and/or modify");
 		out.println(" * it under the terms of the GNU Lesser General Public License as");
