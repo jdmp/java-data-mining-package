@@ -35,10 +35,10 @@ import org.ujmp.core.interfaces.GUIObject;
 import org.ujmp.gui.actions.AbstractObjectAction;
 import org.ujmp.gui.util.GUIUtil;
 
-public class ClusterSOM extends AbstractObjectAction {
+public class ClusterSOMAction extends AbstractObjectAction {
 	private static final long serialVersionUID = -5877704478610043843L;
 
-	public ClusterSOM(JComponent c, GUIObject i) {
+	public ClusterSOMAction(JComponent c, GUIObject i) {
 		super(c, i);
 		putValue(Action.NAME, "SOM");
 		putValue(Action.SHORT_DESCRIPTION, "Cluster a DataSet using a Self-Organizing Map");
