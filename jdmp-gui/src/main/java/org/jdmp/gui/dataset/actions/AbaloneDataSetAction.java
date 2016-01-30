@@ -23,28 +23,33 @@
 
 package org.jdmp.gui.dataset.actions;
 
-import javax.swing.JComponent;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
+import java.io.IOException;
 
+import javax.swing.Action;
+import javax.swing.JComponent;
+
+import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.gui.dataset.DataSetGUIObject;
 
-public class DataSetExamplesMenu extends JMenu {
-	private static final long serialVersionUID = 4125290536630857445L;
+public class AbaloneDataSetAction extends DataSetAction {
+	private static final long serialVersionUID = -147640509730917126L;
 
-	public DataSetExamplesMenu(JComponent component, DataSetGUIObject ds) {
-		super("DataSet");
-		add(new JMenuItem(new IrisDataSetAction(component, ds)));
-		add(new JMenuItem(new HenonDataSetAction(component, ds)));
-		add(new JMenuItem(new AnimalDataSetAction(component, ds)));
-		add(new JMenuItem(new MNISTTrainAction(component, ds)));
-		add(new JMenuItem(new MNISTTestAction(component, ds)));
-		add(new JMenuItem(new AbaloneDataSetAction(component, ds)));
-		add(new JMenuItem(new BreastCancerWisconsinDataSetAction(component, ds)));
-		add(new JMenuItem(new HepatitisDataSetAction(component, ds)));
-		add(new JMenuItem(new HorseColicDataSetAction(component, ds)));
-		add(new JMenuItem(new WineDataSetAction(component, ds)));
-		add(new JMenuItem(new YeastDataSetAction(component, ds)));
+	public AbaloneDataSetAction(JComponent c, DataSetGUIObject ds) {
+		super(c, ds);
+		putValue(Action.NAME, "Abalone DataSet");
+		putValue(Action.SHORT_DESCRIPTION,
+				"Loads the Abalone Data Set from the UCI Machine Learning Repository");
+	}
+
+	public Object call() {
+		try {
+			ListDataSet ds = ListDataSet.Factory.ABALONE();
+			ds.showGUI();
+			return ds;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

@@ -35,12 +35,15 @@ import org.jdmp.core.algorithm.basic.CreateIris;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.enums.DBType;
 import org.ujmp.core.filematrix.FileFormat;
 import org.ujmp.core.util.UJMPSettings;
 import org.ujmp.core.util.io.HttpUtil;
 
 public class DataSetFactory {
+
+	private static final String UCI_REPOSITORY_URL = "http://archive.ics.uci.edu/ml/machine-learning-databases/";
 
 	public ListDataSet emptyDataSet() {
 		return new DefaultListDataSet();
@@ -462,6 +465,86 @@ public class DataSetFactory {
 
 	public ListDataSet IRIS() {
 		ListDataSet ds = (ListDataSet) (new CreateIris().calculate().get(Sample.TARGET));
+		return ds;
+	}
+
+	public ListDataSet ABALONE() throws IOException {
+		Matrix input = Matrix.Factory.importFrom().url(UCI_REPOSITORY_URL + "abalone/abalone.data")
+				.asDenseCSV();
+		String description = HttpUtil
+				.getStringFromUrl(UCI_REPOSITORY_URL + "abalone/abalone.names");
+		input = input.discretizeToColumns(0);
+		Matrix output = input.selectColumns(Ret.NEW, 10).discretizeToColumns(0);
+		input = input.deleteColumns(Ret.NEW, 10);
+		ListDataSet ds = linkToInputAndTarget(input, output);
+		ds.setLabel("Abalone Data Set");
+		ds.setDescription(description);
+		return ds;
+	}
+
+	public ListDataSet BREASTCANCERWISCONSIN() throws IOException {
+		Matrix input = Matrix.Factory.importFrom()
+				.url(UCI_REPOSITORY_URL + "breast-cancer-wisconsin/wdbc.data").asDenseCSV();
+		String description = HttpUtil
+				.getStringFromUrl(UCI_REPOSITORY_URL + "breast-cancer-wisconsin/wdbc.names");
+		Matrix output = input.selectColumns(Ret.NEW, 1).discretizeToColumns(0);
+		input = input.deleteColumns(Ret.NEW, 1);
+		input = input.deleteColumns(Ret.NEW, 0);
+		ListDataSet ds = linkToInputAndTarget(input, output);
+		ds.setLabel("Breast Cancer Wisconsin Data Set");
+		ds.setDescription(description);
+		return ds;
+	}
+
+	public ListDataSet HEPATITIS() throws IOException {
+		Matrix input = Matrix.Factory.importFrom()
+				.url(UCI_REPOSITORY_URL + "hepatitis/hepatitis.data").asDenseCSV();
+		String description = HttpUtil
+				.getStringFromUrl(UCI_REPOSITORY_URL + "hepatitis/hepatitis.names");
+		Matrix output = input.selectColumns(Ret.NEW, 19).discretizeToColumns(0);
+		input = input.deleteColumns(Ret.NEW, 19);
+		ListDataSet ds = linkToInputAndTarget(input, output);
+		ds.setLabel("Breast Cancer Wisconsin Data Set");
+		ds.setDescription(description);
+		return ds;
+	}
+
+	public ListDataSet HORSECOLIC() throws IOException {
+		Matrix input = Matrix.Factory.importFrom()
+				.url(UCI_REPOSITORY_URL + "horse-colic/horse-colic.data").asDenseCSV(' ');
+		String description = HttpUtil
+				.getStringFromUrl(UCI_REPOSITORY_URL + "horse-colic/horse-colic.names");
+		Matrix output = input.selectColumns(Ret.NEW, 23).discretizeToColumns(0);
+		input = input.deleteColumns(Ret.NEW, 23, 24, 25, 26, 27);
+		ListDataSet ds = linkToInputAndTarget(input, output);
+		ds.setLabel("Horse Colic Data Set");
+		ds.setDescription(description);
+		return ds;
+	}
+
+	public ListDataSet WINE() throws IOException {
+		Matrix input = Matrix.Factory.importFrom().url(UCI_REPOSITORY_URL + "wine/wine.data")
+				.asDenseCSV(',');
+		String description = HttpUtil.getStringFromUrl(UCI_REPOSITORY_URL + "wine/wine.names");
+		Matrix output = input.selectColumns(Ret.NEW, 0).discretizeToColumns(0);
+		input = input.deleteColumns(Ret.NEW, 0);
+		ListDataSet ds = linkToInputAndTarget(input, output);
+		ds.setLabel("Wine Data Set");
+		ds.setDescription(description);
+		return ds;
+	}
+
+	public ListDataSet YEAST() throws IOException {
+		String rawData = HttpUtil.getStringFromUrl(UCI_REPOSITORY_URL + "yeast/yeast.data");
+		Matrix m = Matrix.Factory.importFrom()
+				.string(rawData.replaceAll("  ", " ").replaceAll("  ", " ")).asDenseCSV(' ');
+		String description = HttpUtil.getStringFromUrl(UCI_REPOSITORY_URL + "yeast/yeast.data");
+		m = m.discretizeToColumns(9).deleteColumns(Ret.NEW, 0);
+		Matrix input = m.select(Ret.NEW, "*;0-7");
+		Matrix output = m.select(Ret.NEW, "*;8-17");
+		ListDataSet ds = linkToInputAndTarget(input, output);
+		ds.setLabel("Yeast Data Set");
+		ds.setDescription(description);
 		return ds;
 	}
 
