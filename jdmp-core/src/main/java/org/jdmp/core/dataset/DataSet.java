@@ -46,7 +46,7 @@ public interface DataSet extends CoreObject {
 
 	public static final String ERRORCOUNT = Variable.ERRORCOUNT;
 
-	public static final DataSetFactory Factory = new DefaultDataSetFactory();
+	public static final DataSetFactory Factory = new DataSetFactory();
 
 	public List<ListDataSet> splitByCount(boolean shuffle, int... count);
 

@@ -28,6 +28,6 @@ import org.ujmp.core.listmatrix.ListMatrix;
 
 public interface ListDataSet extends DataSet, ListMatrix<Sample> {
 
-	public static final DataSetFactory Factory = new DefaultDataSetFactory();
+	public static final DataSetFactory Factory = new DataSetFactory();
 
 }
