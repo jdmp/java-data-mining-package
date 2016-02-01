@@ -177,8 +177,11 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 
 			for (Sample sample : dataSet) {
 
-				double rmse = sample.getAsMatrix(RMSE).getEuklideanValue();
-				error += Math.pow(rmse, 2.0);
+				Matrix rmseMatrix = sample.getAsMatrix(RMSE);
+				if (rmseMatrix != null) {
+					double rmse = rmseMatrix.getEuklideanValue();
+					error += Math.pow(rmse, 2.0);
+				}
 
 				int recognized = sample.getRecognizedClass();
 				int targetClass = sample.getTargetClass();
@@ -238,8 +241,8 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 			confusion.setLabel("Confusion with " + getLabel());
 			dataSet.setMatrix(Variable.CONFUSION, confusion);
 
-			Matrix accuracy = Matrix.Factory.linkToValue((double) correctCount
-					/ (double) dataSet.size());
+			Matrix accuracy = Matrix.Factory
+					.linkToValue((double) correctCount / (double) dataSet.size());
 			accuracy.setLabel("Accuracy with " + getLabel());
 			dataSet.setMatrix(Variable.ACCURACY, accuracy);
 
@@ -247,12 +250,12 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 			errorMatrix.setLabel("Errors with " + getLabel());
 			dataSet.setMatrix(Variable.ERRORCOUNT, errorMatrix);
 
-			Matrix sensitivity = (Matrix) new Sensitivity().calculate(confusion).get(
-					getTargetLabel());
+			Matrix sensitivity = (Matrix) new Sensitivity().calculate(confusion)
+					.get(getTargetLabel());
 			dataSet.setMatrix(Variable.SENSITIVITY, sensitivity);
 
-			Matrix specificity = (Matrix) new Specificity().calculate(confusion).get(
-					getTargetLabel());
+			Matrix specificity = (Matrix) new Specificity().calculate(confusion)
+					.get(getTargetLabel());
 			dataSet.setMatrix(Variable.SPECIFICITY, specificity);
 
 			Matrix precision = (Matrix) new Precision().calculate(confusion).get(getTargetLabel());
