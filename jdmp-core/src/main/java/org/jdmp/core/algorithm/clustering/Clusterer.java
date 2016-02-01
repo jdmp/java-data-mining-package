@@ -35,7 +35,7 @@ public interface Clusterer {
 
 	public void predict(Sample sample) throws Exception;
 
-	public void predict(ListDataSet dataSet) throws Exception;
+	public void predictAll(ListDataSet dataSet) throws Exception;
 
 	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception;
 

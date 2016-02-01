@@ -60,7 +60,7 @@ public abstract class AbstractClusterer extends AbstractAlgorithm implements Clu
 		this.weightLabel = weightLabel;
 	}
 
-	public void predict(ListDataSet dataSet) throws Exception {
+	public void predictAll(ListDataSet dataSet) throws Exception {
 		for (Sample sample : dataSet) {
 			predict(sample);
 		}

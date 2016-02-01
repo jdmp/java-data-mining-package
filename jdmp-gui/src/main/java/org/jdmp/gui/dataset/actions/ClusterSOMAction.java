@@ -50,7 +50,7 @@ public class ClusterSOMAction extends AbstractObjectAction {
 			Clusterer c = new SelfOrganizingMap(GUIUtil.getInt("number of rows", 1, 100),
 					GUIUtil.getInt("number of columns", 1, 100));
 			c.train((ListDataSet) getCoreObject());
-			c.predict((ListDataSet) getCoreObject());
+			c.predictAll((ListDataSet) getCoreObject());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
