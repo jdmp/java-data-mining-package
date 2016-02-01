@@ -38,7 +38,7 @@ public class TestWekaClusterer {
 		ListDataSet iris = ListDataSet.Factory.IRIS();
 		WekaClusterer wc = new WekaClusterer(WekaClustererType.EM, false);
 		wc.setNumberOfClusters(3);
-		wc.train(iris);
+		wc.trainAll(iris);
 		wc.predictAll(iris);
 
 		Matrix result = iris.getPredictedMatrix().sum(Ret.NEW, Matrix.ROW, true);
@@ -54,7 +54,7 @@ public class TestWekaClusterer {
 		ListDataSet iris = ListDataSet.Factory.IRIS();
 		WekaClusterer wc = new WekaClusterer(WekaClustererType.SimpleKMeans, false);
 		wc.setNumberOfClusters(3);
-		wc.train(iris);
+		wc.trainAll(iris);
 		wc.predictAll(iris);
 
 		Matrix result = iris.getPredictedMatrix().sum(Ret.NEW, Matrix.ROW, true);

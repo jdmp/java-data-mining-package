@@ -93,20 +93,29 @@ public class WekaClusterer extends AbstractClusterer {
 		createAlgorithm();
 	}
 
-	public void train(ListDataSet dataSet) throws Exception {
+	public void trainAll(ListDataSet dataSet) {
 		instances = new DataSetToInstancesWrapper(dataSet, discrete, false);
-		wekaClusterer.buildClusterer(instances);
+		try {
+			wekaClusterer.buildClusterer(instances);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-	public Matrix predict(Matrix input, Matrix weight) throws Exception {
-		double[] probabilities = null;
-		Instance instance = new SampleToInstanceWrapper(input, weight, null, discrete, false);
-		instance.setDataset(instances);
-		probabilities = wekaClusterer.distributionForInstance(instance);
-		double[][] v = new double[1][];
-		v[0] = probabilities;
-		DenseDoubleMatrix2D output = Matrix.Factory.linkToArray(v);
-		return output;
+	public Matrix predictOne(Matrix input) {
+		try {
+			double[] probabilities = null;
+			Instance instance = new SampleToInstanceWrapper(input, null, null, discrete, false);
+			instance.setDataset(instances);
+			probabilities = wekaClusterer.distributionForInstance(instance);
+			double[][] v = new double[1][];
+			v[0] = probabilities;
+			DenseDoubleMatrix2D output = Matrix.Factory.linkToArray(v);
+			return output;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public void setNumberOfClusters(int numberOfClusters) throws Exception {
@@ -115,6 +124,10 @@ public class WekaClusterer extends AbstractClusterer {
 		} else {
 			throw new RuntimeException("Cannot set number of Clusters for this Clusterer");
 		}
+	}
+
+	public org.jdmp.core.algorithm.clustering.Clusterer emptyCopy() {
+		throw new RuntimeException("not implemented");
 	}
 
 }

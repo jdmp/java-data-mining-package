@@ -64,7 +64,7 @@ public class SelfOrganizingMap extends AbstractClusterer {
 		this.weightVectors = new Matrix[rows][cols];
 	}
 
-	public void train(ListDataSet dataSet) throws Exception {
+	public void trainAll(ListDataSet dataSet) {
 
 		List<Sample> samples = new FastArrayList<Sample>(dataSet);
 		for (int t = 0; t < tMax; t++) {
@@ -103,8 +103,8 @@ public class SelfOrganizingMap extends AbstractClusterer {
 
 				for (int row = 0; row < rows; row++) {
 					for (int col = 0; col < cols; col++) {
-						double dist = Math.sqrt((row - bestRow) * (row - bestRow) + (col - bestCol)
-								* (col - bestCol));
+						double dist = Math.sqrt((row - bestRow) * (row - bestRow)
+								+ (col - bestCol) * (col - bestCol));
 						double h = MathUtil.gauss(0, delta, dist);
 						Matrix w = weightVectors[row][col];
 						w = w.plus(input.minus(w).times(epsilon * h));
@@ -122,8 +122,12 @@ public class SelfOrganizingMap extends AbstractClusterer {
 
 	}
 
-	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
+	public Matrix predictOne(Matrix input) {
 		return null;
+	}
+
+	public Clusterer emptyCopy() {
+		return new SelfOrganizingMap(rows, cols);
 	}
 
 }

@@ -60,15 +60,14 @@ public abstract class AbstractClusterer extends AbstractAlgorithm implements Clu
 		this.weightLabel = weightLabel;
 	}
 
-	public void predictAll(ListDataSet dataSet) throws Exception {
+	public void predictAll(ListDataSet dataSet) {
 		for (Sample sample : dataSet) {
-			predict(sample);
+			predictOne(sample);
 		}
 	}
 
-	public final void predict(Sample sample) throws Exception {
-		Matrix output = predict(sample.getAsMatrix(getInputLabel()),
-				sample.getAsMatrix(getWeightLabel()));
+	public final void predictOne(Sample sample) {
+		Matrix output = predictOne(sample.getAsMatrix(getInputLabel()));
 		sample.put(PREDICTED, output);
 		// List<Matrix> error = getOutputErrorAlgorithm().calculate(output,
 		// sample.getTargetMatrix());

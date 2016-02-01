@@ -48,7 +48,7 @@ public class ClusterKMeansAction extends AbstractObjectAction {
 	public Object call() {
 		try {
 			Clusterer c = new KMeans(GUIUtil.getInt("number of cluster centers", 1, 100));
-			c.train((ListDataSet) getCoreObject());
+			c.trainAll((ListDataSet) getCoreObject());
 			c.predictAll((ListDataSet) getCoreObject());
 		} catch (Exception e) {
 			e.printStackTrace();

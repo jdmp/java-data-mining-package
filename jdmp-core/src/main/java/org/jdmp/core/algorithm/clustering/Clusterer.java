@@ -29,14 +29,16 @@ import org.ujmp.core.Matrix;
 
 public interface Clusterer {
 
+	public Clusterer emptyCopy();
+
 	public void reset() throws Exception;
 
-	public void train(ListDataSet dataSet) throws Exception;
+	public void trainAll(ListDataSet dataSet);
 
-	public void predict(Sample sample) throws Exception;
+	public void predictOne(Sample sample);
 
-	public void predictAll(ListDataSet dataSet) throws Exception;
+	public void predictAll(ListDataSet dataSet);
 
-	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception;
+	public Matrix predictOne(Matrix input);
 
 }

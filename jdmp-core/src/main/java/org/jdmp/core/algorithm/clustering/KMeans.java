@@ -53,7 +53,7 @@ public class KMeans extends AbstractClusterer {
 		clusterCenters = null;
 	}
 
-	public void train(ListDataSet dataSet) throws Exception {
+	public void trainAll(ListDataSet dataSet) {
 
 		clusterCenters = new Matrix[k];
 
@@ -79,7 +79,7 @@ public class KMeans extends AbstractClusterer {
 			int[] clusterCounts = new int[k];
 			for (Sample s : samples) {
 				Matrix input = s.getAsMatrix(getInputLabel());
-				int bestCluster = predict(input, null).intValue();
+				int bestCluster = predictOne(input).intValue();
 
 				// sum up vectors
 				newClusterCenters[bestCluster] = newClusterCenters[bestCluster].plus(input);
@@ -110,7 +110,7 @@ public class KMeans extends AbstractClusterer {
 		}
 	}
 
-	public Matrix predict(Matrix input, Matrix sampleWeight) throws Exception {
+	public Matrix predictOne(Matrix input) {
 		double minDistance = Double.MAX_VALUE;
 		int bestCluster = -1;
 		for (int i = 0; i < k; i++) {
@@ -121,6 +121,10 @@ public class KMeans extends AbstractClusterer {
 			}
 		}
 		return Matrix.Factory.linkToValue(bestCluster);
+	}
+
+	public Clusterer emptyCopy() {
+		return new KMeans(k);
 	}
 
 }

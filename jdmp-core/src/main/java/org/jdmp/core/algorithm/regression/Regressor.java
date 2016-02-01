@@ -23,11 +23,12 @@
 
 package org.jdmp.core.algorithm.regression;
 
+import org.jdmp.core.algorithm.clustering.Clusterer;
 import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 
-public interface Regressor {
+public interface Regressor extends Clusterer {
 
 	public void trainAll(ListDataSet dataSet);
 
