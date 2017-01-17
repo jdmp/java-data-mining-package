@@ -23,32 +23,12 @@
 
 package org.jdmp.examples;
 
-import org.jdmp.core.algorithm.classification.bayes.NaiveBayesClassifier;
-import org.jdmp.core.dataset.DataSet;
-import org.jdmp.core.dataset.ListDataSet;
+public class WorkspaceExample {
 
-public class NaiveBayesClassificationExample {
+	public static void main(String[] args) throws Exception {
 
-	public static void main(String[] args) {
+		org.jdmp.gui.JDMP.main(args);
 
-		// load example data set
-		ListDataSet dataSet = DataSet.Factory.IRIS();
-
-		// create a classifier
-		NaiveBayesClassifier classifier = new NaiveBayesClassifier();
-
-		// train the classifier using all data
-		classifier.trainAll(dataSet);
-
-		// use the classifier to make predictions
-		classifier.predictAll(dataSet);
-
-		// get the results
-		double accurary = dataSet.getAccuracy();
-
-		System.out.println("accuracy: " + accurary);
-		
-		// display dataset on the screen
-		dataSet.showGUI();
 	}
+
 }

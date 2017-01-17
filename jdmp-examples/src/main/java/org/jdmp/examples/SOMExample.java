@@ -23,32 +23,28 @@
 
 package org.jdmp.examples;
 
-import org.jdmp.core.algorithm.classification.bayes.NaiveBayesClassifier;
+import org.jdmp.core.algorithm.clustering.SelfOrganizingMap;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.ListDataSet;
 
-public class NaiveBayesClassificationExample {
+public class SOMExample {
 
 	public static void main(String[] args) {
 
 		// load example data set
-		ListDataSet dataSet = DataSet.Factory.IRIS();
+		ListDataSet dataSet = DataSet.Factory.ANIMALS();
 
-		// create a classifier
-		NaiveBayesClassifier classifier = new NaiveBayesClassifier();
+		// create a self-organizing map
+		SelfOrganizingMap som = new SelfOrganizingMap();
 
-		// train the classifier using all data
-		classifier.trainAll(dataSet);
+		// train the SOM using all data
+		som.trainAll(dataSet);
 
-		// use the classifier to make predictions
-		classifier.predictAll(dataSet);
+		// use the SOM to make predictions
+		som.predictAll(dataSet);
 
-		// get the results
-		double accurary = dataSet.getAccuracy();
-
-		System.out.println("accuracy: " + accurary);
-		
 		// display dataset on the screen
 		dataSet.showGUI();
 	}
+
 }

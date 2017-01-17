@@ -24,6 +24,9 @@ public class LinearRegressionClassificationExample {
 		double accurary = dataSet.getAccuracy();
 
 		System.out.println("accuracy: " + accurary);
+
+		// display dataset on the screen
+		dataSet.showGUI();
 	}
 
 }
