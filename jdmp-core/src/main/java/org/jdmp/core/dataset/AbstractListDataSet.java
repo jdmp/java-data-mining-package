@@ -45,7 +45,7 @@ public abstract class AbstractListDataSet extends AbstractListMatrix<Sample> imp
 
 	public AbstractListDataSet() {
 		super();
-		setId("DataSet" + getCoreObjectId());
+		setId("DataSet" + getUUID());
 	}
 
 	public final Matrix getInputMatrix() {

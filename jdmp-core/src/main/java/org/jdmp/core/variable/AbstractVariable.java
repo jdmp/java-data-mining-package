@@ -34,7 +34,7 @@ public abstract class AbstractVariable extends DefaultListMatrix<Matrix> impleme
 
 	protected AbstractVariable() {
 		super();
-		setId("Variable" + getCoreObjectId());
+		setId("Variable" + getUUID());
 	}
 
 	public final GUIObject getGUIObject() {

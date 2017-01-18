@@ -85,7 +85,7 @@ public abstract class AbstractAlgorithm extends AbstractCoreObject implements Al
 	public final String getId() {
 		String id = getVariableMap().getAsString(Algorithm.ID);
 		if (id == null) {
-			id = "Algorithm" + getCoreObjectId();
+			id = "Algorithm" + getUUID();
 			setId(id);
 		}
 		return id;

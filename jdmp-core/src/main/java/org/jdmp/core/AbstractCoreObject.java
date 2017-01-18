@@ -24,6 +24,7 @@
 package org.jdmp.core;
 
 import java.lang.reflect.Constructor;
+import java.util.UUID;
 
 import javax.swing.JFrame;
 
@@ -54,23 +55,14 @@ public abstract class AbstractCoreObject implements CoreObject {
 
 	protected transient GUIObject guiObject = null;
 
-	private static long runningId = 0;
-
-	private long coreObjectId = 0;
-
-	static {
-		try {
-			runningId = 31 * System.nanoTime() + System.currentTimeMillis();
-		} catch (Exception e) {
-		}
-	}
+	private final UUID uuid;
 
 	public AbstractCoreObject() {
-		coreObjectId = runningId++;
+		uuid = UUID.randomUUID();
 	}
 
-	public final long getCoreObjectId() {
-		return coreObjectId;
+	public final UUID getUUID() {
+		return uuid;
 	}
 
 	public final JFrame showGUI() {

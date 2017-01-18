@@ -37,7 +37,7 @@ public abstract class AbstractSample extends AbstractMapMatrix<String, Object> i
 
 	public AbstractSample() {
 		super();
-		setId("Sample" + getCoreObjectId());
+		setId("Sample" + getUUID());
 	}
 
 	public boolean isCorrect() {

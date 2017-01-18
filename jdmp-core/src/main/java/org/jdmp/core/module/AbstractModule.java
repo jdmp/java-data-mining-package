@@ -106,7 +106,7 @@ public abstract class AbstractModule extends AbstractCoreObject implements Modul
 	public final String getId() {
 		String id = getVariableMap().getAsString(Sample.ID);
 		if (id == null) {
-			id = "Module" + getCoreObjectId();
+			id = "Module" + getUUID();
 			setId(id);
 		}
 		return id;
