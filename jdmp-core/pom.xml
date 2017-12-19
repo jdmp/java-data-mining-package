@@ -4,13 +4,13 @@
 	<artifactId>jdmp-core</artifactId>
 	<packaging>jar</packaging>
 	<name>jdmp-core</name>
-	<url>https://jdmp.org/0.3.0/jdmp-core/</url>
+	<url>https://jdmp.org/0.3.1-SNAPSHOT/jdmp-core/</url>
 	<description>Main package of JDMP containing machine learning algorithms and functions</description>
 
 	<parent>
 		<groupId>org.jdmp</groupId>
 		<artifactId>jdmp</artifactId>
-		<version>0.3.0</version>
+		<version>0.3.1-SNAPSHOT</version>
 		<relativePath>../jdmp</relativePath>
 	</parent>
 
@@ -26,13 +26,13 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-core</artifactId>
-			<version>0.3.0</version>
+			<version>0.3.1-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-core</artifactId>
-			<version>0.3.0</version>
+			<version>0.3.1-SNAPSHOT</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>

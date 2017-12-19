@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.ujmp:ujmp-elasticsearch:test-jar:tests:0.3.1-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/ujmp/ujmp-elasticsearch/0.3.1-SNAPSHOT/ujmp-elasticsearch-0.3.1-SNAPSHOT-tests.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/ujmp/ujmp-elasticsearch/0.3.1-SNAPSHOT/ujmp-elasticsearch-0.3.1-SNAPSHOT-test-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/ujmp/ujmp-elasticsearch/0.3.1-SNAPSHOT/ujmp-elasticsearch-0.3.1-SNAPSHOT-test-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

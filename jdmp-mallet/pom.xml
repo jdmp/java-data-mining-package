@@ -4,13 +4,13 @@
 	<artifactId>jdmp-mallet</artifactId>
 	<packaging>jar</packaging>
 	<name>jdmp-mallet</name>
-	<url>https://jdmp.org/0.3.0/jdmp-mallet/</url>
+	<url>https://jdmp.org/0.3.1-SNAPSHOT/jdmp-mallet/</url>
 	<description>Plugin to incorporate text mining algorithms from Mallet</description>
 
 	<parent>
 		<groupId>org.jdmp</groupId>
 		<artifactId>jdmp</artifactId>
-		<version>0.3.0</version>
+		<version>0.3.1-SNAPSHOT</version>
 		<relativePath>../jdmp</relativePath>
 	</parent>
 

@@ -4,13 +4,13 @@
 	<artifactId>jdmp-complete</artifactId>
 	<packaging>jar</packaging>
 	<name>jdmp-complete</name>
-	<url>https://jdmp.org/0.3.0/jdmp-complete/</url>
+	<url>https://jdmp.org/0.3.1-SNAPSHOT/jdmp-complete/</url>
 	<description>Collection of all available JDMP modules in one meta package</description>
 
 	<parent>
 		<groupId>org.jdmp</groupId>
 		<artifactId>jdmp</artifactId>
-		<version>0.3.0</version>
+		<version>0.3.1-SNAPSHOT</version>
 		<relativePath>../jdmp</relativePath>
 	</parent>
 

@@ -4,13 +4,13 @@
 	<artifactId>jdmp-gui</artifactId>
 	<packaging>jar</packaging>
 	<name>jdmp-gui</name>
-	<url>https://jdmp.org/0.3.0/jdmp-gui/</url>
+	<url>https://jdmp.org/0.3.1-SNAPSHOT/jdmp-gui/</url>
 	<description>Plugin to enable visualization and graphics</description>
 
 	<parent>
 		<groupId>org.jdmp</groupId>
 		<artifactId>jdmp</artifactId>
-		<version>0.3.0</version>
+		<version>0.3.1-SNAPSHOT</version>
 		<relativePath>../jdmp</relativePath>
 	</parent>
 
@@ -26,7 +26,7 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-gui</artifactId>
-			<version>0.3.0</version>
+			<version>0.3.1-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -39,7 +39,7 @@
 		<dependency>
 			<groupId>org.ujmp</groupId>
 			<artifactId>ujmp-gui</artifactId>
-			<version>0.3.0</version>
+			<version>0.3.1-SNAPSHOT</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>

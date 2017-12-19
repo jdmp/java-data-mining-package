@@ -4,7 +4,7 @@
 
 	<groupId>org.jdmp</groupId>
 	<artifactId>jdmp</artifactId>
-	<version>0.3.0</version>
+	<version>0.3.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Java Data Mining Package</name>
 	<url>https://jdmp.org/</url>
@@ -78,7 +78,7 @@
 			<distributionManagement>
 				<site>
 					<id>jdmp.org</id>
-					<url>scp://jdmp.org/var/www/jdmp.org/0.3.0/jdmp/</url>
+					<url>scp://jdmp.org/var/www/jdmp.org/0.3.1-SNAPSHOT/jdmp/</url>
 				</site>
 			</distributionManagement>
 		</profile>
@@ -260,8 +260,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.3</version>
 				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
+					<source>1.7</source>
+					<target>1.7</target>
 				</configuration>
 			</plugin>
 
