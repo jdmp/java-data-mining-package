@@ -143,7 +143,7 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 		trainOne(input, Matrix.Factory.linkToValue(1.0), targetOutput);
 	}
 
-	public final void trainOne(Sample sample) {
+	public void trainOne(Sample sample) {
 		Matrix input = sample.getAsMatrix(getInputLabel());
 		Matrix weight = sample.getAsMatrix(getWeightLabel());
 		Matrix target = sample.getAsMatrix(getTargetLabel());
