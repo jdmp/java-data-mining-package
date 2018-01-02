@@ -82,12 +82,13 @@ public class LinearRegressionGradientDescent extends AbstractClassifier {
 		return getGradientVariable().getLast();
 	}
 
-	public Matrix predictOne(Matrix input) {
+	public void predictOne(Sample sample) {
+		Matrix input = sample.getAsMatrix(INPUT);
 		input = input.toColumnVector(Ret.NEW);
 		Matrix bias = Matrix.Factory.ones(input.getRowCount(), 1);
 		Matrix data = Matrix.Factory.horCat(bias, input);
 		Matrix result = getParameterMatrix().transpose().mtimes(data.transpose());
-		return result.transpose();
+		sample.put(PREDICTED, result.transpose());
 	}
 
 	public void trainAll(ListDataSet dataSet) {
@@ -99,8 +100,8 @@ public class LinearRegressionGradientDescent extends AbstractClassifier {
 
 		int featureCount = getFeatureCount(dataSet);
 		int classCount = getClassCount(dataSet);
-		Matrix parameters = Matrix.Factory.randn(featureCount + 1, classCount).divide(
-				featureCount + 1);
+		Matrix parameters = Matrix.Factory.randn(featureCount + 1, classCount)
+				.divide(featureCount + 1);
 
 		List<Matrix> inputs = new FastArrayList<Matrix>();
 		List<Matrix> targets = new FastArrayList<Matrix>();

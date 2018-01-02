@@ -175,8 +175,8 @@ public class LibSVMClassifier extends AbstractClassifier {
 		if (param.kernel_type == svm_parameter.PRECOMPUTED)
 			for (i = 0; i < prob.l; i++) {
 				if (prob.x[i][0].index != 0) {
-					System.err
-							.print("Wrong kernel matrix: first column must be 0:sample_serial_number\n");
+					System.err.print(
+							"Wrong kernel matrix: first column must be 0:sample_serial_number\n");
 					System.exit(1);
 				}
 				if ((int) prob.x[i][0].value <= 0 || (int) prob.x[i][0].value > featureCount) {
@@ -198,7 +198,8 @@ public class LibSVMClassifier extends AbstractClassifier {
 		System.out.println("training finished");
 	}
 
-	public Matrix predictOne(Matrix input) {
+	public void predictOne(Sample sample) {
+		Matrix input = sample.getAsMatrix(INPUT);
 		input = input.toRowVector(Ret.NEW);
 
 		if (svmType == SVMType.EPSILON_SVR || svmType == SVMType.NU_SVR) {
@@ -219,7 +220,7 @@ public class LibSVMClassifier extends AbstractClassifier {
 
 			svm.svm_predict_values(model, x, prediction);
 			Matrix output = Matrix.Factory.linkToValue(prediction[0]);
-			return output;
+			sample.put(PREDICTED, output);
 		} else {
 			int nr_class = svm.svm_get_nr_class(model);
 			double[] prediction = new double[nr_class];
@@ -244,7 +245,7 @@ public class LibSVMClassifier extends AbstractClassifier {
 				output.setAsDouble(prediction[i], 0, label[i]);
 			}
 
-			return output;
+			sample.put(PREDICTED, output);
 		}
 	}
 

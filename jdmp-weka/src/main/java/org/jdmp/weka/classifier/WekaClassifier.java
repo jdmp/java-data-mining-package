@@ -28,6 +28,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import org.jdmp.core.algorithm.classification.AbstractClassifier;
 import org.jdmp.core.dataset.ListDataSet;
+import org.jdmp.core.sample.Sample;
 import org.jdmp.weka.wrappers.DataSetToInstancesWrapper;
 import org.jdmp.weka.wrappers.SampleToInstanceWrapper;
 import org.ujmp.core.Matrix;
@@ -144,8 +145,9 @@ public class WekaClassifier extends AbstractClassifier {
 		}
 	}
 
-	public Matrix predictOne(Matrix input) {
+	public void predictOne(Sample sample) {
 		try {
+			Matrix input = sample.getAsMatrix(INPUT);
 			double[] probabilities = null;
 			Instance instance = new SampleToInstanceWrapper(input, null, null, discrete, true);
 			instance.setDataset(instances);
@@ -153,7 +155,7 @@ public class WekaClassifier extends AbstractClassifier {
 			double[][] v = new double[1][];
 			v[0] = probabilities;
 			Matrix output = Matrix.Factory.linkToArray(v);
-			return output;
+			sample.put(PREDICTED, output);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

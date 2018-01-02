@@ -27,6 +27,7 @@ import java.lang.reflect.Constructor;
 
 import org.jdmp.core.algorithm.clustering.AbstractClusterer;
 import org.jdmp.core.dataset.ListDataSet;
+import org.jdmp.core.sample.Sample;
 import org.jdmp.weka.wrappers.DataSetToInstancesWrapper;
 import org.jdmp.weka.wrappers.SampleToInstanceWrapper;
 import org.ujmp.core.Matrix;
@@ -102,19 +103,19 @@ public class WekaClusterer extends AbstractClusterer {
 		}
 	}
 
-	public Matrix predictOne(Matrix input) {
+	public void predictOne(Sample sample) {
 		try {
 			double[] probabilities = null;
+			Matrix input = sample.getAsMatrix(INPUT);
 			Instance instance = new SampleToInstanceWrapper(input, null, null, discrete, false);
 			instance.setDataset(instances);
 			probabilities = wekaClusterer.distributionForInstance(instance);
 			double[][] v = new double[1][];
 			v[0] = probabilities;
 			DenseDoubleMatrix2D output = Matrix.Factory.linkToArray(v);
-			return output;
+			sample.put(PREDICTED, output);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return null;
 		}
 	}
 

@@ -49,8 +49,8 @@ public class SemiSupervisedEM extends AbstractRegressor {
 		this.iterations = iterations;
 	}
 
-	public Matrix predictOne(Matrix input) {
-		return algorithm.predictOne(input);
+	public void predictOne(Sample sample) {
+		algorithm.predictOne(sample);
 	}
 
 	public void reset() {

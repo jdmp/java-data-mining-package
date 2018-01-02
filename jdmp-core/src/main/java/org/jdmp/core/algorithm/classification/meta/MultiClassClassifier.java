@@ -30,6 +30,7 @@ import org.jdmp.core.algorithm.classification.AbstractClassifier;
 import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.dataset.DataSet;
 import org.jdmp.core.dataset.ListDataSet;
+import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 
@@ -51,13 +52,15 @@ public class MultiClassClassifier extends AbstractClassifier {
 		this.twoColumns = twoColumns;
 	}
 
-	public Matrix predictOne(Matrix input) {
+	public void predictOne(Sample sample) {
 		double[] results = new double[classCount];
 		for (int i = 0; i < classCount; i++) {
 			Classifier c = singleClassClassifiers.get(i);
-			results[i] = c.predictOne(input).getAsDouble(0, 0);
+			Sample clone = sample.clone();
+			c.predictOne(clone);
+			results[i] = clone.getAsMatrix(PREDICTED).getAsDouble(0, 0);
 		}
-		return Matrix.Factory.linkToArray(results).transpose();
+		sample.put(PREDICTED, Matrix.Factory.linkToArray(results).transpose());
 	}
 
 	public void reset() {

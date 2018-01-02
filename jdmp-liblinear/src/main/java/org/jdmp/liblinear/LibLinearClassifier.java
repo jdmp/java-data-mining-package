@@ -58,7 +58,8 @@ public class LibLinearClassifier extends AbstractClassifier {
 		this.features = new FeatureStore();
 	}
 
-	public Matrix predictOne(Matrix input) {
+	public void predictOne(Sample sample) {
+		Matrix input = sample.getAsMatrix(INPUT);
 		input = input.toColumnVector(Ret.LINK);
 		long columnCount = input.getColumnCount();
 		int count = 0;
@@ -79,7 +80,7 @@ public class LibLinearClassifier extends AbstractClassifier {
 			}
 		}
 
-		return predictOne(x);
+		sample.put(PREDICTED, predictOne(x));
 	}
 
 	public void trainAll(Problem problem) {
@@ -106,7 +107,8 @@ public class LibLinearClassifier extends AbstractClassifier {
 				System.out.println("Converting samples: " + Math.round(((double) i / dataSet.size() * 100)) + "% done");
 			}
 			Matrix input = s.getAsMatrix(getInputLabel()).toColumnVector(Ret.LINK);
-			int targetClass = (int) s.getAsMatrix(getTargetLabel()).toColumnVector(Ret.LINK).getCoordinatesOfMaximum()[COLUMN];
+			int targetClass = (int) s.getAsMatrix(getTargetLabel()).toColumnVector(Ret.LINK)
+					.getCoordinatesOfMaximum()[COLUMN];
 			prob.y[i] = targetClass;
 			long columnCount = input.getColumnCount();
 			int count = 0;

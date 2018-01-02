@@ -23,6 +23,7 @@
 
 package org.jdmp.core.algorithm.regression;
 
+import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 
@@ -37,15 +38,17 @@ public class LogisticRegression extends LinearRegression {
 		super(numberOfPrincipalComponents);
 	}
 
-	public Matrix predictOne(Matrix input) {
+	public void predictOne(Sample sample) {
+		Matrix input = sample.getAsMatrix(INPUT);
 		// TODO: check
-		Matrix result = super.predictOne(input);
+		super.predictOne(sample);
+		Matrix result = sample.getAsMatrix(PREDICTED);
 		result = result.logistic(Ret.NEW);
 		double sum = result.getValueSum();
 		if (sum > 0) {
 			result = result.divide(sum);
 		}
-		return result;
+		sample.put(PREDICTED, result);
 	}
 
 }

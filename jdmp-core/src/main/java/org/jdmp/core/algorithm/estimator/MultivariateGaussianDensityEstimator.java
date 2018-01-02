@@ -87,7 +87,8 @@ public class MultivariateGaussianDensityEstimator extends AbstractClassifier {
 		return Math.exp(-0.5 * matrix.doubleValue());
 	}
 
-	public Matrix predictOne(Matrix input) {
+	public void predictOne(Sample sample) {
+		Matrix input = sample.getAsMatrix(INPUT);
 		input = input.toColumnVector(Ret.NEW);
 		Matrix x = Matrix.Factory.zeros(1, dimensions);
 		for (int i = 0; i < featureCount; i++) {
@@ -107,7 +108,7 @@ public class MultivariateGaussianDensityEstimator extends AbstractClassifier {
 		for (int i = 0; i < classCount; i++) {
 			result.setAsDouble(result.getAsDouble(0, i) / sum, 0, i);
 		}
-		return result;
+		sample.put(PREDICTED, result);
 	}
 
 	public Classifier emptyCopy() {

@@ -78,8 +78,9 @@ public class KMeans extends AbstractClusterer {
 			// distribute samples to clusters and update new cluster centers
 			int[] clusterCounts = new int[k];
 			for (Sample s : samples) {
-				Matrix input = s.getAsMatrix(getInputLabel());
-				int bestCluster = predictOne(input).intValue();
+				Matrix input = s.getAsMatrix(INPUT);
+				predictOne(s);
+				int bestCluster = s.getAsMatrix(PREDICTED).intValue();
 
 				// sum up vectors
 				newClusterCenters[bestCluster] = newClusterCenters[bestCluster].plus(input);
@@ -110,7 +111,8 @@ public class KMeans extends AbstractClusterer {
 		}
 	}
 
-	public Matrix predictOne(Matrix input) {
+	public void predictOne(Sample sample) {
+		Matrix input = sample.getAsMatrix(INPUT);
 		double minDistance = Double.MAX_VALUE;
 		int bestCluster = -1;
 		for (int i = 0; i < k; i++) {
@@ -120,7 +122,7 @@ public class KMeans extends AbstractClusterer {
 				bestCluster = i;
 			}
 		}
-		return Matrix.Factory.linkToValue(bestCluster);
+		sample.put(PREDICTED, Matrix.Factory.linkToValue(bestCluster));
 	}
 
 	public Clusterer emptyCopy() {

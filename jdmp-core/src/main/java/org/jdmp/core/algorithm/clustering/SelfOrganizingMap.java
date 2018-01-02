@@ -122,8 +122,7 @@ public class SelfOrganizingMap extends AbstractClusterer {
 
 	}
 
-	public Matrix predictOne(Matrix input) {
-		return null;
+	public void predictOne(Sample sample) {
 	}
 
 	public Clusterer emptyCopy() {

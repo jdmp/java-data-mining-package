@@ -41,8 +41,8 @@ public class ConstantClassifier extends AbstractClassifier {
 		super();
 	}
 
-	public Matrix predictOne(Matrix input) {
-		return prediction;
+	public void predictOne(Sample sample) {
+		sample.put(PREDICTED, prediction);
 	}
 
 	public void reset() {

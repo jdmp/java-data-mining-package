@@ -36,9 +36,9 @@ public interface Regressor extends Clusterer {
 
 	public void trainOne(Matrix input, Matrix sampleWeight, Matrix target);
 
+	public void calculateError(Sample sample);
+	
 	public void predictOne(Sample sample);
-
-	public Matrix predictOne(Matrix input);
 
 	public void trainOne(Matrix input, Matrix target);
 

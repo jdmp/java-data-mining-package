@@ -50,7 +50,8 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 		super(inputLabel);
 	}
 
-	public Matrix predictOne(Matrix input) {
+	public void predictOne(Sample sample) {
+		Matrix input = sample.getAsMatrix(INPUT);
 		input = input.toColumnVector(Ret.LINK);
 		final double[] probs = new double[classCount];
 		final double[] logs = new double[classCount];
@@ -76,7 +77,7 @@ public class NaiveBayesClassifier extends AbstractClassifier {
 
 		final double[] finalProbs = MathUtil.logToProbs(logs);
 		Matrix m = Matrix.Factory.linkToArray(finalProbs).transpose();
-		return m;
+		sample.put(PREDICTED, m);
 	}
 
 	public void reset() {

@@ -58,19 +58,20 @@ public class KNNClassifier extends AbstractRegressor {
 		this.dataSet = null;
 	}
 
-	public Matrix predictOne(Matrix input) {
+	public void predictOne(Sample sample) {
 		List<Sortable<Double, Matrix>> bestResults = new FastArrayList<Sortable<Double, Matrix>>();
 		for (Sample s : dataSet) {
 			Matrix reference = s.getAsMatrix(getInputLabel());
+			Matrix input = sample.getAsMatrix(INPUT);
 			double distance = input.euklideanDistanceTo(reference, true);
 			if (bestResults.size() < k) {
-				bestResults.add(new Sortable<Double, Matrix>(distance, s
-						.getAsMatrix(getTargetLabel())));
+				bestResults.add(
+						new Sortable<Double, Matrix>(distance, s.getAsMatrix(getTargetLabel())));
 				Collections.sort(bestResults);
 			} else if (distance < bestResults.get(k - 1).getComparable()) {
 				bestResults.remove(k - 1);
-				bestResults.add(new Sortable<Double, Matrix>(distance, s
-						.getAsMatrix(getTargetLabel())));
+				bestResults.add(
+						new Sortable<Double, Matrix>(distance, s.getAsMatrix(getTargetLabel())));
 				Collections.sort(bestResults);
 			}
 		}
@@ -80,6 +81,6 @@ public class KNNClassifier extends AbstractRegressor {
 		}
 		Matrix resultMatrix = Matrix.Factory.vertCat(results);
 		Matrix mean = resultMatrix.mean(Ret.NEW, Matrix.ROW, true);
-		return mean;
+		sample.put(PREDICTED, mean);
 	}
 }

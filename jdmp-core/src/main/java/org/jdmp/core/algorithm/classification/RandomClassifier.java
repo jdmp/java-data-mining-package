@@ -37,8 +37,8 @@ public class RandomClassifier extends AbstractClassifier {
 		super();
 	}
 
-	public Matrix predictOne(Matrix input) {
-		return Matrix.Factory.rand(1, classCount);
+	public void predictOne(Sample sample) {
+		sample.put(PREDICTED, Matrix.Factory.rand(1, classCount));
 	}
 
 	public void reset() {

@@ -65,7 +65,8 @@ public class LinearRegression extends AbstractRegressor {
 		return getParameterVariable().getLast();
 	}
 
-	public Matrix predictOne(Matrix input) {
+	public void predictOne(Sample sample) {
+		Matrix input = sample.getAsMatrix(INPUT);
 		input = input.toColumnVector(Ret.NEW);
 
 		Matrix x = Matrix.Factory.zeros(1, input.getColumnCount() + 1);
@@ -77,7 +78,7 @@ public class LinearRegression extends AbstractRegressor {
 		x.setAsDouble(1, 0, 0);
 
 		Matrix result = x.mtimes(getParameterMatrix());
-		return result;
+		sample.put(PREDICTED, result);
 	}
 
 	public void trainAll(ListDataSet dataSet) {
@@ -132,8 +133,8 @@ public class LinearRegression extends AbstractRegressor {
 
 		Matrix parameters;
 
-		if (numberOfPrincipalComponents > 0
-				&& numberOfPrincipalComponents < Math.min(x.getRowCount(), x.getColumnCount() - 1)) {
+		if (numberOfPrincipalComponents > 0 && numberOfPrincipalComponents < Math
+				.min(x.getRowCount(), x.getColumnCount() - 1)) {
 			if (sampleCount < featureCount) {
 				// final Matrix xt = x.transpose();
 				parameters = x.pinv(numberOfPrincipalComponents).mtimes(y);

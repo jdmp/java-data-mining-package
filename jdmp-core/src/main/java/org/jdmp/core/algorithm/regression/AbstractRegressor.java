@@ -126,10 +126,8 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 		throw new RuntimeException("not supported");
 	}
 
-	public final void predictOne(Sample sample) {
-		Matrix predicted = predictOne(sample.getAsMatrix(getInputLabel()));
-		predicted = predicted.toColumnVector(Ret.LINK);
-		sample.put(PREDICTED, predicted);
+	public final void calculateError(Sample sample) {
+		Matrix predicted = sample.getAsMatrix(PREDICTED);
 
 		if (sample.getAsMatrix(getTargetLabel()) != null) {
 			Matrix target = sample.getAsMatrix(getTargetLabel()).toColumnVector(Ret.LINK);
@@ -160,6 +158,7 @@ public abstract class AbstractRegressor extends AbstractAlgorithm implements Reg
 			public void step(int i) {
 				Sample sample = dataSet.get(i);
 				predictOne(sample);
+				calculateError(sample);
 			}
 		};
 

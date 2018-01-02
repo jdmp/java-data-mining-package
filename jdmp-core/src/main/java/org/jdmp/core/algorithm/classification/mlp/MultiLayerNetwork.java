@@ -99,8 +99,8 @@ public class MultiLayerNetwork extends AbstractClassifier {
 					hiddenLayer = new NetworkLayer(aggregationInput, transferInput, biasInput,
 							hiddenNeurons[i]);
 				} else {
-					hiddenLayer = new NetworkLayer(aggregationDefault, transferDefault,
-							biasDefault, hiddenNeurons[i]);
+					hiddenLayer = new NetworkLayer(aggregationDefault, transferDefault, biasDefault,
+							hiddenNeurons[i]);
 				}
 				getAlgorithmMap().put("hidden" + i + "-forward", hiddenLayer.getAlgorithmForward());
 				getAlgorithmMap().put("hidden" + i + "-backward",
@@ -247,7 +247,7 @@ public class MultiLayerNetwork extends AbstractClassifier {
 		return networkLayers;
 	}
 
-	public Matrix predictOne(Matrix input) {
+	public void predictOne(Sample sample) {
 		// transpose and add bias unit
 		// Matrix inputWithBias = Matrix.zeros(input.getColumnCount() + 1,
 		// input.getRowCount());
@@ -255,6 +255,7 @@ public class MultiLayerNetwork extends AbstractClassifier {
 		// inputWithBias.setDouble(input.getDouble(0, i), i, 0);
 		// }
 		// inputWithBias.setDouble(1.0, inputWithBias.getRowCount() - 1, 0);
+		Matrix input = sample.getAsMatrix(INPUT);
 		addInputMatrix(input);
 
 		for (NetworkLayer networkLayer : getNetworkLayerList()) {
@@ -262,7 +263,7 @@ public class MultiLayerNetwork extends AbstractClassifier {
 		}
 
 		Matrix actualOutput = getOutputMatrix().transpose();
-		return actualOutput;
+		sample.put(PREDICTED, actualOutput);
 	}
 
 	public Matrix getOutputMatrix() {
@@ -275,7 +276,12 @@ public class MultiLayerNetwork extends AbstractClassifier {
 			sampleWeight = Matrix.Factory.linkToValue(1.0);
 		}
 		setSampleWeight(sampleWeight.doubleValue());
-		predictOne(input);
+		Sample sample = Sample.Factory.emptySample();
+		sample.put(INPUT, input);
+		sample.put(WEIGHT, sampleWeight);
+		sample.put(TARGET, desiredOutput);
+		// TODO: is this working?
+		predictOne(sample);
 		getOutputErrorAlgorithm().calculate();
 
 		for (int i = networkLayers.size() - 1; i != -1; i--) {
@@ -304,12 +310,12 @@ public class MultiLayerNetwork extends AbstractClassifier {
 				a.trainAll(train);
 				a.predictAll(test);
 				// System.out.println(i+": "+test.getRMSE());
-				//if (test.isEarlyStoppingReached(numberOfSteps)) {
-				//	double d = test.getEarlyStoppingIndex(numberOfSteps);
-				//	duration.add(d);
-					// System.out.println("CV"+r+": "+d);
-				//	break;
-				//}
+				// if (test.isEarlyStoppingReached(numberOfSteps)) {
+				// double d = test.getEarlyStoppingIndex(numberOfSteps);
+				// duration.add(d);
+				// System.out.println("CV"+r+": "+d);
+				// break;
+				// }
 			}
 		}
 		int mean = (int) (duration.getMeanValue() * 0.9);
@@ -338,7 +344,8 @@ public class MultiLayerNetwork extends AbstractClassifier {
 		double rmse = 0;
 		for (int i = first90Percent; i < samples.size(); i++) {
 			Sample rs = samples.get(i);
-			Matrix output = predictOne(rs.getAsMatrix(getInputLabel()));
+			predictOne(rs);
+			Matrix output = rs.getAsMatrix(PREDICTED);
 			rmse += output.minus(rs.getAsMatrix(getTargetLabel())).getRMS();
 			trainOne(samples.get(i));
 		}

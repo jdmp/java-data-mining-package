@@ -25,7 +25,6 @@ package org.jdmp.core.algorithm.clustering;
 
 import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
-import org.ujmp.core.Matrix;
 
 public interface Clusterer {
 
@@ -38,7 +37,5 @@ public interface Clusterer {
 	public void predictOne(Sample sample);
 
 	public void predictAll(ListDataSet dataSet);
-
-	public Matrix predictOne(Matrix input);
 
 }

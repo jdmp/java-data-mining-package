@@ -145,13 +145,17 @@ public class FeatureSelector extends AbstractRegressor {
 		selectedFeatures.clear();
 	}
 
-	public Matrix predictOne(Matrix input) {
+	public void predictOne(Sample sample) {
+		Matrix input = sample.getAsMatrix(INPUT);
 		input = input.toColumnVector(Ret.NEW);
+		Sample clone = sample.clone();
 		Matrix input2 = Matrix.Factory.zeros(1, selectedFeatures.size());
+		clone.put(INPUT, input2);
 		for (int i = 0; i < selectedFeatures.size(); i++) {
 			input2.setAsDouble(input.getAsDouble(0, selectedFeatures.get(i)), 0, i);
 		}
-		return learningAlgorithm.predictOne(input2);
+		learningAlgorithm.predictOne(clone);
+		sample.put(PREDICTED, clone.getAsMatrix(PREDICTED));
 	}
 
 	public Regressor emptyCopy() {

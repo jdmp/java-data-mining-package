@@ -26,7 +26,6 @@ package org.jdmp.core.algorithm.clustering;
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
-import org.ujmp.core.Matrix;
 
 public abstract class AbstractClusterer extends AbstractAlgorithm implements Clusterer {
 	private static final long serialVersionUID = -8045773409890719666L;
@@ -64,15 +63,6 @@ public abstract class AbstractClusterer extends AbstractAlgorithm implements Clu
 		for (Sample sample : dataSet) {
 			predictOne(sample);
 		}
-	}
-
-	public final void predictOne(Sample sample) {
-		Matrix output = predictOne(sample.getAsMatrix(getInputLabel()));
-		sample.put(PREDICTED, output);
-		// List<Matrix> error = getOutputErrorAlgorithm().calculate(output,
-		// sample.getTargetMatrix());
-		// sample.setOutputErrorMatrix(error.get(0));
-		// sample.setRMSEMatrix(MatrixFactory.linkToValue(error.get(0).getRMS()));
 	}
 
 }

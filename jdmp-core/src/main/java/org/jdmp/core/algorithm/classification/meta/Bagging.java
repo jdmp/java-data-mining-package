@@ -29,6 +29,7 @@ import java.util.List;
 import org.jdmp.core.algorithm.regression.AbstractRegressor;
 import org.jdmp.core.algorithm.regression.Regressor;
 import org.jdmp.core.dataset.ListDataSet;
+import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.collections.list.FastArrayList;
@@ -79,15 +80,17 @@ public class Bagging extends AbstractRegressor {
 		}
 	}
 
-	public Matrix predictOne(Matrix input) {
+	public void predictOne(Sample sample) {
 		List<Matrix> results = new FastArrayList<Matrix>();
 		for (Regressor learningAlgorithm : learningAlgorithms) {
-			Matrix result = learningAlgorithm.predictOne(input);
+			Sample clone = sample.clone();
+			learningAlgorithm.predictOne(clone);
+			Matrix result = clone.getAsMatrix(PREDICTED);
 			results.add(result);
 		}
 		Matrix all = Matrix.Factory.vertCat(results);
 		Matrix mean = all.mean(Ret.NEW, Matrix.ROW, true);
-		return mean;
+		sample.put(PREDICTED, mean);
 	}
 
 	public Regressor emptyCopy() {
