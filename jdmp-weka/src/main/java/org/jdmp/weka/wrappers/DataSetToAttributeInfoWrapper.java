@@ -27,48 +27,52 @@ import org.jdmp.core.dataset.ListDataSet;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 
+import weka.core.Attribute;
 import weka.core.FastVector;
 
-public class DataSetToAttributeInfoWrapper extends FastVector {
-	private static final long serialVersionUID = -5668139225494255695L;
+import java.util.ArrayList;
+import java.util.List;
 
-	public DataSetToAttributeInfoWrapper(ListDataSet dataSet, boolean discrete) {
-		super();
+public class DataSetToAttributeInfoWrapper extends ArrayList<Attribute> {
+    private static final long serialVersionUID = -5668139225494255695L;
 
-		// for (Attribute f : dataSet.getAttributes()) {
-		// weka.core.Attribute a = null;
-		// if (f.isDiscrete()) {
-		// FastVector values = new FastVector();
-		// for (int i = 0; i < f.getValueCount(); i++) {
-		// values.addElement("Attribute " + i);
-		// }
-		// a = new weka.core.Attribute(f.getLabel(), values);
-		// } else {
-		// a = new weka.core.Attribute(f.getLabel());
-		// }
-		// addElement(a);
-		// }
-		Matrix valueCounts = dataSet.getInputMatrix().max(Ret.NEW, Matrix.ROW).plus(1);
-		for (int j = 0; j < dataSet.getInputMatrix().getColumnCount(); j++) {
-			weka.core.Attribute a = null;
-			if (discrete) {
-				FastVector values = new FastVector();
-				for (int i = 0; i < valueCounts.getAsDouble(0, j); i++) {
-					values.addElement("Attribute " + i);
-				}
-				a = new weka.core.Attribute(j + "", values);
-			} else {
-				a = new weka.core.Attribute(j + "");
-			}
-			addElement(a);
-		}
+    public DataSetToAttributeInfoWrapper(ListDataSet dataSet, boolean discrete) {
+        super();
 
-		FastVector classes = new FastVector();
-		int classCount = dataSet.getClassCount();
-		for (int i = 0; i < classCount; i++) {
-			classes.addElement("Class " + i);
-		}
-		weka.core.Attribute a = new weka.core.Attribute("class", classes);
-		addElement(a);
-	}
+        // for (Attribute f : dataSet.getAttributes()) {
+        // weka.core.Attribute a = null;
+        // if (f.isDiscrete()) {
+        // FastVector values = new FastVector();
+        // for (int i = 0; i < f.getValueCount(); i++) {
+        // values.addElement("Attribute " + i);
+        // }
+        // a = new weka.core.Attribute(f.getLabel(), values);
+        // } else {
+        // a = new weka.core.Attribute(f.getLabel());
+        // }
+        // addElement(a);
+        // }
+        Matrix valueCounts = dataSet.getInputMatrix().max(Ret.NEW, Matrix.ROW).plus(1);
+        for (int j = 0; j < dataSet.getInputMatrix().getColumnCount(); j++) {
+            weka.core.Attribute a = null;
+            if (discrete) {
+                List<String> values = new ArrayList<>();
+                for (int i = 0; i < valueCounts.getAsDouble(0, j); i++) {
+                    values.add("Attribute " + i);
+                }
+                a = new Attribute(j + "", values);
+            } else {
+                a = new Attribute(j + "");
+            }
+            add(a);
+        }
+
+        List<String> classes = new ArrayList<>();
+        int classCount = dataSet.getClassCount();
+        for (int i = 0; i < classCount; i++) {
+            classes.add("Class " + i);
+        }
+        Attribute a = new Attribute("class", classes);
+        add(a);
+    }
 }
