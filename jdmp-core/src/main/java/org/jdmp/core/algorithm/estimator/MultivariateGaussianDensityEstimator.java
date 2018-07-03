@@ -29,6 +29,9 @@ import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
+import org.ujmp.core.exception.NotImplementedException;
+
+import java.util.Collection;
 
 public class MultivariateGaussianDensityEstimator extends AbstractClassifier {
 	private static final long serialVersionUID = -8923432381344117225L;
@@ -133,4 +136,8 @@ public class MultivariateGaussianDensityEstimator extends AbstractClassifier {
 		return Math.exp(-0.5 * matrix.doubleValue());
 	}
 
+	@Override
+	public void trainBatch(Collection<Sample> samples) {
+		throw new NotImplementedException();
+	}
 }

@@ -26,43 +26,59 @@ package org.jdmp.core.algorithm.clustering;
 import org.jdmp.core.algorithm.AbstractAlgorithm;
 import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
+import org.ujmp.core.util.concurrent.PFor;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public abstract class AbstractClusterer extends AbstractAlgorithm implements Clusterer {
-	private static final long serialVersionUID = -8045773409890719666L;
+    private static final long serialVersionUID = -8045773409890719666L;
 
-	private String inputLabel;
-	private String weightLabel;
+    private String inputLabel;
+    private String weightLabel;
 
-	public AbstractClusterer() {
-		this(INPUT, WEIGHT);
-	}
+    public AbstractClusterer() {
+        this(INPUT, WEIGHT);
+    }
 
-	public AbstractClusterer(String inputLabel, String weightLabel) {
-		super();
-		this.inputLabel = inputLabel;
-		this.weightLabel = weightLabel;
-	}
+    public AbstractClusterer(String inputLabel, String weightLabel) {
+        super();
+        this.inputLabel = inputLabel;
+        this.weightLabel = weightLabel;
+    }
 
-	public String getInputLabel() {
-		return inputLabel;
-	}
+    public String getInputLabel() {
+        return inputLabel;
+    }
 
-	public void setInputLabel(String inputLabel) {
-		this.inputLabel = inputLabel;
-	}
+    public void setInputLabel(String inputLabel) {
+        this.inputLabel = inputLabel;
+    }
 
-	public String getWeightLabel() {
-		return weightLabel;
-	}
+    public String getWeightLabel() {
+        return weightLabel;
+    }
 
-	public void setWeightLabel(String weightLabel) {
-		this.weightLabel = weightLabel;
-	}
+    public void setWeightLabel(String weightLabel) {
+        this.weightLabel = weightLabel;
+    }
 
-	public void predictAll(ListDataSet dataSet) {
-		for (Sample sample : dataSet) {
-			predictOne(sample);
-		}
-	}
+    public void predictAll(ListDataSet dataSet) {
+        for (Sample sample : dataSet) {
+            predictOne(sample);
+        }
+    }
+
+    public final void predictBatch(Collection<Sample> samples) {
+        final List<Sample> list = new ArrayList<>(samples);
+        new PFor(0, samples.size() - 1) {
+            @Override
+            public void step(int i) {
+                Sample sample = list.get(i);
+                predictOne(sample);
+            }
+        };
+    }
 
 }

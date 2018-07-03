@@ -23,110 +23,117 @@
 
 package org.jdmp.core.algorithm.clustering;
 
-import java.util.Collections;
-import java.util.List;
-
 import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.collections.list.FastArrayList;
+import org.ujmp.core.exception.NotImplementedException;
 import org.ujmp.core.util.MathUtil;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
 public class SelfOrganizingMap extends AbstractClusterer {
-	private static final long serialVersionUID = -7826055336085139110L;
+    private static final long serialVersionUID = -7826055336085139110L;
 
-	private int rows = 10;
-	private int cols = 10;
-	private int tMax = 1;
-	private double epsilonStart = 0.5;
-	private double epsilonEnd = 0.01;
-	private double deltaStart = Math.max(rows, cols) / 2.0;
-	private double deltaEnd = 1.0;
+    private int rows = 10;
+    private int cols = 10;
+    private int tMax = 1;
+    private double epsilonStart = 0.5;
+    private double epsilonEnd = 0.01;
+    private double deltaStart = Math.max(rows, cols) / 2.0;
+    private double deltaEnd = 1.0;
 
-	private Matrix[][] weightVectors;
+    private Matrix[][] weightVectors;
 
-	public SelfOrganizingMap() {
-		this(10, 10);
-	}
+    public SelfOrganizingMap() {
+        this(10, 10);
+    }
 
-	public SelfOrganizingMap(int rows, int cols) {
-		this.rows = rows;
-		this.cols = cols;
-		this.tMax = 200;
-		this.epsilonStart = 0.5;
-		this.epsilonEnd = 0.001;
-		this.deltaStart = Math.max(rows, cols) / 2.0;
-		this.deltaEnd = 0.5;
-		this.weightVectors = new Matrix[rows][cols];
-	}
+    public SelfOrganizingMap(int rows, int cols) {
+        this.rows = rows;
+        this.cols = cols;
+        this.tMax = 200;
+        this.epsilonStart = 0.5;
+        this.epsilonEnd = 0.001;
+        this.deltaStart = Math.max(rows, cols) / 2.0;
+        this.deltaEnd = 0.5;
+        this.weightVectors = new Matrix[rows][cols];
+    }
 
-	public void reset() throws Exception {
-		this.weightVectors = new Matrix[rows][cols];
-	}
+    public void reset() {
+        this.weightVectors = new Matrix[rows][cols];
+    }
 
-	public void trainAll(ListDataSet dataSet) {
+    @Override
+    public void trainBatch(Collection<Sample> samples) {
+        throw new NotImplementedException();
+    }
 
-		List<Sample> samples = new FastArrayList<Sample>(dataSet);
-		for (int t = 0; t < tMax; t++) {
+    public void trainAll(ListDataSet dataSet) {
 
-			double epsilon = epsilonStart * Math.pow(epsilonEnd / epsilonStart, (double) t / tMax);
-			double delta = deltaStart * Math.pow(deltaEnd / deltaStart, (double) t / tMax);
+        List<Sample> samples = new FastArrayList<Sample>(dataSet);
+        for (int t = 0; t < tMax; t++) {
 
-			System.out.println((int) ((double) t / tMax * 100) + "%");
+            double epsilon = epsilonStart * Math.pow(epsilonEnd / epsilonStart, (double) t / tMax);
+            double delta = deltaStart * Math.pow(deltaEnd / deltaStart, (double) t / tMax);
 
-			Collections.shuffle(samples);
+            System.out.println((int) ((double) t / tMax * 100) + "%");
 
-			for (Sample s : samples) {
-				Matrix input = s.getAsMatrix(getInputLabel());
+            Collections.shuffle(samples);
 
-				// find best match
-				double bestDistance = Double.MAX_VALUE;
-				int bestRow = -1;
-				int bestCol = -1;
-				Matrix distanceMatrix = Matrix.Factory.zeros(rows, cols);
-				for (int row = 0; row < rows; row++) {
-					for (int col = 0; col < cols; col++) {
-						Matrix m = weightVectors[row][col];
-						if (m == null) {
-							m = Matrix.Factory.randn(input.getSize());
-							weightVectors[row][col] = m;
-						}
-						double distance = input.euklideanDistanceTo(m, true);
-						distanceMatrix.setAsDouble(distance, row, col);
-						if (distance < bestDistance) {
-							bestDistance = distance;
-							bestRow = row;
-							bestCol = col;
-						}
-					}
-				}
+            for (Sample s : samples) {
+                Matrix input = s.getAsMatrix(getInputLabel());
 
-				for (int row = 0; row < rows; row++) {
-					for (int col = 0; col < cols; col++) {
-						double dist = Math.sqrt((row - bestRow) * (row - bestRow)
-								+ (col - bestCol) * (col - bestCol));
-						double h = MathUtil.gauss(0, delta, dist);
-						Matrix w = weightVectors[row][col];
-						w = w.plus(input.minus(w).times(epsilon * h));
-						weightVectors[row][col] = w;
-					}
-				}
+                // find best match
+                double bestDistance = Double.MAX_VALUE;
+                int bestRow = -1;
+                int bestCol = -1;
+                Matrix distanceMatrix = Matrix.Factory.zeros(rows, cols);
+                for (int row = 0; row < rows; row++) {
+                    for (int col = 0; col < cols; col++) {
+                        Matrix m = weightVectors[row][col];
+                        if (m == null) {
+                            m = Matrix.Factory.randn(input.getSize());
+                            weightVectors[row][col] = m;
+                        }
+                        double distance = input.euklideanDistanceTo(m, true);
+                        distanceMatrix.setAsDouble(distance, row, col);
+                        if (distance < bestDistance) {
+                            bestDistance = distance;
+                            bestRow = row;
+                            bestCol = col;
+                        }
+                    }
+                }
 
-				if (t == tMax - 1) {
-					s.put("Projection", distanceMatrix);
-				}
+                for (int row = 0; row < rows; row++) {
+                    for (int col = 0; col < cols; col++) {
+                        double dist = Math.sqrt((row - bestRow) * (row - bestRow)
+                                + (col - bestCol) * (col - bestCol));
+                        double h = MathUtil.gauss(0, delta, dist);
+                        Matrix w = weightVectors[row][col];
+                        w = w.plus(input.minus(w).times(epsilon * h));
+                        weightVectors[row][col] = w;
+                    }
+                }
 
-			}
+                if (t == tMax - 1) {
+                    s.put("Projection", distanceMatrix);
+                }
 
-		}
+            }
 
-	}
+        }
 
-	public void predictOne(Sample sample) {
-	}
+    }
 
-	public Clusterer emptyCopy() {
-		return new SelfOrganizingMap(rows, cols);
-	}
+    public void predictOne(Sample sample) {
+    }
+
+    public Clusterer emptyCopy() {
+        return new SelfOrganizingMap(rows, cols);
+    }
 
 }

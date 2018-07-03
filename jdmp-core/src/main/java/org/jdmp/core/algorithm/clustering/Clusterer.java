@@ -26,16 +26,22 @@ package org.jdmp.core.algorithm.clustering;
 import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 
+import java.util.Collection;
+
 public interface Clusterer {
 
-	public Clusterer emptyCopy();
+    public Clusterer emptyCopy();
 
-	public void reset() throws Exception;
+    public void reset();
 
-	public void trainAll(ListDataSet dataSet);
+    public void trainAll(ListDataSet dataSet);
 
-	public void predictOne(Sample sample);
+    public void predictOne(Sample sample);
 
-	public void predictAll(ListDataSet dataSet);
+    public void predictAll(ListDataSet dataSet);
+
+    public void trainBatch(Collection<Sample> samples);
+
+    public void predictBatch(Collection<Sample> samples);
 
 }

@@ -30,6 +30,9 @@ import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
+import org.ujmp.core.exception.NotImplementedException;
+
+import java.util.Collection;
 
 public class SemiSupervisedEM extends AbstractRegressor {
 	private static final long serialVersionUID = 7362798845466035645L;
@@ -47,6 +50,11 @@ public class SemiSupervisedEM extends AbstractRegressor {
 		this.unlabeledData = unlabeledData;
 		this.useRawPrediction = useRawPrediction;
 		this.iterations = iterations;
+	}
+
+	@Override
+	public void trainBatch(Collection<Sample> samples) {
+		throw new NotImplementedException();
 	}
 
 	public void predictOne(Sample sample) {

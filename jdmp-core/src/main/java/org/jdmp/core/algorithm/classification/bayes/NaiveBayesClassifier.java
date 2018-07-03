@@ -32,114 +32,122 @@ import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
+import org.ujmp.core.exception.NotImplementedException;
 import org.ujmp.core.util.MathUtil;
 
+import java.util.Collection;
+
 public class NaiveBayesClassifier extends AbstractClassifier {
-	private static final long serialVersionUID = -4962565315819543623L;
+    private static final long serialVersionUID = -4962565315819543623L;
 
-	private DensityEstimator[][] dists = null;
+    private DensityEstimator[][] dists = null;
 
-	private DensityEstimator[] classDists = null;
+    private DensityEstimator[] classDists = null;
 
-	private int classCount = -1;
+    private int classCount = -1;
 
-	public NaiveBayesClassifier() {
-	}
+    public NaiveBayesClassifier() {
+    }
 
-	public NaiveBayesClassifier(String inputLabel) {
-		super(inputLabel);
-	}
+    public NaiveBayesClassifier(String inputLabel) {
+        super(inputLabel);
+    }
 
-	public void predictOne(Sample sample) {
-		Matrix input = sample.getAsMatrix(INPUT);
-		input = input.toColumnVector(Ret.LINK);
-		final double[] probs = new double[classCount];
-		final double[] logs = new double[classCount];
+    public void predictOne(Sample sample) {
+        Matrix input = sample.getAsMatrix(INPUT);
+        input = input.toColumnVector(Ret.LINK);
+        final double[] probs = new double[classCount];
+        final double[] logs = new double[classCount];
 
-		for (int j = 0; j < classCount; j++) {
-			logs[j] += Math.log(classDists[j].getProbability(1.0));
-		}
+        for (int j = 0; j < classCount; j++) {
+            logs[j] += Math.log(classDists[j].getProbability(1.0));
+        }
 
-		// for all features
-		for (int j = 0; j < input.getColumnCount(); j++) {
-			// for all classes
-			double probSum = 0;
-			for (int i = 0; i < classCount; i++) {
-				double value = input.getAsDouble(0, j);
-				double probability = dists[j][i].getProbability(value);
-				probs[i] = probability;
-				probSum += probability;
-			}
-			for (int i = 0; i < classCount; i++) {
-				logs[i] += Math.log(probs[i] / probSum);
-			}
-		}
+        // for all features
+        for (int j = 0; j < input.getColumnCount(); j++) {
+            // for all classes
+            double probSum = 0;
+            for (int i = 0; i < classCount; i++) {
+                double value = input.getAsDouble(0, j);
+                double probability = dists[j][i].getProbability(value);
+                probs[i] = probability;
+                probSum += probability;
+            }
+            for (int i = 0; i < classCount; i++) {
+                logs[i] += Math.log(probs[i] / probSum);
+            }
+        }
 
-		final double[] finalProbs = MathUtil.logToProbs(logs);
-		Matrix m = Matrix.Factory.linkToArray(finalProbs).transpose();
-		sample.put(PREDICTED, m);
-	}
+        final double[] finalProbs = MathUtil.logToProbs(logs);
+        Matrix m = Matrix.Factory.linkToArray(finalProbs).transpose();
+        sample.put(PREDICTED, m);
+    }
 
-	public void reset() {
-		dists = null;
-		classDists = null;
-	}
+    @Override
+    public void trainBatch(Collection<Sample> samples) {
+        throw new NotImplementedException();
+    }
 
-	public void trainAll(ListDataSet dataSet) {
-		System.out.println("training started");
-		int featureCount = (int) dataSet.get(0).getAsMatrix(getInputLabel()).getValueCount();
-		boolean discrete = isDiscrete(dataSet);
-		classCount = getClassCount(dataSet);
+    public void reset() {
+        dists = null;
+        classDists = null;
+    }
 
-		this.dists = new DensityEstimator[featureCount][classCount];
-		this.classDists = new DensityEstimator[classCount];
+    public void trainAll(ListDataSet dataSet) {
+        System.out.println("training started");
+        int featureCount = (int) dataSet.get(0).getAsMatrix(getInputLabel()).getValueCount();
+        boolean discrete = dataSet.isDiscrete();
+        classCount = getClassCount(dataSet);
 
-		for (int j = 0; j < classCount; j++) {
-			classDists[j] = new GeneralDensityEstimator();
-			for (int i = 0; i < featureCount; i++) {
-				if (discrete) {
-					dists[i][j] = new GeneralDensityEstimator();
-				} else {
-					dists[i][j] = new GaussianDensityEstimator();
-				}
-			}
-		}
+        this.dists = new DensityEstimator[featureCount][classCount];
+        this.classDists = new DensityEstimator[classCount];
 
-		System.out.println("density estimators created");
+        for (int j = 0; j < classCount; j++) {
+            classDists[j] = new GeneralDensityEstimator();
+            for (int i = 0; i < featureCount; i++) {
+                if (discrete) {
+                    dists[i][j] = new GeneralDensityEstimator();
+                } else {
+                    dists[i][j] = new GaussianDensityEstimator();
+                }
+            }
+        }
 
-		int count = 0;
-		for (Sample s : dataSet) {
+        System.out.println("density estimators created");
 
-			final Matrix sampleInput = s.getAsMatrix(getInputLabel()).toColumnVector(Ret.LINK);
-			final Matrix sampleTarget = s.getAsMatrix(getTargetLabel()).toColumnVector(Ret.LINK);
-			final double weight = s.getWeight();
+        int count = 0;
+        for (Sample s : dataSet) {
 
-			for (int j = 0; j < classCount; j++) {
-				double classValue = sampleTarget.getAsDouble(0, j);
-				if (classValue == 0.0) {
-					classDists[j].addValue(0.0, weight);
-				} else {
-					classDists[j].addValue(1.0, weight);
-					for (int i = 0; i < sampleInput.getColumnCount(); i++) {
-						double inputValue = sampleInput.getAsDouble(0, i);
-						dists[i][j].addValue(inputValue, weight);
-					}
-				}
-			}
+            final Matrix sampleInput = s.getAsMatrix(getInputLabel()).toColumnVector(Ret.LINK);
+            final Matrix sampleTarget = s.getAsMatrix(getTargetLabel()).toColumnVector(Ret.LINK);
+            final double weight = s.getWeight();
 
-			count++;
-			if (count % 10000 == 0) {
-				System.out.println(count);
-			}
-		}
+            for (int j = 0; j < classCount; j++) {
+                double classValue = sampleTarget.getAsDouble(0, j);
+                if (classValue == 0.0) {
+                    classDists[j].addValue(0.0, weight);
+                } else {
+                    classDists[j].addValue(1.0, weight);
+                    for (int i = 0; i < sampleInput.getColumnCount(); i++) {
+                        double inputValue = sampleInput.getAsDouble(0, i);
+                        dists[i][j].addValue(inputValue, weight);
+                    }
+                }
+            }
 
-		System.out.println("training finished");
-	}
+            count++;
+            if (count % 10000 == 0) {
+                System.out.println(count);
+            }
+        }
 
-	public Classifier emptyCopy() {
-		NaiveBayesClassifier nb = new NaiveBayesClassifier();
-		nb.setInputLabel(getInputLabel());
-		nb.setTargetLabel(getTargetLabel());
-		return nb;
-	}
+        System.out.println("training finished");
+    }
+
+    public Classifier emptyCopy() {
+        NaiveBayesClassifier nb = new NaiveBayesClassifier();
+        nb.setInputLabel(getInputLabel());
+        nb.setTargetLabel(getTargetLabel());
+        return nb;
+    }
 }

@@ -23,19 +23,17 @@
 
 package org.jdmp.libsvm;
 
-import libsvm.svm;
-import libsvm.svm_model;
-import libsvm.svm_node;
-import libsvm.svm_parameter;
-import libsvm.svm_problem;
-
+import libsvm.*;
 import org.jdmp.core.algorithm.classification.AbstractClassifier;
 import org.jdmp.core.algorithm.classification.Classifier;
 import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
+import org.ujmp.core.exception.NotImplementedException;
 import org.ujmp.core.util.MathUtil;
+
+import java.util.Collection;
 
 public class LibSVMClassifier extends AbstractClassifier {
 	private static final long serialVersionUID = -3809157647628200950L;
@@ -258,6 +256,11 @@ public class LibSVMClassifier extends AbstractClassifier {
 		LibSVMClassifier svm = new LibSVMClassifier(svmType, kernel);
 		svm.setCost(cost);
 		return svm;
+	}
+
+	@Override
+	public void trainBatch(Collection<Sample> samples) {
+		throw new NotImplementedException();
 	}
 
 	public double getCost() {

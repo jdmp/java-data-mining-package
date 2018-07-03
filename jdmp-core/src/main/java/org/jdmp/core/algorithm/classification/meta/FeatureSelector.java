@@ -23,10 +23,7 @@
 
 package org.jdmp.core.algorithm.classification.meta;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import org.jdmp.core.algorithm.regression.AbstractRegressor;
 import org.jdmp.core.algorithm.regression.Regressor;
@@ -37,133 +34,141 @@ import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.collections.list.FastArrayList;
+import org.ujmp.core.exception.NotImplementedException;
 import org.ujmp.core.util.MathUtil;
 
 public class FeatureSelector extends AbstractRegressor {
-	private static final long serialVersionUID = -4290061842734681590L;
+    private static final long serialVersionUID = -4290061842734681590L;
 
-	public enum SelectionType {
-		Random, MutualInformation, Covariance
-	};
+    public enum SelectionType {
+        Random, MutualInformation, Covariance
+    }
 
-	private final Regressor learningAlgorithm;
-	private final int selectedFeatureCount;
-	private final List<Integer> selectedFeatures = new FastArrayList<Integer>();
-	private final SelectionType selectionType;
+    ;
 
-	public FeatureSelector(SelectionType selectionType, Regressor learningAlgorithm,
-			int featureCount) {
-		this.selectionType = selectionType;
-		this.learningAlgorithm = learningAlgorithm;
-		this.selectedFeatureCount = featureCount;
-	}
+    private final Regressor learningAlgorithm;
+    private final int selectedFeatureCount;
+    private final List<Integer> selectedFeatures = new FastArrayList<Integer>();
+    private final SelectionType selectionType;
 
-	private void selectFeatures(ListDataSet dataSet) {
-		if (selectionType == SelectionType.Random) {
-			selectedFeatures.addAll(MathUtil.sequenceListInt(0, getFeatureCount(dataSet)));
-			while (selectedFeatures.size() > selectedFeatureCount) {
-				selectedFeatures.remove(MathUtil.nextInteger(selectedFeatures.size()));
-			}
-			return;
-		}
+    public FeatureSelector(SelectionType selectionType, Regressor learningAlgorithm,
+                           int featureCount) {
+        this.selectionType = selectionType;
+        this.learningAlgorithm = learningAlgorithm;
+        this.selectedFeatureCount = featureCount;
+    }
 
-		final int featureCount = getFeatureCount(dataSet);
-		final int targetCount = getClassCount(dataSet);
+    private void selectFeatures(ListDataSet dataSet) {
+        if (selectionType == SelectionType.Random) {
+            selectedFeatures.addAll(MathUtil.sequenceListInt(0, getFeatureCount(dataSet)));
+            while (selectedFeatures.size() > selectedFeatureCount) {
+                selectedFeatures.remove(MathUtil.nextInteger(selectedFeatures.size()));
+            }
+            return;
+        }
 
-		Matrix m = createCompleteMatrix(dataSet);
-		Matrix comp;
-		if (selectionType == SelectionType.Covariance) {
-			comp = m.cov(Ret.NEW, true, true);
-		} else if (selectionType == SelectionType.MutualInformation) {
-			comp = m.mutualInf(Ret.NEW);
-		} else {
-			comp = m.cov(Ret.NEW, true, true);
-		}
+        final int featureCount = getFeatureCount(dataSet);
+        final int targetCount = getClassCount(dataSet);
 
-		Set<Integer> featureSet = new HashSet<Integer>();
+        Matrix m = createCompleteMatrix(dataSet);
+        Matrix comp;
+        if (selectionType == SelectionType.Covariance) {
+            comp = m.cov(Ret.NEW, true, true);
+        } else if (selectionType == SelectionType.MutualInformation) {
+            comp = m.mutualInf(Ret.NEW);
+        } else {
+            comp = m.cov(Ret.NEW, true, true);
+        }
 
-		while (featureSet.size() < selectedFeatureCount) {
-			for (int t = 0; t < targetCount && featureSet.size() < selectedFeatureCount; t++) {
-				double bestValue = 0;
-				int bestFeature = -1;
-				for (int f = 0; f < featureCount; f++) {
-					double val = Math.abs(comp.getAsDouble(f, featureCount + t));
-					if (val > bestValue && !featureSet.contains(f)) {
-						bestValue = val;
-						bestFeature = f;
-					}
-				}
-				featureSet.add(bestFeature);
-			}
-		}
-		selectedFeatures.addAll(featureSet);
-		Collections.sort(selectedFeatures);
-		System.out.println(selectedFeatures);
-	}
+        Set<Integer> featureSet = new HashSet<Integer>();
 
-	private Matrix createCompleteMatrix(ListDataSet dataSet) {
-		final int sampleCount = dataSet.size();
-		final int featureCount = getFeatureCount(dataSet);
-		final int targetCount = getClassCount(dataSet);
-		Matrix m = Matrix.Factory.zeros(sampleCount, featureCount + targetCount);
-		for (int r = 0; r < sampleCount; r++) {
-			Sample s = dataSet.get(r);
-			Matrix input = s.getAsMatrix(getInputLabel()).toColumnVector(Ret.NEW);
-			Matrix target = s.getAsMatrix(getTargetLabel()).toColumnVector(Ret.NEW);
-			for (int c = 0; c < featureCount; c++) {
-				m.setAsDouble(input.getAsDouble(0, c), r, c);
-			}
-			for (int c = 0; c < targetCount; c++) {
-				m.setAsDouble(target.getAsDouble(0, c), r, c + featureCount);
-			}
-		}
-		return m;
-	}
+        while (featureSet.size() < selectedFeatureCount) {
+            for (int t = 0; t < targetCount && featureSet.size() < selectedFeatureCount; t++) {
+                double bestValue = 0;
+                int bestFeature = -1;
+                for (int f = 0; f < featureCount; f++) {
+                    double val = Math.abs(comp.getAsDouble(f, featureCount + t));
+                    if (val > bestValue && !featureSet.contains(f)) {
+                        bestValue = val;
+                        bestFeature = f;
+                    }
+                }
+                featureSet.add(bestFeature);
+            }
+        }
+        selectedFeatures.addAll(featureSet);
+        Collections.sort(selectedFeatures);
+        System.out.println(selectedFeatures);
+    }
 
-	public void trainAll(ListDataSet dataSet) {
-		selectFeatures(dataSet);
+    @Override
+    public void trainBatch(Collection<Sample> samples) {
+        throw new NotImplementedException();
+    }
 
-		ListDataSet newDataSet = new DefaultListDataSet();
+    private Matrix createCompleteMatrix(ListDataSet dataSet) {
+        final int sampleCount = dataSet.size();
+        final int featureCount = getFeatureCount(dataSet);
+        final int targetCount = getClassCount(dataSet);
+        Matrix m = Matrix.Factory.zeros(sampleCount, featureCount + targetCount);
+        for (int r = 0; r < sampleCount; r++) {
+            Sample s = dataSet.get(r);
+            Matrix input = s.getAsMatrix(getInputLabel()).toColumnVector(Ret.NEW);
+            Matrix target = s.getAsMatrix(getTargetLabel()).toColumnVector(Ret.NEW);
+            for (int c = 0; c < featureCount; c++) {
+                m.setAsDouble(input.getAsDouble(0, c), r, c);
+            }
+            for (int c = 0; c < targetCount; c++) {
+                m.setAsDouble(target.getAsDouble(0, c), r, c + featureCount);
+            }
+        }
+        return m;
+    }
 
-		for (Sample s1 : dataSet) {
-			Sample s2 = new DefaultSample();
-			Matrix input1 = s1.getAsMatrix(getInputLabel()).toColumnVector(Ret.NEW);
-			Matrix input2 = Matrix.Factory.zeros(1, selectedFeatures.size());
-			for (int i = 0; i < selectedFeatures.size(); i++) {
-				input2.setAsDouble(input1.getAsDouble(0, selectedFeatures.get(i)), 0, i);
-			}
-			s2.put(getInputLabel(), input2);
-			s2.put(getTargetLabel(), s1.getAsMatrix(getTargetLabel()));
-			newDataSet.add(s2);
-		}
+    public void trainAll(ListDataSet dataSet) {
+        selectFeatures(dataSet);
 
-		learningAlgorithm.trainAll(newDataSet);
-	}
+        ListDataSet newDataSet = new DefaultListDataSet();
 
-	public void reset() {
-		learningAlgorithm.reset();
-		selectedFeatures.clear();
-	}
+        for (Sample s1 : dataSet) {
+            Sample s2 = new DefaultSample();
+            Matrix input1 = s1.getAsMatrix(getInputLabel()).toColumnVector(Ret.NEW);
+            Matrix input2 = Matrix.Factory.zeros(1, selectedFeatures.size());
+            for (int i = 0; i < selectedFeatures.size(); i++) {
+                input2.setAsDouble(input1.getAsDouble(0, selectedFeatures.get(i)), 0, i);
+            }
+            s2.put(getInputLabel(), input2);
+            s2.put(getTargetLabel(), s1.getAsMatrix(getTargetLabel()));
+            newDataSet.add(s2);
+        }
 
-	public void predictOne(Sample sample) {
-		Matrix input = sample.getAsMatrix(INPUT);
-		input = input.toColumnVector(Ret.NEW);
-		Sample clone = sample.clone();
-		Matrix input2 = Matrix.Factory.zeros(1, selectedFeatures.size());
-		clone.put(INPUT, input2);
-		for (int i = 0; i < selectedFeatures.size(); i++) {
-			input2.setAsDouble(input.getAsDouble(0, selectedFeatures.get(i)), 0, i);
-		}
-		learningAlgorithm.predictOne(clone);
-		sample.put(PREDICTED, clone.getAsMatrix(PREDICTED));
-	}
+        learningAlgorithm.trainAll(newDataSet);
+    }
 
-	public Regressor emptyCopy() {
-		FeatureSelector r = new FeatureSelector(selectionType, learningAlgorithm.emptyCopy(),
-				selectedFeatureCount);
-		r.setInputLabel(getInputLabel());
-		r.setTargetLabel(getTargetLabel());
-		return r;
-	}
+    public void reset() {
+        learningAlgorithm.reset();
+        selectedFeatures.clear();
+    }
+
+    public void predictOne(Sample sample) {
+        Matrix input = sample.getAsMatrix(INPUT);
+        input = input.toColumnVector(Ret.NEW);
+        Sample clone = sample.clone();
+        Matrix input2 = Matrix.Factory.zeros(1, selectedFeatures.size());
+        clone.put(INPUT, input2);
+        for (int i = 0; i < selectedFeatures.size(); i++) {
+            input2.setAsDouble(input.getAsDouble(0, selectedFeatures.get(i)), 0, i);
+        }
+        learningAlgorithm.predictOne(clone);
+        sample.put(PREDICTED, clone.getAsMatrix(PREDICTED));
+    }
+
+    public Regressor emptyCopy() {
+        FeatureSelector r = new FeatureSelector(selectionType, learningAlgorithm.emptyCopy(),
+                selectedFeatureCount);
+        r.setInputLabel(getInputLabel());
+        r.setTargetLabel(getTargetLabel());
+        return r;
+    }
 
 }

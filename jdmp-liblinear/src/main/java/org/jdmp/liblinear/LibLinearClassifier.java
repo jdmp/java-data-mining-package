@@ -29,6 +29,7 @@ import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
+import org.ujmp.core.exception.NotImplementedException;
 import org.ujmp.core.util.MathUtil;
 
 import de.bwaldvogel.liblinear.Feature;
@@ -38,133 +39,140 @@ import de.bwaldvogel.liblinear.Parameter;
 import de.bwaldvogel.liblinear.Problem;
 import de.bwaldvogel.liblinear.SolverType;
 
+import java.util.Collection;
+
 public class LibLinearClassifier extends AbstractClassifier {
-	private static final long serialVersionUID = 895205125219258509L;
+    private static final long serialVersionUID = 895205125219258509L;
 
-	private final Parameter param;
+    private final Parameter param;
 
-	private Problem prob = null;
+    private Problem prob = null;
 
-	private Model model = null;
+    private Model model = null;
 
-	private final FeatureStore features;
+    private final FeatureStore features;
 
-	public LibLinearClassifier() {
-		this(new Parameter(SolverType.L2R_LR, 1, 0.1));
-	}
+    public LibLinearClassifier() {
+        this(new Parameter(SolverType.L2R_LR, 1, 0.1));
+    }
 
-	public LibLinearClassifier(Parameter parameter) {
-		this.param = parameter;
-		this.features = new FeatureStore();
-	}
+    public LibLinearClassifier(Parameter parameter) {
+        this.param = parameter;
+        this.features = new FeatureStore();
+    }
 
-	public void predictOne(Sample sample) {
-		Matrix input = sample.getAsMatrix(INPUT);
-		input = input.toColumnVector(Ret.LINK);
-		long columnCount = input.getColumnCount();
-		int count = 0;
-		for (int j = 0; j < columnCount; j++) {
-			double value = input.getAsDouble(0, j);
-			if (value != 0.0 && !MathUtil.isNaNOrInfinite(value)) {
-				count++;
-			}
-		}
+    public void predictOne(Sample sample) {
+        Matrix input = sample.getAsMatrix(INPUT);
+        input = input.toColumnVector(Ret.LINK);
+        long columnCount = input.getColumnCount();
+        int count = 0;
+        for (int j = 0; j < columnCount; j++) {
+            double value = input.getAsDouble(0, j);
+            if (value != 0.0 && !MathUtil.isNaNOrInfinite(value)) {
+                count++;
+            }
+        }
 
-		Feature[] x = new Feature[count];
-		count = 0;
-		for (int j = 0; j < columnCount; j++) {
-			double value = input.getAsDouble(0, j);
-			if (value != 0.0 && !MathUtil.isNaNOrInfinite(value)) {
-				x[count] = features.get(j + 1, value);
-				count++;
-			}
-		}
+        Feature[] x = new Feature[count];
+        count = 0;
+        for (int j = 0; j < columnCount; j++) {
+            double value = input.getAsDouble(0, j);
+            if (value != 0.0 && !MathUtil.isNaNOrInfinite(value)) {
+                x[count] = features.get(j + 1, value);
+                count++;
+            }
+        }
 
-		sample.put(PREDICTED, predictOne(x));
-	}
+        sample.put(PREDICTED, predictOne(x));
+    }
 
-	public void trainAll(Problem problem) {
-		this.prob = problem;
-		model = Linear.train(prob, param);
-	}
+    public void trainAll(Problem problem) {
+        this.prob = problem;
+        model = Linear.train(prob, param);
+    }
 
-	public void trainAll(ListDataSet dataSet) {
-		System.out.println("training started");
-		createAlgorithm();
-		prob = new Problem();
-		prob.l = dataSet.size();
-		prob.n = getFeatureCount(dataSet);
-		prob.x = new Feature[prob.l][];
-		prob.y = new double[prob.l];
-		prob.bias = 1;
+    public void trainAll(ListDataSet dataSet) {
+        System.out.println("training started");
+        createAlgorithm();
+        prob = new Problem();
+        prob.l = dataSet.size();
+        prob.n = getFeatureCount(dataSet);
+        prob.x = new Feature[prob.l][];
+        prob.y = new double[prob.l];
+        prob.bias = 1;
 
-		long time = System.currentTimeMillis();
+        long time = System.currentTimeMillis();
 
-		int i = 0;
-		for (Sample s : dataSet) {
-			if (System.currentTimeMillis() - time > 5000) {
-				time = System.currentTimeMillis();
-				System.out.println("Converting samples: " + Math.round(((double) i / dataSet.size() * 100)) + "% done");
-			}
-			Matrix input = s.getAsMatrix(getInputLabel()).toColumnVector(Ret.LINK);
-			int targetClass = (int) s.getAsMatrix(getTargetLabel()).toColumnVector(Ret.LINK)
-					.getCoordinatesOfMaximum()[COLUMN];
-			prob.y[i] = targetClass;
-			long columnCount = input.getColumnCount();
-			int count = 0;
-			for (int j = 0; j < columnCount; j++) {
-				double value = input.getAsDouble(0, j);
-				if (value != 0.0 && !MathUtil.isNaNOrInfinite(value)) {
-					count++;
-				}
-			}
-			prob.x[i] = new Feature[count];
-			count = 0;
-			for (int j = 0; j < columnCount; j++) {
-				double value = input.getAsDouble(0, j);
-				if (value != 0.0 && !MathUtil.isNaNOrInfinite(value)) {
-					prob.x[i][count] = features.get(j + 1, value);
-					count++;
-				}
-			}
-			i++;
-		}
-		model = Linear.train(prob, param);
-	}
+        int i = 0;
+        for (Sample s : dataSet) {
+            if (System.currentTimeMillis() - time > 5000) {
+                time = System.currentTimeMillis();
+                System.out.println("Converting samples: " + Math.round(((double) i / dataSet.size() * 100)) + "% done");
+            }
+            Matrix input = s.getAsMatrix(getInputLabel()).toColumnVector(Ret.LINK);
+            int targetClass = (int) s.getAsMatrix(getTargetLabel()).toColumnVector(Ret.LINK)
+                    .getCoordinatesOfMaximum()[COLUMN];
+            prob.y[i] = targetClass;
+            long columnCount = input.getColumnCount();
+            int count = 0;
+            for (int j = 0; j < columnCount; j++) {
+                double value = input.getAsDouble(0, j);
+                if (value != 0.0 && !MathUtil.isNaNOrInfinite(value)) {
+                    count++;
+                }
+            }
+            prob.x[i] = new Feature[count];
+            count = 0;
+            for (int j = 0; j < columnCount; j++) {
+                double value = input.getAsDouble(0, j);
+                if (value != 0.0 && !MathUtil.isNaNOrInfinite(value)) {
+                    prob.x[i][count] = features.get(j + 1, value);
+                    count++;
+                }
+            }
+            i++;
+        }
+        model = Linear.train(prob, param);
+    }
 
-	public Classifier emptyCopy() {
-		LibLinearClassifier ll = new LibLinearClassifier(param);
-		ll.setInputLabel(getInputLabel());
-		ll.setTargetLabel(getTargetLabel());
-		return ll;
-	}
+    public Classifier emptyCopy() {
+        LibLinearClassifier ll = new LibLinearClassifier(param);
+        ll.setInputLabel(getInputLabel());
+        ll.setTargetLabel(getTargetLabel());
+        return ll;
+    }
 
-	private void createAlgorithm() {
-		model = null;
-		prob = null;
-	}
+    private void createAlgorithm() {
+        model = null;
+        prob = null;
+    }
 
-	public void reset() {
-		createAlgorithm();
-	}
+    public void reset() {
+        createAlgorithm();
+    }
 
-	public Matrix predictOne(Feature[] x) {
-		Matrix result = null;
-		if (model.isProbabilityModel()) {
-			double[] probabilities = new double[model.getNrClass()];
-			Linear.predictProbability(model, x, probabilities);
-			result = Matrix.Factory.zeros(1, model.getNrClass());
-			for (int i = 0; i < probabilities.length; i++) {
-				int label = model.getLabels()[i];
-				result.setAsDouble(probabilities[i], 0, label);
-			}
-		} else {
-			double classId = Linear.predict(model, x);
-			result = Matrix.Factory.zeros(1, Math.max(model.getNrClass(), (int) (classId + 1)));
-			result.setAsDouble(1.0, 0, (int) classId);
-		}
+    @Override
+    public void trainBatch(Collection<Sample> samples) {
+        throw new NotImplementedException();
+    }
 
-		return result;
-	}
+    public Matrix predictOne(Feature[] x) {
+        Matrix result = null;
+        if (model.isProbabilityModel()) {
+            double[] probabilities = new double[model.getNrClass()];
+            Linear.predictProbability(model, x, probabilities);
+            result = Matrix.Factory.zeros(1, model.getNrClass());
+            for (int i = 0; i < probabilities.length; i++) {
+                int label = model.getLabels()[i];
+                result.setAsDouble(probabilities[i], 0, label);
+            }
+        } else {
+            double classId = Linear.predict(model, x);
+            result = Matrix.Factory.zeros(1, Math.max(model.getNrClass(), (int) (classId + 1)));
+            result.setAsDouble(1.0, 0, (int) classId);
+        }
+
+        return result;
+    }
 
 }

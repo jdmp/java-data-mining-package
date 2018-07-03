@@ -24,6 +24,7 @@
 package org.jdmp.core.algorithm.classification.meta;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.jdmp.core.algorithm.classification.AbstractClassifier;
@@ -33,61 +34,67 @@ import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
+import org.ujmp.core.exception.NotImplementedException;
 
 public class MultiClassClassifier extends AbstractClassifier {
-	private static final long serialVersionUID = 466059743021340944L;
+    private static final long serialVersionUID = 466059743021340944L;
 
-	private Classifier singleClassClassifier = null;
+    private Classifier singleClassClassifier = null;
 
-	private int classCount = 0;
+    private int classCount = 0;
 
-	private boolean twoColumns = false;
+    private boolean twoColumns = false;
 
-	private final List<Classifier> singleClassClassifiers = new ArrayList<Classifier>();
+    private final List<Classifier> singleClassClassifiers = new ArrayList<Classifier>();
 
-	public MultiClassClassifier(Classifier singleClassClassifier, boolean twoColumns) {
-		super();
-		setLabel("MultiClassClassifier [" + singleClassClassifier.toString() + "]");
-		this.singleClassClassifier = singleClassClassifier;
-		this.twoColumns = twoColumns;
-	}
+    public MultiClassClassifier(Classifier singleClassClassifier, boolean twoColumns) {
+        super();
+        setLabel("MultiClassClassifier [" + singleClassClassifier.toString() + "]");
+        this.singleClassClassifier = singleClassClassifier;
+        this.twoColumns = twoColumns;
+    }
 
-	public void predictOne(Sample sample) {
-		double[] results = new double[classCount];
-		for (int i = 0; i < classCount; i++) {
-			Classifier c = singleClassClassifiers.get(i);
-			Sample clone = sample.clone();
-			c.predictOne(clone);
-			results[i] = clone.getAsMatrix(PREDICTED).getAsDouble(0, 0);
-		}
-		sample.put(PREDICTED, Matrix.Factory.linkToArray(results).transpose());
-	}
+    public void predictOne(Sample sample) {
+        double[] results = new double[classCount];
+        for (int i = 0; i < classCount; i++) {
+            Classifier c = singleClassClassifiers.get(i);
+            Sample clone = sample.clone();
+            c.predictOne(clone);
+            results[i] = clone.getAsMatrix(PREDICTED).getAsDouble(0, 0);
+        }
+        sample.put(PREDICTED, Matrix.Factory.linkToArray(results).transpose());
+    }
 
-	public void reset() {
-		singleClassClassifiers.clear();
-	}
+    public void reset() {
+        singleClassClassifiers.clear();
+    }
 
-	public void trainAll(ListDataSet dataSet) {
-		reset();
-		classCount = getClassCount(dataSet);
+    public void trainAll(ListDataSet dataSet) {
+        reset();
+        classCount = getClassCount(dataSet);
 
-		for (int i = 0; i < classCount; i++) {
-			System.out.println("Training class " + i);
-			Classifier c = singleClassClassifier.emptyCopy();
-			singleClassClassifiers.add(c);
-			Matrix input = dataSet.getInputMatrix();
-			Matrix target = dataSet.getTargetMatrix().selectColumns(Ret.LINK, i);
-			if (twoColumns) {
-				Matrix target2 = target.minus(1).abs(Ret.NEW);
-				target = Matrix.Factory.horCat(target, target2);
-			}
-			ListDataSet ds = DataSet.Factory.linkToInputAndTarget(input, target);
-			c.trainAll(ds);
-		}
+        for (int i = 0; i < classCount; i++) {
+            System.out.println("Training class " + i);
+            Classifier c = singleClassClassifier.emptyCopy();
+            singleClassClassifiers.add(c);
+            Matrix input = dataSet.getInputMatrix();
+            Matrix target = dataSet.getTargetMatrix().selectColumns(Ret.LINK, i);
+            if (twoColumns) {
+                Matrix target2 = target.minus(1).abs(Ret.NEW);
+                target = Matrix.Factory.horCat(target, target2);
+            }
+            ListDataSet ds = DataSet.Factory.linkToInputAndTarget(input, target);
+            c.trainAll(ds);
+        }
 
-	}
+    }
 
-	public Classifier emptyCopy() {
-		return new MultiClassClassifier(singleClassClassifier, twoColumns);
-	}
+    @Override
+    public void trainBatch(Collection<Sample> samples) {
+        throw new NotImplementedException();
+    }
+
+    public Classifier emptyCopy() {
+        return new MultiClassClassifier(singleClassClassifier, twoColumns);
+    }
 }

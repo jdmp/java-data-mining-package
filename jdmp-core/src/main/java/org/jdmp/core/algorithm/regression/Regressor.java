@@ -30,32 +30,20 @@ import org.ujmp.core.Matrix;
 
 public interface Regressor extends Clusterer {
 
-	public void trainAll(ListDataSet dataSet);
+    public Regressor emptyCopy();
 
-	public void reset();
+    public void calculateError(Sample sample);
 
-	public void trainOne(Matrix input, Matrix sampleWeight, Matrix target);
+    public void trainOne(Matrix input, Matrix sampleWeight, Matrix target);
 
-	public void calculateError(Sample sample);
-	
-	public void predictOne(Sample sample);
+    public void trainOne(Sample sample);
 
-	public void trainOne(Matrix input, Matrix target);
+    public String getInputLabel();
 
-	public void trainOne(Sample sample);
+    public String getTargetLabel();
 
-	public void predictAll(ListDataSet dataSet);
+    public int getClassCount(ListDataSet dataSet);
 
-	public Regressor emptyCopy();
-
-	public String getInputLabel();
-
-	public String getTargetLabel();
-
-	public int getClassCount(ListDataSet dataSet);
-
-	public int getFeatureCount(ListDataSet dataSet);
-
-	public boolean isDiscrete(ListDataSet dataSet);
+    public int getFeatureCount(ListDataSet dataSet);
 
 }

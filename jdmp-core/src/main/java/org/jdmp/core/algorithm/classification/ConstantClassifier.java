@@ -27,57 +27,65 @@ import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.exception.NotImplementedException;
 import org.ujmp.core.mapmatrix.DefaultMapMatrix;
 import org.ujmp.core.mapmatrix.MapMatrix;
 
+import java.util.Collection;
+
 public class ConstantClassifier extends AbstractClassifier {
-	private static final long serialVersionUID = 4554183836593870371L;
+    private static final long serialVersionUID = 4554183836593870371L;
 
-	private Matrix prediction = null;
+    private Matrix prediction = null;
 
-	private long maxClassId = 0;
+    private long maxClassId = 0;
 
-	public ConstantClassifier() {
-		super();
-	}
+    public ConstantClassifier() {
+        super();
+    }
 
-	public void predictOne(Sample sample) {
-		sample.put(PREDICTED, prediction);
-	}
+    public void predictOne(Sample sample) {
+        sample.put(PREDICTED, prediction);
+    }
 
-	public void reset() {
-		prediction = null;
-		maxClassId = 0;
-	}
+    public void reset() {
+        prediction = null;
+        maxClassId = 0;
+    }
 
-	public void trainAll(ListDataSet dataSet) {
-		MapMatrix<Long, Integer> count = new DefaultMapMatrix<Long, Integer>();
-		for (Sample s : dataSet) {
-			Matrix m = s.getAsMatrix(Variable.TARGET);
-			long target = m.getCoordinatesOfMaximum()[COLUMN];
-			maxClassId = Math.max(maxClassId, target);
-			Integer c = count.get(target);
-			if (c == null) {
-				c = 0;
-			}
-			c++;
-			count.put(target, c);
-		}
-		int max = 0;
-		long pc = 0;
-		for (Long t : count.keySet()) {
-			Integer c = count.get(t);
-			if (c > max) {
-				max = c;
-				pc = t;
-			}
-		}
-		prediction = Matrix.Factory.zeros(1, maxClassId + 1);
-		prediction.setAsDouble(1.0, 0, pc);
-	}
+    @Override
+    public void trainBatch(Collection<Sample> samples) {
+        throw new NotImplementedException();
+    }
 
-	public Classifier emptyCopy() {
-		return new ConstantClassifier();
-	}
+    public void trainAll(ListDataSet dataSet) {
+        MapMatrix<Long, Integer> count = new DefaultMapMatrix<Long, Integer>();
+        for (Sample s : dataSet) {
+            Matrix m = s.getAsMatrix(Variable.TARGET);
+            long target = m.getCoordinatesOfMaximum()[COLUMN];
+            maxClassId = Math.max(maxClassId, target);
+            Integer c = count.get(target);
+            if (c == null) {
+                c = 0;
+            }
+            c++;
+            count.put(target, c);
+        }
+        int max = 0;
+        long pc = 0;
+        for (Long t : count.keySet()) {
+            Integer c = count.get(t);
+            if (c > max) {
+                max = c;
+                pc = t;
+            }
+        }
+        prediction = Matrix.Factory.zeros(1, maxClassId + 1);
+        prediction.setAsDouble(1.0, 0, pc);
+    }
+
+    public Classifier emptyCopy() {
+        return new ConstantClassifier();
+    }
 
 }

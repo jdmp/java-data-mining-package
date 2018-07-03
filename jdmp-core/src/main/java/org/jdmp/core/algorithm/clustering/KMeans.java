@@ -23,110 +23,117 @@
 
 package org.jdmp.core.algorithm.clustering;
 
-import java.util.Collections;
-import java.util.List;
-
 import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.collections.list.FastArrayList;
+import org.ujmp.core.exception.NotImplementedException;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 public class KMeans extends AbstractClusterer {
-	private static final long serialVersionUID = 6823002403320626583L;
+    private static final long serialVersionUID = 6823002403320626583L;
 
-	private int k = 10;
-	private int maxIterations = 100;
-	private double epsilon = 1e-6;
+    private int k = 10;
+    private int maxIterations = 100;
+    private double epsilon = 1e-6;
 
-	private Matrix[] clusterCenters = null;
+    private Matrix[] clusterCenters = null;
 
-	public KMeans() {
-		this(10);
-	}
+    public KMeans() {
+        this(10);
+    }
 
-	public KMeans(int k) {
-		this.k = k;
-	}
+    public KMeans(int k) {
+        this.k = k;
+    }
 
-	public void reset() throws Exception {
-		clusterCenters = null;
-	}
+    public void reset() {
+        clusterCenters = null;
+    }
 
-	public void trainAll(ListDataSet dataSet) {
+    @Override
+    public void trainBatch(Collection<Sample> samples) {
+        throw new NotImplementedException();
+    }
 
-		clusterCenters = new Matrix[k];
+    public void trainAll(ListDataSet dataSet) {
 
-		List<Sample> samples = new FastArrayList<Sample>(dataSet);
-		Collections.shuffle(samples);
+        clusterCenters = new Matrix[k];
 
-		// set initial cluster centers to actual samples
-		for (int i = 0; i < k; i++) {
-			Sample s = samples.get(i);
-			Matrix input = s.getAsMatrix(getInputLabel()).toRowVector(Ret.NEW);
-			clusterCenters[i] = input.clone();
-		}
+        List<Sample> samples = new FastArrayList<Sample>(dataSet);
+        Collections.shuffle(samples);
 
-		for (int j = 0; j < maxIterations; j++) {
+        // set initial cluster centers to actual samples
+        for (int i = 0; i < k; i++) {
+            Sample s = samples.get(i);
+            Matrix input = s.getAsMatrix(getInputLabel()).toRowVector(Ret.NEW);
+            clusterCenters[i] = input.clone();
+        }
 
-			// initialize new cluster centers to zero
-			Matrix[] newClusterCenters = new Matrix[k];
-			for (int i = 0; i < k; i++) {
-				newClusterCenters[i] = Matrix.Factory.zeros(clusterCenters[0].getRowCount(), 1);
-			}
+        for (int j = 0; j < maxIterations; j++) {
 
-			// distribute samples to clusters and update new cluster centers
-			int[] clusterCounts = new int[k];
-			for (Sample s : samples) {
-				Matrix input = s.getAsMatrix(INPUT);
-				predictOne(s);
-				int bestCluster = s.getAsMatrix(PREDICTED).intValue();
+            // initialize new cluster centers to zero
+            Matrix[] newClusterCenters = new Matrix[k];
+            for (int i = 0; i < k; i++) {
+                newClusterCenters[i] = Matrix.Factory.zeros(clusterCenters[0].getRowCount(), 1);
+            }
 
-				// sum up vectors
-				newClusterCenters[bestCluster] = newClusterCenters[bestCluster].plus(input);
-				clusterCounts[bestCluster]++;
-			}
+            // distribute samples to clusters and update new cluster centers
+            int[] clusterCounts = new int[k];
+            for (Sample s : samples) {
+                Matrix input = s.getAsMatrix(INPUT);
+                predictOne(s);
+                int bestCluster = s.getAsMatrix(PREDICTED).intValue();
 
-			// calculate average for final new clusters
-			for (int i = 0; i < k; i++) {
-				if (clusterCounts[i] != 0) {
-					newClusterCenters[i] = newClusterCenters[i].divide(clusterCounts[i]);
-				}
-			}
+                // sum up vectors
+                newClusterCenters[bestCluster] = newClusterCenters[bestCluster].plus(input);
+                clusterCounts[bestCluster]++;
+            }
 
-			// measure the change of the cluster centers and update
-			double sum = 0;
-			for (int i = 0; i < k; i++) {
-				sum += clusterCenters[i].euklideanDistanceTo(newClusterCenters[i], true);
-				clusterCenters[i] = newClusterCenters[i];
-			}
-			sum = sum / k;
+            // calculate average for final new clusters
+            for (int i = 0; i < k; i++) {
+                if (clusterCounts[i] != 0) {
+                    newClusterCenters[i] = newClusterCenters[i].divide(clusterCounts[i]);
+                }
+            }
 
-			System.out.println("iteration " + j + " change of cluster centers: " + sum);
+            // measure the change of the cluster centers and update
+            double sum = 0;
+            for (int i = 0; i < k; i++) {
+                sum += clusterCenters[i].euklideanDistanceTo(newClusterCenters[i], true);
+                clusterCenters[i] = newClusterCenters[i];
+            }
+            sum = sum / k;
 
-			if (sum < epsilon) {
-				break;
-			}
+            System.out.println("iteration " + j + " change of cluster centers: " + sum);
 
-		}
-	}
+            if (sum < epsilon) {
+                break;
+            }
 
-	public void predictOne(Sample sample) {
-		Matrix input = sample.getAsMatrix(INPUT);
-		double minDistance = Double.MAX_VALUE;
-		int bestCluster = -1;
-		for (int i = 0; i < k; i++) {
-			double distance = clusterCenters[i].euklideanDistanceTo(input, true);
-			if (distance < minDistance) {
-				minDistance = distance;
-				bestCluster = i;
-			}
-		}
-		sample.put(PREDICTED, Matrix.Factory.linkToValue(bestCluster));
-	}
+        }
+    }
 
-	public Clusterer emptyCopy() {
-		return new KMeans(k);
-	}
+    public void predictOne(Sample sample) {
+        Matrix input = sample.getAsMatrix(INPUT);
+        double minDistance = Double.MAX_VALUE;
+        int bestCluster = -1;
+        for (int i = 0; i < k; i++) {
+            double distance = clusterCenters[i].euklideanDistanceTo(input, true);
+            if (distance < minDistance) {
+                minDistance = distance;
+                bestCluster = i;
+            }
+        }
+        sample.put(PREDICTED, Matrix.Factory.linkToValue(bestCluster));
+    }
+
+    public Clusterer emptyCopy() {
+        return new KMeans(k);
+    }
 
 }

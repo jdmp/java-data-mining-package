@@ -23,6 +23,7 @@
 
 package org.jdmp.core.algorithm.classification;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -33,54 +34,60 @@ import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.collections.list.FastArrayList;
+import org.ujmp.core.exception.NotImplementedException;
 import org.ujmp.core.util.Sortable;
 
 public class KNNClassifier extends AbstractRegressor {
-	private static final long serialVersionUID = 5971192321313837066L;
+    private static final long serialVersionUID = 5971192321313837066L;
 
-	private final int k;
+    private final int k;
 
-	public KNNClassifier(int k) {
-		this.k = k;
-	}
+    public KNNClassifier(int k) {
+        this.k = k;
+    }
 
-	private ListDataSet dataSet = null;
+    private ListDataSet dataSet = null;
 
-	public Regressor emptyCopy() {
-		return new KNNClassifier(k);
-	}
+    public Regressor emptyCopy() {
+        return new KNNClassifier(k);
+    }
 
-	public void trainAll(ListDataSet dataSet) {
-		this.dataSet = dataSet;
-	}
+    public void trainAll(ListDataSet dataSet) {
+        this.dataSet = dataSet;
+    }
 
-	public void reset() {
-		this.dataSet = null;
-	}
+    @Override
+    public void trainBatch(Collection<Sample> samples) {
+        throw new NotImplementedException();
+    }
 
-	public void predictOne(Sample sample) {
-		List<Sortable<Double, Matrix>> bestResults = new FastArrayList<Sortable<Double, Matrix>>();
-		for (Sample s : dataSet) {
-			Matrix reference = s.getAsMatrix(getInputLabel());
-			Matrix input = sample.getAsMatrix(INPUT);
-			double distance = input.euklideanDistanceTo(reference, true);
-			if (bestResults.size() < k) {
-				bestResults.add(
-						new Sortable<Double, Matrix>(distance, s.getAsMatrix(getTargetLabel())));
-				Collections.sort(bestResults);
-			} else if (distance < bestResults.get(k - 1).getComparable()) {
-				bestResults.remove(k - 1);
-				bestResults.add(
-						new Sortable<Double, Matrix>(distance, s.getAsMatrix(getTargetLabel())));
-				Collections.sort(bestResults);
-			}
-		}
-		List<Matrix> results = new FastArrayList<Matrix>();
-		for (Sortable<Double, Matrix> s : bestResults) {
-			results.add(s.getObject().toColumnVector(Ret.LINK));
-		}
-		Matrix resultMatrix = Matrix.Factory.vertCat(results);
-		Matrix mean = resultMatrix.mean(Ret.NEW, Matrix.ROW, true);
-		sample.put(PREDICTED, mean);
-	}
+    public void reset() {
+        this.dataSet = null;
+    }
+
+    public void predictOne(Sample sample) {
+        List<Sortable<Double, Matrix>> bestResults = new FastArrayList<Sortable<Double, Matrix>>();
+        for (Sample s : dataSet) {
+            Matrix reference = s.getAsMatrix(getInputLabel());
+            Matrix input = sample.getAsMatrix(INPUT);
+            double distance = input.euklideanDistanceTo(reference, true);
+            if (bestResults.size() < k) {
+                bestResults.add(
+                        new Sortable<Double, Matrix>(distance, s.getAsMatrix(getTargetLabel())));
+                Collections.sort(bestResults);
+            } else if (distance < bestResults.get(k - 1).getComparable()) {
+                bestResults.remove(k - 1);
+                bestResults.add(
+                        new Sortable<Double, Matrix>(distance, s.getAsMatrix(getTargetLabel())));
+                Collections.sort(bestResults);
+            }
+        }
+        List<Matrix> results = new FastArrayList<Matrix>();
+        for (Sortable<Double, Matrix> s : bestResults) {
+            results.add(s.getObject().toColumnVector(Ret.LINK));
+        }
+        Matrix resultMatrix = Matrix.Factory.vertCat(results);
+        Matrix mean = resultMatrix.mean(Ret.NEW, Matrix.ROW, true);
+        sample.put(PREDICTED, mean);
+    }
 }

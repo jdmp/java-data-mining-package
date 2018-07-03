@@ -23,6 +23,7 @@
 
 package org.jdmp.core.algorithm.regression;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.jdmp.core.algorithm.classification.AbstractClassifier;
@@ -33,145 +34,151 @@ import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.collections.list.FastArrayList;
+import org.ujmp.core.exception.NotImplementedException;
 import org.ujmp.core.util.MathUtil;
 
 public class LinearRegressionGradientDescent extends AbstractClassifier {
-	private static final long serialVersionUID = 9107143531298310638L;
+    private static final long serialVersionUID = 9107143531298310638L;
 
-	public static final String PARAMETERS = "Parameters";
-	public static final String GRADIENT = "Gradient";
+    public static final String PARAMETERS = "Parameters";
+    public static final String GRADIENT = "Gradient";
 
-	private int batchSize = 1000;
+    private int batchSize = 1000;
 
-	private double eta = 0.01;
+    private double eta = 0.01;
 
-	private int epochs = 100;
+    private int epochs = 100;
 
-	private double minImprovement = 1e-6;
+    private double minImprovement = 1e-6;
 
-	// private double weightDecay = eta / 10.0;
-	private double weightDecay = 0.0;
+    // private double weightDecay = eta / 10.0;
+    private double weightDecay = 0.0;
 
-	public LinearRegressionGradientDescent() {
-		super();
-		setParameterVariable(Variable.Factory.labeledVariable("Regression Parameters"));
-		setParameterVariable(Variable.Factory.labeledVariable("Gradient"));
-	}
+    public LinearRegressionGradientDescent() {
+        super();
+        setParameterVariable(Variable.Factory.labeledVariable("Regression Parameters"));
+        setParameterVariable(Variable.Factory.labeledVariable("Gradient"));
+    }
 
-	public void setParameterVariable(Variable variable) {
-		setVariable(PARAMETERS, variable);
-	}
+    public void setParameterVariable(Variable variable) {
+        setVariable(PARAMETERS, variable);
+    }
 
-	public Variable getParameterVariable() {
-		return getVariableMap().get(PARAMETERS);
-	}
+    public Variable getParameterVariable() {
+        return getVariableMap().get(PARAMETERS);
+    }
 
-	public void setGradientVariable(Variable variable) {
-		setVariable(GRADIENT, variable);
-	}
+    public void setGradientVariable(Variable variable) {
+        setVariable(GRADIENT, variable);
+    }
 
-	public Variable getGradientVariable() {
-		return getVariableMap().get(GRADIENT);
-	}
+    public Variable getGradientVariable() {
+        return getVariableMap().get(GRADIENT);
+    }
 
-	public Matrix getParameterMatrix() {
-		return getParameterVariable().getLast();
-	}
+    public Matrix getParameterMatrix() {
+        return getParameterVariable().getLast();
+    }
 
-	public Matrix getGradientMatrix() {
-		return getGradientVariable().getLast();
-	}
+    public Matrix getGradientMatrix() {
+        return getGradientVariable().getLast();
+    }
 
-	public void predictOne(Sample sample) {
-		Matrix input = sample.getAsMatrix(INPUT);
-		input = input.toColumnVector(Ret.NEW);
-		Matrix bias = Matrix.Factory.ones(input.getRowCount(), 1);
-		Matrix data = Matrix.Factory.horCat(bias, input);
-		Matrix result = getParameterMatrix().transpose().mtimes(data.transpose());
-		sample.put(PREDICTED, result.transpose());
-	}
+    public void predictOne(Sample sample) {
+        Matrix input = sample.getAsMatrix(INPUT);
+        input = input.toColumnVector(Ret.NEW);
+        Matrix bias = Matrix.Factory.ones(input.getRowCount(), 1);
+        Matrix data = Matrix.Factory.horCat(bias, input);
+        Matrix result = getParameterMatrix().transpose().mtimes(data.transpose());
+        sample.put(PREDICTED, result.transpose());
+    }
 
-	public void trainAll(ListDataSet dataSet) {
+    @Override
+    public void trainBatch(Collection<Sample> samples) {
+        throw new NotImplementedException();
+    }
 
-		// todo: normalize data
+    public void trainAll(ListDataSet dataSet) {
 
-		double lastRmse = Double.MAX_VALUE;
-		double averageImprovement = Double.NaN;
+        // todo: normalize data
 
-		int featureCount = getFeatureCount(dataSet);
-		int classCount = getClassCount(dataSet);
-		Matrix parameters = Matrix.Factory.randn(featureCount + 1, classCount)
-				.divide(featureCount + 1);
+        double lastRmse = Double.MAX_VALUE;
+        double averageImprovement = Double.NaN;
 
-		List<Matrix> inputs = new FastArrayList<Matrix>();
-		List<Matrix> targets = new FastArrayList<Matrix>();
+        int featureCount = getFeatureCount(dataSet);
+        int classCount = getClassCount(dataSet);
+        Matrix parameters = Matrix.Factory.randn(featureCount + 1, classCount)
+                .divide(featureCount + 1);
 
-		for (int e = 0; e < ((double) dataSet.size() / batchSize) * epochs; e++) {
+        List<Matrix> inputs = new FastArrayList<Matrix>();
+        List<Matrix> targets = new FastArrayList<Matrix>();
 
-			inputs.clear();
-			targets.clear();
+        for (int e = 0; e < ((double) dataSet.size() / batchSize) * epochs; e++) {
 
-			for (int i = 0; i < batchSize; i++) {
-				int randomIndex = MathUtil.nextInteger(dataSet.size());
-				Sample s = dataSet.get(randomIndex);
-				inputs.add(s.getAsMatrix(Sample.INPUT).toColumnVector(Ret.NEW));
-				targets.add(s.getAsMatrix(Sample.TARGET).toColumnVector(Ret.NEW));
-			}
+            inputs.clear();
+            targets.clear();
 
-			Matrix input = Matrix.Factory.vertCat(inputs);
-			Matrix bias = Matrix.Factory.ones(input.getRowCount(), 1);
-			Matrix x = Matrix.Factory.horCat(bias, input);
-			x = x.transpose();
+            for (int i = 0; i < batchSize; i++) {
+                int randomIndex = MathUtil.nextInteger(dataSet.size());
+                Sample s = dataSet.get(randomIndex);
+                inputs.add(s.getAsMatrix(Sample.INPUT).toColumnVector(Ret.NEW));
+                targets.add(s.getAsMatrix(Sample.TARGET).toColumnVector(Ret.NEW));
+            }
 
-			Matrix target = Matrix.Factory.vertCat(targets);
-			target = target.transpose();
+            Matrix input = Matrix.Factory.vertCat(inputs);
+            Matrix bias = Matrix.Factory.ones(input.getRowCount(), 1);
+            Matrix x = Matrix.Factory.horCat(bias, input);
+            x = x.transpose();
 
-			Matrix y = parameters.transpose().mtimes(x);
+            Matrix target = Matrix.Factory.vertCat(targets);
+            target = target.transpose();
 
-			Matrix diff = y.minus(target);
-			Matrix squared = diff.power(Ret.NEW, 2);
+            Matrix y = parameters.transpose().mtimes(x);
 
-			double rmse = Math.sqrt(squared.getValueSum() / squared.getValueCount());
-			double improvement = Math.abs(lastRmse - rmse);
-			if (MathUtil.isNaNOrInfinite(averageImprovement)) {
-				averageImprovement = improvement;
-			}
-			averageImprovement = averageImprovement * 0.99 + 0.01 * improvement;
+            Matrix diff = y.minus(target);
+            Matrix squared = diff.power(Ret.NEW, 2);
 
-			System.out.println(rmse);
+            double rmse = Math.sqrt(squared.getValueSum() / squared.getValueCount());
+            double improvement = Math.abs(lastRmse - rmse);
+            if (MathUtil.isNaNOrInfinite(averageImprovement)) {
+                averageImprovement = improvement;
+            }
+            averageImprovement = averageImprovement * 0.99 + 0.01 * improvement;
 
-			Matrix gradient = x.mtimes(diff.transpose()).times(eta / batchSize);
+            System.out.println(rmse);
 
-			setGradientMatrix(gradient);
+            Matrix gradient = x.mtimes(diff.transpose()).times(eta / batchSize);
 
-			parameters = parameters.minus(gradient);
-			parameters = parameters.times(1.0 - weightDecay);
+            setGradientMatrix(gradient);
 
-			if (averageImprovement < minImprovement) {
-				break;
-			}
+            parameters = parameters.minus(gradient);
+            parameters = parameters.times(1.0 - weightDecay);
 
-			lastRmse = rmse;
+            if (averageImprovement < minImprovement) {
+                break;
+            }
 
-		}
+            lastRmse = rmse;
 
-		setParameterMatrix(parameters);
-	}
+        }
 
-	public void setParameterMatrix(Matrix parameters) {
-		getVariableMap().setMatrix(PARAMETERS, parameters);
-	}
+        setParameterMatrix(parameters);
+    }
 
-	public void setGradientMatrix(Matrix gradient) {
-		getVariableMap().setMatrix(GRADIENT, gradient);
-	}
+    public void setParameterMatrix(Matrix parameters) {
+        getVariableMap().setMatrix(PARAMETERS, parameters);
+    }
 
-	public void reset() {
-		getParameterVariable().clear();
-	}
+    public void setGradientMatrix(Matrix gradient) {
+        getVariableMap().setMatrix(GRADIENT, gradient);
+    }
 
-	public Classifier emptyCopy() {
-		return new LinearRegressionGradientDescent();
-	}
+    public void reset() {
+        getParameterVariable().clear();
+    }
+
+    public Classifier emptyCopy() {
+        return new LinearRegressionGradientDescent();
+    }
 
 }

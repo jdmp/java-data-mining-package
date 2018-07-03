@@ -27,6 +27,9 @@ import org.jdmp.core.dataset.ListDataSet;
 import org.jdmp.core.sample.Sample;
 import org.jdmp.core.variable.Variable;
 import org.ujmp.core.Matrix;
+import org.ujmp.core.exception.NotImplementedException;
+
+import java.util.Collection;
 
 public class RandomClassifier extends AbstractClassifier {
 	private static final long serialVersionUID = -8043103888877795342L;
@@ -50,6 +53,11 @@ public class RandomClassifier extends AbstractClassifier {
 			Matrix m = s.getAsMatrix(Variable.TARGET);
 			classCount = (int) Math.max(classCount, m.getColumnCount());
 		}
+	}
+
+	@Override
+	public void trainBatch(Collection<Sample> samples) {
+		throw new NotImplementedException();
 	}
 
 	public Classifier emptyCopy() {

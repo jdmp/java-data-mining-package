@@ -39,259 +39,258 @@ import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.util.MathUtil;
 import org.ujmp.core.util.concurrent.PFor;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+
 public abstract class AbstractRegressor extends AbstractAlgorithm implements Regressor {
-	private static final long serialVersionUID = 4674447558395794134L;
+    private static final long serialVersionUID = 4674447558395794134L;
 
-	public static final String OUTPUTERRORALGORITHM = "OutputErrorAlgorithm";
+    public static final String OUTPUTERRORALGORITHM = "OutputErrorAlgorithm";
 
-	public static final int TRAIN = 0;
+    private int iteration = 0;
 
-	public static final int PREDICT = 1;
+    private String inputLabel;
+    private String targetLabel;
+    private String weightLabel;
 
-	public int mode = TRAIN;
+    public AbstractRegressor(String inputLabel, String targetLabel, String weightLabel) {
+        super();
+        this.inputLabel = inputLabel;
+        this.targetLabel = targetLabel;
+        this.weightLabel = weightLabel;
+        setAlgorithm(OUTPUTERRORALGORITHM, new Minus());
+    }
 
-	private int iteration = 0;
+    public AbstractRegressor(String inputLabel, String targetLabel) {
+        this(inputLabel, targetLabel, WEIGHT);
+    }
 
-	private String inputLabel;
-	private String targetLabel;
-	private String weightLabel;
+    public AbstractRegressor(String inputLabel) {
+        this(inputLabel, TARGET);
+    }
 
-	public AbstractRegressor(String inputLabel, String targetLabel, String weightLabel) {
-		super();
-		this.inputLabel = inputLabel;
-		this.targetLabel = targetLabel;
-		this.weightLabel = weightLabel;
-		setAlgorithm(OUTPUTERRORALGORITHM, new Minus());
-	}
+    public AbstractRegressor() {
+        this(INPUT);
+    }
 
-	public AbstractRegressor(String inputLabel, String targetLabel) {
-		this(inputLabel, targetLabel, WEIGHT);
-	}
+    public int getClassCount(ListDataSet dataSet) {
+        return (int) dataSet.get(0).getAsMatrix(getTargetLabel()).toRowVector(Ret.NEW)
+                .getRowCount();
+    }
 
-	public AbstractRegressor(String inputLabel) {
-		this(inputLabel, TARGET);
-	}
+    public boolean isDiscrete(ListDataSet dataSet) {
+        for (Sample s : dataSet) {
+            Matrix input = s.getAsMatrix(getInputLabel());
+            for (long[] c : input.availableCoordinates()) {
+                if (!MathUtil.isDiscrete(input.getAsDouble(c))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
-	public AbstractRegressor() {
-		this(INPUT);
-	}
+    public int getFeatureCount(ListDataSet dataSet) {
+        return (int) dataSet.iterator().next().getAsMatrix(getInputLabel()).toRowVector(Ret.NEW)
+                .getRowCount();
+    }
 
-	public int getClassCount(ListDataSet dataSet) {
-		return (int) dataSet.get(0).getAsMatrix(getTargetLabel()).toRowVector(Ret.NEW)
-				.getRowCount();
-	}
+    public String getInputLabel() {
+        return inputLabel;
+    }
 
-	public boolean isDiscrete(ListDataSet dataSet) {
-		for (Sample s : dataSet) {
-			Matrix input = s.getAsMatrix(getInputLabel());
-			for (long[] c : input.availableCoordinates()) {
-				if (!MathUtil.isDiscrete(input.getAsDouble(c))) {
-					return false;
-				}
-			}
-		}
-		return true;
-	}
+    public String getWeightLabel() {
+        return weightLabel;
+    }
 
-	public int getFeatureCount(ListDataSet dataSet) {
-		return (int) dataSet.iterator().next().getAsMatrix(getInputLabel()).toRowVector(Ret.NEW)
-				.getRowCount();
-	}
+    public void setWeightLabel(String weightLabel) {
+        this.weightLabel = weightLabel;
+    }
 
-	public String getInputLabel() {
-		return inputLabel;
-	}
+    public void setInputLabel(String inputLabel) {
+        this.inputLabel = inputLabel;
+    }
 
-	public String getWeightLabel() {
-		return weightLabel;
-	}
+    public String getTargetLabel() {
+        return targetLabel;
+    }
 
-	public void setWeightLabel(String weightLabel) {
-		this.weightLabel = weightLabel;
-	}
+    public void setTargetLabel(String targetLabel) {
+        this.targetLabel = targetLabel;
+    }
 
-	public void setInputLabel(String inputLabel) {
-		this.inputLabel = inputLabel;
-	}
+    public void trainOne(Matrix input, Matrix sampleWeight, Matrix targetOutput) {
+        throw new RuntimeException("not supported");
+    }
 
-	public String getTargetLabel() {
-		return targetLabel;
-	}
+    public final void calculateError(Sample sample) {
+        Matrix predicted = sample.getAsMatrix(PREDICTED);
 
-	public void setTargetLabel(String targetLabel) {
-		this.targetLabel = targetLabel;
-	}
+        if (sample.getAsMatrix(getTargetLabel()) != null) {
+            Matrix target = sample.getAsMatrix(getTargetLabel()).toColumnVector(Ret.LINK);
+            Matrix error = target.minus(predicted);
+            sample.put(DIFFERENCE, error);
+            sample.put(RMSE, Matrix.Factory.linkToValue(error.getRMS()));
+        }
 
-	public void trainOne(Matrix input, Matrix sampleWeight, Matrix targetOutput) {
-		throw new RuntimeException("not supported");
-	}
+        sample.fireValueChanged();
+    }
 
-	public final void calculateError(Sample sample) {
-		Matrix predicted = sample.getAsMatrix(PREDICTED);
+    public void trainOne(Sample sample) {
+        Matrix input = sample.getAsMatrix(getInputLabel());
+        Matrix weight = sample.getAsMatrix(getWeightLabel());
+        Matrix target = sample.getAsMatrix(getTargetLabel());
+        trainOne(input, weight, target);
+    }
 
-		if (sample.getAsMatrix(getTargetLabel()) != null) {
-			Matrix target = sample.getAsMatrix(getTargetLabel()).toColumnVector(Ret.LINK);
-			Matrix error = target.minus(predicted);
-			sample.put(DIFFERENCE, error);
-			sample.put(RMSE, Matrix.Factory.linkToValue(error.getRMS()));
-		}
+    public final void predictBatch(Collection<Sample> samples) {
+        final List<Sample> list = new ArrayList<>(samples);
+        new PFor(0, samples.size() - 1) {
+            @Override
+            public void step(int i) {
+                Sample sample = list.get(i);
+                predictOne(sample);
+                calculateError(sample);
+            }
+        };
+    }
 
-		sample.fireValueChanged();
-	}
+    public final void predictAll(final ListDataSet dataSet) {
 
-	public final void trainOne(Matrix input, Matrix targetOutput) {
-		trainOne(input, Matrix.Factory.linkToValue(1.0), targetOutput);
-	}
+        new PFor(0, dataSet.size() - 1) {
 
-	public void trainOne(Sample sample) {
-		Matrix input = sample.getAsMatrix(getInputLabel());
-		Matrix weight = sample.getAsMatrix(getWeightLabel());
-		Matrix target = sample.getAsMatrix(getTargetLabel());
-		trainOne(input, weight, target);
-	}
+            @Override
+            public void step(int i) {
+                Sample sample = dataSet.get(i);
+                predictOne(sample);
+                calculateError(sample);
+            }
+        };
 
-	public void predictAll(final ListDataSet dataSet) {
+        if (dataSet.get(0).getAsMatrix(getTargetLabel()) != null) {
+            final Matrix confusion;
+            double error = 0.0;
+            int correctCount = 0;
+            int errorCount = 0;
+            final int classCount;
 
-		new PFor(0, dataSet.size() - 1) {
+            classCount = getClassCount(dataSet);
+            confusion = Matrix.Factory.zeros(classCount, classCount);
+            confusion.setDimensionLabel(Matrix.ROW, "expected");
+            confusion.setDimensionLabel(Matrix.COLUMN, "predicted");
 
-			@Override
-			public void step(int i) {
-				Sample sample = dataSet.get(i);
-				predictOne(sample);
-				calculateError(sample);
-			}
-		};
+            for (Sample sample : dataSet) {
 
-		if (dataSet.get(0).getAsMatrix(getTargetLabel()) != null) {
-			final Matrix confusion;
-			double error = 0.0;
-			int correctCount = 0;
-			int errorCount = 0;
-			final int classCount;
+                Matrix rmseMatrix = sample.getAsMatrix(RMSE);
+                if (rmseMatrix != null) {
+                    double rmse = rmseMatrix.getEuklideanValue();
+                    error += Math.pow(rmse, 2.0);
+                }
 
-			classCount = getClassCount(dataSet);
-			confusion = Matrix.Factory.zeros(classCount, classCount);
-			confusion.setDimensionLabel(Matrix.ROW, "expected");
-			confusion.setDimensionLabel(Matrix.COLUMN, "predicted");
+                int recognized = sample.getRecognizedClass();
+                int targetClass = sample.getTargetClass();
 
-			for (Sample sample : dataSet) {
+                if (classCount == 1 || recognized == -1) {
+                    confusion.setAsDouble(confusion.getAsDouble(0, 0) + 1, 0, 0);
+                } else {
+                    confusion.setAsDouble(confusion.getAsDouble(targetClass, recognized) + 1,
+                            targetClass, recognized);
+                }
 
-				Matrix rmseMatrix = sample.getAsMatrix(RMSE);
-				if (rmseMatrix != null) {
-					double rmse = rmseMatrix.getEuklideanValue();
-					error += Math.pow(rmse, 2.0);
-				}
+                if (sample.isCorrect()) {
+                    correctCount++;
+                    // weight = weight * 0.99;
+                } else {
+                    errorCount++;
+                    // weight = weight / 0.99;
+                }
 
-				int recognized = sample.getRecognizedClass();
-				int targetClass = sample.getTargetClass();
+                // ((RegressionSample) sample).setWeight(weight);
 
-				if (classCount == 1 || recognized == -1) {
-					confusion.setAsDouble(confusion.getAsDouble(0, 0) + 1, 0, 0);
-				} else {
-					confusion.setAsDouble(confusion.getAsDouble(targetClass, recognized) + 1,
-							targetClass, recognized);
-				}
+            }
 
-				if (sample.isCorrect()) {
-					correctCount++;
-					// weight = weight * 0.99;
-				} else {
-					errorCount++;
-					// weight = weight / 0.99;
-				}
+            Matrix rmse = Matrix.Factory.linkToValue(Math.sqrt(error / dataSet.size()));
+            rmse.setLabel("RMSE with " + getLabel());
+            dataSet.setMatrix(Variable.RMSE, rmse);
 
-				// ((RegressionSample) sample).setWeight(weight);
+            double maxRMSE = 0.0;
+            double minRMSE = 1e100;
+            double sumRMSE = 0;
+            for (Sample s : dataSet) {
+                Matrix m = s.getAsMatrix("RMSE");
+                if (m != null) {
+                    double sampleRMSE = m.doubleValue();
+                    sumRMSE += sampleRMSE;
+                    if (sampleRMSE > maxRMSE) {
+                        maxRMSE = sampleRMSE;
+                    }
+                    if (sampleRMSE < minRMSE) {
+                        minRMSE = sampleRMSE;
+                    }
+                }
+            }
 
-			}
+            // calculate sample weight
+            // if (maxRMSE > 0 && maxRMSE != minRMSE) {
+            // for (Sample s : dataSet.getSampleMap()) {
+            // Matrix m = s.getMatrix("RMSE");
+            // if (m != null) {
+            // double sampleWeight = (m.doubleValue() / (sumRMSE));
+            // s.setMatrix("SampleWeight",
+            // Matrix.Factory.linkToValue(sampleWeight));
+            // }
+            // }
+            // }
 
-			Matrix rmse = Matrix.Factory.linkToValue(Math.sqrt(error / dataSet.size()));
-			rmse.setLabel("RMSE with " + getLabel());
-			dataSet.setMatrix(Variable.RMSE, rmse);
+            confusion.setLabel("Confusion with " + getLabel());
+            dataSet.setMatrix(Variable.CONFUSION, confusion);
 
-			double maxRMSE = 0.0;
-			double minRMSE = 1e100;
-			double sumRMSE = 0;
-			for (Sample s : dataSet) {
-				Matrix m = s.getAsMatrix("RMSE");
-				if (m != null) {
-					double sampleRMSE = m.doubleValue();
-					sumRMSE += sampleRMSE;
-					if (sampleRMSE > maxRMSE) {
-						maxRMSE = sampleRMSE;
-					}
-					if (sampleRMSE < minRMSE) {
-						minRMSE = sampleRMSE;
-					}
-				}
-			}
+            Matrix accuracy = Matrix.Factory
+                    .linkToValue((double) correctCount / (double) dataSet.size());
+            accuracy.setLabel("Accuracy with " + getLabel());
+            dataSet.setMatrix(Variable.ACCURACY, accuracy);
 
-			// calculate sample weight
-			// if (maxRMSE > 0 && maxRMSE != minRMSE) {
-			// for (Sample s : dataSet.getSampleMap()) {
-			// Matrix m = s.getMatrix("RMSE");
-			// if (m != null) {
-			// double sampleWeight = (m.doubleValue() / (sumRMSE));
-			// s.setMatrix("SampleWeight",
-			// Matrix.Factory.linkToValue(sampleWeight));
-			// }
-			// }
-			// }
+            Matrix errorMatrix = Matrix.Factory.linkToValue(errorCount);
+            errorMatrix.setLabel("Errors with " + getLabel());
+            dataSet.setMatrix(Variable.ERRORCOUNT, errorMatrix);
 
-			confusion.setLabel("Confusion with " + getLabel());
-			dataSet.setMatrix(Variable.CONFUSION, confusion);
+            Matrix sensitivity = (Matrix) new Sensitivity().calculate(confusion)
+                    .get(getTargetLabel());
+            dataSet.setMatrix(Variable.SENSITIVITY, sensitivity);
 
-			Matrix accuracy = Matrix.Factory
-					.linkToValue((double) correctCount / (double) dataSet.size());
-			accuracy.setLabel("Accuracy with " + getLabel());
-			dataSet.setMatrix(Variable.ACCURACY, accuracy);
+            Matrix specificity = (Matrix) new Specificity().calculate(confusion)
+                    .get(getTargetLabel());
+            dataSet.setMatrix(Variable.SPECIFICITY, specificity);
 
-			Matrix errorMatrix = Matrix.Factory.linkToValue(errorCount);
-			errorMatrix.setLabel("Errors with " + getLabel());
-			dataSet.setMatrix(Variable.ERRORCOUNT, errorMatrix);
+            Matrix precision = (Matrix) new Precision().calculate(confusion).get(getTargetLabel());
+            dataSet.setMatrix(Variable.PRECISION, precision);
 
-			Matrix sensitivity = (Matrix) new Sensitivity().calculate(confusion)
-					.get(getTargetLabel());
-			dataSet.setMatrix(Variable.SENSITIVITY, sensitivity);
+            Matrix recall = (Matrix) new Recall().calculate(confusion).get(getTargetLabel());
+            dataSet.setMatrix(Variable.RECALL, recall);
 
-			Matrix specificity = (Matrix) new Specificity().calculate(confusion)
-					.get(getTargetLabel());
-			dataSet.setMatrix(Variable.SPECIFICITY, specificity);
+            Matrix fmeasure = (Matrix) new FMeasure().calculate(confusion).get(getTargetLabel());
+            dataSet.setMatrix(Variable.FMEASURE, fmeasure);
 
-			Matrix precision = (Matrix) new Precision().calculate(confusion).get(getTargetLabel());
-			dataSet.setMatrix(Variable.PRECISION, precision);
+            Matrix fmeasureMacro = fmeasure.mean(Ret.NEW, Matrix.ALL, false);
+            dataSet.setMatrix(Variable.FMEASUREMACRO, fmeasureMacro);
 
-			Matrix recall = (Matrix) new Recall().calculate(confusion).get(getTargetLabel());
-			dataSet.setMatrix(Variable.RECALL, recall);
+            iteration++;
+            System.out.println("Iteration: " + iteration + ", RMSE: " + rmse.doubleValue()
+                    + ", errors: " + errorCount + ", accuracy: " + accuracy.doubleValue());
 
-			Matrix fmeasure = (Matrix) new FMeasure().calculate(confusion).get(getTargetLabel());
-			dataSet.setMatrix(Variable.FMEASURE, fmeasure);
+        }
 
-			Matrix fmeasureMacro = fmeasure.mean(Ret.NEW, Matrix.ALL, false);
-			dataSet.setMatrix(Variable.FMEASUREMACRO, fmeasureMacro);
+        dataSet.fireValueChanged();
+    }
 
-			iteration++;
-			System.out.println("Iteration: " + iteration + ", RMSE: " + rmse.doubleValue()
-					+ ", errors: " + errorCount + ", accuracy: " + accuracy.doubleValue());
+    public Algorithm getOutputErrorAlgorithm() {
+        return getAlgorithmMap().get(OUTPUTERRORALGORITHM);
+    }
 
-		}
-
-		dataSet.fireValueChanged();
-	}
-
-	public Algorithm getOutputErrorAlgorithm() {
-		return getAlgorithmMap().get(OUTPUTERRORALGORITHM);
-	}
-
-	public void setOutputErrorAlgorithm(Algorithm a) {
-		setAlgorithm(OUTPUTERRORALGORITHM, a);
-	}
-
-	public int getMode() {
-		return mode;
-	}
-
-	public void setMode(int mode) {
-		this.mode = mode;
-	}
+    public void setOutputErrorAlgorithm(Algorithm a) {
+        setAlgorithm(OUTPUTERRORALGORITHM, a);
+    }
 
 }

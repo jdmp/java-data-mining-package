@@ -24,6 +24,7 @@
 package org.jdmp.core.algorithm.classification.meta;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import org.jdmp.core.algorithm.regression.AbstractRegressor;
@@ -33,72 +34,78 @@ import org.jdmp.core.sample.Sample;
 import org.ujmp.core.Matrix;
 import org.ujmp.core.calculation.Calculation.Ret;
 import org.ujmp.core.collections.list.FastArrayList;
+import org.ujmp.core.exception.NotImplementedException;
 
 public class Bagging extends AbstractRegressor {
-	private static final long serialVersionUID = -4111544932911087016L;
+    private static final long serialVersionUID = -4111544932911087016L;
 
-	private final List<Regressor> learningAlgorithms;
+    private final List<Regressor> learningAlgorithms;
 
-	private final int bootstrapSize;
+    private final int bootstrapSize;
 
-	public Bagging(Regressor learningAlgorithm, int count) {
-		this(learningAlgorithm, count, -1);
-	}
+    public Bagging(Regressor learningAlgorithm, int count) {
+        this(learningAlgorithm, count, -1);
+    }
 
-	public Bagging(Regressor learningAlgorithm, int count, int bootstrapSize) {
-		this.bootstrapSize = bootstrapSize;
-		this.learningAlgorithms = new FastArrayList<Regressor>();
-		for (int i = 0; i < count; i++) {
-			learningAlgorithms.add(learningAlgorithm.emptyCopy());
-		}
-	}
+    public Bagging(Regressor learningAlgorithm, int count, int bootstrapSize) {
+        this.bootstrapSize = bootstrapSize;
+        this.learningAlgorithms = new FastArrayList<Regressor>();
+        for (int i = 0; i < count; i++) {
+            learningAlgorithms.add(learningAlgorithm.emptyCopy());
+        }
+    }
 
-	public Bagging(Regressor... learningAlgorithms) {
-		this(-1, learningAlgorithms);
-	}
+    public Bagging(Regressor... learningAlgorithms) {
+        this(-1, learningAlgorithms);
+    }
 
-	public Bagging(int bootstrapSize, Regressor... learningAlgorithms) {
-		this.bootstrapSize = bootstrapSize;
-		this.learningAlgorithms = Arrays.asList(learningAlgorithms);
-	}
+    public Bagging(int bootstrapSize, Regressor... learningAlgorithms) {
+        this.bootstrapSize = bootstrapSize;
+        this.learningAlgorithms = Arrays.asList(learningAlgorithms);
+    }
 
-	public void trainAll(ListDataSet dataSet) {
-		for (Regressor learningAlgorithm : learningAlgorithms) {
-			ListDataSet bootstrap;
-			if (bootstrapSize > 0) {
-				bootstrap = dataSet.bootstrap(bootstrapSize);
-			} else {
-				bootstrap = dataSet.bootstrap();
-			}
-			learningAlgorithm.trainAll(bootstrap);
-		}
-	}
+    @Override
+    public void trainBatch(Collection<Sample> samples) {
+        throw new NotImplementedException();
+    }
 
-	public void reset() {
-		for (Regressor learningAlgorithm : learningAlgorithms) {
-			learningAlgorithm.reset();
-		}
-	}
+    public void trainAll(ListDataSet dataSet) {
+        for (Regressor learningAlgorithm : learningAlgorithms) {
+            ListDataSet bootstrap;
+            if (bootstrapSize > 0) {
+                bootstrap = dataSet.bootstrap(bootstrapSize);
+            } else {
+                bootstrap = dataSet.bootstrap();
+            }
+            learningAlgorithm.trainAll(bootstrap);
+        }
+    }
 
-	public void predictOne(Sample sample) {
-		List<Matrix> results = new FastArrayList<Matrix>();
-		for (Regressor learningAlgorithm : learningAlgorithms) {
-			Sample clone = sample.clone();
-			learningAlgorithm.predictOne(clone);
-			Matrix result = clone.getAsMatrix(PREDICTED);
-			results.add(result);
-		}
-		Matrix all = Matrix.Factory.vertCat(results);
-		Matrix mean = all.mean(Ret.NEW, Matrix.ROW, true);
-		sample.put(PREDICTED, mean);
-	}
+    public void reset() {
+        for (Regressor learningAlgorithm : learningAlgorithms) {
+            learningAlgorithm.reset();
+        }
+    }
 
-	public Regressor emptyCopy() {
-		Bagging bagging = new Bagging();
-		for (Regressor learningAlgorithm : learningAlgorithms) {
-			bagging.learningAlgorithms.add(learningAlgorithm.emptyCopy());
-		}
-		return bagging;
-	}
+    public void predictOne(Sample sample) {
+        List<Matrix> results = new FastArrayList<Matrix>();
+        for (Regressor learningAlgorithm : learningAlgorithms) {
+            Sample clone = sample.clone();
+            learningAlgorithm.predictOne(clone);
+            Matrix result = clone.getAsMatrix(PREDICTED);
+            results.add(result);
+        }
+        Matrix all = Matrix.Factory.vertCat(results);
+        Matrix mean = all.mean(Ret.NEW, Matrix.ROW, true);
+        sample.put(PREDICTED, mean);
+    }
+
+    public Regressor emptyCopy() {
+        Bagging bagging = new Bagging();
+        for (Regressor learningAlgorithm : learningAlgorithms) {
+            bagging.learningAlgorithms.add(learningAlgorithm.emptyCopy());
+        }
+        return bagging;
+    }
 
 }
