@@ -24,6 +24,7 @@
 package org.jdmp.mallet.classifier;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.jdmp.core.algorithm.classification.AbstractClassifier;
@@ -46,107 +47,115 @@ import cc.mallet.classify.NaiveBayesTrainer;
 import cc.mallet.types.Instance;
 import cc.mallet.types.InstanceList;
 import cc.mallet.types.LabelAlphabet;
+import org.ujmp.core.exception.NotImplementedException;
 
 public class MalletClassifier extends AbstractClassifier {
-	private static final long serialVersionUID = -1594522916901093940L;
+    private static final long serialVersionUID = -1594522916901093940L;
 
-	public enum MalletClassifiers {
-		NaiveBayes, AdaBoost, AdaBoostM2, Bagging, BalancedWinnow, C45, ConfidencePredictingClassifier, DecisionTree, MaxEnt, MCMaxEnt, Winnow
-	};
+    public enum MalletClassifiers {
+        NaiveBayes, AdaBoost, AdaBoostM2, Bagging, BalancedWinnow, C45, ConfidencePredictingClassifier, DecisionTree, MaxEnt, MCMaxEnt, Winnow
+    }
 
-	private MalletClassifiers type = null;
+    ;
 
-	private ClassifierTrainer<?> trainer = null;
+    private MalletClassifiers type = null;
 
-	private List<Integer> cumSum = null;
+    private ClassifierTrainer<?> trainer = null;
 
-	private cc.mallet.classify.Classifier classifier = null;
+    private List<Integer> cumSum = null;
 
-	public MalletClassifier(MalletClassifiers classifier) {
-		super();
-		setLabel("Mallet Classifier " + classifier.name());
-		this.type = classifier;
-		reset();
-	}
+    private cc.mallet.classify.Classifier classifier = null;
 
-	public void predictOne(Sample sample) {
-		Matrix input = sample.getAsMatrix(INPUT);
-		Instance instance = new Sample2Instance(input, null, classifier.getAlphabet(), classifier.getLabelAlphabet(),
-				classifier.getInstancePipe(), cumSum);
-		Classification c = classifier.classify(instance);
-		sample.put(PREDICTED, new Labeling2Matrix(c.getLabeling()));
-	}
+    public MalletClassifier(MalletClassifiers classifier) {
+        super();
+        setLabel("Mallet Classifier " + classifier.name());
+        this.type = classifier;
+        reset();
+    }
 
-	public void reset() {
-		switch (type) {
-		case NaiveBayes:
-			this.trainer = new NaiveBayesTrainer();
-			this.classifier = null;
-			break;
-		case AdaBoost:
-			this.trainer = new AdaBoostTrainer(new DecisionTreeTrainer());
-			this.classifier = null;
-			break;
-		case AdaBoostM2:
-			this.trainer = new AdaBoostM2Trainer(new DecisionTreeTrainer());
-			this.classifier = null;
-			break;
-		// case Bagging:
-		// this.trainer = new BaggingTrainer(new DecisionTreeTrainer());
-		// this.classifier = null;
-		// break;
-		case BalancedWinnow:
-			this.trainer = new BalancedWinnowTrainer();
-			this.classifier = null;
-			break;
-		// case ConfidencePredictingClassifier:
-		// this.trainer = new ConfidencePredictingClassifierTrainer(new
-		// DecisionTreeTrainer());
-		// this.classifier = null;
-		// break;
-		case DecisionTree:
-			this.trainer = new DecisionTreeTrainer();
-			this.classifier = null;
-			break;
-		default:
-			throw new RuntimeException("not implemented");
-		}
+    public void predictOne(Sample sample) {
+        Matrix input = sample.getAsMatrix(INPUT);
+        Instance instance = new Sample2Instance(input, null, classifier.getAlphabet(), classifier.getLabelAlphabet(),
+                classifier.getInstancePipe(), cumSum);
+        Classification c = classifier.classify(instance);
+        sample.put(PREDICTED, new Labeling2Matrix(c.getLabeling()));
+    }
 
-	}
+    public void reset() {
+        switch (type) {
+            case NaiveBayes:
+                this.trainer = new NaiveBayesTrainer();
+                this.classifier = null;
+                break;
+            case AdaBoost:
+                this.trainer = new AdaBoostTrainer(new DecisionTreeTrainer());
+                this.classifier = null;
+                break;
+            case AdaBoostM2:
+                this.trainer = new AdaBoostM2Trainer(new DecisionTreeTrainer());
+                this.classifier = null;
+                break;
+            // case Bagging:
+            // this.trainer = new BaggingTrainer(new DecisionTreeTrainer());
+            // this.classifier = null;
+            // break;
+            case BalancedWinnow:
+                this.trainer = new BalancedWinnowTrainer();
+                this.classifier = null;
+                break;
+            // case ConfidencePredictingClassifier:
+            // this.trainer = new ConfidencePredictingClassifierTrainer(new
+            // DecisionTreeTrainer());
+            // this.classifier = null;
+            // break;
+            case DecisionTree:
+                this.trainer = new DecisionTreeTrainer();
+                this.classifier = null;
+                break;
+            default:
+                throw new RuntimeException("not implemented");
+        }
 
-	public void trainAll(ListDataSet dataSet) {
-		Matrix dataSetInput = dataSet.getInputMatrix();
+    }
 
-		Matrix max = dataSetInput.max(Ret.NEW, Matrix.ROW);
-		cumSum = new ArrayList<Integer>((int) max.getColumnCount());
-		int sum = 0;
-		cumSum.add(sum);
-		for (int i = (int) max.getColumnCount() - 1; i != -1; i--) {
-			sum += max.getAsInt(0, i) + 1;
-			cumSum.add(sum);
-		}
+    public void trainAll(ListDataSet dataSet) {
+        Matrix dataSetInput = dataSet.getInputMatrix();
 
-		LabelAlphabet inputAlphabet = new LabelAlphabet();
-		int featureCount = getFeatureCount(dataSet);
-		for (int i = 0; i < featureCount; i++) {
-			// iterate from 1 to max (inclusive!)
-			for (int fv = 1; fv < max.getAsDouble(0, i) + 1; fv++) {
-				inputAlphabet.lookupIndex("Feature" + i + "=" + fv, true);
-			}
-		}
+        Matrix max = dataSetInput.max(Ret.NEW, Matrix.ROW);
+        cumSum = new ArrayList<Integer>((int) max.getColumnCount());
+        int sum = 0;
+        cumSum.add(sum);
+        for (int i = (int) max.getColumnCount() - 1; i != -1; i--) {
+            sum += max.getAsInt(0, i) + 1;
+            cumSum.add(sum);
+        }
 
-		LabelAlphabet targetAlphabet = new LabelAlphabet();
-		for (int i = 0; i < dataSet.getTargetMatrix().getColumnCount(); i++) {
-			targetAlphabet.lookupIndex("Class" + i, true);
-		}
+        LabelAlphabet inputAlphabet = new LabelAlphabet();
+        int featureCount = getFeatureCount(dataSet);
+        for (int i = 0; i < featureCount; i++) {
+            // iterate from 1 to max (inclusive!)
+            for (int fv = 1; fv < max.getAsDouble(0, i) + 1; fv++) {
+                inputAlphabet.lookupIndex("Feature" + i + "=" + fv, true);
+            }
+        }
 
-		InstanceList trainingSet = new DataSet2InstanceList(dataSet, inputAlphabet, targetAlphabet, cumSum);
+        LabelAlphabet targetAlphabet = new LabelAlphabet();
+        for (int i = 0; i < dataSet.getTargetMatrix().getColumnCount(); i++) {
+            targetAlphabet.lookupIndex("Class" + i, true);
+        }
 
-		classifier = trainer.train(trainingSet);
-	}
+        InstanceList trainingSet = new DataSet2InstanceList(dataSet, inputAlphabet, targetAlphabet, cumSum);
 
-	public Classifier emptyCopy() {
-		return new MalletClassifier(type);
-	}
+        classifier = trainer.train(trainingSet);
+    }
+
+    @Override
+    public void trainBatch(Collection<Sample> samples) {
+        throw new NotImplementedException();
+    }
+
+    public Classifier emptyCopy() {
+        return new MalletClassifier(type);
+    }
 
 }
