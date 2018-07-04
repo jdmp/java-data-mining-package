@@ -32,62 +32,64 @@ import org.ujmp.core.interfaces.CoreObject;
 
 public interface DataSet extends CoreObject {
 
-	public static final String INPUT = "Input";
+    public static final String INPUT = "Input";
 
-	public static final String RMSE = "RMSE";
+    public static final String RMSE = "RMSE";
 
-	public static final String PREDICTED = "Predicted";
+    public static final String PREDICTED = "Predicted";
 
-	public static final String TARGET = "Target";
+    public static final String TARGET = "Target";
 
-	public static final String ACCURACY = Variable.ACCURACY;
+    public static final String ACCURACY = Variable.ACCURACY;
 
-	public static final String CONFUSION = Variable.CONFUSION;
+    public static final String CONFUSION = Variable.CONFUSION;
 
-	public static final String ERRORCOUNT = Variable.ERRORCOUNT;
+    public static final String ERRORCOUNT = Variable.ERRORCOUNT;
 
-	public static final DataSetFactory Factory = new DataSetFactory();
+    public static final DataSetFactory Factory = new DataSetFactory();
 
-	public List<ListDataSet> splitByCount(boolean shuffle, int... count);
+    public List<ListDataSet> splitByCount(boolean shuffle, int... count);
 
-	public List<ListDataSet> splitForCV(int numberOfCVSets, int idOfCVSet, long randomSeed);
+    public List<ListDataSet> splitForCV(int numberOfCVSets, int idOfCVSet, long randomSeed);
 
-	public List<ListDataSet> splitByPercent(boolean shuffle, double... percent);
+    public List<ListDataSet> splitByPercent(boolean shuffle, double... percent);
 
-	public Matrix getInputMatrix();
+    public Matrix getInputMatrix();
 
-	public Matrix getPredictedMatrix();
+    public Matrix getPredictedMatrix();
 
-	public ListDataSet clone();
+    public ListDataSet clone();
 
-	public Matrix getTargetMatrix();
+    public Matrix getTargetMatrix();
 
-	public double getAccuracy();
+    public double getAccuracy();
 
-	public List<ListDataSet> splitForStratifiedCV(int i, int r, long seed);
+    public List<ListDataSet> splitForStratifiedCV(int i, int r, long seed);
 
-	public boolean isDiscrete();
+    public boolean isDiscrete();
 
-	public int getFeatureCount();
+    public int getFeatureCount();
 
-	public int getClassCount();
+    public int getClassCount();
 
-	public int getErrorCount();
+    public int getErrorCount();
 
-	public ListDataSet bootstrap();
+    public void normalizeInput();
 
-	public ListDataSet bootstrap(int count);
+    public ListDataSet bootstrap();
 
-	public Matrix getMatrix(Object key);
+    public ListDataSet bootstrap(int count);
 
-	public Set<String> keySet();
+    public Matrix getMatrix(Object key);
 
-	public int size();
+    public Set<String> keySet();
 
-	public boolean isEmpty();
+    public int size();
 
-	public void setMatrix(String key, Matrix matrix);
+    public boolean isEmpty();
 
-	public double getAsDouble(String key);
+    public void setMatrix(String key, Matrix matrix);
+
+    public double getAsDouble(String key);
 
 }
